@@ -922,6 +922,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /api/v1/activities:
+    get:
+      operationId: DescribeActivities
+      description: Describes the user activities in a specified time period.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeActivitiesResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '483':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeActivitiesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/api/v1/documents/{DocumentId}/versions/{VersionId}/comments':
     get:
       operationId: DescribeComments
@@ -1036,6 +1081,96 @@ paths:
           in: path
           type: string
           required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /api/v1/me/root:
+    get:
+      operationId: DescribeRootFolders
+      description: Describes the current user's special folders; the <code>RootFolder</code> and the <code>RecyleBin</code>. <code>RootFolder</code> is the root of user's files and folders and <code>RecyleBin</code> is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeRootFoldersResponse'
+        '480':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '483':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeRootFoldersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /api/v1/me:
+    get:
+      operationId: GetCurrentUser
+      description: Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetCurrentUserResponse'
+        '480':
+          description: EntityNotExistsException
+          schema:
+            $ref: '#/definitions/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          schema:
+            $ref: '#/definitions/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          schema:
+            $ref: '#/definitions/UnauthorizedResourceAccessException'
+        '483':
+          description: FailedDependencyException
+          schema:
+            $ref: '#/definitions/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetCurrentUserRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1273,6 +1408,68 @@ definitions:
       User:
         $ref: '#/definitions/User'
         description: The user information.
+  Activity:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/ActivityType'
+        description: The activity type.
+      TimeStamp:
+        $ref: '#/definitions/TimestampType'
+        description: The timestamp when the action was performed.
+      OrganizationId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the organization.
+      Initiator:
+        $ref: '#/definitions/UserMetadata'
+        description: The user who performed the action.
+      Participants:
+        $ref: '#/definitions/Participants'
+        description: 'The list of users or groups impacted by this action. This is an optional field and is filled for the following sharing activities: DOCUMENT_SHARED, DOCUMENT_SHARED, DOCUMENT_UNSHARED, FOLDER_SHARED, FOLDER_UNSHARED.'
+      ResourceMetadata:
+        $ref: '#/definitions/ResourceMetadata'
+        description: The metadata of the resource involved in the user action.
+      OriginalParent:
+        $ref: '#/definitions/ResourceMetadata'
+        description: The original parent of the resource. This is an optional field and is filled for move activities.
+      CommentMetadata:
+        $ref: '#/definitions/CommentMetadata'
+        description: Metadata of the commenting activity. This is an optional field and is filled for commenting activities.
+    description: Describes the activity information.
+  ActivityType:
+    type: string
+    enum:
+      - DOCUMENT_CHECKED_IN
+      - DOCUMENT_CHECKED_OUT
+      - DOCUMENT_RENAMED
+      - DOCUMENT_VERSION_UPLOADED
+      - DOCUMENT_VERSION_DELETED
+      - DOCUMENT_RECYCLED
+      - DOCUMENT_RESTORED
+      - DOCUMENT_REVERTED
+      - DOCUMENT_SHARED
+      - DOCUMENT_UNSHARED
+      - DOCUMENT_SHARE_PERMISSION_CHANGED
+      - DOCUMENT_SHAREABLE_LINK_CREATED
+      - DOCUMENT_SHAREABLE_LINK_REMOVED
+      - DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED
+      - DOCUMENT_MOVED
+      - DOCUMENT_COMMENT_ADDED
+      - DOCUMENT_COMMENT_DELETED
+      - DOCUMENT_ANNOTATION_ADDED
+      - DOCUMENT_ANNOTATION_DELETED
+      - FOLDER_CREATED
+      - FOLDER_DELETED
+      - FOLDER_RENAMED
+      - FOLDER_RECYCLED
+      - FOLDER_RESTORED
+      - FOLDER_SHARED
+      - FOLDER_UNSHARED
+      - FOLDER_SHARE_PERMISSION_CHANGED
+      - FOLDER_SHAREABLE_LINK_CREATED
+      - FOLDER_SHAREABLE_LINK_REMOVED
+      - FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED
+      - FOLDER_MOVED
   AddResourcePermissionsRequest:
     type: object
     required:
@@ -1336,6 +1533,23 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Comment'
+  CommentMetadata:
+    type: object
+    properties:
+      CommentId:
+        $ref: '#/definitions/CommentIdType'
+        description: The ID of the comment.
+      Contributor:
+        $ref: '#/definitions/User'
+        description: The user who made the comment.
+      CreatedTimestamp:
+        $ref: '#/definitions/TimestampType'
+      CommentStatus:
+        $ref: '#/definitions/CommentStatusType'
+      RecipientId:
+        $ref: '#/definitions/IdType'
+        description: The ID of the user being replied to.
+    description: Describes the metadata of a comment.
   CommentStatusType:
     type: string
     enum:
@@ -1490,7 +1704,7 @@ definitions:
     maxItems: 8
   CustomMetadataKeyType:
     type: string
-    pattern: '[a-zA-Z0-9_-][a-zA-Z0-9 _-]*'
+    pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
     minLength: 1
     maxLength: 56
   CustomMetadataLimitExceededException:
@@ -1512,9 +1726,9 @@ definitions:
           $ref: '#/definitions/CustomMetadataValueType'
   CustomMetadataValueType:
     type: string
-    pattern: '[a-zA-Z0-9_-][a-zA-Z0-9 _-]*'
+    pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
     minLength: 1
-    maxLength: 56
+    maxLength: 256
   DeactivateUserRequest:
     type: object
     properties: {}
@@ -1552,6 +1766,18 @@ definitions:
   DeleteUserRequest:
     type: object
     properties: {}
+  DescribeActivitiesRequest:
+    type: object
+    properties: {}
+  DescribeActivitiesResponse:
+    type: object
+    properties:
+      UserActivities:
+        $ref: '#/definitions/UserActivities'
+        description: The list of activities for the specified user and time period.
+      Marker:
+        $ref: '#/definitions/MarkerType'
+        description: The marker for the next set of results.
   DescribeCommentsRequest:
     type: object
     properties: {}
@@ -1615,6 +1841,18 @@ definitions:
       Marker:
         $ref: '#/definitions/PageMarkerType'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+  DescribeRootFoldersRequest:
+    type: object
+    properties: {}
+  DescribeRootFoldersResponse:
+    type: object
+    properties:
+      Folders:
+        $ref: '#/definitions/FolderMetadataList'
+        description: The user's special folders.
+      Marker:
+        $ref: '#/definitions/PageMarkerType'
+        description: The marker for the next set of results.
   DescribeUsersRequest:
     type: object
     properties: {}
@@ -1842,13 +2080,24 @@ definitions:
         description: List of labels on the folder.
       Size:
         $ref: '#/definitions/SizeType'
+        description: The size of the folder metadata.
       LatestVersionSize:
         $ref: '#/definitions/SizeType'
+        description: The size of the latest version of the folder metadata.
     description: Describes a folder.
   FolderMetadataList:
     type: array
     items:
       $ref: '#/definitions/FolderMetadata'
+  GetCurrentUserRequest:
+    type: object
+    properties: {}
+  GetCurrentUserResponse:
+    type: object
+    properties:
+      User:
+        $ref: '#/definitions/User'
+        description: Metadata of the user.
   GetDocumentPathRequest:
     type: object
     properties: {}
@@ -1903,6 +2152,22 @@ definitions:
       CustomMetadata:
         $ref: '#/definitions/CustomMetadataMap'
         description: The custom metadata on the folder.
+  GroupMetadata:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/IdType'
+        description: The ID of the user group.
+      Name:
+        $ref: '#/definitions/GroupNameType'
+        description: The name of the group.
+    description: Describes the metadata of a user group.
+  GroupMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/GroupMetadata'
+  GroupNameType:
+    type: string
   HashType:
     type: string
     pattern: '[&\w+-.@]+'
@@ -1977,9 +2242,9 @@ definitions:
     description: The operation is invalid.
   Label:
     type: string
-    pattern: '[a-zA-Z0-9_-][a-zA-Z0-9 _-]*'
+    pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
     minLength: 1
-    maxLength: 20
+    maxLength: 32
   Labels:
     type: array
     items:
@@ -2032,6 +2297,16 @@ definitions:
     type: string
     minLength: 1
     maxLength: 2048
+  Participants:
+    type: object
+    properties:
+      Users:
+        $ref: '#/definitions/UserMetadataList'
+        description: The list of users.
+      Groups:
+        $ref: '#/definitions/GroupMetadataList'
+        description: The list of user groups.
+    description: Describes the users and/or user groups.
   PasswordType:
     type: string
     pattern: '[\u0020-\u00FF]+'
@@ -2097,11 +2372,37 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/ErrorMessageType'
+    description: The resource is already checked out.
   ResourceIdType:
     type: string
     pattern: '[\w+-.@]+'
     minLength: 1
     maxLength: 128
+  ResourceMetadata:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/ResourceType'
+        description: The type of resource.
+      Name:
+        $ref: '#/definitions/ResourceNameType'
+        description: The name of the resource.
+      OriginalName:
+        $ref: '#/definitions/ResourceNameType'
+        description: The original name of the resource prior to a rename operation.
+      Id:
+        $ref: '#/definitions/ResourceIdType'
+        description: The ID of the resource.
+      VersionId:
+        $ref: '#/definitions/DocumentVersionIdType'
+        description: The version ID of the resource. This is an optional field and is filled for action on document version.
+      Owner:
+        $ref: '#/definitions/UserMetadata'
+        description: The owner of the resource.
+      ParentId:
+        $ref: '#/definitions/ResourceIdType'
+        description: The parent ID of the resource before a rename operation.
+    description: Describes the metadata of a resource.
   ResourceNameType:
     type: string
     pattern: '[\u0020-\u202D\u202F-\uFFFF]+'
@@ -2140,6 +2441,11 @@ definitions:
       - RESTORING
       - RECYCLING
       - RECYCLED
+  ResourceType:
+    type: string
+    enum:
+      - FOLDER
+      - DOCUMENT
   RolePermissionType:
     type: string
     enum:
@@ -2431,6 +2737,10 @@ definitions:
         $ref: '#/definitions/UserStorageMetadata'
         description: The storage for the user.
     description: Describes a user.
+  UserActivities:
+    type: array
+    items:
+      $ref: '#/definitions/Activity'
   UserAttributeValueType:
     type: string
     minLength: 1
@@ -2445,6 +2755,29 @@ definitions:
     pattern: '[&\w+-.@, ]+'
     minLength: 1
     maxLength: 2000
+  UserMetadata:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/IdType'
+        description: The ID of the user.
+      Username:
+        $ref: '#/definitions/UsernameType'
+        description: The username of the user.
+      GivenName:
+        $ref: '#/definitions/UserAttributeValueType'
+        description: The given name of the user before a rename operation.
+      Surname:
+        $ref: '#/definitions/UserAttributeValueType'
+        description: The surname of the user.
+      EmailAddress:
+        $ref: '#/definitions/EmailAddressType'
+        description: The email address of the user.
+    description: Describes the metadata of the user.
+  UserMetadataList:
+    type: array
+    items:
+      $ref: '#/definitions/UserMetadata'
   UserSortType:
     type: string
     enum:

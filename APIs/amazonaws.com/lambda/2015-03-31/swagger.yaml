@@ -500,6 +500,10 @@ paths:
           description: TooManyRequestsException
           schema:
             $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: ResourceConflictException
+          schema:
+            $ref: '#/definitions/ResourceConflictException'
       parameters:
         - name: body
           in: body
@@ -608,6 +612,10 @@ paths:
           description: KMSNotFoundException
           schema:
             $ref: '#/definitions/KMSNotFoundException'
+        '499':
+          description: InvalidRuntimeException
+          schema:
+            $ref: '#/definitions/InvalidRuntimeException'
       parameters:
         - name: body
           in: body
@@ -652,6 +660,10 @@ paths:
           description: InvalidRequestContentException
           schema:
             $ref: '#/definitions/InvalidRequestContentException'
+        '483':
+          description: InvalidRuntimeException
+          schema:
+            $ref: '#/definitions/InvalidRuntimeException'
       parameters:
         - name: body
           in: body
@@ -1106,7 +1118,7 @@ definitions:
         description: 'The name you want to assign to the function you are uploading. The function names appear in the console and are returned in the <a>ListFunctions</a> API. Function names are used to specify functions to other AWS Lambda API operations, such as <a>Invoke</a>. Note that the length constraint applies only to the ARN. If you specify only the function name, it is limited to 64 characters in length. '
       Runtime:
         $ref: '#/definitions/Runtime'
-        description: '<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3".</p> <note> <p>You can no longer create functions using the v0.10.42 runtime version as of November, 2016. Existing functions will be supported until early 2017, but we recommend you migrate them to either nodejs6.10 or nodejs4.3 runtime version as soon as possible.</p> </note>'
+        description: '<p>The runtime environment for the Lambda function you are uploading.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parmaeter error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>'
       Role:
         $ref: '#/definitions/RoleArn'
         description: 'The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources. For more information, see <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">AWS Lambda: How it Works</a>. '
@@ -1383,7 +1395,7 @@ definitions:
         description: 'The memory size, in MB, you configured for the function. Must be a multiple of 64 MB.'
       LastModified:
         $ref: '#/definitions/Timestamp'
-        description: The time stamp of the last time you updated the function.
+        description: 'The time stamp of the last time you updated the function. The time stamp is conveyed as a string complying with ISO-8601 in this way YYYY-MM-DDThh:mm:ssTZD (e.g., 1997-07-16T19:20:30+01:00). For more information, see <a href="https://www.w3.org/TR/NOTE-datetime">Date and Time Formats</a>.'
       CodeSha256:
         $ref: '#/definitions/String'
         description: It is the SHA256 hash of your function deployment package.
@@ -1522,7 +1534,7 @@ definitions:
       message:
         $ref: '#/definitions/String'
         description: <p/>
-    description: 'One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. '
+    description: 'One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>CreateFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. You will also get this exception if you have selected a deprecated runtime, such as Node v0.10.42. '
   InvalidRequestContentException:
     type: object
     properties:
@@ -1533,6 +1545,14 @@ definitions:
         $ref: '#/definitions/String'
         description: <p/>
     description: The request body could not be parsed as JSON.
+  InvalidRuntimeException:
+    type: object
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+      Message:
+        $ref: '#/definitions/String'
+    description: The runtime or runtime version specified is not supported.
   InvalidSecurityGroupIDException:
     type: object
     properties:
@@ -2049,7 +2069,7 @@ definitions:
         description: The parent object that contains your environment's configuration settings.
       Runtime:
         $ref: '#/definitions/Runtime'
-        description: '<p>The runtime environment for the Lambda function.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7".</p> <note> <p>You can no longer downgrade to the v0.10.42 runtime version. This version will no longer be supported as of early 2017.</p> </note>'
+        description: '<p>The runtime environment for the Lambda function.</p> <p>To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set the value to "nodejs4.3". To use the Python runtime v3.6, set the value to "python3.6". To use the Python runtime v2.7, set the value to "python2.7".</p> <note> <p>Node v0.10.42 is currently marked as deprecated. You must migrate existing functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can request a one-time extension until June 30, 2017 by going to the Lambda console and following the instructions provided. Failure to do so will result in an invalid parameter value error being returned. Note that you will have to follow this procedure for each region that contains functions written in the Node v0.10.42 runtime.</p> </note>'
       DeadLetterConfig:
         $ref: '#/definitions/DeadLetterConfig'
         description: The parent object that contains the target ARN (Amazon Resource Name) of an Amazon SQS queue or Amazon SNS topic.

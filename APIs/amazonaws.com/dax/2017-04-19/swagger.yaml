@@ -1,0 +1,1910 @@
+swagger: '2.0'
+info:
+  version: '2017-04-19'
+  x-release: v4
+  title: Amazon DynamoDB Accelerator (DAX)
+  description: 'DAX is a managed caching service engineered for Amazon DynamoDB. DAX dramatically speeds up database reads by caching frequently-accessed data from DynamoDB, so applications can access that data with sub-millisecond latency. You can create a DAX cluster easily, using the AWS Management Console. With a few simple modifications to your code, your application can begin taking advantage of the DAX cluster and realize significant improvements in read performance.'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: dax
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/dax-2017-04-19.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/dax/'
+host: dax.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CreateCluster
+      description: Creates a DAX cluster. All nodes in the cluster run the same DAX caching software.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateClusterResponse'
+        '480':
+          description: ClusterAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/ClusterAlreadyExistsFault'
+        '481':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
+        '482':
+          description: InsufficientClusterCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientClusterCapacityFault'
+        '483':
+          description: SubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/SubnetGroupNotFoundFault'
+        '484':
+          description: InvalidParameterGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidParameterGroupStateFault'
+        '485':
+          description: ParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/ParameterGroupNotFoundFault'
+        '486':
+          description: ClusterQuotaForCustomerExceededFault
+          schema:
+            $ref: '#/definitions/ClusterQuotaForCustomerExceededFault'
+        '487':
+          description: NodeQuotaForClusterExceededFault
+          schema:
+            $ref: '#/definitions/NodeQuotaForClusterExceededFault'
+        '488':
+          description: NodeQuotaForCustomerExceededFault
+          schema:
+            $ref: '#/definitions/NodeQuotaForCustomerExceededFault'
+        '489':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '490':
+          description: TagQuotaPerResourceExceeded
+          schema:
+            $ref: '#/definitions/TagQuotaPerResourceExceeded'
+        '491':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '492':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateClusterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateParameterGroup':
+    post:
+      operationId: CreateParameterGroup
+      description: Creates a new parameter group. A parameter group is a collection of parameters that you apply to all of the nodes in a DAX cluster.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateParameterGroupResponse'
+        '480':
+          description: ParameterGroupQuotaExceededFault
+          schema:
+            $ref: '#/definitions/ParameterGroupQuotaExceededFault'
+        '481':
+          description: ParameterGroupAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/ParameterGroupAlreadyExistsFault'
+        '482':
+          description: InvalidParameterGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidParameterGroupStateFault'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateParameterGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateSubnetGroup':
+    post:
+      operationId: CreateSubnetGroup
+      description: Creates a new subnet group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateSubnetGroupResponse'
+        '480':
+          description: SubnetGroupAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/SubnetGroupAlreadyExistsFault'
+        '481':
+          description: SubnetGroupQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SubnetGroupQuotaExceededFault'
+        '482':
+          description: SubnetQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SubnetQuotaExceededFault'
+        '483':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateSubnetGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DecreaseReplicationFactor':
+    post:
+      operationId: DecreaseReplicationFactor
+      description: '<p>Removes one or more nodes from a DAX cluster.</p> <note> <p>You cannot use <code>DecreaseReplicationFactor</code> to remove the last node in a DAX cluster. If you need to do this, use <code>DeleteCluster</code> instead.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DecreaseReplicationFactorResponse'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: NodeNotFoundFault
+          schema:
+            $ref: '#/definitions/NodeNotFoundFault'
+        '482':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DecreaseReplicationFactorRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteCluster':
+    post:
+      operationId: DeleteCluster
+      description: 'Deletes a previously provisioned DAX cluster. <i>DeleteCluster</i> deletes all associated nodes, node endpoints and the DAX cluster itself. When you receive a successful response from this action, DAX immediately begins deleting the cluster; you cannot cancel or revert this action.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteClusterResponse'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteClusterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteParameterGroup':
+    post:
+      operationId: DeleteParameterGroup
+      description: Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any DAX clusters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteParameterGroupResponse'
+        '480':
+          description: InvalidParameterGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidParameterGroupStateFault'
+        '481':
+          description: ParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/ParameterGroupNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteParameterGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSubnetGroup':
+    post:
+      operationId: DeleteSubnetGroup
+      description: <p>Deletes a subnet group.</p> <note> <p>You cannot delete a subnet group if it is associated with any DAX clusters.</p> </note>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteSubnetGroupResponse'
+        '480':
+          description: SubnetGroupInUseFault
+          schema:
+            $ref: '#/definitions/SubnetGroupInUseFault'
+        '481':
+          description: SubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/SubnetGroupNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteSubnetGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeClusters':
+    post:
+      operationId: DescribeClusters
+      description: '<p>Returns information about all provisioned DAX clusters if no cluster identifier is specified, or about a specific DAX cluster if a cluster identifier is supplied.</p> <p>If the cluster is in the CREATING state, only cluster level information will be displayed until all of the nodes are successfully provisioned.</p> <p>If the cluster is in the DELETING state, only cluster level information will be displayed.</p> <p>If nodes are currently being added to the DAX cluster, node endpoint information and creation time for the additional nodes will not be displayed until they are completely provisioned. When the DAX cluster state is <i>available</i>, the cluster is ready for use.</p> <p>If nodes are currently being removed from the DAX cluster, no endpoint information for the removed nodes is displayed.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeClustersResponse'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeClustersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDefaultParameters':
+    post:
+      operationId: DescribeDefaultParameters
+      description: Returns the default system parameter information for the DAX caching software.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDefaultParametersResponse'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDefaultParametersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEvents':
+    post:
+      operationId: DescribeEvents
+      description: '<p>Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter.</p> <p>By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days'' worth of events if necessary.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEventsResponse'
+        '480':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '481':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEventsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeParameterGroups':
+    post:
+      operationId: DescribeParameterGroups
+      description: 'Returns a list of parameter group descriptions. If a parameter group name is specified, the list will contain only the descriptions for that group.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeParameterGroupsResponse'
+        '480':
+          description: ParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/ParameterGroupNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeParameterGroupsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeParameters':
+    post:
+      operationId: DescribeParameters
+      description: Returns the detailed parameter list for a particular parameter group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeParametersResponse'
+        '480':
+          description: ParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/ParameterGroupNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeParametersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSubnetGroups':
+    post:
+      operationId: DescribeSubnetGroups
+      description: 'Returns a list of subnet group descriptions. If a subnet group name is specified, the list will contain only the description of that group.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeSubnetGroupsResponse'
+        '480':
+          description: SubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/SubnetGroupNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeSubnetGroupsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#IncreaseReplicationFactor':
+    post:
+      operationId: IncreaseReplicationFactor
+      description: Adds one or more nodes to a DAX cluster.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/IncreaseReplicationFactorResponse'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
+        '482':
+          description: InsufficientClusterCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientClusterCapacityFault'
+        '483':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '484':
+          description: NodeQuotaForClusterExceededFault
+          schema:
+            $ref: '#/definitions/NodeQuotaForClusterExceededFault'
+        '485':
+          description: NodeQuotaForCustomerExceededFault
+          schema:
+            $ref: '#/definitions/NodeQuotaForCustomerExceededFault'
+        '486':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '487':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/IncreaseReplicationFactorRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTags':
+    post:
+      operationId: ListTags
+      description: 'List all of the tags for a DAX cluster. You can call <code>ListTags</code> up to 10 times per second, per account.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsResponse'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: InvalidARNFault
+          schema:
+            $ref: '#/definitions/InvalidARNFault'
+        '482':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RebootNode':
+    post:
+      operationId: RebootNode
+      description: 'Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RebootNodeResponse'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: NodeNotFoundFault
+          schema:
+            $ref: '#/definitions/NodeNotFoundFault'
+        '482':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
+        '483':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RebootNodeRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TagResource':
+    post:
+      operationId: TagResource
+      description: 'Associates a set of tags with a DAX resource. You can call <code>TagResource</code> up to 5 times per second, per account. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: TagQuotaPerResourceExceeded
+          schema:
+            $ref: '#/definitions/TagQuotaPerResourceExceeded'
+        '482':
+          description: InvalidARNFault
+          schema:
+            $ref: '#/definitions/InvalidARNFault'
+        '483':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
+        '484':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '485':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UntagResource':
+    post:
+      operationId: UntagResource
+      description: 'Removes the association of tags from a DAX resource. You can call <code>UntagResource</code> up to 5 times per second, per account. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '481':
+          description: InvalidARNFault
+          schema:
+            $ref: '#/definitions/InvalidARNFault'
+        '482':
+          description: TagNotFoundFault
+          schema:
+            $ref: '#/definitions/TagNotFoundFault'
+        '483':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
+        '484':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '485':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateCluster':
+    post:
+      operationId: UpdateCluster
+      description: Modifies the settings for a DAX cluster. You can use this action to change one or more cluster configuration parameters by specifying the parameters and the new values.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateClusterResponse'
+        '480':
+          description: InvalidClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidClusterStateFault'
+        '481':
+          description: ClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/ClusterNotFoundFault'
+        '482':
+          description: InvalidParameterGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidParameterGroupStateFault'
+        '483':
+          description: ParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/ParameterGroupNotFoundFault'
+        '484':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '485':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateClusterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateParameterGroup':
+    post:
+      operationId: UpdateParameterGroup
+      description: Modifies the parameters of a parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateParameterGroupResponse'
+        '480':
+          description: InvalidParameterGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidParameterGroupStateFault'
+        '481':
+          description: ParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/ParameterGroupNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateParameterGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateSubnetGroup':
+    post:
+      operationId: UpdateSubnetGroup
+      description: Modifies an existing subnet group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSubnetGroupResponse'
+        '480':
+          description: SubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/SubnetGroupNotFoundFault'
+        '481':
+          description: SubnetQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SubnetQuotaExceededFault'
+        '482':
+          description: SubnetInUse
+          schema:
+            $ref: '#/definitions/SubnetInUse'
+        '483':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSubnetGroupRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AvailabilityZoneList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  AwsQueryErrorMessage:
+    type: string
+  ChangeType:
+    type: string
+    enum:
+      - IMMEDIATE
+      - REQUIRES_REBOOT
+  Cluster:
+    type: object
+    properties:
+      ClusterName:
+        $ref: '#/definitions/String'
+        description: The name of the DAX cluster.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description of the cluster.
+      ClusterArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) that uniquely identifies the cluster. '
+      TotalNodes:
+        $ref: '#/definitions/IntegerOptional'
+        description: The total number of nodes in the cluster.
+      ActiveNodes:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The number of nodes in the cluster that are active (i.e., capable of serving requests).'
+      NodeType:
+        $ref: '#/definitions/String'
+        description: The node type for the nodes in the cluster. (All nodes in a DAX cluster are of the same type.)
+      Status:
+        $ref: '#/definitions/String'
+        description: The current status of the cluster.
+      ClusterDiscoveryEndpoint:
+        $ref: '#/definitions/Endpoint'
+        description: 'The configuration endpoint for this DAX cluster, consisting of a DNS name and a port number. Client applications can specify this endpoint, rather than an individual node endpoint, and allow the DAX client software to intelligently route requests and responses to nodes in the DAX cluster.'
+      NodeIdsToRemove:
+        $ref: '#/definitions/NodeIdentifierList'
+        description: A list of nodes to be removed from the cluster.
+      Nodes:
+        $ref: '#/definitions/NodeList'
+        description: A list of nodes that are currently in the cluster.
+      PreferredMaintenanceWindow:
+        $ref: '#/definitions/String'
+        description: 'A range of time when maintenance of DAX cluster software will be performed. For example: <code>sun:01:00-sun:09:00</code>. Cluster maintenance normally takes less than 30 minutes, and is performed automatically within the maintenance window.'
+      NotificationConfiguration:
+        $ref: '#/definitions/NotificationConfiguration'
+        description: Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).
+      SubnetGroup:
+        $ref: '#/definitions/String'
+        description: The subnet group where the DAX cluster is running.
+      SecurityGroups:
+        $ref: '#/definitions/SecurityGroupMembershipList'
+        description: 'A list of security groups, and the status of each, for the nodes in the cluster.'
+      IamRoleArn:
+        $ref: '#/definitions/String'
+        description: 'A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role''s permissions to access DynamoDB on your behalf.'
+      ParameterGroup:
+        $ref: '#/definitions/ParameterGroupStatus'
+        description: The parameter group being used by nodes in the cluster.
+    description: Contains all of the attributes of a specific DAX cluster.
+  ClusterAlreadyExistsFault:
+    type: object
+    properties: {}
+    description: You already have a DAX cluster with the given identifier.
+  ClusterList:
+    type: array
+    items:
+      $ref: '#/definitions/Cluster'
+  ClusterNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ClusterNotFoundFault:
+    type: object
+    properties: {}
+    description: The requested cluster ID does not refer to an existing DAX cluster.
+  ClusterQuotaForCustomerExceededFault:
+    type: object
+    properties: {}
+    description: You have attempted to exceed the maximum number of DAX clusters for your AWS account.
+  CreateClusterRequest:
+    type: object
+    required:
+      - ClusterName
+      - NodeType
+      - ReplicationFactor
+      - IamRoleArn
+    properties:
+      ClusterName:
+        $ref: '#/definitions/String'
+        description: '<p>The cluster identifier. This parameter is stored as a lowercase string.</p> <p> <b>Constraints:</b> </p> <ul> <li> <p>A name must contain from 1 to 20 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+      NodeType:
+        $ref: '#/definitions/String'
+        description: The compute and memory capacity of the nodes in the cluster.
+      Description:
+        $ref: '#/definitions/String'
+        description: A description of the cluster.
+      ReplicationFactor:
+        $ref: '#/definitions/Integer'
+        description: '<p>The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas. For additional fault tolerance, you can create a multiple node cluster with one or more read replicas. To do this, set <i>ReplicationFactor</i> to 2 or more.</p> <note> <p>AWS recommends that you have at least two read replicas per cluster.</p> </note>'
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZoneList'
+        description: The Availability Zones (AZs) in which the cluster nodes will be created. All nodes belonging to the cluster are placed in these Availability Zones. Use this parameter if you want to distribute the nodes across multiple AZs.
+      SubnetGroupName:
+        $ref: '#/definitions/String'
+        description: <p>The name of the subnet group to be used for the replication group.</p> <important> <p>DAX clusters can only run in an Amazon VPC environment. All of the subnets that you specify in a subnet group must exist in the same VPC.</p> </important>
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIdentifierList'
+        description: '<p>A list of security group IDs to be assigned to each node in the DAX cluster. (Each of the security group ID is system-generated.)</p> <p>If this parameter is not specified, DAX assigns the default VPC security group to each node.</p>'
+      PreferredMaintenanceWindow:
+        $ref: '#/definitions/String'
+        description: '<p>Specifies the weekly time range during which maintenance on the DAX cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <ul> <li> <p> <code>sun</code> </p> </li> <li> <p> <code>mon</code> </p> </li> <li> <p> <code>tue</code> </p> </li> <li> <p> <code>wed</code> </p> </li> <li> <p> <code>thu</code> </p> </li> <li> <p> <code>fri</code> </p> </li> <li> <p> <code>sat</code> </p> </li> </ul> <p>Example: <code>sun:05:00-sun:09:00</code> </p> <note> <p>If you don''t specify a preferred maintenance window when you create or modify a cache cluster, DAX assigns a 60-minute maintenance window on a randomly selected day of the week.</p> </note>'
+      NotificationTopicArn:
+        $ref: '#/definitions/String'
+        description: <p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will be sent.</p> <note> <p>The Amazon SNS topic owner must be same as the DAX cluster owner.</p> </note>
+      IamRoleArn:
+        $ref: '#/definitions/String'
+        description: 'A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role''s permissions to access DynamoDB on your behalf.'
+      ParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The parameter group to be associated with the DAX cluster.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'A set of tags to associate with the DAX cluster. '
+  CreateClusterResponse:
+    type: object
+    properties:
+      Cluster:
+        $ref: '#/definitions/Cluster'
+        description: A description of the DAX cluster that you have created.
+  CreateParameterGroupRequest:
+    type: object
+    required:
+      - ParameterGroupName
+    properties:
+      ParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the parameter group to apply to all of the clusters in this replication group.
+      Description:
+        $ref: '#/definitions/String'
+        description: A description of the parameter group.
+  CreateParameterGroupResponse:
+    type: object
+    properties:
+      ParameterGroup:
+        $ref: '#/definitions/ParameterGroup'
+        description: Represents the output of a <i>CreateParameterGroup</i> action.
+  CreateSubnetGroupRequest:
+    type: object
+    required:
+      - SubnetGroupName
+      - SubnetIds
+    properties:
+      SubnetGroupName:
+        $ref: '#/definitions/String'
+        description: 'A name for the subnet group. This value is stored as a lowercase string. '
+      Description:
+        $ref: '#/definitions/String'
+        description: A description for the subnet group
+      SubnetIds:
+        $ref: '#/definitions/SubnetIdentifierList'
+        description: A list of VPC subnet IDs for the subnet group.
+  CreateSubnetGroupResponse:
+    type: object
+    properties:
+      SubnetGroup:
+        $ref: '#/definitions/SubnetGroup'
+        description: Represents the output of a <i>CreateSubnetGroup</i> operation.
+  DecreaseReplicationFactorRequest:
+    type: object
+    required:
+      - ClusterName
+      - NewReplicationFactor
+    properties:
+      ClusterName:
+        $ref: '#/definitions/String'
+        description: The name of the DAX cluster from which you want to remove nodes.
+      NewReplicationFactor:
+        $ref: '#/definitions/Integer'
+        description: The new number of nodes for the DAX cluster.
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZoneList'
+        description: The Availability Zone(s) from which to remove nodes.
+      NodeIdsToRemove:
+        $ref: '#/definitions/NodeIdentifierList'
+        description: The unique identifiers of the nodes to be removed from the cluster.
+  DecreaseReplicationFactorResponse:
+    type: object
+    properties:
+      Cluster:
+        $ref: '#/definitions/Cluster'
+        description: 'A description of the DAX cluster, after you have decreased its replication factor.'
+  DeleteClusterRequest:
+    type: object
+    required:
+      - ClusterName
+    properties:
+      ClusterName:
+        $ref: '#/definitions/String'
+        description: The name of the cluster to be deleted.
+  DeleteClusterResponse:
+    type: object
+    properties:
+      Cluster:
+        $ref: '#/definitions/Cluster'
+        description: A description of the DAX cluster that is being deleted.
+  DeleteParameterGroupRequest:
+    type: object
+    required:
+      - ParameterGroupName
+    properties:
+      ParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the parameter group to delete.
+  DeleteParameterGroupResponse:
+    type: object
+    properties:
+      DeletionMessage:
+        $ref: '#/definitions/String'
+        description: 'A user-specified message for this action (i.e., a reason for deleting the parameter group).'
+  DeleteSubnetGroupRequest:
+    type: object
+    required:
+      - SubnetGroupName
+    properties:
+      SubnetGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the subnet group to delete.
+  DeleteSubnetGroupResponse:
+    type: object
+    properties:
+      DeletionMessage:
+        $ref: '#/definitions/String'
+        description: 'A user-specified message for this action (i.e., a reason for deleting the subnet group).'
+  DescribeClustersRequest:
+    type: object
+    properties:
+      ClusterNames:
+        $ref: '#/definitions/ClusterNameList'
+        description: The names of the DAX clusters being described.
+      MaxResults:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+  DescribeClustersResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Provides an identifier to allow retrieval of paginated results.
+      Clusters:
+        $ref: '#/definitions/ClusterList'
+        description: 'The descriptions of your DAX clusters, in response to a <i>DescribeClusters</i> request.'
+  DescribeDefaultParametersRequest:
+    type: object
+    properties:
+      MaxResults:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+  DescribeDefaultParametersResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Provides an identifier to allow retrieval of paginated results.
+      Parameters:
+        $ref: '#/definitions/ParameterList'
+        description: A list of parameters. Each element in the list represents one parameter.
+  DescribeEventsRequest:
+    type: object
+    properties:
+      SourceName:
+        $ref: '#/definitions/String'
+        description: 'The identifier of the event source for which events will be returned. If not specified, then all sources are included in the response.'
+      SourceType:
+        $ref: '#/definitions/SourceType'
+        description: 'The event source to retrieve events for. If no value is specified, all events are returned.'
+      StartTime:
+        $ref: '#/definitions/TStamp'
+        description: 'The beginning of the time interval to retrieve events for, specified in ISO 8601 format.'
+      EndTime:
+        $ref: '#/definitions/TStamp'
+        description: 'The end of the time interval for which to retrieve events, specified in ISO 8601 format.'
+      Duration:
+        $ref: '#/definitions/IntegerOptional'
+        description: The number of minutes' worth of events to retrieve.
+      MaxResults:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+  DescribeEventsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Provides an identifier to allow retrieval of paginated results.
+      Events:
+        $ref: '#/definitions/EventList'
+        description: An array of events. Each element in the array represents one event.
+  DescribeParameterGroupsRequest:
+    type: object
+    properties:
+      ParameterGroupNames:
+        $ref: '#/definitions/ParameterGroupNameList'
+        description: The names of the parameter groups.
+      MaxResults:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+  DescribeParameterGroupsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Provides an identifier to allow retrieval of paginated results.
+      ParameterGroups:
+        $ref: '#/definitions/ParameterGroupList'
+        description: An array of parameter groups. Each element in the array represents one parameter group.
+  DescribeParametersRequest:
+    type: object
+    required:
+      - ParameterGroupName
+    properties:
+      ParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the parameter group.
+      Source:
+        $ref: '#/definitions/String'
+        description: 'How the parameter is defined. For example, <code>system</code> denotes a system-defined parameter.'
+      MaxResults:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+  DescribeParametersResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Provides an identifier to allow retrieval of paginated results.
+      Parameters:
+        $ref: '#/definitions/ParameterList'
+        description: A list of parameters within a parameter group. Each element in the list represents one parameter.
+  DescribeSubnetGroupsRequest:
+    type: object
+    properties:
+      SubnetGroupNames:
+        $ref: '#/definitions/SubnetGroupNameList'
+        description: The name of the subnet group.
+      MaxResults:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+  DescribeSubnetGroupsResponse:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/String'
+        description: Provides an identifier to allow retrieval of paginated results.
+      SubnetGroups:
+        $ref: '#/definitions/SubnetGroupList'
+        description: An array of subnet groups. Each element in the array represents a single subnet group.
+  Endpoint:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/String'
+        description: The DNS hostname of the endpoint.
+      Port:
+        $ref: '#/definitions/Integer'
+        description: The port number that applications should use to connect to the endpoint.
+    description: 'Represents the information required for client programs to connect to the configuration endpoint for a DAX cluster, or to an individual node within the cluster.'
+  Event:
+    type: object
+    properties:
+      SourceName:
+        $ref: '#/definitions/String'
+        description: 'The source of the event. For example, if the event occurred at the node level, the source would be the node ID.'
+      SourceType:
+        $ref: '#/definitions/SourceType'
+        description: 'Specifies the origin of this event - a cluster, a parameter group, a node ID, etc.'
+      Message:
+        $ref: '#/definitions/String'
+        description: A user-defined message associated with the event.
+      Date:
+        $ref: '#/definitions/TStamp'
+        description: The date and time when the event occurred.
+    description: 'Represents a single occurrence of something interesting within the system. Some examples of events are creating a DAX cluster, adding or removing a node, or rebooting a node.'
+  EventList:
+    type: array
+    items:
+      $ref: '#/definitions/Event'
+  IncreaseReplicationFactorRequest:
+    type: object
+    required:
+      - ClusterName
+      - NewReplicationFactor
+    properties:
+      ClusterName:
+        $ref: '#/definitions/String'
+        description: The name of the DAX cluster that will receive additional nodes.
+      NewReplicationFactor:
+        $ref: '#/definitions/Integer'
+        description: The new number of nodes for the DAX cluster.
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZoneList'
+        description: The Availability Zones (AZs) in which the cluster nodes will be created. All nodes belonging to the cluster are placed in these Availability Zones. Use this parameter if you want to distribute the nodes across multiple AZs.
+  IncreaseReplicationFactorResponse:
+    type: object
+    properties:
+      Cluster:
+        $ref: '#/definitions/Cluster'
+        description: A description of the DAX cluster. with its new replication factor.
+  InsufficientClusterCapacityFault:
+    type: object
+    properties: {}
+    description: 'There are not enough system resources to create the cluster you requested (or to resize an already-existing cluster). '
+  Integer:
+    type: integer
+  IntegerOptional:
+    type: integer
+  InvalidARNFault:
+    type: object
+    properties: {}
+    description: The Amazon Resource Name (ARN) supplied in the request is not valid.
+  InvalidClusterStateFault:
+    type: object
+    properties: {}
+    description: The requested DAX cluster is not in the <i>available</i> state.
+  InvalidParameterCombinationException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/AwsQueryErrorMessage'
+    description: Two or more incompatible parameters were specified.
+  InvalidParameterGroupStateFault:
+    type: object
+    properties: {}
+    description: One or more parameters in a parameter group are in an invalid state.
+  InvalidParameterValueException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/AwsQueryErrorMessage'
+    description: The value for a parameter is invalid.
+  InvalidSubnet:
+    type: object
+    properties: {}
+    description: An invalid subnet identifier was specified.
+  InvalidVPCNetworkStateFault:
+    type: object
+    properties: {}
+    description: The VPC network is in an invalid state.
+  IsModifiable:
+    type: string
+    enum:
+      - 'TRUE'
+      - 'FALSE'
+      - CONDITIONAL
+  KeyList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ListTagsRequest:
+    type: object
+    required:
+      - ResourceName
+    properties:
+      ResourceName:
+        $ref: '#/definitions/String'
+        description: The name of the DAX resource to which the tags belong.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token.'
+  ListTagsResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: A list of tags currently associated with the DAX cluster.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'If this value is present, there are additional results to be displayed. To retrieve them, call <code>ListTags</code> again, with <code>NextToken</code> set to this value.'
+  Node:
+    type: object
+    properties:
+      NodeId:
+        $ref: '#/definitions/String'
+        description: A system-generated identifier for the node.
+      Endpoint:
+        $ref: '#/definitions/Endpoint'
+        description: 'The endpoint for the node, consisting of a DNS name and a port number. Client applications can connect directly to a node endpoint, if desired (as an alternative to allowing DAX client software to intelligently route requests and responses to nodes in the DAX cluster.'
+      NodeCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: The date and time (in UNIX epoch format) when the node was launched.
+      AvailabilityZone:
+        $ref: '#/definitions/String'
+        description: The Availability Zone (AZ) in which the node has been deployed.
+      NodeStatus:
+        $ref: '#/definitions/String'
+        description: 'The current status of the node. For example: <code>available</code>.'
+      ParameterGroupStatus:
+        $ref: '#/definitions/String'
+        description: 'The status of the parameter group associated with this node. For example, <code>in-sync</code>.'
+    description: Represents an individual node within a DAX cluster.
+  NodeIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  NodeList:
+    type: array
+    items:
+      $ref: '#/definitions/Node'
+  NodeNotFoundFault:
+    type: object
+    properties: {}
+    description: None of the nodes in the cluster have the given node ID.
+  NodeQuotaForClusterExceededFault:
+    type: object
+    properties: {}
+    description: You have attempted to exceed the maximum number of nodes for a DAX cluster.
+  NodeQuotaForCustomerExceededFault:
+    type: object
+    properties: {}
+    description: You have attempted to exceed the maximum number of nodes for your AWS account.
+  NodeTypeSpecificValue:
+    type: object
+    properties:
+      NodeType:
+        $ref: '#/definitions/String'
+        description: A node type to which the parameter value applies.
+      Value:
+        $ref: '#/definitions/String'
+        description: The parameter value for this node type.
+    description: Represents a parameter value that is applicable to a particular node type.
+  NodeTypeSpecificValueList:
+    type: array
+    items:
+      $ref: '#/definitions/NodeTypeSpecificValue'
+  NotificationConfiguration:
+    type: object
+    properties:
+      TopicArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) that identifies the topic. '
+      TopicStatus:
+        $ref: '#/definitions/String'
+        description: The current state of the topic.
+    description: Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).
+  Parameter:
+    type: object
+    properties:
+      ParameterName:
+        $ref: '#/definitions/String'
+        description: The name of the parameter.
+      ParameterType:
+        $ref: '#/definitions/ParameterType'
+        description: 'Determines whether the parameter can be applied to any nodes, or only nodes of a particular type.'
+      ParameterValue:
+        $ref: '#/definitions/String'
+        description: The value for the parameter.
+      NodeTypeSpecificValues:
+        $ref: '#/definitions/NodeTypeSpecificValueList'
+        description: 'A list of node types, and specific parameter values for each node.'
+      Description:
+        $ref: '#/definitions/String'
+        description: A description of the parameter
+      Source:
+        $ref: '#/definitions/String'
+        description: 'How the parameter is defined. For example, <code>system</code> denotes a system-defined parameter.'
+      DataType:
+        $ref: '#/definitions/String'
+        description: 'The data type of the parameter. For example, <code>integer</code>:'
+      AllowedValues:
+        $ref: '#/definitions/String'
+        description: A range of values within which the parameter can be set.
+      IsModifiable:
+        $ref: '#/definitions/IsModifiable'
+        description: Whether the customer is allowed to modify the parameter.
+      ChangeType:
+        $ref: '#/definitions/ChangeType'
+        description: 'The conditions under which changes to this parameter can be applied. For example, <code>requires-reboot</code> indicates that a new value for this parameter will only take effect if a node is rebooted.'
+    description: Describes an individual setting that controls some aspect of DAX behavior.
+  ParameterGroup:
+    type: object
+    properties:
+      ParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the parameter group.
+      Description:
+        $ref: '#/definitions/String'
+        description: A description of the parameter group.
+    description: A named set of parameters that are applied to all of the nodes in a DAX cluster.
+  ParameterGroupAlreadyExistsFault:
+    type: object
+    properties: {}
+    description: The specified parameter group already exists.
+  ParameterGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterGroup'
+  ParameterGroupNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ParameterGroupNotFoundFault:
+    type: object
+    properties: {}
+    description: The specified parameter group does not exist.
+  ParameterGroupQuotaExceededFault:
+    type: object
+    properties: {}
+    description: You have attempted to exceed the maximum number of parameter groups.
+  ParameterGroupStatus:
+    type: object
+    properties:
+      ParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the parameter group.
+      ParameterApplyStatus:
+        $ref: '#/definitions/String'
+        description: 'The status of parameter updates. '
+      NodeIdsToReboot:
+        $ref: '#/definitions/NodeIdentifierList'
+        description: The node IDs of one or more nodes to be rebooted.
+    description: The status of a parameter group.
+  ParameterList:
+    type: array
+    items:
+      $ref: '#/definitions/Parameter'
+  ParameterNameValue:
+    type: object
+    properties:
+      ParameterName:
+        $ref: '#/definitions/String'
+        description: The name of the parameter.
+      ParameterValue:
+        $ref: '#/definitions/String'
+        description: The value of the parameter.
+    description: An individual DAX parameter.
+  ParameterNameValueList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterNameValue'
+  ParameterType:
+    type: string
+    enum:
+      - DEFAULT
+      - NODE_TYPE_SPECIFIC
+  RebootNodeRequest:
+    type: object
+    required:
+      - ClusterName
+      - NodeId
+    properties:
+      ClusterName:
+        $ref: '#/definitions/String'
+        description: The name of the DAX cluster containing the node to be rebooted.
+      NodeId:
+        $ref: '#/definitions/String'
+        description: The system-assigned ID of the node to be rebooted.
+  RebootNodeResponse:
+    type: object
+    properties:
+      Cluster:
+        $ref: '#/definitions/Cluster'
+        description: A description of the DAX cluster after a node has been rebooted.
+  SecurityGroupIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  SecurityGroupMembership:
+    type: object
+    properties:
+      SecurityGroupIdentifier:
+        $ref: '#/definitions/String'
+        description: The unique ID for this security group.
+      Status:
+        $ref: '#/definitions/String'
+        description: The status of this security group.
+    description: An individual VPC security group and its status.
+  SecurityGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupMembership'
+  SourceType:
+    type: string
+    enum:
+      - CLUSTER
+      - PARAMETER_GROUP
+      - SUBNET_GROUP
+  String:
+    type: string
+  Subnet:
+    type: object
+    properties:
+      SubnetIdentifier:
+        $ref: '#/definitions/String'
+        description: The system-assigned identifier for the subnet.
+      SubnetAvailabilityZone:
+        $ref: '#/definitions/String'
+        description: The Availability Zone (AZ) for subnet subnet.
+    description: Represents the subnet associated with a DAX cluster. This parameter refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with DAX.
+  SubnetGroup:
+    type: object
+    properties:
+      SubnetGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the subnet group.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description of the subnet group.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: The Amazon Virtual Private Cloud identifier (VPC ID) of the subnet group.
+      Subnets:
+        $ref: '#/definitions/SubnetList'
+        description: 'A list of subnets associated with the subnet group. '
+    description: '<p>Represents the output of one of the following actions:</p> <ul> <li> <p> <i>CreateSubnetGroup</i> </p> </li> <li> <p> <i>ModifySubnetGroup</i> </p> </li> </ul>'
+  SubnetGroupAlreadyExistsFault:
+    type: object
+    properties: {}
+    description: The specified subnet group already exists.
+  SubnetGroupInUseFault:
+    type: object
+    properties: {}
+    description: The specified subnet group is currently in use.
+  SubnetGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetGroup'
+  SubnetGroupNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  SubnetGroupNotFoundFault:
+    type: object
+    properties: {}
+    description: The requested subnet group name does not refer to an existing subnet group.
+  SubnetGroupQuotaExceededFault:
+    type: object
+    properties: {}
+    description: The request cannot be processed because it would exceed the allowed number of subnets in a subnet group.
+  SubnetIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  SubnetInUse:
+    type: object
+    properties: {}
+    description: The requested subnet is being used by another subnet group.
+  SubnetList:
+    type: array
+    items:
+      $ref: '#/definitions/Subnet'
+  SubnetQuotaExceededFault:
+    type: object
+    properties: {}
+    description: The request cannot be processed because it would exceed the allowed number of subnets in a subnet group.
+  TStamp:
+    type: string
+    format: date-time
+  Tag:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/String'
+        description: 'The key for the tag. Tag keys are case sensitive. Every DAX cluster can only have one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value.'
+      Value:
+        $ref: '#/definitions/String'
+        description: 'The value of the tag. Tag values are case-sensitive and can be null. '
+    description: '<p>A description of a tag. Every tag is a key-value pair. You can add up to 50 tags to a single DAX cluster.</p> <p>AWS-assigned tag names and values are automatically assigned the <code>aws:</code> prefix, which the user cannot assign. AWS-assigned tag names do not count towards the tag limit of 50. User-assigned tag names have the prefix <code>user:</code>.</p> <p>You cannot backdate the application of a tag.</p>'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  TagNotFoundFault:
+    type: object
+    properties: {}
+    description: The tag does not exist.
+  TagQuotaPerResourceExceeded:
+    type: object
+    properties: {}
+    description: You have exceeded the maximum number of tags for this DAX cluster.
+  TagResourceRequest:
+    type: object
+    required:
+      - ResourceName
+      - Tags
+    properties:
+      ResourceName:
+        $ref: '#/definitions/String'
+        description: The name of the DAX resource to which tags should be added.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tags to be assigned to the DAX resource. '
+  TagResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The list of tags that are associated with the DAX resource.
+  UntagResourceRequest:
+    type: object
+    required:
+      - ResourceName
+      - TagKeys
+    properties:
+      ResourceName:
+        $ref: '#/definitions/String'
+        description: The name of the DAX resource from which the tags should be removed.
+      TagKeys:
+        $ref: '#/definitions/KeyList'
+        description: 'A list of tag keys. If the DAX cluster has any tags with these keys, then the tags are removed from the cluster.'
+  UntagResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tag keys that have been removed from the cluster.
+  UpdateClusterRequest:
+    type: object
+    required:
+      - ClusterName
+    properties:
+      ClusterName:
+        $ref: '#/definitions/String'
+        description: The name of the DAX cluster to be modified.
+      Description:
+        $ref: '#/definitions/String'
+        description: A description of the changes being made to the cluster.
+      PreferredMaintenanceWindow:
+        $ref: '#/definitions/String'
+        description: 'A range of time when maintenance of DAX cluster software will be performed. For example: <code>sun:01:00-sun:09:00</code>. Cluster maintenance normally takes less than 30 minutes, and is performed automatically within the maintenance window.'
+      NotificationTopicArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) that identifies the topic.
+      NotificationTopicStatus:
+        $ref: '#/definitions/String'
+        description: The current state of the topic.
+      ParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The name of a parameter group for this cluster.
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIdentifierList'
+        description: 'A list of user-specified security group IDs to be assigned to each node in the DAX cluster. If this parameter is not specified, DAX assigns the default VPC security group to each node.'
+  UpdateClusterResponse:
+    type: object
+    properties:
+      Cluster:
+        $ref: '#/definitions/Cluster'
+        description: 'A description of the DAX cluster, after it has been modified.'
+  UpdateParameterGroupRequest:
+    type: object
+    required:
+      - ParameterGroupName
+      - ParameterNameValues
+    properties:
+      ParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the parameter group.
+      ParameterNameValues:
+        $ref: '#/definitions/ParameterNameValueList'
+        description: An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.
+  UpdateParameterGroupResponse:
+    type: object
+    properties:
+      ParameterGroup:
+        $ref: '#/definitions/ParameterGroup'
+        description: The parameter group that has been modified.
+  UpdateSubnetGroupRequest:
+    type: object
+    required:
+      - SubnetGroupName
+    properties:
+      SubnetGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the subnet group.
+      Description:
+        $ref: '#/definitions/String'
+        description: A description of the subnet group.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIdentifierList'
+        description: A list of subnet IDs in the subnet group.
+  UpdateSubnetGroupResponse:
+    type: object
+    properties:
+      SubnetGroup:
+        $ref: '#/definitions/SubnetGroup'
+        description: The subnet group that has been modified.

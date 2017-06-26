@@ -3,7 +3,7 @@ info:
   version: '2014-11-06'
   x-release: v4
   title: Amazon Simple Systems Manager (SSM)
-  description: '<fullname>Amazon EC2 Systems Manager</fullname> <p>Amazon EC2 Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/">Amazon EC2 Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-prereqs.html">Systems Manager Prerequisites</a>.</p>'
+  description: '<fullname>Amazon EC2 Systems Manager</fullname> <p>Amazon EC2 Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/">Amazon EC2 Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Systems Manager Prerequisites</a>.</p>'
   x-logo:
     url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
     backgroundColor: '#FFFFFF'
@@ -644,6 +644,35 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteParameterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteParameters':
+    post:
+      operationId: DeleteParameters
+      description: Delete a list of parameters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteParametersResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteParametersRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1524,10 +1553,18 @@ paths:
           schema:
             $ref: '#/definitions/InternalServerError'
         '481':
+          description: InvalidFilterKey
+          schema:
+            $ref: '#/definitions/InvalidFilterKey'
+        '482':
+          description: InvalidFilterOption
+          schema:
+            $ref: '#/definitions/InvalidFilterOption'
+        '483':
           description: InvalidFilterValue
           schema:
             $ref: '#/definitions/InvalidFilterValue'
-        '482':
+        '484':
           description: InvalidNextToken
           schema:
             $ref: '#/definitions/InvalidNextToken'
@@ -1537,6 +1574,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeParametersRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1992,6 +2039,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetParameter':
+    post:
+      operationId: GetParameter
+      description: 'Get information about a parameter by using the parameter name. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetParameterResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: InvalidKeyId
+          schema:
+            $ref: '#/definitions/InvalidKeyId'
+        '482':
+          description: ParameterNotFound
+          schema:
+            $ref: '#/definitions/ParameterNotFound'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetParameterRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetParameterHistory':
     post:
       operationId: GetParameterHistory
@@ -2013,12 +2097,26 @@ paths:
           description: InvalidNextToken
           schema:
             $ref: '#/definitions/InvalidNextToken'
+        '483':
+          description: InvalidKeyId
+          schema:
+            $ref: '#/definitions/InvalidKeyId'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/GetParameterHistoryRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2039,6 +2137,10 @@ paths:
           schema:
             $ref: '#/definitions/GetParametersResult'
         '480':
+          description: InvalidKeyId
+          schema:
+            $ref: '#/definitions/InvalidKeyId'
+        '481':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -2048,6 +2150,65 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/GetParametersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetParametersByPath':
+    post:
+      operationId: GetParametersByPath
+      description: 'Retrieve parameters in a specific hierarchy. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html">Using Parameter Hierarchies</a>. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetParametersByPathResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: InvalidFilterKey
+          schema:
+            $ref: '#/definitions/InvalidFilterKey'
+        '482':
+          description: InvalidFilterOption
+          schema:
+            $ref: '#/definitions/InvalidFilterOption'
+        '483':
+          description: InvalidFilterValue
+          schema:
+            $ref: '#/definitions/InvalidFilterValue'
+        '484':
+          description: InvalidKeyId
+          schema:
+            $ref: '#/definitions/InvalidKeyId'
+        '485':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetParametersByPathRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2552,7 +2713,7 @@ paths:
   '/#PutParameter':
     post:
       operationId: PutParameter
-      description: Add one or more paramaters to the system.
+      description: Add one or more parameters to the system.
       responses:
         '200':
           description: Success
@@ -2579,6 +2740,22 @@ paths:
           schema:
             $ref: '#/definitions/ParameterAlreadyExists'
         '485':
+          description: HierarchyLevelLimitExceededException
+          schema:
+            $ref: '#/definitions/HierarchyLevelLimitExceededException'
+        '486':
+          description: HierarchyTypeMismatchException
+          schema:
+            $ref: '#/definitions/HierarchyTypeMismatchException'
+        '487':
+          description: InvalidAllowedPatternException
+          schema:
+            $ref: '#/definitions/InvalidAllowedPatternException'
+        '488':
+          description: ParameterPatternMismatchException
+          schema:
+            $ref: '#/definitions/ParameterPatternMismatchException'
+        '489':
           description: UnsupportedParameterType
           schema:
             $ref: '#/definitions/UnsupportedParameterType'
@@ -2802,7 +2979,7 @@ paths:
   '/#SendCommand':
     post:
       operationId: SendCommand
-      description: Executes commands on one or more remote instances.
+      description: Executes commands on one or more managed instances.
       responses:
         '200':
           description: Success
@@ -3330,6 +3507,10 @@ definitions:
   AgentErrorCode:
     type: string
     maxLength: 10
+  AllowedPattern:
+    type: string
+    minLength: 0
+    maxLength: 1024
   AlreadyExistsException:
     type: object
     properties:
@@ -3772,7 +3953,7 @@ definitions:
         description: '<p>A detailed status of the command execution. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html">Run Command Status</a>. StatusDetails can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to any instances.</p> </li> <li> <p>In Progress: The command has been sent to at least one instance but has not reached a final state on all instances.</p> </li> <li> <p>Success: The command successfully executed on all invocations. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The value of MaxErrors or more command invocations shows a status of Delivery Timed Out. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: The value of MaxErrors or more command invocations shows a status of Execution Timed Out. This is a terminal state.</p> </li> <li> <p>Failed: The value of MaxErrors or more command invocations shows a status of Failed. This is a terminal state.</p> </li> <li> <p>Incomplete: The command was attempted on all instances and one or more invocations does not have a value of Success but not enough invocations failed for the status to be Failed. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Rate Exceeded: The number of instances targeted by the command exceeded the account limit for pending invocations. The system has canceled the command before executing it on any instance. This is a terminal state.</p> </li> </ul>'
       OutputS3Region:
         $ref: '#/definitions/S3Region'
-        description: The region where the Amazon Simple Storage Service (Amazon S3) output bucket is located. The default value is the region where Run Command is being called.
+        description: '(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.'
       OutputS3BucketName:
         $ref: '#/definitions/S3BucketName'
         description: The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command.
@@ -3809,10 +3990,10 @@ definitions:
     properties:
       key:
         $ref: '#/definitions/CommandFilterKey'
-        description: 'The name of the filter. For example, requested date and time.'
+        description: The name of the filter.
       value:
         $ref: '#/definitions/CommandFilterValue'
-        description: 'The filter value. For example: June 30, 2015.'
+        description: 'The filter value. '
     description: Describes a command filter.
   CommandFilterKey:
     type: string
@@ -3933,7 +4114,7 @@ definitions:
         description: 'The URL for the complete text written by the plugin to stderr. If execution is not yet complete, then this string is empty.'
       OutputS3Region:
         $ref: '#/definitions/S3Region'
-        description: The name of the region where the output is stored in Amazon S3.
+        description: '(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.'
       OutputS3BucketName:
         $ref: '#/definitions/S3BucketName'
         description: '<p>The S3 bucket where the responses to the command executions should be stored. This was requested when issuing the command. For example, in the following response:</p> <p> test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript </p> <p>test_folder is the name of the Amazon S3 bucket;</p> <p> ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;</p> <p>i-1234567876543 is the instance ID;</p> <p>awsrunShellScript is the name of the plugin.</p>'
@@ -4256,6 +4437,23 @@ definitions:
   DeleteParameterResult:
     type: object
     properties: {}
+  DeleteParametersRequest:
+    type: object
+    required:
+      - Names
+    properties:
+      Names:
+        $ref: '#/definitions/ParameterNameList'
+        description: The names of the parameters to delete.
+  DeleteParametersResult:
+    type: object
+    properties:
+      DeletedParameters:
+        $ref: '#/definitions/ParameterNameList'
+        description: The names of the deleted parameters.
+      InvalidParameters:
+        $ref: '#/definitions/ParameterNameList'
+        description: The names of parameters that weren't deleted because the parameters are not valid.
   DeletePatchBaselineRequest:
     type: object
     required:
@@ -4384,7 +4582,7 @@ definitions:
         description: A list of activations for your AWS account.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: ' The token for the next set of items to return. Use this token to get the next set of results. '
+        description: 'The token for the next set of items to return. Use this token to get the next set of results. '
   DescribeAssociationRequest:
     type: object
     properties:
@@ -4809,6 +5007,9 @@ definitions:
       Filters:
         $ref: '#/definitions/ParametersFilterList'
         description: One or more filters. Use a filter to return a more specific list of results.
+      ParameterFilters:
+        $ref: '#/definitions/ParameterStringFilterList'
+        description: Filters to limit the request results.
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -5257,13 +5458,13 @@ definitions:
         description: 'The error level response code for the plugin script. If the response code is -1, then the command has not started executing on the instance, or it was not received by the instance.'
       ExecutionStartDateTime:
         $ref: '#/definitions/StringDateTime'
-        description: 'The date and time the plugin started executing. Date and time are written in ISO 8601 format. For example, August 28, 2016 is represented as 2016-08-28. If the plugin has not started to execute, the string is empty.'
+        description: '<p>The date and time the plugin started executing. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the <code>InvokedBefore</code> filter.</p> <p> <code>aws ssm list-commands --filters key=InvokedBefore,value=2017-06-07T00:00:00Z</code> </p> <p>If the plugin has not started to execute, the string is empty.</p>'
       ExecutionElapsedTime:
         $ref: '#/definitions/StringDateTime'
         description: Duration since ExecutionStartDateTime.
       ExecutionEndDateTime:
         $ref: '#/definitions/StringDateTime'
-        description: 'The date and time the plugin was finished executing. Date and time are written in ISO 8601 format. For example, August 28, 2016 is represented as 2016-08-28. If the plugin has not started to execute, the string is empty.'
+        description: '<p>The date and time the plugin was finished executing. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the <code>InvokedAfter</code> filter.</p> <p> <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code> </p> <p>If the plugin has not started to execute, the string is empty.</p>'
       Status:
         $ref: '#/definitions/CommandInvocationStatus'
         description: The status of the parent command for this invocation. This status can be different than StatusDetails.
@@ -5537,6 +5738,59 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
+  GetParameterRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/PSParameterName'
+        description: The name of the parameter you want to query.
+      WithDecryption:
+        $ref: '#/definitions/Boolean'
+        description: Return decrypted values for secure string parameters. This flag is ignored for String and StringList parameter types.
+  GetParameterResult:
+    type: object
+    properties:
+      Parameter:
+        $ref: '#/definitions/Parameter'
+        description: Information about a parameter.
+  GetParametersByPathMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 10
+  GetParametersByPathRequest:
+    type: object
+    required:
+      - Path
+    properties:
+      Path:
+        $ref: '#/definitions/PSParameterName'
+        description: '<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/) and end with the parameter name. A hierarchy can have a maximum of five levels. Examples: /Environment/Test/DBString003</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p>'
+      Recursive:
+        $ref: '#/definitions/Boolean'
+        description: Retrieve all parameters within a hierarchy.
+      ParameterFilters:
+        $ref: '#/definitions/ParameterStringFilterList'
+        description: Filters to limit the request results.
+      WithDecryption:
+        $ref: '#/definitions/Boolean'
+        description: Retrieve all parameters in a hierarchy with their value decrypted.
+      MaxResults:
+        $ref: '#/definitions/GetParametersByPathMaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token to start the list. Use this token to get the next set of results. '
+  GetParametersByPathResult:
+    type: object
+    properties:
+      Parameters:
+        $ref: '#/definitions/ParameterList'
+        description: A list of parameters found in the specified hierarchy.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
   GetParametersRequest:
     type: object
     required:
@@ -5615,6 +5869,20 @@ definitions:
       Description:
         $ref: '#/definitions/BaselineDescription'
         description: A description of the patch baseline.
+  HierarchyLevelLimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+        description: '<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html">Develop a Parameter Hierarchy</a>. </p>'
+    description: '<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html">Develop a Parameter Hierarchy</a>. </p>'
+  HierarchyTypeMismatchException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+        description: 'Parameter Store does not support changing a parameter type in a hierarchy. For example, you can''t change a parameter from a String type to a SecureString type. You must create a new, unique parameter.'
+    description: 'Parameter Store does not support changing a parameter type in a hierarchy. For example, you can''t change a parameter from a String type to a SecureString type. You must create a new, unique parameter.'
   IPAddress:
     type: string
     minLength: 1
@@ -5980,6 +6248,13 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: The activation ID is not valid. Verify the you entered the correct ActivationId or ActivationCode and try again.
+  InvalidAllowedPatternException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+        description: The request does not meet the regular expression requirement.
+    description: The request does not meet the regular expression requirement.
   InvalidAutomationExecutionParametersException:
     type: object
     properties:
@@ -6031,6 +6306,13 @@ definitions:
     type: object
     properties: {}
     description: The specified key is not valid.
+  InvalidFilterOption:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+        description: 'The specified filter option is not valid. Valid options are Equals and BeginsWith. For Path filter, valid options are Recursive and OneLevel.'
+    description: 'The specified filter option is not valid. Valid options are Equals and BeginsWith. For Path filter, valid options are Recursive and OneLevel.'
   InvalidFilterValue:
     type: object
     properties:
@@ -7013,12 +7295,10 @@ definitions:
     format: password
   PSParameterName:
     type: string
-    pattern: '^(?!^([aA][wW][sS]|[sS][sS][mM]))(?=^[a-zA-Z0-9_.-]*$).*$'
     minLength: 1
     maxLength: 1024
   PSParameterValue:
     type: string
-    pattern: '^(?:(?!(\{\{.*\}\})).)*$'
     minLength: 1
     maxLength: 4096
   Parameter:
@@ -7068,6 +7348,9 @@ definitions:
       Value:
         $ref: '#/definitions/PSParameterValue'
         description: The parameter value.
+      AllowedPattern:
+        $ref: '#/definitions/AllowedPattern'
+        description: <p>Parameter names can include the following letters and symbols.</p> <p>a-zA-Z0-9_.-</p>
     description: Information about parameter usage.
   ParameterHistoryList:
     type: array
@@ -7109,6 +7392,9 @@ definitions:
       Description:
         $ref: '#/definitions/ParameterDescription'
         description: Description of the parameter actions.
+      AllowedPattern:
+        $ref: '#/definitions/AllowedPattern'
+        description: <p>A parameter name can include only the following letters and symbols.</p> <p>a-zA-Z0-9_.-</p>
     description: Metada includes information like the ARN of the last user and the date/time the parameter was last used.
   ParameterMetadataList:
     type: array
@@ -7128,6 +7414,51 @@ definitions:
       message:
         $ref: '#/definitions/String'
     description: The parameter could not be found. Verify the name and try again.
+  ParameterPatternMismatchException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/String'
+        description: The parameter name is not valid.
+    description: The parameter name is not valid.
+  ParameterStringFilter:
+    type: object
+    required:
+      - Key
+    properties:
+      Key:
+        $ref: '#/definitions/ParameterStringFilterKey'
+        description: The name of the filter.
+      Option:
+        $ref: '#/definitions/ParameterStringQueryOption'
+        description: 'Valid options are Equals and BeginsWith. For Path filter, valid options are Recursive and OneLevel.'
+      Values:
+        $ref: '#/definitions/ParameterStringFilterValueList'
+        description: The value you want to search for.
+    description: One or more filters. Use a filter to return a more specific list of results.
+  ParameterStringFilterKey:
+    type: string
+    pattern: 'tag:.+|Name|Type|KeyId|Path'
+    minLength: 1
+    maxLength: 132
+  ParameterStringFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterStringFilter'
+  ParameterStringFilterValue:
+    type: string
+    minLength: 1
+    maxLength: 1024
+  ParameterStringFilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/ParameterStringFilterValue'
+    minItems: 1
+    maxItems: 50
+  ParameterStringQueryOption:
+    type: string
+    minLength: 1
+    maxLength: 10
   ParameterType:
     type: string
     enum:
@@ -7152,6 +7483,7 @@ definitions:
   ParametersFilter:
     type: object
     required:
+      - Key
       - Values
     properties:
       Key:
@@ -7174,7 +7506,7 @@ definitions:
   ParametersFilterValue:
     type: string
     minLength: 1
-    maxLength: 100
+    maxLength: 1024
   ParametersFilterValueList:
     type: array
     items:
@@ -7546,10 +7878,13 @@ definitions:
         description: The type of parameter that you want to add to the system.
       KeyId:
         $ref: '#/definitions/ParameterKeyId'
-        description: The parameter key ID that you want to add to the system.
+        description: 'The KMS Key ID that you want to use to encrypt a parameter when you choose the SecureString data type. If you don''t specify a key ID, the system uses the default key associated with your AWS account.'
       Overwrite:
         $ref: '#/definitions/Boolean'
         description: 'Overwrite an existing parameter. If not specified, will default to "false".'
+      AllowedPattern:
+        $ref: '#/definitions/AllowedPattern'
+        description: 'A regular expression used to validate the parameter value. For example, for String types with values restricted to numbers, you can specify the following: AllowedPattern=^\d+$ '
   PutParameterResult:
     type: object
     properties: {}
@@ -7748,7 +8083,7 @@ definitions:
     properties:
       OutputS3Region:
         $ref: '#/definitions/S3Region'
-        description: The Amazon S3 region where the association information is stored.
+        description: '(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.'
       OutputS3BucketName:
         $ref: '#/definitions/S3BucketName'
         description: The name of the Amazon S3 bucket.
@@ -7778,10 +8113,10 @@ definitions:
     properties:
       InstanceIds:
         $ref: '#/definitions/InstanceIdList'
-        description: 'The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags.'
+        description: 'The instance IDs where the command should execute. You can specify a maximum of 50 IDs. If you prefer not to list individual instance IDs, you can instead send commands to a fleet of instances using the Targets parameter, which accepts EC2 tags. For more information about how to use Targets, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html">Sending Commands to a Fleet</a>.'
       Targets:
         $ref: '#/definitions/Targets'
-        description: '(Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don''t provide one or more instance IDs in the call. For more information about how to use Targets, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+        description: '(Optional) An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don''t provide one or more instance IDs in the call. For more information about how to use Targets, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html">Sending Commands to a Fleet</a>.'
       DocumentName:
         $ref: '#/definitions/DocumentARN'
         description: Required. The name of the Systems Manager document to execute. This can be a public document or a custom document.
@@ -7802,7 +8137,7 @@ definitions:
         description: The required and optional parameters specified in the document being executed.
       OutputS3Region:
         $ref: '#/definitions/S3Region'
-        description: (Optional) The region where the Amazon Simple Storage Service (Amazon S3) output bucket is located. The default value is the region where Run Command is being called.
+        description: '(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon S3 bucket region.'
       OutputS3BucketName:
         $ref: '#/definitions/S3BucketName'
         description: The name of the S3 bucket where command execution responses should be stored.
@@ -7811,10 +8146,10 @@ definitions:
         description: The directory structure within the S3 bucket where the responses should be stored.
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
-        description: '(Optional) The maximum number of instances that are allowed to execute the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+        description: '(Optional) The maximum number of instances that are allowed to execute the command at the same time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50. For more information about how to use MaxConcurrency, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-velocity.html">Using Concurrency Controls</a>.'
       MaxErrors:
         $ref: '#/definitions/MaxErrors'
-        description: 'The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 50. For more information about how to use MaxErrors, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+        description: 'The maximum number of errors allowed without the command failing. When the command fails one more time beyond the value of MaxErrors, the systems stops sending the command to additional targets. You can specify a number like 10 or a percentage like 10%. The default value is 50. For more information about how to use MaxErrors, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-maxerrors.html">Using Error Controls</a>.'
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
         description: 'The IAM role that Systems Manager uses to send notifications. '
@@ -7974,11 +8309,11 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/TargetKey'
-        description: 'User-defined criteria for sending commands that target instances that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or InstanceIds. For more information about how to send commands that target instances using Key,Value parameters, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
+        description: 'User-defined criteria for sending commands that target instances that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or InstanceIds. For more information about how to send commands that target instances using Key,Value parameters, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html">Executing a Command Using Systems Manager Run Command</a>.'
       Values:
         $ref: '#/definitions/TargetValues'
-        description: 'User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to execute a command on instances that include Amazon EC2 tags of ServerRole,WebServer. For more information about how to send commands that target instances using Key,Value parameters, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html">Executing a Command Using Systems Manager Run Command</a>.'
-    description: 'An array of search criteria that targets instances using a Key,Value combination that you specify. Targets is required if you don''t provide one or more instance IDs in the call.'
+        description: 'User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to execute a command on instances that include Amazon EC2 tags of ServerRole,WebServer. For more information about how to send commands that target instances using Key,Value parameters, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html">Executing a Command Using Systems Manager Run Command</a>.'
+    description: '<p>An array of search criteria that targets instances using a Key,Value combination that you specify. <code>Targets</code> is required if you don''t provide one or more instance IDs in the call.</p> <p/>'
   TargetCount:
     type: integer
   TargetKey:

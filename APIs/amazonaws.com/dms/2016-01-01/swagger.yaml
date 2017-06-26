@@ -344,22 +344,26 @@ paths:
           schema:
             $ref: '#/definitions/CreateReplicationTaskResponse'
         '480':
+          description: AccessDeniedFault
+          schema:
+            $ref: '#/definitions/AccessDeniedFault'
+        '481':
           description: InvalidResourceStateFault
           schema:
             $ref: '#/definitions/InvalidResourceStateFault'
-        '481':
+        '482':
           description: ResourceAlreadyExistsFault
           schema:
             $ref: '#/definitions/ResourceAlreadyExistsFault'
-        '482':
+        '483':
           description: ResourceNotFoundFault
           schema:
             $ref: '#/definitions/ResourceNotFoundFault'
-        '483':
+        '484':
           description: KMSKeyNotAccessibleFault
           schema:
             $ref: '#/definitions/KMSKeyNotAccessibleFault'
-        '484':
+        '485':
           description: ResourceQuotaExceededFault
           schema:
             $ref: '#/definitions/ResourceQuotaExceededFault'
@@ -2913,6 +2917,9 @@ definitions:
       CertificateWallet:
         $ref: '#/definitions/CertificateWallet'
         description: The location of the imported Oracle Wallet certificate for use with SSL.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags associated with the certificate.
   ImportCertificateResponse:
     type: object
     example:
@@ -3842,6 +3849,12 @@ definitions:
       FullLoadRows:
         $ref: '#/definitions/Long'
         description: The number of rows added during the Full Load operation.
+      FullLoadCondtnlChkFailedRows:
+        $ref: '#/definitions/Long'
+        description: The number of rows that failed conditional checks during the Full Load operation (valid only for DynamoDB as a target migrations).
+      FullLoadErrorRows:
+        $ref: '#/definitions/Long'
+        description: The number of rows that failed to load during the Full Load operation (valid only for DynamoDB as a target migrations).
       LastUpdateTime:
         $ref: '#/definitions/TStamp'
         description: The last time the table was updated.

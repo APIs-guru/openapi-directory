@@ -104,41 +104,34 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '410':
+        '481':
           description: TransferAlreadyCompletedException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/TransferAlreadyCompletedException'
-        '429':
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '484':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '485':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -166,36 +159,30 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '429':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '483':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -225,36 +212,30 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListThingPrincipalsResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '429':
+        '481':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '482':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
@@ -278,45 +259,38 @@ paths:
   '/cancel-certificate-transfer/{certificateId}':
     patch:
       operationId: CancelCertificateTransfer
-      description: '<p>Cancels a pending transfer for the specified certificate.</p> <p><b>Note</b> Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use <a>RejectCertificateTransfer</a> instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled.</p> <p>After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.</p>'
+      description: '<p>Cancels a pending transfer for the specified certificate.</p> <p> <b>Note</b> Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use <a>RejectCertificateTransfer</a> instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled.</p> <p>After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.</p>'
       responses:
         '200':
           description: Success
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '410':
+        '481':
           description: TransferAlreadyCompletedException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/TransferAlreadyCompletedException'
-        '429':
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '484':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '485':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -346,31 +320,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListCertificatesResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '429':
+        '481':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '482':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -390,37 +359,32 @@ paths:
   /keys-and-certificate:
     post:
       operationId: CreateKeysAndCertificate
-      description: '<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.</p> <p><b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>'
+      description: '<p>Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.</p> <p> <b>Note</b> This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.</p>'
       responses:
         '200':
           description: Success
           schema:
             $ref: '#/definitions/CreateKeysAndCertificateResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '429':
+        '481':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '482':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -446,36 +410,30 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/GetPolicyResponse'
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '429':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '483':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -505,36 +463,30 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListPolicyVersionsResponse'
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '429':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '483':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -564,41 +516,34 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/UpdateThingResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '409':
+        '481':
           description: VersionConflictException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/VersionConflictException'
-        '429':
+        '482':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '483':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '486':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
@@ -628,36 +573,30 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeThingTypeResponse'
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '429':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '483':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -688,26 +627,26 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
+        '480':
+          description: SqlParseException
           schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '500':
+            $ref: '#/definitions/SqlParseException'
+        '481':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
-        '503':
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
       parameters:
         - name: body
           in: body
@@ -735,36 +674,30 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '429':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '483':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -792,41 +725,34 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '406':
+        '481':
           description: CertificateStateException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/CertificateStateException'
-        '429':
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '484':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '485':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -854,36 +780,30 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '429':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '483':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -917,31 +837,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/GetRegistrationCodeResponse'
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '429':
+        '480':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '481':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '484':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
       parameters:
         - name: body
           in: body
@@ -967,36 +882,30 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DeprecateThingTypeResponse'
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '429':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '483':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1029,21 +938,18 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/DescribeEndpointResponse'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '429':
-          description: ThrottlingException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ThrottlingException'
-        '500':
+        '480':
           description: InternalFailureException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '482':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
       parameters:
         - name: body
           in: body
@@ -1067,26 +973,22 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '500':
+        '480':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
-        '503':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
       parameters:
         - name: body
           in: body
@@ -1114,26 +1016,22 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '500':
+        '480':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
-        '503':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
       parameters:
         - name: body
           in: body
@@ -1161,19 +1059,16 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '500':
+        '480':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
-        '503':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
@@ -1201,31 +1096,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListCACertificatesResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '429':
+        '481':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '482':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1251,31 +1141,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListCertificatesByCAResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '429':
+        '481':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '482':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1305,31 +1190,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListOutgoingCertificatesResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '429':
+        '481':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '482':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1355,31 +1235,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListPoliciesResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '429':
+        '481':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '482':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1405,36 +1280,30 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListPolicyPrincipalsResponse'
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '429':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '483':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1460,36 +1329,30 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListPrincipalPoliciesResponse'
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '429':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '483':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '484':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '485':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1515,36 +1378,30 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListPrincipalThingsResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
-          description: ResourceNotFoundException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '429':
+        '481':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '482':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
       parameters:
         - name: body
           in: body
@@ -1570,31 +1427,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListThingTypesResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '429':
+        '481':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '482':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1620,31 +1472,26 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListThingsResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '429':
+        '481':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '482':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1670,19 +1517,16 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/ListTopicRulesResponse'
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '500':
+        '480':
           description: InternalException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InternalException'
-        '503':
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
       parameters:
@@ -1704,47 +1548,48 @@ paths:
   /cacertificate:
     post:
       operationId: RegisterCACertificate
-      description: 'Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field and public key. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.'
+      description: 'Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.'
       responses:
         '200':
           description: Success
           schema:
             $ref: '#/definitions/RegisterCACertificateResponse'
-        '400':
-          description: CertificateValidationException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/CertificateValidationException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '409':
+        '480':
           description: ResourceAlreadyExistsException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceAlreadyExistsException'
-        '410':
-          description: LimitExceededException
-          x-aws-exception: true
+        '481':
+          description: RegistrationCodeValidationException
           schema:
-            $ref: '#/definitions/LimitExceededException'
-        '429':
+            $ref: '#/definitions/RegistrationCodeValidationException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: CertificateValidationException
+          schema:
+            $ref: '#/definitions/CertificateValidationException'
+        '484':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '485':
+          description: LimitExceededException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/LimitExceededException'
+        '486':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '487':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '488':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1770,41 +1615,42 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/RegisterCertificateResponse'
-        '400':
+        '480':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
           description: CertificateValidationException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/CertificateValidationException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '406':
+        '483':
           description: CertificateStateException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/CertificateStateException'
-        '409':
+        '484':
           description: CertificateConflictException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/CertificateConflictException'
-        '429':
+        '485':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '486':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '487':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '488':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1828,41 +1674,34 @@ paths:
       responses:
         '200':
           description: Success
-        '400':
-          description: InvalidRequestException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '480':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '410':
+        '481':
           description: TransferAlreadyCompletedException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/TransferAlreadyCompletedException'
-        '429':
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '484':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '485':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '486':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1892,46 +1731,38 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/TransferCertificateResponse'
-        '400':
+        '480':
           description: InvalidRequestException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/InvalidRequestException'
-        '401':
-          description: UnauthorizedException
-          x-aws-exception: true
-          schema:
-            $ref: '#/definitions/UnauthorizedException'
-        '404':
+        '481':
           description: ResourceNotFoundException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '406':
+        '482':
           description: CertificateStateException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/CertificateStateException'
-        '409':
+        '483':
           description: TransferConflictException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/TransferConflictException'
-        '429':
+        '484':
           description: ThrottlingException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ThrottlingException'
-        '500':
-          description: InternalFailureException
-          x-aws-exception: true
+        '485':
+          description: UnauthorizedException
           schema:
-            $ref: '#/definitions/InternalFailureException'
-        '503':
+            $ref: '#/definitions/UnauthorizedException'
+        '486':
           description: ServiceUnavailableException
-          x-aws-exception: true
           schema:
             $ref: '#/definitions/ServiceUnavailableException'
+        '487':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
       parameters:
         - name: body
           in: body
@@ -1996,6 +1827,9 @@ definitions:
       elasticsearch:
         $ref: '#/definitions/ElasticsearchAction'
         description: Write data to an Amazon Elasticsearch Service domain.
+      salesforce:
+        $ref: '#/definitions/SalesforceAction'
+        description: Send a message to a Salesforce IoT Cloud Input Stream.
     description: Describes the actions associated with a rule.
   ActionList:
     type: array
@@ -2030,7 +1864,7 @@ definitions:
     properties:
       attributes:
         $ref: '#/definitions/Attributes'
-        description: '<p>A JSON string containing up to three key-value pair in JSON format. For example:</p> <p><code>{\"attributes\":{\"string1\":\"string2\"}})</code></p>'
+        description: '<p>A JSON string containing up to three key-value pair in JSON format. For example:</p> <p> <code>{\"attributes\":{\"string1\":\"string2\"}}</code> </p>'
       merge:
         $ref: '#/definitions/Flag'
         description: '<p>Specifies whether the list of attributes provided in the <code>AttributePayload</code> is merged with the attributes stored in the registry, instead of overwriting them.</p> <p>To remove an attribute, call <code>UpdateThing</code> with an empty attribute value.</p> <note> <p>The <code>merge</code> attribute is only valid when calling <code>UpdateThing</code>.</p> </note>'
@@ -2076,7 +1910,7 @@ definitions:
         description: The ID of the CA certificate.
       status:
         $ref: '#/definitions/CACertificateStatus'
-        description: <p>The status of the CA certificate. </p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>
+        description: <p>The status of the CA certificate.</p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>
       creationDate:
         $ref: '#/definitions/DateType'
         description: The date the CA certificate was created.
@@ -2379,7 +2213,7 @@ definitions:
         description: The name of the thing type associated with the new thing.
       attributePayload:
         $ref: '#/definitions/AttributePayload'
-        description: '<p>The attribute payload, which consists of up to three name/value pairs in a JSON document. For example:</p> <p><code>{\"attributes\":{\"string1\":\"string2\"}})</code></p>'
+        description: '<p>The attribute payload, which consists of up to three name/value pairs in a JSON document. For example:</p> <p> <code>{\"attributes\":{\"string1\":\"string2\"}}</code> </p>'
     description: The input for the CreateThing operation.
   CreateThingResponse:
     type: object
@@ -2460,7 +2294,7 @@ definitions:
   DeleteRegistrationCodeResponse:
     type: object
     properties: {}
-    description: 'The output for the DeleteRegistrationCode operation. '
+    description: The output for the DeleteRegistrationCode operation.
   DeleteThingRequest:
     type: object
     properties: {}
@@ -2568,6 +2402,7 @@ definitions:
         description: 'The ThingTypeProperties contains information about the thing type including description, and a list of searchable thing attribute names.'
       thingTypeMetadata:
         $ref: '#/definitions/ThingTypeMetadata'
+        description: 'The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when it was deprecated.'
     description: The output for the DescribeThingType operation.
   Description:
     type: string
@@ -2625,7 +2460,7 @@ definitions:
       payloadField:
         $ref: '#/definitions/PayloadField'
         description: The action payload. This name can be customized.
-    description: '<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any valid expression in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p><code>"hashKeyValue": "${topic(3)}"</code></p> <p>The following field uses the timestamp:</p> <p><code>"rangeKeyValue": "${timestamp()}"</code></p>'
+    description: '<p>Describes an action to write to a DynamoDB table.</p> <p>The <code>tableName</code>, <code>hashKeyField</code>, and <code>rangeKeyField</code> values must match the values used when you created the table.</p> <p>The <code>hashKeyValue</code> and <code>rangeKeyvalue</code> fields use a substitution template syntax. These templates provide data at runtime. The syntax is as follows: ${<i>sql-expression</i>}.</p> <p>You can specify any valid expression in a WHERE or SELECT clause, including JSON properties, comparisons, calculations, and functions. For example, the following field uses the third level of the topic:</p> <p> <code>"hashKeyValue": "${topic(3)}"</code> </p> <p>The following field uses the timestamp:</p> <p> <code>"rangeKeyValue": "${timestamp()}"</code> </p>'
   DynamoDBv2Action:
     type: object
     properties:
@@ -2634,7 +2469,7 @@ definitions:
         description: The ARN of the IAM role that grants access to the DynamoDB table.
       putItem:
         $ref: '#/definitions/PutItemInput'
-        description: '<p>Specifies the DynamoDB table to which the message data will be written. For example:</p> <p><code>{ "dynamoDBv2": { "roleArn": "aws:iam:12341251:my-role" "putItem": { "tableName": "my-table" } } }</code></p> <p>Each attribute in the message payload will be written to a separate column in the DynamoDB database.</p>'
+        description: '<p>Specifies the DynamoDB table to which the message data will be written. For example:</p> <p> <code>{ "dynamoDBv2": { "roleArn": "aws:iam:12341251:my-role" "putItem": { "tableName": "my-table" } } }</code> </p> <p>Each attribute in the message payload will be written to a separate column in the DynamoDB database.</p>'
     description: <p>Describes an action to write to a DynamoDB table.</p> <p>This DynamoDB action writes each attribute in the message payload into it's own column in the DynamoDB table.</p>
   DynamoKeyType:
     type: string
@@ -3235,6 +3070,7 @@ definitions:
         description: The CA certificate used to sign the device certificate being registered.
       status:
         $ref: '#/definitions/CertificateStatus'
+        description: The status of the register certificate request.
     description: The input to the RegisterCertificate operation.
   RegisterCertificateResponse:
     type: object
@@ -3258,6 +3094,10 @@ definitions:
         $ref: '#/definitions/errorMessage'
         description: Additional information about the exception.
     description: The registration code is invalid.
+  RegistryMaxResults:
+    type: integer
+    minimum: 1
+    maximum: 250
   RejectCertificateTransferRequest:
     type: object
     properties:
@@ -3338,6 +3178,26 @@ definitions:
     description: Describes an action to write data to an Amazon S3 bucket.
   SQL:
     type: string
+  SalesforceAction:
+    type: object
+    required:
+      - token
+      - url
+    properties:
+      token:
+        $ref: '#/definitions/SalesforceToken'
+        description: The token used to authenticate access to the Salesforce IoT Cloud Input Stream. The token is available from the Salesforce IoT Cloud platform after creation of the Input Stream.
+      url:
+        $ref: '#/definitions/SalesforceEndpoint'
+        description: The URL exposed by the Salesforce IoT Cloud Input Stream. The URL is available from the Salesforce IoT Cloud platform after creation of the Input Stream.
+    description: Describes an action to write a message to a Salesforce IoT Cloud Input Stream.
+  SalesforceEndpoint:
+    type: string
+    pattern: 'https://ingestion-[a-zA-Z0-9]{1,12}\.[a-zA-Z0-9]+\.((sfdc-matrix\.net)|(sfdcnow\.com))/streams/\w{1,20}/\w{1,20}/event'
+    maxLength: 2000
+  SalesforceToken:
+    type: string
+    minLength: 40
   SearchableAttributes:
     type: array
     items:
@@ -3382,7 +3242,7 @@ definitions:
         description: The ARN of the IAM role that grants access.
       messageFormat:
         $ref: '#/definitions/MessageFormat'
-        description: 'The message format of the message to publish. Optional. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href="http://docs.aws.amazon.com/sns/latest/dg/json-formats.html"></a> refer to their official documentation.'
+        description: 'The message format of the message to publish. Optional. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href="http://docs.aws.amazon.com/sns/latest/dg/json-formats.html">http://docs.aws.amazon.com/sns/latest/dg/json-formats.html</a> refer to their official documentation.'
     description: Describes an action to publish to an Amazon SNS topic.
   SqlParseException:
     type: object
@@ -3459,6 +3319,7 @@ definitions:
         description: The ThingTypeProperties for the thing type.
       thingTypeMetadata:
         $ref: '#/definitions/ThingTypeMetadata'
+        description: 'The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when it was deprecated.'
     description: 'The definition of the thing type, including thing type name and description.'
   ThingTypeDescription:
     type: string
@@ -3646,7 +3507,7 @@ definitions:
         description: The name of the thing type.
       attributePayload:
         $ref: '#/definitions/AttributePayload'
-        description: '<p>A list of thing attributes, a JSON string containing name-value pairs. For example:</p> <p><code>{\"attributes\":{\"name1\":\"value2\"}})</code></p> <p>This data is used to add new attributes or update existing attributes.</p>'
+        description: '<p>A list of thing attributes, a JSON string containing name-value pairs. For example:</p> <p> <code>{\"attributes\":{\"name1\":\"value2\"}}</code> </p> <p>This data is used to add new attributes or update existing attributes.</p>'
       expectedVersion:
         $ref: '#/definitions/OptionalVersion'
         description: 'The expected version of the thing record in the registry. If the version of the record in the registry does not match the expected version specified in the request, the <code>UpdateThing</code> request is rejected with a <code>VersionConflictException</code>.'
@@ -3668,7 +3529,7 @@ definitions:
       message:
         $ref: '#/definitions/errorMessage'
         description: The message for the exception.
-    description: 'An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter. '
+    description: An exception thrown when the version of a thing passed to a command is different than the version specified with the --version parameter.
   VersionsLimitExceededException:
     type: object
     properties:

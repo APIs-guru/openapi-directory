@@ -308,6 +308,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/apns_sandbox':
+    put:
+      operationId: UpdateApnsSandboxChannel
+      description: Update an APNS sandbox channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateApnsSandboxChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateApnsSandboxChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/campaigns/{campaign-id}':
     put:
       operationId: UpdateCampaign
@@ -352,6 +405,59 @@ paths:
           type: string
           required: true
         - name: campaign-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/email':
+    put:
+      operationId: UpdateEmailChannel
+      description: Update an email channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateEmailChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateEmailChannelRequest'
+        - name: application-id
           in: path
           type: string
           required: true
@@ -515,6 +621,59 @@ paths:
           type: string
           required: true
         - name: segment-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/channels/sms':
+    put:
+      operationId: UpdateSmsChannel
+      description: Update an SMS channel
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateSmsChannelResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSmsChannelRequest'
+        - name: application-id
           in: path
           type: string
           required: true
@@ -1045,6 +1204,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}/messages':
+    post:
+      operationId: SendMessages
+      description: Send a batch of messages
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SendMessagesResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SendMessagesRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/endpoints':
     put:
       operationId: UpdateEndpointsBatch
@@ -1105,6 +1317,9 @@ definitions:
       Certificate:
         $ref: '#/definitions/__string'
         description: The distribution certificate from Apple.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
       PrivateKey:
         $ref: '#/definitions/__string'
         description: The certificate private key.
@@ -1118,9 +1333,12 @@ definitions:
       CreationDate:
         $ref: '#/definitions/__string'
         description: When was this segment created
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
       Id:
         $ref: '#/definitions/__string'
-        description: The unique channel ID.
+        description: 'Channel ID. Not used, only for backwards compatibility.'
       IsArchived:
         $ref: '#/definitions/__boolean'
         description: Is this channel archived
@@ -1137,6 +1355,93 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Version of channel
     description: Apple Distribution Push Notification Service channel definition.
+  APNSMessage:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: 'The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user''s device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL'
+      Badge:
+        $ref: '#/definitions/__integer'
+        description: 'Include this key when you want the system to modify the badge of your app icon. If this key is not included in the dictionary, the badge is not changed. To remove the badge, set the value of this key to 0.'
+      Body:
+        $ref: '#/definitions/__string'
+        description: 'The message body of the notification, the email body or the text message.'
+      Category:
+        $ref: '#/definitions/__string'
+        description: Provide this key with a string value that represents the notification's type. This value corresponds to the value in the identifier property of one of your app's registered categories.
+      Data:
+        $ref: '#/definitions/MapOf__string'
+        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+      MediaUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to a video used in the push notification.
+      RawContent:
+        $ref: '#/definitions/__string'
+        description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
+      SilentPush:
+        $ref: '#/definitions/__boolean'
+        description: Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+      Sound:
+        $ref: '#/definitions/__string'
+        description: 'Include this key when you want the system to play a sound. The value of this key is the name of a sound file in your app''s main bundle or in the Library/Sounds folder of your app''s data container. If the sound file cannot be found, or if you specify defaultfor the value, the system plays the default alert sound.'
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Default message substitutions. Can be overridden by individual address substitutions.
+      ThreadId:
+        $ref: '#/definitions/__string'
+        description: 'Provide this key with a string value that represents the app-specific identifier for grouping notifications. If you provide a Notification Content app extension, you can use this value to group your notifications together.'
+      Title:
+        $ref: '#/definitions/__string'
+        description: The message title that displays above the message on the user's device.
+      Url:
+        $ref: '#/definitions/__string'
+        description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
+    description: APNS Message.
+  APNSSandboxChannelRequest:
+    type: object
+    properties:
+      Certificate:
+        $ref: '#/definitions/__string'
+        description: The distribution certificate from Apple.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      PrivateKey:
+        $ref: '#/definitions/__string'
+        description: The certificate private key.
+    description: Apple Development Push Notification Service channel definition.
+  APNSSandboxChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: When was this segment created
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who last updated this entry
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: The platform type. Will be APNS.
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Apple Development Push Notification Service channel definition.
   Action:
     type: string
     enum:
@@ -1199,6 +1504,28 @@ definitions:
         $ref: '#/definitions/__string'
         description: The ID of a variation of the campaign used for A/B testing.
     description: Activity definition
+  AddressConfiguration:
+    type: object
+    properties:
+      BodyOverride:
+        $ref: '#/definitions/__string'
+        description: Body override. If specified will override default body.
+      ChannelType:
+        $ref: '#/definitions/ChannelType'
+        description: Type of channel of this address
+      Context:
+        $ref: '#/definitions/MapOf__string'
+        description: A map of custom attributes to attributes to be attached to the message for this address. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+      RawContent:
+        $ref: '#/definitions/__string'
+        description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: A map of substitution values for the message to be merged with the DefaultMessage's substitutions. Substitutions on this map take precedence over the all other substitutions.
+      TitleOverride:
+        $ref: '#/definitions/__string'
+        description: Title override. If specified will override default title if applicable.
+    description: Address configuration.
   ApplicationSettingsResource:
     type: object
     properties:
@@ -1222,8 +1549,8 @@ definitions:
         $ref: '#/definitions/AttributeType'
         description: |-
           The type of dimension:
-          INCLUSIVE – Endpoints that match the criteria are included in the segment.
-          EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
+          INCLUSIVE - Endpoints that match the criteria are included in the segment.
+          EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
       Values:
         $ref: '#/definitions/ListOf__string'
         description: 'The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.'
@@ -1243,6 +1570,19 @@ definitions:
         $ref: '#/definitions/__string'
         description: The unique message body ID.
     description: Simple message object.
+  CampaignEmailMessage:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/__string'
+        description: The email text body.
+      HtmlBody:
+        $ref: '#/definitions/__string'
+        description: The email html body.
+      Title:
+        $ref: '#/definitions/__string'
+        description: The email title (Or subject).
+    description: The email message configuration.
   CampaignLimits:
     type: object
     properties:
@@ -1317,6 +1657,19 @@ definitions:
         $ref: '#/definitions/__integer'
         description: The campaign version number.
     description: Campaign definition
+  CampaignSmsMessage:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/__string'
+        description: The SMS text body.
+      MessageType:
+        $ref: '#/definitions/MessageType'
+        description: 'Is this is a transactional SMS message, otherwise a promotional message.'
+      SenderId:
+        $ref: '#/definitions/__string'
+        description: Sender ID of sent message.
+    description: SMS message configuration.
   CampaignState:
     type: object
     properties:
@@ -1348,8 +1701,12 @@ definitions:
   ChannelType:
     type: string
     enum:
-      - APNS
       - GCM
+      - APNS
+      - APNS_SANDBOX
+      - ADM
+      - SMS
+      - EMAIL
   CreateCampaignRequest:
     type: object
     required:
@@ -1392,6 +1749,41 @@ definitions:
     properties:
       SegmentResponse:
         $ref: '#/definitions/SegmentResponse'
+  DefaultMessage:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/__string'
+        description: 'The message body of the notification, the email body or the text message.'
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Default message substitutions. Can be overridden by individual address substitutions.
+    description: 'Default Message across push notification, email, and sms.'
+  DefaultPushNotificationMessage:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: 'The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user''s device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL'
+      Body:
+        $ref: '#/definitions/__string'
+        description: 'The message body of the notification, the email body or the text message.'
+      Data:
+        $ref: '#/definitions/MapOf__string'
+        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+      SilentPush:
+        $ref: '#/definitions/__boolean'
+        description: Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Default message substitutions. Can be overridden by individual address substitutions.
+      Title:
+        $ref: '#/definitions/__string'
+        description: The message title that displays above the message on the user's device.
+      Url:
+        $ref: '#/definitions/__string'
+        description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
+    description: Default Push Notification Message.
   DeleteApnsChannelRequest:
     type: object
     properties: {}
@@ -1402,6 +1794,16 @@ definitions:
     properties:
       APNSChannelResponse:
         $ref: '#/definitions/APNSChannelResponse'
+  DeleteApnsSandboxChannelRequest:
+    type: object
+    properties: {}
+  DeleteApnsSandboxChannelResponse:
+    type: object
+    required:
+      - APNSSandboxChannelResponse
+    properties:
+      APNSSandboxChannelResponse:
+        $ref: '#/definitions/APNSSandboxChannelResponse'
   DeleteCampaignRequest:
     type: object
     properties: {}
@@ -1412,6 +1814,16 @@ definitions:
     properties:
       CampaignResponse:
         $ref: '#/definitions/CampaignResponse'
+  DeleteEmailChannelRequest:
+    type: object
+    properties: {}
+  DeleteEmailChannelResponse:
+    type: object
+    required:
+      - EmailChannelResponse
+    properties:
+      EmailChannelResponse:
+        $ref: '#/definitions/EmailChannelResponse'
   DeleteEventStreamRequest:
     type: object
     properties: {}
@@ -1444,11 +1856,47 @@ definitions:
     properties:
       SegmentResponse:
         $ref: '#/definitions/SegmentResponse'
+  DeleteSmsChannelRequest:
+    type: object
+    properties: {}
+  DeleteSmsChannelResponse:
+    type: object
+    required:
+      - SMSChannelResponse
+    properties:
+      SMSChannelResponse:
+        $ref: '#/definitions/SMSChannelResponse'
+  DeliveryStatus:
+    type: string
+    enum:
+      - SUCCESSFUL
+      - THROTTLED
+      - TEMPORARY_FAILURE
+      - PERMANENT_FAILURE
   DimensionType:
     type: string
     enum:
       - INCLUSIVE
       - EXCLUSIVE
+  DirectMessageConfiguration:
+    type: object
+    properties:
+      APNSMessage:
+        $ref: '#/definitions/APNSMessage'
+        description: The message to APNS channels. Overrides the default push notification message.
+      DefaultMessage:
+        $ref: '#/definitions/DefaultMessage'
+        description: The default message for all channels.
+      DefaultPushNotificationMessage:
+        $ref: '#/definitions/DefaultPushNotificationMessage'
+        description: The default push notification message for all push channels.
+      GCMMessage:
+        $ref: '#/definitions/GCMMessage'
+        description: The message to GCM channels. Overrides the default push notification message.
+      SMSMessage:
+        $ref: '#/definitions/SMSMessage'
+        description: The message to SMS channels. Overrides the default message.
+    description: The message configuration.
   Duration:
     type: string
     enum:
@@ -1456,6 +1904,62 @@ definitions:
       - DAY_7
       - DAY_14
       - DAY_30
+  EmailChannelRequest:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      FromAddress:
+        $ref: '#/definitions/__string'
+        description: The email address used to send emails from.
+      Identity:
+        $ref: '#/definitions/__string'
+        description: The ARN of an identity verified with SES.
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service
+    description: Email Channel Request
+  EmailChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date that the settings were last updated in ISO 8601 format.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      FromAddress:
+        $ref: '#/definitions/__string'
+        description: The email address used to send emails from.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      Identity:
+        $ref: '#/definitions/__string'
+        description: The ARN of an identity verified with SES.
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who last updated this entry
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: Platform type. Will be "EMAIL"
+      RoleArn:
+        $ref: '#/definitions/__string'
+        description: The ARN of an IAM Role used to submit events to Mobile Analytics' event ingestion service
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: Email Channel Response.
   EndpointBatchItem:
     type: object
     properties:
@@ -1728,6 +2232,9 @@ definitions:
       ApiKey:
         $ref: '#/definitions/__string'
         description: Platform credential API key from Google.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
     description: Google Cloud Messaging credentials
   GCMChannelResponse:
     type: object
@@ -1741,9 +2248,12 @@ definitions:
       Credential:
         $ref: '#/definitions/__string'
         description: The GCM API key from Google.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
       Id:
         $ref: '#/definitions/__string'
-        description: The unique channel ID.
+        description: 'Channel ID. Not used, only for backwards compatibility.'
       IsArchived:
         $ref: '#/definitions/__boolean'
         description: Is this channel archived
@@ -1760,6 +2270,55 @@ definitions:
         $ref: '#/definitions/__integer'
         description: Version of channel
     description: Google Cloud Messaging channel definition
+  GCMMessage:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/Action'
+        description: 'The action that occurs if the user taps a push notification delivered by the campaign: OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action. DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app. URL - The default mobile browser on the user''s device launches and opens a web page at the URL you specify. Possible values include: OPEN_APP | DEEP_LINK | URL'
+      Body:
+        $ref: '#/definitions/__string'
+        description: 'The message body of the notification, the email body or the text message.'
+      CollapseKey:
+        $ref: '#/definitions/__string'
+        description: 'This parameter identifies a group of messages (e.g., with collapse_key: "Updates Available") that can be collapsed, so that only the last message gets sent when delivery can be resumed. This is intended to avoid sending too many of the same messages when the device comes back online or becomes active.'
+      Data:
+        $ref: '#/definitions/MapOf__string'
+        description: The data payload used for a silent push. This payload is added to the notifications' data.pinpoint.jsonBody' object
+      IconReference:
+        $ref: '#/definitions/__string'
+        description: The icon image name of the asset saved in your application.
+      ImageIconUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used as the large icon to the notification content view.
+      ImageUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used in the push notification.
+      RawContent:
+        $ref: '#/definitions/__string'
+        description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
+      RestrictedPackageName:
+        $ref: '#/definitions/__string'
+        description: This parameter specifies the package name of the application where the registration tokens must match in order to receive the message.
+      SilentPush:
+        $ref: '#/definitions/__boolean'
+        description: Indicates if the message should display on the users device. Silent pushes can be used for Remote Configuration and Phone Home use cases.
+      SmallImageIconUrl:
+        $ref: '#/definitions/__string'
+        description: The URL that points to an image used as the small icon for the notification which will be used to represent the notification in the status bar and content view
+      Sound:
+        $ref: '#/definitions/__string'
+        description: 'Indicates a sound to play when the device receives the notification. Supports default, or the filename of a sound resource bundled in the app. Android sound files must reside in /res/raw/'
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Default message substitutions. Can be overridden by individual address substitutions.
+      Title:
+        $ref: '#/definitions/__string'
+        description: The message title that displays above the message on the user's device.
+      Url:
+        $ref: '#/definitions/__string'
+        description: The URL to open in the user's mobile browser. Used if the value for Action is URL.
+    description: GCM Message.
   GetApnsChannelRequest:
     type: object
     properties: {}
@@ -1770,6 +2329,16 @@ definitions:
     properties:
       APNSChannelResponse:
         $ref: '#/definitions/APNSChannelResponse'
+  GetApnsSandboxChannelRequest:
+    type: object
+    properties: {}
+  GetApnsSandboxChannelResponse:
+    type: object
+    required:
+      - APNSSandboxChannelResponse
+    properties:
+      APNSSandboxChannelResponse:
+        $ref: '#/definitions/APNSSandboxChannelResponse'
   GetApplicationSettingsRequest:
     type: object
     properties: {}
@@ -1830,6 +2399,16 @@ definitions:
     properties:
       CampaignsResponse:
         $ref: '#/definitions/CampaignsResponse'
+  GetEmailChannelRequest:
+    type: object
+    properties: {}
+  GetEmailChannelResponse:
+    type: object
+    required:
+      - EmailChannelResponse
+    properties:
+      EmailChannelResponse:
+        $ref: '#/definitions/EmailChannelResponse'
   GetEndpointRequest:
     type: object
     properties: {}
@@ -1932,6 +2511,16 @@ definitions:
     properties:
       SegmentsResponse:
         $ref: '#/definitions/SegmentsResponse'
+  GetSmsChannelRequest:
+    type: object
+    properties: {}
+  GetSmsChannelResponse:
+    type: object
+    required:
+      - SMSChannelResponse
+    properties:
+      SMSChannelResponse:
+        $ref: '#/definitions/SMSChannelResponse'
   ImportJobRequest:
     type: object
     properties:
@@ -2106,6 +2695,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/__string'
+  MapOfAddressConfiguration:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/AddressConfiguration'
   MapOfAttributeDimension:
     type: array
     items:
@@ -2124,6 +2722,15 @@ definitions:
           $ref: '#/definitions/__string'
         value:
           $ref: '#/definitions/ListOf__string'
+  MapOfMessageResult:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/MessageResult'
   MapOf__double:
     type: array
     items:
@@ -2133,6 +2740,24 @@ definitions:
           $ref: '#/definitions/__string'
         value:
           $ref: '#/definitions/__double'
+  MapOf__integer:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__integer'
+  MapOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
   Message:
     type: object
     properties:
@@ -2140,17 +2765,20 @@ definitions:
         $ref: '#/definitions/Action'
         description: |-
           The action that occurs if the user taps a push notification delivered by the campaign:
-          OPEN_APP – Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action.
+          OPEN_APP - Your app launches, or it becomes the foreground app if it has been sent to the background. This is the default action.
 
-          DEEP_LINK – Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app.
+          DEEP_LINK - Uses deep linking features in iOS and Android to open your app and display a designated user interface within the app.
 
-          URL – The default mobile browser on the user's device launches and opens a web page at the URL you specify.
+          URL - The default mobile browser on the user's device launches and opens a web page at the URL you specify.
       Body:
         $ref: '#/definitions/__string'
         description: The message body. Can include up to 140 characters.
       ImageIconUrl:
         $ref: '#/definitions/__string'
         description: 'The URL that points to the icon image for the push notification icon, for example, the app icon.'
+      ImageSmallIconUrl:
+        $ref: '#/definitions/__string'
+        description: 'The URL that points to the small icon image for the push notification icon, for example, the app icon.'
       ImageUrl:
         $ref: '#/definitions/__string'
         description: The URL that points to an image used in the push notification.
@@ -2191,10 +2819,63 @@ definitions:
       DefaultMessage:
         $ref: '#/definitions/Message'
         description: The default message for all channels.
+      EmailMessage:
+        $ref: '#/definitions/CampaignEmailMessage'
+        description: The email message configuration.
       GCMMessage:
         $ref: '#/definitions/Message'
         description: The message that the campaign delivers to GCM channels. Overrides the default message.
+      SMSMessage:
+        $ref: '#/definitions/CampaignSmsMessage'
+        description: The SMS message configuration.
     description: Message configuration for a campaign.
+  MessageRequest:
+    type: object
+    properties:
+      Addresses:
+        $ref: '#/definitions/MapOfAddressConfiguration'
+        description: 'A map of destination addresses, with the address as the key(Email address, phone number or push token) and the Address Configuration as the value.'
+      Context:
+        $ref: '#/definitions/MapOf__string'
+        description: A map of custom attributes to attributes to be attached to the message. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
+      MessageConfiguration:
+        $ref: '#/definitions/DirectMessageConfiguration'
+        description: Message configuration.
+    description: Send message request.
+  MessageResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id of the message.
+      RequestId:
+        $ref: '#/definitions/__string'
+        description: Original request Id for which this message was delivered.
+      Result:
+        $ref: '#/definitions/MapOfMessageResult'
+        description: 'A map containing a multi part response for each address, with the address as the key(Email address, phone number or push token) and the result as the value.'
+    description: Send message response.
+  MessageResult:
+    type: object
+    properties:
+      DeliveryStatus:
+        $ref: '#/definitions/DeliveryStatus'
+        description: Delivery status of message.
+      StatusCode:
+        $ref: '#/definitions/__integer'
+        description: Downstream service status code.
+      StatusMessage:
+        $ref: '#/definitions/__string'
+        description: Status message for message delivery.
+      UpdatedToken:
+        $ref: '#/definitions/__string'
+        description: If token was updated as part of delivery. (This is GCM Specific)
+    description: The result from sending a message to an address.
+  MessageType:
+    type: string
+    enum:
+      - TRANSACTIONAL
+      - PROMOTIONAL
   MethodNotAllowedException:
     type: object
     properties:
@@ -2254,14 +2935,77 @@ definitions:
         $ref: '#/definitions/RecencyType'
         description: |-
           The recency dimension type:
-          ACTIVE – Users who have used your app within the specified duration are included in the segment.
-          INACTIVE – Users who have not used your app within the specified duration are included in the segment.
+          ACTIVE - Users who have used your app within the specified duration are included in the segment.
+          INACTIVE - Users who have not used your app within the specified duration are included in the segment.
     description: Define how a segment based on recency of use.
   RecencyType:
     type: string
     enum:
       - ACTIVE
       - INACTIVE
+  SMSChannelRequest:
+    type: object
+    properties:
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      SenderId:
+        $ref: '#/definitions/__string'
+        description: Sender identifier of your messages.
+    description: SMS Channel Request
+  SMSChannelResponse:
+    type: object
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/__string'
+        description: Application id
+      CreationDate:
+        $ref: '#/definitions/__string'
+        description: The date that the settings were last updated in ISO 8601 format.
+      Enabled:
+        $ref: '#/definitions/__boolean'
+        description: If the channel is enabled for sending messages.
+      Id:
+        $ref: '#/definitions/__string'
+        description: 'Channel ID. Not used, only for backwards compatibility.'
+      IsArchived:
+        $ref: '#/definitions/__boolean'
+        description: Is this channel archived
+      LastModifiedBy:
+        $ref: '#/definitions/__string'
+        description: Who last updated this entry
+      LastModifiedDate:
+        $ref: '#/definitions/__string'
+        description: Last date this was updated
+      Platform:
+        $ref: '#/definitions/__string'
+        description: Platform type. Will be "SMS"
+      SenderId:
+        $ref: '#/definitions/__string'
+        description: Sender identifier of your messages.
+      ShortCode:
+        $ref: '#/definitions/__string'
+        description: The short code registered with the phone provider.
+      Version:
+        $ref: '#/definitions/__integer'
+        description: Version of channel
+    description: SMS Channel Response.
+  SMSMessage:
+    type: object
+    properties:
+      Body:
+        $ref: '#/definitions/__string'
+        description: 'The message body of the notification, the email body or the text message.'
+      MessageType:
+        $ref: '#/definitions/MessageType'
+        description: Is this a transaction priority message or lower priority.
+      SenderId:
+        $ref: '#/definitions/__string'
+        description: Sender ID of sent message.
+      Substitutions:
+        $ref: '#/definitions/MapOfListOf__string'
+        description: Default message substitutions. Can be overridden by individual address substitutions.
+    description: SMS Message.
   Schedule:
     type: object
     properties:
@@ -2334,6 +3078,9 @@ definitions:
       AppVersion:
         $ref: '#/definitions/SetDimension'
         description: The app version criteria for the segment.
+      Channel:
+        $ref: '#/definitions/SetDimension'
+        description: The channel criteria for the segment.
       DeviceType:
         $ref: '#/definitions/SetDimension'
         description: The device type criteria for the segment.
@@ -2369,6 +3116,9 @@ definitions:
   SegmentImportResource:
     type: object
     properties:
+      ChannelCounts:
+        $ref: '#/definitions/MapOf__integer'
+        description: Channel type counts
       ExternalId:
         $ref: '#/definitions/__string'
         description: 'A unique, custom ID assigned to the IAM role that restricts who can assume the role.'
@@ -2422,8 +3172,8 @@ definitions:
         $ref: '#/definitions/SegmentType'
         description: |-
           The segment type:
-          DIMENSIONAL – A dynamic segment built from selection criteria based on endpoint data reported by your app. You create this type of segment by using the segment builder in the Amazon Pinpoint console or by making a POST request to the segments resource.
-          IMPORT – A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource.
+          DIMENSIONAL - A dynamic segment built from selection criteria based on endpoint data reported by your app. You create this type of segment by using the segment builder in the Amazon Pinpoint console or by making a POST request to the segments resource.
+          IMPORT - A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource.
       Version:
         $ref: '#/definitions/__integer'
         description: The segment version number.
@@ -2443,6 +3193,20 @@ definitions:
         $ref: '#/definitions/__string'
         description: An identifier used to retrieve the next page of results. The token is null if no additional pages exist.
     description: Segments in your account.
+  SendMessagesRequest:
+    type: object
+    required:
+      - MessageRequest
+    properties:
+      MessageRequest:
+        $ref: '#/definitions/MessageRequest'
+  SendMessagesResponse:
+    type: object
+    required:
+      - MessageResponse
+    properties:
+      MessageResponse:
+        $ref: '#/definitions/MessageResponse'
   SetDimension:
     type: object
     properties:
@@ -2450,8 +3214,8 @@ definitions:
         $ref: '#/definitions/DimensionType'
         description: |-
           The type of dimension:
-          INCLUSIVE – Endpoints that match the criteria are included in the segment.
-          EXCLUSIVE – Endpoints that match the criteria are excluded from the segment.
+          INCLUSIVE - Endpoints that match the criteria are included in the segment.
+          EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
       Values:
         $ref: '#/definitions/ListOf__string'
         description: 'The criteria values for the segment dimension. Endpoints with matching attribute values are included or excluded from the segment, depending on the setting for Type.'
@@ -2505,6 +3269,20 @@ definitions:
     properties:
       APNSChannelResponse:
         $ref: '#/definitions/APNSChannelResponse'
+  UpdateApnsSandboxChannelRequest:
+    type: object
+    required:
+      - APNSSandboxChannelRequest
+    properties:
+      APNSSandboxChannelRequest:
+        $ref: '#/definitions/APNSSandboxChannelRequest'
+  UpdateApnsSandboxChannelResponse:
+    type: object
+    required:
+      - APNSSandboxChannelResponse
+    properties:
+      APNSSandboxChannelResponse:
+        $ref: '#/definitions/APNSSandboxChannelResponse'
   UpdateApplicationSettingsRequest:
     type: object
     required:
@@ -2533,6 +3311,20 @@ definitions:
     properties:
       CampaignResponse:
         $ref: '#/definitions/CampaignResponse'
+  UpdateEmailChannelRequest:
+    type: object
+    required:
+      - EmailChannelRequest
+    properties:
+      EmailChannelRequest:
+        $ref: '#/definitions/EmailChannelRequest'
+  UpdateEmailChannelResponse:
+    type: object
+    required:
+      - EmailChannelResponse
+    properties:
+      EmailChannelResponse:
+        $ref: '#/definitions/EmailChannelResponse'
   UpdateEndpointRequest:
     type: object
     required:
@@ -2589,6 +3381,20 @@ definitions:
     properties:
       SegmentResponse:
         $ref: '#/definitions/SegmentResponse'
+  UpdateSmsChannelRequest:
+    type: object
+    required:
+      - SMSChannelRequest
+    properties:
+      SMSChannelRequest:
+        $ref: '#/definitions/SMSChannelRequest'
+  UpdateSmsChannelResponse:
+    type: object
+    required:
+      - SMSChannelResponse
+    properties:
+      SMSChannelResponse:
+        $ref: '#/definitions/SMSChannelResponse'
   WriteApplicationSettingsRequest:
     type: object
     properties:

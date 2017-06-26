@@ -3,7 +3,7 @@ info:
   version: '2015-12-10'
   x-release: v4
   title: AWS Service Catalog
-  description: '<fullname>AWS Service Catalog</fullname> <p> <b>Overview</b> </p> <p> <a href="https://aws.amazon.com/servicecatalog/">AWS Service Catalog</a> allows organizations to create and manage catalogs of IT services that are approved for use on AWS. This documentation provides reference material for the AWS Service Catalog end user API. To get the most out of this documentation, you need to be familiar with the terminology discussed in <a href="http://docs.aws.amazon.com/servicecatalog/latest/userguide/what-is_concepts.html">AWS Service Catalog Concepts</a>.</p> <p> <i>Additional Resources</i> </p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html">AWS Service Catalog Administrator Guide</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/servicecatalog/latest/userguide/introduction.html">AWS Service Catalog User Guide</a> </p> </li> </ul>'
+  description: '<fullname>AWS Service Catalog</fullname> <p> <b>Overview</b> </p> <p> <a href="https://aws.amazon.com/servicecatalog/">AWS Service Catalog</a> allows organizations to create and manage catalogs of IT services that are approved for use on AWS. This documentation provides reference material for the AWS Service Catalog end user API. To get the most out of this documentation, be familiar with the terminology discussed in <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html">AWS Service Catalog Concepts</a>.</p> <p> <i>Additional Resources</i> </p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html">AWS Service Catalog Administrator Guide</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/servicecatalog/latest/userguide/introduction.html">AWS Service Catalog User Guide</a> </p> </li> </ul>'
   x-logo:
     url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
     backgroundColor: '#FFFFFF'
@@ -211,7 +211,7 @@ paths:
   '/#CreateConstraint':
     post:
       operationId: CreateConstraint
-      description: Creates a new constraint.
+      description: 'Creates a new constraint. For more information, see <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints.html">Using Constraints</a>.'
       responses:
         '200':
           description: Success
@@ -355,7 +355,7 @@ paths:
   '/#CreateProvisioningArtifact':
     post:
       operationId: CreateProvisioningArtifact
-      description: Create a new provisioning artifact for the specified product. This operation will not work with a product that has been shared with you.
+      description: <p>Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you.</p> <p>See the bottom of this topic for an example JSON request.</p>
       responses:
         '200':
           description: Success
@@ -425,7 +425,7 @@ paths:
   '/#DeletePortfolio':
     post:
       operationId: DeletePortfolio
-      description: 'Deletes the specified portfolio. This operation will not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.'
+      description: 'Deletes the specified portfolio. This operation does not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.'
       responses:
         '200':
           description: Success
@@ -491,7 +491,7 @@ paths:
   '/#DeleteProduct':
     post:
       operationId: DeleteProduct
-      description: 'Deletes the specified product. This operation will not work with a product that has been shared with you or is associated with a portfolio. '
+      description: 'Deletes the specified product. This operation does not work with a product that has been shared with you or is associated with a portfolio. '
       responses:
         '200':
           description: Success
@@ -528,7 +528,7 @@ paths:
   '/#DeleteProvisioningArtifact':
     post:
       operationId: DeleteProvisioningArtifact
-      description: 'Deletes the specified provisioning artifact. This operation will not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).'
+      description: 'Deletes the specified provisioning artifact. This operation does not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).'
       responses:
         '200':
           description: Success
@@ -705,6 +705,35 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeProductViewInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeProvisionedProduct':
+    post:
+      operationId: DescribeProvisionedProduct
+      description: Retrieve detailed information about the provisioned product.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeProvisionedProductOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeProvisionedProductInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1156,7 +1185,7 @@ paths:
   '/#ProvisionProduct':
     post:
       operationId: ProvisionProduct
-      description: '<p>Requests a <i>Provision</i> of a specified product. A <i>ProvisionedProduct</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>'
+      description: '<p>Requests a <i>provision</i> of a specified product. A <i>provisioned product</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>'
       responses:
         '200':
           description: Success
@@ -1375,7 +1404,7 @@ paths:
   '/#UpdatePortfolio':
     post:
       operationId: UpdatePortfolio
-      description: Updates the specified portfolio's details. This operation will not work with a product that has been shared with you.
+      description: Updates the specified portfolio's details. This operation does not work with a product that has been shared with you.
       responses:
         '200':
           description: Success
@@ -1478,7 +1507,7 @@ paths:
   '/#UpdateProvisioningArtifact':
     post:
       operationId: UpdateProvisioningArtifact
-      description: Updates an existing provisioning artifact's information. This operation will not work on a provisioning artifact associated with a product that has been shared with you.
+      description: Updates an existing provisioning artifact's information. This operation does not work on a provisioning artifact associated with a product that has been shared with you.
       responses:
         '200':
           description: Success
@@ -1671,10 +1700,10 @@ definitions:
         description: The product identifier.
       Parameters:
         $ref: '#/definitions/ConstraintParameters'
-        description: The constraint parameters.
+        description: '<p>The constraint parameters. Expected values vary depending on which <b>Type</b> is specified. For examples, see the bottom of this topic.</p> <p>For Type <code>LAUNCH</code>, the <code>RoleArn</code> property is required. </p> <p>For Type <code>NOTIFICATION</code>, the <code>NotificationArns</code> property is required.</p> <p>For Type <code>TEMPLATE</code>, the <code>Rules</code> property is required.</p>'
       Type:
         $ref: '#/definitions/ConstraintType'
-        description: The type of the constraint.
+        description: 'The type of the constraint. Case-sensitive valid values are: <code>LAUNCH</code>, <code>NOTIFICATION</code>, or <code>TEMPLATE</code>. '
       Description:
         $ref: '#/definitions/ConstraintDescription'
         description: The text description of the constraint.
@@ -1829,7 +1858,7 @@ definitions:
         description: The resulting detailed provisioning artifact information.
       Info:
         $ref: '#/definitions/ProvisioningArtifactInfo'
-        description: Additional information about the provisioning artifact create request.
+        description: Additional information about the creation request for the provisioning artifact.
       Status:
         $ref: '#/definitions/Status'
         description: The status of the current request.
@@ -1915,7 +1944,7 @@ definitions:
         description: The product identifier.
       ProvisioningArtifactId:
         $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact for the delete request.
+        description: The identifier of the provisioning artifact for the delete request. This is sometimes referred to as the product version.
   DeleteProvisioningArtifactOutput:
     type: object
     properties: {}
@@ -1979,6 +2008,9 @@ definitions:
       ProductViewDetail:
         $ref: '#/definitions/ProductViewDetail'
         description: Detailed product view information.
+      ProvisioningArtifactSummaries:
+        $ref: '#/definitions/ProvisioningArtifactSummaries'
+        description: A list of provisioning artifact summaries for the product.
       Tags:
         $ref: '#/definitions/Tags'
         description: Tags associated with the product.
@@ -2022,6 +2054,23 @@ definitions:
       ProvisioningArtifacts:
         $ref: '#/definitions/ProvisioningArtifacts'
         description: A list of provisioning artifact objects for the specified product. The <code>ProvisioningArtifacts</code> represent the ways in which the specified product can be provisioned.
+  DescribeProvisionedProductInput:
+    type: object
+    required:
+      - Id
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+      Id:
+        $ref: '#/definitions/Id'
+        description: The provisioned product identifier.
+  DescribeProvisionedProductOutput:
+    type: object
+    properties:
+      ProvisionedProductDetail:
+        $ref: '#/definitions/ProvisionedProductDetail'
+        description: Detailed provisioned product information.
   DescribeProvisioningArtifactInput:
     type: object
     required:
@@ -2033,10 +2082,13 @@ definitions:
         description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
       ProvisioningArtifactId:
         $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact.
+        description: The identifier of the provisioning artifact. This is sometimes referred to as the product version.
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
+      Verbose:
+        $ref: '#/definitions/Verbose'
+        description: 'Selects verbose results. If set to true, the CloudFormation template is returned.'
   DescribeProvisioningArtifactOutput:
     type: object
     properties:
@@ -2063,7 +2115,7 @@ definitions:
         description: The product identifier.
       ProvisioningArtifactId:
         $ref: '#/definitions/Id'
-        description: The provisioning artifact identifier for this product.
+        description: The provisioning artifact identifier for this product. This is sometimes referred to as the product version.
       PathId:
         $ref: '#/definitions/Id'
         description: 'The identifier of the path for this product''s provisioning. This value is optional if the product has a default path, and is required if there is more than one path for the specified product.'
@@ -2465,7 +2517,7 @@ definitions:
     type: string
   ParameterValue:
     type: string
-    maxLength: 1000
+    maxLength: 4096
   PortfolioDescription:
     type: string
     maxLength: 2000
@@ -2531,6 +2583,7 @@ definitions:
     type: string
     enum:
       - CLOUD_FORMATION_TEMPLATE
+      - MARKETPLACE
   ProductViewAggregationType:
     type: string
   ProductViewAggregationValue:
@@ -2564,7 +2617,7 @@ definitions:
         description: The summary metadata about the specified product view.
       Status:
         $ref: '#/definitions/Status'
-        description: Current status of the product.
+        description: '<p>Current status of the product.</p> <p> <code>AVAILABLE</code> - Product is available for use.</p> <p> <code>CREATING</code> - Creation of product started, not ready for use.</p> <p> <code>FAILED</code> - Action on product failed.</p>'
       ProductARN:
         $ref: '#/definitions/ResourceARN'
         description: The ARN associated with the product.
@@ -2584,6 +2637,7 @@ definitions:
       - FullTextSearch
       - Owner
       - ProductType
+      - SourceProductId
   ProductViewFilterValue:
     type: string
   ProductViewFilterValues:
@@ -2635,7 +2689,7 @@ definitions:
         description: Short description of the product.
       Type:
         $ref: '#/definitions/ProductType'
-        description: The product type. Contact the product administrator for the significance of this value.
+        description: 'The product type. Contact the product administrator for the significance of this value. If this value is <code>MARKETPLACE</code>, the product was created by AWS Marketplace.'
       Distributor:
         $ref: '#/definitions/ProductViewDistributor'
         description: The distributor of the product. Contact the product administrator for the significance of this value.
@@ -2672,7 +2726,7 @@ definitions:
         description: The product identifier.
       ProvisioningArtifactId:
         $ref: '#/definitions/Id'
-        description: The provisioning artifact identifier for this product.
+        description: The provisioning artifact identifier for this product. This is sometimes referred to as the product version.
       PathId:
         $ref: '#/definitions/Id'
         description: 'The identifier of the path for this product''s provisioning. This value is optional if the product has a default path, and is required if there is more than one path for the specified product.'
@@ -2713,8 +2767,8 @@ definitions:
         $ref: '#/definitions/ProvisionedProductId'
         description: The identifier of the ProvisionedProduct object.
       Status:
-        $ref: '#/definitions/RecordStatus'
-        description: The current status of the ProvisionedProduct.
+        $ref: '#/definitions/ProvisionedProductStatus'
+        description: '<p>The current status of the ProvisionedProduct.</p> <p> <code>AVAILABLE</code> - Stable state, ready to perform any operation. The most recent action request succeeded and completed.</p> <p> <code>UNDER_CHANGE</code> - Transitive state, operations performed may or may not have valid results. Wait for an <code>AVAILABLE</code> status before performing operations.</p> <p> <code>TAINTED</code> - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version. </p> <p> <code>ERROR</code> - Something unexpected happened such that the provisioned product exists but the stack is not running. For example, CloudFormation received an invalid parameter value and could not launch the stack.</p>'
       StatusMessage:
         $ref: '#/definitions/ProvisionedProductStatusMessage'
         description: The current status message of the ProvisionedProduct.
@@ -2736,11 +2790,21 @@ definitions:
     type: string
   ProvisionedProductName:
     type: string
+    pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]*'
+    minLength: 1
+    maxLength: 128
   ProvisionedProductNameOrArn:
     type: string
-    pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]{0,127}|arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+    pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
     minLength: 1
     maxLength: 1224
+  ProvisionedProductStatus:
+    type: string
+    enum:
+      - AVAILABLE
+      - UNDER_CHANGE
+      - TAINTED
+      - ERROR
   ProvisionedProductStatusMessage:
     type: string
   ProvisionedProductType:
@@ -2750,7 +2814,7 @@ definitions:
     properties:
       Id:
         $ref: '#/definitions/Id'
-        description: The identifier for the artifact.
+        description: The identifier for the artifact. This is sometimes referred to as the product version.
       Name:
         $ref: '#/definitions/ProvisioningArtifactName'
         description: The name of the artifact.
@@ -2771,7 +2835,7 @@ definitions:
     properties:
       Id:
         $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact.
+        description: The identifier of the provisioning artifact. This is sometimes referred to as the product version.
       Name:
         $ref: '#/definitions/ProvisioningArtifactName'
         description: The name assigned to the provisioning artifact.
@@ -2780,7 +2844,7 @@ definitions:
         description: The text description of the provisioning artifact.
       Type:
         $ref: '#/definitions/ProvisioningArtifactType'
-        description: The type of the provisioning artifact.
+        description: '<p>The type of the provisioning artifact. The following provisioning artifact types are used by AWS Marketplace products:</p> <p> <code>MARKETPLACE_AMI</code> - AMI products.</p> <p> <code>MARKETPLACE_CAR</code> - CAR (Cluster and AWS Resources) products.</p>'
       CreatedTime:
         $ref: '#/definitions/CreationTime'
         description: The UTC timestamp of the creation time.
@@ -2792,7 +2856,7 @@ definitions:
   ProvisioningArtifactInfo:
     type: array
     minItems: 1
-    maxItems: 1
+    maxItems: 100
     items:
       type: object
       properties:
@@ -2845,15 +2909,40 @@ definitions:
         description: The text description of the provisioning artifact properties.
       Info:
         $ref: '#/definitions/ProvisioningArtifactInfo'
-        description: Additional information about the provisioning artifact properties.
+        description: 'Additional information about the provisioning artifact properties. When using this element in a request, you must specify <code>LoadTemplateFromURL</code>. For more information, see <a>CreateProvisioningArtifact</a>.'
       Type:
         $ref: '#/definitions/ProvisioningArtifactType'
-        description: The type of the provisioning artifact properties.
-    description: Provisioning artifact properties.
+        description: '<p>The type of the provisioning artifact properties. The following provisioning artifact property types are used by AWS Marketplace products:</p> <p> <code>MARKETPLACE_AMI</code> - AMI products.</p> <p> <code>MARKETPLACE_CAR</code> - CAR (Cluster and AWS Resources) products.</p>'
+    description: 'Provisioning artifact properties. For example request JSON, see <a>CreateProvisioningArtifact</a>.'
+  ProvisioningArtifactSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/ProvisioningArtifactSummary'
+  ProvisioningArtifactSummary:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/Id'
+        description: The provisioning artifact identifier.
+      Name:
+        $ref: '#/definitions/ProvisioningArtifactName'
+        description: The provisioning artifact name.
+      Description:
+        $ref: '#/definitions/ProvisioningArtifactDescription'
+        description: The provisioning artifact description.
+      CreatedTime:
+        $ref: '#/definitions/ProvisioningArtifactCreatedTime'
+        description: The UTC timestamp of the creation time.
+      ProvisioningArtifactMetadata:
+        $ref: '#/definitions/ProvisioningArtifactInfo'
+        description: The provisioning artifact metadata. This data is used with products created by AWS Marketplace.
+    description: Summary information about a provisioning artifact.
   ProvisioningArtifactType:
     type: string
     enum:
       - CLOUD_FORMATION_TEMPLATE
+      - MARKETPLACE_AMI
+      - MARKETPLACE_CAR
   ProvisioningArtifacts:
     type: array
     items:
@@ -2867,7 +2956,7 @@ definitions:
       Value:
         $ref: '#/definitions/ParameterValue'
         description: The value to use for provisioning. Any constraints on this value can be found in <code>ProvisioningArtifactParameter</code> for <code>Key</code>.
-    description: The arameter key/value pairs used to provision a product.
+    description: The parameter key-value pairs used to provision a product.
   ProvisioningParameters:
     type: array
     items:
@@ -2883,7 +2972,7 @@ definitions:
         description: The user-friendly name of the ProvisionedProduct object.
       Status:
         $ref: '#/definitions/RecordStatus'
-        description: The status of the ProvisionedProduct object.
+        description: '<p>The status of the ProvisionedProduct object.</p> <p> <code>CREATED</code> - Request created but the operation has not yet started.</p> <p> <code>IN_PROGRESS</code> - The requested operation is in-progress.</p> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a roll-back.</p> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> <p> <code>FAILED</code> - The requested operation has completed but has failed. Investigate using the error messages returned.</p>'
       CreatedTime:
         $ref: '#/definitions/CreatedTime'
         description: The UTC timestamp of the creation time.
@@ -2904,7 +2993,7 @@ definitions:
         description: The product identifier.
       ProvisioningArtifactId:
         $ref: '#/definitions/Id'
-        description: The provisioning artifact identifier for this product.
+        description: The provisioning artifact identifier for this product. This is sometimes referred to as the product version.
       PathId:
         $ref: '#/definitions/Id'
         description: The identifier of the path for this product's provisioning.
@@ -2953,9 +3042,11 @@ definitions:
   RecordStatus:
     type: string
     enum:
+      - CREATED
       - IN_PROGRESS
+      - IN_PROGRESS_IN_ERROR
       - SUCCEEDED
-      - ERROR
+      - FAILED
   RecordTag:
     type: object
     properties:
@@ -3134,7 +3225,7 @@ definitions:
         description: The <code>ProvisioningArtifactParameter.TagKey</code> parameter from <a>DescribeProvisioningParameters</a>.
       Value:
         $ref: '#/definitions/TagValue'
-        description: The esired value for this key.
+        description: The desired value for this key.
     description: Key/value pairs to associate with this provisioning. These tags are entirely discretionary and are propagated to the resources created in the provisioning.
   TagKey:
     type: string
@@ -3162,10 +3253,10 @@ definitions:
     properties:
       ProvisionedProductName:
         $ref: '#/definitions/ProvisionedProductNameOrArn'
-        description: 'The name of the ProvisionedProduct object to terminate. You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.'
+        description: 'The name of the ProvisionedProduct object to terminate. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.'
       ProvisionedProductId:
         $ref: '#/definitions/Id'
-        description: 'The identifier of the ProvisionedProduct object to terminate. You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.'
+        description: 'The identifier of the ProvisionedProduct object to terminate. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.'
       TerminateToken:
         $ref: '#/definitions/IdempotencyToken'
         description: 'An idempotency token that uniquely identifies the termination request. This token is only valid during the termination process. After the ProvisionedProduct object is terminated, further requests to terminate the same ProvisionedProduct object always return <b>ResourceNotFound</b> regardless of the value of <code>TerminateToken</code>.'
@@ -3299,16 +3390,16 @@ definitions:
         description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
       ProvisionedProductName:
         $ref: '#/definitions/ProvisionedProductNameOrArn'
-        description: 'The updated name of the ProvisionedProduct object . You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.'
+        description: 'The updated name of the ProvisionedProduct object. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.'
       ProvisionedProductId:
         $ref: '#/definitions/Id'
-        description: 'The identifier of the ProvisionedProduct object to update. You must specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.'
+        description: 'The identifier of the ProvisionedProduct object to update. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.'
       ProductId:
         $ref: '#/definitions/Id'
         description: The identifier of the ProvisionedProduct object.
       ProvisioningArtifactId:
         $ref: '#/definitions/Id'
-        description: The provisioning artifact identifier for this product.
+        description: The provisioning artifact identifier for this product. This is sometimes referred to as the product version.
       PathId:
         $ref: '#/definitions/Id'
         description: 'The identifier of the path to use in the updated ProvisionedProduct object. This value is optional if the product has a default path, and is required if there is more than one path for the specified product.'
@@ -3338,7 +3429,7 @@ definitions:
         description: The product identifier.
       ProvisioningArtifactId:
         $ref: '#/definitions/Id'
-        description: The identifier of the provisioning artifact for the update request.
+        description: The identifier of the provisioning artifact for the update request. This is sometimes referred to as the product version.
       Name:
         $ref: '#/definitions/ProvisioningArtifactName'
         description: The updated name of the provisioning artifact.
@@ -3369,7 +3460,7 @@ definitions:
       UsePreviousValue:
         $ref: '#/definitions/UsePreviousValue'
         description: 'If true, uses the currently set value for <code>Key</code>, ignoring <code>UpdateProvisioningParameter.Value</code>.'
-    description: 'The parameter key/value pair used to update a ProvisionedProduct object. If <code>UsePreviousValue</code> is set to true, <code>Value</code> is ignored and the value for <code>Key</code> is kept as previously set (current value).'
+    description: 'The parameter key-value pair used to update a ProvisionedProduct object. If <code>UsePreviousValue</code> is set to true, <code>Value</code> is ignored and the value for <code>Key</code> is kept as previously set (current value).'
   UpdateProvisioningParameters:
     type: array
     items:
@@ -3392,4 +3483,6 @@ definitions:
     items:
       $ref: '#/definitions/UsageInstruction'
   UsePreviousValue:
+    type: boolean
+  Verbose:
     type: boolean

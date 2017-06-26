@@ -599,6 +599,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListPipelineExecutions':
+    post:
+      operationId: ListPipelineExecutions
+      description: Gets a summary of the most recent executions for a pipeline.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPipelineExecutionsOutput'
+        '480':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '481':
+          description: PipelineNotFoundException
+          schema:
+            $ref: '#/definitions/PipelineNotFoundException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPipelineExecutionsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListPipelines':
     post:
       operationId: ListPipelines
@@ -1083,9 +1120,6 @@ definitions:
     required:
       - jobId
       - nonce
-    example:
-      jobId: 11111111-abcd-1111-abcd-111111abcdef
-      nonce: '3'
     properties:
       jobId:
         $ref: '#/definitions/JobId'
@@ -1096,8 +1130,6 @@ definitions:
     description: Represents the input of an acknowledge job action.
   AcknowledgeJobOutput:
     type: object
-    example:
-      status: InProgress
     properties:
       status:
         $ref: '#/definitions/JobStatus'
@@ -1201,7 +1233,7 @@ definitions:
     type: string
     pattern: '[a-zA-Z0-9_-]+'
     minLength: 1
-    maxLength: 20
+    maxLength: 50
   ActionConfigurationValue:
     type: string
     minLength: 1
@@ -1329,8 +1361,10 @@ definitions:
         description: The name of the action.
       currentRevision:
         $ref: '#/definitions/ActionRevision'
+        description: Represents information about the version (or revision) of an action.
       latestExecution:
         $ref: '#/definitions/ActionExecution'
+        description: Represents information about the run of an action.
       entityUrl:
         $ref: '#/definitions/Url'
         description: 'A URL link for more information about the state of the action, such as a deployment group details page.'
@@ -1351,6 +1385,7 @@ definitions:
     properties:
       id:
         $ref: '#/definitions/ActionTypeId'
+        description: Represents information about an action type.
       settings:
         $ref: '#/definitions/ActionTypeSettings'
         description: The settings for the action type.
@@ -1524,11 +1559,11 @@ definitions:
         description: 'The type of the artifact store, such as S3.'
       location:
         $ref: '#/definitions/ArtifactStoreLocation'
-        description: 'The location for storing the artifacts for a pipeline, such as an S3 bucket or folder.'
+        description: The Amazon S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder within the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any Amazon S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
       encryptionKey:
         $ref: '#/definitions/EncryptionKey'
         description: 'The encryption key used to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If this is undefined, the default key for Amazon S3 is used.'
-    description: 'The Amazon S3 location where artifacts are stored for the pipeline. If this Amazon S3 bucket is created manually, it must meet the requirements for AWS CodePipeline. For more information, see the <a href="http://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#CPS3Bucket">Concepts</a>.'
+    description: The Amazon S3 bucket where artifacts are stored for the pipeline.
   ArtifactStoreLocation:
     type: string
     pattern: '[a-zA-Z0-9\-\.]+'
@@ -1578,28 +1613,6 @@ definitions:
       - version
       - inputArtifactDetails
       - outputArtifactDetails
-    example:
-      version: '1'
-      category: Build
-      configurationProperties:
-        - name: MyJenkinsExampleBuildProject
-          type: String
-          required: true
-          key: true
-          description: The name of the build project must be provided when this action is added to the pipeline.
-          queryable: false
-          secret: false
-      inputArtifactDetails:
-        maximumCount: 1
-        minimumCount: 0
-      outputArtifactDetails:
-        maximumCount: 1
-        minimumCount: 0
-      provider: MyBuild-ProviderName
-      settings:
-        entityUrlTemplate: 'https://192.0.2.4/job/{Config:ProjectName}/'
-        executionUrlTemplate: 'https://192.0.2.4/job/{Config:ProjectName}/lastSuccessfulBuild/{ExternalExecutionId}/'
-        revisionUrlTemplate: none
     properties:
       category:
         $ref: '#/definitions/ActionCategory'
@@ -1612,137 +1625,41 @@ definitions:
         description: The version identifier of the custom action.
       settings:
         $ref: '#/definitions/ActionTypeSettings'
+        description: Returns information about the settings for an action type.
       configurationProperties:
         $ref: '#/definitions/ActionConfigurationPropertyList'
         description: '<p>The configuration properties for the custom action.</p> <note> <p>You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of {Config:name}, as long as the configuration property is both required and not secret. For more information, see <a href="http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html">Create a Custom Action for a Pipeline</a>.</p> </note>'
       inputArtifactDetails:
         $ref: '#/definitions/ArtifactDetails'
+        description: 'The details of the input artifact for the action, such as its commit ID.'
       outputArtifactDetails:
         $ref: '#/definitions/ArtifactDetails'
+        description: 'The details of the output artifact of the action, such as its commit ID.'
     description: Represents the input of a create custom action operation.
   CreateCustomActionTypeOutput:
     type: object
     required:
       - actionType
-    example:
-      actionType:
-        actionConfigurationProperties:
-          - name: MyJenkinsExampleBuildProject
-            required: true
-            key: true
-            description: The name of the build project must be provided when this action is added to the pipeline.
-            queryable: false
-            secret: false
-        id:
-          version: '1'
-          category: Build
-          owner: Custom
-          provider: MyBuild-ProviderName
-        inputArtifactDetails:
-          maximumCount: 1
-          minimumCount: 0
-        outputArtifactDetails:
-          maximumCount: 1
-          minimumCount: 0
-        settings:
-          entityUrlTemplate: 'https://192.0.2.4/job/{Config:ProjectName}/'
-          executionUrlTemplate: 'https://192.0.2.4/job/{Config:ProjectName}/lastSuccessfulBuild/{ExternalExecutionId}/'
-          revisionUrlTemplate: none
     properties:
       actionType:
         $ref: '#/definitions/ActionType'
+        description: Returns information about the details of an action type.
     description: Represents the output of a create custom action operation.
   CreatePipelineInput:
     type: object
     required:
       - pipeline
-    example:
-      pipeline:
-        version: 1
-        name: MySecondPipeline
-        artifactStore:
-          type: S3
-          location: codepipeline-us-east-1-11EXAMPLE11
-        roleArn: 'arn:aws:iam::111111111111:role/AWS-CodePipeline-Service'
-        stages:
-          - name: Source
-            actions:
-              - name: Source
-                actionTypeId:
-                  version: '1'
-                  category: Source
-                  owner: AWS
-                  provider: S3
-                configuration:
-                  S3Bucket: awscodepipeline-demo-bucket
-                  S3ObjectKey: aws-codepipeline-s3-aws-codedeploy_linux.zip
-                inputArtifacts: []
-                outputArtifacts:
-                  - name: MyApp
-                runOrder: 1
-          - name: Beta
-            actions:
-              - name: CodePipelineDemoFleet
-                actionTypeId:
-                  version: '1'
-                  category: Deploy
-                  owner: AWS
-                  provider: CodeDeploy
-                configuration:
-                  ApplicationName: CodePipelineDemoApplication
-                  DeploymentGroupName: CodePipelineDemoFleet
-                inputArtifacts:
-                  - name: MyApp
-                outputArtifacts: []
-                runOrder: 1
     properties:
       pipeline:
         $ref: '#/definitions/PipelineDeclaration'
+        description: 'Represents the structure of actions and stages to be performed in the pipeline. '
     description: Represents the input of a create pipeline action.
   CreatePipelineOutput:
     type: object
-    example:
-      pipeline:
-        version: 1
-        name: MySecondPipeline
-        artifactStore:
-          type: S3
-          location: codepipeline-us-east-1-11EXAMPLE11
-        roleArn: 'arn:aws:iam::111111111111:role/AWS-CodePipeline-Service'
-        stages:
-          - name: Source
-            actions:
-              - name: Source
-                actionTypeId:
-                  version: '1'
-                  category: Source
-                  owner: AWS
-                  provider: S3
-                configuration:
-                  S3Bucket: awscodepipeline-demo-bucket
-                  S3ObjectKey: aws-codepipeline-s3-aws-codedeploy_linux.zip
-                inputArtifacts: []
-                outputArtifacts:
-                  - name: MyApp
-                runOrder: 1
-          - name: Beta
-            actions:
-              - name: CodePipelineDemoFleet
-                actionTypeId:
-                  version: '1'
-                  category: Deploy
-                  owner: AWS
-                  provider: CodeDeploy
-                configuration:
-                  ApplicationName: CodePipelineDemoApplication
-                  DeploymentGroupName: CodePipelineDemoFleet
-                inputArtifacts:
-                  - name: MyApp
-                outputArtifacts: []
-                runOrder: 1
     properties:
       pipeline:
         $ref: '#/definitions/PipelineDeclaration'
+        description: 'Represents the structure of actions and stages to be performed in the pipeline. '
     description: Represents the output of a create pipeline action.
   CurrentRevision:
     type: object
@@ -1769,10 +1686,6 @@ definitions:
       - category
       - provider
       - version
-    example:
-      version: '1'
-      category: Build
-      provider: MyJenkinsProviderName
     properties:
       category:
         $ref: '#/definitions/ActionCategory'
@@ -1788,8 +1701,6 @@ definitions:
     type: object
     required:
       - name
-    example:
-      name: MySecondPipeline
     properties:
       name:
         $ref: '#/definitions/PipelineName'
@@ -1806,11 +1717,6 @@ definitions:
       - stageName
       - transitionType
       - reason
-    example:
-      pipelineName: MyFirstPipeline
-      reason: An example reason
-      stageName: Beta
-      transitionType: Inbound
     properties:
       pipelineName:
         $ref: '#/definitions/PipelineName'
@@ -1836,10 +1742,6 @@ definitions:
       - pipelineName
       - stageName
       - transitionType
-    example:
-      pipelineName: MyFirstPipeline
-      stageName: Beta
-      transitionType: Inbound
     properties:
       pipelineName:
         $ref: '#/definitions/PipelineName'
@@ -1932,8 +1834,6 @@ definitions:
     type: object
     required:
       - jobId
-    example:
-      jobId: 11111111-abcd-1111-abcd-111111abcdef
     properties:
       jobId:
         $ref: '#/definitions/JobId'
@@ -1941,37 +1841,6 @@ definitions:
     description: Represents the input of a get job details action.
   GetJobDetailsOutput:
     type: object
-    example:
-      jobDetails:
-        accountId: '111111111111'
-        data:
-          actionConfiguration:
-            configuration:
-              ProjectName: MyJenkinsExampleTestProject
-          actionTypeId:
-            version: '1'
-            category: Test
-            owner: Custom
-            provider: MyJenkinsProviderName
-          artifactCredentials:
-            accessKeyId: AKIAIOSFODNN7EXAMPLE
-            secretAccessKey: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-            sessionToken: fICCQD6m7oRw0uXOjANBgkqhkiG9w0BAQUFADCBiDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdTZWF0dGxlMQ8wDQYDVQQKEwZBbWF6b24xFDASBgNVBAsTC0lBTSBDb25zb2xlMRIwEAYDVQQDEwlUZXN0Q2lsYWMxHzAdBgkqhkiG9w0BCQEWEG5vb25lQGFtYXpvbi5jb20wHhcNMTEwNDI1MjA0NTIxWhcNMTIwNDI0MjA0NTIxWjCBiDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdTZWF0dGxlMQ8wDQYDVQQKEwZBbWF6b24xFDASBgNVBAsTC0lBTSBDb25zb2xlMRIwEAYDVQQDEwlUZXN0Q2lsYWMxHzAdBgkqhkiG9w0BCQEWEG5vb25lQGFtYXpvbi5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMaK0dn+a4GmWIWJ21uUSfwfEvySWtC2XADZ4nB+BLYgVIk60CpiwsZ3G93vUEIO3IyNoH/f0wYK8m9TrDHudUZg3qX4waLG5M43q7Wgc/MbQITxOUSQv7c7ugFFDzQGBzZswY6786m86gpEIbb3OhjZnzcvQAaRHhdlQWIMm2nrAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAtCu4nUhVVxYUntneD9+h8Mg9q6q+auNKyExzyLwaxlAoo7TJHidbtS4J5iNmZgXL0FkbFFBjvSfpJIlJ00zbhNYS5f6GuoEDmFJl0ZxBHjJnyp378OD8uTs7fLvjx79LjSTbNYiytVbZPQUQ5Yaxu2jXnimvw3rrszlaEXAMPLE=
-          inputArtifacts:
-            - name: MyAppBuild
-              location:
-                type: S3
-                s3Location:
-                  bucketName: codepipeline-us-east-1-11EXAMPLE11
-                  objectKey: MySecondPipeline/MyAppBuild/EXAMPLE
-          outputArtifacts: []
-          pipelineContext:
-            action:
-              name: MyJenkinsTest-Action
-            pipelineName: MySecondPipeline
-            stage:
-              name: Testing
-        id: 11111111-abcd-1111-abcd-111111abcdef
     properties:
       jobDetails:
         $ref: '#/definitions/JobDetails'
@@ -2001,9 +1870,6 @@ definitions:
     type: object
     required:
       - name
-    example:
-      version: 123
-      name: MyFirstPipeline
     properties:
       name:
         $ref: '#/definitions/PipelineName'
@@ -2014,55 +1880,15 @@ definitions:
     description: Represents the input of a get pipeline action.
   GetPipelineOutput:
     type: object
-    example:
-      pipeline:
-        version: 1
-        name: MyFirstPipeline
-        artifactStore:
-          type: S3
-          location: codepipeline-us-east-1-11EXAMPLE11
-        roleArn: 'arn:aws:iam::111111111111:role/AWS-CodePipeline-Service'
-        stages:
-          - name: Source
-            actions:
-              - name: Source
-                actionTypeId:
-                  version: '1'
-                  category: Source
-                  owner: AWS
-                  provider: S3
-                configuration:
-                  S3Bucket: awscodepipeline-demo-bucket
-                  S3ObjectKey: aws-codepipeline-s3-aws-codedeploy_linux.zip
-                inputArtifacts: []
-                outputArtifacts:
-                  - name: MyApp
-                runOrder: 1
-          - name: Beta
-            actions:
-              - name: CodePipelineDemoFleet
-                actionTypeId:
-                  version: '1'
-                  category: Deploy
-                  owner: AWS
-                  provider: CodeDeploy
-                configuration:
-                  ApplicationName: CodePipelineDemoApplication
-                  DeploymentGroupName: CodePipelineDemoFleet
-                inputArtifacts:
-                  - name: MyApp
-                outputArtifacts: []
-                runOrder: 1
     properties:
       pipeline:
         $ref: '#/definitions/PipelineDeclaration'
+        description: 'Represents the structure of actions and stages to be performed in the pipeline. '
     description: Represents the output of a get pipeline action.
   GetPipelineStateInput:
     type: object
     required:
       - name
-    example:
-      name: MyFirstPipeline
     properties:
       name:
         $ref: '#/definitions/PipelineName'
@@ -2070,31 +1896,6 @@ definitions:
     description: Represents the input of a get pipeline state action.
   GetPipelineStateOutput:
     type: object
-    example:
-      created: '1446137312.204'
-      pipelineName: MyFirstPipeline
-      pipelineVersion: 1
-      stageStates:
-        - actionStates:
-            - actionName: Source
-              entityUrl: 'https://console.aws.amazon.com/s3/home?#'
-              latestExecution:
-                lastStatusChange: '1446137358.328'
-                status: Succeeded
-          stageName: Source
-        - actionStates:
-            - actionName: CodePipelineDemoFleet
-              entityUrl: 'https://console.aws.amazon.com/codedeploy/home?#/applications/CodePipelineDemoApplication/deployment-groups/CodePipelineDemoFleet'
-              latestExecution:
-                externalExecutionId: d-EXAMPLE
-                externalExecutionUrl: 'https://console.aws.amazon.com/codedeploy/home?#/deployments/d-EXAMPLE'
-                lastStatusChange: '1446137493.131'
-                status: Succeeded
-                summary: Deployment Succeeded
-          inboundTransitionState:
-            enabled: true
-          stageName: Beta
-      updated: '1446137312.204'
     properties:
       pipelineName:
         $ref: '#/definitions/PipelineName'
@@ -2206,10 +2007,13 @@ definitions:
     properties:
       actionTypeId:
         $ref: '#/definitions/ActionTypeId'
+        description: Represents information about an action type.
       actionConfiguration:
         $ref: '#/definitions/ActionConfiguration'
+        description: Represents information about an action configuration.
       pipelineContext:
         $ref: '#/definitions/PipelineContext'
+        description: Represents information about a pipeline to a job worker.
       inputArtifacts:
         $ref: '#/definitions/ArtifactList'
         description: The artifact supplied to the job.
@@ -2218,11 +2022,13 @@ definitions:
         description: The output of the job.
       artifactCredentials:
         $ref: '#/definitions/AWSSessionCredentials'
+        description: Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline.
       continuationToken:
         $ref: '#/definitions/ContinuationToken'
         description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.'
       encryptionKey:
         $ref: '#/definitions/EncryptionKey'
+        description: 'Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. '
     description: Represents additional information about a job required for a job worker to complete the job.
   JobDetails:
     type: object
@@ -2232,6 +2038,7 @@ definitions:
         description: The unique system-generated ID of the job.
       data:
         $ref: '#/definitions/JobData'
+        description: 'Represents additional information about a job required for a job worker to complete the job. '
       accountId:
         $ref: '#/definitions/AccountId'
         description: The AWS account ID associated with the job.
@@ -2270,9 +2077,6 @@ definitions:
     description: The number of pipelines associated with the AWS account has exceeded the limit allowed for the account.
   ListActionTypesInput:
     type: object
-    example:
-      actionOwnerFilter: Custom
-      nextToken: ''
     properties:
       actionOwnerFilter:
         $ref: '#/definitions/ActionOwner'
@@ -2285,49 +2089,6 @@ definitions:
     type: object
     required:
       - actionTypes
-    example:
-      actionTypes:
-        - actionConfigurationProperties:
-            - name: MyJenkinsExampleBuildProject
-              required: true
-              key: true
-              queryable: true
-              secret: false
-          id:
-            version: '1'
-            category: Build
-            owner: Custom
-            provider: MyJenkinsProviderName
-          inputArtifactDetails:
-            maximumCount: 5
-            minimumCount: 0
-          outputArtifactDetails:
-            maximumCount: 5
-            minimumCount: 0
-          settings:
-            entityUrlTemplate: 'http://54.174.131.118/job/{Config:ProjectName}'
-            executionUrlTemplate: 'http://54.174.131.118/job/{Config:ProjectName}/{ExternalExecutionId}'
-        - actionConfigurationProperties:
-            - name: MyJenkinsExampleTestProject
-              required: true
-              key: true
-              queryable: true
-              secret: false
-          id:
-            version: '1'
-            category: Build
-            owner: Custom
-            provider: MyJenkinsProviderName
-          inputArtifactDetails:
-            maximumCount: 5
-            minimumCount: 0
-          outputArtifactDetails:
-            maximumCount: 5
-            minimumCount: 0
-          settings:
-            entityUrlTemplate: 'http://54.210.140.46/job/{Config:ProjectName}'
-            executionUrlTemplate: 'http://54.210.140.46/job/{Config:ProjectName}/{ExternalExecutionId}'
-      nextToken: ''
     properties:
       actionTypes:
         $ref: '#/definitions/ActionTypeList'
@@ -2336,9 +2097,33 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'If the amount of returned information is significantly large, an identifier is also returned which can be used in a subsequent list action types call to return the next set of action types in the list.'
     description: Represents the output of a list action types action.
+  ListPipelineExecutionsInput:
+    type: object
+    required:
+      - pipelineName
+    properties:
+      pipelineName:
+        $ref: '#/definitions/PipelineName'
+        description: The name of the pipeline for which you want to get execution summary information.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. The available pipeline execution history is limited to the most recent 12 months, based on pipeline execution start times. Default value is 100.'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The token that was returned from the previous list pipeline executions call, which can be used to return the next set of pipeline executions in the list.'
+    description: Represents the input of a list pipeline executions action.
+  ListPipelineExecutionsOutput:
+    type: object
+    properties:
+      pipelineExecutionSummaries:
+        $ref: '#/definitions/PipelineExecutionSummaryList'
+        description: A list of executions in the history of a pipeline.
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token that can be used in the next list pipeline executions call to return the next set of pipeline executions. To view all items in the list, continue to call this operation with each subsequent token until no more nextToken values are returned.'
+    description: 'Represents the output of a list pipeline executions action. '
   ListPipelinesInput:
     type: object
-    example: {}
     properties:
       nextToken:
         $ref: '#/definitions/NextToken'
@@ -2346,17 +2131,6 @@ definitions:
     description: Represents the input of a list pipelines action.
   ListPipelinesOutput:
     type: object
-    example:
-      nextToken: ''
-      pipelines:
-        - version: 1
-          name: MyFirstPipeline
-          created: '1444681408.094'
-          updated: '1444681408.094'
-        - version: 3
-          name: MySecondPipeline
-          created: '1443046290.003'
-          updated: '1443048299.639'
     properties:
       pipelines:
         $ref: '#/definitions/PipelineList'
@@ -2368,6 +2142,10 @@ definitions:
   MaxBatchSize:
     type: integer
     minimum: 1
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
   MaximumArtifactCount:
     type: integer
     minimum: 0
@@ -2414,6 +2192,7 @@ definitions:
         description: The stage of the pipeline.
       action:
         $ref: '#/definitions/ActionContext'
+        description: <p/>
     description: Represents information about a pipeline to a job worker.
   PipelineDeclaration:
     type: object
@@ -2431,6 +2210,7 @@ definitions:
         description: 'The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform actions with no actionRoleArn, or to use to assume roles for actions with an actionRoleArn.'
       artifactStore:
         $ref: '#/definitions/ArtifactStore'
+        description: 'Represents the context of an action within the stage of a pipeline to a job worker. '
       stages:
         $ref: '#/definitions/PipelineStageDeclarationList'
         description: The stage in which to perform the action.
@@ -2452,7 +2232,7 @@ definitions:
         description: The ID of the pipeline execution.
       status:
         $ref: '#/definitions/PipelineExecutionStatus'
-        description: '<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Succeeded: The pipeline execution completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead. </p> </li> <li> <p>Failed: The pipeline did not complete successfully.</p> </li> </ul>'
+        description: '<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Succeeded: The pipeline execution completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead. </p> </li> <li> <p>Failed: The pipeline execution did not complete successfully.</p> </li> </ul>'
       artifactRevisions:
         $ref: '#/definitions/ArtifactRevisionList'
         description: A list of ArtifactRevision objects included in a pipeline execution.
@@ -2471,6 +2251,26 @@ definitions:
       - Succeeded
       - Superseded
       - Failed
+  PipelineExecutionSummary:
+    type: object
+    properties:
+      pipelineExecutionId:
+        $ref: '#/definitions/PipelineExecutionId'
+        description: The ID of the pipeline execution.
+      status:
+        $ref: '#/definitions/PipelineExecutionStatus'
+        description: '<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Succeeded: The pipeline execution completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution caught up and continued through the pipeline instead. </p> </li> <li> <p>Failed: The pipeline execution did not complete successfully.</p> </li> </ul>'
+      startTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time when the pipeline execution began, in timestamp format.'
+      lastUpdateTime:
+        $ref: '#/definitions/Timestamp'
+        description: 'The date and time of the last change to the pipeline execution, in timestamp format.'
+    description: Summary information about a pipeline execution.
+  PipelineExecutionSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/PipelineExecutionSummary'
   PipelineList:
     type: array
     items:
@@ -2519,18 +2319,10 @@ definitions:
     type: object
     required:
       - actionTypeId
-    example:
-      actionTypeId:
-        version: '1'
-        category: Test
-        owner: Custom
-        provider: MyJenkinsProviderName
-      maxBatchSize: 5
-      queryParam:
-        ProjectName: MyJenkinsTestProj
     properties:
       actionTypeId:
         $ref: '#/definitions/ActionTypeId'
+        description: Represents information about an action type.
       maxBatchSize:
         $ref: '#/definitions/MaxBatchSize'
         description: The maximum number of jobs to return in a poll for jobs call.
@@ -2540,38 +2332,6 @@ definitions:
     description: Represents the input of a poll for jobs action.
   PollForJobsOutput:
     type: object
-    example:
-      jobs:
-        - accountId: '111111111111'
-          data:
-            actionConfiguration:
-              configuration:
-                ProjectName: MyJenkinsTestProj
-            actionTypeId:
-              version: '1'
-              category: Test
-              owner: Custom
-              provider: MyJenkinsProviderName
-            artifactCredentials:
-              accessKeyId: AKIAIOSFODNN7EXAMPLE
-              secretAccessKey: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-              sessionToken: fICCQD6m7oRw0uXOjANBgkqhkiG9w0BAQUFADCBiDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdTZWF0dGxlMQ8wDQYDVQQKEwZBbWF6b24xFDASBgNVBAsTC0lBTSBDb25zb2xlMRIwEAYDVQQDEwlUZXN0Q2lsYWMxHzAdBgkqhkiG9w0BCQEWEG5vb25lQGFtYXpvbi5jb20wHhcNMTEwNDI1MjA0NTIxWhcNMTIwNDI0MjA0NTIxWjCBiDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdTZWF0dGxlMQ8wDQYDVQQKEwZBbWF6b24xFDASBgNVBAsTC0lBTSBDb25zb2xlMRIwEAYDVQQDEwlUZXN0Q2lsYWMxHzAdBgkqhkiG9w0BCQEWEG5vb25lQGFtYXpvbi5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMaK0dn+a4GmWIWJ21uUSfwfEvySWtC2XADZ4nB+BLYgVIk60CpiwsZ3G93vUEIO3IyNoH/f0wYK8m9TrDHudUZg3qX4waLG5M43q7Wgc/MbQITxOUSQv7c7ugFFDzQGBzZswY6786m86gpEIbb3OhjZnzcvQAaRHhdlQWIMm2nrAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAtCu4nUhVVxYUntneD9+h8Mg9q6q+auNKyExzyLwaxlAoo7TJHidbtS4J5iNmZgXL0FkbFFBjvSfpJIlJ00zbhNYS5f6GuoEDmFJl0ZxBHjJnyp378OD8uTs7fLvjx79LjSTbNYiytVbZPQUQ5Yaxu2jXnimvw3rrszlaEXAMPLE=
-            inputArtifacts:
-              - name: MyAppBuild
-                location:
-                  type: S3
-                  s3Location:
-                    bucketName: codepipeline-us-east-1-11EXAMPLE11
-                    objectKey: MySecondPipeline/MyAppBuild/EXAMPLE
-            outputArtifacts: []
-            pipelineContext:
-              action:
-                name: MyJenkinsTest-Action
-              pipelineName: MySecondPipeline
-              stage:
-                name: Testing
-          id: 11111111-abcd-1111-abcd-111111abcdef
-          nonce: '3'
     properties:
       jobs:
         $ref: '#/definitions/JobList'
@@ -2584,6 +2344,7 @@ definitions:
     properties:
       actionTypeId:
         $ref: '#/definitions/ActionTypeId'
+        description: Represents information about an action type.
       maxBatchSize:
         $ref: '#/definitions/MaxBatchSize'
         description: The maximum number of jobs to return in a poll for jobs call.
@@ -2614,6 +2375,7 @@ definitions:
         description: The name of the action that will process the revision.
       actionRevision:
         $ref: '#/definitions/ActionRevision'
+        description: Represents information about the version (or revision) of an action.
     description: Represents the input of a put action revision action.
   PutActionRevisionOutput:
     type: object
@@ -2703,6 +2465,7 @@ definitions:
         description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
       failureDetails:
         $ref: '#/definitions/FailureDetails'
+        description: Represents information about failure details.
     description: Represents the input of a third party job failure result action.
   PutThirdPartyJobSuccessResultInput:
     type: object
@@ -2718,11 +2481,13 @@ definitions:
         description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
       currentRevision:
         $ref: '#/definitions/CurrentRevision'
+        description: Represents information about a current revision.
       continuationToken:
         $ref: '#/definitions/ContinuationToken'
         description: 'A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs will use this token in order to identify the running instance of the action. It can be reused to return additional information about the progress of the partner action. When the action is complete, no continuation token should be supplied.'
       executionDetails:
         $ref: '#/definitions/ExecutionDetails'
+        description: 'The details of the actions taken and results produced on an artifact as it passes through stages in the pipeline. '
     description: Represents the input of a put third party job success result action.
   QueryParamMap:
     type: array
@@ -2896,8 +2661,6 @@ definitions:
     type: object
     required:
       - name
-    example:
-      name: MyFirstPipeline
     properties:
       name:
         $ref: '#/definitions/PipelineName'
@@ -2905,8 +2668,6 @@ definitions:
     description: Represents the input of a start pipeline execution action.
   StartPipelineExecutionOutput:
     type: object
-    example:
-      pipelineExecutionId: 11111111-abcd-1111-abcd-111111abcdef
     properties:
       pipelineExecutionId:
         $ref: '#/definitions/PipelineExecutionId'
@@ -2927,10 +2688,13 @@ definitions:
     properties:
       actionTypeId:
         $ref: '#/definitions/ActionTypeId'
+        description: Represents information about an action type.
       actionConfiguration:
         $ref: '#/definitions/ActionConfiguration'
+        description: Represents information about an action configuration.
       pipelineContext:
         $ref: '#/definitions/PipelineContext'
+        description: Represents information about a pipeline to a job worker.
       inputArtifacts:
         $ref: '#/definitions/ArtifactList'
         description: 'The name of the artifact that will be worked upon by the action, if any. This name might be system-generated, such as "MyApp", or might be defined by the user when the action is created. The input artifact name must match the name of an output artifact generated by an action in an earlier action or stage of the pipeline.'
@@ -2939,6 +2703,7 @@ definitions:
         description: 'The name of the artifact that will be the result of the action, if any. This name might be system-generated, such as "MyBuiltApp", or might be defined by the user when the action is created.'
       artifactCredentials:
         $ref: '#/definitions/AWSSessionCredentials'
+        description: 'Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline. '
       continuationToken:
         $ref: '#/definitions/ContinuationToken'
         description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires in order to continue the job asynchronously.'
@@ -2993,45 +2758,6 @@ definitions:
     type: object
     required:
       - pipeline
-    example:
-      pipeline:
-        version: 2
-        name: MyFirstPipeline
-        artifactStore:
-          type: S3
-          location: codepipeline-us-east-1-11EXAMPLE11
-        roleArn: 'arn:aws:iam::111111111111:role/AWS-CodePipeline-Service'
-        stages:
-          - name: Source
-            actions:
-              - name: Source
-                actionTypeId:
-                  version: '1'
-                  category: Source
-                  owner: AWS
-                  provider: S3
-                configuration:
-                  S3Bucket: awscodepipeline-demo-bucket2
-                  S3ObjectKey: aws-codepipeline-s3-aws-codedeploy_linux.zip
-                inputArtifacts: []
-                outputArtifacts:
-                  - name: MyApp
-                runOrder: 1
-          - name: Beta
-            actions:
-              - name: CodePipelineDemoFleet
-                actionTypeId:
-                  version: '1'
-                  category: Deploy
-                  owner: AWS
-                  provider: CodeDeploy
-                configuration:
-                  ApplicationName: CodePipelineDemoApplication
-                  DeploymentGroupName: CodePipelineDemoFleet
-                inputArtifacts:
-                  - name: MyApp
-                outputArtifacts: []
-                runOrder: 1
     properties:
       pipeline:
         $ref: '#/definitions/PipelineDeclaration'
@@ -3039,45 +2765,6 @@ definitions:
     description: Represents the input of an update pipeline action.
   UpdatePipelineOutput:
     type: object
-    example:
-      pipeline:
-        version: 3
-        name: MyFirstPipeline
-        artifactStore:
-          type: S3
-          location: codepipeline-us-east-1-11EXAMPLE11
-        roleArn: 'arn:aws:iam::111111111111:role/AWS-CodePipeline-Service'
-        stages:
-          - name: Source
-            actions:
-              - name: Source
-                actionTypeId:
-                  version: '1'
-                  category: Source
-                  owner: AWS
-                  provider: S3
-                configuration:
-                  S3Bucket: awscodepipeline-demo-bucket2
-                  S3ObjectKey: aws-codepipeline-s3-aws-codedeploy_linux.zip
-                inputArtifacts: []
-                outputArtifacts:
-                  - name: MyApp
-                runOrder: 1
-          - name: Beta
-            actions:
-              - name: CodePipelineDemoFleet
-                actionTypeId:
-                  version: '1'
-                  category: Deploy
-                  owner: AWS
-                  provider: CodeDeploy
-                configuration:
-                  ApplicationName: CodePipelineDemoApplication
-                  DeploymentGroupName: CodePipelineDemoFleet
-                inputArtifacts:
-                  - name: MyApp
-                outputArtifacts: []
-                runOrder: 1
     properties:
       pipeline:
         $ref: '#/definitions/PipelineDeclaration'

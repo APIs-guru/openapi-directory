@@ -765,18 +765,14 @@ paths:
           schema:
             $ref: '#/definitions/InvalidRoleException'
         '483':
-          description: ResourceNotFoundException
-          schema:
-            $ref: '#/definitions/ResourceNotFoundException'
-        '484':
           description: InvalidParameterCombinationException
           schema:
             $ref: '#/definitions/InvalidParameterCombinationException'
-        '485':
+        '484':
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
-        '486':
+        '485':
           description: IncompatibleImageException
           schema:
             $ref: '#/definitions/IncompatibleImageException'
@@ -849,6 +845,7 @@ definitions:
     enum:
       - API
       - SAML
+      - USERPOOL
   Boolean:
     type: boolean
   BooleanObject:
@@ -1179,6 +1176,17 @@ definitions:
         $ref: '#/definitions/BooleanObject'
         description: 'Whether default Internet access is enabled for the fleet. '
     description: Contains the parameters for a fleet.
+  FleetAttribute:
+    type: string
+    enum:
+      - VPC_CONFIGURATION
+      - VPC_CONFIGURATION_SECURITY_GROUP_IDS
+    description: Fleet attribute.
+  FleetAttributes:
+    type: array
+    description: A list of fleet attributes.
+    items:
+      $ref: '#/definitions/FleetAttribute'
   FleetError:
     type: object
     properties:
@@ -1410,6 +1418,12 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: The specified resource was not found.
+  SecurityGroupIdList:
+    type: array
+    description: A list of security groups.
+    items:
+      $ref: '#/definitions/String'
+    maxItems: 5
   Session:
     type: object
     required:
@@ -1599,6 +1613,9 @@ definitions:
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
         description: Enables or disables default Internet access for the fleet.
+      AttributesToDelete:
+        $ref: '#/definitions/FleetAttributes'
+        description: Fleet attributes to be deleted.
   UpdateFleetResult:
     type: object
     properties:
@@ -1646,4 +1663,7 @@ definitions:
       SubnetIds:
         $ref: '#/definitions/SubnetIdList'
         description: The list of subnets to which a network interface is established from the fleet instance.
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIdList'
+        description: Security groups associated with the fleet.
     description: VPC configuration information.
