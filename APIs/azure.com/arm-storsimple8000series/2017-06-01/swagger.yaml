@@ -47,6 +47,7 @@ parameters:
     name: deviceName
     required: true
     type: string
+    x-ms-parameter-location: method
     x-ms-skip-url-encoding: true
   managerNameParameter:
     description: The manager name
@@ -152,6 +153,28 @@ paths:
       responses:
         '200':
           description: The StorSimple manager.
+          schema:
+            $ref: '#/definitions/Manager'
+      tags:
+        - Managers
+    patch:
+      deprecated: false
+      description: Updates the StorSimple Manager.
+      operationId: Managers_Update
+      parameters:
+        - description: The manager update parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ManagerPatch'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The StorSimple manager has been successfully updated
           schema:
             $ref: '#/definitions/Manager'
       tags:
@@ -418,6 +441,24 @@ paths:
           description: Successfully cleared the alerts.
       tags:
         - Alerts
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/cloudApplianceConfigurations':
+    get:
+      deprecated: false
+      description: Lists supported cloud appliance models and supported configurations.
+      operationId: CloudAppliances_ListSupportedConfigurations
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of cloud appliance configuration.
+          schema:
+            $ref: '#/definitions/CloudApplianceConfigurationList'
+      tags:
+        - CloudAppliances
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/configureDevice':
     post:
       deprecated: false
@@ -1137,6 +1178,50 @@ paths:
       tags:
         - Devices
       x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/metrics':
+    get:
+      deprecated: false
+      description: Gets the metrics for the specified device.
+      operationId: Devices_ListMetrics
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: OData Filter options
+          in: query
+          name: $filter
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The collection of metrics.
+          schema:
+            $ref: '#/definitions/MetricList'
+      tags:
+        - Devices
+      x-ms-odata: '#/definitions/MetricFilter'
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/metricsDefinitions':
+    get:
+      deprecated: false
+      description: Gets the metric definitions for the specified device.
+      operationId: Devices_ListMetricDefinition
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of metric definitions.
+          schema:
+            $ref: '#/definitions/MetricDefinitionList'
+      tags:
+        - Devices
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/networkSettings/default':
     get:
       deprecated: false
@@ -1199,31 +1284,6 @@ paths:
             $ref: '#/definitions/PublicKey'
       tags:
         - Managers
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/publishSupportPackage':
-    post:
-      deprecated: false
-      description: Triggers collection of support package on a device.
-      operationId: Devices_PublishSupportPackage
-      parameters:
-        - $ref: '#/parameters/deviceNameParameter'
-        - description: The publish support package request.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/SupportPackageRequest'
-        - $ref: '#/parameters/subscriptionIdParameter'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/managerNameParameter'
-        - $ref: '#/parameters/apiVersionParameter'
-      responses:
-        '202':
-          description: Accepted the request to publish support package of the device.
-        '204':
-          description: Successfully published the support package.
-      tags:
-        - Devices
-      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/scanForUpdates':
     post:
       deprecated: false
@@ -1242,6 +1302,69 @@ paths:
           description: Successfully scanned for updates.
       tags:
         - Devices
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/securitySettings/default':
+    get:
+      deprecated: false
+      description: Returns the Security properties of the specified device name.
+      operationId: DeviceSettings_GetSecuritySettings
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Device Security settings.
+          schema:
+            $ref: '#/definitions/SecuritySettings'
+      tags:
+        - DeviceSettings
+    patch:
+      deprecated: false
+      description: Patch Security properties of the specified device name.
+      operationId: DeviceSettings_UpdateSecuritySettings
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The security settings properties to be patched.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SecuritySettingsPatch'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The device Security settings.
+          schema:
+            $ref: '#/definitions/SecuritySettings'
+        '202':
+          description: Accepted the request to update device security settings.
+      tags:
+        - DeviceSettings
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/securitySettings/default/syncRemoteManagementCertificate':
+    post:
+      deprecated: false
+      description: sync Remote management Certificate between appliance and Service
+      operationId: DeviceSettings_SyncRemotemanagementCertificate
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '202':
+          description: Accepted the request to sync Remote Management certificate settings.
+        '204':
+          description: Successfully synced Remote Management certificate settings.
+      tags:
+        - DeviceSettings
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/sendTestAlertEmail':
     post:
@@ -1426,6 +1549,62 @@ paths:
       tags:
         - VolumeContainers
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/metrics':
+    get:
+      deprecated: false
+      description: Gets the metrics for the specified volume container.
+      operationId: VolumeContainers_ListMetrics
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The volume container name.
+          in: path
+          name: volumeContainerName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: OData Filter options
+          in: query
+          name: $filter
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The collection of metrics.
+          schema:
+            $ref: '#/definitions/MetricList'
+      tags:
+        - VolumeContainers
+      x-ms-odata: '#/definitions/MetricFilter'
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/metricsDefinitions':
+    get:
+      deprecated: false
+      description: Gets the metric definitions for the specified volume container.
+      operationId: VolumeContainers_ListMetricDefinition
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The volume container name.
+          in: path
+          name: volumeContainerName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of metric definitions.
+          schema:
+            $ref: '#/definitions/MetricDefinitionList'
+      tags:
+        - VolumeContainers
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes':
     get:
       deprecated: false
@@ -1549,6 +1728,74 @@ paths:
       tags:
         - Volumes
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes/{volumeName}/metrics':
+    get:
+      deprecated: false
+      description: Gets the metrics for the specified volume.
+      operationId: Volumes_ListMetrics
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The volume container name.
+          in: path
+          name: volumeContainerName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The volume name.
+          in: path
+          name: volumeName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: OData Filter options
+          in: query
+          name: $filter
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The collection of metrics
+          schema:
+            $ref: '#/definitions/MetricList'
+      tags:
+        - Volumes
+      x-ms-odata: '#/definitions/MetricFilter'
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumeContainers/{volumeContainerName}/volumes/{volumeName}/metricsDefinitions':
+    get:
+      deprecated: false
+      description: Gets the metric definitions for the specified volume.
+      operationId: Volumes_ListMetricDefinition
+      parameters:
+        - $ref: '#/parameters/deviceNameParameter'
+        - description: The volume container name.
+          in: path
+          name: volumeContainerName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The volume name.
+          in: path
+          name: volumeName
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of metric definitions.
+          schema:
+            $ref: '#/definitions/MetricDefinitionList'
+      tags:
+        - Volumes
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/volumes':
     get:
       deprecated: false
@@ -1791,23 +2038,6 @@ paths:
             $ref: '#/definitions/Key'
       tags:
         - Managers
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/listPrivateEncryptionKey':
-    post:
-      deprecated: false
-      description: Returns the symmetric encrypted private encryption key of the manager.
-      operationId: Managers_GetPrivateEncryptionKey
-      parameters:
-        - $ref: '#/parameters/subscriptionIdParameter'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/managerNameParameter'
-        - $ref: '#/parameters/apiVersionParameter'
-      responses:
-        '200':
-          description: The private encryption key.
-          schema:
-            $ref: '#/definitions/SymmetricEncryptedSecret'
-      tags:
-        - Managers
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/listPublicEncryptionKey':
     post:
       deprecated: false
@@ -1825,6 +2055,72 @@ paths:
             $ref: '#/definitions/SymmetricEncryptedSecret'
       tags:
         - Managers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/metrics':
+    get:
+      deprecated: false
+      description: Gets the metrics for the specified manager.
+      operationId: Managers_ListMetrics
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: OData Filter options
+          in: query
+          name: $filter
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The collection of metrics.
+          schema:
+            $ref: '#/definitions/MetricList'
+      tags:
+        - Managers
+      x-ms-odata: '#/definitions/MetricFilter'
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/metricsDefinitions':
+    get:
+      deprecated: false
+      description: Gets the metric definitions for the specified manager.
+      operationId: Managers_ListMetricDefinition
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The collection of metric definitions.
+          schema:
+            $ref: '#/definitions/MetricDefinitionList'
+      tags:
+        - Managers
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/provisionCloudAppliance':
+    post:
+      deprecated: false
+      description: Provisions cloud appliance.
+      operationId: CloudAppliances_Provision
+      parameters:
+        - description: The cloud appliance
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CloudAppliance'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/managerNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully created job for provision cloud appliance.
+        '202':
+          description: Accepted the request to provision cloud appliance.
+      tags:
+        - CloudAppliances
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/regenerateActivationKey':
     post:
       deprecated: false
@@ -1937,30 +2233,6 @@ paths:
       tags:
         - StorageAccountCredentials
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/storageAccountCredentials/{storageAccountCredentialName}/listAccessKey':
-    post:
-      deprecated: false
-      description: Returns the encrypted storage account access key.
-      operationId: StorageAccountCredentials_ListAccessKey
-      parameters:
-        - description: Name of the storage account credential.
-          in: path
-          name: storageAccountCredentialName
-          required: true
-          type: string
-          x-ms-skip-url-encoding: true
-        - $ref: '#/parameters/subscriptionIdParameter'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/managerNameParameter'
-        - $ref: '#/parameters/apiVersionParameter'
-      responses:
-        '200':
-          description: The encrypted storage account access key.
-          schema:
-            $ref: '#/definitions/AsymmetricEncryptedSecret'
-      tags:
-        - StorageAccountCredentials
-      x-ms-pageable: {}
 definitions:
   AccessControlRecord:
     allOf:
@@ -2729,6 +3001,120 @@ definitions:
       - targetAccessControlRecordIds
       - backupElement
     type: object
+  CloudAppliance:
+    description: The cloud appliance.
+    properties:
+      isVnetDnsConfigured:
+        description: Indicates whether virtual network used is configured with DNS or not.
+        type: boolean
+      isVnetExpressConfigured:
+        description: Indicates whether virtual network used is configured with express route or not.
+        type: boolean
+      modelNumber:
+        description: The model number.
+        type: string
+      name:
+        description: The name.
+        type: string
+      storageAccountName:
+        description: The name of the storage account.
+        type: string
+      storageAccountType:
+        description: The type of the storage account.
+        type: string
+      subnetName:
+        description: The name of the subnet.
+        type: string
+      vmImageName:
+        description: The name of the virtual machine image.
+        type: string
+      vmType:
+        description: The type of the virtual machine.
+        type: string
+      vnetName:
+        description: The name of the virtual network.
+        type: string
+      vnetRegion:
+        description: The virtual network region.
+        type: string
+    required:
+      - name
+      - vnetRegion
+    type: object
+  CloudApplianceConfiguration:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The cloud appliance configuration
+    properties:
+      properties:
+        $ref: '#/definitions/CloudApplianceConfigurationProperties'
+        description: The properties.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  CloudApplianceConfigurationList:
+    description: The cloud appliance configuration list
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/CloudApplianceConfiguration'
+        type: array
+    required:
+      - value
+    type: object
+  CloudApplianceConfigurationProperties:
+    description: The properties of cloud appliance configuration.
+    properties:
+      acsConfiguration:
+        $ref: '#/definitions/AcsConfiguration'
+        description: The ACS configuration.
+      cloudPlatform:
+        description: The cloud platform.
+        type: string
+      modelNumber:
+        description: The model number.
+        type: string
+      supportedRegions:
+        description: The supported regions.
+        items:
+          type: string
+        type: array
+      supportedStorageAccountTypes:
+        description: The supported storage account types.
+        items:
+          type: string
+        type: array
+      supportedVmImages:
+        description: The supported virtual machine images.
+        items:
+          $ref: '#/definitions/VmImage'
+        type: array
+      supportedVmTypes:
+        description: The supported virtual machine types.
+        items:
+          type: string
+        type: array
+    required:
+      - modelNumber
+      - cloudPlatform
+      - acsConfiguration
+      - supportedStorageAccountTypes
+      - supportedRegions
+      - supportedVmTypes
+      - supportedVmImages
+    type: object
+  CloudApplianceSettings:
+    description: The cloud appliance settings.
+    properties:
+      channelIntegrityKey:
+        $ref: '#/definitions/AsymmetricEncryptedSecret'
+        description: The channel integrity key (encrypted with DAK).
+      serviceDataEncryptionKey:
+        $ref: '#/definitions/AsymmetricEncryptedSecret'
+        description: The service data encryption key (encrypted with DAK).
+    type: object
   ConfigureDeviceRequest:
     allOf:
       - $ref: '#/definitions/BaseModel'
@@ -3005,11 +3391,15 @@ definitions:
         format: int32
         type: integer
       provisionedLocalStorageInBytes:
-        description: The storage in bytes that has been provisioned on the device.
+        description: The storage in bytes used for locally pinned volumes on the device (including additional local reservation).
         format: int64
         type: integer
       provisionedTieredStorageInBytes:
         description: The storage in bytes that has been provisioned on the device for tiered volumes.
+        format: int64
+        type: integer
+      provisionedVolumeSizeInBytes:
+        description: Total capacity in bytes of tiered and locally pinned volumes on the device
         format: int64
         type: integer
       rolloverDetails:
@@ -3103,6 +3493,16 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: InEligibilityCategory
+    type: object
+  DimensionFilter:
+    description: The dimension filter.
+    properties:
+      name:
+        description: 'Specifies the dimension name. E.g., NetworkInterface. Valid values are the ones specified in the field "dimensions" in the ListMetricDefinitions call. Only ''Equality'' operator is supported for this property.'
+        type: string
+      values:
+        description: 'Specifies the dimension value. E.g., Data0. Valid values are the ones returned in the field "dimensions" in the ListMetricDefinitions call. Only ''Equality'' operator is supported for this property.'
+        type: string
     type: object
   EncryptionSettings:
     allOf:
@@ -3645,6 +4045,15 @@ definitions:
     required:
       - value
     type: object
+  ManagerPatch:
+    description: The StorSimple Manager patch.
+    properties:
+      tags:
+        additionalProperties:
+          type: string
+        description: The tags attached to the Manager.
+        type: object
+    type: object
   ManagerProperties:
     description: The properties of the StorSimple Manager.
     properties:
@@ -3671,6 +4080,227 @@ definitions:
           name: ManagerSkuType
     required:
       - name
+    type: object
+  MetricAvailablity:
+    description: The metric availability.
+    properties:
+      retention:
+        description: The retention period for the metric at the specified timegrain.
+        type: string
+      timeGrain:
+        description: The aggregation interval for the metric.
+        type: string
+    type: object
+  MetricData:
+    description: The metric data.
+    properties:
+      average:
+        description: The average of all samples at the time stamp.
+        format: double
+        type: number
+      count:
+        description: The count of all samples at the time stamp.
+        format: int32
+        type: integer
+      maximum:
+        description: The maximum of all samples at the time stamp.
+        format: double
+        type: number
+      minimum:
+        description: The minimum of all samples at the time stamp.
+        format: double
+        type: number
+      sum:
+        description: The sum of all samples at the time stamp.
+        format: double
+        type: number
+      timeStamp:
+        description: The time stamp of the metric data.
+        format: date-time
+        type: string
+    type: object
+  MetricDefinition:
+    description: The monitoring metric definition.
+    properties:
+      category:
+        description: The category of the metric.
+        type: string
+      dimensions:
+        description: The available metric dimensions.
+        items:
+          $ref: '#/definitions/MetricDimension'
+        type: array
+      metricAvailabilities:
+        description: The available metric granularities.
+        items:
+          $ref: '#/definitions/MetricAvailablity'
+        type: array
+      name:
+        $ref: '#/definitions/MetricName'
+        description: The metric name.
+      primaryAggregationType:
+        description: The metric aggregation type.
+        enum:
+          - Average
+          - Last
+          - Maximum
+          - Minimum
+          - None
+          - Total
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: MetricAggregationType
+      resourceId:
+        description: The metric source ID.
+        type: string
+      type:
+        description: The metric definition type.
+        type: string
+      unit:
+        description: The metric unit.
+        enum:
+          - Bytes
+          - BytesPerSecond
+          - Count
+          - CountPerSecond
+          - Percent
+          - Seconds
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: MetricUnit
+    type: object
+  MetricDefinitionList:
+    description: The list of metric definitions.
+    properties:
+      value:
+        description: The list of metric definitions.
+        items:
+          $ref: '#/definitions/MetricDefinition'
+        type: array
+    type: object
+  MetricDimension:
+    description: The metric dimension. It indicates the source of the metric.
+    properties:
+      name:
+        description: The metric dimension name.
+        type: string
+      value:
+        description: The metric dimension values.
+        type: string
+    type: object
+  MetricFilter:
+    description: The OData filters to be used for metrics.
+    properties:
+      category:
+        description: 'Specifies the category of the metrics to be filtered. E.g., "CapacityUtilization". Valid values are the ones returned as the field "category" in the ListMetricDefinitions call. Only ''Equality'' operator is supported for this property.'
+        type: string
+      dimensions:
+        $ref: '#/definitions/DimensionFilter'
+        description: Specifies the source(the dimension) of the metrics to be filtered. Only 'Equality' operator is supported for this property.
+      endTime:
+        description: Specifies the end time of the time range to be queried. Only 'Less Than Or Equal To' operator is supported for this property.
+        format: date-time
+        type: string
+      name:
+        $ref: '#/definitions/MetricNameFilter'
+        description: Specifies the metric name filter specifying the name of the metric to be filtered on. Only 'Equality' operator is supported for this property.
+      startTime:
+        description: Specifies the start time of the time range to be queried. Only 'Greater Than Or Equal To' operator is supported for this property.
+        format: date-time
+        type: string
+      timeGrain:
+        description: 'Specifies the time granularity of the metrics to be returned. E.g., "P1D". Valid values are the ones returned as the field "timeGrain" in the ListMetricDefinitions call. Only ''Equality'' operator is supported for this property.'
+        type: string
+    required:
+      - category
+    type: object
+  MetricList:
+    description: The metric list.
+    properties:
+      value:
+        description: The value.
+        items:
+          $ref: '#/definitions/Metrics'
+        type: array
+    type: object
+  MetricName:
+    description: The metric name.
+    properties:
+      localizedValue:
+        description: The localized metric name.
+        type: string
+      value:
+        description: The metric name.
+        type: string
+    type: object
+  MetricNameFilter:
+    description: 'The metric name filter, specifying the name of the metric to be filtered on.'
+    properties:
+      value:
+        description: 'Specifies the metric name to be filtered on. E.g., CloudStorageUsed. Valid values are the ones returned in the field "name" in the ListMetricDefinitions call. Only ''Equality'' operator is supported for this property.'
+        type: string
+    type: object
+  Metrics:
+    description: The monitoring metric.
+    properties:
+      dimensions:
+        description: The metric dimensions.
+        items:
+          $ref: '#/definitions/MetricDimension'
+        type: array
+      endTime:
+        description: The end time of the metric data.
+        format: date-time
+        type: string
+      name:
+        $ref: '#/definitions/MetricName'
+        description: The name of the metric.
+      primaryAggregation:
+        description: The metric aggregation type.
+        enum:
+          - Average
+          - Last
+          - Maximum
+          - Minimum
+          - None
+          - Total
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: MetricAggregationType
+      resourceId:
+        description: The ID of metric source.
+        type: string
+      startTime:
+        description: The start time of the metric data.
+        format: date-time
+        type: string
+      timeGrain:
+        description: The time granularity of the metric data.
+        type: string
+      type:
+        description: The type of the metric data.
+        type: string
+      unit:
+        description: The unit of the metric data.
+        enum:
+          - Bytes
+          - BytesPerSecond
+          - Count
+          - CountPerSecond
+          - Percent
+          - Seconds
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: MetricUnit
+      values:
+        description: The list of the metric data.
+        items:
+          $ref: '#/definitions/MetricData'
+        type: array
     type: object
   NetworkAdapterList:
     description: The collection of network adapters on the device.
@@ -3967,6 +4597,60 @@ definitions:
           type: string
         type: array
     type: object
+  SecuritySettings:
+    allOf:
+      - $ref: '#/definitions/BaseModel'
+    description: The security settings of a device.
+    properties:
+      properties:
+        $ref: '#/definitions/SecuritySettingsProperties'
+        description: The properties of the security settings of a device.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  SecuritySettingsPatch:
+    description: Represents the patch request for the security settings of a device.
+    properties:
+      properties:
+        $ref: '#/definitions/SecuritySettingsPatchProperties'
+        description: The properties of the security settings patch.
+        x-ms-client-flatten: true
+    required:
+      - properties
+    type: object
+  SecuritySettingsPatchProperties:
+    description: The properties of the security settings patch.
+    properties:
+      chapSettings:
+        $ref: '#/definitions/ChapSettings'
+        description: The device CHAP and reverse-CHAP settings.
+      cloudApplianceSettings:
+        $ref: '#/definitions/CloudApplianceSettings'
+        description: The cloud appliance settings.
+      deviceAdminPassword:
+        $ref: '#/definitions/AsymmetricEncryptedSecret'
+        description: The device administrator password.
+      remoteManagementSettings:
+        $ref: '#/definitions/RemoteManagementSettingsPatch'
+        description: The remote management settings.
+      snapshotPassword:
+        $ref: '#/definitions/AsymmetricEncryptedSecret'
+        description: The snapshot manager password.
+    type: object
+  SecuritySettingsProperties:
+    description: The properties of security settings of a device.
+    properties:
+      chapSettings:
+        $ref: '#/definitions/ChapSettings'
+        description: The Challenge-Handshake Authentication Protocol (CHAP) settings.
+      remoteManagementSettings:
+        $ref: '#/definitions/RemoteManagementSettings'
+        description: The settings for remote management of a device.
+    required:
+      - remoteManagementSettings
+      - chapSettings
+    type: object
   SendTestAlertEmailRequest:
     description: The request for sending test alert email
     properties:
@@ -4027,72 +4711,6 @@ definitions:
     required:
       - endPoint
       - sslStatus
-    type: object
-  SupportPackageRequest:
-    description: The support package request entity.
-    properties:
-      customIncludeList:
-        description: The list of log categories
-        items:
-          enum:
-            - RegistryKeys
-            - LogFiles
-            - ClusterManagementLog
-            - BmcLogs
-            - ClusterLog
-            - CbsLogs
-            - StorageCmdlets
-            - ClusterCmdlets
-            - ConfigurationCmdlets
-            - Performance
-            - MdsAgentLogs
-            - NetworkCmdlets
-            - NetworkCmds
-            - EtwLogs
-            - UpdateLogs
-            - PeriodicMgmtSvcLogs
-          type: string
-          x-ms-enum:
-            modelAsString: false
-            name: CustomSupportPackageType
-        type: array
-      endTime:
-        description: The maximum time stamp of the logs.
-        format: date-time
-        type: string
-      includeArchived:
-        description: The bool which determines whether the archived logs are included or not.
-        type: boolean
-      packageType:
-        description: The support package type.
-        enum:
-          - None
-          - IncludeDefault
-          - IncludeAll
-          - Mini
-          - Custom
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: SupportPackageType
-      scope:
-        description: The support package scope (Cluster | Controller).
-        enum:
-          - Cluster
-          - Controller
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: ScopeType
-      sdpPassKey:
-        description: The SDP(Support Diagnostics Protocol) pass key.
-        type: string
-      startTime:
-        description: The minimum time stamp of the logs.
-        format: date-time
-        type: string
-    required:
-      - sdpPassKey
     type: object
   SymmetricEncryptedSecret:
     description: Represents the secrets encrypted using Symmetric Encryption Key.
@@ -4242,6 +4860,31 @@ definitions:
       regularUpdatesAvailable:
         description: Set to 'true' if regular updates are available for the device.
         type: boolean
+    type: object
+  VmImage:
+    description: The virtual machine image.
+    properties:
+      name:
+        description: The name.
+        type: string
+      offer:
+        description: The offer.
+        type: string
+      publisher:
+        description: The publisher.
+        type: string
+      sku:
+        description: The SKU.
+        type: string
+      version:
+        description: The version.
+        type: string
+    required:
+      - name
+      - version
+      - offer
+      - publisher
+      - sku
     type: object
   Volume:
     allOf:

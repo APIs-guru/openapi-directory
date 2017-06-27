@@ -475,13 +475,22 @@ paths:
         - ClockingRecords
   /contact_types:
     get:
+      parameters:
+        - description: Search for specific identifier value
+          in: query
+          name: identifier
+          type: string
       responses:
         '200':
           description: Contact object with city embedded
           schema:
             properties:
               data:
-                $ref: '#/definitions/ContactType'
+                items:
+                  $ref: '#/definitions/ContactType'
+                type: array
+              pagination:
+                $ref: '#/definitions/PaginationDetails'
               success:
                 default: true
                 type: boolean
@@ -701,6 +710,48 @@ paths:
           name: contact_id
           required: true
           type: string
+        - in: body
+          name: contact
+          schema:
+            properties:
+              address:
+                description: Street address
+                maxLength: 255
+                type: string
+              city_id:
+                format: uuid
+                type: string
+              contact_types:
+                properties:
+                  _ids:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              cvr:
+                maxLength: 255
+                type: string
+              description:
+                maxLength: 8192
+                type: string
+              email:
+                maxLength: 255
+                type: string
+              erp_id:
+                description: 'If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact'
+                maxLength: 255
+                type: string
+              name:
+                maxLength: 255
+                type: string
+              phone:
+                description: Format like eg. `28680133` or `046158971404`
+                maxLength: 32
+                type: string
+              website:
+                maxLength: 255
+                type: string
+            type: object
       responses:
         '200':
           description: OK
@@ -723,11 +774,15 @@ paths:
     get:
       responses:
         '200':
-          description: Currency object
+          description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/Currency'
+                items:
+                  $ref: '#/definitions/Currency'
+                type: array
+              pagination:
+                $ref: '#/definitions/PaginationDetails'
               success:
                 default: true
                 type: boolean
@@ -1826,6 +1881,38 @@ paths:
           name: invoice_line_id
           required: true
           type: string
+        - in: body
+          name: invoice_line
+          schema:
+            properties:
+              description:
+                maxLength: 8192
+                type: string
+              discount_percent:
+                format: int32
+                type: integer
+              discount_text:
+                maxLength: 255
+                type: string
+              invoice_id:
+                format: uuid
+                type: string
+              name:
+                maxLength: 2048
+                type: string
+              product_id:
+                format: uuid
+                type: string
+              quantity:
+                format: int32
+                type: integer
+              selling_price:
+                format: float
+                type: number
+              user_id:
+                format: uuid
+                type: string
+            type: object
       responses:
         '200':
           description: OK
@@ -2051,6 +2138,62 @@ paths:
           name: invoice_id
           required: true
           type: string
+        - in: body
+          name: invoice
+          schema:
+            properties:
+              contact_id:
+                format: uuid
+                type: string
+              date_from:
+                format: date
+                type: string
+              date_to:
+                format: date
+                type: string
+              erp_id:
+                maxLength: 255
+                type: string
+              erp_payment_term_id:
+                maxLength: 255
+                type: string
+              invoice_number:
+                format: int32
+                maxLength: 8
+                type: integer
+              is_draft:
+                type: boolean
+              is_locked:
+                type: boolean
+              is_offer:
+                type: boolean
+              issued_date:
+                format: date
+                type: string
+              message:
+                maxLength: 8192
+                type: string
+              offer_number:
+                format: int32
+                maxLength: 8
+                type: integer
+              payment_due_date:
+                format: date
+                type: string
+              payment_term_id:
+                format: uuid
+                type: string
+              project_id:
+                format: uuid
+                type: string
+              reference:
+                maxLength: 255
+                type: string
+              vat_percent:
+                format: int32
+                maxLength: 2
+                type: integer
+            type: object
       responses:
         '200':
           description: OK
@@ -2948,6 +3091,37 @@ paths:
           name: project_id
           required: true
           type: string
+        - in: body
+          name: project
+          schema:
+            properties:
+              contact_id:
+                format: uuid
+                type: string
+              description:
+                maxLength: 8192
+                type: string
+              erp_project_id:
+                maxLength: 255
+                type: string
+              erp_task_id:
+                maxLength: 255
+                type: string
+              name:
+                maxLength: 255
+                type: string
+              project_status_id:
+                format: uuid
+                type: string
+              start_time:
+                format: datetime
+                type: string
+              street_name:
+                maxLength: 255
+                type: string
+            required:
+              - name
+            type: object
       responses:
         '200':
           description: OK
@@ -4690,6 +4864,9 @@ definitions:
     type: object
   Form:
     properties:
+      approved_by_id:
+        format: uuid
+        type: string
       company_id:
         format: uuid
         type: string
@@ -4701,11 +4878,26 @@ definitions:
         type: string
       deleted:
         $ref: '#/definitions/deleted'
+      form_date:
+        format: date
+        type: string
       form_template_id:
         format: uuid
         type: string
       id:
         description: Read-only
+        format: uuid
+        type: string
+      is_draft:
+        default: false
+        type: boolean
+      is_invoiced:
+        default: false
+        type: boolean
+      is_shared:
+        default: false
+        type: boolean
+      mass_form_id:
         format: uuid
         type: string
       modified:

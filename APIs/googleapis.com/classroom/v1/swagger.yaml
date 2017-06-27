@@ -1321,6 +1321,10 @@ paths:
         does not exist.
       operationId: classroom.courses.courseWork.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CourseWork'
         - description: |-
             Identifier of the course.
             This identifier can be either the Classroom-assigned identifier or an
@@ -1350,14 +1354,11 @@ paths:
             * `due_date`
             * `due_time`
             * `max_points`
+            * `scheduled_time`
             * `submission_modification_mode`
           in: query
           name: updateMask
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CourseWork'
       responses:
         '200':
           description: Successful response
@@ -2879,6 +2880,13 @@ definitions:
 
           Read-only.
         type: string
+      calendarId:
+        description: |-
+          The Calendar ID for a calendar that all course members can see, to which
+          Classroom adds events for course work and announcements in the course.
+
+          Read-only.
+        type: string
       courseGroupEmail:
         description: |-
           The email address of a Google group containing all members of the course.
@@ -3166,6 +3174,10 @@ definitions:
           For write operations, this field must be specified when creating course
           work with a `work_type` of `MULTIPLE_CHOICE_QUESTION`, and it must not be
           set otherwise.
+      scheduledTime:
+        description: Optional timestamp when this course work is scheduled to be published.
+        format: google-datetime
+        type: string
       state:
         description: |-
           Status of this course work.
@@ -3919,6 +3931,14 @@ definitions:
 
           Read-only.
         type: string
+      verifiedTeacher:
+        description: |-
+          Represents whether a G Suite for Education user's domain administrator has
+          explicitly verified them as being a teacher. If the user is not a member of
+          a G Suite for Education domain, than this field will always be false.
+
+          Read-only
+        type: boolean
     type: object
   YouTubeVideo:
     description: YouTube video item.

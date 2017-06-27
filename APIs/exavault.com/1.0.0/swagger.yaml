@@ -145,11 +145,6 @@ paths:
           name: access_token
           required: true
           type: string
-        - description: 'Type of notification: ''file'' or ''folder'' '
-          in: query
-          name: type
-          required: true
-          type: string
         - description: Full path of file/folder where notification is set.
           in: query
           name: path
@@ -160,13 +155,11 @@ paths:
           name: action
           required: true
           type: string
-        - description: 'Array of usernames or with one flag to filter on: ''notice_user_all'', ''notice_user_all_recipients'', ''notice_user_all_users'''
+        - description: 'User type to filter on: ''notice_user_all'', ''notice_user_all_recipients'', ''notice_user_all_users'''
           in: query
-          items:
-            type: string
           name: usernames
           required: true
-          type: array
+          type: string
         - description: Set to true if the user should be notified by email when the notification is triggered.
           in: query
           name: sendEmail
@@ -213,11 +206,6 @@ paths:
           name: filePaths
           required: true
           type: array
-        - description: 'Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete.'
-          in: query
-          name: accessMode
-          required: true
-          type: string
         - description: Share message subject (for email invitations).
           in: query
           name: subject
@@ -246,6 +234,11 @@ paths:
           name: requireEmail
           required: false
           type: boolean
+        - description: 'Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete. Defaults to download if no option specified.'
+          in: query
+          name: accessMode
+          required: false
+          type: string
         - default: false
           description: Allows user to embed a widget with the share. Defaults to false if not specified.
           in: query
@@ -263,7 +256,7 @@ paths:
           name: password
           required: false
           type: string
-        - description: 'The date the current Share should expire, formatted YYYY-mm-dd hh:mm:ss'
+        - description: 'The date the current Share should expire, formatted YYYY-mm-dd'
           in: query
           name: expiration
           required: false
@@ -344,7 +337,7 @@ paths:
           in: query
           name: nickname
           type: string
-        - description: 'The date when the user should expire, formatted YYYY-mm-dd hh:mm:ss'
+        - description: 'The date when the user should expire, formatted YYYY-mm-dd'
           in: query
           name: expiration
           type: string
@@ -477,7 +470,7 @@ paths:
           description: No response was specified
           schema:
             $ref: '#/definitions/AccountResponse'
-      summary: Gets the account object and master user object
+      summary: Gets the account object for the currently logged in user
       tags:
         - v1
   /v1/getCurrentUser:
@@ -1098,12 +1091,10 @@ paths:
           in: query
           name: action
           type: string
-        - description: 'Array of usernames or with one flag to filter on: ''notice_user_all'', ''notice_user_all_recipients'', ''notice_user_all_users'''
+        - description: 'User type to filter on: ''notice_user_all'', ''notice_user_all_recipients'', ''notice_user_all_users'''
           in: query
-          items:
-            type: string
           name: usernames
-          type: array
+          type: string
         - description: 'Email addresses to send notification to. If not specified, sends to owner by default.'
           in: query
           items:
@@ -1148,10 +1139,6 @@ paths:
             type: string
           name: filePaths
           type: array
-        - description: 'Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete.'
-          in: query
-          name: accessMode
-          type: string
         - description: Share message subject (for email invitations).
           in: query
           name: subject
@@ -1174,6 +1161,10 @@ paths:
           in: query
           name: requireEmail
           type: boolean
+        - description: 'Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete.'
+          in: query
+          name: accessMode
+          type: string
         - description: Allows user to embed a widget with the share.
           in: query
           name: embed
@@ -1186,7 +1177,7 @@ paths:
           in: query
           name: password
           type: string
-        - description: 'The date the current Share should expire, formatted YYYY-mm-dd hh:mm:ss'
+        - description: 'The date the current Share should expire, formatted YYYY-mm-dd'
           in: query
           name: expiration
           type: string
@@ -1236,7 +1227,7 @@ paths:
           in: query
           name: nickname
           type: string
-        - description: 'The date when use should expire in format: YYYY-mm-dd hh:mm:ss'
+        - description: 'The date when use should expire in format: YYYY-MM-DD'
           in: query
           name: expiration
           type: string

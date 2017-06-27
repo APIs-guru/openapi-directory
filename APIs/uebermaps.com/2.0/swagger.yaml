@@ -93,7 +93,7 @@ paths:
     post:
       description: Invite user to collaborate on map.
       parameters:
-        - description: Supply map_id and either a comma separated list of user_ids or emails
+        - description: Supply map_id and either a comma separated list of user_ids or emails. Optionally you can provide a 'is_admin' parameter with 'true' or 'false' to give the invited users admin privileges.
           in: body
           name: body
           schema:
@@ -737,6 +737,23 @@ paths:
       summary: Get respot
       tags:
         - Respots
+  '/share/map/{id}':
+    get:
+      description: Get secret access token of an uebermap with access set to 'Secret link'. Pass the 'token' on every request you make to access this uebermap and its resources. F.e. token=1-x_gqu7eLBe3uKoAGAGXy
+      parameters:
+        - description: Id of map
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Contains map data and a secret token to access this map.
+          schema:
+            $ref: '#/definitions/MapWithAuthToken'
+      summary: Get secret access token to share map
+      tags:
+        - Share
   /spots:
     get:
       description: List your own spots.
@@ -1198,17 +1215,17 @@ definitions:
       email:
         example: a@b.com
         type: string
+      group:
+        enum:
+          - admin
+          - editor
+        example: editor
+        type: string
       id:
         example: 8696493
         type: integer
       invited_by_user:
         $ref: '#/definitions/User'
-      invited_by_user_id:
-        example: 5258321
-        type: integer
-      is_admin:
-        example: false
-        type: boolean
       map:
         $ref: '#/definitions/Map'
       sent:
@@ -1217,11 +1234,16 @@ definitions:
       updated_at:
         format: date-time
         type: string
+      user:
+        $ref: '#/definitions/User'
   CollaboratorInvitationCreate:
     properties:
       emails:
         example: 'a@b.com, c@d.com, e@f.com'
         type: string
+      is_admin:
+        example: true
+        type: boolean
       map_id:
         example: 34925783
         type: integer
@@ -1453,6 +1475,41 @@ definitions:
           - can_administer.comments
           - can_administer.attachments
           - can_administer.collaborators
+        type: string
+  MapWithAuthToken:
+    properties:
+      counts:
+        $ref: '#/definitions/MapCounts'
+      created_at:
+        format: date-time
+        type: string
+      description:
+        example: 'A collection of restaurants, cafes, clubs and random spots that I recommend in Berlin'
+        type: string
+      id:
+        example: 18234843
+        type: integer
+      owner_id:
+        example: 9829358
+        type: integer
+      picture_url:
+        example: 'https://...'
+        type: string
+      title:
+        example: My favourite places in Berlin
+        type: string
+      token:
+        example: 1-x_gqu7eLBe3uKoAGAGXy
+        type: string
+      updated_at:
+        format: date-time
+        type: string
+      visibility:
+        enum:
+          - public
+          - link
+          - private
+        example: public
         type: string
   MapWithRelation:
     properties:

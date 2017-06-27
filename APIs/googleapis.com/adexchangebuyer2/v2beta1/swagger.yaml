@@ -1042,7 +1042,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer than requested.
+            Requested page size. The server may return fewer results than requested.
             If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1052,7 +1052,7 @@ paths:
             Typically, this is the value of
             ListFilterSetsResponse.nextPageToken
             returned from the previous call to the
-            accounts.rtbBreakout.filterSets.list
+            accounts.filterSets.list
             method.
           in: query
           name: pageToken
@@ -1202,7 +1202,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer than requested.
+            Requested page size. The server may return fewer results than requested.
             If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1261,7 +1261,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer than requested.
+            Requested page size. The server may return fewer results than requested.
             If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1320,7 +1320,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer than requested.
+            Requested page size. The server may return fewer results than requested.
             If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1379,7 +1379,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer than requested.
+            Requested page size. The server may return fewer results than requested.
             If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1438,7 +1438,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer than requested.
+            Requested page size. The server may return fewer results than requested.
             If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1506,7 +1506,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer than requested.
+            Requested page size. The server may return fewer results than requested.
             If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1579,7 +1579,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer than requested.
+            Requested page size. The server may return fewer results than requested.
             If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1646,7 +1646,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer than requested.
+            Requested page size. The server may return fewer results than requested.
             If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1687,66 +1687,6 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/filteredImpressions':
-    get:
-      description: |-
-        List all reasons that caused an impression to be filtered (i.e. not
-        considered as an inventory match), with the number of impressions that were
-        filtered for each reason.
-      operationId: adexchangebuyer2.accounts.filterSets.filteredImpressions.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListFilteredImpressionsResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.filteredImpressions.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListFilteredImpressionsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
   '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/impressionMetrics':
     get:
       description: Lists all metrics that are measured in terms of number of impressions.
@@ -1763,7 +1703,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer than requested.
+            Requested page size. The server may return fewer results than requested.
             If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1822,7 +1762,7 @@ paths:
           required: true
           type: string
         - description: |-
-            Requested page size. The server may return fewer than requested.
+            Requested page size. The server may return fewer results than requested.
             If unspecified, the server will pick an appropriate default.
           in: query
           name: pageSize
@@ -1842,6 +1782,65 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListLosingBidsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/nonBillableWinningBids':
+    get:
+      description: |-
+        List all reasons for which winning bids were not billable, with the number
+        of bids not billed for each reason.
+      operationId: adexchangebuyer2.accounts.filterSets.nonBillableWinningBids.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The ID of the filter set to apply.
+          in: path
+          name: filterSetId
+          required: true
+          type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListNonBillableWinningBidsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.nonBillableWinningBids.list
+            method.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListNonBillableWinningBidsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
@@ -1934,6 +1933,11 @@ definitions:
       impressionsWon:
         $ref: '#/definitions/MetricValue'
         description: The number of bids that won an impression.
+      measurableImpressions:
+        $ref: '#/definitions/MetricValue'
+        description: |-
+          The number of bids for which the corresponding impression was measurable
+          for viewability (as defined by Active View).
       rowDimensions:
         $ref: '#/definitions/RowDimensions'
         description: The values of all dimensions associated with metric values in this row.
@@ -1958,7 +1962,7 @@ definitions:
         description: The values of all dimensions associated with metric values in this row.
       status:
         description: |-
-          The status that caused the bid response to be considered to have no
+          The status specifying why the bid responses were considered to have no
           applicable bids.
         enum:
           - STATUS_UNSPECIFIED
@@ -2758,24 +2762,6 @@ definitions:
           The number of impressions for which the buyer successfully sent a response
           to Ad Exchange.
     type: object
-  ImpressionStatusRow:
-    description: |-
-      The number of impressions with the specified dimension values that were
-      filtered due to the specified filtering status.
-    properties:
-      impressionCount:
-        $ref: '#/definitions/MetricValue'
-        description: The number of impressions that were filtered with the specified status.
-      rowDimensions:
-        $ref: '#/definitions/RowDimensions'
-        description: The values of all dimensions associated with metric values in this row.
-      status:
-        description: The status for which impressions were filtered.
-        enum:
-          - STATUS_UNSPECIFIED
-          - PRETARGETING_CONFIGURATIONS
-        type: string
-    type: object
   ListBidMetricsResponse:
     description: Response message for listing the metrics that are measured in number of bids.
     properties:
@@ -3069,26 +3055,6 @@ definitions:
           method to retrieve the next page of results.
         type: string
     type: object
-  ListFilteredImpressionsResponse:
-    description: |-
-      Response message for listing all reasons that impressions were filtered (i.e.
-      not considered as an inventory match) for the buyer.
-    properties:
-      impressionsStatusRows:
-        description: 'List of rows, with counts of filtered impressions aggregated by status.'
-        items:
-          $ref: '#/definitions/ImpressionStatusRow'
-        type: array
-      nextPageToken:
-        description: |-
-          A token to retrieve the next page of results.
-          Pass this value in the
-          ListFilteredImpressionsRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.filteredImpressions.list
-          method to retrieve the next page of results.
-        type: string
-    type: object
   ListImpressionMetricsResponse:
     description: |-
       Response message for listing the metrics that are measured in number of
@@ -3128,6 +3094,26 @@ definitions:
           accounts.filterSets.losingBids.list
           method to retrieve the next page of results.
         type: string
+    type: object
+  ListNonBillableWinningBidsResponse:
+    description: |-
+      Response message for listing all reasons for which a buyer was not billed for
+      a winning bid.
+    properties:
+      nextPageToken:
+        description: |-
+          A token to retrieve the next page of results.
+          Pass this value in the
+          ListNonBillableWinningBidsRequest.pageToken
+          field in the subsequent call to the
+          accounts.filterSets.nonBillableWinningBids.list
+          method to retrieve the next page of results.
+        type: string
+      nonBillableWinningBidStatusRows:
+        description: 'List of rows, with counts of bids not billed aggregated by reason.'
+        items:
+          $ref: '#/definitions/NonBillableWinningBidStatusRow'
+        type: array
     type: object
   LocationContext:
     description: '@OutputOnly The Geo criteria the restriction applies to.'
@@ -3207,6 +3193,25 @@ definitions:
         type: string
       videoUrl:
         description: The URL to fetch a native video ad.
+        type: string
+    type: object
+  NonBillableWinningBidStatusRow:
+    description: |-
+      The number of winning bids with the specified dimension values for which the
+      buyer was not billed, as described by the specified status.
+    properties:
+      bidCount:
+        $ref: '#/definitions/MetricValue'
+        description: The number of bids with the specified status.
+      rowDimensions:
+        $ref: '#/definitions/RowDimensions'
+        description: The values of all dimensions associated with metric values in this row.
+      status:
+        description: The status specifying why the winning bids were not billed.
+        enum:
+          - STATUS_UNSPECIFIED
+          - AD_NOT_RENDERED
+          - INVALID_IMPRESSION
         type: string
     type: object
   PlatformContext:

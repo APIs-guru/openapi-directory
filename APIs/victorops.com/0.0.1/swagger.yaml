@@ -114,13 +114,6 @@ parameters:
     required: true
     schema:
       $ref: '#/definitions/ContactPhoneAdd'
-  createBatchAlertRequestPayload:
-    description: A collection of IDs for the alerts to be retrieved
-    in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/CreateBatchAlertRequestPayload'
   createIncidentPayload:
     description: The incident details
     in: body
@@ -212,35 +205,6 @@ tags:
   - name: Reporting
   - name: Users
 paths:
-  /api-public/v1/alerts/batch:
-    post:
-      description: |
-        Retrieve the details of multiple alerts that were sent VictorOps by you.
-
-        This API may be called a maximum of 6 times per minute.
-      parameters:
-        - $ref: '#/parameters/apiId'
-        - $ref: '#/parameters/apiKey'
-        - $ref: '#/parameters/createBatchAlertRequestPayload'
-      responses:
-        '200':
-          description: |
-            The alerts, if found.
-          schema:
-            $ref: '#/definitions/AlertBatchResponse'
-        '400':
-          $ref: '#/responses/400'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/user-not-found'
-        '500':
-          $ref: '#/responses/500'
-      summary: Retrieve details for a collection of alerts.
-      tags:
-        - Alerts
   '/api-public/v1/alerts/{uuid}':
     get:
       description: |
@@ -447,6 +411,32 @@ paths:
       summary: Resolve an incident or list of incidents
       tags:
         - Incidents
+  /api-public/v1/org/routing-keys:
+    get:
+      description: |-
+        Retrieves a list of routing keys and associated teams.
+        This API may be called a maximum of once a minute.
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+      responses:
+        '200':
+          description: The list of routing keys and associated teams
+          schema:
+            $ref: '#/definitions/ListRoutingKeysResponse'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '500':
+          $ref: '#/responses/500'
+      summary: List routing keys with assoicated teams
+      tags:
+        - Routing keys
   /api-public/v1/team:
     get:
       description: |
@@ -1521,6 +1511,38 @@ paths:
       summary: Get a user's on-call schedule
       tags:
         - On-call
+  '/api-public/v1/user/{user}/policies':
+    get:
+      description: |
+        Get paging policies for a user
+
+        This API may be called a maximum of 15 times per minute.
+      parameters:
+        - $ref: '#/parameters/apiId'
+        - $ref: '#/parameters/apiKey'
+        - description: The VictorOps user ID
+          in: path
+          name: user
+          required: true
+          type: string
+      responses:
+        '200':
+          description: All configured paging policies for a user
+          schema:
+            $ref: '#/definitions/Policies'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/user-not-found'
+        '500':
+          $ref: '#/responses/500'
+      summary: Get a list of paging policies for a user
+      tags:
+        - User Paging Policies
   /api-reporting/v1/incidents:
     get:
       description: |
@@ -2155,26 +2177,48 @@ definitions:
         description: The transition name
         type: string
     type: object
+  ListRoutingKeysResponse:
+    description: Info about routing keys in the org
+    properties:
+      _selfUrl:
+        type: string
+      routingKeys:
+        items:
+          $ref: '#/definitions/RoutingKeyInfo'
+        type: array
+    type: object
   ListTeamMembersResponse:
     description: A list of members for the team
     properties:
       _selfUrl:
         type: string
-      teams:
+      _teamUrl:
+        type: string
+      members:
         items:
           $ref: '#/definitions/TeamMember'
         type: array
     type: object
   ListTeamResponse:
     description: Some info about teams in the org
-    properties:
-      _selfUrl:
-        type: string
-      teams:
-        items:
-          $ref: '#/definitions/AddTeamResponse'
-        type: array
-    type: object
+    items:
+      properties:
+        _membersUrl:
+          type: string
+        _selfUrl:
+          type: string
+        isDefaultTeam:
+          type: boolean
+        memberCount:
+          type: number
+        name:
+          type: string
+        slug:
+          type: string
+        version:
+          type: number
+      type: object
+    type: array
   ListUserResponse:
     description: Some info about the user
     properties:
@@ -2227,6 +2271,30 @@ definitions:
           $ref: '#/definitions/UserLog'
         type: array
     type: object
+  PagingPolicy:
+    description: Paging policy fields
+    properties:
+      contactType:
+        type: string
+      extId:
+        type: string
+      order:
+        type: integer
+      timeout:
+        type: integer
+    type: object
+  Policies:
+    description: Paging policies accociated which this user
+    properties:
+      policies:
+        items:
+          $ref: '#/definitions/PagingPolicy'
+        type: array
+      userId:
+        type: integer
+      username:
+        type: string
+    type: object
   RelLink:
     properties:
       href:
@@ -2241,6 +2309,28 @@ definitions:
         type: string
     required:
       - replacement
+    type: object
+  RoutingKeyInfo:
+    description: Routing keys contain the following fields
+    properties:
+      isDefault:
+        type: boolean
+      routingKey:
+        type: string
+      targets:
+        items:
+          $ref: '#/definitions/RoutingKeyTarget'
+        type: array
+    type: object
+  RoutingKeyTarget:
+    description: Routing key target
+    properties:
+      _teamUrl:
+        type: string
+      policyName:
+        type: string
+      policySlug:
+        type: string
     type: object
   TakeRequest:
     properties:
@@ -2260,8 +2350,6 @@ definitions:
   TeamMember:
     description: Some info about the user
     properties:
-      _selfUrl:
-        type: string
       firstName:
         type: string
       lastName:

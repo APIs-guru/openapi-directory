@@ -101,6 +101,29 @@ paths:
       summary: Check if email is available
       tags:
         - users
+  '/users/password/{username}':
+    put:
+      consumes:
+        - application/json
+      operationId: putUsersPasswordUsername
+      parameters:
+        - in: path
+          name: username
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PasswordDTO'
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: No response was specified
+      summary: Update user's password
+      tags:
+        - users
   '/users/username/{username}':
     get:
       operationId: getUsersUsernameUsername
@@ -116,6 +139,12 @@ paths:
       tags:
         - users
 definitions:
+  PasswordDTO:
+    properties:
+      newPassword:
+        type: string
+      oldPassword:
+        type: string
   TradingAccount:
     properties:
       brokerServer:

@@ -497,16 +497,16 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
       description: Licenses transfer between licensees
-      operationId: transferLicensee
+      operationId: transferLicenses
       parameters:
         - description: Licensee number with a maximum length of 1000 characters
           in: path
           name: licenseeNumber
           required: true
           type: string
-        - description: Licensee number which licenses will be transferred
+        - description: Licensee number which licenses to be transferred
           in: formData
-          name: transfer
+          name: sourceLicenseeNumber
           required: true
           type: string
       responses:
@@ -524,7 +524,7 @@ paths:
           description: Internal service error
       security:
         - basicAuth: []
-      summary: Transfer licensee
+      summary: Transfer licenses
       tags:
         - Licensee
   '/licensee/{licenseeNumber}/validate':

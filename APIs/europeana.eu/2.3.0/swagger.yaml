@@ -305,6 +305,12 @@ paths:
           name: callback
           required: false
           type: string
+        - description: hierarchytimeout
+          format: int32
+          in: query
+          name: hierarchytimeout
+          required: false
+          type: integer
       produces:
         - application/json
       responses:

@@ -76,6 +76,36 @@ paths:
       tags:
         - Servers
       x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/skus':
+    get:
+      description: Lists eligible SKUs for Analysis Services resource provider.
+      operationId: Servers_ListSkusForNew
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SkuEnumerationForNewResourceResult'
+      x-ms-examples:
+        List eligible SKUs for a new server:
+          parameters:
+            api-version: '2016-05-16'
+            subscriptionId: 613192d7-503f-477a-9cfe-4efc3ee2bd60
+          responses:
+            '200':
+              body:
+                value:
+                  - name: B1
+                  - name: B2
+                  - name: D1
+                  - name: S0
+                  - name: S1
+                  - name: S2
+                  - name: S3
+                  - name: S4
+              headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers':
     get:
       description: Gets all the Analysis Services servers for the given resource group.
@@ -230,6 +260,62 @@ paths:
       tags:
         - Servers
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/skus':
+    get:
+      description: Lists eligible SKUs for an Analysis Services resource.
+      operationId: Servers_ListSkusForExisting
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - description: 'The name of the Analysis Services server. It must be at least 3 characters in length, and no more than 63.'
+          in: path
+          maxLength: 63
+          minLength: 3
+          name: serverName
+          pattern: '^[a-z][a-z0-9]*$'
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SkuEnumerationForExistingResourceResult'
+      tags:
+        - Servers
+      x-ms-examples:
+        List eligible SKUs for an existing server:
+          parameters:
+            api-version: '2016-05-16'
+            resourceGroupName: TestRG
+            serverName: azsdktest
+            subscriptionId: 613192d7-503f-477a-9cfe-4efc3ee2bd60
+          responses:
+            '200':
+              body:
+                value:
+                  - sku:
+                      name: B1
+                      tier: Basic
+                  - sku:
+                      name: B2
+                      tier: Basic
+                  - sku:
+                      name: S0
+                      tier: Standard
+                  - sku:
+                      name: S1
+                      tier: Standard
+                  - sku:
+                      name: S2
+                      tier: Standard
+                  - sku:
+                      name: S3
+                      tier: Standard
+                  - sku:
+                      name: S4
+                      tier: Standard
+              headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend':
     post:
       description: Supends operation of the specified Analysis Services server instance.
@@ -270,8 +356,10 @@ definitions:
     properties:
       asAdministrators:
         $ref: '#/definitions/ServerAdministrators'
-      backupConfiguration:
-        $ref: '#/definitions/BackupConfiguration'
+        description: A collection of AS server administrators
+      backupBlobContainerUri:
+        description: The container URI of backup blob.
+        type: string
     type: object
   AnalysisServicesServerProperties:
     allOf:
@@ -350,22 +438,6 @@ definitions:
     required:
       - value
     type: object
-  BackupConfiguration:
-    description: An object that represents backup configurations
-    properties:
-      accessKey:
-        description: The access key of storage account used for backup configuration
-        type: string
-      blobContainer:
-        description: The name of blob container for backup configuration
-        type: string
-      storageAccount:
-        description: Storage account full resource id for backup configuration
-        type: string
-    required:
-      - storageAccount
-      - blobContainer
-    type: object
   Resource:
     description: Represents an instance of an Analysis Services resource.
     properties:
@@ -401,19 +473,8 @@ definitions:
     description: Represents the SKU name and Azure pricing tier for Analysis Services resource.
     properties:
       name:
-        description: Name of the SKU level for the server being provisioned.
-        enum:
-          - B1
-          - B2
-          - S0
-          - S1
-          - S2
-          - S4
-          - D1
+        description: Name of the SKU level.
         type: string
-        x-ms-enum:
-          modelAsString: true
-          name: SkuName
       tier:
         description: The name of the Azure pricing tier to which the SKU applies.
         enum:
@@ -435,5 +496,30 @@ definitions:
         items:
           description: 'The UPN of the user. For example: johnsmith@contoso.com.'
           type: string
+        type: array
+    type: object
+  SkuDetailsForExistingResource:
+    description: An object that represents SKU details for existing resources
+    properties:
+      sku:
+        $ref: '#/definitions/ResourceSku'
+        description: The SKU in SKU details for existing resources.
+    type: object
+  SkuEnumerationForExistingResourceResult:
+    description: An object that represents enumerating SKUs for existing resources
+    properties:
+      value:
+        description: The collection of available SKUs for existing resources
+        items:
+          $ref: '#/definitions/SkuDetailsForExistingResource'
+        type: array
+    type: object
+  SkuEnumerationForNewResourceResult:
+    description: An object that represents enumerating SKUs for new resources
+    properties:
+      value:
+        description: The collection of available SKUs for new resources
+        items:
+          $ref: '#/definitions/ResourceSku'
         type: array
     type: object

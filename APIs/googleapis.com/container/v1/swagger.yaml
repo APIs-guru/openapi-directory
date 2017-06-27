@@ -660,6 +660,66 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/setSize':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Sets the size of a specific node pool.
+      operationId: container.projects.zones.clusters.nodePools.setSize
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetNodePoolSizeRequest'
+        - description: The name of the cluster to update.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: The name of the node pool to update.
+          in: path
+          name: nodePoolId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}:rollback':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1179,6 +1239,13 @@ definitions:
     description: CancelOperationRequest cancels a single operation.
     properties: {}
     type: object
+  ClientCertificateConfig:
+    description: Configuration for client certificates on the cluster.
+    properties:
+      issueClientCertificate:
+        description: Issue a client certificate.
+        type: boolean
+    type: object
   Cluster:
     description: A Google Container Engine cluster.
     properties:
@@ -1574,6 +1641,11 @@ definitions:
           [Output only] Base64-encoded public certificate used by clients to
           authenticate to the cluster endpoint.
         type: string
+      clientCertificateConfig:
+        $ref: '#/definitions/ClientCertificateConfig'
+        description: |-
+          Configuration for client certificate authentication on the cluster.  If no
+          configuration is specified, a client certificate is issued.
       clientKey:
         description: |-
           [Output only] Base64-encoded private key used by clients to authenticate
@@ -1837,6 +1909,7 @@ definitions:
           - AUTO_UPGRADE_NODES
           - SET_LABELS
           - SET_MASTER_AUTH
+          - SET_NODE_POOL_SIZE
         type: string
       selfLink:
         description: Server-defined URL for the resource.
@@ -1947,6 +2020,16 @@ definitions:
       management:
         $ref: '#/definitions/NodeManagement'
         description: NodeManagement configuration for the node pool.
+    type: object
+  SetNodePoolSizeRequest:
+    description: |-
+      SetNodePoolSizeRequest sets the size a node
+      pool.
+    properties:
+      nodeCount:
+        description: The desired node count for the pool.
+        format: int32
+        type: integer
     type: object
   StartIPRotationRequest:
     description: |-

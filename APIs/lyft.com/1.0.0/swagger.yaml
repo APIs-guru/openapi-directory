@@ -104,6 +104,9 @@ parameters:
       - lyft
       - lyft_line
       - lyft_plus
+      - lyft_premier
+      - lyft_lux
+      - lyft_luxsuv
     in: query
     name: ride_type
     required: false
@@ -113,6 +116,9 @@ parameters:
       - lyft
       - lyft_line
       - lyft_plus
+      - lyft_premier
+      - lyft_lux
+      - lyft_luxsuv
     in: path
     name: ride_type
     required: true
@@ -839,6 +845,7 @@ definitions:
       image_url: 'http://example.com/lyft.png'
       phone_number: '+15554445000'
       rating: '4.9'
+      user_id: '123456789'
     properties:
       first_name:
         description: The driver's first name
@@ -854,11 +861,15 @@ definitions:
       rating:
         description: The driver's rating based in 0-5 scale
         type: string
+      user_id:
+        description: The driver's id
+        type: string
     required:
       - first_name
       - phone_number
       - rating
       - image_url
+      - user_id
   ErrorDetail:
     description: |
       An object with a single key-value pair, where the key is the name of the invalid parameter, and the value is a description of the error.
@@ -1230,7 +1241,7 @@ definitions:
         type: object
       pricing_details_url:
         description: |
-          The web view showing the pricing structure for the geographic area where the ride was taken         
+          The web view showing the pricing structure for the geographic area where the ride was taken
         type: string
       primetime_percentage:
         description: The Prime Time percentage applied to the base price
@@ -1417,6 +1428,7 @@ definitions:
       - pickedUp
       - droppedOff
       - canceled
+      - scheduled
       - unknown
     type: string
   RideType:
@@ -1480,6 +1492,9 @@ definitions:
       - lyft
       - lyft_line
       - lyft_plus
+      - lyft_premier
+      - lyft_lux
+      - lyft_luxsuv
     type: string
   RideTypeEnumWithOther:
     description: The ID of the ride type
@@ -1487,6 +1502,9 @@ definitions:
       - lyft
       - lyft_line
       - lyft_plus
+      - lyft_premier
+      - lyft_lux
+      - lyft_luxsuv
       - other
     type: string
   SandboxDriverAvailability:
@@ -1617,8 +1635,10 @@ definitions:
       color: black
       image_url: 'http://example.com/lyft.png'
       license_plate: AAAAAAA
+      license_plate_state: CA
       make: Audi
       model: A4
+      year: 2016
     properties:
       color:
         description: The vehicle's color

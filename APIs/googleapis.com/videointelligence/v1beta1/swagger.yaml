@@ -165,6 +165,160 @@ paths:
       tags:
         - videos
 definitions:
+  GoogleCloudVideointelligenceV1_AnnotateVideoProgress:
+    description: |-
+      Video annotation progress. Included in the `metadata`
+      field of the `Operation` returned by the `GetOperation`
+      call of the `google::longrunning::Operations` service.
+    properties:
+      annotationProgress:
+        description: Progress metadata for all videos specified in `AnnotateVideoRequest`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoAnnotationProgress'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1_AnnotateVideoResponse:
+    description: |-
+      Video annotation response. Included in the `response`
+      field of the `Operation` returned by the `GetOperation`
+      call of the `google::longrunning::Operations` service.
+    properties:
+      annotationResults:
+        description: Annotation results for all videos specified in `AnnotateVideoRequest`.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoAnnotationResults'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1_LabelAnnotation:
+    description: Label annotation.
+    properties:
+      description:
+        description: 'Textual description, e.g. `Fixed-gear bicycle`.'
+        type: string
+      languageCode:
+        description: Language code for `description` in BCP-47 format.
+        type: string
+      locations:
+        description: Where the label was detected and with what confidence.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelLocation'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1_LabelLocation:
+    description: Label location.
+    properties:
+      confidence:
+        description: 'Confidence that the label is accurate. Range: [0, 1].'
+        format: float
+        type: number
+      level:
+        description: Label level.
+        enum:
+          - LABEL_LEVEL_UNSPECIFIED
+          - VIDEO_LEVEL
+          - SEGMENT_LEVEL
+          - SHOT_LEVEL
+          - FRAME_LEVEL
+        type: string
+      segment:
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoSegment'
+        description: |-
+          Video segment. Unset for video-level labels.
+          Set to a frame timestamp for frame-level labels.
+          Otherwise, corresponds to one of `AnnotateSpec.segments`
+          (if specified) or to shot boundaries (if requested).
+    type: object
+  GoogleCloudVideointelligenceV1_SafeSearchAnnotation:
+    description: |-
+      Safe search annotation (based on per-frame visual signals only).
+      If no unsafe content has been detected in a frame, no annotations
+      are present for that frame.
+    properties:
+      adult:
+        description: Likelihood of adult content.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      time:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the video frame for this annotation.
+        format: google-duration
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1_VideoAnnotationProgress:
+    description: Annotation progress for a single video.
+    properties:
+      inputUri:
+        description: |-
+          Video file location in
+          [Google Cloud Storage](https://cloud.google.com/storage/).
+        type: string
+      progressPercent:
+        description: |-
+          Approximate percentage processed thus far.
+          Guaranteed to be 100 when fully processed.
+        format: int32
+        type: integer
+      startTime:
+        description: Time when the request was received.
+        format: google-datetime
+        type: string
+      updateTime:
+        description: Time of the most recent update.
+        format: google-datetime
+        type: string
+    type: object
+  GoogleCloudVideointelligenceV1_VideoAnnotationResults:
+    description: Annotation results for a single video.
+    properties:
+      error:
+        $ref: '#/definitions/GoogleRpc_Status'
+        description: |-
+          If set, indicates an error. Note that for a single `AnnotateVideoRequest`
+          some videos may succeed and some may fail.
+      inputUri:
+        description: |-
+          Video file location in
+          [Google Cloud Storage](https://cloud.google.com/storage/).
+        type: string
+      labelAnnotations:
+        description: Label annotations. There is exactly one element for each unique label.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_LabelAnnotation'
+        type: array
+      safeSearchAnnotations:
+        description: Safe search annotations.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_SafeSearchAnnotation'
+        type: array
+      shotAnnotations:
+        description: Shot annotations. Each shot is represented as a video segment.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1_VideoSegment'
+        type: array
+    type: object
+  GoogleCloudVideointelligenceV1_VideoSegment:
+    description: Video segment.
+    properties:
+      endTime:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the end of the segment (inclusive).
+        format: google-duration
+        type: string
+      startTime:
+        description: |-
+          Time-offset, relative to the beginning of the video,
+          corresponding to the start of the segment (inclusive).
+        format: google-duration
+        type: string
+    type: object
   GoogleCloudVideointelligenceV1beta1_AnnotateVideoProgress:
     description: |-
       Video annotation progress. Included in the `metadata`

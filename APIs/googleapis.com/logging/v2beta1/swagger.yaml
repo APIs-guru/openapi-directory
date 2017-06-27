@@ -282,7 +282,7 @@ paths:
   '/v2beta1/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.projects.logs.delete
+      operationId: logging.billingAccounts.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -311,7 +311,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - projects
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -449,7 +449,7 @@ paths:
   '/v2beta1/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.projects.logs.list
+      operationId: logging.billingAccounts.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -493,7 +493,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - projects
+        - billingAccounts
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -797,6 +797,10 @@ paths:
       description: 'Updates a sink. If the named sink doesn''t exist, then this method is identical to sinks.create. If the named sink does exist, then this method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated filter might also have a new writer_identity; see the unique_writer_identity field.'
       operationId: logging.projects.sinks.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogSink'
         - description: |-
             Required. The full resource name of the sink to update, including the parent resource and the sink identifier:
             "projects/[PROJECT_ID]/sinks/[SINK_ID]"
@@ -813,14 +817,10 @@ paths:
             Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field:
             If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity.
             If the old value is false and the new value is true, then writer_identity is changed to a unique service account.
-            It is an error if the old value is true and the new value is false.
+            It is an error if the old value is true and the new value is set to false or defaulted to false.
           in: query
           name: uniqueWriterIdentity
           type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LogSink'
       responses:
         '200':
           description: Successful response

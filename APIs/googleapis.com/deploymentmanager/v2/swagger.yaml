@@ -104,17 +104,12 @@ paths:
       description: Lists all deployments for a given project.
       operationId: deploymentmanager.deployments.list
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: |-
-            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
 
             You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
 
@@ -140,6 +135,11 @@ paths:
         - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -449,22 +449,17 @@ paths:
       description: Lists all manifests for a given deployment.
       operationId: deploymentmanager.manifests.list
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The name of the deployment for this request.
           in: path
           name: deployment
           required: true
           type: string
         - description: |-
-            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
 
             You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
 
@@ -490,6 +485,11 @@ paths:
         - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -580,22 +580,17 @@ paths:
       description: Lists all resources in a given deployment.
       operationId: deploymentmanager.resources.list
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: The name of the deployment for this request.
           in: path
           name: deployment
           required: true
           type: string
         - description: |-
-            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
 
             You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
 
@@ -621,6 +616,11 @@ paths:
         - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -879,17 +879,12 @@ paths:
       description: Lists all operations for a project.
       operationId: deploymentmanager.operations.list
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: |-
-            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
 
             You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
 
@@ -915,6 +910,11 @@ paths:
         - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -1000,17 +1000,12 @@ paths:
       description: Lists all resource types for Deployment Manager.
       operationId: deploymentmanager.types.list
       parameters:
-        - description: The project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
         - description: |-
-            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
 
             You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
 
@@ -1036,6 +1031,11 @@ paths:
         - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
+          type: string
+        - description: The project ID for this request.
+          in: path
+          name: project
+          required: true
           type: string
       responses:
         '200':
@@ -1116,6 +1116,9 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: 'The condition that is associated with this binding. NOTE: an unsatisfied condition will not allow user access via current binding. Different bindings, including their conditions, are examined independently. This field is GOOGLE_INTERNAL.'
       members:
         description: |-
           Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values:
@@ -1131,6 +1134,8 @@ definitions:
           * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`.
 
           * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`.
+
+
 
           * `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.
         items:
@@ -1278,6 +1283,28 @@ definitions:
         format: byte
         type: string
     type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+      title: "User account presence" description: "Determines whether the request has a user account" expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: 'An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.'
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in Common Expression Language syntax.
+
+          The application context of the containing message determines which well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: 'An optional string indicating the location of the expression for error reporting, e.g. a file name and a position in the file.'
+        type: string
+      title:
+        description: 'An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.'
+        type: string
+    type: object
   ImportFile:
     description: ''
     properties:
@@ -1291,9 +1318,19 @@ definitions:
   LogConfig:
     description: Specifies what kind of log the caller must write
     properties:
+      cloudAudit:
+        $ref: '#/definitions/LogConfigCloudAuditOptions'
+        description: Cloud audit options.
       counter:
         $ref: '#/definitions/LogConfigCounterOptions'
         description: Counter options.
+    type: object
+  LogConfigCloudAuditOptions:
+    description: Write a Cloud Audit log
+    properties:
+      logName:
+        description: The log_name to populate in the Cloud Audit Record.
+        type: string
     type: object
   LogConfigCounterOptions:
     description: Options for counters
@@ -1497,7 +1534,7 @@ definitions:
           $ref: '#/definitions/AuditConfig'
         type: array
       bindings:
-        description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
+        description: Associates a list of `members` to a `role`. `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'
         type: array

@@ -25,6 +25,13 @@ info:
 externalDocs:
   description: Find more info here
   url: 'https://developers.vestorly.com'
+securityDefinitions:
+  access_token:
+    authorizationUrl: 'https://dev.vestorly.com/oauth/authorize'
+    flow: implicit
+    scopes:
+      default: read and write data to your account
+    type: oauth2
 tags:
   - description: Vestorly API docs
     name: api docs
@@ -36,8 +43,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Advisor Id to fetch
           in: path
@@ -49,6 +61,9 @@ paths:
           description: Advisor response
           schema:
             $ref: '#/definitions/Advisor'
+      security:
+        - access_token:
+            - default
       tags:
         - advisors
   /articles:
@@ -58,8 +73,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Limit on the number of articles to return
           format: int32
@@ -87,6 +107,9 @@ paths:
           description: Response
           schema:
             $ref: '#/definitions/Articles'
+      security:
+        - access_token:
+            - default
       tags:
         - articles
   '/articles/{id}':
@@ -96,8 +119,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Article Id to fetch
           format: string
@@ -110,6 +138,9 @@ paths:
           description: Article response
           schema:
             $ref: '#/definitions/Articleresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - articles
   /events:
@@ -119,14 +150,22 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
       responses:
         '200':
           description: Event response
           schema:
             $ref: '#/definitions/Events'
+      security:
+        - access_token:
+            - default
       tags:
         - events
     post:
@@ -135,8 +174,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Event
           in: body
@@ -149,6 +193,9 @@ paths:
           description: Event response
           schema:
             $ref: '#/definitions/Eventcreateresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - events
   '/events/{id}':
@@ -161,9 +208,14 @@ paths:
           name: id
           required: true
           type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
+          type: string
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
           type: string
       responses:
@@ -171,6 +223,9 @@ paths:
           description: Event response
           schema:
             $ref: '#/definitions/Eventresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - events
   /groups:
@@ -181,14 +236,22 @@ paths:
         - description: Vestorly Auth Token
           format: string
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
       responses:
         '200':
           description: Group response
           schema:
             $ref: '#/definitions/Groups'
+      security:
+        - access_token:
+            - default
       tags:
         - groups
     post:
@@ -198,8 +261,13 @@ paths:
         - description: Vestorly Auth Token
           format: string
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Group to add
           in: body
@@ -214,6 +282,9 @@ paths:
           description: group response
           schema:
             $ref: '#/definitions/Groupresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - groups
   '/groups/{id}':
@@ -224,8 +295,13 @@ paths:
         - description: Vestorly Auth Token
           format: string
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: id of group to delete
           in: path
@@ -239,6 +315,9 @@ paths:
           description: group response
           schema:
             $ref: '#/definitions/Groupresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - groups
     get:
@@ -248,8 +327,13 @@ paths:
         - description: Vestorly Auth Token
           format: string
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Mongo ID of group to fetch
           format: string
@@ -262,6 +346,9 @@ paths:
           description: Group response
           schema:
             $ref: '#/definitions/Groupresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - groups
     put:
@@ -270,8 +357,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: id of group to update
           in: path
@@ -291,6 +383,9 @@ paths:
           description: group response
           schema:
             $ref: '#/definitions/Groupresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - groups
   /member_events:
@@ -300,14 +395,22 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
       responses:
         '200':
           description: member event response
           schema:
             $ref: '#/definitions/MemberEvents'
+      security:
+        - access_token:
+            - default
       tags:
         - member_events
   /member_reports:
@@ -317,14 +420,22 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
       responses:
         '200':
           description: member reports response
           schema:
             $ref: '#/definitions/MemberReports'
+      security:
+        - access_token:
+            - default
       tags:
         - member_reports
   /members:
@@ -335,14 +446,32 @@ paths:
         - description: Vestorly Auth Token
           format: string
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
           type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
+          type: string
+        - description: Skips number of members from start
+          in: query
+          name: start
+          required: false
+          type: integer
+        - description: Number of members to return
+          in: query
+          name: limit
+          required: false
+          type: integer
       responses:
         '200':
           description: Member response
           schema:
             $ref: '#/definitions/Members'
+      security:
+        - access_token:
+            - default
       tags:
         - members
     post:
@@ -351,8 +480,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Member you want to create
           in: body
@@ -365,6 +499,9 @@ paths:
           description: member response
           schema:
             $ref: '#/definitions/Memberresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - members
   '/members/{id}':
@@ -381,14 +518,22 @@ paths:
         - description: Vestorly Auth Token
           format: string
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
       responses:
         '200':
           description: Member response
           schema:
             $ref: '#/definitions/Memberresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - members
     put:
@@ -404,8 +549,13 @@ paths:
         - description: Vestorly Auth Token
           format: string
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Member you want to update
           in: body
@@ -418,6 +568,9 @@ paths:
           description: Member response
           schema:
             $ref: '#/definitions/Memberresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - members
   /newsletter_settings:
@@ -427,14 +580,22 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
       responses:
         '200':
           description: newsletter settings response
           schema:
             $ref: '#/definitions/NewsletterSettings'
+      security:
+        - access_token:
+            - default
       tags:
         - newsletter_settings
   '/newsletter_settings/{id}':
@@ -449,14 +610,22 @@ paths:
           type: string
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
       responses:
         '200':
           description: newsletting setting response
           schema:
             $ref: '#/definitions/Newslettersettingresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - newsletter_settings
     put:
@@ -470,8 +639,13 @@ paths:
           type: string
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: newsletter settings
           in: body
@@ -484,6 +658,9 @@ paths:
           description: newsletter settings response
           schema:
             $ref: '#/definitions/Newslettersettingresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - newsletter_settings
   /newsletters:
@@ -493,14 +670,22 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
       responses:
         '200':
           description: Newsletter response
           schema:
             $ref: '#/definitions/Newsletters'
+      security:
+        - access_token:
+            - default
       tags:
         - newsletters
   '/newsletters/{id}':
@@ -510,8 +695,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Mongo ID of event to get
           in: path
@@ -523,6 +713,9 @@ paths:
           description: Newsletter response
           schema:
             $ref: '#/definitions/Newsletterresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - newsletters
     put:
@@ -531,8 +724,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Mongo ID of event to update
           in: path
@@ -550,6 +748,9 @@ paths:
           description: Newsletter response
           schema:
             $ref: '#/definitions/Newsletterresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - newsletters
   /posts:
@@ -559,8 +760,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Filter post by parameters
           in: query
@@ -582,6 +788,9 @@ paths:
           description: posts response
           schema:
             $ref: '#/definitions/Posts'
+      security:
+        - access_token:
+            - default
       tags:
         - posts
     post:
@@ -590,8 +799,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Post you want to create
           in: body
@@ -604,6 +818,9 @@ paths:
           description: posts response
           schema:
             $ref: '#/definitions/Postresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - posts
   '/posts/{id}':
@@ -613,8 +830,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: ID of post to fetch
           in: path
@@ -626,6 +848,9 @@ paths:
           description: post response
           schema:
             $ref: '#/definitions/Postresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - posts
     put:
@@ -634,8 +859,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: id of post to update
           in: path
@@ -653,6 +883,9 @@ paths:
           description: post response
           schema:
             $ref: '#/definitions/Postresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - posts
   /sessions:
@@ -686,7 +919,7 @@ paths:
       parameters:
         - description: Authenication token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
           type: string
         - description: ID of pet to session
@@ -708,14 +941,22 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
       responses:
         '200':
           description: source response
           schema:
             $ref: '#/definitions/Sources'
+      security:
+        - access_token:
+            - default
       tags:
         - sources
     post:
@@ -724,8 +965,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: Source
           in: body
@@ -738,6 +984,9 @@ paths:
           description: source response
           schema:
             $ref: '#/definitions/Sourceresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - sources
   '/sources/{id}':
@@ -747,8 +996,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: ID of source to fetch
           in: path
@@ -760,6 +1014,9 @@ paths:
           description: source response
           schema:
             $ref: '#/definitions/Sourceresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - sources
     put:
@@ -768,8 +1025,13 @@ paths:
       parameters:
         - description: Vestorly Auth Token
           in: query
-          name: vestorly_auth
+          name: vestorly-auth
           required: true
+          type: string
+        - description: OAuth Token
+          in: query
+          name: access_token
+          required: false
           type: string
         - description: ID of source to fetch
           in: path
@@ -787,6 +1049,9 @@ paths:
           description: source response
           schema:
             $ref: '#/definitions/Sourceresponse'
+      security:
+        - access_token:
+            - default
       tags:
         - sources
 definitions:
@@ -800,8 +1065,6 @@ definitions:
         type: string
       adv_brochure:
         type: string
-      advisor_employees:
-        type: string
       api_key:
         type: string
       city:
@@ -810,19 +1073,13 @@ definitions:
         type: string
       compliance_bcc_email_address:
         type: string
-      consultation_reminder:
-        type: string
       dashboard_url:
         type: string
       disclosure:
         type: string
-      email_blast:
-        type: string
       email_report_blast:
         type: string
       external_options:
-        type: string
-      facebook_blast:
         type: string
       first_name:
         type: string
@@ -832,23 +1089,13 @@ definitions:
         type: string
       linkedin:
         type: string
-      linkedin_blast:
-        type: string
       logo:
         type: string
       name:
         type: string
-      other_compensation:
-        type: string
-      other_services_types:
-        type: string
-      performance_audited:
-        type: string
       plan:
         type: string
       profile_picture:
-        type: string
-      referral_reminder:
         type: string
       reg_number:
         type: string
@@ -856,13 +1103,9 @@ definitions:
         type: string
       tag:
         type: string
-      twitter_blast:
-        type: string
       twitter_handle:
         type: string
       website:
-        type: string
-      weekly_email_blast:
         type: string
       zip:
         type: string
@@ -1422,8 +1665,12 @@ definitions:
         type: string
       salutation_text:
         type: string
+      social_day_of_week:
+        type: integer
       social_description:
         type: string
+      social_hour:
+        type: integer
       social_posting_text:
         type: string
       social_subtitle:

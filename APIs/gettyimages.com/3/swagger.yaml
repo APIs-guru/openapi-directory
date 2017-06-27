@@ -721,7 +721,7 @@ paths:
           name: page_size
           required: false
           type: integer
-        - description: Specifies product type to be included in the previous download results.
+        - description: 'Specifies product type to be included in the previous download results. To get previous iStockPhoto credit downloads, credit_pack must be selected.'
           enum:
             - easy_access
             - editorial_subscription
@@ -2044,15 +2044,11 @@ paths:
         - collectionFormat: multi
           description: Return only images having a specific file type.
           enum:
-            - gif
-            - png
             - eps
             - jpg
           in: query
           items:
             enum:
-              - gif
-              - png
               - eps
               - jpg
             type: string
@@ -2599,15 +2595,11 @@ paths:
         - collectionFormat: multi
           description: Return only images having a specific file type.
           enum:
-            - gif
-            - png
             - eps
             - jpg
           in: query
           items:
             enum:
-              - gif
-              - png
               - eps
               - jpg
             type: string
@@ -3118,15 +3110,11 @@ paths:
         - collectionFormat: multi
           description: Return only images having a specific file type.
           enum:
-            - gif
-            - png
             - eps
             - jpg
           in: query
           items:
             enum:
-              - gif
-              - png
               - eps
               - jpg
             type: string
@@ -4788,27 +4776,6 @@ definitions:
       title:
         type: string
     type: object
-  GettyImages.Models.Customers.Customer:
-    properties:
-      billing_country_iso_alpha_3:
-        type: string
-      email_address:
-        type: string
-      marketing_email_opt_in:
-        type: boolean
-      name_first:
-        type: string
-      name_last:
-        type: string
-      name_middle:
-        type: string
-      password:
-        type: string
-      phone_number:
-        type: string
-      username:
-        type: string
-    type: object
   GettyImages.Models.Customers.CustomerInfoResponse:
     properties:
       email_address:
@@ -4817,25 +4784,6 @@ definitions:
         type: boolean
       user_name:
         type: string
-    type: object
-  GettyImages.Models.Customers.Email:
-    properties:
-      email_address:
-        type: string
-      email_marketing_enabled:
-        type: boolean
-    required:
-      - email_address
-    type: object
-  GettyImages.Models.Customers.PasswordChange:
-    properties:
-      current_password:
-        type: string
-      new_password:
-        type: string
-    required:
-      - current_password
-      - new_password
     type: object
   GettyImages.Models.Download:
     properties:

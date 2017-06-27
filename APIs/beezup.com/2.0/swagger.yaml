@@ -361,6 +361,9 @@ tags:
   - description: All user account operations
     name: Customer - Account
     x-displayName: Account
+  - description: All security operations
+    name: Customer - Security
+    x-displayName: Security
   - description: All stores operations
     name: Customer - Stores
     x-displayName: Stores
@@ -382,9 +385,6 @@ tags:
   - description: All invoice operations
     name: Customer - Invoices
     x-displayName: Invoices
-  - description: All security operations
-    name: Customer - Security
-    x-displayName: Security
   - description: All operations related to the Auto importation
     name: Catalogs - Auto
     x-displayName: Auto
@@ -3276,6 +3276,7 @@ paths:
         - Channels - Channels Global
   /user/customer/:
     get:
+      operationId: GetCustomerIndex
       parameters:
         - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
@@ -3324,9 +3325,15 @@ paths:
             type: string
       responses:
         '204':
-          description: User account activated
+          description: User account activated.
         '403':
           description: Invalid email activation id
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '409':
+          description: User account already activated.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3348,6 +3355,8 @@ paths:
           description: Password updated
         '400':
           description: Old password is invalid or the new password does not respect the password's constraints
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3373,6 +3382,8 @@ paths:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '403':
           description: User not found or unauthorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3394,8 +3405,12 @@ paths:
           $ref: '#/responses/304_NotModified'
         '404':
           description: Credit Card not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '503':
           description: We are unable to get your credit card info. This is a temporary state. Please retry later
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3421,6 +3436,8 @@ paths:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '502':
           description: Communication problem with our payment service
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3487,8 +3504,12 @@ paths:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '413':
           description: The picture size is too large
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '415':
           description: The content type of the image must be an image
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3504,10 +3525,26 @@ paths:
           description: Email activation resent
         '400':
           description: Email activation not sent because of email problem. Ensure that your email is the correct one.
-        '403':
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '409':
+          description: Email activation not available because user account already activated.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+        '429':
           description: 'Email activation sent recently, must retry later. (One per hour)'
+          headers:
+            Retry-After:
+              default: 60
+              description: The duration in second to wait before making another request
+              type: integer
+              x-example: 60
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '502':
           description: Email activate send failed because of our email service. Ensure that your email is the correct one otherwise please contact our support if the problem persists.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3524,7 +3561,7 @@ paths:
         '200':
           description: Get the billing periods conditions
           schema:
-            $ref: '#/definitions/billingPeriods'
+            $ref: '#/definitions/billingPeriodList'
         '304':
           $ref: '#/responses/304_NotModified'
         default:
@@ -3565,18 +3602,14 @@ paths:
             $ref: '#/definitions/createContract'
       responses:
         '200':
-          description: New contract has been saved. Some warnings can be present in response.
+          description: New contract has been created. Some warnings can be present in response.
           schema:
-            $ref: '#/definitions/BeezUP.Common.InfoSummaries'
+            $ref: '#/definitions/createContractResponse'
         '400':
           description: 'Bad request. (Invalid billing period, invalid offer, etc.)'
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '403':
-          description: The contract is not modifiable or the coupon offer has been already used
-          schema:
-            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
-        '409':
           description: The contract is not modifiable or the coupon offer has been already used
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
@@ -3607,6 +3640,8 @@ paths:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: No current contract
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3623,6 +3658,8 @@ paths:
           description: Your current contract has been resumed
         '404':
           description: No current contract
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3663,6 +3700,8 @@ paths:
           $ref: '#/responses/304_NotModified'
         '404':
           description: User not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3679,7 +3718,7 @@ paths:
         '200':
           description: Get all invoices of a customer
           schema:
-            $ref: '#/definitions/invoices'
+            $ref: '#/definitions/invoiceList'
         '304':
           $ref: '#/responses/304_NotModified'
         default:
@@ -3724,11 +3763,13 @@ paths:
           schema:
             $ref: '#/definitions/offer'
         '400':
-          description: 'Bad request. (Invalid billing period, invalid offer, etc.)'
+          description: 'Bad request. (Invalid billing period, invalid offer, etc.). You cannot get a pricing for a free offer.'
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '403':
           description: You current contract is not modifiable. Please choose another offer.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3757,9 +3798,9 @@ paths:
         - $ref: '#/parameters/ifNoneMatchParameter'
       responses:
         '200':
-          description: Store list response
+          description: Store list
           schema:
-            $ref: '#/definitions/stores'
+            $ref: '#/definitions/storeList'
         '304':
           $ref: '#/responses/304_NotModified'
         default:
@@ -3781,11 +3822,15 @@ paths:
         '201':
           description: The store has been created successfully. The http header Location contains the new resource url. The body contains the link to the new resource.
           schema:
-            $ref: '#/definitions/links.getStoresLink'
-        '403':
+            $ref: '#/definitions/links.getStoreLink'
+        '402':
           description: The maximum amount of store has been reached. Please upgrade your contract.
+          schema:
+            $ref: '#/definitions/errorResponseMessagePaymentRequired'
         '409':
           description: The customer has a store with the same name
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3803,6 +3848,8 @@ paths:
           description: Store deleted
         '404':
           description: Store not found or customer not the owner
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3819,11 +3866,13 @@ paths:
         '200':
           description: The store information
           schema:
-            $ref: '#/definitions/storeHeader'
+            $ref: '#/definitions/store'
         '304':
           $ref: '#/responses/304_NotModified'
         '404':
           description: Store not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3847,8 +3896,12 @@ paths:
           description: Store updated
         '404':
           description: Store not found or customer not the owner
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: The store name already used
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3871,6 +3924,8 @@ paths:
           $ref: '#/responses/304_NotModified'
         '404':
           description: Store not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3878,37 +3933,32 @@ paths:
       summary: Get store's alerts
       tags:
         - Customer - Alerts
-  '/user/customer/stores/{storeId}/alerts/{alertId}':
-    put:
-      operationId: SaveStoreAlert
+    post:
+      description: 'You just have to send the alert you want to update, does not need all alerts. (PARTIAL UPDATE ACCEPTED)'
+      operationId: SaveStoreAlerts
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
-        - format: int32
-          in: path
-          name: alertId
-          required: true
-          type: integer
         - in: body
           name: request
           required: true
           schema:
-            items:
-              $ref: '#/definitions/saveStoreAlertRequest'
-            type: array
+            $ref: '#/definitions/saveStoreAlertsRequest'
       responses:
         '204':
-          description: Store alert saved
+          description: Store alerts saved
         '400':
           description: BadRequest
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Store not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Save store alert
+      summary: Save store alerts
       tags:
         - Customer - Alerts
   '/user/customer/stores/{storeId}/rights':
@@ -3935,9 +3985,11 @@ paths:
         '403':
           description: Functionality not found
           schema:
-            $ref: '#/definitions/BeezUP.Common.InfoSummaries'
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Store not found or not authorized
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3947,7 +3999,7 @@ paths:
         - Customer - Rights
   '/user/customer/stores/{storeId}/shares':
     get:
-      operationId: GetShares
+      operationId: GetStoreShares
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
         - $ref: '#/parameters/ifNoneMatchParameter'
@@ -3960,6 +4012,8 @@ paths:
           $ref: '#/responses/304_NotModified'
         '404':
           description: Store not found or customer not the owner
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3968,7 +4022,7 @@ paths:
       tags:
         - Customer - Shares
     post:
-      operationId: Share
+      operationId: ShareStore
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
         - description: Your friend's email
@@ -3980,10 +4034,14 @@ paths:
       responses:
         '204':
           description: Store shared
-        '403':
+        '402':
           description: Free offer is not allowed to share store.
+          schema:
+            $ref: '#/definitions/errorResponseMessagePaymentRequired'
         '404':
           description: Only the owner of the store can make this operation or user not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -3993,7 +4051,7 @@ paths:
         - Customer - Shares
   '/user/customer/stores/{storeId}/shares/{userId}':
     delete:
-      operationId: DeleteShare
+      operationId: DeleteStoreShare
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
         - description: The friend user id
@@ -4007,11 +4065,13 @@ paths:
           description: Share deleted
         '404':
           description: Store not found or customer not the owner
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Delete a share to another user
+      summary: Delete a share of a store to another user
       tags:
         - Customer - Shares
   /user/lov/:
@@ -4848,10 +4908,45 @@ paths:
       tags:
         - Marketplaces - Orders - Order
 definitions:
+  BeezUP.Common.AdditionalProductFilters:
+    additionalProperties:
+      example:
+        672644c7-5bd0-4e25-88c1-1f732bda5e4c:
+          operatorName: GreaterTo
+          values:
+            - 100
+      properties:
+        operatorName:
+          $ref: '#/definitions/BeezUP.Common.ProductFilterOperatorName'
+        values:
+          description: |
+            Must be null if the operator is "IsNull" or "IsNotNull". 
+            Can contains multiple value in case of "InList" operator. Otherwise a single value is expected.
+          example:
+            - My value
+          items:
+            type: string
+          type: array
+      type: object
+    description: |
+      Describe a filter on a product's column.
+      The key is the column identifier of your catalog or a custom column.
+    type: object
   BeezUP.Common.BeezUPColumnName:
     description: The BeezUP column name
     example: CategoryFirstLevel
     type: string
+  BeezUP.Common.CatalogCategoryFilter:
+    properties:
+      categoryPath:
+        description: Indicates on which catalog category path you want to make the filter
+        example:
+          - Maison
+          - Chambre
+        items:
+          type: string
+        type: array
+    type: object
   BeezUP.Common.CatalogCategoryId:
     description: The catalog category identifier
     example: 81a058a6-0451-4b79-84ef-94c58d0ed4ac
@@ -4894,6 +4989,17 @@ definitions:
     example: 6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
     format: guid
     type: string
+  BeezUP.Common.ChannelCategoryFilter:
+    properties:
+      categoryPath:
+        description: Indicates on which channel category path you want to make the filter
+        example:
+          - Home
+          - Bedroom
+        items:
+          type: string
+        type: array
+    type: object
   BeezUP.Common.ChannelCategoryId:
     example: 24f508da-a069-4467-b9d3-15baebe9bac7
     format: guid
@@ -5316,6 +5422,28 @@ definitions:
     description: The operationId to call.
     example: GetOrder
     type: string
+  BeezUP.Common.PageNumber:
+    default: 1
+    description: Indicates the page number
+    example: 1
+    format: int32
+    minimum: 1
+    type: integer
+  BeezUP.Common.PageSize:
+    default: 100
+    description: Indicate the item count per page
+    example: 100
+    format: int32
+    maximum: 100
+    minimum: 25
+    type: integer
+  BeezUP.Common.PaginationRequestParameters:
+    properties:
+      pageNumber:
+        $ref: '#/definitions/BeezUP.Common.PageNumber'
+      pageSize:
+        $ref: '#/definitions/BeezUP.Common.PageSize'
+    type: object
   BeezUP.Common.PaginationResult:
     example:
       entryCount: 25
@@ -5430,7 +5558,7 @@ definitions:
   BeezUP.Common.ProductBasicInfo:
     description: The basic information related to a product
     properties:
-      productActive:
+      productExists:
         description: Indicates if the product still exists in your catalog
         example: true
         type: boolean
@@ -5457,7 +5585,31 @@ definitions:
       - productSku
       - productTitle
       - productImageUrl
-      - productActive
+      - productExists
+    type: object
+  BeezUP.Common.ProductFilterOperatorName:
+    description: Indicate the operator you want to make on the columnId
+    enum:
+      - Equals
+      - Contains
+      - GreaterTo
+      - LowerTo
+      - InList
+      - IsNull
+      - IsNotNull
+    type: string
+  BeezUP.Common.ProductFilters:
+    properties:
+      additionalProductFilters:
+        $ref: '#/definitions/BeezUP.Common.AdditionalProductFilters'
+      sku:
+        description: The product sku filter
+        example: M1234
+        type: string
+      title:
+        description: The product title filter
+        example: RefrigÃ©rateur
+        type: string
     type: object
   BeezUP.Common.ProductId:
     description: The product identifier
@@ -5571,12 +5723,8 @@ definitions:
       - email
       - status
       - links
-      - personalInfo
-      - companyInfo
-      - profilePictureUrl
     type: object
   accountInfoLinks:
-    additionalProperties: false
     description: The different actions you can make on this account
     properties:
       activateUserAccount:
@@ -5751,15 +5899,15 @@ definitions:
     description: Your address
     example: 21 jump street
     type: string
+  alertEnabled:
+    description: Is the alert enable ?
+    example: true
+    type: boolean
   alertId:
     description: Alert identifier
     example: 8
     format: int32
     type: integer
-  alertIsActive:
-    description: Is the alert is active ?
-    example: true
-    type: boolean
   alertName:
     description: The alert name
     example: NoImportSinceXDays
@@ -5994,7 +6142,7 @@ definitions:
     format: int32
     minimum: 1
     type: integer
-  billingPeriods:
+  billingPeriodList:
     properties:
       billingPeriods:
         description: The billing period list
@@ -6004,8 +6152,16 @@ definitions:
         items:
           $ref: '#/definitions/billingPeriod'
         type: array
+      links:
+        $ref: '#/definitions/billingPeriodListLinks'
     required:
+      - links
       - billingPeriods
+    type: object
+  billingPeriodListLinks:
+    properties:
+      self:
+        $ref: '#/definitions/links.getBillingPeriodsLink'
     type: object
   bonusInfo:
     properties:
@@ -6015,6 +6171,9 @@ definitions:
         type: number
       bonusType:
         $ref: '#/definitions/bonusType'
+    required:
+      - bonusType
+      - amount
     type: object
   bonusType:
     enum:
@@ -7463,12 +7622,14 @@ definitions:
     properties:
       amountBillingPeriodDiscount:
         description: The amount discounted related to the billing period
+        example: 20
         format: double
         type: number
       billingPeriodInMonth:
         $ref: '#/definitions/billingPeriodInMonth'
       billingPeriodPercentDiscount:
         description: The discount percent related to the billing period
+        example: 10
         format: double
         type: number
     type: object
@@ -7479,20 +7640,25 @@ definitions:
         items:
           $ref: '#/definitions/bonusInfo'
         type: array
+    required:
+      - bonuses
     type: object
   contractClickInfo:
     description: Describe the click information related to the offer.
     properties:
       additionalClickPrice:
         description: The addition click price in the offer
+        example: 0.001
         format: double
         type: number
       clickIncluded:
         description: The click included in the offer
+        example: 5000
         format: int32
         type: integer
       initialOfferClickIncluded:
         description: The click included in your current contract
+        example: 5000
         format: int32
         type: integer
     type: object
@@ -7501,18 +7667,22 @@ definitions:
     properties:
       commercialCreatorUserId:
         description: The commercial that is responsible of the creation of your account
+        example: 6e07814d-26a9-494b-91b2-e5ed0b9aba8c
         format: guid
         type: string
       commercialUserId:
         description: Your current commercial user id
+        example: 0ddc2b79-10fe-4071-8161-42faa897082f
         format: guid
         type: string
       commitmentCalculatedFinishDate:
         description: The commitment end date related to the offer
-        format: date-time
+        example: '2017-06-02'
+        format: date
         type: string
       commitmentPeriodInMonth:
         description: The commitment period in month related to the offer
+        example: 1
         format: int32
         type: integer
       contractType:
@@ -7524,10 +7694,12 @@ definitions:
         $ref: '#/definitions/couponOfferCode'
       currentContractId:
         description: Your current contract id
+        example: dce56457-aa23-478d-8d76-b56eb9be799f
         format: guid
         type: string
       currentContractTerminationDate:
         description: The current contract termination date
+        example: '2017-06-02'
         format: date
         type: string
       currentCustomerPaymentMethod:
@@ -7540,6 +7712,7 @@ definitions:
         type: boolean
       isModelMustBeTransmittedInNewContract:
         description: 'Internal usage: Old offer type. Is the current contract model needs to be converted into a new contract type'
+        example: false
         type: boolean
       minBillingPeriodInMonths:
         description: The minimum billing period in month authorized for this offer.
@@ -7548,18 +7721,22 @@ definitions:
         type: integer
       model:
         description: 'Interal usage: Old offer type. The model description'
+        example: BLABLA
         type: string
       newContractStartDate:
         description: The start date related to the offer
+        example: '2017-05-01T13:02:24'
         format: date-time
         type: string
       offerId:
         $ref: '#/definitions/offerId'
       offerName:
         description: The offer Name
+        example: Premium
         type: string
       paymentDelayInDays:
         description: The payment delay in days related to the offer
+        example: 1
         format: int32
         type: integer
       paymentMethodAuthorized:
@@ -7568,10 +7745,11 @@ definitions:
         $ref: '#/definitions/paymentMethod'
       trialPeriodFinishDate:
         description: The trial period end date related to the offer
-        format: date-time
+        format: date
         type: string
       trialPeriodInMonth:
         description: The trial period in month related to the offer
+        example: 0
         format: int32
         type: integer
       variableModelInfo:
@@ -7794,6 +7972,8 @@ definitions:
         $ref: '#/definitions/contractsLinks'
       next:
         $ref: '#/definitions/nextContractInfo'
+    required:
+      - links
     type: object
   contractsLinks:
     properties:
@@ -7852,6 +8032,20 @@ definitions:
   createContract:
     allOf:
       - $ref: '#/definitions/offerRequest'
+  createContractResponse:
+    properties:
+      info:
+        $ref: '#/definitions/BeezUP.Common.InfoSummaries'
+      links:
+        $ref: '#/definitions/createContractResponseLinks'
+    type: object
+  createContractResponseLinks:
+    properties:
+      contracts:
+        $ref: '#/definitions/links.getContractsLink'
+      self:
+        $ref: '#/definitions/links.createContractLink'
+    type: object
   createCustomColumnRequest:
     description: The request message to create a custom column
     properties:
@@ -7898,8 +8092,21 @@ definitions:
       - reportFilterId
     type: object
   createStoreRequest:
-    allOf:
-      - $ref: '#/definitions/store'
+    description: The request to create a store
+    properties:
+      countryIsoCodeAlpha3:
+        $ref: '#/definitions/storeCountryIsoCodeAlpha3'
+      name:
+        $ref: '#/definitions/storeName'
+      sectors:
+        $ref: '#/definitions/storeSectors'
+      url:
+        $ref: '#/definitions/storeUrl'
+    required:
+      - name
+      - url
+      - countryIsoCodeAlpha3
+      - sectors
     type: object
   credential:
     description: Provides the credentials
@@ -7941,29 +8148,21 @@ definitions:
       info:
         $ref: '#/definitions/BeezUP.Common.InfoSummaries'
       links:
-        additionalProperties: false
-        description: The different actions you can make on this offer
-        example:
-          - href: /v2/user/customer/creditCardinfo
-            method: GET
-            operationId: GetCreditCardInfo
-            rel: self
-          - href: /v2/user/customer/creditCardinfo
-            method: PUT
-            parameters:
-              - in: body
-                name: request
-                required: true
-                type: object
-            ref: SaveCreditCardInfo
-        properties:
-          saveCreditCardInfo:
-            $ref: '#/definitions/links.saveCreditCardInfoLink'
-          self:
-            $ref: '#/definitions/links.getCreditCardInfoLink'
-        type: object
+        $ref: '#/definitions/creditCardInfoResponseLinks'
     required:
       - links
+      - currentPaymentMethod
+    type: object
+  creditCardInfoResponseLinks:
+    description: The different actions you can make on this offer
+    properties:
+      saveCreditCardInfo:
+        $ref: '#/definitions/links.saveCreditCardInfoLink'
+      self:
+        $ref: '#/definitions/links.getCreditCardInfoLink'
+    required:
+      - self
+      - saveCreditCardInfo
     type: object
   creditCardInfoWithCardType:
     properties:
@@ -7998,10 +8197,6 @@ definitions:
         $ref: '#/definitions/links.terminateCurrentContractLink'
       reenable:
         $ref: '#/definitions/links.reactivateCurrentContractLink'
-      self:
-        $ref: '#/definitions/links.getContractsLink'
-    required:
-      - self
     type: object
   customColumn:
     description: The custom column configuration
@@ -8046,12 +8241,14 @@ definitions:
         $ref: '#/definitions/links.getContractsLink'
       friendInfo:
         $ref: '#/definitions/links.getFriendInfoLink'
+      getOffer:
+        $ref: '#/definitions/links.getOfferLink'
       invoices:
         $ref: '#/definitions/links.getInvoicesLink'
       logout:
         $ref: '#/definitions/links.logoutLink'
       self:
-        $ref: '#/definitions/links.customerIndexLink'
+        $ref: '#/definitions/links.GetCustomerIndexLink'
       standardOffers:
         $ref: '#/definitions/links.getStandardOffersLink'
       stores:
@@ -8065,6 +8262,8 @@ definitions:
     type: object
   customerIndexLovLinks:
     properties:
+      activeOfferLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
       beezUPTimeZoneLov:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
       contractTerminationReasonLov:
@@ -8074,6 +8273,8 @@ definitions:
       customerStatusLov:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
       invoicePaymentStatusLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      offerLov:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
       storeCountryLov:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
@@ -8162,6 +8363,22 @@ definitions:
     description: The encrypted excel expression of the column
     example: uziushdczaniodnndonisodndsiondsoidsndoin
     type: string
+  errorResponseMessagePaymentRequired:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
+      - properties:
+          links:
+            $ref: '#/definitions/errorResponseMessagePaymentRequiredLinks'
+        required:
+          - links
+        type: object
+  errorResponseMessagePaymentRequiredLinks:
+    properties:
+      offer:
+        $ref: '#/definitions/links.getOfferLink'
+    required:
+      - offer
+    type: object
   etag:
     description: |
       ETag value to identify the order.\
@@ -8336,6 +8553,8 @@ definitions:
         items:
           $ref: '#/definitions/clickIncludedAndAdditionalClickPrice'
         type: array
+    required:
+      - clickIncludedAndAdditionalClickPrices
     type: object
   friendCountryIsoCodeAlpha3:
     description: Your friend's user country iso code alpha 3
@@ -8364,6 +8583,9 @@ definitions:
         example: 1
         format: int32
         type: integer
+    required:
+      - code
+      - order
     type: object
   functionalityRightInfo:
     description: Describe the rights for a functionality
@@ -8863,20 +9085,7 @@ definitions:
       - paymentStatus
       - dueDate
     type: object
-  invoiceNumber:
-    description: Your invoice number
-    example: B1234
-    type: string
-  invoicePaymentStatus:
-    description: The payment status
-    enum:
-      - Paid
-      - NotPaid
-      - PartiallyPaid
-      - Loss
-    example: Paid
-    type: string
-  invoices:
+  invoiceList:
     properties:
       invoices:
         example:
@@ -8892,9 +9101,32 @@ definitions:
         items:
           $ref: '#/definitions/invoice'
         type: array
+      links:
+        $ref: '#/definitions/invoiceListLinks'
     required:
+      - links
       - invoices
     type: object
+  invoiceListLinks:
+    properties:
+      self:
+        $ref: '#/definitions/links.getInvoicesLink'
+    required:
+      - self
+    type: object
+  invoiceNumber:
+    description: Your invoice number
+    example: B1234
+    type: string
+  invoicePaymentStatus:
+    description: The payment status
+    enum:
+      - Paid
+      - NotPaid
+      - PartiallyPaid
+      - Loss
+    example: Paid
+    type: string
   lastManualImportInputConfiguration:
     description: Last manual import input configuration
     properties:
@@ -9082,6 +9314,12 @@ definitions:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
           href: /v2/public/channels/FRA
+          method: GET
+  links.GetCustomerIndexLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer
           method: GET
   links.GetMarketplaceAccountStoresLink:
     allOf:
@@ -9423,30 +9661,55 @@ definitions:
   links.activateUserAccountLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/account/activate
+          method: POST
   links.changePasswordLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/account/changePassword
+          method: POST
   links.createContractLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/contracts
+          method: POST
+          parameters:
+            request:
+              in: body
+              type: object
+              value:
+                billingPeriodInMonth: 12
+                couponDiscountCode: I-LOVE-BEEZUP
+                couponOfferCode: 04efc310-bc25-4710-a83a-faf200284fe5
+                offerId: 1
+                storeCount: 1
   links.createStoreLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
-  links.customerIndexLink:
-    allOf:
-      - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
-          href: /v2/user/customer
-          method: GET
+          href: /v2/user/customer/stores
+          method: POST
   links.deleteNextContractLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
-  links.deleteShareLink:
-    allOf:
-      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/contracts/next
+          method: DELETE
   links.deleteStoreLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/stores/51afae05-277e-4902-8b17-5a811a23a2c6
+          method: DELETE
+  links.deleteStoreShareLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/stores/51afae05-277e-4902-8b17-5a811a23a2c6/shares/277596c1-a5a9-4cce-9f34-b5906451a98f
+          method: DELETE
   links.getBillingPeriodsLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9463,7 +9726,7 @@ definitions:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
-          href: /v2/user/customer/account/creditCardinfo
+          href: /v2/user/customer/account/creditCardInfo
           method: GET
   links.getFriendInfoLink:
     allOf:
@@ -9482,15 +9745,24 @@ definitions:
       - example:
           href: /v2/user/customer/invoices
           method: GET
+  links.getOfferLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/offers
+          method: POST
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: offerRequest
+              type: object
   links.getProfilePictureInfoLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
           href: /v2/user/customer/account/profilePictureInfo
           method: GET
-  links.getSharesLink:
-    allOf:
-      - $ref: '#/definitions/BeezUP.Common.Link3'
   links.getStandardOffersLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9500,6 +9772,15 @@ definitions:
   links.getStoreLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/stores/51afae05-277e-4902-8b17-5a811a23a2c6
+          method: GET
+  links.getStoreSharesLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/stores/51afae05-277e-4902-8b17-5a811a23a2c6/shares
+          method: GET
   links.getStoresLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9521,30 +9802,62 @@ definitions:
   links.reactivateCurrentContractLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/contracts/current/reenableAutoRenewal
+          method: POST
   links.saveCompanyInfoLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/account/companyInfo
+          method: PUT
   links.saveCreditCardInfoLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/account/creditCardInfo
+          method: PUT
   links.savePersonalInfoLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/account/personalInfo
+          method: PUT
   links.saveProfilePictureInfoLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
-  links.saveStoreAlertLink:
+      - example:
+          href: /v2/user/customer/account/profilePictureInfo
+          method: PUT
+  links.saveStoreAlertsLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
-  links.shareLink:
+      - example:
+          href: /v2/user/customer/stores/51afae05-277e-4902-8b17-5a811a23a2c6/alerts
+          method: POST
+  links.shareStoreLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/stores/51afae05-277e-4902-8b17-5a811a23a2c6/shares
+          method: POST
+          parameters:
+            email:
+              in: body
+              required: true
+              type: string
   links.terminateCurrentContractLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/contracts/current/disableAutoRenewal
+          method: POST
   links.updateStoreLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/customer/stores/51afae05-277e-4902-8b17-5a811a23a2c6
+          method: PATCH
   loginRequest:
     properties:
       login:
@@ -9712,10 +10025,6 @@ definitions:
     properties:
       delete:
         $ref: '#/definitions/links.deleteNextContractLink'
-      self:
-        $ref: '#/definitions/links.getContractsLink'
-    required:
-      - self
     type: object
   offer:
     properties:
@@ -9724,26 +10033,7 @@ definitions:
       info:
         $ref: '#/definitions/BeezUP.Common.InfoSummaries'
       links:
-        additionalProperties: false
-        description: The different actions you can make on this offer
-        example:
-          - href: /v2/user/customer/contracts
-            operationId: CreateContract
-            parameters:
-              - in: body
-                name: request
-                type: object
-                value:
-                  billingPeriodInMonth: 12
-                  couponDiscountCode: I-LOVE-BEEZUP
-                  couponOfferCode: 04efc310-bc25-4710-a83a-faf200284fe5
-                  offerId: 1
-                  storeCount: 1
-            rel: CreateContract
-        properties:
-          createContract:
-            $ref: '#/definitions/links.createContractLink'
-        type: object
+        $ref: '#/definitions/offerLinks'
     type: object
   offerContent:
     properties:
@@ -9811,6 +10101,12 @@ definitions:
     format: int32
     minimum: 1
     type: integer
+  offerLinks:
+    description: The different actions you can make on this offer
+    properties:
+      createContract:
+        $ref: '#/definitions/links.createContractLink'
+    type: object
   offerRequest:
     properties:
       billingPeriodInMonth:
@@ -10815,6 +11111,7 @@ definitions:
         type: number
       computedProrataToBeDeducted:
         description: The prorata amount
+        example: 194.66
         format: double
         type: number
       contractId:
@@ -10824,11 +11121,13 @@ definitions:
         type: string
       fixedPeriodEndDate:
         description: The fixed end period of the previous invoice
-        format: date-time
+        example: '2017-05-01'
+        format: date
         type: string
       fixedPeriodStartDate:
         description: The fixed start period of the previous invoice
-        format: date-time
+        example: '2017-04-01'
+        format: date
         type: string
       invoiceNumber:
         description: The previous invoice number
@@ -12070,8 +12369,8 @@ definitions:
     type: object
   saveStoreAlertRequest:
     properties:
-      active:
-        $ref: '#/definitions/alertIsActive'
+      enabled:
+        $ref: '#/definitions/alertEnabled'
       properties:
         description: Properties to configure the alert
         example:
@@ -12081,7 +12380,12 @@ definitions:
           $ref: '#/definitions/storeAlertProperty'
         type: array
     required:
-      - active
+      - enabled
+    type: object
+  saveStoreAlertsRequest:
+    additionalProperties:
+      $ref: '#/definitions/saveStoreAlertRequest'
+    description: The key is the alert identifier (alertId)
     type: object
   scheduleAutoImportRequest:
     description: The message request to schedule the auto import
@@ -12218,6 +12522,8 @@ definitions:
         description: Is an old offer
         example: false
         type: boolean
+      links:
+        $ref: '#/definitions/standardOfferLinks'
       name:
         description: The offer name
         example: Wonder offer
@@ -12232,6 +12538,15 @@ definitions:
         example: 1
         format: int32
         type: integer
+    required:
+      - offerId
+      - name
+      - links
+    type: object
+  standardOfferLinks:
+    properties:
+      getOffer:
+        $ref: '#/definitions/links.getOfferLink'
     type: object
   standardOffers:
     properties:
@@ -12243,6 +12558,8 @@ definitions:
         items:
           $ref: '#/definitions/functionality'
         type: array
+      links:
+        $ref: '#/definitions/standardOffersLinks'
       offers:
         description: All standard offers
         example:
@@ -12262,6 +12579,17 @@ definitions:
         items:
           $ref: '#/definitions/standardOffer'
         type: array
+    required:
+      - links
+      - offers
+      - functionalities
+    type: object
+  standardOffersLinks:
+    properties:
+      self:
+        $ref: '#/definitions/links.getStandardOffersLink'
+    required:
+      - self
     type: object
   startManualImportRequest:
     description: The message request start a manual importation process.  Indicate the way to handle duplicate product. Can be null if you want to reuse the configuration of the previous importation succeed.
@@ -12277,48 +12605,57 @@ definitions:
     properties:
       countryIsoCodeAlpha3:
         $ref: '#/definitions/storeCountryIsoCodeAlpha3'
+      creationUtcDate:
+        description: The creation date of the store
+        example: '2017-04-01T22:30:00Z'
+        format: date-time
+        type: string
+      links:
+        $ref: '#/definitions/storeLinks'
       name:
         $ref: '#/definitions/storeName'
+      ownerUserId:
+        description: The user id of the owner of the store
+        example: 00000000-0000-0000-0000-000000000000
+        format: guid
+        type: string
       sectors:
         $ref: '#/definitions/storeSectors'
+      shareCount:
+        description: The share count related to this store
+        example: 5
+        type: integer
+      status:
+        $ref: '#/definitions/storeStatus'
+      storeId:
+        $ref: '#/definitions/BeezUP.Common.StoreId'
       url:
         $ref: '#/definitions/storeUrl'
+      userRole:
+        $ref: '#/definitions/storeUserRole'
     required:
+      - storeId
       - name
       - url
       - countryIsoCodeAlpha3
+      - userRole
+      - status
+      - ownerUserId
+      - shareCount
+      - creationUtcDate
       - sectors
+      - links
+    type: object
   storeAlert:
     properties:
-      active:
-        $ref: '#/definitions/alertIsActive'
       alertId:
         $ref: '#/definitions/alertId'
       alertName:
         $ref: '#/definitions/alertName'
+      enabled:
+        $ref: '#/definitions/alertEnabled'
       links:
-        additionalProperties: false
-        description: The different actions you can make on this offer
-        example:
-          - href: '/v2/user/customer/stores/{storeId}/alerts/{alertId}'
-            method: PUT
-            parameters:
-              - in: path
-                name: storeId
-                required: true
-                value: 00000000-0000-0000-0000-000000000000
-              - in: path
-                name: alertId
-                required: true
-                value: 8
-              - in: body
-                name: request
-                required: true
-            rel: save
-        properties:
-          saveStoreAlert:
-            $ref: '#/definitions/links.saveStoreAlertLink'
-        type: object
+        $ref: '#/definitions/storeAlertLinks'
       properties:
         description: The current configuration properties of the alert
         example:
@@ -12329,9 +12666,16 @@ definitions:
           $ref: '#/definitions/storeAlertPropertyInfo'
         type: array
     required:
+      - links
       - alertId
       - alertName
-      - active
+      - enabled
+    type: object
+  storeAlertLinks:
+    description: The different actions you can make on this alert
+    properties:
+      save:
+        $ref: '#/definitions/links.saveStoreAlertsLink'
     type: object
   storeAlertProperty:
     properties:
@@ -12384,79 +12728,61 @@ definitions:
     example: DEU
     type: string
     x-lov: StoreCountry
-  storeHeader:
-    allOf:
-      - $ref: '#/definitions/store'
-      - properties:
-          creationUtcDate:
-            description: The creation date of the store
-            example: '2017-04-01T22:30:00Z'
-            format: date-time
-            type: string
-          links:
-            additionalProperties: false
-            description: The action links for this store
-            properties:
-              deleteStore:
-                $ref: '#/definitions/links.deleteStoreLink'
-              getShares:
-                $ref: '#/definitions/links.getSharesLink'
-              self:
-                $ref: '#/definitions/links.getStoreLink'
-              share:
-                $ref: '#/definitions/links.shareLink'
-              updateStore:
-                $ref: '#/definitions/links.updateStoreLink'
-            type: object
-          ownerUserId:
-            description: The user id of the owner of the store
-            example: 00000000-0000-0000-0000-000000000000
-            format: guid
-            type: string
-          shareCount:
-            description: The share count related to this store
-            example: 5
-            type: integer
-          status:
-            $ref: '#/definitions/storeStatus'
-          storeId:
-            $ref: '#/definitions/BeezUP.Common.StoreId'
-          userRole:
-            $ref: '#/definitions/storeUserRole'
-        required:
-          - storeId
-          - userRole
-          - status
-          - ownerUserId
-          - shareCount
-          - creationUtcDate
-          - links
-        type: object
+  storeLinks:
+    description: The action links for this store
+    properties:
+      deleteStore:
+        $ref: '#/definitions/links.deleteStoreLink'
+      self:
+        $ref: '#/definitions/links.getStoreLink'
+      share:
+        $ref: '#/definitions/links.shareStoreLink'
+      shares:
+        $ref: '#/definitions/links.getStoreSharesLink'
+      updateStore:
+        $ref: '#/definitions/links.updateStoreLink'
+    type: object
+  storeList:
+    properties:
+      links:
+        $ref: '#/definitions/storeListLinks'
+      stores:
+        items:
+          $ref: '#/definitions/store'
+        type: array
+    required:
+      - links
+      - stores
+    type: object
+  storeListLinks:
+    description: The action links you can do globally on stores
+    properties:
+      createStore:
+        $ref: '#/definitions/links.createStoreLink'
+      self:
+        $ref: '#/definitions/links.getStoresLink'
+    type: object
   storeName:
     description: The store name. Must be unique.
     example: My Store
     type: string
   storeSector:
     description: The store's sector based on the list of values /user/lov/ParamSector
-    example: 1
-    type: integer
+    example: ANIMALERIE
+    type: string
     x-lov: ParamSector
   storeSectors:
     description: The store's sectors based on the list of values /user/lov/ParamSector
     example:
-      - 1
+      - ANIMALERIE
+      - AUTOMOTO
     items:
       $ref: '#/definitions/storeSector'
     type: array
   storeShare:
     properties:
       links:
-        additionalProperties: false
-        description: The different actions you can make on this share
-        properties:
-          deleteShare:
-            $ref: '#/definitions/links.deleteShareLink'
-        type: object
+        $ref: '#/definitions/storeShareLinks'
       userId:
         $ref: '#/definitions/BeezUP.Common.UserId'
       userRole:
@@ -12466,34 +12792,30 @@ definitions:
       - userRole
       - links
     type: object
+  storeShareLinks:
+    description: The different actions you can make on this store share
+    properties:
+      deleteShare:
+        $ref: '#/definitions/links.deleteStoreShareLink'
+    type: object
   storeShares:
     properties:
       links:
-        additionalProperties: false
-        properties:
-          share:
-            $ref: '#/definitions/links.shareLink'
-        required:
-          - share
-        type: object
+        $ref: '#/definitions/storeSharesLinks'
       shares:
-        example:
-          - links:
-              deleteShare:
-                href: '/v2/user/stores/{storeId}/shares/{userId}'
-                method: DELETE
-                operationId: DeleteShare
-                parameters:
-                  storeId: 51afae05-277e-4902-8b17-5a811a23a2c6
-                  userId: 277596c1-a5a9-4cce-9f34-b5906451a98f
-            storeRole: User
-            userId: 277596c1-a5a9-4cce-9f34-b5906451a98f
         items:
           $ref: '#/definitions/storeShare'
         type: array
     required:
       - links
       - shares
+    type: object
+  storeSharesLinks:
+    properties:
+      self:
+        $ref: '#/definitions/links.getStoreSharesLink'
+      share:
+        $ref: '#/definitions/links.shareStoreLink'
     type: object
   storeStatus:
     description: |
@@ -12540,57 +12862,6 @@ definitions:
       - User
     example: User
     type: string
-  stores:
-    properties:
-      links:
-        additionalProperties: false
-        description: The action links
-        properties:
-          createStore:
-            $ref: '#/definitions/links.createStoreLink'
-          getStores:
-            $ref: '#/definitions/links.getStoresLink'
-        type: object
-      storeList:
-        example:
-          - creationUtcDate: '2001-01-01T00:00:00'
-            links:
-              - href: '/v2/user/stores/{storeId}'
-                method: GET
-                operationId: GetStore
-                rel: self
-              - href: '/v2/user/stores/{storeId}'
-                method: DELETE
-                operationId: DeleteStore
-                rel: DeleteStore
-              - href: '/v2/user/stores/{storeId}'
-                method: PATCH
-                operationId: UpdateStore
-                parameters:
-                  - in: body
-                    name: request
-                    required: true
-                    type: object
-                rel: UpdateStore
-              - href: '/v2/user/stores/{storeId}/shares'
-                method: GET
-                operationId: GetShares
-                rel: GetShares
-            name: My Store
-            ownerUserId: 00000000-0000-0000-0000-000000000000
-            sectors:
-              - 1
-            status: Active
-            storeId: 00000000-0000-0000-0000-000000000000
-            url: 'http://www.mystore.com'
-            userRole: Owner
-        items:
-          $ref: '#/definitions/storeHeader'
-        type: array
-    required:
-      - links
-      - storeList
-    type: object
   terminateContract:
     description: The contract termination info
     properties:
@@ -12972,6 +13243,10 @@ definitions:
         description: The overflow click price
         format: double
         type: number
+    required:
+      - clickIncludedAndVariablePrices
+      - overflowClickCount
+      - overflowClickPrice
     type: object
   vatNumber:
     description: Your company VATNumber. Used for french company. This number is checked with official web service before being saved.
@@ -12986,7 +13261,7 @@ x-beezup-api-ops:
   apiName: V2PublicSecurity
   appRoot: BeezUP.Customer.WebService
   comment: |
-    Change the product name from BeezUP API to UserApi to correspond to the reality
+    No change. Just server side generation.
   namespace: BeezUP.Customer.WebService
   repo: Customer
 x-tagGroups:
@@ -13006,6 +13281,7 @@ x-tagGroups:
     tags:
       - Customer - Global
       - Customer - Account
+      - Customer - Security
       - Customer - Stores
       - Customer - Shares
       - Customer - Alerts
@@ -13013,7 +13289,6 @@ x-tagGroups:
       - Customer - Friends
       - Customer - Contracts
       - Customer - Invoices
-      - Customer - Security
   - name: Catalogs
     tags:
       - Catalogs - Auto

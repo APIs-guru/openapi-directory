@@ -1843,7 +1843,7 @@ paths:
         - files
   '/files/{fileId}/export':
     get:
-      description: Exports a Google Doc to the requested MIME type and returns the exported content.
+      description: Exports a Google Doc to the requested MIME type and returns the exported content. Please note that the exported content is limited to 10MB.
       operationId: drive.files.export
       parameters:
         - description: The ID of the file.

@@ -664,7 +664,7 @@ paths:
         '201':
           description: "The creation of the booking was successful. You will get back the confirmation id and maybe warnings, if\r\n            e.g. the prepayment could not be captured."
           schema:
-            $ref: '#/definitions/BaseResponse'
+            $ref: '#/definitions/ReservationConfirmation'
         '400':
           description: Bad request. Request body erroneous.
         '401':
@@ -1147,6 +1147,56 @@ paths:
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Cancel one reservation.
+      tags:
+        - Bookings
+  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/check_in':
+    post:
+      consumes: []
+      deprecated: false
+      description: "With this call you can set a reservation to the status inhouse. It allows only single room reservations to be checked in.\r\n            The reservation must have assigned a vacant and clean room.<br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
+      operationId: Bookings_CheckIn
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The confirmation id for the booking the reservation was made.
+          in: path
+          name: confirmationId
+          required: true
+          type: string
+        - description: Specifies the reservation number for the reservation to be checked in.
+          format: int32
+          in: path
+          name: reservationNumber
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: The check in was successful
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: 'The request failed to validate. The reason could be wrong room or reservation status, wrong start date of reservation etc.'
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Performs a check in operation for a reservation.
       tags:
         - Bookings
   /api/booking/v0/daily_rates:
@@ -3192,8 +3242,26 @@ definitions:
         description: "The number of rooms this reservation is for. After a multi-room booking is done there will be \r\n            one reservation in hetras for all rooms. The hotel staff then will split this reservation into\r\n            one reservation per room to be able to check in the guests"
         format: int32
         type: integer
+      travelAgent:
+        $ref: '#/definitions/Company'
+        description: The travel agency that will be linked to this reservation
     required:
       - hotel_id
+    type: object
+  ReservationConfirmation:
+    properties:
+      _warnings:
+        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r\n            you see such warnings in your response"
+        items:
+          type: string
+        type: array
+      confirmation_id:
+        description: "The confirmation id for the newly created booking which the guest can use to check in on the kiosk, add the\r\n            booking to the mobile app etc."
+        type: string
+      reservation_id:
+        description: The reservation number of the newly created reservation
+        format: int32
+        type: integer
     type: object
   ReservationDetails:
     properties:
@@ -3272,6 +3340,9 @@ definitions:
         description: "The number of rooms this reservation is for. After a multi-room booking is done there will be \r\n            one reservation in hetras for all rooms. The hotel staff then will split this reservation into\r\n            one reservation per room to be able to check in the guests"
         format: int32
         type: integer
+      travelAgent:
+        $ref: '#/definitions/Company'
+        description: The travel agency that will be linked to this reservation
     required:
       - hotel_id
     type: object

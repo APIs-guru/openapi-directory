@@ -37,6 +37,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-vision': Apply machine learning models to understand and label images
     type: oauth2
   Oauth2c:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -44,6 +45,7 @@ securityDefinitions:
     flow: accessCode
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-vision': Apply machine learning models to understand and label images
     tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
@@ -158,6 +160,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-vision'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-vision'
       tags:
         - images
 definitions:
@@ -553,10 +559,8 @@ definitions:
       boundingPoly:
         $ref: '#/definitions/BoundingPoly'
         description: |-
-          Image region to which this entity belongs. Currently not produced
-          for `LABEL_DETECTION` features. For `TEXT_DETECTION` (OCR), `boundingPoly`s
-          are produced for the entire text detected in an image region, followed by
-          `boundingPoly`s for each word within the detected text.
+          Image region to which this entity belongs. Not produced
+          for `LABEL_DETECTION` features.
       confidence:
         description: |-
           The accuracy of the entity detection in an image.

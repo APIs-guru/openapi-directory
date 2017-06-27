@@ -124,8 +124,50 @@ paths:
       summary: Effluent Charts Download Service
       tags:
         - Effluent Charts
+    post:
+      description: Downloads tabular Discharge Monitoring Report (DMR) and compliance data for one NPDES permit as a CSV.
+      parameters:
+        - $ref: '#/parameters/p_id'
+        - $ref: '#/parameters/outfall'
+        - $ref: '#/parameters/parameter_code'
+        - $ref: '#/parameters/start_date'
+        - $ref: '#/parameters/end_date'
+      responses:
+        '200':
+          description: Returns an object with summary effluent information
+          schema:
+            type: file
+      summary: Effluent Charts Download Service
+      tags:
+        - Effluent Charts
   /eff_rest_services.get_effluent_chart:
     get:
+      description: |+
+        Discharge Monitoring Report (DMR) data supporting each effluent chart for one NPDES permit. Includes Discharge Monitoring Reports and NPDES Violations. 
+
+      parameters:
+        - $ref: '#/parameters/p_id'
+        - $ref: '#/parameters/outfall'
+        - $ref: '#/parameters/parameter_code'
+        - $ref: '#/parameters/start_date'
+        - $ref: '#/parameters/end_date'
+        - $ref: '#/parameters/output'
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Returns an object with detailed effluent information
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/eff1_Results'
+            required:
+              - Results
+            type: object
+      summary: Detailed Effluent Chart Service
+      tags:
+        - Effluent Charts
+    post:
       description: |+
         Discharge Monitoring Report (DMR) data supporting each effluent chart for one NPDES permit. Includes Discharge Monitoring Reports and NPDES Violations. 
 
@@ -174,6 +216,28 @@ paths:
       summary: Summary Effluent Chart Service
       tags:
         - Effluent Charts
+    post:
+      description: Summary of compliance status each outfall and parameter for one NPDES permit. Provides the current compliance status and overall compliance status for the date range of interest. This service supports the Summary Matrix on the Effluent Charts.
+      parameters:
+        - $ref: '#/parameters/p_id'
+        - $ref: '#/parameters/output'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/start_date'
+        - $ref: '#/parameters/end_date'
+      responses:
+        '200':
+          description: Returns an object with summary effluent information
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/eff2_Results'
+            required:
+              - Results
+            type: object
+      summary: Summary Effluent Chart Service
+      tags:
+        - Effluent Charts
   /rest_lookups.cwa_parameters:
     get:
       description: Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term.
@@ -191,7 +255,30 @@ paths:
             description: Root Object
             properties:
               Results:
-                $ref: '#/definitions/rlk9_Results'
+                $ref: '#/definitions/rlk16_Results'
+            required:
+              - Results
+            type: object
+      summary: ECHO CWA Parameter Lookup Service
+      tags:
+        - Lookups
+    post:
+      description: Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term.
+      parameters:
+        - $ref: '#/parameters/output'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/search_term'
+        - $ref: '#/parameters/search_code'
+      responses:
+        '200':
+          description: |-
+            Returns an array of parameter codes and descriptions that contain the search_term or search_code entered. If search term or search code not provided, returns all values. ValueCode is the 5-digit parameter code.
+            ValueDescription is the parameter description.
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/rlk16_Results'
             required:
               - Results
             type: object
@@ -1015,7 +1102,7 @@ definitions:
       - StartDate
       - EndDate
     type: object
-  rlk0_LuValues:
+  rlk00_LuValues:
     description: Lookup Values
     properties:
       ValueCode:
@@ -1030,12 +1117,12 @@ definitions:
       - ValueCode
       - ValueDescription
     type: object
-  rlk9_Results:
+  rlk16_Results:
     description: Results Object
     properties:
       LuValues:
         items:
-          $ref: '#/definitions/rlk0_LuValues'
+          $ref: '#/definitions/rlk00_LuValues'
         type: array
       Message:
         description: Field to record messages (typically performance-related) about packet processing

@@ -384,19 +384,14 @@ parameters:
     required: false
     type: string
   p_med:
-    description: |-
-      Filter Results by Media.
-      - A = Air
-      - M = RMP (Risk Management Plan)
-      - R = RCRA (Hazardous Waste)
-      - S = SDWA (Public Drinking Water Systems)
-      - W = Water
-      - ALL = Air and Water and RCRA
+    description: Filter Results by Media.- A = Air- C = CAMD (Clean Air Markets Division)- M = RMP (Risk Management Plan)- R = RCRA (Hazardous Waste)- S = SDWA (Public Drinking Water Systems)- T = TRI (Toxic Release Inventory)- W = Water- ALL = Air and Water and RCRA
     enum:
       - A
+      - C
       - M
       - R
       - S
+      - T
       - W
       - ALL
     in: query
@@ -778,7 +773,33 @@ parameters:
 paths:
   /echo_rest_services.get_download:
     get:
-      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return a comma sepated vaule (CSV) file of the facilities found.'
+      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return a comma separated value (CSV) file of the facilities found.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
+          in: query
+          name: qcolumns
+          required: false
+          type: string
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
+          schema:
+            type: file
+      summary: Combined ECHO Download Data Service
+      tags:
+        - Facility Info
+    post:
+      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return a comma separated value (CSV) file of the facilities found.'
       parameters:
         - description: |-
             Output Format Flag.  Enter one of the following keywords:
@@ -805,6 +826,111 @@ paths:
         - Facility Info
   /echo_rest_services.get_facilities:
     get:
+      description: Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_fn'
+        - $ref: '#/parameters/p_sa'
+        - $ref: '#/parameters/p_sa1'
+        - $ref: '#/parameters/p_ct'
+        - $ref: '#/parameters/p_co'
+        - $ref: '#/parameters/p_fips'
+        - $ref: '#/parameters/p_st'
+        - $ref: '#/parameters/p_zip'
+        - $ref: '#/parameters/p_sid'
+        - $ref: '#/parameters/p_frs'
+        - $ref: '#/parameters/p_reg'
+        - $ref: '#/parameters/p_sic'
+        - $ref: '#/parameters/p_ncs'
+        - $ref: '#/parameters/p_pen'
+        - $ref: '#/parameters/p_c1lat'
+        - $ref: '#/parameters/p_c1lon'
+        - $ref: '#/parameters/p_c2lat'
+        - $ref: '#/parameters/p_c2lon'
+        - $ref: '#/parameters/p_usmex'
+        - $ref: '#/parameters/p_sic2'
+        - $ref: '#/parameters/p_sic4'
+        - $ref: '#/parameters/p_fa'
+        - $ref: '#/parameters/p_ff'
+        - $ref: '#/parameters/p_act'
+        - $ref: '#/parameters/p_maj'
+        - $ref: '#/parameters/p_mact'
+        - $ref: '#/parameters/p_fea'
+        - $ref: '#/parameters/p_feay'
+        - $ref: '#/parameters/p_feaa'
+        - $ref: '#/parameters/p_feac'
+        - $ref: '#/parameters/p_iea'
+        - $ref: '#/parameters/p_ieay'
+        - $ref: '#/parameters/p_ieaa'
+        - $ref: '#/parameters/p_cs'
+        - $ref: '#/parameters/p_qiv'
+        - $ref: '#/parameters/p_naa'
+        - $ref: '#/parameters/p_impw'
+        - $ref: '#/parameters/p_trep'
+        - $ref: '#/parameters/p_ocr'
+        - $ref: '#/parameters/p_oct'
+        - $ref: '#/parameters/p_pm'
+        - $ref: '#/parameters/p_pd'
+        - $ref: '#/parameters/p_ico'
+        - $ref: '#/parameters/p_huc'
+        - $ref: '#/parameters/p_pid'
+        - $ref: '#/parameters/p_med'
+        - $ref: '#/parameters/p_ysl'
+        - $ref: '#/parameters/p_ysly'
+        - $ref: '#/parameters/p_ysla'
+        - $ref: '#/parameters/p_qs'
+        - $ref: '#/parameters/p_sfs'
+        - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
+        - $ref: '#/parameters/p_tribedist'
+        - $ref: '#/parameters/p_wbd'
+        - $ref: '#/parameters/p_fntype'
+        - $ref: '#/parameters/p_icoo'
+        - $ref: '#/parameters/p_fac_icos'
+        - $ref: '#/parameters/p_ejscreen'
+        - $ref: '#/parameters/p_limit_addr'
+        - $ref: '#/parameters/p_lat'
+        - $ref: '#/parameters/p_long'
+        - $ref: '#/parameters/p_radius'
+        - $ref: '#/parameters/p_ejscreen_over80cnt'
+        - $ref: '#/parameters/queryset'
+        - $ref: '#/parameters/responseset'
+        - $ref: '#/parameters/tablelist'
+        - $ref: '#/parameters/maplist'
+        - $ref: '#/parameters/summarylist'
+        - $ref: '#/parameters/callback'
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
+          in: query
+          name: qcolumns
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Results are summary statistics for the query and a query identifier (QID).
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/ers1_Results'
+            required:
+              - Results
+            type: object
+      summary: Combined ECHO Facility Search Service
+      tags:
+        - Facility Info
+    post:
       description: Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size
       parameters:
         - description: |-
@@ -1012,6 +1138,108 @@ paths:
       summary: Combined ECHO Facility Enhanced Search Service
       tags:
         - Facility Info
+    post:
+      description: Returns either an array of Facilities or an array of Clusters that meet the specified search criteria.
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+            - CSV = Facility results formatted as comma delimited file download.
+            - GEOJSON = Facility results formatted as GeoJSON feature collection.
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_fn'
+        - $ref: '#/parameters/p_sa'
+        - $ref: '#/parameters/p_sa1'
+        - $ref: '#/parameters/p_ct'
+        - $ref: '#/parameters/p_co'
+        - $ref: '#/parameters/p_fips'
+        - $ref: '#/parameters/p_st'
+        - $ref: '#/parameters/p_zip'
+        - $ref: '#/parameters/p_sid'
+        - $ref: '#/parameters/p_frs'
+        - $ref: '#/parameters/p_reg'
+        - $ref: '#/parameters/p_sic'
+        - $ref: '#/parameters/p_ncs'
+        - $ref: '#/parameters/p_pen'
+        - $ref: '#/parameters/xmin'
+        - $ref: '#/parameters/ymin'
+        - $ref: '#/parameters/xmax'
+        - $ref: '#/parameters/ymax'
+        - $ref: '#/parameters/p_usmex'
+        - $ref: '#/parameters/p_sic2'
+        - $ref: '#/parameters/p_sic4'
+        - $ref: '#/parameters/p_fa'
+        - $ref: '#/parameters/p_ff'
+        - $ref: '#/parameters/p_act'
+        - $ref: '#/parameters/p_maj'
+        - $ref: '#/parameters/p_mact'
+        - $ref: '#/parameters/p_fea'
+        - $ref: '#/parameters/p_feay'
+        - $ref: '#/parameters/p_feaa'
+        - $ref: '#/parameters/p_feac'
+        - $ref: '#/parameters/p_iea'
+        - $ref: '#/parameters/p_ieay'
+        - $ref: '#/parameters/p_ieaa'
+        - $ref: '#/parameters/p_cs'
+        - $ref: '#/parameters/p_qiv'
+        - $ref: '#/parameters/p_naa'
+        - $ref: '#/parameters/p_impw'
+        - $ref: '#/parameters/p_trep'
+        - $ref: '#/parameters/p_ocr'
+        - $ref: '#/parameters/p_oct'
+        - $ref: '#/parameters/p_pm'
+        - $ref: '#/parameters/p_pd'
+        - $ref: '#/parameters/p_ico'
+        - $ref: '#/parameters/p_huc'
+        - $ref: '#/parameters/p_pid'
+        - $ref: '#/parameters/p_med'
+        - $ref: '#/parameters/p_ysl'
+        - $ref: '#/parameters/p_ysly'
+        - $ref: '#/parameters/p_ysla'
+        - $ref: '#/parameters/p_qs'
+        - $ref: '#/parameters/p_sfs'
+        - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
+        - $ref: '#/parameters/p_tribedist'
+        - $ref: '#/parameters/p_wbd'
+        - $ref: '#/parameters/p_fntype'
+        - $ref: '#/parameters/p_icoo'
+        - $ref: '#/parameters/p_fac_icos'
+        - $ref: '#/parameters/p_ejscreen'
+        - $ref: '#/parameters/p_limit_addr'
+        - $ref: '#/parameters/p_lat'
+        - $ref: '#/parameters/p_long'
+        - $ref: '#/parameters/p_radius'
+        - $ref: '#/parameters/p_ejscreen_over80cnt'
+        - $ref: '#/parameters/responseset'
+        - $ref: '#/parameters/callback'
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
+          in: query
+          name: qcolumns
+          required: false
+          type: string
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: 'Results will either be an array of Facilities or an array of Clusters. The determination as to whether Facilities or Clusters are returned is based on the number of facilities that meet the specified criteria. Generally, if there are more than ~2000 facilities, the search will return clusters; otherwise individual facility records will be returned.'
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/ers2_Results'
+            required:
+              - Results
+            type: object
+      summary: Combined ECHO Facility Enhanced Search Service
+      tags:
+        - Facility Info
   /echo_rest_services.get_geojson:
     get:
       description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return GeoJSON of the facilities found.'
@@ -1039,7 +1267,69 @@ paths:
         '200':
           description: Results are formatted as a GeoJSON feature collection.
           schema:
-            $ref: '#/definitions/ers5_FeatureCollection'
+            description: GeoJSON Feature Collection Object
+            properties:
+              features:
+                description: Array of GeoJSON feature objects.
+                items:
+                  $ref: '#/definitions/ers5_Feature'
+                title: Features Array
+                type: array
+              type:
+                description: Static marker indicating object is a GeoJSON Feature Collection.
+                example: FeatureCollection
+                title: Feature Collection
+                type: string
+            required:
+              - type
+              - features
+            type: object
+      summary: Combined ECHO GeoJSON Service
+      tags:
+        - Facility Info
+    post:
+      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return GeoJSON of the facilities found.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - GEOJSON = Facility results formatted as GeoJSON feature collection (default).
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/newsort'
+        - $ref: '#/parameters/descending'
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
+          in: query
+          name: qcolumns
+          required: false
+          type: string
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are formatted as a GeoJSON feature collection.
+          schema:
+            description: GeoJSON Feature Collection Object
+            properties:
+              features:
+                description: Array of GeoJSON feature objects.
+                items:
+                  $ref: '#/definitions/ers5_Feature'
+                title: Features Array
+                type: array
+              type:
+                description: Static marker indicating object is a GeoJSON Feature Collection.
+                example: FeatureCollection
+                title: Feature Collection
+                type: string
+            required:
+              - type
+              - features
+            type: object
       summary: Combined ECHO GeoJSON Service
       tags:
         - Facility Info
@@ -1065,8 +1355,67 @@ paths:
       summary: Combined ECHO Info Clusters Service
       tags:
         - Facility Info
+    post:
+      description: 'Based on the QID obtained from a clustered get_facility_info query, download cluster facility information as either a CSV or GEOJSON file.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_qid'
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
+          schema:
+            type: file
+      summary: Combined ECHO Info Clusters Service
+      tags:
+        - Facility Info
   /echo_rest_services.get_map:
     get:
+      description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_facilities facility query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/tablelist'
+        - $ref: '#/parameters/c1_lat'
+        - $ref: '#/parameters/c1_long'
+        - $ref: '#/parameters/c2_lat'
+        - $ref: '#/parameters/c2_long'
+        - $ref: '#/parameters/p_id'
+      responses:
+        '200':
+          description: 'Results are either an array of State, County, Zip Code facility cluster map coordinates or individual facility coordinates.  Coordinates provided are in WGS84.'
+          schema:
+            description: Root Object
+            properties:
+              MapOutput:
+                $ref: '#/definitions/ers0_MapOutput'
+            required:
+              - MapOutput
+            type: object
+      summary: Combined ECHO Map Service
+      tags:
+        - Facility Info
+    post:
       description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_facilities facility query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
       parameters:
         - description: |-
@@ -1145,8 +1494,79 @@ paths:
       summary: Combined ECHO Paginated Results Service
       tags:
         - Facility Info
+    post:
+      description: 'GET_QID is passed with a query ID corresponding to a previously run get_facilities query. It then returns a Facility object containing all matching facilities. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/pageno'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/newsort'
+        - $ref: '#/parameters/descending'
+        - description: Used to cutomize service output.  A list of comma-separated column IDs of output objects that will be returned in the service query object or download.  Use the metadata service endpoint for a complete list of Ids and definitions.
+          in: query
+          name: qcolumns
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Results are an array (page) Facility Registry System (FRS)  Facilities with the number of facilities equal to the responseset (page size).
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/ers4_Results'
+            required:
+              - Results
+            type: object
+      summary: Combined ECHO Paginated Results Service
+      tags:
+        - Facility Info
   /echo_rest_services.metadata:
     get:
+      description: 'Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facility_info and other service endpoints.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Results are an array of columns/objects.
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/met_Results'
+            required:
+              - Results
+            type: object
+      summary: Combined ECHO Metadata Service
+      tags:
+        - Metadata
+    post:
       description: 'Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facility_info and other service endpoints.'
       parameters:
         - description: |-
@@ -1414,6 +1834,10 @@ definitions:
       CWAQtrsInNC:
         type: string
       CWASics:
+        type: string
+      CamdIDs:
+        description: Facility identifiers for the Clean Air Markets Division database.
+        title: Clean Air Markets Division Identifiers
         type: string
       CensusBlockGroup:
         description: 'A geographic unit used by the United States Census Bureau, generally defined to contain between 600 and 3,000 people.'
@@ -2077,6 +2501,7 @@ definitions:
       - FacDerivedWBDHu8Name
       - FacDerivedRadWBDHu8
       - FacDerivedRadWBDHu8Name
+      - CamdIDs
       - Score
       - MaxScore
     type: object
@@ -2396,6 +2821,10 @@ definitions:
         type: string
       CWASics:
         type: string
+      CamdIDs:
+        description: Facility identifiers for the Clean Air Markets Division database.
+        title: Clean Air Markets Division Identifiers
+        type: string
       CensusBlockGroup:
         description: 'A geographic unit used by the United States Census Bureau, generally defined to contain between 600 and 3,000 people.'
         example: '110010096022'
@@ -3064,6 +3493,7 @@ definitions:
       - FacDerivedWBDHu8Name
       - FacDerivedRadWBDHu8
       - FacDerivedRadWBDHu8Name
+      - CamdIDs
       - Score
       - MaxScore
     type: object
@@ -3234,24 +3664,6 @@ definitions:
       - geometry
       - properties
     type: object
-  ers5_FeatureCollection:
-    description: GeoJSON Feature Collection Object
-    properties:
-      features:
-        description: Array of GeoJSON feature objects.
-        items:
-          $ref: '#/definitions/ers5_Feature'
-        title: Features Array
-        type: array
-      type:
-        description: Static marker indicating object is a GeoJSON Feature Collection.
-        example: FeatureCollection
-        title: Feature Collection
-        type: string
-    required:
-      - type
-      - features
-    type: object
   ers5_properties:
     description: GeoJSON Properties Object
     properties:
@@ -3366,6 +3778,10 @@ definitions:
       CWAQtrsInNC:
         type: string
       CWASics:
+        type: string
+      CamdIDs:
+        description: Facility identifiers for the Clean Air Markets Division database.
+        title: Clean Air Markets Division Identifiers
         type: string
       CensusBlockGroup:
         description: 'A geographic unit used by the United States Census Bureau, generally defined to contain between 600 and 3,000 people.'
@@ -4017,6 +4433,7 @@ definitions:
       - FacDerivedWBDHu8Name
       - FacDerivedRadWBDHu8
       - FacDerivedRadWBDHu8Name
+      - CamdIDs
       - Score
       - MaxScore
     type: object

@@ -25,7 +25,7 @@ info:
       url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
       version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: '444'
+  x-release: '449'
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -938,6 +938,8 @@ definitions:
             availability:
               additionalProperties: false
               properties:
+                accurate_start:
+                  type: string
                 end:
                   type: string
                 remaining:
@@ -1194,6 +1196,8 @@ definitions:
                 availability:
                   additionalProperties: false
                   properties:
+                    accurate_start:
+                      type: string
                     end:
                       type: string
                     remaining:
@@ -2184,6 +2188,8 @@ definitions:
       availability:
         additionalProperties: false
         properties:
+          accurate_start:
+            type: string
           end:
             type: string
           remaining:

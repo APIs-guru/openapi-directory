@@ -647,7 +647,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Claims the website of a Merchant Center sub-account. This method can only be called for multi-client accounts.
+      description: 'Claims the website of a Merchant Center sub-account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account.'
       operationId: content.accounts.claimwebsite
       parameters:
         - description: The ID of the account whose website is claimed.

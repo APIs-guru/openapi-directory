@@ -736,8 +736,144 @@ paths:
       summary: Enforcement Case Summary Report Search
       tags:
         - Case Enforcement
+    post:
+      description: The get_case_report service endpoint returns a complex object of civil enforcement case details based on the provided case id.
+      parameters:
+        - description: Case Number. Enter the case number identifier to retrieve the case report.
+          in: query
+          name: p_id
+          required: false
+          type: string
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Returns a complex object containing detailed case information for the provided Case Identifier.
+          schema:
+            description: Service call container.
+            properties:
+              Results:
+                $ref: '#/definitions/crs1_Results'
+            required:
+              - Results
+            type: object
+      summary: Enforcement Case Summary Report Search
+      tags:
+        - Case Enforcement
   /case_rest_services.get_cases:
     get:
+      description: The get_cases service end point searches for civil enforcement and criminal cases based on the provided selection criteria.
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_case_category'
+        - $ref: '#/parameters/p_case_status'
+        - $ref: '#/parameters/p_milestone'
+        - $ref: '#/parameters/p_from_date'
+        - $ref: '#/parameters/p_to_date'
+        - $ref: '#/parameters/p_milestone_fy'
+        - $ref: '#/parameters/p_name'
+        - $ref: '#/parameters/p_name_type'
+        - $ref: '#/parameters/p_case_number'
+        - $ref: '#/parameters/p_docket_number'
+        - $ref: '#/parameters/p_activity_number'
+        - $ref: '#/parameters/p_case_lead'
+        - $ref: '#/parameters/p_case_sens_flg'
+        - $ref: '#/parameters/p_region'
+        - $ref: '#/parameters/p_state'
+        - $ref: '#/parameters/p_district'
+        - $ref: '#/parameters/p_sic'
+        - $ref: '#/parameters/p_sic_ao_naics'
+        - $ref: '#/parameters/p_sic_primary_flg'
+        - $ref: '#/parameters/p_sic_frs_flg'
+        - $ref: '#/parameters/p_naics'
+        - $ref: '#/parameters/p_naics_primary_flg'
+        - $ref: '#/parameters/p_naics_frs_flg'
+        - $ref: '#/parameters/p_enf_type'
+        - $ref: '#/parameters/p_law'
+        - $ref: '#/parameters/p_section'
+        - $ref: '#/parameters/p_cp_citation'
+        - $ref: '#/parameters/p_rank_order'
+        - $ref: '#/parameters/p_enf_program'
+        - $ref: '#/parameters/p_violation'
+        - $ref: '#/parameters/p_priority_area'
+        - $ref: '#/parameters/p_priority_area_desc'
+        - $ref: '#/parameters/p_tribal'
+        - $ref: '#/parameters/p_oeca_core'
+        - $ref: '#/parameters/p_multimedia'
+        - $ref: '#/parameters/p_fed_case'
+        - $ref: '#/parameters/p_activity_contact'
+        - $ref: '#/parameters/p_role'
+        - $ref: '#/parameters/p_fed_penalty'
+        - $ref: '#/parameters/p_total_fed_penalty'
+        - $ref: '#/parameters/p_cost_recovery'
+        - $ref: '#/parameters/p_total_cost_recovery'
+        - $ref: '#/parameters/p_complying_actions'
+        - $ref: '#/parameters/p_comp_act_val'
+        - $ref: '#/parameters/p_total_comp_act_val'
+        - $ref: '#/parameters/p_sep_cats'
+        - $ref: '#/parameters/p_sep_val'
+        - $ref: '#/parameters/p_total_sep_val'
+        - $ref: '#/parameters/p_lodged_date'
+        - $ref: '#/parameters/p_entered_date'
+        - $ref: '#/parameters/p_facility_id'
+        - $ref: '#/parameters/p_fac_city'
+        - $ref: '#/parameters/p_fac_zip'
+        - $ref: '#/parameters/p_fac_county'
+        - $ref: '#/parameters/p_case_summary'
+        - $ref: '#/parameters/p_usmex'
+        - $ref: '#/parameters/p_c1lat'
+        - $ref: '#/parameters/p_c1lon'
+        - $ref: '#/parameters/p_c2lat'
+        - $ref: '#/parameters/p_c2lon'
+        - $ref: '#/parameters/p_voluntary'
+        - $ref: '#/parameters/p_fed_indicator'
+        - $ref: '#/parameters/p_fntype'
+        - $ref: '#/parameters/p_civil_criminal_indicator'
+        - $ref: '#/parameters/queryset'
+        - $ref: '#/parameters/responseset'
+        - $ref: '#/parameters/maplist'
+        - $ref: '#/parameters/tablelist'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/qcolumns'
+      responses:
+        '200':
+          description: Returns an array of cases that meet the selection criteria.
+          schema:
+            description: Service call container.
+            properties:
+              Results:
+                $ref: '#/definitions/crs2_Results'
+            required:
+              - Results
+            type: object
+      summary: Enforcement Case Search
+      tags:
+        - Case Enforcement
+    post:
       description: The get_cases service end point searches for civil enforcement and criminal cases based on the provided selection criteria.
       parameters:
         - description: |-
@@ -874,9 +1010,65 @@ paths:
       summary: Enforcement Criminal Case Summary Report Search
       tags:
         - Case Enforcement
+    post:
+      description: The get_crcase_report service end point returns a complex object of criminal case detials based on the provided criminal case id.
+      parameters:
+        - description: Prosecution Summary Identifier. Enter the numeric prosecution summary identifier to retrieve the criminal case report.
+          in: query
+          name: p_id
+          required: false
+          type: string
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Returns a complex object containing detailed criminal case information for the provided Case Identifier.
+          schema:
+            description: Service call container.
+            properties:
+              Results:
+                $ref: '#/definitions/crs3_Results'
+            required:
+              - Results
+            type: object
+      summary: Enforcement Criminal Case Summary Report Search
+      tags:
+        - Case Enforcement
   /case_rest_services.get_download:
     get:
-      description: 'Based on the QID obtained from a get_cases query, return a comma sepated vaule (CSV) file of the cases found.'
+      description: 'Based on the QID obtained from a get_cases query, return a comma separated value (CSV) file of the cases found.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/qcolumns'
+      responses:
+        '200':
+          description: Results are a comma separated value (CSV) file.
+          schema:
+            type: file
+      summary: Enforcement Case Download Data Service
+      tags:
+        - Case Enforcement
+    post:
+      description: 'Based on the QID obtained from a get_cases query, return a comma separated value (CSV) file of the cases found.'
       parameters:
         - description: |-
             Output Format Flag.  Enter one of the following keywords:
@@ -897,6 +1089,43 @@ paths:
         - Case Enforcement
   /case_rest_services.get_map:
     get:
+      description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_cases query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/tablelist'
+        - $ref: '#/parameters/c1_lat'
+        - $ref: '#/parameters/c1_long'
+        - $ref: '#/parameters/c2_lat'
+        - $ref: '#/parameters/c2_long'
+      responses:
+        '200':
+          description: 'Results are either an array of State, County, Zip Code facility cluster map coordinates or individual facility coordinates.  Coordinates provided are in WGS84.'
+          schema:
+            description: Service call container.
+            properties:
+              MapOutput:
+                $ref: '#/definitions/crs0_MapOutput'
+            required:
+              - MapOutput
+            type: object
+      summary: Enforcement Case Map Service
+      tags:
+        - Case Enforcement
+    post:
       description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_cases query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
       parameters:
         - description: |-
@@ -970,8 +1199,75 @@ paths:
       summary: Enforcement Case Paginated Results Service
       tags:
         - Case Enforcement
+    post:
+      description: 'GET_QID is passed with a query ID corresponding to a previously run get_cases query. It then returns a CASES object containing all matching cases. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/pageno'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/newsort'
+        - $ref: '#/parameters/descending'
+        - $ref: '#/parameters/qcolumns'
+      responses:
+        '200':
+          description: Results are an array (page)  of Cases from ICIS with the number of cases equal to the responseset (page size).
+          schema:
+            description: Service call container.
+            properties:
+              Results:
+                $ref: '#/definitions/crs5_Results'
+            required:
+              - Results
+            type: object
+      summary: Enforcement Case Paginated Results Service
+      tags:
+        - Case Enforcement
   /case_rest_services.metadata:
     get:
+      description: Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_cases endpoint.
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Results are an array of columns/objects.
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/met_Results'
+            required:
+              - Results
+            type: object
+      summary: Enforcement Case Metadata Service
+      tags:
+        - Metadata
+    post:
       description: Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_cases endpoint.
       parameters:
         - description: |-
@@ -1032,7 +1328,43 @@ paths:
             description: Root Object
             properties:
               Results:
-                $ref: '#/definitions/rlk1_Results'
+                $ref: '#/definitions/rlk51_Results'
+            required:
+              - Results
+            type: object
+      summary: ECHO ICIS Law Sections Lookup Service
+      tags:
+        - Lookups
+    post:
+      description: Returns the ICIS Law Section Descriptions.
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/statute_code'
+        - $ref: '#/parameters/status_flag'
+        - $ref: '#/parameters/search_term'
+        - $ref: '#/parameters/search_code'
+        - $ref: '#/parameters/sort_order'
+      responses:
+        '200':
+          description: 'Returns an array of icis_inspection_types codes and their description. If search term or search code is  not provided, all values are returned.'
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/rlk51_Results'
             required:
               - Results
             type: object
@@ -2343,7 +2675,7 @@ definitions:
       - ObjectName
       - Description
     type: object
-  rlk0_LuValues:
+  rlk00_LuValues:
     description: Lookup Values
     properties:
       ValueCode:
@@ -2358,12 +2690,12 @@ definitions:
       - ValueCode
       - ValueDescription
     type: object
-  rlk1_Results:
+  rlk51_Results:
     description: Results Object
     properties:
       LuValues:
         items:
-          $ref: '#/definitions/rlk0_LuValues'
+          $ref: '#/definitions/rlk00_LuValues'
         type: array
       Message:
         description: Field to record messages (typically performance-related) about packet processing

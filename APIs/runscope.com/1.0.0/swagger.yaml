@@ -34,6 +34,9 @@ securityDefinitions:
       'test:write': 'Allows you to create, update and delete details of API tests.'
     tokenUrl: 'https://www.runscope.com/signin/oauth/access_token'
     type: oauth2
+security:
+  - runscope_auth:
+      - 'api:read'
 parameters:
   bucketKey:
     description: Unique identifier for a bucket
@@ -120,6 +123,9 @@ paths:
       security:
         - runscope_auth:
             - 'api:read'
+        - runscope_auth:
+            - 'api:read'
+            - 'bucket:auth_token'
       summary: Returns a list of buckets.
       tags:
         - Buckets
@@ -170,9 +176,6 @@ paths:
             $ref: '#/definitions/Bucket'
         default:
           $ref: '#/responses/UnexpectedError'
-      security:
-        - runscope_auth:
-            - 'api:read'
       summary: Returns a single bucket resource.
       tags:
         - Buckets
@@ -249,9 +252,6 @@ paths:
           description: List of error messages in a bucket
         default:
           $ref: '#/responses/UnexpectedError'
-      security:
-        - runscope_auth:
-            - 'api:read'
       summary: Retrieve a list of error messages in a bucket
       tags:
         - Messages
@@ -291,9 +291,6 @@ paths:
           description: List of messages in a bucket
         default:
           $ref: '#/responses/UnexpectedError'
-      security:
-        - runscope_auth:
-            - 'api:read'
       summary: Retrieve a list of messages in a bucket
       tags:
         - Messages
@@ -381,9 +378,6 @@ paths:
           description: List of messages in a bucket
         default:
           $ref: '#/responses/UnexpectedError'
-      security:
-        - runscope_auth:
-            - 'api:read'
       summary: Retrieve the details for a single message.
       tags:
         - Messages
@@ -728,6 +722,7 @@ definitions:
         items:
           $ref: '#/definitions/Team'
         type: array
+    type: object
   Agent:
     properties:
       agent_id:
@@ -739,6 +734,15 @@ definitions:
       version:
         description: The version for this agent.
         type: string
+  Assertion:
+    properties:
+      comparison:
+        type: string
+      source:
+        type: string
+      value:
+        type: string
+    type: object
   Bucket:
     properties:
       auth_token:
@@ -799,7 +803,8 @@ definitions:
         type: boolean
       regions:
         description: An array of the region codes that this environment is using.
-        items: {}
+        items:
+          type: string
         type: array
       remote_agents:
         items:
@@ -830,6 +835,7 @@ definitions:
         type: string
     required:
       - name
+    type: object
   Error:
     properties:
       code:
@@ -974,6 +980,21 @@ definitions:
             format: float
             type: number
         type: object
+  Schedule:
+    properties:
+      environment_id:
+        type: string
+      exported_at:
+        type: integer
+      id:
+        type: string
+      interval:
+        type: string
+      note:
+        type: string
+      version:
+        type: string
+    type: object
   StandardError:
     properties:
       data:
@@ -1030,13 +1051,16 @@ definitions:
           last_run:
             type: object
           schedules:
-            items: {}
+            items:
+              $ref: '#/definitions/Schedule'
             type: array
           steps:
-            items: {}
+            items:
+              type: object
             type: array
           version:
             type: string
+        type: object
       - $ref: '#/definitions/Test'
   TestStep:
     properties:
@@ -1048,14 +1072,16 @@ definitions:
       - properties:
           assertions:
             description: A list of assertions to apply to the HTTP response from this request.
-            items: {}
+            items:
+              $ref: '#/definitions/Assertion'
             type: array
           auth:
             description: 'An authentication object with either basic, oauth1, or client_certificate credentials for authenticating this request.'
             type: object
           before_scripts:
             description: A list of pre-request scripts to run before this request.
-            items: {}
+            items:
+              type: string
             type: array
           body:
             description: A string to use as the body of the request.
@@ -1074,13 +1100,25 @@ definitions:
             type: string
           scripts:
             description: A list of post-response scripts to run after this request.
-            items: {}
+            items:
+              type: string
             type: array
           url:
             description: The URL to make a request to for this step. This may contain both query string parameters and variables.
             type: string
           variables:
             description: A list of variables to extract out of the HTTP response from this request.
-            items: {}
+            items:
+              $ref: '#/definitions/Variable'
             type: array
+        type: object
       - $ref: '#/definitions/TestStep'
+  Variable:
+    properties:
+      name:
+        type: string
+      property:
+        type: string
+      source:
+        type: string
+    type: object

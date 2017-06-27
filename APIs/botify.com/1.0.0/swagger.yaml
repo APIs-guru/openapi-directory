@@ -792,6 +792,7 @@ paths:
             - disappeared
             - new
             - search_engines_orphans
+            - gsc_keywords
           in: query
           name: area
           required: false
@@ -868,6 +869,7 @@ paths:
             - disappeared
             - new
             - search_engines_orphans
+            - gsc_keywords
           in: query
           name: area
           required: false
@@ -1005,6 +1007,7 @@ paths:
             - disappeared
             - new
             - search_engines_orphans
+            - gsc_keywords
           in: query
           name: area
           required: false
@@ -1357,6 +1360,9 @@ definitions:
         format: date-time
         readOnly: true
         type: string
+      full_export:
+        default: false
+        type: boolean
       job_id:
         readOnly: true
         type: string
@@ -1380,6 +1386,9 @@ definitions:
     type: object
   AdvancedExporter:
     properties:
+      full_export:
+        default: false
+        type: boolean
       group:
         type: string
       lines:
@@ -1538,6 +1547,12 @@ definitions:
       - add_on_features
       - features_to_update
     type: object
+  CheckExternalStorageAccess:
+    properties:
+      access_ok:
+        readOnly: true
+        type: string
+    type: object
   CrawlOrphanURLs:
     properties:
       url:
@@ -1693,7 +1708,6 @@ definitions:
   CsvExportStatus:
     properties:
       area:
-        default: current
         type: string
       date_created:
         format: date-time

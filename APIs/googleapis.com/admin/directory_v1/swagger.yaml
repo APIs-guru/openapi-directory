@@ -227,6 +227,10 @@ paths:
           in: query
           name: orderBy
           type: string
+        - description: Full path of the organization unit or its Id
+          in: query
+          name: orgUnitPath
+          type: string
         - description: Token to specify next page in the list
           in: query
           name: pageToken
@@ -4670,6 +4674,7 @@ definitions:
         description: Kind of resource this is.
         readOnly: true
         type: string
+      languages: {}
       lastLoginTime:
         description: User's last login time. (Read-only)
         format: date-time
@@ -4825,11 +4830,21 @@ definitions:
         description: 'Each entry can have a type which indicates standard types of that entry. For example instant messengers could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value. Such types should have the CUSTOM value as type and also have a customType value.'
         type: string
     type: object
+  UserLanguage:
+    description: JSON template for a language entry.
+    properties:
+      customLanguage:
+        description: Other language. User can provide own language name if there is no corresponding Google III language code. If this is set LanguageCode can't be set
+        type: string
+      languageCode:
+        description: Language Code. Should be used for storing Google III LanguageCode string representation for language. Illegal values cause SchemaException.
+        type: string
+    type: object
   UserLocation:
     description: JSON template for a location entry.
     properties:
       area:
-        description: 'Textual location. This is most useful for display purposes to concisely describe the location. E.g. "Mountain View, CA", "Near Seattle", "US-NYC-9TH 9A209A".'
+        description: 'Textual location. This is most useful for display purposes to concisely describe the location. For example, "Mountain View, CA", "Near Seattle", "US-NYC-9TH 9A209A".'
         type: string
       buildingId:
         description: Building Identifier.
@@ -4844,7 +4859,7 @@ definitions:
         description: Floor name/number.
         type: string
       floorSection:
-        description: 'Floor Section. More specific location within the floor. E.g. if a floor is divided into sections "A", "B", and "C", this field would identify one of those values.'
+        description: 'Floor section. More specific location within the floor. For example, if a floor is divided into sections "A", "B", and "C", this field would identify one of those values.'
         type: string
       type:
         description: 'Each entry can have a type which indicates standard types of that entry. For example location could be of types default and desk. In addition to standard type, an entry can have a custom type and can give it any name. Such types should have "custom" as type and also have a customType value.'
@@ -4888,6 +4903,10 @@ definitions:
       domain:
         description: The domain to which the organization belongs to.
         type: string
+      fullTimeEquivalent:
+        description: The full-time equivalent percent within the organization (100000 = 100%).
+        format: int32
+        type: integer
       location:
         description: Location of the organization. This need not be fully qualified address.
         type: string

@@ -10,7 +10,7 @@ info:
     url: 'https://developer.oxforddictionaries.com/api-terms-and-conditions'
   termsOfService: 'http://helloreverb.com/terms/'
   title: Oxford Dictionaries
-  version: 1.6.0
+  version: 1.7.0
   x-apisguru-categories:
     - text
   x-logo:
@@ -65,6 +65,8 @@ parameters:
       - nso
       - tn
       - zu
+      - de
+      - pt
     in: path
     name: source_lang
     required: true
@@ -114,6 +116,8 @@ paths:
             - nso
             - zu
             - ur
+            - de
+            - pt
           in: path
           name: source_domains_language
           required: true
@@ -127,6 +131,8 @@ paths:
             - id
             - tn
             - ro
+            - de
+            - pt
           in: path
           name: target_domains_language
           required: true
@@ -160,6 +166,8 @@ paths:
             - hi
             - sw
             - ur
+            - de
+            - pt
           in: path
           name: source_language
           required: true
@@ -522,6 +530,8 @@ paths:
             - id
             - tn
             - ur
+            - de
+            - pt
           in: path
           name: source_translation_language
           required: true
@@ -541,6 +551,8 @@ paths:
             - id
             - tn
             - ro
+            - de
+            - pt
           in: path
           name: target_translation_language
           required: true
@@ -629,6 +641,8 @@ paths:
             - ur
             - hi
             - sw
+            - de
+            - pt
           in: path
           name: source_language
           required: true
@@ -724,6 +738,8 @@ paths:
             - hi
             - sw
             - ro
+            - de
+            - pt
           in: query
           name: sourceLanguage
           required: false
@@ -780,6 +796,8 @@ paths:
             - hi
             - sw
             - ro
+            - de
+            - pt
           in: path
           name: language
           required: true
@@ -839,6 +857,8 @@ paths:
             - ms
             - sw
             - ur
+            - de
+            - pt
           in: path
           name: source_language
           required: true
@@ -870,6 +890,8 @@ paths:
             - ms
             - id
             - ur
+            - de
+            - pt
           in: path
           name: source_register_language
           required: true
@@ -884,6 +906,8 @@ paths:
             - id
             - tn
             - ro
+            - de
+            - pt
           in: path
           name: target_register_language
           required: true
@@ -994,6 +1018,8 @@ paths:
             - id
             - tn
             - ur
+            - de
+            - pt
           in: path
           name: source_search_language
           required: true
@@ -1007,6 +1033,8 @@ paths:
             - id
             - tn
             - ro
+            - de
+            - pt
           in: path
           name: target_search_language
           required: true

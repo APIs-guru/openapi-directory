@@ -1,19 +1,19 @@
 swagger: '2.0'
 schemes:
   - https
-host: tracing.googleapis.com
+host: cloudtrace.googleapis.com
 basePath: /
 info:
   contact:
     name: Google
     url: 'https://google.com'
   description: |
-    Send and retrieve trace data from Google Stackdriver Trace.
+    Send and retrieve trace data from Stackdriver Trace. Data is generated and available by default for all App Engine applications. Data from other applications can be written to Stackdriver Trace for display, reporting, and analysis.
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
   termsOfService: 'https://developers.google.com/terms/'
-  title: Google Tracing
+  title: Stackdriver Trace
   version: v2
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -147,20 +147,18 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     put:
       description: Creates a new Span.
-      operationId: tracing.projects.traces.spans.create
+      operationId: cloudtrace.projects.traces.spans.create
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Span'
         - description: |-
-            The resource name of Span in the format
-            `projects/PROJECT_ID/traces/TRACE_ID/spans/SPAN_ID`.
-            `TRACE_ID` is a unique identifier for a trace within a project and is a
-            base16-encoded, case-insensitive string and is required to be 32 char long.
-            `SPAN_ID` is a unique identifier for a span within a trace. It is a
-            base 16-encoded, case-insensitive string of a 8-bytes array and is required
-            to be 16 char long.
+            The resource name of the span in the following format:
+
+                projects/[PROJECT_ID]traces/[TRACE_ID]/spans/SPAN_ID is a unique identifier for a trace within a project.
+            [SPAN_ID] is a unique identifier for a span within a trace,
+            assigned when the span is created.
           in: path
           name: name
           required: true
@@ -204,14 +202,14 @@ paths:
         are added to the existing trace. Attempt to update existing spans results
         undefined behavior. If the name does not match, a new trace is created
         with given set of spans.
-      operationId: tracing.projects.traces.batchWrite
+      operationId: cloudtrace.projects.traces.batchWrite
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/BatchWriteSpansRequest'
         - description: |-
-            Name of the project where the spans belong to. Format is
+            Required. Name of the project where the spans belong. The format is
             `projects/PROJECT_ID`.
           in: path
           name: name
@@ -237,63 +235,59 @@ paths:
   '/v2/{parent}/traces':
     get:
       description: Returns of a list of traces that match the specified filter conditions.
-      operationId: tracing.projects.traces.list
+      operationId: cloudtrace.projects.traces.list
       parameters:
-        - description: |-
-            End of the time interval (inclusive) during which the trace data was
-            collected from the application.
+        - description: Optional. Do not return traces whose start time is later than this time.
           in: query
           name: endTime
           type: string
         - description: |-
-            An optional filter for the request.
-            Example:
-            `version_label_key:a some_label:some_label_key`
-            returns traces from version `a` and has `some_label` with `some_label_key`.
+            Opional. Return only traces that match this
+            [trace filter](/trace/docs/trace-filters). Example:
+
+                "label:/http/url root:/_ah/background my_label:17"
           in: query
           name: filter
           type: string
         - description: |-
-            Field used to sort the returned traces. Optional.
-            Can be one of the following:
+            Optional. A single field used to sort the returned traces.
+            Only the following field names can be used:
 
-            *   `trace_id`
-            *   `name` (`name` field of root span in the trace)
-            *   `duration` (difference between `end_time` and `start_time` fields of
-                 the root span)
-            *   `start` (`start_time` field of the root span)
+            *   `trace_id`: the trace's ID field
+            *   `name`:  the root span's resource name
+            *   `duration`: the difference between the root span's start time and end time
+            *   `start`:  the start time of the root span
 
-            Descending order can be specified by appending `desc` to the sort field
-            (for example, `name desc`).
-
-            Only one sort field is permitted.
+            Sorting is in ascending order unless `desc` is appended to the sort field name.
+            Example: `"name desc"`).
           in: query
           name: orderBy
           type: string
         - description: |-
-            Maximum number of traces to return. If not specified or <= 0, the
-            implementation selects a reasonable value. The implementation may
-            return fewer traces than the requested page size. Optional.
+            Optional. The maximum number of results to return from this request.
+            Non-positive values are ignored. The presence of `next_page_token` in the
+            response indicates that more results might be available, even if fewer than
+            the maximum number of results is returned by this request.
           in: query
           name: pageSize
           type: integer
         - description: |-
-            Token identifying the page of results to return. If provided, use the
-            value of the `next_page_token` field from a previous request. Optional.
+            Optional. If present, then retrieve the next batch of results from the
+            preceding call to this method.  `page_token` must be the value of
+            `next_page_token` from the previous response.  The values of other method
+            parameters should be identical to those in the previous call.
           in: query
           name: pageToken
           type: string
         - description: |-
-            ID of the Cloud project where the trace data is stored which is
-            `projects/PROJECT_ID`.
+            Required. The project where the trace data is stored. The format
+            is `projects/PROJECT_ID`.
           in: path
           name: parent
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            Start of the time interval (inclusive) during which the trace data was
-            collected from the application.
+        - description: Optional. Do not return traces whose end time is earlier than this time.
           in: query
           name: startTime
           type: string
@@ -330,17 +324,19 @@ paths:
   '/v2/{parent}:listSpans':
     get:
       description: Returns a list of spans within a trace.
-      operationId: tracing.projects.traces.listSpans
+      operationId: cloudtrace.projects.traces.listSpans
       parameters:
         - description: |-
-            Token identifying the page of results to return. If provided, use the
-            value of the `nextPageToken` field from a previous request. Optional.
+            Optional. If present, then retrieve the next batch of results from the
+            preceding call to this method. `page_token` must be the value of
+            `next_page_token` from the previous response. The values of other method
+            parameters should be identical to those in the previous call.
           in: query
           name: pageToken
           type: string
         - description: |-
-            ID of the trace for which to list child spans. Format is
-            `projects/PROJECT_ID/traces/TRACE_ID`.
+            Required: The resource name of the trace containing the spans to list.
+            The format is `projects/PROJECT_ID/traces/TRACE_ID`.
           in: path
           name: parent
           required: true
@@ -378,15 +374,13 @@ paths:
       - $ref: '#/parameters/upload_protocol'
 definitions:
   Annotation:
-    description: |-
-      Text annotation with a set of attributes. A maximum of 32 annotations are
-      allowed per Span.
+    description: Text annotation with a set of attributes.
     properties:
       attributes:
         $ref: '#/definitions/Attributes'
         description: |-
-          A set of attributes on the annotation. A maximum of 4 attributes are
-          allowed per Annotation.
+          A set of attributes on the annotation. There is a limit of 4 attributes
+          per Annotation.
       description:
         $ref: '#/definitions/TruncatableString'
         description: |-
@@ -394,45 +388,40 @@ definitions:
           the description is 256 bytes.
     type: object
   AttributeValue:
-    description: 'The allowed types for the value side of an attribute key:value pair.'
+    description: 'The allowed types for [VALUE] in a `[KEY]:[VALUE]` attribute.'
     properties:
       boolValue:
-        description: A boolean value.
+        description: A Boolean value represented by `true` or `false`.
         type: boolean
       intValue:
-        description: An integer value.
+        description: A 64-bit signed integer.
         format: int64
         type: string
       stringValue:
         $ref: '#/definitions/TruncatableString'
-        description: A string value (up to 256 bytes).
+        description: A string up to 256 bytes long.
     type: object
   Attributes:
-    description: 'Attributes of a span with a key:value format.'
+    description: 'A set of attributes, each in the format `[KEY]:[VALUE]`.'
     properties:
       attributeMap:
         additionalProperties:
           $ref: '#/definitions/AttributeValue'
         description: |-
-          The maximum key length is 128 bytes (attributes are dropped if the
-          key size is larger than the maximum allowed). The value can be a string
-          (up to 256 bytes), integer, or boolean (true/false). Some common pair
-          examples:
+          The set of attributes. Each attribute's key can be up to 128 bytes
+          long. The value can be a string up to 256 bytes, an integer, or the
+          Boolean values `true` and `false`. For example:
 
               "/instance_id": "my-instance"
-              "/zone": "us-central1-a"
-              "/grpc/peer_address": "ip:port" (dns, etc.)
-              "/grpc/deadline": "Duration"
-              "/http/user_agent"
+              "/http/user_agent": ""
               "/http/request_bytes": 300
-              "/http/response_bytes": 1200
-              "/http/url": google.com/apis
               "abc.com/myattribute": true
         type: object
       droppedAttributesCount:
         description: |-
-          The number of dropped attributes after the maximum size was enforced. If
-          0 then no attributes were dropped.
+          The number of attributes that were discarded. Attributes can be discarded
+          because their keys are too long or because there are too many attributes.
+          If this value is 0 then all attributes are valid.
         format: int32
         type: integer
     type: object
@@ -460,23 +449,21 @@ definitions:
     type: object
   Link:
     description: |-
-      A pointer from this span to another span in a different `Trace` within
-      the same service project or within a different service project. Used
-      (for example) in batching operations, where a single batch handler
-      processes multiple requests from different traces or when receives a
-      request from a different service project.
+      A pointer from the current span to another span in the same trace or in a
+      different trace. For example, this can be used in batching operations,
+      where a single batch handler processes multiple requests from different
+      traces or when the handler receives a request from a different project.
     properties:
-      spanId:
+      attributes:
+        $ref: '#/definitions/Attributes'
         description: |-
-          `SPAN_ID` is a unique identifier for a span within a trace. It is a
-          base16-encoded, case-insensitive string of a 8-bytes array and is
-          required to be 16 char long.
+          A set of attributes on the link. There is a limit of 32 attributes per
+          link.
+      spanId:
+        description: '`SPAN_ID` identifies a span within a trace.'
         type: string
       traceId:
-        description: |-
-          `TRACE_ID` is a unique identifier for a trace within a project. It is
-          a base16-encoded, case-insensitive string of a 16-bytes array and is
-          required to be 32 char long.
+        description: '`TRACE_ID` identifies a trace within a project.'
         type: string
       type:
         description: The relationship of the current span relative to the linked span.
@@ -494,7 +481,7 @@ definitions:
       droppedLinksCount:
         description: |-
           The number of dropped links after the maximum size was enforced. If
-          0 then no links were dropped.
+          this value is 0, then no links were dropped.
         format: int32
         type: integer
       link:
@@ -508,12 +495,12 @@ definitions:
     properties:
       nextPageToken:
         description: |-
-          If defined, indicates that there are more spans that match the request.
-          Pass this as the value of `pageToken` in a subsequent request to retrieve
-          additional spans.
+          If defined, indicates that there might be more spans that match the
+          request. Pass this as the value of `pageToken` in a subsequent request to
+          retrieve additional spans.
         type: string
       spans:
-        description: The requested spans if there are any in the specified trace.
+        description: 'The requested spans, if there are any in the specified trace.'
         items:
           $ref: '#/definitions/Span'
         type: array
@@ -523,9 +510,9 @@ definitions:
     properties:
       nextPageToken:
         description: |-
-          If defined, indicates that there are more traces that match the request
-          and that this value should be passed to the next request to continue
-          retrieving additional traces.
+          If there might be more results than those appearing in this response, then
+          `next_page_token` is included.  To get the next set of results, call this
+          method again using the value of `next_page_token` as `page_token`.
         type: string
       traces:
         description: List of trace records returned.
@@ -539,18 +526,16 @@ definitions:
       buildId:
         $ref: '#/definitions/TruncatableString'
         description: |-
-          Build_id is a unique identifier for the module, usually a hash of its
-          contents (up to 128 characters).
+          A unique identifier for the module, usually a hash of its
+          contents (up to 128 bytes).
       module:
         $ref: '#/definitions/TruncatableString'
         description: |-
-          E.g. main binary, kernel modules, and dynamic libraries
-          such as libc.so, sharedlib.so (up to 256 characters).
+          For example: main binary, kernel modules, and dynamic libraries
+          such as libc.so, sharedlib.so (up to 256 bytes).
     type: object
   NetworkEvent:
-    description: |-
-      An event describing an RPC message sent/received on the network. A
-      maximum of 128 network events are allowed per Span.
+    description: An event describing an RPC message sent or received on the network.
     properties:
       messageId:
         description: 'An identifier for the message, which must be unique in this span.'
@@ -562,11 +547,9 @@ definitions:
         type: string
       time:
         description: |-
-          If available, this is the kernel time:
-
-          *  For sent messages, this is the time at which the first bit was sent.
-          *  For received messages, this is the time at which the last bit was
-             received.
+          For sent messages, this is the time at which the first bit was sent.
+          For received messages, this is the time at which the last bit was
+          received.
         format: google-datetime
         type: string
       type:
@@ -581,36 +564,39 @@ definitions:
     type: object
   Span:
     description: |-
-      A span represents a single operation within a trace. Spans can be nested
-      to form a trace tree. Often, a trace contains a root span that
-      describes the end-to-end latency and, optionally, one or more subspans for
-      its sub-operations. (A trace could alternatively contain multiple root spans,
-      or none at all.) Spans do not need to be contiguous. There may be gaps
-      and/or overlaps between spans in a trace.
+      A span represents a single operation within a trace. Spans can be
+      nested to form a trace tree. Often, a trace contains a root span
+      that describes the end-to-end latency, and one or more subspans for
+      its sub-operations. A trace can also contain multiple root spans,
+      or none at all. Spans do not need to be contiguous&mdash;there may be
+      gaps or overlaps between spans in a trace.
     properties:
       attributes:
         $ref: '#/definitions/Attributes'
         description: |-
-          A set of attributes on the span. A maximum of 32 attributes are allowed per
-          Span.
+          A set of attributes on the span. There is a limit of 32 attributes per
+          span.
+      childSpanCount:
+        description: |-
+          An optional number of child spans that were generated while this span
+          was active. If set, allows implementation to detect missing child spans.
+        format: uint32
+        type: integer
       displayName:
         $ref: '#/definitions/TruncatableString'
         description: |-
-          Description of the operation in the span. It is sanitized and displayed in
-          the Stackdriver Trace tool in the
+          A description of the span's operation (up to 128 bytes).
+          Stackdriver Trace displays the description in the
           {% dynamic print site_values.console_name %}.
-          The display_name may be a method name or some other per-call site
-          name. For the same executable and the same call point, a best practice is
-          to use a consistent operation name, which makes it easier to correlate
-          cross-trace spans.
-          The maximum length for the display_name is 128 bytes.
+          For example, the display name can be a qualified method name or a file name
+          and a line number where the operation is called. A best practice is to use
+          the same display name within an application and at the same call point.
+          This makes it easier to correlate spans in different traces.
       endTime:
         description: |-
-          End time of the span.
-          On the client side, this is the local machine clock time at which the span
-          execution was ended; on the server
-          side, this is the time at which the server application handler stopped
-          running.
+          The end time of the span. On the client side, this is the time kept by
+          the local machine where the span execution ends. On the server side, this
+          is the time when the server application handler stops running.
         format: google-datetime
         type: string
       links:
@@ -618,35 +604,34 @@ definitions:
         description: A maximum of 128 links are allowed per Span.
       name:
         description: |-
-          The resource name of Span in the format
-          `projects/PROJECT_ID/traces/TRACE_ID/spans/SPAN_ID`.
-          `TRACE_ID` is a unique identifier for a trace within a project and is a
-          base16-encoded, case-insensitive string and is required to be 32 char long.
-          `SPAN_ID` is a unique identifier for a span within a trace. It is a
-          base 16-encoded, case-insensitive string of a 8-bytes array and is required
-          to be 16 char long.
+          The resource name of the span in the following format:
+
+              projects/[PROJECT_ID]traces/[TRACE_ID]/spans/SPAN_ID is a unique identifier for a trace within a project.
+          [SPAN_ID] is a unique identifier for a span within a trace,
+          assigned when the span is created.
         type: string
       parentSpanId:
         description: |-
-          ID of parent span which is a base 16-encoded, case-insensitive string of
-          a 8-bytes array and is required to be 16 char long. If this is a root span,
-          the value must be empty.
+          The [SPAN_ID] of this span's parent span. If this is a root span,
+          then this field must be empty.
         type: string
-      spanId:
+      sameProcessAsParentSpan:
         description: |-
-          Unique identifier for a span within a trace. It is a base 16-encoded,
-          case-insensitive string of a 8-bytes array and is required.
+          A highly recommended but not required flag that identifies when a trace
+          crosses a process boundary. True when the parent_span belongs to the
+          same process as the current span.
+        type: boolean
+      spanId:
+        description: 'The [SPAN_ID] portion of the span''s resource name.'
         type: string
       stackTrace:
         $ref: '#/definitions/StackTrace'
         description: Stack trace captured at the start of the span.
       startTime:
         description: |-
-          Start time of the span.
-          On the client side, this is the local machine clock time at which the span
-          execution was started; on the server
-          side, this is the time at which the server application handler started
-          running.
+          The start time of the span. On the client side, this is the time kept by
+          the local machine where the span execution starts. On the server side, this
+          is the time when the server's application handler starts running.
         format: google-datetime
         type: string
       status:
@@ -654,59 +639,64 @@ definitions:
         description: An optional final status for this span.
       timeEvents:
         $ref: '#/definitions/TimeEvents'
-        description: A maximum of 32 annotations and 128 network events are allowed per Span.
+        description: |-
+          The included time events. There can be up to 32 annotations and 128 network
+          events per span.
     type: object
   StackFrame:
     description: Represents a single stack frame in a stack trace.
     properties:
       columnNumber:
         description: |-
-          Column number is important in JavaScript (anonymous functions).
-          May not be available in some languages.
+          The column number where the function call appears, if available.
+          This is important in JavaScript because of its anonymous functions.
         format: int64
         type: string
       fileName:
         $ref: '#/definitions/TruncatableString'
-        description: The filename of the file containing this frame (up to 256 characters).
+        description: |-
+          The name of the source file where the function call appears (up to 256
+          bytes).
       functionName:
         $ref: '#/definitions/TruncatableString'
         description: |-
-          The fully-qualified name that uniquely identifies this function or
-          method (up to 1024 characters).
+          The fully-qualified name that uniquely identifies the function or
+          method that is active in this frame (up to 1024 bytes).
       lineNumber:
-        description: Line number of the frame.
+        description: The line number in `file_name` where the function call appears.
         format: int64
         type: string
       loadModule:
         $ref: '#/definitions/Module'
-        description: Binary module the code is loaded from.
+        description: The binary module from where the code was loaded.
       originalFunctionName:
         $ref: '#/definitions/TruncatableString'
         description: |-
-          Used when the function name is
-          [mangled](http://www.avabodh.com/cxxin/namemangling.html). May be
-          fully-qualified (up to 1024 characters).
+          An un-mangled function name, if `function_name` is
+          [mangled](http://www.avabodh.com/cxxin/namemangling.html). The name can
+          be fully-qualified (up to 1024 bytes).
       sourceVersion:
         $ref: '#/definitions/TruncatableString'
-        description: The version of the deployed source code (up to 128 characters).
+        description: The version of the deployed source code (up to 128 bytes).
     type: object
   StackFrames:
-    description: Represents collection of StackFrames that can be truncated.
+    description: 'A collection of stack frames, which can be truncated.'
     properties:
       droppedFramesCount:
         description: |-
-          The number of dropped stack frames after the maximum size was enforced.
-          If 0 then no frames were dropped.
+          The number of stack frames that were dropped because there
+          were too many stack frames.
+          If this value is 0, then no stack frames were dropped.
         format: int32
         type: integer
       frame:
-        description: Stack frames in this stack trace.
+        description: Stack frames in this call stack.
         items:
           $ref: '#/definitions/StackFrame'
         type: array
     type: object
   StackTrace:
-    description: StackTrace collected in a trace.
+    description: A call stack appearing in a trace.
     properties:
       stackFrames:
         $ref: '#/definitions/StackFrames'
@@ -801,7 +791,7 @@ definitions:
         type: string
     type: object
   TimeEvent:
-    description: A time-stamped annotation in the Span.
+    description: A time-stamped annotation or network event in the Span.
     properties:
       annotation:
         $ref: '#/definitions/Annotation'
@@ -822,14 +812,14 @@ definitions:
     properties:
       droppedAnnotationsCount:
         description: |-
-          The number of dropped annotations after the maximum size was enforced. If
-          0 then no annotations were dropped.
+          The number of dropped annotations in all the included time events.
+          If the value is 0, then no annotations were dropped.
         format: int32
         type: integer
       droppedNetworkEventsCount:
         description: |-
-          The number of dropped network events after the maximum size was enforced.
-          If 0 then no annotations were dropped.
+          The number of dropped network events in all the included time events.
+          If the value is 0, then no network events were dropped.
         format: int32
         type: integer
       timeEvent:
@@ -846,24 +836,28 @@ definitions:
     properties:
       name:
         description: |-
-          The resource name of Trace in the format
-          `projects/PROJECT_ID/traces/TRACE_ID`. `TRACE_ID` is a unique identifier
-          for a trace within a project and is a base16-encoded, case-insensitive
-          string and is required to be 32 char long.
+          The resource name of the trace in the following format:
+
+              projects/[PROJECT_ID]/traces/TRACE_ID is a unique identifier for a trace within a project.
+          The ID is assigned when the trace is created.
         type: string
     type: object
   TruncatableString:
-    description: Represents a string value that might be truncated.
+    description: Represents a string that might be shortened to a specified length.
     properties:
-      truncatedCharacterCount:
+      truncatedByteCount:
         description: |-
-          The number of characters truncated from the original string value. If 0 it
-          means that the string value was not truncated.
+          The number of bytes removed from the original string. If this
+          value is 0, then the string was not shortened.
         format: int32
         type: integer
       value:
         description: |-
-          The truncated string value. E.g. for a string attribute this may have up to
-          256 bytes.
+          The shortened string. For example, if the original string was 500
+          bytes long and the limit of the string was 128 bytes, then this
+          value contains the first 128 bytes of the 500-byte string. Note that
+          truncation always happens on the character boundary, to ensure that
+          truncated string is still valid UTF8. In case of multi-byte characters,
+          size of truncated string can be less than truncation limit.
         type: string
     type: object

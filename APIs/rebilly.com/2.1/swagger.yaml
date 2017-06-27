@@ -2243,24 +2243,22 @@ paths:
             $couponForm = new Rebilly\Entities\Coupons\Coupon();
 
             $discountArray = [
-                'type' => Rebilly\Entities\Coupons\Discount::TYPE_FIXED,
                 'currency' => 'USD',
                 'amount' => 1.99,
             ];
 
-            $discountForm = new Rebilly\Entities\Coupons\Discount($discountArray);
+            $discountForm = new \Rebilly\Entities\Coupons\Discounts\Fixed($discountArray);
             $couponForm->setDiscount($discountForm);
+            // Coupon will can be used right now
+            $couponForm->setIssuedTime(date('Y-m-d H:i:s'));
 
             $restrictionArray = [
-                'type' => Rebilly\Entities\Coupons\Restriction::TYPE_DISCOUNTS_PER_REDEMPTION,
                 'quantity' => 2,
             ];
 
-            $restrictionForm = new Rebilly\Entities\Coupons\Restriction([
-                $restrictionArray,
-            ]);
+            $restrictionForm = new Rebilly\Entities\Coupons\Restrictions\DiscountsPerRedemption($restrictionArray);
 
-            $couponForm->setRestrictions($restrictionForm);
+            $couponForm->setRestrictions([$restrictionForm]);
 
             try {
                 $coupon = $client->coupons()->create($couponForm);
@@ -8125,44 +8123,6 @@ paths:
       summary: Update pending payment
       tags:
         - Payments
-  '/queue/payments/{id}/cancel':
-    parameters:
-      - $ref: '#/parameters/resourceId'
-    post:
-      description: |
-        Cancel a scheduled payment with specified identifier string
-      responses:
-        '201':
-          description: Successful cancel the payment
-          headers:
-            Rate-Limit-Limit:
-              description: The number of allowed requests in the current period
-              type: integer
-            Rate-Limit-Remaining:
-              description: The number of remaining requests in the current period
-              type: integer
-            Rate-Limit-Reset:
-              description: |
-                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
-                when the current period will reset
-              type: string
-          schema:
-            $ref: '#/definitions/Payment'
-        '401':
-          $ref: '#/responses/AccessForbidden'
-        '404':
-          $ref: '#/responses/NotFound'
-      summary: Cancel a scheduled payment
-      tags:
-        - Payments
-      x-code-samples:
-        - lang: PHP
-          source: |
-            try {
-                $payment = $client->payments()->cancel('paymentId');
-            } catch (UnprocessableEntityException $e) {
-                echo $e->getMessage();
-            }
   /sessions:
     get:
       description: |
@@ -9663,6 +9623,8 @@ paths:
         - $ref: '#/parameters/collectionLimit'
         - $ref: '#/parameters/collectionOffset'
         - $ref: '#/parameters/collectionFilter'
+        - $ref: '#/parameters/collectionQuery'
+        - $ref: '#/parameters/collectionCriteria'
         - $ref: '#/parameters/collectionSort'
         - default: application/json
           description: The response media type
@@ -9705,6 +9667,8 @@ paths:
             type: array
         '401':
           $ref: '#/responses/AccessForbidden'
+        '422':
+          $ref: '#/responses/InvalidDataError'
       summary: Retrieve a list of transactions
       tags:
         - Transactions
@@ -9748,6 +9712,43 @@ paths:
             $transaction = $client->transactions()->load('transactionId');
     parameters:
       - $ref: '#/parameters/resourceId'
+  '/transactions/{id}/cancel':
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    post:
+      description: Cancel a scheduled transaction. Once handled a transaction cannot be canceled
+      responses:
+        '201':
+          description: Successful cancel the payment
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Transaction'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Cancel a pending or suspended transaction
+      tags:
+        - Transactions
+      x-code-samples:
+        - lang: PHP
+          source: |
+            try {
+                $payment = $client->transactions()->cancel('transactionId');
+            } catch (UnprocessableEntityException $e) {
+                echo $e->getMessage();
+            }
   '/transactions/{id}/gateway-logs':
     get:
       description: Retrieve Gateway communication Logs for Transaction with specified identifier string
@@ -10870,6 +10871,7 @@ definitions:
       - RBS WorldPay
       - RealTime
       - RebillyProcessor
+      - SMSVoucher
       - State Bank of Mauritius
       - Stripe
       - TBI
@@ -11964,6 +11966,10 @@ definitions:
           - subscription-renewed
           - payment-card-expired
           - invoice-past-due
+          - invoice-issued
+          - invoice-voided
+          - invoice-paid
+          - invoice-abandoned
         type: string
       id:
         allOf:
@@ -12070,10 +12076,6 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The customer identifier string
         readOnly: true
-      ipAddress:
-        description: The customer IP
-        format: ipv4
-        type: string
       primaryAddress:
         $ref: '#/definitions/ContactObject'
       updatedTime:
@@ -12897,6 +12899,7 @@ definitions:
       - Redsys
       - RPN
       - Sagepay
+      - SMSVoucher
       - Stripe
       - UPayCard
       - USAePay
@@ -13130,10 +13133,10 @@ definitions:
         allOf:
           - $ref: '#/definitions/ContactObject'
         description: Invoice's billing address
-      closedTime:
-        allOf:
-          - $ref: '#/definitions/ServerTimestamp'
-        description: Invoice closed time
+      collectionPeriod:
+        description: Collection Period - difference between paidTime and issuedTime in days.
+        readOnly: true
+        type: integer
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -13145,6 +13148,10 @@ definitions:
         allOf:
           - $ref: '#/definitions/ResourceId'
         description: The customer's ID
+      delinquentCollectionPeriod:
+        description: Delinquent Collection Period - difference between paidTime and dueTime in days.
+        readOnly: true
+        type: integer
       deliveryAddress:
         allOf:
           - $ref: '#/definitions/ContactObject'
@@ -13183,11 +13190,26 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The organization's ID
         readOnly: true
+      paidTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Invoice paid time
       shippingAmount:
         description: The Invoice's shipping amount
         format: double
         readOnly: true
         type: number
+      status:
+        description: Invoice status.
+        enum:
+          - draft
+          - issued
+          - past-due
+          - paid
+          - abandoned
+          - voided
+        readOnly: true
+        type: string
       taxes:
         description: Taxes applied to this invoice
         items:
@@ -13504,12 +13526,13 @@ definitions:
       - Alipay
       - cash
       - china-unionpay
+      - Flexepin
       - payment-card
       - paypal
       - OchaPay
+      - SMSVoucher
       - UPayCard
       - WeChat Pay
-      - Flexepin
     type: string
   Moneris:
     allOf:
@@ -14358,9 +14381,9 @@ definitions:
                 type: string
             required:
               - memberId
+              - memberGuid
               - avs
               - delay
-              - memberGuid
             type: object
           mpi:
             $ref: '#/definitions/PayvisionMpis'
@@ -15006,6 +15029,22 @@ definitions:
     required:
       - rel
     type: object
+  SMSVoucher:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              AppId:
+                description: SMSVoucher AppId
+                type: string
+            required:
+              - AppId
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: SMSVoucher Gateway config
   Sagepay:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -16258,6 +16297,7 @@ definitions:
             - layouts
             - lead-sources
             - lists
+            - matched-rules
             - notes
             - oct-batch
             - organizations

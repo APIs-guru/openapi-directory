@@ -1151,8 +1151,170 @@ paths:
       summary: Clean Air Act Download Data Service
       tags:
         - Facilities
+    post:
+      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return a comma sepated vaule (CSV) file of the facilities found.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/qcolumns'
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
+          schema:
+            type: file
+      summary: Clean Air Act Download Data Service
+      tags:
+        - Facilities
   /air_rest_services.get_facilities:
     get:
+      description: Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_fn'
+        - $ref: '#/parameters/p_sa'
+        - $ref: '#/parameters/p_sa1'
+        - $ref: '#/parameters/p_ct'
+        - $ref: '#/parameters/p_co'
+        - $ref: '#/parameters/p_fips'
+        - $ref: '#/parameters/p_st'
+        - $ref: '#/parameters/p_zip'
+        - $ref: '#/parameters/p_lcon'
+        - $ref: '#/parameters/p_frs'
+        - $ref: '#/parameters/p_reg'
+        - $ref: '#/parameters/p_sic'
+        - $ref: '#/parameters/p_ncs'
+        - $ref: '#/parameters/p_qnc'
+        - $ref: '#/parameters/p_pen'
+        - $ref: '#/parameters/p_opst'
+        - $ref: '#/parameters/p_c1lat'
+        - $ref: '#/parameters/p_c1lon'
+        - $ref: '#/parameters/p_c2lat'
+        - $ref: '#/parameters/p_c2lon'
+        - $ref: '#/parameters/p_usmex'
+        - $ref: '#/parameters/p_sic2'
+        - $ref: '#/parameters/p_sic4'
+        - $ref: '#/parameters/p_fa'
+        - $ref: '#/parameters/p_act'
+        - $ref: '#/parameters/p_maj'
+        - $ref: '#/parameters/p_mact'
+        - $ref: '#/parameters/p_prog'
+        - $ref: '#/parameters/p_fea'
+        - $ref: '#/parameters/p_feay'
+        - $ref: '#/parameters/p_feaa'
+        - $ref: '#/parameters/p_iea'
+        - $ref: '#/parameters/p_ieay'
+        - $ref: '#/parameters/p_ieaa'
+        - $ref: '#/parameters/p_qiv'
+        - $ref: '#/parameters/p_naa'
+        - $ref: '#/parameters/p_impw'
+        - $ref: '#/parameters/p_trep'
+        - $ref: '#/parameters/p_tri_cat'
+        - $ref: '#/parameters/p_tri_amt'
+        - $ref: '#/parameters/p_tri_any_amt'
+        - $ref: '#/parameters/p_tri_pol'
+        - $ref: '#/parameters/p_ghg_cat'
+        - $ref: '#/parameters/p_ghg_amt'
+        - $ref: '#/parameters/p_ghg_any_amt'
+        - $ref: '#/parameters/p_ghg_yr'
+        - $ref: '#/parameters/p_nei_pol'
+        - $ref: '#/parameters/p_nei_amt'
+        - $ref: '#/parameters/p_nei_any_amt'
+        - $ref: '#/parameters/p_nei_yr'
+        - $ref: '#/parameters/p_nei_cat'
+        - $ref: '#/parameters/p_pm'
+        - $ref: '#/parameters/p_pd'
+        - $ref: '#/parameters/p_ico'
+        - $ref: '#/parameters/p_huc'
+        - $ref: '#/parameters/p_wbd'
+        - $ref: '#/parameters/p_pid'
+        - $ref: '#/parameters/p_med'
+        - $ref: '#/parameters/p_ysl'
+        - $ref: '#/parameters/p_ysly'
+        - $ref: '#/parameters/p_ysla'
+        - $ref: '#/parameters/p_stsl'
+        - $ref: '#/parameters/p_stsly'
+        - $ref: '#/parameters/p_stsla'
+        - $ref: '#/parameters/p_stres'
+        - $ref: '#/parameters/p_sttyp'
+        - $ref: '#/parameters/p_qs'
+        - $ref: '#/parameters/p_sfs'
+        - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
+        - $ref: '#/parameters/p_tribedist'
+        - $ref: '#/parameters/p_owop'
+        - $ref: '#/parameters/p_agoo'
+        - $ref: '#/parameters/p_idt1'
+        - $ref: '#/parameters/p_idt2'
+        - $ref: '#/parameters/p_stdt1'
+        - $ref: '#/parameters/p_stdt2'
+        - $ref: '#/parameters/p_pityp'
+        - $ref: '#/parameters/p_cifdi'
+        - $ref: '#/parameters/p_pfead1'
+        - $ref: '#/parameters/p_pfead2'
+        - $ref: '#/parameters/p_pfeat'
+        - $ref: '#/parameters/p_psncq'
+        - $ref: '#/parameters/p_pctrack'
+        - $ref: '#/parameters/p_swpa'
+        - $ref: '#/parameters/p_des'
+        - $ref: '#/parameters/p_fntype'
+        - $ref: '#/parameters/p_hpvmth'
+        - $ref: '#/parameters/p_recvio'
+        - $ref: '#/parameters/p_pollvio'
+        - $ref: '#/parameters/p_ar'
+        - $ref: '#/parameters/p_tri_yr'
+        - $ref: '#/parameters/p_pidall'
+        - $ref: '#/parameters/p_fac_ico'
+        - $ref: '#/parameters/p_icoo'
+        - $ref: '#/parameters/p_fac_icos'
+        - $ref: '#/parameters/p_ejscreen'
+        - $ref: '#/parameters/p_limit_addr'
+        - $ref: '#/parameters/p_lat'
+        - $ref: '#/parameters/p_long'
+        - $ref: '#/parameters/p_radius'
+        - $ref: '#/parameters/p_decouple'
+        - $ref: '#/parameters/p_ejscreen_over80cnt'
+        - $ref: '#/parameters/queryset'
+        - $ref: '#/parameters/responseset'
+        - $ref: '#/parameters/tablelist'
+        - $ref: '#/parameters/maplist'
+        - $ref: '#/parameters/summarylist'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/qcolumns'
+      responses:
+        '200':
+          description: Results are summary statistics for the query and a query identifier (QID).
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/air2_Results'
+            required:
+              - Results
+            type: object
+      summary: Clean Air Act Facility Search
+      tags:
+        - Facilities
+    post:
       description: Validates query search parameters and returns query identifier.  Use the responseset parameter to set the page size
       parameters:
         - description: |-
@@ -1432,6 +1594,145 @@ paths:
       summary: Clean Air Act Facility Enhanced Search
       tags:
         - Facilities
+    post:
+      description: Returns either an array of Facilities or an array of Clusters that meet the specified search criteria.
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+            - CSV = Facility results formatted as comma delimited file download.
+            - GEOJSON = Facility results formatted as GeoJSON feature collection.
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_fn'
+        - $ref: '#/parameters/p_sa'
+        - $ref: '#/parameters/p_sa1'
+        - $ref: '#/parameters/p_ct'
+        - $ref: '#/parameters/p_co'
+        - $ref: '#/parameters/p_fips'
+        - $ref: '#/parameters/p_st'
+        - $ref: '#/parameters/p_zip'
+        - $ref: '#/parameters/p_lcon'
+        - $ref: '#/parameters/p_frs'
+        - $ref: '#/parameters/p_reg'
+        - $ref: '#/parameters/p_sic'
+        - $ref: '#/parameters/p_ncs'
+        - $ref: '#/parameters/p_qnc'
+        - $ref: '#/parameters/p_pen'
+        - $ref: '#/parameters/p_opst'
+        - $ref: '#/parameters/xmin'
+        - $ref: '#/parameters/ymin'
+        - $ref: '#/parameters/xmax'
+        - $ref: '#/parameters/ymax'
+        - $ref: '#/parameters/p_usmex'
+        - $ref: '#/parameters/p_sic2'
+        - $ref: '#/parameters/p_sic4'
+        - $ref: '#/parameters/p_fa'
+        - $ref: '#/parameters/p_act'
+        - $ref: '#/parameters/p_maj'
+        - $ref: '#/parameters/p_mact'
+        - $ref: '#/parameters/p_prog'
+        - $ref: '#/parameters/p_fea'
+        - $ref: '#/parameters/p_feay'
+        - $ref: '#/parameters/p_feaa'
+        - $ref: '#/parameters/p_iea'
+        - $ref: '#/parameters/p_ieay'
+        - $ref: '#/parameters/p_ieaa'
+        - $ref: '#/parameters/p_qiv'
+        - $ref: '#/parameters/p_naa'
+        - $ref: '#/parameters/p_impw'
+        - $ref: '#/parameters/p_trep'
+        - $ref: '#/parameters/p_tri_cat'
+        - $ref: '#/parameters/p_tri_amt'
+        - $ref: '#/parameters/p_tri_any_amt'
+        - $ref: '#/parameters/p_tri_pol'
+        - $ref: '#/parameters/p_ghg_cat'
+        - $ref: '#/parameters/p_ghg_amt'
+        - $ref: '#/parameters/p_ghg_any_amt'
+        - $ref: '#/parameters/p_ghg_yr'
+        - $ref: '#/parameters/p_nei_pol'
+        - $ref: '#/parameters/p_nei_amt'
+        - $ref: '#/parameters/p_nei_any_amt'
+        - $ref: '#/parameters/p_nei_yr'
+        - $ref: '#/parameters/p_nei_cat'
+        - $ref: '#/parameters/p_pm'
+        - $ref: '#/parameters/p_pd'
+        - $ref: '#/parameters/p_ico'
+        - $ref: '#/parameters/p_huc'
+        - $ref: '#/parameters/p_wbd'
+        - $ref: '#/parameters/p_pid'
+        - $ref: '#/parameters/p_med'
+        - $ref: '#/parameters/p_ysl'
+        - $ref: '#/parameters/p_ysly'
+        - $ref: '#/parameters/p_ysla'
+        - $ref: '#/parameters/p_stsl'
+        - $ref: '#/parameters/p_stsly'
+        - $ref: '#/parameters/p_stsla'
+        - $ref: '#/parameters/p_stres'
+        - $ref: '#/parameters/p_sttyp'
+        - $ref: '#/parameters/p_qs'
+        - $ref: '#/parameters/p_sfs'
+        - $ref: '#/parameters/p_tribeid'
+        - $ref: '#/parameters/p_tribename'
+        - $ref: '#/parameters/p_tribedist'
+        - $ref: '#/parameters/p_owop'
+        - $ref: '#/parameters/p_agoo'
+        - $ref: '#/parameters/p_idt1'
+        - $ref: '#/parameters/p_idt2'
+        - $ref: '#/parameters/p_stdt1'
+        - $ref: '#/parameters/p_stdt2'
+        - $ref: '#/parameters/p_pityp'
+        - $ref: '#/parameters/p_cifdi'
+        - $ref: '#/parameters/p_pfead1'
+        - $ref: '#/parameters/p_pfead2'
+        - $ref: '#/parameters/p_pfeat'
+        - $ref: '#/parameters/p_psncq'
+        - $ref: '#/parameters/p_pctrack'
+        - $ref: '#/parameters/p_swpa'
+        - $ref: '#/parameters/p_des'
+        - $ref: '#/parameters/p_fntype'
+        - $ref: '#/parameters/p_hpvmth'
+        - $ref: '#/parameters/p_recvio'
+        - $ref: '#/parameters/p_pollvio'
+        - $ref: '#/parameters/p_ar'
+        - $ref: '#/parameters/p_tri_yr'
+        - $ref: '#/parameters/p_pidall'
+        - $ref: '#/parameters/p_fac_ico'
+        - $ref: '#/parameters/p_icoo'
+        - $ref: '#/parameters/p_fac_icos'
+        - $ref: '#/parameters/p_ejscreen'
+        - $ref: '#/parameters/p_limit_addr'
+        - $ref: '#/parameters/p_lat'
+        - $ref: '#/parameters/p_long'
+        - $ref: '#/parameters/p_radius'
+        - $ref: '#/parameters/p_decouple'
+        - $ref: '#/parameters/p_ejscreen_over80cnt'
+        - $ref: '#/parameters/queryset'
+        - $ref: '#/parameters/responseset'
+        - $ref: '#/parameters/summarylist'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/qcolumns'
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: 'Results will either be an array of Facilities or an array of Clusters. The search will return clusters if the number of facilities returned is greater than the resposeset size, otherwise individual facility records will be returned.'
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/air3_Results'
+            required:
+              - Results
+            type: object
+      summary: Clean Air Act Facility Enhanced Search
+      tags:
+        - Facilities
   /air_rest_services.get_geojson:
     get:
       description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return GeoJSON of the facilities found.'
@@ -1455,7 +1756,65 @@ paths:
         '200':
           description: Results are formatted as a GeoJSON feature collection.
           schema:
-            $ref: '#/definitions/air6_FeatureCollection'
+            description: GeoJSON Feature Collection Object
+            properties:
+              features:
+                description: Array of features in the feature collection.
+                items:
+                  $ref: '#/definitions/air6_Feature'
+                title: Features Array
+                type: array
+              type:
+                description: Static marker indicating object is a GeoJSON Feature Collection.
+                example: FeatureCollection
+                title: Feature Collection
+                type: string
+            required:
+              - type
+              - features
+            type: object
+      summary: Clean Air Act GeoJSON Service
+      tags:
+        - Facilities
+    post:
+      description: 'Based on the QID obtained from a get_facilities or get_facility_info query, return GeoJSON of the facilities found.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - GEOJSON = Facility results formatted as GeoJSON feature collection (default).
+            - GEOJSONP = Facility results formatted as GeoJSON feature collection with Padding.
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/newsort'
+        - $ref: '#/parameters/descending'
+        - $ref: '#/parameters/qcolumns'
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are formatted as a GeoJSON feature collection.
+          schema:
+            description: GeoJSON Feature Collection Object
+            properties:
+              features:
+                description: Array of features in the feature collection.
+                items:
+                  $ref: '#/definitions/air6_Feature'
+                title: Features Array
+                type: array
+              type:
+                description: Static marker indicating object is a GeoJSON Feature Collection.
+                example: FeatureCollection
+                title: Feature Collection
+                type: string
+            required:
+              - type
+              - features
+            type: object
       summary: Clean Air Act GeoJSON Service
       tags:
         - Facilities
@@ -1481,8 +1840,67 @@ paths:
       summary: Clean Air Act Info Clusters Service
       tags:
         - Facilities
+    post:
+      description: 'Based on the QID obtained from a clustered get_facility_info query, download cluster facility information as either a CSV or GEOJSON file.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+            - GEOJSOND = Facility results formatted as GeoJSON feature collection download.
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_qid'
+        - $ref: '#/parameters/p_pretty_print'
+      responses:
+        '200':
+          description: Results are a comma separated value (CSV) file or a file containing a GeoJSON feature collection.
+          schema:
+            type: file
+      summary: Clean Air Act Info Clusters Service
+      tags:
+        - Facilities
   /air_rest_services.get_map:
     get:
+      description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_facilities facility query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/tablelist'
+        - $ref: '#/parameters/c1_lat'
+        - $ref: '#/parameters/c1_long'
+        - $ref: '#/parameters/c2_lat'
+        - $ref: '#/parameters/c2_long'
+        - $ref: '#/parameters/p_id'
+      responses:
+        '200':
+          description: 'Results are either an array of State, County, Zip Code facility cluster map coordinates or individual facility coordinates.  Coordinates provided are in WGS84.'
+          schema:
+            description: Root Object
+            properties:
+              MapOutput:
+                $ref: '#/definitions/air4_MapOutput'
+            required:
+              - MapOutput
+            type: object
+      summary: Clean Air Act Map Service
+      tags:
+        - Facilities
+    post:
       description: 'The purpose of the GET_MAP service is to display facility coordinates and facility clusters related to a get_facilities facility query. Currently, the maximum number of coordinates returned is 500. GET_MAP performs automatic clustering at the state, county, and zip code levels to maximize the number of coordinates returned.'
       parameters:
         - description: |-
@@ -1557,8 +1975,75 @@ paths:
       summary: Clean Air Act Search by Query ID
       tags:
         - Facilities
+    post:
+      description: 'GET_QID is passed with a query ID corresponding to a previously run get_facilities query. It then returns a Facility object containing all matching facilities. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/pageno'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/newsort'
+        - $ref: '#/parameters/descending'
+        - $ref: '#/parameters/qcolumns'
+      responses:
+        '200':
+          description: Results are an array (page)  of CAA (ICIS Air) Facilities with the number of facilities equal to the responseset (page size).
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/air5_Results'
+            required:
+              - Results
+            type: object
+      summary: Clean Air Act Search by Query ID
+      tags:
+        - Facilities
   /air_rest_services.metadata:
     get:
+      description: 'Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facility_info and other service endpoints.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Results are an array of columns/objects.
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/met_Results'
+            required:
+              - Results
+            type: object
+      summary: Clean Air Act Metadata Service
+      tags:
+        - Metadata
+    post:
       description: 'Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_qid, get_facility_info and other service endpoints.'
       parameters:
         - description: |-
@@ -1785,14 +2270,6 @@ definitions:
         type: string
       AIRCity:
         type: string
-      AIRCmsCategoryCode:
-        description: 'A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.'
-        example: 20011FRTTT5001F
-        type: string
-      AIRCmsCategoryDesc:
-        description: 'A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.'
-        example: 20011FRTTT5001F
-        type: string
       AIRCounty:
         description: The name of the county where the AIR facility is located.
         example: Racine
@@ -1940,6 +2417,10 @@ definitions:
         example: '50'
         title: Calculated Accuracy in Meters
         type: string
+      CamdIDs:
+        description: Facility identifiers for the Clean Air Markets Division database.
+        title: Clean Air Markets Division Identifiers
+        type: string
       CensusBlockGroup:
         description: 'A geographic unit used by the United States Census Bureau, generally defined to contain between 600 and 3,000 people.'
         example: '110010096022'
@@ -1948,8 +2429,7 @@ definitions:
       ChesapeakeBayFlag:
         description: Displays "Y" if the facility is located within the Chesapeake Bay watershed.
         example: 'Y'
-        title: |
-          Chesapeake Bay Flag
+        title: Chesapeake Bay Flag
         type: string
       CollectionMethod:
         description: '??'
@@ -2097,6 +2577,12 @@ definitions:
         description: Indicates if the facility has an inspection within the last 5 years. 1 = Yes
         example: '1'
         title: Inspected Within Last Five Years Flag
+        type: string
+      LastDatePce:
+        type: string
+      LastDatePceEPA:
+        type: string
+      LastDatePceSta:
         type: string
       LocalControlRegionCode:
         description: Code for regions within a state. Search criteria for DFR in OTIS.
@@ -2328,8 +2814,6 @@ definitions:
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
-      - AIRCmsCategoryCode
-      - AIRCmsCategoryDesc
       - TRIbalFlag
       - CurrSvFlag
       - ViolFlag
@@ -2468,14 +2952,6 @@ definitions:
         example: 05-1993-1585 05-2014-5021
         type: string
       AIRCity:
-        type: string
-      AIRCmsCategoryCode:
-        description: 'A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.'
-        example: 20011FRTTT5001F
-        type: string
-      AIRCmsCategoryDesc:
-        description: 'A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.'
-        example: 20011FRTTT5001F
         type: string
       AIRCounty:
         description: The name of the county where the AIR facility is located.
@@ -2624,6 +3100,10 @@ definitions:
         example: '50'
         title: Calculated Accuracy in Meters
         type: string
+      CamdIDs:
+        description: Facility identifiers for the Clean Air Markets Division database.
+        title: Clean Air Markets Division Identifiers
+        type: string
       CensusBlockGroup:
         description: 'A geographic unit used by the United States Census Bureau, generally defined to contain between 600 and 3,000 people.'
         example: '110010096022'
@@ -2632,8 +3112,7 @@ definitions:
       ChesapeakeBayFlag:
         description: Displays "Y" if the facility is located within the Chesapeake Bay watershed.
         example: 'Y'
-        title: |
-          Chesapeake Bay Flag
+        title: Chesapeake Bay Flag
         type: string
       CollectionMethod:
         description: '??'
@@ -2781,6 +3260,12 @@ definitions:
         description: Indicates if the facility has an inspection within the last 5 years. 1 = Yes
         example: '1'
         title: Inspected Within Last Five Years Flag
+        type: string
+      LastDatePce:
+        type: string
+      LastDatePceEPA:
+        type: string
+      LastDatePceSta:
         type: string
       LocalControlRegionCode:
         description: Code for regions within a state. Search criteria for DFR in OTIS.
@@ -3018,8 +3503,6 @@ definitions:
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
-      - AIRCmsCategoryCode
-      - AIRCmsCategoryDesc
       - TRIbalFlag
       - CurrSvFlag
       - ViolFlag
@@ -3222,24 +3705,6 @@ definitions:
       - geometry
       - properties
     type: object
-  air6_FeatureCollection:
-    description: GeoJSON Feature Collection Object
-    properties:
-      features:
-        description: Array of features in the feature collection.
-        items:
-          $ref: '#/definitions/air6_Feature'
-        title: Features Array
-        type: array
-      type:
-        description: Static marker indicating object is a GeoJSON Feature Collection.
-        example: FeatureCollection
-        title: Feature Collection
-        type: string
-    required:
-      - type
-      - features
-    type: object
   air6_properties:
     description: GeoJSON Properties Object
     properties:
@@ -3251,14 +3716,6 @@ definitions:
         example: 05-1993-1585 05-2014-5021
         type: string
       AIRCity:
-        type: string
-      AIRCmsCategoryCode:
-        description: 'A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.'
-        example: 20011FRTTT5001F
-        type: string
-      AIRCmsCategoryDesc:
-        description: 'A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.'
-        example: 20011FRTTT5001F
         type: string
       AIRCounty:
         description: The name of the county where the AIR facility is located.
@@ -3407,6 +3864,10 @@ definitions:
         example: 50
         title: Calculated Accuracy in Meters
         type: number
+      CamdIDs:
+        description: Facility identifiers for the Clean Air Markets Division database.
+        title: Clean Air Markets Division Identifiers
+        type: string
       CensusBlockGroup:
         description: 'A geographic unit used by the United States Census Bureau, generally defined to contain between 600 and 3,000 people.'
         example: '110010096022'
@@ -3415,8 +3876,7 @@ definitions:
       ChesapeakeBayFlag:
         description: Displays "Y" if the facility is located within the Chesapeake Bay watershed.
         example: 'Y'
-        title: |
-          Chesapeake Bay Flag
+        title: Chesapeake Bay Flag
         type: string
       CollectionMethod:
         description: '??'
@@ -3555,6 +4015,12 @@ definitions:
         example: 1
         title: Inspected Within Last Five Years Flag
         type: number
+      LastDatePce:
+        type: string
+      LastDatePceEPA:
+        type: string
+      LastDatePceSta:
+        type: string
       LocalControlRegionCode:
         description: Code for regions within a state. Search criteria for DFR in OTIS.
         title: Local Control Region Code
@@ -3783,8 +4249,6 @@ definitions:
       - MaxPctileUs
       - EjscreenFlagUs
       - EjscreenFlag
-      - AIRCmsCategoryCode
-      - AIRCmsCategoryDesc
       - TRIbalFlag
       - CurrSvFlag
       - ViolFlag

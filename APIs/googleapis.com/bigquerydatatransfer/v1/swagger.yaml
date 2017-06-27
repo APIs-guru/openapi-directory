@@ -37,6 +37,8 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
     type: oauth2
   Oauth2c:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -44,6 +46,8 @@ securityDefinitions:
     flow: accessCode
     scopes:
       'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
     tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
@@ -148,6 +152,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -172,6 +180,14 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
     parameters:
@@ -243,6 +259,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:checkValidCreds':
@@ -288,6 +308,14 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
   '/v1/{name}:isEnabled':
@@ -331,6 +359,14 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
   '/v1/{name}:setEnabled':
@@ -373,6 +409,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/dataSources':
@@ -413,6 +454,14 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
     parameters:
@@ -434,8 +483,19 @@ paths:
       description: Returns information about running and completed jobs.
       operationId: bigquerydatatransfer.projects.transferConfigs.runs.list
       parameters:
-        - description: Page size. The default page size is the maximum value of 1000 results.
+        - collectionFormat: multi
+          description: Page size. The default page size is the maximum value of 1000 results.
           in: query
+          items:
+            enum:
+              - TRANSFER_STATUS_UNSPECIFIED
+              - INACTIVE
+              - PENDING
+              - RUNNING
+              - SUCCEEDED
+              - FAILED
+              - CANCELLED
+            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -444,6 +504,9 @@ paths:
             results, `ListTransferRunsResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
+          enum:
+            - RUN_ATTEMPT_UNSPECIFIED
+            - LATEST
           in: query
           name: pageToken
           type: string
@@ -488,6 +551,14 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
     parameters:
@@ -550,6 +621,14 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
     parameters:
@@ -610,6 +689,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/transferLogs':
@@ -631,8 +714,16 @@ paths:
             type: string
           name: messageTypes
           type: array
-        - description: Page size. The default page size is the maximum value of 1000 results.
+        - collectionFormat: multi
+          description: Page size. The default page size is the maximum value of 1000 results.
           in: query
+          items:
+            enum:
+              - MESSAGE_SEVERITY_UNSPECIFIED
+              - INFO
+              - WARNING
+              - ERROR
+            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -662,6 +753,14 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
     parameters:
@@ -723,6 +822,10 @@ paths:
             - 'https://www.googleapis.com/auth/bigquery'
           Oauth2c:
             - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
 definitions:
@@ -1068,6 +1171,12 @@ definitions:
       dataSourceId:
         description: Data source id. Cannot be changed once data transfer is created.
         type: string
+      datasetRegion:
+        description: |-
+          Region in which BigQuery dataset is located. Currently possible values are:
+          "US" and "EU".
+          @OutputOnly
+        type: string
       destinationDatasetId:
         description: The BigQuery target dataset id.
         type: string
@@ -1130,6 +1239,14 @@ definitions:
           @OutputOnly
         format: google-datetime
         type: string
+      userId:
+        description: |-
+          GaiaID of the user on whose behalf transfer is done. Applicable only
+          to data sources that do not support service accounts. When set to 0,
+          the data source service account credentials are used.
+          @OutputOnly
+        format: int64
+        type: string
     type: object
   TransferMessage:
     description: Represents a user facing message for a particular data transfer run.
@@ -1158,6 +1275,12 @@ definitions:
           Data source id.
           @OutputOnly
         type: string
+      datasetRegion:
+        description: |-
+          Region in which BigQuery dataset is located. Currently possible values are:
+          "US" and "EU".
+          @OutputOnly
+        type: string
       destinationDatasetId:
         description: The BigQuery target dataset id.
         type: string
@@ -1172,7 +1295,7 @@ definitions:
         description: |-
           The resource name of the transfer run.
           Transfer run names have the form
-          `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`.
+          `projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}`.
           The name is ignored when creating a transfer run.
         type: string
       params:
@@ -1224,5 +1347,11 @@ definitions:
           Last time the data transfer run status was updated.
           @OutputOnly
         format: google-datetime
+        type: string
+      userId:
+        description: |-
+          The user id for this transfer run.
+          @OutputOnly
+        format: int64
         type: string
     type: object

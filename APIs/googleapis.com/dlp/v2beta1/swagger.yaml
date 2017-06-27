@@ -144,19 +144,19 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Find potentially sensitive info in a list of strings.
+        Finds potentially sensitive info in a list of strings.
         This method has limits on input size, processing time, and output size.
       operationId: dlp.content.inspect
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/InspectContentRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectContentRequest'
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/InspectContentResponse'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectContentResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -181,19 +181,19 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Redact potentially sensitive info from a list of strings.
+        Redacts potentially sensitive info from a list of strings.
         This method has limits on input size, processing time, and output size.
       operationId: dlp.content.redact
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/RedactContentRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta1RedactContentRequest'
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/RedactContentResponse'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta1RedactContentResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -217,18 +217,20 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Schedule a job scanning content in a Google Cloud Platform data repository.
+      description: |-
+        Schedules a job scanning content in a Google Cloud Platform data
+        repository.
       operationId: dlp.inspect.operations.create
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/CreateInspectOperationRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta1CreateInspectOperationRequest'
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/GoogleLongrunningOperation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -252,7 +254,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListRootCategoriesResponse'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta1ListRootCategoriesResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -296,7 +298,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListInfoTypesResponse'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta1ListInfoTypesResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -333,7 +335,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: '#/definitions/GoogleProtobufEmpty'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -342,17 +344,7 @@ paths:
       tags:
         - inspect
     get:
-      description: |-
-        Lists operations that match the specified filter in the request. If the
-        server doesn't support this method, it returns `UNIMPLEMENTED`.
-
-        NOTE: the `name` binding allows API services to override the binding
-        to use different resource name schemes, such as `users/*/operations`. To
-        override the binding, API services can add a binding such as
-        `"/v1/{name=users/*}/operations"` to their service configuration.
-        For backwards compatibility, the default name includes the operations
-        collection id, however overriding users must ensure the name binding
-        is the parent resource, without the operations collection id.
+      description: Fetch the list of long running operations.
       operationId: dlp.inspect.operations.list
       parameters:
         - description: 'This parameter supports filtering by done, ie done=true or done=false.'
@@ -369,7 +361,7 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: The list page token.
+        - description: The standard list page token.
           in: query
           name: pageToken
           type: string
@@ -377,7 +369,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListOperationsResponse'
+            $ref: '#/definitions/GoogleLongrunningListOperationsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -405,7 +397,7 @@ paths:
       operationId: dlp.inspect.results.findings.list
       parameters:
         - description: |-
-            Restrict findings to items that match. Supports info_type and likelihood.
+            Restricts findings to items that match. Supports info_type and likelihood.
             <p>Examples:<br/>
             <li>info_type=EMAIL_ADDRESS
             <li>info_type=PHONE_NUMBER,EMAIL_ADDRESS
@@ -426,7 +418,7 @@ paths:
           x-reservedExpansion: true
         - description: |-
             Maximum number of results to return.
-            If 0, the implementation select a reasonable value.
+            If 0, the implementation selects a reasonable value.
           in: query
           name: pageSize
           type: integer
@@ -441,7 +433,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ListInspectFindingsResponse'
+            $ref: '#/definitions/GooglePrivacyDlpV2beta1ListInspectFindingsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -485,7 +477,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/CancelOperationRequest'
+            $ref: '#/definitions/GoogleLongrunningCancelOperationRequest'
         - description: The name of the operation resource to be cancelled.
           in: path
           name: name
@@ -496,7 +488,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: '#/definitions/GoogleProtobufEmpty'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -505,11 +497,51 @@ paths:
       tags:
         - inspect
 definitions:
-  CancelOperationRequest:
+  GoogleLongrunningCancelOperationRequest:
     description: The request message for Operations.CancelOperation.
     properties: {}
     type: object
-  CategoryDescription:
+  GoogleLongrunningListOperationsResponse:
+    description: The response message for Operations.ListOperations.
+    properties:
+      nextPageToken:
+        description: The standard List next-page token.
+        type: string
+      operations:
+        description: A list of operations that matches the specified filter in the request.
+        items:
+          $ref: '#/definitions/GoogleLongrunningOperation'
+        type: array
+    type: object
+  GoogleLongrunningOperation:
+    description: |-
+      This resource represents a long-running operation that is the result of a
+      network API call.
+    properties:
+      done:
+        description: |-
+          If the value is `false`, it means the operation is still in progress.
+          If true, the operation is completed, and either `error` or `response` is
+          available.
+        type: boolean
+      error:
+        $ref: '#/definitions/GoogleRpcStatus'
+        description: The error result of the operation in case of failure or cancellation.
+      metadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: This field will contain an InspectOperationMetadata object. This will always be returned with the Operation.
+        type: object
+      name:
+        description: 'The server-assigned name, The `name` should have the format of `inspect/operations/<identifier>`.'
+        type: string
+      response:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: This field will contain an InspectOperationResult object.
+        type: object
+    type: object
+  GooglePrivacyDlpV2beta1CategoryDescription:
     description: Info Type Category description.
     properties:
       displayName:
@@ -519,7 +551,7 @@ definitions:
         description: Internal name of the category.
         type: string
     type: object
-  CloudStorageKey:
+  GooglePrivacyDlpV2beta1CloudStorageKey:
     description: Record key for a finding in a Cloud Storage file.
     properties:
       filePath:
@@ -530,22 +562,38 @@ definitions:
         format: int64
         type: string
     type: object
-  CloudStorageOptions:
+  GooglePrivacyDlpV2beta1CloudStorageOptions:
     description: |-
       Options defining a file or a set of files (path ending with *) within
       a Google Cloud Storage bucket.
     properties:
       fileSet:
-        $ref: '#/definitions/FileSet'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FileSet'
     type: object
-  CloudStoragePath:
+  GooglePrivacyDlpV2beta1CloudStoragePath:
     description: A location in Cloud Storage.
     properties:
       path:
         description: 'The url, in the format of `gs://bucket/<path>`.'
         type: string
     type: object
-  ContentItem:
+  GooglePrivacyDlpV2beta1Color:
+    description: Represents a color in the RGB color space.
+    properties:
+      blue:
+        description: 'The amount of blue in the color as a value in the interval [0, 1].'
+        format: float
+        type: number
+      green:
+        description: 'The amount of green in the color as a value in the interval [0, 1].'
+        format: float
+        type: number
+      red:
+        description: 'The amount of red in the color as a value in the interval [0, 1].'
+        format: float
+        type: number
+    type: object
+  GooglePrivacyDlpV2beta1ContentItem:
     description: Container structure for the content to inspect.
     properties:
       data:
@@ -562,16 +610,16 @@ definitions:
         description: String data to inspect or redact.
         type: string
     type: object
-  CreateInspectOperationRequest:
+  GooglePrivacyDlpV2beta1CreateInspectOperationRequest:
     description: |-
       Request for scheduling a scan of a data subset from a Google Platform data
       repository.
     properties:
       inspectConfig:
-        $ref: '#/definitions/InspectConfig'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectConfig'
         description: Configuration for the inspector.
       outputConfig:
-        $ref: '#/definitions/OutputStorageConfig'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1OutputStorageConfig'
         description: |-
           Optional location to store findings. The bucket must already exist and
           the Google APIs service account for DLP must have write permission to
@@ -588,24 +636,24 @@ definitions:
           <p>For Cloud Datastore the next columns are: <li>project_id
           <li>namespace_id <li>path <li>column_name <li>offset
       storageConfig:
-        $ref: '#/definitions/StorageConfig'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1StorageConfig'
         description: Specification of the data set to process.
     type: object
-  DatastoreKey:
+  GooglePrivacyDlpV2beta1DatastoreKey:
     description: Record key for a finding in Cloud Datastore.
     properties:
       entityKey:
-        $ref: '#/definitions/Key'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Key'
         description: Datastore entity key.
     type: object
-  DatastoreOptions:
+  GooglePrivacyDlpV2beta1DatastoreOptions:
     description: Options defining a data set within Google Cloud Datastore.
     properties:
       kind:
-        $ref: '#/definitions/KindExpression'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1KindExpression'
         description: The kind to process.
       partitionId:
-        $ref: '#/definitions/PartitionId'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1PartitionId'
         description: |-
           A partition ID identifies a grouping of entities. The grouping is always
           by project and namespace, however the namespace ID may be empty.
@@ -614,30 +662,17 @@ definitions:
           Properties to scan. If none are specified, all properties will be scanned
           by default.
         items:
-          $ref: '#/definitions/Projection'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1Projection'
         type: array
     type: object
-  Empty:
-    description: |-
-      A generic empty message that you can re-use to avoid defining duplicated
-      empty messages in your APIs. A typical example is to use it as the request
-      or the response type of an API method. For instance:
-
-          service Foo {
-            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-          }
-
-      The JSON representation for `Empty` is empty JSON object `{}`.
-    properties: {}
-    type: object
-  FieldId:
+  GooglePrivacyDlpV2beta1FieldId:
     description: General identifier of a data field in a storage service.
     properties:
       columnName:
         description: Column name describing the field.
         type: string
     type: object
-  FileSet:
+  GooglePrivacyDlpV2beta1FileSet:
     description: Set of files to scan.
     properties:
       url:
@@ -646,7 +681,7 @@ definitions:
           path is allowed.
         type: string
     type: object
-  Finding:
+  GooglePrivacyDlpV2beta1Finding:
     description: Container structure describing a single finding within a string or image.
     properties:
       createTime:
@@ -654,7 +689,7 @@ definitions:
         format: google-datetime
         type: string
       infoType:
-        $ref: '#/definitions/InfoType'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
         description: The specific type of info the string might be.
       likelihood:
         description: Estimate of how likely it is that the info_type is correct.
@@ -667,13 +702,13 @@ definitions:
           - VERY_LIKELY
         type: string
       location:
-        $ref: '#/definitions/Location'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Location'
         description: Location of the info found.
       quote:
         description: The specific string that may be potentially sensitive info.
         type: string
     type: object
-  ImageLocation:
+  GooglePrivacyDlpV2beta1ImageLocation:
     description: Bounding box encompassing detected text within an image.
     properties:
       height:
@@ -693,7 +728,28 @@ definitions:
         format: int32
         type: integer
     type: object
-  InfoType:
+  GooglePrivacyDlpV2beta1ImageRedactionConfig:
+    description: Configuration for determing how redaction of images should occur.
+    properties:
+      infoType:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
+        description: |-
+          Only one per info_type should be provided per request. If not
+          specified, and redact_all_text is false, the DLP API will redacts all
+          text that it matches against all info_types that are found, but not
+          specified in another ImageRedactionConfig.
+      redactAllText:
+        description: |-
+          If true, all text found in the image, regardless if it matches an
+          info_type, is redacted.
+        type: boolean
+      redactionColor:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Color'
+        description: |-
+          The color to use when redacting content from an image. If not specified,
+          the default is black.
+    type: object
+  GooglePrivacyDlpV2beta1InfoType:
     description: Type of information detected by the API.
     properties:
       name:
@@ -704,13 +760,13 @@ definitions:
           and cannot conflict with built-in info type names.
         type: string
     type: object
-  InfoTypeDescription:
+  GooglePrivacyDlpV2beta1InfoTypeDescription:
     description: Info type description.
     properties:
       categories:
         description: List of categories this info type belongs to.
         items:
-          $ref: '#/definitions/CategoryDescription'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1CategoryDescription'
         type: array
       displayName:
         description: Human readable form of the info type name.
@@ -719,14 +775,25 @@ definitions:
         description: Internal name of the info type.
         type: string
     type: object
-  InspectConfig:
+  GooglePrivacyDlpV2beta1InfoTypeStatistics:
+    description: Statistics regarding a specific InfoType.
+    properties:
+      count:
+        description: Number of findings for this info type.
+        format: int64
+        type: string
+      infoType:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
+        description: The type of finding this stat is for.
+    type: object
+  GooglePrivacyDlpV2beta1InspectConfig:
     description: |-
       Configuration description of the scanning process.
       When used with redactContent only info_types and min_likelihood are currently
       used.
     properties:
       excludeTypes:
-        description: 'When true, exclude type information of the findings.'
+        description: 'When true, excludes type information of the findings.'
         type: boolean
       includeQuote:
         description: |-
@@ -735,18 +802,18 @@ definitions:
         type: boolean
       infoTypes:
         description: |-
-          Restrict what info_types to look for. The values must correspond to
+          Restricts what info_types to look for. The values must correspond to
           InfoType values returned by ListInfoTypes or found in documentation.
           Empty info_types runs all enabled detectors.
         items:
-          $ref: '#/definitions/InfoType'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
         type: array
       maxFindings:
-        description: Limit the number of findings per content item.
+        description: Limits the number of findings per content item.
         format: int32
         type: integer
       minLikelihood:
-        description: Only return findings equal or above this threshold.
+        description: Only returns findings equal or above this threshold.
         enum:
           - LIKELIHOOD_UNSPECIFIED
           - VERY_UNLIKELY
@@ -756,11 +823,11 @@ definitions:
           - VERY_LIKELY
         type: string
     type: object
-  InspectContentRequest:
+  GooglePrivacyDlpV2beta1InspectContentRequest:
     description: Request to search for potentially sensitive info in a list of items.
     properties:
       inspectConfig:
-        $ref: '#/definitions/InspectConfig'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectConfig'
         description: Configuration for the inspector.
       items:
         description: |-
@@ -768,10 +835,10 @@ definitions:
           considered "related" unless inspect_config.independent_inputs is true.
           Up to 100 are allowed per request.
         items:
-          $ref: '#/definitions/ContentItem'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1ContentItem'
         type: array
     type: object
-  InspectContentResponse:
+  GooglePrivacyDlpV2beta1InspectContentResponse:
     description: Results of inspecting a list of items.
     properties:
       results:
@@ -779,16 +846,55 @@ definitions:
           Each content_item from the request has a result in this list, in the
           same order as the request.
         items:
-          $ref: '#/definitions/InspectResult'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectResult'
         type: array
     type: object
-  InspectResult:
+  GooglePrivacyDlpV2beta1InspectOperationMetadata:
+    description: Metadata returned within GetOperation for an inspect request.
+    properties:
+      createTime:
+        description: The time which this request was started.
+        format: google-datetime
+        type: string
+      infoTypeStats:
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoTypeStatistics'
+        type: array
+      processedBytes:
+        description: Total size in bytes that were processed.
+        format: int64
+        type: string
+      requestInspectConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectConfig'
+        description: The inspect config used to create the Operation.
+      requestOutputConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1OutputStorageConfig'
+        description: Optional location to store findings.
+      requestStorageConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1StorageConfig'
+        description: The storage config used to create the Operation.
+      totalEstimatedBytes:
+        description: Estimate of the number of bytes to process.
+        format: int64
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1InspectOperationResult:
+    description: The operational data.
+    properties:
+      name:
+        description: |-
+          The server-assigned name, which is only unique within the same service that
+          originally returns it. If you use the default HTTP mapping, the
+          `name` should have the format of `inspect/results/{id}`.
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1InspectResult:
     description: All the findings for a single scanned item.
     properties:
       findings:
         description: List of findings for an item.
         items:
-          $ref: '#/definitions/Finding'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1Finding'
         type: array
       findingsTruncated:
         description: |-
@@ -800,7 +906,7 @@ definitions:
           smaller batches.
         type: boolean
     type: object
-  Key:
+  GooglePrivacyDlpV2beta1Key:
     description: |-
       A unique identifier for a Datastore entity.
       If a key's partition ID or any of its path kinds or names are
@@ -808,7 +914,7 @@ definitions:
       A reserved/read-only key is forbidden in certain documented contexts.
     properties:
       partitionId:
-        $ref: '#/definitions/PartitionId'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1PartitionId'
         description: |-
           Entities are partitioned into subsets, currently identified by a project
           ID and namespace ID.
@@ -825,26 +931,26 @@ definitions:
 
           A path can never be empty, and a path can have at most 100 elements.
         items:
-          $ref: '#/definitions/PathElement'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1PathElement'
         type: array
     type: object
-  KindExpression:
+  GooglePrivacyDlpV2beta1KindExpression:
     description: A representation of a Datastore kind.
     properties:
       name:
         description: The name of the kind.
         type: string
     type: object
-  ListInfoTypesResponse:
+  GooglePrivacyDlpV2beta1ListInfoTypesResponse:
     description: Response to the ListInfoTypes request.
     properties:
       infoTypes:
         description: Set of sensitive info types belonging to a category.
         items:
-          $ref: '#/definitions/InfoTypeDescription'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoTypeDescription'
         type: array
     type: object
-  ListInspectFindingsResponse:
+  GooglePrivacyDlpV2beta1ListInspectFindingsResponse:
     description: Response to the ListInspectFindings request.
     properties:
       nextPageToken:
@@ -853,89 +959,49 @@ definitions:
           request; this value should be passed in a new `ListInspectFindingsRequest`.
         type: string
       result:
-        $ref: '#/definitions/InspectResult'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectResult'
         description: The results.
     type: object
-  ListOperationsResponse:
-    description: The response message for Operations.ListOperations.
-    properties:
-      nextPageToken:
-        description: The standard List next-page token.
-        type: string
-      operations:
-        description: A list of operations that matches the specified filter in the request.
-        items:
-          $ref: '#/definitions/Operation'
-        type: array
-    type: object
-  ListRootCategoriesResponse:
+  GooglePrivacyDlpV2beta1ListRootCategoriesResponse:
     description: Response for ListRootCategories request.
     properties:
       categories:
         description: List of all into type categories supported by the API.
         items:
-          $ref: '#/definitions/CategoryDescription'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1CategoryDescription'
         type: array
     type: object
-  Location:
+  GooglePrivacyDlpV2beta1Location:
     description: Specifies the location of a finding within its source item.
     properties:
       byteRange:
-        $ref: '#/definitions/Range'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Range'
         description: Zero-based byte offsets within a content item.
       codepointRange:
-        $ref: '#/definitions/Range'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Range'
         description: |-
           Character offsets within a content item, included when content type
           is a text. Default charset assumed to be UTF-8.
       fieldId:
-        $ref: '#/definitions/FieldId'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
         description: Field id of the field containing the finding.
       imageBoxes:
         description: Location within an image's pixels.
         items:
-          $ref: '#/definitions/ImageLocation'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1ImageLocation'
         type: array
       recordKey:
-        $ref: '#/definitions/RecordKey'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1RecordKey'
         description: Key of the finding.
     type: object
-  Operation:
-    description: |-
-      This resource represents a long-running operation that is the result of a
-      network API call.
-    properties:
-      done:
-        description: |-
-          If the value is `false`, it means the operation is still in progress.
-          If true, the operation is completed, and either `error` or `response` is
-          available.
-        type: boolean
-      error:
-        $ref: '#/definitions/Status'
-        description: The error result of the operation in case of failure or cancellation.
-      metadata:
-        additionalProperties:
-          description: Properties of the object. Contains field @type with type URL.
-        description: This field will contain an `InspectOperationMetadata` object.
-        type: object
-      name:
-        description: 'The server-assigned name, The `name` should have the format of `inspect/operations/<identifier>`.'
-        type: string
-      response:
-        additionalProperties:
-          description: Properties of the object. Contains field @type with type URL.
-        description: This field will contain an `InspectOperationResult` object.
-        type: object
-    type: object
-  OutputStorageConfig:
+  GooglePrivacyDlpV2beta1OutputStorageConfig:
     description: Cloud repository for storing output.
     properties:
       storagePath:
-        $ref: '#/definitions/CloudStoragePath'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1CloudStoragePath'
         description: The path to a Google Cloud Storage location to store output.
     type: object
-  PartitionId:
+  GooglePrivacyDlpV2beta1PartitionId:
     description: |-
       Datastore partition ID.
       A partition ID identifies a grouping of entities. The grouping is always
@@ -951,7 +1017,7 @@ definitions:
         description: The ID of the project to which the entities belong.
         type: string
     type: object
-  PathElement:
+  GooglePrivacyDlpV2beta1PathElement:
     description: |-
       A (kind, ID/name) pair used to construct a key path.
 
@@ -980,14 +1046,14 @@ definitions:
           Cannot be `""`.
         type: string
     type: object
-  Projection:
+  GooglePrivacyDlpV2beta1Projection:
     description: A representation of a Datastore property in a projection.
     properties:
       property:
-        $ref: '#/definitions/PropertyReference'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1PropertyReference'
         description: The property to project.
     type: object
-  PropertyReference:
+  GooglePrivacyDlpV2beta1PropertyReference:
     description: A reference to a property relative to the Datastore kind expressions.
     properties:
       name:
@@ -996,7 +1062,7 @@ definitions:
           If name includes "."s, it may be interpreted as a property name path.
         type: string
     type: object
-  Range:
+  GooglePrivacyDlpV2beta1Range:
     description: 'Generic half-open interval [start, end)'
     properties:
       end:
@@ -1008,46 +1074,53 @@ definitions:
         format: int64
         type: string
     type: object
-  RecordKey:
+  GooglePrivacyDlpV2beta1RecordKey:
     description: Message for a unique key indicating a record that contains a finding.
     properties:
       cloudStorageKey:
-        $ref: '#/definitions/CloudStorageKey'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1CloudStorageKey'
       datastoreKey:
-        $ref: '#/definitions/DatastoreKey'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1DatastoreKey'
     type: object
-  RedactContentRequest:
+  GooglePrivacyDlpV2beta1RedactContentRequest:
     description: |-
       Request to search for potentially sensitive info in a list of items
       and replace it with a default or provided content.
     properties:
+      imageRedactionConfigs:
+        description: The configuration for specifying what content to redact from images.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1ImageRedactionConfig'
+        type: array
       inspectConfig:
-        $ref: '#/definitions/InspectConfig'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectConfig'
         description: Configuration for the inspector.
       items:
         description: The list of items to inspect. Up to 100 are allowed per request.
         items:
-          $ref: '#/definitions/ContentItem'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1ContentItem'
         type: array
       replaceConfigs:
-        description: The strings to replace findings with. Must specify at least one.
+        description: |-
+          The strings to replace findings text findings with. Must specify at least
+          one of these or one ImageRedactionConfig if redacting images.
         items:
-          $ref: '#/definitions/ReplaceConfig'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1ReplaceConfig'
         type: array
     type: object
-  RedactContentResponse:
+  GooglePrivacyDlpV2beta1RedactContentResponse:
     description: Results of redacting a list of items.
     properties:
       items:
         description: The redacted content.
         items:
-          $ref: '#/definitions/ContentItem'
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1ContentItem'
         type: array
     type: object
-  ReplaceConfig:
+  GooglePrivacyDlpV2beta1ReplaceConfig:
     properties:
       infoType:
-        $ref: '#/definitions/InfoType'
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
         description: |-
           Type of information to replace. Only one ReplaceConfig per info_type
           should be provided. If ReplaceConfig does not have an info_type, the DLP
@@ -1057,7 +1130,30 @@ definitions:
         description: Content replacing sensitive information of given type. Max 256 chars.
         type: string
     type: object
-  Status:
+  GooglePrivacyDlpV2beta1StorageConfig:
+    description: Shared message indicating Cloud storage type.
+    properties:
+      cloudStorageOptions:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1CloudStorageOptions'
+        description: Google Cloud Storage options specification.
+      datastoreOptions:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1DatastoreOptions'
+        description: Google Cloud Datastore options specification.
+    type: object
+  GoogleProtobufEmpty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
+    type: object
+  GoogleRpcStatus:
     description: |-
       The `Status` type defines a logical error model that is suitable for different
       programming environments, including REST APIs and RPC APIs. It is used by
@@ -1131,14 +1227,4 @@ definitions:
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
         type: string
-    type: object
-  StorageConfig:
-    description: Shared message indicating Cloud storage type.
-    properties:
-      cloudStorageOptions:
-        $ref: '#/definitions/CloudStorageOptions'
-        description: Google Cloud Storage options specification.
-      datastoreOptions:
-        $ref: '#/definitions/DatastoreOptions'
-        description: Google Cloud Datastore options specification.
     type: object

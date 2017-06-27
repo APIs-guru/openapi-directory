@@ -1478,7 +1478,7 @@ paths:
       summary: Copy File
       tags:
         - Files
-  '/files/{FILE_ID}/metadata/':
+  '/files/{FILE_ID}/metadata':
     get:
       description: Used to retrieve all metadata associated with a given file
       externalDocs:
@@ -1575,7 +1575,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        '201':
           description: 'An instance of the template that includes key:value pairs defined by a user or application.'
           examples:
             application/json:
@@ -2816,7 +2816,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        '201':
           description: 'An instance of the template that includes key:value pairs defined by a user or application.'
           examples:
             application/json:
@@ -3919,7 +3919,7 @@ paths:
           schema:
             $ref: '#/definitions/MetadataTemplate'
       responses:
-        '200':
+        '201':
           description: The schema representing the metadata template created.
           examples:
             application/json:
@@ -7109,8 +7109,6 @@ definitions:
         type: string
     type: object
   Metadata:
-    additionalProperties:
-      type: object
     description: |-
       Metadata can be used for many purposes. Enterprises may want to have a better way to organize their digital assets for their marketing teams or developers may want to provide advanced content functionality such as facilitating workflows or approvals. Metadata is also visible in the Box Web Application. To learn more, please visit the help documentation.
       Templates
@@ -7121,6 +7119,8 @@ definitions:
       Global Properties Template
       In addition to enterprise scoped templates, every file on Box has access to the global properties template. The Properties template is a bucket of free form key:value string pairs, with no additional schema associated with it. Properties are ideal for scenarios where applications want to write metadata to file objects in a flexible way, without pre-defined template structure.
       Properties follow all the conventions of standard templates, except for being located at a different endpoint. All requests made to the properties template must be made to /files/{file_id}/metadata/global/properties.
+    example:
+      test: testvalue
     title: Metadata Object
     type: object
   MetadataList:
@@ -7149,9 +7149,6 @@ definitions:
         type: boolean
       scope:
         description: The scope of the object.
-        enum:
-          - enterprise
-          - global
         type: string
       templateKey:
         description: A unique identifier for the template. The identifier must be unique across the scope of the enterprise to which the metadata template is being applied to. Defaults to a string derived from the displayName if no value is provided.
@@ -7266,6 +7263,7 @@ definitions:
           - legal_hold_policy
           - legal_hold_policy_assignment
           - legal_hold
+          - upload_session
         type: string
     type: object
   RetentionPolicy:
@@ -7503,6 +7501,10 @@ definitions:
         type: string
     type: object
   UpdateMetadata:
+    example:
+      - op: replace
+        path: /test
+        value: changedvalue
     items:
       properties:
         from:
@@ -7530,6 +7532,11 @@ definitions:
       type: object
     type: array
   UpdateMetadataTemplate:
+    example:
+      - data:
+          description: Test
+        fieldKey: test
+        op: editField
     items:
       properties:
         data:
@@ -7553,8 +7560,11 @@ definitions:
           enum:
             - addEnumOption
             - addField
+            - editEnumOption
             - editField
             - editTemplate
+            - removeEnumOption
+            - removeField
             - reorderEnumOptions
             - reorderFields
           type: string

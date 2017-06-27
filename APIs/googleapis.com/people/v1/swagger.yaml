@@ -147,8 +147,43 @@ paths:
         Provides information about a list of specific people by specifying a list
         of requested resource names. Use `people/me` to indicate the authenticated
         user.
+        The request throws a 400 error if 'personFields' is not specified.
       operationId: people.people.getBatchGet
       parameters:
+        - description: |-
+            Required. A field mask to restrict which fields on each person are
+            returned. Valid values are:
+
+            * addresses
+            * ageRanges
+            * biographies
+            * birthdays
+            * braggingRights
+            * coverPhotos
+            * emailAddresses
+            * events
+            * genders
+            * imClients
+            * interests
+            * locales
+            * memberships
+            * metadata
+            * names
+            * nicknames
+            * occupations
+            * organizations
+            * phoneNumbers
+            * photos
+            * relations
+            * relationshipInterests
+            * relationshipStatuses
+            * residences
+            * skills
+            * taglines
+            * urls
+          in: query
+          name: personFields
+          type: string
         - description: |-
             Required. Comma-separated list of person fields to be included in the
             response. Each path should start with `person.`: for example,
@@ -230,8 +265,43 @@ paths:
       description: |-
         Provides information about a person by specifying a resource name. Use
         `people/me` to indicate the authenticated user.
+        The request throws a 400 error if 'personFields' is not specified.
       operationId: people.people.get
       parameters:
+        - description: |-
+            Required. A field mask to restrict which fields on the person are returned.
+            Valid values are:
+
+            * addresses
+            * ageRanges
+            * biographies
+            * birthdays
+            * braggingRights
+            * coverPhotos
+            * emailAddresses
+            * events
+            * genders
+            * imClients
+            * interests
+            * locales
+            * memberships
+            * metadata
+            * names
+            * nicknames
+            * occupations
+            * organizations
+            * phoneNumbers
+            * photos
+            * relations
+            * relationshipInterests
+            * relationshipStatuses
+            * residences
+            * skills
+            * taglines
+            * urls
+          in: query
+          name: personFields
+          type: string
         - description: |-
             Required. Comma-separated list of person fields to be included in the
             response. Each path should start with `person.`: for example,
@@ -243,9 +313,10 @@ paths:
             The resource name of the person to provide information about.
 
             - To get information about the authenticated user, specify `people/me`.
-            - To get information about any user, specify the resource name that
-              identifies the user, such as the resource names returned by
-              [`people.connections.list`](/people/api/rest/v1/people.connections/list).
+            - To get information about a google account, specify `people/<account_id>`.
+            - To get information about a contact, specify the resource name that
+              identifies the contact as returned by
+            [`people.connections.list`](/people/api/rest/v1/people.connections/list).
           in: path
           name: resourceName
           required: true
@@ -314,6 +385,7 @@ paths:
       description: |-
         Provides a list of the authenticated user's contacts merged with any
         linked profiles.
+        The request throws a 400 error if 'personFields' is not specified.
       operationId: people.people.connections.list
       parameters:
         - description: |-
@@ -325,6 +397,40 @@ paths:
         - description: The token of the page to be returned.
           in: query
           name: pageToken
+          type: string
+        - description: |-
+            Required. A field mask to restrict which fields on each person are
+            returned. Valid values are:
+
+            * addresses
+            * ageRanges
+            * biographies
+            * birthdays
+            * braggingRights
+            * coverPhotos
+            * emailAddresses
+            * events
+            * genders
+            * imClients
+            * interests
+            * locales
+            * memberships
+            * metadata
+            * names
+            * nicknames
+            * occupations
+            * organizations
+            * phoneNumbers
+            * photos
+            * relations
+            * relationshipInterests
+            * relationshipStatuses
+            * residences
+            * skills
+            * taglines
+            * urls
+          in: query
+          name: personFields
           type: string
         - description: |-
             Required. Comma-separated list of person fields to be included in the
@@ -741,8 +847,8 @@ definitions:
         type: integer
       totalPeople:
         description: |-
-          DEPRECATED(Please use total_items). The total number of people in the list
-          without pagination.
+          **DEPRECATED** (Please use totalItems)
+          The total number of people in the list without pagination.
         format: int32
         type: integer
     type: object
@@ -925,7 +1031,10 @@ definitions:
           $ref: '#/definitions/Address'
         type: array
       ageRange:
-        description: DEPRECATED(Please read person.age_ranges instead). The person's age range.
+        description: |-
+          **DEPRECATED** (Please use `person.ageRanges` instead)**
+
+          The person's read-only age range.
         enum:
           - AGE_RANGE_UNSPECIFIED
           - LESS_THAN_EIGHTEEN
@@ -933,7 +1042,7 @@ definitions:
           - TWENTY_ONE_OR_OLDER
         type: string
       ageRanges:
-        description: The person's age ranges.
+        description: The person's read-only age ranges.
         items:
           $ref: '#/definitions/AgeRangeType'
         type: array
@@ -953,7 +1062,7 @@ definitions:
           $ref: '#/definitions/BraggingRights'
         type: array
       coverPhotos:
-        description: The person's cover photos.
+        description: The person's read-only cover photos.
         items:
           $ref: '#/definitions/CoverPhoto'
         type: array
@@ -993,13 +1102,13 @@ definitions:
           $ref: '#/definitions/Locale'
         type: array
       memberships:
-        description: The person's group memberships.
+        description: The person's read-only group memberships.
         items:
           $ref: '#/definitions/Membership'
         type: array
       metadata:
         $ref: '#/definitions/PersonMetadata'
-        description: Metadata about the person.
+        description: Read-only metadata about the person.
       names:
         description: The person's names.
         items:
@@ -1026,7 +1135,7 @@ definitions:
           $ref: '#/definitions/PhoneNumber'
         type: array
       photos:
-        description: The person's photos.
+        description: The person's read-only photos.
         items:
           $ref: '#/definitions/Photo'
         type: array
@@ -1036,12 +1145,12 @@ definitions:
           $ref: '#/definitions/Relation'
         type: array
       relationshipInterests:
-        description: The kind of relationship the person is looking for.
+        description: The person's read-only relationship interests.
         items:
           $ref: '#/definitions/RelationshipInterest'
         type: array
       relationshipStatuses:
-        description: The person's relationship statuses.
+        description: The person's read-only relationship statuses.
         items:
           $ref: '#/definitions/RelationshipStatus'
         type: array
@@ -1061,7 +1170,7 @@ definitions:
           $ref: '#/definitions/Skill'
         type: array
       taglines:
-        description: The person's taglines.
+        description: The person's read-only taglines.
         items:
           $ref: '#/definitions/Tagline'
         type: array
@@ -1087,7 +1196,9 @@ definitions:
         type: array
       objectType:
         description: |-
-          DEPRECATED(Please read person.metadata.sources.profile_metadata instead).
+          **DEPRECATED** (Please use
+          `person.metadata.sources.profileMetadata.objectType` instead)
+
           The type of the person object.
         enum:
           - OBJECT_TYPE_UNSPECIFIED
@@ -1117,9 +1228,10 @@ definitions:
     properties:
       httpStatusCode:
         description: |-
-          DEPRECATED(Please use status instead).
-          [HTTP 1.1 status
-          code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
+          **DEPRECATED** (Please use status instead)
+
+          [HTTP 1.1 status code]
+          (http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html).
         format: int32
         type: integer
       person:
@@ -1149,7 +1261,7 @@ definitions:
       formattedType:
         description: |-
           The read-only type of the phone number translated and formatted in the
-          viewer's account locale or the the `Accept-Language` HTTP header locale.
+          viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'

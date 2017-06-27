@@ -38,6 +38,8 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/spanner.admin': Administer your Spanner databases
+      'https://www.googleapis.com/auth/spanner.data': View and manage the contents of your Spanner databases
     type: oauth2
   Oauth2c:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -45,6 +47,8 @@ securityDefinitions:
     flow: accessCode
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/spanner.admin': Administer your Spanner databases
+      'https://www.googleapis.com/auth/spanner.data': View and manage the contents of your Spanner databases
     tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
@@ -147,6 +151,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     parameters:
@@ -187,6 +195,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     parameters:
@@ -234,6 +246,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
   '/v1/{database}/sessions':
@@ -290,6 +306,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
   '/v1/{name}':
@@ -317,16 +337,19 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: spanner.projects.instances.operations.get
+      description: Gets information about a particular instance configuration.
+      operationId: spanner.projects.instanceConfigs.get
       parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            Required. The name of the requested instance configuration. Values are of
+            the form `projects/<project>/instanceConfigs/<config>`.
           in: path
           name: name
           required: true
@@ -336,12 +359,16 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/InstanceConfig'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     parameters:
@@ -426,6 +453,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
   '/v1/{name}:cancel':
@@ -473,6 +504,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
   '/v1/{parent}/databases':
@@ -511,6 +546,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     parameters:
@@ -561,6 +600,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
   '/v1/{parent}/instanceConfigs':
@@ -600,6 +643,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     parameters:
@@ -675,6 +722,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     parameters:
@@ -751,6 +802,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
   '/v1/{resource}:getIamPolicy':
@@ -797,6 +852,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
   '/v1/{resource}:setIamPolicy':
@@ -843,6 +902,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
   '/v1/{resource}:testIamPermissions':
@@ -890,6 +953,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
   '/v1/{session}:beginTransaction':
@@ -935,6 +1002,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
   '/v1/{session}:commit':
@@ -984,6 +1055,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
   '/v1/{session}:executeSql':
@@ -1036,6 +1111,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
   '/v1/{session}:executeStreamingSql':
@@ -1082,6 +1161,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
   '/v1/{session}:read':
@@ -1136,6 +1219,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
   '/v1/{session}:rollback':
@@ -1185,6 +1272,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
   '/v1/{session}:streamingRead':
@@ -1231,6 +1322,10 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
 definitions:
@@ -1376,6 +1471,7 @@ definitions:
           * `group:{emailid}`: An email address that represents a Google group.
              For example, `admins@example.com`.
 
+
           * `domain:{domain}`: A Google Apps domain name that represents all the
              users of that domain. For example, `google.com` or `example.com`.
 
@@ -1419,7 +1515,14 @@ definitions:
     type: object
   CloudAuditOptions:
     description: Write a Cloud Audit log
-    properties: {}
+    properties:
+      logName:
+        description: The log_name to populate in the Cloud Audit Record.
+        enum:
+          - UNSPECIFIED_LOG_NAME
+          - ADMIN_ACTIVITY
+          - DATA_ACCESS
+        type: string
     type: object
   CommitRequest:
     description: The request for Commit.
@@ -2365,7 +2468,7 @@ definitions:
         type: array
     type: object
   ReadOnly:
-    description: Options for read-only transactions.
+    description: Message type to initiate a read-only transaction.
     properties:
       exactStaleness:
         description: |-
@@ -2491,7 +2594,9 @@ definitions:
           temporary read-only transaction with strong concurrency.
     type: object
   ReadWrite:
-    description: Options for read-write transactions.
+    description: |-
+      Message type to initiate a read-write transaction. Currently this
+      transaction type has no options.
     properties: {}
     type: object
   ResultSet:
@@ -2689,7 +2794,7 @@ definitions:
       error message is needed, put the localized message in the error details or
       localize it in the client. The optional error details may contain arbitrary
       information about the error. There is a predefined set of error detail types
-      in the package `google.rpc` which can be used for common error conditions.
+      in the package `google.rpc` that can be used for common error conditions.
 
       # Language mapping
 
@@ -2712,7 +2817,7 @@ definitions:
           errors.
 
       - Workflow errors. A typical workflow has multiple steps. Each step may
-          have a `Status` message for error reporting purpose.
+          have a `Status` message for error reporting.
 
       - Batch operations. If a client uses batch request and batch response, the
           `Status` message should be used directly inside batch response, one for

@@ -24,9 +24,12 @@ produces:
   - application/json
 securityDefinitions:
   client_credentials:
+    authorizationUrl: 'https://api.motaword.com/token'
     description: 'OAuth2 authentication, Client Credentials flow.'
-    flow: password
-    tokenUrl: /token
+    flow: accessCode
+    scopes:
+      '*': '*'
+    tokenUrl: 'https://api.motaword.com/token'
     type: oauth2
 paths:
   /:
@@ -85,6 +88,9 @@ paths:
         - Account
         - Glossary
     post:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: Update your corporate account's global glossary. This endpoint is available only for corporate account customers.
       operationId: updateGlobalGlossary
       parameters:
@@ -176,6 +182,9 @@ paths:
       tags:
         - Project
     post:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: Create a new project
       operationId: createProject
       parameters:
@@ -241,6 +250,34 @@ paths:
       tags:
         - Project
   '/projects/{id}':
+    delete:
+      description: Delete(cancel) a project.
+      operationId: deleteProject
+      parameters:
+        - description: Project ID
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Project canceled successfully
+          schema:
+            properties:
+              status:
+                default: success
+                type: string
+            type: object
+        '404':
+          description: ProjectNotFound
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - client_credentials: []
+      summary: Delete a project
+      tags:
+        - Project
     get:
       description: Get single project
       operationId: getProject
@@ -266,6 +303,9 @@ paths:
       tags:
         - Project
     put:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: Update project language pairs
       operationId: updateProject
       parameters:
@@ -314,6 +354,41 @@ paths:
       security:
         - client_credentials: []
       summary: Update project language pairs
+      tags:
+        - Project
+  '/projects/{id}/cancel':
+    post:
+      consumes:
+        - multipart/form-data
+        - application/json
+      operationId: cancelProject
+      parameters:
+        - description: Project ID
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Cancellation reason
+          in: formData
+          name: reason
+          type: string
+      responses:
+        '200':
+          description: Project canceled successfully
+          schema:
+            properties:
+              status:
+                default: success
+                type: string
+            type: object
+        '404':
+          description: ProjectNotFound
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - client_credentials: []
+      summary: Cancel your translation project
       tags:
         - Project
   '/projects/{id}/download':
@@ -381,6 +456,9 @@ paths:
         - Project
   '/projects/{id}/launch':
     post:
+      consumes:
+        - multipart/form-data
+        - application/json
       operationId: launchProject
       parameters:
         - description: Project ID
@@ -569,6 +647,49 @@ paths:
       summary: Get project progress
       tags:
         - Project
+  '/projects/{id}/reports':
+    post:
+      consumes:
+        - multipart/form-data
+        - application/json
+      operationId: submitProjectReports
+      parameters:
+        - description: Project ID
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Activity Type
+          in: formData
+          name: activity_type
+          type: string
+        - description: Report Message
+          in: formData
+          name: message
+          type: string
+      responses:
+        '200':
+          description: Report submitted successfully
+          schema:
+            properties:
+              status:
+                default: success
+                type: string
+            type: object
+        '400':
+          description: MissingMessage
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: ProjectNotFound
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - client_credentials: []
+      summary: Submit reports for a project
+      tags:
+        - Project
   '/projects/{projectId}/activities':
     get:
       description: 'Get a list of realtime activities on the project, such as translation suggestion and translation approval.'
@@ -634,6 +755,9 @@ paths:
       tags:
         - Activity
     post:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: Submit a comment to an activity.
       operationId: submitComment
       parameters:
@@ -758,6 +882,9 @@ paths:
       tags:
         - Document
     post:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: Upload a new document
       operationId: createDocument
       parameters:
@@ -772,6 +899,11 @@ paths:
           name: 'documents[]'
           required: true
           type: file
+        - description: 'JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.'
+          in: formData
+          name: 'schemes[]'
+          required: false
+          type: string
       responses:
         '200':
           description: A list of successfully added new documents.
@@ -787,6 +919,10 @@ paths:
             $ref: '#/definitions/Error'
         '405':
           description: UnsupportedDocumentFormat
+          schema:
+            $ref: '#/definitions/Error'
+        '406':
+          description: InvalidDocumentScheme
           schema:
             $ref: '#/definitions/Error'
         '409':
@@ -868,6 +1004,9 @@ paths:
       tags:
         - Document
     put:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: Update the document. File name and contents will replaced with the new one.
       operationId: updateDocument
       parameters:
@@ -886,8 +1025,13 @@ paths:
         - description: Single file data. The name is plural to provide a consistent naming convention.
           in: formData
           name: documents
-          required: true
+          required: false
           type: file
+        - description: 'JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.'
+          in: formData
+          name: schemes
+          required: false
+          type: string
       responses:
         '200':
           description: Updated document model
@@ -903,6 +1047,10 @@ paths:
             $ref: '#/definitions/Error'
         '405':
           description: UnsupportedDocumentFormat
+          schema:
+            $ref: '#/definitions/Error'
+        '406':
+          description: InvalidDocumentScheme
           schema:
             $ref: '#/definitions/Error'
         '409':
@@ -971,6 +1119,9 @@ paths:
       tags:
         - Glossary
     post:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: Upload a new glossary
       operationId: createGlossary
       parameters:
@@ -1085,6 +1236,9 @@ paths:
       tags:
         - Glossary
     put:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: Update the glossary. File name and contents will replaced with the new one.
       operationId: updateGlossary
       parameters:
@@ -1188,6 +1342,9 @@ paths:
       tags:
         - Style Guide
     post:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: Upload a new style guide
       operationId: createStyleGuide
       parameters:
@@ -1298,6 +1455,9 @@ paths:
       tags:
         - Style Guide
     put:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: Update the style guide. File name and contents will replaced with the new one.
       operationId: updteStyleGuide
       parameters:
@@ -1395,6 +1555,9 @@ paths:
         - Account
         - Style Guide
     post:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: Update your corporate account's global style guide. This endpoint is available only for corporate account customers.
       operationId: updateGlobalStyleGuide
       parameters:
@@ -1429,6 +1592,9 @@ paths:
         - Style Guide
   /token:
     post:
+      consumes:
+        - multipart/form-data
+        - application/json
       description: |
         MotaWord API is using OAuth2 procedures when authenticating or authorizing your API call. Currently, we only allow Client Credential type flow.
       operationId: getAccessToken
@@ -1594,6 +1760,8 @@ definitions:
         $ref: '#/definitions/DocumentLinks'
       name:
         type: string
+      scheme:
+        type: object
       uploaded_at:
         format: date
         type: string

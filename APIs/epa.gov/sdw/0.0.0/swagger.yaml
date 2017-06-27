@@ -520,7 +520,27 @@ parameters:
 paths:
   /sdw_rest_services.get_download:
     get:
-      description: 'Based on the QID obtained from a get_systems query, return a comma sepated vaule (CSV) file of the water systems found.'
+      description: 'Based on the QID obtained from a get_systems query, return a comma separated value (CSV) file of the water systems found.'
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - CSV = Facility results formatted as comma delimited file download (default).
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/qcolumns'
+      responses:
+        '200':
+          description: Results are a comma separated value (CSV) file.
+          schema:
+            type: file
+      summary: Safe Drinking Water Act (SDWA) Download Data Service
+      tags:
+        - Safe Drinking Water
+    post:
+      description: 'Based on the QID obtained from a get_systems query, return a comma separated value (CSV) file of the water systems found.'
       parameters:
         - description: |-
             Output Format Flag.  Enter one of the following keywords:
@@ -541,6 +561,41 @@ paths:
         - Safe Drinking Water
   /sdw_rest_services.get_qid:
     get:
+      description: 'GET_QID is passed with a query ID corresponding to a previously run get_systems query. It then returns a Systems object containing all matching water systems. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/qid'
+        - $ref: '#/parameters/pageno'
+        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/newsort'
+        - $ref: '#/parameters/descending'
+      responses:
+        '200':
+          description: Results are an array (page)  of SDWA (SDWIS) Water Systems with the number of systems equal to the responseset (page size).
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/sdw2_Results'
+            required:
+              - Results
+            type: object
+      summary: Safe Drinking Water Act (SDWA) Paginated Results Service
+      tags:
+        - Safe Drinking Water
+    post:
       description: 'GET_QID is passed with a query ID corresponding to a previously run get_systems query. It then returns a Systems object containing all matching water systems. The main purpose of GET_QID is for large querysets that contain multiple pages (responsesets) of output. GET_QID allows for pagination and for the selection and sorting of columns. '
       parameters:
         - description: |-
@@ -651,8 +706,114 @@ paths:
       summary: Safe Drinking Water Act (SDWA) Systems Search Service
       tags:
         - Safe Drinking Water
+    post:
+      description: Returns an array of public water systems that meet the specified search criteria.
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/p_fn'
+        - $ref: '#/parameters/p_ct'
+        - $ref: '#/parameters/p_co'
+        - $ref: '#/parameters/p_fips'
+        - $ref: '#/parameters/p_st'
+        - $ref: '#/parameters/p_zip'
+        - $ref: '#/parameters/p_reg'
+        - $ref: '#/parameters/p_trb'
+        - $ref: '#/parameters/p_act'
+        - $ref: '#/parameters/p_qiv'
+        - $ref: '#/parameters/p_ico'
+        - $ref: '#/parameters/p_pid'
+        - $ref: '#/parameters/p_owop'
+        - $ref: '#/parameters/p_systyp'
+        - $ref: '#/parameters/p_swtyp'
+        - $ref: '#/parameters/p_popsv'
+        - $ref: '#/parameters/p_cs'
+        - $ref: '#/parameters/p_mr'
+        - $ref: '#/parameters/p_health'
+        - $ref: '#/parameters/p_other'
+        - $ref: '#/parameters/p_pn'
+        - $ref: '#/parameters/p_sv'
+        - $ref: '#/parameters/p_qs'
+        - $ref: '#/parameters/p_sfs'
+        - $ref: '#/parameters/p_pswpol'
+        - $ref: '#/parameters/p_pswvio'
+        - $ref: '#/parameters/p_pbale'
+        - $ref: '#/parameters/p_cuale'
+        - $ref: '#/parameters/p_rc350v'
+        - $ref: '#/parameters/p_pbv'
+        - $ref: '#/parameters/p_cuv'
+        - $ref: '#/parameters/p_lcrv'
+        - $ref: '#/parameters/p_fea'
+        - $ref: '#/parameters/p_feay'
+        - $ref: '#/parameters/p_feaa'
+        - $ref: '#/parameters/p_iea'
+        - $ref: '#/parameters/p_ieay'
+        - $ref: '#/parameters/p_ieaa'
+        - $ref: '#/parameters/p_qis'
+        - $ref: '#/parameters/p_pfead1'
+        - $ref: '#/parameters/p_pfead2'
+        - $ref: '#/parameters/p_pfeat'
+        - $ref: '#/parameters/queryset'
+        - $ref: '#/parameters/responseset'
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Returns an array of public water systems that meet the specified search criteria.
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/sdw3_Results'
+            required:
+              - Results
+            type: object
+      summary: Safe Drinking Water Act (SDWA) Systems Search Service
+      tags:
+        - Safe Drinking Water
   /sdw_rest_services.metadata:
     get:
+      description: Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_systems endpoint.
+      parameters:
+        - description: |-
+            Output Format Flag.  Enter one of the following keywords:
+            - JSON = Data model formatted as Javascript Object Notation (default).
+            - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+            - XML = Data model formatted as Extensible Markup Language.
+          enum:
+            - JSONP
+            - JSON
+            - XML
+          in: query
+          name: output
+          required: false
+          type: string
+        - $ref: '#/parameters/callback'
+      responses:
+        '200':
+          description: Results are an array of columns/objects.
+          schema:
+            description: Root Object
+            properties:
+              Results:
+                $ref: '#/definitions/met_Results'
+            required:
+              - Results
+            type: object
+      summary: Safe Drinking Water Act (SDWA) Metadata Service
+      tags:
+        - Metadata
+    post:
       description: Returns the JSON Object Name and ColumnId for usage with the qcolumns parameter for get_systems endpoint.
       parameters:
         - description: |-
