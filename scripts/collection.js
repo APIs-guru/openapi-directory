@@ -858,6 +858,8 @@ function errorToString(error, context) {
   if (!_.isUndefined(swagger))
     result += util.Yaml2String(swagger);
 
+  fs.writeFileSync('../tmp.yaml',util.Yaml2String(swagger),'utf8');
+
   result += '!!!!!!!!!!!!!!!!!!!! Errors ' + source + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n';
   if (_.get(validation, 'errors'))
     result += util.Yaml2String(validation.errors);
