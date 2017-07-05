@@ -469,6 +469,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateResourceDataSync':
+    post:
+      operationId: CreateResourceDataSync
+      description: '<p>Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the <a href="API_ListResourceDataSync.html">ListResourceDataSync</a> operation.</p> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync-create.html">Creating a Resource Data Sync</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateResourceDataSyncResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: ResourceDataSyncCountExceededException
+          schema:
+            $ref: '#/definitions/ResourceDataSyncCountExceededException'
+        '482':
+          description: ResourceDataSyncAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceDataSyncAlreadyExistsException'
+        '483':
+          description: ResourceDataSyncInvalidConfigurationException
+          schema:
+            $ref: '#/definitions/ResourceDataSyncInvalidConfigurationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateResourceDataSyncRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteActivation':
     post:
       operationId: DeleteActivation
@@ -706,6 +747,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeletePatchBaselineRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteResourceDataSync':
+    post:
+      operationId: DeleteResourceDataSync
+      description: 'Deletes a Resource Data Sync configuration. After the configuration is deleted, changes to inventory data on managed instances are no longer synced with the target Amazon S3 bucket. Deleting a sync configuration does not delete data in the target Amazon S3 bucket.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteResourceDataSyncResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: ResourceDataSyncNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceDataSyncNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteResourceDataSyncRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2163,7 +2237,7 @@ paths:
   '/#GetParametersByPath':
     post:
       operationId: GetParametersByPath
-      description: 'Retrieve parameters in a specific hierarchy. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html">Using Parameter Hierarchies</a>. '
+      description: 'Retrieve parameters in a specific hierarchy. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a>. '
       responses:
         '200':
           description: Success
@@ -2557,6 +2631,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListInventoryEntriesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListResourceDataSync':
+    post:
+      operationId: ListResourceDataSync
+      description: '<p>Lists your resource data sync configurations. Includes information about the last time a sync attempted to start, the last sync status, and the last time a sync successfully completed.</p> <p>The number of sync configurations might be too large to return using a single call to <code>ListResourceDataSync</code>. You can limit the number of sync configurations returned by using the <code>MaxResults</code> parameter. To determine whether there are more sync configurations to list, check the value of <code>NextToken</code> in the output. If there are more sync configurations to list, you can request them by specifying the <code>NextToken</code> returned in the call to the parameter of a subsequent call. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListResourceDataSyncResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListResourceDataSyncRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4356,6 +4463,21 @@ definitions:
       BaselineId:
         $ref: '#/definitions/BaselineId'
         description: The ID of the created patch baseline.
+  CreateResourceDataSyncRequest:
+    type: object
+    required:
+      - SyncName
+      - S3Destination
+    properties:
+      SyncName:
+        $ref: '#/definitions/ResourceDataSyncName'
+        description: A name for the configuration.
+      S3Destination:
+        $ref: '#/definitions/ResourceDataSyncS3Destination'
+        description: Amazon S3 configuration details for the sync.
+  CreateResourceDataSyncResult:
+    type: object
+    properties: {}
   CreatedDate:
     type: string
     format: date-time
@@ -4468,6 +4590,17 @@ definitions:
       BaselineId:
         $ref: '#/definitions/BaselineId'
         description: The ID of the deleted patch baseline.
+  DeleteResourceDataSyncRequest:
+    type: object
+    required:
+      - SyncName
+    properties:
+      SyncName:
+        $ref: '#/definitions/ResourceDataSyncName'
+        description: The name of the configuration to delete.
+  DeleteResourceDataSyncResult:
+    type: object
+    properties: {}
   DeregisterManagedInstanceRequest:
     type: object
     required:
@@ -5874,8 +6007,8 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/String'
-        description: '<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html">Develop a Parameter Hierarchy</a>. </p>'
-    description: '<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working-path.html">Develop a Parameter Hierarchy</a>. </p>'
+        description: '<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a>. </p>'
+    description: '<p>A hierarchy can have a maximum of five levels. For example:</p> <p>/Finance/Prod/IAD/OS/WinServ2016/license15</p> <p>For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a>. </p>'
   HierarchyTypeMismatchException:
     type: object
     properties:
@@ -6654,6 +6787,18 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagKey'
+  LastResourceDataSyncStatus:
+    type: string
+    enum:
+      - Successful
+      - Failed
+      - InProgress
+  LastResourceDataSyncTime:
+    type: string
+    format: date-time
+  LastSuccessfulResourceDataSyncTime:
+    type: string
+    format: date-time
   ListAssociationsRequest:
     type: object
     properties:
@@ -6818,6 +6963,24 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
+  ListResourceDataSyncRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token to start the list. Use this token to get the next set of results. '
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+  ListResourceDataSyncResult:
+    type: object
+    properties:
+      ResourceDataSyncItems:
+        $ref: '#/definitions/ResourceDataSyncItemList'
+        description: A list of your current Resource Data Sync configurations and their statuses.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
   ListTagsForResourceRequest:
     type: object
     required:
@@ -8028,6 +8191,99 @@ definitions:
   RemoveTagsFromResourceResult:
     type: object
     properties: {}
+  ResourceDataSyncAlreadyExistsException:
+    type: object
+    properties:
+      SyncName:
+        $ref: '#/definitions/ResourceDataSyncName'
+    description: A sync configuration with the same name already exists.
+  ResourceDataSyncCountExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: You have exceeded the allowed maximum sync configurations.
+  ResourceDataSyncCreatedTime:
+    type: string
+    format: date-time
+  ResourceDataSyncInvalidConfigurationException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The specified sync configuration is invalid.
+  ResourceDataSyncItem:
+    type: object
+    properties:
+      SyncName:
+        $ref: '#/definitions/ResourceDataSyncName'
+        description: The name of the Resource Data Sync.
+      S3Destination:
+        $ref: '#/definitions/ResourceDataSyncS3Destination'
+        description: Configuration information for the target Amazon S3 bucket.
+      LastSyncTime:
+        $ref: '#/definitions/LastResourceDataSyncTime'
+        description: The last time the configuration attempted to sync (UTC).
+      LastSuccessfulSyncTime:
+        $ref: '#/definitions/LastSuccessfulResourceDataSyncTime'
+        description: The last time the sync operations returned a status of <code>SUCCESSFUL</code> (UTC).
+      LastStatus:
+        $ref: '#/definitions/LastResourceDataSyncStatus'
+        description: The status reported by the last sync.
+      SyncCreatedTime:
+        $ref: '#/definitions/ResourceDataSyncCreatedTime'
+        description: The date and time the configuration was created (UTC).
+    description: 'Information about a Resource Data Sync configuration, including its current status and last successful sync.'
+  ResourceDataSyncItemList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceDataSyncItem'
+  ResourceDataSyncName:
+    type: string
+    minLength: 1
+    maxLength: 64
+  ResourceDataSyncNotFoundException:
+    type: object
+    properties:
+      SyncName:
+        $ref: '#/definitions/ResourceDataSyncName'
+    description: The specified sync name was not found.
+  ResourceDataSyncS3BucketName:
+    type: string
+    minLength: 1
+    maxLength: 2048
+  ResourceDataSyncS3Destination:
+    type: object
+    required:
+      - BucketName
+      - SyncFormat
+      - Region
+    properties:
+      BucketName:
+        $ref: '#/definitions/ResourceDataSyncS3BucketName'
+        description: The name of the Amazon S3 bucket where the aggregated data is stored.
+      Prefix:
+        $ref: '#/definitions/ResourceDataSyncS3Prefix'
+        description: An Amazon S3 prefix for the bucket.
+      SyncFormat:
+        $ref: '#/definitions/ResourceDataSyncS3Format'
+        description: 'A supported sync format. The following format is currently supported: JsonSerDe'
+      Region:
+        $ref: '#/definitions/ResourceDataSyncS3Region'
+        description: The AWS Region with the Amazon S3 bucket targeted by the Resource Data Sync.
+    description: Information about the target Amazon S3 bucket for the Resource Data Sync.
+  ResourceDataSyncS3Format:
+    type: string
+    enum:
+      - JsonSerDe
+  ResourceDataSyncS3Prefix:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ResourceDataSyncS3Region:
+    type: string
+    minLength: 1
+    maxLength: 64
   ResourceId:
     type: string
   ResourceInUseException:

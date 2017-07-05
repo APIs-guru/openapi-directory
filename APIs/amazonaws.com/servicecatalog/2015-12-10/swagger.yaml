@@ -208,6 +208,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AssociateTagOptionWithResource':
+    post:
+      operationId: AssociateTagOptionWithResource
+      description: Associate a TagOption identifier with a resource identifier.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateTagOptionWithResourceOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: DuplicateResourceException
+          schema:
+            $ref: '#/definitions/DuplicateResourceException'
+        '485':
+          description: InvalidStateException
+          schema:
+            $ref: '#/definitions/InvalidStateException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateTagOptionWithResourceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateConstraint':
     post:
       operationId: CreateConstraint
@@ -266,6 +315,10 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
       parameters:
         - name: body
           in: body
@@ -336,6 +389,10 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
       parameters:
         - name: body
           in: body
@@ -379,6 +436,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateProvisioningArtifactInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateTagOption':
+    post:
+      operationId: CreateTagOption
+      description: Create a new TagOption.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateTagOptionOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
+        '481':
+          description: DuplicateResourceException
+          schema:
+            $ref: '#/definitions/DuplicateResourceException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTagOptionInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -443,6 +537,10 @@ paths:
           description: ResourceInUseException
           schema:
             $ref: '#/definitions/ResourceInUseException'
+        '483':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
       parameters:
         - name: body
           in: body
@@ -509,6 +607,10 @@ paths:
           description: InvalidParametersException
           schema:
             $ref: '#/definitions/InvalidParametersException'
+        '483':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
       parameters:
         - name: body
           in: body
@@ -776,7 +878,7 @@ paths:
   '/#DescribeProvisioningParameters':
     post:
       operationId: DescribeProvisioningParameters
-      description: Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of <code>ProvisioningArtifactParameters</code> parameters available to call the <a>ProvisionProduct</a> operation for the specified product.
+      description: '<p>Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of <code>ProvisioningArtifactParameters</code> parameters available to call the <a>ProvisionProduct</a> operation for the specified product.</p> <p>If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to the <code>ProvisionProduct</code> operation, do not include conflicted TagOption keys as tags. Calls to <code>ProvisionProduct</code> with empty TagOption values cause the error "Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i> ". Calls to <code>ProvisionProduct</code> with conflicted TagOption keys automatically tag the provisioned product with the conflicted keys with the value "<code>sc-tagoption-conflict-portfolioId-productId</code>".</p>'
       responses:
         '200':
           description: Success
@@ -835,6 +937,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTagOption':
+    post:
+      operationId: DescribeTagOption
+      description: Describes a TagOption.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeTagOptionOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeTagOptionInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DisassociatePrincipalFromPortfolio':
     post:
       operationId: DisassociatePrincipalFromPortfolio
@@ -882,6 +1017,10 @@ paths:
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
         '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
           description: InvalidParametersException
           schema:
             $ref: '#/definitions/InvalidParametersException'
@@ -891,6 +1030,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DisassociateProductFromPortfolioInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateTagOptionFromResource':
+    post:
+      operationId: DisassociateTagOptionFromResource
+      description: Disassociates a TagOption from a resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateTagOptionFromResourceOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateTagOptionFromResourceInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1182,10 +1354,100 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListResourcesForTagOption':
+    post:
+      operationId: ListResourcesForTagOption
+      description: Lists resources associated with a TagOption.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListResourcesForTagOptionOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListResourcesForTagOptionInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTagOptions':
+    post:
+      operationId: ListTagOptions
+      description: Lists detailed TagOptions information.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagOptionsOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
+        '481':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagOptionsInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ProvisionProduct':
     post:
       operationId: ProvisionProduct
-      description: '<p>Requests a <i>provision</i> of a specified product. A <i>provisioned product</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>'
+      description: '<p>Requests a <i>provision</i> of a specified product. A <i>provisioned product</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation. The error "Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>" indicates that your request contains a tag which has a tag key but no corresponding tag value (value is empty or null). Your call may have included values returned from a <code>DescribeProvisioningParameters</code> call that resulted in a TagOption key with an empty list. This happens when TagOption keys are in conflict. For more information, see <a>DescribeProvisioningParameters</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1422,6 +1684,10 @@ paths:
           description: LimitExceededException
           schema:
             $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
       parameters:
         - name: body
           in: body
@@ -1455,6 +1721,10 @@ paths:
           description: InvalidParametersException
           schema:
             $ref: '#/definitions/InvalidParametersException'
+        '482':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
       parameters:
         - name: body
           in: body
@@ -1527,6 +1797,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateProvisioningArtifactInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTagOption':
+    post:
+      operationId: UpdateTagOption
+      description: Updates an existing TagOption.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateTagOptionOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          schema:
+            $ref: '#/definitions/TagOptionNotMigratedException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: DuplicateResourceException
+          schema:
+            $ref: '#/definitions/DuplicateResourceException'
+        '483':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTagOptionInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1633,6 +1944,21 @@ definitions:
         $ref: '#/definitions/Id'
         description: The identifier of the source portfolio to use with this association.
   AssociateProductWithPortfolioOutput:
+    type: object
+    properties: {}
+  AssociateTagOptionWithResourceInput:
+    type: object
+    required:
+      - ResourceId
+      - TagOptionId
+    properties:
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: The resource identifier.
+      TagOptionId:
+        $ref: '#/definitions/TagOptionId'
+        description: The TagOption identifier.
+  AssociateTagOptionWithResourceOutput:
     type: object
     properties: {}
   AttributeValue:
@@ -1862,6 +2188,24 @@ definitions:
       Status:
         $ref: '#/definitions/Status'
         description: The status of the current request.
+  CreateTagOptionInput:
+    type: object
+    required:
+      - Key
+      - Value
+    properties:
+      Key:
+        $ref: '#/definitions/TagOptionKey'
+        description: The TagOption key.
+      Value:
+        $ref: '#/definitions/TagOptionValue'
+        description: The TagOption value.
+  CreateTagOptionOutput:
+    type: object
+    properties:
+      TagOptionDetail:
+        $ref: '#/definitions/TagOptionDetail'
+        description: The resulting detailed TagOption information.
   CreatedTime:
     type: string
     format: date-time
@@ -1991,6 +2335,9 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: Tags associated with the portfolio.
+      TagOptions:
+        $ref: '#/definitions/TagOptionDetails'
+        description: TagOptions associated with the portfolio.
   DescribeProductAsAdminInput:
     type: object
     required:
@@ -2014,6 +2361,9 @@ definitions:
       Tags:
         $ref: '#/definitions/Tags'
         description: Tags associated with the product.
+      TagOptions:
+        $ref: '#/definitions/TagOptionDetails'
+        description: List of TagOptions associated with the product.
   DescribeProductInput:
     type: object
     required:
@@ -2088,7 +2438,7 @@ definitions:
         description: The product identifier.
       Verbose:
         $ref: '#/definitions/Verbose'
-        description: 'Selects verbose results. If set to true, the CloudFormation template is returned.'
+        description: Enable a verbose level of details for the provisioning artifact.
   DescribeProvisioningArtifactOutput:
     type: object
     properties:
@@ -2131,6 +2481,9 @@ definitions:
       UsageInstructions:
         $ref: '#/definitions/UsageInstructions'
         description: 'Any additional metadata specifically related to the provisioning of the product. For example, see the <code>Version</code> field of the CloudFormation template.'
+      TagOptions:
+        $ref: '#/definitions/TagOptionSummaries'
+        description: List of TagOptions associated with the provisioned provisioning parameters.
   DescribeRecordInput:
     type: object
     required:
@@ -2160,6 +2513,20 @@ definitions:
       NextPageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  DescribeTagOptionInput:
+    type: object
+    required:
+      - Id
+    properties:
+      Id:
+        $ref: '#/definitions/TagOptionId'
+        description: The identifier of the TagOption.
+  DescribeTagOptionOutput:
+    type: object
+    properties:
+      TagOptionDetail:
+        $ref: '#/definitions/TagOptionDetail'
+        description: The resulting detailed TagOption information.
   Description:
     type: string
   DisassociatePrincipalFromPortfolioInput:
@@ -2198,6 +2565,21 @@ definitions:
   DisassociateProductFromPortfolioOutput:
     type: object
     properties: {}
+  DisassociateTagOptionFromResourceInput:
+    type: object
+    required:
+      - ResourceId
+      - TagOptionId
+    properties:
+      ResourceId:
+        $ref: '#/definitions/ResourceId'
+        description: Identifier of the resource from which to disassociate the TagOption.
+      TagOptionId:
+        $ref: '#/definitions/TagOptionId'
+        description: Identifier of the TagOption to disassociate from the resource.
+  DisassociateTagOptionFromResourceOutput:
+    type: object
+    properties: {}
   DuplicateResourceException:
     type: object
     properties: {}
@@ -2227,6 +2609,10 @@ definitions:
     type: object
     properties: {}
     description: One or more parameters provided to the operation are invalid.
+  InvalidStateException:
+    type: object
+    properties: {}
+    description: An attempt was made to modify a resource that is in an invalid state. Inspect the resource you are using for this operation to ensure that all resource states are valid before retrying the operation.
   LastRequestId:
     type: string
   LaunchPathSummaries:
@@ -2313,7 +2699,7 @@ definitions:
         description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
       ProductId:
         $ref: '#/definitions/Id'
-        description: The product identifier.. Identifies the product for which to retrieve <code>LaunchPathSummaries</code> information.
+        description: The product identifier. Identifies the product for which to retrieve <code>LaunchPathSummaries</code> information.
       PageSize:
         $ref: '#/definitions/PageSize'
         description: 'The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.'
@@ -2479,6 +2865,66 @@ definitions:
         $ref: '#/definitions/SearchFilterValue'
         description: The filter value for <code>Key</code>.
     description: The search filter to limit results when listing request history records.
+  ListResourcesForTagOptionInput:
+    type: object
+    required:
+      - TagOptionId
+    properties:
+      TagOptionId:
+        $ref: '#/definitions/TagOptionId'
+        description: Identifier of the TagOption.
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: Resource type.
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: 'The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.'
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.'
+  ListResourcesForTagOptionOutput:
+    type: object
+    properties:
+      ResourceDetails:
+        $ref: '#/definitions/ResourceDetails'
+        description: The resulting detailed resource information.
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.'
+  ListTagOptionsFilters:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagOptionKey'
+        description: The ListTagOptionsFilters key.
+      Value:
+        $ref: '#/definitions/TagOptionValue'
+        description: The ListTagOptionsFilters value.
+      Active:
+        $ref: '#/definitions/TagOptionActive'
+        description: The ListTagOptionsFilters active state.
+    description: The ListTagOptions filters.
+  ListTagOptionsInput:
+    type: object
+    properties:
+      Filters:
+        $ref: '#/definitions/ListTagOptionsFilters'
+        description: 'The list of filters with which to limit search results. If no search filters are specified, the output is all TagOptions. '
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: 'The maximum number of items to return in the results. If more results exist than fit in the specified <code>PageSize</code>, the value of <code>NextPageToken</code> in the response is non-null.'
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.'
+  ListTagOptionsOutput:
+    type: object
+    properties:
+      TagOptionDetails:
+        $ref: '#/definitions/TagOptionDetails'
+        description: The resulting detailed TagOption information.
+      PageToken:
+        $ref: '#/definitions/PageToken'
+        description: 'The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.'
   NoEcho:
     type: boolean
   NotificationArn:
@@ -2923,20 +3369,20 @@ definitions:
     properties:
       Id:
         $ref: '#/definitions/Id'
-        description: The provisioning artifact identifier.
+        description: The identifier of the provisioning artifact.
       Name:
         $ref: '#/definitions/ProvisioningArtifactName'
-        description: The provisioning artifact name.
+        description: The name of the provisioning artifact.
       Description:
         $ref: '#/definitions/ProvisioningArtifactDescription'
-        description: The provisioning artifact description.
+        description: The description of the provisioning artifact.
       CreatedTime:
         $ref: '#/definitions/ProvisioningArtifactCreatedTime'
         description: The UTC timestamp of the creation time.
       ProvisioningArtifactMetadata:
         $ref: '#/definitions/ProvisioningArtifactInfo'
         description: The provisioning artifact metadata. This data is used with products created by AWS Marketplace.
-    description: Summary information about a provisioning artifact.
+    description: Stores summary information about a provisioning artifact.
   ProvisioningArtifactType:
     type: string
     enum:
@@ -2972,7 +3418,7 @@ definitions:
         description: The user-friendly name of the ProvisionedProduct object.
       Status:
         $ref: '#/definitions/RecordStatus'
-        description: '<p>The status of the ProvisionedProduct object.</p> <p> <code>CREATED</code> - Request created but the operation has not yet started.</p> <p> <code>IN_PROGRESS</code> - The requested operation is in-progress.</p> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a roll-back.</p> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> <p> <code>FAILED</code> - The requested operation has completed but has failed. Investigate using the error messages returned.</p>'
+        description: '<p>The status of the ProvisionedProduct object.</p> <p> <code>CREATED</code> - Request created but the operation has not yet started.</p> <p> <code>IN_PROGRESS</code> - The requested operation is in-progress.</p> <p> <code>IN_PROGRESS_IN_ERROR</code> - The provisioned product is under change but the requested operation failed and some remediation is occurring. For example, a rollback.</p> <p> <code>SUCCEEDED</code> - The requested operation has successfully completed.</p> <p> <code>FAILED</code> - The requested operation has completed but has failed. Investigate using the error messages returned.</p>'
       CreatedTime:
         $ref: '#/definitions/CreatedTime'
         description: The UTC timestamp of the creation time.
@@ -3092,6 +3538,42 @@ definitions:
     type: string
     minLength: 1
     maxLength: 150
+  ResourceDetail:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/ResourceDetailId'
+        description: Identifier of the resource.
+      ARN:
+        $ref: '#/definitions/ResourceDetailARN'
+        description: ARN of the resource.
+      Name:
+        $ref: '#/definitions/ResourceDetailName'
+        description: Name of the resource.
+      Description:
+        $ref: '#/definitions/ResourceDetailDescription'
+        description: Description of the resource.
+      CreatedTime:
+        $ref: '#/definitions/ResourceDetailCreatedTime'
+        description: Creation time of the resource.
+    description: Detailed resource information.
+  ResourceDetailARN:
+    type: string
+  ResourceDetailCreatedTime:
+    type: string
+    format: date-time
+  ResourceDetailDescription:
+    type: string
+  ResourceDetailId:
+    type: string
+  ResourceDetailName:
+    type: string
+  ResourceDetails:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceDetail'
+  ResourceId:
+    type: string
   ResourceInUseException:
     type: object
     properties: {}
@@ -3100,6 +3582,8 @@ definitions:
     type: object
     properties: {}
     description: The specified resource was not found.
+  ResourceType:
+    type: string
   ScanProvisionedProductsInput:
     type: object
     properties:
@@ -3226,7 +3710,7 @@ definitions:
       Value:
         $ref: '#/definitions/TagValue'
         description: The desired value for this key.
-    description: Key/value pairs to associate with this provisioning. These tags are entirely discretionary and are propagated to the resources created in the provisioning.
+    description: Key-value pairs to associate with this provisioning. These tags are entirely discretionary and are propagated to the resources created in the provisioning.
   TagKey:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -3236,6 +3720,64 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TagKey'
+  TagOptionActive:
+    type: boolean
+  TagOptionDetail:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagOptionKey'
+        description: The TagOptionDetail key.
+      Value:
+        $ref: '#/definitions/TagOptionValue'
+        description: The TagOptionDetail value.
+      Active:
+        $ref: '#/definitions/TagOptionActive'
+        description: The TagOptionDetail active state.
+      Id:
+        $ref: '#/definitions/TagOptionId'
+        description: The TagOptionDetail identifier.
+    description: The TagOption details.
+  TagOptionDetails:
+    type: array
+    items:
+      $ref: '#/definitions/TagOptionDetail'
+  TagOptionId:
+    type: string
+    minLength: 1
+    maxLength: 100
+  TagOptionKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagOptionNotMigratedException:
+    type: object
+    properties: {}
+    description: An operation requiring TagOptions failed because the TagOptions migration process has not been performed for this account. Please use the AWS console to perform the migration process before retrying the operation.
+  TagOptionSummaries:
+    type: array
+    items:
+      $ref: '#/definitions/TagOptionSummary'
+  TagOptionSummary:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagOptionKey'
+        description: The TagOptionSummary key.
+      Values:
+        $ref: '#/definitions/TagOptionValues'
+        description: The TagOptionSummary value.
+    description: The TagOption summary key-value pair.
+  TagOptionValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 256
+  TagOptionValues:
+    type: array
+    items:
+      $ref: '#/definitions/TagOptionValue'
   TagValue:
     type: string
     pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -3465,6 +4007,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/UpdateProvisioningParameter'
+  UpdateTagOptionInput:
+    type: object
+    required:
+      - Id
+    properties:
+      Id:
+        $ref: '#/definitions/TagOptionId'
+        description: The identifier of the constraint to update.
+      Value:
+        $ref: '#/definitions/TagOptionValue'
+        description: The updated value.
+      Active:
+        $ref: '#/definitions/TagOptionActive'
+        description: The updated active state.
+  UpdateTagOptionOutput:
+    type: object
+    properties:
+      TagOptionDetail:
+        $ref: '#/definitions/TagOptionDetail'
+        description: The resulting detailed TagOption information.
   UpdatedTime:
     type: string
     format: date-time
