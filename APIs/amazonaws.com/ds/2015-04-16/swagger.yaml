@@ -915,6 +915,65 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDomainControllers':
+    post:
+      operationId: DescribeDomainControllers
+      description: Provides information about any domain controllers in your directory.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDomainControllersResult'
+        '480':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '481':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '484':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+        '485':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDomainControllersRequest'
+        - name: Limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeEventTopics':
     post:
       operationId: DescribeEventTopics
@@ -1693,6 +1752,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateNumberOfDomainControllers':
+    post:
+      operationId: UpdateNumberOfDomainControllers
+      description: 'Adds or removes domain controllers to or from the directory. Based on the difference between current value and new value (provided through this API call), domain controllers will be added or removed. It may take up to 45 minutes for any new domain controllers to become fully active once the requested number of domain controllers is updated. During this time, you cannot make another update request.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateNumberOfDomainControllersResult'
+        '480':
+          description: EntityDoesNotExistException
+          schema:
+            $ref: '#/definitions/EntityDoesNotExistException'
+        '481':
+          description: DirectoryUnavailableException
+          schema:
+            $ref: '#/definitions/DirectoryUnavailableException'
+        '482':
+          description: DomainControllerLimitExceededException
+          schema:
+            $ref: '#/definitions/DomainControllerLimitExceededException'
+        '483':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '484':
+          description: UnsupportedOperationException
+          schema:
+            $ref: '#/definitions/UnsupportedOperationException'
+        '485':
+          description: ClientException
+          schema:
+            $ref: '#/definitions/ClientException'
+        '486':
+          description: ServiceException
+          schema:
+            $ref: '#/definitions/ServiceException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateNumberOfDomainControllersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateRadius':
     post:
       operationId: UpdateRadius
@@ -2101,6 +2213,7 @@ definitions:
         description: A textual description for the directory. This label will appear on the AWS console <code>Directory Details</code> page after the directory is created.
       VpcSettings:
         $ref: '#/definitions/DirectoryVpcSettings'
+        description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
     description: Creates a Microsoft AD in the AWS cloud.
   CreateMicrosoftADResult:
     type: object
@@ -2296,6 +2409,32 @@ definitions:
         $ref: '#/definitions/NextToken'
         description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>DescribeDirectories</a> to retrieve the next set of items.'
     description: Contains the results of the <a>DescribeDirectories</a> operation.
+  DescribeDomainControllersRequest:
+    type: object
+    required:
+      - DirectoryId
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the directory for which to retrieve the domain controller information.
+      DomainControllerIds:
+        $ref: '#/definitions/DomainControllerIds'
+        description: A list of identifiers for the domain controllers whose information will be provided.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <i>DescribeDomainControllers.NextToken</i> value from a previous call to <a>DescribeDomainControllers</a>. Pass null if this is the first call. '
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: The maximum number of items to return.
+  DescribeDomainControllersResult:
+    type: object
+    properties:
+      DomainControllers:
+        $ref: '#/definitions/DomainControllers'
+        description: List of the <a>DomainController</a> objects that were retrieved.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDomainControllers</a> retrieve the next set of items.'
   DescribeEventTopicsRequest:
     type: object
     properties:
@@ -2370,6 +2509,9 @@ definitions:
     pattern: '^([a-zA-Z0-9_])[\\a-zA-Z0-9_@#%*+=:?./!\s-]*$'
     minLength: 0
     maxLength: 128
+  DesiredNumberOfDomainControllers:
+    type: integer
+    minimum: 2
   DirectoryConnectSettings:
     type: object
     required:
@@ -2470,6 +2612,9 @@ definitions:
       SsoEnabled:
         $ref: '#/definitions/SsoEnabled'
         description: 'Indicates if single-sign on is enabled for the directory. For more information, see <a>EnableSso</a> and <a>DisableSso</a>.'
+      DesiredNumberOfDomainControllers:
+        $ref: '#/definitions/DesiredNumberOfDomainControllers'
+        description: The desired number of domain controllers in the directory if the directory is Microsoft AD.
     description: Contains information about an AWS Directory Service directory.
   DirectoryDescriptions:
     type: array
@@ -2627,6 +2772,71 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/IpAddr'
+  DomainController:
+    type: object
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the directory where the domain controller resides.
+      DomainControllerId:
+        $ref: '#/definitions/DomainControllerId'
+        description: Identifies a specific domain controller in the directory.
+      DnsIpAddr:
+        $ref: '#/definitions/IpAddr'
+        description: The IP address of the domain controller.
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The identifier of the VPC that contains the domain controller.
+      SubnetId:
+        $ref: '#/definitions/SubnetId'
+        description: Identifier of the subnet in the VPC that contains the domain controller.
+      AvailabilityZone:
+        $ref: '#/definitions/AvailabilityZone'
+        description: The Availability Zone where the domain controller is located.
+      Status:
+        $ref: '#/definitions/DomainControllerStatus'
+        description: The status of the domain controller.
+      StatusReason:
+        $ref: '#/definitions/DomainControllerStatusReason'
+        description: A description of the domain controller state.
+      LaunchTime:
+        $ref: '#/definitions/LaunchTime'
+        description: Specifies when the domain controller was created.
+      StatusLastUpdatedDateTime:
+        $ref: '#/definitions/LastUpdatedDateTime'
+        description: The date and time that the status was last updated.
+    description: Contains information about the domain controllers for a specified directory.
+  DomainControllerId:
+    type: string
+    pattern: '^dc-[0-9a-f]{10}$'
+  DomainControllerIds:
+    type: array
+    items:
+      $ref: '#/definitions/DomainControllerId'
+  DomainControllerLimitExceededException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ExceptionMessage'
+      RequestId:
+        $ref: '#/definitions/RequestId'
+    description: The maximum allowed number of domain controllers per directory was exceeded. The default limit per directory is 20 domain controllers.
+  DomainControllerStatus:
+    type: string
+    enum:
+      - Creating
+      - Active
+      - Impaired
+      - Restoring
+      - Deleting
+      - Deleted
+      - Failed
+  DomainControllerStatusReason:
+    type: string
+  DomainControllers:
+    type: array
+    items:
+      $ref: '#/definitions/DomainController'
   EnableRadiusRequest:
     type: object
     required:
@@ -3406,6 +3616,21 @@ definitions:
     type: object
     properties: {}
     description: The result of an UpdateConditionalForwarder request.
+  UpdateNumberOfDomainControllersRequest:
+    type: object
+    required:
+      - DirectoryId
+      - DesiredNumber
+    properties:
+      DirectoryId:
+        $ref: '#/definitions/DirectoryId'
+        description: Identifier of the directory to which the domain controllers will be added or removed.
+      DesiredNumber:
+        $ref: '#/definitions/DesiredNumberOfDomainControllers'
+        description: The number of domain controllers desired in the directory.
+  UpdateNumberOfDomainControllersResult:
+    type: object
+    properties: {}
   UpdateRadiusRequest:
     type: object
     required:

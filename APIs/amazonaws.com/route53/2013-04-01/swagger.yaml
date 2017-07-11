@@ -2688,6 +2688,8 @@ definitions:
       messages:
         $ref: '#/definitions/ErrorMessages'
         description: Descriptive message for the error response.
+      message:
+        $ref: '#/definitions/ErrorMessage'
     description: This exception contains a list of messages that might contain one or more error messages. Each error message indicates one error in the change batch.
   InvalidDomainName:
     type: object

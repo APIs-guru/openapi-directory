@@ -2558,6 +2558,11 @@ definitions:
         $ref: '#/definitions/ArnType'
         description: ARN of the key.
     description: Contains information about each entry in the key list.
+  KeyManagerType:
+    type: string
+    enum:
+      - AWS
+      - CUSTOMER
   KeyMetadata:
     type: object
     required:
@@ -2599,6 +2604,9 @@ definitions:
       ExpirationModel:
         $ref: '#/definitions/ExpirationModelType'
         description: 'Specifies whether the CMK''s key material expires. This value is present only when <code>Origin</code> is <code>EXTERNAL</code>, otherwise this value is omitted.'
+      KeyManager:
+        $ref: '#/definitions/KeyManagerType'
+        description: 'The CMK''s manager. CMKs are either customer-managed or AWS-managed. For more information about the difference, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">Customer Master Keys</a> in the <i>AWS Key Management Service Developer Guide</i>.'
     description: <p>Contains metadata about a customer master key (CMK).</p> <p>This data type is used as a response element for the <a>CreateKey</a> and <a>DescribeKey</a> operations.</p>
   KeyState:
     type: string

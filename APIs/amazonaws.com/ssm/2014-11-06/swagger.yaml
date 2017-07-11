@@ -472,7 +472,7 @@ paths:
   '/#CreateResourceDataSync':
     post:
       operationId: CreateResourceDataSync
-      description: '<p>Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the <a href="API_ListResourceDataSync.html">ListResourceDataSync</a> operation.</p> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync-create.html">Creating a Resource Data Sync</a>.</p>'
+      description: '<p>Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the <a href="API_ListResourceDataSync.html">ListResourceDataSync</a> operation.</p> <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync">Configuring Resource Data Sync for Inventory</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1186,7 +1186,7 @@ paths:
   '/#DescribeEffectivePatchesForPatchBaseline':
     post:
       operationId: DescribeEffectivePatchesForPatchBaseline
-      description: Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline.
+      description: Retrieves the current effective patches (the patch and the approval state) for the specified patch baseline. Note that this API applies only to Windows patch baselines.
       responses:
         '200':
           description: Success
@@ -1201,6 +1201,10 @@ paths:
           schema:
             $ref: '#/definitions/DoesNotExistException'
         '482':
+          description: UnsupportedOperatingSystem
+          schema:
+            $ref: '#/definitions/UnsupportedOperatingSystem'
+        '483':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -1840,7 +1844,7 @@ paths:
   '/#GetDefaultPatchBaseline':
     post:
       operationId: GetDefaultPatchBaseline
-      description: Retrieves the default patch baseline.
+      description: 'Retrieves the default patch baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.'
       responses:
         '200':
           description: Success
@@ -1869,7 +1873,7 @@ paths:
   '/#GetDeployablePatchSnapshotForInstance':
     post:
       operationId: GetDeployablePatchSnapshotForInstance
-      description: 'Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-ApplyPatchBaseline Systems Manager document. '
+      description: 'Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document. '
       responses:
         '200':
           description: Success
@@ -1879,6 +1883,10 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
+        '481':
+          description: UnsupportedOperatingSystem
+          schema:
+            $ref: '#/definitions/UnsupportedOperatingSystem'
       parameters:
         - name: body
           in: body
@@ -4436,6 +4444,9 @@ definitions:
     required:
       - Name
     properties:
+      OperatingSystem:
+        $ref: '#/definitions/OperatingSystem'
+        description: 'Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS.'
       Name:
         $ref: '#/definitions/BaselineName'
         description: The name of the patch baseline.
@@ -4448,6 +4459,9 @@ definitions:
       ApprovedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly approved patches for the baseline.
+      ApprovedPatchesComplianceLevel:
+        $ref: '#/definitions/PatchComplianceLevel'
+        description: 'Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. Valid compliance severity levels include the following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED. The default value is UNSPECIFIED.'
       RejectedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly rejected patches for the baseline.
@@ -5214,6 +5228,9 @@ definitions:
       MaxResults:
         $ref: '#/definitions/PatchBaselineMaxResults'
         description: The maximum number of patch groups to return (per page).
+      Filters:
+        $ref: '#/definitions/PatchOrchestratorFilterList'
+        description: One or more filters. Use a filter to return a more specific list of results.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of items to return. (You received this token from a previous call.)
@@ -5618,13 +5635,19 @@ definitions:
         description: 'The URL for the complete text written by the plugin to stderr. If the command has not finished executing, then this string is empty.'
   GetDefaultPatchBaselineRequest:
     type: object
-    properties: {}
+    properties:
+      OperatingSystem:
+        $ref: '#/definitions/OperatingSystem'
+        description: Returns the default patch baseline for the specified operating system.
   GetDefaultPatchBaselineResult:
     type: object
     properties:
       BaselineId:
         $ref: '#/definitions/BaselineId'
         description: The ID of the default patch baseline.
+      OperatingSystem:
+        $ref: '#/definitions/OperatingSystem'
+        description: 'The operating system for the returned patch baseline. '
   GetDeployablePatchSnapshotForInstanceRequest:
     type: object
     required:
@@ -5649,6 +5672,9 @@ definitions:
       SnapshotDownloadUrl:
         $ref: '#/definitions/SnapshotDownloadUrl'
         description: A pre-signed Amazon S3 URL that can be used to download the patch snapshot.
+      Product:
+        $ref: '#/definitions/Product'
+        description: Returns the specific operating system (for example Windows Server 2012 or Amazon Linux 2015.09) on the instance for the specified patch snapshot.
   GetDocumentRequest:
     type: object
     required:
@@ -5952,6 +5978,9 @@ definitions:
       PatchGroup:
         $ref: '#/definitions/PatchGroup'
         description: The name of the patch group whose patch baseline should be retrieved.
+      OperatingSystem:
+        $ref: '#/definitions/OperatingSystem'
+        description: Returns he operating system rule specified for patch groups using the patch baseline.
   GetPatchBaselineForPatchGroupResult:
     type: object
     properties:
@@ -5961,6 +5990,9 @@ definitions:
       PatchGroup:
         $ref: '#/definitions/PatchGroup'
         description: The name of the patch group.
+      OperatingSystem:
+        $ref: '#/definitions/OperatingSystem'
+        description: The operating system rule specified for patch groups using the patch baseline.
   GetPatchBaselineRequest:
     type: object
     required:
@@ -5978,6 +6010,9 @@ definitions:
       Name:
         $ref: '#/definitions/BaselineName'
         description: The name of the patch baseline.
+      OperatingSystem:
+        $ref: '#/definitions/OperatingSystem'
+        description: Returns the operating system specified for the patch baseline.
       GlobalFilters:
         $ref: '#/definitions/PatchFilterGroup'
         description: A set of global filters used to exclude patches from the baseline.
@@ -5987,6 +6022,9 @@ definitions:
       ApprovedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly approved patches for the baseline.
+      ApprovedPatchesComplianceLevel:
+        $ref: '#/definitions/PatchComplianceLevel'
+        description: Returns the specified compliance severity level for approved patches in the patch baseline.
       RejectedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly rejected patches for the baseline.
@@ -6297,10 +6335,10 @@ definitions:
         $ref: '#/definitions/PatchNotApplicableCount'
         description: The number of patches from the patch baseline that aren't applicable for the instance and hence aren't installed on the instance.
       OperationStartTime:
-        $ref: '#/definitions/PatchOperationStartTime'
+        $ref: '#/definitions/DateTime'
         description: The time the most recent patching operation was started on the instance.
       OperationEndTime:
-        $ref: '#/definitions/PatchOperationEndTime'
+        $ref: '#/definitions/DateTime'
         description: The time the most recent patching operation completed on the instance.
       Operation:
         $ref: '#/definitions/PatchOperationType'
@@ -7451,6 +7489,13 @@ definitions:
     enum:
       - Command
       - Invocation
+  OperatingSystem:
+    type: string
+    enum:
+      - WINDOWS
+      - AMAZON_LINUX
+      - UBUNTU
+      - REDHAT_ENTERPRISE_LINUX
   OwnerInformation:
     type: string
     minLength: 1
@@ -7728,12 +7773,15 @@ definitions:
       BaselineName:
         $ref: '#/definitions/BaselineName'
         description: The name of the patch baseline.
+      OperatingSystem:
+        $ref: '#/definitions/OperatingSystem'
+        description: 'Defines the operating system the patch baseline applies to. Supported operating systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX. The Default value is WINDOWS. '
       BaselineDescription:
         $ref: '#/definitions/BaselineDescription'
         description: The description of the patch baseline.
       DefaultBaseline:
         $ref: '#/definitions/DefaultBaseline'
-        description: Whether this is the default baseline.
+        description: 'Whether this is the default baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.'
     description: Defines the basic information about a patch baseline.
   PatchBaselineIdentityList:
     type: array
@@ -7760,7 +7808,7 @@ definitions:
         description: The title of the patch.
       KBId:
         $ref: '#/definitions/PatchKbNumber'
-        description: The Microsoft Knowledge Base ID of the patch.
+        description: The operating system-specific ID of the patch.
       Classification:
         $ref: '#/definitions/PatchClassification'
         description: 'The classification of the patch (for example, SecurityUpdates, Updates, CriticalUpdates).'
@@ -7771,8 +7819,8 @@ definitions:
         $ref: '#/definitions/PatchComplianceDataState'
         description: 'The state of the patch on the instance (INSTALLED, INSTALLED_OTHER, MISSING, NOT_APPLICABLE or FAILED).'
       InstalledTime:
-        $ref: '#/definitions/PatchInstalledTime'
-        description: The date/time the patch was installed on the instance.
+        $ref: '#/definitions/DateTime'
+        description: The date/time the patch was installed on the instance. Note that not all operating systems provide this level of information.
     description: Information about the state of a patch on a particular instance as it relates to the patch baseline used to patch the instance.
   PatchComplianceDataList:
     type: array
@@ -7786,6 +7834,15 @@ definitions:
       - MISSING
       - NOT_APPLICABLE
       - FAILED
+  PatchComplianceLevel:
+    type: string
+    enum:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - INFORMATIONAL
+      - UNSPECIFIED
   PatchComplianceMaxResults:
     type: integer
     minimum: 10
@@ -7832,6 +7889,9 @@ definitions:
       - CLASSIFICATION
       - MSRC_SEVERITY
       - PATCH_ID
+      - SECTION
+      - PRIORITY
+      - SEVERITY
   PatchFilterList:
     type: array
     items:
@@ -7873,7 +7933,8 @@ definitions:
       $ref: '#/definitions/PatchGroupPatchBaselineMapping'
   PatchId:
     type: string
-    pattern: '(^KB[0-9]{1,7}$)|(^MS[0-9]{2}\-[0-9]{3}$)'
+    minLength: 1
+    maxLength: 100
   PatchIdList:
     type: array
     items:
@@ -7884,9 +7945,6 @@ definitions:
     type: integer
   PatchInstalledOtherCount:
     type: integer
-  PatchInstalledTime:
-    type: string
-    format: date-time
   PatchKbNumber:
     type: string
   PatchLanguage:
@@ -7903,12 +7961,6 @@ definitions:
     type: string
   PatchNotApplicableCount:
     type: integer
-  PatchOperationEndTime:
-    type: string
-    format: date-time
-  PatchOperationStartTime:
-    type: string
-    format: date-time
   PatchOperationType:
     type: string
     enum:
@@ -7955,6 +8007,9 @@ definitions:
       PatchFilterGroup:
         $ref: '#/definitions/PatchFilterGroup'
         description: The patch filter group that defines the criteria for the rule.
+      ComplianceLevel:
+        $ref: '#/definitions/PatchComplianceLevel'
+        description: 'A compliance severity level for all approved patches in a patch baseline. Valid compliance severity levels include the following: Unspecified, Critical, High, Medium, Low, and Informational.'
       ApproveAfterDays:
         $ref: '#/definitions/ApproveAfterDays'
         description: The number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline.
@@ -7982,6 +8037,9 @@ definitions:
       DeploymentStatus:
         $ref: '#/definitions/PatchDeploymentStatus'
         description: 'The approval status of a patch (APPROVED, PENDING_APPROVAL, EXPLICIT_APPROVED, EXPLICIT_REJECTED).'
+      ComplianceLevel:
+        $ref: '#/definitions/PatchComplianceLevel'
+        description: The compliance severity level for a patch.
       ApprovalDate:
         $ref: '#/definitions/DateTime'
         description: The date the patch was approved (or will be approved if the status is PENDING_APPROVAL).
@@ -8005,6 +8063,8 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PlatformType'
+  Product:
+    type: string
   PutInventoryRequest:
     type: object
     required:
@@ -8617,6 +8677,12 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: Inventory item type schema version has to match supported versions in the service. Check output of GetInventorySchema to see the available schema version for each type.
+  UnsupportedOperatingSystem:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: 'The operating systems you specified is not supported, or the operation is not supported for the operating system. Valid operating systems include: Windows, AmazonLinux, RedhatEnterpriseLinux, and Ubuntu.'
   UnsupportedParameterType:
     type: object
     properties:
@@ -8807,6 +8873,9 @@ definitions:
       ApprovedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly approved patches for the baseline.
+      ApprovedPatchesComplianceLevel:
+        $ref: '#/definitions/PatchComplianceLevel'
+        description: Assigns a new compliance severity level to an existing patch baseline.
       RejectedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly rejected patches for the baseline.
@@ -8822,6 +8891,9 @@ definitions:
       Name:
         $ref: '#/definitions/BaselineName'
         description: The name of the patch baseline.
+      OperatingSystem:
+        $ref: '#/definitions/OperatingSystem'
+        description: The operating system rule used by the updated patch baseline.
       GlobalFilters:
         $ref: '#/definitions/PatchFilterGroup'
         description: A set of global filters used to exclude patches from the baseline.
@@ -8831,6 +8903,9 @@ definitions:
       ApprovedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly approved patches for the baseline.
+      ApprovedPatchesComplianceLevel:
+        $ref: '#/definitions/PatchComplianceLevel'
+        description: The compliance severity level assigned to the patch baseline after the update completed.
       RejectedPatches:
         $ref: '#/definitions/PatchIdList'
         description: A list of explicitly rejected patches for the baseline.
