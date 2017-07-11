@@ -2236,6 +2236,9 @@ definitions:
             tableReference:
               $ref: '#/definitions/TableReference'
               description: A reference uniquely identifying the table.
+            timePartitioning:
+              $ref: '#/definitions/TimePartitioning'
+              description: '[Experimental] The time-based partitioning for this table.'
             type:
               description: 'The type of table. Possible values are: TABLE, VIEW.'
               type: string

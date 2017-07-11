@@ -274,6 +274,12 @@ paths:
       parameters:
         - $ref: '#/parameters/all'
         - $ref: '#/parameters/userId'
+        - collectionFormat: multi
+          description: To fetch one or more devices. Multiple params can be passed like `id=31&id=42`
+          in: query
+          name: id
+          required: false
+          type: integer
       responses:
         '200':
           description: OK
@@ -317,7 +323,7 @@ paths:
       responses:
         '204':
           description: No Content
-      summary: Update a Device
+      summary: Delete a Device
     put:
       parameters:
         - $ref: '#/parameters/entityId'

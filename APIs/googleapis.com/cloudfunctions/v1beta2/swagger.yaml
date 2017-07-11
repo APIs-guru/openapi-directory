@@ -294,10 +294,13 @@ paths:
       tags:
         - projects
     get:
-      description: Returns a function with the given name from the requested project.
-      operationId: cloudfunctions.projects.locations.functions.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: cloudfunctions.operations.get
       parameters:
-        - description: The name of the function which details should be obtained.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -307,14 +310,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/CloudFunction'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - operations
     parameters:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/prettyPrint'
@@ -520,6 +523,22 @@ definitions:
       sourceRepository:
         $ref: '#/definitions/SourceRepository'
         description: The hosted repository where the function is defined.
+      sourceRepositoryUrl:
+        description: |-
+          The URL pointing to the hosted repository where the function is defined.
+          There are supported Cloud Source Repository URLs in the following
+          formats:
+
+          To refer to a specific commit:
+          `https://source.developers.google.com/projects/*/repos/*/revisions/*/paths/*`
+          To refer to a moveable alias (branch):
+          `https://source.developers.google.com/projects/*/repos/*/aliases/movable/*/paths/*`
+          In particular, to refer to HEAD use `master` moveable alias.
+          To refer to a specific fixed alias (tag):
+          `https://source.developers.google.com/projects/*/repos/*/aliases/fixed/*/paths/*`
+
+          You may omit `paths/*` if you want to use the main directory.
+        type: string
       status:
         description: Output only. Status of the function deployment.
         enum:
@@ -806,8 +825,8 @@ definitions:
         type: integer
       details:
         description: |-
-          A list of messages that carry the error details.  There will be a
-          common set of message types for APIs to use.
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.

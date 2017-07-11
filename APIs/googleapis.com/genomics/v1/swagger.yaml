@@ -2562,23 +2562,52 @@ paths:
         - variantsets
   '/v1/{name}':
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: genomics.operations.get
+      description: Lists operations that match the specified filter in the request.
+      operationId: genomics.operations.list
       parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            A string for filtering Operations.
+            The following filter fields are supported&#58;
+
+            * projectId&#58; Required. Corresponds to
+              OperationMetadata.projectId.
+            * createTime&#58; The time this job was created, in seconds from the
+              [epoch](http://en.wikipedia.org/wiki/Unix_time). Can use `>=` and/or `<=`
+              operators.
+            * status&#58; Can be `RUNNING`, `SUCCESS`, `FAILURE`, or `CANCELED`. Only
+              one status may be specified.
+            * labels.key where key is a label key.
+
+            Examples&#58;
+
+            * `projectId = my-project AND createTime >= 1432140000`
+            * `projectId = my-project AND createTime >= 1432140000 AND createTime <= 1432150000 AND status = RUNNING`
+            * `projectId = my-project AND labels.color = *`
+            * `projectId = my-project AND labels.color = red`
+          in: query
+          name: filter
+          type: string
+        - description: The name of the operation's parent resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            The maximum number of results to return. If unspecified, defaults to
+            256. The maximum value is 2048.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -4735,8 +4764,8 @@ definitions:
         type: integer
       details:
         description: |-
-          A list of messages that carry the error details.  There will be a
-          common set of message types for APIs to use.
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.

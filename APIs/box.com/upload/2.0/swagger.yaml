@@ -68,6 +68,246 @@ paths:
       summary: Upload File
       tags:
         - FileUpload
+  /files/upload_sessions:
+    post:
+      description: Use the Uploads API to create a new session to upload a new file.
+      operationId: createUploadSession
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/FileUploadSessionRequest'
+      responses:
+        '201':
+          description: The upload session creation would be successful
+          schema:
+            $ref: '#/definitions/UploadSession'
+        '400':
+          description: Bad request. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        '409':
+          description: Name collision occurs.
+          schema:
+            $ref: '#/definitions/Error'
+        '412':
+          description: Preconditioned failed.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Request entity too large.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: File upload error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Create File Upload Session
+      tags:
+        - ChunkedUpload
+  '/files/upload_sessions/{SESSION_ID}':
+    delete:
+      description: Abort the upload session and discard all data uploaded. This cannot be reversed.
+      operationId: abortUploadSession
+      parameters:
+        - in: path
+          name: SESSION_ID
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Abort would be successful
+        '400':
+          description: Bad request. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Get upload session error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Abort Upload Session
+      tags:
+        - ChunkedUpload
+    get:
+      description: Return the information about this session.
+      operationId: getUploadSession
+      parameters:
+        - in: path
+          name: SESSION_ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Get would be successful
+          schema:
+            $ref: '#/definitions/UploadSession'
+        '400':
+          description: Bad request. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Get upload session error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Upload Session Details
+      tags:
+        - ChunkedUpload
+    put:
+      consumes:
+        - application/octet-stream
+      description: Upload a part of the file to this session.
+      operationId: uploadPart
+      parameters:
+        - in: path
+          name: SESSION_ID
+          required: true
+          type: string
+        - description: 'The message digest of the partbody, formatted as specified by RFC 3230. The usage is sha=BASE64_ENCODED_DIGEST. Currently only SHA-1 is supported.As per RFC 3230, the output from SHA-1 algorithm must be Base64 encoded.'
+          in: header
+          name: Digest
+          required: true
+          type: string
+        - description: 'Byte range of part within overall file. E.g: bytes 8388608-16777215/445856194. It must not overlap with the range of a part already uploaded to this session.'
+          in: header
+          name: Content-Range
+          required: true
+          type: string
+        - description: Part bytes
+          in: body
+          name: bytes
+          required: true
+          schema:
+            format: byte
+            type: string
+      responses:
+        '200':
+          description: Part upload would be successful
+          schema:
+            $ref: '#/definitions/UploadPartResponse'
+        '400':
+          description: Bad request. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        '409':
+          description: Part conflict. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        '412':
+          description: Preconditioned failed. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        '416':
+          description: Request range bit satisfiable. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Part upload error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Upload Part
+      tags:
+        - ChunkedUpload
+  '/files/upload_sessions/{SESSION_ID}/commit':
+    post:
+      description: Create a Box file comprised of the uploaded parts.
+      operationId: commitUploadSession
+      parameters:
+        - in: path
+          name: SESSION_ID
+          required: true
+          type: string
+        - description: 'The message digest of the file, formatted as specified by RFC 3230. The usage is sha=BASE64_ENCODED_DIGEST. Currently only SHA-1 is supported.As per RFC 3230, the output from SHA-1 algorithm must be Base64 encoded.'
+          in: header
+          name: Digest
+          required: true
+          type: string
+        - description: 'This is in the ‘etag’ field of the file object. See https://developer.box.com/v2.0/reference#if-match'
+          in: header
+          name: If-Match
+          required: false
+          type: string
+        - description: 'This is in the ‘etag’ field of the file object. See https://developer.box.com/v2.0/reference#if-match'
+          in: header
+          name: If-Non-Match
+          required: false
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CommitRequest'
+      responses:
+        '201':
+          description: The file has been committed successfully
+          schema:
+            $ref: '#/definitions/FileList'
+        '202':
+          description: All parts have been uploaded but not yet processed. Use Get Upload Session API to get more information about the progress of processing the parts. Retry commit afterwards
+          headers:
+            Retry-After:
+              description: Indicates the number of seconds the client should wait before attempting their commit request again.
+              type: integer
+        '400':
+          description: Bad request. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        '409':
+          description: There is already a file with the same name in the target folder.
+          schema:
+            $ref: '#/definitions/Error'
+        '412':
+          description: The If-Match condition failed.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Request entity too large. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Part upload error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Commit Upload
+      tags:
+        - ChunkedUpload
+  '/files/upload_sessions/{SESSION_ID}/parts':
+    get:
+      description: Return the list of parts uploaded so far for this session.
+      operationId: listParts
+      parameters:
+        - in: path
+          name: SESSION_ID
+          required: true
+          type: string
+        - description: 'Zero-based index of first part to return. Defaults to zero, if not specified.'
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: 'How many parts to return. Defaults to 1000 if not specified, which is also the maximum value allowed.'
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: List would be successful
+          schema:
+            $ref: '#/definitions/PartList'
+        '400':
+          description: Bad request. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Upload commit error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: List Parts
+      tags:
+        - ChunkedUpload
   '/files/{FILE_ID}/content':
     post:
       consumes:
@@ -107,6 +347,48 @@ paths:
       summary: Upload File Version
       tags:
         - FileUpload
+  '/files/{FILE_ID}/upload_sessions':
+    post:
+      description: Use the Uploads API to create a new session to upload a new version of existing file.
+      operationId: createUploadSessionNewVersion
+      parameters:
+        - in: path
+          name: FILE_ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/VersionUploadSessionRequest'
+      responses:
+        '201':
+          description: The upload session creation would be successful
+          schema:
+            $ref: '#/definitions/UploadSession'
+        '400':
+          description: Bad request. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        '409':
+          description: Name collision occurs. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        '412':
+          description: Preconditioned failed. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Request entity too large. See response body for details.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: File upload error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Create File Upload Session
+      tags:
+        - ChunkedUpload
 definitions:
   BoxFile:
     allOf:
@@ -214,6 +496,19 @@ definitions:
     description: 'Collections contain information about the items contained inside of them, including files and folders. The only collection available currently is a “Favorites” collection. The contents of the collection are discovered in a similar way in which the contents of a folder are discovered.'
     title: Collection Object
     type: object
+  CommitRequest:
+    properties:
+      attributes:
+        additionalProperties:
+          type: object
+        description: 'Optional. An array of attributes to set on the created file. See https://box-content.readme.io/reference#file-object'
+        type: object
+      parts:
+        description: An arrayof Part objects. MUST be ordered by offset.
+        items:
+          $ref: '#/definitions/Part'
+        type: array
+    type: object
   Error:
     properties:
       code:
@@ -285,6 +580,19 @@ definitions:
             type: string
     description: It references either a file or a folder
     type: object
+  FileUploadSessionRequest:
+    properties:
+      file_name:
+        description: Name of new file
+        type: string
+      file_size:
+        description: The total number of bytes in the file to be uploaded
+        format: int64
+        type: integer
+      folder_id:
+        description: The ID of the folder that will contain the new file
+        type: string
+    type: object
   FileVersionReference:
     allOf:
       - $ref: '#/definitions/Reference'
@@ -350,6 +658,39 @@ definitions:
         format: int64
         type: integer
     type: object
+  Part:
+    properties:
+      offset:
+        format: int64
+        type: integer
+      part_id:
+        type: string
+      sha1:
+        type: string
+      size:
+        format: int64
+        type: integer
+    type: object
+  PartList:
+    properties:
+      entries:
+        description: An array of parts
+        items:
+          $ref: '#/definitions/Part'
+        type: array
+      limit:
+        description: The limit that was used for these entries. This will be the same as the limit query parameter unless that value exceeded the maximum value allowed.
+        format: int32
+        type: integer
+      offset:
+        description: The 0-based offset of the first entry in this set. This will be the same as the offset query parameter.
+        format: int32
+        type: integer
+      total_count:
+        description: This will always be equal to the number of expected parts in the session (i.e. ceiling(file size / part size)).
+        format: int32
+        type: integer
+    type: object
   PathCollection:
     allOf:
       - $ref: '#/definitions/Pagination'
@@ -393,6 +734,7 @@ definitions:
           - legal_hold_policy
           - legal_hold_policy_assignment
           - legal_hold
+          - upload_session
         type: string
     type: object
   SharedLink:
@@ -429,6 +771,57 @@ definitions:
       can_preview:
         type: boolean
     type: object
+  UploadPartResponse:
+    properties:
+      part:
+        $ref: '#/definitions/Part'
+    type: object
+  UploadSession:
+    allOf:
+      - $ref: '#/definitions/Reference'
+      - properties:
+          num_parts_processed:
+            description: 'Tracks Box’s progress in processing all the parts that have been uploaded. Always equal to 0 when creating new upload session. In other cases, this will be the number of parts that have been processed by server. When all parts have been uploaded, but Commit API returned 202, you can check this value == total_parts to check if file was uploaded.'
+            format: int32
+            type: integer
+          part_size:
+            description: The part size in bytes that must be used for all parts of this session. Only the last part is allowed to be of a smaller size.
+            format: int64
+            type: integer
+          session_endpoints:
+            $ref: '#/definitions/UploadSessionEndpoints'
+          session_expires_at:
+            description: 'UTC Time in RFC 3339 date timeformat: 2016-04-17T09:12:36-00:00.'
+            format: date-time
+            type: string
+          total_parts:
+            description: 'The total number of parts expected in this session, as determined by the file size and part size.'
+            format: int32
+            type: integer
+    description: Upload Session.
+    type: object
+  UploadSessionEndpoints:
+    description: URLs for all other possible calls to this session.
+    properties:
+      abort:
+        description: The URL for abort API.
+        type: string
+      commit:
+        description: The URL for commit API.
+        type: string
+      list_parts:
+        description: The URL for list parts API.
+        type: string
+      log_event:
+        description: The URL for log event API.
+        type: string
+      status:
+        description: The URL for status API.
+        type: string
+      upload_part:
+        description: The URL for upload part API.
+        type: string
+    type: object
   UserReference:
     description: It references a user
     properties:
@@ -445,6 +838,16 @@ definitions:
         enum:
           - user
         type: string
+    type: object
+  VersionUploadSessionRequest:
+    properties:
+      file_name:
+        description: Name of new file
+        type: string
+      file_size:
+        description: The total number of bytes in the file to be uploaded
+        format: int64
+        type: integer
     type: object
   WatermarkInfo:
     items:

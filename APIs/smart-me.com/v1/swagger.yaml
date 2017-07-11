@@ -1074,6 +1074,19 @@ definitions:
       Id:
         description: The ID of the device
         type: string
+      MeterSubType:
+        description: The Sub Type of this Meter.
+        enum:
+          - MeterSubTypeUnknown
+          - MeterSubTypeCold
+          - MeterSubTypeHeat
+          - MeterSubTypeChargingStation
+          - MeterSubTypeElectricity
+          - MeterSubTypeWater
+          - MeterSubTypeGas
+          - MeterSubTypeElectricityHeat
+          - MeterSubTypeTemperature
+        type: string
       Name:
         description: The Name of the Device
         type: string

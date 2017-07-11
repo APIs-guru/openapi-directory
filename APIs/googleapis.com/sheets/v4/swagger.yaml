@@ -3489,6 +3489,13 @@ definitions:
           the editors will be set to all the editors in the document.
         type: boolean
     type: object
+  RandomizeRangeRequest:
+    description: Randomizes the order of the rows in a range.
+    properties:
+      range:
+        $ref: '#/definitions/GridRange'
+        description: The range to randomize.
+    type: object
   RepeatCellRequest:
     description: |-
       Updates all cells in the range to the values in the given Cell object.
@@ -3617,6 +3624,9 @@ definitions:
       pasteData:
         $ref: '#/definitions/PasteDataRequest'
         description: Pastes data (HTML or delimited) into a sheet.
+      randomizeRange:
+        $ref: '#/definitions/RandomizeRangeRequest'
+        description: Randomizes the order of the rows in a range.
       repeatCell:
         $ref: '#/definitions/RepeatCellRequest'
         description: Repeats a single cell across a range.

@@ -357,6 +357,61 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/addons':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Sets the addons of a specific cluster.
+      operationId: container.projects.zones.clusters.addons
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetAddonsConfigRequest'
+        - description: The name of the cluster to upgrade.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/legacyAbac':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -381,6 +436,226 @@ paths:
           schema:
             $ref: '#/definitions/SetLegacyAbacRequest'
         - description: The name of the cluster to update.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/locations':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Sets the locations of a specific cluster.
+      operationId: container.projects.zones.clusters.locations
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetLocationsRequest'
+        - description: The name of the cluster to upgrade.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/logging':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Sets the logging service of a specific cluster.
+      operationId: container.projects.zones.clusters.logging
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetLoggingServiceRequest'
+        - description: The name of the cluster to upgrade.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/master':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Updates the master of a specific cluster.
+      operationId: container.projects.zones.clusters.master
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateMasterRequest'
+        - description: The name of the cluster to upgrade.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/monitoring':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Sets the monitoring service of a specific cluster.
+      operationId: container.projects.zones.clusters.monitoring
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetMonitoringServiceRequest'
+        - description: The name of the cluster to upgrade.
           in: path
           name: clusterId
           required: true
@@ -600,6 +875,66 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/autoscaling':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Sets the autoscaling settings of a specific node pool.
+      operationId: container.projects.zones.clusters.nodePools.autoscaling
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetNodePoolAutoscalingRequest'
+        - description: The name of the cluster to upgrade.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: The name of the node pool to upgrade.
+          in: path
+          name: nodePoolId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/setManagement':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -689,6 +1024,66 @@ paths:
           required: true
           type: string
         - description: The name of the node pool to update.
+          in: path
+          name: nodePoolId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/update':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Updates the version and/or image type of a specific node pool.
+      operationId: container.projects.zones.clusters.nodePools.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateNodePoolRequest'
+        - description: The name of the cluster to upgrade.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: The name of the node pool to upgrade.
           in: path
           name: nodePoolId
           required: true
@@ -926,6 +1321,61 @@ paths:
         - description: |-
             The Google Developers Console [project ID or project
             number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setNetworkPolicy':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Enables/Disables Network Policy for a cluster.
+      operationId: container.projects.zones.clusters.setNetworkPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetNetworkPolicyRequest'
+        - description: The name of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://developers.google.com/console/help/new/#projectnumber).
           in: path
           name: projectId
           required: true
@@ -1330,6 +1780,9 @@ definitions:
         items:
           type: string
         type: array
+      ipAllocationPolicy:
+        $ref: '#/definitions/IPAllocationPolicy'
+        description: Configuration for cluster IP allocation.
       labelFingerprint:
         description: The fingerprint of the set of labels for this cluster.
         type: string
@@ -1381,6 +1834,9 @@ definitions:
           cluster is connected. If left unspecified, the `default` network
           will be used.
         type: string
+      networkPolicy:
+        $ref: '#/definitions/NetworkPolicy'
+        description: Configuration options for the NetworkPolicy feature.
       nodeConfig:
         $ref: '#/definitions/NodeConfig'
         description: |-
@@ -1574,6 +2030,75 @@ definitions:
           balancers.
         type: boolean
     type: object
+  IPAllocationPolicy:
+    description: Configuration for controlling how IPs are allocated in the cluster.
+    properties:
+      clusterIpv4Cidr:
+        description: |-
+          The IP address range for the cluster pod IPs. If this field is set, then
+          `cluster.cluster_ipv4_cidr` must be left blank.
+
+          This field is only applicable when `use_ip_aliases` is true.
+
+          Set to blank to have a range will be chosen with the default size.
+
+          Set to /netmask (e.g. `/14`) to have a range be chosen with a specific
+          netmask.
+
+          Set to a [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+          notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
+          `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
+          to use.
+        type: string
+      createSubnetwork:
+        description: |-
+          Whether a new subnetwork will be created automatically for the cluster.
+
+          This field is only applicable when `use_ip_aliases` is true.
+        type: boolean
+      nodeIpv4Cidr:
+        description: |-
+          The IP address range of the instance IPs in this cluster.
+
+          This is applicable only if `create_subnetwork` is true.
+
+          Set to blank to have a range will be chosen with the default size.
+
+          Set to /netmask (e.g. `/14`) to have a range be chosen with a specific
+          netmask.
+
+          Set to a [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+          notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
+          `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
+          to use.
+        type: string
+      servicesIpv4Cidr:
+        description: |-
+          The IP address range of the services IPs in this cluster. If blank, a range
+          will be automatically chosen with the default size.
+
+          This field is only applicable when `use_ip_aliases` is true.
+
+          Set to blank to have a range will be chosen with the default size.
+
+          Set to /netmask (e.g. `/14`) to have a range be chosen with a specific
+          netmask.
+
+          Set to a [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
+          notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
+          `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
+          to use.
+        type: string
+      subnetworkName:
+        description: |-
+          A custom subnetwork name to be used if `create_subnetwork` is true.  If
+          this field is empty, then an automatic name will choosen for the new
+          subnetwork.
+        type: string
+      useIpAliases:
+        description: Whether alias IPs will be used for pod IPs in the cluster.
+        type: boolean
+    type: object
   LegacyAbac:
     description: |-
       Configuration for the legacy Attribute Based Access Control authorization
@@ -1668,6 +2193,21 @@ definitions:
           The username to use for HTTP basic authentication to the master endpoint.
           For clusters v1.6.0 and later, you can disable basic authentication by
           providing an empty username.
+        type: string
+    type: object
+  NetworkPolicy:
+    description: |-
+      Configuration options for the NetworkPolicy feature.
+      https://kubernetes.io/docs/concepts/services-networking/networkpolicies/
+    properties:
+      enabled:
+        description: Whether network policy is enabled on the cluster.
+        type: boolean
+      provider:
+        description: The selected network policy provider.
+        enum:
+          - UNKNOWN
+          - CALICO
         type: string
     type: object
   NodeConfig:
@@ -1910,6 +2450,7 @@ definitions:
           - SET_LABELS
           - SET_MASTER_AUTH
           - SET_NODE_POOL_SIZE
+          - SET_NETWORK_POLICY
         type: string
       selfLink:
         description: Server-defined URL for the resource.
@@ -1968,6 +2509,15 @@ definitions:
           type: string
         type: array
     type: object
+  SetAddonsConfigRequest:
+    description: SetAddonsConfigRequest sets the addons associated with the cluster.
+    properties:
+      addonsConfig:
+        $ref: '#/definitions/AddonsConfig'
+        description: |-
+          The desired configurations for the various addons available to run in the
+          cluster.
+    type: object
   SetLabelsRequest:
     description: |-
       SetLabelsRequest sets the Google Cloud Platform labels on a Google Container
@@ -1998,6 +2548,34 @@ definitions:
         description: Whether ABAC authorization will be enabled in the cluster.
         type: boolean
     type: object
+  SetLocationsRequest:
+    description: SetLocationsRequest sets the locations of the cluster.
+    properties:
+      locations:
+        description: |-
+          The desired list of Google Compute Engine
+          [locations](/compute/docs/zones#available) in which the cluster's nodes
+          should be located. Changing the locations a cluster is in will result
+          in nodes being either created or removed from the cluster, depending on
+          whether locations are being added or removed.
+
+          This list must always include the cluster's primary zone.
+        items:
+          type: string
+        type: array
+    type: object
+  SetLoggingServiceRequest:
+    description: SetLoggingServiceRequest sets the logging service of a cluster.
+    properties:
+      loggingService:
+        description: |-
+          The logging service the cluster should use to write metrics.
+          Currently available options:
+
+          * "logging.googleapis.com" - the Google Cloud Logging service
+          * "none" - no metrics will be exported from the cluster
+        type: string
+    type: object
   SetMasterAuthRequest:
     description: SetMasterAuthRequest updates the admin password of a cluster.
     properties:
@@ -2011,6 +2589,32 @@ definitions:
       update:
         $ref: '#/definitions/MasterAuth'
         description: A description of the update.
+    type: object
+  SetMonitoringServiceRequest:
+    description: SetMonitoringServiceRequest sets the monitoring service of a cluster.
+    properties:
+      monitoringService:
+        description: |-
+          The monitoring service the cluster should use to write metrics.
+          Currently available options:
+
+          * "monitoring.googleapis.com" - the Google Cloud Monitoring service
+          * "none" - no metrics will be exported from the cluster
+        type: string
+    type: object
+  SetNetworkPolicyRequest:
+    description: SetNetworkPolicyRequest enables/disables network policy for a cluster.
+    properties:
+      networkPolicy:
+        $ref: '#/definitions/NetworkPolicy'
+        description: Configuration options for the NetworkPolicy feature.
+    type: object
+  SetNodePoolAutoscalingRequest:
+    description: SetNodePoolAutoscalingRequest sets the autoscaler settings of a node pool.
+    properties:
+      autoscaling:
+        $ref: '#/definitions/NodePoolAutoscaling'
+        description: Autoscaling configuration for the node pool.
     type: object
   SetNodePoolManagementRequest:
     description: |-
@@ -2043,4 +2647,27 @@ definitions:
       update:
         $ref: '#/definitions/ClusterUpdate'
         description: A description of the update.
+    type: object
+  UpdateMasterRequest:
+    description: UpdateMasterRequest updates the master of the cluster.
+    properties:
+      masterVersion:
+        description: |-
+          The Kubernetes version to change the master to. The only valid value is the
+          latest supported version. Use "-" to have the server automatically select
+          the latest version.
+        type: string
+    type: object
+  UpdateNodePoolRequest:
+    description: UpdateNodePoolRequests update a node pool's image and/or version.
+    properties:
+      imageType:
+        description: The desired image type for the node pool.
+        type: string
+      nodeVersion:
+        description: |-
+          The Kubernetes version to change the nodes to (typically an
+          upgrade). Use `-` to upgrade to the latest version supported by
+          the server.
+        type: string
     type: object

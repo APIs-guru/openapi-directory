@@ -1547,79 +1547,6 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
-  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/filteredBids/{creativeStatusId}/creatives/{creativeId}/details':
-    get:
-      description: |-
-        List all details associated with a specific reason for which bids were
-        filtered and a specific creative that was filtered for that reason, with
-        the number of bids filtered for each detail.
-      operationId: adexchangebuyer2.accounts.filterSets.filteredBids.creatives.details.list
-      parameters:
-        - description: Account ID of the buyer.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The creative ID for which to retrieve a breakdown by detail.
-          in: path
-          name: creativeId
-          required: true
-          type: string
-        - description: |-
-            The ID of the creative status for which to retrieve a breakdown by detail.
-            See
-            [creative-status-codes](https://developers.google.com/ad-exchange/rtb/downloads/creative-status-codes).
-          in: path
-          name: creativeStatusId
-          required: true
-          type: integer
-        - description: The ID of the filter set to apply.
-          in: path
-          name: filterSetId
-          required: true
-          type: string
-        - description: |-
-            Requested page size. The server may return fewer results than requested.
-            If unspecified, the server will pick an appropriate default.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListCreativeStatusAndCreativeBreakdownByDetailResponse.nextPageToken
-            returned from the previous call to the
-            accounts.filterSets.filteredBids.creatives.details.list
-            method.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListCreativeStatusAndCreativeBreakdownByDetailResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
   '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/filteredBids/{creativeStatusId}/details':
     get:
       description: |-
@@ -1636,6 +1563,7 @@ paths:
             The ID of the creative status for which to retrieve a breakdown by detail.
             See
             [creative-status-codes](https://developers.google.com/ad-exchange/rtb/downloads/creative-status-codes).
+            Details are only available for statuses 14, 15, 17, 18, 19, 86, and 87.
           in: path
           name: creativeStatusId
           required: true
@@ -2640,7 +2568,7 @@ definitions:
           The granularity of time intervals if a time series breakdown is desired;
           optional.
         enum:
-          - INTERVAL_UNSPECIFIED
+          - TIME_SERIES_GRANULARITY_UNSPECIFIED
           - HOURLY
           - DAILY
         type: string
@@ -2875,37 +2803,6 @@ definitions:
           to retrieve the next page of results.
         type: string
     type: object
-  ListCreativeStatusAndCreativeBreakdownByDetailResponse:
-    description: |-
-      Response message for listing all details associated with a given filtered bid
-      reason and a given creative.
-    properties:
-      detailType:
-        description: The type of detail that the detail IDs represent.
-        enum:
-          - TYPE_UNSPECIFIED
-          - CREATIVE_ATTRIBUTE
-          - VENDOR
-          - SENSITIVE_CATEGORY
-          - PRODUCT_CATEGORY
-        type: string
-      filteredBidDetailRows:
-        description: |-
-          List of rows, with counts of bids with a given creative status and
-          creative, aggregated by detail.
-        items:
-          $ref: '#/definitions/FilteredBidDetailRow'
-        type: array
-      nextPageToken:
-        description: |-
-          A token to retrieve the next page of results.
-          Pass this value in the
-          ListCreativeStatusAndCreativeBreakdownByDetailRequest.pageToken
-          field in the subsequent call to the
-          accounts.filterSets.filteredBids.creatives.details.list
-          method to retrieve the next page of results.
-        type: string
-    type: object
   ListCreativeStatusBreakdownByCreativeResponse:
     description: |-
       Response message for listing all creatives associated with a given filtered
@@ -2936,7 +2833,7 @@ definitions:
       detailType:
         description: The type of detail that the detail IDs represent.
         enum:
-          - TYPE_UNSPECIFIED
+          - DETAIL_TYPE_UNSPECIFIED
           - CREATIVE_ATTRIBUTE
           - VENDOR
           - SENSITIVE_CATEGORY

@@ -159,12 +159,14 @@ paths:
       tags:
         - projects
     get:
-      description: Returns information about the particular transfer run.
-      operationId: bigquerydatatransfer.projects.transferConfigs.runs.get
+      description: |-
+        Retrieves a supported data source and returns its settings,
+        which can be used for UI rendering.
+      operationId: bigquerydatatransfer.projects.dataSources.get
       parameters:
         - description: |-
             The field will contain name of the resource requested, for example:
-            `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+            `projects/{project_id}/dataSources/{data_source_id}`
           in: path
           name: name
           required: true
@@ -174,7 +176,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/TransferRun'
+            $ref: '#/definitions/DataSource'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
@@ -483,19 +485,8 @@ paths:
       description: Returns information about running and completed jobs.
       operationId: bigquerydatatransfer.projects.transferConfigs.runs.list
       parameters:
-        - collectionFormat: multi
-          description: Page size. The default page size is the maximum value of 1000 results.
+        - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
-          items:
-            enum:
-              - TRANSFER_STATUS_UNSPECIFIED
-              - INACTIVE
-              - PENDING
-              - RUNNING
-              - SUCCEEDED
-              - FAILED
-              - CANCELLED
-            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -504,9 +495,6 @@ paths:
             results, `ListTransferRunsResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
-          enum:
-            - RUN_ATTEMPT_UNSPECIFIED
-            - LATEST
           in: query
           name: pageToken
           type: string
@@ -587,11 +575,8 @@ paths:
             type: string
           name: dataSourceIds
           type: array
-        - collectionFormat: multi
-          description: Page size. The default page size is the maximum value of 1000 results.
+        - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
-          items:
-            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -673,7 +658,13 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/TransferConfig'
-        - description: The BigQuery project id where the transfer configuration should be created.
+        - description: |-
+            The BigQuery project id where the transfer configuration should be created.
+            Must be in the format /projects/{project_id}/locations/{location_id}
+            or
+            /projects/{project_id}/locations/-
+            In case when '-' is specified as location_id, location is infered from
+            the destination dataset region.
           in: path
           name: parent
           required: true
@@ -714,16 +705,8 @@ paths:
             type: string
           name: messageTypes
           type: array
-        - collectionFormat: multi
-          description: Page size. The default page size is the maximum value of 1000 results.
+        - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
-          items:
-            enum:
-              - MESSAGE_SEVERITY_UNSPECIFIED
-              - INFO
-              - WARNING
-              - ERROR
-            type: string
           name: pageSize
           type: integer
         - description: |-

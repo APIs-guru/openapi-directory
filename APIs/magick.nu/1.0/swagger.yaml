@@ -68,6 +68,37 @@ paths:
       summary: Add a Trading Account
       tags:
         - tradingAccounts
+  '/tradingAccounts/password/{username}/{brokerserver}/{mt4username}':
+    put:
+      consumes:
+        - application/json
+      operationId: putTradingAccountsPasswordUsernameBrokerserverMt4username
+      parameters:
+        - in: path
+          name: username
+          required: true
+          type: string
+        - in: path
+          name: brokerserver
+          required: true
+          type: string
+        - in: path
+          name: mt4username
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/PasswordDTO'
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: No response was specified
+      summary: Update MT4 Account Password
+      tags:
+        - tradingAccounts
   /users:
     post:
       consumes:

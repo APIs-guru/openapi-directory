@@ -176,10 +176,55 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
   '/v1/{parent}/products/{name}':
+    delete:
+      description: Deletes the product from a Manufacturer Center account.
+      operationId: manufacturers.accounts.products.delete
+      parameters:
+        - description: |-
+            Name in the format `{target_country}:{content_language}:{product_id}`.
+
+            `target_country`   - The target country of the product as a CLDR territory
+                                 code (for example, US).
+
+            `content_language` - The content language of the product as a two-letter
+                                 ISO 639-1 language code (for example, en).
+
+            `product_id`     -   The ID of the product. For more information, see
+                                 https://support.google.com/manufacturers/answer/6124116#id.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Parent ID in the format `accounts/{account_id}`.
+
+            `account_id` - The ID of the Manufacturer Center account.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/manufacturercenter'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/manufacturercenter'
+      tags:
+        - accounts
     get:
       description: |-
         Gets the product from a Manufacturer Center account, including product
         issues.
+
+        A recently updated product takes some time to be processed before any
+        changes are visible. While some issues may be available once the product
+        has been processed, other issues may take days to appear.
       operationId: manufacturers.accounts.products.get
       parameters:
         - description: |-
@@ -233,6 +278,63 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+    put:
+      description: |-
+        Inserts or updates the product in a Manufacturer Center account.
+
+        The checks at upload time are minimal. All required attributes need to be
+        present for a product to be valid. Issues may show up later
+        after the API has accepted an update for a product and it is possible to
+        overwrite an existing valid product with an invalid product. To detect
+        this, you should retrieve the product and check it for issues once the
+        updated version is available.
+
+        Inserted or updated products first need to be processed before they can be
+        retrieved. Until then, new products will be unavailable, and retrieval
+        of updated products will return the original state of the product.
+      operationId: manufacturers.accounts.products.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Product'
+        - description: |-
+            Name in the format `{target_country}:{content_language}:{product_id}`.
+
+            `target_country`   - The target country of the product as a CLDR territory
+                                 code (for example, US).
+
+            `content_language` - The content language of the product as a two-letter
+                                 ISO 639-1 language code (for example, en).
+
+            `product_id`     -   The ID of the product. For more information, see
+                                 https://support.google.com/manufacturers/answer/6124116#id.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Parent ID in the format `accounts/{account_id}`.
+
+            `account_id` - The ID of the Manufacturer Center account.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Product'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/manufacturercenter'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/manufacturercenter'
+      tags:
+        - accounts
 definitions:
   Attributes:
     description: |-
@@ -438,6 +540,19 @@ definitions:
         description: The numeric value of the number of products in a package.
         format: int64
         type: string
+    type: object
+  Empty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
     type: object
   FeatureDescription:
     description: |-

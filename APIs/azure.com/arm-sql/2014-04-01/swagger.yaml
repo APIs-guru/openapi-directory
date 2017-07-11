@@ -68,14 +68,14 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints':
     get:
-      description: Returns a list of database restore points.
+      description: Gets a list of database restore points.
       operationId: Databases_ListRestorePoints
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the database from which to retrieve available restore points.
+        - description: The name of the database to get available restore points.
           in: path
           name: databaseName
           required: true
@@ -90,7 +90,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases':
     get:
-      description: Returns a list of Recoverable Databases
+      description: Gets a list of recoverable databases
       operationId: RecoverableDatabases_ListByServer
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -142,7 +142,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}':
     get:
-      description: 'Gets a Recoverable Database, which is a resource representing a database''s Geo backup'
+      description: 'Gets a recoverable database, which is a resource representing a database''s geo backup'
       operationId: RecoverableDatabases_Get
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -182,7 +182,7 @@ paths:
                 type: Microsoft.Sql/servers/recoverabledatabases
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases':
     get:
-      description: Get a list of deleted database that can be restored
+      description: Gets a list of deleted databases that can be restored
       operationId: RestorableDroppedDatabases_ListByServer
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -287,7 +287,7 @@ definitions:
   RecoverableDatabase:
     allOf:
       - $ref: '#/definitions/ProxyResource'
-    description: Represents a recoverable database
+    description: A recoverable database
     properties:
       properties:
         $ref: '#/definitions/RecoverableDatabaseProperties'
@@ -297,7 +297,7 @@ definitions:
     description: The response to a list recoverable databases request
     properties:
       value:
-        description: A list of Recoverable Databases
+        description: A list of recoverable databases
         items:
           $ref: '#/definitions/RecoverableDatabase'
         type: array
@@ -403,17 +403,17 @@ definitions:
   RestorePoint:
     allOf:
       - $ref: '#/definitions/ProxyResource'
-    description: Represents a database restore point.
+    description: A database restore point.
     properties:
       properties:
         $ref: '#/definitions/RestorePointProperties'
-        description: The properties representing the restore point.
+        description: The properties of the restore point.
         x-ms-client-flatten: true
   RestorePointListResult:
-    description: Represents the response to a list database restore points request.
+    description: The response to a list database restore points request.
     properties:
       value:
-        description: The list of a given database restore points.
+        description: The list of database restore points.
         items:
           $ref: '#/definitions/RestorePoint'
         type: array

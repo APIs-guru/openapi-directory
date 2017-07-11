@@ -784,7 +784,7 @@ definitions:
         format: int32
         type: integer
       acceleratorTypeUri:
-        description: Full or partial URI of the accelerator type resource to expose to this instance. See Google Compute Engine AcceleratorTypes( /compute/docs/reference/beta/acceleratorTypes)
+        description: 'Full URL, partial URI, or short name of the accelerator type resource to expose to this instance. See Google Compute Engine AcceleratorTypes( /compute/docs/reference/beta/acceleratorTypes)Examples * https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80 * nvidia-tesla-k80'
         type: string
     type: object
   CancelJobRequest:
@@ -1001,7 +1001,11 @@ definitions:
         description: 'The Google Compute Engine metadata entries to add to all instances (see Project and instance metadata (https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).'
         type: object
       networkUri:
-        description: 'Optional. The Google Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see Using Subnetworks for more information). Example: https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default.'
+        description: |-
+          Optional. The Google Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see Using Subnetworks for more information).A full URL, partial URI, or short name are valid. Examples:
+          https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default
+          projects/[project_id]/regions/global/default
+          default
         type: string
       serviceAccount:
         description: |-
@@ -1023,7 +1027,11 @@ definitions:
           type: string
         type: array
       subnetworkUri:
-        description: 'Optional. The Google Compute Engine subnetwork to be used for machine communications. Cannot be specified with network_uri. Example: https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0.'
+        description: |-
+          Optional. The Google Compute Engine subnetwork to be used for machine communications. Cannot be specified with network_uri.A full URL, partial URI, or short name are valid. Examples:
+          https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/sub0
+          projects/[project_id]/regions/us-east1/sub0
+          sub0
         type: string
       tags:
         description: The Google Compute Engine tags to add to all instances (see Tagging instances).
@@ -1031,7 +1039,11 @@ definitions:
           type: string
         type: array
       zoneUri:
-        description: 'Required. The zone where the Google Compute Engine cluster will be located. Example: https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone].'
+        description: |-
+          Optional. The zone where the Google Compute Engine cluster will be located. On a create request, it is required in the "global" region. If omitted in a non-global Cloud Dataproc region, the service will pick a zone in the corresponding GCE region. On a get request, zone will always be present.A full URL, partial URI, or short name are valid. Examples:
+          https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]
+          projects/[project_id]/zones/[zone]
+          us-central1-f
         type: string
     type: object
   HadoopJob:
@@ -1123,13 +1135,17 @@ definitions:
         description: Optional. Specifies that this instance group contains preemptible instances.
         type: boolean
       machineTypeUri:
-        description: 'Required. The Google Compute Engine machine type used for cluster instances. Example: https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2.'
+        description: |-
+          Optional. The Google Compute Engine machine type used for cluster instances.A full URL, partial URI, or short name are valid. Examples:
+          https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
+          projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2
+          n1-standard-2
         type: string
       managedGroupConfig:
         $ref: '#/definitions/ManagedGroupConfig'
         description: Output-only. The config for Google Compute Engine Instance Group Manager that manages this group. This is only used for preemptible instance groups.
       numInstances:
-        description: 'Required. The number of VM instances in the instance group. For master instance groups, must be set to 1.'
+        description: 'Optional. The number of VM instances in the instance group. For master instance groups, must be set to 1.'
         format: int32
         type: integer
     type: object

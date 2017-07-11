@@ -319,7 +319,7 @@ paths:
         no longer interested in the operation result. It does not cancel the
         operation. If the server doesn't support this method, it returns
         `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: spanner.projects.instances.operations.delete
+      operationId: spanner.projects.instances.databases.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -347,6 +347,10 @@ paths:
       description: Gets information about a particular instance configuration.
       operationId: spanner.projects.instanceConfigs.get
       parameters:
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
         - description: |-
             Required. The name of the requested instance configuration. Values are of
             the form `projects/<project>/instanceConfigs/<config>`.
@@ -355,6 +359,14 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -486,7 +498,7 @@ paths:
         the operation is not deleted; instead, it becomes an operation with
         an Operation.error value with a google.rpc.Status.code of 1,
         corresponding to `Code.CANCELLED`.
-      operationId: spanner.projects.instances.operations.cancel
+      operationId: spanner.projects.instances.databases.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path
@@ -1450,6 +1462,14 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
+          This field is GOOGLE_INTERNAL.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -1798,6 +1818,39 @@ definitions:
         description: |-
           The transaction to use. If none is provided, the default is a
           temporary read-only transaction with strong concurrency.
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          [Common Expression Language](http://go/api-expr) syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
     type: object
   Field:
     description: Message representing a single field of a struct.
@@ -2415,7 +2468,6 @@ definitions:
       bindings:
         description: |-
           Associates a list of `members` to a `role`.
-          Multiple `bindings` must not be specified for the same `role`.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'

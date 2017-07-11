@@ -469,8 +469,8 @@ definitions:
         description: The relationship of the current span relative to the linked span.
         enum:
           - TYPE_UNSPECIFIED
-          - CHILD
-          - PARENT
+          - CHILD_LINKED_SPAN
+          - PARENT_LINKED_SPAN
         type: string
     type: object
   Links:

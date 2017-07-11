@@ -1059,7 +1059,8 @@ definitions:
       privateKeyData:
         description: |-
           The private key data. Only provided in `CreateServiceAccountKey`
-          responses.
+          responses. Make sure to keep the private key data secure because it
+          allows for the assertion of the service account identity.
         format: byte
         type: string
       privateKeyType:

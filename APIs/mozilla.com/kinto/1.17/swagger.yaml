@@ -5,7 +5,7 @@ host: firefox.settings.services.mozilla.com
 basePath: /v1
 info:
   title: kinto
-  version: '1.15'
+  version: '1.17'
   x-apisguru-categories:
     - cloud
   x-logo:
@@ -50,7 +50,7 @@ paths:
       operationId: get_openapi_spec
       responses:
         '200':
-          description: Return an OpenAPI description og the running instance.
+          description: Return an OpenAPI description of the running instance.
           schema:
             additionalProperties: {}
             title: SchemaNode
@@ -1901,14 +1901,13 @@ paths:
               data:
                 items:
                   additionalProperties: {}
+                  default: {}
                   properties:
                     members:
                       items:
                         type: string
                       title: Members
                       type: array
-                  required:
-                    - members
                   type: object
                 type: array
             title: Schema
@@ -2119,14 +2118,13 @@ paths:
             properties:
               data:
                 additionalProperties: {}
+                default: {}
                 properties:
                   members:
                     items:
                       type: string
                     title: Members
                     type: array
-                required:
-                  - members
                 type: object
               permissions:
                 properties:
@@ -2142,8 +2140,6 @@ paths:
                     type: array
                 title: Permissions
                 type: object
-            required:
-              - data
             title: RecordSchema
             type: object
         '304':

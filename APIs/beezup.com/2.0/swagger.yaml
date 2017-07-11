@@ -1534,13 +1534,29 @@ paths:
       summary: Get store tracking synchronization status
       tags:
         - Analytics - Tracking
+  /user/catalogs/:
+    get:
+      description: The operation will give you all the operations you will be able to do and all the LOV used in this API.
+      operationId: CatalogIndex
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/catalogIndex'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Get the index of the catalog API
+      tags:
+        - Catalogs - Global
   /user/catalogs/beezupColumns:
     get:
       description: 'Get the BeezUP columns, this columns are used for mapping during the manual catalog importation process.'
       operationId: Catalog_GetBeezUPColumns
       responses:
         '200':
-          description: OK
+          description: The catalog API index
           schema:
             items:
               $ref: '#/definitions/beezUPColumnConfiguration'
@@ -1552,6 +1568,24 @@ paths:
       summary: Get the BeezUP columns
       tags:
         - Catalogs - Global
+  '/user/catalogs/{storeId}':
+    get:
+      description: The operation will give you all the operations you will be able to do on this store for this API.
+      operationId: CatalogStoreIndex
+      parameters:
+        - $ref: '#/parameters/storeIdOnlyGeneralParameters'
+      responses:
+        '200':
+          description: The catalog index
+          schema:
+            $ref: '#/definitions/catalogStoreIndex'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Get the index of the catalog API for this store
+      tags:
+        - Catalogs - Catalog
   '/user/catalogs/{storeId}/autoImport':
     delete:
       operationId: Auto_DeleteAutoImport
@@ -1562,8 +1596,12 @@ paths:
           description: Auto import deleted
         '400':
           description: Occurs when the catalog auto import is not configured.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Occurs when a user tries to work on the wrong store.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1582,6 +1620,8 @@ paths:
             $ref: '#/definitions/autoImportConfiguration'
         '404':
           description: StoreId or Auto Import configuration not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1604,6 +1644,8 @@ paths:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Occurs when a user tries to work on the wrong store.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: When a catalog importation is already in progress!
           schema:
@@ -1625,8 +1667,12 @@ paths:
           description: Auto import paused
         '400':
           description: Occurs when the catalog auto import is not configured.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Occurs when a user tries to work on the wrong store.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1644,8 +1690,12 @@ paths:
           description: Auto import resumed
         '400':
           description: Occurs when the catalog auto import is not configured.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Occurs when a user tries to work on the wrong store.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1675,6 +1725,8 @@ paths:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Occurs when a user tries to work on the wrong store.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1705,6 +1757,8 @@ paths:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Occurs when a user tries to work on the wrong store.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1734,6 +1788,8 @@ paths:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Occurs when a user tries to work on the wrong store.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: When a catalog importation is already in progress!
           schema:
@@ -1754,9 +1810,11 @@ paths:
         '200':
           description: Catalog column list
           schema:
-            $ref: '#/definitions/catalogColumns'
+            $ref: '#/definitions/catalogColumnList'
         '404':
           description: StoreId not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1786,6 +1844,8 @@ paths:
           description: |-
             Occurs when a user tries to work on the wrong store.
             Occurs when a catalog column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           $ref: '#/responses/importAlreadyInProgress'
         default:
@@ -1819,9 +1879,11 @@ paths:
                 type: string
               type: array
           schema:
-            $ref: '#/definitions/categories'
+            $ref: '#/definitions/categoryList'
         '404':
           description: StoreId not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1838,9 +1900,11 @@ paths:
         '200':
           description: Custom column list
           schema:
-            $ref: '#/definitions/customColumns'
+            $ref: '#/definitions/customColumnList'
         '404':
           description: StoreId not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -1881,8 +1945,12 @@ paths:
           description: Custom column deleted
         '403':
           description: Occurs when the parent category is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Occurs when a user tries to work on the wrong store.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: When a catalog importation is already in progress!
           schema:
@@ -1962,10 +2030,14 @@ paths:
           description: Custom column expression saved
         '403':
           description: Occurs when the user try to change a custom column related to a Category. If you want to change this custom column expression you have to make a new manual importation.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: |-
             Occurs when a user tries to work on the wrong store.
             Occurs when a catalog custom column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           $ref: '#/responses/importAlreadyInProgress'
         default:
@@ -1997,6 +2069,8 @@ paths:
           description: |-
             Occurs when a user tries to work on the wrong store.
             Occurs when a catalog column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           $ref: '#/responses/importAlreadyInProgress'
         default:
@@ -2015,9 +2089,11 @@ paths:
         '200':
           description: The last importation reportings
           schema:
-            items:
-              $ref: '#/definitions/importationReporting'
-            type: array
+            $ref: '#/definitions/importationsResponse'
+        '404':
+          description: StoreId not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2046,7 +2122,9 @@ paths:
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
-          description: Occurs when a user tries to work on the wrong store.
+          description: StoreId not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           $ref: '#/responses/importAlreadyInProgress'
         default:
@@ -2114,11 +2192,15 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/detectedCatalogColumns'
+            $ref: '#/definitions/detectedCatalogColumnList'
         '404':
           description: 'ExecutionId not found or not yet synchronized. If not synchronized within 30 sec, please contact our support'
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Catalog preparation read step is not completed. Please refer to the reporting of this execution for more details.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2152,8 +2234,12 @@ paths:
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
             Occurs when a catalog column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Occurs when this importation is already finished.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2176,8 +2262,12 @@ paths:
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
             Occurs when a catalog column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Occurs when this importation is already finished.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2205,8 +2295,12 @@ paths:
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
             Occurs when a catalog column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Occurs when this importation is already finished.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2229,8 +2323,12 @@ paths:
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
             Occurs when a catalog column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Occurs when this importation is already finished.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2253,8 +2351,12 @@ paths:
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
             Occurs when a catalog column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Occurs when this importation is already finished.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2372,11 +2474,15 @@ paths:
         '200':
           description: Custom columns of current Importation successfully retrieved
           schema:
-            $ref: '#/definitions/customColumns'
+            $ref: '#/definitions/importationCustomColumnList'
         '404':
           description: 'ExecutionId not found or not yet synchronized. If not synchronized within 30 sec, please contact our support'
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Catalog preparation read step is not completed. Please refer to the reporting of this execution for more details.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2398,6 +2504,8 @@ paths:
           description: |-
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2423,8 +2531,12 @@ paths:
           description: |-
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Occurs when this importation is already finished.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2447,8 +2559,12 @@ paths:
             type: string
         '404':
           description: 'ExecutionId not found or not yet synchronized. If not synchronized within 30 sec, please contact our support'
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Catalog preparation read step is not completed. Please refer to the reporting of this execution for more details.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2476,8 +2592,12 @@ paths:
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
             Occurs when a catalog column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Occurs when this importation is already finished.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2500,8 +2620,12 @@ paths:
             Occurs when a user tries to work on the wrong store.
             Occurs when the message concerns the wrong execution.
             Occurs when a catalog column is not found.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Occurs when this importation is already finished.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2561,8 +2685,12 @@ paths:
               minimum: 5
               type: integer
               x-example: 5
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '409':
           description: Catalog preparation read step is not completed. Please refer to the reporting of this execution for more details.
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2610,6 +2738,8 @@ paths:
             $ref: '#/definitions/lastManualImportInputConfiguration'
         '404':
           description: StoreId or Manual Update last configuration not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2624,15 +2754,18 @@ paths:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
         - in: body
           name: request
+          required: true
           schema:
             $ref: '#/definitions/getProductsRequest'
       responses:
         '200':
           description: Product list
           schema:
-            $ref: '#/definitions/products'
+            $ref: '#/definitions/productList'
         '404':
           description: StoreId not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2642,26 +2775,19 @@ paths:
         - Catalogs - Catalog
   '/user/catalogs/{storeId}/products/random':
     get:
+      description: We will return 10 products randomly selected with all product values
       operationId: Catalog_GetRandomProducts
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
-        - default: 100
-          description: The count of random product you want to get
-          format: int32
-          in: query
-          maximum: 100
-          minimum: 25
-          name: count
-          required: false
-          type: integer
-          x-example: 25
       responses:
         '200':
           description: Random product list
           schema:
-            $ref: '#/definitions/products'
+            $ref: '#/definitions/randomProductList'
         '404':
           description: StoreId not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -2687,6 +2813,8 @@ paths:
             $ref: '#/definitions/product'
         '404':
           description: StoreId not found
+          schema:
+            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -4910,27 +5038,29 @@ paths:
 definitions:
   BeezUP.Common.AdditionalProductFilters:
     additionalProperties:
-      example:
-        672644c7-5bd0-4e25-88c1-1f732bda5e4c:
-          operatorName: GreaterTo
-          values:
-            - 100
-      properties:
-        operatorName:
-          $ref: '#/definitions/BeezUP.Common.ProductFilterOperatorName'
-        values:
-          description: |
-            Must be null if the operator is "IsNull" or "IsNotNull". 
-            Can contains multiple value in case of "InList" operator. Otherwise a single value is expected.
-          example:
-            - My value
-          items:
-            type: string
-          type: array
-      type: object
+      $ref: '#/definitions/BeezUP.Common.AdditionalProductFiltersValue'
     description: |
       Describe a filter on a product's column.
       The key is the column identifier of your catalog or a custom column.
+    type: object
+  BeezUP.Common.AdditionalProductFiltersValue:
+    example:
+      672644c7-5bd0-4e25-88c1-1f732bda5e4c:
+        operatorName: GreaterTo
+        values:
+          - 100
+    properties:
+      operatorName:
+        $ref: '#/definitions/BeezUP.Common.ProductFilterOperatorName'
+      values:
+        description: |
+          Must be null if the operator is "IsNull" or "IsNotNull". 
+          Can contains multiple value in case of "InList" operator. Otherwise a single value is expected.
+        example:
+          - My value
+        items:
+          type: string
+        type: array
     type: object
   BeezUP.Common.BeezUPColumnName:
     description: The BeezUP column name
@@ -6003,6 +6133,25 @@ definitions:
       - paused
       - duplicateProductConfiguration
     type: object
+  autoImportConfigurationLinks:
+    properties:
+      activate:
+        $ref: '#/definitions/links.Importation_ActivateAutoImportLink'
+      pause:
+        $ref: '#/definitions/links.Auto_PauseAutoImportLink'
+      resume:
+        $ref: '#/definitions/links.Auto_ResumeAutoImportLink'
+      schedule:
+        $ref: '#/definitions/links.Auto_ScheduleAutoImportLink'
+      scheduleInterval:
+        $ref: '#/definitions/links.Auto_ConfigureAutoImportIntervalLink'
+      self:
+        $ref: '#/definitions/links.Auto_GetAutoImportConfigurationLink'
+      start:
+        $ref: '#/definitions/links.Auto_StartAutoImportLink'
+    required:
+      - self
+    type: object
   automaticTransition:
     properties:
       accountId:
@@ -6229,6 +6378,8 @@ definitions:
         default: false
         description: 'IF true, the product values of this column will be not taken in account during the importation process'
         type: boolean
+      links:
+        $ref: '#/definitions/catalogColumnLinks'
       userColumName:
         $ref: '#/definitions/userColumName'
     required:
@@ -6236,27 +6387,127 @@ definitions:
       - catalogColumnName
       - userColumName
       - configuration
+      - links
     type: object
-  catalogColumnName:
-    description: The catalog column name
-    example: SKU
-    type: string
-  catalogColumns:
+  catalogColumnLinks:
+    properties:
+      rename:
+        $ref: '#/definitions/links.Catalog_ChangeCatalogColumnUserNameLink'
+    type: object
+  catalogColumnList:
     properties:
       catalogColumns:
         items:
           $ref: '#/definitions/catalogColumn'
         type: array
+    required:
+      - catalogColumns
     type: object
-  categories:
-    description: The object which contains the category list
+  catalogColumnName:
+    description: The catalog column name
+    example: SKU
+    type: string
+  catalogIndex:
     properties:
-      categories:
-        description: The category list
-        items:
-          $ref: '#/definitions/category'
-        type: array
+      links:
+        $ref: '#/definitions/catalogIndexLinks'
+      lovLinks:
+        $ref: '#/definitions/catalogIndexLOVLinks'
+      storeLinks:
+        $ref: '#/definitions/catalogStoreIndexList'
+    required:
+      - links
+      - lovLinks
     type: object
+  catalogIndexLOVLinks:
+    properties:
+      beezUPColumnDataTypeLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      beezUPColumnDisplayGroupLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      beezUPColumnImportanceLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      beezUPColumnLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      compareOptionLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      duplicateProductValueStrategyLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+    required:
+      - beezUPColumnLov
+      - beezUPColumnDataTypeLov
+      - beezUPColumnImportanceLov
+      - beezUPColumnDisplayGroupLov
+      - duplicateProductValueStrategyLov
+      - compareOptionLov
+    type: object
+  catalogIndexLinks:
+    properties:
+      beezUPColumns:
+        $ref: '#/definitions/links.Catalog_GetBeezUPColumnsLink'
+      self:
+        $ref: '#/definitions/links.CatalogIndexLink'
+    required:
+      - self
+      - beezUPColumns
+    type: object
+  catalogStoreIndex:
+    properties:
+      links:
+        $ref: '#/definitions/catalogStoreIndexLinks'
+      status:
+        $ref: '#/definitions/catalogStoreStatus'
+    required:
+      - links
+      - status
+    type: object
+  catalogStoreIndexLinks:
+    properties:
+      autoImportInfo:
+        $ref: '#/definitions/links.Auto_GetAutoImportConfigurationLink'
+      catalogColumns:
+        $ref: '#/definitions/links.Catalog_GetCatalogColumnsLink'
+      categories:
+        $ref: '#/definitions/links.Catalog_GetCategoriesLink'
+      computeExpression:
+        $ref: '#/definitions/links.Catalog_ComputeExpressionLink'
+      customColumns:
+        $ref: '#/definitions/links.Catalog_GetCustomColumnsLink'
+      importations:
+        $ref: '#/definitions/links.Importation_GetReportingsLink'
+      inputConfiguration:
+        $ref: '#/definitions/links.Importation_GetManualUpdateLastInputConfigLink'
+      products:
+        $ref: '#/definitions/links.Catalog_GetProductsLink'
+      randomProducts:
+        $ref: '#/definitions/links.Catalog_GetRandomProductsLink'
+      self:
+        $ref: '#/definitions/links.CatalogStoreIndexLink'
+      startImportation:
+        $ref: '#/definitions/links.Importation_StartManualUpdateLink'
+    required:
+      - self
+    type: object
+  catalogStoreIndexList:
+    properties:
+      links:
+        additionalProperties:
+          $ref: '#/definitions/catalogStoreIndex'
+        description: The key is the store identifier.
+        type: object
+    type: object
+  catalogStoreStatus:
+    description: |
+      Indicates the status of the catalog store.
+      * OK: If the latest importation is a success!
+      * Failed: If the latest importation has failed !
+      * Outdated: If the latest succeed importation is later than 1 day.
+    enum:
+      - OK
+      - Failed
+      - Outdated
+    example: OK
+    type: string
   category:
     description: The catalog category
     properties:
@@ -6264,9 +6515,26 @@ definitions:
         $ref: '#/definitions/BeezUP.Common.CatalogCategoryId'
       categoryPath:
         $ref: '#/definitions/BeezUP.Common.CatalogCategoryPath'
+      productCount:
+        description: The product count related to this category
+        example: 101
+        format: int32
+        type: integer
     required:
       - categoryId
       - categoryPath
+      - productCount
+  categoryList:
+    description: The object which contains the category list
+    properties:
+      categories:
+        description: The category list
+        items:
+          $ref: '#/definitions/category'
+        type: array
+    required:
+      - categories
+    type: object
   categoryMappingState:
     description: The category mapping state of the channel catalog
     properties:
@@ -8205,19 +8473,55 @@ definitions:
         $ref: '#/definitions/columnConfiguration'
       id:
         $ref: '#/definitions/columnId'
+      links:
+        $ref: '#/definitions/customColumnLinks'
       userColumName:
         $ref: '#/definitions/userColumName'
     required:
       - id
       - userColumName
       - configuration
+      - links
     type: object
-  customColumns:
+  customColumnLinks:
+    properties:
+      delete:
+        $ref: '#/definitions/links.Catalog_DeleteCustomColumnLink'
+      expression:
+        $ref: '#/definitions/links.Catalog_GetCustomColumnExpressionLink'
+      rename:
+        $ref: '#/definitions/links.Catalog_ChangeCustomColumnUserNameLink'
+      save:
+        $ref: '#/definitions/links.Catalog_SaveCustomColumnLink'
+      saveExpression:
+        $ref: '#/definitions/links.Catalog_ChangeCustomColumnExpressionLink'
+    required:
+      - save
+      - delete
+      - rename
+      - expression
+      - saveExpression
+    type: object
+  customColumnList:
     properties:
       customColumns:
         items:
           $ref: '#/definitions/customColumn'
         type: array
+      links:
+        $ref: '#/definitions/customColumnListLinks'
+    required:
+      - links
+      - customColumns
+    type: object
+  customColumnListLinks:
+    properties:
+      add:
+        $ref: '#/definitions/links.Catalog_SaveCustomColumnLink'
+      self:
+        $ref: '#/definitions/links.Catalog_GetCustomColumnsLink'
+    required:
+      - self
     type: object
   customerIndex:
     description: The index of the customer API
@@ -8294,22 +8598,32 @@ definitions:
       - $ref: '#/definitions/catalogColumn'
       - description: The catalog column detected during the first parsing step
         properties:
-          catalogColumnName:
-            $ref: '#/definitions/catalogColumnName'
-          columnId:
-            $ref: '#/definitions/columnId'
           detected:
             description: Indicates if the column is detected or is from the current catalog
             example: true
             type: boolean
           existingConfiguration:
             $ref: '#/definitions/existingCatalogColumnConfiguration'
+          links:
+            $ref: '#/definitions/detectedCatalogColumnLinks'
         required:
-          - columnId
-          - catalogColumnName
           - detected
+          - links
         type: object
-  detectedCatalogColumns:
+  detectedCatalogColumnLinks:
+    properties:
+      configure:
+        $ref: '#/definitions/links.Importation_ConfigureCatalogColumnLink'
+      ignore:
+        $ref: '#/definitions/links.Importation_IgnoreColumnLink'
+      map:
+        $ref: '#/definitions/links.Importation_MapCatalogColumnLink'
+      reattend:
+        $ref: '#/definitions/links.Importation_ReattendColumnLink'
+      unmap:
+        $ref: '#/definitions/links.Importation_UnmapCatalogColumnLink'
+    type: object
+  detectedCatalogColumnList:
     description: The list of detected catalog column
     properties:
       detectedCatalogColumns:
@@ -8317,6 +8631,17 @@ definitions:
         items:
           $ref: '#/definitions/detectedCatalogColumn'
         type: array
+      links:
+        $ref: '#/definitions/detectedCatalogColumnListLinks'
+    required:
+      - links
+    type: object
+  detectedCatalogColumnListLinks:
+    properties:
+      self:
+        $ref: '#/definitions/links.Importation_GetDetectedCatalogColumnsLink'
+    required:
+      - self
     type: object
   displayGroupName:
     description: Indicate the display group name where the column must be putted
@@ -8335,7 +8660,7 @@ definitions:
     example: SimpleUri
     type: string
   duplicateProductValueConfiguration:
-    description: Describe how you
+    description: Describe how you want to manage the duplication of the product value
     properties:
       compareOptions:
         $ref: '#/definitions/compareOptions'
@@ -8673,12 +8998,37 @@ definitions:
     properties:
       categoryPath:
         $ref: '#/definitions/BeezUP.Common.CatalogCategoryPath'
+      columnIdList:
+        items:
+          $ref: '#/definitions/BeezUP.Common.CatalogColumnId'
+        maxItems: 5
+        minItems: 1
+        type: array
+      exists:
+        description: Search for existing products or not. If null you will received both.
+        example: true
+        type: boolean
+      pageNumber:
+        $ref: '#/definitions/BeezUP.Common.PageNumber'
+      pageSize:
+        $ref: '#/definitions/BeezUP.Common.PageSize'
+      productIdList:
+        description: Filter with a list of product identifier
+        items:
+          $ref: '#/definitions/BeezUP.Common.ProductId'
+        type: array
       sku:
         description: Search for products containing this SKU (merchant product dentifier).
+        example: MySku123
         type: string
       title:
         description: Search for products containing this title
+        example: Frigo
         type: string
+    required:
+      - pageNumber
+      - pageSize
+      - columnIdList
     type: object
   globalPerformanceIndicatorByChannel:
     properties:
@@ -8759,6 +9109,63 @@ definitions:
       - currentImportation
       - cancelCurrentImportation
     type: object
+  importationCustomColumn:
+    description: The custom column configuration
+    properties:
+      configuration:
+        $ref: '#/definitions/columnConfiguration'
+      id:
+        $ref: '#/definitions/columnId'
+      links:
+        $ref: '#/definitions/importationCustomColumnLinks'
+      userColumName:
+        $ref: '#/definitions/userColumName'
+    required:
+      - id
+      - userColumName
+      - configuration
+      - links
+    type: object
+  importationCustomColumnLinks:
+    properties:
+      delete:
+        $ref: '#/definitions/links.Catalog_DeleteCustomColumnLink'
+      expression:
+        $ref: '#/definitions/links.Catalog_GetCustomColumnExpressionLink'
+      map:
+        $ref: '#/definitions/links.Importation_MapCustomColumnLink'
+      productSampleValue:
+        $ref: '#/definitions/links.Importation_GetProductSampleCustomColumnValueLink'
+      save:
+        $ref: '#/definitions/links.Importation_SaveCustomColumnLink'
+      unmap:
+        $ref: '#/definitions/links.Importation_UnmapCustomColumnLink'
+    required:
+      - save
+      - delete
+      - expression
+    type: object
+  importationCustomColumnList:
+    properties:
+      customColumns:
+        items:
+          $ref: '#/definitions/importationCustomColumn'
+        type: array
+      links:
+        $ref: '#/definitions/customColumnListLinks'
+    required:
+      - links
+      - customColumns
+    type: object
+  importationCustomColumnListLinks:
+    properties:
+      add:
+        $ref: '#/definitions/links.Importation_SaveCustomColumnLink'
+      self:
+        $ref: '#/definitions/links.Importation_GetCustomColumnsLink'
+    required:
+      - self
+    type: object
   importationMonitoring:
     description: Describe the reporting of the catalog importation
     properties:
@@ -8811,12 +9218,18 @@ definitions:
         $ref: '#/definitions/links.Importation_ActivateAutoImportLink'
       cancel:
         $ref: '#/definitions/links.Importation_CancelLink'
+      catalogColumns:
+        $ref: '#/definitions/links.Importation_GetDetectedCatalogColumnsLink'
       commit:
         $ref: '#/definitions/links.Importation_CommitLink'
       commitColumns:
         $ref: '#/definitions/links.Importation_CommitColumnsLink'
       configureRemainingCatalogColumns:
         $ref: '#/definitions/links.Importation_ConfigureRemainingCatalogColumnsLink'
+      customColumns:
+        $ref: '#/definitions/links.Importation_GetCustomColumnsLink'
+      productSamples:
+        $ref: '#/definitions/links.Importation_GetProductSampleLink'
       self:
         $ref: '#/definitions/links.Importation_GetImportationMonitoringLink'
       technicalProgression:
@@ -8906,6 +9319,22 @@ definitions:
           type: array
         description: Indicate for each step of the importation the uris to look at
         type: object
+    type: object
+  importationsResponse:
+    properties:
+      importations:
+        items:
+          $ref: '#/definitions/importationReporting'
+        type: array
+      links:
+        $ref: '#/definitions/importationsResponseLinks'
+    type: object
+  importationsResponseLinks:
+    properties:
+      self:
+        $ref: '#/definitions/links.Importation_GetReportingsLink'
+      start:
+        $ref: '#/definitions/links.Importation_StartManualUpdateLink'
     type: object
   initialsProfilePictureUrl:
     description: Indicate the url of your picture profil based on your initials
@@ -9024,7 +9453,6 @@ definitions:
       - hasHeaderRecord
       - ignoreHeaderRecord
       - csvSeparator
-      - csvTextQualifier
     type: object
   inputFileReadXmlConfiguration:
     description: The XML file description
@@ -9146,6 +9574,184 @@ definitions:
       - OnClickDate
     example: OnClickDate
     type: string
+  links.Auto_ConfigureAutoImportIntervalLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/autoImport/scheduling/interval
+          method: POST
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: configureAutoImportIntervalRequest
+              type: object
+  links.Auto_GetAutoImportConfigurationLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/autoImport
+          method: GET
+  links.Auto_PauseAutoImportLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/autoImport/pause
+          method: POST
+  links.Auto_ResumeAutoImportLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/autoImport/resume
+          method: POST
+  links.Auto_ScheduleAutoImportLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/autoImport/scheduling/schedules
+          method: POST
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: scheduleAutoImportRequest
+              type: object
+  links.Auto_StartAutoImportLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/autoImport/start
+          method: POST
+  links.CatalogIndexLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs
+          method: GET
+  links.CatalogStoreIndexLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3
+          method: GET
+  links.Catalog_ChangeCatalogColumnUserNameLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/catalogColumns/b45c1999-e089-4bb1-a219-80a7a50a6f53/rename
+          method: POST
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: changeUserColumnNameRequest
+              type: object
+  links.Catalog_ChangeCustomColumnExpressionLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb/expression
+          method: PUT
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: changeCustomColumnExpressionRequest
+              type: object
+  links.Catalog_ChangeCustomColumnUserNameLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb/rename
+          method: POST
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: changeUserColumnNameRequest
+              type: object
+  links.Catalog_ComputeExpressionLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/customColumns/computeExpression
+          method: POST
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: computeExpressionRequest
+              type: object
+  links.Catalog_DeleteCustomColumnLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb
+          method: DELETE
+  links.Catalog_GetBeezUPColumnsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/beezupColumns
+          method: GET
+  links.Catalog_GetCatalogColumnsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/catalogColumns
+          method: GET
+  links.Catalog_GetCategoriesLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/categories
+          method: GET
+  links.Catalog_GetCustomColumnExpressionLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb/expression
+          method: GET
+  links.Catalog_GetCustomColumnsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/customColumns
+          method: GET
+  links.Catalog_GetProductsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/products/list
+          method: POST
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: getProductsRequest
+              type: object
+  links.Catalog_GetRandomProductsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/products/random
+          method: GET
+  links.Catalog_SaveCustomColumnLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: '/v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/customColumns/{columnId}'
+          method: POST
+          parameters:
+            columnId:
+              in: path
+              required: true
+              type: string
+            request:
+              in: body
+              required: true
+              schema: createCustomColumnRequest
+              type: object
   links.ChangeOrderLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9480,24 +10086,170 @@ definitions:
       - example:
           href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/commit
           method: POST
+  links.Importation_ConfigureCatalogColumnLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/catalogColumns/b45c1999-e089-4bb1-a219-80a7a50a6f53
+          method: POST
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: configureCatalogColumnCatalogRequest
+              type: object
   links.Importation_ConfigureRemainingCatalogColumnsLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
           href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/configureRemainingCatalogColumns
           method: POST
+  links.Importation_DeleteCustomColumnLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb
+          method: DELETE
+  links.Importation_GetCustomColumnExpressionLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb/expression
+          method: GET
+  links.Importation_GetCustomColumnsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/customColumns
+          method: GET
+  links.Importation_GetDetectedCatalogColumnsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/catalogColumns
+          method: GET
   links.Importation_GetImportationMonitoringLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
           href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c
           method: GET
+  links.Importation_GetManualUpdateLastInputConfigLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/inputConfiguration
+          method: GET
+  links.Importation_GetProductSampleCustomColumnValueLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: '/v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/productSamples/{productSampleIndex}/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb'
+          method: GET
+          parameters:
+            productSampleIndex:
+              in: path
+              required: true
+              type: integer
+  links.Importation_GetProductSampleLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: '/v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/productSamples/{productSampleIndex}'
+          method: GET
+          parameters:
+            productSampleIndex:
+              in: path
+              required: true
+              type: integer
+  links.Importation_GetReportingsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations
+          method: GET
+  links.Importation_IgnoreColumnLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/catalogColumns/b45c1999-e089-4bb1-a219-80a7a50a6f53/ignore
+          method: POST
+  links.Importation_MapCatalogColumnLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/catalogColumns/b45c1999-e089-4bb1-a219-80a7a50a6f53/map
+          method: POST
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: mapBeezUPColumnRequest
+              type: object
+  links.Importation_MapCustomColumnLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb/map
+          method: POST
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: mapBeezUPColumnRequest
+              type: object
+  links.Importation_ReattendColumnLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/catalogColumns/b45c1999-e089-4bb1-a219-80a7a50a6f53/reattend
+          method: POST
+  links.Importation_SaveCustomColumnLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: '/v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/customColumns/{columnId}'
+          method: POST
+          parameters:
+            columnId:
+              in: path
+              required: true
+              type: string
+            request:
+              in: body
+              required: true
+              schema: createCustomColumnRequest
+              type: object
+  links.Importation_StartManualUpdateLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/start
+          method: POST
+          parameters:
+            request:
+              in: body
+              required: true
+              schema: startManualImportRequest
+              type: object
   links.Importation_TechnicalProgressionLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
           href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/technicalProgression
           method: GET
+  links.Importation_UnmapCatalogColumnLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/catalogColumns/b45c1999-e089-4bb1-a219-80a7a50a6f53/map
+          method: POST
+  links.Importation_UnmapCustomColumnLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb/map
+          method: POST
   links.MoveDownRuleLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -11143,10 +11895,19 @@ definitions:
     properties:
       categoryId:
         $ref: '#/definitions/BeezUP.Common.CatalogCategoryId'
+      exists:
+        description: Indicates if the product exists in the current catalog
+        example: true
+        type: boolean
       productId:
         $ref: '#/definitions/BeezUP.Common.ProductId'
       values:
         $ref: '#/definitions/productValues'
+    required:
+      - productId
+      - categoryId
+      - values
+      - exists
   productFilters:
     properties:
       additionalProductFilters:
@@ -11166,6 +11927,18 @@ definitions:
         description: The product title filter
         example: RefrigÃ©rateur
         type: string
+    type: object
+  productList:
+    properties:
+      paginationResult:
+        $ref: '#/definitions/BeezUP.Common.PaginationResult'
+      products:
+        items:
+          $ref: '#/definitions/product'
+        type: array
+    required:
+      - paginationResult
+      - products
     type: object
   productOverrideWithCatalogValue:
     properties:
@@ -11241,13 +12014,6 @@ definitions:
       68082b11-4ffd-4bec-964a-465a471c7d37: SKU1234
       b6d74510-41ce-42ec-947a-0bdf62e9beee: Refrigerateur
       ba270fa0-8482-46be-905a-cae4ca746b92: 'http://www.conforama.fr/gros-electromenager/encastrable/refrigerateur-encastrable/refrigerateur-combine-161-litres-far-r5115s/p/585511'
-    type: object
-  products:
-    properties:
-      products:
-        items:
-          $ref: '#/definitions/product'
-        type: array
     type: object
   profilePictureInfo:
     properties:
@@ -11493,6 +12259,15 @@ definitions:
     example: PublishOffers
     type: string
     x-lov: MarketplacePublicationType
+  randomProductList:
+    properties:
+      products:
+        items:
+          $ref: '#/definitions/product'
+        type: array
+    required:
+      - products
+    type: object
   registerRequest:
     properties:
       commercialOwnerUserId:

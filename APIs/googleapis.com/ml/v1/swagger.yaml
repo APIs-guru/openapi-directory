@@ -158,10 +158,7 @@ paths:
       description: Describes a job.
       operationId: ml.projects.jobs.get
       parameters:
-        - description: |-
-            Required. The name of the job to get the description of.
-
-            Authorization: requires `Viewer` role on the parent project.
+        - description: Required. The name of the job to get the description of.
           in: path
           name: name
           required: true
@@ -275,10 +272,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/GoogleCloudMlV1__CancelJobRequest'
-        - description: |-
-            Required. The name of the job to cancel.
-
-            Authorization: requires `Editor` role on the parent project.
+        - description: Required. The name of the job to cancel.
           in: path
           name: name
           required: true
@@ -305,10 +299,7 @@ paths:
         for training the model with Google Cloud Machine Learning.
       operationId: ml.projects.getConfig
       parameters:
-        - description: |-
-            Required. The project name.
-
-            Authorization: requires `Viewer` role on the specified project.
+        - description: Required. The project name.
           in: path
           name: name
           required: true
@@ -362,19 +353,19 @@ paths:
         **** REMOVE FROM GENERATED DOCUMENTATION
       operationId: ml.projects.predict
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudMlV1__PredictRequest'
         - description: |-
             Required. The resource name of a model or a version.
 
-            Authorization: requires `Viewer` role on the parent project.
+            Authorization: requires the `predict` permission on the specified resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GoogleCloudMlV1__PredictRequest'
       responses:
         '200':
           description: Successful response
@@ -423,7 +414,7 @@ paths:
             can get the names of all the versions of a model by calling
             [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
 
-            Authorization: requires `Editor` role on the parent project.
+            Authorization: `ml.models.update` permission is required on the parent model.
           in: path
           name: name
           required: true
@@ -446,26 +437,9 @@ paths:
       description: Lists the jobs in the project.
       operationId: ml.projects.jobs.list
       parameters:
-        - description: |-
-            Required. The name of the project for which to list jobs.
-
-            Authorization: requires `Viewer` role on the specified project.
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
         - description: Optional. Specifies the subset of jobs to retrieve.
           in: query
           name: filter
-          type: string
-        - description: |-
-            Optional. A page token to request the next page of results.
-
-            You get the token from the `next_page_token` field of the response from
-            the previous call.
-          in: query
-          name: pageToken
           type: string
         - description: |-
             Optional. The number of jobs to retrieve per "page" of results. If there
@@ -476,6 +450,20 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            Optional. A page token to request the next page of results.
+
+            You get the token from the `next_page_token` field of the response from
+            the previous call.
+          in: query
+          name: pageToken
+          type: string
+        - description: Required. The name of the project for which to list jobs.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -506,19 +494,16 @@ paths:
       description: Creates a training or a batch prediction job.
       operationId: ml.projects.jobs.create
       parameters:
-        - description: |-
-            Required. The project name.
-
-            Authorization: requires `Editor` role on the specified project.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudMlV1__Job'
+        - description: Required. The project name.
           in: path
           name: parent
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GoogleCloudMlV1__Job'
       responses:
         '200':
           description: Successful response
@@ -541,23 +526,6 @@ paths:
       operationId: ml.projects.models.list
       parameters:
         - description: |-
-            Required. The name of the project whose models are to be listed.
-
-            Authorization: requires `Viewer` role on the specified project.
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - description: |-
-            Optional. A page token to request the next page of results.
-
-            You get the token from the `next_page_token` field of the response from
-            the previous call.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
             Optional. The number of models to retrieve per "page" of results. If there
             are more remaining results than this number, the response message will
             contain a valid value in the `next_page_token` field.
@@ -566,6 +534,20 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            Optional. A page token to request the next page of results.
+
+            You get the token from the `next_page_token` field of the response from
+            the previous call.
+          in: query
+          name: pageToken
+          type: string
+        - description: Required. The name of the project whose models are to be listed.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -601,19 +583,16 @@ paths:
         [projects.models.versions.create](/ml-engine/reference/rest/v1/projects.models.versions/create).
       operationId: ml.projects.models.create
       parameters:
-        - description: |-
-            Required. The project name.
-
-            Authorization: requires `Editor` role on the specified project.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudMlV1__Model'
+        - description: Required. The project name.
           in: path
           name: parent
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GoogleCloudMlV1__Model'
       responses:
         '200':
           description: Successful response
@@ -637,23 +616,6 @@ paths:
       operationId: ml.projects.models.versions.list
       parameters:
         - description: |-
-            Required. The name of the model for which to list the version.
-
-            Authorization: requires `Viewer` role on the parent project.
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - description: |-
-            Optional. A page token to request the next page of results.
-
-            You get the token from the `next_page_token` field of the response from
-            the previous call.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
             Optional. The number of versions to retrieve per "page" of results. If
             there are more remaining results than this number, the response message
             will contain a valid value in the `next_page_token` field.
@@ -662,6 +624,20 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            Optional. A page token to request the next page of results.
+
+            You get the token from the `next_page_token` field of the response from
+            the previous call.
+          in: query
+          name: pageToken
+          type: string
+        - description: Required. The name of the model for which to list the version.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -700,19 +676,16 @@ paths:
         [projects.models.versions.setDefault](/ml-engine/reference/rest/v1/projects.models.versions/setDefault).
       operationId: ml.projects.models.versions.create
       parameters:
-        - description: |-
-            Required. The name of the model.
-
-            Authorization: requires `Editor` role on the parent project.
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudMlV1__Version'
+        - description: Required. The name of the model.
           in: path
           name: parent
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GoogleCloudMlV1__Version'
       responses:
         '200':
           description: Successful response
@@ -1767,6 +1740,9 @@ definitions:
       description:
         description: Optional. The description specified for the version when it was created.
         type: string
+      errorMessage:
+        description: Output only. The details of a failure or a cancellation.
+        type: string
       isDefault:
         description: |-
           Output only. If true, this version will be used to handle prediction
@@ -1805,6 +1781,7 @@ definitions:
           - UNKNOWN
           - READY
           - CREATING
+          - FAILED
         type: string
     type: object
   GoogleCloudMlV1beta1__AutomaticScaling:
@@ -1916,6 +1893,9 @@ definitions:
       description:
         description: Optional. The description specified for the version when it was created.
         type: string
+      errorMessage:
+        description: Output only. The details of a failure or a cancellation.
+        type: string
       isDefault:
         description: |-
           Output only. If true, this version will be used to handle prediction
@@ -1954,6 +1934,7 @@ definitions:
           - UNKNOWN
           - READY
           - CREATING
+          - FAILED
         type: string
     type: object
   GoogleIamV1_LogConfig_CloudAuditOptions:
@@ -2184,7 +2165,30 @@ definitions:
         type: array
     type: object
   GoogleIamV1__LogConfig:
-    description: Specifies what kind of log the caller must write
+    description: |-
+      Specifies what kind of log the caller must write
+      Increment a streamz counter with the specified metric and field names.
+
+      Metric names should start with a '/', generally be lowercase-only,
+      and end in "_count". Field names should not contain an initial slash.
+      The actual exported metric names will have "/iam/policy" prepended.
+
+      Field names correspond to IAM request parameters and field values are
+      their respective values.
+
+      At present the only supported field names are
+         - "iam_principal", corresponding to IAMContext.principal;
+         - "" (empty string), resulting in one aggretated counter with no field.
+
+      Examples:
+        counter { metric: "/debug_access_count"  field: "iam_principal" }
+        ==> increment counter /iam/policy/backend_debug_access_count
+                              {iam_principal=[value of IAMContext.principal]}
+
+      At this time we do not support:
+      * multiple field names (though this may be supported in the future)
+      * decrementing the counter
+      * incrementing it by anything other than 1
     properties:
       cloudAudit:
         $ref: '#/definitions/GoogleIamV1_LogConfig_CloudAuditOptions'

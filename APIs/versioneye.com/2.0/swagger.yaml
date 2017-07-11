@@ -36,32 +36,9 @@ tags:
     name: users
   - description: Operations about githubs
     name: github
-  - description: Operations about facebooks
-    name: facebook
   - description: Operations about securities
     name: security
 paths:
-  /facebook/ping:
-    get:
-      description: ping pong
-      operationId: getFacebookPing
-      responses:
-        '200':
-          description: ping pong
-      summary: ping pong
-      tags:
-        - facebook
-    post:
-      consumes:
-        - application/json
-      description: ping pong
-      operationId: postFacebookPing
-      responses:
-        '201':
-          description: ping pong
-      summary: ping pong
-      tags:
-        - facebook
   /github:
     get:
       description: |-

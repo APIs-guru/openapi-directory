@@ -474,22 +474,41 @@ paths:
   '/v1/{name}':
     get:
       description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: cloudbuild.operations.get
+        Lists operations that match the specified filter in the request. If the
+        server doesn't support this method, it returns `UNIMPLEMENTED`.
+
+        NOTE: the `name` binding allows API services to override the binding
+        to use different resource name schemes, such as `users/*/operations`. To
+        override the binding, API services can add a binding such as
+        `"/v1/{name=users/*}/operations"` to their service configuration.
+        For backwards compatibility, the default name includes the operations
+        collection id, however overriding users must ensure the name binding
+        is the parent resource, without the operations collection id.
+      operationId: cloudbuild.operations.list
       parameters:
-        - description: The name of the operation resource.
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
+        - description: The name of the operation's parent resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -647,6 +666,11 @@ definitions:
         description: |-
           Results of the build.
           @OutputOnly
+      secrets:
+        description: Secrets to decrypt using Cloud KMS.
+        items:
+          $ref: '#/definitions/Secret'
+        type: array
       source:
         $ref: '#/definitions/Source'
         description: Describes where to find the source files to build.
@@ -729,6 +753,12 @@ definitions:
             - SHA256
           type: string
         type: array
+      substitutionOption:
+        description: SubstitutionOption to allow unmatch substitutions.
+        enum:
+          - MUST_MATCH
+          - ALLOW_LOOSE
+        type: string
     type: object
   BuildStep:
     description: BuildStep describes a step to perform in the build pipeline.
@@ -787,6 +817,13 @@ definitions:
           host's Docker daemon's cache and is available to use as the name for a
           later build step.
         type: string
+      secretEnv:
+        description: |-
+          A list of environment variables which are encrypted using a Cloud KMS
+          crypto key. These values must be specified in the build's secrets.
+        items:
+          type: string
+        type: array
       waitFor:
         description: |-
           The ID(s) of the step(s) that this build step depends on.
@@ -1015,6 +1052,27 @@ definitions:
           $ref: '#/definitions/BuiltImage'
         type: array
     type: object
+  Secret:
+    description: |-
+      Secret pairs a set of secret environment variables containing encrypted
+      values with the Cloud KMS key to use to decrypt the value.
+    properties:
+      kmsKeyName:
+        description: Cloud KMS key name to use to decrypt these envs.
+        type: string
+      secretEnv:
+        additionalProperties:
+          format: byte
+          type: string
+        description: |-
+          Map of environment variable name to its encrypted value.
+
+          Secret environment variables must be unique across all of a build's
+          secrets, and must be used by at least one build step. Values can be at most
+          1 KB in size. There can be at most ten secret values across all of a
+          build's secrets.
+        type: object
+    type: object
   Source:
     description: |-
       Source describes the location of the source in a supported storage
@@ -1121,8 +1179,8 @@ definitions:
         type: integer
       details:
         description: |-
-          A list of messages that carry the error details.  There will be a
-          common set of message types for APIs to use.
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.

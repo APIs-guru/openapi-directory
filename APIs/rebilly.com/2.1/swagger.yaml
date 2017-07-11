@@ -2249,7 +2249,7 @@ paths:
 
             $discountForm = new \Rebilly\Entities\Coupons\Discounts\Fixed($discountArray);
             $couponForm->setDiscount($discountForm);
-            // Coupon will can be used right now
+            // Coupon can be used right now
             $couponForm->setIssuedTime(date('Y-m-d H:i:s'));
 
             $restrictionArray = [
@@ -6706,6 +6706,48 @@ paths:
             $paymentCard = $client->paymentCards()->load('paymentCardId');
     parameters:
       - $ref: '#/parameters/resourceId'
+    patch:
+      description: |
+        Update a payment card's cvv value with predefined identifier string
+      parameters:
+        - description: Payment card
+          in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              cvv:
+                description: Card's cvv (card verification value).
+                type: string
+            type: object
+      responses:
+        '200':
+          description: Gateway Account was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/PaymentCard'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Update a payment card's cvv value with predefined ID
+      tags:
+        - Payment Cards
     put:
       parameters:
         - description: Payment card
@@ -6734,7 +6776,7 @@ paths:
         '401':
           $ref: '#/responses/AccessForbidden'
         '409':
-          description: Payment card exist and cannot be updated
+          description: Payment card already exists and cannot be updated
           schema:
             $ref: '#/definitions/Error'
         '422':
@@ -11067,7 +11109,7 @@ definitions:
       rel:
         description: The link type
         enum:
-          - approval_url
+          - approvalUrl
         type: string
     required:
       - rel
@@ -11399,6 +11441,18 @@ definitions:
           - gatewayConfig
         type: object
     description: BraintreePayments Gateway config
+  CancelUrlLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - cancelUrl
+        type: string
+    required:
+      - rel
+    type: object
   CardinalCommerce:
     allOf:
       - $ref: '#/definitions/PayvisionMpis'
@@ -11663,6 +11717,10 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The contact identifier string
         readOnly: true
+      isOutdated:
+        description: Is contact outdated
+        readOnly: true
+        type: boolean
       lastName:
         description: The contact last name
         type: string
@@ -13401,6 +13459,8 @@ definitions:
       starred:
         description: Boolean if the plan should be starred (special callout presentation)
         type: boolean
+    required:
+      - planId
     type: object
   LeadSource:
     properties:
@@ -14848,6 +14908,18 @@ definitions:
           - gatewayConfig
         type: object
     description: Redsys Gateway config
+  RefundUrlLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - refundUrl
+        type: string
+    required:
+      - rel
+    type: object
   ResetPassword:
     properties:
       newPassword:
@@ -15770,7 +15842,10 @@ definitions:
           - $ref: '#/definitions/RetriedTransactionLink'
           - $ref: '#/definitions/BillingContactLink'
           - $ref: '#/definitions/LeadSourceLink'
-        maxItems: 9
+          - $ref: '#/definitions/ApprovalUrlLink'
+          - $ref: '#/definitions/CancelUrlLink'
+          - $ref: '#/definitions/RefundUrlLink'
+        maxItems: 12
         minItems: 1
         readOnly: true
         type: array

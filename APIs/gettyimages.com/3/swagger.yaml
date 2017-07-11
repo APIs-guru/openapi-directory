@@ -25,95 +25,35 @@ securityDefinitions:
 security:
   - Api-Key: []
 paths:
-  /v3/asset-changes/change-sets:
-    put:
-      consumes: []
-      deprecated: false
-      operationId: AssetChanges_PutAssetChanges
-      parameters:
-        - description: 'Provide access token in the format of ''Bearer {token}''.'
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: Specifies the id of the channel for the asset data. Valid channel ids can be found in the results of the Get Partner Channel query.
-          format: int32
-          in: query
-          name: channel_id
-          required: true
-          type: integer
-        - description: Specifies the number of assets to return. The default is 10; maximum is 500.
-          format: int32
-          in: query
-          name: batch_size
-          required: false
-          type: integer
-      produces:
+  /v3/asset-registrations:
+    post:
+      consumes:
         - application/json
         - text/json
-      responses:
-        '200':
-          description: OK
+      deprecated: false
+      operationId: AssetRegistration_Register
+      parameters:
+        - description: Specify JSON containing an array of asset ids to register.  Limited to 500 asset ids per call.
+          in: body
+          name: request
+          required: true
           schema:
-            $ref: '#/definitions/AssetChanges'
-        '403':
-          description: Your access token does not authorize access to this resource
-        '404':
-          description: The channel you specified does not exist
-      summary: Generates asset changes.
-      tags:
-        - AssetChanges
-  '/v3/asset-changes/change-sets/{change-set-id}':
-    delete:
-      consumes: []
-      deprecated: false
-      operationId: AssetChanges_DeleteAssetChanges
-      parameters:
-        - description: 'Provide access token in the format of ''Bearer {token}''.'
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - format: int64
-          in: path
-          name: change-set-id
-          required: true
-          type: integer
+            $ref: '#/definitions/RegisterAssetsRequest'
       produces:
         - application/json
         - text/json
       responses:
         '200':
-          description: OK
-        '403':
-          description: Your access token does not authorize access to this resource
-        '404':
-          description: Transaction was not found
-      summary: Confirm asset changes acknowledges receipt of asset changes.
-      tags:
-        - AssetChanges
-  /v3/asset-changes/channels:
-    get:
-      consumes: []
-      deprecated: false
-      operationId: AssetChanges_GetPartnerChannel
-      parameters:
-        - description: 'Provide access token in the format of ''Bearer {token}''.'
-          in: header
-          name: Authorization
-          required: true
-          type: string
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: OK
+          description: Success - The assets were successfully registered.
           schema:
-            $ref: '#/definitions/PartnerChannelList'
-      summary: Retrieves the channel data for the partner. This data can be used to populate the channel_id parameter in the Put Asset Changes query.
+            $ref: '#/definitions/Object'
+        '401':
+          description: AuthorizationTokenRequired - Authorization token was missing or not valid.
+        '500':
+          description: AssetRegistrationFailed - There was a failure when registering assets.
+      summary: Register a list of customer assets.
       tags:
-        - AssetChanges
+        - AssetRegistration
   /v3/boards:
     get:
       consumes: []
@@ -4191,6 +4131,47 @@ paths:
       summary: Search for editorial videos
       tags:
         - Search
+  '/v3/usage-batches/{id}':
+    put:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      operationId: Usage_Put
+      parameters:
+        - description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r\n            The date format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/report_usage_batch_request'
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Specifies a unique batch transaction id to identify the report.
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Success - All usages reported were successfully recorded.
+          schema:
+            $ref: '#/definitions/report_usage_batch_response'
+        '400':
+          description: 'InvalidRequest - The content of the request was invalid. Most commonly this is due to either too many assets specified, no assets or invalid JSON.'
+        '401':
+          description: AuthorizationTokenRequired - Authorization token was missing or not valid.
+        '409':
+          description: TransactionIdDuplicated - The id parameter supplied was already used in a previous usage report.
+      summary: Report usage of assets via a batch format.
+      tags:
+        - Usage
   /v3/videos:
     get:
       consumes: []
@@ -4453,17 +4434,6 @@ definitions:
       id:
         type: string
     type: object
-  AssetChanges:
-    properties:
-      change_set_id:
-        description: Contains the identifier for the change-set resource. Passed into ConfirmAssetChanges requests to confirm receipt of the asset changes in the response.
-        type: string
-      changed_assets:
-        description: Contains a list of ChangedAssetList results for the query.
-        items:
-          $ref: '#/definitions/ChangedAssetDetail'
-        type: array
-    type: object
   BoardAsset:
     properties:
       asset_id:
@@ -4565,25 +4535,6 @@ definitions:
         type: boolean
       can_update_name:
         type: boolean
-    type: object
-  ChangedAssetDetail:
-    properties:
-      asset_changed_utc_datetime:
-        description: Contains the date of the asset change.
-        format: date-time
-        type: string
-      asset_lifecycle:
-        description: 'Contains the type of change this asset change is. (i.e. "New," "Updated" or "Deleted")'
-        type: string
-      asset_type:
-        description: Contains the type of asset this asset change is (i.e. "Image").
-        type: string
-      id:
-        description: Contains the Id for the asset change.
-        type: string
-      uri:
-        description: Contains the asset download URL for assets with an AssetLifecycle of "New."
-        type: string
     type: object
   Collaborator:
     properties:
@@ -5854,35 +5805,52 @@ definitions:
   Object:
     properties: {}
     type: object
-  PartnerChannel:
-    description: partner_channel
+  RegisterAssetsRequest:
+    description: Specify request containing the list of asset ids you want to register.
     properties:
-      asset_family:
-        description: Specifies the asset family for the channel (e.g. "editorial" or "creative")
-        type: string
-      channel_id:
-        description: Specifies the identification number for the channel
-        format: int32
-        type: integer
-      channel_type:
-        description: 'Specifies the channel type (i.e. "New," "Updated" or "Deleted")'
-        type: string
-      notification_count:
-        description: Specifies the current count of notifications pending in the channel
-        format: int32
-        type: integer
-      start_date:
-        description: ''
-        format: date-time
-        type: string
-    type: object
-  PartnerChannelList:
-    properties:
-      channels:
+      asset_ids:
+        description: Specifies the list of asset ids you want to register.
         items:
-          $ref: '#/definitions/PartnerChannel'
+          type: string
         type: array
     type: object
   System.Object:
     properties: {}
+    type: object
+  asset_usage:
+    description: 'Specifies the id, usage quantity, and date of when an asset was used.'
+    properties:
+      asset_id:
+        description: Specifies the Id of the asset that was used.
+        type: string
+      quantity:
+        description: Specifies the number of times the asset was used.
+        format: int32
+        type: integer
+      usage_date:
+        description: 'Identifies the date the asset was used, in ISO 8601 format (e.g., YYYY-MM-DD), time is not needed.'
+        format: date-time
+        type: string
+    type: object
+  report_usage_batch_request:
+    description: Specifies the request information for the Batch Usages endpoint.
+    properties:
+      asset_usages:
+        description: 'Identifies the list of asset id, usage count and date of usage combinations to record.'
+        items:
+          $ref: '#/definitions/asset_usage'
+        type: array
+    type: object
+  report_usage_batch_response:
+    description: Specifies the response from the Batch Usages endpoint.
+    properties:
+      invalid_assets:
+        description: Identifies a list of asset ids submitted that did not match known Getty asset ids.
+        items:
+          type: string
+        type: array
+      total_asset_usages_processed:
+        description: Specifies the number of asset usage records that were successfully recorded.
+        format: int32
+        type: integer
     type: object

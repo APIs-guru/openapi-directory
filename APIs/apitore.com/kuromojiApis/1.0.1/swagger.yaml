@@ -6,7 +6,7 @@ basePath: /api/7
 info:
   description: 'Kuromoji: japanese morphological analyzer.<BR />[Endpoint] https://api.apitore.com/api/7'
   title: Kuromoji APIs
-  version: 1.0.0
+  version: 1.0.1
   x-description-language: jp
   x-logo:
     url: 'https://apitore.com/img/apis/7.jpg'
@@ -55,6 +55,37 @@ paths:
       summary: Kuromoji IPADIC NEologd
       tags:
         - kuromoji-ipadic-neologd-controller
+    post:
+      description: 'Kuromoji IPADIC NEologd dictionary.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/kuromoji-response">kuromoji-response</a><BR />&nbsp; Class: com.apitore.banana.response.com.atilika.kuromoji.TokenResponseEntity<BR />'
+      operationId: tokenizeUsingPOST_1
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: Input Text
+          in: body
+          name: req
+          required: true
+          schema:
+            $ref: '#/definitions/KuromojiRequestEntity'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TokensResponseEntity'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Kuromoji IPADIC NEologd
+      tags:
+        - kuromoji-ipadic-neologd-controller
   /kuromoji-ipadic/tokenize:
     get:
       description: 'Kuromoji IPADIC dictionary.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/kuromoji-response">kuromoji-response</a><BR />&nbsp; Class: com.apitore.banana.response.com.atilika.kuromoji.TokenResponseEntity<BR />'
@@ -84,7 +115,48 @@ paths:
       summary: Kuromoji IPADIC
       tags:
         - kuromoji-ipadic-controller
+    post:
+      description: 'Kuromoji IPADIC dictionary.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/kuromoji-response">kuromoji-response</a><BR />&nbsp; Class: com.apitore.banana.response.com.atilika.kuromoji.TokenResponseEntity<BR />'
+      operationId: tokenizeUsingPOST
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: Input Text
+          in: body
+          name: req
+          required: true
+          schema:
+            $ref: '#/definitions/KuromojiRequestEntity'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TokensResponseEntity'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Kuromoji IPADIC
+      tags:
+        - kuromoji-ipadic-controller
 definitions:
+  KuromojiRequestEntity:
+    properties:
+      texts:
+        description: 'texts [max 1MB]'
+        items:
+          type: string
+        type: array
+    required:
+      - texts
+    type: object
   TokenEntity:
     properties:
       allFeatures:
@@ -167,6 +239,33 @@ definitions:
         description: Tokens
         items:
           $ref: '#/definitions/TokenEntity'
+        type: array
+    required:
+      - endTime
+      - log
+      - processTime
+      - startTime
+    type: object
+  TokensResponseEntity:
+    properties:
+      endTime:
+        description: End date
+        type: string
+      log:
+        description: Log message
+        type: string
+      processTime:
+        description: 'Process time [millisecond]'
+        type: string
+      startTime:
+        description: Start date
+        type: string
+      tokens:
+        description: Tokens
+        items:
+          items:
+            $ref: '#/definitions/TokenEntity'
+          type: array
         type: array
     required:
       - endTime

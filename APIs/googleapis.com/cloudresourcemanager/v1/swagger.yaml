@@ -237,6 +237,9 @@ paths:
         the specified filter. This method returns Organizations in an unspecified
         order. New Organizations do not necessarily appear at the end of the
         results.
+
+        Search will only return organizations on which the user has the permission
+        `resourcemanager.organizations.get`
       operationId: cloudresourcemanager.organizations.search
       parameters:
         - in: body
@@ -285,8 +288,16 @@ paths:
             |NAME:howl|Equivalent to above.|
             |labels.color:*|The project has the label `color`.|
             |labels.color:red|The project's label `color` has the value `red`.|
-            |labels.color:red&nbsp;labels.size:big|The project's label `color` has the
-            value `red` and its label `size` has the value `big`.
+            |labels.color:red&nbsp;labels.size:big|The project's label `color` has the value `red` and its label `size` has the value `big`.
+
+            If you specify a filter that has both `parent.type` and `parent.id`, then
+            the `resourcemanager.projects.list` permission is checked on the parent.
+            If the user has this permission, all projects under the parent will be
+            returned after remaining filters have been applied. If the user lacks this
+            permission, then all projects for which the user has the
+            `resourcemanager.projects.get` permission will be returned after remaining
+            filters have been applied. If no filter is specified, the call will return
+            projects for which the user has `resourcemanager.projects.get` permissions.
 
             Optional.
           in: query
@@ -349,6 +360,10 @@ paths:
         percentile. As of 2016-08-29, we are observing 6 seconds 50th percentile
         latency. 95th percentile latency is around 11 seconds. We recommend
         polling at the 5th second with an exponential backoff.
+
+        Authorization requires the Google IAM permission
+        `resourcemanager.projects.create` on the specified parent for the new
+        project.
       operationId: cloudresourcemanager.projects.create
       parameters:
         - in: body
@@ -614,6 +629,9 @@ paths:
       description: |-
         Returns the IAM access control policy for the specified Project.
         Permission is denied if the policy or the resource does not exist.
+
+        Authorization requires the Google IAM permission
+        `resourcemanager.projects.getIamPolicy` on the project
       operationId: cloudresourcemanager.projects.getIamPolicy
       parameters:
         - description: |-
@@ -699,6 +717,9 @@ paths:
         can render services completely inoperable. It is important to understand
         how the service account is being used before removing or updating its
         roles.
+
+        Authorization requires the Google IAM permission
+        `resourcemanager.projects.setIamPolicy` on the project
       operationId: cloudresourcemanager.projects.setIamPolicy
       parameters:
         - description: |-
@@ -740,7 +761,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
     post:
-      description: Returns permissions that a caller has on the specified Project.
+      description: |-
+        Returns permissions that a caller has on the specified Project.
+
+        There are no permissions required for making this API call.
       operationId: cloudresourcemanager.projects.testIamPermissions
       parameters:
         - description: |-
@@ -954,6 +978,9 @@ paths:
         Gets the access control policy for an Organization resource. May be empty
         if no such policy or resource exists. The `resource` field should be the
         organization's resource name, e.g. "organizations/123".
+
+        Authorization requires the Google IAM permission
+        `resourcemanager.organizations.getIamPolicy` on the specified organization
       operationId: cloudresourcemanager.organizations.getIamPolicy
       parameters:
         - description: |-
@@ -1145,6 +1172,9 @@ paths:
         Sets the access control policy on an Organization resource. Replaces any
         existing policy. The `resource` field should be the organization's resource
         name, e.g. "organizations/123".
+
+        Authorization requires the Google IAM permission
+        `resourcemanager.organizations.setIamPolicy` on the specified organization
       operationId: cloudresourcemanager.organizations.setIamPolicy
       parameters:
         - description: |-
@@ -1237,6 +1267,8 @@ paths:
         Returns permissions that a caller has on the specified Organization.
         The `resource` field should be the organization's resource name,
         e.g. "organizations/123".
+
+        There are no permissions required for making this API call.
       operationId: cloudresourcemanager.organizations.testIamPermissions
       parameters:
         - description: |-

@@ -7,7 +7,7 @@ info:
   contact:
     email: developers@flat.io
     name: Flat
-    url: 'https://flat.io/support'
+    url: 'https://flat.io/developers/docs/api/'
   description: |
     The Flat API allows you to easily extend the abilities of the [Flat Platform](https://flat.io), with a wide range of use cases including the following:
 
@@ -30,7 +30,7 @@ info:
     * [Changelog](https://flat.io/developers/docs/api/changelog.html)
   termsOfService: 'https://flat.io/legal'
   title: Flat
-  version: 2.1.0
+  version: 2.2.0
   x-apisguru-categories:
     - media
     - collaboration
@@ -49,13 +49,22 @@ securityDefinitions:
   OAuth2:
     authorizationUrl: 'https://flat.io/auth/oauth'
     description: |
-      OAuth 2.0 authentication for your app or script.
+      OAuth 2.0 authentication for your app or. Please only request the most restrictive and needed scopes. Using some of the scopes may require an additional review from our team. The Flat API supports **authorization code** and **implicit** flows.
     flow: accessCode
     scopes:
       account.education_profile: |
         Provides access to the basic person's education profile and public organization information.
       account.public_profile: |
         Provides access to the basic person's public profile. Education profiles may be anonymized with this scope, you can request the scope `education_profile` to access to the a basic education account profile.
+      edu.admin: 'Full, permissive scope to manage all the admin of an organization.'
+      edu.admin.lti: Access and manage the LTI Credentials for an organization.
+      edu.admin.lti.readonly: Read-only access to the LTI Credentials of an organization.
+      edu.admin.users: Access and manage the users and invitations of the organization.
+      edu.admin.users.readonly: Read-only access to the users and invitations of the organization.
+      edu.assignments: Read-write access to the assignments and submissions.
+      edu.assignments.readonly: Read-only access to the assignments and submissions.
+      edu.classes: 'Full, permissive scope to manage the classes.'
+      edu.classes.readonly: Read-only access to the classes.
       scores: |
         Full, permissive scope to access all of a user's scores.
       scores.readonly: |
@@ -65,6 +74,28 @@ securityDefinitions:
     tokenUrl: 'https://api.flat.io/oauth/access_token'
     type: oauth2
 parameters:
+  group:
+    description: |
+      Unique identifier of a Flat group
+    in: path
+    name: group
+    required: true
+    type: string
+  limit:
+    default: 100
+    description: This is the maximum number of objects that may be returned
+    in: query
+    maximum: 1000
+    minimum: 1
+    name: limit
+    type: integer
+  offset:
+    default: 0
+    description: This offsets the start of each page by the number specified
+    in: query
+    minimum: 0
+    name: offset
+    type: integer
   score:
     description: |
       Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. `ScoreDetails.id`) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with `drive-` (e.g. `drive-0B000000000`).
@@ -124,18 +155,596 @@ tags:
     x-displayName: Music scores
   - description: Flat users
     name: User
+  - description: Flat for Education organizations
+    name: Organization
+  - description: Flat for Education classes
+    name: Class
+  - description: Flat Groups
+    name: Group
 paths:
+  /classes:
+    get:
+      operationId: listClasses
+      parameters:
+        - default: active
+          description: Filter the classes by state
+          enum:
+            - active
+            - archived
+          in: query
+          name: state
+          type: string
+      responses:
+        '200':
+          description: The list of classes
+          schema:
+            items:
+              $ref: '#/definitions/ClassDetails'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+            - edu.classes.readonly
+      summary: List the classes available for the current user
+      tags:
+        - Class
+    post:
+      description: |
+        Classrooms on Flat allow you to create activities with assignments and post content to a specific group.
+
+        When creating a class, Flat automatically creates two groups: one for the teachers of the course, one for the students. The creator of this class is automatically added to the teachers group.
+
+        If the classsroom is synchronized with another application like Google Classroom, some of the meta information will automatically be updated.
+
+        You can add users to this class using `POST /classes/{class}/users/{user}`, they will automatically added to the group based on their role on Flat. Users can also enroll themselves to this class using `POST /classes/enroll/{enrollmentCode}` and the `enrollmentCode` returned in the `ClassDetails` response.
+      operationId: createClass
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ClassCreation'
+      responses:
+        '200':
+          description: The new class details
+          schema:
+            $ref: '#/definitions/ClassDetails'
+        '402':
+          description: Account overquota
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+      summary: Create a new class
+      tags:
+        - Class
+  '/classes/enroll/{enrollmentCode}':
+    post:
+      description: |
+        Use this method to join a class using an enrollment code given one of the teacher of this class. This code is also available in the `ClassDetails` returned to the teachers when creating the class or listing / fetching a specific class.
+
+        Flat will automatically add the user to the corresponding class group based on this role in the organization.
+      operationId: enrollClass
+      parameters:
+        - description: |
+            The enrollment code, available to the teacher in `ClassDetails`
+          in: path
+          name: enrollmentCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The new class details
+          schema:
+            $ref: '#/definitions/ClassDetails'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+      summary: Join a class
+      tags:
+        - Class
+  '/classes/{class}':
+    get:
+      operationId: getClass
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The new class details
+          schema:
+            $ref: '#/definitions/ClassDetails'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+            - edu.classes.readonly
+      summary: Get the details of a single class
+      tags:
+        - Class
+    put:
+      description: |
+        Update the meta information of the class
+      operationId: updateClass
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+        - description: Details of the Class
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ClassUpdate'
+      responses:
+        '200':
+          description: The new class details
+          schema:
+            $ref: '#/definitions/ClassDetails'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+      summary: Update the class
+      tags:
+        - Class
+  '/classes/{class}/archive':
+    delete:
+      description: |
+        Mark the class as `active`. When this course is synchronized with another app, like Google Classroom, this state will be automatically be updated.
+      operationId: unarchiveClass
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The class details
+          schema:
+            $ref: '#/definitions/ClassDetails'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+      summary: Unarchive the class
+      tags:
+        - Class
+    post:
+      description: |
+        Mark the class as `archived`. When this course is synchronized with another app, like Google Classroom, this state will be automatically be updated.
+      operationId: archiveClass
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The class details
+          schema:
+            $ref: '#/definitions/ClassDetails'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+      summary: Archive the class
+      tags:
+        - Class
+  '/classes/{class}/assignments':
+    get:
+      operationId: listAssignments
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of assignments for the class
+          schema:
+            items:
+              $ref: '#/definitions/Assignment'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+            - edu.classes.readonly
+            - edu.assignments
+            - edu.assignments.readonly
+      summary: Assignments listing
+      tags:
+        - Class
+    post:
+      description: |
+        Use this method as a teacher to create and post a new assignment to a class.
+
+        If the class is synchronized with Google Classroom, the assignment will be automatically posted to your Classroom course.
+      operationId: createAssignment
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AssignmentCreation'
+      responses:
+        '200':
+          description: The assignment has been created
+          schema:
+            $ref: '#/definitions/Assignment'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+            - edu.assignments
+      summary: Assignment creation
+      tags:
+        - Class
+  '/classes/{class}/assignments/{assignment}/copy':
+    post:
+      description: |
+        Copy an assignment to a specified class.
+
+        If the original assignment has a due date in the past, this new assingment will be created without a due date.
+
+        If the new class is synchronized with an external app (e.g. Google Classroom), the copied assignment will also be posted on the external app.
+      operationId: copyAssignment
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+        - description: Unique identifier of the assignment
+          in: path
+          name: assignment
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssignmentCopy'
+      responses:
+        '200':
+          description: The new created assingment
+          schema:
+            $ref: '#/definitions/Assignment'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+            - edu.assignments
+      summary: Copy an assignment
+      tags:
+        - Class
+  '/classes/{class}/assignments/{assignment}/submissions':
+    get:
+      operationId: getSubmissions
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+        - description: Unique identifier of the assignment
+          in: path
+          name: assignment
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The submissions
+          schema:
+            items:
+              $ref: '#/definitions/AssignmentSubmission'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+            - edu.classes.readonly
+            - edu.assignments
+            - edu.assignments.readonly
+      summary: List the students' submissions
+      tags:
+        - Class
+    put:
+      description: |
+        Use this method as a student to create, update and submit a submission related to an assignment. Students can only set `attachments`, `studentComment` and `submit`.
+
+        Teachers can use `PUT /classes/{class}/assignments/{assignment}/submissions/{submission}` to update a submission by id.
+      operationId: createSubmission
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+        - description: Unique identifier of the assignment
+          in: path
+          name: assignment
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssignmentSubmissionUpdate'
+      responses:
+        '200':
+          description: The submission
+          schema:
+            $ref: '#/definitions/AssignmentSubmission'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+            - edu.assignments
+      summary: Create or edit a submission
+      tags:
+        - Class
+  '/classes/{class}/assignments/{assignment}/submissions/{submission}':
+    get:
+      operationId: getSubmission
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+        - description: Unique identifier of the assignment
+          in: path
+          name: assignment
+          required: true
+          type: string
+        - description: Unique identifier of the submission
+          in: path
+          name: submission
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A submission
+          schema:
+            $ref: '#/definitions/AssignmentSubmission'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+            - edu.classes.readonly
+            - edu.assignments
+            - edu.assignments.readonly
+      summary: Get a student submission
+      tags:
+        - Class
+    put:
+      description: |
+        Use this method as a teacher to update the different submission and give feedback.
+        Teachers can only set `returnFeedback`
+      operationId: editSubmission
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+        - description: Unique identifier of the assignment
+          in: path
+          name: assignment
+          required: true
+          type: string
+        - description: Unique identifier of the submission
+          in: path
+          name: submission
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssignmentSubmissionUpdate'
+      responses:
+        '200':
+          description: The submission
+          schema:
+            $ref: '#/definitions/AssignmentSubmission'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+            - edu.assignments
+      summary: Edit a submission
+      tags:
+        - Class
+  '/classes/{class}/students/{user}/submissions':
+    get:
+      description: |
+        Use this method as a teacher to list all the assignment submissions sent by a student of the class
+      operationId: listClassStudentSubmissions
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+        - description: Unique identifier of the user
+          in: path
+          name: user
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The list of submissions
+          schema:
+            items:
+              $ref: '#/definitions/AssignmentSubmission'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+            - edu.classes.readonly
+            - edu.assignments
+            - edu.assignments.readonly
+      summary: List the submissions for a student
+      tags:
+        - Class
+  '/classes/{class}/users/{user}':
+    delete:
+      description: |
+        This method can be used by a teacher to remove a user from the class, or by a student to leave the classroom.
+
+        Warning: Removing a user from the class will remove the associated resources, including the submissions and feedback related to these submissions.
+      operationId: deleteClassUser
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+        - description: Unique identifier of the user
+          in: path
+          name: user
+          required: true
+          type: string
+      responses:
+        '204':
+          description: The user has been removed from the class
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+      summary: Remove a user from the class
+      tags:
+        - Class
+    put:
+      description: |
+        This method can be used by a teacher of the class to enroll another Flat user into the class.
+
+        Only users that are part of your Organization can be enrolled in a class of this same Organization.
+
+        When enrolling a user in the class, Flat will automatically add this user to the corresponding Class group, based on this role in the Organization.
+      operationId: addClassUser
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+        - description: Unique identifier of the user
+          in: path
+          name: user
+          required: true
+          type: string
+      responses:
+        '204':
+          description: The user has been added to the class
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+      summary: Add a user to the class
+      tags:
+        - Class
+  '/groups/{group}':
+    get:
+      operationId: getGroupDetails
+      parameters:
+        - $ref: '#/parameters/group'
+      responses:
+        '200':
+          description: The group details
+          schema:
+            $ref: '#/definitions/GroupDetails'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.users
+            - edu.admin.users.readonly
+            - edu.classes
+            - edu.classes.readonly
+      summary: Get group information
+      tags:
+        - Group
   '/groups/{group}/scores':
     get:
       description: |
         Get the list of scores shared with a group.
       operationId: getGroupScores
       parameters:
-        - description: Unique identifier of the group
-          in: path
-          name: group
-          required: true
-          type: string
+        - $ref: '#/parameters/group'
         - description: Filter the score forked from the score id `parent`
           in: query
           name: parent
@@ -151,11 +760,40 @@ paths:
           description: Error
           schema:
             $ref: '#/definitions/FlatErrorResponse'
-      security: []
+      security:
+        - OAuth2:
+            - scores
+            - scores.readonly
       summary: List group's scores
       tags:
         - Group
         - Score
+  '/groups/{group}/users':
+    get:
+      operationId: listGroupUsers
+      parameters:
+        - $ref: '#/parameters/group'
+      responses:
+        '200':
+          description: The list of users member of the group
+          schema:
+            items:
+              $ref: '#/definitions/UserPublic'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.users
+            - edu.admin.users.readonly
+            - edu.classes
+            - edu.classes.readonly
+      summary: List group's users
+      tags:
+        - Group
   /me:
     get:
       description: |
@@ -177,6 +815,235 @@ paths:
       summary: Get current user profile
       tags:
         - Account
+  /organizations/invitations:
+    get:
+      operationId: listOrganizationInvitations
+      parameters:
+        - description: Filter users by role
+          enum:
+            - user
+            - teacher
+            - admin
+          in: query
+          name: role
+          type: string
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/offset'
+      responses:
+        '200':
+          description: List of invitations
+          schema:
+            items:
+              $ref: '#/definitions/OrganizationInvitation'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.users
+            - edu.admin.users.readonly
+      summary: List the organization invitations
+      tags:
+        - Organization
+    post:
+      description: |
+        This method creates and sends invitation for teachers and admins.
+
+        Invitations can only be used by new Flat users or users who are not part of the organization yet.
+
+        If the email of the user is already associated to a user of your organization, the API will simply update the role of the existing user and won't send an invitation. In this case, the property `usedBy` will be directly filled with the uniquer identifier of the corresponding user.
+      operationId: createOrganizationInvitation
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrganizationInvitationCreation'
+      responses:
+        '200':
+          description: New invitation created
+          schema:
+            $ref: '#/definitions/OrganizationInvitation'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.users
+      summary: Create a new invitation to join the organization
+      tags:
+        - Organization
+  '/organizations/invitations/{invitation}':
+    delete:
+      operationId: removeOrganizationInvitation
+      parameters:
+        - description: Unique identifier of the invitation
+          in: path
+          name: invitation
+          required: true
+          type: string
+      responses:
+        '204':
+          description: The invitation has been removed
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.users
+      summary: Remove an organization invitation
+      tags:
+        - Organization
+  /organizations/lti/credentials:
+    get:
+      operationId: listLtiCredentials
+      responses:
+        '200':
+          description: The list of LTI Credentials
+          schema:
+            items:
+              $ref: '#/definitions/LtiCredentials'
+            type: array
+        '403':
+          description: Not admin of an organization
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.lti
+            - edu.admin.lti.readonly
+      summary: List LTI 1.x credentials
+      tags:
+        - Organization
+    post:
+      description: |
+        Flat for Education is a Certified LTI Provider. You can use these API methods to automate the creation of LTI credentials. You can read more about our LTI implementation, supported components and LTI Endpoints in our [Developer Documentation](https://flat.io/developers/docs/lti/).
+      operationId: createLtiCredentials
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/LtiCredentialsCreation'
+      responses:
+        '200':
+          description: The LTI Credentials
+          schema:
+            $ref: '#/definitions/LtiCredentials'
+        '403':
+          description: Not admin of an organization
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.lti
+      summary: Create a new couple of LTI 1.x credentials
+      tags:
+        - Organization
+  '/organizations/lti/credentials/{credentials}':
+    delete:
+      operationId: revokeLtiCredentials
+      parameters:
+        - description: |
+            Credentials unique identifier
+          in: path
+          name: credentials
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Credentials revoked
+        '403':
+          description: Not admin of an organization
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        '404':
+          description: Credentials not found
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.lti
+      summary: Revoke LTI 1.x credentials
+      tags:
+        - Organization
+  /organizations/users:
+    get:
+      operationId: listOrganizationUsers
+      parameters:
+        - description: Filter users by role
+          enum:
+            - user
+            - teacher
+            - admin
+          in: query
+          name: role
+          type: string
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/offset'
+      responses:
+        '200':
+          description: List of users
+          schema:
+            items:
+              $ref: '#/definitions/UserDetailsAdmin'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.users
+            - edu.admin.users.readonly
+      summary: List the organization users
+      tags:
+        - Organization
+    post:
+      operationId: createOrganizationUser
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UserCreation'
+      responses:
+        '200':
+          description: New user created
+          schema:
+            $ref: '#/definitions/UserDetailsAdmin'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.users
+      summary: Create a new user account
+      tags:
+        - Organization
   /scores:
     post:
       description: |
@@ -818,7 +1685,10 @@ paths:
           description: Error
           schema:
             $ref: '#/definitions/FlatErrorResponse'
-      security: []
+      security:
+        - OAuth2:
+            - scores
+            - scores.readonly
       summary: Get a score revision
       tags:
         - Score
@@ -887,10 +1757,39 @@ paths:
           description: Error
           schema:
             $ref: '#/definitions/FlatErrorResponse'
-      security: []
+      security:
+        - OAuth2:
+            - scores
+            - scores.readonly
       summary: Get a score revision data
       tags:
         - Score
+  '/scores/{score}/submissions':
+    get:
+      description: |
+        This API call will list the different assignments submissions where the score is attached. This method can be used by anyone that are part of the organization and have at least read access to the document.
+      operationId: getScoreSubmissions
+      parameters:
+        - $ref: '#/parameters/score'
+      responses:
+        '200':
+          description: List of submissions
+          schema:
+            items:
+              $ref: '#/definitions/AssignmentSubmission'
+            type: array
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - scores
+            - scores.readonly
+      summary: List submissions related to the score
+      tags:
+        - Score
+        - Class
   '/users/{user}':
     get:
       description: |
@@ -977,12 +1876,418 @@ paths:
         - User
         - Score
 definitions:
+  Assignment:
+    description: Assignment details
+    example:
+      attachments:
+        - score: '0000000000000000'
+          type: flat
+        - type: link
+          url: 'https://flat.io/developers'
+        - authorName: Flat
+          authorUrl: 'https://www.youtube.com/channel/UCEUIbEP9Rba_g0r4eeGhmXw'
+          description: 'Discover Flat on https://flat.io'
+          html: '<iframe width="560" height="315" src="https://www.youtube.com/embed/SNbRUiBZ4Uw" frameborder="0" allowfullscreen></iframe>'
+          thumbnailHeight: 1052
+          thumbnailUrl: 'https://i.ytimg.com/vi/SNbRUiBZ4Uw/maxresdefault.jpg'
+          thumbnailWidth: 1868
+          title: Flat - The online collaborative music notation software
+          type: video
+          url: 'https://www.youtube.com/watch?v=SNbRUiBZ4Uw'
+      classroom: 58c4725345cd836264f0b29e
+      creationDate: '2017-06-12T13:56:19.613Z'
+      creator: 5832bf149995c4024bd6de7d
+      description: Get started with Flat
+      dueDate: '2017-07-12T13:56:19.613Z'
+      googleClassroom:
+        alternateLink: 'http://classroom.google.com/c/music-theory/a/first-assignment/detail'
+        id: '1235665432'
+      scheduledDate: '2017-06-18T13:56:19.613Z'
+      state: active
+      submissions:
+        - assignment: 58c49068524c03ec576ca43c
+          attachments:
+            - score: 58c4955a226ffff257211a8d
+              title: Hello - Student
+              type: flat
+          classroom: 58c4725345cd836264f0b29e
+          creationDate: '2017-03-12T00:25:00.748Z'
+          creator: 559eb5c7f0d4d5e46d03781d
+          googleClassroom:
+            alternateLink: 'http://classroom.google.com/c/music-theory/a/first-assignment/submissions/student/my-submission'
+            id: CgsI-00000000000
+            state: turned_in
+          id: 58c4955c226ffff257211a90
+          submissionDate: '2017-03-12T00:25:22.748Z'
+      title: My first assignment
+    properties:
+      attachments:
+        items:
+          $ref: '#/definitions/MediaAttachment'
+        type: array
+      classroom:
+        description: The unique identifier of the class where this assignment was posted
+        type: string
+      creationDate:
+        description: The creation date of this assignment
+        format: date-time
+        type: string
+      creator:
+        description: |
+          The User unique identifier of the creator of this assignment
+        type: string
+      description:
+        description: Description and content of the assignment
+        type: string
+      dueDate:
+        description: |
+          The due date of this assignment, late submissions will be marked as
+          paste due.
+        format: date-time
+        type: string
+      googleClassroom:
+        $ref: '#/definitions/GoogleClassroomCoursework'
+      scheduledDate:
+        description: |
+          The publication (scheduled) date of the assignment.
+          If this one is specified, the assignment will only be listed to the teachers of the class.
+        format: date-time
+        type: string
+      state:
+        description: State of the assignment
+        enum:
+          - active
+          - archived
+        type: string
+      submissions:
+        items:
+          $ref: '#/definitions/AssignmentSubmission'
+        type: array
+      title:
+        description: Title of the assignment
+        type: string
+    type: object
+  AssignmentCopy:
+    description: Assignment copy operation
+    example:
+      classroom: '0000000000000000'
+    properties:
+      classroom:
+        description: The destination classroom where the assignment will be copied
+        type: string
+    required:
+      - classroom
+    type: object
+  AssignmentCreation:
+    description: Assignment creation details
+    example:
+      attachments:
+        - score: '0000000000000000'
+          type: flat
+        - type: link
+          url: 'https://flat.io/developers'
+      description: Get started with Flat
+      dueDate: '2017-07-12T13:56:19.613Z'
+      scheduledDate: '2017-06-20T13:56:19.613Z'
+      title: First assignment
+    properties:
+      attachments:
+        items:
+          $ref: '#/definitions/ClassAttachmentCreation'
+        type: array
+      description:
+        description: Description and content of the assignment
+        type: string
+      dueDate:
+        description: |
+          The due date of this assignment, late submissions will be marked as paste due. If not set, the assignment won't have a due date.
+        format: date-time
+        type: string
+      scheduledDate:
+        description: |
+          The publication (scheduled) date of the assignment.
+          If this one is specified, the assignment will only be listed to the teachers of the class.
+        format: date-time
+        type: string
+      title:
+        description: Title of the assignment
+        type: string
+    type: object
+  AssignmentSubmission:
+    description: Assignment Submission
+    example:
+      assignment: 58c49068524c03ec576ca43c
+      attachments:
+        - score: 58c4955a226ffff257211a8d
+          title: Hello - Student
+          type: flat
+      classroom: 58c4725345cd836264f0b29e
+      creationDate: '2017-03-12T00:25:00.748Z'
+      creator: 559eb5c7f0d4d5e46d03781d
+      googleClassroom:
+        alternateLink: 'http://classroom.google.com/c/music-theory/a/first-assignment/submissions/student/my-submission'
+        id: CgsI-00000000000
+        state: turned_in
+      id: 58c4955c226ffff257211a90
+      submissionDate: '2017-03-12T00:25:22.748Z'
+    properties:
+      assignment:
+        description: Unique identifier of the assignment
+        type: string
+      attachments:
+        items:
+          $ref: '#/definitions/MediaAttachment'
+        type: array
+      classroom:
+        description: |
+          Unique identifier of the classroom where the assignment was posted
+        type: string
+      creationDate:
+        description: The date when the submission was created
+        type: string
+      creator:
+        description: The User identifier of the student who created the submission
+        type: string
+      googleClassroom:
+        $ref: '#/definitions/GoogleClassroomSubmission'
+      id:
+        description: Unique identifier of the submission
+        type: string
+      returnCreator:
+        description: |
+          The User unique identifier of the teacher who returned the submission
+        type: string
+      returnDate:
+        description: The date when the teacher returned the work
+        type: string
+      returnFeedback:
+        description: The feedback associated with the return
+        type: string
+      studentComment:
+        description: |
+          An optionnal comment sent by the student when submitting his work
+        type: string
+      submissionDate:
+        description: The date when the student submitted his work
+        type: string
+    type: object
+  AssignmentSubmissionUpdate:
+    description: Assignment Submission creation
+    example:
+      attachments:
+        - score: 58c4955a226ffff257211a8d
+          title: Hello - Student
+          type: flat
+      studentComment: Here is my great creation
+      submit: true
+    properties:
+      attachments:
+        items:
+          $ref: '#/definitions/ClassAttachmentCreation'
+        type: array
+      returnFeedback:
+        description: The feedback associated with the return
+        type: string
+      studentComment:
+        description: |
+          An optionnal comment sent by the student when submitting his work
+        type: string
+      submit:
+        description: 'If `true`, the submission will be marked as done'
+        type: boolean
+    type: object
+  ClassAttachmentCreation:
+    description: |
+      Attachment creation for an assignment or stream post.
+      This attachment must contain a `score` or an `url`, all the details of this one will be resolved and returned as `ClassAttachment` once the assignment or stream post is created.
+    example:
+      score: '000000000000000001'
+      sharingMode: copy
+      type: flat
+    properties:
+      score:
+        description: |
+          A unique Flat score identifier. The user creating the assignment must at least have read access to the document. If the user has admin rights, new group permissions will be automatically added for the
+          teachers and students of the class.
+        type: string
+      type:
+        description: The type of the attachment posted
+        enum:
+          - flat
+          - link
+        type: string
+      url:
+        description: The URL of the attachment.
+        type: string
+    type: object
+  ClassCreation:
+    description: Creation of a classroom
+    example:
+      name: Music Theory Course
+      section: Music Theory 101
+    properties:
+      name:
+        description: The name of the new class
+        maxLength: 255
+        type: string
+      section:
+        description: The section of the new class
+        maxLength: 255
+        type: string
+    required:
+      - name
+    type: object
+  ClassDetails:
+    description: A classroom
+    example:
+      assignmentsCount: 10
+      canvas:
+        id: '000000000'
+      creationTime: '2017-01-25T09:47:34.544Z'
+      enrollmentCode: jm447ear
+      googleClassroom:
+        alternateLink: 'http://classroom.google.com/c/music-theory'
+        creationTime: '2017-01-25T09:47:34.544Z'
+        id: '00000000'
+        name: Music Theory 101
+        ownerId: '0000000000424242'
+        updateTime: '2017-01-25T09:47:33.481Z'
+      googleDrive:
+        teacherFolderAlternateLink: 'https://drive.google.com/drive/folders/0B-0000000000000000'
+        teacherFolderId: 0B-0000000000000000
+      id: '100000000000000000000001'
+      lti:
+        contextId: '042'
+        contextLabel: MUSIC
+        contextTitle: Music Theory 101
+      name: Music Theory 101
+      organization: '100000000000000000000002'
+      owner: '100000000000000000000003'
+      section: Music Theory 101
+      state: active
+      theme: blue-8
+    properties:
+      assignmentsCount:
+        description: The number of assignments created in the class
+        type: number
+      canvas:
+        description: Meta information provided by Canvs LMS
+        properties:
+          id:
+            description: Unique identifier of the course on Canvas
+            type: string
+        type: object
+      creationDate:
+        description: The date when the class was create
+        format: date-time
+        type: string
+      description:
+        description: An optionnal description for this class
+        type: string
+      enrollmentCode:
+        description: |
+          [Teachers only] The enrollment code that can be used by the students to join the class
+        type: string
+      googleClassroom:
+        description: Google Classroom course-related information
+        properties:
+          alternateLink:
+            description: Absolute link to this course in the Classroom web UI
+            type: string
+          id:
+            description: The course identifier on Google Classroom
+            type: string
+          name:
+            description: The name of the course on Google Classroom
+            type: string
+          section:
+            description: The section of the course on Google Classroom
+            type: string
+        type: object
+      googleDrive:
+        description: Google Drive course-related information provided by Google Classroom
+        properties:
+          teacherFolderAlternateLink:
+            description: |
+              [Teachers only] The Drive URL of the teachers' folder
+            type: string
+          teacherFolderId:
+            description: |
+              [Teachers only] The Drive directory identifier of the teachers' folder
+            type: string
+        type: object
+      id:
+        description: The unique identifier of the class
+        type: string
+      lti:
+        description: Meta information provided by the LTI consumer
+        properties:
+          contextId:
+            description: Unique context identifier provided
+            type: string
+          contextLabel:
+            description: Context label
+            type: string
+          contextTitle:
+            description: Context title
+            type: string
+        type: object
+      name:
+        description: The name of the class
+        type: string
+      organization:
+        description: The unique identifier of the Organization owning this class
+        type: string
+      owner:
+        description: The unique identifier of the User owning this class
+        type: string
+      section:
+        description: The section of the class
+        type: string
+      state:
+        $ref: '#/definitions/ClassState'
+      studentsGroup:
+        $ref: '#/definitions/GroupDetails'
+      teachersGroup:
+        $ref: '#/definitions/GroupDetails'
+      theme:
+        description: The theme identifier using in Flat User Interface
+        type: string
+    type: object
   ClassRoles:
     description: User's Class Role (for Edu users only)
     enum:
       - teacher
       - student
     type: string
+  ClassState:
+    description: The state of a classroom
+    enum:
+      - active
+      - archived
+    type: string
+  ClassStreamPostMode:
+    description: The post mode on the stream
+    enum:
+      - everybodyCanPost
+      - everybodyCanComment
+      - teachersCanPost
+    type: string
+  ClassUpdate:
+    description: Update of a classroom
+    example:
+      name: Music Theory Course
+      section: Music Theory 101
+    properties:
+      name:
+        description: The name of the class
+        maxLength: 255
+        type: string
+      section:
+        description: The section of the class
+        maxLength: 255
+        type: string
+    type: object
   FlatErrorResponse:
     example:
       code: CLIENT_ERROR
@@ -1014,6 +2319,39 @@ definitions:
       - ro
       - nl
     type: string
+  GoogleClassroomCoursework:
+    description: A coursework on Google Classroom
+    example:
+      alternateLink: 'http://classroom.google.com/c/music-theory/a/first-assignment/detail'
+      id: '1235665432'
+    properties:
+      alternateLink:
+        description: Absolute link to this coursework in the Classroom web UI
+        type: string
+      id:
+        description: Identifier of the coursework assigned by Classroom
+        type: string
+      state:
+        description: State of the coursework
+        type: string
+    type: object
+  GoogleClassroomSubmission:
+    description: A coursework submission on Google Classroom
+    example:
+      alternateLink: 'http://classroom.google.com/c/music-theory/a/first-assignment/submissions/student/my-submission'
+      id: CgsI-00000000000
+      state: turned_in
+    properties:
+      alternateLink:
+        description: Absolute link to this coursework in the Classroom web UI
+        type: string
+      id:
+        description: Identifier of the coursework submission assigned by Classroom
+        type: string
+      state:
+        description: State of the submission on Google Classroom
+        type: string
+    type: object
   Group:
     description: A group of users
     example:
@@ -1060,6 +2398,260 @@ definitions:
       usersCount:
         description: The number of users in this group
         type: number
+    type: object
+  GroupDetails:
+    description: The details of a group
+    example:
+      creationDate: '2017-07-02T15:02:40.207Z'
+      id: 58c4955c226ffff257211a00
+      name: 5th Grade - Teachers
+      organization: '0000000000000000000000042'
+      readOnly: false
+      type: classTeachers
+      usersCount: 2
+    properties:
+      creationDate:
+        description: The date when the group was create
+        format: date-time
+        type: string
+      id:
+        description: The unique identifier of the group
+        type: string
+      name:
+        description: The displayable name of the group
+        type: string
+      organization:
+        description: The unique identifier of the Organization owning the group
+        type: string
+      readOnly:
+        description: |
+          `true` if the properties and members of this group are in in read-only
+        type: boolean
+      type:
+        $ref: '#/definitions/GroupType'
+      usersCount:
+        description: The number of students in this group
+        type: number
+    type: object
+  GroupType:
+    description: The type of the group
+    enum:
+      - generic
+      - classTeachers
+      - classStudents
+    type: string
+  LicenseMode:
+    description: Mode of the license
+    enum:
+      - credit
+      - site
+    type: string
+  LicenseSources:
+    default: order
+    description: Source of the license
+    enum:
+      - order
+      - trial
+      - voucher
+      - distributor
+      - subscription
+    type: string
+  LmsName:
+    description: LMS name
+    enum:
+      - canvas
+      - moodle
+      - schoology
+      - blackboard
+      - desire2learn
+      - sakai
+      - other
+    type: string
+  LtiCredentials:
+    description: A couple of LTI 1.x OAuth credentials
+    example:
+      consumerKey: 200082F5-FAFD-4C6E-BB19-7DAB5D6264D4
+      consumerSecret: 168b6181c05eae14298176a274273e4ebef0d15555fe3e80c6a98ccd57d0c3b6
+      creationDate: '2017-06-06T11:03:01.955Z'
+      creator: 5832bf149995c4024bd6de7d
+      id: 59368be5c66caf895ee02387
+      lastUsage: '2017-06-13T16:02:34.324Z'
+      lms: canvas
+      name: My couple of credentials for Canvas
+      organization: 5832c801a4bedc05f4fb4993
+    properties:
+      consumerKey:
+        description: OAuth 1 Consumer Key
+        type: string
+      consumerSecret:
+        description: OAuth 1 Consumer Secret
+        type: string
+      creationDate:
+        description: The creation date of thse credentials
+        format: date-time
+        type: string
+      creator:
+        description: Unique identifier of the user who created these credentials
+        type: string
+      id:
+        description: The unique identifier of this couple of credentials
+        type: string
+      lastUsage:
+        description: The last time these credentials were used
+        format: date-time
+        type: string
+      lms:
+        $ref: '#/definitions/LmsName'
+      name:
+        description: Name of the couple of credentials
+        type: string
+      organization:
+        description: The unique identifier of the Organization associated to these credentials
+        type: string
+    type: object
+  LtiCredentialsCreation:
+    description: Creation of a couple of LTI 1.x OAuth credentials
+    example:
+      lms: canvas
+      name: My couple of credentials for Canvas
+    properties:
+      lms:
+        $ref: '#/definitions/LmsName'
+      name:
+        description: Name of the couple of credentials
+        maxLength: 300
+        type: string
+    required:
+      - name
+      - lms
+    type: object
+  MediaAttachment:
+    description: |
+      Media attachment. The API will automatically resolve the details, oEmbed,
+      and media available if possible and return them in this object
+    example:
+      authorName: Flat
+      authorUrl: 'https://www.youtube.com/channel/UCEUIbEP9Rba_g0r4eeGhmXw'
+      description: 'Discover Flat on https://flat.io'
+      html: '<iframe width="560" height="315" src="https://www.youtube.com/embed/SNbRUiBZ4Uw" frameborder="0" allowfullscreen></iframe>'
+      thumbnailHeight: 1052
+      thumbnailUrl: 'https://i.ytimg.com/vi/SNbRUiBZ4Uw/maxresdefault.jpg'
+      thumbnailWidth: 1868
+      title: Flat - The online collaborative music notation software
+      type: video
+      url: 'https://www.youtube.com/watch?v=SNbRUiBZ4Uw'
+    properties:
+      authorName:
+        description: The resolved author name of the attachment
+        type: string
+      authorUrl:
+        description: The resolved author url of the attachment
+        type: string
+      description:
+        description: The resolved description of the attachment
+        type: string
+      html:
+        description: |
+          If the attachment type is `rich` or `video`, the HTML code of the
+          media to display
+        type: string
+      htmlHeight:
+        description: 'If the `html` is available, the height of the widget'
+        type: string
+      htmlWidth:
+        description: 'If the `html` is available, the width of the widget'
+        type: string
+      revision:
+        description: An unique revision identifier of a score
+        type: string
+      score:
+        description: An unique Flat score identifier
+        type: string
+      sharingMode:
+        $ref: '#/definitions/MediaScoreSharingMode'
+      thumbnailHeight:
+        description: |
+          If the `thumbnailUrl` is available, the width of the thumbnail
+        type: string
+      thumbnailUrl:
+        description: |
+          If the attachment type is `rich`, `video`, `photo` or `link`, a
+          displayable thumbnail for this attachment
+        type: string
+      thumbnailWidth:
+        description: |
+          If the `thumbnailUrl` is available, the width of the thumbnail
+        type: string
+      title:
+        description: The resolved title of the attachment
+        type: string
+      type:
+        description: |
+          The type of the assignment resolved:
+          * `rich`, `photo`, `video` are attachment types that are automatically resolved from a `link` attachment.
+          * A `flat` attachment is a score document where the unique identifier will be specified in the `score` property. Its sharing mode will be provided in the `sharingMode` property.
+        enum:
+          - rich
+          - photo
+          - video
+          - link
+          - flat
+        type: string
+      url:
+        description: The url of the attachment
+        type: string
+    type: object
+  MediaScoreSharingMode:
+    default: read
+    description: The sharing mode of the score for classes post and assignments
+    enum:
+      - read
+      - write
+      - copy
+    type: string
+  OrganizationInvitation:
+    description: Details of an invitation to join an organization
+    example:
+      creationDate: '2017-07-02T15:05:15.576Z'
+      customCode: u5raQ7pZ
+      email: edu@flat.io
+      id: 59590bab53b1af260610000
+      invitedBy: 55b8d8f395c8db031ed00000
+      organization: 55df29a6694e4a3953100000
+      organizationRole: teacher
+    properties:
+      customCode:
+        description: Enrollment code to use when joining this organization
+        type: string
+      email:
+        description: The email address this invitation was sent to
+        type: string
+      id:
+        description: The invitation unique identifier
+        type: string
+      invitedBy:
+        description: The unique identifier of the User who created this invitation
+        type: string
+      organization:
+        description: The unique identifier of the Organization owning this class
+        type: string
+      organizationRole:
+        $ref: '#/definitions/OrganizationRoles'
+      usedBy:
+        description: The unique identifier of the User who used this invitation
+        type: string
+    type: object
+  OrganizationInvitationCreation:
+    description: The parameters to create an organization invitation
+    example:
+      email: edu@flat.io
+      organizationRole: teacher
+    properties:
+      email:
+        description: The email address you want to send the invitation to
+        type: string
+      organizationRole:
+        $ref: '#/definitions/OrganizationRoles'
     type: object
   OrganizationRoles:
     description: User's Organization Role (for Edu users only)
@@ -1789,6 +3381,28 @@ definitions:
         description: The user name (unique for the organization)
         type: string
     type: object
+  UserCreation:
+    description: User creation
+    properties:
+      email:
+        description: Email of the new account
+        format: email
+        type: string
+      locale:
+        $ref: '#/definitions/FlatLocales'
+      password:
+        description: Password of the new account
+        format: password
+        minLength: 6
+        type: string
+      username:
+        description: Username of the new account
+        pattern: '^[A-Za-z0-9-_.]+$'
+        type: string
+    required:
+      - username
+      - password
+    type: object
   UserDetails:
     allOf:
       - $ref: '#/definitions/UserPublic'
@@ -1810,6 +3424,38 @@ definitions:
         type: object
     description: User details
     type: object
+  UserDetailsAdmin:
+    allOf:
+      - $ref: '#/definitions/UserPublicSummary'
+      - properties:
+          email:
+            description: Email of the user
+            format: email
+            type: string
+          lastActivityDate:
+            description: Date of the last user activity
+            format: date-time
+            type: string
+          license:
+            description: Current active license of the user
+            properties:
+              active:
+                description: ID of the current license
+                type: boolean
+              expirationDate:
+                description: Date when the license expires
+                format: date-time
+                type: string
+              id:
+                description: ID of the current license
+                type: string
+              mode:
+                $ref: '#/definitions/LicenseMode'
+              source:
+                $ref: '#/definitions/LicenseSources'
+            type: object
+        type: object
+    description: User details (view for organization teacher / admin)
   UserPublic:
     allOf:
       - $ref: '#/definitions/UserPublicSummary'

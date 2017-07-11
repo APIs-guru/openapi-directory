@@ -139,19 +139,143 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: contactGroups
   - name: people
 paths:
+  /v1/contactGroups:
+    get:
+      description: |-
+        List all contact groups owned by the authenticated user. Members of the
+        contact groups are not populated.
+      operationId: people.contactGroups.list
+      parameters:
+        - description: The maximum number of resources to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The next_page_token value returned from a previous call to
+            [ListContactGroups](/people/api/rest/v1/contactgroups/list).
+            Requests the next page of resources.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            A sync token, returned by a previous call to `contactgroups.list`.
+            Only resources changed since the sync token was created will be returned.
+          in: query
+          name: syncToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListContactGroupsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+      tags:
+        - contactGroups
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Create a new contact group owned by the authenticated user.
+      operationId: people.contactGroups.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateContactGroupRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ContactGroup'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
+      tags:
+        - contactGroups
+  '/v1/contactGroups:batchGet':
+    get:
+      description: |-
+        Get a list of contact groups owned by the authenticated user by specifying
+        a list of contact group resource names.
+      operationId: people.contactGroups.batchGet
+      parameters:
+        - description: Specifies the maximum number of members to return for each group.
+          in: query
+          name: maxMembers
+          type: integer
+        - collectionFormat: multi
+          description: The resource names of the contact groups to get.
+          in: query
+          items:
+            type: string
+          name: resourceNames
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchGetContactGroupsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts.readonly'
+      tags:
+        - contactGroups
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/people:batchGet':
     get:
       description: |-
         Provides information about a list of specific people by specifying a list
         of requested resource names. Use `people/me` to indicate the authenticated
         user.
+        <br>
         The request throws a 400 error if 'personFields' is not specified.
       operationId: people.people.getBatchGet
       parameters:
         - description: |-
-            Required. A field mask to restrict which fields on each person are
+            **Required.** A field mask to restrict which fields on each person are
             returned. Valid values are:
 
             * addresses
@@ -185,7 +309,7 @@ paths:
           name: personFields
           type: string
         - description: |-
-            Required. Comma-separated list of person fields to be included in the
+            **Required.** Comma-separated list of person fields to be included in the
             response. Each path should start with `person.`: for example,
             `person.names` or `person.photos`.
           in: query
@@ -260,17 +384,85 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+  '/v1/people:createContact':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Create a new contact and return the person resource for that contact.
+      operationId: people.people.createContact
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Person'
+        - description: The resource name of the owning person resource.
+          in: query
+          name: parent
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Person'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
+      tags:
+        - people
   '/v1/{resourceName}':
+    delete:
+      description: |-
+        Delete an existing contact group owned by the authenticated user by
+        specifying a contact group resource name.
+      operationId: people.contactGroups.delete
+      parameters:
+        - description: Set to true to also delete the contacts in the specified group.
+          in: query
+          name: deleteContacts
+          type: boolean
+        - description: The resource name of the contact group to delete.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
+      tags:
+        - contactGroups
     get:
       description: |-
         Provides information about a person by specifying a resource name. Use
         `people/me` to indicate the authenticated user.
+        <br>
         The request throws a 400 error if 'personFields' is not specified.
       operationId: people.people.get
       parameters:
         - description: |-
-            Required. A field mask to restrict which fields on the person are returned.
-            Valid values are:
+            **Required.** A field mask to restrict which fields on the person are
+            returned. Valid values are:
 
             * addresses
             * ageRanges
@@ -303,7 +495,7 @@ paths:
           name: personFields
           type: string
         - description: |-
-            Required. Comma-separated list of person fields to be included in the
+            **Required.** Comma-separated list of person fields to be included in the
             response. Each path should start with `person.`: for example,
             `person.names` or `person.photos`.
           in: query
@@ -380,11 +572,42 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+    put:
+      description: |-
+        Update the name of an existing contact group owned by the authenticated
+        user.
+      operationId: people.contactGroups.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateContactGroupRequest'
+        - description: |-
+            The resource name for the contact group, assigned by the server. An ASCII
+            string, in the form of `contactGroups/<contact_group_id>`.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ContactGroup'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
+      tags:
+        - contactGroups
   '/v1/{resourceName}/connections':
     get:
       description: |-
         Provides a list of the authenticated user's contacts merged with any
-        linked profiles.
+        connected profiles.
+        <br>
         The request throws a 400 error if 'personFields' is not specified.
       operationId: people.people.connections.list
       parameters:
@@ -399,7 +622,7 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Required. A field mask to restrict which fields on each person are
+            **Required.** A field mask to restrict which fields on each person are
             returned. Valid values are:
 
             * addresses
@@ -433,7 +656,7 @@ paths:
           name: personFields
           type: string
         - description: |-
-            Required. Comma-separated list of person fields to be included in the
+            **Required.** Comma-separated list of person fields to be included in the
             response. Each path should start with `person.`: for example,
             `person.names` or `person.photos`.
           in: query
@@ -497,6 +720,165 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/alt'
+  '/v1/{resourceName}/members:modify':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Modify the members of a contact group owned by the authenticated user.
+      operationId: people.contactGroups.members.modify
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ModifyContactGroupMembersRequest'
+        - description: The resource name of the contact group to modify.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ModifyContactGroupMembersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
+      tags:
+        - contactGroups
+  '/v1/{resourceName}:deleteContact':
+    delete:
+      description: Delete a contact person. Any non-contact data will not be deleted.
+      operationId: people.people.deleteContact
+      parameters:
+        - description: The resource name of the contact to delete.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{resourceName}:updateContact':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: |-
+        Update contact data for an existing contact person. Any non-contact data
+        will not be modified.
+
+        The request throws a 400 error if `updatePersonFields` is not specified.
+        <br>
+        The request throws a 400 error if `person.metadata.sources` is not
+        specified for the contact to be updated.
+        <br>
+        The request throws a 412 error if `person.metadata.sources.etag` is
+        different than the contact's etag, which indicates the contact has changed
+        since its data was read. Clients should get the latest person and re-apply
+        their updates to the latest person.
+      operationId: people.people.updateContact
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Person'
+        - description: |-
+            The resource name for the person, assigned by the server. An ASCII string
+            with a max length of 27 characters, in the form of `people/<person_id>`.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            **Required.** A field mask to restrict which fields on the person are
+            updated. Valid values are:
+
+            * addresses
+            * biographies
+            * birthdays
+            * braggingRights
+            * emailAddresses
+            * events
+            * genders
+            * imClients
+            * interests
+            * locales
+            * names
+            * nicknames
+            * occupations
+            * organizations
+            * phoneNumbers
+            * relations
+            * residences
+            * skills
+            * urls
+          in: query
+          name: updatePersonFields
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Person'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/contacts'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/contacts'
+      tags:
+        - people
 definitions:
   Address:
     description: |-
@@ -567,6 +949,15 @@ definitions:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the age range.
     type: object
+  BatchGetContactGroupsResponse:
+    description: The response to a batch get contact groups request.
+    properties:
+      responses:
+        description: The list of responses for each requested contact group resource.
+        items:
+          $ref: '#/definitions/ContactGroupResponse'
+        type: array
+    type: object
   Biography:
     description: A person's short biography.
     properties:
@@ -610,6 +1001,56 @@ definitions:
         description: 'The bragging rights; for example, `climbed mount everest`.'
         type: string
     type: object
+  ContactGroup:
+    description: A contact group.
+    properties:
+      etag:
+        description: |-
+          The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the
+          resource. Used for web cache validation.
+        type: string
+      formattedName:
+        description: |-
+          The read-only name translated and formatted in the viewer's account locale
+          or the `Accept-Language` HTTP header locale for system groups names.
+          Group names set by the owner are the same as name.
+        type: string
+      groupType:
+        description: The read-only contact group type.
+        enum:
+          - GROUP_TYPE_UNSPECIFIED
+          - USER_CONTACT_GROUP
+          - SYSTEM_CONTACT_GROUP
+        type: string
+      memberCount:
+        description: |-
+          The total number of contacts in the group irrespective of max members in
+          specified in the request.
+        format: int32
+        type: integer
+      memberResourceNames:
+        description: |-
+          The list of contact person resource names that are members of the contact
+          group. The field is not populated for LIST requests and can only be updated
+          through the
+          [ModifyContactGroupMembers](/people/api/rest/v1/contactgroups/members/modify).
+        items:
+          type: string
+        type: array
+      metadata:
+        $ref: '#/definitions/ContactGroupMetadata'
+        description: Metadata about the contact group.
+      name:
+        description: |-
+          The contact group name set by the group owner or a system provided name
+          for system groups.
+        type: string
+      resourceName:
+        description: |-
+          The resource name for the contact group, assigned by the server. An ASCII
+          string, in the form of `contactGroups/<contact_group_id>`.
+        type: string
+    type: object
   ContactGroupMembership:
     description: A Google contact group membership.
     properties:
@@ -623,6 +1064,33 @@ definitions:
           *  `starred`
           *  A numerical ID for user-created groups.
         type: string
+    type: object
+  ContactGroupMetadata:
+    description: The read-only metadata about a contact group.
+    properties:
+      deleted:
+        description: |-
+          True if the contact group resource has been deleted. Populated only for
+          [`ListContactGroups`](/people/api/rest/v1/contactgroups/list) requests
+          that include a sync token.
+        type: boolean
+      updateTime:
+        description: The time the group was last updated.
+        format: google-datetime
+        type: string
+    type: object
+  ContactGroupResponse:
+    description: The response for a specific contact group.
+    properties:
+      contactGroup:
+        $ref: '#/definitions/ContactGroup'
+        description: The contact group.
+      requestedResourceName:
+        description: The original requested resource name.
+        type: string
+      status:
+        $ref: '#/definitions/Status'
+        description: The status of the response.
     type: object
   CoverPhoto:
     description: |-
@@ -640,6 +1108,13 @@ definitions:
       url:
         description: The URL of the cover photo.
         type: string
+    type: object
+  CreateContactGroupRequest:
+    description: A request to create a new contact group.
+    properties:
+      contactGroup:
+        $ref: '#/definitions/ContactGroup'
+        description: The contact group to create.
     type: object
   Date:
     description: |-
@@ -701,6 +1176,19 @@ definitions:
       value:
         description: The email address.
         type: string
+    type: object
+  Empty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
     type: object
   Event:
     description: An event related to the person.
@@ -852,6 +1340,27 @@ definitions:
         format: int32
         type: integer
     type: object
+  ListContactGroupsResponse:
+    description: The response to a list contact groups request.
+    properties:
+      contactGroups:
+        description: |-
+          The list of contact groups. Members of the contact groups are not
+          populated.
+        items:
+          $ref: '#/definitions/ContactGroup'
+        type: array
+      nextPageToken:
+        description: The token that can be used to retrieve the next page of results.
+        type: string
+      nextSyncToken:
+        description: The token that can be used to retrieve changes since the last request.
+        type: string
+      totalItems:
+        description: The total number of items in the list without pagination.
+        format: int32
+        type: integer
+    type: object
   Locale:
     description: A person's locale preference.
     properties:
@@ -876,6 +1385,33 @@ definitions:
       metadata:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the membership.
+    type: object
+  ModifyContactGroupMembersRequest:
+    description: A request to modify an existing contact group's members.
+    properties:
+      resourceNamesToAdd:
+        description: |-
+          The resource names of the contact people to add in the form of in the form
+          `people/<person_id>`.
+        items:
+          type: string
+        type: array
+      resourceNamesToRemove:
+        description: |-
+          The resource names of the contact people to remove in the form of in the
+          form of `people/<person_id>`.
+        items:
+          type: string
+        type: array
+    type: object
+  ModifyContactGroupMembersResponse:
+    description: The response to a modify contact group members request.
+    properties:
+      notFoundResourceNames:
+        description: The contact people resource names that were not found.
+        items:
+          type: string
+        type: array
     type: object
   Name:
     description: 'A person''s name. If the name is a mononym, the family name is empty.'
@@ -1313,6 +1849,16 @@ definitions:
           - PERSON
           - PAGE
         type: string
+      userTypes:
+        description: The user types.
+        items:
+          enum:
+            - USER_TYPE_UNKNOWN
+            - GOOGLE_USER
+            - GPLUS_USER
+            - GOOGLE_APPS_USER
+          type: string
+        type: array
     type: object
   Relation:
     description: A person's relation to another person.
@@ -1449,6 +1995,10 @@ definitions:
           - DOMAIN_PROFILE
           - CONTACT
         type: string
+      updateTime:
+        description: Last update timestamp of this source.
+        format: google-datetime
+        type: string
     type: object
   Status:
     description: |-
@@ -1511,8 +2061,8 @@ definitions:
         type: integer
       details:
         description: |-
-          A list of messages that carry the error details.  There will be a
-          common set of message types for APIs to use.
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
@@ -1534,6 +2084,13 @@ definitions:
       value:
         description: The tagline.
         type: string
+    type: object
+  UpdateContactGroupRequest:
+    description: A request to update an existing contact group. Only the name can be updated.
+    properties:
+      contactGroup:
+        $ref: '#/definitions/ContactGroup'
+        description: The contact group to update.
     type: object
   Url:
     description: A person's associated URLs.
