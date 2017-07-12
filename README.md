@@ -4,14 +4,14 @@
 ![banner]
 
 [![APIs in collection][numApis-image]][apisDir-link]
-[![OpenAPI specs][numSpecs-image]][apisDir-link]
+[![OpenAPI definitions][numSpecs-image]][apisDir-link]
 [![Endpoints][endpoints-image]][apisDir-link]
 [![Chat on gitter][gitter-image]][gitter-link]
 
 [![Share on Twitter][twitter-image]][twitter-link]
 [![Follow on Twitter][twitterFollow-image]][twitterFollow-link]
 
-Directory of API specs in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) format.<BR>
+Directory of API definitions in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) format.<BR>
 API access to collection: [Go!][apiDoc-link]
 
 [![Add API][addAPI-image]][addAPI-link]
@@ -33,13 +33,13 @@ What does APIs.guru do?
 --------------------------
 * Filter out private and non-reliable APIs.
 * [Convert](https://github.com/lucybot/api-spec-converter) different formats into OpenAPI(fka Swagger) 2.0
-* Fix mistakes, ~80% of spec have some
+* Fix mistakes, ~80% of definitions have some
 * Add additional data, like: logo, categories, …
-* Update specs on daily basis
+* Update definitions on at least a weekly basis
 
 Update procedure
 --------------------------
-All specs are automatically updated from their original source.
+All definitions are automatically updated from their original source.
 You can see it under `x-origin` property inside [each](https://github.com/APIs-guru/openapi-directory/search?utf8=%E2%9C%93&q=x-origin+filename%3Aswagger.yaml) of `swagger.yaml` files.
 We run our update script at least weekly and manually check diffs before commit.
 If you see some APIs are not updated for more than 2 weeks please open [an issue](https://github.com/APIs-guru/openapi-directory/issues/new).
@@ -63,11 +63,11 @@ Also used as test suite in following projects:
 
 
 
-API spec acceptance criteria
---------------------------
+API definition acceptance criteria
+----------------------------------
 * Public - anyone can access it as long as they follow some clearly defined steps (email owner, pay money, etc.).
 * Persistant - API is made with long-lived goal, and not for a particular event (conference, hackathon, etc.).
-* Useful - API could provide useful functionality not only for its owner.
+* Useful - API should provide useful functionality not only for its owner.
 
 Integration with 3rd-party services
 --------------------------
@@ -77,15 +77,15 @@ Instead, we strongly recomend you to use our [REST API][apiDoc-link].
 Licenses
 --------------------------
 All code is released under the [MIT](http://opensource.org/licenses/MIT) licence.<br>
-All API specs contributed to project by authors are covered by the [CC01.0](https://creativecommons.org/publicdomain/zero/1.0/) license.<br>
-All API specs acquired from public sources under the [Fair use](http://en.wikipedia.org/wiki/Fair_use) principal.
+All API definitions contributed to project by authors are covered by the [CC01.0](https://creativecommons.org/publicdomain/zero/1.0/) license.<br>
+All API definitions acquired from public sources under the [Fair use](http://en.wikipedia.org/wiki/Fair_use) principal.
 
-Spec sources
+Definition sources
 --------------------------
-Some specs are taken from Open Source projects:
- - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI(aka Swagger) spec for Instagram API
- - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI(aka Swagger) spec for BBC Nitro and iBL APIs
- - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - OpenAPI (aka Swagger 2.0) spec for Medium API
+Some definitions are taken from Open Source projects:
+ - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI(aka Swagger) description for Instagram API
+ - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI(aka Swagger) definition for BBC Nitro and iBL APIs
+ - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - OpenAPI (aka Swagger 2.0) description for Medium API
 
 [banner]: https://apis.guru/branding/banner.svg "APIs.guru"
 [twitter-image]: https://img.shields.io/twitter/url/http/APIs.guru.svg?style=social
