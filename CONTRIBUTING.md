@@ -41,6 +41,12 @@ Please issue a Pull Request, it is not necessary to raise an Issue as well.
 
 ### Changing / Fixing an API definition
 
+First please see if you can make your fix upstream with the owner of the API definition, this benefits everyone and is less work than maintaining patches.
+
+Check the `info.contact` section of the API definition or the `x-origin` to see if there is an email contact, or a GitHub repository you can contribute to.
+
+#### Creating a fixup.yaml patch
+
 To do this, you will need to fork the repository and clone your fork locally.
 
 These instructions should work on Linux or other Unix variants, MacOSx and Windows using the Git for Windows shell.
