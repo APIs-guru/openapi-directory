@@ -302,7 +302,7 @@ definitions:
         $ref: '#/definitions/ErrorCode'
     type: object
 x-servers:
-  - url: 'http://{ip-address}:8990/'
+  - url: 'http://{ip_address}:8990/'
     variables:
-      ip-address:
+      ip_address:
         default: 192.168.1.5
