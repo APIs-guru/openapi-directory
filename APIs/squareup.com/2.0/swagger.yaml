@@ -32,7 +32,7 @@ produces:
   - application/json
 securityDefinitions:
   oauth2:
-    authorizationUrl: 'https://connect.squareup.com/oauth2/authorize?<PARAMETERS>'
+    authorizationUrl: 'https://connect.squareup.com/oauth2/authorize'
     flow: accessCode
     scopes:
       BANK_ACCOUNTS_READ: GET endpoints related to a merchant's bank accounts
