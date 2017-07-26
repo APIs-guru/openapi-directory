@@ -1,0 +1,3111 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://elasticmapreduce.amazonaws.com/'
+info:
+  version: '2009-03-31'
+  x-release: v4
+  title: Amazon Elastic MapReduce
+  description: 'Amazon EMR is a web service that makes it easy to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several AWS products to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehousing.'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: elasticmapreduce
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/elasticmapreduce-2009-03-31.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/elasticmapreduce/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddInstanceFleet
+      description: '<p>Adds an instance fleet to a running cluster.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddInstanceFleetOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddInstanceFleetInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AddInstanceGroups':
+    post:
+      operationId: AddInstanceGroups
+      description: Adds one or more instance groups to a running cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddInstanceGroupsOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddInstanceGroupsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AddJobFlowSteps':
+    post:
+      operationId: AddJobFlowSteps
+      description: '<p>AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are allowed in each job flow.</p> <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using SSH to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see <a href="http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/AddMoreThan256Steps.html">Add More than 256 Steps to a Cluster</a> in the <i>Amazon EMR Management Guide</i>.</p> <p>A step specifies the location of a JAR file stored either on the master node of the cluster or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step.</p> <p>Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully.</p> <p>You can only add steps to a cluster that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddJobFlowStepsOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddJobFlowStepsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AddTags':
+    post:
+      operationId: AddTags
+      description: 'Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html">Tagging Amazon EMR Resources</a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddTagsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTagsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CancelSteps':
+    post:
+      operationId: CancelSteps
+      description: 'Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee a step will be canceled, even if the request is successfully submitted. You can only cancel steps that are in a <code>PENDING</code> state.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelStepsOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelStepsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateSecurityConfiguration':
+    post:
+      operationId: CreateSecurityConfiguration
+      description: 'Creates a security configuration, which is stored in the service and can be specified when a cluster is created.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSecurityConfigurationOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSecurityConfigurationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSecurityConfiguration':
+    post:
+      operationId: DeleteSecurityConfiguration
+      description: Deletes a security configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSecurityConfigurationOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSecurityConfigurationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeCluster':
+    post:
+      operationId: DescribeCluster
+      description: 'Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. For information about the cluster steps, see <a>ListSteps</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeClusterOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      x-waiters:
+        - delay: 30
+          operation: DescribeCluster
+          maxAttempts: 60
+          acceptors:
+            - state: success
+              matcher: path
+              argument: Cluster.Status.State
+              expected: RUNNING
+            - state: success
+              matcher: path
+              argument: Cluster.Status.State
+              expected: WAITING
+            - state: failure
+              matcher: path
+              argument: Cluster.Status.State
+              expected: TERMINATING
+            - state: failure
+              matcher: path
+              argument: Cluster.Status.State
+              expected: TERMINATED
+            - state: failure
+              matcher: path
+              argument: Cluster.Status.State
+              expected: TERMINATED_WITH_ERRORS
+        - delay: 30
+          operation: DescribeCluster
+          maxAttempts: 60
+          acceptors:
+            - state: success
+              matcher: path
+              argument: Cluster.Status.State
+              expected: TERMINATED
+            - state: failure
+              matcher: path
+              argument: Cluster.Status.State
+              expected: TERMINATED_WITH_ERRORS
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeClusterInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeJobFlows':
+    post:
+      operationId: DescribeJobFlows
+      description: '<p>This API is deprecated and will eventually be removed. We recommend you use <a>ListClusters</a>, <a>DescribeCluster</a>, <a>ListSteps</a>, <a>ListInstanceGroups</a> and <a>ListBootstrapActions</a> instead.</p> <p>DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time.</p> <p>Regardless of supplied parameters, only job flows created within the last two months are returned.</p> <p>If no parameters are supplied, then job flows matching either of the following criteria are returned:</p> <ul> <li> <p>Job flows created and completed in the last two weeks</p> </li> <li> <p> Job flows created within the last two months that are in one of the following states: <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>, <code>STARTING</code> </p> </li> </ul> <p>Amazon EMR can return a maximum of 512 job flow descriptions.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeJobFlowsOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeJobFlowsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSecurityConfiguration':
+    post:
+      operationId: DescribeSecurityConfiguration
+      description: Provides the details of a security configuration by returning the configuration JSON.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSecurityConfigurationOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSecurityConfigurationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStep':
+    post:
+      operationId: DescribeStep
+      description: Provides more detail about the cluster step.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStepOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      x-waiters:
+        - delay: 30
+          operation: DescribeStep
+          maxAttempts: 60
+          acceptors:
+            - state: success
+              matcher: path
+              argument: Step.Status.State
+              expected: COMPLETED
+            - state: failure
+              matcher: path
+              argument: Step.Status.State
+              expected: FAILED
+            - state: failure
+              matcher: path
+              argument: Step.Status.State
+              expected: CANCELLED
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStepInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListBootstrapActions':
+    post:
+      operationId: ListBootstrapActions
+      description: Provides information about the bootstrap actions associated with a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBootstrapActionsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListBootstrapActionsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListClusters':
+    post:
+      operationId: ListClusters
+      description: 'Provides the status of all clusters visible to this AWS account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListClustersOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListClustersInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListInstanceFleets':
+    post:
+      operationId: ListInstanceFleets
+      description: '<p>Lists all available details about the instance fleets in a cluster.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInstanceFleetsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListInstanceFleetsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListInstanceGroups':
+    post:
+      operationId: ListInstanceGroups
+      description: Provides all available details about the instance groups in a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInstanceGroupsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListInstanceGroupsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListInstances':
+    post:
+      operationId: ListInstances
+      description: 'Provides information about the cluster instances that Amazon EMR provisions on behalf of a user when it creates the cluster. For example, this operation indicates when the EC2 instances reach the Ready state, when instances become available to Amazon EMR to use for jobs, and the IP addresses for cluster instances, etc.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInstancesOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListInstancesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListSecurityConfigurations':
+    post:
+      operationId: ListSecurityConfigurations
+      description: 'Lists all the security configurations visible to this account, providing their creation dates and times, and their names. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListSecurityConfigurations calls.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityConfigurationsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSecurityConfigurationsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListSteps':
+    post:
+      operationId: ListSteps
+      description: Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStepsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStepsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyInstanceFleet':
+    post:
+      operationId: ModifyInstanceFleet
+      description: '<p>Modifies the target On-Demand and target Spot capacities for the instance fleet with the specified InstanceFleetID within the cluster specified using ClusterID. The call either succeeds or fails atomically.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyInstanceFleetInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyInstanceGroups':
+    post:
+      operationId: ModifyInstanceGroups
+      description: ModifyInstanceGroups modifies the number of nodes and configuration settings of an instance group. The input parameters include the new target instance count for the group and the instance group ID. The call will either succeed or fail atomically.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyInstanceGroupsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutAutoScalingPolicy':
+    post:
+      operationId: PutAutoScalingPolicy
+      description: Creates or updates an automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutAutoScalingPolicyOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutAutoScalingPolicyInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveAutoScalingPolicy':
+    post:
+      operationId: RemoveAutoScalingPolicy
+      description: Removes an automatic scaling policy from a specified instance group within an EMR cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveAutoScalingPolicyOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveAutoScalingPolicyInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveTags':
+    post:
+      operationId: RemoveTags
+      description: '<p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html">Tagging Amazon EMR Resources</a>. </p> <p>The following example removes the stack tag with value Prod from a cluster:</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveTagsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveTagsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RunJobFlow':
+    post:
+      operationId: RunJobFlow
+      description: '<p>RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the steps specified. After the steps complete, the cluster stops and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the <a>JobFlowInstancesConfig</a> <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the cluster transitions to the WAITING state rather than shutting down after the steps have completed. </p> <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a> <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the cluster and prevent it from being terminated by API call, user intervention, or in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in each job flow.</p> <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see <a href="http://docs.aws.amazon.com/ElasticMapReduce/latest/Management/Guide/AddMoreThan256Steps.html">Add More than 256 Steps to a Cluster</a> in the <i>Amazon EMR Management Guide</i>.</p> <p>For long running clusters, we recommend that you periodically store your results.</p> <note> <p>The instance fleets configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain InstanceFleets parameters or InstanceGroups parameters, but not both.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunJobFlowOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunJobFlowInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetTerminationProtection':
+    post:
+      operationId: SetTerminationProtection
+      description: '<p>SetTerminationProtection locks a cluster (job flow) so the EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling <code>SetTerminationProtection</code> on a cluster is similar to calling the Amazon EC2 <code>DisableAPITermination</code> API on all EC2 instances in a cluster.</p> <p> <code>SetTerminationProtection</code> is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.</p> <p> To terminate a cluster that has been locked by setting <code>SetTerminationProtection</code> to <code>true</code>, you must first unlock the job flow by a subsequent call to <code>SetTerminationProtection</code> in which you set the value to <code>false</code>. </p> <p> For more information, see<a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html">Managing Cluster Termination</a> in the <i>Amazon EMR Management Guide</i>. </p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetTerminationProtectionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetVisibleToAllUsers':
+    post:
+      operationId: SetVisibleToAllUsers
+      description: Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when you launch it using the <code>VisibleToAllUsers</code> parameter of <a>RunJobFlow</a>. The SetVisibleToAllUsers action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetVisibleToAllUsersInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TerminateJobFlows':
+    post:
+      operationId: TerminateJobFlows
+      description: '<p>TerminateJobFlows shuts a list of clusters (job flows) down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the cluster is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the cluster was created.</p> <p>The maximum number of clusters allowed is 10. The call to <code>TerminateJobFlows</code> is asynchronous. Depending on the configuration of the cluster, it may take up to 1-5 minutes for the cluster to completely terminate and release allocated resources, such as Amazon EC2 instances.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminateJobFlowsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    ActionOnFailure:
+      type: string
+      enum:
+        - TERMINATE_JOB_FLOW
+        - TERMINATE_CLUSTER
+        - CANCEL_AND_WAIT
+        - CONTINUE
+    AddInstanceFleetInput:
+      type: object
+      required:
+        - ClusterId
+        - InstanceFleet
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        InstanceFleet:
+          $ref: '#/components/schemas/InstanceFleetConfig'
+    AddInstanceFleetOutput:
+      type: object
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        InstanceFleetId:
+          $ref: '#/components/schemas/InstanceFleetId'
+    AddInstanceGroupsInput:
+      type: object
+      required:
+        - InstanceGroups
+        - JobFlowId
+      properties:
+        InstanceGroups:
+          $ref: '#/components/schemas/InstanceGroupConfigList'
+        JobFlowId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+      description: Input to an AddInstanceGroups call.
+    AddInstanceGroupsOutput:
+      type: object
+      properties:
+        JobFlowId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        InstanceGroupIds:
+          $ref: '#/components/schemas/InstanceGroupIdsList'
+      description: Output from an AddInstanceGroups call.
+    AddJobFlowStepsInput:
+      type: object
+      required:
+        - JobFlowId
+        - Steps
+      properties:
+        JobFlowId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Steps:
+          $ref: '#/components/schemas/StepConfigList'
+      description: ' The input argument to the <a>AddJobFlowSteps</a> operation. '
+    AddJobFlowStepsOutput:
+      type: object
+      properties:
+        StepIds:
+          $ref: '#/components/schemas/StepIdsList'
+      description: ' The output for the <a>AddJobFlowSteps</a> operation. '
+    AddTagsInput:
+      type: object
+      required:
+        - ResourceId
+        - Tags
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/ResourceId'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: This input identifies a cluster and a list of tags to attach.
+    AddTagsOutput:
+      type: object
+      properties: {}
+      description: This output indicates the result of adding tags to a resource.
+    AdjustmentType:
+      type: string
+      enum:
+        - CHANGE_IN_CAPACITY
+        - PERCENT_CHANGE_IN_CAPACITY
+        - EXACT_CAPACITY
+    Application:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Version:
+          $ref: '#/components/schemas/String'
+        Args:
+          $ref: '#/components/schemas/StringList'
+        AdditionalInfo:
+          $ref: '#/components/schemas/StringMap'
+      description: '<p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action argument. For more information, see <a href="http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/emr-mapr.html">Using the MapR Distribution for Hadoop</a>. Currently supported values are:</p> <ul> <li> <p>"mapr-m3" - launch the cluster using MapR M3 Edition.</p> </li> <li> <p>"mapr-m5" - launch the cluster using MapR M5 Edition.</p> </li> <li> <p>"mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the cluster using MapR M3 or M5 Edition, respectively.</p> </li> </ul> <note> <p>In Amazon EMR releases 4.0 and greater, the only accepted parameter is the application name. To pass arguments to applications, you supply a configuration for each application.</p> </note>'
+    ApplicationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Application'
+    AutoScalingPolicy:
+      type: object
+      required:
+        - Constraints
+        - Rules
+      properties:
+        Constraints:
+          $ref: '#/components/schemas/ScalingConstraints'
+        Rules:
+          $ref: '#/components/schemas/ScalingRuleList'
+      description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. An automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.
+    AutoScalingPolicyDescription:
+      type: object
+      properties:
+        Status:
+          $ref: '#/components/schemas/AutoScalingPolicyStatus'
+        Constraints:
+          $ref: '#/components/schemas/ScalingConstraints'
+        Rules:
+          $ref: '#/components/schemas/ScalingRuleList'
+      description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.
+    AutoScalingPolicyState:
+      type: string
+      enum:
+        - PENDING
+        - ATTACHING
+        - ATTACHED
+        - DETACHING
+        - DETACHED
+        - FAILED
+    AutoScalingPolicyStateChangeReason:
+      type: object
+      properties:
+        Code:
+          $ref: '#/components/schemas/AutoScalingPolicyStateChangeReasonCode'
+        Message:
+          $ref: '#/components/schemas/String'
+      description: The reason for an <a>AutoScalingPolicyStatus</a> change.
+    AutoScalingPolicyStateChangeReasonCode:
+      type: string
+      enum:
+        - USER_REQUEST
+        - PROVISION_FAILURE
+        - CLEANUP_FAILURE
+    AutoScalingPolicyStatus:
+      type: object
+      properties:
+        State:
+          $ref: '#/components/schemas/AutoScalingPolicyState'
+        StateChangeReason:
+          $ref: '#/components/schemas/AutoScalingPolicyStateChangeReason'
+      description: 'The status of an automatic scaling policy. '
+    Boolean:
+      type: boolean
+    BooleanObject:
+      type: boolean
+    BootstrapActionConfig:
+      type: object
+      required:
+        - Name
+        - ScriptBootstrapAction
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        ScriptBootstrapAction:
+          $ref: '#/components/schemas/ScriptBootstrapActionConfig'
+      description: Configuration of a bootstrap action.
+    BootstrapActionConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BootstrapActionConfig'
+    BootstrapActionDetail:
+      type: object
+      properties:
+        BootstrapActionConfig:
+          $ref: '#/components/schemas/BootstrapActionConfig'
+      description: Reports the configuration of a bootstrap action in a cluster (job flow).
+    BootstrapActionDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BootstrapActionDetail'
+    CancelStepsInfo:
+      type: object
+      properties:
+        StepId:
+          $ref: '#/components/schemas/StepId'
+        Status:
+          $ref: '#/components/schemas/CancelStepsRequestStatus'
+        Reason:
+          $ref: '#/components/schemas/String'
+      description: 'Specification of the status of a CancelSteps request. Available only in Amazon EMR version 4.8.0 and later, excluding version 5.0.0.'
+    CancelStepsInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CancelStepsInfo'
+    CancelStepsInput:
+      type: object
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        StepIds:
+          $ref: '#/components/schemas/StepIdsList'
+      description: The input argument to the <a>CancelSteps</a> operation.
+    CancelStepsOutput:
+      type: object
+      properties:
+        CancelStepsInfoList:
+          $ref: '#/components/schemas/CancelStepsInfoList'
+      description: ' The output for the <a>CancelSteps</a> operation. '
+    CancelStepsRequestStatus:
+      type: string
+      enum:
+        - SUBMITTED
+        - FAILED
+    CloudWatchAlarmDefinition:
+      type: object
+      required:
+        - ComparisonOperator
+        - MetricName
+        - Period
+        - Threshold
+      properties:
+        ComparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperator'
+        EvaluationPeriods:
+          $ref: '#/components/schemas/Integer'
+        MetricName:
+          $ref: '#/components/schemas/String'
+        Namespace:
+          $ref: '#/components/schemas/String'
+        Period:
+          $ref: '#/components/schemas/Integer'
+        Statistic:
+          $ref: '#/components/schemas/Statistic'
+        Threshold:
+          $ref: '#/components/schemas/NonNegativeDouble'
+        Unit:
+          $ref: '#/components/schemas/Unit'
+        Dimensions:
+          $ref: '#/components/schemas/MetricDimensionList'
+      description: 'The definition of a CloudWatch metric alarm, which determines when an automatic scaling activity is triggered. When the defined alarm conditions are satisfied, scaling activity begins.'
+    Cluster:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ClusterId'
+        Name:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/ClusterStatus'
+        Ec2InstanceAttributes:
+          $ref: '#/components/schemas/Ec2InstanceAttributes'
+        InstanceCollectionType:
+          $ref: '#/components/schemas/InstanceCollectionType'
+        LogUri:
+          $ref: '#/components/schemas/String'
+        RequestedAmiVersion:
+          $ref: '#/components/schemas/String'
+        RunningAmiVersion:
+          $ref: '#/components/schemas/String'
+        ReleaseLabel:
+          $ref: '#/components/schemas/String'
+        AutoTerminate:
+          $ref: '#/components/schemas/Boolean'
+        TerminationProtected:
+          $ref: '#/components/schemas/Boolean'
+        VisibleToAllUsers:
+          $ref: '#/components/schemas/Boolean'
+        Applications:
+          $ref: '#/components/schemas/ApplicationList'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        ServiceRole:
+          $ref: '#/components/schemas/String'
+        NormalizedInstanceHours:
+          $ref: '#/components/schemas/Integer'
+        MasterPublicDnsName:
+          $ref: '#/components/schemas/String'
+        Configurations:
+          $ref: '#/components/schemas/ConfigurationList'
+        SecurityConfiguration:
+          $ref: '#/components/schemas/XmlString'
+        AutoScalingRole:
+          $ref: '#/components/schemas/XmlString'
+        ScaleDownBehavior:
+          $ref: '#/components/schemas/ScaleDownBehavior'
+      description: The detailed description of the cluster.
+    ClusterId:
+      type: string
+    ClusterState:
+      type: string
+      enum:
+        - STARTING
+        - BOOTSTRAPPING
+        - RUNNING
+        - WAITING
+        - TERMINATING
+        - TERMINATED
+        - TERMINATED_WITH_ERRORS
+    ClusterStateChangeReason:
+      type: object
+      properties:
+        Code:
+          $ref: '#/components/schemas/ClusterStateChangeReasonCode'
+        Message:
+          $ref: '#/components/schemas/String'
+      description: The reason that the cluster changed to its current state.
+    ClusterStateChangeReasonCode:
+      type: string
+      enum:
+        - INTERNAL_ERROR
+        - VALIDATION_ERROR
+        - INSTANCE_FAILURE
+        - BOOTSTRAP_FAILURE
+        - USER_REQUEST
+        - STEP_FAILURE
+        - ALL_STEPS_COMPLETED
+    ClusterStateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ClusterState'
+    ClusterStatus:
+      type: object
+      properties:
+        State:
+          $ref: '#/components/schemas/ClusterState'
+        StateChangeReason:
+          $ref: '#/components/schemas/ClusterStateChangeReason'
+        Timeline:
+          $ref: '#/components/schemas/ClusterTimeline'
+      description: The detailed status of the cluster.
+    ClusterSummary:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ClusterId'
+        Name:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/ClusterStatus'
+        NormalizedInstanceHours:
+          $ref: '#/components/schemas/Integer'
+      description: The summary description of the cluster.
+    ClusterSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ClusterSummary'
+    ClusterTimeline:
+      type: object
+      properties:
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+        ReadyDateTime:
+          $ref: '#/components/schemas/Date'
+        EndDateTime:
+          $ref: '#/components/schemas/Date'
+      description: Represents the timeline of the cluster's lifecycle.
+    Command:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        ScriptPath:
+          $ref: '#/components/schemas/String'
+        Args:
+          $ref: '#/components/schemas/StringList'
+      description: An entity describing an executable that runs on a cluster.
+    CommandList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Command'
+    ComparisonOperator:
+      type: string
+      enum:
+        - GREATER_THAN_OR_EQUAL
+        - GREATER_THAN
+        - LESS_THAN
+        - LESS_THAN_OR_EQUAL
+    Configuration:
+      type: object
+      properties:
+        Classification:
+          $ref: '#/components/schemas/String'
+        Configurations:
+          $ref: '#/components/schemas/ConfigurationList'
+        Properties:
+          $ref: '#/components/schemas/StringMap'
+      description: '<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>An optional configuration specification to be used when provisioning cluster instances, which can include configurations for applications and software bundled with Amazon EMR. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file. For more information, see <a href="http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html">Configuring Applications</a>.</p>'
+    ConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Configuration'
+    CreateSecurityConfigurationInput:
+      type: object
+      required:
+        - Name
+        - SecurityConfiguration
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlString'
+        SecurityConfiguration:
+          $ref: '#/components/schemas/String'
+    CreateSecurityConfigurationOutput:
+      type: object
+      required:
+        - Name
+        - CreationDateTime
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlString'
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+    Date:
+      type: string
+      format: date-time
+    DeleteSecurityConfigurationInput:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlString'
+    DeleteSecurityConfigurationOutput:
+      type: object
+      properties: {}
+    DescribeClusterInput:
+      type: object
+      required:
+        - ClusterId
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+      description: This input determines which cluster to describe.
+    DescribeClusterOutput:
+      type: object
+      properties:
+        Cluster:
+          $ref: '#/components/schemas/Cluster'
+      description: This output contains the description of the cluster.
+    DescribeJobFlowsInput:
+      type: object
+      properties:
+        CreatedAfter:
+          $ref: '#/components/schemas/Date'
+        CreatedBefore:
+          $ref: '#/components/schemas/Date'
+        JobFlowIds:
+          $ref: '#/components/schemas/XmlStringList'
+        JobFlowStates:
+          $ref: '#/components/schemas/JobFlowExecutionStateList'
+      description: ' The input for the <a>DescribeJobFlows</a> operation. '
+    DescribeJobFlowsOutput:
+      type: object
+      properties:
+        JobFlows:
+          $ref: '#/components/schemas/JobFlowDetailList'
+      description: ' The output for the <a>DescribeJobFlows</a> operation. '
+    DescribeSecurityConfigurationInput:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlString'
+    DescribeSecurityConfigurationOutput:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlString'
+        SecurityConfiguration:
+          $ref: '#/components/schemas/String'
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+    DescribeStepInput:
+      type: object
+      required:
+        - ClusterId
+        - StepId
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+        StepId:
+          $ref: '#/components/schemas/StepId'
+      description: This input determines which step to describe.
+    DescribeStepOutput:
+      type: object
+      properties:
+        Step:
+          $ref: '#/components/schemas/Step'
+      description: This output contains the description of the cluster step.
+    EC2InstanceIdsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceId'
+    EC2InstanceIdsToTerminateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceId'
+    EbsBlockDevice:
+      type: object
+      properties:
+        VolumeSpecification:
+          $ref: '#/components/schemas/VolumeSpecification'
+        Device:
+          $ref: '#/components/schemas/String'
+      description: Configuration of requested EBS block device associated with the instance group.
+    EbsBlockDeviceConfig:
+      type: object
+      required:
+        - VolumeSpecification
+      properties:
+        VolumeSpecification:
+          $ref: '#/components/schemas/VolumeSpecification'
+        VolumesPerInstance:
+          $ref: '#/components/schemas/Integer'
+      description: Configuration of requested EBS block device associated with the instance group with count of volumes that will be associated to every instance.
+    EbsBlockDeviceConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EbsBlockDeviceConfig'
+    EbsBlockDeviceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EbsBlockDevice'
+    EbsConfiguration:
+      type: object
+      properties:
+        EbsBlockDeviceConfigs:
+          $ref: '#/components/schemas/EbsBlockDeviceConfigList'
+        EbsOptimized:
+          $ref: '#/components/schemas/BooleanObject'
+      description: The Amazon EBS configuration of a cluster instance.
+    EbsVolume:
+      type: object
+      properties:
+        Device:
+          $ref: '#/components/schemas/String'
+        VolumeId:
+          $ref: '#/components/schemas/String'
+      description: EBS block device that's attached to an EC2 instance.
+    EbsVolumeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EbsVolume'
+    Ec2InstanceAttributes:
+      type: object
+      properties:
+        Ec2KeyName:
+          $ref: '#/components/schemas/String'
+        Ec2SubnetId:
+          $ref: '#/components/schemas/String'
+        RequestedEc2SubnetIds:
+          $ref: '#/components/schemas/XmlStringMaxLen256List'
+        Ec2AvailabilityZone:
+          $ref: '#/components/schemas/String'
+        RequestedEc2AvailabilityZones:
+          $ref: '#/components/schemas/XmlStringMaxLen256List'
+        IamInstanceProfile:
+          $ref: '#/components/schemas/String'
+        EmrManagedMasterSecurityGroup:
+          $ref: '#/components/schemas/String'
+        EmrManagedSlaveSecurityGroup:
+          $ref: '#/components/schemas/String'
+        ServiceAccessSecurityGroup:
+          $ref: '#/components/schemas/String'
+        AdditionalMasterSecurityGroups:
+          $ref: '#/components/schemas/StringList'
+        AdditionalSlaveSecurityGroups:
+          $ref: '#/components/schemas/StringList'
+      description: 'Provides information about the EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.'
+    ErrorCode:
+      type: string
+      minLength: 1
+      maxLength: 256
+    ErrorMessage:
+      type: string
+    FailureDetails:
+      type: object
+      properties:
+        Reason:
+          $ref: '#/components/schemas/String'
+        Message:
+          $ref: '#/components/schemas/String'
+        LogFile:
+          $ref: '#/components/schemas/String'
+      description: The details of the step failure. The service attempts to detect the root cause for many common failures.
+    HadoopJarStepConfig:
+      type: object
+      required:
+        - Jar
+      properties:
+        Properties:
+          $ref: '#/components/schemas/KeyValueList'
+        Jar:
+          $ref: '#/components/schemas/XmlString'
+        MainClass:
+          $ref: '#/components/schemas/XmlString'
+        Args:
+          $ref: '#/components/schemas/XmlStringList'
+      description: A job flow step consisting of a JAR file whose main function will be executed. The main function submits a job for Hadoop to execute and waits for the job to finish or fail.
+    HadoopStepConfig:
+      type: object
+      properties:
+        Jar:
+          $ref: '#/components/schemas/String'
+        Properties:
+          $ref: '#/components/schemas/StringMap'
+        MainClass:
+          $ref: '#/components/schemas/String'
+        Args:
+          $ref: '#/components/schemas/StringList'
+      description: A cluster step consisting of a JAR file whose main function will be executed. The main function submits a job for Hadoop to execute and waits for the job to finish or fail.
+    Instance:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/InstanceId'
+        Ec2InstanceId:
+          $ref: '#/components/schemas/InstanceId'
+        PublicDnsName:
+          $ref: '#/components/schemas/String'
+        PublicIpAddress:
+          $ref: '#/components/schemas/String'
+        PrivateDnsName:
+          $ref: '#/components/schemas/String'
+        PrivateIpAddress:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/InstanceStatus'
+        InstanceGroupId:
+          $ref: '#/components/schemas/String'
+        InstanceFleetId:
+          $ref: '#/components/schemas/InstanceFleetId'
+        Market:
+          $ref: '#/components/schemas/MarketType'
+        InstanceType:
+          $ref: '#/components/schemas/InstanceType'
+        EbsVolumes:
+          $ref: '#/components/schemas/EbsVolumeList'
+      description: Represents an EC2 instance provisioned as part of cluster.
+    InstanceCollectionType:
+      type: string
+      enum:
+        - INSTANCE_FLEET
+        - INSTANCE_GROUP
+    InstanceFleet:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/InstanceFleetId'
+        Name:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Status:
+          $ref: '#/components/schemas/InstanceFleetStatus'
+        InstanceFleetType:
+          $ref: '#/components/schemas/InstanceFleetType'
+        TargetOnDemandCapacity:
+          $ref: '#/components/schemas/WholeNumber'
+        TargetSpotCapacity:
+          $ref: '#/components/schemas/WholeNumber'
+        ProvisionedOnDemandCapacity:
+          $ref: '#/components/schemas/WholeNumber'
+        ProvisionedSpotCapacity:
+          $ref: '#/components/schemas/WholeNumber'
+        InstanceTypeSpecifications:
+          $ref: '#/components/schemas/InstanceTypeSpecificationList'
+        LaunchSpecifications:
+          $ref: '#/components/schemas/InstanceFleetProvisioningSpecifications'
+      description: '<p>Describes an instance fleet, which is a group of EC2 instances that host a particular node type (master, core, or task) in an Amazon EMR cluster. Instance fleets can consist of a mix of instance types and On-Demand and Spot instances, which are provisioned to meet a defined target capacity. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+    InstanceFleetConfig:
+      type: object
+      required:
+        - InstanceFleetType
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        InstanceFleetType:
+          $ref: '#/components/schemas/InstanceFleetType'
+        TargetOnDemandCapacity:
+          $ref: '#/components/schemas/WholeNumber'
+        TargetSpotCapacity:
+          $ref: '#/components/schemas/WholeNumber'
+        InstanceTypeConfigs:
+          $ref: '#/components/schemas/InstanceTypeConfigList'
+        LaunchSpecifications:
+          $ref: '#/components/schemas/InstanceFleetProvisioningSpecifications'
+      description: '<p>The configuration that defines an instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+    InstanceFleetConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceFleetConfig'
+    InstanceFleetId:
+      type: string
+    InstanceFleetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceFleet'
+    InstanceFleetModifyConfig:
+      type: object
+      required:
+        - InstanceFleetId
+      properties:
+        InstanceFleetId:
+          $ref: '#/components/schemas/InstanceFleetId'
+        TargetOnDemandCapacity:
+          $ref: '#/components/schemas/WholeNumber'
+        TargetSpotCapacity:
+          $ref: '#/components/schemas/WholeNumber'
+      description: '<p>Configuration parameters for an instance fleet modification request.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+    InstanceFleetProvisioningSpecifications:
+      type: object
+      required:
+        - SpotSpecification
+      properties:
+        SpotSpecification:
+          $ref: '#/components/schemas/SpotProvisioningSpecification'
+      description: '<p>The launch specification for Spot instances in the fleet, which determines the defined duration and provisioning timeout behavior.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+    InstanceFleetState:
+      type: string
+      enum:
+        - PROVISIONING
+        - BOOTSTRAPPING
+        - RUNNING
+        - RESIZING
+        - SUSPENDED
+        - TERMINATING
+        - TERMINATED
+    InstanceFleetStateChangeReason:
+      type: object
+      properties:
+        Code:
+          $ref: '#/components/schemas/InstanceFleetStateChangeReasonCode'
+        Message:
+          $ref: '#/components/schemas/String'
+      description: '<p>Provides status change reason details for the instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+    InstanceFleetStateChangeReasonCode:
+      type: string
+      enum:
+        - INTERNAL_ERROR
+        - VALIDATION_ERROR
+        - INSTANCE_FAILURE
+        - CLUSTER_TERMINATED
+    InstanceFleetStatus:
+      type: object
+      properties:
+        State:
+          $ref: '#/components/schemas/InstanceFleetState'
+        StateChangeReason:
+          $ref: '#/components/schemas/InstanceFleetStateChangeReason'
+        Timeline:
+          $ref: '#/components/schemas/InstanceFleetTimeline'
+      description: '<p>The status of the instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+    InstanceFleetTimeline:
+      type: object
+      properties:
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+        ReadyDateTime:
+          $ref: '#/components/schemas/Date'
+        EndDateTime:
+          $ref: '#/components/schemas/Date'
+      description: '<p>Provides historical timestamps for the instance fleet, including the time of creation, the time it became ready to run jobs, and the time of termination.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+    InstanceFleetType:
+      type: string
+      enum:
+        - MASTER
+        - CORE
+        - TASK
+    InstanceGroup:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/InstanceGroupId'
+        Name:
+          $ref: '#/components/schemas/String'
+        Market:
+          $ref: '#/components/schemas/MarketType'
+        InstanceGroupType:
+          $ref: '#/components/schemas/InstanceGroupType'
+        BidPrice:
+          $ref: '#/components/schemas/String'
+        InstanceType:
+          $ref: '#/components/schemas/InstanceType'
+        RequestedInstanceCount:
+          $ref: '#/components/schemas/Integer'
+        RunningInstanceCount:
+          $ref: '#/components/schemas/Integer'
+        Status:
+          $ref: '#/components/schemas/InstanceGroupStatus'
+        Configurations:
+          $ref: '#/components/schemas/ConfigurationList'
+        EbsBlockDevices:
+          $ref: '#/components/schemas/EbsBlockDeviceList'
+        EbsOptimized:
+          $ref: '#/components/schemas/BooleanObject'
+        ShrinkPolicy:
+          $ref: '#/components/schemas/ShrinkPolicy'
+        AutoScalingPolicy:
+          $ref: '#/components/schemas/AutoScalingPolicyDescription'
+      description: 'This entity represents an instance group, which is a group of instances that have common purpose. For example, CORE instance group is used for HDFS.'
+    InstanceGroupConfig:
+      type: object
+      required:
+        - InstanceRole
+        - InstanceType
+        - InstanceCount
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Market:
+          $ref: '#/components/schemas/MarketType'
+        InstanceRole:
+          $ref: '#/components/schemas/InstanceRoleType'
+        BidPrice:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        InstanceType:
+          $ref: '#/components/schemas/InstanceType'
+        InstanceCount:
+          $ref: '#/components/schemas/Integer'
+        Configurations:
+          $ref: '#/components/schemas/ConfigurationList'
+        EbsConfiguration:
+          $ref: '#/components/schemas/EbsConfiguration'
+        AutoScalingPolicy:
+          $ref: '#/components/schemas/AutoScalingPolicy'
+      description: Configuration defining a new instance group.
+    InstanceGroupConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceGroupConfig'
+    InstanceGroupDetail:
+      type: object
+      required:
+        - Market
+        - InstanceRole
+        - InstanceType
+        - InstanceRequestCount
+        - InstanceRunningCount
+        - State
+        - CreationDateTime
+      properties:
+        InstanceGroupId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Name:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Market:
+          $ref: '#/components/schemas/MarketType'
+        InstanceRole:
+          $ref: '#/components/schemas/InstanceRoleType'
+        BidPrice:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        InstanceType:
+          $ref: '#/components/schemas/InstanceType'
+        InstanceRequestCount:
+          $ref: '#/components/schemas/Integer'
+        InstanceRunningCount:
+          $ref: '#/components/schemas/Integer'
+        State:
+          $ref: '#/components/schemas/InstanceGroupState'
+        LastStateChangeReason:
+          $ref: '#/components/schemas/XmlString'
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+        StartDateTime:
+          $ref: '#/components/schemas/Date'
+        ReadyDateTime:
+          $ref: '#/components/schemas/Date'
+        EndDateTime:
+          $ref: '#/components/schemas/Date'
+      description: Detailed information about an instance group.
+    InstanceGroupDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceGroupDetail'
+    InstanceGroupId:
+      type: string
+    InstanceGroupIdsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen256'
+    InstanceGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceGroup'
+    InstanceGroupModifyConfig:
+      type: object
+      required:
+        - InstanceGroupId
+      properties:
+        InstanceGroupId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        InstanceCount:
+          $ref: '#/components/schemas/Integer'
+        EC2InstanceIdsToTerminate:
+          $ref: '#/components/schemas/EC2InstanceIdsToTerminateList'
+        ShrinkPolicy:
+          $ref: '#/components/schemas/ShrinkPolicy'
+      description: Modify an instance group size.
+    InstanceGroupModifyConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceGroupModifyConfig'
+    InstanceGroupState:
+      type: string
+      enum:
+        - PROVISIONING
+        - BOOTSTRAPPING
+        - RUNNING
+        - RESIZING
+        - SUSPENDED
+        - TERMINATING
+        - TERMINATED
+        - ARRESTED
+        - SHUTTING_DOWN
+        - ENDED
+    InstanceGroupStateChangeReason:
+      type: object
+      properties:
+        Code:
+          $ref: '#/components/schemas/InstanceGroupStateChangeReasonCode'
+        Message:
+          $ref: '#/components/schemas/String'
+      description: The status change reason details for the instance group.
+    InstanceGroupStateChangeReasonCode:
+      type: string
+      enum:
+        - INTERNAL_ERROR
+        - VALIDATION_ERROR
+        - INSTANCE_FAILURE
+        - CLUSTER_TERMINATED
+    InstanceGroupStatus:
+      type: object
+      properties:
+        State:
+          $ref: '#/components/schemas/InstanceGroupState'
+        StateChangeReason:
+          $ref: '#/components/schemas/InstanceGroupStateChangeReason'
+        Timeline:
+          $ref: '#/components/schemas/InstanceGroupTimeline'
+      description: The details of the instance group status.
+    InstanceGroupTimeline:
+      type: object
+      properties:
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+        ReadyDateTime:
+          $ref: '#/components/schemas/Date'
+        EndDateTime:
+          $ref: '#/components/schemas/Date'
+      description: The timeline of the instance group lifecycle.
+    InstanceGroupType:
+      type: string
+      enum:
+        - MASTER
+        - CORE
+        - TASK
+    InstanceGroupTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceGroupType'
+    InstanceId:
+      type: string
+    InstanceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Instance'
+    InstanceResizePolicy:
+      type: object
+      properties:
+        InstancesToTerminate:
+          $ref: '#/components/schemas/EC2InstanceIdsList'
+        InstancesToProtect:
+          $ref: '#/components/schemas/EC2InstanceIdsList'
+        InstanceTerminationTimeout:
+          $ref: '#/components/schemas/Integer'
+      description: Custom policy for requesting termination protection or termination of specific instances when shrinking an instance group.
+    InstanceRoleType:
+      type: string
+      enum:
+        - MASTER
+        - CORE
+        - TASK
+    InstanceState:
+      type: string
+      enum:
+        - AWAITING_FULFILLMENT
+        - PROVISIONING
+        - BOOTSTRAPPING
+        - RUNNING
+        - TERMINATED
+    InstanceStateChangeReason:
+      type: object
+      properties:
+        Code:
+          $ref: '#/components/schemas/InstanceStateChangeReasonCode'
+        Message:
+          $ref: '#/components/schemas/String'
+      description: The details of the status change reason for the instance.
+    InstanceStateChangeReasonCode:
+      type: string
+      enum:
+        - INTERNAL_ERROR
+        - VALIDATION_ERROR
+        - INSTANCE_FAILURE
+        - BOOTSTRAP_FAILURE
+        - CLUSTER_TERMINATED
+    InstanceStateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceState'
+    InstanceStatus:
+      type: object
+      properties:
+        State:
+          $ref: '#/components/schemas/InstanceState'
+        StateChangeReason:
+          $ref: '#/components/schemas/InstanceStateChangeReason'
+        Timeline:
+          $ref: '#/components/schemas/InstanceTimeline'
+      description: The instance status details.
+    InstanceTimeline:
+      type: object
+      properties:
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+        ReadyDateTime:
+          $ref: '#/components/schemas/Date'
+        EndDateTime:
+          $ref: '#/components/schemas/Date'
+      description: The timeline of the instance lifecycle.
+    InstanceType:
+      type: string
+      minLength: 1
+      maxLength: 256
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    InstanceTypeConfig:
+      type: object
+      required:
+        - InstanceType
+      properties:
+        InstanceType:
+          $ref: '#/components/schemas/InstanceType'
+        WeightedCapacity:
+          $ref: '#/components/schemas/WholeNumber'
+        BidPrice:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        BidPriceAsPercentageOfOnDemandPrice:
+          $ref: '#/components/schemas/NonNegativeDouble'
+        EbsConfiguration:
+          $ref: '#/components/schemas/EbsConfiguration'
+        Configurations:
+          $ref: '#/components/schemas/ConfigurationList'
+      description: '<p>An instance type configuration for each instance type in an instance fleet, which determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities. There can be a maximum of 5 instance type configurations in a fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+    InstanceTypeConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceTypeConfig'
+    InstanceTypeSpecification:
+      type: object
+      properties:
+        InstanceType:
+          $ref: '#/components/schemas/InstanceType'
+        WeightedCapacity:
+          $ref: '#/components/schemas/WholeNumber'
+        BidPrice:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        BidPriceAsPercentageOfOnDemandPrice:
+          $ref: '#/components/schemas/NonNegativeDouble'
+        Configurations:
+          $ref: '#/components/schemas/ConfigurationList'
+        EbsBlockDevices:
+          $ref: '#/components/schemas/EbsBlockDeviceList'
+        EbsOptimized:
+          $ref: '#/components/schemas/BooleanObject'
+      description: '<p>The configuration specification for each instance type in an instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+    InstanceTypeSpecificationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceTypeSpecification'
+    Integer:
+      type: integer
+    InternalServerError:
+      type: object
+      properties: {}
+      description: Indicates that an error occurred while processing the request and that the request was not completed.
+    InternalServerException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: This exception occurs when there is an internal failure in the EMR service.
+    InvalidRequestException:
+      type: object
+      properties:
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: This exception occurs when there is something wrong with user input.
+    JobFlowDetail:
+      type: object
+      required:
+        - JobFlowId
+        - Name
+        - ExecutionStatusDetail
+        - Instances
+      properties:
+        JobFlowId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Name:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        LogUri:
+          $ref: '#/components/schemas/XmlString'
+        AmiVersion:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        ExecutionStatusDetail:
+          $ref: '#/components/schemas/JobFlowExecutionStatusDetail'
+        Instances:
+          $ref: '#/components/schemas/JobFlowInstancesDetail'
+        Steps:
+          $ref: '#/components/schemas/StepDetailList'
+        BootstrapActions:
+          $ref: '#/components/schemas/BootstrapActionDetailList'
+        SupportedProducts:
+          $ref: '#/components/schemas/SupportedProductsList'
+        VisibleToAllUsers:
+          $ref: '#/components/schemas/Boolean'
+        JobFlowRole:
+          $ref: '#/components/schemas/XmlString'
+        ServiceRole:
+          $ref: '#/components/schemas/XmlString'
+        AutoScalingRole:
+          $ref: '#/components/schemas/XmlString'
+        ScaleDownBehavior:
+          $ref: '#/components/schemas/ScaleDownBehavior'
+      description: A description of a cluster (job flow).
+    JobFlowDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobFlowDetail'
+    JobFlowExecutionState:
+      type: string
+      enum:
+        - STARTING
+        - BOOTSTRAPPING
+        - RUNNING
+        - WAITING
+        - SHUTTING_DOWN
+        - TERMINATED
+        - COMPLETED
+        - FAILED
+      description: The type of instance.
+    JobFlowExecutionStateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobFlowExecutionState'
+    JobFlowExecutionStatusDetail:
+      type: object
+      required:
+        - State
+        - CreationDateTime
+      properties:
+        State:
+          $ref: '#/components/schemas/JobFlowExecutionState'
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+        StartDateTime:
+          $ref: '#/components/schemas/Date'
+        ReadyDateTime:
+          $ref: '#/components/schemas/Date'
+        EndDateTime:
+          $ref: '#/components/schemas/Date'
+        LastStateChangeReason:
+          $ref: '#/components/schemas/XmlString'
+      description: Describes the status of the cluster (job flow).
+    JobFlowInstancesConfig:
+      type: object
+      properties:
+        MasterInstanceType:
+          $ref: '#/components/schemas/InstanceType'
+        SlaveInstanceType:
+          $ref: '#/components/schemas/InstanceType'
+        InstanceCount:
+          $ref: '#/components/schemas/Integer'
+        InstanceGroups:
+          $ref: '#/components/schemas/InstanceGroupConfigList'
+        InstanceFleets:
+          $ref: '#/components/schemas/InstanceFleetConfigList'
+        Ec2KeyName:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Placement:
+          $ref: '#/components/schemas/PlacementType'
+        KeepJobFlowAliveWhenNoSteps:
+          $ref: '#/components/schemas/Boolean'
+        TerminationProtected:
+          $ref: '#/components/schemas/Boolean'
+        HadoopVersion:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Ec2SubnetId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Ec2SubnetIds:
+          $ref: '#/components/schemas/XmlStringMaxLen256List'
+        EmrManagedMasterSecurityGroup:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        EmrManagedSlaveSecurityGroup:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        ServiceAccessSecurityGroup:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        AdditionalMasterSecurityGroups:
+          $ref: '#/components/schemas/SecurityGroupsList'
+        AdditionalSlaveSecurityGroups:
+          $ref: '#/components/schemas/SecurityGroupsList'
+      description: 'A description of the Amazon EC2 instance on which the cluster (job flow) runs. A valid JobFlowInstancesConfig must contain either InstanceGroups or InstanceFleets, which is the recommended configuration. They cannot be used together. You may also have MasterInstanceType, SlaveInstanceType, and InstanceCount (all three must be present), but we don''t recommend this configuration.'
+    JobFlowInstancesDetail:
+      type: object
+      required:
+        - MasterInstanceType
+        - SlaveInstanceType
+        - InstanceCount
+      properties:
+        MasterInstanceType:
+          $ref: '#/components/schemas/InstanceType'
+        MasterPublicDnsName:
+          $ref: '#/components/schemas/XmlString'
+        MasterInstanceId:
+          $ref: '#/components/schemas/XmlString'
+        SlaveInstanceType:
+          $ref: '#/components/schemas/InstanceType'
+        InstanceCount:
+          $ref: '#/components/schemas/Integer'
+        InstanceGroups:
+          $ref: '#/components/schemas/InstanceGroupDetailList'
+        NormalizedInstanceHours:
+          $ref: '#/components/schemas/Integer'
+        Ec2KeyName:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Ec2SubnetId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Placement:
+          $ref: '#/components/schemas/PlacementType'
+        KeepJobFlowAliveWhenNoSteps:
+          $ref: '#/components/schemas/Boolean'
+        TerminationProtected:
+          $ref: '#/components/schemas/Boolean'
+        HadoopVersion:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+      description: Specify the type of Amazon EC2 instances that the cluster (job flow) runs on.
+    KeyValue:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/XmlString'
+        Value:
+          $ref: '#/components/schemas/XmlString'
+      description: A key value pair.
+    KeyValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeyValue'
+    ListBootstrapActionsInput:
+      type: object
+      required:
+        - ClusterId
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+      description: This input determines which bootstrap actions to retrieve.
+    ListBootstrapActionsOutput:
+      type: object
+      properties:
+        BootstrapActions:
+          $ref: '#/components/schemas/CommandList'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+      description: This output contains the bootstrap actions detail.
+    ListClustersInput:
+      type: object
+      properties:
+        CreatedAfter:
+          $ref: '#/components/schemas/Date'
+        CreatedBefore:
+          $ref: '#/components/schemas/Date'
+        ClusterStates:
+          $ref: '#/components/schemas/ClusterStateList'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+      description: This input determines how the ListClusters action filters the list of clusters that it returns.
+    ListClustersOutput:
+      type: object
+      properties:
+        Clusters:
+          $ref: '#/components/schemas/ClusterSummaryList'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+      description: 'This contains a ClusterSummaryList with the cluster details; for example, the cluster IDs, names, and status.'
+    ListInstanceFleetsInput:
+      type: object
+      required:
+        - ClusterId
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+    ListInstanceFleetsOutput:
+      type: object
+      properties:
+        InstanceFleets:
+          $ref: '#/components/schemas/InstanceFleetList'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+    ListInstanceGroupsInput:
+      type: object
+      required:
+        - ClusterId
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+      description: This input determines which instance groups to retrieve.
+    ListInstanceGroupsOutput:
+      type: object
+      properties:
+        InstanceGroups:
+          $ref: '#/components/schemas/InstanceGroupList'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+      description: This input determines which instance groups to retrieve.
+    ListInstancesInput:
+      type: object
+      required:
+        - ClusterId
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+        InstanceGroupId:
+          $ref: '#/components/schemas/InstanceGroupId'
+        InstanceGroupTypes:
+          $ref: '#/components/schemas/InstanceGroupTypeList'
+        InstanceFleetId:
+          $ref: '#/components/schemas/InstanceFleetId'
+        InstanceFleetType:
+          $ref: '#/components/schemas/InstanceFleetType'
+        InstanceStates:
+          $ref: '#/components/schemas/InstanceStateList'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+      description: This input determines which instances to list.
+    ListInstancesOutput:
+      type: object
+      properties:
+        Instances:
+          $ref: '#/components/schemas/InstanceList'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+      description: This output contains the list of instances.
+    ListSecurityConfigurationsInput:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/Marker'
+    ListSecurityConfigurationsOutput:
+      type: object
+      properties:
+        SecurityConfigurations:
+          $ref: '#/components/schemas/SecurityConfigurationList'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+    ListStepsInput:
+      type: object
+      required:
+        - ClusterId
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+        StepStates:
+          $ref: '#/components/schemas/StepStateList'
+        StepIds:
+          $ref: '#/components/schemas/XmlStringList'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+      description: This input determines which steps to list.
+    ListStepsOutput:
+      type: object
+      properties:
+        Steps:
+          $ref: '#/components/schemas/StepSummaryList'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+      description: This output contains the list of steps returned in reverse order. This means that the last step is the first element in the list.
+    Marker:
+      type: string
+    MarketType:
+      type: string
+      enum:
+        - ON_DEMAND
+        - SPOT
+    MetricDimension:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/String'
+        Value:
+          $ref: '#/components/schemas/String'
+      description: 'A CloudWatch dimension, which is specified using a <code>Key</code> (known as a <code>Name</code> in CloudWatch), <code>Value</code> pair. By default, Amazon EMR uses one dimension whose <code>Key</code> is <code>JobFlowID</code> and <code>Value</code> is a variable representing the cluster ID, which is <code>${emr.clusterId}</code>. This enables the rule to bootstrap when the cluster ID becomes available.'
+    MetricDimensionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricDimension'
+    ModifyInstanceFleetInput:
+      type: object
+      required:
+        - ClusterId
+        - InstanceFleet
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+        InstanceFleet:
+          $ref: '#/components/schemas/InstanceFleetModifyConfig'
+    ModifyInstanceGroupsInput:
+      type: object
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+        InstanceGroups:
+          $ref: '#/components/schemas/InstanceGroupModifyConfigList'
+      description: Change the size of some instance groups.
+    NewSupportedProductsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SupportedProductConfig'
+    NonNegativeDouble:
+      type: number
+      format: double
+      minimum: 0
+    PlacementType:
+      type: object
+      properties:
+        AvailabilityZone:
+          $ref: '#/components/schemas/XmlString'
+        AvailabilityZones:
+          $ref: '#/components/schemas/XmlStringMaxLen256List'
+      description: The Amazon EC2 Availability Zone configuration of the cluster (job flow).
+    PutAutoScalingPolicyInput:
+      type: object
+      required:
+        - ClusterId
+        - InstanceGroupId
+        - AutoScalingPolicy
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+        InstanceGroupId:
+          $ref: '#/components/schemas/InstanceGroupId'
+        AutoScalingPolicy:
+          $ref: '#/components/schemas/AutoScalingPolicy'
+    PutAutoScalingPolicyOutput:
+      type: object
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+        InstanceGroupId:
+          $ref: '#/components/schemas/InstanceGroupId'
+        AutoScalingPolicy:
+          $ref: '#/components/schemas/AutoScalingPolicyDescription'
+    RemoveAutoScalingPolicyInput:
+      type: object
+      required:
+        - ClusterId
+        - InstanceGroupId
+      properties:
+        ClusterId:
+          $ref: '#/components/schemas/ClusterId'
+        InstanceGroupId:
+          $ref: '#/components/schemas/InstanceGroupId'
+    RemoveAutoScalingPolicyOutput:
+      type: object
+      properties: {}
+    RemoveTagsInput:
+      type: object
+      required:
+        - ResourceId
+        - TagKeys
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/ResourceId'
+        TagKeys:
+          $ref: '#/components/schemas/StringList'
+      description: This input identifies a cluster and a list of tags to remove.
+    RemoveTagsOutput:
+      type: object
+      properties: {}
+      description: This output indicates the result of removing tags from a resource.
+    ResourceId:
+      type: string
+    RunJobFlowInput:
+      type: object
+      required:
+        - Name
+        - Instances
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        LogUri:
+          $ref: '#/components/schemas/XmlString'
+        AdditionalInfo:
+          $ref: '#/components/schemas/XmlString'
+        AmiVersion:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        ReleaseLabel:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Instances:
+          $ref: '#/components/schemas/JobFlowInstancesConfig'
+        Steps:
+          $ref: '#/components/schemas/StepConfigList'
+        BootstrapActions:
+          $ref: '#/components/schemas/BootstrapActionConfigList'
+        SupportedProducts:
+          $ref: '#/components/schemas/SupportedProductsList'
+        NewSupportedProducts:
+          $ref: '#/components/schemas/NewSupportedProductsList'
+        Applications:
+          $ref: '#/components/schemas/ApplicationList'
+        Configurations:
+          $ref: '#/components/schemas/ConfigurationList'
+        VisibleToAllUsers:
+          $ref: '#/components/schemas/Boolean'
+        JobFlowRole:
+          $ref: '#/components/schemas/XmlString'
+        ServiceRole:
+          $ref: '#/components/schemas/XmlString'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        SecurityConfiguration:
+          $ref: '#/components/schemas/XmlString'
+        AutoScalingRole:
+          $ref: '#/components/schemas/XmlString'
+        ScaleDownBehavior:
+          $ref: '#/components/schemas/ScaleDownBehavior'
+      description: ' Input to the <a>RunJobFlow</a> operation. '
+    RunJobFlowOutput:
+      type: object
+      properties:
+        JobFlowId:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+      description: ' The result of the <a>RunJobFlow</a> operation. '
+    ScaleDownBehavior:
+      type: string
+      enum:
+        - TERMINATE_AT_INSTANCE_HOUR
+        - TERMINATE_AT_TASK_COMPLETION
+    ScalingAction:
+      type: object
+      required:
+        - SimpleScalingPolicyConfiguration
+      properties:
+        Market:
+          $ref: '#/components/schemas/MarketType'
+        SimpleScalingPolicyConfiguration:
+          $ref: '#/components/schemas/SimpleScalingPolicyConfiguration'
+      description: 'The type of adjustment the automatic scaling activity makes when triggered, and the periodicity of the adjustment.'
+    ScalingConstraints:
+      type: object
+      required:
+        - MinCapacity
+        - MaxCapacity
+      properties:
+        MinCapacity:
+          $ref: '#/components/schemas/Integer'
+        MaxCapacity:
+          $ref: '#/components/schemas/Integer'
+      description: The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activities triggered by automatic scaling rules will not cause an instance group to grow above or below these limits.
+    ScalingRule:
+      type: object
+      required:
+        - Name
+        - Action
+        - Trigger
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+        Action:
+          $ref: '#/components/schemas/ScalingAction'
+        Trigger:
+          $ref: '#/components/schemas/ScalingTrigger'
+      description: 'A scale-in or scale-out rule that defines scaling activity, including the CloudWatch metric alarm that triggers activity, how EC2 instances are added or removed, and the periodicity of adjustments. The automatic scaling policy for an instance group can comprise one or more automatic scaling rules.'
+    ScalingRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScalingRule'
+    ScalingTrigger:
+      type: object
+      required:
+        - CloudWatchAlarmDefinition
+      properties:
+        CloudWatchAlarmDefinition:
+          $ref: '#/components/schemas/CloudWatchAlarmDefinition'
+      description: The conditions that trigger an automatic scaling activity.
+    ScriptBootstrapActionConfig:
+      type: object
+      required:
+        - Path
+      properties:
+        Path:
+          $ref: '#/components/schemas/XmlString'
+        Args:
+          $ref: '#/components/schemas/XmlStringList'
+      description: Configuration of the script to run during a bootstrap action.
+    SecurityConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityConfigurationSummary'
+    SecurityConfigurationSummary:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlString'
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+      description: 'The creation date and time, and name, of a security configuration.'
+    SecurityGroupsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen256'
+    SetTerminationProtectionInput:
+      type: object
+      required:
+        - JobFlowIds
+        - TerminationProtected
+      properties:
+        JobFlowIds:
+          $ref: '#/components/schemas/XmlStringList'
+        TerminationProtected:
+          $ref: '#/components/schemas/Boolean'
+      description: ' The input argument to the <a>TerminationProtection</a> operation. '
+    SetVisibleToAllUsersInput:
+      type: object
+      required:
+        - JobFlowIds
+        - VisibleToAllUsers
+      properties:
+        JobFlowIds:
+          $ref: '#/components/schemas/XmlStringList'
+        VisibleToAllUsers:
+          $ref: '#/components/schemas/Boolean'
+      description: The input to the SetVisibleToAllUsers action.
+    ShrinkPolicy:
+      type: object
+      properties:
+        DecommissionTimeout:
+          $ref: '#/components/schemas/Integer'
+        InstanceResizePolicy:
+          $ref: '#/components/schemas/InstanceResizePolicy'
+      description: Policy for customizing shrink operations. Allows configuration of decommissioning timeout and targeted instance shrinking.
+    SimpleScalingPolicyConfiguration:
+      type: object
+      required:
+        - ScalingAdjustment
+      properties:
+        AdjustmentType:
+          $ref: '#/components/schemas/AdjustmentType'
+        ScalingAdjustment:
+          $ref: '#/components/schemas/Integer'
+        CoolDown:
+          $ref: '#/components/schemas/Integer'
+      description: 'An automatic scaling configuration, which describes how the policy adds or removes instances, the cooldown period, and the number of EC2 instances that will be added each time the CloudWatch metric alarm condition is satisfied.'
+    SpotProvisioningSpecification:
+      type: object
+      required:
+        - TimeoutDurationMinutes
+        - TimeoutAction
+      properties:
+        TimeoutDurationMinutes:
+          $ref: '#/components/schemas/WholeNumber'
+        TimeoutAction:
+          $ref: '#/components/schemas/SpotProvisioningTimeoutAction'
+        BlockDurationMinutes:
+          $ref: '#/components/schemas/WholeNumber'
+      description: '<p>The launch specification for Spot instances in the instance fleet, which determines the defined duration and provisioning timeout behavior.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+    SpotProvisioningTimeoutAction:
+      type: string
+      enum:
+        - SWITCH_TO_ON_DEMAND
+        - TERMINATE_CLUSTER
+    Statistic:
+      type: string
+      enum:
+        - SAMPLE_COUNT
+        - AVERAGE
+        - SUM
+        - MINIMUM
+        - MAXIMUM
+    Step:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/StepId'
+        Name:
+          $ref: '#/components/schemas/String'
+        Config:
+          $ref: '#/components/schemas/HadoopStepConfig'
+        ActionOnFailure:
+          $ref: '#/components/schemas/ActionOnFailure'
+        Status:
+          $ref: '#/components/schemas/StepStatus'
+      description: This represents a step in a cluster.
+    StepConfig:
+      type: object
+      required:
+        - Name
+        - HadoopJarStep
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        ActionOnFailure:
+          $ref: '#/components/schemas/ActionOnFailure'
+        HadoopJarStep:
+          $ref: '#/components/schemas/HadoopJarStepConfig'
+      description: Specification of a cluster (job flow) step.
+    StepConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StepConfig'
+    StepDetail:
+      type: object
+      required:
+        - StepConfig
+        - ExecutionStatusDetail
+      properties:
+        StepConfig:
+          $ref: '#/components/schemas/StepConfig'
+        ExecutionStatusDetail:
+          $ref: '#/components/schemas/StepExecutionStatusDetail'
+      description: Combines the execution state and configuration of a step.
+    StepDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StepDetail'
+    StepExecutionState:
+      type: string
+      enum:
+        - PENDING
+        - RUNNING
+        - CONTINUE
+        - COMPLETED
+        - CANCELLED
+        - FAILED
+        - INTERRUPTED
+    StepExecutionStatusDetail:
+      type: object
+      required:
+        - State
+        - CreationDateTime
+      properties:
+        State:
+          $ref: '#/components/schemas/StepExecutionState'
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+        StartDateTime:
+          $ref: '#/components/schemas/Date'
+        EndDateTime:
+          $ref: '#/components/schemas/Date'
+        LastStateChangeReason:
+          $ref: '#/components/schemas/XmlString'
+      description: The execution state of a step.
+    StepId:
+      type: string
+    StepIdsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen256'
+    StepState:
+      type: string
+      enum:
+        - PENDING
+        - CANCEL_PENDING
+        - RUNNING
+        - COMPLETED
+        - CANCELLED
+        - FAILED
+        - INTERRUPTED
+    StepStateChangeReason:
+      type: object
+      properties:
+        Code:
+          $ref: '#/components/schemas/StepStateChangeReasonCode'
+        Message:
+          $ref: '#/components/schemas/String'
+      description: The details of the step state change reason.
+    StepStateChangeReasonCode:
+      type: string
+      enum:
+        - NONE
+    StepStateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StepState'
+    StepStatus:
+      type: object
+      properties:
+        State:
+          $ref: '#/components/schemas/StepState'
+        StateChangeReason:
+          $ref: '#/components/schemas/StepStateChangeReason'
+        FailureDetails:
+          $ref: '#/components/schemas/FailureDetails'
+        Timeline:
+          $ref: '#/components/schemas/StepTimeline'
+      description: The execution status details of the cluster step.
+    StepSummary:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/StepId'
+        Name:
+          $ref: '#/components/schemas/String'
+        Config:
+          $ref: '#/components/schemas/HadoopStepConfig'
+        ActionOnFailure:
+          $ref: '#/components/schemas/ActionOnFailure'
+        Status:
+          $ref: '#/components/schemas/StepStatus'
+      description: The summary of the cluster step.
+    StepSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StepSummary'
+    StepTimeline:
+      type: object
+      properties:
+        CreationDateTime:
+          $ref: '#/components/schemas/Date'
+        StartDateTime:
+          $ref: '#/components/schemas/Date'
+        EndDateTime:
+          $ref: '#/components/schemas/Date'
+      description: The timeline of the cluster step lifecycle.
+    String:
+      type: string
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    StringMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    SupportedProductConfig:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlStringMaxLen256'
+        Args:
+          $ref: '#/components/schemas/XmlStringList'
+      description: The list of supported product configurations which allow user-supplied arguments. EMR accepts these arguments and forwards them to the corresponding installation script as bootstrap action arguments.
+    SupportedProductsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen256'
+    Tag:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/String'
+        Value:
+          $ref: '#/components/schemas/String'
+      description: 'A key/value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html">Tagging Amazon EMR Resources</a>. '
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TerminateJobFlowsInput:
+      type: object
+      required:
+        - JobFlowIds
+      properties:
+        JobFlowIds:
+          $ref: '#/components/schemas/XmlStringList'
+      description: ' Input to the <a>TerminateJobFlows</a> operation. '
+    Unit:
+      type: string
+      enum:
+        - NONE
+        - SECONDS
+        - MICRO_SECONDS
+        - MILLI_SECONDS
+        - BYTES
+        - KILO_BYTES
+        - MEGA_BYTES
+        - GIGA_BYTES
+        - TERA_BYTES
+        - BITS
+        - KILO_BITS
+        - MEGA_BITS
+        - GIGA_BITS
+        - TERA_BITS
+        - PERCENT
+        - COUNT
+        - BYTES_PER_SECOND
+        - KILO_BYTES_PER_SECOND
+        - MEGA_BYTES_PER_SECOND
+        - GIGA_BYTES_PER_SECOND
+        - TERA_BYTES_PER_SECOND
+        - BITS_PER_SECOND
+        - KILO_BITS_PER_SECOND
+        - MEGA_BITS_PER_SECOND
+        - GIGA_BITS_PER_SECOND
+        - TERA_BITS_PER_SECOND
+        - COUNT_PER_SECOND
+    VolumeSpecification:
+      type: object
+      required:
+        - VolumeType
+        - SizeInGB
+      properties:
+        VolumeType:
+          $ref: '#/components/schemas/String'
+        Iops:
+          $ref: '#/components/schemas/Integer'
+        SizeInGB:
+          $ref: '#/components/schemas/Integer'
+      description: 'EBS volume specifications such as volume type, IOPS, and size (GiB) that will be requested for the EBS volume attached to an EC2 instance in the cluster.'
+    WholeNumber:
+      type: integer
+      minimum: 0
+    XmlString:
+      type: string
+      minLength: 0
+      maxLength: 10280
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    XmlStringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlString'
+    XmlStringMaxLen256:
+      type: string
+      minLength: 0
+      maxLength: 256
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    XmlStringMaxLen256List:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen256'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

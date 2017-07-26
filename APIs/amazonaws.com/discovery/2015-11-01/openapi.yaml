@@ -1,0 +1,1772 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://discovery.amazonaws.com/'
+info:
+  version: '2015-11-01'
+  x-release: v4
+  title: AWS Application Discovery Service
+  description: '<fullname>AWS Application Discovery Service</fullname> <p>AWS Application Discovery Service helps you plan application migration projects by automatically identifying servers, virtual machines (VMs), software, and software dependencies running in your on-premises data centers. Application Discovery Service also collects application performance data, which can help you assess the outcome of your migration. The data collected by Application Discovery Service is securely retained in an Amazon-hosted and managed database in the cloud. You can export the data as a CSV or XML file into your preferred visualization tool or cloud-migration solution to plan your migration. For more information, see the Application Discovery Service <a href="http://aws.amazon.com/application-discovery/faqs/">FAQ</a>.</p> <p>Application Discovery Service offers two modes of operation.</p> <ul> <li> <p> <b>Agentless discovery</b> mode is recommended for environments that use VMware vCenter Server. This mode doesn''t require you to install an agent on each host. Agentless discovery gathers server information regardless of the operating systems, which minimizes the time required for initial on-premises infrastructure assessment. Agentless discovery doesn''t collect information about software and software dependencies. It also doesn''t work in non-VMware environments. We recommend that you use agent-based discovery for non-VMware environments and if you want to collect information about software and software dependencies. You can also run agent-based and agentless discovery simultaneously. Use agentless discovery to quickly complete the initial infrastructure assessment and then install agents on select hosts to gather information about software and software dependencies.</p> </li> <li> <p> <b>Agent-based discovery</b> mode collects a richer set of data than agentless discovery by using Amazon software, the AWS Application Discovery Agent, which you install on one or more hosts in your data center. The agent captures infrastructure and application information, including an inventory of installed software applications, system and process performance, resource utilization, and network dependencies between workloads. The information collected by agents is secured at rest and in transit to the Application Discovery Service database in the cloud. </p> </li> </ul> <p>Application Discovery Service integrates with application discovery solutions from AWS Partner Network (APN) partners. Third-party application discovery tools can query Application Discovery Service and write to the Application Discovery Service database using a public API. You can then import the data into either a visualization tool or cloud-migration solution.</p> <important> <p>Application Discovery Service doesn''t gather sensitive information. All data is handled according to the <a href="http://aws.amazon.com/privacy/">AWS Privacy Policy</a>. You can operate Application Discovery Service using offline mode to inspect collected data before it is shared with the service.</p> </important> <p>Your AWS account must be granted access to Application Discovery Service, a process called <i>whitelisting</i>. This is true for AWS partners and customers alike. To request access, sign up for AWS Application Discovery Service <a href="http://aws.amazon.com/application-discovery/preview/">here</a>. We send you information about how to get started.</p> <p>This API reference provides descriptions, syntax, and usage examples for each of the actions and data types for Application Discovery Service. The topic for each action shows the API request parameters and the response. Alternatively, you can use one of the AWS SDKs to access an API that is tailored to the programming language or platform that you''re using. For more information, see <a href="http://aws.amazon.com/tools/#SDKs">AWS SDKs</a>.</p> <p>This guide is intended for use with the <a href="http://docs.aws.amazon.com/application-discovery/latest/userguide/"> <i>AWS Application Discovery Service User Guide</i> </a>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: discovery
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/discovery-2015-11-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/discovery/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AssociateConfigurationItemsToApplication
+      description: Associates one or more configuration items with an application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateConfigurationItemsToApplicationResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateConfigurationItemsToApplicationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateApplication':
+    post:
+      operationId: CreateApplication
+      description: Creates an application with the given name and description.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateTags':
+    post:
+      operationId: CreateTags
+      description: Creates one or more tags for configuration items. Tags are metadata that help you categorize IT assets. This API accepts a list of multiple configuration items.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTagsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteApplications':
+    post:
+      operationId: DeleteApplications
+      description: Deletes a list of applications and their associations with configuration items.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteApplicationsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteApplicationsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTags':
+    post:
+      operationId: DeleteTags
+      description: Deletes the association between configuration items and one or more tags. This API accepts a list of multiple configuration items.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTagsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAgents':
+    post:
+      operationId: DescribeAgents
+      description: Lists agents or the Connector by ID or lists all agents/Connectors associated with your user account if you did not specify an ID.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAgentsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAgentsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConfigurations':
+    post:
+      operationId: DescribeConfigurations
+      description: '<p>Retrieves attributes for a list of configuration item IDs. All of the supplied IDs must be for the same asset type (server, application, process, or connection). Output fields are specific to the asset type selected. For example, the output for a <i>server</i> configuration item includes a list of attributes about the server, such as host name, operating system, and number of network cards.</p> <p>For a complete list of outputs for each asset type, see <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#DescribeConfigurations">Using the DescribeConfigurations Action</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConfigurationsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConfigurationsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeExportConfigurations':
+    post:
+      operationId: DescribeExportConfigurations
+      description: <p>Deprecated. Use <code>DescribeExportTasks</code> instead.</p> <p>Retrieves the status of a given export process. You can retrieve status from a maximum of 100 processes.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeExportConfigurationsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeExportConfigurationsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeExportTasks':
+    post:
+      operationId: DescribeExportTasks
+      description: Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeExportTasksResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeExportTasksRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTags':
+    post:
+      operationId: DescribeTags
+      description: Retrieves a list of configuration items that are tagged with a specific tag. Or retrieves a list of all tags assigned to a specific configuration item.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTagsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateConfigurationItemsFromApplication':
+    post:
+      operationId: DisassociateConfigurationItemsFromApplication
+      description: Disassociates one or more configuration items from an application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateConfigurationItemsFromApplicationResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateConfigurationItemsFromApplicationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ExportConfigurations':
+    post:
+      operationId: ExportConfigurations
+      description: '<p>Deprecated. Use <code>StartExportTask</code> instead.</p> <p>Exports all discovered configuration data to an Amazon S3 bucket or an application that enables you to view and evaluate the data. Data includes tags and tag associations, processes, connections, servers, and system performance. This API returns an export ID that you can query using the <i>DescribeExportConfigurations</i> API. The system imposes a limit of two configuration exports in six hours.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportConfigurationsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+        '484':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDiscoverySummary':
+    post:
+      operationId: GetDiscoverySummary
+      description: Retrieves a short summary of discovered assets.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDiscoverySummaryResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDiscoverySummaryRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListConfigurations':
+    post:
+      operationId: ListConfigurations
+      description: Retrieves a list of configuration items according to criteria that you specify in a filter. The filter criteria identifies the relationship requirements.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConfigurationsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListConfigurationsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListServerNeighbors':
+    post:
+      operationId: ListServerNeighbors
+      description: Retrieves a list of servers that are one network hop away from a specified server.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListServerNeighborsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListServerNeighborsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartDataCollectionByAgentIds':
+    post:
+      operationId: StartDataCollectionByAgentIds
+      description: Instructs the specified agents or connectors to start collecting data.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartDataCollectionByAgentIdsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartDataCollectionByAgentIdsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartExportTask':
+    post:
+      operationId: StartExportTask
+      description: Export the configuration data about discovered configuration items and relationships to an S3 bucket in a specified format.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartExportTaskResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+        '484':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartExportTaskRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopDataCollectionByAgentIds':
+    post:
+      operationId: StopDataCollectionByAgentIds
+      description: Instructs the specified agents or connectors to stop collecting data.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopDataCollectionByAgentIdsResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopDataCollectionByAgentIdsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateApplication':
+    post:
+      operationId: UpdateApplication
+      description: Updates metadata about an application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateApplicationResponse'
+        '480':
+          description: AuthorizationErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ServerInternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AgentConfigurationStatus:
+      type: object
+      properties:
+        agentId:
+          $ref: '#/components/schemas/String'
+        operationSucceeded:
+          $ref: '#/components/schemas/Boolean'
+        description:
+          $ref: '#/components/schemas/String'
+      description: 'Information about agents or connectors that were instructed to start collecting data. Information includes the agent/connector ID, a description of the operation, and whether the agent/connector configuration was updated.'
+    AgentConfigurationStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AgentConfigurationStatus'
+    AgentId:
+      type: string
+    AgentIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/AgentId'
+    AgentInfo:
+      type: object
+      properties:
+        agentId:
+          $ref: '#/components/schemas/AgentId'
+        hostName:
+          $ref: '#/components/schemas/String'
+        agentNetworkInfoList:
+          $ref: '#/components/schemas/AgentNetworkInfoList'
+        connectorId:
+          $ref: '#/components/schemas/String'
+        version:
+          $ref: '#/components/schemas/String'
+        health:
+          $ref: '#/components/schemas/AgentStatus'
+        lastHealthPingTime:
+          $ref: '#/components/schemas/String'
+        collectionStatus:
+          $ref: '#/components/schemas/String'
+        agentType:
+          $ref: '#/components/schemas/String'
+        registeredTime:
+          $ref: '#/components/schemas/String'
+      description: 'Information about agents or connectors associated with the user’s AWS account. Information includes agent or connector IDs, IP addresses, media access control (MAC) addresses, agent or connector health, hostname where the agent or connector resides, and agent version for each agent.'
+    AgentNetworkInfo:
+      type: object
+      properties:
+        ipAddress:
+          $ref: '#/components/schemas/String'
+        macAddress:
+          $ref: '#/components/schemas/String'
+      description: Network details about the host where the agent/connector resides.
+    AgentNetworkInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AgentNetworkInfo'
+    AgentStatus:
+      type: string
+      enum:
+        - HEALTHY
+        - UNHEALTHY
+        - RUNNING
+        - UNKNOWN
+        - BLACKLISTED
+        - SHUTDOWN
+    AgentsInfo:
+      type: array
+      items:
+        $ref: '#/components/schemas/AgentInfo'
+    ApplicationId:
+      type: string
+    ApplicationIdsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationId'
+    AssociateConfigurationItemsToApplicationRequest:
+      type: object
+      required:
+        - applicationConfigurationId
+        - configurationIds
+      properties:
+        applicationConfigurationId:
+          $ref: '#/components/schemas/ApplicationId'
+        configurationIds:
+          $ref: '#/components/schemas/ConfigurationIdList'
+    AssociateConfigurationItemsToApplicationResponse:
+      type: object
+      properties: {}
+    AuthorizationErrorException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: The AWS user account does not have permission to perform the action. Check the IAM policy associated with this account.
+    Boolean:
+      type: boolean
+    BoxedInteger:
+      type: integer
+    Condition:
+      type: string
+    Configuration:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    ConfigurationId:
+      type: string
+    ConfigurationIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationId'
+    ConfigurationItemType:
+      type: string
+      enum:
+        - SERVER
+        - PROCESS
+        - CONNECTION
+        - APPLICATION
+    ConfigurationTag:
+      type: object
+      properties:
+        configurationType:
+          $ref: '#/components/schemas/ConfigurationItemType'
+        configurationId:
+          $ref: '#/components/schemas/ConfigurationId'
+        key:
+          $ref: '#/components/schemas/TagKey'
+        value:
+          $ref: '#/components/schemas/TagValue'
+        timeOfCreation:
+          $ref: '#/components/schemas/TimeStamp'
+      description: Tags for a configuration item. Tags are metadata that help you categorize IT assets.
+    ConfigurationTagSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationTag'
+    Configurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/Configuration'
+    ConfigurationsDownloadUrl:
+      type: string
+    ConfigurationsExportId:
+      type: string
+    CreateApplicationRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/String'
+        description:
+          $ref: '#/components/schemas/String'
+    CreateApplicationResponse:
+      type: object
+      properties:
+        configurationId:
+          $ref: '#/components/schemas/String'
+    CreateTagsRequest:
+      type: object
+      required:
+        - configurationIds
+        - tags
+      properties:
+        configurationIds:
+          $ref: '#/components/schemas/ConfigurationIdList'
+        tags:
+          $ref: '#/components/schemas/TagSet'
+    CreateTagsResponse:
+      type: object
+      properties: {}
+    CustomerAgentInfo:
+      type: object
+      required:
+        - activeAgents
+        - healthyAgents
+        - blackListedAgents
+        - shutdownAgents
+        - unhealthyAgents
+        - totalAgents
+        - unknownAgents
+      properties:
+        activeAgents:
+          $ref: '#/components/schemas/Integer'
+        healthyAgents:
+          $ref: '#/components/schemas/Integer'
+        blackListedAgents:
+          $ref: '#/components/schemas/Integer'
+        shutdownAgents:
+          $ref: '#/components/schemas/Integer'
+        unhealthyAgents:
+          $ref: '#/components/schemas/Integer'
+        totalAgents:
+          $ref: '#/components/schemas/Integer'
+        unknownAgents:
+          $ref: '#/components/schemas/Integer'
+      description: Inventory data for installed discovery agents.
+    CustomerConnectorInfo:
+      type: object
+      required:
+        - activeConnectors
+        - healthyConnectors
+        - blackListedConnectors
+        - shutdownConnectors
+        - unhealthyConnectors
+        - totalConnectors
+        - unknownConnectors
+      properties:
+        activeConnectors:
+          $ref: '#/components/schemas/Integer'
+        healthyConnectors:
+          $ref: '#/components/schemas/Integer'
+        blackListedConnectors:
+          $ref: '#/components/schemas/Integer'
+        shutdownConnectors:
+          $ref: '#/components/schemas/Integer'
+        unhealthyConnectors:
+          $ref: '#/components/schemas/Integer'
+        totalConnectors:
+          $ref: '#/components/schemas/Integer'
+        unknownConnectors:
+          $ref: '#/components/schemas/Integer'
+      description: Inventory data for installed discovery connectors.
+    DeleteApplicationsRequest:
+      type: object
+      required:
+        - configurationIds
+      properties:
+        configurationIds:
+          $ref: '#/components/schemas/ApplicationIdsList'
+    DeleteApplicationsResponse:
+      type: object
+      properties: {}
+    DeleteTagsRequest:
+      type: object
+      required:
+        - configurationIds
+      properties:
+        configurationIds:
+          $ref: '#/components/schemas/ConfigurationIdList'
+        tags:
+          $ref: '#/components/schemas/TagSet'
+    DeleteTagsResponse:
+      type: object
+      properties: {}
+    DescribeAgentsRequest:
+      type: object
+      properties:
+        agentIds:
+          $ref: '#/components/schemas/AgentIds'
+        filters:
+          $ref: '#/components/schemas/Filters'
+        maxResults:
+          $ref: '#/components/schemas/Integer'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeAgentsResponse:
+      type: object
+      properties:
+        agentsInfo:
+          $ref: '#/components/schemas/AgentsInfo'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeConfigurationsAttribute:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    DescribeConfigurationsAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/DescribeConfigurationsAttribute'
+    DescribeConfigurationsRequest:
+      type: object
+      required:
+        - configurationIds
+      properties:
+        configurationIds:
+          $ref: '#/components/schemas/ConfigurationIdList'
+    DescribeConfigurationsResponse:
+      type: object
+      properties:
+        configurations:
+          $ref: '#/components/schemas/DescribeConfigurationsAttributes'
+    DescribeExportConfigurationsRequest:
+      type: object
+      properties:
+        exportIds:
+          $ref: '#/components/schemas/ExportIds'
+        maxResults:
+          $ref: '#/components/schemas/Integer'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeExportConfigurationsResponse:
+      type: object
+      properties:
+        exportsInfo:
+          $ref: '#/components/schemas/ExportsInfo'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeExportTasksRequest:
+      type: object
+      properties:
+        exportIds:
+          $ref: '#/components/schemas/ExportIds'
+        maxResults:
+          $ref: '#/components/schemas/Integer'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeExportTasksResponse:
+      type: object
+      properties:
+        exportsInfo:
+          $ref: '#/components/schemas/ExportsInfo'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeTagsRequest:
+      type: object
+      properties:
+        filters:
+          $ref: '#/components/schemas/TagFilters'
+        maxResults:
+          $ref: '#/components/schemas/Integer'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeTagsResponse:
+      type: object
+      properties:
+        tags:
+          $ref: '#/components/schemas/ConfigurationTagSet'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    DisassociateConfigurationItemsFromApplicationRequest:
+      type: object
+      required:
+        - applicationConfigurationId
+        - configurationIds
+      properties:
+        applicationConfigurationId:
+          $ref: '#/components/schemas/ApplicationId'
+        configurationIds:
+          $ref: '#/components/schemas/ConfigurationIdList'
+    DisassociateConfigurationItemsFromApplicationResponse:
+      type: object
+      properties: {}
+    ExportConfigurationsResponse:
+      type: object
+      properties:
+        exportId:
+          $ref: '#/components/schemas/ConfigurationsExportId'
+    ExportDataFormat:
+      type: string
+      enum:
+        - CSV
+        - GRAPHML
+    ExportDataFormats:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportDataFormat'
+    ExportIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationsExportId'
+    ExportInfo:
+      type: object
+      required:
+        - exportId
+        - exportStatus
+        - statusMessage
+        - exportRequestTime
+      properties:
+        exportId:
+          $ref: '#/components/schemas/ConfigurationsExportId'
+        exportStatus:
+          $ref: '#/components/schemas/ExportStatus'
+        statusMessage:
+          $ref: '#/components/schemas/ExportStatusMessage'
+        configurationsDownloadUrl:
+          $ref: '#/components/schemas/ConfigurationsDownloadUrl'
+        exportRequestTime:
+          $ref: '#/components/schemas/ExportRequestTime'
+      description: Information regarding the export status of the discovered data. The value is an array of objects.
+    ExportRequestTime:
+      type: string
+      format: date-time
+    ExportStatus:
+      type: string
+      enum:
+        - FAILED
+        - SUCCEEDED
+        - IN_PROGRESS
+    ExportStatusMessage:
+      type: string
+    ExportsInfo:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportInfo'
+    Filter:
+      type: object
+      required:
+        - name
+        - values
+        - condition
+      properties:
+        name:
+          $ref: '#/components/schemas/String'
+        values:
+          $ref: '#/components/schemas/FilterValues'
+        condition:
+          $ref: '#/components/schemas/Condition'
+      description: '<p>A filter that can use conditional operators.</p> <p>For more information about filters, see <a href="http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html">Querying Discovered Configuration Items</a>. </p>'
+    FilterName:
+      type: string
+    FilterValue:
+      type: string
+    FilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/FilterValue'
+    Filters:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+    GetDiscoverySummaryRequest:
+      type: object
+      properties: {}
+    GetDiscoverySummaryResponse:
+      type: object
+      properties:
+        servers:
+          $ref: '#/components/schemas/Long'
+        applications:
+          $ref: '#/components/schemas/Long'
+        serversMappedToApplications:
+          $ref: '#/components/schemas/Long'
+        serversMappedtoTags:
+          $ref: '#/components/schemas/Long'
+        agentSummary:
+          $ref: '#/components/schemas/CustomerAgentInfo'
+        connectorSummary:
+          $ref: '#/components/schemas/CustomerConnectorInfo'
+    Integer:
+      type: integer
+    InvalidParameterException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: One or more parameters are not valid. Verify the parameters and try again.
+    InvalidParameterValueException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: The value of one or more parameters are either invalid or out of range. Verify the parameter values and try again.
+    ListConfigurationsRequest:
+      type: object
+      required:
+        - configurationType
+      properties:
+        configurationType:
+          $ref: '#/components/schemas/ConfigurationItemType'
+        filters:
+          $ref: '#/components/schemas/Filters'
+        maxResults:
+          $ref: '#/components/schemas/Integer'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+        orderBy:
+          $ref: '#/components/schemas/OrderByList'
+    ListConfigurationsResponse:
+      type: object
+      properties:
+        configurations:
+          $ref: '#/components/schemas/Configurations'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListServerNeighborsRequest:
+      type: object
+      required:
+        - configurationId
+      properties:
+        configurationId:
+          $ref: '#/components/schemas/ConfigurationId'
+        portInformationNeeded:
+          $ref: '#/components/schemas/Boolean'
+        neighborConfigurationIds:
+          $ref: '#/components/schemas/ConfigurationIdList'
+        maxResults:
+          $ref: '#/components/schemas/Integer'
+        nextToken:
+          $ref: '#/components/schemas/String'
+    ListServerNeighborsResponse:
+      type: object
+      required:
+        - neighbors
+      properties:
+        neighbors:
+          $ref: '#/components/schemas/NeighborDetailsList'
+        nextToken:
+          $ref: '#/components/schemas/String'
+        knownDependencyCount:
+          $ref: '#/components/schemas/Long'
+    Long:
+      type: integer
+    Message:
+      type: string
+    NeighborConnectionDetail:
+      type: object
+      required:
+        - sourceServerId
+        - destinationServerId
+        - connectionsCount
+      properties:
+        sourceServerId:
+          $ref: '#/components/schemas/ConfigurationId'
+        destinationServerId:
+          $ref: '#/components/schemas/ConfigurationId'
+        destinationPort:
+          $ref: '#/components/schemas/BoxedInteger'
+        transportProtocol:
+          $ref: '#/components/schemas/String'
+        connectionsCount:
+          $ref: '#/components/schemas/Long'
+      description: Details about neighboring servers.
+    NeighborDetailsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NeighborConnectionDetail'
+    NextToken:
+      type: string
+    OperationNotPermittedException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: This operation is not permitted.
+    OrderByElement:
+      type: object
+      required:
+        - fieldName
+      properties:
+        fieldName:
+          $ref: '#/components/schemas/String'
+        sortOrder:
+          $ref: '#/components/schemas/orderString'
+      description: A field and direction for ordered output.
+    OrderByList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OrderByElement'
+    ResourceNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: The specified configuration ID was not located. Verify the configuration ID and try again.
+    ServerInternalErrorException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/Message'
+      description: The server experienced an internal error. Try again.
+    StartDataCollectionByAgentIdsRequest:
+      type: object
+      required:
+        - agentIds
+      properties:
+        agentIds:
+          $ref: '#/components/schemas/AgentIds'
+    StartDataCollectionByAgentIdsResponse:
+      type: object
+      properties:
+        agentsConfigurationStatus:
+          $ref: '#/components/schemas/AgentConfigurationStatusList'
+    StartExportTaskRequest:
+      type: object
+      properties:
+        exportDataFormat:
+          $ref: '#/components/schemas/ExportDataFormats'
+    StartExportTaskResponse:
+      type: object
+      properties:
+        exportId:
+          $ref: '#/components/schemas/ConfigurationsExportId'
+    StopDataCollectionByAgentIdsRequest:
+      type: object
+      required:
+        - agentIds
+      properties:
+        agentIds:
+          $ref: '#/components/schemas/AgentIds'
+    StopDataCollectionByAgentIdsResponse:
+      type: object
+      properties:
+        agentsConfigurationStatus:
+          $ref: '#/components/schemas/AgentConfigurationStatusList'
+    String:
+      type: string
+    Tag:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          $ref: '#/components/schemas/TagKey'
+        value:
+          $ref: '#/components/schemas/TagValue'
+      description: Metadata that help you categorize IT assets.
+    TagFilter:
+      type: object
+      required:
+        - name
+        - values
+      properties:
+        name:
+          $ref: '#/components/schemas/FilterName'
+        values:
+          $ref: '#/components/schemas/FilterValues'
+      description: 'The tag filter. Valid names are: <code>tagKey</code>, <code>tagValue</code>, <code>configurationId</code>.'
+    TagFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagFilter'
+    TagKey:
+      type: string
+    TagSet:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TagValue:
+      type: string
+    TimeStamp:
+      type: string
+      format: date-time
+    UpdateApplicationRequest:
+      type: object
+      required:
+        - configurationId
+      properties:
+        configurationId:
+          $ref: '#/components/schemas/ApplicationId'
+        name:
+          $ref: '#/components/schemas/String'
+        description:
+          $ref: '#/components/schemas/String'
+    UpdateApplicationResponse:
+      type: object
+      properties: {}
+    orderString:
+      type: string
+      enum:
+        - ASC
+        - DESC
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

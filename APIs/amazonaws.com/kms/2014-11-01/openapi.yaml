@@ -1,0 +1,3509 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://kms.amazonaws.com/'
+info:
+  version: '2014-11-01'
+  x-release: v4
+  title: AWS Key Management Service
+  description: '<fullname>AWS Key Management Service</fullname> <p>AWS Key Management Service (AWS KMS) is an encryption and key management web service. This guide describes the AWS KMS operations that you can call programmatically. For general information about AWS KMS, see the <a href="http://docs.aws.amazon.com/kms/latest/developerguide/">AWS Key Management Service Developer Guide</a>.</p> <note> <p>AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .Net, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to AWS KMS and other AWS services. For example, the SDKs take care of tasks such as signing requests (see below), managing errors, and retrying requests automatically. For more information about the AWS SDKs, including how to download and install them, see <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p> </note> <p>We recommend that you use the AWS SDKs to make programmatic API calls to AWS KMS.</p> <p>Clients must support TLS (Transport Layer Security) 1.0. We recommend TLS 1.2. Clients must also support cipher suites with Perfect Forward Secrecy (PFS) such as Ephemeral Diffie-Hellman (DHE) or Elliptic Curve Ephemeral Diffie-Hellman (ECDHE). Most modern systems such as Java 7 and later support these modes.</p> <p> <b>Signing Requests</b> </p> <p>Requests must be signed by using an access key ID and a secret access key. We strongly recommend that you <i>do not</i> use your AWS account (root) access key ID and secret key for everyday work with AWS KMS. Instead, use the access key ID and secret access key for an IAM user, or you can use the AWS Security Token Service to generate temporary security credentials that you can use to sign requests.</p> <p>All AWS KMS operations require <a href="http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.</p> <p> <b>Logging API Requests</b> </p> <p>AWS KMS supports AWS CloudTrail, a service that logs AWS API calls and related events for your AWS account and delivers them to an Amazon S3 bucket that you specify. By using the information collected by CloudTrail, you can determine what requests were made to AWS KMS, who made the request, when it was made, and so on. To learn more about CloudTrail, including how to turn it on and find your log files, see the <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/">AWS CloudTrail User Guide</a>.</p> <p> <b>Additional Resources</b> </p> <p>For more information about credentials and request signing, see the following:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html">AWS Security Credentials</a> - This topic provides general information about the types of credentials used for accessing AWS.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html">Temporary Security Credentials</a> - This section of the <i>IAM User Guide</i> describes how to create and use temporary security credentials.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> - This set of topics walks you through the process of signing a request using an access key ID and a secret access key.</p> </li> </ul> <p> <b>Commonly Used APIs</b> </p> <p>Of the APIs discussed in this guide, the following will prove the most useful for most applications. You will likely perform actions other than these, such as creating keys and assigning policies, by using the console.</p> <ul> <li> <p> <a>Encrypt</a> </p> </li> <li> <p> <a>Decrypt</a> </p> </li> <li> <p> <a>GenerateDataKey</a> </p> </li> <li> <p> <a>GenerateDataKeyWithoutPlaintext</a> </p> </li> </ul>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: kms
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/kms-2014-11-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/kms/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CancelKeyDeletion
+      description: '<p>Cancels the deletion of a customer master key (CMK). When this operation is successful, the CMK is set to the <code>Disabled</code> state. To enable a CMK, use <a>EnableKey</a>.</p> <p>For more information about scheduling and canceling deletion of a CMK, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html">Deleting Customer Master Keys</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelKeyDeletionResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '484':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelKeyDeletionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateAlias':
+    post:
+      operationId: CreateAlias
+      description: '<p>Creates a display name for a customer master key. An alias can be used to identify a key and should be unique. The console enforces a one-to-one mapping between the alias and a key. An alias name can contain only alphanumeric characters, forward slashes (/), underscores (_), and dashes (-). An alias must start with the word "alias" followed by a forward slash (alias/). An alias that begins with "aws" after the forward slash (alias/aws...) is reserved by Amazon Web Services (AWS).</p> <p>The alias and the key it is mapped to must be in the same AWS account and the same region.</p> <p>To map an alias to a different key, call <a>UpdateAlias</a>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '481':
+          description: AlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: InvalidAliasNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAliasNameException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAliasRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateGrant':
+    post:
+      operationId: CreateGrant
+      description: '<p>Adds a grant to a key to specify who can use the key and under what conditions. Grants are alternate permission mechanisms to key policies.</p> <p>For more information about grants, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/grants.html">Grants</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGrantResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: DisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '485':
+          description: InvalidGrantTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGrantTokenException'
+        '486':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '487':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGrantRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateKey':
+    post:
+      operationId: CreateKey
+      description: '<p>Creates a customer master key (CMK).</p> <p>You can use a CMK to encrypt small amounts of data (4 KiB or less) directly, but CMKs are more commonly used to encrypt data encryption keys (DEKs), which are used to encrypt raw data. For more information about DEKs and the difference between CMKs and DEKs, see the following:</p> <ul> <li> <p>The <a>GenerateDataKey</a> operation</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html">AWS Key Management Service Concepts</a> in the <i>AWS Key Management Service Developer Guide</i> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateKeyResponse'
+        '480':
+          description: MalformedPolicyDocumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MalformedPolicyDocumentException'
+        '481':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '482':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '483':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: TagException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#Decrypt':
+    post:
+      operationId: Decrypt
+      description: '<p>Decrypts ciphertext. Ciphertext is plaintext that has been previously encrypted by using any of the following functions:</p> <ul> <li> <p> <a>GenerateDataKey</a> </p> </li> <li> <p> <a>GenerateDataKeyWithoutPlaintext</a> </p> </li> <li> <p> <a>Encrypt</a> </p> </li> </ul> <p>Note that if a caller has been granted access permissions to all keys (through, for example, IAM user policies that grant <code>Decrypt</code> permission on all resources), then ciphertext encrypted by using keys in other accounts where the key grants access to the caller can be decrypted. To remedy this, we recommend that you do not grant <code>Decrypt</code> access in an IAM user policy. Instead grant <code>Decrypt</code> access only in key policies. If you must grant <code>Decrypt</code> access in an IAM user policy, you should scope the resource to specific keys or to specific trusted accounts.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecryptResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: DisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledException'
+        '482':
+          description: InvalidCiphertextException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCiphertextException'
+        '483':
+          description: KeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyUnavailableException'
+        '484':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '485':
+          description: InvalidGrantTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGrantTokenException'
+        '486':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '487':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DecryptRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteAlias':
+    post:
+      operationId: DeleteAlias
+      description: 'Deletes the specified alias. To map an alias to a different key, call <a>UpdateAlias</a>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '483':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAliasRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteImportedKeyMaterial':
+    post:
+      operationId: DeleteImportedKeyMaterial
+      description: '<p>Deletes key material that you previously imported and makes the specified customer master key (CMK) unusable. For more information about importing key material into AWS KMS, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html">Importing Key Material</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>When the specified CMK is in the <code>PendingDeletion</code> state, this operation does not change the CMK''s state. Otherwise, it changes the CMK''s state to <code>PendingImport</code>.</p> <p>After you delete key material, you can use <a>ImportKeyMaterial</a> to reimport the same key material into the CMK.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '481':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '485':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteImportedKeyMaterialRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeKey':
+    post:
+      operationId: DescribeKey
+      description: Provides detailed information about the specified customer master key.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeKeyResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeKeyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisableKey':
+    post:
+      operationId: DisableKey
+      description: 'Sets the state of a customer master key (CMK) to disabled, thereby preventing its use for cryptographic operations. For more information about how key state affects the use of a CMK, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">How Key State Affects the Use of a Customer Master Key</a> in the <i>AWS Key Management Service Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '484':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableKeyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisableKeyRotation':
+    post:
+      operationId: DisableKeyRotation
+      description: Disables rotation of the specified key.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: DisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledException'
+        '482':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '483':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '485':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+        '486':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableKeyRotationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EnableKey':
+    post:
+      operationId: EnableKey
+      description: 'Marks a key as enabled, thereby permitting its use.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableKeyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EnableKeyRotation':
+    post:
+      operationId: EnableKeyRotation
+      description: Enables rotation of the specified customer master key.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: DisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledException'
+        '482':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '483':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '485':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+        '486':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableKeyRotationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#Encrypt':
+    post:
+      operationId: Encrypt
+      description: '<p>Encrypts plaintext into ciphertext by using a customer master key. The <code>Encrypt</code> function has two primary use cases:</p> <ul> <li> <p>You can encrypt up to 4 KB of arbitrary data such as an RSA key, a database password, or other sensitive customer information.</p> </li> <li> <p>If you are moving encrypted data from one region to another, you can use this API to encrypt in the new region the plaintext data key that was used to encrypt the data in the original region. This provides you with an encrypted copy of the data key that can be decrypted in the new region and used there to decrypt the encrypted data.</p> </li> </ul> <p>Unless you are moving encrypted data from one region to another, you don''t use this function to encrypt a generated data key within a region. You retrieve data keys already encrypted by calling the <a>GenerateDataKey</a> or <a>GenerateDataKeyWithoutPlaintext</a> function. Data keys don''t need to be encrypted again by calling <code>Encrypt</code>.</p> <p>If you want to encrypt data locally in your application, you can use the <code>GenerateDataKey</code> function to return a plaintext data encryption key and a copy of the key encrypted under the customer master key (CMK) of your choosing.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: DisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledException'
+        '482':
+          description: KeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyUnavailableException'
+        '483':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '484':
+          description: InvalidKeyUsageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKeyUsageException'
+        '485':
+          description: InvalidGrantTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGrantTokenException'
+        '486':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '487':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EncryptRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GenerateDataKey':
+    post:
+      operationId: GenerateDataKey
+      description: '<p>Returns a data encryption key that you can use in your application to encrypt data locally.</p> <p>You must specify the customer master key (CMK) under which to generate the data key. You must also specify the length of the data key using either the <code>KeySpec</code> or <code>NumberOfBytes</code> field. You must specify one field or the other, but not both. For common key lengths (128-bit and 256-bit symmetric keys), we recommend that you use <code>KeySpec</code>.</p> <p>This operation returns a plaintext copy of the data key in the <code>Plaintext</code> field of the response, and an encrypted copy of the data key in the <code>CiphertextBlob</code> field. The data key is encrypted under the CMK specified in the <code>KeyId</code> field of the request.</p> <p>We recommend that you use the following pattern to encrypt data locally in your application:</p> <ol> <li> <p>Use this operation (<code>GenerateDataKey</code>) to retrieve a data encryption key.</p> </li> <li> <p>Use the plaintext data encryption key (returned in the <code>Plaintext</code> field of the response) to encrypt data locally, then erase the plaintext data key from memory.</p> </li> <li> <p>Store the encrypted data key (returned in the <code>CiphertextBlob</code> field of the response) alongside the locally encrypted data.</p> </li> </ol> <p>To decrypt data locally:</p> <ol> <li> <p>Use the <a>Decrypt</a> operation to decrypt the encrypted data key into a plaintext copy of the data key.</p> </li> <li> <p>Use the plaintext data key to decrypt data locally, then erase the plaintext data key from memory.</p> </li> </ol> <p>To return only an encrypted copy of the data key, use <a>GenerateDataKeyWithoutPlaintext</a>. To return a random byte string that is cryptographically secure, use <a>GenerateRandom</a>.</p> <p>If you use the optional <code>EncryptionContext</code> field, you must store at least enough information to be able to reconstruct the full encryption context when you later send the ciphertext to the <a>Decrypt</a> operation. It is a good practice to choose an encryption context that you can reconstruct on the fly to better secure the ciphertext. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html">Encryption Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateDataKeyResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: DisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledException'
+        '482':
+          description: KeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyUnavailableException'
+        '483':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '484':
+          description: InvalidKeyUsageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKeyUsageException'
+        '485':
+          description: InvalidGrantTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGrantTokenException'
+        '486':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '487':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateDataKeyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GenerateDataKeyWithoutPlaintext':
+    post:
+      operationId: GenerateDataKeyWithoutPlaintext
+      description: '<p>Returns a data encryption key encrypted under a customer master key (CMK). This operation is identical to <a>GenerateDataKey</a> but returns only the encrypted copy of the data key.</p> <p>This operation is useful in a system that has multiple components with different degrees of trust. For example, consider a system that stores encrypted data in containers. Each container stores the encrypted data and an encrypted copy of the data key. One component of the system, called the <i>control plane</i>, creates new containers. When it creates a new container, it uses this operation (<code>GenerateDataKeyWithoutPlaintext</code>) to get an encrypted data key and then stores it in the container. Later, a different component of the system, called the <i>data plane</i>, puts encrypted data into the containers. To do this, it passes the encrypted data key to the <a>Decrypt</a> operation, then uses the returned plaintext data key to encrypt data, and finally stores the encrypted data in the container. In this system, the control plane never sees the plaintext data key.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateDataKeyWithoutPlaintextResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: DisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledException'
+        '482':
+          description: KeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyUnavailableException'
+        '483':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '484':
+          description: InvalidKeyUsageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKeyUsageException'
+        '485':
+          description: InvalidGrantTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGrantTokenException'
+        '486':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '487':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateDataKeyWithoutPlaintextRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GenerateRandom':
+    post:
+      operationId: GenerateRandom
+      description: '<p>Returns a random byte string that is cryptographically secure.</p> <p>For more information about entropy and random number generation, see the <a href="https://d0.awsstatic.com/whitepapers/KMS-Cryptographic-Details.pdf">AWS Key Management Service Cryptographic Details</a> whitepaper.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateRandomResponse'
+        '480':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '481':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateRandomRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetKeyPolicy':
+    post:
+      operationId: GetKeyPolicy
+      description: Retrieves a policy attached to the specified key.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetKeyPolicyResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '484':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetKeyPolicyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetKeyRotationStatus':
+    post:
+      operationId: GetKeyRotationStatus
+      description: Retrieves a Boolean value that indicates whether key rotation is enabled for the specified key.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetKeyRotationStatusResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '484':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+        '485':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetKeyRotationStatusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetParametersForImport':
+    post:
+      operationId: GetParametersForImport
+      description: '<p>Returns the items you need in order to import key material into AWS KMS from your existing key management infrastructure. For more information about importing key material into AWS KMS, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html">Importing Key Material</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>You must specify the key ID of the customer master key (CMK) into which you will import key material. This CMK''s <code>Origin</code> must be <code>EXTERNAL</code>. You must also specify the wrapping algorithm and type of wrapping key (public key) that you will use to encrypt the key material.</p> <p>This operation returns a public key and an import token. Use the public key to encrypt the key material. Store the import token to send with a subsequent <a>ImportKeyMaterial</a> request. The public key and import token from the same response must be used together. These items are valid for 24 hours, after which they cannot be used for a subsequent <a>ImportKeyMaterial</a> request. To retrieve new ones, send another <code>GetParametersForImport</code> request.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetParametersForImportResponse'
+        '480':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '481':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '485':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetParametersForImportRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ImportKeyMaterial':
+    post:
+      operationId: ImportKeyMaterial
+      description: '<p>Imports key material into an AWS KMS customer master key (CMK) from your existing key management infrastructure. For more information about importing key material into AWS KMS, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html">Importing Key Material</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>You must specify the key ID of the CMK to import the key material into. This CMK''s <code>Origin</code> must be <code>EXTERNAL</code>. You must also send an import token and the encrypted key material. Send the import token that you received in the same <a>GetParametersForImport</a> response that contained the public key that you used to encrypt the key material. You must also specify whether the key material expires and if so, when. When the key material expires, AWS KMS deletes the key material and the CMK becomes unusable. To use the CMK again, you can reimport the same key material. If you set an expiration date, you can change it only by reimporting the same key material and specifying a new expiration date.</p> <p>When this operation is successful, the specified CMK''s key state changes to <code>Enabled</code>, and you can use the CMK.</p> <p>After you successfully import key material into a CMK, you can reimport the same key material into that CMK, but you cannot import different key material.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportKeyMaterialResponse'
+        '480':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '481':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '485':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+        '486':
+          description: InvalidCiphertextException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCiphertextException'
+        '487':
+          description: IncorrectKeyMaterialException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncorrectKeyMaterialException'
+        '488':
+          description: ExpiredImportTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredImportTokenException'
+        '489':
+          description: InvalidImportTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidImportTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportKeyMaterialRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListAliases':
+    post:
+      operationId: ListAliases
+      description: Lists all of the key aliases in the account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAliasesResponse'
+        '480':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '481':
+          description: InvalidMarkerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidMarkerException'
+        '482':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAliasesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListGrants':
+    post:
+      operationId: ListGrants
+      description: List the grants for a specified key.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGrantsResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '482':
+          description: InvalidMarkerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidMarkerException'
+        '483':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '485':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListGrantsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListKeyPolicies':
+    post:
+      operationId: ListKeyPolicies
+      description: Retrieves a list of policies attached to a key.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListKeyPoliciesResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '484':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListKeyPoliciesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListKeys':
+    post:
+      operationId: ListKeys
+      description: Lists the customer master keys.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListKeysResponse'
+        '480':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '481':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '482':
+          description: InvalidMarkerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidMarkerException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListKeysRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListResourceTags':
+    post:
+      operationId: ListResourceTags
+      description: Returns a list of all tags for the specified customer master key (CMK).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResourceTagsResponse'
+        '480':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '483':
+          description: InvalidMarkerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidMarkerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListResourceTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListRetirableGrants':
+    post:
+      operationId: ListRetirableGrants
+      description: '<p>Returns a list of all grants for which the grant''s <code>RetiringPrincipal</code> matches the one specified.</p> <p>A typical use is to list all grants that you are able to retire. To retire a grant, use <a>RetireGrant</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGrantsResponse'
+        '480':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '481':
+          description: InvalidMarkerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidMarkerException'
+        '482':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRetirableGrantsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutKeyPolicy':
+    post:
+      operationId: PutKeyPolicy
+      description: '<p>Attaches a key policy to the specified customer master key (CMK).</p> <p>For more information about key policies, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Key Policies</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '482':
+          description: MalformedPolicyDocumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MalformedPolicyDocumentException'
+        '483':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '484':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '485':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '486':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '487':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutKeyPolicyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ReEncrypt':
+    post:
+      operationId: ReEncrypt
+      description: '<p>Encrypts data on the server side with a new customer master key (CMK) without exposing the plaintext of the data on the client side. The data is first decrypted and then reencrypted. You can also use this operation to change the encryption context of a ciphertext.</p> <p>Unlike other operations, <code>ReEncrypt</code> is authorized twice, once as <code>ReEncryptFrom</code> on the source CMK and once as <code>ReEncryptTo</code> on the destination CMK. We recommend that you include the <code>"kms:ReEncrypt*"</code> permission in your <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">key policies</a> to permit reencryption from or to the CMK. This permission is automatically included in the key policy when you create a CMK through the console, but you must include it manually when you create a CMK programmatically or when you set a key policy with the <a>PutKeyPolicy</a> operation.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReEncryptResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: DisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledException'
+        '482':
+          description: InvalidCiphertextException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCiphertextException'
+        '483':
+          description: KeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyUnavailableException'
+        '484':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '485':
+          description: InvalidKeyUsageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKeyUsageException'
+        '486':
+          description: InvalidGrantTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGrantTokenException'
+        '487':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '488':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReEncryptRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RetireGrant':
+    post:
+      operationId: RetireGrant
+      description: '<p>Retires a grant. To clean up, you can retire a grant when you''re done using it. You should revoke a grant when you intend to actively deny operations that depend on it. The following are permitted to call this API:</p> <ul> <li> <p>The AWS account (root user) under which the grant was created</p> </li> <li> <p>The <code>RetiringPrincipal</code>, if present in the grant</p> </li> <li> <p>The <code>GranteePrincipal</code>, if <code>RetireGrant</code> is an operation specified in the grant</p> </li> </ul> <p>You must identify the grant to retire by its grant token or by a combination of the grant ID and the Amazon Resource Name (ARN) of the customer master key (CMK). A grant token is a unique variable-length base64-encoded string. A grant ID is a 64 character unique identifier of a grant. The <a>CreateGrant</a> operation returns both.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidGrantTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGrantTokenException'
+        '481':
+          description: InvalidGrantIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGrantIdException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '485':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetireGrantRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RevokeGrant':
+    post:
+      operationId: RevokeGrant
+      description: Revokes a grant. You can revoke a grant to actively deny operations that depend on it.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '482':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '483':
+          description: InvalidGrantIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGrantIdException'
+        '484':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '485':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeGrantRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ScheduleKeyDeletion':
+    post:
+      operationId: ScheduleKeyDeletion
+      description: '<p>Schedules the deletion of a customer master key (CMK). You may provide a waiting period, specified in days, before deletion occurs. If you do not provide a waiting period, the default period of 30 days is used. When this operation is successful, the state of the CMK changes to <code>PendingDeletion</code>. Before the waiting period ends, you can use <a>CancelKeyDeletion</a> to cancel the deletion of the CMK. After the waiting period ends, AWS KMS deletes the CMK and all AWS KMS data associated with it, including all aliases that refer to it.</p> <important> <p>Deleting a CMK is a destructive and potentially dangerous operation. When a CMK is deleted, all data that was encrypted under the CMK is rendered unrecoverable. To restrict the use of a CMK without deleting it, use <a>DisableKey</a>.</p> </important> <p>For more information about scheduling a CMK for deletion, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html">Deleting Customer Master Keys</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleKeyDeletionResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '484':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleKeyDeletionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TagResource':
+    post:
+      operationId: TagResource
+      description: '<p>Adds or overwrites one or more tags for the specified customer master key (CMK). </p> <p>Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.</p> <p>You cannot use the same tag key more than once per CMK. For example, consider a CMK with one tag whose tag key is <code>Purpose</code> and tag value is <code>Test</code>. If you send a <code>TagResource</code> request for this CMK with a tag key of <code>Purpose</code> and a tag value of <code>Prod</code>, it does not create a second tag. Instead, the original tag is overwritten with the new tag value.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '483':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: TagException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UntagResource':
+    post:
+      operationId: UntagResource
+      description: '<p>Removes the specified tag or tags from the specified customer master key (CMK). </p> <p>To remove a tag, you specify the tag key for each tag to remove. You do not specify the tag value. To overwrite the tag value for an existing tag, use <a>TagResource</a>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '483':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+        '484':
+          description: TagException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateAlias':
+    post:
+      operationId: UpdateAlias
+      description: '<p>Updates an alias to map it to a different key.</p> <p>An alias is not a property of a key. Therefore, an alias can be mapped to and unmapped from an existing key without changing the properties of the key.</p> <p>An alias name can contain only alphanumeric characters, forward slashes (/), underscores (_), and dashes (-). An alias must start with the word "alias" followed by a forward slash (alias/). An alias that begins with "aws" after the forward slash (alias/aws...) is reserved by Amazon Web Services (AWS).</p> <p>The alias and the key it is mapped to must be in the same AWS account and the same region.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '483':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAliasRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateKeyDescription':
+    post:
+      operationId: UpdateKeyDescription
+      description: Updates the description of a customer master key (CMK).
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: InvalidArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArnException'
+        '482':
+          description: DependencyTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyTimeoutException'
+        '483':
+          description: KMSInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInternalException'
+        '484':
+          description: KMSInvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateKeyDescriptionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AWSAccountIdType:
+      type: string
+    AlgorithmSpec:
+      type: string
+      enum:
+        - RSAES_PKCS1_V1_5
+        - RSAES_OAEP_SHA_1
+        - RSAES_OAEP_SHA_256
+    AliasList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AliasListEntry'
+    AliasListEntry:
+      type: object
+      properties:
+        AliasName:
+          $ref: '#/components/schemas/AliasNameType'
+        AliasArn:
+          $ref: '#/components/schemas/ArnType'
+        TargetKeyId:
+          $ref: '#/components/schemas/KeyIdType'
+      description: Contains information about an alias.
+    AliasNameType:
+      type: string
+      pattern: '^[a-zA-Z0-9:/_-]+$'
+      minLength: 1
+      maxLength: 256
+    AlreadyExistsException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because it attempted to create a resource that already exists.
+    ArnType:
+      type: string
+      minLength: 20
+      maxLength: 2048
+    BooleanType:
+      type: boolean
+    CancelKeyDeletionRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    CancelKeyDeletionResponse:
+      type: object
+      example:
+        KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    CiphertextType:
+      type: string
+      minLength: 1
+      maxLength: 6144
+    CreateAliasRequest:
+      type: object
+      required:
+        - AliasName
+        - TargetKeyId
+      example:
+        AliasName: alias/ExampleAlias
+        TargetKeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        AliasName:
+          $ref: '#/components/schemas/AliasNameType'
+        TargetKeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    CreateGrantRequest:
+      type: object
+      required:
+        - KeyId
+        - GranteePrincipal
+      example:
+        GranteePrincipal: 'arn:aws:iam::111122223333:role/ExampleRole'
+        KeyId: 'arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+        Operations:
+          - Encrypt
+          - Decrypt
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        GranteePrincipal:
+          $ref: '#/components/schemas/PrincipalIdType'
+        RetiringPrincipal:
+          $ref: '#/components/schemas/PrincipalIdType'
+        Operations:
+          $ref: '#/components/schemas/GrantOperationList'
+        Constraints:
+          $ref: '#/components/schemas/GrantConstraints'
+        GrantTokens:
+          $ref: '#/components/schemas/GrantTokenList'
+        Name:
+          $ref: '#/components/schemas/GrantNameType'
+    CreateGrantResponse:
+      type: object
+      example:
+        GrantId: 0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60
+        GrantToken: AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW__MSrqnre1HIN0Grt00ViSSuUjhqOC8OT3YAAADfMIHcBgkqhkiG9w0BBwaggc4wgcsCAQAwgcUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMmqLyBTAegIn9XlK5AgEQgIGXZQjkBcl1dykDdqZBUQ6L1OfUivQy7JVYO2-ZJP7m6f1g8GzV47HX5phdtONAP7K_HQIflcgpkoCqd_fUnE114mSmiagWkbQ5sqAVV3ov-VeqgrvMe5ZFEWLMSluvBAqdjHEdMIkHMlhlj4ENZbzBfo9Wxk8b8SnwP4kc4gGivedzFXo-dwN8fxjjq_ZZ9JFOj2ijIbj5FyogDCN0drOfi8RORSEuCEmPvjFRMFAwcmwFkN2NPp89amA
+      properties:
+        GrantToken:
+          $ref: '#/components/schemas/GrantTokenType'
+        GrantId:
+          $ref: '#/components/schemas/GrantIdType'
+    CreateKeyRequest:
+      type: object
+      example:
+        Tags:
+          - TagKey: CreatedBy
+            TagValue: ExampleUser
+      properties:
+        Policy:
+          $ref: '#/components/schemas/PolicyType'
+        Description:
+          $ref: '#/components/schemas/DescriptionType'
+        KeyUsage:
+          $ref: '#/components/schemas/KeyUsageType'
+        Origin:
+          $ref: '#/components/schemas/OriginType'
+        BypassPolicyLockoutSafetyCheck:
+          $ref: '#/components/schemas/BooleanType'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    CreateKeyResponse:
+      type: object
+      example:
+        KeyMetadata:
+          AWSAccountId: '111122223333'
+          Arn: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+          CreationDate: '2017-01-09T12:00:07-08:00'
+          Description: ''
+          Enabled: true
+          KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+          KeyState: Enabled
+          KeyUsage: ENCRYPT_DECRYPT
+          Origin: AWS_KMS
+      properties:
+        KeyMetadata:
+          $ref: '#/components/schemas/KeyMetadata'
+    DataKeySpec:
+      type: string
+      enum:
+        - AES_256
+        - AES_128
+    DateType:
+      type: string
+      format: date-time
+    DecryptRequest:
+      type: object
+      required:
+        - CiphertextBlob
+      example:
+        CiphertextBlob: <binary data>
+      properties:
+        CiphertextBlob:
+          $ref: '#/components/schemas/CiphertextType'
+        EncryptionContext:
+          $ref: '#/components/schemas/EncryptionContextType'
+        GrantTokens:
+          $ref: '#/components/schemas/GrantTokenList'
+    DecryptResponse:
+      type: object
+      example:
+        KeyId: 'arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+        Plaintext: <binary data>
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        Plaintext:
+          $ref: '#/components/schemas/PlaintextType'
+    DeleteAliasRequest:
+      type: object
+      required:
+        - AliasName
+      example:
+        AliasName: alias/ExampleAlias
+      properties:
+        AliasName:
+          $ref: '#/components/schemas/AliasNameType'
+    DeleteImportedKeyMaterialRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    DependencyTimeoutException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The system timed out while trying to fulfill the request. The request can be retried.
+    DescribeKeyRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        GrantTokens:
+          $ref: '#/components/schemas/GrantTokenList'
+    DescribeKeyResponse:
+      type: object
+      example:
+        KeyMetadata:
+          AWSAccountId: '111122223333'
+          Arn: 'arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+          CreationDate: '2015-10-12T11:45:07-07:00'
+          Description: ''
+          Enabled: true
+          KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+          KeyState: Enabled
+          KeyUsage: ENCRYPT_DECRYPT
+          Origin: AWS_KMS
+      properties:
+        KeyMetadata:
+          $ref: '#/components/schemas/KeyMetadata'
+    DescriptionType:
+      type: string
+      minLength: 0
+      maxLength: 8192
+    DisableKeyRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    DisableKeyRotationRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    DisabledException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the specified CMK is not enabled.
+    EnableKeyRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    EnableKeyRotationRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    EncryptRequest:
+      type: object
+      required:
+        - KeyId
+        - Plaintext
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+        Plaintext: <binary data>
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        Plaintext:
+          $ref: '#/components/schemas/PlaintextType'
+        EncryptionContext:
+          $ref: '#/components/schemas/EncryptionContextType'
+        GrantTokens:
+          $ref: '#/components/schemas/GrantTokenList'
+    EncryptResponse:
+      type: object
+      example:
+        CiphertextBlob: <binary data>
+        KeyId: 'arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+      properties:
+        CiphertextBlob:
+          $ref: '#/components/schemas/CiphertextType'
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    EncryptionContextKey:
+      type: string
+    EncryptionContextType:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/EncryptionContextKey'
+          value:
+            $ref: '#/components/schemas/EncryptionContextValue'
+    EncryptionContextValue:
+      type: string
+    ErrorMessageType:
+      type: string
+    ExpirationModelType:
+      type: string
+      enum:
+        - KEY_MATERIAL_EXPIRES
+        - KEY_MATERIAL_DOES_NOT_EXPIRE
+    ExpiredImportTokenException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: 'The request was rejected because the provided import token is expired. Use <a>GetParametersForImport</a> to retrieve a new import token and public key, use the new public key to encrypt the key material, and then try the request again.'
+    GenerateDataKeyRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: alias/ExampleAlias
+        KeySpec: AES_256
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        EncryptionContext:
+          $ref: '#/components/schemas/EncryptionContextType'
+        NumberOfBytes:
+          $ref: '#/components/schemas/NumberOfBytesType'
+        KeySpec:
+          $ref: '#/components/schemas/DataKeySpec'
+        GrantTokens:
+          $ref: '#/components/schemas/GrantTokenList'
+    GenerateDataKeyResponse:
+      type: object
+      example:
+        CiphertextBlob: <binary data>
+        KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+        Plaintext: <binary data>
+      properties:
+        CiphertextBlob:
+          $ref: '#/components/schemas/CiphertextType'
+        Plaintext:
+          $ref: '#/components/schemas/PlaintextType'
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    GenerateDataKeyWithoutPlaintextRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: alias/ExampleAlias
+        KeySpec: AES_256
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        EncryptionContext:
+          $ref: '#/components/schemas/EncryptionContextType'
+        KeySpec:
+          $ref: '#/components/schemas/DataKeySpec'
+        NumberOfBytes:
+          $ref: '#/components/schemas/NumberOfBytesType'
+        GrantTokens:
+          $ref: '#/components/schemas/GrantTokenList'
+    GenerateDataKeyWithoutPlaintextResponse:
+      type: object
+      example:
+        CiphertextBlob: <binary data>
+        KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+      properties:
+        CiphertextBlob:
+          $ref: '#/components/schemas/CiphertextType'
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    GenerateRandomRequest:
+      type: object
+      example:
+        NumberOfBytes: 32
+      properties:
+        NumberOfBytes:
+          $ref: '#/components/schemas/NumberOfBytesType'
+    GenerateRandomResponse:
+      type: object
+      example:
+        Plaintext: <binary data>
+      properties:
+        Plaintext:
+          $ref: '#/components/schemas/PlaintextType'
+    GetKeyPolicyRequest:
+      type: object
+      required:
+        - KeyId
+        - PolicyName
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+        PolicyName: default
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        PolicyName:
+          $ref: '#/components/schemas/PolicyNameType'
+    GetKeyPolicyResponse:
+      type: object
+      example:
+        Policy: |-
+          {
+            "Version" : "2012-10-17",
+            "Id" : "key-default-1",
+            "Statement" : [ {
+              "Sid" : "Enable IAM User Permissions",
+              "Effect" : "Allow",
+              "Principal" : {
+                "AWS" : "arn:aws:iam::111122223333:root"
+              },
+              "Action" : "kms:*",
+              "Resource" : "*"
+            } ]
+          }
+      properties:
+        Policy:
+          $ref: '#/components/schemas/PolicyType'
+    GetKeyRotationStatusRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    GetKeyRotationStatusResponse:
+      type: object
+      example:
+        KeyRotationEnabled: true
+      properties:
+        KeyRotationEnabled:
+          $ref: '#/components/schemas/BooleanType'
+    GetParametersForImportRequest:
+      type: object
+      required:
+        - KeyId
+        - WrappingAlgorithm
+        - WrappingKeySpec
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+        WrappingAlgorithm: RSAES_OAEP_SHA_1
+        WrappingKeySpec: RSA_2048
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        WrappingAlgorithm:
+          $ref: '#/components/schemas/AlgorithmSpec'
+        WrappingKeySpec:
+          $ref: '#/components/schemas/WrappingKeySpec'
+    GetParametersForImportResponse:
+      type: object
+      example:
+        ImportToken: <binary data>
+        KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+        ParametersValidTo: '2016-12-01T14:52:17-08:00'
+        PublicKey: <binary data>
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        ImportToken:
+          $ref: '#/components/schemas/CiphertextType'
+        PublicKey:
+          $ref: '#/components/schemas/PlaintextType'
+        ParametersValidTo:
+          $ref: '#/components/schemas/DateType'
+    GrantConstraints:
+      type: object
+      properties:
+        EncryptionContextSubset:
+          $ref: '#/components/schemas/EncryptionContextType'
+        EncryptionContextEquals:
+          $ref: '#/components/schemas/EncryptionContextType'
+      description: '<p>A structure that you can use to allow certain operations in the grant only when the desired encryption context is present. For more information about encryption context, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html">Encryption Context</a> in the <i>AWS Key Management Service Developer Guide</i>.</p> <p>Grant constraints apply only to operations that accept encryption context as input. For example, the <code> <a>DescribeKey</a> </code> operation does not accept encryption context as input. A grant that allows the <code>DescribeKey</code> operation does so regardless of the grant constraints. In constrast, the <code> <a>Encrypt</a> </code> operation accepts encryption context as input. A grant that allows the <code>Encrypt</code> operation does so only when the encryption context of the <code>Encrypt</code> operation satisfies the grant constraints.</p>'
+    GrantIdType:
+      type: string
+      minLength: 1
+      maxLength: 128
+    GrantList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GrantListEntry'
+    GrantListEntry:
+      type: object
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        GrantId:
+          $ref: '#/components/schemas/GrantIdType'
+        Name:
+          $ref: '#/components/schemas/GrantNameType'
+        CreationDate:
+          $ref: '#/components/schemas/DateType'
+        GranteePrincipal:
+          $ref: '#/components/schemas/PrincipalIdType'
+        RetiringPrincipal:
+          $ref: '#/components/schemas/PrincipalIdType'
+        IssuingAccount:
+          $ref: '#/components/schemas/PrincipalIdType'
+        Operations:
+          $ref: '#/components/schemas/GrantOperationList'
+        Constraints:
+          $ref: '#/components/schemas/GrantConstraints'
+      description: Contains information about an entry in a list of grants.
+    GrantNameType:
+      type: string
+      pattern: '^[a-zA-Z0-9:/_-]+$'
+      minLength: 1
+      maxLength: 256
+    GrantOperation:
+      type: string
+      enum:
+        - Decrypt
+        - Encrypt
+        - GenerateDataKey
+        - GenerateDataKeyWithoutPlaintext
+        - ReEncryptFrom
+        - ReEncryptTo
+        - CreateGrant
+        - RetireGrant
+        - DescribeKey
+    GrantOperationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GrantOperation'
+    GrantTokenList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GrantTokenType'
+      minItems: 0
+      maxItems: 10
+    GrantTokenType:
+      type: string
+      minLength: 1
+      maxLength: 8192
+    ImportKeyMaterialRequest:
+      type: object
+      required:
+        - KeyId
+        - ImportToken
+        - EncryptedKeyMaterial
+      example:
+        EncryptedKeyMaterial: <binary data>
+        ExpirationModel: KEY_MATERIAL_DOES_NOT_EXPIRE
+        ImportToken: <binary data>
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        ImportToken:
+          $ref: '#/components/schemas/CiphertextType'
+        EncryptedKeyMaterial:
+          $ref: '#/components/schemas/CiphertextType'
+        ValidTo:
+          $ref: '#/components/schemas/DateType'
+        ExpirationModel:
+          $ref: '#/components/schemas/ExpirationModelType'
+    ImportKeyMaterialResponse:
+      type: object
+      properties: {}
+    IncorrectKeyMaterialException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the provided key material is invalid or is not the same key material that was previously imported into this customer master key (CMK).
+    InvalidAliasNameException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the specified alias name is not valid.
+    InvalidArnException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because a specified ARN was not valid.
+    InvalidCiphertextException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the specified ciphertext has been corrupted or is otherwise invalid.
+    InvalidGrantIdException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the specified <code>GrantId</code> is not valid.
+    InvalidGrantTokenException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the specified grant token is not valid.
+    InvalidImportTokenException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the provided import token is invalid or is associated with a different customer master key (CMK).
+    InvalidKeyUsageException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the specified <code>KeySpec</code> value is not valid.
+    InvalidMarkerException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the marker that specifies where pagination should next begin is not valid.
+    KMSInternalException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because an internal exception occurred. The request can be retried.
+    KMSInvalidStateException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: '<p>The request was rejected because the state of the specified resource is not valid for this request.</p> <p>For more information about how key state affects the use of a CMK, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">How Key State Affects Use of a Customer Master Key</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+    KeyIdType:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    KeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeyListEntry'
+    KeyListEntry:
+      type: object
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        KeyArn:
+          $ref: '#/components/schemas/ArnType'
+      description: Contains information about each entry in the key list.
+    KeyManagerType:
+      type: string
+      enum:
+        - AWS
+        - CUSTOMER
+    KeyMetadata:
+      type: object
+      required:
+        - KeyId
+      properties:
+        AWSAccountId:
+          $ref: '#/components/schemas/AWSAccountIdType'
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        Arn:
+          $ref: '#/components/schemas/ArnType'
+        CreationDate:
+          $ref: '#/components/schemas/DateType'
+        Enabled:
+          $ref: '#/components/schemas/BooleanType'
+        Description:
+          $ref: '#/components/schemas/DescriptionType'
+        KeyUsage:
+          $ref: '#/components/schemas/KeyUsageType'
+        KeyState:
+          $ref: '#/components/schemas/KeyState'
+        DeletionDate:
+          $ref: '#/components/schemas/DateType'
+        ValidTo:
+          $ref: '#/components/schemas/DateType'
+        Origin:
+          $ref: '#/components/schemas/OriginType'
+        ExpirationModel:
+          $ref: '#/components/schemas/ExpirationModelType'
+        KeyManager:
+          $ref: '#/components/schemas/KeyManagerType'
+      description: <p>Contains metadata about a customer master key (CMK).</p> <p>This data type is used as a response element for the <a>CreateKey</a> and <a>DescribeKey</a> operations.</p>
+    KeyState:
+      type: string
+      enum:
+        - Enabled
+        - Disabled
+        - PendingDeletion
+        - PendingImport
+    KeyUnavailableException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the specified CMK was not available. The request can be retried.
+    KeyUsageType:
+      type: string
+      enum:
+        - ENCRYPT_DECRYPT
+    LimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: 'The request was rejected because a limit was exceeded. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/limits.html">Limits</a> in the <i>AWS Key Management Service Developer Guide</i>.'
+    LimitType:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    ListAliasesRequest:
+      type: object
+      properties:
+        Limit:
+          $ref: '#/components/schemas/LimitType'
+        Marker:
+          $ref: '#/components/schemas/MarkerType'
+    ListAliasesResponse:
+      type: object
+      example:
+        Aliases:
+          - AliasArn: 'arn:aws:kms:us-east-2:111122223333:alias/aws/acm'
+            AliasName: alias/aws/acm
+            TargetKeyId: da03f6f7-d279-427a-9cae-de48d07e5b66
+          - AliasArn: 'arn:aws:kms:us-east-2:111122223333:alias/aws/ebs'
+            AliasName: alias/aws/ebs
+            TargetKeyId: 25a217e7-7170-4b8c-8bf6-045ea5f70e5b
+          - AliasArn: 'arn:aws:kms:us-east-2:111122223333:alias/aws/rds'
+            AliasName: alias/aws/rds
+            TargetKeyId: 7ec3104e-c3f2-4b5c-bf42-bfc4772c6685
+          - AliasArn: 'arn:aws:kms:us-east-2:111122223333:alias/aws/redshift'
+            AliasName: alias/aws/redshift
+            TargetKeyId: 08f7a25a-69e2-4fb5-8f10-393db27326fa
+          - AliasArn: 'arn:aws:kms:us-east-2:111122223333:alias/aws/s3'
+            AliasName: alias/aws/s3
+            TargetKeyId: d2b0f1a3-580d-4f79-b836-bc983be8cfa5
+          - AliasArn: 'arn:aws:kms:us-east-2:111122223333:alias/example1'
+            AliasName: alias/example1
+            TargetKeyId: 4da1e216-62d0-46c5-a7c0-5f3a3d2f8046
+          - AliasArn: 'arn:aws:kms:us-east-2:111122223333:alias/example2'
+            AliasName: alias/example2
+            TargetKeyId: f32fef59-2cc2-445b-8573-2d73328acbee
+          - AliasArn: 'arn:aws:kms:us-east-2:111122223333:alias/example3'
+            AliasName: alias/example3
+            TargetKeyId: 1374ef38-d34e-4d5f-b2c9-4e0daee38855
+        Truncated: false
+      properties:
+        Aliases:
+          $ref: '#/components/schemas/AliasList'
+        NextMarker:
+          $ref: '#/components/schemas/MarkerType'
+        Truncated:
+          $ref: '#/components/schemas/BooleanType'
+    ListGrantsRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        Limit:
+          $ref: '#/components/schemas/LimitType'
+        Marker:
+          $ref: '#/components/schemas/MarkerType'
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    ListGrantsResponse:
+      type: object
+      example:
+        Grants:
+          - CreationDate: '2016-12-07T11:09:35-08:00'
+            GrantId: 0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60
+            GranteePrincipal: 'arn:aws:iam::111122223333:role/ExampleRole'
+            IssuingAccount: 'arn:aws:iam::444455556666:root'
+            KeyId: 'arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+            Operations:
+              - Decrypt
+              - Encrypt
+            RetiringPrincipal: 'arn:aws:iam::111122223333:role/ExampleRole'
+        Truncated: false
+      properties:
+        Grants:
+          $ref: '#/components/schemas/GrantList'
+        NextMarker:
+          $ref: '#/components/schemas/MarkerType'
+        Truncated:
+          $ref: '#/components/schemas/BooleanType'
+    ListKeyPoliciesRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        Limit:
+          $ref: '#/components/schemas/LimitType'
+        Marker:
+          $ref: '#/components/schemas/MarkerType'
+    ListKeyPoliciesResponse:
+      type: object
+      example:
+        PolicyNames:
+          - default
+        Truncated: false
+      properties:
+        PolicyNames:
+          $ref: '#/components/schemas/PolicyNameList'
+        NextMarker:
+          $ref: '#/components/schemas/MarkerType'
+        Truncated:
+          $ref: '#/components/schemas/BooleanType'
+    ListKeysRequest:
+      type: object
+      properties:
+        Limit:
+          $ref: '#/components/schemas/LimitType'
+        Marker:
+          $ref: '#/components/schemas/MarkerType'
+    ListKeysResponse:
+      type: object
+      example:
+        Keys:
+          - KeyArn: 'arn:aws:kms:us-east-2:111122223333:key/0d990263-018e-4e65-a703-eff731de951e'
+            KeyId: 0d990263-018e-4e65-a703-eff731de951e
+          - KeyArn: 'arn:aws:kms:us-east-2:111122223333:key/144be297-0ae1-44ac-9c8f-93cd8c82f841'
+            KeyId: 144be297-0ae1-44ac-9c8f-93cd8c82f841
+          - KeyArn: 'arn:aws:kms:us-east-2:111122223333:key/21184251-b765-428e-b852-2c7353e72571'
+            KeyId: 21184251-b765-428e-b852-2c7353e72571
+          - KeyArn: 'arn:aws:kms:us-east-2:111122223333:key/214fe92f-5b03-4ae1-b350-db2a45dbe10c'
+            KeyId: 214fe92f-5b03-4ae1-b350-db2a45dbe10c
+          - KeyArn: 'arn:aws:kms:us-east-2:111122223333:key/339963f2-e523-49d3-af24-a0fe752aa458'
+            KeyId: 339963f2-e523-49d3-af24-a0fe752aa458
+          - KeyArn: 'arn:aws:kms:us-east-2:111122223333:key/b776a44b-df37-4438-9be4-a27494e4271a'
+            KeyId: b776a44b-df37-4438-9be4-a27494e4271a
+          - KeyArn: 'arn:aws:kms:us-east-2:111122223333:key/deaf6c9e-cf2c-46a6-bf6d-0b6d487cffbb'
+            KeyId: deaf6c9e-cf2c-46a6-bf6d-0b6d487cffbb
+        Truncated: false
+      properties:
+        Keys:
+          $ref: '#/components/schemas/KeyList'
+        NextMarker:
+          $ref: '#/components/schemas/MarkerType'
+        Truncated:
+          $ref: '#/components/schemas/BooleanType'
+    ListResourceTagsRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        Limit:
+          $ref: '#/components/schemas/LimitType'
+        Marker:
+          $ref: '#/components/schemas/MarkerType'
+    ListResourceTagsResponse:
+      type: object
+      example:
+        Tags:
+          - TagKey: CostCenter
+            TagValue: '87654'
+          - TagKey: CreatedBy
+            TagValue: ExampleUser
+          - TagKey: Purpose
+            TagValue: Test
+        Truncated: false
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        NextMarker:
+          $ref: '#/components/schemas/MarkerType'
+        Truncated:
+          $ref: '#/components/schemas/BooleanType'
+    ListRetirableGrantsRequest:
+      type: object
+      required:
+        - RetiringPrincipal
+      example:
+        RetiringPrincipal: 'arn:aws:iam::111122223333:role/ExampleRole'
+      properties:
+        Limit:
+          $ref: '#/components/schemas/LimitType'
+        Marker:
+          $ref: '#/components/schemas/MarkerType'
+        RetiringPrincipal:
+          $ref: '#/components/schemas/PrincipalIdType'
+    MalformedPolicyDocumentException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the specified policy is not syntactically or semantically correct.
+    MarkerType:
+      type: string
+      pattern: '[\u0020-\u00FF]*'
+      minLength: 1
+      maxLength: 320
+    NotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because the specified entity or resource could not be found.
+    NumberOfBytesType:
+      type: integer
+      minimum: 1
+      maximum: 1024
+    OriginType:
+      type: string
+      enum:
+        - AWS_KMS
+        - EXTERNAL
+    PendingWindowInDaysType:
+      type: integer
+      minimum: 1
+      maximum: 365
+    PlaintextType:
+      type: string
+      minLength: 1
+      maxLength: 4096
+      format: password
+    PolicyNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyNameType'
+    PolicyNameType:
+      type: string
+      pattern: '[\w]+'
+      minLength: 1
+      maxLength: 128
+    PolicyType:
+      type: string
+      pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+      minLength: 1
+      maxLength: 131072
+    PrincipalIdType:
+      type: string
+      minLength: 1
+      maxLength: 256
+    PutKeyPolicyRequest:
+      type: object
+      required:
+        - KeyId
+        - PolicyName
+        - Policy
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+        Policy: |
+          {
+              "Version": "2012-10-17",
+              "Id": "custom-policy-2016-12-07",
+              "Statement": [
+                  {
+                      "Sid": "Enable IAM User Permissions",
+                      "Effect": "Allow",
+                      "Principal": {
+                          "AWS": "arn:aws:iam::111122223333:root"
+                      },
+                      "Action": "kms:*",
+                      "Resource": "*"
+                  },
+                  {
+                      "Sid": "Allow access for Key Administrators",
+                      "Effect": "Allow",
+                      "Principal": {
+                          "AWS": [
+                              "arn:aws:iam::111122223333:user/ExampleAdminUser",
+                              "arn:aws:iam::111122223333:role/ExampleAdminRole"
+                          ]
+                      },
+                      "Action": [
+                          "kms:Create*",
+                          "kms:Describe*",
+                          "kms:Enable*",
+                          "kms:List*",
+                          "kms:Put*",
+                          "kms:Update*",
+                          "kms:Revoke*",
+                          "kms:Disable*",
+                          "kms:Get*",
+                          "kms:Delete*",
+                          "kms:ScheduleKeyDeletion",
+                          "kms:CancelKeyDeletion"
+                      ],
+                      "Resource": "*"
+                  },
+                  {
+                      "Sid": "Allow use of the key",
+                      "Effect": "Allow",
+                      "Principal": {
+                          "AWS": "arn:aws:iam::111122223333:role/ExamplePowerUserRole"
+                      },
+                      "Action": [
+                          "kms:Encrypt",
+                          "kms:Decrypt",
+                          "kms:ReEncrypt*",
+                          "kms:GenerateDataKey*",
+                          "kms:DescribeKey"
+                      ],
+                      "Resource": "*"
+                  },
+                  {
+                      "Sid": "Allow attachment of persistent resources",
+                      "Effect": "Allow",
+                      "Principal": {
+                          "AWS": "arn:aws:iam::111122223333:role/ExamplePowerUserRole"
+                      },
+                      "Action": [
+                          "kms:CreateGrant",
+                          "kms:ListGrants",
+                          "kms:RevokeGrant"
+                      ],
+                      "Resource": "*",
+                      "Condition": {
+                          "Bool": {
+                              "kms:GrantIsForAWSResource": "true"
+                          }
+                      }
+                  }
+              ]
+          }
+        PolicyName: default
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        PolicyName:
+          $ref: '#/components/schemas/PolicyNameType'
+        Policy:
+          $ref: '#/components/schemas/PolicyType'
+        BypassPolicyLockoutSafetyCheck:
+          $ref: '#/components/schemas/BooleanType'
+    ReEncryptRequest:
+      type: object
+      required:
+        - CiphertextBlob
+        - DestinationKeyId
+      example:
+        CiphertextBlob: <binary data>
+        DestinationKeyId: 0987dcba-09fe-87dc-65ba-ab0987654321
+      properties:
+        CiphertextBlob:
+          $ref: '#/components/schemas/CiphertextType'
+        SourceEncryptionContext:
+          $ref: '#/components/schemas/EncryptionContextType'
+        DestinationKeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        DestinationEncryptionContext:
+          $ref: '#/components/schemas/EncryptionContextType'
+        GrantTokens:
+          $ref: '#/components/schemas/GrantTokenList'
+    ReEncryptResponse:
+      type: object
+      example:
+        CiphertextBlob: <binary data>
+        KeyId: 'arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321'
+        SourceKeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+      properties:
+        CiphertextBlob:
+          $ref: '#/components/schemas/CiphertextType'
+        SourceKeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    RetireGrantRequest:
+      type: object
+      example:
+        GrantId: 0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60
+        KeyId: 'arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+      properties:
+        GrantToken:
+          $ref: '#/components/schemas/GrantTokenType'
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        GrantId:
+          $ref: '#/components/schemas/GrantIdType'
+    RevokeGrantRequest:
+      type: object
+      required:
+        - KeyId
+        - GrantId
+      example:
+        GrantId: 0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        GrantId:
+          $ref: '#/components/schemas/GrantIdType'
+    ScheduleKeyDeletionRequest:
+      type: object
+      required:
+        - KeyId
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+        PendingWindowInDays: 7
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        PendingWindowInDays:
+          $ref: '#/components/schemas/PendingWindowInDaysType'
+    ScheduleKeyDeletionResponse:
+      type: object
+      example:
+        DeletionDate: '2016-12-17T16:00:00-08:00'
+        KeyId: 'arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab'
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        DeletionDate:
+          $ref: '#/components/schemas/DateType'
+    Tag:
+      type: object
+      required:
+        - TagKey
+        - TagValue
+      properties:
+        TagKey:
+          $ref: '#/components/schemas/TagKeyType'
+        TagValue:
+          $ref: '#/components/schemas/TagValueType'
+      description: 'A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.'
+    TagException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because one or more tags are not valid.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKeyType'
+    TagKeyType:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TagResourceRequest:
+      type: object
+      required:
+        - KeyId
+        - Tags
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+        Tags:
+          - TagKey: Purpose
+            TagValue: Test
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    TagValueType:
+      type: string
+      minLength: 0
+      maxLength: 256
+    UnsupportedOperationException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The request was rejected because a specified parameter is not supported or a specified resource is not valid for this operation.
+    UntagResourceRequest:
+      type: object
+      required:
+        - KeyId
+        - TagKeys
+      example:
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+        TagKeys:
+          - Purpose
+          - CostCenter
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        TagKeys:
+          $ref: '#/components/schemas/TagKeyList'
+    UpdateAliasRequest:
+      type: object
+      required:
+        - AliasName
+        - TargetKeyId
+      example:
+        AliasName: alias/ExampleAlias
+        TargetKeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        AliasName:
+          $ref: '#/components/schemas/AliasNameType'
+        TargetKeyId:
+          $ref: '#/components/schemas/KeyIdType'
+    UpdateKeyDescriptionRequest:
+      type: object
+      required:
+        - KeyId
+        - Description
+      example:
+        Description: Example description that indicates the intended use of this CMK.
+        KeyId: 1234abcd-12ab-34cd-56ef-1234567890ab
+      properties:
+        KeyId:
+          $ref: '#/components/schemas/KeyIdType'
+        Description:
+          $ref: '#/components/schemas/DescriptionType'
+    WrappingKeySpec:
+      type: string
+      enum:
+        - RSA_2048
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

@@ -1,0 +1,1832 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://api.wordnik.com/v4'
+info:
+  description: |
+    Wordnik is the world's biggest online English dictionary, by number of words
+  title: Wordnik
+  version: '4.0'
+  x-apisguru-categories:
+    - text
+  x-logo:
+    url: 'https://wordnik.com/img/logo-wordnik-home.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
+      url: 'http://developer.wordnik.com/v4/resources.json'
+      version: '1.1'
+  x-providerName: wordnik.com
+externalDocs:
+  url: 'http://developer.wordnik.com/'
+security:
+  - api_key: []
+tags:
+  - name: account
+  - name: word
+  - name: wordList
+  - name: wordLists
+  - name: words
+paths:
+  /account.json/apiTokenStatus:
+    get:
+      operationId: getApiTokenStatus
+      parameters:
+        - description: Wordnik authentication token
+          in: header
+          name: api_key
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiTokenStatus'
+      summary: Returns usage statistics for the API account.
+      tags:
+        - account
+  '/account.json/authenticate/{username}':
+    get:
+      operationId: authenticate
+      parameters:
+        - description: A confirmed Wordnik username
+          in: path
+          name: username
+          required: true
+          schema:
+            type: string
+        - description: The user's password
+          in: query
+          name: password
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthenticationToken'
+      summary: Authenticates a User
+      tags:
+        - account
+    post:
+      operationId: authenticatePost
+      parameters:
+        - description: A confirmed Wordnik username
+          in: path
+          name: username
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthenticationToken'
+      summary: Authenticates a user
+      tags:
+        - account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: The user's password
+        required: true
+  /account.json/user:
+    get:
+      description: Requires a valid auth_token to be set.
+      operationId: getLoggedInUser
+      parameters:
+        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+          in: header
+          name: auth_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+      summary: Returns the logged-in User
+      tags:
+        - account
+  /account.json/wordLists:
+    get:
+      operationId: getWordListsForLoggedInUser
+      parameters:
+        - description: auth_token of logged-in user
+          in: header
+          name: auth_token
+          required: true
+          schema:
+            type: string
+        - description: Results to skip
+          in: query
+          name: skip
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: Maximum number of results to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 50
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/WordList'
+                type: array
+      summary: Fetches WordList objects for the logged-in user.
+      tags:
+        - account
+  '/word.json/{word}':
+    get:
+      operationId: getWord
+      parameters:
+        - description: String value of WordObject to return
+          in: path
+          name: word
+          required: true
+          schema:
+            type: string
+        - description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          in: query
+          name: useCanonical
+          required: false
+          schema:
+            type: string
+            default: 'false'
+        - description: 'Return suggestions (for correct spelling, case variants, etc.)'
+          in: query
+          name: includeSuggestions
+          required: false
+          schema:
+            type: string
+            default: 'true'
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordObject'
+      summary: 'Given a word as a string, returns the WordObject that represents it'
+      tags:
+        - word
+  '/word.json/{word}/audio':
+    get:
+      description: The metadata includes a time-expiring fileUrl which allows reading the audio file directly from the API.  Currently only audio pronunciations from the American Heritage Dictionary in mp3 format are supported.
+      operationId: getAudio
+      parameters:
+        - description: Word to get audio for.
+          in: path
+          name: word
+          required: true
+          schema:
+            type: string
+        - description: Use the canonical form of the word
+          in: query
+          name: useCanonical
+          required: false
+          schema:
+            type: string
+            default: 'false'
+        - description: Maximum number of results to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 50
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/AudioFile'
+                type: array
+      summary: Fetches audio metadata for a word.
+      tags:
+        - word
+  '/word.json/{word}/definitions':
+    get:
+      operationId: getDefinitions
+      parameters:
+        - description: Word to return definitions for
+          in: path
+          name: word
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of results to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 200
+        - description: CSV list of part-of-speech types
+          in: query
+          name: partOfSpeech
+          required: false
+          schema:
+            type: string
+        - description: Return related words with definitions
+          in: query
+          name: includeRelated
+          required: false
+          schema:
+            type: string
+            default: 'false'
+        - description: 'Source dictionary to return definitions from.  If ''all'' is received, results are returned from all sources. If multiple values are received (e.g. ''century,wiktionary''), results are returned from the first specified dictionary that has definitions. If left blank, results are returned from the first dictionary that has definitions. By default, dictionaries are searched in this order: ahd, wiktionary, webster, century, wordnet'
+          in: query
+          name: sourceDictionaries
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          in: query
+          name: useCanonical
+          required: false
+          schema:
+            type: string
+            default: 'false'
+        - description: Return a closed set of XML tags in response
+          in: query
+          name: includeTags
+          required: false
+          schema:
+            type: string
+            default: 'false'
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Definition'
+                type: array
+      summary: Return definitions for a word
+      tags:
+        - word
+  '/word.json/{word}/etymologies':
+    get:
+      operationId: getEtymologies
+      parameters:
+        - description: Word to return
+          in: path
+          name: word
+          required: true
+          schema:
+            type: string
+        - description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          in: query
+          name: useCanonical
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                items:
+                  type: string
+                type: array
+      summary: Fetches etymology data
+      tags:
+        - word
+  '/word.json/{word}/examples':
+    get:
+      operationId: getExamples
+      parameters:
+        - description: Word to return examples for
+          in: path
+          name: word
+          required: true
+          schema:
+            type: string
+        - description: Show duplicate examples from different sources
+          in: query
+          name: includeDuplicates
+          required: false
+          schema:
+            type: string
+            default: 'false'
+        - description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          in: query
+          name: useCanonical
+          required: false
+          schema:
+            type: string
+            default: 'false'
+        - description: Results to skip
+          in: query
+          name: skip
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: Maximum number of results to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 5
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExampleSearchResults'
+      summary: Returns examples for a word
+      tags:
+        - word
+  '/word.json/{word}/frequency':
+    get:
+      operationId: getWordFrequency
+      parameters:
+        - description: Word to return
+          in: path
+          name: word
+          required: true
+          schema:
+            type: string
+        - description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          in: query
+          name: useCanonical
+          required: false
+          schema:
+            type: string
+            default: 'false'
+        - description: Starting Year
+          in: query
+          name: startYear
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1800
+        - description: Ending Year
+          in: query
+          name: endYear
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 2012
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/FrequencySummary'
+      summary: Returns word usage over time
+      tags:
+        - word
+  '/word.json/{word}/hyphenation':
+    get:
+      operationId: getHyphenation
+      parameters:
+        - description: Word to get syllables for
+          in: path
+          name: word
+          required: true
+          schema:
+            type: string
+        - description: If true will try to return a correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          in: query
+          name: useCanonical
+          required: false
+          schema:
+            type: string
+            default: 'false'
+        - description: 'Get from a single dictionary. Valid options: ahd, century, wiktionary, webster, and wordnet.'
+          in: query
+          name: sourceDictionary
+          required: false
+          schema:
+            type: string
+        - description: Maximum number of results to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 50
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Syllable'
+                type: array
+      summary: Returns syllable information for a word
+      tags:
+        - word
+  '/word.json/{word}/phrases':
+    get:
+      operationId: getPhrases
+      parameters:
+        - description: Word to fetch phrases for
+          in: path
+          name: word
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of results to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 5
+        - description: Minimum WLMI for the phrase
+          in: query
+          name: wlmi
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          in: query
+          name: useCanonical
+          required: false
+          schema:
+            type: string
+            default: 'false'
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Bigram'
+                type: array
+      summary: Fetches bi-gram phrases for a word
+      tags:
+        - word
+  '/word.json/{word}/pronunciations':
+    get:
+      operationId: getTextPronunciations
+      parameters:
+        - description: Word to get pronunciations for
+          in: path
+          name: word
+          required: true
+          schema:
+            type: string
+        - description: If true will try to return a correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          in: query
+          name: useCanonical
+          required: false
+          schema:
+            type: string
+            default: 'false'
+        - description: Get from a single dictionary
+          in: query
+          name: sourceDictionary
+          required: false
+          schema:
+            type: string
+        - description: Text pronunciation type
+          in: query
+          name: typeFormat
+          required: false
+          schema:
+            type: string
+        - description: Maximum number of results to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 50
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/TextPron'
+                type: array
+      summary: Returns text pronunciations for a given word
+      tags:
+        - word
+  '/word.json/{word}/relatedWords':
+    get:
+      operationId: getRelatedWords
+      parameters:
+        - description: Word to fetch relationships for
+          in: path
+          name: word
+          required: true
+          schema:
+            type: string
+        - description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          in: query
+          name: useCanonical
+          required: false
+          schema:
+            type: string
+            default: 'false'
+        - description: Limits the total results per type of relationship type
+          in: query
+          name: relationshipTypes
+          required: false
+          schema:
+            type: string
+        - description: Restrict to the supplied relationship types
+          in: query
+          name: limitPerRelationshipType
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Related'
+                type: array
+      summary: 'Given a word as a string, returns relationships from the Word Graph'
+      tags:
+        - word
+  '/word.json/{word}/topExample':
+    get:
+      operationId: getTopExample
+      parameters:
+        - description: Word to fetch examples for
+          in: path
+          name: word
+          required: true
+          schema:
+            type: string
+        - description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          in: query
+          name: useCanonical
+          required: false
+          schema:
+            type: string
+            default: 'false'
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Example'
+      summary: Returns a top example for a word
+      tags:
+        - word
+  '/wordList.json/{permalink}':
+    delete:
+      operationId: deleteWordList
+      parameters:
+        - description: ID of WordList to delete
+          in: path
+          name: permalink
+          required: true
+          schema:
+            type: string
+        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+          in: header
+          name: auth_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Deletes an existing WordList
+      tags:
+        - wordList
+    get:
+      operationId: getWordListByPermalink
+      parameters:
+        - description: permalink of WordList to fetch
+          in: path
+          name: permalink
+          required: true
+          schema:
+            type: string
+        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+          in: header
+          name: auth_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordList'
+      summary: Fetches a WordList by ID
+      tags:
+        - wordList
+    put:
+      operationId: updateWordList
+      parameters:
+        - description: permalink of WordList to update
+          in: path
+          name: permalink
+          required: true
+          schema:
+            type: string
+        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+          in: header
+          name: auth_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Updates an existing WordList
+      tags:
+        - wordList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WordList'
+        description: Updated WordList
+  '/wordList.json/{permalink}/deleteWords':
+    post:
+      operationId: deleteWordsFromWordList
+      parameters:
+        - description: permalink of WordList to use
+          in: path
+          name: permalink
+          required: true
+          schema:
+            type: string
+        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+          in: header
+          name: auth_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Removes words from a WordList
+      tags:
+        - wordList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/StringValue'
+              type: array
+        description: Words to remove from WordList
+  '/wordList.json/{permalink}/words':
+    get:
+      operationId: getWordListWords
+      parameters:
+        - description: ID of WordList to use
+          in: path
+          name: permalink
+          required: true
+          schema:
+            type: string
+        - description: Field to sort by
+          in: query
+          name: sortBy
+          required: false
+          schema:
+            type: string
+            default: createDate
+        - description: Direction to sort
+          in: query
+          name: sortOrder
+          required: false
+          schema:
+            type: string
+            default: desc
+        - description: Results to skip
+          in: query
+          name: skip
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: Maximum number of results to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 100
+        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+          in: header
+          name: auth_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/WordListWord'
+                type: array
+      summary: Fetches words in a WordList
+      tags:
+        - wordList
+    post:
+      operationId: addWordsToWordList
+      parameters:
+        - description: permalink of WordList to user
+          in: path
+          name: permalink
+          required: true
+          schema:
+            type: string
+        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+          in: header
+          name: auth_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Adds words to a WordList
+      tags:
+        - wordList
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/StringValue'
+              type: array
+        description: Array of words to add to WordList
+  /wordLists.json:
+    post:
+      operationId: createWordList
+      parameters:
+        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+          in: header
+          name: auth_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordList'
+      summary: Creates a WordList.
+      tags:
+        - wordLists
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WordList'
+        description: WordList to create
+  /words.json/randomWord:
+    get:
+      operationId: getRandomWord
+      parameters:
+        - description: Only return words with dictionary definitions
+          in: query
+          name: hasDictionaryDef
+          required: false
+          schema:
+            type: string
+            default: 'true'
+        - description: CSV part-of-speech values to include
+          in: query
+          name: includePartOfSpeech
+          required: false
+          schema:
+            type: string
+        - description: CSV part-of-speech values to exclude
+          in: query
+          name: excludePartOfSpeech
+          required: false
+          schema:
+            type: string
+        - description: Minimum corpus frequency for terms
+          in: query
+          name: minCorpusCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: Maximum corpus frequency for terms
+          in: query
+          name: maxCorpusCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: -1
+        - description: Minimum dictionary count
+          in: query
+          name: minDictionaryCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - description: Maximum dictionary count
+          in: query
+          name: maxDictionaryCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: -1
+        - description: Minimum word length
+          in: query
+          name: minLength
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 5
+        - description: Maximum word length
+          in: query
+          name: maxLength
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: -1
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordObject'
+      summary: Returns a single random WordObject
+      tags:
+        - words
+  /words.json/randomWords:
+    get:
+      operationId: getRandomWords
+      parameters:
+        - description: Only return words with dictionary definitions
+          in: query
+          name: hasDictionaryDef
+          required: false
+          schema:
+            type: string
+            default: 'true'
+        - description: CSV part-of-speech values to include
+          in: query
+          name: includePartOfSpeech
+          required: false
+          schema:
+            type: string
+        - description: CSV part-of-speech values to exclude
+          in: query
+          name: excludePartOfSpeech
+          required: false
+          schema:
+            type: string
+        - description: Minimum corpus frequency for terms
+          in: query
+          name: minCorpusCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: Maximum corpus frequency for terms
+          in: query
+          name: maxCorpusCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: -1
+        - description: Minimum dictionary count
+          in: query
+          name: minDictionaryCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - description: Maximum dictionary count
+          in: query
+          name: maxDictionaryCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: -1
+        - description: Minimum word length
+          in: query
+          name: minLength
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 5
+        - description: Maximum word length
+          in: query
+          name: maxLength
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: -1
+        - description: Attribute to sort by
+          in: query
+          name: sortBy
+          required: false
+          schema:
+            type: string
+        - description: Sort direction
+          in: query
+          name: sortOrder
+          required: false
+          schema:
+            type: string
+        - description: Maximum number of results to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/WordObject'
+                type: array
+      summary: Returns an array of random WordObjects
+      tags:
+        - words
+  /words.json/reverseDictionary:
+    get:
+      operationId: reverseDictionary
+      parameters:
+        - description: Search term
+          in: query
+          name: query
+          required: true
+          schema:
+            type: string
+        - description: Restricts words and finds closest sense
+          in: query
+          name: findSenseForWord
+          required: false
+          schema:
+            type: string
+        - description: Only include these comma-delimited source dictionaries
+          in: query
+          name: includeSourceDictionaries
+          required: false
+          schema:
+            type: string
+        - description: Exclude these comma-delimited source dictionaries
+          in: query
+          name: excludeSourceDictionaries
+          required: false
+          schema:
+            type: string
+        - description: Only include these comma-delimited parts of speech
+          in: query
+          name: includePartOfSpeech
+          required: false
+          schema:
+            type: string
+        - description: Exclude these comma-delimited parts of speech
+          in: query
+          name: excludePartOfSpeech
+          required: false
+          schema:
+            type: string
+        - description: Minimum corpus frequency for terms
+          in: query
+          name: minCorpusCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 5
+        - description: Maximum corpus frequency for terms
+          in: query
+          name: maxCorpusCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: -1
+        - description: Minimum word length
+          in: query
+          name: minLength
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - description: Maximum word length
+          in: query
+          name: maxLength
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: -1
+        - description: Expand terms
+          in: query
+          name: expandTerms
+          required: false
+          schema:
+            type: string
+        - description: Return a closed set of XML tags in response
+          in: query
+          name: includeTags
+          required: false
+          schema:
+            type: string
+            default: 'false'
+        - description: Attribute to sort by
+          in: query
+          name: sortBy
+          required: false
+          schema:
+            type: string
+        - description: Sort direction
+          in: query
+          name: sortOrder
+          required: false
+          schema:
+            type: string
+        - description: Results to skip
+          in: query
+          name: skip
+          required: false
+          schema:
+            type: string
+            default: '0'
+        - description: Maximum number of results to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DefinitionSearchResults'
+      summary: Reverse dictionary search
+      tags:
+        - words
+  '/words.json/search/{query}':
+    get:
+      operationId: searchWords
+      parameters:
+        - description: Search query
+          in: path
+          name: query
+          required: true
+          schema:
+            type: string
+        - description: Search case sensitive
+          in: query
+          name: caseSensitive
+          required: false
+          schema:
+            type: string
+            default: 'true'
+        - description: Only include these comma-delimited parts of speech
+          in: query
+          name: includePartOfSpeech
+          required: false
+          schema:
+            type: string
+        - description: Exclude these comma-delimited parts of speech
+          in: query
+          name: excludePartOfSpeech
+          required: false
+          schema:
+            type: string
+        - description: Minimum corpus frequency for terms
+          in: query
+          name: minCorpusCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 5
+        - description: Maximum corpus frequency for terms
+          in: query
+          name: maxCorpusCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: -1
+        - description: Minimum number of dictionary entries for words returned
+          in: query
+          name: minDictionaryCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - description: Maximum dictionary definition count
+          in: query
+          name: maxDictionaryCount
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: -1
+        - description: Minimum word length
+          in: query
+          name: minLength
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - description: Maximum word length
+          in: query
+          name: maxLength
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: -1
+        - description: Results to skip
+          in: query
+          name: skip
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: Maximum number of results to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordSearchResults'
+      summary: Searches words
+      tags:
+        - words
+  /words.json/wordOfTheDay:
+    get:
+      operationId: getWordOfTheDay
+      parameters:
+        - description: Fetches by date in yyyy-MM-dd
+          in: query
+          name: date
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordOfTheDay'
+      summary: Returns a specific WordOfTheDay
+      tags:
+        - words
+components:
+  schemas:
+    ApiTokenStatus:
+      properties:
+        expiresInMillis:
+          format: int64
+          type: integer
+        remainingCalls:
+          format: int64
+          type: integer
+        resetsInMillis:
+          format: int64
+          type: integer
+        token:
+          type: string
+        totalRequests:
+          format: int64
+          type: integer
+        valid:
+          type: boolean
+    AudioFile:
+      properties:
+        attributionText:
+          type: string
+        attributionUrl:
+          type: string
+        audioType:
+          type: string
+        commentCount:
+          format: int32
+          type: integer
+        createdAt:
+          format: date
+          type: string
+        createdBy:
+          type: string
+        description:
+          type: string
+        duration:
+          format: double
+          type: number
+        fileUrl:
+          type: string
+        id:
+          format: int64
+          type: integer
+        voteAverage:
+          format: float
+          type: number
+        voteCount:
+          format: int32
+          type: integer
+        voteWeightedAverage:
+          format: float
+          type: number
+        word:
+          type: string
+      required:
+        - id
+    AudioType:
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+    AuthenticationToken:
+      properties:
+        token:
+          type: string
+        userId:
+          format: int64
+          type: integer
+        userSignature:
+          type: string
+    Bigram:
+      properties:
+        count:
+          format: int64
+          type: integer
+        gram1:
+          type: string
+        gram2:
+          type: string
+        mi:
+          format: double
+          type: number
+        wlmi:
+          format: double
+          type: number
+    Category:
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+      required:
+        - id
+    Citation:
+      properties:
+        cite:
+          type: string
+        source:
+          type: string
+    ContentProvider:
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+    Definition:
+      properties:
+        attributionText:
+          type: string
+        attributionUrl:
+          type: string
+        citations:
+          items:
+            $ref: '#/components/schemas/Citation'
+          type: array
+        exampleUses:
+          items:
+            $ref: '#/components/schemas/ExampleUsage'
+          type: array
+        extendedText:
+          type: string
+        labels:
+          items:
+            $ref: '#/components/schemas/Label'
+          type: array
+        notes:
+          items:
+            $ref: '#/components/schemas/Note'
+          type: array
+        partOfSpeech:
+          type: string
+        relatedWords:
+          items:
+            $ref: '#/components/schemas/Related'
+          type: array
+        score:
+          format: float
+          type: number
+        seqString:
+          type: string
+        sequence:
+          type: string
+        sourceDictionary:
+          type: string
+        text:
+          type: string
+        textProns:
+          items:
+            $ref: '#/components/schemas/TextPron'
+          type: array
+        word:
+          type: string
+    DefinitionSearchResults:
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/Definition'
+          type: array
+        totalResults:
+          format: int32
+          type: integer
+    Example:
+      properties:
+        documentId:
+          format: int64
+          type: integer
+        exampleId:
+          format: int64
+          type: integer
+        id:
+          format: int64
+          type: integer
+        provider:
+          $ref: '#/components/schemas/ContentProvider'
+        rating:
+          format: float
+          type: number
+        score:
+          $ref: '#/components/schemas/ScoredWord'
+        sentence:
+          $ref: '#/components/schemas/Sentence'
+        text:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+        word:
+          type: string
+        year:
+          format: int32
+          type: integer
+    ExampleSearchResults:
+      properties:
+        examples:
+          items:
+            $ref: '#/components/schemas/Example'
+          type: array
+        facets:
+          items:
+            $ref: '#/components/schemas/Facet'
+          type: array
+    ExampleUsage:
+      properties:
+        text:
+          type: string
+    Facet:
+      properties:
+        facetValues:
+          items:
+            $ref: '#/components/schemas/FacetValue'
+          type: array
+        name:
+          type: string
+    FacetValue:
+      properties:
+        count:
+          format: int64
+          type: integer
+        value:
+          type: string
+    Frequency:
+      properties:
+        count:
+          format: int64
+          type: integer
+        year:
+          format: int32
+          type: integer
+    FrequencySummary:
+      properties:
+        frequency:
+          items:
+            $ref: '#/components/schemas/Frequency'
+          type: array
+        frequencyString:
+          type: string
+        totalCount:
+          format: int64
+          type: integer
+        unknownYearCount:
+          format: int32
+          type: integer
+        word:
+          type: string
+    Label:
+      properties:
+        text:
+          type: string
+        type:
+          type: string
+    Note:
+      properties:
+        appliesTo:
+          items:
+            type: string
+          type: array
+        noteType:
+          type: string
+        pos:
+          format: int32
+          type: integer
+        value:
+          type: string
+    PartOfSpeech:
+      properties:
+        allCategories:
+          items:
+            $ref: '#/components/schemas/Category'
+          type: array
+        roots:
+          items:
+            $ref: '#/components/schemas/Root'
+          type: array
+        storageAbbr:
+          items:
+            type: string
+          type: array
+    Related:
+      properties:
+        gram:
+          type: string
+        label1:
+          type: string
+        label2:
+          type: string
+        label3:
+          type: string
+        label4:
+          type: string
+        relationshipType:
+          type: string
+        words:
+          items:
+            type: string
+          type: array
+    Root:
+      properties:
+        categories:
+          items:
+            $ref: '#/components/schemas/Category'
+          type: array
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+      required:
+        - id
+    ScoredWord:
+      properties:
+        baseWordScore:
+          format: double
+          type: number
+        docTermCount:
+          format: int32
+          type: integer
+        id:
+          format: int64
+          type: integer
+        lemma:
+          type: string
+        partOfSpeech:
+          type: string
+        position:
+          format: int32
+          type: integer
+        score:
+          format: float
+          type: number
+        sentenceId:
+          format: int64
+          type: integer
+        stopword:
+          type: boolean
+        word:
+          type: string
+        wordType:
+          type: string
+    Sentence:
+      properties:
+        display:
+          type: string
+        documentMetadataId:
+          format: int64
+          type: integer
+        hasScoredWords:
+          type: boolean
+        id:
+          format: int64
+          type: integer
+        rating:
+          format: int32
+          type: integer
+        scoredWords:
+          items:
+            $ref: '#/components/schemas/ScoredWord'
+          type: array
+    SimpleDefinition:
+      properties:
+        note:
+          type: string
+        partOfSpeech:
+          type: string
+        source:
+          type: string
+        text:
+          type: string
+    SimpleExample:
+      properties:
+        id:
+          format: int64
+          type: integer
+        text:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+    StringValue:
+      properties:
+        word:
+          type: string
+    Syllable:
+      properties:
+        seq:
+          format: int32
+          type: integer
+        text:
+          type: string
+        type:
+          type: string
+    TextPron:
+      properties:
+        raw:
+          type: string
+        rawType:
+          type: string
+        seq:
+          format: int32
+          type: integer
+    User:
+      properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        faceBookId:
+          type: string
+        id:
+          format: int64
+          type: integer
+        password:
+          type: string
+        status:
+          format: int32
+          type: integer
+        userName:
+          type: string
+        username:
+          type: string
+    WordList:
+      properties:
+        createdAt:
+          format: date
+          type: string
+        description:
+          type: string
+        id:
+          format: int64
+          type: integer
+        lastActivityAt:
+          format: date
+          type: string
+        name:
+          type: string
+        numberWordsInList:
+          format: int64
+          type: integer
+        permalink:
+          type: string
+        type:
+          type: string
+        updatedAt:
+          format: date
+          type: string
+        userId:
+          format: int64
+          type: integer
+        username:
+          type: string
+    WordListWord:
+      properties:
+        createdAt:
+          format: date
+          type: string
+        id:
+          format: int64
+          type: integer
+        numberCommentsOnWord:
+          format: int64
+          type: integer
+        numberLists:
+          format: int64
+          type: integer
+        userId:
+          format: int64
+          type: integer
+        username:
+          type: string
+        word:
+          type: string
+      required:
+        - id
+    WordObject:
+      properties:
+        canonicalForm:
+          type: string
+        id:
+          format: int64
+          type: integer
+        originalWord:
+          type: string
+        suggestions:
+          items:
+            type: string
+          type: array
+        vulgar:
+          type: string
+        word:
+          type: string
+      required:
+        - id
+    WordOfTheDay:
+      properties:
+        category:
+          type: string
+        contentProvider:
+          $ref: '#/components/schemas/ContentProvider'
+        createdAt:
+          format: date
+          type: string
+        createdBy:
+          type: string
+        definitions:
+          items:
+            $ref: '#/components/schemas/SimpleDefinition'
+          type: array
+        examples:
+          items:
+            $ref: '#/components/schemas/SimpleExample'
+          type: array
+        htmlExtra:
+          type: string
+        id:
+          format: int64
+          type: integer
+        note:
+          type: string
+        parentId:
+          type: string
+        publishDate:
+          format: date
+          type: string
+        word:
+          type: string
+      required:
+        - id
+    WordSearchResult:
+      properties:
+        count:
+          format: int64
+          type: integer
+        lexicality:
+          format: double
+          type: number
+        word:
+          type: string
+    WordSearchResults:
+      properties:
+        searchResults:
+          items:
+            $ref: '#/components/schemas/WordSearchResult'
+          type: array
+        totalResults:
+          format: int32
+          type: integer
+  securitySchemes:
+    api_key:
+      in: query
+      name: _apikey
+      type: apiKey

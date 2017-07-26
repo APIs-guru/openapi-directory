@@ -1,0 +1,381 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://www.googleapis.com/prediction/v1.2'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Lets you access a cloud hosted machine learning service that makes it easy to build smart apps
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Prediction
+  version: v1.2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - prediction
+  x-logo:
+    url: 'https://www.google.com/images/icons/feature/predictionapi-64.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://www.googleapis.com/discovery/v1/apis/prediction/v1.2/rest'
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: prediction
+externalDocs:
+  url: 'https://developers.google.com/prediction/docs/developer-guide'
+tags:
+  - name: hostedmodels
+  - name: training
+paths:
+  '/hostedmodels/{hostedModelName}/predict':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Submit input and request an output against a hosted model
+      operationId: prediction.hostedmodels.predict
+      parameters:
+        - description: The name of a hosted model
+          in: path
+          name: hostedModelName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Output'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - hostedmodels
+      requestBody:
+        $ref: '#/components/requestBodies/Input'
+  /training:
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Begin training your model
+      operationId: prediction.training.insert
+      parameters:
+        - description: mybucket/mydata resource in Google Storage
+          in: query
+          name: data
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Training'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - training
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Training'
+  '/training/{data}':
+    delete:
+      description: Delete a trained model
+      operationId: prediction.training.delete
+      parameters:
+        - description: mybucket/mydata resource in Google Storage
+          in: path
+          name: data
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - training
+    get:
+      description: Check training status of your model
+      operationId: prediction.training.get
+      parameters:
+        - description: mybucket/mydata resource in Google Storage
+          in: path
+          name: data
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Training'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - training
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    put:
+      description: Add new data to a trained model
+      operationId: prediction.training.update
+      parameters:
+        - description: mybucket/mydata resource in Google Storage
+          in: path
+          name: data
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Training'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - training
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Update'
+  '/training/{data}/predict':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Submit data and request a prediction
+      operationId: prediction.predict
+      parameters:
+        - description: mybucket%2Fmydata resource in Google Storage
+          in: path
+          name: data
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Output'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/prediction'
+      requestBody:
+        $ref: '#/components/requestBodies/Input'
+components:
+  schemas:
+    Input:
+      properties:
+        input:
+          properties:
+            csvInstance:
+              items: {}
+              type: array
+          type: object
+      type: object
+    Output:
+      properties:
+        id:
+          type: string
+        kind:
+          default: 'prediction#output'
+          type: string
+        outputLabel:
+          type: string
+        outputMulti:
+          items:
+            properties:
+              label:
+                type: string
+              score:
+                format: double
+                type: number
+            type: object
+          type: array
+        outputValue:
+          format: double
+          type: number
+        selfLink:
+          type: string
+      type: object
+    Training:
+      properties:
+        id:
+          type: string
+        kind:
+          default: 'prediction#training'
+          type: string
+        modelInfo:
+          properties:
+            classificationAccuracy:
+              format: double
+              type: number
+            meanSquaredError:
+              format: double
+              type: number
+            modelType:
+              type: string
+          type: object
+        selfLink:
+          type: string
+        trainingStatus:
+          type: string
+      type: object
+    Update:
+      properties:
+        classLabel:
+          description: The true class label of this instance
+          type: string
+        csvInstance:
+          description: The input features for this instance
+          items: {}
+          type: array
+      type: object
+  parameters:
+    alt:
+      description: Data format for the response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+        default: json
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    userIp:
+      description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      in: query
+      name: userIp
+      schema:
+        type: string
+  requestBodies:
+    Input:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Input'
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
+            'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
+            'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+            'https://www.googleapis.com/auth/prediction': Manage your data in the Google Prediction API
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
+            'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
+            'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+            'https://www.googleapis.com/auth/prediction': Manage your data in the Google Prediction API

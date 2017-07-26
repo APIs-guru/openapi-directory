@@ -1,0 +1,225 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://mobileanalytics.amazonaws.com/'
+info:
+  version: '2014-06-05'
+  x-release: v4
+  title: Amazon Mobile Analytics
+  description: 'Amazon Mobile Analytics is a service for collecting, visualizing, and understanding app usage data at scale.'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: mobileanalytics
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mobileanalytics-2014-06-05.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/mobileanalytics/'
+security:
+  - hmac: []
+paths:
+  /2014-06-05/events:
+    post:
+      operationId: PutEvents
+      description: 'The PutEvents operation records one or more events. You can have up to 1,500 unique custom events per app, any combination of up to 40 attributes and metrics per custom event, and any number of attribute or metric values.'
+      responses:
+        '202':
+          description: Success
+        '400':
+          description: BadRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutEventsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    BadRequestException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: An exception object returned when a request fails.
+    Double:
+      type: number
+      format: double
+    Event:
+      type: object
+      required:
+        - eventType
+        - timestamp
+      properties:
+        eventType:
+          $ref: '#/components/schemas/String50Chars'
+        timestamp:
+          $ref: '#/components/schemas/ISO8601Timestamp'
+        session:
+          $ref: '#/components/schemas/Session'
+        version:
+          $ref: '#/components/schemas/String10Chars'
+        attributes:
+          $ref: '#/components/schemas/MapOfStringToString'
+        metrics:
+          $ref: '#/components/schemas/MapOfStringToNumber'
+      description: A JSON object representing a batch of unique event occurrences in your app.
+    EventListDefinition:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    ISO8601Timestamp:
+      type: string
+    Long:
+      type: integer
+    MapOfStringToNumber:
+      type: array
+      minItems: 0
+      maxItems: 50
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String50Chars'
+          value:
+            $ref: '#/components/schemas/Double'
+    MapOfStringToString:
+      type: array
+      minItems: 0
+      maxItems: 50
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String50Chars'
+          value:
+            $ref: '#/components/schemas/String0to1000Chars'
+    PutEventsInput:
+      type: object
+      required:
+        - events
+      properties:
+        events:
+          $ref: '#/components/schemas/EventListDefinition'
+      description: A container for the data needed for a PutEvent operation
+    Session:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/String50Chars'
+        duration:
+          $ref: '#/components/schemas/Long'
+        startTimestamp:
+          $ref: '#/components/schemas/ISO8601Timestamp'
+        stopTimestamp:
+          $ref: '#/components/schemas/ISO8601Timestamp'
+      description: Describes the session. Session information is required on ALL events.
+    String:
+      type: string
+    String0to1000Chars:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    String10Chars:
+      type: string
+      minLength: 1
+      maxLength: 10
+    String50Chars:
+      type: string
+      minLength: 1
+      maxLength: 50
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

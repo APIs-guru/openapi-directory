@@ -1,0 +1,1865 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://www.zoomconnect.com/app'
+info:
+  description: The world's greatest SMS API
+  title: Zoom Connect
+  version: '1'
+  x-apisguru-categories:
+    - messaging
+    - marketing
+  x-logo:
+    url: 'http://zoomconnect.com/assets/logo.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
+      url: 'https://www.zoomconnect.com/zoom/api-docs'
+      version: '1.2'
+  x-providerName: zoomconnect.com
+  x-tags:
+    - SMS
+    - bulk SMS
+tags:
+  - description: Core information related to your account
+    name: account
+  - description: Manage contacts
+    name: contacts
+  - description: Number context service
+    name: context
+  - description: Manage groups
+    name: groups
+  - description: Manage your messages
+    name: messages
+  - description: Send and schedule messages
+    name: sms
+  - description: Manage your templates
+    name: templates
+paths:
+  /api/rest/v1/account/balance:
+    get:
+      deprecated: false
+      description: Returns your account's credit balance
+      operationId: getBalance
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceAccount'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceAccount'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: balance
+      tags:
+        - account
+  /api/rest/v1/account/transfer:
+    post:
+      deprecated: false
+      description: 'Transfers credits between two users in the same team. The <i>account email address</i> fields as well as the <i>number of credits to transfer</i> are required. '
+      operationId: transfer
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: transfer
+      tags:
+        - account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebServiceTransferCreditsRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/WebServiceTransferCreditsRequest'
+        description: request
+  /api/rest/v1/account/user:
+    get:
+      deprecated: false
+      description: Find a user for a particular email address
+      operationId: search
+      parameters:
+        - description: search by email address
+          in: query
+          name: searchEmail
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceUsers'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceUsers'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: search
+      tags:
+        - account
+    put:
+      deprecated: false
+      description: 'Creates a new sub-account in your team. The following fields are required <i>firstname, lastname, email address, contact number</i> and <i>password.</i>'
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceUser'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceUser'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: create
+      tags:
+        - account
+      requestBody:
+        $ref: '#/components/requestBodies/WebServiceUser'
+  '/api/rest/v1/account/user/{userId}':
+    get:
+      deprecated: false
+      description: Gets a user from a given user id
+      operationId: getUser
+      parameters:
+        - description: userId
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceUser'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceUser'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: getUser
+      tags:
+        - account
+    post:
+      deprecated: false
+      description: 'Updates a sub-account in your team. The following fields can be updated <i>firstname, lastname, contact number</i> and <i>password.</i>'
+      parameters:
+        - description: userId
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceUser'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceUser'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: update
+      tags:
+        - account
+      requestBody:
+        $ref: '#/components/requestBodies/WebServiceUser'
+  /api/rest/v1/contacts/all:
+    get:
+      deprecated: false
+      description: Returns all contacts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceContacts'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceContacts'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: all
+      tags:
+        - contacts
+  /api/rest/v1/contacts/create:
+    post:
+      deprecated: false
+      description: Creates a  contact
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceContact'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceContact'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceContact'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceContact'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: create
+      tags:
+        - contacts
+      requestBody:
+        $ref: '#/components/requestBodies/WebServiceContact'
+  '/api/rest/v1/contacts/{contactId}':
+    delete:
+      deprecated: false
+      description: Deletes a  contact
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: delete
+      tags:
+        - contacts
+    get:
+      deprecated: false
+      description: Returns details for a single contact
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceContact'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceContact'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get
+      tags:
+        - contacts
+    post:
+      deprecated: false
+      description: Updates a  contact
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceContact'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceContact'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: update
+      tags:
+        - contacts
+      requestBody:
+        $ref: '#/components/requestBodies/WebServiceContact'
+  '/api/rest/v1/contacts/{contactId}/addFromGroup/{groupId}':
+    get:
+      deprecated: false
+      description: Remove a contact from a group
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          schema:
+            type: string
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: removeFromGroup
+      tags:
+        - contacts
+    post:
+      deprecated: false
+      description: Remove a contact from a group
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          schema:
+            type: string
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: removeFromGroup
+      tags:
+        - contacts
+  '/api/rest/v1/contacts/{contactId}/addToGroup/{groupId}':
+    get:
+      deprecated: false
+      description: Add a contact to a group
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          schema:
+            type: string
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: addToGroup
+      tags:
+        - contacts
+    post:
+      deprecated: false
+      description: Add a contact to a group
+      parameters:
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          schema:
+            type: string
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: addToGroup
+      tags:
+        - contacts
+  /api/rest/v1/context/lookup:
+    get:
+      deprecated: false
+      description: Returns context information for a single provided
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceNumberContextLookupResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceNumberContextLookupResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: lookup
+      tags:
+        - context
+      requestBody:
+        $ref: '#/components/requestBodies/Body'
+    post:
+      deprecated: false
+      description: Returns context information for a single provided
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceNumberContextLookupResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceNumberContextLookupResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: lookup
+      tags:
+        - context
+      requestBody:
+        $ref: '#/components/requestBodies/Body'
+  /api/rest/v1/groups/all:
+    get:
+      deprecated: false
+      description: Returns all groups
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceGroups'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceGroups'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: all
+      tags:
+        - groups
+  /api/rest/v1/groups/create:
+    post:
+      deprecated: false
+      description: Create a  group
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceGroup'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceGroup'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceGroup'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceGroup'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: create
+      tags:
+        - groups
+      requestBody:
+        $ref: '#/components/requestBodies/WebServiceGroup'
+  '/api/rest/v1/groups/{groupId}':
+    delete:
+      deprecated: false
+      description: Deletes a  group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: delete
+      tags:
+        - groups
+    get:
+      deprecated: false
+      description: Returns details for a single group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceGroup'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceGroup'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get
+      tags:
+        - groups
+    post:
+      deprecated: false
+      description: Update a  group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceGroup'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceGroup'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: update
+      tags:
+        - groups
+      requestBody:
+        $ref: '#/components/requestBodies/WebServiceGroup'
+  '/api/rest/v1/groups/{groupId}/addContact/{contactId}':
+    get:
+      deprecated: false
+      description: Add a contact to a group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: addContact
+      tags:
+        - groups
+    post:
+      deprecated: false
+      description: Add a contact to a group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: addContact
+      tags:
+        - groups
+  '/api/rest/v1/groups/{groupId}/removeContact/{contactId}':
+    get:
+      deprecated: false
+      description: Remove a contact from a group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: removeContact
+      tags:
+        - groups
+    post:
+      deprecated: false
+      description: Remove a contact from a group
+      parameters:
+        - description: groupId
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+        - description: contactId
+          in: path
+          name: contactId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: removeContact
+      tags:
+        - groups
+  /api/rest/v1/messages/all:
+    get:
+      deprecated: false
+      description: Returns all messages
+      parameters:
+        - description: number of elements to return at a time
+          in: query
+          name: pageSize
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 100
+        - description: page number
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - description: filter by message type
+          in: query
+          name: type
+          required: false
+          schema:
+            type: string
+            enum:
+              - OUTBOUND
+              - INBOUND
+        - description: filter by message status
+          in: query
+          name: status
+          required: false
+          schema:
+            type: string
+            enum:
+              - SCHEDULED
+              - UNKNOWN
+              - SENT
+              - FAILED
+              - FAILED_REFUNDED
+              - FAILED_OPTOUT
+              - DELIVERED
+              - RECEIVED
+        - description: 'date format: yyyyMMdd'
+          in: query
+          name: fromDateTimeSent
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: 'date format: yyyyMMdd'
+          in: query
+          name: toDateTimeSent
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: 'date format: yyyyMMdd'
+          in: query
+          name: fromDateTimeReceived
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: 'date format: yyyyMMdd'
+          in: query
+          name: toDateTimeReceived
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: phone number the message was sent from
+          in: query
+          name: fromNumber
+          required: false
+          schema:
+            type: string
+        - description: phone number the message was sent to
+          in: query
+          name: toNumber
+          required: false
+          schema:
+            type: string
+        - description: search matching message text
+          in: query
+          name: message
+          required: false
+          schema:
+            type: string
+        - description: search by campaign
+          in: query
+          name: campaign
+          required: false
+          schema:
+            type: string
+        - description: search by data field
+          in: query
+          name: dataField
+          required: false
+          schema:
+            type: string
+        - description: return only deleted / not deleted messages
+          in: query
+          name: deleted
+          required: false
+          schema:
+            type: boolean
+        - description: return only read / unread messages (inbox messages only)
+          in: query
+          name: read
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessages'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessages'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: all
+      tags:
+        - messages
+  '/api/rest/v1/messages/{messageId}':
+    delete:
+      deprecated: false
+      description: Deletes a  message
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: delete
+      tags:
+        - messages
+    get:
+      deprecated: false
+      description: Returns details for a single message
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessage'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get
+      tags:
+        - messages
+  '/api/rest/v1/messages/{messageId}/markRead':
+    post:
+      deprecated: false
+      description: Marks a  message as read
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessage'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: markRead
+      tags:
+        - messages
+    put:
+      deprecated: false
+      description: Marks a  message as read
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessage'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: markRead
+      tags:
+        - messages
+  '/api/rest/v1/messages/{messageId}/markUnread':
+    post:
+      deprecated: false
+      description: Marks a  message as unread
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessage'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: markUnread
+      tags:
+        - messages
+    put:
+      deprecated: false
+      description: Marks a  message as unread
+      parameters:
+        - description: messageId
+          in: path
+          name: messageId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessage'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: markUnread
+      tags:
+        - messages
+  /api/rest/v1/sms/send:
+    get:
+      deprecated: false
+      description: Returns an example of the data to POST to send a single message.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceSendSmsRequest'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceSendSmsRequest'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: send
+      tags:
+        - sms
+    post:
+      deprecated: false
+      description: Sends a single message. The <i>recipientNumber</i> and <i>message</i> fields are required. All other fields are optional.
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceSendSmsResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceSendSmsResponse'
+        '201':
+          description: Created
+        '400':
+          description: 'Validation error</br></br>Code and message:<ul><li>2 - Invalid mobile number</li><li>3 - Message cannot be empty</li></ul>'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestErrorDTO'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RestErrorDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: send
+      tags:
+        - sms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebServiceSendSmsRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/WebServiceSendSmsRequest'
+        description: request
+  /api/rest/v1/sms/send-bulk:
+    get:
+      deprecated: false
+      description: Returns an example of the data to POST to send multiple messages in one transaction.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceSendSmsRequests'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceSendSmsRequests'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: send-bulk
+      tags:
+        - sms
+    post:
+      deprecated: false
+      description: Send multiple messages in one transaction.
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceSendSmsResponses'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceSendSmsResponses'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: send-bulk
+      tags:
+        - sms
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebServiceSendSmsRequests'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/WebServiceSendSmsRequests'
+        description: requests
+  /api/rest/v1/sms/send-url-parameters:
+    get:
+      deprecated: false
+      description: Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
+      parameters:
+        - description: the phone number of the recipient to send to
+          in: query
+          name: recipientNumber
+          required: true
+          schema:
+            type: string
+        - description: the message to send
+          in: query
+          name: message
+          required: true
+          schema:
+            type: string
+        - description: 'date format: yyyyMMddHHmm'
+          in: query
+          name: dateToSend
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: optional campaign name
+          in: query
+          name: campaign
+          required: false
+          schema:
+            type: string
+        - description: optional extra data
+          in: query
+          name: dataField
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: send-url-parameters
+      tags:
+        - sms
+    post:
+      deprecated: false
+      description: Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
+      parameters:
+        - description: the phone number of the recipient to send to
+          in: query
+          name: recipientNumber
+          required: true
+          schema:
+            type: string
+        - description: the message to send
+          in: query
+          name: message
+          required: true
+          schema:
+            type: string
+        - description: 'date format: yyyyMMddHHmm'
+          in: query
+          name: dateToSend
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: optional campaign name
+          in: query
+          name: campaign
+          required: false
+          schema:
+            type: string
+        - description: optional extra data
+          in: query
+          name: dataField
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: send-url-parameters
+      tags:
+        - sms
+  '/api/rest/v1/sms/send-url/{token}':
+    get:
+      deprecated: false
+      description: 'Send a single message using your unique URL without having to authenticate using your email address or REST API token. The token required is the URL Sending token available on the developer setting page. The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional. Not that the token required here is '
+      parameters:
+        - description: token
+          in: path
+          name: token
+          required: true
+          schema:
+            type: string
+        - description: the phone number of the recipient to send to
+          in: query
+          name: recipientNumber
+          required: true
+          schema:
+            type: string
+        - description: the message to send
+          in: query
+          name: message
+          required: true
+          schema:
+            type: string
+        - description: 'date format: yyyyMMddHHmm'
+          in: query
+          name: dateToSend
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: optional campaign name
+          in: query
+          name: campaign
+          required: false
+          schema:
+            type: string
+        - description: optional extra data
+          in: query
+          name: dataField
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: send-url
+      tags:
+        - sms
+    post:
+      deprecated: false
+      description: 'Send a single message using your unique URL without having to authenticate using your email address or REST API token. The token required is the URL Sending token available on the developer setting page. The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional. Not that the token required here is '
+      parameters:
+        - description: token
+          in: path
+          name: token
+          required: true
+          schema:
+            type: string
+        - description: the phone number of the recipient to send to
+          in: query
+          name: recipientNumber
+          required: true
+          schema:
+            type: string
+        - description: the message to send
+          in: query
+          name: message
+          required: true
+          schema:
+            type: string
+        - description: 'date format: yyyyMMddHHmm'
+          in: query
+          name: dateToSend
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - description: optional campaign name
+          in: query
+          name: campaign
+          required: false
+          schema:
+            type: string
+        - description: optional extra data
+          in: query
+          name: dataField
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Description was not specified
+          content:
+            application/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: send-url
+      tags:
+        - sms
+  /api/rest/v1/templates/all:
+    get:
+      deprecated: false
+      description: Returns all templates
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceTemplates'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceTemplates'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: all
+      tags:
+        - templates
+  '/api/rest/v1/templates/{templateId}':
+    delete:
+      deprecated: false
+      description: Deletes a  template
+      parameters:
+        - description: templateId
+          in: path
+          name: templateId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Description was not specified
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: delete
+      tags:
+        - templates
+    get:
+      deprecated: false
+      description: Returns details for a single template
+      parameters:
+        - description: templateId
+          in: path
+          name: templateId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebServiceTemplate'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/WebServiceTemplate'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: get
+      tags:
+        - templates
+components:
+  schemas:
+    Link:
+      properties:
+        href:
+          type: string
+        rel:
+          type: string
+        templated:
+          type: boolean
+    RestErrorDTO:
+      description: RestErrorDTO
+      properties:
+        code:
+          format: int32
+          type: integer
+        developerMessage:
+          type: string
+        message:
+          type: string
+        moreInfoUrl:
+          type: string
+        status:
+          type: string
+    Void: {}
+    WebServiceAccount:
+      description: WebServiceAccount
+      properties:
+        creditBalance:
+          format: double
+          type: number
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+    WebServiceContact:
+      description: WebServiceContact
+      properties:
+        contactId:
+          type: string
+        contactNumber:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        title:
+          type: string
+    WebServiceContactLink:
+      description: WebServiceContactLink
+      properties:
+        contactId:
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+    WebServiceContacts:
+      description: WebServiceContacts
+      properties:
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        webServiceContacts:
+          items:
+            $ref: '#/components/schemas/WebServiceContact'
+          type: array
+    WebServiceGroup:
+      description: WebServiceGroup
+      properties:
+        groupId:
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        name:
+          type: string
+    WebServiceGroups:
+      description: WebServiceGroups
+      properties:
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        webServiceGroups:
+          items:
+            $ref: '#/components/schemas/WebServiceGroup'
+          type: array
+    WebServiceMessage:
+      description: WebServiceMessage
+      properties:
+        campaign:
+          type: string
+        contact:
+          $ref: '#/components/schemas/WebServiceContactLink'
+        creditCost:
+          format: double
+          type: number
+        dateTimeReceived:
+          format: date-time
+          type: string
+        dateTimeScheduled:
+          format: date-time
+          type: string
+        dateTimeSent:
+          format: date-time
+          type: string
+        deleted:
+          type: boolean
+        fromNumber:
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        message:
+          type: string
+        messageId:
+          type: string
+        messageStatus:
+          type: string
+        messageType:
+          type: string
+        numberOfMessages:
+          format: int32
+          type: integer
+        read:
+          type: boolean
+        toNumber:
+          type: string
+        userDataField:
+          type: string
+    WebServiceMessages:
+      description: WebServiceMessages
+      properties:
+        elements:
+          format: int32
+          type: integer
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        page:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        totalPages:
+          format: int32
+          type: integer
+        webServiceMessages:
+          items:
+            $ref: '#/components/schemas/WebServiceMessage'
+          type: array
+    WebServiceNumberContextLookupRequest:
+      description: WebServiceNumberContextLookupRequest
+      properties:
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        numbers:
+          items:
+            type: string
+          type: array
+    WebServiceNumberContextLookupResponse:
+      description: WebServiceNumberContextLookupResponse
+      properties:
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        number:
+          type: string
+        numberValid:
+          type: boolean
+    WebServiceSendSmsRequest:
+      description: WebServiceSendSmsRequest
+      properties:
+        campaign:
+          type: string
+        dataField:
+          type: string
+        dateToSend:
+          format: date-time
+          type: string
+        message:
+          type: string
+        recipientNumber:
+          type: string
+    WebServiceSendSmsRequests:
+      description: WebServiceSendSmsRequests
+      properties:
+        defaultDateToSend:
+          format: date-time
+          type: string
+        messagesPerMinute:
+          format: int32
+          type: integer
+        sendSmsRequests:
+          items:
+            $ref: '#/components/schemas/WebServiceSendSmsRequest'
+          type: array
+    WebServiceSendSmsResponse:
+      description: WebServiceSendSmsResponse
+      properties:
+        error:
+          type: string
+        messageId:
+          type: string
+    WebServiceSendSmsResponses:
+      description: WebServiceSendSmsResponses
+      properties:
+        sendSmsResponses:
+          items:
+            $ref: '#/components/schemas/WebServiceSendSmsResponse'
+          type: array
+    WebServiceTemplate:
+      description: WebServiceTemplate
+      properties:
+        data:
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        name:
+          type: string
+        templateId:
+          format: int64
+          type: integer
+    WebServiceTemplates:
+      description: WebServiceTemplates
+      properties:
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          type: array
+        webServiceTemplates:
+          items:
+            $ref: '#/components/schemas/WebServiceTemplate'
+          type: array
+    WebServiceTransferCreditsRequest:
+      description: WebServiceTransferCreditsRequest
+      properties:
+        numberOfCreditsToTransfer:
+          format: int32
+          type: integer
+        transferFromEmailAddress:
+          type: string
+        transferToEmailAddress:
+          type: string
+    WebServiceUser:
+      description: WebServiceUser
+      properties:
+        company:
+          type: string
+        contactNumber:
+          type: string
+        creditBalance:
+          format: double
+          type: number
+        emailAddress:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        password:
+          type: string
+        userId:
+          format: int64
+          type: integer
+    WebServiceUsers:
+      description: WebServiceUsers
+      properties:
+        webServiceUserList:
+          items:
+            $ref: '#/components/schemas/WebServiceUser'
+          type: array
+  requestBodies:
+    WebServiceUser:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WebServiceUser'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/WebServiceUser'
+      description: request
+    WebServiceContact:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WebServiceContact'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/WebServiceContact'
+      description: webServiceContact
+    Body:
+      content:
+        application/json:
+          schema:
+            type: string
+        application/xml:
+          schema:
+            type: string
+      description: number
+    WebServiceGroup:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WebServiceGroup'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/WebServiceGroup'
+      description: webServiceGroup
+  securitySchemes:
+    email:
+      in: header
+      name: email
+      type: apiKey
+    token:
+      in: header
+      name: token
+      type: apiKey

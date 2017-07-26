@@ -1,0 +1,316 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://{ip_address}:8990/'
+    variables:
+      ip_address:
+        default: 192.168.1.5
+  - url: 'http://192.168.1.5:8990/'
+info:
+  description: 'Move your app forward with the Zappiti Player API. Use http://your-player-ip:8990/ as base URL for your requests.'
+  title: Zappiti Player
+  version: 4.15.174
+  x-apisguru-categories:
+    - entertainment
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://cloud.githubusercontent.com/assets/21603/24292732/7e3a8038-1086-11e7-90c0-434e4dcc3474.png'
+  x-origin:
+    - format: swagger
+      url: 'http://zappiti.com/api/zappiti-player-4k/swagger/swagger.yaml'
+      version: '2.0'
+  x-providerName: zappiti.com
+paths:
+  /CheckZappitiService:
+    post:
+      description: |
+        ErrorCode.NotInstalled
+        ErrorCode.NotRunning
+        ErrorCode.Running
+      responses:
+        '200':
+          description: CheckZappitiServiceResult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckZappitiServiceResult'
+      summary: Check if Zappiti Service app status on the player
+      tags:
+        - Zappiti Service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckZappitiServiceRequest'
+        required: true
+  /ConnectionDetails:
+    post:
+      responses:
+        '200':
+          description: ConnectionDetailsResult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionDetailsResult'
+      summary: Get user's login details
+      tags:
+        - General
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionDetailsRequest'
+        required: true
+  /InstallZappitiService:
+    post:
+      description: ''
+      responses:
+        '200':
+          description: InstallZappitiServiceResult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallZappitiServiceResult'
+      summary: 'Open a popup that allow the user to install Zappiti Service, if not already installed'
+      tags:
+        - Zappiti Service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstallZappitiServiceRequest'
+        required: true
+  /IsAlive:
+    post:
+      responses:
+        '200':
+          description: IsAliveResult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IsAliveResult'
+      summary: Get server status
+      tags:
+        - General
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IsAliveRequest'
+        required: true
+  /LastMedia:
+    post:
+      responses:
+        '200':
+          description: LastMediaResult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LastMediaResult'
+      summary: Get informations about last media playback
+      tags:
+        - Playback
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LastMediaRequest'
+        required: true
+  /StartVideo:
+    post:
+      description: |
+        Start the playback of the speficied video.
+      responses:
+        '200':
+          description: StartVideoResult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartVideoResult'
+      summary: Start the playback
+      tags:
+        - Playback
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartVideoRequest'
+        required: true
+  /StartZappitiService:
+    post:
+      description: ''
+      responses:
+        '200':
+          description: StartZappitiServiceResult
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartZappitiServiceResult'
+      summary: Start Zappiti Service if not started yet
+      tags:
+        - Zappiti Service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartZappitiServiceRequest'
+        required: true
+components:
+  schemas:
+    CheckZappitiServiceRequest:
+      properties:
+        ApiKey:
+          description: Client API Key
+          format: uuid
+          type: string
+      type: object
+    CheckZappitiServiceResult:
+      properties:
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+      type: object
+    ConnectionDetailsRequest:
+      properties:
+        ApiKey:
+          description: Client API Key
+          format: uuid
+          type: string
+      type: object
+    ConnectionDetailsResult:
+      properties:
+        AuthKey:
+          description: User's Authentification key
+          format: uuid
+          type: string
+        Collection:
+          description: User's collection id
+          format: string
+          type: string
+        Email:
+          description: User's email used for the collection
+          format: string
+          type: string
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+        ServerIp:
+          description: Server's IP
+          format: string
+          type: string
+        ServerPort:
+          description: Port used by the server
+          type: integer
+      type: object
+    ErrorCode:
+      enum:
+        - None
+        - Failed
+        - Exist
+        - NotInstalled
+        - NotRunning
+        - Running
+        - FailToStart
+        - BadApiKey
+      type: string
+    InstallZappitiServiceRequest:
+      properties:
+        ApiKey:
+          description: Client API Key
+          format: uuid
+          type: string
+      type: object
+    InstallZappitiServiceResult:
+      properties:
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+      type: object
+    IsAliveRequest:
+      properties:
+        ApiKey:
+          description: Client API Key
+          format: uuid
+          type: string
+      type: object
+    IsAliveResult:
+      properties:
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+      type: object
+    LastMediaRequest:
+      properties:
+        ApiKey:
+          description: Client API Key
+          format: uuid
+          type: string
+      type: object
+    LastMediaResult:
+      properties:
+        Actors:
+          items:
+            type: string
+          type: array
+        BackgroundUrl:
+          type: string
+        Directors:
+          items:
+            type: string
+          type: array
+        Episode:
+          type: integer
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+        PosterUrl:
+          type: string
+        Runtime:
+          type: integer
+        Season:
+          type: integer
+        Synopsis:
+          type: string
+        Title:
+          type: string
+        TvShowName:
+          type: string
+      type: object
+    StartVideoRequest:
+      properties:
+        ApiKey:
+          description: Client API Key
+          format: uuid
+          type: string
+        AuthKey:
+          description: User auth key
+          format: uuid
+          type: string
+        Collection:
+          description: Collection id
+          format: string
+          type: string
+        Ip:
+          description: Server Ip
+          format: string
+          type: string
+        MediaId:
+          description: Id of the video to start
+          format: uuid
+          type: string
+        Port:
+          description: Server Port
+          format: int32
+          type: integer
+      type: object
+    StartVideoResult:
+      properties:
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+      type: object
+    StartZappitiServiceRequest:
+      properties:
+        ApiKey:
+          description: Client API Key
+          format: uuid
+          type: string
+      type: object
+    StartZappitiServiceResult:
+      properties:
+        ErrorCode:
+          $ref: '#/components/schemas/ErrorCode'
+      type: object

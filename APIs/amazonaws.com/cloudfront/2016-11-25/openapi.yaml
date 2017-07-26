@@ -1,0 +1,3205 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://cloudfront.amazonaws.com/'
+info:
+  version: '2016-11-25'
+  x-release: v4
+  title: Amazon CloudFront
+  description: '<fullname>Amazon CloudFront</fullname> <p>This is the <i>Amazon CloudFront API Reference</i>. This guide is for developers who need detailed information about the CloudFront API actions, data types, and errors. For detailed information about CloudFront features and their associated API calls, see the <i>Amazon CloudFront Developer Guide</i>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: cloudfront
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudfront-2016-11-25.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: false
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/cloudfront/'
+security:
+  - hmac: []
+paths:
+  /2016-11-25/origin-access-identity/cloudfront:
+    get:
+      operationId: ListCloudFrontOriginAccessIdentities
+      description: Lists origin access identities.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListCloudFrontOriginAccessIdentitiesResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters:
+        - name: MaxItems
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ListCloudFrontOriginAccessIdentitiesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2016-11-25/distribution:
+    get:
+      operationId: ListDistributions
+      description: 'List distributions. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListDistributionsResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters:
+        - name: MaxItems
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ListDistributionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2016-11-25/distribution?WithTags:
+    post:
+      operationId: CreateDistributionWithTags
+      description: Create a new distribution with tags.
+      responses:
+        '201':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateDistributionWithTagsResult'
+        '480':
+          description: CNAMEAlreadyExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CNAMEAlreadyExists'
+        '481':
+          description: DistributionAlreadyExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DistributionAlreadyExists'
+        '482':
+          description: InvalidOrigin
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidOrigin'
+        '483':
+          description: InvalidOriginAccessIdentity
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidOriginAccessIdentity'
+        '484':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '485':
+          description: TooManyTrustedSigners
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyTrustedSigners'
+        '486':
+          description: TrustedSignerDoesNotExist
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TrustedSignerDoesNotExist'
+        '487':
+          description: InvalidViewerCertificate
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidViewerCertificate'
+        '488':
+          description: InvalidMinimumProtocolVersion
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidMinimumProtocolVersion'
+        '489':
+          description: MissingBody
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingBody'
+        '490':
+          description: TooManyDistributionCNAMEs
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionCNAMEs'
+        '491':
+          description: TooManyDistributions
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributions'
+        '492':
+          description: InvalidDefaultRootObject
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDefaultRootObject'
+        '493':
+          description: InvalidRelativePath
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidRelativePath'
+        '494':
+          description: InvalidErrorCode
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidErrorCode'
+        '495':
+          description: InvalidResponseCode
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidResponseCode'
+        '496':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '497':
+          description: InvalidRequiredProtocol
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidRequiredProtocol'
+        '498':
+          description: NoSuchOrigin
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchOrigin'
+        '499':
+          description: TooManyOrigins
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyOrigins'
+        '500':
+          description: TooManyCacheBehaviors
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyCacheBehaviors'
+        '501':
+          description: TooManyCookieNamesInWhiteList
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyCookieNamesInWhiteList'
+        '502':
+          description: InvalidForwardCookies
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidForwardCookies'
+        '503':
+          description: TooManyHeadersInForwardedValues
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyHeadersInForwardedValues'
+        '504':
+          description: InvalidHeadersForS3Origin
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidHeadersForS3Origin'
+        '505':
+          description: InconsistentQuantities
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InconsistentQuantities'
+        '506':
+          description: TooManyCertificates
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyCertificates'
+        '507':
+          description: InvalidLocationCode
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidLocationCode'
+        '508':
+          description: InvalidGeoRestrictionParameter
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidGeoRestrictionParameter'
+        '509':
+          description: InvalidProtocolSettings
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidProtocolSettings'
+        '510':
+          description: InvalidTTLOrder
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidTTLOrder'
+        '511':
+          description: InvalidWebACLId
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidWebACLId'
+        '512':
+          description: TooManyOriginCustomHeaders
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyOriginCustomHeaders'
+        '513':
+          description: InvalidTagging
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidTagging'
+        '514':
+          description: TooManyQueryStringParameters
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyQueryStringParameters'
+        '515':
+          description: InvalidQueryStringParameters
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidQueryStringParameters'
+        '516':
+          description: TooManyDistributionsWithLambdaAssociations
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsWithLambdaAssociations'
+        '517':
+          description: TooManyLambdaFunctionAssociations
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyLambdaFunctionAssociations'
+        '518':
+          description: InvalidLambdaFunctionAssociation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidLambdaFunctionAssociation'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateDistributionWithTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2016-11-25/distribution/{DistributionId}/invalidation':
+    get:
+      operationId: ListInvalidations
+      description: 'Lists invalidation batches. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListInvalidationsResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '481':
+          description: NoSuchDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchDistribution'
+        '482':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+      parameters:
+        - name: MaxItems
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+        - name: DistributionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ListInvalidationsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2016-11-25/streaming-distribution:
+    get:
+      operationId: ListStreamingDistributions
+      description: 'List streaming distributions. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListStreamingDistributionsResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters:
+        - name: MaxItems
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ListStreamingDistributionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2016-11-25/streaming-distribution?WithTags:
+    post:
+      operationId: CreateStreamingDistributionWithTags
+      description: Create a new streaming distribution with tags.
+      responses:
+        '201':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateStreamingDistributionWithTagsResult'
+        '480':
+          description: CNAMEAlreadyExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CNAMEAlreadyExists'
+        '481':
+          description: StreamingDistributionAlreadyExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StreamingDistributionAlreadyExists'
+        '482':
+          description: InvalidOrigin
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidOrigin'
+        '483':
+          description: InvalidOriginAccessIdentity
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidOriginAccessIdentity'
+        '484':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '485':
+          description: TooManyTrustedSigners
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyTrustedSigners'
+        '486':
+          description: TrustedSignerDoesNotExist
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TrustedSignerDoesNotExist'
+        '487':
+          description: MissingBody
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingBody'
+        '488':
+          description: TooManyStreamingDistributionCNAMEs
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyStreamingDistributionCNAMEs'
+        '489':
+          description: TooManyStreamingDistributions
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyStreamingDistributions'
+        '490':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '491':
+          description: InconsistentQuantities
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InconsistentQuantities'
+        '492':
+          description: InvalidTagging
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidTagging'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateStreamingDistributionWithTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2016-11-25/origin-access-identity/cloudfront/{Id}':
+    get:
+      operationId: GetCloudFrontOriginAccessIdentity
+      description: 'Get the information about an origin access identity. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetCloudFrontOriginAccessIdentityResult'
+        '480':
+          description: NoSuchCloudFrontOriginAccessIdentity
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchCloudFrontOriginAccessIdentity'
+        '481':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetCloudFrontOriginAccessIdentityRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2016-11-25/distribution/{Id}':
+    get:
+      operationId: GetDistribution
+      description: 'Get the information about a distribution. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetDistributionResult'
+        '480':
+          description: NoSuchDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchDistribution'
+        '481':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      x-waiters:
+        - delay: 60
+          operation: GetDistribution
+          maxAttempts: 25
+          description: Wait until a distribution is deployed.
+          acceptors:
+            - expected: Deployed
+              matcher: path
+              state: success
+              argument: Distribution.Status
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetDistributionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2016-11-25/streaming-distribution/{Id}':
+    get:
+      operationId: GetStreamingDistribution
+      description: 'Gets information about a specified RTMP distribution, including the distribution configuration.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetStreamingDistributionResult'
+        '480':
+          description: NoSuchStreamingDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchStreamingDistribution'
+        '481':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      x-waiters:
+        - delay: 60
+          operation: GetStreamingDistribution
+          maxAttempts: 25
+          description: Wait until a streaming distribution is deployed.
+          acceptors:
+            - expected: Deployed
+              matcher: path
+              state: success
+              argument: StreamingDistribution.Status
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetStreamingDistributionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2016-11-25/origin-access-identity/cloudfront/{Id}/config':
+    put:
+      operationId: UpdateCloudFrontOriginAccessIdentity
+      description: 'Update an origin access identity. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateCloudFrontOriginAccessIdentityResult'
+        '480':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '481':
+          description: IllegalUpdate
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/IllegalUpdate'
+        '482':
+          description: InvalidIfMatchVersion
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidIfMatchVersion'
+        '483':
+          description: MissingBody
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingBody'
+        '484':
+          description: NoSuchCloudFrontOriginAccessIdentity
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchCloudFrontOriginAccessIdentity'
+        '485':
+          description: PreconditionFailed
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailed'
+        '486':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '487':
+          description: InconsistentQuantities
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InconsistentQuantities'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateCloudFrontOriginAccessIdentityRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2016-11-25/distribution/{Id}/config':
+    put:
+      operationId: UpdateDistribution
+      description: 'Update a distribution. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateDistributionResult'
+        '480':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '481':
+          description: CNAMEAlreadyExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CNAMEAlreadyExists'
+        '482':
+          description: IllegalUpdate
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/IllegalUpdate'
+        '483':
+          description: InvalidIfMatchVersion
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidIfMatchVersion'
+        '484':
+          description: MissingBody
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingBody'
+        '485':
+          description: NoSuchDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchDistribution'
+        '486':
+          description: PreconditionFailed
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailed'
+        '487':
+          description: TooManyDistributionCNAMEs
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionCNAMEs'
+        '488':
+          description: InvalidDefaultRootObject
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDefaultRootObject'
+        '489':
+          description: InvalidRelativePath
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidRelativePath'
+        '490':
+          description: InvalidErrorCode
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidErrorCode'
+        '491':
+          description: InvalidResponseCode
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidResponseCode'
+        '492':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '493':
+          description: InvalidOriginAccessIdentity
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidOriginAccessIdentity'
+        '494':
+          description: TooManyTrustedSigners
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyTrustedSigners'
+        '495':
+          description: TrustedSignerDoesNotExist
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TrustedSignerDoesNotExist'
+        '496':
+          description: InvalidViewerCertificate
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidViewerCertificate'
+        '497':
+          description: InvalidMinimumProtocolVersion
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidMinimumProtocolVersion'
+        '498':
+          description: InvalidRequiredProtocol
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidRequiredProtocol'
+        '499':
+          description: NoSuchOrigin
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchOrigin'
+        '500':
+          description: TooManyOrigins
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyOrigins'
+        '501':
+          description: TooManyCacheBehaviors
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyCacheBehaviors'
+        '502':
+          description: TooManyCookieNamesInWhiteList
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyCookieNamesInWhiteList'
+        '503':
+          description: InvalidForwardCookies
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidForwardCookies'
+        '504':
+          description: TooManyHeadersInForwardedValues
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyHeadersInForwardedValues'
+        '505':
+          description: InvalidHeadersForS3Origin
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidHeadersForS3Origin'
+        '506':
+          description: InconsistentQuantities
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InconsistentQuantities'
+        '507':
+          description: TooManyCertificates
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyCertificates'
+        '508':
+          description: InvalidLocationCode
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidLocationCode'
+        '509':
+          description: InvalidGeoRestrictionParameter
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidGeoRestrictionParameter'
+        '510':
+          description: InvalidTTLOrder
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidTTLOrder'
+        '511':
+          description: InvalidWebACLId
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidWebACLId'
+        '512':
+          description: TooManyOriginCustomHeaders
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyOriginCustomHeaders'
+        '513':
+          description: TooManyQueryStringParameters
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyQueryStringParameters'
+        '514':
+          description: InvalidQueryStringParameters
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidQueryStringParameters'
+        '515':
+          description: TooManyDistributionsWithLambdaAssociations
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsWithLambdaAssociations'
+        '516':
+          description: TooManyLambdaFunctionAssociations
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyLambdaFunctionAssociations'
+        '517':
+          description: InvalidLambdaFunctionAssociation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidLambdaFunctionAssociation'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateDistributionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2016-11-25/distribution/{DistributionId}/invalidation/{Id}':
+    get:
+      operationId: GetInvalidation
+      description: 'Get the information about an invalidation. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetInvalidationResult'
+        '480':
+          description: NoSuchInvalidation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchInvalidation'
+        '481':
+          description: NoSuchDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchDistribution'
+        '482':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+      parameters:
+        - name: DistributionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      x-waiters:
+        - delay: 20
+          operation: GetInvalidation
+          maxAttempts: 30
+          description: Wait until an invalidation has completed.
+          acceptors:
+            - expected: Completed
+              matcher: path
+              state: success
+              argument: Invalidation.Status
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetInvalidationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2016-11-25/streaming-distribution/{Id}/config':
+    put:
+      operationId: UpdateStreamingDistribution
+      description: 'Update a streaming distribution. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateStreamingDistributionResult'
+        '480':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '481':
+          description: CNAMEAlreadyExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CNAMEAlreadyExists'
+        '482':
+          description: IllegalUpdate
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/IllegalUpdate'
+        '483':
+          description: InvalidIfMatchVersion
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidIfMatchVersion'
+        '484':
+          description: MissingBody
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingBody'
+        '485':
+          description: NoSuchStreamingDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchStreamingDistribution'
+        '486':
+          description: PreconditionFailed
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailed'
+        '487':
+          description: TooManyStreamingDistributionCNAMEs
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyStreamingDistributionCNAMEs'
+        '488':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '489':
+          description: InvalidOriginAccessIdentity
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidOriginAccessIdentity'
+        '490':
+          description: TooManyTrustedSigners
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyTrustedSigners'
+        '491':
+          description: TrustedSignerDoesNotExist
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TrustedSignerDoesNotExist'
+        '492':
+          description: InconsistentQuantities
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InconsistentQuantities'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UpdateStreamingDistributionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2016-11-25/distributionsByWebACLId/{WebACLId}':
+    get:
+      operationId: ListDistributionsByWebACLId
+      description: 'List the distributions that are associated with a specified AWS WAF web ACL. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListDistributionsByWebACLIdResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '481':
+          description: InvalidWebACLId
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidWebACLId'
+      parameters:
+        - name: WebACLId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ListDistributionsByWebACLIdRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2016-11-25/tagging:
+    get:
+      operationId: ListTagsForResource
+      description: List tags for a CloudFront resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResult'
+        '480':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '481':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '482':
+          description: InvalidTagging
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidTagging'
+        '483':
+          description: NoSuchResource
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchResource'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2016-11-25/tagging?Operation=Tag:
+    post:
+      operationId: TagResource
+      description: Add tags to a CloudFront resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '481':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '482':
+          description: InvalidTagging
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidTagging'
+        '483':
+          description: NoSuchResource
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchResource'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2016-11-25/tagging?Operation=Untag:
+    post:
+      operationId: UntagResource
+      description: Remove tags from a CloudFront resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '481':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '482':
+          description: InvalidTagging
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidTagging'
+        '483':
+          description: NoSuchResource
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchResource'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AccessDenied:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: Access denied.
+    ActiveTrustedSigners:
+      type: object
+      required:
+        - Enabled
+        - Quantity
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/boolean'
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/SignerList'
+      description: '<p>A complex type that lists the AWS accounts, if any, that you included in the <code>TrustedSigners</code> complex type for this distribution. These are the accounts that you want to allow to create signed URLs for private content.</p> <p>The <code>Signer</code> complex type lists the AWS account number of the trusted signer or <code>self</code> if the signer is the AWS account that created the distribution. The <code>Signer</code> element also includes the IDs of any active CloudFront key pairs that are associated with the trusted signer''s AWS account. If no <code>KeyPairId</code> element appears for a <code>Signer</code>, that signer can''t create signed URLs. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+    AliasList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    Aliases:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/AliasList'
+      description: 'A complex type that contains information about CNAMEs (alternate domain names), if any, for this distribution. '
+    AllowedMethods:
+      type: object
+      required:
+        - Quantity
+        - Items
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/MethodsList'
+        CachedMethods:
+          $ref: '#/components/schemas/CachedMethods'
+      description: '<p>A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. There are three choices:</p> <ul> <li> <p>CloudFront forwards only <code>GET</code> and <code>HEAD</code> requests.</p> </li> <li> <p>CloudFront forwards only <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests.</p> </li> <li> <p>CloudFront forwards <code>GET, HEAD, OPTIONS, PUT, PATCH, POST</code>, and <code>DELETE</code> requests.</p> </li> </ul> <p>If you pick the third choice, you may need to restrict access to your Amazon S3 bucket or to your custom origin so users can''t perform operations that you don''t want them to. For example, you might not want users to have permissions to delete objects from your origin.</p>'
+    AwsAccountNumberList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    BatchTooLarge:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    CNAMEAlreadyExists:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    CacheBehavior:
+      type: object
+      required:
+        - PathPattern
+        - TargetOriginId
+        - ForwardedValues
+        - TrustedSigners
+        - ViewerProtocolPolicy
+        - MinTTL
+      properties:
+        PathPattern:
+          $ref: '#/components/schemas/string'
+        TargetOriginId:
+          $ref: '#/components/schemas/string'
+        ForwardedValues:
+          $ref: '#/components/schemas/ForwardedValues'
+        TrustedSigners:
+          $ref: '#/components/schemas/TrustedSigners'
+        ViewerProtocolPolicy:
+          $ref: '#/components/schemas/ViewerProtocolPolicy'
+        MinTTL:
+          $ref: '#/components/schemas/long'
+        AllowedMethods:
+          $ref: '#/components/schemas/AllowedMethods'
+        SmoothStreaming:
+          $ref: '#/components/schemas/boolean'
+        DefaultTTL:
+          $ref: '#/components/schemas/long'
+        MaxTTL:
+          $ref: '#/components/schemas/long'
+        Compress:
+          $ref: '#/components/schemas/boolean'
+        LambdaFunctionAssociations:
+          $ref: '#/components/schemas/LambdaFunctionAssociations'
+      description: '<p>A complex type that describes how CloudFront processes requests.</p> <p>You must create at least as many cache behaviors (including the default cache behavior) as you have origins if you want CloudFront to distribute objects from all of the origins. Each cache behavior specifies the one origin from which you want CloudFront to get objects. If you have two origins and only the default cache behavior, the default cache behavior will cause CloudFront to get objects from one of the origins, but the other origin is never used.</p> <p>For the current limit on the number of cache behaviors that you can add to a distribution, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront">Amazon CloudFront Limits</a> in the <i>AWS General Reference</i>.</p> <p>If you don''t want to specify any cache behaviors, include only an empty <code>CacheBehaviors</code> element. Don''t include an empty <code>CacheBehavior</code> element, or CloudFront returns a <code>MalformedXML</code> error.</p> <p>To delete all cache behaviors in an existing distribution, update the distribution configuration and include only an empty <code>CacheBehaviors</code> element.</p> <p>To add, change, or remove one or more cache behaviors, update the distribution configuration and specify all of the cache behaviors that you want to include in the updated distribution.</p> <p>For more information about cache behaviors, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior">Cache Behaviors</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+    CacheBehaviorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CacheBehavior'
+    CacheBehaviors:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/CacheBehaviorList'
+      description: 'A complex type that contains zero or more <code>CacheBehavior</code> elements. '
+    CachedMethods:
+      type: object
+      required:
+        - Quantity
+        - Items
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/MethodsList'
+      description: '<p>A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:</p> <ul> <li> <p>CloudFront caches responses to <code>GET</code> and <code>HEAD</code> requests.</p> </li> <li> <p>CloudFront caches responses to <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> requests.</p> </li> </ul> <p>If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly. </p>'
+    CertificateSource:
+      type: string
+      enum:
+        - cloudfront
+        - iam
+        - acm
+    CloudFrontOriginAccessIdentity:
+      type: object
+      required:
+        - Id
+        - S3CanonicalUserId
+      properties:
+        Id:
+          $ref: '#/components/schemas/string'
+        S3CanonicalUserId:
+          $ref: '#/components/schemas/string'
+        CloudFrontOriginAccessIdentityConfig:
+          $ref: '#/components/schemas/CloudFrontOriginAccessIdentityConfig'
+      description: CloudFront origin access identity.
+    CloudFrontOriginAccessIdentityAlreadyExists:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: 'If the <code>CallerReference</code> is a value you already sent in a previous request to create an identity but the content of the <code>CloudFrontOriginAccessIdentityConfig</code> is different from the original request, CloudFront returns a <code>CloudFrontOriginAccessIdentityAlreadyExists</code> error. '
+    CloudFrontOriginAccessIdentityConfig:
+      type: object
+      required:
+        - CallerReference
+        - Comment
+      properties:
+        CallerReference:
+          $ref: '#/components/schemas/string'
+        Comment:
+          $ref: '#/components/schemas/string'
+      description: 'Origin access identity configuration. Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/CloudFront/identity ID/config</code> resource. '
+    CloudFrontOriginAccessIdentityInUse:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    CloudFrontOriginAccessIdentityList:
+      type: object
+      required:
+        - Marker
+        - MaxItems
+        - IsTruncated
+        - Quantity
+      properties:
+        Marker:
+          $ref: '#/components/schemas/string'
+        NextMarker:
+          $ref: '#/components/schemas/string'
+        MaxItems:
+          $ref: '#/components/schemas/integer'
+        IsTruncated:
+          $ref: '#/components/schemas/boolean'
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/CloudFrontOriginAccessIdentitySummaryList'
+      description: 'Lists the origin access identities for CloudFront.Send a <code>GET</code> request to the <code>/<i>CloudFront API version</i>/origin-access-identity/cloudfront</code> resource. The response includes a <code>CloudFrontOriginAccessIdentityList</code> element with zero or more <code>CloudFrontOriginAccessIdentitySummary</code> child elements. By default, your entire list of origin access identities is returned in one single page. If the list is long, you can paginate it using the <code>MaxItems</code> and <code>Marker</code> parameters.'
+    CloudFrontOriginAccessIdentitySummary:
+      type: object
+      required:
+        - Id
+        - S3CanonicalUserId
+        - Comment
+      properties:
+        Id:
+          $ref: '#/components/schemas/string'
+        S3CanonicalUserId:
+          $ref: '#/components/schemas/string'
+        Comment:
+          $ref: '#/components/schemas/string'
+      description: Summary of the information about a CloudFront origin access identity.
+    CloudFrontOriginAccessIdentitySummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CloudFrontOriginAccessIdentitySummary'
+    CookieNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    CookieNames:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/CookieNameList'
+      description: 'A complex type that specifies whether you want CloudFront to forward cookies to the origin and, if so, which ones. For more information about forwarding cookies to the origin, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html">How CloudFront Forwards, Caches, and Logs Cookies</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+    CookiePreference:
+      type: object
+      required:
+        - Forward
+      properties:
+        Forward:
+          $ref: '#/components/schemas/ItemSelection'
+        WhitelistedNames:
+          $ref: '#/components/schemas/CookieNames'
+      description: 'A complex type that specifies whether you want CloudFront to forward cookies to the origin and, if so, which ones. For more information about forwarding cookies to the origin, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html">How CloudFront Forwards, Caches, and Logs Cookies</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+    CreateCloudFrontOriginAccessIdentityRequest:
+      type: object
+      required:
+        - CloudFrontOriginAccessIdentityConfig
+      properties:
+        CloudFrontOriginAccessIdentityConfig:
+          $ref: '#/components/schemas/CloudFrontOriginAccessIdentityConfig'
+      description: The request to create a new origin access identity.
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2016-11-25/'
+    CreateCloudFrontOriginAccessIdentityResult:
+      type: object
+      properties:
+        CloudFrontOriginAccessIdentity:
+          $ref: '#/components/schemas/CloudFrontOriginAccessIdentity'
+      description: The returned result of the corresponding request.
+    CreateDistributionRequest:
+      type: object
+      required:
+        - DistributionConfig
+      properties:
+        DistributionConfig:
+          $ref: '#/components/schemas/DistributionConfig'
+      description: The request to create a new distribution.
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2016-11-25/'
+    CreateDistributionResult:
+      type: object
+      properties:
+        Distribution:
+          $ref: '#/components/schemas/Distribution'
+      description: The returned result of the corresponding request.
+    CreateDistributionWithTagsRequest:
+      type: object
+      required:
+        - DistributionConfigWithTags
+      properties:
+        DistributionConfigWithTags:
+          $ref: '#/components/schemas/DistributionConfigWithTags'
+      description: 'The request to create a new distribution with tags. '
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2016-11-25/'
+    CreateDistributionWithTagsResult:
+      type: object
+      properties:
+        Distribution:
+          $ref: '#/components/schemas/Distribution'
+      description: 'The returned result of the corresponding request. '
+    CreateInvalidationRequest:
+      type: object
+      required:
+        - InvalidationBatch
+      properties:
+        InvalidationBatch:
+          $ref: '#/components/schemas/InvalidationBatch'
+      description: The request to create an invalidation.
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2016-11-25/'
+    CreateInvalidationResult:
+      type: object
+      properties:
+        Invalidation:
+          $ref: '#/components/schemas/Invalidation'
+      description: The returned result of the corresponding request.
+    CreateStreamingDistributionRequest:
+      type: object
+      required:
+        - StreamingDistributionConfig
+      properties:
+        StreamingDistributionConfig:
+          $ref: '#/components/schemas/StreamingDistributionConfig'
+      description: The request to create a new streaming distribution.
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2016-11-25/'
+    CreateStreamingDistributionResult:
+      type: object
+      properties:
+        StreamingDistribution:
+          $ref: '#/components/schemas/StreamingDistribution'
+      description: The returned result of the corresponding request.
+    CreateStreamingDistributionWithTagsRequest:
+      type: object
+      required:
+        - StreamingDistributionConfigWithTags
+      properties:
+        StreamingDistributionConfigWithTags:
+          $ref: '#/components/schemas/StreamingDistributionConfigWithTags'
+      description: The request to create a new streaming distribution with tags.
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2016-11-25/'
+    CreateStreamingDistributionWithTagsResult:
+      type: object
+      properties:
+        StreamingDistribution:
+          $ref: '#/components/schemas/StreamingDistribution'
+      description: 'The returned result of the corresponding request. '
+    CustomErrorResponse:
+      type: object
+      required:
+        - ErrorCode
+      properties:
+        ErrorCode:
+          $ref: '#/components/schemas/integer'
+        ResponsePagePath:
+          $ref: '#/components/schemas/string'
+        ResponseCode:
+          $ref: '#/components/schemas/string'
+        ErrorCachingMinTTL:
+          $ref: '#/components/schemas/long'
+      description: '<p>A complex type that controls:</p> <ul> <li> <p>Whether CloudFront replaces HTTP status codes in the 4xx and 5xx range with custom error messages before returning the response to the viewer. </p> </li> <li> <p>How long CloudFront caches HTTP status codes in the 4xx and 5xx range.</p> </li> </ul> <p>For more information about custom error pages, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html">Customizing Error Responses</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+    CustomErrorResponseList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomErrorResponse'
+    CustomErrorResponses:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/CustomErrorResponseList'
+      description: '<p>A complex type that controls:</p> <ul> <li> <p>Whether CloudFront replaces HTTP status codes in the 4xx and 5xx range with custom error messages before returning the response to the viewer.</p> </li> <li> <p>How long CloudFront caches HTTP status codes in the 4xx and 5xx range.</p> </li> </ul> <p>For more information about custom error pages, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html">Customizing Error Responses</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+    CustomHeaders:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/OriginCustomHeadersList'
+      description: 'A complex type that contains the list of Custom Headers for each origin. '
+    CustomOriginConfig:
+      type: object
+      required:
+        - HTTPPort
+        - HTTPSPort
+        - OriginProtocolPolicy
+      properties:
+        HTTPPort:
+          $ref: '#/components/schemas/integer'
+        HTTPSPort:
+          $ref: '#/components/schemas/integer'
+        OriginProtocolPolicy:
+          $ref: '#/components/schemas/OriginProtocolPolicy'
+        OriginSslProtocols:
+          $ref: '#/components/schemas/OriginSslProtocols'
+      description: A customer origin.
+    DefaultCacheBehavior:
+      type: object
+      required:
+        - TargetOriginId
+        - ForwardedValues
+        - TrustedSigners
+        - ViewerProtocolPolicy
+        - MinTTL
+      properties:
+        TargetOriginId:
+          $ref: '#/components/schemas/string'
+        ForwardedValues:
+          $ref: '#/components/schemas/ForwardedValues'
+        TrustedSigners:
+          $ref: '#/components/schemas/TrustedSigners'
+        ViewerProtocolPolicy:
+          $ref: '#/components/schemas/ViewerProtocolPolicy'
+        MinTTL:
+          $ref: '#/components/schemas/long'
+        AllowedMethods:
+          $ref: '#/components/schemas/AllowedMethods'
+        SmoothStreaming:
+          $ref: '#/components/schemas/boolean'
+        DefaultTTL:
+          $ref: '#/components/schemas/long'
+        MaxTTL:
+          $ref: '#/components/schemas/long'
+        Compress:
+          $ref: '#/components/schemas/boolean'
+        LambdaFunctionAssociations:
+          $ref: '#/components/schemas/LambdaFunctionAssociations'
+      description: A complex type that describes the default cache behavior if you do not specify a <code>CacheBehavior</code> element or if files don't match any of the values of <code>PathPattern</code> in <code>CacheBehavior</code> elements. You must create exactly one default cache behavior.
+    DeleteCloudFrontOriginAccessIdentityRequest:
+      type: object
+      properties: {}
+      description: Deletes a origin access identity.
+    DeleteDistributionRequest:
+      type: object
+      properties: {}
+      description: '<p>This action deletes a web distribution. To delete a web distribution using the CloudFront API, perform the following steps.</p> <p> <b>To delete a web distribution using the CloudFront API:</b> </p> <ol> <li> <p>Disable the web distribution </p> </li> <li> <p>Submit a <code>GET Distribution Config</code> request to get the current configuration and the <code>Etag</code> header for the distribution.</p> </li> <li> <p>Update the XML document that was returned in the response to your <code>GET Distribution Config</code> request to change the value of <code>Enabled</code> to <code>false</code>.</p> </li> <li> <p>Submit a <code>PUT Distribution Config</code> request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Distribution Config</code> request in Step 2.</p> </li> <li> <p>Review the response to the <code>PUT Distribution Config</code> request to confirm that the distribution was successfully disabled.</p> </li> <li> <p>Submit a <code>GET Distribution</code> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> </li> <li> <p>Submit a <code>DELETE Distribution</code> request. Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GET Distribution Config</code> request in Step 6.</p> </li> <li> <p>Review the response to your <code>DELETE Distribution</code> request to confirm that the distribution was successfully deleted.</p> </li> </ol> <p>For information about deleting a distribution using the CloudFront console, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html">Deleting a Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+    DeleteStreamingDistributionRequest:
+      type: object
+      properties: {}
+      description: The request to delete a streaming distribution.
+    Distribution:
+      type: object
+      required:
+        - Id
+        - ARN
+        - Status
+        - LastModifiedTime
+        - InProgressInvalidationBatches
+        - DomainName
+        - ActiveTrustedSigners
+        - DistributionConfig
+      properties:
+        Id:
+          $ref: '#/components/schemas/string'
+        ARN:
+          $ref: '#/components/schemas/string'
+        Status:
+          $ref: '#/components/schemas/string'
+        LastModifiedTime:
+          $ref: '#/components/schemas/timestamp'
+        InProgressInvalidationBatches:
+          $ref: '#/components/schemas/integer'
+        DomainName:
+          $ref: '#/components/schemas/string'
+        ActiveTrustedSigners:
+          $ref: '#/components/schemas/ActiveTrustedSigners'
+        DistributionConfig:
+          $ref: '#/components/schemas/DistributionConfig'
+      description: The distribution's information.
+    DistributionAlreadyExists:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The caller reference you attempted to create the distribution with is associated with another distribution.
+    DistributionConfig:
+      type: object
+      required:
+        - CallerReference
+        - Origins
+        - DefaultCacheBehavior
+        - Comment
+        - Enabled
+      properties:
+        CallerReference:
+          $ref: '#/components/schemas/string'
+        Aliases:
+          $ref: '#/components/schemas/Aliases'
+        DefaultRootObject:
+          $ref: '#/components/schemas/string'
+        Origins:
+          $ref: '#/components/schemas/Origins'
+        DefaultCacheBehavior:
+          $ref: '#/components/schemas/DefaultCacheBehavior'
+        CacheBehaviors:
+          $ref: '#/components/schemas/CacheBehaviors'
+        CustomErrorResponses:
+          $ref: '#/components/schemas/CustomErrorResponses'
+        Comment:
+          $ref: '#/components/schemas/string'
+        Logging:
+          $ref: '#/components/schemas/LoggingConfig'
+        PriceClass:
+          $ref: '#/components/schemas/PriceClass'
+        Enabled:
+          $ref: '#/components/schemas/boolean'
+        ViewerCertificate:
+          $ref: '#/components/schemas/ViewerCertificate'
+        Restrictions:
+          $ref: '#/components/schemas/Restrictions'
+        WebACLId:
+          $ref: '#/components/schemas/string'
+        HttpVersion:
+          $ref: '#/components/schemas/HttpVersion'
+        IsIPV6Enabled:
+          $ref: '#/components/schemas/boolean'
+      description: A distribution configuration.
+    DistributionConfigWithTags:
+      type: object
+      required:
+        - DistributionConfig
+        - Tags
+      properties:
+        DistributionConfig:
+          $ref: '#/components/schemas/DistributionConfig'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+      description: A distribution Configuration and a list of tags to be associated with the distribution.
+    DistributionList:
+      type: object
+      required:
+        - Marker
+        - MaxItems
+        - IsTruncated
+        - Quantity
+      properties:
+        Marker:
+          $ref: '#/components/schemas/string'
+        NextMarker:
+          $ref: '#/components/schemas/string'
+        MaxItems:
+          $ref: '#/components/schemas/integer'
+        IsTruncated:
+          $ref: '#/components/schemas/boolean'
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/DistributionSummaryList'
+      description: A distribution list.
+    DistributionNotDisabled:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    DistributionSummary:
+      type: object
+      required:
+        - Id
+        - ARN
+        - Status
+        - LastModifiedTime
+        - DomainName
+        - Aliases
+        - Origins
+        - DefaultCacheBehavior
+        - CacheBehaviors
+        - CustomErrorResponses
+        - Comment
+        - PriceClass
+        - Enabled
+        - ViewerCertificate
+        - Restrictions
+        - WebACLId
+        - HttpVersion
+        - IsIPV6Enabled
+      properties:
+        Id:
+          $ref: '#/components/schemas/string'
+        ARN:
+          $ref: '#/components/schemas/string'
+        Status:
+          $ref: '#/components/schemas/string'
+        LastModifiedTime:
+          $ref: '#/components/schemas/timestamp'
+        DomainName:
+          $ref: '#/components/schemas/string'
+        Aliases:
+          $ref: '#/components/schemas/Aliases'
+        Origins:
+          $ref: '#/components/schemas/Origins'
+        DefaultCacheBehavior:
+          $ref: '#/components/schemas/DefaultCacheBehavior'
+        CacheBehaviors:
+          $ref: '#/components/schemas/CacheBehaviors'
+        CustomErrorResponses:
+          $ref: '#/components/schemas/CustomErrorResponses'
+        Comment:
+          $ref: '#/components/schemas/string'
+        PriceClass:
+          $ref: '#/components/schemas/PriceClass'
+        Enabled:
+          $ref: '#/components/schemas/boolean'
+        ViewerCertificate:
+          $ref: '#/components/schemas/ViewerCertificate'
+        Restrictions:
+          $ref: '#/components/schemas/Restrictions'
+        WebACLId:
+          $ref: '#/components/schemas/string'
+        HttpVersion:
+          $ref: '#/components/schemas/HttpVersion'
+        IsIPV6Enabled:
+          $ref: '#/components/schemas/boolean'
+      description: A summary of the information about a CloudFront distribution.
+    DistributionSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DistributionSummary'
+    EventType:
+      type: string
+      enum:
+        - viewer-request
+        - viewer-response
+        - origin-request
+        - origin-response
+    ForwardedValues:
+      type: object
+      required:
+        - QueryString
+        - Cookies
+      properties:
+        QueryString:
+          $ref: '#/components/schemas/boolean'
+        Cookies:
+          $ref: '#/components/schemas/CookiePreference'
+        Headers:
+          $ref: '#/components/schemas/Headers'
+        QueryStringCacheKeys:
+          $ref: '#/components/schemas/QueryStringCacheKeys'
+      description: A complex type that specifies how CloudFront handles query strings and cookies.
+    GeoRestriction:
+      type: object
+      required:
+        - RestrictionType
+        - Quantity
+      properties:
+        RestrictionType:
+          $ref: '#/components/schemas/GeoRestrictionType'
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/LocationList'
+      description: 'A complex type that controls the countries in which your content is distributed. CloudFront determines the location of your users using <code>MaxMind</code> GeoIP databases. '
+    GeoRestrictionType:
+      type: string
+      enum:
+        - blacklist
+        - whitelist
+        - none
+    GetCloudFrontOriginAccessIdentityConfigRequest:
+      type: object
+      properties: {}
+      description: 'The origin access identity''s configuration information. For more information, see <a>CloudFrontOriginAccessIdentityConfigComplexType</a>.'
+    GetCloudFrontOriginAccessIdentityConfigResult:
+      type: object
+      properties:
+        CloudFrontOriginAccessIdentityConfig:
+          $ref: '#/components/schemas/CloudFrontOriginAccessIdentityConfig'
+      description: The returned result of the corresponding request.
+    GetCloudFrontOriginAccessIdentityRequest:
+      type: object
+      properties: {}
+      description: The request to get an origin access identity's information.
+    GetCloudFrontOriginAccessIdentityResult:
+      type: object
+      properties:
+        CloudFrontOriginAccessIdentity:
+          $ref: '#/components/schemas/CloudFrontOriginAccessIdentity'
+      description: The returned result of the corresponding request.
+    GetDistributionConfigRequest:
+      type: object
+      properties: {}
+      description: The request to get a distribution configuration.
+    GetDistributionConfigResult:
+      type: object
+      properties:
+        DistributionConfig:
+          $ref: '#/components/schemas/DistributionConfig'
+      description: The returned result of the corresponding request.
+    GetDistributionRequest:
+      type: object
+      properties: {}
+      description: The request to get a distribution's information.
+    GetDistributionResult:
+      type: object
+      properties:
+        Distribution:
+          $ref: '#/components/schemas/Distribution'
+      description: The returned result of the corresponding request.
+    GetInvalidationRequest:
+      type: object
+      properties: {}
+      description: 'The request to get an invalidation''s information. '
+    GetInvalidationResult:
+      type: object
+      properties:
+        Invalidation:
+          $ref: '#/components/schemas/Invalidation'
+      description: The returned result of the corresponding request.
+    GetStreamingDistributionConfigRequest:
+      type: object
+      properties: {}
+      description: To request to get a streaming distribution configuration.
+    GetStreamingDistributionConfigResult:
+      type: object
+      properties:
+        StreamingDistributionConfig:
+          $ref: '#/components/schemas/StreamingDistributionConfig'
+      description: The returned result of the corresponding request.
+    GetStreamingDistributionRequest:
+      type: object
+      properties: {}
+      description: The request to get a streaming distribution's information.
+    GetStreamingDistributionResult:
+      type: object
+      properties:
+        StreamingDistribution:
+          $ref: '#/components/schemas/StreamingDistribution'
+      description: The returned result of the corresponding request.
+    HeaderList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    Headers:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/HeaderList'
+      description: '<p>A complex type that specifies the headers that you want CloudFront to forward to the origin for this cache behavior.</p> <p>For the headers that you specify, CloudFront also caches separate versions of a specified object based on the header values in viewer requests. For example, suppose viewer requests for <code>logo.jpg</code> contain a custom <code>Product</code> header that has a value of either <code>Acme</code> or <code>Apex</code>, and you configure CloudFront to cache your content based on values in the <code>Product</code> header. CloudFront forwards the <code>Product</code> header to the origin and caches the response from the origin once for each header value. For more information about caching based on header values, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html">How CloudFront Forwards and Caches Headers</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+    HttpVersion:
+      type: string
+      enum:
+        - http1.1
+        - http2
+    IllegalUpdate:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: 'Origin and <code>CallerReference</code> cannot be updated. '
+    InconsistentQuantities:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The value of <code>Quantity</code> and the size of <code>Items</code> do not match.
+    InvalidArgument:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The argument is invalid.
+    InvalidDefaultRootObject:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The default root object file name is too big or contains an invalid character.
+    InvalidErrorCode:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    InvalidForwardCookies:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: Your request contains forward cookies option which doesn't match with the expectation for the <code>whitelisted</code> list of cookie names. Either list of cookie names has been specified when not allowed or list of cookie names is missing when expected.
+    InvalidGeoRestrictionParameter:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    InvalidHeadersForS3Origin:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    InvalidIfMatchVersion:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The <code>If-Match</code> version is missing or not valid for the distribution.
+    InvalidLambdaFunctionAssociation:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The specified Lambda function association is invalid.
+    InvalidLocationCode:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    InvalidMinimumProtocolVersion:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    InvalidOrigin:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The Amazon S3 origin server specified does not refer to a valid Amazon S3 bucket.
+    InvalidOriginAccessIdentity:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The origin access identity is not valid or doesn't exist.
+    InvalidProtocolSettings:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: You cannot specify SSLv3 as the minimum protocol version if you only want to support only clients that support Server Name Indication (SNI).
+    InvalidQueryStringParameters:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    InvalidRelativePath:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: 'The relative path is too big, is not URL-encoded, or does not begin with a slash (/).'
+    InvalidRequiredProtocol:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: 'This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the <code>RequiredProtocols</code> element from your distribution configuration.'
+    InvalidResponseCode:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    InvalidTTLOrder:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    InvalidTagging:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    InvalidViewerCertificate:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    InvalidWebACLId:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    Invalidation:
+      type: object
+      required:
+        - Id
+        - Status
+        - CreateTime
+        - InvalidationBatch
+      properties:
+        Id:
+          $ref: '#/components/schemas/string'
+        Status:
+          $ref: '#/components/schemas/string'
+        CreateTime:
+          $ref: '#/components/schemas/timestamp'
+        InvalidationBatch:
+          $ref: '#/components/schemas/InvalidationBatch'
+      description: 'An invalidation. '
+    InvalidationBatch:
+      type: object
+      required:
+        - Paths
+        - CallerReference
+      properties:
+        Paths:
+          $ref: '#/components/schemas/Paths'
+        CallerReference:
+          $ref: '#/components/schemas/string'
+      description: An invalidation batch.
+    InvalidationList:
+      type: object
+      required:
+        - Marker
+        - MaxItems
+        - IsTruncated
+        - Quantity
+      properties:
+        Marker:
+          $ref: '#/components/schemas/string'
+        NextMarker:
+          $ref: '#/components/schemas/string'
+        MaxItems:
+          $ref: '#/components/schemas/integer'
+        IsTruncated:
+          $ref: '#/components/schemas/boolean'
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/InvalidationSummaryList'
+      description: 'The <code>InvalidationList</code> complex type describes the list of invalidation objects. For more information about invalidation, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html">Invalidating Objects (Web Distributions Only)</a> in the <i>Amazon CloudFront Developer Guide</i>.'
+    InvalidationSummary:
+      type: object
+      required:
+        - Id
+        - CreateTime
+        - Status
+      properties:
+        Id:
+          $ref: '#/components/schemas/string'
+        CreateTime:
+          $ref: '#/components/schemas/timestamp'
+        Status:
+          $ref: '#/components/schemas/string'
+      description: A summary of an invalidation request.
+    InvalidationSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InvalidationSummary'
+    ItemSelection:
+      type: string
+      enum:
+        - none
+        - whitelist
+        - all
+    KeyPairIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    KeyPairIds:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/KeyPairIdList'
+      description: '<p>A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>. </p> <p>For more information, see <a>ActiveTrustedSigners</a>.</p>'
+    LambdaFunctionAssociation:
+      type: object
+      properties:
+        LambdaFunctionARN:
+          $ref: '#/components/schemas/string'
+        EventType:
+          $ref: '#/components/schemas/EventType'
+      description: A complex type that contains a Lambda function association.
+    LambdaFunctionAssociationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LambdaFunctionAssociation'
+    LambdaFunctionAssociations:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/LambdaFunctionAssociationList'
+      description: '<p>A complex type that specifies a list of Lambda functions associations for a cache behavior.</p> <p>If you want to invoke one or more Lambda functions triggered by requests that match the <code>PathPattern</code> of the cache behavior, specify the applicable values for <code>Quantity</code> and <code>Items</code>. Note that there can be up to 4 <code>LambdaFunctionAssociation</code> items in this list (one for each possible value of <code>EventType</code>) and each <code>EventType</code> can be associated with the Lambda function only once.</p> <p>If you don''t want to invoke any Lambda functions for the requests that match <code>PathPattern</code>, specify <code>0</code> for <code>Quantity</code> and omit <code>Items</code>. </p>'
+    ListCloudFrontOriginAccessIdentitiesRequest:
+      type: object
+      properties: {}
+      description: 'The request to list origin access identities. '
+    ListCloudFrontOriginAccessIdentitiesResult:
+      type: object
+      properties:
+        CloudFrontOriginAccessIdentityList:
+          $ref: '#/components/schemas/CloudFrontOriginAccessIdentityList'
+      description: 'The returned result of the corresponding request. '
+    ListDistributionsByWebACLIdRequest:
+      type: object
+      properties: {}
+      description: 'The request to list distributions that are associated with a specified AWS WAF web ACL. '
+    ListDistributionsByWebACLIdResult:
+      type: object
+      properties:
+        DistributionList:
+          $ref: '#/components/schemas/DistributionList'
+      description: 'The response to a request to list the distributions that are associated with a specified AWS WAF web ACL. '
+    ListDistributionsRequest:
+      type: object
+      properties: {}
+      description: 'The request to list your distributions. '
+    ListDistributionsResult:
+      type: object
+      properties:
+        DistributionList:
+          $ref: '#/components/schemas/DistributionList'
+      description: 'The returned result of the corresponding request. '
+    ListInvalidationsRequest:
+      type: object
+      properties: {}
+      description: 'The request to list invalidations. '
+    ListInvalidationsResult:
+      type: object
+      properties:
+        InvalidationList:
+          $ref: '#/components/schemas/InvalidationList'
+      description: 'The returned result of the corresponding request. '
+    ListStreamingDistributionsRequest:
+      type: object
+      properties: {}
+      description: 'The request to list your streaming distributions. '
+    ListStreamingDistributionsResult:
+      type: object
+      properties:
+        StreamingDistributionList:
+          $ref: '#/components/schemas/StreamingDistributionList'
+      description: 'The returned result of the corresponding request. '
+    ListTagsForResourceRequest:
+      type: object
+      properties: {}
+      description: ' The request to list tags for a CloudFront resource.'
+    ListTagsForResourceResult:
+      type: object
+      required:
+        - Tags
+      properties:
+        Tags:
+          $ref: '#/components/schemas/Tags'
+      description: ' The returned result of the corresponding request.'
+    LocationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    LoggingConfig:
+      type: object
+      required:
+        - Enabled
+        - IncludeCookies
+        - Bucket
+        - Prefix
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/boolean'
+        IncludeCookies:
+          $ref: '#/components/schemas/boolean'
+        Bucket:
+          $ref: '#/components/schemas/string'
+        Prefix:
+          $ref: '#/components/schemas/string'
+      description: A complex type that controls whether access logs are written for the distribution.
+    Method:
+      type: string
+      enum:
+        - GET
+        - HEAD
+        - POST
+        - PUT
+        - PATCH
+        - OPTIONS
+        - DELETE
+    MethodsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Method'
+    MinimumProtocolVersion:
+      type: string
+      enum:
+        - SSLv3
+        - TLSv1
+    MissingBody:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: This operation requires a body. Ensure that the body is present and the Content-Type header is set.
+    NoSuchCloudFrontOriginAccessIdentity:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The specified origin access identity does not exist.
+    NoSuchDistribution:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The specified distribution does not exist.
+    NoSuchInvalidation:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The specified invalidation does not exist.
+    NoSuchOrigin:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: 'No origin exists with the specified <code>Origin Id</code>. '
+    NoSuchResource:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    NoSuchStreamingDistribution:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: The specified streaming distribution does not exist.
+    Origin:
+      type: object
+      required:
+        - Id
+        - DomainName
+      properties:
+        Id:
+          $ref: '#/components/schemas/string'
+        DomainName:
+          $ref: '#/components/schemas/string'
+        OriginPath:
+          $ref: '#/components/schemas/string'
+        CustomHeaders:
+          $ref: '#/components/schemas/CustomHeaders'
+        S3OriginConfig:
+          $ref: '#/components/schemas/S3OriginConfig'
+        CustomOriginConfig:
+          $ref: '#/components/schemas/CustomOriginConfig'
+      description: '<p>A complex type that describes the Amazon S3 bucket or the HTTP server (for example, a web server) from which CloudFront gets your files. You must create at least one origin.</p> <p>For the current limit on the number of origins that you can create for a distribution, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront">Amazon CloudFront Limits</a> in the <i>AWS General Reference</i>.</p>'
+    OriginCustomHeader:
+      type: object
+      required:
+        - HeaderName
+        - HeaderValue
+      properties:
+        HeaderName:
+          $ref: '#/components/schemas/string'
+        HeaderValue:
+          $ref: '#/components/schemas/string'
+      description: 'A complex type that contains <code>HeaderName</code> and <code>HeaderValue</code> elements, if any, for this distribution. '
+    OriginCustomHeadersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OriginCustomHeader'
+    OriginList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Origin'
+      minItems: 1
+    OriginProtocolPolicy:
+      type: string
+      enum:
+        - http-only
+        - match-viewer
+        - https-only
+    OriginSslProtocols:
+      type: object
+      required:
+        - Quantity
+        - Items
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/SslProtocolsList'
+      description: 'A complex type that contains information about the SSL/TLS protocols that CloudFront can use when establishing an HTTPS connection with your origin. '
+    Origins:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/OriginList'
+      description: 'A complex type that contains information about origins for this distribution. '
+    PathList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    Paths:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/PathList'
+      description: 'A complex type that contains information about the objects that you want to invalidate. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects">Specifying the Objects to Invalidate</a> in the <i>Amazon CloudFront Developer Guide</i>. '
+    PreconditionFailed:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: 'The precondition given in one or more of the request-header fields evaluated to <code>false</code>. '
+    PriceClass:
+      type: string
+      enum:
+        - PriceClass_100
+        - PriceClass_200
+        - PriceClass_All
+    QueryStringCacheKeys:
+      type: object
+      required:
+        - Quantity
+      properties:
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/QueryStringCacheKeysList'
+    QueryStringCacheKeysList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    ResourceARN:
+      type: string
+      pattern: 'arn:aws:cloudfront::[0-9]+:.*'
+    Restrictions:
+      type: object
+      required:
+        - GeoRestriction
+      properties:
+        GeoRestriction:
+          $ref: '#/components/schemas/GeoRestriction'
+      description: A complex type that identifies ways in which you want to restrict distribution of your content.
+    S3Origin:
+      type: object
+      required:
+        - DomainName
+        - OriginAccessIdentity
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/string'
+        OriginAccessIdentity:
+          $ref: '#/components/schemas/string'
+      description: A complex type that contains information about the Amazon S3 bucket from which you want CloudFront to get your media files for distribution.
+    S3OriginConfig:
+      type: object
+      required:
+        - OriginAccessIdentity
+      properties:
+        OriginAccessIdentity:
+          $ref: '#/components/schemas/string'
+      description: 'A complex type that contains information about the Amazon S3 origin. If the origin is a custom origin, use the <code>CustomOriginConfig</code> element instead.'
+    SSLSupportMethod:
+      type: string
+      enum:
+        - sni-only
+        - vip
+    Signer:
+      type: object
+      properties:
+        AwsAccountNumber:
+          $ref: '#/components/schemas/string'
+        KeyPairIds:
+          $ref: '#/components/schemas/KeyPairIds'
+      description: 'A complex type that lists the AWS accounts that were included in the <code>TrustedSigners</code> complex type, as well as their active CloudFront key pair IDs, if any. '
+    SignerList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Signer'
+    SslProtocol:
+      type: string
+      enum:
+        - SSLv3
+        - TLSv1
+        - TLSv1.1
+        - TLSv1.2
+    SslProtocolsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SslProtocol'
+    StreamingDistribution:
+      type: object
+      required:
+        - Id
+        - ARN
+        - Status
+        - DomainName
+        - ActiveTrustedSigners
+        - StreamingDistributionConfig
+      properties:
+        Id:
+          $ref: '#/components/schemas/string'
+        ARN:
+          $ref: '#/components/schemas/string'
+        Status:
+          $ref: '#/components/schemas/string'
+        LastModifiedTime:
+          $ref: '#/components/schemas/timestamp'
+        DomainName:
+          $ref: '#/components/schemas/string'
+        ActiveTrustedSigners:
+          $ref: '#/components/schemas/ActiveTrustedSigners'
+        StreamingDistributionConfig:
+          $ref: '#/components/schemas/StreamingDistributionConfig'
+      description: 'A streaming distribution. '
+    StreamingDistributionAlreadyExists:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    StreamingDistributionConfig:
+      type: object
+      required:
+        - CallerReference
+        - S3Origin
+        - Comment
+        - TrustedSigners
+        - Enabled
+      properties:
+        CallerReference:
+          $ref: '#/components/schemas/string'
+        S3Origin:
+          $ref: '#/components/schemas/S3Origin'
+        Aliases:
+          $ref: '#/components/schemas/Aliases'
+        Comment:
+          $ref: '#/components/schemas/string'
+        Logging:
+          $ref: '#/components/schemas/StreamingLoggingConfig'
+        TrustedSigners:
+          $ref: '#/components/schemas/TrustedSigners'
+        PriceClass:
+          $ref: '#/components/schemas/PriceClass'
+        Enabled:
+          $ref: '#/components/schemas/boolean'
+      description: The RTMP distribution's configuration information.
+    StreamingDistributionConfigWithTags:
+      type: object
+      required:
+        - StreamingDistributionConfig
+        - Tags
+      properties:
+        StreamingDistributionConfig:
+          $ref: '#/components/schemas/StreamingDistributionConfig'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+      description: A streaming distribution Configuration and a list of tags to be associated with the streaming distribution.
+    StreamingDistributionList:
+      type: object
+      required:
+        - Marker
+        - MaxItems
+        - IsTruncated
+        - Quantity
+      properties:
+        Marker:
+          $ref: '#/components/schemas/string'
+        NextMarker:
+          $ref: '#/components/schemas/string'
+        MaxItems:
+          $ref: '#/components/schemas/integer'
+        IsTruncated:
+          $ref: '#/components/schemas/boolean'
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/StreamingDistributionSummaryList'
+      description: 'A streaming distribution list. '
+    StreamingDistributionNotDisabled:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    StreamingDistributionSummary:
+      type: object
+      required:
+        - Id
+        - ARN
+        - Status
+        - LastModifiedTime
+        - DomainName
+        - S3Origin
+        - Aliases
+        - TrustedSigners
+        - Comment
+        - PriceClass
+        - Enabled
+      properties:
+        Id:
+          $ref: '#/components/schemas/string'
+        ARN:
+          $ref: '#/components/schemas/string'
+        Status:
+          $ref: '#/components/schemas/string'
+        LastModifiedTime:
+          $ref: '#/components/schemas/timestamp'
+        DomainName:
+          $ref: '#/components/schemas/string'
+        S3Origin:
+          $ref: '#/components/schemas/S3Origin'
+        Aliases:
+          $ref: '#/components/schemas/Aliases'
+        TrustedSigners:
+          $ref: '#/components/schemas/TrustedSigners'
+        Comment:
+          $ref: '#/components/schemas/string'
+        PriceClass:
+          $ref: '#/components/schemas/PriceClass'
+        Enabled:
+          $ref: '#/components/schemas/boolean'
+      description: ' A summary of the information for an Amazon CloudFront streaming distribution.'
+    StreamingDistributionSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StreamingDistributionSummary'
+    StreamingLoggingConfig:
+      type: object
+      required:
+        - Enabled
+        - Bucket
+        - Prefix
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/boolean'
+        Bucket:
+          $ref: '#/components/schemas/string'
+        Prefix:
+          $ref: '#/components/schemas/string'
+      description: A complex type that controls whether access logs are written for this streaming distribution.
+    Tag:
+      type: object
+      required:
+        - Key
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+      description: ' A complex type that contains <code>Tag</code> key and <code>Tag</code> value.'
+    TagKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      description: '<p> A string that contains <code>Tag</code> key.</p> <p>The string length should be between 1 and 128 characters. Valid characters include <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, space, and the special characters <code>_ - . : / = + @</code>.</p>'
+      minLength: 1
+      maxLength: 128
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    TagKeys:
+      type: object
+      properties:
+        Items:
+          $ref: '#/components/schemas/TagKeyList'
+      description: ' A complex type that contains zero or more <code>Tag</code> elements.'
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TagResourceRequest:
+      type: object
+      required:
+        - Tags
+      properties:
+        Tags:
+          $ref: '#/components/schemas/Tags'
+      description: ' The request to add tags to a CloudFront resource.'
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2016-11-25/'
+    TagValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 0
+      maxLength: 256
+    Tags:
+      type: object
+      properties:
+        Items:
+          $ref: '#/components/schemas/TagList'
+      description: ' A complex type that contains zero or more <code>Tag</code> elements.'
+    TooManyCacheBehaviors:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: You cannot create more cache behaviors for the distribution.
+    TooManyCertificates:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: You cannot create anymore custom SSL/TLS certificates.
+    TooManyCloudFrontOriginAccessIdentities:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: Processing your request would cause you to exceed the maximum number of origin access identities allowed.
+    TooManyCookieNamesInWhiteList:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: Your request contains more cookie names in the whitelist than are allowed per cache behavior.
+    TooManyDistributionCNAMEs:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: Your request contains more CNAMEs than are allowed per distribution.
+    TooManyDistributions:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: Processing your request would cause you to exceed the maximum number of distributions allowed.
+    TooManyDistributionsWithLambdaAssociations:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: Processing your request would cause the maximum number of distributions with Lambda function associations per owner to be exceeded.
+    TooManyHeadersInForwardedValues:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    TooManyInvalidationsInProgress:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: 'You have exceeded the maximum number of allowable InProgress invalidation batch requests, or invalidation objects.'
+    TooManyLambdaFunctionAssociations:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: Your request contains more Lambda function associations than are allowed per distribution.
+    TooManyOriginCustomHeaders:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    TooManyOrigins:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: You cannot create more origins for the distribution.
+    TooManyQueryStringParameters:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    TooManyStreamingDistributionCNAMEs:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+    TooManyStreamingDistributions:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: Processing your request would cause you to exceed the maximum number of streaming distributions allowed.
+    TooManyTrustedSigners:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: Your request contains more trusted signers than are allowed per distribution.
+    TrustedSignerDoesNotExist:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/string'
+      description: One or more of your trusted signers do not exist.
+    TrustedSigners:
+      type: object
+      required:
+        - Enabled
+        - Quantity
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/boolean'
+        Quantity:
+          $ref: '#/components/schemas/integer'
+        Items:
+          $ref: '#/components/schemas/AwsAccountNumberList'
+      description: '<p>A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content.</p> <p>If you want to require signed URLs in requests for objects in the target origin that match the <code>PathPattern</code> for this cache behavior, specify <code>true</code> for <code>Enabled</code>, and specify the applicable values for <code>Quantity</code> and <code>Items</code>. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon Amazon CloudFront Developer Guide</i>.</p> <p>If you don''t want to require signed URLs in requests for objects that match <code>PathPattern</code>, specify <code>false</code> for <code>Enabled</code> and <code>0</code> for <code>Quantity</code>. Omit <code>Items</code>.</p> <p>To add, change, or remove one or more trusted signers, change <code>Enabled</code> to <code>true</code> (if it''s currently <code>false</code>), change <code>Quantity</code> as applicable, and specify all of the trusted signers that you want to include in the updated distribution.</p> <p>For more information about updating the distribution configuration, see <a>DistributionConfig</a> .</p>'
+    UntagResourceRequest:
+      type: object
+      required:
+        - TagKeys
+      properties:
+        TagKeys:
+          $ref: '#/components/schemas/TagKeys'
+      description: ' The request to remove tags from a CloudFront resource.'
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2016-11-25/'
+    UpdateCloudFrontOriginAccessIdentityRequest:
+      type: object
+      required:
+        - CloudFrontOriginAccessIdentityConfig
+      properties:
+        CloudFrontOriginAccessIdentityConfig:
+          $ref: '#/components/schemas/CloudFrontOriginAccessIdentityConfig'
+      description: The request to update an origin access identity.
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2016-11-25/'
+    UpdateCloudFrontOriginAccessIdentityResult:
+      type: object
+      properties:
+        CloudFrontOriginAccessIdentity:
+          $ref: '#/components/schemas/CloudFrontOriginAccessIdentity'
+      description: The returned result of the corresponding request.
+    UpdateDistributionRequest:
+      type: object
+      required:
+        - DistributionConfig
+      properties:
+        DistributionConfig:
+          $ref: '#/components/schemas/DistributionConfig'
+      description: The request to update a distribution.
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2016-11-25/'
+    UpdateDistributionResult:
+      type: object
+      properties:
+        Distribution:
+          $ref: '#/components/schemas/Distribution'
+      description: The returned result of the corresponding request.
+    UpdateStreamingDistributionRequest:
+      type: object
+      required:
+        - StreamingDistributionConfig
+      properties:
+        StreamingDistributionConfig:
+          $ref: '#/components/schemas/StreamingDistributionConfig'
+      description: The request to update a streaming distribution.
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2016-11-25/'
+    UpdateStreamingDistributionResult:
+      type: object
+      properties:
+        StreamingDistribution:
+          $ref: '#/components/schemas/StreamingDistribution'
+      description: The returned result of the corresponding request.
+    ViewerCertificate:
+      type: object
+      properties:
+        CloudFrontDefaultCertificate:
+          $ref: '#/components/schemas/boolean'
+        IAMCertificateId:
+          $ref: '#/components/schemas/string'
+        ACMCertificateArn:
+          $ref: '#/components/schemas/string'
+        SSLSupportMethod:
+          $ref: '#/components/schemas/SSLSupportMethod'
+        MinimumProtocolVersion:
+          $ref: '#/components/schemas/MinimumProtocolVersion'
+        Certificate:
+          $ref: '#/components/schemas/string'
+        CertificateSource:
+          $ref: '#/components/schemas/CertificateSource'
+      description: '<p>A complex type that specifies the following:</p> <ul> <li> <p>Which SSL/TLS certificate to use when viewers request objects using HTTPS</p> </li> <li> <p>Whether you want CloudFront to use dedicated IP addresses or SNI when you''re using alternate domain names in your object names</p> </li> <li> <p>The minimum protocol version that you want CloudFront to use when communicating with viewers</p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html">Using an HTTPS Connection to Access Your Objects</a> in the <i>Amazon Amazon CloudFront Developer Guide</i>.</p>'
+    ViewerProtocolPolicy:
+      type: string
+      enum:
+        - allow-all
+        - https-only
+        - redirect-to-https
+    boolean:
+      type: boolean
+    integer:
+      type: integer
+    long:
+      type: integer
+    string:
+      type: string
+    timestamp:
+      type: string
+      format: date-time
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

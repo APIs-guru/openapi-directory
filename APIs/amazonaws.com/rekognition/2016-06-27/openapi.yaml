@@ -1,0 +1,2209 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://rekognition.amazonaws.com/'
+info:
+  version: '2016-06-27'
+  x-release: v4
+  title: Amazon Rekognition
+  description: This is the Amazon Rekognition API reference.
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: rekognition
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/rekognition-2016-06-27.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/rekognition/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CompareFaces
+      description: '<p>Compares a face in the <i>source</i> input image with each face detected in the <i>target</i> input image. </p> <note> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> </note> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don''t match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>If the image doesn''t contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn''t persist.</p> </note> <p>For an example, see <a>get-started-exercise-compare-faces</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompareFacesResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
+        '482':
+          description: ImageTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageTooLargeException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '487':
+          description: InvalidImageFormatException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidImageFormatException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompareFacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateCollection':
+    post:
+      operationId: CreateCollection
+      description: '<p>Creates a collection in an AWS Region. You can add faces to the collection using the operation. </p> <p>For example, you might create collections, one for each of your application users. A user can then index faces using the <code>IndexFaces</code> operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container. </p> <note> <p>Collection names are case-sensitive.</p> </note> <p>For an example, see <a>example1</a>. </p> <p>This operation requires permissions to perform the <code>rekognition:CreateCollection</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCollectionResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '485':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCollectionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteCollection':
+    post:
+      operationId: DeleteCollection
+      description: '<p>Deletes the specified collection. Note that this operation removes all faces in the collection. For an example, see <a>example1</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:DeleteCollection</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCollectionResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCollectionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteFaces':
+    post:
+      operationId: DeleteFaces
+      description: '<p>Deletes faces from a collection. You specify a collection ID and an array of face IDs to remove from the collection.</p> <p>This operation requires permissions to perform the <code>rekognition:DeleteFaces</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFacesResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteFacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DetectFaces':
+    post:
+      operationId: DetectFaces
+      description: '<p>Detects faces within an image (JPEG or PNG) that is provided as input.</p> <p> For each face detected, the operation returns face details including a bounding box of the face, a confidence value (that the bounding box contains a face), and a fixed set of attributes such as facial landmarks (for example, coordinates of eye and mouth), gender, presence of beard, sunglasses, etc. </p> <p>The face-detection algorithm is most effective on frontal faces. For non-frontal or obscured faces, the algorithm may not detect the faces or might detect faces with lower confidence. </p> <note> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> </note> <p>For an example, see <a>get-started-exercise-detect-faces</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectFaces</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectFacesResponse'
+        '480':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ImageTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageTooLargeException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '487':
+          description: InvalidImageFormatException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidImageFormatException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectFacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DetectLabels':
+    post:
+      operationId: DetectLabels
+      description: '<p>Detects instances of real-world labels within an image (JPEG or PNG) provided as input. This includes objects like flower, tree, and table; events like wedding, graduation, and birthday party; and concepts like landscape, evening, and nature. For an example, see <a>get-started-exercise-detect-labels</a>.</p> <p> For each object, scene, and concept the API returns one or more labels. Each label provides the object name, and the level of confidence that the image contains the object. For example, suppose the input image has a lighthouse, the sea, and a rock. The response will include all three labels, one for each object. </p> <p> <code>{Name: lighthouse, Confidence: 98.4629}</code> </p> <p> <code>{Name: rock,Confidence: 79.2097}</code> </p> <p> <code> {Name: sea,Confidence: 75.061}</code> </p> <p> In the preceding example, the operation returns one label for each of the three objects. The operation can also return multiple labels for the same object in the image. For example, if the input image shows a flower (for example, a tulip), the operation might return the following three labels. </p> <p> <code>{Name: flower,Confidence: 99.0562}</code> </p> <p> <code>{Name: plant,Confidence: 99.0562}</code> </p> <p> <code>{Name: tulip,Confidence: 99.0562}</code> </p> <p>In this example, the detection algorithm more precisely identifies the flower as a tulip.</p> <p>You can provide the input image as an S3 object or as base64-encoded bytes. In response, the API returns an array of labels. In addition, the response also includes the orientation correction. Optionally, you can specify <code>MinConfidence</code> to control the confidence threshold for the labels returned. The default is 50%. You can also add the <code>MaxLabels</code> parameter to limit the number of labels returned. </p> <note> <p>If the object detected is a person, the operation doesn''t provide the same facial details that the <a>DetectFaces</a> operation provides.</p> </note> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectLabels</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectLabelsResponse'
+        '480':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ImageTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageTooLargeException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '487':
+          description: InvalidImageFormatException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidImageFormatException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectLabelsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DetectModerationLabels':
+    post:
+      operationId: DetectModerationLabels
+      description: '<p>Detects explicit or suggestive adult content in a specified JPEG or PNG format image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p> <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate. For information about moderation labels, see <a>image-moderation</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectModerationLabelsResponse'
+        '480':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ImageTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageTooLargeException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '487':
+          description: InvalidImageFormatException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidImageFormatException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectModerationLabelsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetCelebrityInfo':
+    post:
+      operationId: GetCelebrityInfo
+      description: '<p>Gets the name and additional information about a celebrity based on his or her Rekognition ID. The additional information is returned as an array of URLs. If there is no additional information about the celebrity, this list is empty. For more information, see <a>celebrity-recognition</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:GetCelebrityInfo</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCelebrityInfoResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCelebrityInfoRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#IndexFaces':
+    post:
+      operationId: IndexFaces
+      description: '<p>Detects faces in the input image and adds them to the specified collection. </p> <p> Amazon Rekognition does not save the actual faces detected. Instead, the underlying detection algorithm first detects the faces in the input image, and for each face extracts facial features into a feature vector, and stores it in the back-end database. Amazon Rekognition uses feature vectors when performing face match and search operations using the and operations. </p> <p>If you provide the optional <code>externalImageID</code> for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. </p> <p>In response, the operation returns an array of metadata for all detected faces. This includes, the bounding box of the detected face, confidence value (indicating the bounding box contains a face), a face ID assigned by the service for each face that is detected and stored, and an image ID assigned by the service for the input image. If you request all facial attributes (using the <code>detectionAttributes</code> parameter, Amazon Rekognition returns detailed facial attributes such as facial landmarks (for example, location of eye and mount) and other facial attributes such gender. If you provide the same image, specify the same collection, and use the same external ID in the <code>IndexFaces</code> operation, Amazon Rekognition doesn''t save duplicate face metadata. </p> <p>For an example, see <a>example2</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexFacesResponse'
+        '480':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ImageTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageTooLargeException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '487':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '488':
+          description: InvalidImageFormatException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidImageFormatException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndexFacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListCollections':
+    post:
+      operationId: ListCollections
+      description: '<p>Returns list of collection IDs in your account. If the result is truncated, the response also provides a <code>NextToken</code> that you can use in the subsequent request to fetch the next set of collection IDs.</p> <p>For an example, see <a>example1</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:ListCollections</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCollectionsResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '485':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCollectionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListFaces':
+    post:
+      operationId: ListFaces
+      description: '<p>Returns metadata for faces in the specified collection. This metadata includes information such as the bounding box coordinates, the confidence (that the bounding box contains a face), and face ID. For an example, see <a>example3</a>. </p> <p>This operation requires permissions to perform the <code>rekognition:ListFaces</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFacesResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '485':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RecognizeCelebrities':
+    post:
+      operationId: RecognizeCelebrities
+      description: '<p>Returns an array of celebrities recognized in the input image. The image is passed either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. The image must be either a PNG or JPEG formatted file. For more information, see <a>celebrity-recognition</a>. </p> <p> <code>RecognizeCelebrities</code> returns the 15 largest faces in the image. It lists recognized celebrities in the <code>CelebrityFaces</code> list and unrecognized faces in the <code>UnrecognizedFaces</code> list. The operation doesn''t return celebrities whose face sizes are smaller than the largest 15 faces in the image.</p> <p>For each celebrity recognized, the API returns a <code>Celebrity</code> object. The <code>Celebrity</code> object contains the celebrity name, ID, URL links to additional information, match confidence, and a <code>ComparedFace</code> object that you can use to locate the celebrity''s face on the image.</p> <p>Rekognition does not retain information about which images a celebrity has been recognized in. Your application must store this information and use the <code>Celebrity</code> ID property as a unique identifier for the celebrity. If you don''t store the celebrity name or additional information URLs returned by <code>RecognizeCelebrities</code>, you will need the ID to identify the celebrity in a call to the operation.</p> <p>For an example, see <a>recognize-celebrities-tutorial</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:RecognizeCelebrities</code> operation.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecognizeCelebritiesResponse'
+        '480':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidImageFormatException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidImageFormatException'
+        '483':
+          description: ImageTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageTooLargeException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '488':
+          description: InvalidImageFormatException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidImageFormatException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecognizeCelebritiesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SearchFaces':
+    post:
+      operationId: SearchFaces
+      description: '<p>For a given input face ID, searches for matching faces in the collection the face belongs to. You get a face ID when you add a face to the collection using the <a>IndexFaces</a> operation. The operation compares the features of the input face with faces in the specified collection. </p> <note> <p>You can also search faces without indexing faces by using the <code>SearchFacesByImage</code> operation.</p> </note> <p> The operation response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match that is found. Along with the metadata, the response also includes a <code>confidence</code> value for each face match, indicating the confidence that the specific face matches the input face. </p> <p>For an example, see <a>example3</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:SearchFaces</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchFacesResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchFacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SearchFacesByImage':
+    post:
+      operationId: SearchFacesByImage
+      description: '<p>For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection. </p> <note> <p> To search for all faces in an input image, you might first call the operation, and then use the face IDs returned in subsequent calls to the operation. </p> <p> You can also call the <code>DetectFaces</code> operation and use the bounding boxes in the response to make face crops, which then you can pass in to the <code>SearchFacesByImage</code> operation. </p> </note> <p> The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a <code>similarity</code> indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image. </p> <p>For an example, see <a>example3</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:SearchFacesByImage</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchFacesByImageResponse'
+        '480':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ImageTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageTooLargeException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '487':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '488':
+          description: InvalidImageFormatException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidImageFormatException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchFacesByImageRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AccessDeniedException:
+      type: object
+      properties: {}
+      description: You are not authorized to perform the action.
+    AgeRange:
+      type: object
+      properties:
+        Low:
+          $ref: '#/components/schemas/UInteger'
+        High:
+          $ref: '#/components/schemas/UInteger'
+      description: '<p>Structure containing the estimated age range, in years, for a face.</p> <p>Rekognition estimates an age-range for faces detected in the input image. Estimated age ranges can overlap; a face of a 5 year old may have an estimated range of 4-6 whilst the face of a 6 year old may have an estimated range of 4-8.</p>'
+    Attribute:
+      type: string
+      enum:
+        - DEFAULT
+        - ALL
+    Attributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Attribute'
+    Beard:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/Boolean'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: 'Indicates whether or not the face has a beard, and the confidence level in the determination.'
+    Boolean:
+      type: boolean
+    BoundingBox:
+      type: object
+      properties:
+        Width:
+          $ref: '#/components/schemas/Float'
+        Height:
+          $ref: '#/components/schemas/Float'
+        Left:
+          $ref: '#/components/schemas/Float'
+        Top:
+          $ref: '#/components/schemas/Float'
+      description: '<p>Identifies the bounding box around the object or face. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p> The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>'
+    Celebrity:
+      type: object
+      properties:
+        Urls:
+          $ref: '#/components/schemas/Urls'
+        Name:
+          $ref: '#/components/schemas/String'
+        Id:
+          $ref: '#/components/schemas/RekognitionUniqueId'
+        Face:
+          $ref: '#/components/schemas/ComparedFace'
+        MatchConfidence:
+          $ref: '#/components/schemas/Percent'
+      description: Provides information about a celebrity recognized by the operation.
+    CelebrityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Celebrity'
+    CollectionId:
+      type: string
+      pattern: '[a-zA-Z0-9_.\-]+'
+      minLength: 1
+      maxLength: 255
+    CollectionIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CollectionId'
+    CompareFacesMatch:
+      type: object
+      properties:
+        Similarity:
+          $ref: '#/components/schemas/Percent'
+        Face:
+          $ref: '#/components/schemas/ComparedFace'
+      description: Provides information about a face in a target image that matches the source image face analysed by <code>CompareFaces</code>. The <code>Face</code> property contains the bounding box of the face in the target image. The <code>Similarity</code> property is the confidence that the source image face matches the face in the bounding box.
+    CompareFacesMatchList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CompareFacesMatch'
+    CompareFacesRequest:
+      type: object
+      required:
+        - SourceImage
+        - TargetImage
+      example:
+        SimilarityThreshold: 90
+        SourceImage:
+          S3Object:
+            Bucket: mybucket
+            Name: mysourceimage
+        TargetImage:
+          S3Object:
+            Bucket: mybucket
+            Name: mytargetimage
+      properties:
+        SourceImage:
+          $ref: '#/components/schemas/Image'
+        TargetImage:
+          $ref: '#/components/schemas/Image'
+        SimilarityThreshold:
+          $ref: '#/components/schemas/Percent'
+    CompareFacesResponse:
+      type: object
+      example:
+        FaceMatches:
+          - Face:
+              BoundingBox:
+                Height: 0.33481481671333313
+                Left: 0.31888890266418457
+                Top: 0.4933333396911621
+                Width: 0.25
+              Confidence: 99.9991226196289
+            Similarity: 100
+        SourceImageFace:
+          BoundingBox:
+            Height: 0.33481481671333313
+            Left: 0.31888890266418457
+            Top: 0.4933333396911621
+            Width: 0.25
+          Confidence: 99.9991226196289
+      properties:
+        SourceImageFace:
+          $ref: '#/components/schemas/ComparedSourceImageFace'
+        FaceMatches:
+          $ref: '#/components/schemas/CompareFacesMatchList'
+        UnmatchedFaces:
+          $ref: '#/components/schemas/CompareFacesUnmatchList'
+        SourceImageOrientationCorrection:
+          $ref: '#/components/schemas/OrientationCorrection'
+        TargetImageOrientationCorrection:
+          $ref: '#/components/schemas/OrientationCorrection'
+    CompareFacesUnmatchList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComparedFace'
+    ComparedFace:
+      type: object
+      properties:
+        BoundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+        Landmarks:
+          $ref: '#/components/schemas/Landmarks'
+        Pose:
+          $ref: '#/components/schemas/Pose'
+        Quality:
+          $ref: '#/components/schemas/ImageQuality'
+      description: Provides face metadata for target image faces that are analysed by <code>CompareFaces</code> and <code>RecognizeCelebrities</code>.
+    ComparedFaceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ComparedFace'
+    ComparedSourceImageFace:
+      type: object
+      properties:
+        BoundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: 'Type that describes the face Amazon Rekognition chose to compare with the faces in the target. This contains a bounding box for the selected face and confidence level that the bounding box contains a face. Note that Amazon Rekognition selects the largest face in the source image for this comparison. '
+    CreateCollectionRequest:
+      type: object
+      required:
+        - CollectionId
+      example:
+        CollectionId: myphotos
+      properties:
+        CollectionId:
+          $ref: '#/components/schemas/CollectionId'
+    CreateCollectionResponse:
+      type: object
+      example:
+        CollectionArn: 'aws:rekognition:us-west-2:123456789012:collection/myphotos'
+        StatusCode: 200
+      properties:
+        StatusCode:
+          $ref: '#/components/schemas/UInteger'
+        CollectionArn:
+          $ref: '#/components/schemas/String'
+    Degree:
+      type: number
+      format: float
+      minimum: -180
+      maximum: 180
+    DeleteCollectionRequest:
+      type: object
+      required:
+        - CollectionId
+      example:
+        CollectionId: myphotos
+      properties:
+        CollectionId:
+          $ref: '#/components/schemas/CollectionId'
+    DeleteCollectionResponse:
+      type: object
+      example:
+        StatusCode: 200
+      properties:
+        StatusCode:
+          $ref: '#/components/schemas/UInteger'
+    DeleteFacesRequest:
+      type: object
+      required:
+        - CollectionId
+        - FaceIds
+      example:
+        CollectionId: myphotos
+        FaceIds:
+          - ff43d742-0c13-5d16-a3e8-03d3f58e980b
+      properties:
+        CollectionId:
+          $ref: '#/components/schemas/CollectionId'
+        FaceIds:
+          $ref: '#/components/schemas/FaceIdList'
+    DeleteFacesResponse:
+      type: object
+      example:
+        DeletedFaces:
+          - ff43d742-0c13-5d16-a3e8-03d3f58e980b
+      properties:
+        DeletedFaces:
+          $ref: '#/components/schemas/FaceIdList'
+    DetectFacesRequest:
+      type: object
+      required:
+        - Image
+      example:
+        Image:
+          S3Object:
+            Bucket: mybucket
+            Name: myphoto
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+        Attributes:
+          $ref: '#/components/schemas/Attributes'
+    DetectFacesResponse:
+      type: object
+      example:
+        FaceDetails:
+          - BoundingBox:
+              Height: 0.18000000715255737
+              Left: 0.5555555820465088
+              Top: 0.33666667342185974
+              Width: 0.23999999463558197
+            Confidence: 100
+            Landmarks:
+              - Type: EYE_LEFT
+                X: 0.6394737362861633
+                'Y': 0.40819624066352844
+              - Type: EYE_RIGHT
+                X: 0.7266660928726196
+                'Y': 0.41039225459098816
+              - Type: NOSE_LEFT
+                X: 0.6912462115287781
+                'Y': 0.44240960478782654
+              - Type: MOUTH_DOWN
+                X: 0.6306198239326477
+                'Y': 0.46700039505958557
+              - Type: MOUTH_UP
+                X: 0.7215608954429626
+                'Y': 0.47114261984825134
+            Pose:
+              Pitch: 4.050806522369385
+              Roll: 0.9950747489929199
+              Yaw: 13.693790435791016
+            Quality:
+              Brightness: 37.60169982910156
+              Sharpness: 80
+        OrientationCorrection: ROTATE_0
+      properties:
+        FaceDetails:
+          $ref: '#/components/schemas/FaceDetailList'
+        OrientationCorrection:
+          $ref: '#/components/schemas/OrientationCorrection'
+    DetectLabelsRequest:
+      type: object
+      required:
+        - Image
+      example:
+        Image:
+          S3Object:
+            Bucket: mybucket
+            Name: myphoto
+        MaxLabels: 123
+        MinConfidence: 70
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+        MaxLabels:
+          $ref: '#/components/schemas/UInteger'
+        MinConfidence:
+          $ref: '#/components/schemas/Percent'
+    DetectLabelsResponse:
+      type: object
+      example:
+        Labels:
+          - Confidence: 99.25072479248047
+            Name: People
+          - Confidence: 99.25074005126953
+            Name: Person
+      properties:
+        Labels:
+          $ref: '#/components/schemas/Labels'
+        OrientationCorrection:
+          $ref: '#/components/schemas/OrientationCorrection'
+    DetectModerationLabelsRequest:
+      type: object
+      required:
+        - Image
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+        MinConfidence:
+          $ref: '#/components/schemas/Percent'
+    DetectModerationLabelsResponse:
+      type: object
+      properties:
+        ModerationLabels:
+          $ref: '#/components/schemas/ModerationLabels'
+    Emotion:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/EmotionName'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: 'The emotions detected on the face, and the confidence level in the determination. For example, HAPPY, SAD, and ANGRY.'
+    EmotionName:
+      type: string
+      enum:
+        - HAPPY
+        - SAD
+        - ANGRY
+        - CONFUSED
+        - DISGUSTED
+        - SURPRISED
+        - CALM
+        - UNKNOWN
+    Emotions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Emotion'
+    ExternalImageId:
+      type: string
+      pattern: '[a-zA-Z0-9_.\-:]+'
+      minLength: 1
+      maxLength: 255
+    EyeOpen:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/Boolean'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: 'Indicates whether or not the eyes on the face are open, and the confidence level in the determination.'
+    Eyeglasses:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/Boolean'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: 'Indicates whether or not the face is wearing eye glasses, and the confidence level in the determination.'
+    Face:
+      type: object
+      properties:
+        FaceId:
+          $ref: '#/components/schemas/FaceId'
+        BoundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+        ImageId:
+          $ref: '#/components/schemas/ImageId'
+        ExternalImageId:
+          $ref: '#/components/schemas/ExternalImageId'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: 'Describes the face properties such as the bounding box, face ID, image ID of the input image, and external image ID that you assigned. '
+    FaceDetail:
+      type: object
+      properties:
+        BoundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+        AgeRange:
+          $ref: '#/components/schemas/AgeRange'
+        Smile:
+          $ref: '#/components/schemas/Smile'
+        Eyeglasses:
+          $ref: '#/components/schemas/Eyeglasses'
+        Sunglasses:
+          $ref: '#/components/schemas/Sunglasses'
+        Gender:
+          $ref: '#/components/schemas/Gender'
+        Beard:
+          $ref: '#/components/schemas/Beard'
+        Mustache:
+          $ref: '#/components/schemas/Mustache'
+        EyesOpen:
+          $ref: '#/components/schemas/EyeOpen'
+        MouthOpen:
+          $ref: '#/components/schemas/MouthOpen'
+        Emotions:
+          $ref: '#/components/schemas/Emotions'
+        Landmarks:
+          $ref: '#/components/schemas/Landmarks'
+        Pose:
+          $ref: '#/components/schemas/Pose'
+        Quality:
+          $ref: '#/components/schemas/ImageQuality'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: Structure containing attributes of the face that the algorithm detected.
+    FaceDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FaceDetail'
+    FaceId:
+      type: string
+      pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+    FaceIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FaceId'
+      minItems: 1
+      maxItems: 4096
+    FaceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Face'
+    FaceMatch:
+      type: object
+      properties:
+        Similarity:
+          $ref: '#/components/schemas/Percent'
+        Face:
+          $ref: '#/components/schemas/Face'
+      description: 'Provides face metadata. In addition, it also provides the confidence in the match of this face with the input face.'
+    FaceMatchList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FaceMatch'
+    FaceRecord:
+      type: object
+      properties:
+        Face:
+          $ref: '#/components/schemas/Face'
+        FaceDetail:
+          $ref: '#/components/schemas/FaceDetail'
+      description: Object containing both the face metadata (stored in the back-end database) and facial attributes that are detected but aren't stored in the database.
+    FaceRecordList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FaceRecord'
+    Float:
+      type: number
+      format: float
+    Gender:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/GenderType'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: Gender of the face and the confidence level in the determination.
+    GenderType:
+      type: string
+      enum:
+        - MALE
+        - FEMALE
+    GetCelebrityInfoRequest:
+      type: object
+      required:
+        - Id
+      properties:
+        Id:
+          $ref: '#/components/schemas/RekognitionUniqueId'
+    GetCelebrityInfoResponse:
+      type: object
+      properties:
+        Urls:
+          $ref: '#/components/schemas/Urls'
+        Name:
+          $ref: '#/components/schemas/String'
+    Image:
+      type: object
+      properties:
+        Bytes:
+          $ref: '#/components/schemas/ImageBlob'
+        S3Object:
+          $ref: '#/components/schemas/S3Object'
+      description: '<p>Provides the input image either as bytes or an S3 object.</p> <p>You pass image bytes to a Rekognition API operation by using the <code>Bytes</code> property. For example, you would use the <code>Bytes</code> property to pass an image loaded from a local file system. Image bytes passed by using the <code>Bytes</code> property must be base64-encoded. Your code may not need to encode image bytes if you are using an AWS SDK to call Rekognition API operations. For more information, see <a>example4</a>.</p> <p> You pass images stored in an S3 bucket to a Rekognition API operation by using the <code>S3Object</code> property. Images stored in an S3 bucket do not need to be base64-encoded.</p> <p>The region for the S3 bucket containing the S3 object must match the region you use for Amazon Rekognition operations.</p> <p>If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes using the Bytes property is not supported. You must first upload the image to an Amazon S3 bucket and then call the operation using the S3Object property.</p> <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3 object. For more information, see <a>manage-access-resource-policies</a>. </p>'
+    ImageBlob:
+      type: string
+      minLength: 1
+      maxLength: 5242880
+    ImageId:
+      type: string
+      pattern: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+    ImageQuality:
+      type: object
+      properties:
+        Brightness:
+          $ref: '#/components/schemas/Float'
+        Sharpness:
+          $ref: '#/components/schemas/Float'
+      description: 'Identifies face image brightness and sharpness. '
+    ImageTooLargeException:
+      type: object
+      properties: {}
+      description: 'The input image size exceeds the allowed limit. For more information, see <a>limits</a>. '
+    IndexFacesRequest:
+      type: object
+      required:
+        - CollectionId
+        - Image
+      example:
+        CollectionId: myphotos
+        DetectionAttributes: []
+        ExternalImageId: myphotoid
+        Image:
+          S3Object:
+            Bucket: mybucket
+            Name: myphoto
+      properties:
+        CollectionId:
+          $ref: '#/components/schemas/CollectionId'
+        Image:
+          $ref: '#/components/schemas/Image'
+        ExternalImageId:
+          $ref: '#/components/schemas/ExternalImageId'
+        DetectionAttributes:
+          $ref: '#/components/schemas/Attributes'
+    IndexFacesResponse:
+      type: object
+      example:
+        FaceRecords:
+          - Face:
+              BoundingBox:
+                Height: 0.33481481671333313
+                Left: 0.31888890266418457
+                Top: 0.4933333396911621
+                Width: 0.25
+              Confidence: 99.9991226196289
+              FaceId: ff43d742-0c13-5d16-a3e8-03d3f58e980b
+              ImageId: 465f4e93-763e-51d0-b030-b9667a2d94b1
+            FaceDetail:
+              BoundingBox:
+                Height: 0.33481481671333313
+                Left: 0.31888890266418457
+                Top: 0.4933333396911621
+                Width: 0.25
+              Confidence: 99.9991226196289
+              Landmarks:
+                - Type: EYE_LEFT
+                  X: 0.3976764678955078
+                  'Y': 0.6248345971107483
+                - Type: EYE_RIGHT
+                  X: 0.4810936450958252
+                  'Y': 0.6317117214202881
+                - Type: NOSE_LEFT
+                  X: 0.41986238956451416
+                  'Y': 0.7111940383911133
+                - Type: MOUTH_DOWN
+                  X: 0.40525302290916443
+                  'Y': 0.7497701048851013
+                - Type: MOUTH_UP
+                  X: 0.4753248989582062
+                  'Y': 0.7558549642562866
+              Pose:
+                Pitch: -9.713645935058594
+                Roll: 4.707281112670898
+                Yaw: -24.438663482666016
+              Quality:
+                Brightness: 29.23358917236328
+                Sharpness: 80
+          - Face:
+              BoundingBox:
+                Height: 0.32592591643333435
+                Left: 0.5144444704055786
+                Top: 0.15111111104488373
+                Width: 0.24444444477558136
+              Confidence: 99.99950408935547
+              FaceId: 8be04dba-4e58-520d-850e-9eae4af70eb2
+              ImageId: 465f4e93-763e-51d0-b030-b9667a2d94b1
+            FaceDetail:
+              BoundingBox:
+                Height: 0.32592591643333435
+                Left: 0.5144444704055786
+                Top: 0.15111111104488373
+                Width: 0.24444444477558136
+              Confidence: 99.99950408935547
+              Landmarks:
+                - Type: EYE_LEFT
+                  X: 0.6006892323493958
+                  'Y': 0.290842205286026
+                - Type: EYE_RIGHT
+                  X: 0.6808141469955444
+                  'Y': 0.29609042406082153
+                - Type: NOSE_LEFT
+                  X: 0.6395332217216492
+                  'Y': 0.3522595763206482
+                - Type: MOUTH_DOWN
+                  X: 0.5892083048820496
+                  'Y': 0.38689887523651123
+                - Type: MOUTH_UP
+                  X: 0.674560010433197
+                  'Y': 0.394125759601593
+              Pose:
+                Pitch: -4.683138370513916
+                Roll: 2.1029529571533203
+                Yaw: 6.716655254364014
+              Quality:
+                Brightness: 34.951698303222656
+                Sharpness: 160
+        OrientationCorrection: ROTATE_0
+      properties:
+        FaceRecords:
+          $ref: '#/components/schemas/FaceRecordList'
+        OrientationCorrection:
+          $ref: '#/components/schemas/OrientationCorrection'
+    InternalServerError:
+      type: object
+      properties: {}
+      description: Amazon Rekognition experienced a service issue. Try your call again.
+    InvalidImageFormatException:
+      type: object
+      properties: {}
+      description: 'The provided image format is not supported. '
+    InvalidPaginationTokenException:
+      type: object
+      properties: {}
+      description: Pagination token in the request is not valid.
+    InvalidParameterException:
+      type: object
+      properties: {}
+      description: Input parameter violated a constraint. Validate your parameter before calling the API operation again.
+    InvalidS3ObjectException:
+      type: object
+      properties: {}
+      description: Amazon Rekognition is unable to access the S3 object specified in the request.
+    Label:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: 'Structure containing details about the detected label, including name, and level of confidence.'
+    Labels:
+      type: array
+      items:
+        $ref: '#/components/schemas/Label'
+    Landmark:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/LandmarkType'
+        X:
+          $ref: '#/components/schemas/Float'
+        'Y':
+          $ref: '#/components/schemas/Float'
+      description: Indicates the location of the landmark on the face.
+    LandmarkType:
+      type: string
+      enum:
+        - EYE_LEFT
+        - EYE_RIGHT
+        - NOSE
+        - MOUTH_LEFT
+        - MOUTH_RIGHT
+        - LEFT_EYEBROW_LEFT
+        - LEFT_EYEBROW_RIGHT
+        - LEFT_EYEBROW_UP
+        - RIGHT_EYEBROW_LEFT
+        - RIGHT_EYEBROW_RIGHT
+        - RIGHT_EYEBROW_UP
+        - LEFT_EYE_LEFT
+        - LEFT_EYE_RIGHT
+        - LEFT_EYE_UP
+        - LEFT_EYE_DOWN
+        - RIGHT_EYE_LEFT
+        - RIGHT_EYE_RIGHT
+        - RIGHT_EYE_UP
+        - RIGHT_EYE_DOWN
+        - NOSE_LEFT
+        - NOSE_RIGHT
+        - MOUTH_UP
+        - MOUTH_DOWN
+        - LEFT_PUPIL
+        - RIGHT_PUPIL
+    Landmarks:
+      type: array
+      items:
+        $ref: '#/components/schemas/Landmark'
+    ListCollectionsRequest:
+      type: object
+      example: {}
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+        MaxResults:
+          $ref: '#/components/schemas/PageSize'
+    ListCollectionsResponse:
+      type: object
+      example:
+        CollectionIds:
+          - myphotos
+      properties:
+        CollectionIds:
+          $ref: '#/components/schemas/CollectionIdList'
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+    ListFacesRequest:
+      type: object
+      required:
+        - CollectionId
+      example:
+        CollectionId: myphotos
+        MaxResults: 20
+      properties:
+        CollectionId:
+          $ref: '#/components/schemas/CollectionId'
+        NextToken:
+          $ref: '#/components/schemas/PaginationToken'
+        MaxResults:
+          $ref: '#/components/schemas/PageSize'
+    ListFacesResponse:
+      type: object
+      example:
+        Faces:
+          - BoundingBox:
+              Height: 0.18000000715255737
+              Left: 0.5555559992790222
+              Top: 0.336667001247406
+              Width: 0.23999999463558197
+            Confidence: 100
+            FaceId: 1c62e8b5-69a7-5b7d-b3cd-db4338a8a7e7
+            ImageId: 147fdf82-7a71-52cf-819b-e786c7b9746e
+          - BoundingBox:
+              Height: 0.16555599868297577
+              Left: 0.30963000655174255
+              Top: 0.7066670060157776
+              Width: 0.22074100375175476
+            Confidence: 100
+            FaceId: 29a75abe-397b-5101-ba4f-706783b2246c
+            ImageId: 147fdf82-7a71-52cf-819b-e786c7b9746e
+          - BoundingBox:
+              Height: 0.3234420120716095
+              Left: 0.3233329951763153
+              Top: 0.5
+              Width: 0.24222199618816376
+            Confidence: 99.99829864501953
+            FaceId: 38271d79-7bc2-5efb-b752-398a8d575b85
+            ImageId: d5631190-d039-54e4-b267-abd22c8647c5
+          - BoundingBox:
+              Height: 0.03555560111999512
+              Left: 0.37388700246810913
+              Top: 0.2477779984474182
+              Width: 0.04747769981622696
+            Confidence: 99.99210357666016
+            FaceId: 3b01bef0-c883-5654-ba42-d5ad28b720b3
+            ImageId: 812d9f04-86f9-54fc-9275-8d0dcbcb6784
+          - BoundingBox:
+              Height: 0.05333330109715462
+              Left: 0.2937690019607544
+              Top: 0.35666701197624207
+              Width: 0.07121659815311432
+            Confidence: 99.99919891357422
+            FaceId: 4839a608-49d0-566c-8301-509d71b534d1
+            ImageId: 812d9f04-86f9-54fc-9275-8d0dcbcb6784
+          - BoundingBox:
+              Height: 0.3249259889125824
+              Left: 0.5155559778213501
+              Top: 0.1513350009918213
+              Width: 0.24333299696445465
+            Confidence: 99.99949645996094
+            FaceId: 70008e50-75e4-55d0-8e80-363fb73b3a14
+            ImageId: d5631190-d039-54e4-b267-abd22c8647c5
+          - BoundingBox:
+              Height: 0.03777780011296272
+              Left: 0.7002969980239868
+              Top: 0.18777799606323242
+              Width: 0.05044509842991829
+            Confidence: 99.92639923095703
+            FaceId: 7f5f88ed-d684-5a88-b0df-01e4a521552b
+            ImageId: 812d9f04-86f9-54fc-9275-8d0dcbcb6784
+          - BoundingBox:
+              Height: 0.05555560067296028
+              Left: 0.13946600258350372
+              Top: 0.46333301067352295
+              Width: 0.07270029932260513
+            Confidence: 99.99469757080078
+            FaceId: 895b4e2c-81de-5902-a4bd-d1792bda00b2
+            ImageId: 812d9f04-86f9-54fc-9275-8d0dcbcb6784
+          - BoundingBox:
+              Height: 0.3259260058403015
+              Left: 0.5144439935684204
+              Top: 0.15111100673675537
+              Width: 0.24444399774074554
+            Confidence: 99.99949645996094
+            FaceId: 8be04dba-4e58-520d-850e-9eae4af70eb2
+            ImageId: 465f4e93-763e-51d0-b030-b9667a2d94b1
+          - BoundingBox:
+              Height: 0.18888899683952332
+              Left: 0.3783380091190338
+              Top: 0.2355560064315796
+              Width: 0.25222599506378174
+            Confidence: 99.9999008178711
+            FaceId: 908544ad-edc3-59df-8faf-6a87cc256cf5
+            ImageId: 3c731605-d772-541a-a5e7-0375dbc68a07
+          - BoundingBox:
+              Height: 0.33481499552726746
+              Left: 0.31888899207115173
+              Top: 0.49333301186561584
+              Width: 0.25
+            Confidence: 99.99909973144531
+            FaceId: ff43d742-0c13-5d16-a3e8-03d3f58e980b
+            ImageId: 465f4e93-763e-51d0-b030-b9667a2d94b1
+      properties:
+        Faces:
+          $ref: '#/components/schemas/FaceList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    MaxFaces:
+      type: integer
+      minimum: 1
+      maximum: 4096
+    ModerationLabel:
+      type: object
+      properties:
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+        Name:
+          $ref: '#/components/schemas/String'
+        ParentName:
+          $ref: '#/components/schemas/String'
+      description: 'Provides information about a single type of moderated content found in an image. Each type of moderated content has a label within a hierarchical taxonomy. For more information, see <a>image-moderation</a>.'
+    ModerationLabels:
+      type: array
+      items:
+        $ref: '#/components/schemas/ModerationLabel'
+    MouthOpen:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/Boolean'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: 'Indicates whether or not the mouth on the face is open, and the confidence level in the determination.'
+    Mustache:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/Boolean'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: 'Indicates whether or not the face has a mustache, and the confidence level in the determination.'
+    OrientationCorrection:
+      type: string
+      enum:
+        - ROTATE_0
+        - ROTATE_90
+        - ROTATE_180
+        - ROTATE_270
+    PageSize:
+      type: integer
+      minimum: 0
+      maximum: 4096
+    PaginationToken:
+      type: string
+      maxLength: 255
+    Percent:
+      type: number
+      format: float
+      minimum: 0
+      maximum: 100
+    Pose:
+      type: object
+      properties:
+        Roll:
+          $ref: '#/components/schemas/Degree'
+        Yaw:
+          $ref: '#/components/schemas/Degree'
+        Pitch:
+          $ref: '#/components/schemas/Degree'
+      description: 'Indicates the pose of the face as determined by its pitch, roll, and yaw.'
+    ProvisionedThroughputExceededException:
+      type: object
+      properties: {}
+      description: 'The number of requests exceeded your throughput limit. If you want to increase this limit, contact Amazon Rekognition.'
+    RecognizeCelebritiesRequest:
+      type: object
+      required:
+        - Image
+      properties:
+        Image:
+          $ref: '#/components/schemas/Image'
+    RecognizeCelebritiesResponse:
+      type: object
+      properties:
+        CelebrityFaces:
+          $ref: '#/components/schemas/CelebrityList'
+        UnrecognizedFaces:
+          $ref: '#/components/schemas/ComparedFaceList'
+        OrientationCorrection:
+          $ref: '#/components/schemas/OrientationCorrection'
+    RekognitionUniqueId:
+      type: string
+      pattern: '[0-9A-Za-z]*'
+    ResourceAlreadyExistsException:
+      type: object
+      properties: {}
+      description: A collection with the specified ID already exists.
+    ResourceNotFoundException:
+      type: object
+      properties: {}
+      description: Collection specified in the request is not found.
+    S3Bucket:
+      type: string
+      pattern: '[0-9A-Za-z\.\-_]*'
+      minLength: 3
+      maxLength: 255
+    S3Object:
+      type: object
+      properties:
+        Bucket:
+          $ref: '#/components/schemas/S3Bucket'
+        Name:
+          $ref: '#/components/schemas/S3ObjectName'
+        Version:
+          $ref: '#/components/schemas/S3ObjectVersion'
+      description: '<p>Provides the S3 bucket name and object name.</p> <p>The region for the S3 bucket containing the S3 object must match the region you use for Amazon Rekognition operations.</p> <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3 object. For more information, see <a>manage-access-resource-policies</a>. </p>'
+    S3ObjectName:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    S3ObjectVersion:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    SearchFacesByImageRequest:
+      type: object
+      required:
+        - CollectionId
+        - Image
+      example:
+        CollectionId: myphotos
+        FaceMatchThreshold: 95
+        Image:
+          S3Object:
+            Bucket: mybucket
+            Name: myphoto
+        MaxFaces: 5
+      properties:
+        CollectionId:
+          $ref: '#/components/schemas/CollectionId'
+        Image:
+          $ref: '#/components/schemas/Image'
+        MaxFaces:
+          $ref: '#/components/schemas/MaxFaces'
+        FaceMatchThreshold:
+          $ref: '#/components/schemas/Percent'
+    SearchFacesByImageResponse:
+      type: object
+      example:
+        FaceMatches:
+          - Face:
+              BoundingBox:
+                Height: 0.3234420120716095
+                Left: 0.3233329951763153
+                Top: 0.5
+                Width: 0.24222199618816376
+              Confidence: 99.99829864501953
+              FaceId: 38271d79-7bc2-5efb-b752-398a8d575b85
+              ImageId: d5631190-d039-54e4-b267-abd22c8647c5
+            Similarity: 99.97036743164062
+        SearchedFaceBoundingBox:
+          Height: 0.33481481671333313
+          Left: 0.31888890266418457
+          Top: 0.4933333396911621
+          Width: 0.25
+        SearchedFaceConfidence: 99.9991226196289
+      properties:
+        SearchedFaceBoundingBox:
+          $ref: '#/components/schemas/BoundingBox'
+        SearchedFaceConfidence:
+          $ref: '#/components/schemas/Percent'
+        FaceMatches:
+          $ref: '#/components/schemas/FaceMatchList'
+    SearchFacesRequest:
+      type: object
+      required:
+        - CollectionId
+        - FaceId
+      example:
+        CollectionId: myphotos
+        FaceId: 70008e50-75e4-55d0-8e80-363fb73b3a14
+        FaceMatchThreshold: 90
+        MaxFaces: 10
+      properties:
+        CollectionId:
+          $ref: '#/components/schemas/CollectionId'
+        FaceId:
+          $ref: '#/components/schemas/FaceId'
+        MaxFaces:
+          $ref: '#/components/schemas/MaxFaces'
+        FaceMatchThreshold:
+          $ref: '#/components/schemas/Percent'
+    SearchFacesResponse:
+      type: object
+      example:
+        FaceMatches:
+          - Face:
+              BoundingBox:
+                Height: 0.3259260058403015
+                Left: 0.5144439935684204
+                Top: 0.15111100673675537
+                Width: 0.24444399774074554
+              Confidence: 99.99949645996094
+              FaceId: 8be04dba-4e58-520d-850e-9eae4af70eb2
+              ImageId: 465f4e93-763e-51d0-b030-b9667a2d94b1
+            Similarity: 99.97222137451172
+          - Face:
+              BoundingBox:
+                Height: 0.16555599868297577
+                Left: 0.30963000655174255
+                Top: 0.7066670060157776
+                Width: 0.22074100375175476
+              Confidence: 100
+              FaceId: 29a75abe-397b-5101-ba4f-706783b2246c
+              ImageId: 147fdf82-7a71-52cf-819b-e786c7b9746e
+            Similarity: 97.04154968261719
+          - Face:
+              BoundingBox:
+                Height: 0.18888899683952332
+                Left: 0.3783380091190338
+                Top: 0.2355560064315796
+                Width: 0.25222599506378174
+              Confidence: 99.9999008178711
+              FaceId: 908544ad-edc3-59df-8faf-6a87cc256cf5
+              ImageId: 3c731605-d772-541a-a5e7-0375dbc68a07
+            Similarity: 95.94520568847656
+        SearchedFaceId: 70008e50-75e4-55d0-8e80-363fb73b3a14
+      properties:
+        SearchedFaceId:
+          $ref: '#/components/schemas/FaceId'
+        FaceMatches:
+          $ref: '#/components/schemas/FaceMatchList'
+    Smile:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/Boolean'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: 'Indicates whether or not the face is smiling, and the confidence level in the determination.'
+    String:
+      type: string
+    Sunglasses:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/Boolean'
+        Confidence:
+          $ref: '#/components/schemas/Percent'
+      description: 'Indicates whether or not the face is wearing sunglasses, and the confidence level in the determination.'
+    ThrottlingException:
+      type: object
+      properties: {}
+      description: Amazon Rekognition is temporarily unable to process the request. Try your call again.
+    UInteger:
+      type: integer
+      minimum: 0
+    Url:
+      type: string
+    Urls:
+      type: array
+      items:
+        $ref: '#/components/schemas/Url'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

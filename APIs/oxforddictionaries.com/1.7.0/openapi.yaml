@@ -1,0 +1,2002 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://od-api-demo.oxforddictionaries.com:443/api/v1'
+x-hasEquivalentPaths: true
+info:
+  license:
+    name: API Terms And Conditions
+    url: 'https://developer.oxforddictionaries.com/api-terms-and-conditions'
+  termsOfService: 'http://helloreverb.com/terms/'
+  title: Oxford Dictionaries
+  version: 1.7.0
+  x-apisguru-categories:
+    - text
+  x-logo:
+    url: 'https://developer.oxforddictionaries.com/images/logo.png'
+  x-origin:
+    - format: swagger
+      url: 'https://developer.oxforddictionaries.com/swagger/spec/public_doc_guest.json'
+      version: '2.0'
+  x-providerName: oxforddictionaries.com
+paths:
+  '/domains/{source_domains_language}/{target_domains_language}':
+    get:
+      description: |
+        Returns a list of the available [domains](/glossary?tag=#domains&expand) for a given bilingual language dataset.
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_domains_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+              - nso
+              - zu
+              - ur
+              - de
+              - pt
+        - description: IANA language code
+          in: path
+          name: target_domains_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - es
+              - nso
+              - zu
+              - ms
+              - id
+              - tn
+              - ro
+              - de
+              - pt
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityLabels'
+        '400':
+          description: source_language and target_language are same.
+        '404':
+          description: Unknown source_language and/or target_language.
+      summary: Lists available domains in a given bilingual language dataset.
+      tags:
+        - Utility
+  '/domains/{source_language}':
+    get:
+      description: |
+        Returns a list of the available [domains](/glossary?tag=#domains&expand) for a given monolingual language dataset.
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+              - nso
+              - zu
+              - hi
+              - sw
+              - ur
+              - de
+              - pt
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityLabels'
+        '404':
+          description: Unknown source_language.
+      summary: Lists available domains in a given monolingual language dataset.
+      tags:
+        - Utility
+  '/entries/{source_language}/{word_id}/sentences':
+    get:
+      description: |
+
+        Retrieve list of sentences and list of [senses](/glossary?tag=#sense&expand) (English language only).
+          <div id="sentences"></div>
+      externalDocs:
+        description: find more info here
+        url: 'https://helloreverb.com/about'
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+        - $ref: '#/components/parameters/entriesWordId'
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SentencesResults'
+        '404':
+          description: |
+            No entry is found matching supplied id and source_language
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve corpus sentences for a given word.
+      tags:
+        - The Sentence Dictionary
+  '/entries/{source_lang}/{word_id}':
+    get:
+      description: |
+
+        Retrieve available [dictionary entries](/glossary?tag=#entry&expand) for a given word and language. 
+
+          <div id="dictionary_entries"></div>
+      externalDocs:
+        description: find more info here
+        url: 'https://helloreverb.com/about'
+      parameters:
+        - $ref: '#/components/parameters/monolingual-source_lang'
+        - $ref: '#/components/parameters/entriesWordId'
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveEntry'
+        '404':
+          description: |
+            No entry is found matching supplied id and source_lang or filters are not recognized
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve dictionary entries for a given word.
+      tags:
+        - Dictionary entries
+  '/entries/{source_lang}/{word_id}/antonyms':
+    get:
+      description: |
+
+        Retrieve available [antonyms](/glossary?tag=#thesaurus&expand) for a given word and language. 
+
+          <div id="antonyms"></div>
+      externalDocs:
+        description: find more info here
+        url: 'https://helloreverb.com/about'
+      parameters:
+        - $ref: '#/components/parameters/thesaurus-source_lang'
+        - $ref: '#/components/parameters/entriesWordId'
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thesaurus'
+        '404':
+          description: |
+            No entry is found matching supplied id and source_lang or filters are not recognized
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve antonyms for a given word.
+      tags:
+        - Thesaurus
+  '/entries/{source_lang}/{word_id}/definitions':
+    get:
+      description: |
+
+        Find available [dictionary entries](/glossary?tag=#entry&expand) for given word and language. Filter results by categories. 
+
+          <div id="dictionary_entries_filters_definitions"></div>
+      parameters:
+        - $ref: '#/components/parameters/monolingual-source_lang'
+        - $ref: '#/components/parameters/entriesWordId'
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveEntry'
+        '404':
+          description: |
+            no entry is found matching supplied source_lang and id
+            and/or that entry has no senses with translations in the target language. 
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve only definitions in entry search.
+      tags:
+        - Dictionary entries
+  '/entries/{source_lang}/{word_id}/examples':
+    get:
+      description: |
+
+        Find available [dictionary entries](/glossary?tag=#entry&expand) for given word and language. Filter results by categories. 
+
+          <div id="dictionary_entries_filters_examples"></div>
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_lang
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+        - $ref: '#/components/parameters/entriesWordId'
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveEntry'
+        '404':
+          description: |
+            no entry is found matching supplied source_lang and id
+            and/or that entry has no senses with translations in the target language. 
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve only example sentences in entry search.
+      tags:
+        - Dictionary entries
+  '/entries/{source_lang}/{word_id}/pronunciations':
+    get:
+      description: |
+
+        Find available [dictionary entries](/glossary?tag=#entry&expand) for given word and language. Filter results by categories. 
+
+          <div id="dictionary_entries_filters_pronunciations"></div>
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_lang
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+        - $ref: '#/components/parameters/entriesWordId'
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveEntry'
+        '404':
+          description: |
+            no entry is found matching supplied source_lang and id
+            and/or that entry has no senses with translations in the target language. 
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve only pronunciations in entry search.
+      tags:
+        - Dictionary entries
+  '/entries/{source_lang}/{word_id}/regions={region}':
+    get:
+      description: |
+
+        Retrieve available [dictionary entries](/glossary?tag=#entry&expand) for given word and language. 
+
+          <div id="dictionary_entries"></div>
+      externalDocs:
+        description: find more info here
+        url: 'https://helloreverb.com/about'
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_lang
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+        - $ref: '#/components/parameters/entriesWordId'
+        - description: Region filter parameter. gb = Great Britain English. us = United States English. Default is gb.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+            enum:
+              - gb
+              - us
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveEntry'
+        '404':
+          description: |
+            no entry is found matching supplied source_lang and id
+            and/or that entry has no senses with translations in the target language. 
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Specify GB or US dictionary for English entry search.
+      tags:
+        - Dictionary entries
+  '/entries/{source_lang}/{word_id}/synonyms':
+    get:
+      description: |
+
+        Retrieve available [synonyms](/glossary?tag=#thesaurus&expand) for a given word and language. 
+
+          <div id="synonyms"></div>
+      externalDocs:
+        description: find more info here
+        url: 'https://helloreverb.com/about'
+      parameters:
+        - $ref: '#/components/parameters/thesaurus-source_lang'
+        - $ref: '#/components/parameters/entriesWordId'
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thesaurus'
+        '404':
+          description: |
+            No entry is found matching supplied id and source_lang or filters are not recognized
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve synonyms for a given word.
+      tags:
+        - Thesaurus
+  '/entries/{source_lang}/{word_id}/synonyms;antonyms':
+    get:
+      description: |
+
+        Retrieve available [synonyms and antonyms](/glossary?tag=#thesaurus&expand) for a given word and language. 
+
+          <div id="synonyms_and_antonyms"></div>
+      externalDocs:
+        description: find more info here
+        url: 'https://helloreverb.com/about'
+      parameters:
+        - $ref: '#/components/parameters/thesaurus-source_lang'
+        - $ref: '#/components/parameters/entriesWordId'
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thesaurus'
+        '404':
+          description: |
+            No entry is found matching supplied id and source_lang or filters are not recognized
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve synonyms and antonyms for a given word.
+      tags:
+        - Thesaurus
+  '/entries/{source_lang}/{word_id}/{filters}':
+    get:
+      description: |
+
+        Find available [dictionary entries](/glossary?tag=#entry&expand) for given word and language. Filter results by categories. 
+
+          <div id="dictionary_entries_filters"></div>
+      parameters:
+        - $ref: '#/components/parameters/monolingual-source_lang'
+        - $ref: '#/components/parameters/entriesWordId'
+        - $ref: '#/components/parameters/keyValFilters'
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveEntry'
+        '404':
+          description: |
+            no entry is found matching supplied source_lang and id
+            and/or that entry has no senses with translations in the target language. 
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Apply filters to entry search.
+      tags:
+        - Dictionary entries
+  '/entries/{source_translation_language}/{word_id}/translations={target_translation_language}':
+    get:
+      description: |
+        Returns target language translations for a given word ID and source language. 
+        In the event that a word in the dataset does not have a direct translation, the response will be a [definition](/glossary?tag=#entry&expand) in the target language.
+
+          <div id="translation"></div>
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_translation_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+              - nso
+              - zu
+              - ms
+              - id
+              - tn
+              - ur
+              - de
+              - pt
+        - description: An Entry identifier. Case-sensitive.
+          in: path
+          name: word_id
+          required: true
+          schema:
+            type: string
+            default: change
+        - description: IANA language code
+          in: path
+          name: target_translation_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - es
+              - nso
+              - zu
+              - ms
+              - id
+              - tn
+              - ro
+              - de
+              - pt
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response. In case word doesn't have a direct translation a response would be definitions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveEntry'
+        '400':
+          description: any of target languages is unknown
+        '404':
+          description: |
+            no entry is found matching supplied source_lang and id
+            and/or that entry has no senses with translations in the target language(s). 
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Find translation for a given word.
+      tags:
+        - Translation
+  /filters:
+    get:
+      description: |
+        Returns a list of all the valid filters to construct API calls.
+      parameters:
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Filters'
+        '500':
+          description: Internal Error. An error occurred while processing the data.
+      summary: Lists available filters.
+      tags:
+        - Utility
+  '/filters/{endpoint}':
+    get:
+      description: |
+        Returns a list of all the valid filters for a given endpoint to construct API calls.
+      parameters:
+        - description: Name of the endpoint.
+          in: path
+          name: endpoint
+          required: true
+          schema:
+            type: string
+            enum:
+              - entries
+              - inflections
+              - translations
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Filters'
+        '404':
+          description: Unknown endpoint.
+        '500':
+          description: Internal Error. An error occurred while processing the data.
+      summary: Lists available filters for specific endpoint.
+      tags:
+        - Utility
+  '/grammaticalFeatures/{source_language}':
+    get:
+      description: |
+        Returns a list of the available [grammatical features](/glossary?tag=#grammaticalfeatures&expand) for a given language dataset.
+      parameters:
+        - description: IANA language code. If provided output will be filtered by sourceLanguage.
+          in: path
+          name: source_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+              - lv
+              - nso
+              - zu
+              - ms
+              - tn
+              - ur
+              - hi
+              - sw
+              - de
+              - pt
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityLabels'
+        '404':
+          description: Unknown source_language.
+      summary: Lists available grammatical features in a given language dataset.
+      tags:
+        - Utility
+  '/inflections/{source_lang}/{word_id}':
+    get:
+      description: |
+
+        Retrieve available [lemmas](/glossary?tag=#lemma&expand) for a given [inflected](/glossary?tag=#inflection&expand) wordform. 
+
+          <div id="lemmatron"></div>
+      parameters:
+        - $ref: '#/components/parameters/monolingual-lemmatron-source_lang'
+        - description: An inflected wordform. Case-sensitive.
+          in: path
+          name: word_id
+          required: true
+          schema:
+            type: string
+            default: changed
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lemmatron'
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve lemmas for a given inflected wordform.
+      tags:
+        - Lemmatron
+  '/inflections/{source_lang}/{word_id}/{filters}':
+    get:
+      description: |
+
+        Retrieve available [lemmas](/glossary?tag=#lemma&expand) for a given [inflected](/glossary?tag=#inflection&expand) wordform. Filter results by categories.  
+
+          <div id="lemmatron_filters"></div>
+      parameters:
+        - $ref: '#/components/parameters/monolingual-lemmatron-source_lang'
+        - description: An inflected wordform. Case-sensitive.
+          in: path
+          name: word_id
+          required: true
+          schema:
+            type: string
+            default: change
+        - $ref: '#/components/parameters/keyValFilters'
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lemmatron'
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Apply filters to Lemmatron response
+      tags:
+        - Lemmatron
+  /languages:
+    get:
+      description: |
+        Returns a list of monolingual and bilingual language datasets available in the API
+      parameters:
+        - description: IANA language code. If provided output will be filtered by sourceLanguage.
+          in: query
+          name: sourceLanguage
+          required: false
+          schema:
+            type: string
+            enum:
+              - es
+              - en
+              - lv
+              - nso
+              - zu
+              - ms
+              - id
+              - tn
+              - ur
+              - hi
+              - sw
+              - ro
+              - de
+              - pt
+        - description: IANA language code. If provided output will be filtered by sourceLanguage.
+          in: query
+          name: targetLanguage
+          required: false
+          schema:
+            type: string
+            enum:
+              - es
+              - en
+              - lv
+              - nso
+              - zu
+              - ms
+              - id
+              - tn
+              - ur
+              - hi
+              - sw
+              - ro
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Languages'
+        '404':
+          description: Unknown sourceLanguage and/or targetLanguage.
+        '500':
+          description: Internal Error. An error occurred while processing the data.
+      summary: Lists available monolingual and bilingual language datasets in the API.
+      tags:
+        - Utility
+  '/lexicalcategories/{language}':
+    get:
+      description: |
+        Returns a list of available [lexical categories](/glossary?tag=#lexicalcategory&expand) for a given language dataset.
+      parameters:
+        - description: IANA language code
+          in: path
+          name: language
+          required: true
+          schema:
+            type: string
+            enum:
+              - es
+              - en
+              - lv
+              - nso
+              - zu
+              - ms
+              - id
+              - tn
+              - ur
+              - hi
+              - sw
+              - ro
+              - de
+              - pt
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityLabels'
+        '404':
+          description: Unknown language.
+        '500':
+          description: Internal Error. An error occurred while processing the data.
+      summary: Lists available lexical categories in a given language dataset.
+      tags:
+        - Utility
+  '/regions/{source_language}':
+    get:
+      description: |
+        Returns a list of the available [regions](/glossary?tag=#regions&expand) for a given monolingual language dataset.
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Regions'
+        '404':
+          description: Unknown source_language.
+      summary: Lists available regions in a given monolingual language dataset.
+      tags:
+        - Utility
+  '/registers/{source_language}':
+    get:
+      description: |
+        Returns a list of the available [registers](/glossary?tag=#registers&expand) for a given monolingual language dataset.
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+              - hi
+              - id
+              - lv
+              - ms
+              - sw
+              - ur
+              - de
+              - pt
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityLabels'
+        '404':
+          description: Unknown source_language.
+        '500':
+          description: Internal Error. An error occurred while processing the data.
+      summary: Lists available registers in a given monolingual language dataset.
+      tags:
+        - Utility
+  '/registers/{source_register_language}/{target_register_language}':
+    get:
+      description: |
+        Returns a list of the available [registers](/glossary?tag=#registers&expand) for a given bilingual language dataset.
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_register_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+              - ms
+              - id
+              - ur
+              - de
+              - pt
+        - description: IANA language code
+          in: path
+          name: target_register_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - es
+              - en
+              - nso
+              - zu
+              - ms
+              - id
+              - tn
+              - ro
+              - de
+              - pt
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityLabels'
+        '400':
+          description: source_language and target_language are same.
+        '404':
+          description: Unknown source_language and/or target_language.
+        '500':
+          description: Internal Error. An error occurred while processing the data.
+      summary: Lists available registers in a given bilingual language dataset.
+      tags:
+        - Utility
+  '/search/{source_lang}':
+    get:
+      description: |
+
+        Retrieve available results for a search query and language. 
+
+          <div id="search"></div>
+      externalDocs:
+        description: find more info here
+        url: 'https://helloreverb.com/about'
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_lang
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+              - hi
+              - lv
+              - sw
+        - description: Search string.
+          in: query
+          name: q
+          required: false
+          schema:
+            type: string
+            default: eye
+        - description: Set prefix to true if you'd like to get results only starting with search string.
+          in: query
+          name: prefix
+          required: false
+          schema:
+            type: boolean
+            enum:
+              - 'false'
+              - 'true'
+        - description: 'Filter words with specific region(s) E.g., regions=us. For now gb, us are available for en language.'
+          in: query
+          name: regions
+          required: false
+          schema:
+            type: string
+        - description: Limit the number of results per response. Default and maximum limit is 5000.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: string
+        - description: Offset the start number of the result.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wordlist'
+        '404':
+          description: |
+            No entry is found matching supplied id and source_lang or filters are not recognized
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Find results for search query.
+      tags:
+        - Search
+  '/search/{source_search_language}/translations={target_search_language}':
+    get:
+      description: |
+
+        Find available translation results  for a search query and language. 
+
+          <div id="search_translation"></div>
+      externalDocs:
+        description: find more info here
+        url: 'https://helloreverb.com/about'
+      parameters:
+        - description: IANA language code
+          in: path
+          name: source_search_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - en
+              - es
+              - nso
+              - zu
+              - ms
+              - id
+              - tn
+              - ur
+              - de
+              - pt
+        - description: IANA language code
+          in: path
+          name: target_search_language
+          required: true
+          schema:
+            type: string
+            enum:
+              - es
+              - nso
+              - zu
+              - ms
+              - id
+              - tn
+              - ro
+              - de
+              - pt
+        - description: Search string.
+          in: query
+          name: q
+          required: false
+          schema:
+            type: string
+            default: eye
+        - description: Set prefix to true if you'd like to get results only starting with search string.
+          in: query
+          name: prefix
+          required: false
+          schema:
+            type: boolean
+            enum:
+              - 'false'
+              - 'true'
+        - description: 'Filter words with specific region(s) E.g., regions=us. For now gb, us are available for en language.'
+          in: query
+          name: regions
+          required: false
+          schema:
+            type: string
+        - description: Limit the number of results per response. Default and maximum limit is 5000.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: string
+        - description: Offset the start number of the result.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wordlist'
+        '404':
+          description: |
+            No entry is found matching supplied id and source_lang or filters are not recognized
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Find translation results for search query.
+      tags:
+        - Search
+  '/wordlist/{source_lang}/{filters_advanced}':
+    get:
+      description: |
+        Advanced options for retrieving [wordlist](/glossary?tag=#wordlist&expand) - exclude filter, filter by word length or match by substring (prefix). 
+
+          <div id="wordlist_advanced"></div>
+      parameters:
+        - $ref: '#/components/parameters/monolingual-wordlist-source_lang'
+        - description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5.'
+          in: path
+          name: filters_advanced
+          required: true
+          schema:
+            type: string
+            default: lexicalCategory=Noun;domains=sport
+        - description: 'Semicolon separated list of parameters-value pairs (same as filters). Excludes headwords that have any senses in specified exclusion attributes (lexical categories, domains, etc.) from results.'
+          in: query
+          name: exclude
+          required: false
+          schema:
+            type: string
+        - description: 'Semicolon separated list of parameters-value pairs (same as filters). Excludes those senses of a particular headword that match specified exclusion attributes (lexical categories, domains, etc.) from results but includes the headword if it has other permitted senses.'
+          in: query
+          name: exclude_senses
+          required: false
+          schema:
+            type: string
+        - description: 'Semicolon separated list of parameters-value pairs (same as filters). Excludes a headword only if the primary sense matches the specified exclusion attributes (registers, domains only).'
+          in: query
+          name: exclude_prime_senses
+          required: false
+          schema:
+            type: string
+        - description: 'Parameter to speficy the minimum (>), exact or maximum (<) length of the words required. E.g., >5 - more than 5 chars; <4 - less than 4 chars; >5<10 - from 5 to 10 chars; 3 - exactly 3 chars.'
+          in: query
+          name: word_length
+          required: false
+          schema:
+            type: string
+            default: '>5,<10'
+        - description: Filter words that start with prefix parameter
+          in: query
+          name: prefix
+          required: false
+          schema:
+            type: string
+            default: goal
+        - description: If exact=true wordlist returns a list of entries that exactly matches the search string. Otherwise wordlist lists entries that start with prefix string.
+          in: query
+          name: exact
+          required: false
+          schema:
+            type: boolean
+            enum:
+              - 'false'
+              - 'true'
+        - description: Limit the number of results per response. Default and maximum limit is 5000.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: string
+        - description: Offset the start number of the result.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wordlist'
+        '400':
+          description: disjoint sets of word_length values (eg <3>10); filter has no values; total number of filters > 20; filters and excludes values can not be the same; source_lang and translations can not be same; word_length conflicts with prefix length.
+        '404':
+          description: |
+            No entries is found matching supplied filters or lang or filters is not recognized.
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve list of words for category with advanced options.
+      tags:
+        - Wordlist
+  '/wordlist/{source_lang}/{filters_basic}':
+    get:
+      description: |
+        Retrieve list of words for particular [domain](/glossary?tag=#domain&expand), [lexical category](/glossary?tag=#lexicalcategory&expand), [register](/glossary?tag=#register&expand) and/or [region](/glossary?tag=#region&expand).  
+
+          <div id="wordlist"></div>
+      parameters:
+        - $ref: '#/components/parameters/monolingual-wordlist-source_lang'
+        - description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5.'
+          in: path
+          name: filters_basic
+          required: true
+          schema:
+            type: string
+            default: registers=Rare;domains=Art
+        - description: Limit the number of results per response. Default and maximum limit is 5000.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: string
+        - description: Offset the start number of the result.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/appKey'
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Wordlist'
+        '400':
+          description: filter has no values; total number of filters > 20.
+        '404':
+          description: |
+            No entries is found matching supplied filters or lang or filters is not recognized.
+        '500':
+          description: |
+            Internal Error. An error occurred while processing the data.
+      summary: Retrieve list of words for category.
+      tags:
+        - Wordlist
+components:
+  schemas:
+    ArrayOfRelatedEntries:
+      description: A list of written or spoken words
+      items:
+        additionalProperties: false
+        properties:
+          domains:
+            $ref: '#/components/schemas/arrayofstrings'
+          id:
+            description: The identifier of the word
+            type: string
+          language:
+            description: IANA language code specifying the language of the word
+            type: string
+          regions:
+            $ref: '#/components/schemas/arrayofstrings'
+          registers:
+            $ref: '#/components/schemas/arrayofstrings'
+          text:
+            type: string
+        required:
+          - text
+          - id
+        type: object
+      minItems: 1
+      type: array
+    CategorizedTextList:
+      description: various types of notes that appear
+      items:
+        additionalProperties: false
+        properties:
+          id:
+            description: The identifier of the word
+            type: string
+          text:
+            description: A note text
+            type: string
+          type:
+            description: The descriptive category of the text
+            type: string
+        required:
+          - text
+          - type
+        type: object
+      minItems: 1
+      type: array
+    CrossReferencesList:
+      description: 'A reference to another word that is closely related, might provide additional information about the subject, has a variant spelling or is an abbreviated form of it.'
+      items:
+        additionalProperties: false
+        description: cross references of a sense
+        properties:
+          id:
+            description: The word id of cooccurrence
+            type: string
+          text:
+            description: The word of cooccurrence
+            type: string
+          type:
+            description: 'The type of relation between the two words. Possible values are ''close match'', ''related'', ''see also'', ''variant spelling'', and ''abbreviation'' in case of crossreferences, or ''pre'', ''post'' in case of collocates.'
+            type: string
+        required:
+          - id
+          - text
+          - type
+        type: object
+      minItems: 1
+      type: array
+    Entry:
+      additionalProperties: false
+      minProperties: 1
+      properties:
+        etymologies:
+          $ref: '#/components/schemas/arrayofstrings'
+        grammaticalFeatures:
+          $ref: '#/components/schemas/GrammaticalFeaturesList'
+        homographNumber:
+          description: Identifies the homograph grouping. The last two digits identify different entries of the same homograph. The first one/two digits identify the homograph number.
+          type: string
+        notes:
+          $ref: '#/components/schemas/CategorizedTextList'
+        pronunciations:
+          $ref: '#/components/schemas/PronunciationsList'
+        senses:
+          description: Complete list of senses
+          items:
+            $ref: '#/components/schemas/Sense'
+          minItems: 1
+          type: array
+        variantForms:
+          $ref: '#/components/schemas/VariantFormsList'
+      type: object
+    ExamplesList:
+      description: A list of written or spoken rendering of examples of use of a word or text
+      items:
+        additionalProperties: false
+        properties:
+          definitions:
+            $ref: '#/components/schemas/arrayofstrings'
+          domains:
+            $ref: '#/components/schemas/arrayofstrings'
+          notes:
+            $ref: '#/components/schemas/CategorizedTextList'
+          regions:
+            $ref: '#/components/schemas/arrayofstrings'
+          registers:
+            $ref: '#/components/schemas/arrayofstrings'
+          senseIds:
+            $ref: '#/components/schemas/arrayofstrings'
+          text:
+            type: string
+          translations:
+            $ref: '#/components/schemas/TranslationsList'
+        required:
+          - text
+        type: object
+      minItems: 1
+      type: array
+    Filters:
+      description: Schema for the Filters endpoint.
+      properties:
+        metadata:
+          description: Additional Information provided by OUP
+          type: object
+        results:
+          additionalProperties: false
+          description: A mapping of filters available per endpoints.
+          minProperties: 1
+          properties:
+            entries:
+              $ref: '#/components/schemas/arrayofstrings'
+            inflections:
+              $ref: '#/components/schemas/arrayofstrings'
+            translations:
+              $ref: '#/components/schemas/arrayofstrings'
+            wordlist:
+              $ref: '#/components/schemas/arrayofstrings'
+          type: object
+    GrammaticalFeaturesList:
+      description: The different forms are correlated with meanings or functions which we text as 'features'
+      items:
+        additionalProperties: false
+        properties:
+          text:
+            type: string
+          type:
+            type: string
+        required:
+          - text
+          - type
+        type: object
+      minItems: 1
+      type: array
+    HeadwordEntry:
+      additionalProperties: false
+      description: Description of a word
+      properties:
+        id:
+          description: The identifier of a word
+          type: string
+        language:
+          description: IANA language code
+          type: string
+        lexicalEntries:
+          description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+          items:
+            $ref: '#/components/schemas/lexicalEntry'
+          minItems: 1
+          type: array
+        pronunciations:
+          $ref: '#/components/schemas/PronunciationsList'
+        type:
+          description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+          type: string
+        word:
+          description: 'A given written or spoken realisation of a an entry, lowercased.'
+          type: string
+      required:
+        - id
+        - language
+        - lexicalEntries
+        - word
+      type: object
+    HeadwordLemmatron:
+      additionalProperties: false
+      description: Description of an inflected form of a word
+      properties:
+        id:
+          description: The identifier of a word
+          type: string
+        language:
+          description: IANA language code
+          type: string
+        lexicalEntries:
+          description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+          items:
+            $ref: '#/components/schemas/LemmatronLexicalEntry'
+          minItems: 1
+          type: array
+        type:
+          description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+          type: string
+        word:
+          description: 'A given written or spoken realisation of a an entry, lowercased.'
+          type: string
+      required:
+        - id
+        - language
+        - lexicalEntries
+        - word
+      type: object
+    HeadwordThesaurus:
+      additionalProperties: false
+      description: description of thesaurus information of a word
+      properties:
+        id:
+          description: The identifier of a word
+          type: string
+        language:
+          description: IANA language code
+          type: string
+        lexicalEntries:
+          description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+          items:
+            $ref: '#/components/schemas/ThesaurusLexicalEntry'
+          minItems: 1
+          type: array
+        type:
+          description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+          type: string
+        word:
+          description: 'A given written or spoken realisation of a an entry, lowercased.'
+          type: string
+      required:
+        - word
+        - id
+        - language
+        - lexicalEntries
+      type: object
+    InflectionsList:
+      description: A grouping of the modifications of a word to express different grammatical categories
+      items:
+        additionalProperties: false
+        properties:
+          id:
+            description: The identifier of the word
+            type: string
+          text:
+            type: string
+        required:
+          - text
+          - id
+        type: object
+      minItems: 1
+      type: array
+    Languages:
+      description: Schema for the languages endpoint.
+      properties:
+        metadata:
+          description: Additional Information provided by OUP
+          type: object
+        results:
+          description: A list of languages available.
+          items:
+            additionalProperties: false
+            minProperties: 1
+            properties:
+              region:
+                description: Name of region.
+                type: string
+              source:
+                description: Name of source dictionary.
+                type: string
+              sourceLanguage:
+                description: Source language of the results
+                properties:
+                  id:
+                    description: IANA language code
+                    type: string
+                  language:
+                    description: Language label.
+                    type: string
+                type: object
+              targetLanguage:
+                description: Translation language of the results
+                properties:
+                  id:
+                    description: IANA language code
+                    type: string
+                  language:
+                    description: Language label.
+                    type: string
+                type: object
+              type:
+                description: whether monolingual or bilingual.
+                enum:
+                  - monolingual
+                  - bilingual
+                type: string
+            type: object
+          minItems: 1
+          type: array
+      type: object
+    Lemmatron:
+      description: Schema for the inflections endpoint.
+      properties:
+        metadata:
+          description: Additional Information provided by OUP
+          type: object
+        results:
+          description: A list of inflections matching a given word
+          items:
+            $ref: '#/components/schemas/HeadwordLemmatron'
+          minItems: 1
+          type: array
+      type: object
+    LemmatronLexicalEntry:
+      additionalProperties: false
+      description: Description of an entry for a particular part of speech and grammatical features
+      properties:
+        grammaticalFeatures:
+          $ref: '#/components/schemas/GrammaticalFeaturesList'
+        inflectionOf:
+          $ref: '#/components/schemas/InflectionsList'
+        language:
+          description: IANA language code
+          type: string
+        lexicalCategory:
+          description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
+          type: string
+        text:
+          description: A given written or spoken realisation of a an entry.
+          type: string
+      required:
+        - inflectionOf
+        - language
+        - lexicalCategory
+        - text
+      type: object
+    PronunciationsList:
+      description: A list of possible pronunciations of a word
+      items:
+        additionalProperties: false
+        description: A grouping of pronunciation information
+        minProperties: 1
+        properties:
+          audioFile:
+            description: The URL of the sound file
+            type: string
+          dialects:
+            $ref: '#/components/schemas/arrayofstrings'
+          phoneticNotation:
+            description: The alphabetic system used to display the phonetic spelling
+            type: string
+          phoneticSpelling:
+            description: Phonetic spelling is the representation of vocal sounds which express pronunciations of words. It is a system of spelling in which each letter represents invariably the same spoken sound
+            type: string
+          regions:
+            $ref: '#/components/schemas/arrayofstrings'
+        type: object
+      minItems: 1
+      type: array
+    Regions:
+      description: Schema for region endpoint.
+      properties:
+        metadata:
+          description: Additional Information provided by OUP
+          type: object
+        results:
+          additionalProperties:
+            $ref: '#/components/schemas/arrayofstrings'
+          description: A mapping of regions available.
+          type: object
+    RetrieveEntry:
+      description: Schema for the 'entries' endpoints
+      properties:
+        metadata:
+          description: Additional Information provided by OUP
+          type: object
+        results:
+          description: A list of entries and all the data related to them
+          items:
+            $ref: '#/components/schemas/HeadwordEntry'
+          minItems: 1
+          type: array
+      type: object
+    Sense:
+      additionalProperties: false
+      description: A lexical sense represents the lexical meaning of a lexical entry when interpreted as referring to the corresponding ontology element
+      minProperties: 1
+      properties:
+        crossReferenceMarkers:
+          $ref: '#/components/schemas/arrayofstrings'
+        crossReferences:
+          $ref: '#/components/schemas/CrossReferencesList'
+        definitions:
+          $ref: '#/components/schemas/arrayofstrings'
+        domains:
+          $ref: '#/components/schemas/arrayofstrings'
+        examples:
+          $ref: '#/components/schemas/ExamplesList'
+        id:
+          description: The id of the sense that is required for the delete procedure
+          type: string
+        notes:
+          $ref: '#/components/schemas/CategorizedTextList'
+        pronunciations:
+          $ref: '#/components/schemas/PronunciationsList'
+        regions:
+          $ref: '#/components/schemas/arrayofstrings'
+        registers:
+          $ref: '#/components/schemas/arrayofstrings'
+        subsenses:
+          description: Ordered list of subsenses of a sense
+          items:
+            $ref: '#/components/schemas/Sense'
+          minItems: 1
+          type: array
+        translations:
+          $ref: '#/components/schemas/TranslationsList'
+        variantForms:
+          $ref: '#/components/schemas/VariantFormsList'
+      type: object
+    SentencesEntry:
+      additionalProperties: false
+      description: Description of a word
+      properties:
+        id:
+          description: The identifier of a word
+          type: string
+        language:
+          description: IANA language code
+          type: string
+        lexicalEntries:
+          description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+          items:
+            $ref: '#/components/schemas/SentencesLexicalEntry'
+          minItems: 1
+          type: array
+        type:
+          description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+          type: string
+        word:
+          description: 'A given written or spoken realisation of a an entry, lowercased.'
+          type: string
+      required:
+        - id
+        - language
+        - lexicalEntries
+        - word
+      type: object
+    SentencesLexicalEntry:
+      additionalProperties: false
+      description: Description of an entry for a particular part of speech
+      properties:
+        grammaticalFeatures:
+          $ref: '#/components/schemas/GrammaticalFeaturesList'
+        language:
+          description: IANA language code
+          type: string
+        lexicalCategory:
+          description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
+          type: string
+        sentences:
+          $ref: '#/components/schemas/ExamplesList'
+        text:
+          description: A given written or spoken realisation of a an entry.
+          type: string
+      required:
+        - language
+        - sentences
+        - text
+      type: object
+    SentencesResults:
+      description: Schema for the 'sentences' endpoint
+      properties:
+        metadata:
+          description: Additional Information provided by OUP
+          type: object
+        results:
+          description: A list of entries and all the data related to them
+          items:
+            $ref: '#/components/schemas/SentencesEntry'
+          minItems: 1
+          type: array
+      type: object
+    SynonymsAntonyms:
+      items:
+        additionalProperties: false
+        properties:
+          domains:
+            $ref: '#/components/schemas/arrayofstrings'
+          id:
+            type: string
+          language:
+            type: string
+          regions:
+            $ref: '#/components/schemas/arrayofstrings'
+          registers:
+            $ref: '#/components/schemas/arrayofstrings'
+          text:
+            type: string
+        required:
+          - id
+          - text
+        type: object
+      minItems: 1
+      type: array
+    Thesaurus:
+      description: Schema for thesaurus endpoint
+      properties:
+        metadata:
+          description: Additional Information provided by OUP
+          type: object
+        results:
+          description: A list of found synonyms or antonyms
+          items:
+            $ref: '#/components/schemas/HeadwordThesaurus'
+          minItems: 1
+          type: array
+      type: object
+    ThesaurusEntry:
+      additionalProperties: false
+      minProperties: 1
+      properties:
+        homographNumber:
+          description: Identifies the homograph grouping. The last two digits identify different entries of the same homograph. The first one/two digits identify the homograph number.
+          type: string
+        senses:
+          description: Complete list of senses
+          items:
+            $ref: '#/components/schemas/ThesaurusSense'
+          minItems: 1
+          type: array
+        variantForms:
+          $ref: '#/components/schemas/VariantFormsList'
+      type: object
+    ThesaurusLexicalEntry:
+      additionalProperties: false
+      description: Description of an entry for a particular part of speech
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/ThesaurusEntry'
+          minItems: 1
+          type: array
+        language:
+          description: IANA language code
+          type: string
+        lexicalCategory:
+          description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
+          type: string
+        text:
+          description: A given written or spoken realisation of a an entry.
+          type: string
+        variantForms:
+          $ref: '#/components/schemas/VariantFormsList'
+      required:
+        - language
+        - lexicalCategory
+        - text
+      type: object
+    ThesaurusSense:
+      additionalProperties: false
+      description: A lexical sense represents the lexical meaning of a lexical entry when interpreted as referring to the corresponding ontology element
+      minProperties: 1
+      properties:
+        antonyms:
+          $ref: '#/components/schemas/SynonymsAntonyms'
+        domains:
+          $ref: '#/components/schemas/arrayofstrings'
+        examples:
+          $ref: '#/components/schemas/ExamplesList'
+        id:
+          description: The id of the sense that is required for the delete procedure
+          type: string
+        regions:
+          $ref: '#/components/schemas/arrayofstrings'
+        registers:
+          $ref: '#/components/schemas/arrayofstrings'
+        subsenses:
+          description: subsenses of word
+          items:
+            $ref: '#/components/schemas/ThesaurusSense'
+          minItems: 1
+          type: array
+        synonyms:
+          $ref: '#/components/schemas/SynonymsAntonyms'
+      type: object
+    TranslationsList:
+      description: A list of written or spoken rendering of the meaning of a word or text in another language(s)
+      items:
+        additionalProperties: false
+        properties:
+          domains:
+            $ref: '#/components/schemas/arrayofstrings'
+          grammaticalFeatures:
+            $ref: '#/components/schemas/GrammaticalFeaturesList'
+          language:
+            description: IANA language code specifying the language of the translation
+            type: string
+          notes:
+            $ref: '#/components/schemas/CategorizedTextList'
+          regions:
+            $ref: '#/components/schemas/arrayofstrings'
+          registers:
+            $ref: '#/components/schemas/arrayofstrings'
+          text:
+            type: string
+        required:
+          - text
+          - language
+        type: object
+      minItems: 1
+      type: array
+    UtilityLabels:
+      description: 'Schema for lexicalcategories, registers utility endpoints.'
+      properties:
+        metadata:
+          description: Additional Information provided by OUP
+          type: object
+        results:
+          additionalProperties:
+            description: 'the list of labels for an object. Every object can be a lexical category, or a register, or a domain.'
+            properties:
+              en:
+                description: Label in English
+                type: string
+            type: object
+          description: Mapping of labels available.
+          type: object
+    VariantFormsList:
+      description: 'Various words that are used interchangeably depending on the context, e.g ''aluminium'' and ''aluminum'''
+      items:
+        additionalProperties: false
+        properties:
+          regions:
+            $ref: '#/components/schemas/arrayofstrings'
+          text:
+            type: string
+        required:
+          - text
+        type: object
+      minItems: 1
+      type: array
+    Wordlist:
+      description: Schema for wordlist endpoint.
+      properties:
+        metadata:
+          description: Additional Information provided by OUP
+          type: object
+        results:
+          description: A list of found words
+          items:
+            additionalProperties: true
+            description: Description of found word
+            properties:
+              id:
+                description: The identifier of a word
+                type: string
+              matchString:
+                type: string
+                nullable: true
+              matchType:
+                type: string
+              region:
+                description: Name of region.
+                type: string
+              word:
+                description: 'A given written or spoken realisation of a an entry, lowercased.'
+                type: string
+            required:
+              - id
+              - word
+            type: object
+          minItems: 0
+          type: array
+      type: object
+    arrayofstrings:
+      items:
+        type: string
+      type: array
+    lexicalEntry:
+      additionalProperties: false
+      description: Description of an entry for a particular part of speech
+      properties:
+        derivativeOf:
+          $ref: '#/components/schemas/ArrayOfRelatedEntries'
+        entries:
+          items:
+            $ref: '#/components/schemas/Entry'
+          minItems: 1
+          type: array
+        grammaticalFeatures:
+          $ref: '#/components/schemas/GrammaticalFeaturesList'
+        language:
+          description: IANA language code
+          type: string
+        lexicalCategory:
+          description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
+          type: string
+        notes:
+          $ref: '#/components/schemas/CategorizedTextList'
+        pronunciations:
+          $ref: '#/components/schemas/PronunciationsList'
+        text:
+          description: A given written or spoken realisation of a an entry.
+          type: string
+        variantForms:
+          $ref: '#/components/schemas/VariantFormsList'
+      required:
+        - language
+        - lexicalCategory
+        - text
+      type: object
+  parameters:
+    appId:
+      description: App ID Authentication Parameter
+      in: header
+      name: app_id
+      required: true
+      x-data-threescale-name: app_ids
+      schema:
+        type: string
+        default: 5037d509
+    appKey:
+      description: App Key Authentication Parameter
+      in: header
+      name: app_key
+      required: true
+      x-data-threescale-name: app_keys
+      schema:
+        type: string
+        default: 4dc1aebaa63721f0f8e79a55e2514bc7
+    entriesWordId:
+      description: An Entry identifier. Case-sensitive.
+      in: path
+      name: word_id
+      required: true
+      schema:
+        type: string
+        default: ace
+    keyValFilters:
+      description: Separate filtering conditions using a semicolon. Conditions take values grammaticalFeatures and/or lexicalCategory and are case-sensitive. To list multiple values in single condition divide them with comma.
+      in: path
+      name: filters
+      required: true
+      style: simple
+      schema:
+        type: array
+        items:
+          pattern: (lexicalCategory|grammaticalFeatures)=.+
+          type: string
+    monolingual-lemmatron-source_lang:
+      description: IANA language code
+      in: path
+      name: source_lang
+      required: true
+      schema:
+        type: string
+        enum:
+          - en
+          - es
+          - hi
+          - nso
+          - tn
+          - zu
+          - de
+          - pt
+    monolingual-source_lang:
+      description: IANA language code
+      in: path
+      name: source_lang
+      required: true
+      schema:
+        type: string
+        enum:
+          - en
+          - es
+          - lv
+          - hi
+          - sw
+    monolingual-wordlist-source_lang:
+      description: IANA language code
+      in: path
+      name: source_lang
+      required: true
+      schema:
+        type: string
+        enum:
+          - en
+          - es
+          - hi
+          - lv
+          - sw
+    thesaurus-source_lang:
+      description: IANA language code
+      in: path
+      name: source_lang
+      required: true
+      schema:
+        type: string
+        enum:
+          - en

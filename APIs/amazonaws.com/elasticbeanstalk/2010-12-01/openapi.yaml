@@ -1,0 +1,3894 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://elasticbeanstalk.amazonaws.com/'
+info:
+  version: '2010-12-01'
+  x-release: v4
+  title: AWS Elastic Beanstalk
+  description: '<fullname>AWS Elastic Beanstalk</fullname> <p>AWS Elastic Beanstalk makes it easy for you to create, deploy, and manage scalable, fault-tolerant applications running on the Amazon Web Services cloud.</p> <p>For more information about this product, go to the <a href="http://aws.amazon.com/elasticbeanstalk/">AWS Elastic Beanstalk</a> details page. The location of the latest AWS Elastic Beanstalk WSDL is <a href="http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl">http://elasticbeanstalk.s3.amazonaws.com/doc/2010-12-01/AWSElasticBeanstalk.wsdl</a>. To install the Software Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command line tools that enable you to access the API, go to <a href="http://aws.amazon.com/tools/">Tools for Amazon Web Services</a>.</p> <p> <b>Endpoints</b> </p> <p>For a list of region-specific endpoints that AWS Elastic Beanstalk supports, go to <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: elasticbeanstalk
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/elasticbeanstalk-2010-12-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/elasticbeanstalk/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AbortEnvironmentUpdate
+      description: Cancels in-progress environment configuration update or application version deployment.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AbortEnvironmentUpdateMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ApplyEnvironmentManagedAction':
+    post:
+      operationId: ApplyEnvironmentManagedAction
+      description: Applies a scheduled managed action immediately. A managed action can be applied only if its status is <code>Scheduled</code>. Get the status and action ID of a managed action with <a>DescribeEnvironmentManagedActions</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApplyEnvironmentManagedActionResult'
+        '480':
+          description: ElasticBeanstalkServiceException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ElasticBeanstalkServiceException'
+        '481':
+          description: ManagedActionInvalidStateException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ManagedActionInvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplyEnvironmentManagedActionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CheckDNSAvailability':
+    post:
+      operationId: CheckDNSAvailability
+      description: Checks if the specified CNAME is available.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CheckDNSAvailabilityResultMessage'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckDNSAvailabilityMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ComposeEnvironments':
+    post:
+      operationId: ComposeEnvironments
+      description: 'Create or update a group of environments that each run a separate component of a single application. Takes a list of version labels that specify application source bundles for each of the environments to create or update. The name of each environment and other required information must be included in the source bundles in an environment manifest named <code>env.yaml</code>. See <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html">Compose Environments</a> for details.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EnvironmentDescriptionsMessage'
+        '480':
+          description: TooManyEnvironmentsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyEnvironmentsException'
+        '481':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComposeEnvironmentsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateApplication':
+    post:
+      operationId: CreateApplication
+      description: ' Creates an application that has one configuration template named <code>default</code> and no application versions. '
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApplicationDescriptionMessage'
+        '480':
+          description: TooManyApplicationsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyApplicationsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateApplicationVersion':
+    post:
+      operationId: CreateApplicationVersion
+      description: '<p>Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows:</p> <p>Specify a commit in an AWS CodeCommit repository with <code>SourceBuildInformation</code>.</p> <p>Specify a build in an AWS CodeBuild with <code>SourceBuildInformation</code> and <code>BuildConfiguration</code>.</p> <p>Specify a source bundle in S3 with <code>SourceBundle</code> </p> <p>Omit both <code>SourceBuildInformation</code> and <code>SourceBundle</code> to use the default sample application.</p> <note> <p>Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApplicationVersionDescriptionMessage'
+        '480':
+          description: TooManyApplicationsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyApplicationsException'
+        '481':
+          description: TooManyApplicationVersionsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyApplicationVersionsException'
+        '482':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+        '483':
+          description: S3LocationNotInServiceRegionException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/S3LocationNotInServiceRegionException'
+        '484':
+          description: CodeBuildNotInServiceRegionException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CodeBuildNotInServiceRegionException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationVersionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateConfigurationTemplate':
+    post:
+      operationId: CreateConfigurationTemplate
+      description: <p>Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings.</p> <p>Related Topics</p> <ul> <li> <p> <a>DescribeConfigurationOptions</a> </p> </li> <li> <p> <a>DescribeConfigurationSettings</a> </p> </li> <li> <p> <a>ListAvailableSolutionStacks</a> </p> </li> </ul>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSettingsDescription'
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+        '481':
+          description: TooManyBucketsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyBucketsException'
+        '482':
+          description: TooManyConfigurationTemplatesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyConfigurationTemplatesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConfigurationTemplateMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateEnvironment':
+    post:
+      operationId: CreateEnvironment
+      description: Launches an environment for the specified application using the specified configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EnvironmentDescription'
+        '480':
+          description: TooManyEnvironmentsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyEnvironmentsException'
+        '481':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEnvironmentMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreatePlatformVersion':
+    post:
+      operationId: CreatePlatformVersion
+      description: Create a new version of your custom platform.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreatePlatformVersionResult'
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+        '481':
+          description: ElasticBeanstalkServiceException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ElasticBeanstalkServiceException'
+        '482':
+          description: TooManyPlatformsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyPlatformsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePlatformVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateStorageLocation':
+    post:
+      operationId: CreateStorageLocation
+      description: <p>Creates the Amazon S3 storage location for the account.</p> <p>This location is used to store user log files.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateStorageLocationResultMessage'
+        '480':
+          description: TooManyBucketsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyBucketsException'
+        '481':
+          description: S3SubscriptionRequiredException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/S3SubscriptionRequiredException'
+        '482':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteApplication':
+    post:
+      operationId: DeleteApplication
+      description: <p>Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket.</p> <note> <p>You cannot delete an application that has a running environment.</p> </note>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: OperationInProgressException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OperationInProgressException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteApplicationMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteApplicationVersion':
+    post:
+      operationId: DeleteApplicationVersion
+      description: <p>Deletes the specified version from the specified application.</p> <note> <p>You cannot delete an application version that is associated with a running environment.</p> </note>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: SourceBundleDeletionException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SourceBundleDeletionException'
+        '481':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+        '482':
+          description: OperationInProgressException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OperationInProgressException'
+        '483':
+          description: S3LocationNotInServiceRegionException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/S3LocationNotInServiceRegionException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteApplicationVersionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteConfigurationTemplate':
+    post:
+      operationId: DeleteConfigurationTemplate
+      description: '<p>Deletes the specified configuration template.</p> <note> <p>When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment''s copy of the template without affecting the running environment.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: OperationInProgressException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OperationInProgressException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteConfigurationTemplateMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteEnvironmentConfiguration':
+    post:
+      operationId: DeleteEnvironmentConfiguration
+      description: <p>Deletes the draft configuration associated with the running environment.</p> <p>Updating a running environment with any configuration changes creates a draft configuration set. You can get the draft configuration using <a>DescribeConfigurationSettings</a> while the update is in progress or if the update fails. The <code>DeploymentStatus</code> for the draft configuration indicates whether the deployment is in process or has failed. The draft configuration remains in existence until it is deleted with this action.</p>
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEnvironmentConfigurationMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeletePlatformVersion':
+    post:
+      operationId: DeletePlatformVersion
+      description: Deletes the specified version of a custom platform.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeletePlatformVersionResult'
+        '480':
+          description: OperationInProgressException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OperationInProgressException'
+        '481':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+        '482':
+          description: ElasticBeanstalkServiceException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ElasticBeanstalkServiceException'
+        '483':
+          description: PlatformVersionStillReferencedException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PlatformVersionStillReferencedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePlatformVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeApplicationVersions':
+    post:
+      operationId: DescribeApplicationVersions
+      description: Retrieve a list of application versions.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApplicationVersionDescriptionsMessage'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeApplicationVersionsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeApplications':
+    post:
+      operationId: DescribeApplications
+      description: Returns the descriptions of existing applications.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApplicationDescriptionsMessage'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeApplicationsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConfigurationOptions':
+    post:
+      operationId: DescribeConfigurationOptions
+      description: 'Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationOptionsDescription'
+        '480':
+          description: TooManyBucketsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyBucketsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConfigurationOptionsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConfigurationSettings':
+    post:
+      operationId: DescribeConfigurationSettings
+      description: '<p>Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment.</p> <p>When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy.</p> <p>Related Topics</p> <ul> <li> <p> <a>DeleteEnvironmentConfiguration</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSettingsDescriptions'
+        '480':
+          description: TooManyBucketsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyBucketsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConfigurationSettingsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEnvironmentHealth':
+    post:
+      operationId: DescribeEnvironmentHealth
+      description: Returns information about the overall health of the specified environment. The <b>DescribeEnvironmentHealth</b> operation is only available with AWS Elastic Beanstalk Enhanced Health.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeEnvironmentHealthResult'
+        '480':
+          description: InvalidRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ElasticBeanstalkServiceException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ElasticBeanstalkServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEnvironmentHealthRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEnvironmentManagedActionHistory':
+    post:
+      operationId: DescribeEnvironmentManagedActionHistory
+      description: Lists an environment's completed and failed managed actions.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeEnvironmentManagedActionHistoryResult'
+        '480':
+          description: ElasticBeanstalkServiceException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ElasticBeanstalkServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEnvironmentManagedActionHistoryRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEnvironmentManagedActions':
+    post:
+      operationId: DescribeEnvironmentManagedActions
+      description: Lists an environment's upcoming and in-progress managed actions.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeEnvironmentManagedActionsResult'
+        '480':
+          description: ElasticBeanstalkServiceException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ElasticBeanstalkServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEnvironmentManagedActionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEnvironmentResources':
+    post:
+      operationId: DescribeEnvironmentResources
+      description: Returns AWS resources for this environment.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EnvironmentResourceDescriptionsMessage'
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEnvironmentResourcesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEnvironments':
+    post:
+      operationId: DescribeEnvironments
+      description: Returns descriptions for existing environments.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EnvironmentDescriptionsMessage'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEnvironmentsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEvents':
+    post:
+      operationId: DescribeEvents
+      description: '<p>Returns list of event descriptions matching criteria up to the last 6 weeks.</p> <note> <p>This action returns the most recent 1,000 events from the specified <code>NextToken</code>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventDescriptionsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeInstancesHealth':
+    post:
+      operationId: DescribeInstancesHealth
+      description: 'Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html">enhanced health reporting</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeInstancesHealthResult'
+        '480':
+          description: InvalidRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ElasticBeanstalkServiceException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ElasticBeanstalkServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeInstancesHealthRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribePlatformVersion':
+    post:
+      operationId: DescribePlatformVersion
+      description: Describes the version of the platform.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribePlatformVersionResult'
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+        '481':
+          description: ElasticBeanstalkServiceException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ElasticBeanstalkServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribePlatformVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListAvailableSolutionStacks':
+    post:
+      operationId: ListAvailableSolutionStacks
+      description: 'Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListAvailableSolutionStacksResultMessage'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListPlatformVersions':
+    post:
+      operationId: ListPlatformVersions
+      description: Lists the available platforms.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListPlatformVersionsResult'
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+        '481':
+          description: ElasticBeanstalkServiceException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ElasticBeanstalkServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPlatformVersionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RebuildEnvironment':
+    post:
+      operationId: RebuildEnvironment
+      description: 'Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RebuildEnvironmentMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RequestEnvironmentInfo':
+    post:
+      operationId: RequestEnvironmentInfo
+      description: <p>Initiates a request to compile the specified type of information of the deployed environment.</p> <p> Setting the <code>InfoType</code> to <code>tail</code> compiles the last lines from the application server log files of every Amazon EC2 instance in your environment. </p> <p> Setting the <code>InfoType</code> to <code>bundle</code> compresses the application server log files for every Amazon EC2 instance into a <code>.zip</code> file. Legacy and .NET containers do not support bundle logs. </p> <p> Use <a>RetrieveEnvironmentInfo</a> to obtain the set of logs. </p> <p>Related Topics</p> <ul> <li> <p> <a>RetrieveEnvironmentInfo</a> </p> </li> </ul>
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestEnvironmentInfoMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RestartAppServer':
+    post:
+      operationId: RestartAppServer
+      description: Causes the environment to restart the application container server running on each Amazon EC2 instance.
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestartAppServerMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RetrieveEnvironmentInfo':
+    post:
+      operationId: RetrieveEnvironmentInfo
+      description: <p>Retrieves the compiled information from a <a>RequestEnvironmentInfo</a> request.</p> <p>Related Topics</p> <ul> <li> <p> <a>RequestEnvironmentInfo</a> </p> </li> </ul>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RetrieveEnvironmentInfoResultMessage'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrieveEnvironmentInfoMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SwapEnvironmentCNAMEs':
+    post:
+      operationId: SwapEnvironmentCNAMEs
+      description: Swaps the CNAMEs of two environments.
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SwapEnvironmentCNAMEsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TerminateEnvironment':
+    post:
+      operationId: TerminateEnvironment
+      description: Terminates the specified environment.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EnvironmentDescription'
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminateEnvironmentMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateApplication':
+    post:
+      operationId: UpdateApplication
+      description: '<p>Updates the specified application to have the specified properties.</p> <note> <p>If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear these properties, specify an empty string.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApplicationDescriptionMessage'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateApplicationResourceLifecycle':
+    post:
+      operationId: UpdateApplicationResourceLifecycle
+      description: Modifies lifecycle settings for an application.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApplicationResourceLifecycleDescriptionMessage'
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationResourceLifecycleMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateApplicationVersion':
+    post:
+      operationId: UpdateApplicationVersion
+      description: '<p>Updates the specified application version to have the specified properties.</p> <note> <p>If a property (for example, <code>description</code>) is not provided, the value remains unchanged. To clear properties, specify an empty string.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApplicationVersionDescriptionMessage'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationVersionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateConfigurationTemplate':
+    post:
+      operationId: UpdateConfigurationTemplate
+      description: '<p>Updates the specified configuration template to have the specified properties or configuration option values.</p> <note> <p>If a property (for example, <code>ApplicationName</code>) is not provided, its value remains unchanged. To clear such properties, specify an empty string.</p> </note> <p>Related Topics</p> <ul> <li> <p> <a>DescribeConfigurationOptions</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSettingsDescription'
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+        '481':
+          description: TooManyBucketsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyBucketsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConfigurationTemplateMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateEnvironment':
+    post:
+      operationId: UpdateEnvironment
+      description: '<p>Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.</p> <p> Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an <code>InvalidParameterCombination</code> error. </p> <p> When updating the configuration settings to a new template or individual settings, a draft configuration is created and <a>DescribeConfigurationSettings</a> for this environment returns two setting descriptions with different <code>DeploymentStatus</code> values. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EnvironmentDescription'
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+        '481':
+          description: TooManyBucketsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyBucketsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEnvironmentMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ValidateConfigurationSettings':
+    post:
+      operationId: ValidateConfigurationSettings
+      description: '<p>Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid.</p> <p>This action returns a list of messages indicating any errors or warnings associated with the selection of option values.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSettingsValidationMessages'
+        '480':
+          description: InsufficientPrivilegesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientPrivilegesException'
+        '481':
+          description: TooManyBucketsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyBucketsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateConfigurationSettingsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    ARN:
+      type: string
+    AbortEnvironmentUpdateMessage:
+      type: object
+      example:
+        EnvironmentName: my-env
+      properties:
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+      description: <p/>
+    AbortableOperationInProgress:
+      type: boolean
+    ActionHistoryStatus:
+      type: string
+      enum:
+        - Completed
+        - Failed
+        - Unknown
+    ActionStatus:
+      type: string
+      enum:
+        - Scheduled
+        - Pending
+        - Running
+        - Unknown
+    ActionType:
+      type: string
+      enum:
+        - InstanceRefresh
+        - PlatformUpdate
+        - Unknown
+    ApplicationDescription:
+      type: object
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        Description:
+          $ref: '#/components/schemas/Description'
+        DateCreated:
+          $ref: '#/components/schemas/CreationDate'
+        DateUpdated:
+          $ref: '#/components/schemas/UpdateDate'
+        Versions:
+          $ref: '#/components/schemas/VersionLabelsList'
+        ConfigurationTemplates:
+          $ref: '#/components/schemas/ConfigurationTemplateNamesList'
+        ResourceLifecycleConfig:
+          $ref: '#/components/schemas/ApplicationResourceLifecycleConfig'
+      description: Describes the properties of an application.
+    ApplicationDescriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationDescription'
+    ApplicationDescriptionMessage:
+      type: object
+      example:
+        Application:
+          ApplicationName: my-app
+          ConfigurationTemplates: []
+          DateCreated: '2015-08-13T19:15:50.449Z'
+          DateUpdated: '2015-08-20T22:34:56.195Z'
+          Description: my Elastic Beanstalk application
+          Versions:
+            - 2fba-stage-150819_234450
+            - bf07-stage-150820_214945
+            - 93f8
+            - fd7c-stage-150820_000431
+            - 22a0-stage-150819_185942
+      properties:
+        Application:
+          $ref: '#/components/schemas/ApplicationDescription'
+      description: Result message containing a single description of an application.
+    ApplicationDescriptionsMessage:
+      type: object
+      example:
+        Applications:
+          - ApplicationName: ruby
+            ConfigurationTemplates: []
+            DateCreated: '2015-08-13T21:05:44.376Z'
+            DateUpdated: '2015-08-13T21:05:44.376Z'
+            Versions:
+              - Sample Application
+          - ApplicationName: pythonsample
+            ConfigurationTemplates: []
+            DateCreated: '2015-08-13T19:05:43.637Z'
+            DateUpdated: '2015-08-13T19:05:43.637Z'
+            Description: Application created from the EB CLI using "eb init"
+            Versions:
+              - Sample Application
+          - ApplicationName: nodejs-example
+            ConfigurationTemplates: []
+            DateCreated: '2015-08-06T17:50:02.486Z'
+            DateUpdated: '2015-08-06T17:50:02.486Z'
+            Versions:
+              - add elasticache
+              - First Release
+      properties:
+        Applications:
+          $ref: '#/components/schemas/ApplicationDescriptionList'
+      description: Result message containing a list of application descriptions.
+    ApplicationMetrics:
+      type: object
+      properties:
+        Duration:
+          $ref: '#/components/schemas/NullableInteger'
+        RequestCount:
+          $ref: '#/components/schemas/RequestCount'
+        StatusCodes:
+          $ref: '#/components/schemas/StatusCodes'
+        Latency:
+          $ref: '#/components/schemas/Latency'
+      description: Application request metrics for an AWS Elastic Beanstalk environment.
+    ApplicationName:
+      type: string
+      minLength: 1
+      maxLength: 100
+    ApplicationNamesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationName'
+    ApplicationResourceLifecycleConfig:
+      type: object
+      properties:
+        ServiceRole:
+          $ref: '#/components/schemas/String'
+        VersionLifecycleConfig:
+          $ref: '#/components/schemas/ApplicationVersionLifecycleConfig'
+      description: 'The resource lifecycle configuration for an application. Defines lifecycle settings for resources that belong to the application, and the service role that Elastic Beanstalk assumes in order to apply lifecycle settings. The version lifecycle configuration defines lifecycle settings for application versions.'
+    ApplicationResourceLifecycleDescriptionMessage:
+      type: object
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        ResourceLifecycleConfig:
+          $ref: '#/components/schemas/ApplicationResourceLifecycleConfig'
+    ApplicationVersionDescription:
+      type: object
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        Description:
+          $ref: '#/components/schemas/Description'
+        VersionLabel:
+          $ref: '#/components/schemas/VersionLabel'
+        SourceBuildInformation:
+          $ref: '#/components/schemas/SourceBuildInformation'
+        BuildArn:
+          $ref: '#/components/schemas/String'
+        SourceBundle:
+          $ref: '#/components/schemas/S3Location'
+        DateCreated:
+          $ref: '#/components/schemas/CreationDate'
+        DateUpdated:
+          $ref: '#/components/schemas/UpdateDate'
+        Status:
+          $ref: '#/components/schemas/ApplicationVersionStatus'
+      description: Describes the properties of an application version.
+    ApplicationVersionDescriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationVersionDescription'
+    ApplicationVersionDescriptionMessage:
+      type: object
+      example:
+        ApplicationVersion:
+          ApplicationName: my-app
+          DateCreated: '2015-08-19T18:59:17.646Z'
+          DateUpdated: '2015-08-20T22:53:28.871Z'
+          Description: new description
+          SourceBundle:
+            S3Bucket: elasticbeanstalk-us-west-2-0123456789012
+            S3Key: my-app/22a0-stage-150819_185942.war
+          VersionLabel: 22a0-stage-150819_185942
+      properties:
+        ApplicationVersion:
+          $ref: '#/components/schemas/ApplicationVersionDescription'
+      description: Result message wrapping a single description of an application version.
+    ApplicationVersionDescriptionsMessage:
+      type: object
+      example:
+        ApplicationVersions:
+          - ApplicationName: my-app
+            DateCreated: '2015-07-23T01:32:26.079Z'
+            DateUpdated: '2015-07-23T01:32:26.079Z'
+            Description: update cover page
+            SourceBundle:
+              S3Bucket: elasticbeanstalk-us-west-2-015321684451
+              S3Key: my-app/5026-stage-150723_224258.war
+            VersionLabel: v2
+          - ApplicationName: my-app
+            DateCreated: '2015-07-23T22:26:10.816Z'
+            DateUpdated: '2015-07-23T22:26:10.816Z'
+            Description: initial version
+            SourceBundle:
+              S3Bucket: elasticbeanstalk-us-west-2-015321684451
+              S3Key: my-app/5026-stage-150723_222618.war
+            VersionLabel: v1
+      properties:
+        ApplicationVersions:
+          $ref: '#/components/schemas/ApplicationVersionDescriptionList'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+      description: Result message wrapping a list of application version descriptions.
+    ApplicationVersionLifecycleConfig:
+      type: object
+      properties:
+        MaxCountRule:
+          $ref: '#/components/schemas/MaxCountRule'
+        MaxAgeRule:
+          $ref: '#/components/schemas/MaxAgeRule'
+      description: '<p>The application version lifecycle settings for an application. Defines the rules that Elastic Beanstalk applies to an application''s versions in order to avoid hitting the per-region limit for application versions.</p> <p>When Elastic Beanstalk deletes an application version from its database, you can no longer deploy that version to an environment. The source bundle remains in S3 unless you configure the rule to delete it.</p>'
+    ApplicationVersionProccess:
+      type: boolean
+    ApplicationVersionStatus:
+      type: string
+      enum:
+        - Processed
+        - Unprocessed
+        - Failed
+        - Processing
+        - Building
+    ApplyEnvironmentManagedActionRequest:
+      type: object
+      required:
+        - ActionId
+      properties:
+        EnvironmentName:
+          $ref: '#/components/schemas/String'
+        EnvironmentId:
+          $ref: '#/components/schemas/String'
+        ActionId:
+          $ref: '#/components/schemas/String'
+      description: Request to execute a scheduled managed action immediately.
+    ApplyEnvironmentManagedActionResult:
+      type: object
+      properties:
+        ActionId:
+          $ref: '#/components/schemas/String'
+        ActionDescription:
+          $ref: '#/components/schemas/String'
+        ActionType:
+          $ref: '#/components/schemas/ActionType'
+        Status:
+          $ref: '#/components/schemas/String'
+      description: The result message containing information about the managed action.
+    AutoCreateApplication:
+      type: boolean
+    AutoScalingGroup:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/ResourceId'
+      description: Describes an Auto Scaling launch configuration.
+    AutoScalingGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutoScalingGroup'
+    AvailableSolutionStackDetailsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SolutionStackDescription'
+    AvailableSolutionStackNamesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SolutionStackName'
+    BoxedBoolean:
+      type: boolean
+    BoxedInt:
+      type: integer
+    BuildConfiguration:
+      type: object
+      required:
+        - CodeBuildServiceRole
+        - Image
+      properties:
+        ArtifactName:
+          $ref: '#/components/schemas/String'
+        CodeBuildServiceRole:
+          $ref: '#/components/schemas/NonEmptyString'
+        ComputeType:
+          $ref: '#/components/schemas/ComputeType'
+        Image:
+          $ref: '#/components/schemas/NonEmptyString'
+        TimeoutInMinutes:
+          $ref: '#/components/schemas/BoxedInt'
+      description: Settings for an AWS CodeBuild build.
+    Builder:
+      type: object
+      properties:
+        ARN:
+          $ref: '#/components/schemas/ARN'
+      description: The builder used to build the custom platform.
+    CPUUtilization:
+      type: object
+      properties:
+        User:
+          $ref: '#/components/schemas/NullableDouble'
+        Nice:
+          $ref: '#/components/schemas/NullableDouble'
+        System:
+          $ref: '#/components/schemas/NullableDouble'
+        Idle:
+          $ref: '#/components/schemas/NullableDouble'
+        IOWait:
+          $ref: '#/components/schemas/NullableDouble'
+        IRQ:
+          $ref: '#/components/schemas/NullableDouble'
+        SoftIRQ:
+          $ref: '#/components/schemas/NullableDouble'
+      description: CPU utilization metrics for an instance.
+    Cause:
+      type: string
+      minLength: 1
+      maxLength: 255
+    Causes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cause'
+    CheckDNSAvailabilityMessage:
+      type: object
+      required:
+        - CNAMEPrefix
+      example:
+        CNAMEPrefix: my-cname
+      properties:
+        CNAMEPrefix:
+          $ref: '#/components/schemas/DNSCnamePrefix'
+      description: Results message indicating whether a CNAME is available.
+    CheckDNSAvailabilityResultMessage:
+      type: object
+      example:
+        Available: true
+        FullyQualifiedCNAME: my-cname.us-west-2.elasticbeanstalk.com
+      properties:
+        Available:
+          $ref: '#/components/schemas/CnameAvailability'
+        FullyQualifiedCNAME:
+          $ref: '#/components/schemas/DNSCname'
+      description: Indicates if the specified CNAME is available.
+    CnameAvailability:
+      type: boolean
+    CodeBuildNotInServiceRegionException:
+      type: object
+      properties: {}
+      description: AWS CodeBuild is not available in the specified region.
+    ComposeEnvironmentsMessage:
+      type: object
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        GroupName:
+          $ref: '#/components/schemas/GroupName'
+        VersionLabels:
+          $ref: '#/components/schemas/VersionLabels'
+      description: Request to create or update a group of environments.
+    ComputeType:
+      type: string
+      enum:
+        - BUILD_GENERAL1_SMALL
+        - BUILD_GENERAL1_MEDIUM
+        - BUILD_GENERAL1_LARGE
+    ConfigurationDeploymentStatus:
+      type: string
+      enum:
+        - deployed
+        - pending
+        - failed
+    ConfigurationOptionDefaultValue:
+      type: string
+    ConfigurationOptionDescription:
+      type: object
+      properties:
+        Namespace:
+          $ref: '#/components/schemas/OptionNamespace'
+        Name:
+          $ref: '#/components/schemas/ConfigurationOptionName'
+        DefaultValue:
+          $ref: '#/components/schemas/ConfigurationOptionDefaultValue'
+        ChangeSeverity:
+          $ref: '#/components/schemas/ConfigurationOptionSeverity'
+        UserDefined:
+          $ref: '#/components/schemas/UserDefinedOption'
+        ValueType:
+          $ref: '#/components/schemas/ConfigurationOptionValueType'
+        ValueOptions:
+          $ref: '#/components/schemas/ConfigurationOptionPossibleValues'
+        MinValue:
+          $ref: '#/components/schemas/OptionRestrictionMinValue'
+        MaxValue:
+          $ref: '#/components/schemas/OptionRestrictionMaxValue'
+        MaxLength:
+          $ref: '#/components/schemas/OptionRestrictionMaxLength'
+        Regex:
+          $ref: '#/components/schemas/OptionRestrictionRegex'
+      description: Describes the possible values for a configuration option.
+    ConfigurationOptionDescriptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationOptionDescription'
+    ConfigurationOptionName:
+      type: string
+    ConfigurationOptionPossibleValue:
+      type: string
+    ConfigurationOptionPossibleValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationOptionPossibleValue'
+    ConfigurationOptionSetting:
+      type: object
+      properties:
+        ResourceName:
+          $ref: '#/components/schemas/ResourceName'
+        Namespace:
+          $ref: '#/components/schemas/OptionNamespace'
+        OptionName:
+          $ref: '#/components/schemas/ConfigurationOptionName'
+        Value:
+          $ref: '#/components/schemas/ConfigurationOptionValue'
+      description: ' A specification identifying an individual configuration option along with its current value. For a list of possible option values, go to <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html">Option Values</a> in the <i>AWS Elastic Beanstalk Developer Guide</i>. '
+    ConfigurationOptionSettingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationOptionSetting'
+    ConfigurationOptionSeverity:
+      type: string
+    ConfigurationOptionValue:
+      type: string
+    ConfigurationOptionValueType:
+      type: string
+      enum:
+        - Scalar
+        - List
+    ConfigurationOptionsDescription:
+      type: object
+      example:
+        Options:
+          - ChangeSeverity: NoInterruption
+            DefaultValue: '30'
+            MaxValue: 300
+            MinValue: 5
+            Name: Interval
+            Namespace: 'aws:elb:healthcheck'
+            UserDefined: false
+            ValueType: Scalar
+          - ChangeSeverity: NoInterruption
+            DefaultValue: '2000000'
+            MinValue: 0
+            Name: LowerThreshold
+            Namespace: 'aws:autoscaling:trigger'
+            UserDefined: false
+            ValueType: Scalar
+      properties:
+        SolutionStackName:
+          $ref: '#/components/schemas/SolutionStackName'
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+        Options:
+          $ref: '#/components/schemas/ConfigurationOptionDescriptionsList'
+      description: Describes the settings for a specified configuration set.
+    ConfigurationSettingsDescription:
+      type: object
+      example:
+        ApplicationName: my-app
+        DateCreated: '2015-08-20T22:39:31Z'
+        DateUpdated: '2015-08-20T22:43:11Z'
+        SolutionStackName: 64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8
+        TemplateName: my-template
+      properties:
+        SolutionStackName:
+          $ref: '#/components/schemas/SolutionStackName'
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+        Description:
+          $ref: '#/components/schemas/Description'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        DeploymentStatus:
+          $ref: '#/components/schemas/ConfigurationDeploymentStatus'
+        DateCreated:
+          $ref: '#/components/schemas/CreationDate'
+        DateUpdated:
+          $ref: '#/components/schemas/UpdateDate'
+        OptionSettings:
+          $ref: '#/components/schemas/ConfigurationOptionSettingsList'
+      description: Describes the settings for a configuration set.
+    ConfigurationSettingsDescriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationSettingsDescription'
+    ConfigurationSettingsDescriptions:
+      type: object
+      example:
+        ConfigurationSettings:
+          - ApplicationName: my-app
+            DateCreated: '2015-08-13T19:16:25Z'
+            DateUpdated: '2015-08-13T23:30:07Z'
+            DeploymentStatus: deployed
+            Description: Environment created from the EB CLI using "eb create"
+            EnvironmentName: my-env
+            OptionSettings:
+              - Namespace: 'aws:autoscaling:asg'
+                OptionName: Availability Zones
+                ResourceName: AWSEBAutoScalingGroup
+                Value: Any
+              - Namespace: 'aws:autoscaling:asg'
+                OptionName: Cooldown
+                ResourceName: AWSEBAutoScalingGroup
+                Value: '360'
+              - Namespace: 'aws:elb:policies'
+                OptionName: ConnectionDrainingTimeout
+                ResourceName: AWSEBLoadBalancer
+                Value: '20'
+              - Namespace: 'aws:elb:policies'
+                OptionName: ConnectionSettingIdleTimeout
+                ResourceName: AWSEBLoadBalancer
+                Value: '60'
+            SolutionStackName: 64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8
+      properties:
+        ConfigurationSettings:
+          $ref: '#/components/schemas/ConfigurationSettingsDescriptionList'
+      description: The results from a request to change the configuration settings of an environment.
+    ConfigurationSettingsValidationMessages:
+      type: object
+      example:
+        Messages: []
+      properties:
+        Messages:
+          $ref: '#/components/schemas/ValidationMessagesList'
+      description: Provides a list of validation messages.
+    ConfigurationTemplateName:
+      type: string
+      minLength: 1
+      maxLength: 100
+    ConfigurationTemplateNamesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationTemplateName'
+    CreateApplicationMessage:
+      type: object
+      required:
+        - ApplicationName
+      example:
+        ApplicationName: my-app
+        Description: my application
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        Description:
+          $ref: '#/components/schemas/Description'
+        ResourceLifecycleConfig:
+          $ref: '#/components/schemas/ApplicationResourceLifecycleConfig'
+      description: Request to create an application.
+    CreateApplicationVersionMessage:
+      type: object
+      required:
+        - ApplicationName
+        - VersionLabel
+      example:
+        ApplicationName: my-app
+        AutoCreateApplication: true
+        Description: my-app-v1
+        Process: true
+        SourceBundle:
+          S3Bucket: my-bucket
+          S3Key: sample.war
+        VersionLabel: v1
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        VersionLabel:
+          $ref: '#/components/schemas/VersionLabel'
+        Description:
+          $ref: '#/components/schemas/Description'
+        SourceBuildInformation:
+          $ref: '#/components/schemas/SourceBuildInformation'
+        SourceBundle:
+          $ref: '#/components/schemas/S3Location'
+        BuildConfiguration:
+          $ref: '#/components/schemas/BuildConfiguration'
+        AutoCreateApplication:
+          $ref: '#/components/schemas/AutoCreateApplication'
+        Process:
+          $ref: '#/components/schemas/ApplicationVersionProccess'
+      description: <p/>
+    CreateConfigurationTemplateMessage:
+      type: object
+      required:
+        - ApplicationName
+        - TemplateName
+      example:
+        ApplicationName: my-app
+        EnvironmentId: e-rpqsewtp2j
+        TemplateName: my-app-v1
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+        SolutionStackName:
+          $ref: '#/components/schemas/SolutionStackName'
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+        SourceConfiguration:
+          $ref: '#/components/schemas/SourceConfiguration'
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        Description:
+          $ref: '#/components/schemas/Description'
+        OptionSettings:
+          $ref: '#/components/schemas/ConfigurationOptionSettingsList'
+      description: Request to create a configuration template.
+    CreateEnvironmentMessage:
+      type: object
+      required:
+        - ApplicationName
+      example:
+        ApplicationName: my-app
+        CNAMEPrefix: my-app
+        EnvironmentName: my-env
+        SolutionStackName: 64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8
+        VersionLabel: v1
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        GroupName:
+          $ref: '#/components/schemas/GroupName'
+        Description:
+          $ref: '#/components/schemas/Description'
+        CNAMEPrefix:
+          $ref: '#/components/schemas/DNSCnamePrefix'
+        Tier:
+          $ref: '#/components/schemas/EnvironmentTier'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+        VersionLabel:
+          $ref: '#/components/schemas/VersionLabel'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+        SolutionStackName:
+          $ref: '#/components/schemas/SolutionStackName'
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+        OptionSettings:
+          $ref: '#/components/schemas/ConfigurationOptionSettingsList'
+        OptionsToRemove:
+          $ref: '#/components/schemas/OptionsSpecifierList'
+      description: <p/>
+    CreatePlatformVersionRequest:
+      type: object
+      required:
+        - PlatformName
+        - PlatformVersion
+        - PlatformDefinitionBundle
+      properties:
+        PlatformName:
+          $ref: '#/components/schemas/PlatformName'
+        PlatformVersion:
+          $ref: '#/components/schemas/PlatformVersion'
+        PlatformDefinitionBundle:
+          $ref: '#/components/schemas/S3Location'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        OptionSettings:
+          $ref: '#/components/schemas/ConfigurationOptionSettingsList'
+      description: Request to create a new platform version.
+    CreatePlatformVersionResult:
+      type: object
+      properties:
+        PlatformSummary:
+          $ref: '#/components/schemas/PlatformSummary'
+        Builder:
+          $ref: '#/components/schemas/Builder'
+    CreateStorageLocationResultMessage:
+      type: object
+      example:
+        S3Bucket: elasticbeanstalk-us-west-2-0123456789012
+      properties:
+        S3Bucket:
+          $ref: '#/components/schemas/S3Bucket'
+      description: Results of a <a>CreateStorageLocationResult</a> call.
+    CreationDate:
+      type: string
+      format: date-time
+    CustomAmi:
+      type: object
+      properties:
+        VirtualizationType:
+          $ref: '#/components/schemas/VirtualizationType'
+        ImageId:
+          $ref: '#/components/schemas/ImageId'
+      description: A custom AMI available to platforms.
+    CustomAmiList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomAmi'
+    DNSCname:
+      type: string
+      minLength: 1
+      maxLength: 255
+    DNSCnamePrefix:
+      type: string
+      minLength: 4
+      maxLength: 63
+    DeleteApplicationMessage:
+      type: object
+      required:
+        - ApplicationName
+      example:
+        ApplicationName: my-app
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        TerminateEnvByForce:
+          $ref: '#/components/schemas/TerminateEnvForce'
+      description: Request to delete an application.
+    DeleteApplicationVersionMessage:
+      type: object
+      required:
+        - ApplicationName
+        - VersionLabel
+      example:
+        ApplicationName: my-app
+        DeleteSourceBundle: true
+        VersionLabel: 22a0-stage-150819_182129
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        VersionLabel:
+          $ref: '#/components/schemas/VersionLabel'
+        DeleteSourceBundle:
+          $ref: '#/components/schemas/DeleteSourceBundle'
+      description: Request to delete an application version.
+    DeleteConfigurationTemplateMessage:
+      type: object
+      required:
+        - ApplicationName
+        - TemplateName
+      example:
+        ApplicationName: my-app
+        TemplateName: my-template
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+      description: Request to delete a configuration template.
+    DeleteEnvironmentConfigurationMessage:
+      type: object
+      required:
+        - ApplicationName
+        - EnvironmentName
+      example:
+        ApplicationName: my-app
+        EnvironmentName: my-env
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+      description: Request to delete a draft environment configuration.
+    DeletePlatformVersionRequest:
+      type: object
+      properties:
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+    DeletePlatformVersionResult:
+      type: object
+      properties:
+        PlatformSummary:
+          $ref: '#/components/schemas/PlatformSummary'
+    DeleteSourceBundle:
+      type: boolean
+    Deployment:
+      type: object
+      properties:
+        VersionLabel:
+          $ref: '#/components/schemas/String'
+        DeploymentId:
+          $ref: '#/components/schemas/NullableLong'
+        Status:
+          $ref: '#/components/schemas/String'
+        DeploymentTime:
+          $ref: '#/components/schemas/DeploymentTimestamp'
+      description: Information about an application version deployment.
+    DeploymentTimestamp:
+      type: string
+      format: date-time
+    DescribeApplicationVersionsMessage:
+      type: object
+      example:
+        ApplicationName: my-app
+        VersionLabels:
+          - v2
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        VersionLabels:
+          $ref: '#/components/schemas/VersionLabelsList'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+      description: Request to describe application versions.
+    DescribeApplicationsMessage:
+      type: object
+      example: {}
+      properties:
+        ApplicationNames:
+          $ref: '#/components/schemas/ApplicationNamesList'
+      description: Request to describe one or more applications.
+    DescribeConfigurationOptionsMessage:
+      type: object
+      example:
+        ApplicationName: my-app
+        EnvironmentName: my-env
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        SolutionStackName:
+          $ref: '#/components/schemas/SolutionStackName'
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+        Options:
+          $ref: '#/components/schemas/OptionsSpecifierList'
+      description: Result message containing a list of application version descriptions.
+    DescribeConfigurationSettingsMessage:
+      type: object
+      required:
+        - ApplicationName
+      example:
+        ApplicationName: my-app
+        EnvironmentName: my-env
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+      description: Result message containing all of the configuration settings for a specified solution stack or configuration template.
+    DescribeEnvironmentHealthRequest:
+      type: object
+      example:
+        AttributeNames:
+          - All
+        EnvironmentName: my-env
+      properties:
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        AttributeNames:
+          $ref: '#/components/schemas/EnvironmentHealthAttributes'
+      description: See the example below to learn how to create a request body.
+    DescribeEnvironmentHealthResult:
+      type: object
+      example:
+        ApplicationMetrics:
+          Duration: 10
+          Latency:
+            P10: 0.001
+            P50: 0.001
+            P75: 0.002
+            P85: 0.003
+            P90: 0.003
+            P95: 0.004
+            P99: 0.004
+            P999: 0.004
+          RequestCount: 45
+          StatusCodes:
+            Status2xx: 45
+            Status3xx: 0
+            Status4xx: 0
+            Status5xx: 0
+        Causes: []
+        Color: Green
+        EnvironmentName: my-env
+        HealthStatus: Ok
+        InstancesHealth:
+          Degraded: 0
+          Info: 0
+          NoData: 0
+          Ok: 1
+          Pending: 0
+          Severe: 0
+          Unknown: 0
+          Warning: 0
+        RefreshedAt: '2015-08-20T21:09:18Z'
+      properties:
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        HealthStatus:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/EnvironmentHealth'
+        Color:
+          $ref: '#/components/schemas/String'
+        Causes:
+          $ref: '#/components/schemas/Causes'
+        ApplicationMetrics:
+          $ref: '#/components/schemas/ApplicationMetrics'
+        InstancesHealth:
+          $ref: '#/components/schemas/InstanceHealthSummary'
+        RefreshedAt:
+          $ref: '#/components/schemas/RefreshedAt'
+      description: Health details for an AWS Elastic Beanstalk environment.
+    DescribeEnvironmentManagedActionHistoryRequest:
+      type: object
+      properties:
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        NextToken:
+          $ref: '#/components/schemas/String'
+        MaxItems:
+          $ref: '#/components/schemas/Integer'
+      description: Request to list completed and failed managed actions.
+    DescribeEnvironmentManagedActionHistoryResult:
+      type: object
+      properties:
+        ManagedActionHistoryItems:
+          $ref: '#/components/schemas/ManagedActionHistoryItems'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: A result message containing a list of completed and failed managed actions.
+    DescribeEnvironmentManagedActionsRequest:
+      type: object
+      properties:
+        EnvironmentName:
+          $ref: '#/components/schemas/String'
+        EnvironmentId:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/ActionStatus'
+      description: Request to list an environment's upcoming and in-progress managed actions.
+    DescribeEnvironmentManagedActionsResult:
+      type: object
+      properties:
+        ManagedActions:
+          $ref: '#/components/schemas/ManagedActions'
+      description: The result message containing a list of managed actions.
+    DescribeEnvironmentResourcesMessage:
+      type: object
+      example:
+        EnvironmentName: my-env
+      properties:
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+      description: Request to describe the resources in an environment.
+    DescribeEnvironmentsMessage:
+      type: object
+      example:
+        EnvironmentNames:
+          - my-env
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        VersionLabel:
+          $ref: '#/components/schemas/VersionLabel'
+        EnvironmentIds:
+          $ref: '#/components/schemas/EnvironmentIdList'
+        EnvironmentNames:
+          $ref: '#/components/schemas/EnvironmentNamesList'
+        IncludeDeleted:
+          $ref: '#/components/schemas/IncludeDeleted'
+        IncludedDeletedBackTo:
+          $ref: '#/components/schemas/IncludeDeletedBackTo'
+      description: Request to describe one or more environments.
+    DescribeEventsMessage:
+      type: object
+      example:
+        EnvironmentName: my-env
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        VersionLabel:
+          $ref: '#/components/schemas/VersionLabel'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+        Severity:
+          $ref: '#/components/schemas/EventSeverity'
+        StartTime:
+          $ref: '#/components/schemas/TimeFilterStart'
+        EndTime:
+          $ref: '#/components/schemas/TimeFilterEnd'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+      description: Request to retrieve a list of events for an environment.
+    DescribeInstancesHealthRequest:
+      type: object
+      example:
+        AttributeNames:
+          - All
+        EnvironmentName: my-env
+      properties:
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        AttributeNames:
+          $ref: '#/components/schemas/InstancesHealthAttributes'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Parameters for a call to <code>DescribeInstancesHealth</code>.
+    DescribeInstancesHealthResult:
+      type: object
+      example:
+        InstanceHealthList:
+          - ApplicationMetrics:
+              Duration: 10
+              Latency:
+                P10: 0
+                P50: 0.001
+                P75: 0.002
+                P85: 0.003
+                P90: 0.004
+                P95: 0.005
+                P99: 0.006
+                P999: 0.006
+              RequestCount: 48
+              StatusCodes:
+                Status2xx: 47
+                Status3xx: 0
+                Status4xx: 1
+                Status5xx: 0
+            Causes: []
+            Color: Green
+            HealthStatus: Ok
+            InstanceId: i-08691cc7
+            LaunchedAt: '2015-08-13T19:17:09Z'
+            System:
+              CPUUtilization:
+                IOWait: 0.2
+                IRQ: 0
+                Idle: 97.8
+                Nice: 0.1
+                SoftIRQ: 0.1
+                System: 0.3
+                User: 1.5
+              LoadAverage:
+                - 0
+                - 0.02
+                - 0.05
+        RefreshedAt: '2015-08-20T21:09:08Z'
+      properties:
+        InstanceHealthList:
+          $ref: '#/components/schemas/InstanceHealthList'
+        RefreshedAt:
+          $ref: '#/components/schemas/RefreshedAt'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Detailed health information about the Amazon EC2 instances in an AWS Elastic Beanstalk environment.
+    DescribePlatformVersionRequest:
+      type: object
+      properties:
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+    DescribePlatformVersionResult:
+      type: object
+      properties:
+        PlatformDescription:
+          $ref: '#/components/schemas/PlatformDescription'
+    Description:
+      type: string
+      maxLength: 200
+    Ec2InstanceId:
+      type: string
+    ElasticBeanstalkServiceException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: A generic service exception has occurred.
+    EndpointURL:
+      type: string
+    EnvironmentDescription:
+      type: object
+      example:
+        AbortableOperationInProgress: true
+        ApplicationName: my-app
+        CNAME: my-env.elasticbeanstalk.com
+        DateCreated: '2015-08-07T20:48:49.599Z'
+        DateUpdated: '2015-08-12T18:15:23.804Z'
+        EndpointURL: awseb-e-w-AWSEBLoa-14XB83101Q4L-104QXY80921.sa-east-1.elb.amazonaws.com
+        EnvironmentId: e-wtp2rpqsej
+        EnvironmentName: my-env
+        Health: Grey
+        SolutionStackName: 64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8
+        Status: Updating
+        Tier:
+          Name: WebServer
+          Type: Standard
+          Version: ' '
+        VersionLabel: 7f58-stage-150812_025409
+      properties:
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        VersionLabel:
+          $ref: '#/components/schemas/VersionLabel'
+        SolutionStackName:
+          $ref: '#/components/schemas/SolutionStackName'
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+        Description:
+          $ref: '#/components/schemas/Description'
+        EndpointURL:
+          $ref: '#/components/schemas/EndpointURL'
+        CNAME:
+          $ref: '#/components/schemas/DNSCname'
+        DateCreated:
+          $ref: '#/components/schemas/CreationDate'
+        DateUpdated:
+          $ref: '#/components/schemas/UpdateDate'
+        Status:
+          $ref: '#/components/schemas/EnvironmentStatus'
+        AbortableOperationInProgress:
+          $ref: '#/components/schemas/AbortableOperationInProgress'
+        Health:
+          $ref: '#/components/schemas/EnvironmentHealth'
+        HealthStatus:
+          $ref: '#/components/schemas/EnvironmentHealthStatus'
+        Resources:
+          $ref: '#/components/schemas/EnvironmentResourcesDescription'
+        Tier:
+          $ref: '#/components/schemas/EnvironmentTier'
+        EnvironmentLinks:
+          $ref: '#/components/schemas/EnvironmentLinks'
+      description: Describes the properties of an environment.
+    EnvironmentDescriptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvironmentDescription'
+    EnvironmentDescriptionsMessage:
+      type: object
+      example:
+        Environments:
+          - AbortableOperationInProgress: false
+            ApplicationName: my-app
+            CNAME: my-env.elasticbeanstalk.com
+            DateCreated: '2015-08-07T20:48:49.599Z'
+            DateUpdated: '2015-08-12T18:16:55.019Z'
+            EndpointURL: awseb-e-w-AWSEBLoa-1483140XB0Q4L-109QXY8121.us-west-2.elb.amazonaws.com
+            EnvironmentId: e-rpqsewtp2j
+            EnvironmentName: my-env
+            Health: Green
+            SolutionStackName: 64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8
+            Status: Ready
+            Tier:
+              Name: WebServer
+              Type: Standard
+              Version: ' '
+            VersionLabel: 7f58-stage-150812_025409
+      properties:
+        Environments:
+          $ref: '#/components/schemas/EnvironmentDescriptionsList'
+      description: Result message containing a list of environment descriptions.
+    EnvironmentHealth:
+      type: string
+      enum:
+        - Green
+        - Yellow
+        - Red
+        - Grey
+    EnvironmentHealthAttribute:
+      type: string
+      enum:
+        - Status
+        - Color
+        - Causes
+        - ApplicationMetrics
+        - InstancesHealth
+        - All
+        - HealthStatus
+        - RefreshedAt
+    EnvironmentHealthAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvironmentHealthAttribute'
+    EnvironmentHealthStatus:
+      type: string
+      enum:
+        - NoData
+        - Unknown
+        - Pending
+        - Ok
+        - Info
+        - Warning
+        - Degraded
+        - Severe
+    EnvironmentId:
+      type: string
+    EnvironmentIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvironmentId'
+    EnvironmentInfoDescription:
+      type: object
+      properties:
+        InfoType:
+          $ref: '#/components/schemas/EnvironmentInfoType'
+        Ec2InstanceId:
+          $ref: '#/components/schemas/Ec2InstanceId'
+        SampleTimestamp:
+          $ref: '#/components/schemas/SampleTimestamp'
+        Message:
+          $ref: '#/components/schemas/Message'
+      description: The information retrieved from the Amazon EC2 instances.
+    EnvironmentInfoDescriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvironmentInfoDescription'
+    EnvironmentInfoType:
+      type: string
+      enum:
+        - tail
+        - bundle
+    EnvironmentLink:
+      type: object
+      properties:
+        LinkName:
+          $ref: '#/components/schemas/String'
+        EnvironmentName:
+          $ref: '#/components/schemas/String'
+      description: 'A link to another environment, defined in the environment''s manifest. Links provide connection information in system properties that can be used to connect to another environment in the same group. See <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html">Environment Manifest (env.yaml)</a> for details.'
+    EnvironmentLinks:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvironmentLink'
+    EnvironmentName:
+      type: string
+      minLength: 4
+      maxLength: 40
+    EnvironmentNamesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvironmentName'
+    EnvironmentResourceDescription:
+      type: object
+      properties:
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        AutoScalingGroups:
+          $ref: '#/components/schemas/AutoScalingGroupList'
+        Instances:
+          $ref: '#/components/schemas/InstanceList'
+        LaunchConfigurations:
+          $ref: '#/components/schemas/LaunchConfigurationList'
+        LoadBalancers:
+          $ref: '#/components/schemas/LoadBalancerList'
+        Triggers:
+          $ref: '#/components/schemas/TriggerList'
+        Queues:
+          $ref: '#/components/schemas/QueueList'
+      description: Describes the AWS resources in use by this environment. This data is live.
+    EnvironmentResourceDescriptionsMessage:
+      type: object
+      example:
+        EnvironmentResources:
+          AutoScalingGroups:
+            - Name: awseb-e-qu3fyyjyjs-stack-AWSEBAutoScalingGroup-QSB2ZO88SXZT
+          EnvironmentName: my-env
+          Instances:
+            - Id: i-0c91c786
+          LaunchConfigurations:
+            - Name: awseb-e-qu3fyyjyjs-stack-AWSEBAutoScalingLaunchConfiguration-1UUVQIBC96TQ2
+          LoadBalancers:
+            - Name: awseb-e-q-AWSEBLoa-1EEPZ0K98BIF0
+          Queues: []
+          Triggers: []
+      properties:
+        EnvironmentResources:
+          $ref: '#/components/schemas/EnvironmentResourceDescription'
+      description: Result message containing a list of environment resource descriptions.
+    EnvironmentResourcesDescription:
+      type: object
+      properties:
+        LoadBalancer:
+          $ref: '#/components/schemas/LoadBalancerDescription'
+      description: Describes the AWS resources in use by this environment. This data is not live data.
+    EnvironmentStatus:
+      type: string
+      enum:
+        - Launching
+        - Updating
+        - Ready
+        - Terminating
+        - Terminated
+    EnvironmentTier:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Type:
+          $ref: '#/components/schemas/String'
+        Version:
+          $ref: '#/components/schemas/String'
+      description: Describes the properties of an environment tier
+    EventDate:
+      type: string
+      format: date-time
+    EventDescription:
+      type: object
+      properties:
+        EventDate:
+          $ref: '#/components/schemas/EventDate'
+        Message:
+          $ref: '#/components/schemas/EventMessage'
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        VersionLabel:
+          $ref: '#/components/schemas/VersionLabel'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+        RequestId:
+          $ref: '#/components/schemas/RequestId'
+        Severity:
+          $ref: '#/components/schemas/EventSeverity'
+      description: Describes an event.
+    EventDescriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventDescription'
+    EventDescriptionsMessage:
+      type: object
+      example:
+        Events:
+          - ApplicationName: my-app
+            EnvironmentName: my-env
+            EventDate: '2015-08-20T07:06:53.535Z'
+            Message: Environment health has transitioned from Info to Ok.
+            Severity: INFO
+          - ApplicationName: my-app
+            EnvironmentName: my-env
+            EventDate: '2015-08-20T07:06:02.049Z'
+            Message: Environment update completed successfully.
+            RequestId: b7f3960b-4709-11e5-ba1e-07e16200da41
+            Severity: INFO
+          - ApplicationName: my-app
+            EnvironmentName: my-env
+            EventDate: '2015-08-13T19:16:27.561Z'
+            Message: Using elasticbeanstalk-us-west-2-012445113685 as Amazon S3 storage bucket for environment data.
+            RequestId: ca8dfbf6-41ef-11e5-988b-651aa638f46b
+            Severity: INFO
+          - ApplicationName: my-app
+            EnvironmentName: my-env
+            EventDate: '2015-08-13T19:16:26.581Z'
+            Message: createEnvironment is starting.
+            RequestId: cdfba8f6-41ef-11e5-988b-65638f41aa6b
+            Severity: INFO
+      properties:
+        Events:
+          $ref: '#/components/schemas/EventDescriptionList'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+      description: Result message wrapping a list of event descriptions.
+    EventMessage:
+      type: string
+    EventSeverity:
+      type: string
+      enum:
+        - TRACE
+        - DEBUG
+        - INFO
+        - WARN
+        - ERROR
+        - FATAL
+    ExceptionMessage:
+      type: string
+    FailureType:
+      type: string
+      enum:
+        - UpdateCancelled
+        - CancellationFailed
+        - RollbackFailed
+        - RollbackSuccessful
+        - InternalFailure
+        - InvalidEnvironmentState
+        - PermissionsError
+    FileTypeExtension:
+      type: string
+      minLength: 1
+      maxLength: 100
+    ForceTerminate:
+      type: boolean
+    GroupName:
+      type: string
+      minLength: 1
+      maxLength: 19
+    ImageId:
+      type: string
+    IncludeDeleted:
+      type: boolean
+    IncludeDeletedBackTo:
+      type: string
+      format: date-time
+    Instance:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ResourceId'
+      description: The description of an Amazon EC2 instance.
+    InstanceHealthList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SingleInstanceHealth'
+    InstanceHealthSummary:
+      type: object
+      properties:
+        NoData:
+          $ref: '#/components/schemas/NullableInteger'
+        Unknown:
+          $ref: '#/components/schemas/NullableInteger'
+        Pending:
+          $ref: '#/components/schemas/NullableInteger'
+        Ok:
+          $ref: '#/components/schemas/NullableInteger'
+        Info:
+          $ref: '#/components/schemas/NullableInteger'
+        Warning:
+          $ref: '#/components/schemas/NullableInteger'
+        Degraded:
+          $ref: '#/components/schemas/NullableInteger'
+        Severe:
+          $ref: '#/components/schemas/NullableInteger'
+      description: 'Represents summary information about the health of an instance. For more information, see <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html">Health Colors and Statuses</a>.'
+    InstanceId:
+      type: string
+      minLength: 1
+      maxLength: 255
+    InstanceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Instance'
+    InstancesHealthAttribute:
+      type: string
+      enum:
+        - HealthStatus
+        - Color
+        - Causes
+        - ApplicationMetrics
+        - RefreshedAt
+        - LaunchedAt
+        - System
+        - Deployment
+        - AvailabilityZone
+        - InstanceType
+        - All
+    InstancesHealthAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstancesHealthAttribute'
+    InsufficientPrivilegesException:
+      type: object
+      properties: {}
+      description: The specified account does not have sufficient privileges for one of more AWS services.
+    Integer:
+      type: integer
+    InvalidRequestException:
+      type: object
+      properties: {}
+      description: One or more input parameters is not valid. Please correct the input parameters and try the operation again.
+    Latency:
+      type: object
+      properties:
+        P999:
+          $ref: '#/components/schemas/NullableDouble'
+        P99:
+          $ref: '#/components/schemas/NullableDouble'
+        P95:
+          $ref: '#/components/schemas/NullableDouble'
+        P90:
+          $ref: '#/components/schemas/NullableDouble'
+        P85:
+          $ref: '#/components/schemas/NullableDouble'
+        P75:
+          $ref: '#/components/schemas/NullableDouble'
+        P50:
+          $ref: '#/components/schemas/NullableDouble'
+        P10:
+          $ref: '#/components/schemas/NullableDouble'
+      description: Represents the average latency for the slowest X percent of requests over the last 10 seconds.
+    LaunchConfiguration:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/ResourceId'
+      description: Describes an Auto Scaling launch configuration.
+    LaunchConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LaunchConfiguration'
+    LaunchedAt:
+      type: string
+      format: date-time
+    ListAvailableSolutionStacksResultMessage:
+      type: object
+      example:
+        SolutionStackDetails:
+          - PermittedFileTypes:
+              - zip
+            SolutionStackName: 64bit Amazon Linux 2015.03 v2.0.0 running Node.js
+        SolutionStacks:
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Node.js
+          - 64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.6
+          - 64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.5
+          - 64bit Amazon Linux 2015.03 v2.0.0 running PHP 5.4
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Python 3.4
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Python 2.7
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Python
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.2 (Puma)
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.2 (Passenger Standalone)
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.1 (Puma)
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.1 (Passenger Standalone)
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.0 (Puma)
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Ruby 2.0 (Passenger Standalone)
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Ruby 1.9.3
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 8 Java 8
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 7 Java 7
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Tomcat 7 Java 6
+          - 64bit Windows Server Core 2012 R2 running IIS 8.5
+          - 64bit Windows Server 2012 R2 running IIS 8.5
+          - 64bit Windows Server 2012 running IIS 8
+          - 64bit Windows Server 2008 R2 running IIS 7.5
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Docker 1.6.2
+          - 64bit Amazon Linux 2015.03 v2.0.0 running Multi-container Docker 1.6.2 (Generic)
+          - 64bit Debian jessie v2.0.0 running GlassFish 4.1 Java 8 (Preconfigured - Docker)
+          - 64bit Debian jessie v2.0.0 running GlassFish 4.0 Java 7 (Preconfigured - Docker)
+          - 64bit Debian jessie v2.0.0 running Go 1.4 (Preconfigured - Docker)
+          - 64bit Debian jessie v2.0.0 running Go 1.3 (Preconfigured - Docker)
+          - 64bit Debian jessie v2.0.0 running Python 3.4 (Preconfigured - Docker)
+      properties:
+        SolutionStacks:
+          $ref: '#/components/schemas/AvailableSolutionStackNamesList'
+        SolutionStackDetails:
+          $ref: '#/components/schemas/AvailableSolutionStackDetailsList'
+      description: A list of available AWS Elastic Beanstalk solution stacks.
+    ListPlatformVersionsRequest:
+      type: object
+      properties:
+        Filters:
+          $ref: '#/components/schemas/PlatformFilters'
+        MaxRecords:
+          $ref: '#/components/schemas/PlatformMaxRecords'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+    ListPlatformVersionsResult:
+      type: object
+      properties:
+        PlatformSummaryList:
+          $ref: '#/components/schemas/PlatformSummaryList'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+    Listener:
+      type: object
+      properties:
+        Protocol:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/Integer'
+      description: Describes the properties of a Listener for the LoadBalancer.
+    LoadAverage:
+      type: array
+      items:
+        $ref: '#/components/schemas/LoadAverageValue'
+    LoadAverageValue:
+      type: number
+      format: double
+    LoadBalancer:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/ResourceId'
+      description: Describes a LoadBalancer.
+    LoadBalancerDescription:
+      type: object
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/String'
+        Domain:
+          $ref: '#/components/schemas/String'
+        Listeners:
+          $ref: '#/components/schemas/LoadBalancerListenersDescription'
+      description: Describes the details of a LoadBalancer.
+    LoadBalancerList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LoadBalancer'
+    LoadBalancerListenersDescription:
+      type: array
+      items:
+        $ref: '#/components/schemas/Listener'
+    Maintainer:
+      type: string
+    ManagedAction:
+      type: object
+      properties:
+        ActionId:
+          $ref: '#/components/schemas/String'
+        ActionDescription:
+          $ref: '#/components/schemas/String'
+        ActionType:
+          $ref: '#/components/schemas/ActionType'
+        Status:
+          $ref: '#/components/schemas/ActionStatus'
+        WindowStartTime:
+          $ref: '#/components/schemas/Timestamp'
+      description: The record of an upcoming or in-progress managed action.
+    ManagedActionHistoryItem:
+      type: object
+      properties:
+        ActionId:
+          $ref: '#/components/schemas/String'
+        ActionType:
+          $ref: '#/components/schemas/ActionType'
+        ActionDescription:
+          $ref: '#/components/schemas/String'
+        FailureType:
+          $ref: '#/components/schemas/FailureType'
+        Status:
+          $ref: '#/components/schemas/ActionHistoryStatus'
+        FailureDescription:
+          $ref: '#/components/schemas/String'
+        ExecutedTime:
+          $ref: '#/components/schemas/Timestamp'
+        FinishedTime:
+          $ref: '#/components/schemas/Timestamp'
+      description: The record of a completed or failed managed action.
+    ManagedActionHistoryItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/ManagedActionHistoryItem'
+      minItems: 1
+      maxItems: 100
+    ManagedActionInvalidStateException:
+      type: object
+      properties: {}
+      description: Cannot modify the managed action in its current state.
+    ManagedActions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ManagedAction'
+      minItems: 1
+      maxItems: 100
+    MaxAgeRule:
+      type: object
+      required:
+        - Enabled
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/BoxedBoolean'
+        MaxAgeInDays:
+          $ref: '#/components/schemas/BoxedInt'
+        DeleteSourceFromS3:
+          $ref: '#/components/schemas/BoxedBoolean'
+      description: A lifecycle rule that deletes application versions after the specified number of days.
+    MaxCountRule:
+      type: object
+      required:
+        - Enabled
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/BoxedBoolean'
+        MaxCount:
+          $ref: '#/components/schemas/BoxedInt'
+        DeleteSourceFromS3:
+          $ref: '#/components/schemas/BoxedBoolean'
+      description: A lifecycle rule that deletes the oldest application version when the maximum count is exceeded.
+    MaxRecords:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    Message:
+      type: string
+    NextToken:
+      type: string
+      minLength: 1
+      maxLength: 100
+    NonEmptyString:
+      type: string
+      pattern: .*\S.*
+    NullableDouble:
+      type: number
+      format: double
+    NullableInteger:
+      type: integer
+    NullableLong:
+      type: integer
+    OperatingSystemName:
+      type: string
+    OperatingSystemVersion:
+      type: string
+    OperationInProgressException:
+      type: object
+      properties: {}
+      description: Unable to perform the specified operation because another operation that effects an element in this activity is already in progress.
+    OptionNamespace:
+      type: string
+    OptionRestrictionMaxLength:
+      type: integer
+    OptionRestrictionMaxValue:
+      type: integer
+    OptionRestrictionMinValue:
+      type: integer
+    OptionRestrictionRegex:
+      type: object
+      properties:
+        Pattern:
+          $ref: '#/components/schemas/RegexPattern'
+        Label:
+          $ref: '#/components/schemas/RegexLabel'
+      description: A regular expression representing a restriction on a string configuration option value.
+    OptionSpecification:
+      type: object
+      properties:
+        ResourceName:
+          $ref: '#/components/schemas/ResourceName'
+        Namespace:
+          $ref: '#/components/schemas/OptionNamespace'
+        OptionName:
+          $ref: '#/components/schemas/ConfigurationOptionName'
+      description: A specification identifying an individual configuration option.
+    OptionsSpecifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OptionSpecification'
+    PlatformArn:
+      type: string
+    PlatformCategory:
+      type: string
+    PlatformDescription:
+      type: object
+      properties:
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+        PlatformOwner:
+          $ref: '#/components/schemas/PlatformOwner'
+        PlatformName:
+          $ref: '#/components/schemas/PlatformName'
+        PlatformVersion:
+          $ref: '#/components/schemas/PlatformVersion'
+        SolutionStackName:
+          $ref: '#/components/schemas/SolutionStackName'
+        PlatformStatus:
+          $ref: '#/components/schemas/PlatformStatus'
+        DateCreated:
+          $ref: '#/components/schemas/CreationDate'
+        DateUpdated:
+          $ref: '#/components/schemas/UpdateDate'
+        PlatformCategory:
+          $ref: '#/components/schemas/PlatformCategory'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Maintainer:
+          $ref: '#/components/schemas/Maintainer'
+        OperatingSystemName:
+          $ref: '#/components/schemas/OperatingSystemName'
+        OperatingSystemVersion:
+          $ref: '#/components/schemas/OperatingSystemVersion'
+        ProgrammingLanguages:
+          $ref: '#/components/schemas/PlatformProgrammingLanguages'
+        Frameworks:
+          $ref: '#/components/schemas/PlatformFrameworks'
+        CustomAmiList:
+          $ref: '#/components/schemas/CustomAmiList'
+        SupportedTierList:
+          $ref: '#/components/schemas/SupportedTierList'
+        SupportedAddonList:
+          $ref: '#/components/schemas/SupportedAddonList'
+      description: Detailed information about a platform.
+    PlatformFilter:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/PlatformFilterType'
+        Operator:
+          $ref: '#/components/schemas/PlatformFilterOperator'
+        Values:
+          $ref: '#/components/schemas/PlatformFilterValueList'
+      description: '<p>Specify criteria to restrict the results when listing custom platforms.</p> <p>The filter is evaluated as the expression:</p> <p> <code>Type</code> <code>Operator</code> <code>Values[i]</code> </p>'
+    PlatformFilterOperator:
+      type: string
+    PlatformFilterType:
+      type: string
+    PlatformFilterValue:
+      type: string
+    PlatformFilterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlatformFilterValue'
+    PlatformFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlatformFilter'
+    PlatformFramework:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Version:
+          $ref: '#/components/schemas/String'
+      description: A framework supported by the custom platform.
+    PlatformFrameworks:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlatformFramework'
+    PlatformMaxRecords:
+      type: integer
+      minimum: 1
+    PlatformName:
+      type: string
+    PlatformOwner:
+      type: string
+    PlatformProgrammingLanguage:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Version:
+          $ref: '#/components/schemas/String'
+      description: A programming language supported by the platform.
+    PlatformProgrammingLanguages:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlatformProgrammingLanguage'
+    PlatformStatus:
+      type: string
+      enum:
+        - Creating
+        - Failed
+        - Ready
+        - Deleting
+        - Deleted
+    PlatformSummary:
+      type: object
+      properties:
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+        PlatformOwner:
+          $ref: '#/components/schemas/PlatformOwner'
+        PlatformStatus:
+          $ref: '#/components/schemas/PlatformStatus'
+        PlatformCategory:
+          $ref: '#/components/schemas/PlatformCategory'
+        OperatingSystemName:
+          $ref: '#/components/schemas/OperatingSystemName'
+        OperatingSystemVersion:
+          $ref: '#/components/schemas/OperatingSystemVersion'
+        SupportedTierList:
+          $ref: '#/components/schemas/SupportedTierList'
+        SupportedAddonList:
+          $ref: '#/components/schemas/SupportedAddonList'
+      description: Detailed information about a platform.
+    PlatformSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlatformSummary'
+    PlatformVersion:
+      type: string
+    PlatformVersionStillReferencedException:
+      type: object
+      properties: {}
+      description: You cannot delete the platform version because there are still environments running on it.
+    Queue:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        URL:
+          $ref: '#/components/schemas/String'
+      description: Describes a queue.
+    QueueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Queue'
+    RebuildEnvironmentMessage:
+      type: object
+      example:
+        EnvironmentName: my-env
+      properties:
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+      description: <p/>
+    RefreshedAt:
+      type: string
+      format: date-time
+    RegexLabel:
+      type: string
+    RegexPattern:
+      type: string
+    RequestCount:
+      type: integer
+    RequestEnvironmentInfoMessage:
+      type: object
+      required:
+        - InfoType
+      example:
+        EnvironmentName: my-env
+        InfoType: tail
+      properties:
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        InfoType:
+          $ref: '#/components/schemas/EnvironmentInfoType'
+      description: Request to retrieve logs from an environment and store them in your Elastic Beanstalk storage bucket.
+    RequestId:
+      type: string
+    ResourceId:
+      type: string
+    ResourceName:
+      type: string
+      minLength: 1
+      maxLength: 256
+    RestartAppServerMessage:
+      type: object
+      example:
+        EnvironmentName: my-env
+      properties:
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+      description: <p/>
+    RetrieveEnvironmentInfoMessage:
+      type: object
+      required:
+        - InfoType
+      example:
+        EnvironmentName: my-env
+        InfoType: tail
+      properties:
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        InfoType:
+          $ref: '#/components/schemas/EnvironmentInfoType'
+      description: Request to download logs retrieved with <a>RequestEnvironmentInfo</a>.
+    RetrieveEnvironmentInfoResultMessage:
+      type: object
+      example:
+        EnvironmentInfo:
+          - Ec2InstanceId: i-09c1c867
+            InfoType: tail
+            Message: 'https://elasticbeanstalk-us-west-2-0123456789012.s3.amazonaws.com/resources/environments/logs/tail/e-fyqyju3yjs/i-09c1c867/TailLogs-1440109397703.out?AWSAccessKeyId=AKGPT4J56IAJ2EUBL5CQ&Expires=1440195891&Signature=n%2BEalOV6A2HIOx4Rcfb7LT16bBM%3D'
+            SampleTimestamp: '2015-08-20T22:23:17.703Z'
+      properties:
+        EnvironmentInfo:
+          $ref: '#/components/schemas/EnvironmentInfoDescriptionList'
+      description: Result message containing a description of the requested environment info.
+    S3Bucket:
+      type: string
+      maxLength: 255
+    S3Key:
+      type: string
+      maxLength: 1024
+    S3Location:
+      type: object
+      properties:
+        S3Bucket:
+          $ref: '#/components/schemas/S3Bucket'
+        S3Key:
+          $ref: '#/components/schemas/S3Key'
+      description: The bucket and key of an item stored in Amazon S3.
+    S3LocationNotInServiceRegionException:
+      type: object
+      properties: {}
+      description: '<p>The specified S3 bucket does not belong to the S3 region in which the service is running. The following regions are supported:</p> <ul> <li> <p>IAD/us-east-1</p> </li> <li> <p>PDX/us-west-2</p> </li> <li> <p>DUB/eu-west-1</p> </li> </ul>'
+    S3SubscriptionRequiredException:
+      type: object
+      properties: {}
+      description: The specified account does not have a subscription to Amazon S3.
+    SampleTimestamp:
+      type: string
+      format: date-time
+    SingleInstanceHealth:
+      type: object
+      properties:
+        InstanceId:
+          $ref: '#/components/schemas/InstanceId'
+        HealthStatus:
+          $ref: '#/components/schemas/String'
+        Color:
+          $ref: '#/components/schemas/String'
+        Causes:
+          $ref: '#/components/schemas/Causes'
+        LaunchedAt:
+          $ref: '#/components/schemas/LaunchedAt'
+        ApplicationMetrics:
+          $ref: '#/components/schemas/ApplicationMetrics'
+        System:
+          $ref: '#/components/schemas/SystemStatus'
+        Deployment:
+          $ref: '#/components/schemas/Deployment'
+        AvailabilityZone:
+          $ref: '#/components/schemas/String'
+        InstanceType:
+          $ref: '#/components/schemas/String'
+      description: Detailed health information about an Amazon EC2 instance in your Elastic Beanstalk environment.
+    SolutionStackDescription:
+      type: object
+      properties:
+        SolutionStackName:
+          $ref: '#/components/schemas/SolutionStackName'
+        PermittedFileTypes:
+          $ref: '#/components/schemas/SolutionStackFileTypeList'
+      description: Describes the solution stack.
+    SolutionStackFileTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FileTypeExtension'
+    SolutionStackName:
+      type: string
+    SourceBuildInformation:
+      type: object
+      required:
+        - SourceType
+        - SourceRepository
+        - SourceLocation
+      properties:
+        SourceType:
+          $ref: '#/components/schemas/SourceType'
+        SourceRepository:
+          $ref: '#/components/schemas/SourceRepository'
+        SourceLocation:
+          $ref: '#/components/schemas/SourceLocation'
+      description: Location of the source code for an application version.
+    SourceBundleDeletionException:
+      type: object
+      properties: {}
+      description: Unable to delete the Amazon S3 source bundle associated with the application version. The application version was deleted successfully.
+    SourceConfiguration:
+      type: object
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+      description: A specification for an environment configuration
+    SourceLocation:
+      type: string
+      pattern: .+/.+
+      minLength: 3
+      maxLength: 255
+    SourceRepository:
+      type: string
+      enum:
+        - CodeCommit
+        - S3
+    SourceType:
+      type: string
+      enum:
+        - Git
+        - Zip
+    StatusCodes:
+      type: object
+      properties:
+        Status2xx:
+          $ref: '#/components/schemas/NullableInteger'
+        Status3xx:
+          $ref: '#/components/schemas/NullableInteger'
+        Status4xx:
+          $ref: '#/components/schemas/NullableInteger'
+        Status5xx:
+          $ref: '#/components/schemas/NullableInteger'
+      description: 'Represents the percentage of requests over the last 10 seconds that resulted in each type of status code response. For more information, see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">Status Code Definitions</a>.'
+    String:
+      type: string
+    SupportedAddon:
+      type: string
+    SupportedAddonList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SupportedAddon'
+    SupportedTier:
+      type: string
+    SupportedTierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SupportedTier'
+    SwapEnvironmentCNAMEsMessage:
+      type: object
+      example:
+        DestinationEnvironmentName: my-env-green
+        SourceEnvironmentName: my-env-blue
+      properties:
+        SourceEnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        SourceEnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        DestinationEnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        DestinationEnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+      description: Swaps the CNAMEs of two environments.
+    SystemStatus:
+      type: object
+      properties:
+        CPUUtilization:
+          $ref: '#/components/schemas/CPUUtilization'
+        LoadAverage:
+          $ref: '#/components/schemas/LoadAverage'
+      description: CPU utilization and load average metrics for an Amazon EC2 instance.
+    Tag:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+      description: Describes a tag applied to a resource in an environment.
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      minLength: 1
+      maxLength: 256
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TerminateEnvForce:
+      type: boolean
+    TerminateEnvironmentMessage:
+      type: object
+      example:
+        EnvironmentName: my-env
+      properties:
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        TerminateResources:
+          $ref: '#/components/schemas/TerminateEnvironmentResources'
+        ForceTerminate:
+          $ref: '#/components/schemas/ForceTerminate'
+      description: Request to terminate an environment.
+    TerminateEnvironmentResources:
+      type: boolean
+    TimeFilterEnd:
+      type: string
+      format: date-time
+    TimeFilterStart:
+      type: string
+      format: date-time
+    Timestamp:
+      type: string
+      format: date-time
+    Token:
+      type: string
+    TooManyApplicationVersionsException:
+      type: object
+      properties: {}
+      description: The specified account has reached its limit of application versions.
+    TooManyApplicationsException:
+      type: object
+      properties: {}
+      description: The specified account has reached its limit of applications.
+    TooManyBucketsException:
+      type: object
+      properties: {}
+      description: The specified account has reached its limit of Amazon S3 buckets.
+    TooManyConfigurationTemplatesException:
+      type: object
+      properties: {}
+      description: The specified account has reached its limit of configuration templates.
+    TooManyEnvironmentsException:
+      type: object
+      properties: {}
+      description: The specified account has reached its limit of environments.
+    TooManyPlatformsException:
+      type: object
+      properties: {}
+      description: You have exceeded the maximum number of allowed platforms associated with the account.
+    Trigger:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/ResourceId'
+      description: Describes a trigger.
+    TriggerList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Trigger'
+    UpdateApplicationMessage:
+      type: object
+      required:
+        - ApplicationName
+      example:
+        ApplicationName: my-app
+        Description: my Elastic Beanstalk application
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        Description:
+          $ref: '#/components/schemas/Description'
+      description: Request to update an application.
+    UpdateApplicationResourceLifecycleMessage:
+      type: object
+      required:
+        - ApplicationName
+        - ResourceLifecycleConfig
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        ResourceLifecycleConfig:
+          $ref: '#/components/schemas/ApplicationResourceLifecycleConfig'
+    UpdateApplicationVersionMessage:
+      type: object
+      required:
+        - ApplicationName
+        - VersionLabel
+      example:
+        ApplicationName: my-app
+        Description: new description
+        VersionLabel: 22a0-stage-150819_185942
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        VersionLabel:
+          $ref: '#/components/schemas/VersionLabel'
+        Description:
+          $ref: '#/components/schemas/Description'
+      description: <p/>
+    UpdateConfigurationTemplateMessage:
+      type: object
+      required:
+        - ApplicationName
+        - TemplateName
+      example:
+        ApplicationName: my-app
+        OptionsToRemove:
+          - Namespace: 'aws:elasticbeanstalk:healthreporting:system'
+            OptionName: ConfigDocument
+        TemplateName: my-template
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+        Description:
+          $ref: '#/components/schemas/Description'
+        OptionSettings:
+          $ref: '#/components/schemas/ConfigurationOptionSettingsList'
+        OptionsToRemove:
+          $ref: '#/components/schemas/OptionsSpecifierList'
+      description: The result message containing the options for the specified solution stack.
+    UpdateDate:
+      type: string
+      format: date-time
+    UpdateEnvironmentMessage:
+      type: object
+      example:
+        EnvironmentName: my-env
+        OptionSettings:
+          - Namespace: 'aws:elb:healthcheck'
+            OptionName: Interval
+            Value: '15'
+          - Namespace: 'aws:elb:healthcheck'
+            OptionName: Timeout
+            Value: '8'
+          - Namespace: 'aws:elb:healthcheck'
+            OptionName: HealthyThreshold
+            Value: '2'
+          - Namespace: 'aws:elb:healthcheck'
+            OptionName: UnhealthyThreshold
+            Value: '3'
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        EnvironmentId:
+          $ref: '#/components/schemas/EnvironmentId'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        GroupName:
+          $ref: '#/components/schemas/GroupName'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Tier:
+          $ref: '#/components/schemas/EnvironmentTier'
+        VersionLabel:
+          $ref: '#/components/schemas/VersionLabel'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+        SolutionStackName:
+          $ref: '#/components/schemas/SolutionStackName'
+        PlatformArn:
+          $ref: '#/components/schemas/PlatformArn'
+        OptionSettings:
+          $ref: '#/components/schemas/ConfigurationOptionSettingsList'
+        OptionsToRemove:
+          $ref: '#/components/schemas/OptionsSpecifierList'
+      description: Request to update an environment.
+    UserDefinedOption:
+      type: boolean
+    ValidateConfigurationSettingsMessage:
+      type: object
+      required:
+        - ApplicationName
+        - OptionSettings
+      example:
+        ApplicationName: my-app
+        EnvironmentName: my-env
+        OptionSettings:
+          - Namespace: 'aws:elasticbeanstalk:healthreporting:system'
+            OptionName: ConfigDocument
+            Value: '{"CloudWatchMetrics": {"Environment": {"ApplicationLatencyP99.9": null,"InstancesSevere": 60,"ApplicationLatencyP90": 60,"ApplicationLatencyP99": null,"ApplicationLatencyP95": 60,"InstancesUnknown": 60,"ApplicationLatencyP85": 60,"InstancesInfo": null,"ApplicationRequests2xx": null,"InstancesDegraded": null,"InstancesWarning": 60,"ApplicationLatencyP50": 60,"ApplicationRequestsTotal": null,"InstancesNoData": null,"InstancesPending": 60,"ApplicationLatencyP10": null,"ApplicationRequests5xx": null,"ApplicationLatencyP75": null,"InstancesOk": 60,"ApplicationRequests3xx": null,"ApplicationRequests4xx": null},"Instance": {"ApplicationLatencyP99.9": null,"ApplicationLatencyP90": 60,"ApplicationLatencyP99": null,"ApplicationLatencyP95": null,"ApplicationLatencyP85": null,"CPUUser": 60,"ApplicationRequests2xx": null,"CPUIdle": null,"ApplicationLatencyP50": null,"ApplicationRequestsTotal": 60,"RootFilesystemUtil": null,"LoadAverage1min": null,"CPUIrq": null,"CPUNice": 60,"CPUIowait": 60,"ApplicationLatencyP10": null,"LoadAverage5min": null,"ApplicationRequests5xx": null,"ApplicationLatencyP75": 60,"CPUSystem": 60,"ApplicationRequests3xx": 60,"ApplicationRequests4xx": null,"InstanceHealth": null,"CPUSoftirq": 60}},"Version": 1}'
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        TemplateName:
+          $ref: '#/components/schemas/ConfigurationTemplateName'
+        EnvironmentName:
+          $ref: '#/components/schemas/EnvironmentName'
+        OptionSettings:
+          $ref: '#/components/schemas/ConfigurationOptionSettingsList'
+      description: A list of validation messages for a specified configuration template.
+    ValidationMessage:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ValidationMessageString'
+        Severity:
+          $ref: '#/components/schemas/ValidationSeverity'
+        Namespace:
+          $ref: '#/components/schemas/OptionNamespace'
+        OptionName:
+          $ref: '#/components/schemas/ConfigurationOptionName'
+      description: An error or warning for a desired configuration option value.
+    ValidationMessageString:
+      type: string
+    ValidationMessagesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ValidationMessage'
+    ValidationSeverity:
+      type: string
+      enum:
+        - error
+        - warning
+    VersionLabel:
+      type: string
+      minLength: 1
+      maxLength: 100
+    VersionLabels:
+      type: array
+      items:
+        $ref: '#/components/schemas/VersionLabel'
+    VersionLabelsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VersionLabel'
+    VirtualizationType:
+      type: string
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

@@ -1,0 +1,804 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://www.googleapis.com/cloudmonitoring/v2beta2/projects'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Accesses Google Cloud Monitoring data.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Cloud Monitoring
+  version: v2beta2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://www.googleapis.com/discovery/v1/apis/cloudmonitoring/v2beta2/rest'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: cloudmonitoring
+externalDocs:
+  url: 'https://cloud.google.com/monitoring/v2beta2/'
+tags:
+  - name: metricDescriptors
+  - name: timeseries
+  - name: timeseriesDescriptors
+paths:
+  '/{project}/metricDescriptors':
+    get:
+      description: 'List metric descriptors that match the query. If the query is not set, then all of the metric descriptors will be returned. Large responses will be paginated, use the nextPageToken returned in the response to request subsequent pages of results by setting the pageToken query parameter to the value of the nextPageToken.'
+      operationId: cloudmonitoring.metricDescriptors.list
+      parameters:
+        - description: The project id. The value can be the numeric project ID or string-based project name.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: 'Maximum number of metric descriptors per page. Used for pagination. If not specified, count = 100.'
+          in: query
+          name: count
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+        - description: 'The pagination token, which is used to page through large result sets. Set this value to the value of the nextPageToken to retrieve the next page of results.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: 'The query used to search against existing metrics. Separate keywords with a space; the service joins all keywords with AND, meaning that all keywords must match for a metric to be returned. If this field is omitted, all metrics are returned. If an empty string is passed with this field, no metrics are returned.'
+          in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListMetricDescriptorsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+      tags:
+        - metricDescriptors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMetricDescriptorsRequest'
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Create a new metric.
+      operationId: cloudmonitoring.metricDescriptors.create
+      parameters:
+        - description: The project id. The value can be the numeric project ID or string-based project name.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MetricDescriptor'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+      tags:
+        - metricDescriptors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricDescriptor'
+  '/{project}/metricDescriptors/{metric}':
+    delete:
+      description: Delete an existing metric.
+      operationId: cloudmonitoring.metricDescriptors.delete
+      parameters:
+        - description: The project ID to which the metric belongs.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the metric.
+          in: path
+          name: metric
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteMetricDescriptorResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+      tags:
+        - metricDescriptors
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/{project}/timeseries/{metric}':
+    get:
+      description: List the data points of the time series that match the metric and labels values and that have data points in the interval. Large responses are paginated; use the nextPageToken returned in the response to request subsequent pages of results by setting the pageToken query parameter to the value of the nextPageToken.
+      operationId: cloudmonitoring.timeseries.list
+      parameters:
+        - description: The project ID to which this time series belongs. The value can be the numeric project ID or string-based project name.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: 'Metric names are protocol-free URLs as listed in the Supported Metrics page. For example, compute.googleapis.com/instance/disk/read_ops_count.'
+          in: path
+          name: metric
+          required: true
+          schema:
+            type: string
+        - description: 'End of the time interval (inclusive), which is expressed as an RFC 3339 timestamp.'
+          in: query
+          name: youngest
+          required: true
+          schema:
+            type: string
+        - description: The aggregation function that will reduce the data points in each window to a single point. This parameter is only valid for non-cumulative metrics with a value type of INT64 or DOUBLE.
+          in: query
+          name: aggregator
+          schema:
+            type: string
+            enum:
+              - max
+              - mean
+              - min
+              - sum
+        - description: 'Maximum number of data points per page, which is used for pagination of results.'
+          in: query
+          name: count
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12000
+            default: 6000
+        - description: |-
+            A collection of labels for the matching time series, which are represented as:  
+            - key==value: key equals the value 
+            - key=~value: key regex matches the value 
+            - key!=value: key does not equal the value 
+            - key!~value: key regex does not match the value  For example, to list all of the time series descriptors for the region us-central1, you could specify:
+            label=cloud.googleapis.com%2Flocation=~us-central1.*
+          in: query
+          name: labels
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Start of the time interval (exclusive), which is expressed as an RFC 3339 timestamp. If neither oldest nor timespan is specified, the default time interval will be (youngest - 4 hours, youngest]'
+          in: query
+          name: oldest
+          schema:
+            type: string
+        - description: 'The pagination token, which is used to page through large result sets. Set this value to the value of the nextPageToken to retrieve the next page of results.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: |-
+            Length of the time interval to query, which is an alternative way to declare the interval: (youngest - timespan, youngest]. The timespan and oldest parameters should not be used together. Units:  
+            - s: second 
+            - m: minute 
+            - h: hour 
+            - d: day 
+            - w: week  Examples: 2s, 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.
+
+            If neither oldest nor timespan is specified, the default time interval will be (youngest - 4 hours, youngest].
+          in: query
+          name: timespan
+          schema:
+            type: string
+        - description: |-
+            The sampling window. At most one data point will be returned for each window in the requested time interval. This parameter is only valid for non-cumulative metric types. Units:  
+            - m: minute 
+            - h: hour 
+            - d: day 
+            - w: week  Examples: 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.
+          in: query
+          name: window
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListTimeseriesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+      tags:
+        - timeseries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTimeseriesRequest'
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/{project}/timeseries:write':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: 'Put data points to one or more time series for one or more metrics. If a time series does not exist, a new time series will be created. It is not allowed to write a time series point that is older than the existing youngest point of that time series. Points that are older than the existing youngest point of that time series will be discarded silently. Therefore, users should make sure that points of a time series are written sequentially in the order of their end time.'
+      operationId: cloudmonitoring.timeseries.write
+      parameters:
+        - description: The project ID. The value can be the numeric project ID or string-based project name.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WriteTimeseriesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+      tags:
+        - timeseries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WriteTimeseriesRequest'
+  '/{project}/timeseriesDescriptors/{metric}':
+    get:
+      description: List the descriptors of the time series that match the metric and labels values and that have data points in the interval. Large responses are paginated; use the nextPageToken returned in the response to request subsequent pages of results by setting the pageToken query parameter to the value of the nextPageToken.
+      operationId: cloudmonitoring.timeseriesDescriptors.list
+      parameters:
+        - description: The project ID to which this time series belongs. The value can be the numeric project ID or string-based project name.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: 'Metric names are protocol-free URLs as listed in the Supported Metrics page. For example, compute.googleapis.com/instance/disk/read_ops_count.'
+          in: path
+          name: metric
+          required: true
+          schema:
+            type: string
+        - description: 'End of the time interval (inclusive), which is expressed as an RFC 3339 timestamp.'
+          in: query
+          name: youngest
+          required: true
+          schema:
+            type: string
+        - description: The aggregation function that will reduce the data points in each window to a single point. This parameter is only valid for non-cumulative metrics with a value type of INT64 or DOUBLE.
+          in: query
+          name: aggregator
+          schema:
+            type: string
+            enum:
+              - max
+              - mean
+              - min
+              - sum
+        - description: 'Maximum number of time series descriptors per page. Used for pagination. If not specified, count = 100.'
+          in: query
+          name: count
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+        - description: |-
+            A collection of labels for the matching time series, which are represented as:  
+            - key==value: key equals the value 
+            - key=~value: key regex matches the value 
+            - key!=value: key does not equal the value 
+            - key!~value: key regex does not match the value  For example, to list all of the time series descriptors for the region us-central1, you could specify:
+            label=cloud.googleapis.com%2Flocation=~us-central1.*
+          in: query
+          name: labels
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Start of the time interval (exclusive), which is expressed as an RFC 3339 timestamp. If neither oldest nor timespan is specified, the default time interval will be (youngest - 4 hours, youngest]'
+          in: query
+          name: oldest
+          schema:
+            type: string
+        - description: 'The pagination token, which is used to page through large result sets. Set this value to the value of the nextPageToken to retrieve the next page of results.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: |-
+            Length of the time interval to query, which is an alternative way to declare the interval: (youngest - timespan, youngest]. The timespan and oldest parameters should not be used together. Units:  
+            - s: second 
+            - m: minute 
+            - h: hour 
+            - d: day 
+            - w: week  Examples: 2s, 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.
+
+            If neither oldest nor timespan is specified, the default time interval will be (youngest - 4 hours, youngest].
+          in: query
+          name: timespan
+          schema:
+            type: string
+        - description: |-
+            The sampling window. At most one data point will be returned for each window in the requested time interval. This parameter is only valid for non-cumulative metric types. Units:  
+            - m: minute 
+            - h: hour 
+            - d: day 
+            - w: week  Examples: 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.
+          in: query
+          name: window
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListTimeseriesDescriptorsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+      tags:
+        - timeseriesDescriptors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTimeseriesDescriptorsRequest'
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+components:
+  schemas:
+    DeleteMetricDescriptorResponse:
+      description: The response of cloudmonitoring.metricDescriptors.delete.
+      properties:
+        kind:
+          default: 'cloudmonitoring#deleteMetricDescriptorResponse'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#deleteMetricDescriptorResponse".'
+          type: string
+      type: object
+    ListMetricDescriptorsRequest:
+      description: The request of cloudmonitoring.metricDescriptors.list.
+      properties:
+        kind:
+          default: 'cloudmonitoring#listMetricDescriptorsRequest'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listMetricDescriptorsRequest".'
+          type: string
+      type: object
+    ListMetricDescriptorsResponse:
+      description: The response of cloudmonitoring.metricDescriptors.list.
+      properties:
+        kind:
+          default: 'cloudmonitoring#listMetricDescriptorsResponse'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listMetricDescriptorsResponse".'
+          type: string
+        metrics:
+          description: The returned metric descriptors.
+          items:
+            $ref: '#/components/schemas/MetricDescriptor'
+          type: array
+        nextPageToken:
+          description: 'Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, pass this value to the pageToken query parameter.'
+          type: string
+      type: object
+    ListTimeseriesDescriptorsRequest:
+      description: The request of cloudmonitoring.timeseriesDescriptors.list
+      properties:
+        kind:
+          default: 'cloudmonitoring#listTimeseriesDescriptorsRequest'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesDescriptorsRequest".'
+          type: string
+      type: object
+    ListTimeseriesDescriptorsResponse:
+      description: The response of cloudmonitoring.timeseriesDescriptors.list
+      properties:
+        kind:
+          default: 'cloudmonitoring#listTimeseriesDescriptorsResponse'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesDescriptorsResponse".'
+          type: string
+        nextPageToken:
+          description: 'Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, set this value to the pageToken query parameter.'
+          type: string
+        oldest:
+          description: 'The oldest timestamp of the interval of this query, as an RFC 3339 string.'
+          format: date-time
+          type: string
+        timeseries:
+          description: The returned time series descriptors.
+          items:
+            $ref: '#/components/schemas/TimeseriesDescriptor'
+          type: array
+        youngest:
+          description: 'The youngest timestamp of the interval of this query, as an RFC 3339 string.'
+          format: date-time
+          type: string
+      type: object
+    ListTimeseriesRequest:
+      description: The request of cloudmonitoring.timeseries.list
+      properties:
+        kind:
+          default: 'cloudmonitoring#listTimeseriesRequest'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesRequest".'
+          type: string
+      type: object
+    ListTimeseriesResponse:
+      description: The response of cloudmonitoring.timeseries.list
+      properties:
+        kind:
+          default: 'cloudmonitoring#listTimeseriesResponse'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesResponse".'
+          type: string
+        nextPageToken:
+          description: 'Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, set the pageToken query parameter to this value. All of the points of a time series will be returned before returning any point of the subsequent time series.'
+          type: string
+        oldest:
+          description: The oldest timestamp of the interval of this query as an RFC 3339 string.
+          format: date-time
+          type: string
+        timeseries:
+          description: The returned time series.
+          items:
+            $ref: '#/components/schemas/Timeseries'
+          type: array
+        youngest:
+          description: The youngest timestamp of the interval of this query as an RFC 3339 string.
+          format: date-time
+          type: string
+      type: object
+    MetricDescriptor:
+      description: 'A metricDescriptor defines the name, label keys, and data type of a particular metric.'
+      properties:
+        description:
+          description: Description of this metric.
+          type: string
+        labels:
+          description: Labels defined for this metric.
+          items:
+            $ref: '#/components/schemas/MetricDescriptorLabelDescriptor'
+          type: array
+        name:
+          description: The name of this metric.
+          type: string
+        project:
+          description: The project ID to which the metric belongs.
+          type: string
+        typeDescriptor:
+          $ref: '#/components/schemas/MetricDescriptorTypeDescriptor'
+      type: object
+    MetricDescriptorLabelDescriptor:
+      description: 'A label in a metric is a description of this metric, including the key of this description (what the description is), and the value for this description.'
+      properties:
+        description:
+          description: Label description.
+          type: string
+        key:
+          description: Label key.
+          type: string
+      type: object
+    MetricDescriptorTypeDescriptor:
+      description: A type in a metric contains information about how the metric is collected and what its data points look like.
+      properties:
+        metricType:
+          description: The method of collecting data for the metric. See Metric types.
+          type: string
+        valueType:
+          description: The data type of of individual points in the metric's time series. See Metric value types.
+          type: string
+      type: object
+    Point:
+      description: 'Point is a single point in a time series. It consists of a start time, an end time, and a value.'
+      properties:
+        boolValue:
+          description: The value of this data point. Either "true" or "false".
+          type: boolean
+        distributionValue:
+          $ref: '#/components/schemas/PointDistribution'
+        doubleValue:
+          description: The value of this data point as a double-precision floating-point number.
+          format: double
+          type: number
+        end:
+          description: 'The interval [start, end] is the time period to which the point''s value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings.'
+          format: date-time
+          type: string
+        int64Value:
+          description: The value of this data point as a 64-bit integer.
+          format: int64
+          type: string
+        start:
+          description: 'The interval [start, end] is the time period to which the point''s value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings.'
+          format: date-time
+          type: string
+        stringValue:
+          description: The value of this data point in string format.
+          type: string
+      type: object
+    PointDistribution:
+      description: 'Distribution data point value type. When writing distribution points, try to be consistent with the boundaries of your buckets. If you must modify the bucket boundaries, then do so by merging, partitioning, or appending rather than skewing them.'
+      properties:
+        buckets:
+          description: The finite buckets.
+          items:
+            $ref: '#/components/schemas/PointDistributionBucket'
+          type: array
+        overflowBucket:
+          $ref: '#/components/schemas/PointDistributionOverflowBucket'
+        underflowBucket:
+          $ref: '#/components/schemas/PointDistributionUnderflowBucket'
+      type: object
+    PointDistributionBucket:
+      description: 'The histogram''s bucket. Buckets that form the histogram of a distribution value. If the upper bound of a bucket, say U1, does not equal the lower bound of the next bucket, say L2, this means that there is no event in [U1, L2).'
+      properties:
+        count:
+          description: The number of events whose values are in the interval defined by this bucket.
+          format: int64
+          type: string
+        lowerBound:
+          description: The lower bound of the value interval of this bucket (inclusive).
+          format: double
+          type: number
+        upperBound:
+          description: The upper bound of the value interval of this bucket (exclusive).
+          format: double
+          type: number
+      type: object
+    PointDistributionOverflowBucket:
+      description: The overflow bucket is a special bucket that does not have the upperBound field; it includes all of the events that are no less than its lower bound.
+      properties:
+        count:
+          description: The number of events whose values are in the interval defined by this bucket.
+          format: int64
+          type: string
+        lowerBound:
+          description: The lower bound of the value interval of this bucket (inclusive).
+          format: double
+          type: number
+      type: object
+    PointDistributionUnderflowBucket:
+      description: The underflow bucket is a special bucket that does not have the lowerBound field; it includes all of the events that are less than its upper bound.
+      properties:
+        count:
+          description: The number of events whose values are in the interval defined by this bucket.
+          format: int64
+          type: string
+        upperBound:
+          description: The upper bound of the value interval of this bucket (exclusive).
+          format: double
+          type: number
+      type: object
+    Timeseries:
+      description: The monitoring data is organized as metrics and stored as data points that are recorded over time. Each data point represents information like the CPU utilization of your virtual machine. A historical record of these data points is called a time series.
+      properties:
+        points:
+          description: 'The data points of this time series. The points are listed in order of their end timestamp, from younger to older.'
+          items:
+            $ref: '#/components/schemas/Point'
+          type: array
+        timeseriesDesc:
+          $ref: '#/components/schemas/TimeseriesDescriptor'
+      type: object
+    TimeseriesDescriptor:
+      description: TimeseriesDescriptor identifies a single time series.
+      properties:
+        labels:
+          additionalProperties:
+            description: The label's name.
+            type: string
+          description: The label's name.
+          type: object
+        metric:
+          description: The name of the metric.
+          type: string
+        project:
+          description: The Developers Console project number to which this time series belongs.
+          type: string
+      type: object
+    TimeseriesDescriptorLabel:
+      properties:
+        key:
+          description: The label's name.
+          type: string
+        value:
+          description: The label's value.
+          type: string
+      type: object
+    TimeseriesPoint:
+      description: 'When writing time series, TimeseriesPoint should be used instead of Timeseries, to enforce single point for each time series in the timeseries.write request.'
+      properties:
+        point:
+          $ref: '#/components/schemas/Point'
+        timeseriesDesc:
+          $ref: '#/components/schemas/TimeseriesDescriptor'
+      type: object
+    WriteTimeseriesRequest:
+      description: The request of cloudmonitoring.timeseries.write
+      properties:
+        commonLabels:
+          additionalProperties:
+            description: The label's name.
+            type: string
+          description: The label's name.
+          type: object
+        timeseries:
+          description: Provide time series specific labels and the data points for each time series. The labels in timeseries and the common_labels should form a complete list of labels that required by the metric.
+          items:
+            $ref: '#/components/schemas/TimeseriesPoint'
+          type: array
+      type: object
+    WriteTimeseriesResponse:
+      description: The response of cloudmonitoring.timeseries.write
+      properties:
+        kind:
+          default: 'cloudmonitoring#writeTimeseriesResponse'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#writeTimeseriesResponse".'
+          type: string
+      type: object
+  parameters:
+    alt:
+      description: Data format for the response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+        default: json
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    userIp:
+      description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      in: query
+      name: userIp
+      schema:
+        type: string
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects

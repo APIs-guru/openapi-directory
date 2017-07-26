@@ -1,0 +1,573 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://graphhopper.com/api/1/vrp'
+info:
+  description: 'Our Route Optimization API solves the so called vehicle routing problem fast. It calculates an optimal tour for a set of vehicles, services and constraints'
+  title: Route Optimization
+  version: '1.0'
+  x-apisguru-categories:
+    - location
+  x-logo:
+    url: 'https://graphhopper.com/img/header.png'
+  x-origin:
+    - format: swagger
+      url: 'https://graphhopper.com/api/1/vrp/swagger.json'
+      version: '2.0'
+  x-providerName: graphhopper.com
+security:
+  - api_key: []
+paths:
+  /optimize:
+    post:
+      description: |
+        This endpoint for solving vehicle routing problems, i.e. traveling salesman or vehicle routing problems, and returns the solution.
+      operationId: postVrp
+      parameters:
+        - description: your API key
+          in: query
+          name: key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A jobId you can use to retrieve your solution from server - see solution endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobId'
+        '400':
+          description: Error occurred when reading client request. Request is invalid.
+        '500':
+          description: Error occurred on server side.
+      summary: Solves vehicle routing problems
+      tags:
+        - vrp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request'
+        description: Request object that contains the problem to be solved
+        required: true
+  '/solution/{jobId}':
+    get:
+      description: |
+        This endpoint returns the solution of a large problems. You can fetch it with the job_id, you have been sent.
+      operationId: getSolution
+      parameters:
+        - description: your API key
+          in: query
+          name: key
+          required: true
+          schema:
+            type: string
+        - description: Request solution with jobId
+          in: path
+          name: jobId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A response containing the solution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Error occurred on client side such as invalid input.
+        '500':
+          description: Error occurred on server side.
+      summary: Return the solution associated to the jobId
+      tags:
+        - solution
+components:
+  schemas:
+    Activity:
+      properties:
+        arr_time:
+          description: arrival time at this activity in ms
+          format: int64
+          type: integer
+        distance:
+          description: cumulated distance from start to this activity in m
+          format: int64
+          type: integer
+        driving_time:
+          description: driving time of driver in ms
+          format: int64
+          type: integer
+        end_time:
+          description: end time of and thus departure time at this activity
+          format: int64
+          type: integer
+        id:
+          description: 'id referring to the underlying service or shipment, i.e. the shipment or service this activity belongs to'
+          type: string
+        load_after:
+          description: Array with size/capacity dimensions after this activity
+          items:
+            description: dimension value
+            format: int32
+            type: integer
+          type: array
+        load_before:
+          description: Array with size/capacity dimensions before this activity
+          items:
+            description: dimension value
+            format: int32
+            type: integer
+          type: array
+        location_id:
+          description: id that refers to address
+          type: string
+        type:
+          description: type of activity
+          enum:
+            - start
+            - end
+            - service
+            - pickupShipment
+            - deliverShipment
+            - pickup
+            - delivery
+          type: string
+        waiting_time:
+          description: waiting time at this activity in ms
+          format: int64
+          type: integer
+      type: object
+    Address:
+      properties:
+        lat:
+          description: latitude
+          format: double
+          type: number
+        location_id:
+          description: Unique identifier of location
+          type: string
+        lon:
+          description: longitude
+          format: double
+          type: number
+      type: object
+    Algorithm:
+      properties:
+        objective:
+          enum:
+            - transport_time
+            - completion_time
+          type: string
+        problem_type:
+          enum:
+            - min
+            - min-max
+          type: string
+      type: object
+    Break:
+      properties:
+        duration:
+          description: duration of break
+          format: int64
+          type: integer
+        earliest:
+          description: earliest start of break
+          format: int64
+          type: integer
+        initial_driving_time:
+          description: 'initial driving time, i.e. the time your driver has already spent for driving'
+          format: int64
+          type: integer
+        latest:
+          description: latest start of break
+          format: int64
+          type: integer
+        max_driving_time:
+          description: max driving time without break
+          format: int64
+          type: integer
+        possible_split:
+          description: array of splits
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
+    CostMatrix:
+      properties:
+        profile:
+          description: vehicle profile or empty if catch all fallback
+          type: string
+        type:
+          description: 'type of cost matrix, currently default or google are supported'
+          enum:
+            - default
+            - google
+          type: string
+        url:
+          description: URL of matrix service
+          type: string
+      type: object
+    JobId:
+      properties:
+        job_id:
+          description: unique id for your job/request with which you can fetch your solution
+          type: string
+      type: object
+    Objective:
+      properties:
+        type:
+          description: 'type of objective function, i.e. min or min-max '
+          enum:
+            - min
+            - min-max
+          type: string
+        value:
+          description: objective function value
+          enum:
+            - completion_time
+            - transport_time
+            - vehicles
+          type: string
+      type: object
+    Relation:
+      properties:
+        ids:
+          description: An array of ids that should be related
+          items:
+            description: id of services or special ids of shipments
+            type: string
+          type: array
+        type:
+          description: identifier of relation
+          type: string
+        vehicle_id:
+          description: vehicle id
+          type: string
+      type: object
+    Request:
+      properties:
+        algorithm:
+          $ref: '#/components/schemas/Algorithm'
+        cost_matrices:
+          description: An array of cost matrices
+          items:
+            $ref: '#/components/schemas/CostMatrix'
+          type: array
+        objectives:
+          description: An array of objectives
+          items:
+            $ref: '#/components/schemas/Objective'
+          type: array
+        relations:
+          description: An array of relations
+          items:
+            $ref: '#/components/schemas/Relation'
+          type: array
+        services:
+          description: An array of services
+          items:
+            $ref: '#/components/schemas/Service'
+          type: array
+        shipments:
+          description: An array of shipments
+          items:
+            $ref: '#/components/schemas/Shipment'
+          type: array
+        vehicle_types:
+          description: An array of vehicle types
+          items:
+            $ref: '#/components/schemas/VehicleType'
+          type: array
+        vehicles:
+          description: An array of vehicles that can be employed
+          items:
+            $ref: '#/components/schemas/Vehicle'
+          type: array
+      type: object
+    Response:
+      properties:
+        copyrights:
+          items:
+            description: attribution
+            type: string
+          type: array
+        job_id:
+          description: unique identify of job - which you get when posting your request to the large problem solver
+          type: string
+        processing_time:
+          description: 'processing time in ms. if job is still waiting in queue, processing_time is 0'
+          format: int64
+          type: integer
+        solution:
+          $ref: '#/components/schemas/Solution'
+        status:
+          description: indicates the current status of the job
+          enum:
+            - waiting_in_queue
+            - processing
+            - finished
+          type: string
+        waiting_in_queue:
+          description: waiting time in ms
+          format: int64
+          type: integer
+      type: object
+    Route:
+      properties:
+        activities:
+          description: array of activities
+          items:
+            $ref: '#/components/schemas/Activity'
+          type: array
+        completion_time:
+          description: completion time of route in ms
+          format: int64
+          type: integer
+        distance:
+          description: distance of route in meter
+          format: int64
+          type: integer
+        transport_time:
+          description: transport time of route in ms
+          format: int64
+          type: integer
+        vehicle_id:
+          description: id of vehicle that operates route
+          type: string
+        waiting_time:
+          description: waiting time of route in ms
+          format: int64
+          type: integer
+      type: object
+    Service:
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        allowed_vehicles:
+          description: array of allowed vehicle ids
+          items:
+            type: string
+          type: array
+        duration:
+          description: 'duration of service, i.e. time in ms the corresponding activity takes'
+          format: int64
+          type: integer
+        id:
+          description: Unique identifier of service
+          type: string
+        name:
+          description: name of service
+          type: string
+        priority:
+          description: 'priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2.'
+          format: int32
+          type: integer
+        required_skills:
+          description: array of required skills
+          items:
+            type: string
+          type: array
+        size:
+          description: array of capacity dimensions
+          items:
+            format: int32
+            type: integer
+          type: array
+        time_windows:
+          description: 'array of time windows. currently, only a single time window is allowed'
+          items:
+            $ref: '#/components/schemas/TimeWindow'
+          type: array
+        type:
+          description: type of service
+          enum:
+            - service
+            - pickup
+            - delivery
+          type: string
+      type: object
+    Shipment:
+      properties:
+        allowed_vehicles:
+          description: array of allowed vehicle ids
+          items:
+            type: string
+          type: array
+        delivery:
+          $ref: '#/components/schemas/Stop'
+        id:
+          description: Unique identifier of service
+          type: string
+        name:
+          description: name of shipment
+          type: string
+        pickup:
+          $ref: '#/components/schemas/Stop'
+        priority:
+          description: 'priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2.'
+          format: int32
+          type: integer
+        required_skills:
+          description: array of required skills
+          items:
+            type: string
+          type: array
+        size:
+          description: array of capacity dimensions
+          items:
+            format: int32
+            type: integer
+          type: array
+      type: object
+    Solution:
+      properties:
+        costs:
+          description: overall costs of solution
+          format: int32
+          type: integer
+        distance:
+          description: overall travel distance in meters
+          format: int32
+          type: integer
+        max_operation_time:
+          description: operation time of the longest route in ms
+          format: int64
+          type: integer
+        no_unassigned:
+          description: number of jobs that could not be assigned to final solution
+          format: int32
+          type: integer
+        no_vehicles:
+          description: number of employed vehicles
+          format: int32
+          type: integer
+        routes:
+          description: An array of routes
+          items:
+            $ref: '#/components/schemas/Route'
+          type: array
+        time:
+          description: overall transport time in ms
+          format: int64
+          type: integer
+        transport_time:
+          description: overall transport time in ms
+          format: int64
+          type: integer
+        unassigned:
+          properties:
+            services:
+              description: An array of ids of unassigned services
+              items:
+                description: id of unassigned service
+                type: string
+              type: array
+            shipments:
+              description: An array of ids of unassigned shipments
+              items:
+                description: id of unassigned shipments
+                type: string
+              type: array
+          type: object
+        waiting_time:
+          description: total waiting time in ms
+          format: int64
+          type: integer
+      type: object
+    Stop:
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        duration:
+          description: 'duration of stop, i.e. time in ms the corresponding activity takes'
+          format: int64
+          type: integer
+        time_windows:
+          description: 'array of time windows. currently, only a single time window is allowed'
+          items:
+            $ref: '#/components/schemas/TimeWindow'
+          type: array
+      type: object
+    TimeWindow:
+      properties:
+        earliest:
+          description: earliest start time of corresponding activity
+          format: int64
+          type: integer
+        latest:
+          description: latest start time of corresponding activity
+          format: int64
+          type: integer
+      type: object
+    Vehicle:
+      properties:
+        break:
+          $ref: '#/components/schemas/Break'
+        earliest_start:
+          description: earliest start of vehicle at its start location
+          format: int64
+          type: integer
+        end_address:
+          $ref: '#/components/schemas/Address'
+        latest_end:
+          description: latest end of vehicle at its end location
+          format: int64
+          type: integer
+        return_to_depot:
+          description: 'Indicates whether vehicle should return to start address or not. If not, it can end at any service activity.'
+          type: boolean
+        skills:
+          description: array of skills
+          items:
+            type: string
+          type: array
+        start_address:
+          $ref: '#/components/schemas/Address'
+        type_id:
+          description: Unique identifier referring to the available vehicle types
+          type: string
+        vehicle_id:
+          description: Unique identifier of vehicle
+          type: string
+      type: object
+    VehicleType:
+      properties:
+        capacity:
+          description: array of capacity dimensions
+          items:
+            format: int32
+            type: integer
+          type: array
+        profile:
+          description: Profile of vehicle type
+          enum:
+            - car
+            - bike
+            - foot
+            - mtb
+            - motorcycle
+            - racingbike
+            - truck
+            - small_truck
+            - bus
+          example: car
+          type: string
+        service_time_factor:
+          description: service time factor of vehicle type
+          format: double
+          type: number
+        speed_factor:
+          description: speed_factor of vehicle type
+          format: double
+          type: number
+        type_id:
+          description: Unique identifier for the vehicle type
+          type: string
+      type: object
+  securitySchemes:
+    api_key:
+      in: query
+      name: key
+      type: apiKey

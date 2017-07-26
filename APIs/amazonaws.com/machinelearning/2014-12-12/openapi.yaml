@@ -1,0 +1,2944 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://machinelearning.amazonaws.com/'
+info:
+  version: '2014-12-12'
+  x-release: v4
+  title: Amazon Machine Learning
+  description: Definition of the public APIs exposed by Amazon Machine Learning
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: machinelearning
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/machinelearning-2014-12-12.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/machinelearning/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddTags
+      description: 'Adds one or more tags to an object, up to a limit of 10. Each tag consists of a key and an optional value. If you add a tag using a key that is already associated with the ML object, <code>AddTags</code> updates the tag''s value.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddTagsOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: InvalidTagException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagException'
+        '481':
+          description: TagLimitExceededException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagLimitExceededException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTagsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateBatchPrediction':
+    post:
+      operationId: CreateBatchPrediction
+      description: '<p>Generates predictions for a group of observations. The observations to process exist in one or more data files referenced by a <code>DataSource</code>. This operation creates a new <code>BatchPrediction</code>, and uses an <code>MLModel</code> and the data files referenced by the <code>DataSource</code> as information sources. </p> <p><code>CreateBatchPrediction</code> is an asynchronous operation. In response to <code>CreateBatchPrediction</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>BatchPrediction</code> status to <code>PENDING</code>. After the <code>BatchPrediction</code> completes, Amazon ML sets the status to <code>COMPLETED</code>. </p> <p>You can poll for status updates by using the <a>GetBatchPrediction</a> operation and checking the <code>Status</code> parameter of the result. After the <code>COMPLETED</code> status appears, the results are available in the location specified by the <code>OutputUri</code> parameter.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBatchPredictionOutput'
+        '400':
+          description: IdempotentParameterMismatchException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatchException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBatchPredictionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDataSourceFromRDS':
+    post:
+      operationId: CreateDataSourceFromRDS
+      description: '<p>Creates a <code>DataSource</code> object from an <a href="http://aws.amazon.com/rds/"> Amazon Relational Database Service</a> (Amazon RDS). A <code>DataSource</code> references data that can be used to perform <code>CreateMLModel</code>, <code>CreateEvaluation</code>, or <code>CreateBatchPrediction</code> operations.</p> <p><code>CreateDataSourceFromRDS</code> is an asynchronous operation. In response to <code>CreateDataSourceFromRDS</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>DataSource</code> status to <code>PENDING</code>. After the <code>DataSource</code> is created and ready for use, Amazon ML sets the <code>Status</code> parameter to <code>COMPLETED</code>. <code>DataSource</code> in the <code>COMPLETED</code> or <code>PENDING</code> state can be used only to perform <code>&gt;CreateMLModel</code>&gt;, <code>CreateEvaluation</code>, or <code>CreateBatchPrediction</code> operations. </p> <p> If Amazon ML cannot accept the input source, it sets the <code>Status</code> parameter to <code>FAILED</code> and includes an error message in the <code>Message</code> attribute of the <code>GetDataSource</code> operation response. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDataSourceFromRDSOutput'
+        '400':
+          description: IdempotentParameterMismatchException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatchException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDataSourceFromRDSInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDataSourceFromRedshift':
+    post:
+      operationId: CreateDataSourceFromRedshift
+      description: '<p>Creates a <code>DataSource</code> from a database hosted on an Amazon Redshift cluster. A <code>DataSource</code> references data that can be used to perform either <code>CreateMLModel</code>, <code>CreateEvaluation</code>, or <code>CreateBatchPrediction</code> operations.</p> <p><code>CreateDataSourceFromRedshift</code> is an asynchronous operation. In response to <code>CreateDataSourceFromRedshift</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>DataSource</code> status to <code>PENDING</code>. After the <code>DataSource</code> is created and ready for use, Amazon ML sets the <code>Status</code> parameter to <code>COMPLETED</code>. <code>DataSource</code> in <code>COMPLETED</code> or <code>PENDING</code> states can be used to perform only <code>CreateMLModel</code>, <code>CreateEvaluation</code>, or <code>CreateBatchPrediction</code> operations. </p> <p> If Amazon ML can''t accept the input source, it sets the <code>Status</code> parameter to <code>FAILED</code> and includes an error message in the <code>Message</code> attribute of the <code>GetDataSource</code> operation response. </p> <p>The observations should be contained in the database hosted on an Amazon Redshift cluster and should be specified by a <code>SelectSqlQuery</code> query. Amazon ML executes an <code>Unload</code> command in Amazon Redshift to transfer the result set of the <code>SelectSqlQuery</code> query to <code>S3StagingLocation</code>.</p> <p>After the <code>DataSource</code> has been created, it''s ready for use in evaluations and batch predictions. If you plan to use the <code>DataSource</code> to train an <code>MLModel</code>, the <code>DataSource</code> also requires a recipe. A recipe describes how each input variable will be used in training an <code>MLModel</code>. Will the variable be included or excluded from training? Will the variable be manipulated; for example, will it be combined with another variable or will it be split apart into word combinations? The recipe provides answers to these questions.</p> <?oxy_insert_start author="laurama" timestamp="20160406T153842-0700"><p>You can''t change an existing datasource, but you can copy and modify the settings from an existing Amazon Redshift datasource to create a new datasource. To do so, call <code>GetDataSource</code> for an existing datasource and copy the values to a <code>CreateDataSource</code> call. Change the settings that you want to change and make sure that all required fields have the appropriate values.</p> <?oxy_insert_end>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDataSourceFromRedshiftOutput'
+        '400':
+          description: IdempotentParameterMismatchException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatchException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDataSourceFromRedshiftInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDataSourceFromS3':
+    post:
+      operationId: CreateDataSourceFromS3
+      description: '<p>Creates a <code>DataSource</code> object. A <code>DataSource</code> references data that can be used to perform <code>CreateMLModel</code>, <code>CreateEvaluation</code>, or <code>CreateBatchPrediction</code> operations.</p> <p><code>CreateDataSourceFromS3</code> is an asynchronous operation. In response to <code>CreateDataSourceFromS3</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>DataSource</code> status to <code>PENDING</code>. After the <code>DataSource</code> has been created and is ready for use, Amazon ML sets the <code>Status</code> parameter to <code>COMPLETED</code>. <code>DataSource</code> in the <code>COMPLETED</code> or <code>PENDING</code> state can be used to perform only <code>CreateMLModel</code>, <code>CreateEvaluation</code> or <code>CreateBatchPrediction</code> operations. </p> <p> If Amazon ML can''t accept the input source, it sets the <code>Status</code> parameter to <code>FAILED</code> and includes an error message in the <code>Message</code> attribute of the <code>GetDataSource</code> operation response. </p> <p>The observation data used in a <code>DataSource</code> should be ready to use; that is, it should have a consistent structure, and missing data values should be kept to a minimum. The observation data must reside in one or more .csv files in an Amazon Simple Storage Service (Amazon S3) location, along with a schema that describes the data items by name and type. The same schema must be used for all of the data files referenced by the <code>DataSource</code>. </p> <p>After the <code>DataSource</code> has been created, it''s ready to use in evaluations and batch predictions. If you plan to use the <code>DataSource</code> to train an <code>MLModel</code>, the <code>DataSource</code> also needs a recipe. A recipe describes how each input variable will be used in training an <code>MLModel</code>. Will the variable be included or excluded from training? Will the variable be manipulated; for example, will it be combined with another variable or will it be split apart into word combinations? The recipe provides answers to these questions.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDataSourceFromS3Output'
+        '400':
+          description: IdempotentParameterMismatchException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatchException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDataSourceFromS3Input'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateEvaluation':
+    post:
+      operationId: CreateEvaluation
+      description: '<p>Creates a new <code>Evaluation</code> of an <code>MLModel</code>. An <code>MLModel</code> is evaluated on a set of observations associated to a <code>DataSource</code>. Like a <code>DataSource</code> for an <code>MLModel</code>, the <code>DataSource</code> for an <code>Evaluation</code> contains values for the <code>Target Variable</code>. The <code>Evaluation</code> compares the predicted result for each observation to the actual outcome and provides a summary so that you know how effective the <code>MLModel</code> functions on the test data. Evaluation generates a relevant performance metric, such as BinaryAUC, RegressionRMSE or MulticlassAvgFScore based on the corresponding <code>MLModelType</code>: <code>BINARY</code>, <code>REGRESSION</code> or <code>MULTICLASS</code>. </p> <p><code>CreateEvaluation</code> is an asynchronous operation. In response to <code>CreateEvaluation</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the evaluation status to <code>PENDING</code>. After the <code>Evaluation</code> is created and ready for use, Amazon ML sets the status to <code>COMPLETED</code>. </p> <p>You can use the <code>GetEvaluation</code> operation to check progress of the evaluation during the creation operation.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEvaluationOutput'
+        '400':
+          description: IdempotentParameterMismatchException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatchException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEvaluationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateMLModel':
+    post:
+      operationId: CreateMLModel
+      description: '<p>Creates a new <code>MLModel</code> using the <code>DataSource</code> and the recipe as information sources. </p> <p>An <code>MLModel</code> is nearly immutable. Users can update only the <code>MLModelName</code> and the <code>ScoreThreshold</code> in an <code>MLModel</code> without creating a new <code>MLModel</code>. </p> <p><code>CreateMLModel</code> is an asynchronous operation. In response to <code>CreateMLModel</code>, Amazon Machine Learning (Amazon ML) immediately returns and sets the <code>MLModel</code> status to <code>PENDING</code>. After the <code>MLModel</code> has been created and ready is for use, Amazon ML sets the status to <code>COMPLETED</code>. </p> <p>You can use the <code>GetMLModel</code> operation to check the progress of the <code>MLModel</code> during the creation operation.</p> <p> <code>CreateMLModel</code> requires a <code>DataSource</code> with computed statistics, which can be created by setting <code>ComputeStatistics</code> to <code>true</code> in <code>CreateDataSourceFromRDS</code>, <code>CreateDataSourceFromS3</code>, or <code>CreateDataSourceFromRedshift</code> operations. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMLModelOutput'
+        '400':
+          description: IdempotentParameterMismatchException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatchException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMLModelInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateRealtimeEndpoint':
+    post:
+      operationId: CreateRealtimeEndpoint
+      description: 'Creates a real-time endpoint for the <code>MLModel</code>. The endpoint contains the URI of the <code>MLModel</code>; that is, the location to send real-time prediction requests for the specified <code>MLModel</code>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRealtimeEndpointOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRealtimeEndpointInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteBatchPrediction':
+    post:
+      operationId: DeleteBatchPrediction
+      description: '<p>Assigns the DELETED status to a <code>BatchPrediction</code>, rendering it unusable.</p> <p>After using the <code>DeleteBatchPrediction</code> operation, you can use the <a>GetBatchPrediction</a> operation to verify that the status of the <code>BatchPrediction</code> changed to DELETED.</p> <p><b>Caution:</b> The result of the <code>DeleteBatchPrediction</code> operation is irreversible.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBatchPredictionOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBatchPredictionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDataSource':
+    post:
+      operationId: DeleteDataSource
+      description: '<p>Assigns the DELETED status to a <code>DataSource</code>, rendering it unusable.</p> <p>After using the <code>DeleteDataSource</code> operation, you can use the <a>GetDataSource</a> operation to verify that the status of the <code>DataSource</code> changed to DELETED.</p> <p><b>Caution:</b> The results of the <code>DeleteDataSource</code> operation are irreversible.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDataSourceOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDataSourceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteEvaluation':
+    post:
+      operationId: DeleteEvaluation
+      description: '<p>Assigns the <code>DELETED</code> status to an <code>Evaluation</code>, rendering it unusable.</p> <p>After invoking the <code>DeleteEvaluation</code> operation, you can use the <code>GetEvaluation</code> operation to verify that the status of the <code>Evaluation</code> changed to <code>DELETED</code>.</p> <caution><title>Caution</title> <p>The results of the <code>DeleteEvaluation</code> operation are irreversible.</p></caution>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEvaluationOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEvaluationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteMLModel':
+    post:
+      operationId: DeleteMLModel
+      description: '<p>Assigns the <code>DELETED</code> status to an <code>MLModel</code>, rendering it unusable.</p> <p>After using the <code>DeleteMLModel</code> operation, you can use the <code>GetMLModel</code> operation to verify that the status of the <code>MLModel</code> changed to DELETED.</p> <p><b>Caution:</b> The result of the <code>DeleteMLModel</code> operation is irreversible.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMLModelOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteMLModelInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRealtimeEndpoint':
+    post:
+      operationId: DeleteRealtimeEndpoint
+      description: Deletes a real time endpoint of an <code>MLModel</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRealtimeEndpointOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRealtimeEndpointInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTags':
+    post:
+      operationId: DeleteTags
+      description: '<p>Deletes the specified tags associated with an ML object. After this operation is complete, you can''t recover deleted tags.</p> <p>If you specify a tag that doesn''t exist, Amazon ML ignores it.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTagsOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: InvalidTagException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTagsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeBatchPredictions':
+    post:
+      operationId: DescribeBatchPredictions
+      description: Returns a list of <code>BatchPrediction</code> operations that match the search criteria in the request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBatchPredictionsOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      x-waiters:
+        - delay: 30
+          operation: DescribeBatchPredictions
+          maxAttempts: 60
+          acceptors:
+            - expected: COMPLETED
+              matcher: pathAll
+              state: success
+              argument: 'Results[].Status'
+            - expected: FAILED
+              matcher: pathAny
+              state: failure
+              argument: 'Results[].Status'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeBatchPredictionsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDataSources':
+    post:
+      operationId: DescribeDataSources
+      description: Returns a list of <code>DataSource</code> that match the search criteria in the request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDataSourcesOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      x-waiters:
+        - delay: 30
+          operation: DescribeDataSources
+          maxAttempts: 60
+          acceptors:
+            - expected: COMPLETED
+              matcher: pathAll
+              state: success
+              argument: 'Results[].Status'
+            - expected: FAILED
+              matcher: pathAny
+              state: failure
+              argument: 'Results[].Status'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDataSourcesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEvaluations':
+    post:
+      operationId: DescribeEvaluations
+      description: Returns a list of <code>DescribeEvaluations</code> that match the search criteria in the request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEvaluationsOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      x-waiters:
+        - delay: 30
+          operation: DescribeEvaluations
+          maxAttempts: 60
+          acceptors:
+            - expected: COMPLETED
+              matcher: pathAll
+              state: success
+              argument: 'Results[].Status'
+            - expected: FAILED
+              matcher: pathAny
+              state: failure
+              argument: 'Results[].Status'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEvaluationsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeMLModels':
+    post:
+      operationId: DescribeMLModels
+      description: Returns a list of <code>MLModel</code> that match the search criteria in the request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeMLModelsOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      x-waiters:
+        - delay: 30
+          operation: DescribeMLModels
+          maxAttempts: 60
+          acceptors:
+            - expected: COMPLETED
+              matcher: pathAll
+              state: success
+              argument: 'Results[].Status'
+            - expected: FAILED
+              matcher: pathAny
+              state: failure
+              argument: 'Results[].Status'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeMLModelsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTags':
+    post:
+      operationId: DescribeTags
+      description: Describes one or more of the tags for your Amazon ML object.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTagsOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTagsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetBatchPrediction':
+    post:
+      operationId: GetBatchPrediction
+      description: 'Returns a <code>BatchPrediction</code> that includes detailed metadata, status, and data file information for a <code>Batch Prediction</code> request.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBatchPredictionOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBatchPredictionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDataSource':
+    post:
+      operationId: GetDataSource
+      description: '<p>Returns a <code>DataSource</code> that includes metadata and data file information, as well as the current status of the <code>DataSource</code>.</p> <p><code>GetDataSource</code> provides results in normal or verbose format. The verbose format adds the schema description and the list of files pointed to by the DataSource to the normal format.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDataSourceOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDataSourceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetEvaluation':
+    post:
+      operationId: GetEvaluation
+      description: Returns an <code>Evaluation</code> that includes metadata as well as the current status of the <code>Evaluation</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEvaluationOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEvaluationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetMLModel':
+    post:
+      operationId: GetMLModel
+      description: '<p>Returns an <code>MLModel</code> that includes detailed metadata, data source information, and the current status of the <code>MLModel</code>.</p> <p><code>GetMLModel</code> provides results in normal or verbose format. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMLModelOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMLModelInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#Predict':
+    post:
+      operationId: Predict
+      description: <p>Generates a prediction for the observation using the specified <code>ML Model</code>.</p> <note><title>Note</title> <p>Not all response parameters will be populated. Whether a response parameter is populated depends on the type of model requested.</p></note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictOutput'
+        '400':
+          description: PredictorNotMountedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictorNotMountedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '417':
+          description: LimitExceededException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateBatchPrediction':
+    post:
+      operationId: UpdateBatchPrediction
+      description: <p>Updates the <code>BatchPredictionName</code> of a <code>BatchPrediction</code>.</p> <p>You can use the <code>GetBatchPrediction</code> operation to view the contents of the updated data element.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBatchPredictionOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBatchPredictionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDataSource':
+    post:
+      operationId: UpdateDataSource
+      description: <p>Updates the <code>DataSourceName</code> of a <code>DataSource</code>.</p> <p>You can use the <code>GetDataSource</code> operation to view the contents of the updated data element.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDataSourceOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDataSourceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateEvaluation':
+    post:
+      operationId: UpdateEvaluation
+      description: <p>Updates the <code>EvaluationName</code> of an <code>Evaluation</code>.</p> <p>You can use the <code>GetEvaluation</code> operation to view the contents of the updated data element.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEvaluationOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEvaluationInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateMLModel':
+    post:
+      operationId: UpdateMLModel
+      description: <p>Updates the <code>MLModelName</code> and the <code>ScoreThreshold</code> of an <code>MLModel</code>.</p> <p>You can use the <code>GetMLModel</code> operation to view the contents of the updated data element.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMLModelOutput'
+        '400':
+          description: InvalidInputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalServerException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMLModelInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AddTagsInput:
+      type: object
+      required:
+        - Tags
+        - ResourceId
+        - ResourceType
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        ResourceId:
+          $ref: '#/components/schemas/EntityId'
+        ResourceType:
+          $ref: '#/components/schemas/TaggableResourceType'
+    AddTagsOutput:
+      type: object
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/EntityId'
+        ResourceType:
+          $ref: '#/components/schemas/TaggableResourceType'
+      description: 'Amazon ML returns the following elements. '
+    Algorithm:
+      type: string
+      enum:
+        - sgd
+      description: '<p>The function used to train an <code>MLModel</code>. Training choices supported by Amazon ML include the following:</p> <ul> <li> <code>SGD</code> - Stochastic Gradient Descent.</li> <li> <code>RandomForest</code> - Random forest of decision trees.</li> </ul>'
+    AwsUserArn:
+      type: string
+      pattern: 'arn:aws:iam::[0-9]+:((user/.+)|(root))'
+      description: An Amazon Web Service (AWS) user account identifier. The account identifier can be an AWS root account or an AWS Identity and Access Management (IAM) user.
+    BatchPrediction:
+      type: object
+      properties:
+        BatchPredictionId:
+          $ref: '#/components/schemas/EntityId'
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        BatchPredictionDataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        InputDataLocationS3:
+          $ref: '#/components/schemas/S3Url'
+        CreatedByIamUser:
+          $ref: '#/components/schemas/AwsUserArn'
+        CreatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        LastUpdatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        Name:
+          $ref: '#/components/schemas/EntityName'
+        Status:
+          $ref: '#/components/schemas/EntityStatus'
+        OutputUri:
+          $ref: '#/components/schemas/S3Url'
+        Message:
+          $ref: '#/components/schemas/Message'
+        ComputeTime:
+          $ref: '#/components/schemas/LongType'
+        FinishedAt:
+          $ref: '#/components/schemas/EpochTime'
+        StartedAt:
+          $ref: '#/components/schemas/EpochTime'
+        TotalRecordCount:
+          $ref: '#/components/schemas/LongType'
+        InvalidRecordCount:
+          $ref: '#/components/schemas/LongType'
+      description: '<p> Represents the output of a <code>GetBatchPrediction</code> operation.</p> <p> The content consists of the detailed metadata, the status, and the data file information of a <code>Batch Prediction</code>.</p>'
+    BatchPredictionFilterVariable:
+      type: string
+      enum:
+        - CreatedAt
+        - LastUpdatedAt
+        - Status
+        - Name
+        - IAMUser
+        - MLModelId
+        - DataSourceId
+        - DataURI
+      description: <p>A list of the variables to use in searching or filtering <code>BatchPrediction</code>.</p> <ul> <li> <code>CreatedAt</code> - Sets the search criteria to <code>BatchPrediction</code> creation date.</li> <li> <code>Status</code> - Sets the search criteria to <code>BatchPrediction</code> status.</li> <li> <code>Name</code> - Sets the search criteria to the contents of <code>BatchPrediction</code><b> </b> <code>Name</code>.</li> <li> <code>IAMUser</code> - Sets the search criteria to the user account that invoked the <code>BatchPrediction</code> creation.</li> <li> <code>MLModelId</code> - Sets the search criteria to the <code>MLModel</code> used in the <code>BatchPrediction</code>.</li> <li> <code>DataSourceId</code> - Sets the search criteria to the <code>DataSource</code> used in the <code>BatchPrediction</code>.</li> <li> <code>DataURI</code> - Sets the search criteria to the data file(s) used in the <code>BatchPrediction</code>. The URL can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</li> </ul>
+    BatchPredictions:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchPrediction'
+    ComparatorValue:
+      type: string
+      pattern: .*\S.*|^$
+      description: The value specified in a filtering condition. The <code>ComparatorValue</code> becomes the reference value when matching or evaluating data values in filtering and searching functions.
+      maxLength: 1024
+    ComputeStatistics:
+      type: boolean
+    CreateBatchPredictionInput:
+      type: object
+      required:
+        - BatchPredictionId
+        - MLModelId
+        - BatchPredictionDataSourceId
+        - OutputUri
+      properties:
+        BatchPredictionId:
+          $ref: '#/components/schemas/EntityId'
+        BatchPredictionName:
+          $ref: '#/components/schemas/EntityName'
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        BatchPredictionDataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        OutputUri:
+          $ref: '#/components/schemas/S3Url'
+    CreateBatchPredictionOutput:
+      type: object
+      properties:
+        BatchPredictionId:
+          $ref: '#/components/schemas/EntityId'
+      description: '<p> Represents the output of a <code>CreateBatchPrediction</code> operation, and is an acknowledgement that Amazon ML received the request.</p> <p>The <code>CreateBatchPrediction</code> operation is asynchronous. You can poll for status updates by using the <code>&gt;GetBatchPrediction</code> operation and checking the <code>Status</code> parameter of the result. </p>'
+    CreateDataSourceFromRDSInput:
+      type: object
+      required:
+        - DataSourceId
+        - RDSData
+        - RoleARN
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        DataSourceName:
+          $ref: '#/components/schemas/EntityName'
+        RDSData:
+          $ref: '#/components/schemas/RDSDataSpec'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+        ComputeStatistics:
+          $ref: '#/components/schemas/ComputeStatistics'
+    CreateDataSourceFromRDSOutput:
+      type: object
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+      description: '<p> Represents the output of a <code>CreateDataSourceFromRDS</code> operation, and is an acknowledgement that Amazon ML received the request.</p> <p>The <code>CreateDataSourceFromRDS</code>&gt; operation is asynchronous. You can poll for updates by using the <code>GetBatchPrediction</code> operation and checking the <code>Status</code> parameter. You can inspect the <code>Message</code> when <code>Status</code> shows up as <code>FAILED</code>. You can also check the progress of the copy operation by going to the <code>DataPipeline</code> console and looking up the pipeline using the <code>pipelineId </code> from the describe call.</p>'
+    CreateDataSourceFromRedshiftInput:
+      type: object
+      required:
+        - DataSourceId
+        - DataSpec
+        - RoleARN
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        DataSourceName:
+          $ref: '#/components/schemas/EntityName'
+        DataSpec:
+          $ref: '#/components/schemas/RedshiftDataSpec'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+        ComputeStatistics:
+          $ref: '#/components/schemas/ComputeStatistics'
+    CreateDataSourceFromRedshiftOutput:
+      type: object
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+      description: '<p> Represents the output of a <code>CreateDataSourceFromRedshift</code> operation, and is an acknowledgement that Amazon ML received the request.</p> <p>The <code>CreateDataSourceFromRedshift</code> operation is asynchronous. You can poll for updates by using the <code>GetBatchPrediction</code> operation and checking the <code>Status</code> parameter. </p>'
+    CreateDataSourceFromS3Input:
+      type: object
+      required:
+        - DataSourceId
+        - DataSpec
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        DataSourceName:
+          $ref: '#/components/schemas/EntityName'
+        DataSpec:
+          $ref: '#/components/schemas/S3DataSpec'
+        ComputeStatistics:
+          $ref: '#/components/schemas/ComputeStatistics'
+    CreateDataSourceFromS3Output:
+      type: object
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+      description: '<p> Represents the output of a <code>CreateDataSourceFromS3</code> operation, and is an acknowledgement that Amazon ML received the request.</p> <p>The <code>CreateDataSourceFromS3</code> operation is asynchronous. You can poll for updates by using the <code>GetBatchPrediction</code> operation and checking the <code>Status</code> parameter. </p>'
+    CreateEvaluationInput:
+      type: object
+      required:
+        - EvaluationId
+        - MLModelId
+        - EvaluationDataSourceId
+      properties:
+        EvaluationId:
+          $ref: '#/components/schemas/EntityId'
+        EvaluationName:
+          $ref: '#/components/schemas/EntityName'
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        EvaluationDataSourceId:
+          $ref: '#/components/schemas/EntityId'
+    CreateEvaluationOutput:
+      type: object
+      properties:
+        EvaluationId:
+          $ref: '#/components/schemas/EntityId'
+      description: '<p> Represents the output of a <code>CreateEvaluation</code> operation, and is an acknowledgement that Amazon ML received the request.</p> <p><code>CreateEvaluation</code> operation is asynchronous. You can poll for status updates by using the <code>GetEvcaluation</code> operation and checking the <code>Status</code> parameter. </p>'
+    CreateMLModelInput:
+      type: object
+      required:
+        - MLModelId
+        - MLModelType
+        - TrainingDataSourceId
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        MLModelName:
+          $ref: '#/components/schemas/EntityName'
+        MLModelType:
+          $ref: '#/components/schemas/MLModelType'
+        Parameters:
+          $ref: '#/components/schemas/TrainingParameters'
+        TrainingDataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        Recipe:
+          $ref: '#/components/schemas/Recipe'
+        RecipeUri:
+          $ref: '#/components/schemas/S3Url'
+    CreateMLModelOutput:
+      type: object
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+      description: '<p> Represents the output of a <code>CreateMLModel</code> operation, and is an acknowledgement that Amazon ML received the request.</p> <p>The <code>CreateMLModel</code> operation is asynchronous. You can poll for status updates by using the <code>GetMLModel</code> operation and checking the <code>Status</code> parameter. </p>'
+    CreateRealtimeEndpointInput:
+      type: object
+      required:
+        - MLModelId
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+    CreateRealtimeEndpointOutput:
+      type: object
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        RealtimeEndpointInfo:
+          $ref: '#/components/schemas/RealtimeEndpointInfo'
+      description: '<p>Represents the output of an <code>CreateRealtimeEndpoint</code> operation.</p> <p>The result contains the <code>MLModelId</code> and the endpoint information for the <code>MLModel</code>.</p> <note> <p>The endpoint information includes the URI of the <code>MLModel</code>; that is, the location to send online prediction requests for the specified <code>MLModel</code>.</p> </note>'
+    DataRearrangement:
+      type: string
+    DataSchema:
+      type: string
+      description: '<p>The schema of a <code>DataSource</code>. The <code>DataSchema</code> defines the structure of the observation data in the data file(s) referenced in the <code>DataSource</code>. The DataSource schema is expressed in JSON format.</p> <p><code>DataSchema</code> is not required if you specify a <code>DataSchemaUri</code></p> <p>{ "version": "1.0", "recordAnnotationFieldName": "F1", "recordWeightFieldName": "F2", "targetFieldName": "F3", "dataFormat": "CSV", "dataFileContainsHeader": true, "variables": [ { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2", "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, { "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType": "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName": "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType": "WEIGHTED_STRING_SEQUENCE" } ], "excludedVariableNames": [ "F6" ] } </p>'
+      maxLength: 131071
+    DataSource:
+      type: object
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        DataLocationS3:
+          $ref: '#/components/schemas/S3Url'
+        DataRearrangement:
+          $ref: '#/components/schemas/DataRearrangement'
+        CreatedByIamUser:
+          $ref: '#/components/schemas/AwsUserArn'
+        CreatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        LastUpdatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        DataSizeInBytes:
+          $ref: '#/components/schemas/LongType'
+        NumberOfFiles:
+          $ref: '#/components/schemas/LongType'
+        Name:
+          $ref: '#/components/schemas/EntityName'
+        Status:
+          $ref: '#/components/schemas/EntityStatus'
+        Message:
+          $ref: '#/components/schemas/Message'
+        RedshiftMetadata:
+          $ref: '#/components/schemas/RedshiftMetadata'
+        RDSMetadata:
+          $ref: '#/components/schemas/RDSMetadata'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+        ComputeStatistics:
+          $ref: '#/components/schemas/ComputeStatistics'
+        ComputeTime:
+          $ref: '#/components/schemas/LongType'
+        FinishedAt:
+          $ref: '#/components/schemas/EpochTime'
+        StartedAt:
+          $ref: '#/components/schemas/EpochTime'
+      description: <p> Represents the output of the <code>GetDataSource</code> operation. </p> <p> The content consists of the detailed metadata and data file information and the current status of the <code>DataSource</code>. </p>
+    DataSourceFilterVariable:
+      type: string
+      enum:
+        - CreatedAt
+        - LastUpdatedAt
+        - Status
+        - Name
+        - DataLocationS3
+        - IAMUser
+      description: <p>A list of the variables to use in searching or filtering <code>DataSource</code>.</p> <ul> <li> <code>CreatedAt</code> - Sets the search criteria to <code>DataSource</code> creation date.</li> <li> <code>Status</code> - Sets the search criteria to <code>DataSource</code> status.</li> <li> <code>Name</code> - Sets the search criteria to the contents of <code>DataSource</code> <b> </b> <code>Name</code>.</li> <li> <code>DataUri</code> - Sets the search criteria to the URI of data files used to create the <code>DataSource</code>. The URI can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</li> <li> <code>IAMUser</code> - Sets the search criteria to the user account that invoked the <code>DataSource</code> creation.</li> </ul> <note><title>Note</title> <p>The variable names should match the variable names in the <code>DataSource</code>.</p> </note>
+    DataSources:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataSource'
+    DeleteBatchPredictionInput:
+      type: object
+      required:
+        - BatchPredictionId
+      properties:
+        BatchPredictionId:
+          $ref: '#/components/schemas/EntityId'
+    DeleteBatchPredictionOutput:
+      type: object
+      properties:
+        BatchPredictionId:
+          $ref: '#/components/schemas/EntityId'
+      description: <p> Represents the output of a <code>DeleteBatchPrediction</code> operation.</p> <p>You can use the <code>GetBatchPrediction</code> operation and check the value of the <code>Status</code> parameter to see whether a <code>BatchPrediction</code> is marked as <code>DELETED</code>.</p>
+    DeleteDataSourceInput:
+      type: object
+      required:
+        - DataSourceId
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+    DeleteDataSourceOutput:
+      type: object
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+      description: ' Represents the output of a <code>DeleteDataSource</code> operation.'
+    DeleteEvaluationInput:
+      type: object
+      required:
+        - EvaluationId
+      properties:
+        EvaluationId:
+          $ref: '#/components/schemas/EntityId'
+    DeleteEvaluationOutput:
+      type: object
+      properties:
+        EvaluationId:
+          $ref: '#/components/schemas/EntityId'
+      description: <p> Represents the output of a <code>DeleteEvaluation</code> operation. The output indicates that Amazon Machine Learning (Amazon ML) received the request.</p> <p>You can use the <code>GetEvaluation</code> operation and check the value of the <code>Status</code> parameter to see whether an <code>Evaluation</code> is marked as <code>DELETED</code>.</p>
+    DeleteMLModelInput:
+      type: object
+      required:
+        - MLModelId
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+    DeleteMLModelOutput:
+      type: object
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+      description: <p>Represents the output of a <code>DeleteMLModel</code> operation.</p> <p>You can use the <code>GetMLModel</code> operation and check the value of the <code>Status</code> parameter to see whether an <code>MLModel</code> is marked as <code>DELETED</code>.</p>
+    DeleteRealtimeEndpointInput:
+      type: object
+      required:
+        - MLModelId
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+    DeleteRealtimeEndpointOutput:
+      type: object
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        RealtimeEndpointInfo:
+          $ref: '#/components/schemas/RealtimeEndpointInfo'
+      description: <p>Represents the output of an <code>DeleteRealtimeEndpoint</code> operation.</p> <p>The result contains the <code>MLModelId</code> and the endpoint information for the <code>MLModel</code>. </p>
+    DeleteTagsInput:
+      type: object
+      required:
+        - TagKeys
+        - ResourceId
+        - ResourceType
+      properties:
+        TagKeys:
+          $ref: '#/components/schemas/TagKeyList'
+        ResourceId:
+          $ref: '#/components/schemas/EntityId'
+        ResourceType:
+          $ref: '#/components/schemas/TaggableResourceType'
+    DeleteTagsOutput:
+      type: object
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/EntityId'
+        ResourceType:
+          $ref: '#/components/schemas/TaggableResourceType'
+      description: 'Amazon ML returns the following elements. '
+    DescribeBatchPredictionsInput:
+      type: object
+      properties:
+        FilterVariable:
+          $ref: '#/components/schemas/BatchPredictionFilterVariable'
+        EQ:
+          $ref: '#/components/schemas/ComparatorValue'
+        GT:
+          $ref: '#/components/schemas/ComparatorValue'
+        LT:
+          $ref: '#/components/schemas/ComparatorValue'
+        GE:
+          $ref: '#/components/schemas/ComparatorValue'
+        LE:
+          $ref: '#/components/schemas/ComparatorValue'
+        NE:
+          $ref: '#/components/schemas/ComparatorValue'
+        Prefix:
+          $ref: '#/components/schemas/ComparatorValue'
+        SortOrder:
+          $ref: '#/components/schemas/SortOrder'
+        NextToken:
+          $ref: '#/components/schemas/StringType'
+        Limit:
+          $ref: '#/components/schemas/PageLimit'
+    DescribeBatchPredictionsOutput:
+      type: object
+      properties:
+        Results:
+          $ref: '#/components/schemas/BatchPredictions'
+        NextToken:
+          $ref: '#/components/schemas/StringType'
+      description: Represents the output of a <code>DescribeBatchPredictions</code> operation. The content is essentially a list of <code>BatchPrediction</code>s.
+    DescribeDataSourcesInput:
+      type: object
+      properties:
+        FilterVariable:
+          $ref: '#/components/schemas/DataSourceFilterVariable'
+        EQ:
+          $ref: '#/components/schemas/ComparatorValue'
+        GT:
+          $ref: '#/components/schemas/ComparatorValue'
+        LT:
+          $ref: '#/components/schemas/ComparatorValue'
+        GE:
+          $ref: '#/components/schemas/ComparatorValue'
+        LE:
+          $ref: '#/components/schemas/ComparatorValue'
+        NE:
+          $ref: '#/components/schemas/ComparatorValue'
+        Prefix:
+          $ref: '#/components/schemas/ComparatorValue'
+        SortOrder:
+          $ref: '#/components/schemas/SortOrder'
+        NextToken:
+          $ref: '#/components/schemas/StringType'
+        Limit:
+          $ref: '#/components/schemas/PageLimit'
+    DescribeDataSourcesOutput:
+      type: object
+      properties:
+        Results:
+          $ref: '#/components/schemas/DataSources'
+        NextToken:
+          $ref: '#/components/schemas/StringType'
+      description: Represents the query results from a <a>DescribeDataSources</a> operation. The content is essentially a list of <code>DataSource</code>.
+    DescribeEvaluationsInput:
+      type: object
+      properties:
+        FilterVariable:
+          $ref: '#/components/schemas/EvaluationFilterVariable'
+        EQ:
+          $ref: '#/components/schemas/ComparatorValue'
+        GT:
+          $ref: '#/components/schemas/ComparatorValue'
+        LT:
+          $ref: '#/components/schemas/ComparatorValue'
+        GE:
+          $ref: '#/components/schemas/ComparatorValue'
+        LE:
+          $ref: '#/components/schemas/ComparatorValue'
+        NE:
+          $ref: '#/components/schemas/ComparatorValue'
+        Prefix:
+          $ref: '#/components/schemas/ComparatorValue'
+        SortOrder:
+          $ref: '#/components/schemas/SortOrder'
+        NextToken:
+          $ref: '#/components/schemas/StringType'
+        Limit:
+          $ref: '#/components/schemas/PageLimit'
+    DescribeEvaluationsOutput:
+      type: object
+      properties:
+        Results:
+          $ref: '#/components/schemas/Evaluations'
+        NextToken:
+          $ref: '#/components/schemas/StringType'
+      description: Represents the query results from a <code>DescribeEvaluations</code> operation. The content is essentially a list of <code>Evaluation</code>.
+    DescribeMLModelsInput:
+      type: object
+      properties:
+        FilterVariable:
+          $ref: '#/components/schemas/MLModelFilterVariable'
+        EQ:
+          $ref: '#/components/schemas/ComparatorValue'
+        GT:
+          $ref: '#/components/schemas/ComparatorValue'
+        LT:
+          $ref: '#/components/schemas/ComparatorValue'
+        GE:
+          $ref: '#/components/schemas/ComparatorValue'
+        LE:
+          $ref: '#/components/schemas/ComparatorValue'
+        NE:
+          $ref: '#/components/schemas/ComparatorValue'
+        Prefix:
+          $ref: '#/components/schemas/ComparatorValue'
+        SortOrder:
+          $ref: '#/components/schemas/SortOrder'
+        NextToken:
+          $ref: '#/components/schemas/StringType'
+        Limit:
+          $ref: '#/components/schemas/PageLimit'
+    DescribeMLModelsOutput:
+      type: object
+      properties:
+        Results:
+          $ref: '#/components/schemas/MLModels'
+        NextToken:
+          $ref: '#/components/schemas/StringType'
+      description: Represents the output of a <code>DescribeMLModels</code> operation. The content is essentially a list of <code>MLModel</code>.
+    DescribeTagsInput:
+      type: object
+      required:
+        - ResourceId
+        - ResourceType
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/EntityId'
+        ResourceType:
+          $ref: '#/components/schemas/TaggableResourceType'
+    DescribeTagsOutput:
+      type: object
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/EntityId'
+        ResourceType:
+          $ref: '#/components/schemas/TaggableResourceType'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: 'Amazon ML returns the following elements. '
+    DetailsAttributes:
+      type: string
+      enum:
+        - PredictiveModelType
+        - Algorithm
+      description: 'Contains the key values of <code>DetailsMap</code>: <code>PredictiveModelType</code> - Indicates the type of the <code>MLModel</code>. <code>Algorithm</code> - Indicates the algorithm that was used for the <code>MLModel</code>.'
+    DetailsMap:
+      type: array
+      description: Provides any additional details regarding the prediction.
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/DetailsAttributes'
+          value:
+            $ref: '#/components/schemas/DetailsValue'
+    DetailsValue:
+      type: string
+      minLength: 1
+    EDPPipelineId:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    EDPResourceRole:
+      type: string
+      minLength: 1
+      maxLength: 64
+    EDPSecurityGroupId:
+      type: string
+      minLength: 1
+      maxLength: 255
+    EDPSecurityGroupIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/EDPSecurityGroupId'
+    EDPServiceRole:
+      type: string
+      minLength: 1
+      maxLength: 64
+    EDPSubnetId:
+      type: string
+      minLength: 1
+      maxLength: 255
+    EntityId:
+      type: string
+      pattern: '[a-zA-Z0-9_.-]+'
+      minLength: 1
+      maxLength: 64
+    EntityName:
+      type: string
+      pattern: .*\S.*|^$
+      description: A user-supplied name or description of the Amazon ML resource.
+      maxLength: 1024
+    EntityStatus:
+      type: string
+      enum:
+        - PENDING
+        - INPROGRESS
+        - FAILED
+        - COMPLETED
+        - DELETED
+      description: '<p>Object status with the following possible values:</p> <ul> <li><code>PENDING</code></li> <li><code>INPROGRESS</code></li> <li><code>FAILED</code></li> <li><code>COMPLETED</code></li> <li><code>DELETED</code></li> </ul>'
+    EpochTime:
+      type: string
+      description: A timestamp represented in epoch time.
+      format: date-time
+    ErrorCode:
+      type: integer
+    ErrorMessage:
+      type: string
+      maxLength: 2048
+    Evaluation:
+      type: object
+      properties:
+        EvaluationId:
+          $ref: '#/components/schemas/EntityId'
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        EvaluationDataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        InputDataLocationS3:
+          $ref: '#/components/schemas/S3Url'
+        CreatedByIamUser:
+          $ref: '#/components/schemas/AwsUserArn'
+        CreatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        LastUpdatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        Name:
+          $ref: '#/components/schemas/EntityName'
+        Status:
+          $ref: '#/components/schemas/EntityStatus'
+        PerformanceMetrics:
+          $ref: '#/components/schemas/PerformanceMetrics'
+        Message:
+          $ref: '#/components/schemas/Message'
+        ComputeTime:
+          $ref: '#/components/schemas/LongType'
+        FinishedAt:
+          $ref: '#/components/schemas/EpochTime'
+        StartedAt:
+          $ref: '#/components/schemas/EpochTime'
+      description: <p> Represents the output of <code>GetEvaluation</code> operation. </p> <p>The content consists of the detailed metadata and data file information and the current status of the <code>Evaluation</code>.</p>
+    EvaluationFilterVariable:
+      type: string
+      enum:
+        - CreatedAt
+        - LastUpdatedAt
+        - Status
+        - Name
+        - IAMUser
+        - MLModelId
+        - DataSourceId
+        - DataURI
+      description: <p>A list of the variables to use in searching or filtering <code>Evaluation</code>.</p> <ul> <li> <code>CreatedAt</code> - Sets the search criteria to <code>Evaluation</code> creation date.</li> <li> <code>Status</code> - Sets the search criteria to <code>Evaluation</code> status.</li> <li> <code>Name</code> - Sets the search criteria to the contents of <code>Evaluation</code> <b> </b> <code>Name</code>.</li> <li> <code>IAMUser</code> - Sets the search criteria to the user account that invoked an evaluation.</li> <li> <code>MLModelId</code> - Sets the search criteria to the <code>Predictor</code> that was evaluated.</li> <li> <code>DataSourceId</code> - Sets the search criteria to the <code>DataSource</code> used in evaluation.</li> <li> <code>DataUri</code> - Sets the search criteria to the data file(s) used in evaluation. The URL can identify either a file or an Amazon Simple Storage Service (Amazon S3) bucket or directory.</li> </ul>
+    Evaluations:
+      type: array
+      items:
+        $ref: '#/components/schemas/Evaluation'
+    GetBatchPredictionInput:
+      type: object
+      required:
+        - BatchPredictionId
+      properties:
+        BatchPredictionId:
+          $ref: '#/components/schemas/EntityId'
+    GetBatchPredictionOutput:
+      type: object
+      properties:
+        BatchPredictionId:
+          $ref: '#/components/schemas/EntityId'
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        BatchPredictionDataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        InputDataLocationS3:
+          $ref: '#/components/schemas/S3Url'
+        CreatedByIamUser:
+          $ref: '#/components/schemas/AwsUserArn'
+        CreatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        LastUpdatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        Name:
+          $ref: '#/components/schemas/EntityName'
+        Status:
+          $ref: '#/components/schemas/EntityStatus'
+        OutputUri:
+          $ref: '#/components/schemas/S3Url'
+        LogUri:
+          $ref: '#/components/schemas/PresignedS3Url'
+        Message:
+          $ref: '#/components/schemas/Message'
+        ComputeTime:
+          $ref: '#/components/schemas/LongType'
+        FinishedAt:
+          $ref: '#/components/schemas/EpochTime'
+        StartedAt:
+          $ref: '#/components/schemas/EpochTime'
+        TotalRecordCount:
+          $ref: '#/components/schemas/LongType'
+        InvalidRecordCount:
+          $ref: '#/components/schemas/LongType'
+      description: Represents the output of a <code>GetBatchPrediction</code> operation and describes a <code>BatchPrediction</code>.
+    GetDataSourceInput:
+      type: object
+      required:
+        - DataSourceId
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        Verbose:
+          $ref: '#/components/schemas/Verbose'
+    GetDataSourceOutput:
+      type: object
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        DataLocationS3:
+          $ref: '#/components/schemas/S3Url'
+        DataRearrangement:
+          $ref: '#/components/schemas/DataRearrangement'
+        CreatedByIamUser:
+          $ref: '#/components/schemas/AwsUserArn'
+        CreatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        LastUpdatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        DataSizeInBytes:
+          $ref: '#/components/schemas/LongType'
+        NumberOfFiles:
+          $ref: '#/components/schemas/LongType'
+        Name:
+          $ref: '#/components/schemas/EntityName'
+        Status:
+          $ref: '#/components/schemas/EntityStatus'
+        LogUri:
+          $ref: '#/components/schemas/PresignedS3Url'
+        Message:
+          $ref: '#/components/schemas/Message'
+        RedshiftMetadata:
+          $ref: '#/components/schemas/RedshiftMetadata'
+        RDSMetadata:
+          $ref: '#/components/schemas/RDSMetadata'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+        ComputeStatistics:
+          $ref: '#/components/schemas/ComputeStatistics'
+        ComputeTime:
+          $ref: '#/components/schemas/LongType'
+        FinishedAt:
+          $ref: '#/components/schemas/EpochTime'
+        StartedAt:
+          $ref: '#/components/schemas/EpochTime'
+        DataSourceSchema:
+          $ref: '#/components/schemas/DataSchema'
+      description: Represents the output of a <code>GetDataSource</code> operation and describes a <code>DataSource</code>.
+    GetEvaluationInput:
+      type: object
+      required:
+        - EvaluationId
+      properties:
+        EvaluationId:
+          $ref: '#/components/schemas/EntityId'
+    GetEvaluationOutput:
+      type: object
+      properties:
+        EvaluationId:
+          $ref: '#/components/schemas/EntityId'
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        EvaluationDataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        InputDataLocationS3:
+          $ref: '#/components/schemas/S3Url'
+        CreatedByIamUser:
+          $ref: '#/components/schemas/AwsUserArn'
+        CreatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        LastUpdatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        Name:
+          $ref: '#/components/schemas/EntityName'
+        Status:
+          $ref: '#/components/schemas/EntityStatus'
+        PerformanceMetrics:
+          $ref: '#/components/schemas/PerformanceMetrics'
+        LogUri:
+          $ref: '#/components/schemas/PresignedS3Url'
+        Message:
+          $ref: '#/components/schemas/Message'
+        ComputeTime:
+          $ref: '#/components/schemas/LongType'
+        FinishedAt:
+          $ref: '#/components/schemas/EpochTime'
+        StartedAt:
+          $ref: '#/components/schemas/EpochTime'
+      description: Represents the output of a <code>GetEvaluation</code> operation and describes an <code>Evaluation</code>.
+    GetMLModelInput:
+      type: object
+      required:
+        - MLModelId
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        Verbose:
+          $ref: '#/components/schemas/Verbose'
+    GetMLModelOutput:
+      type: object
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        TrainingDataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        CreatedByIamUser:
+          $ref: '#/components/schemas/AwsUserArn'
+        CreatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        LastUpdatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        Name:
+          $ref: '#/components/schemas/MLModelName'
+        Status:
+          $ref: '#/components/schemas/EntityStatus'
+        SizeInBytes:
+          $ref: '#/components/schemas/LongType'
+        EndpointInfo:
+          $ref: '#/components/schemas/RealtimeEndpointInfo'
+        TrainingParameters:
+          $ref: '#/components/schemas/TrainingParameters'
+        InputDataLocationS3:
+          $ref: '#/components/schemas/S3Url'
+        MLModelType:
+          $ref: '#/components/schemas/MLModelType'
+        ScoreThreshold:
+          $ref: '#/components/schemas/ScoreThreshold'
+        ScoreThresholdLastUpdatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        LogUri:
+          $ref: '#/components/schemas/PresignedS3Url'
+        Message:
+          $ref: '#/components/schemas/Message'
+        ComputeTime:
+          $ref: '#/components/schemas/LongType'
+        FinishedAt:
+          $ref: '#/components/schemas/EpochTime'
+        StartedAt:
+          $ref: '#/components/schemas/EpochTime'
+        Recipe:
+          $ref: '#/components/schemas/Recipe'
+        Schema:
+          $ref: '#/components/schemas/DataSchema'
+      description: 'Represents the output of a <code>GetMLModel</code> operation, and provides detailed information about a <code>MLModel</code>.'
+    IdempotentParameterMismatchException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+      description: A second request to use or change an object was not allowed. This can result from retrying a request using a parameter that was not present in the original request.
+    IntegerType:
+      type: integer
+      description: Integer type that is a 32-bit signed number.
+    InternalServerException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+      description: An error on the server occurred when trying to process a request.
+    InvalidInputException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+      description: 'An error on the client occurred. Typically, the cause is an invalid input value.'
+    InvalidTagException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+    Label:
+      type: string
+      minLength: 1
+    LimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+      description: The subscriber exceeded the maximum number of operations. This exception can occur when listing objects such as <code>DataSource</code>.
+    LongType:
+      type: integer
+      description: Long integer type that is a 64-bit signed number.
+    MLModel:
+      type: object
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        TrainingDataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        CreatedByIamUser:
+          $ref: '#/components/schemas/AwsUserArn'
+        CreatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        LastUpdatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        Name:
+          $ref: '#/components/schemas/MLModelName'
+        Status:
+          $ref: '#/components/schemas/EntityStatus'
+        SizeInBytes:
+          $ref: '#/components/schemas/LongType'
+        EndpointInfo:
+          $ref: '#/components/schemas/RealtimeEndpointInfo'
+        TrainingParameters:
+          $ref: '#/components/schemas/TrainingParameters'
+        InputDataLocationS3:
+          $ref: '#/components/schemas/S3Url'
+        Algorithm:
+          $ref: '#/components/schemas/Algorithm'
+        MLModelType:
+          $ref: '#/components/schemas/MLModelType'
+        ScoreThreshold:
+          $ref: '#/components/schemas/ScoreThreshold'
+        ScoreThresholdLastUpdatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        Message:
+          $ref: '#/components/schemas/Message'
+        ComputeTime:
+          $ref: '#/components/schemas/LongType'
+        FinishedAt:
+          $ref: '#/components/schemas/EpochTime'
+        StartedAt:
+          $ref: '#/components/schemas/EpochTime'
+      description: <p> Represents the output of a <code>GetMLModel</code> operation. </p> <p>The content consists of the detailed metadata and the current status of the <code>MLModel</code>.</p>
+    MLModelFilterVariable:
+      type: string
+      enum:
+        - CreatedAt
+        - LastUpdatedAt
+        - Status
+        - Name
+        - IAMUser
+        - TrainingDataSourceId
+        - RealtimeEndpointStatus
+        - MLModelType
+        - Algorithm
+        - TrainingDataURI
+    MLModelName:
+      type: string
+      maxLength: 1024
+    MLModelType:
+      type: string
+      enum:
+        - REGRESSION
+        - BINARY
+        - MULTICLASS
+    MLModels:
+      type: array
+      items:
+        $ref: '#/components/schemas/MLModel'
+    Message:
+      type: string
+      description: ' Description of the most recent details about an object.'
+      maxLength: 10240
+    PageLimit:
+      type: integer
+      minimum: 1
+      maximum: 100
+    PerformanceMetrics:
+      type: object
+      properties:
+        Properties:
+          $ref: '#/components/schemas/PerformanceMetricsProperties'
+      description: '<p>Measurements of how well the <code>MLModel</code> performed on known observations. One of the following metrics is returned, based on the type of the <code>MLModel</code>: </p> <ul> <li> <p>BinaryAUC: The binary <code>MLModel</code> uses the Area Under the Curve (AUC) technique to measure performance. </p> </li> <li> <p>RegressionRMSE: The regression <code>MLModel</code> uses the Root Mean Square Error (RMSE) technique to measure performance. RMSE measures the difference between predicted and actual values for a single variable.</p> </li> <li> <p>MulticlassAvgFScore: The multiclass <code>MLModel</code> uses the F1 score technique to measure performance. </p> </li> </ul> <p> For more information about performance metrics, please see the <a href="http://docs.aws.amazon.com/machine-learning/latest/dg">Amazon Machine Learning Developer Guide</a>. </p>'
+    PerformanceMetricsProperties:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/PerformanceMetricsPropertyKey'
+          value:
+            $ref: '#/components/schemas/PerformanceMetricsPropertyValue'
+    PerformanceMetricsPropertyKey:
+      type: string
+    PerformanceMetricsPropertyValue:
+      type: string
+    PredictInput:
+      type: object
+      required:
+        - MLModelId
+        - Record
+        - PredictEndpoint
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        Record:
+          $ref: '#/components/schemas/Record'
+        PredictEndpoint:
+          $ref: '#/components/schemas/VipURL'
+    PredictOutput:
+      type: object
+      properties:
+        Prediction:
+          $ref: '#/components/schemas/Prediction'
+    Prediction:
+      type: object
+      properties:
+        predictedLabel:
+          $ref: '#/components/schemas/Label'
+        predictedValue:
+          $ref: '#/components/schemas/floatLabel'
+        predictedScores:
+          $ref: '#/components/schemas/ScoreValuePerLabelMap'
+        details:
+          $ref: '#/components/schemas/DetailsMap'
+      description: '<p>The output from a <code>Predict</code> operation: </p> <ul> <li> <p> <code>Details</code> - Contains the following attributes: <code>DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY | MULTICLASS</code> <code>DetailsAttributes.ALGORITHM - SGD</code> </p> </li> <li> <p> <code>PredictedLabel</code> - Present for either a <code>BINARY</code> or <code>MULTICLASS</code> <code>MLModel</code> request. </p> </li> <li> <p> <code>PredictedScores</code> - Contains the raw classification score corresponding to each label. </p> </li> <li> <p> <code>PredictedValue</code> - Present for a <code>REGRESSION</code> <code>MLModel</code> request. </p> </li> </ul>'
+    PredictorNotMountedException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The exception is thrown when a predict request is made to an unmounted <code>MLModel</code>.
+    PresignedS3Url:
+      type: string
+    RDSDataSpec:
+      type: object
+      required:
+        - DatabaseInformation
+        - SelectSqlQuery
+        - DatabaseCredentials
+        - S3StagingLocation
+        - ResourceRole
+        - ServiceRole
+        - SubnetId
+        - SecurityGroupIds
+      properties:
+        DatabaseInformation:
+          $ref: '#/components/schemas/RDSDatabase'
+        SelectSqlQuery:
+          $ref: '#/components/schemas/RDSSelectSqlQuery'
+        DatabaseCredentials:
+          $ref: '#/components/schemas/RDSDatabaseCredentials'
+        S3StagingLocation:
+          $ref: '#/components/schemas/S3Url'
+        DataRearrangement:
+          $ref: '#/components/schemas/DataRearrangement'
+        DataSchema:
+          $ref: '#/components/schemas/DataSchema'
+        DataSchemaUri:
+          $ref: '#/components/schemas/S3Url'
+        ResourceRole:
+          $ref: '#/components/schemas/EDPResourceRole'
+        ServiceRole:
+          $ref: '#/components/schemas/EDPServiceRole'
+        SubnetId:
+          $ref: '#/components/schemas/EDPSubnetId'
+        SecurityGroupIds:
+          $ref: '#/components/schemas/EDPSecurityGroupIds'
+      description: The data specification of an Amazon Relational Database Service (Amazon RDS) <code>DataSource</code>.
+    RDSDatabase:
+      type: object
+      required:
+        - InstanceIdentifier
+        - DatabaseName
+      properties:
+        InstanceIdentifier:
+          $ref: '#/components/schemas/RDSInstanceIdentifier'
+        DatabaseName:
+          $ref: '#/components/schemas/RDSDatabaseName'
+      description: The database details of an Amazon RDS database.
+    RDSDatabaseCredentials:
+      type: object
+      required:
+        - Username
+        - Password
+      properties:
+        Username:
+          $ref: '#/components/schemas/RDSDatabaseUsername'
+        Password:
+          $ref: '#/components/schemas/RDSDatabasePassword'
+      description: The database credentials to connect to a database on an RDS DB instance.
+    RDSDatabaseName:
+      type: string
+      description: The name of a database hosted on an RDS DB instance.
+      minLength: 1
+      maxLength: 64
+    RDSDatabasePassword:
+      type: string
+      description: The password to be used by Amazon ML to connect to a database on an RDS DB instance. The password should have sufficient permissions to execute the <code>RDSSelectQuery</code> query.
+      minLength: 8
+      maxLength: 128
+    RDSDatabaseUsername:
+      type: string
+      description: The username to be used by Amazon ML to connect to database on an Amazon RDS instance. The username should have sufficient permissions to execute an <code>RDSSelectSqlQuery</code> query.
+      minLength: 1
+      maxLength: 128
+    RDSInstanceIdentifier:
+      type: string
+      pattern: '[a-z0-9-]+'
+      description: Identifier of RDS DB Instances.
+      minLength: 1
+      maxLength: 63
+    RDSMetadata:
+      type: object
+      properties:
+        Database:
+          $ref: '#/components/schemas/RDSDatabase'
+        DatabaseUserName:
+          $ref: '#/components/schemas/RDSDatabaseUsername'
+        SelectSqlQuery:
+          $ref: '#/components/schemas/RDSSelectSqlQuery'
+        ResourceRole:
+          $ref: '#/components/schemas/EDPResourceRole'
+        ServiceRole:
+          $ref: '#/components/schemas/EDPServiceRole'
+        DataPipelineId:
+          $ref: '#/components/schemas/EDPPipelineId'
+      description: The datasource details that are specific to Amazon RDS.
+    RDSSelectSqlQuery:
+      type: string
+      description: 'The SQL query to be executed against the Amazon RDS database. The SQL query should be valid for the Amazon RDS type being used. '
+      minLength: 1
+      maxLength: 16777216
+    RealtimeEndpointInfo:
+      type: object
+      properties:
+        PeakRequestsPerSecond:
+          $ref: '#/components/schemas/IntegerType'
+        CreatedAt:
+          $ref: '#/components/schemas/EpochTime'
+        EndpointUrl:
+          $ref: '#/components/schemas/VipURL'
+        EndpointStatus:
+          $ref: '#/components/schemas/RealtimeEndpointStatus'
+      description: ' Describes the real-time endpoint information for an <code>MLModel</code>.'
+    RealtimeEndpointStatus:
+      type: string
+      enum:
+        - NONE
+        - READY
+        - UPDATING
+        - FAILED
+    Recipe:
+      type: string
+      maxLength: 131071
+    Record:
+      type: array
+      description: A map of variable name-value pairs that represent an observation.
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/VariableName'
+          value:
+            $ref: '#/components/schemas/VariableValue'
+    RedshiftClusterIdentifier:
+      type: string
+      pattern: '[a-z0-9-]+'
+      description: The ID of an Amazon Redshift cluster.
+      minLength: 1
+      maxLength: 63
+    RedshiftDataSpec:
+      type: object
+      required:
+        - DatabaseInformation
+        - SelectSqlQuery
+        - DatabaseCredentials
+        - S3StagingLocation
+      properties:
+        DatabaseInformation:
+          $ref: '#/components/schemas/RedshiftDatabase'
+        SelectSqlQuery:
+          $ref: '#/components/schemas/RedshiftSelectSqlQuery'
+        DatabaseCredentials:
+          $ref: '#/components/schemas/RedshiftDatabaseCredentials'
+        S3StagingLocation:
+          $ref: '#/components/schemas/S3Url'
+        DataRearrangement:
+          $ref: '#/components/schemas/DataRearrangement'
+        DataSchema:
+          $ref: '#/components/schemas/DataSchema'
+        DataSchemaUri:
+          $ref: '#/components/schemas/S3Url'
+      description: Describes the data specification of an Amazon Redshift <code>DataSource</code>.
+    RedshiftDatabase:
+      type: object
+      required:
+        - DatabaseName
+        - ClusterIdentifier
+      properties:
+        DatabaseName:
+          $ref: '#/components/schemas/RedshiftDatabaseName'
+        ClusterIdentifier:
+          $ref: '#/components/schemas/RedshiftClusterIdentifier'
+      description: Describes the database details required to connect to an Amazon Redshift database.
+    RedshiftDatabaseCredentials:
+      type: object
+      required:
+        - Username
+        - Password
+      properties:
+        Username:
+          $ref: '#/components/schemas/RedshiftDatabaseUsername'
+        Password:
+          $ref: '#/components/schemas/RedshiftDatabasePassword'
+      description: ' Describes the database credentials for connecting to a database on an Amazon Redshift cluster.'
+    RedshiftDatabaseName:
+      type: string
+      pattern: '[a-z0-9]+'
+      description: The name of a database hosted on an Amazon Redshift cluster.
+      minLength: 1
+      maxLength: 64
+    RedshiftDatabasePassword:
+      type: string
+      description: 'A password to be used by Amazon ML to connect to a database on an Amazon Redshift cluster. The password should have sufficient permissions to execute a <code>RedshiftSelectSqlQuery</code> query. The password should be valid for an Amazon Redshift <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html">USER</a>.'
+      minLength: 8
+      maxLength: 64
+    RedshiftDatabaseUsername:
+      type: string
+      description: 'A username to be used by Amazon Machine Learning (Amazon ML)to connect to a database on an Amazon Redshift cluster. The username should have sufficient permissions to execute the <code>RedshiftSelectSqlQuery</code> query. The username should be valid for an Amazon Redshift <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html">USER</a>.'
+      minLength: 1
+      maxLength: 128
+    RedshiftMetadata:
+      type: object
+      properties:
+        RedshiftDatabase:
+          $ref: '#/components/schemas/RedshiftDatabase'
+        DatabaseUserName:
+          $ref: '#/components/schemas/RedshiftDatabaseUsername'
+        SelectSqlQuery:
+          $ref: '#/components/schemas/RedshiftSelectSqlQuery'
+      description: Describes the <code>DataSource</code> details specific to Amazon Redshift.
+    RedshiftSelectSqlQuery:
+      type: string
+      description: ' Describes the SQL query to execute on the Amazon Redshift database. The SQL query should be valid for an Amazon Redshift <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_SELECT_synopsis.html">SELECT</a>. '
+      minLength: 1
+      maxLength: 16777216
+    ResourceNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+        code:
+          $ref: '#/components/schemas/ErrorCode'
+      description: A specified resource cannot be located.
+    RoleARN:
+      type: string
+      description: 'The Amazon Resource Name (ARN) of an <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts">AWS IAM Role</a>, such as the following: arn:aws:iam::account:role/rolename. '
+      minLength: 1
+      maxLength: 110
+    S3DataSpec:
+      type: object
+      required:
+        - DataLocationS3
+      properties:
+        DataLocationS3:
+          $ref: '#/components/schemas/S3Url'
+        DataRearrangement:
+          $ref: '#/components/schemas/DataRearrangement'
+        DataSchema:
+          $ref: '#/components/schemas/DataSchema'
+        DataSchemaLocationS3:
+          $ref: '#/components/schemas/S3Url'
+      description: ' Describes the data specification of a <code>DataSource</code>.'
+    S3Url:
+      type: string
+      pattern: 's3://([^/]+)(/.*)?'
+      description: A reference to a file or bucket on Amazon Simple Storage Service (Amazon S3).
+      maxLength: 2048
+    ScoreThreshold:
+      type: number
+      format: float
+    ScoreValue:
+      type: number
+      format: float
+    ScoreValuePerLabelMap:
+      type: array
+      description: Provides the raw classification score corresponding to each label.
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/Label'
+          value:
+            $ref: '#/components/schemas/ScoreValue'
+    SortOrder:
+      type: string
+      enum:
+        - asc
+        - dsc
+      description: '<p>The sort order specified in a listing condition. Possible values include the following:</p> <ul> <li> <code>asc</code> - Present the information in ascending order (from A-Z).</li> <li> <code>dsc</code> - Present the information in descending order (from Z-A).</li> </ul>'
+    StringType:
+      type: string
+      description: String type.
+    Tag:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+      description: 'A custom key-value pair associated with an ML object, such as an ML model.'
+    TagKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      maxItems: 100
+    TagLimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      maxItems: 100
+    TagValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 0
+      maxLength: 256
+    TaggableResourceType:
+      type: string
+      enum:
+        - BatchPrediction
+        - DataSource
+        - Evaluation
+        - MLModel
+    TrainingParameters:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/StringType'
+          value:
+            $ref: '#/components/schemas/StringType'
+    UpdateBatchPredictionInput:
+      type: object
+      required:
+        - BatchPredictionId
+        - BatchPredictionName
+      properties:
+        BatchPredictionId:
+          $ref: '#/components/schemas/EntityId'
+        BatchPredictionName:
+          $ref: '#/components/schemas/EntityName'
+    UpdateBatchPredictionOutput:
+      type: object
+      properties:
+        BatchPredictionId:
+          $ref: '#/components/schemas/EntityId'
+      description: <p>Represents the output of an <code>UpdateBatchPrediction</code> operation.</p> <p>You can see the updated content by using the <code>GetBatchPrediction</code> operation.</p>
+    UpdateDataSourceInput:
+      type: object
+      required:
+        - DataSourceId
+        - DataSourceName
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+        DataSourceName:
+          $ref: '#/components/schemas/EntityName'
+    UpdateDataSourceOutput:
+      type: object
+      properties:
+        DataSourceId:
+          $ref: '#/components/schemas/EntityId'
+      description: <p>Represents the output of an <code>UpdateDataSource</code> operation.</p> <p>You can see the updated content by using the <code>GetBatchPrediction</code> operation.</p>
+    UpdateEvaluationInput:
+      type: object
+      required:
+        - EvaluationId
+        - EvaluationName
+      properties:
+        EvaluationId:
+          $ref: '#/components/schemas/EntityId'
+        EvaluationName:
+          $ref: '#/components/schemas/EntityName'
+    UpdateEvaluationOutput:
+      type: object
+      properties:
+        EvaluationId:
+          $ref: '#/components/schemas/EntityId'
+      description: <p>Represents the output of an <code>UpdateEvaluation</code> operation.</p> <p>You can see the updated content by using the <code>GetEvaluation</code> operation.</p>
+    UpdateMLModelInput:
+      type: object
+      required:
+        - MLModelId
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+        MLModelName:
+          $ref: '#/components/schemas/EntityName'
+        ScoreThreshold:
+          $ref: '#/components/schemas/ScoreThreshold'
+    UpdateMLModelOutput:
+      type: object
+      properties:
+        MLModelId:
+          $ref: '#/components/schemas/EntityId'
+      description: <p>Represents the output of an <code>UpdateMLModel</code> operation.</p> <p>You can see the updated content by using the <code>GetMLModel</code> operation.</p>
+    VariableName:
+      type: string
+      description: 'The name of a variable. Currently it''s used to specify the name of the target value, label, weight, and tags.'
+    VariableValue:
+      type: string
+      description: 'The value of a variable. Currently it''s used to specify values of the target value, weights, and tag variables and for filtering variable values.'
+    Verbose:
+      type: boolean
+      description: Specifies whether a describe operation should return exhaustive or abbreviated information.
+    VipURL:
+      type: string
+      pattern: 'https://[a-zA-Z0-9-.]*\.amazon(aws)?\.com[/]?'
+      maxLength: 2048
+    floatLabel:
+      type: number
+      format: float
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

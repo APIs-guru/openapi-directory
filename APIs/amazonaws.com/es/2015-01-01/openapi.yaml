@@ -1,0 +1,1352 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://es.amazonaws.com/'
+info:
+  version: '2015-01-01'
+  x-release: v4
+  title: Amazon Elasticsearch Service
+  description: '<fullname>Amazon Elasticsearch Configuration Service</fullname> <p>Use the Amazon Elasticsearch configuration API to create, configure, and manage Elasticsearch domains.</p> <p>The endpoint for configuration service requests is region-specific: es.<i>region</i>.amazonaws.com. For example, es.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticsearch-service-regions" target="_blank">Regions and Endpoints</a>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: es
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/es-2015-01-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/es/'
+security:
+  - hmac: []
+paths:
+  /2015-01-01/tags:
+    post:
+      operationId: AddTags
+      description: 'Attaches tags to an existing Elasticsearch domain. Tags are a set of case-sensitive key value pairs. An Elasticsearch domain may have up to 10 tags. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-awsresorcetagging" target="_blank"> Tagging Amazon Elasticsearch Service Domains for more information.</a>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/domain:
+    post:
+      operationId: CreateElasticsearchDomain
+      description: 'Creates a new Elasticsearch domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains" target="_blank">Creating Elasticsearch Domains</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateElasticsearchDomainResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: DisabledOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+        '482':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '483':
+          description: InvalidTypeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTypeException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '486':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateElasticsearchDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/es/domain/{DomainName}':
+    get:
+      operationId: DescribeElasticsearchDomain
+      description: 'Returns domain configuration information about the specified Elasticsearch domain, including the domain ID, domain endpoint, and domain ARN.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeElasticsearchDomainResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeElasticsearchDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/es/domain/{DomainName}/config':
+    post:
+      operationId: UpdateElasticsearchDomainConfig
+      description: 'Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateElasticsearchDomainConfigResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: InvalidTypeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTypeException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateElasticsearchDomainConfigRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/domain-info:
+    post:
+      operationId: DescribeElasticsearchDomains
+      description: 'Returns domain configuration information about the specified Elasticsearch domains, including the domain ID, domain endpoint, and domain ARN.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeElasticsearchDomainsResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeElasticsearchDomainsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/es/instanceTypeLimits/{ElasticsearchVersion}/{InstanceType}':
+    get:
+      operationId: DescribeElasticsearchInstanceTypeLimits
+      description: ' Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the <code> <a>DomainName</a> </code> to know what Limits are supported for modifying. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeElasticsearchInstanceTypeLimitsResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: InvalidTypeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTypeException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: InstanceType
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: ElasticsearchVersion
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeElasticsearchInstanceTypeLimitsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/domain:
+    get:
+      operationId: ListDomainNames
+      description: 'Returns the name of all Elasticsearch domains owned by the current user''s account. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDomainNamesResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/es/instanceTypes/{ElasticsearchVersion}':
+    get:
+      operationId: ListElasticsearchInstanceTypes
+      description: List all Elasticsearch instance types that are supported for given ElasticsearchVersion
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListElasticsearchInstanceTypesResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+        - name: ElasticsearchVersion
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListElasticsearchInstanceTypesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/es/versions:
+    get:
+      operationId: ListElasticsearchVersions
+      description: List all supported Elasticsearch versions
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListElasticsearchVersionsResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListElasticsearchVersionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/tags/:
+    get:
+      operationId: ListTags
+      description: Returns all tags for the given Elasticsearch domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/tags-removal:
+    post:
+      operationId: RemoveTags
+      description: Removes the specified set of tags from the specified Elasticsearch domain.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    ARN:
+      type: string
+      description: 'The Amazon Resource Name (ARN) of the Elasticsearch domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
+    AccessPoliciesStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/PolicyDocument'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: 'The configured access rules for the domain''s document and search endpoints, and the current status of those rules.'
+    AddTagsRequest:
+      type: object
+      required:
+        - ARN
+        - TagList
+      properties:
+        ARN:
+          $ref: '#/components/schemas/ARN'
+        TagList:
+          $ref: '#/components/schemas/TagList'
+      description: Container for the parameters to the <code><a>AddTags</a></code> operation. Specify the tags that you want to attach to the Elasticsearch domain.
+    AdditionalLimit:
+      type: object
+      properties:
+        LimitName:
+          $ref: '#/components/schemas/LimitName'
+        LimitValues:
+          $ref: '#/components/schemas/LimitValueList'
+      description: ' List of limits that are specific to a given InstanceType and for each of it''s <code> <a>InstanceRole</a> </code> . '
+    AdditionalLimitList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AdditionalLimit'
+    AdvancedOptions:
+      type: array
+      description: '<p> Exposes select native Elasticsearch configuration values from <code>elasticsearch.yml</code>. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    AdvancedOptionsStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/AdvancedOptions'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: '<p> Status of the advanced options for the specified Elasticsearch domain. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
+    BaseException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: An error occurred while processing the request.
+    Boolean:
+      type: boolean
+    CreateElasticsearchDomainRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        ElasticsearchVersion:
+          $ref: '#/components/schemas/ElasticsearchVersionString'
+        ElasticsearchClusterConfig:
+          $ref: '#/components/schemas/ElasticsearchClusterConfig'
+        EBSOptions:
+          $ref: '#/components/schemas/EBSOptions'
+        AccessPolicies:
+          $ref: '#/components/schemas/PolicyDocument'
+        SnapshotOptions:
+          $ref: '#/components/schemas/SnapshotOptions'
+        AdvancedOptions:
+          $ref: '#/components/schemas/AdvancedOptions'
+    CreateElasticsearchDomainResponse:
+      type: object
+      properties:
+        DomainStatus:
+          $ref: '#/components/schemas/ElasticsearchDomainStatus'
+      description: The result of a <code>CreateElasticsearchDomain</code> operation. Contains the status of the newly created Elasticsearch domain.
+    DeleteElasticsearchDomainRequest:
+      type: object
+      properties: {}
+      description: Container for the parameters to the <code><a>DeleteElasticsearchDomain</a></code> operation. Specifies the name of the Elasticsearch domain that you want to delete.
+    DeleteElasticsearchDomainResponse:
+      type: object
+      properties:
+        DomainStatus:
+          $ref: '#/components/schemas/ElasticsearchDomainStatus'
+      description: 'The result of a <code>DeleteElasticsearchDomain</code> request. Contains the status of the pending deletion, or no status if the domain and all of its resources have been deleted.'
+    DescribeElasticsearchDomainConfigRequest:
+      type: object
+      properties: {}
+      description: ' Container for the parameters to the <code>DescribeElasticsearchDomainConfig</code> operation. Specifies the domain name for which you want configuration information.'
+    DescribeElasticsearchDomainConfigResponse:
+      type: object
+      required:
+        - DomainConfig
+      properties:
+        DomainConfig:
+          $ref: '#/components/schemas/ElasticsearchDomainConfig'
+      description: The result of a <code>DescribeElasticsearchDomainConfig</code> request. Contains the configuration information of the requested domain.
+    DescribeElasticsearchDomainRequest:
+      type: object
+      properties: {}
+      description: Container for the parameters to the <code><a>DescribeElasticsearchDomain</a></code> operation.
+    DescribeElasticsearchDomainResponse:
+      type: object
+      required:
+        - DomainStatus
+      properties:
+        DomainStatus:
+          $ref: '#/components/schemas/ElasticsearchDomainStatus'
+      description: The result of a <code>DescribeElasticsearchDomain</code> request. Contains the status of the domain specified in the request.
+    DescribeElasticsearchDomainsRequest:
+      type: object
+      required:
+        - DomainNames
+      properties:
+        DomainNames:
+          $ref: '#/components/schemas/DomainNameList'
+      description: 'Container for the parameters to the <code><a>DescribeElasticsearchDomains</a></code> operation. By default, the API returns the status of all Elasticsearch domains.'
+    DescribeElasticsearchDomainsResponse:
+      type: object
+      required:
+        - DomainStatusList
+      properties:
+        DomainStatusList:
+          $ref: '#/components/schemas/ElasticsearchDomainStatusList'
+      description: The result of a <code>DescribeElasticsearchDomains</code> request. Contains the status of the specified domains or all domains owned by the account.
+    DescribeElasticsearchInstanceTypeLimitsRequest:
+      type: object
+      properties: {}
+      description: ' Container for the parameters to <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. '
+    DescribeElasticsearchInstanceTypeLimitsResponse:
+      type: object
+      properties:
+        LimitsByRole:
+          $ref: '#/components/schemas/LimitsByRole'
+      description: ' Container for the parameters received from <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. '
+    DisabledOperationException:
+      type: object
+      properties: {}
+      description: An error occured because the client wanted to access a not supported operation. Gives http status code of 409.
+    DomainId:
+      type: string
+      description: Unique identifier for an Elasticsearch domain.
+      minLength: 1
+      maxLength: 64
+    DomainInfo:
+      type: object
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+    DomainInfoList:
+      type: array
+      description: ' Contains the list of Elasticsearch domain information.'
+      items:
+        $ref: '#/components/schemas/DomainInfo'
+    DomainName:
+      type: string
+      pattern: '[a-z][a-z0-9\-]+'
+      description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+      minLength: 3
+      maxLength: 28
+    DomainNameList:
+      type: array
+      description: A list of Elasticsearch domain names.
+      items:
+        $ref: '#/components/schemas/DomainName'
+    EBSOptions:
+      type: object
+      properties:
+        EBSEnabled:
+          $ref: '#/components/schemas/Boolean'
+        VolumeType:
+          $ref: '#/components/schemas/VolumeType'
+        VolumeSize:
+          $ref: '#/components/schemas/IntegerClass'
+        Iops:
+          $ref: '#/components/schemas/IntegerClass'
+      description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
+    EBSOptionsStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/EBSOptions'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: ' Status of the EBS options for the specified Elasticsearch domain.'
+    ESPartitionInstanceType:
+      type: string
+      enum:
+        - m3.medium.elasticsearch
+        - m3.large.elasticsearch
+        - m3.xlarge.elasticsearch
+        - m3.2xlarge.elasticsearch
+        - m4.large.elasticsearch
+        - m4.xlarge.elasticsearch
+        - m4.2xlarge.elasticsearch
+        - m4.4xlarge.elasticsearch
+        - m4.10xlarge.elasticsearch
+        - t2.micro.elasticsearch
+        - t2.small.elasticsearch
+        - t2.medium.elasticsearch
+        - r3.large.elasticsearch
+        - r3.xlarge.elasticsearch
+        - r3.2xlarge.elasticsearch
+        - r3.4xlarge.elasticsearch
+        - r3.8xlarge.elasticsearch
+        - i2.xlarge.elasticsearch
+        - i2.2xlarge.elasticsearch
+        - d2.xlarge.elasticsearch
+        - d2.2xlarge.elasticsearch
+        - d2.4xlarge.elasticsearch
+        - d2.8xlarge.elasticsearch
+        - c4.large.elasticsearch
+        - c4.xlarge.elasticsearch
+        - c4.2xlarge.elasticsearch
+        - c4.4xlarge.elasticsearch
+        - c4.8xlarge.elasticsearch
+        - r4.large.elasticsearch
+        - r4.xlarge.elasticsearch
+        - r4.2xlarge.elasticsearch
+        - r4.4xlarge.elasticsearch
+        - r4.8xlarge.elasticsearch
+        - r4.16xlarge.elasticsearch
+    ElasticsearchClusterConfig:
+      type: object
+      properties:
+        InstanceType:
+          $ref: '#/components/schemas/ESPartitionInstanceType'
+        InstanceCount:
+          $ref: '#/components/schemas/IntegerClass'
+        DedicatedMasterEnabled:
+          $ref: '#/components/schemas/Boolean'
+        ZoneAwarenessEnabled:
+          $ref: '#/components/schemas/Boolean'
+        DedicatedMasterType:
+          $ref: '#/components/schemas/ESPartitionInstanceType'
+        DedicatedMasterCount:
+          $ref: '#/components/schemas/IntegerClass'
+      description: 'Specifies the configuration for the domain cluster, such as the type and number of instances.'
+    ElasticsearchClusterConfigStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/ElasticsearchClusterConfig'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: ' Specifies the configuration status for the specified Elasticsearch domain.'
+    ElasticsearchDomainConfig:
+      type: object
+      properties:
+        ElasticsearchVersion:
+          $ref: '#/components/schemas/ElasticsearchVersionStatus'
+        ElasticsearchClusterConfig:
+          $ref: '#/components/schemas/ElasticsearchClusterConfigStatus'
+        EBSOptions:
+          $ref: '#/components/schemas/EBSOptionsStatus'
+        AccessPolicies:
+          $ref: '#/components/schemas/AccessPoliciesStatus'
+        SnapshotOptions:
+          $ref: '#/components/schemas/SnapshotOptionsStatus'
+        AdvancedOptions:
+          $ref: '#/components/schemas/AdvancedOptionsStatus'
+      description: The configuration of an Elasticsearch domain.
+    ElasticsearchDomainStatus:
+      type: object
+      required:
+        - DomainId
+        - DomainName
+        - ARN
+        - ElasticsearchClusterConfig
+      properties:
+        DomainId:
+          $ref: '#/components/schemas/DomainId'
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        ARN:
+          $ref: '#/components/schemas/ARN'
+        Created:
+          $ref: '#/components/schemas/Boolean'
+        Deleted:
+          $ref: '#/components/schemas/Boolean'
+        Endpoint:
+          $ref: '#/components/schemas/ServiceUrl'
+        Processing:
+          $ref: '#/components/schemas/Boolean'
+        ElasticsearchVersion:
+          $ref: '#/components/schemas/ElasticsearchVersionString'
+        ElasticsearchClusterConfig:
+          $ref: '#/components/schemas/ElasticsearchClusterConfig'
+        EBSOptions:
+          $ref: '#/components/schemas/EBSOptions'
+        AccessPolicies:
+          $ref: '#/components/schemas/PolicyDocument'
+        SnapshotOptions:
+          $ref: '#/components/schemas/SnapshotOptions'
+        AdvancedOptions:
+          $ref: '#/components/schemas/AdvancedOptions'
+      description: The current status of an Elasticsearch domain.
+    ElasticsearchDomainStatusList:
+      type: array
+      description: A list that contains the status of each requested Elasticsearch domain.
+      items:
+        $ref: '#/components/schemas/ElasticsearchDomainStatus'
+    ElasticsearchInstanceTypeList:
+      type: array
+      description: ' List of instance types supported by Amazon Elasticsearch service. '
+      items:
+        $ref: '#/components/schemas/ESPartitionInstanceType'
+    ElasticsearchVersionList:
+      type: array
+      description: 'List of supported elastic search versions. '
+      items:
+        $ref: '#/components/schemas/ElasticsearchVersionString'
+    ElasticsearchVersionStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/ElasticsearchVersionString'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: ' Status of the Elasticsearch version options for the specified Elasticsearch domain.'
+    ElasticsearchVersionString:
+      type: string
+    ErrorMessage:
+      type: string
+    InstanceCountLimits:
+      type: object
+      properties:
+        MinimumInstanceCount:
+          $ref: '#/components/schemas/MinimumInstanceCount'
+        MaximumInstanceCount:
+          $ref: '#/components/schemas/MaximumInstanceCount'
+      description: ' InstanceCountLimits represents the limits on number of instances that be created in Amazon Elasticsearch for given InstanceType. '
+    InstanceLimits:
+      type: object
+      properties:
+        InstanceCountLimits:
+          $ref: '#/components/schemas/InstanceCountLimits'
+      description: 'InstanceLimits represents the list of instance related attributes that are available for given InstanceType. '
+    InstanceRole:
+      type: string
+    IntegerClass:
+      type: integer
+    InternalException:
+      type: object
+      properties: {}
+      description: 'The request processing has failed because of an unknown error, exception or failure (the failure is internal to the service) . Gives http status code of 500.'
+    InvalidTypeException:
+      type: object
+      properties: {}
+      description: An exception for trying to create or access sub-resource that is either invalid or not supported. Gives http status code of 409.
+    LimitExceededException:
+      type: object
+      properties: {}
+      description: An exception for trying to create more than allowed resources or sub-resources. Gives http status code of 409.
+    LimitName:
+      type: string
+    LimitValue:
+      type: string
+    LimitValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LimitValue'
+    Limits:
+      type: object
+      properties:
+        StorageTypes:
+          $ref: '#/components/schemas/StorageTypeList'
+        InstanceLimits:
+          $ref: '#/components/schemas/InstanceLimits'
+        AdditionalLimits:
+          $ref: '#/components/schemas/AdditionalLimitList'
+      description: ' Limits for given InstanceType and for each of it''s role. <br/> Limits contains following <code> <a>StorageTypes,</a> </code> <code> <a>InstanceLimits</a> </code> and <code> <a>AdditionalLimits</a> </code> '
+    LimitsByRole:
+      type: array
+      description: ' Map of Role of the Instance and Limits that are applicable. Role performed by given Instance in Elasticsearch can be one of the following: <ul> <li>Data: If the given InstanceType is used as Data node</li> <li>Master: If the given InstanceType is used as Master node</li> </ul> '
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/InstanceRole'
+          value:
+            $ref: '#/components/schemas/Limits'
+    ListDomainNamesResponse:
+      type: object
+      properties:
+        DomainNames:
+          $ref: '#/components/schemas/DomainInfoList'
+      description: The result of a <code>ListDomainNames</code> operation. Contains the names of all Elasticsearch domains owned by this account.
+    ListElasticsearchInstanceTypesRequest:
+      type: object
+      properties: {}
+      description: ' Container for the parameters to the <code> <a>ListElasticsearchInstanceTypes</a> </code> operation. '
+    ListElasticsearchInstanceTypesResponse:
+      type: object
+      properties:
+        ElasticsearchInstanceTypes:
+          $ref: '#/components/schemas/ElasticsearchInstanceTypeList'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: ' Container for the parameters returned by <code> <a>ListElasticsearchInstanceTypes</a> </code> operation. '
+    ListElasticsearchVersionsRequest:
+      type: object
+      properties: {}
+      description: '<p> Container for the parameters to the <code> <a>ListElasticsearchVersions</a> </code> operation. <p> Use <code> <a>MaxResults</a> </code> to control the maximum number of results to retrieve in a single call. </p> <p> Use <code> <a>NextToken</a> </code> in response to retrieve more results. If the received response does not contain a NextToken, then there are no more results to retrieve. </p> </p>'
+    ListElasticsearchVersionsResponse:
+      type: object
+      properties:
+        ElasticsearchVersions:
+          $ref: '#/components/schemas/ElasticsearchVersionList'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: ' Container for the parameters for response received from <code> <a>ListElasticsearchVersions</a> </code> operation. '
+    ListTagsRequest:
+      type: object
+      properties: {}
+      description: Container for the parameters to the <code><a>ListTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain to which the tags are attached that you want to view are attached.
+    ListTagsResponse:
+      type: object
+      properties:
+        TagList:
+          $ref: '#/components/schemas/TagList'
+      description: The result of a <code>ListTags</code> operation. Contains tags for all requested Elasticsearch domains.
+    MaxResults:
+      type: integer
+      description: ' Set this value to limit the number of results returned. '
+      maximum: 100
+    MaximumInstanceCount:
+      type: integer
+      description: ' Maximum number of Instances that can be instantiated for given InstanceType. '
+    MinimumInstanceCount:
+      type: integer
+      description: ' Minimum number of Instances that can be instantiated for given InstanceType. '
+    NextToken:
+      type: string
+      description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+    OptionState:
+      type: string
+      enum:
+        - RequiresIndexDocuments
+        - Processing
+        - Active
+      description: '<p>The state of a requested change. One of the following:</p> <ul> <li>Processing: The request change is still in-process.</li> <li>Active: The request change is processed and deployed to the Elasticsearch domain.</li> </ul>'
+    OptionStatus:
+      type: object
+      required:
+        - CreationDate
+        - UpdateDate
+        - State
+      properties:
+        CreationDate:
+          $ref: '#/components/schemas/UpdateTimestamp'
+        UpdateDate:
+          $ref: '#/components/schemas/UpdateTimestamp'
+        UpdateVersion:
+          $ref: '#/components/schemas/UIntValue'
+        State:
+          $ref: '#/components/schemas/OptionState'
+        PendingDeletion:
+          $ref: '#/components/schemas/Boolean'
+      description: Provides the current status of the entity.
+    PolicyDocument:
+      type: string
+      description: 'Access policy rules for an Elasticsearch domain service endpoints. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies" target="_blank">Configuring Access Policies</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>. The maximum size of a policy document is 100 KB.'
+    RemoveTagsRequest:
+      type: object
+      required:
+        - ARN
+        - TagKeys
+      properties:
+        ARN:
+          $ref: '#/components/schemas/ARN'
+        TagKeys:
+          $ref: '#/components/schemas/StringList'
+      description: Container for the parameters to the <code><a>RemoveTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain from which you want to remove the specified <code>TagKey</code>.
+    ResourceAlreadyExistsException:
+      type: object
+      properties: {}
+      description: An exception for creating a resource that already exists. Gives http status code of 400.
+    ResourceNotFoundException:
+      type: object
+      properties: {}
+      description: An exception for accessing or deleting a resource that does not exist. Gives http status code of 400.
+    ServiceUrl:
+      type: string
+      description: 'The endpoint to which service requests are submitted. For example, <code>search-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.es.amazonaws.com</code> or <code>doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.es.amazonaws.com</code>.'
+    SnapshotOptions:
+      type: object
+      properties:
+        AutomatedSnapshotStartHour:
+          $ref: '#/components/schemas/IntegerClass'
+      description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
+    SnapshotOptionsStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/SnapshotOptions'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: Status of a daily automated snapshot.
+    StorageSubTypeName:
+      type: string
+      description: ' SubType of the given storage type. List of available sub-storage options: For "instance" storageType we wont have any storageSubType, in case of "ebs" storageType we will have following valid storageSubTypes <ol> <li>standard</li> <li>gp2</li> <li>io1</li> </ol> Refer <code><a>VolumeType</a></code> for more information regarding above EBS storage options. '
+    StorageType:
+      type: object
+      properties:
+        StorageTypeName:
+          $ref: '#/components/schemas/StorageTypeName'
+        StorageSubTypeName:
+          $ref: '#/components/schemas/StorageSubTypeName'
+        StorageTypeLimits:
+          $ref: '#/components/schemas/StorageTypeLimitList'
+      description: 'StorageTypes represents the list of storage related types and their attributes that are available for given InstanceType. '
+    StorageTypeLimit:
+      type: object
+      properties:
+        LimitName:
+          $ref: '#/components/schemas/LimitName'
+        LimitValues:
+          $ref: '#/components/schemas/LimitValueList'
+      description: 'Limits that are applicable for given storage type. '
+    StorageTypeLimitList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StorageTypeLimit'
+    StorageTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StorageType'
+    StorageTypeName:
+      type: string
+      description: ' Type of the storage. List of available storage options: <ol> <li>instance</li> Inbuilt storage available for the given Instance <li>ebs</li> Elastic block storage that would be attached to the given Instance </ol> '
+    String:
+      type: string
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+      description: Specifies a key value pair for a resource tag.
+    TagKey:
+      type: string
+      description: A string of length from 1 to 128 characters that specifies the key for a Tag. Tag keys must be unique for the Elasticsearch domain to which they are attached.
+      minLength: 1
+      maxLength: 128
+    TagList:
+      type: array
+      description: 'A list of <code>Tag</code> '
+      items:
+        $ref: '#/components/schemas/Tag'
+    TagValue:
+      type: string
+      description: A string of length from 0 to 256 characters that specifies the value for a Tag. Tag values can be null and do not have to be unique in a tag set.
+      minLength: 0
+      maxLength: 256
+    UIntValue:
+      type: integer
+      minimum: 0
+    UpdateElasticsearchDomainConfigRequest:
+      type: object
+      properties:
+        ElasticsearchClusterConfig:
+          $ref: '#/components/schemas/ElasticsearchClusterConfig'
+        EBSOptions:
+          $ref: '#/components/schemas/EBSOptions'
+        SnapshotOptions:
+          $ref: '#/components/schemas/SnapshotOptions'
+        AdvancedOptions:
+          $ref: '#/components/schemas/AdvancedOptions'
+        AccessPolicies:
+          $ref: '#/components/schemas/PolicyDocument'
+      description: Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.
+    UpdateElasticsearchDomainConfigResponse:
+      type: object
+      required:
+        - DomainConfig
+      properties:
+        DomainConfig:
+          $ref: '#/components/schemas/ElasticsearchDomainConfig'
+      description: The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.
+    UpdateTimestamp:
+      type: string
+      format: date-time
+    ValidationException:
+      type: object
+      properties: {}
+      description: An exception for missing / invalid input fields. Gives http status code of 400.
+    VolumeType:
+      type: string
+      enum:
+        - standard
+        - gp2
+        - io1
+      description: ' The type of EBS volume, standard, gp2, or io1. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank">Configuring EBS-based Storage</a>for more information.'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

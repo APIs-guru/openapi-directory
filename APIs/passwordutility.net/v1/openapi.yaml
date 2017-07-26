@@ -1,0 +1,93 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://passwordutility.net:80/'
+info:
+  description: Validate and generate passwords using open source tools
+  title: PasswordUtility.Web
+  version: v1
+  x-apisguru-categories:
+    - security
+    - tools
+  x-origin:
+    - format: swagger
+      url: 'http://passwordutility.net/swagger/docs/v1'
+      version: '2.0'
+  x-providerName: passwordutility.net
+paths:
+  /api/password/generate:
+    post:
+      deprecated: false
+      operationId: Password_Generate
+      parameters:
+        - in: query
+          name: length
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: upperCase
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: digits
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: specialCharacters
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+      tags:
+        - Password
+  /api/password/validate:
+    post:
+      deprecated: false
+      operationId: Password_Validate
+      parameters:
+        - in: query
+          name: password
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+      tags:
+        - Password
+components:
+  schemas:
+    Object:
+      properties: {}
+      type: object

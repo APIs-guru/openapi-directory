@@ -1,0 +1,3884 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://dms.amazonaws.com/'
+info:
+  version: '2016-01-01'
+  x-release: v4
+  title: AWS Database Migration Service
+  description: '<fullname>AWS Database Migration Service</fullname> <p>AWS Database Migration Service (AWS DMS) can migrate your data to and from the most widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as heterogeneous migrations between different database platforms, such as Oracle to MySQL or SQL Server to PostgreSQL.</p> <p>For more information about AWS DMS, see the AWS DMS user guide at <a href="http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html"> What Is AWS Database Migration Service? </a> </p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: dms
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/dms-2016-01-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/dms/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddTagsToResource
+      description: 'Adds metadata tags to a DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddTagsToResourceResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTagsToResourceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateEndpoint':
+    post:
+      operationId: CreateEndpoint
+      description: Creates an endpoint using the provided settings.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEndpointResponse'
+        '480':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '481':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '482':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '483':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '484':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '485':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEndpointMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateEventSubscription':
+    post:
+      operationId: CreateEventSubscription
+      description: '<p> Creates an AWS DMS event notification subscription. </p> <p>You can specify the type of source (<code>SourceType</code>) you want to be notified of, provide a list of AWS DMS source IDs (<code>SourceIds</code>) that triggers the events, and provide a list of event categories (<code>EventCategories</code>) for events you want to be notified of. If you specify both the <code>SourceType</code> and <code>SourceIds</code>, such as <code>SourceType = replication-instance</code> and <code>SourceIdentifier = my-replinstance</code>, you will be notified of all the replication instance events for the specified source. If you specify a <code>SourceType</code> but don''t specify a <code>SourceIdentifier</code>, you receive notice of the events for that source type for all your AWS DMS sources. If you don''t specify either <code>SourceType</code> nor <code>SourceIdentifier</code>, you will be notified of events generated from all AWS DMS sources belonging to your customer account.</p> <p>For more information about AWS DMS events, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html"> Working with Events and Notifications </a> in the AWS Database MIgration Service User Guide.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEventSubscriptionResponse'
+        '480':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '481':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '482':
+          description: SNSInvalidTopicFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SNSInvalidTopicFault'
+        '483':
+          description: SNSNoAuthorizationFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SNSNoAuthorizationFault'
+        '484':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEventSubscriptionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateReplicationInstance':
+    post:
+      operationId: CreateReplicationInstance
+      description: Creates the replication instance using the specified parameters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateReplicationInstanceResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '482':
+          description: InsufficientResourceCapacityFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientResourceCapacityFault'
+        '483':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '484':
+          description: StorageQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageQuotaExceededFault'
+        '485':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '486':
+          description: ReplicationSubnetGroupDoesNotCoverEnoughAZs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplicationSubnetGroupDoesNotCoverEnoughAZs'
+        '487':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '488':
+          description: InvalidSubnet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+        '489':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReplicationInstanceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateReplicationSubnetGroup':
+    post:
+      operationId: CreateReplicationSubnetGroup
+      description: Creates a replication subnet group given a list of the subnet IDs in a VPC.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateReplicationSubnetGroupResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '482':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '483':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '484':
+          description: ReplicationSubnetGroupDoesNotCoverEnoughAZs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplicationSubnetGroupDoesNotCoverEnoughAZs'
+        '485':
+          description: InvalidSubnet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReplicationSubnetGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateReplicationTask':
+    post:
+      operationId: CreateReplicationTask
+      description: Creates a replication task using the specified parameters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateReplicationTaskResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '482':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '483':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '484':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '485':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReplicationTaskMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteCertificate':
+    post:
+      operationId: DeleteCertificate
+      description: 'Deletes the specified certificate. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCertificateResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCertificateMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteEndpoint':
+    post:
+      operationId: DeleteEndpoint
+      description: <p>Deletes the specified endpoint.</p> <note> <p>All tasks associated with the endpoint must be deleted before you can delete the endpoint.</p> </note> <p/>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEndpointResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEndpointMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteEventSubscription':
+    post:
+      operationId: DeleteEventSubscription
+      description: ' Deletes an AWS DMS event subscription. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEventSubscriptionResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEventSubscriptionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteReplicationInstance':
+    post:
+      operationId: DeleteReplicationInstance
+      description: <p>Deletes the specified replication instance.</p> <note> <p>You must delete any migration tasks that are associated with the replication instance before you can delete it.</p> </note> <p/>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteReplicationInstanceResponse'
+        '480':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteReplicationInstanceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteReplicationSubnetGroup':
+    post:
+      operationId: DeleteReplicationSubnetGroup
+      description: Deletes a subnet group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteReplicationSubnetGroupResponse'
+        '480':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteReplicationSubnetGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteReplicationTask':
+    post:
+      operationId: DeleteReplicationTask
+      description: Deletes the specified replication task.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteReplicationTaskResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteReplicationTaskMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAccountAttributes':
+    post:
+      operationId: DescribeAccountAttributes
+      description: '<p>Lists all of the AWS DMS attributes for a customer account. The attributes include AWS DMS quotas for the account, such as the number of replication instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota''s maximum value.</p> <p>This command does not take any parameters.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAccountAttributesResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAccountAttributesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeCertificates':
+    post:
+      operationId: DescribeCertificates
+      description: Provides a description of the certificate.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeCertificatesResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeCertificatesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConnections':
+    post:
+      operationId: DescribeConnections
+      description: Describes the status of the connections that have been made between the replication instance and an endpoint. Connections are created when you test an endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConnectionsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConnectionsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEndpointTypes':
+    post:
+      operationId: DescribeEndpointTypes
+      description: Returns information about the type of endpoints available.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEndpointTypesResponse'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEndpointTypesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEndpoints':
+    post:
+      operationId: DescribeEndpoints
+      description: Returns information about the endpoints for your account in the current region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEndpointsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEndpointsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEventCategories':
+    post:
+      operationId: DescribeEventCategories
+      description: 'Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html"> Working with Events and Notifications </a> in the AWS Database Migration Service User Guide. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEventCategoriesResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventCategoriesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEventSubscriptions':
+    post:
+      operationId: DescribeEventSubscriptions
+      description: '<p>Lists all the event subscriptions for a customer account. The description of a subscription includes <code>SubscriptionName</code>, <code>SNSTopicARN</code>, <code>CustomerID</code>, <code>SourceType</code>, <code>SourceID</code>, <code>CreationTime</code>, and <code>Status</code>. </p> <p>If you specify <code>SubscriptionName</code>, this action lists the description for that subscription.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEventSubscriptionsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventSubscriptionsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEvents':
+    post:
+      operationId: DescribeEvents
+      description: ' Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html"> Working with Events and Notifications </a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEventsResponse'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeOrderableReplicationInstances':
+    post:
+      operationId: DescribeOrderableReplicationInstances
+      description: Returns information about the replication instance types that can be created in the specified region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeOrderableReplicationInstancesResponse'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeOrderableReplicationInstancesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeRefreshSchemasStatus':
+    post:
+      operationId: DescribeRefreshSchemasStatus
+      description: Returns the status of the RefreshSchemas operation.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRefreshSchemasStatusResponse'
+        '480':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeRefreshSchemasStatusMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReplicationInstances':
+    post:
+      operationId: DescribeReplicationInstances
+      description: Returns information about replication instances for your account in the current region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReplicationInstancesResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReplicationInstancesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReplicationSubnetGroups':
+    post:
+      operationId: DescribeReplicationSubnetGroups
+      description: Returns information about the replication subnet groups.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReplicationSubnetGroupsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReplicationSubnetGroupsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReplicationTasks':
+    post:
+      operationId: DescribeReplicationTasks
+      description: Returns information about replication tasks for your account in the current region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReplicationTasksResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReplicationTasksMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSchemas':
+    post:
+      operationId: DescribeSchemas
+      description: <p>Returns information about the schema for the specified endpoint.</p> <p/>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSchemasResponse'
+        '480':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSchemasMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTableStatistics':
+    post:
+      operationId: DescribeTableStatistics
+      description: 'Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTableStatisticsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTableStatisticsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ImportCertificate':
+    post:
+      operationId: ImportCertificate
+      description: Uploads the specified certificate.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportCertificateResponse'
+        '480':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '481':
+          description: InvalidCertificateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCertificateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportCertificateMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: Lists all tags for an AWS DMS resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyEndpoint':
+    post:
+      operationId: ModifyEndpoint
+      description: Modifies the specified endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyEndpointResponse'
+        '480':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '483':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '484':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyEndpointMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyEventSubscription':
+    post:
+      operationId: ModifyEventSubscription
+      description: 'Modifies an existing AWS DMS event notification subscription. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyEventSubscriptionResponse'
+        '480':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: SNSInvalidTopicFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SNSInvalidTopicFault'
+        '483':
+          description: SNSNoAuthorizationFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SNSNoAuthorizationFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyEventSubscriptionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyReplicationInstance':
+    post:
+      operationId: ModifyReplicationInstance
+      description: <p>Modifies the replication instance to apply new settings. You can change one or more parameters by specifying these parameters and the new values in the request.</p> <p>Some settings are applied during the maintenance window.</p> <p/>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyReplicationInstanceResponse'
+        '480':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '481':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '482':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '483':
+          description: InsufficientResourceCapacityFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsufficientResourceCapacityFault'
+        '484':
+          description: StorageQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageQuotaExceededFault'
+        '485':
+          description: UpgradeDependencyFailureFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpgradeDependencyFailureFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyReplicationInstanceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyReplicationSubnetGroup':
+    post:
+      operationId: ModifyReplicationSubnetGroup
+      description: Modifies the settings for the specified replication subnet group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyReplicationSubnetGroupResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '483':
+          description: SubnetAlreadyInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubnetAlreadyInUse'
+        '484':
+          description: ReplicationSubnetGroupDoesNotCoverEnoughAZs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplicationSubnetGroupDoesNotCoverEnoughAZs'
+        '485':
+          description: InvalidSubnet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyReplicationSubnetGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyReplicationTask':
+    post:
+      operationId: ModifyReplicationTask
+      description: '<p>Modifies the specified replication task.</p> <p>You can''t modify the task endpoints. The task must be stopped before you can modify it. </p> <p>For more information about AWS DMS tasks, see the AWS DMS user guide at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html"> Working with Migration Tasks </a> </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyReplicationTaskResponse'
+        '480':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '483':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyReplicationTaskMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RefreshSchemas':
+    post:
+      operationId: RefreshSchemas
+      description: Populates the schema for the specified endpoint. This is an asynchronous operation and can take several minutes. You can check the status of this operation by calling the DescribeRefreshSchemasStatus operation.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshSchemasResponse'
+        '480':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '483':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshSchemasMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ReloadTables':
+    post:
+      operationId: ReloadTables
+      description: 'Reloads the target database table with the source data. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReloadTablesResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReloadTablesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveTagsFromResource':
+    post:
+      operationId: RemoveTagsFromResource
+      description: Removes metadata tags from a DMS resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveTagsFromResourceResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveTagsFromResourceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartReplicationTask':
+    post:
+      operationId: StartReplicationTask
+      description: '<p>Starts the replication task.</p> <p>For more information about AWS DMS tasks, see the AWS DMS user guide at <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html"> Working with Migration Tasks </a> </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartReplicationTaskResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartReplicationTaskMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopReplicationTask':
+    post:
+      operationId: StopReplicationTask
+      description: <p>Stops the replication task.</p> <p/>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopReplicationTaskResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopReplicationTaskMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TestConnection':
+    post:
+      operationId: TestConnection
+      description: Tests the connection between the replication instance and the endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestConnectionResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '482':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '483':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestConnectionMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AccessDeniedFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: AWS DMS was denied access to the endpoint.
+    AccountQuota:
+      type: object
+      properties:
+        AccountQuotaName:
+          $ref: '#/components/schemas/String'
+        Used:
+          $ref: '#/components/schemas/Long'
+        Max:
+          $ref: '#/components/schemas/Long'
+      description: 'Describes a quota for an AWS account, for example, the number of replication instances allowed.'
+    AccountQuotaList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccountQuota'
+    AddTagsToResourceMessage:
+      type: object
+      required:
+        - ResourceArn
+        - Tags
+      example:
+        ResourceArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
+        Tags:
+          - Key: Acount
+            Value: '1633456'
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/String'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: <p/>
+    AddTagsToResourceResponse:
+      type: object
+      example: {}
+      properties: {}
+      description: <p/>
+    AuthMechanismValue:
+      type: string
+      enum:
+        - default
+        - mongodb_cr
+        - scram_sha_1
+    AuthTypeValue:
+      type: string
+      enum:
+        - 'no'
+        - password
+    AvailabilityZone:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    Boolean:
+      type: boolean
+    BooleanOptional:
+      type: boolean
+    Certificate:
+      type: object
+      properties:
+        CertificateIdentifier:
+          $ref: '#/components/schemas/String'
+        CertificateCreationDate:
+          $ref: '#/components/schemas/TStamp'
+        CertificatePem:
+          $ref: '#/components/schemas/String'
+        CertificateWallet:
+          $ref: '#/components/schemas/CertificateWallet'
+        CertificateArn:
+          $ref: '#/components/schemas/String'
+        CertificateOwner:
+          $ref: '#/components/schemas/String'
+        ValidFromDate:
+          $ref: '#/components/schemas/TStamp'
+        ValidToDate:
+          $ref: '#/components/schemas/TStamp'
+        SigningAlgorithm:
+          $ref: '#/components/schemas/String'
+        KeyLength:
+          $ref: '#/components/schemas/IntegerOptional'
+      description: The SSL certificate that can be used to encrypt connections between the endpoints and the replication instance.
+    CertificateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Certificate'
+    CertificateWallet:
+      type: string
+    CompressionTypeValue:
+      type: string
+      enum:
+        - none
+        - gzip
+    Connection:
+      type: object
+      properties:
+        ReplicationInstanceArn:
+          $ref: '#/components/schemas/String'
+        EndpointArn:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+        LastFailureMessage:
+          $ref: '#/components/schemas/String'
+        EndpointIdentifier:
+          $ref: '#/components/schemas/String'
+        ReplicationInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    ConnectionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Connection'
+    CreateEndpointMessage:
+      type: object
+      required:
+        - EndpointIdentifier
+        - EndpointType
+        - EngineName
+      example:
+        CertificateArn: ''
+        DatabaseName: testdb
+        EndpointIdentifier: test-endpoint-1
+        EndpointType: source
+        EngineName: mysql
+        ExtraConnectionAttributes: ''
+        KmsKeyId: 'arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd'
+        Password: pasword
+        Port: 3306
+        ServerName: mydb.cx1llnox7iyx.us-west-2.rds.amazonaws.com
+        SslMode: require
+        Tags:
+          - Key: Acount
+            Value: '143327655'
+        Username: username
+      properties:
+        EndpointIdentifier:
+          $ref: '#/components/schemas/String'
+        EndpointType:
+          $ref: '#/components/schemas/ReplicationEndpointTypeValue'
+        EngineName:
+          $ref: '#/components/schemas/String'
+        Username:
+          $ref: '#/components/schemas/String'
+        Password:
+          $ref: '#/components/schemas/SecretString'
+        ServerName:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        DatabaseName:
+          $ref: '#/components/schemas/String'
+        ExtraConnectionAttributes:
+          $ref: '#/components/schemas/String'
+        KmsKeyId:
+          $ref: '#/components/schemas/String'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        CertificateArn:
+          $ref: '#/components/schemas/String'
+        SslMode:
+          $ref: '#/components/schemas/DmsSslModeValue'
+        DynamoDbSettings:
+          $ref: '#/components/schemas/DynamoDbSettings'
+        S3Settings:
+          $ref: '#/components/schemas/S3Settings'
+        MongoDbSettings:
+          $ref: '#/components/schemas/MongoDbSettings'
+      description: <p/>
+    CreateEndpointResponse:
+      type: object
+      example:
+        Endpoint:
+          EndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM'
+          EndpointIdentifier: test-endpoint-1
+          EndpointType: source
+          EngineName: mysql
+          KmsKeyId: 'arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd'
+          Port: 3306
+          ServerName: mydb.cx1llnox7iyx.us-west-2.rds.amazonaws.com
+          Status: active
+          Username: username
+      properties:
+        Endpoint:
+          $ref: '#/components/schemas/Endpoint'
+      description: <p/>
+    CreateEventSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+        - SnsTopicArn
+      properties:
+        SubscriptionName:
+          $ref: '#/components/schemas/String'
+        SnsTopicArn:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/String'
+        EventCategories:
+          $ref: '#/components/schemas/EventCategoriesList'
+        SourceIds:
+          $ref: '#/components/schemas/SourceIdsList'
+        Enabled:
+          $ref: '#/components/schemas/BooleanOptional'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: <p/>
+    CreateEventSubscriptionResponse:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
+      description: <p/>
+    CreateReplicationInstanceMessage:
+      type: object
+      required:
+        - ReplicationInstanceIdentifier
+        - ReplicationInstanceClass
+      example:
+        AllocatedStorage: 123
+        AutoMinorVersionUpgrade: true
+        AvailabilityZone: ''
+        EngineVersion: ''
+        KmsKeyId: ''
+        MultiAZ: true
+        PreferredMaintenanceWindow: ''
+        PubliclyAccessible: true
+        ReplicationInstanceClass: ''
+        ReplicationInstanceIdentifier: ''
+        ReplicationSubnetGroupIdentifier: ''
+        Tags:
+          - Key: string
+            Value: string
+        VpcSecurityGroupIds: []
+      properties:
+        ReplicationInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        AllocatedStorage:
+          $ref: '#/components/schemas/IntegerOptional'
+        ReplicationInstanceClass:
+          $ref: '#/components/schemas/String'
+        VpcSecurityGroupIds:
+          $ref: '#/components/schemas/VpcSecurityGroupIdList'
+        AvailabilityZone:
+          $ref: '#/components/schemas/String'
+        ReplicationSubnetGroupIdentifier:
+          $ref: '#/components/schemas/String'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        MultiAZ:
+          $ref: '#/components/schemas/BooleanOptional'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/BooleanOptional'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        KmsKeyId:
+          $ref: '#/components/schemas/String'
+        PubliclyAccessible:
+          $ref: '#/components/schemas/BooleanOptional'
+      description: <p/>
+    CreateReplicationInstanceResponse:
+      type: object
+      example:
+        ReplicationInstance:
+          AllocatedStorage: 5
+          AutoMinorVersionUpgrade: true
+          EngineVersion: 1.5.0
+          KmsKeyId: 'arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd'
+          PendingModifiedValues: {}
+          PreferredMaintenanceWindow: 'sun:06:00-sun:14:00'
+          PubliclyAccessible: true
+          ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+          ReplicationInstanceClass: dms.t2.micro
+          ReplicationInstanceIdentifier: test-rep-1
+          ReplicationInstanceStatus: creating
+          ReplicationSubnetGroup:
+            ReplicationSubnetGroupDescription: default
+            ReplicationSubnetGroupIdentifier: default
+            SubnetGroupStatus: Complete
+            Subnets:
+              - SubnetAvailabilityZone:
+                  Name: us-east-1d
+                SubnetIdentifier: subnet-f6dd91af
+                SubnetStatus: Active
+              - SubnetAvailabilityZone:
+                  Name: us-east-1b
+                SubnetIdentifier: subnet-3605751d
+                SubnetStatus: Active
+              - SubnetAvailabilityZone:
+                  Name: us-east-1c
+                SubnetIdentifier: subnet-c2daefb5
+                SubnetStatus: Active
+              - SubnetAvailabilityZone:
+                  Name: us-east-1e
+                SubnetIdentifier: subnet-85e90cb8
+                SubnetStatus: Active
+            VpcId: vpc-6741a603
+      properties:
+        ReplicationInstance:
+          $ref: '#/components/schemas/ReplicationInstance'
+      description: <p/>
+    CreateReplicationSubnetGroupMessage:
+      type: object
+      required:
+        - ReplicationSubnetGroupIdentifier
+        - ReplicationSubnetGroupDescription
+        - SubnetIds
+      example:
+        ReplicationSubnetGroupDescription: US West subnet group
+        ReplicationSubnetGroupIdentifier: us-west-2ab-vpc-215ds366
+        SubnetIds:
+          - subnet-e145356n
+          - subnet-58f79200
+        Tags:
+          - Key: Acount
+            Value: '145235'
+      properties:
+        ReplicationSubnetGroupIdentifier:
+          $ref: '#/components/schemas/String'
+        ReplicationSubnetGroupDescription:
+          $ref: '#/components/schemas/String'
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdentifierList'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: <p/>
+    CreateReplicationSubnetGroupResponse:
+      type: object
+      example:
+        ReplicationSubnetGroup: {}
+      properties:
+        ReplicationSubnetGroup:
+          $ref: '#/components/schemas/ReplicationSubnetGroup'
+      description: <p/>
+    CreateReplicationTaskMessage:
+      type: object
+      required:
+        - ReplicationTaskIdentifier
+        - SourceEndpointArn
+        - TargetEndpointArn
+        - ReplicationInstanceArn
+        - MigrationType
+        - TableMappings
+      example:
+        CdcStartTime: '2016-12-14T18:25:43Z'
+        MigrationType: full-load
+        ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+        ReplicationTaskIdentifier: task1
+        ReplicationTaskSettings: ''
+        SourceEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE'
+        TableMappings: 'file://mappingfile.json'
+        Tags:
+          - Key: Acount
+            Value: '24352226'
+        TargetEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
+      properties:
+        ReplicationTaskIdentifier:
+          $ref: '#/components/schemas/String'
+        SourceEndpointArn:
+          $ref: '#/components/schemas/String'
+        TargetEndpointArn:
+          $ref: '#/components/schemas/String'
+        ReplicationInstanceArn:
+          $ref: '#/components/schemas/String'
+        MigrationType:
+          $ref: '#/components/schemas/MigrationTypeValue'
+        TableMappings:
+          $ref: '#/components/schemas/String'
+        ReplicationTaskSettings:
+          $ref: '#/components/schemas/String'
+        CdcStartTime:
+          $ref: '#/components/schemas/TStamp'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: <p/>
+    CreateReplicationTaskResponse:
+      type: object
+      example:
+        ReplicationTask:
+          MigrationType: full-load
+          ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+          ReplicationTaskArn: 'arn:aws:dms:us-east-1:123456789012:task:OEAMB3NXSTZ6LFYZFEPPBBXPYM'
+          ReplicationTaskCreationDate: '2016-12-14T18:25:43Z'
+          ReplicationTaskIdentifier: task1
+          ReplicationTaskSettings: '{"TargetMetadata":{"TargetSchema":"","SupportLobs":true,"FullLobMode":true,"LobChunkSize":64,"LimitedSizeLobMode":false,"LobMaxSize":0},"FullLoadSettings":{"FullLoadEnabled":true,"ApplyChangesEnabled":false,"TargetTablePrepMode":"DROP_AND_CREATE","CreatePkAfterFullLoad":false,"StopTaskCachedChangesApplied":false,"StopTaskCachedChangesNotApplied":false,"ResumeEnabled":false,"ResumeMinTableSize":100000,"ResumeOnlyClusteredPKTables":true,"MaxFullLoadSubTasks":8,"TransactionConsistencyTimeout":600,"CommitRate":10000},"Logging":{"EnableLogging":false}}'
+          SourceEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE'
+          Status: creating
+          TableMappings: 'file://mappingfile.json'
+          TargetEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
+      properties:
+        ReplicationTask:
+          $ref: '#/components/schemas/ReplicationTask'
+      description: <p/>
+    DeleteCertificateMessage:
+      type: object
+      required:
+        - CertificateArn
+      example:
+        CertificateArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUSM457DE6XFJCJQ'
+      properties:
+        CertificateArn:
+          $ref: '#/components/schemas/String'
+    DeleteCertificateResponse:
+      type: object
+      example:
+        Certificate: {}
+      properties:
+        Certificate:
+          $ref: '#/components/schemas/Certificate'
+    DeleteEndpointMessage:
+      type: object
+      required:
+        - EndpointArn
+      example:
+        EndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM'
+      properties:
+        EndpointArn:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DeleteEndpointResponse:
+      type: object
+      example:
+        Endpoint:
+          EndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM'
+          EndpointIdentifier: test-endpoint-1
+          EndpointType: source
+          EngineName: mysql
+          KmsKeyId: 'arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd'
+          Port: 3306
+          ServerName: mydb.cx1llnox7iyx.us-west-2.rds.amazonaws.com
+          Status: active
+          Username: username
+      properties:
+        Endpoint:
+          $ref: '#/components/schemas/Endpoint'
+      description: <p/>
+    DeleteEventSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+      properties:
+        SubscriptionName:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DeleteEventSubscriptionResponse:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
+      description: <p/>
+    DeleteReplicationInstanceMessage:
+      type: object
+      required:
+        - ReplicationInstanceArn
+      example:
+        ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+      properties:
+        ReplicationInstanceArn:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DeleteReplicationInstanceResponse:
+      type: object
+      example:
+        ReplicationInstance:
+          AllocatedStorage: 5
+          AutoMinorVersionUpgrade: true
+          EngineVersion: 1.5.0
+          KmsKeyId: 'arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd'
+          PendingModifiedValues: {}
+          PreferredMaintenanceWindow: 'sun:06:00-sun:14:00'
+          PubliclyAccessible: true
+          ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+          ReplicationInstanceClass: dms.t2.micro
+          ReplicationInstanceIdentifier: test-rep-1
+          ReplicationInstanceStatus: creating
+          ReplicationSubnetGroup:
+            ReplicationSubnetGroupDescription: default
+            ReplicationSubnetGroupIdentifier: default
+            SubnetGroupStatus: Complete
+            Subnets:
+              - SubnetAvailabilityZone:
+                  Name: us-east-1d
+                SubnetIdentifier: subnet-f6dd91af
+                SubnetStatus: Active
+              - SubnetAvailabilityZone:
+                  Name: us-east-1b
+                SubnetIdentifier: subnet-3605751d
+                SubnetStatus: Active
+              - SubnetAvailabilityZone:
+                  Name: us-east-1c
+                SubnetIdentifier: subnet-c2daefb5
+                SubnetStatus: Active
+              - SubnetAvailabilityZone:
+                  Name: us-east-1e
+                SubnetIdentifier: subnet-85e90cb8
+                SubnetStatus: Active
+            VpcId: vpc-6741a603
+      properties:
+        ReplicationInstance:
+          $ref: '#/components/schemas/ReplicationInstance'
+      description: <p/>
+    DeleteReplicationSubnetGroupMessage:
+      type: object
+      required:
+        - ReplicationSubnetGroupIdentifier
+      example:
+        ReplicationSubnetGroupIdentifier: us-west-2ab-vpc-215ds366
+      properties:
+        ReplicationSubnetGroupIdentifier:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DeleteReplicationSubnetGroupResponse:
+      type: object
+      example: {}
+      properties: {}
+      description: <p/>
+    DeleteReplicationTaskMessage:
+      type: object
+      required:
+        - ReplicationTaskArn
+      example:
+        ReplicationTaskArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+      properties:
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DeleteReplicationTaskResponse:
+      type: object
+      example:
+        ReplicationTask:
+          MigrationType: full-load
+          ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+          ReplicationTaskArn: 'arn:aws:dms:us-east-1:123456789012:task:OEAMB3NXSTZ6LFYZFEPPBBXPYM'
+          ReplicationTaskCreationDate: '2016-12-14T18:25:43Z'
+          ReplicationTaskIdentifier: task1
+          ReplicationTaskSettings: '{"TargetMetadata":{"TargetSchema":"","SupportLobs":true,"FullLobMode":true,"LobChunkSize":64,"LimitedSizeLobMode":false,"LobMaxSize":0},"FullLoadSettings":{"FullLoadEnabled":true,"ApplyChangesEnabled":false,"TargetTablePrepMode":"DROP_AND_CREATE","CreatePkAfterFullLoad":false,"StopTaskCachedChangesApplied":false,"StopTaskCachedChangesNotApplied":false,"ResumeEnabled":false,"ResumeMinTableSize":100000,"ResumeOnlyClusteredPKTables":true,"MaxFullLoadSubTasks":8,"TransactionConsistencyTimeout":600,"CommitRate":10000},"Logging":{"EnableLogging":false}}'
+          SourceEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE'
+          Status: creating
+          TableMappings: 'file://mappingfile.json'
+          TargetEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
+      properties:
+        ReplicationTask:
+          $ref: '#/components/schemas/ReplicationTask'
+      description: <p/>
+    DescribeAccountAttributesMessage:
+      type: object
+      example: {}
+      properties: {}
+      description: <p/>
+    DescribeAccountAttributesResponse:
+      type: object
+      example:
+        AccountQuotas:
+          - AccountQuotaName: ReplicationInstances
+            Max: 20
+            Used: 0
+          - AccountQuotaName: AllocatedStorage
+            Max: 20
+            Used: 0
+          - AccountQuotaName: Endpoints
+            Max: 20
+            Used: 0
+      properties:
+        AccountQuotas:
+          $ref: '#/components/schemas/AccountQuotaList'
+      description: <p/>
+    DescribeCertificatesMessage:
+      type: object
+      example:
+        Filters:
+          - Name: string
+            Values:
+              - string
+              - string
+        Marker: ''
+        MaxRecords: 123
+      properties:
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+    DescribeCertificatesResponse:
+      type: object
+      example:
+        Certificates: []
+        Marker: ''
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        Certificates:
+          $ref: '#/components/schemas/CertificateList'
+    DescribeConnectionsMessage:
+      type: object
+      example:
+        Filters:
+          - Name: string
+            Values:
+              - string
+              - string
+        Marker: ''
+        MaxRecords: 123
+      properties:
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeConnectionsResponse:
+      type: object
+      example:
+        Connections:
+          - EndpointArn: 'arn:aws:dms:us-east-arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE'
+            EndpointIdentifier: testsrc1
+            ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+            ReplicationInstanceIdentifier: test
+            Status: successful
+        Marker: ''
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        Connections:
+          $ref: '#/components/schemas/ConnectionList'
+      description: <p/>
+    DescribeEndpointTypesMessage:
+      type: object
+      example:
+        Filters:
+          - Name: string
+            Values:
+              - string
+              - string
+        Marker: ''
+        MaxRecords: 123
+      properties:
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeEndpointTypesResponse:
+      type: object
+      example:
+        Marker: ''
+        SupportedEndpointTypes: []
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        SupportedEndpointTypes:
+          $ref: '#/components/schemas/SupportedEndpointTypeList'
+      description: <p/>
+    DescribeEndpointsMessage:
+      type: object
+      example:
+        Filters:
+          - Name: string
+            Values:
+              - string
+              - string
+        Marker: ''
+        MaxRecords: 123
+      properties:
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeEndpointsResponse:
+      type: object
+      example:
+        Endpoints: []
+        Marker: ''
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        Endpoints:
+          $ref: '#/components/schemas/EndpointList'
+      description: <p/>
+    DescribeEventCategoriesMessage:
+      type: object
+      properties:
+        SourceType:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+      description: <p/>
+    DescribeEventCategoriesResponse:
+      type: object
+      properties:
+        EventCategoryGroupList:
+          $ref: '#/components/schemas/EventCategoryGroupList'
+      description: <p/>
+    DescribeEventSubscriptionsMessage:
+      type: object
+      properties:
+        SubscriptionName:
+          $ref: '#/components/schemas/String'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeEventSubscriptionsResponse:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        EventSubscriptionsList:
+          $ref: '#/components/schemas/EventSubscriptionsList'
+      description: <p/>
+    DescribeEventsMessage:
+      type: object
+      properties:
+        SourceIdentifier:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/SourceType'
+        StartTime:
+          $ref: '#/components/schemas/TStamp'
+        EndTime:
+          $ref: '#/components/schemas/TStamp'
+        Duration:
+          $ref: '#/components/schemas/IntegerOptional'
+        EventCategories:
+          $ref: '#/components/schemas/EventCategoriesList'
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeEventsResponse:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        Events:
+          $ref: '#/components/schemas/EventList'
+      description: <p/>
+    DescribeOrderableReplicationInstancesMessage:
+      type: object
+      example:
+        Marker: ''
+        MaxRecords: 123
+      properties:
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeOrderableReplicationInstancesResponse:
+      type: object
+      example:
+        Marker: ''
+        OrderableReplicationInstances: []
+      properties:
+        OrderableReplicationInstances:
+          $ref: '#/components/schemas/OrderableReplicationInstanceList'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeRefreshSchemasStatusMessage:
+      type: object
+      required:
+        - EndpointArn
+      example:
+        EndpointArn: ''
+      properties:
+        EndpointArn:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeRefreshSchemasStatusResponse:
+      type: object
+      example:
+        RefreshSchemasStatus: {}
+      properties:
+        RefreshSchemasStatus:
+          $ref: '#/components/schemas/RefreshSchemasStatus'
+      description: <p/>
+    DescribeReplicationInstancesMessage:
+      type: object
+      example:
+        Filters:
+          - Name: string
+            Values:
+              - string
+              - string
+        Marker: ''
+        MaxRecords: 123
+      properties:
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeReplicationInstancesResponse:
+      type: object
+      example:
+        Marker: ''
+        ReplicationInstances: []
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        ReplicationInstances:
+          $ref: '#/components/schemas/ReplicationInstanceList'
+      description: <p/>
+    DescribeReplicationSubnetGroupsMessage:
+      type: object
+      example:
+        Filters:
+          - Name: string
+            Values:
+              - string
+              - string
+        Marker: ''
+        MaxRecords: 123
+      properties:
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeReplicationSubnetGroupsResponse:
+      type: object
+      example:
+        Marker: ''
+        ReplicationSubnetGroups: []
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        ReplicationSubnetGroups:
+          $ref: '#/components/schemas/ReplicationSubnetGroups'
+      description: <p/>
+    DescribeReplicationTasksMessage:
+      type: object
+      example:
+        Filters:
+          - Name: string
+            Values:
+              - string
+              - string
+        Marker: ''
+        MaxRecords: 123
+      properties:
+        Filters:
+          $ref: '#/components/schemas/FilterList'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeReplicationTasksResponse:
+      type: object
+      example:
+        Marker: ''
+        ReplicationTasks: []
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        ReplicationTasks:
+          $ref: '#/components/schemas/ReplicationTaskList'
+      description: <p/>
+    DescribeSchemasMessage:
+      type: object
+      required:
+        - EndpointArn
+      example:
+        EndpointArn: ''
+        Marker: ''
+        MaxRecords: 123
+      properties:
+        EndpointArn:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeSchemasResponse:
+      type: object
+      example:
+        Marker: ''
+        Schemas: []
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        Schemas:
+          $ref: '#/components/schemas/SchemaList'
+      description: <p/>
+    DescribeTableStatisticsMessage:
+      type: object
+      required:
+        - ReplicationTaskArn
+      example:
+        Marker: ''
+        MaxRecords: 123
+        ReplicationTaskArn: ''
+      properties:
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DescribeTableStatisticsResponse:
+      type: object
+      example:
+        Marker: ''
+        ReplicationTaskArn: ''
+        TableStatistics: []
+      properties:
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+        TableStatistics:
+          $ref: '#/components/schemas/TableStatisticsList'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    DmsSslModeValue:
+      type: string
+      enum:
+        - none
+        - require
+        - verify-ca
+        - verify-full
+    DynamoDbSettings:
+      type: object
+      required:
+        - ServiceAccessRoleArn
+      properties:
+        ServiceAccessRoleArn:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    Endpoint:
+      type: object
+      properties:
+        EndpointIdentifier:
+          $ref: '#/components/schemas/String'
+        EndpointType:
+          $ref: '#/components/schemas/ReplicationEndpointTypeValue'
+        EngineName:
+          $ref: '#/components/schemas/String'
+        Username:
+          $ref: '#/components/schemas/String'
+        ServerName:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        DatabaseName:
+          $ref: '#/components/schemas/String'
+        ExtraConnectionAttributes:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+        KmsKeyId:
+          $ref: '#/components/schemas/String'
+        EndpointArn:
+          $ref: '#/components/schemas/String'
+        CertificateArn:
+          $ref: '#/components/schemas/String'
+        SslMode:
+          $ref: '#/components/schemas/DmsSslModeValue'
+        ExternalId:
+          $ref: '#/components/schemas/String'
+        DynamoDbSettings:
+          $ref: '#/components/schemas/DynamoDbSettings'
+        S3Settings:
+          $ref: '#/components/schemas/S3Settings'
+        MongoDbSettings:
+          $ref: '#/components/schemas/MongoDbSettings'
+      description: <p/>
+    EndpointList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Endpoint'
+    Event:
+      type: object
+      properties:
+        SourceIdentifier:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/SourceType'
+        Message:
+          $ref: '#/components/schemas/String'
+        EventCategories:
+          $ref: '#/components/schemas/EventCategoriesList'
+        Date:
+          $ref: '#/components/schemas/TStamp'
+      description: <p/>
+    EventCategoriesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    EventCategoryGroup:
+      type: object
+      properties:
+        SourceType:
+          $ref: '#/components/schemas/String'
+        EventCategories:
+          $ref: '#/components/schemas/EventCategoriesList'
+      description: <p/>
+    EventCategoryGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventCategoryGroup'
+    EventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    EventSubscription:
+      type: object
+      properties:
+        CustomerAwsId:
+          $ref: '#/components/schemas/String'
+        CustSubscriptionId:
+          $ref: '#/components/schemas/String'
+        SnsTopicArn:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+        SubscriptionCreationTime:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/String'
+        SourceIdsList:
+          $ref: '#/components/schemas/SourceIdsList'
+        EventCategoriesList:
+          $ref: '#/components/schemas/EventCategoriesList'
+        Enabled:
+          $ref: '#/components/schemas/Boolean'
+      description: <p/>
+    EventSubscriptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventSubscription'
+    ExceptionMessage:
+      type: string
+    Filter:
+      type: object
+      required:
+        - Name
+        - Values
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Values:
+          $ref: '#/components/schemas/FilterValueList'
+      description: <p/>
+    FilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+    FilterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ImportCertificateMessage:
+      type: object
+      required:
+        - CertificateIdentifier
+      example:
+        CertificateIdentifier: ''
+        CertificatePem: ''
+      properties:
+        CertificateIdentifier:
+          $ref: '#/components/schemas/String'
+        CertificatePem:
+          $ref: '#/components/schemas/String'
+        CertificateWallet:
+          $ref: '#/components/schemas/CertificateWallet'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    ImportCertificateResponse:
+      type: object
+      example:
+        Certificate: {}
+      properties:
+        Certificate:
+          $ref: '#/components/schemas/Certificate'
+    InsufficientResourceCapacityFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: There are not enough resources allocated to the database migration.
+    Integer:
+      type: integer
+    IntegerOptional:
+      type: integer
+    InvalidCertificateFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The certificate was not valid.
+    InvalidResourceStateFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The resource is in a state that prevents it from being used for database migration.
+    InvalidSubnet:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The subnet provided is invalid.
+    KMSKeyNotAccessibleFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: AWS DMS cannot access the KMS key.
+    KeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ListTagsForResourceMessage:
+      type: object
+      required:
+        - ResourceArn
+      example:
+        ResourceArn: ''
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    ListTagsForResourceResponse:
+      type: object
+      example:
+        TagList: []
+      properties:
+        TagList:
+          $ref: '#/components/schemas/TagList'
+      description: <p/>
+    Long:
+      type: integer
+    MigrationTypeValue:
+      type: string
+      enum:
+        - full-load
+        - cdc
+        - full-load-and-cdc
+    ModifyEndpointMessage:
+      type: object
+      required:
+        - EndpointArn
+      example:
+        CertificateArn: ''
+        DatabaseName: ''
+        EndpointArn: ''
+        EndpointIdentifier: ''
+        EndpointType: source
+        EngineName: ''
+        ExtraConnectionAttributes: ''
+        Password: ''
+        Port: 123
+        ServerName: ''
+        SslMode: require
+        Username: ''
+      properties:
+        EndpointArn:
+          $ref: '#/components/schemas/String'
+        EndpointIdentifier:
+          $ref: '#/components/schemas/String'
+        EndpointType:
+          $ref: '#/components/schemas/ReplicationEndpointTypeValue'
+        EngineName:
+          $ref: '#/components/schemas/String'
+        Username:
+          $ref: '#/components/schemas/String'
+        Password:
+          $ref: '#/components/schemas/SecretString'
+        ServerName:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        DatabaseName:
+          $ref: '#/components/schemas/String'
+        ExtraConnectionAttributes:
+          $ref: '#/components/schemas/String'
+        CertificateArn:
+          $ref: '#/components/schemas/String'
+        SslMode:
+          $ref: '#/components/schemas/DmsSslModeValue'
+        DynamoDbSettings:
+          $ref: '#/components/schemas/DynamoDbSettings'
+        S3Settings:
+          $ref: '#/components/schemas/S3Settings'
+        MongoDbSettings:
+          $ref: '#/components/schemas/MongoDbSettings'
+      description: <p/>
+    ModifyEndpointResponse:
+      type: object
+      example:
+        Endpoint: {}
+      properties:
+        Endpoint:
+          $ref: '#/components/schemas/Endpoint'
+      description: <p/>
+    ModifyEventSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+      properties:
+        SubscriptionName:
+          $ref: '#/components/schemas/String'
+        SnsTopicArn:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/String'
+        EventCategories:
+          $ref: '#/components/schemas/EventCategoriesList'
+        Enabled:
+          $ref: '#/components/schemas/BooleanOptional'
+      description: <p/>
+    ModifyEventSubscriptionResponse:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
+      description: <p/>
+    ModifyReplicationInstanceMessage:
+      type: object
+      required:
+        - ReplicationInstanceArn
+      example:
+        AllocatedStorage: 123
+        AllowMajorVersionUpgrade: true
+        ApplyImmediately: true
+        AutoMinorVersionUpgrade: true
+        EngineVersion: 1.5.0
+        MultiAZ: true
+        PreferredMaintenanceWindow: 'sun:06:00-sun:14:00'
+        ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+        ReplicationInstanceClass: dms.t2.micro
+        ReplicationInstanceIdentifier: test-rep-1
+        VpcSecurityGroupIds: []
+      properties:
+        ReplicationInstanceArn:
+          $ref: '#/components/schemas/String'
+        AllocatedStorage:
+          $ref: '#/components/schemas/IntegerOptional'
+        ApplyImmediately:
+          $ref: '#/components/schemas/Boolean'
+        ReplicationInstanceClass:
+          $ref: '#/components/schemas/String'
+        VpcSecurityGroupIds:
+          $ref: '#/components/schemas/VpcSecurityGroupIdList'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        MultiAZ:
+          $ref: '#/components/schemas/BooleanOptional'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        AllowMajorVersionUpgrade:
+          $ref: '#/components/schemas/Boolean'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/BooleanOptional'
+        ReplicationInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    ModifyReplicationInstanceResponse:
+      type: object
+      example:
+        ReplicationInstance:
+          AllocatedStorage: 5
+          AutoMinorVersionUpgrade: true
+          EngineVersion: 1.5.0
+          KmsKeyId: 'arn:aws:kms:us-east-1:123456789012:key/4c1731d6-5435-ed4d-be13-d53411a7cfbd'
+          PendingModifiedValues: {}
+          PreferredMaintenanceWindow: 'sun:06:00-sun:14:00'
+          PubliclyAccessible: true
+          ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+          ReplicationInstanceClass: dms.t2.micro
+          ReplicationInstanceIdentifier: test-rep-1
+          ReplicationInstanceStatus: available
+          ReplicationSubnetGroup:
+            ReplicationSubnetGroupDescription: default
+            ReplicationSubnetGroupIdentifier: default
+            SubnetGroupStatus: Complete
+            Subnets:
+              - SubnetAvailabilityZone:
+                  Name: us-east-1d
+                SubnetIdentifier: subnet-f6dd91af
+                SubnetStatus: Active
+              - SubnetAvailabilityZone:
+                  Name: us-east-1b
+                SubnetIdentifier: subnet-3605751d
+                SubnetStatus: Active
+              - SubnetAvailabilityZone:
+                  Name: us-east-1c
+                SubnetIdentifier: subnet-c2daefb5
+                SubnetStatus: Active
+              - SubnetAvailabilityZone:
+                  Name: us-east-1e
+                SubnetIdentifier: subnet-85e90cb8
+                SubnetStatus: Active
+            VpcId: vpc-6741a603
+      properties:
+        ReplicationInstance:
+          $ref: '#/components/schemas/ReplicationInstance'
+      description: <p/>
+    ModifyReplicationSubnetGroupMessage:
+      type: object
+      required:
+        - ReplicationSubnetGroupIdentifier
+        - SubnetIds
+      example:
+        ReplicationSubnetGroupDescription: ''
+        ReplicationSubnetGroupIdentifier: ''
+        SubnetIds: []
+      properties:
+        ReplicationSubnetGroupIdentifier:
+          $ref: '#/components/schemas/String'
+        ReplicationSubnetGroupDescription:
+          $ref: '#/components/schemas/String'
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdentifierList'
+      description: <p/>
+    ModifyReplicationSubnetGroupResponse:
+      type: object
+      example:
+        ReplicationSubnetGroup: {}
+      properties:
+        ReplicationSubnetGroup:
+          $ref: '#/components/schemas/ReplicationSubnetGroup'
+      description: <p/>
+    ModifyReplicationTaskMessage:
+      type: object
+      required:
+        - ReplicationTaskArn
+      properties:
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+        ReplicationTaskIdentifier:
+          $ref: '#/components/schemas/String'
+        MigrationType:
+          $ref: '#/components/schemas/MigrationTypeValue'
+        TableMappings:
+          $ref: '#/components/schemas/String'
+        ReplicationTaskSettings:
+          $ref: '#/components/schemas/String'
+        CdcStartTime:
+          $ref: '#/components/schemas/TStamp'
+      description: <p/>
+    ModifyReplicationTaskResponse:
+      type: object
+      properties:
+        ReplicationTask:
+          $ref: '#/components/schemas/ReplicationTask'
+      description: <p/>
+    MongoDbSettings:
+      type: object
+      properties:
+        Username:
+          $ref: '#/components/schemas/String'
+        Password:
+          $ref: '#/components/schemas/SecretString'
+        ServerName:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        DatabaseName:
+          $ref: '#/components/schemas/String'
+        AuthType:
+          $ref: '#/components/schemas/AuthTypeValue'
+        AuthMechanism:
+          $ref: '#/components/schemas/AuthMechanismValue'
+        NestingLevel:
+          $ref: '#/components/schemas/NestingLevelValue'
+        ExtractDocId:
+          $ref: '#/components/schemas/String'
+        DocsToInvestigate:
+          $ref: '#/components/schemas/String'
+        AuthSource:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    NestingLevelValue:
+      type: string
+      enum:
+        - none
+        - one
+    OrderableReplicationInstance:
+      type: object
+      properties:
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        ReplicationInstanceClass:
+          $ref: '#/components/schemas/String'
+        StorageType:
+          $ref: '#/components/schemas/String'
+        MinAllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+        MaxAllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+        DefaultAllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+        IncludedAllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+      description: <p/>
+    OrderableReplicationInstanceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OrderableReplicationInstance'
+    RefreshSchemasMessage:
+      type: object
+      required:
+        - EndpointArn
+        - ReplicationInstanceArn
+      example:
+        EndpointArn: ''
+        ReplicationInstanceArn: ''
+      properties:
+        EndpointArn:
+          $ref: '#/components/schemas/String'
+        ReplicationInstanceArn:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    RefreshSchemasResponse:
+      type: object
+      example:
+        RefreshSchemasStatus: {}
+      properties:
+        RefreshSchemasStatus:
+          $ref: '#/components/schemas/RefreshSchemasStatus'
+      description: <p/>
+    RefreshSchemasStatus:
+      type: object
+      properties:
+        EndpointArn:
+          $ref: '#/components/schemas/String'
+        ReplicationInstanceArn:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/RefreshSchemasStatusTypeValue'
+        LastRefreshDate:
+          $ref: '#/components/schemas/TStamp'
+        LastFailureMessage:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    RefreshSchemasStatusTypeValue:
+      type: string
+      enum:
+        - successful
+        - failed
+        - refreshing
+    ReloadTablesMessage:
+      type: object
+      required:
+        - ReplicationTaskArn
+        - TablesToReload
+      properties:
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+        TablesToReload:
+          $ref: '#/components/schemas/TableListToReload'
+    ReloadTablesResponse:
+      type: object
+      properties:
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+    RemoveTagsFromResourceMessage:
+      type: object
+      required:
+        - ResourceArn
+        - TagKeys
+      example:
+        ResourceArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
+        TagKeys: []
+      properties:
+        ResourceArn:
+          $ref: '#/components/schemas/String'
+        TagKeys:
+          $ref: '#/components/schemas/KeyList'
+      description: <p/>
+    RemoveTagsFromResourceResponse:
+      type: object
+      example: {}
+      properties: {}
+      description: <p/>
+    ReplicationEndpointTypeValue:
+      type: string
+      enum:
+        - source
+        - target
+    ReplicationInstance:
+      type: object
+      properties:
+        ReplicationInstanceIdentifier:
+          $ref: '#/components/schemas/String'
+        ReplicationInstanceClass:
+          $ref: '#/components/schemas/String'
+        ReplicationInstanceStatus:
+          $ref: '#/components/schemas/String'
+        AllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+        InstanceCreateTime:
+          $ref: '#/components/schemas/TStamp'
+        VpcSecurityGroups:
+          $ref: '#/components/schemas/VpcSecurityGroupMembershipList'
+        AvailabilityZone:
+          $ref: '#/components/schemas/String'
+        ReplicationSubnetGroup:
+          $ref: '#/components/schemas/ReplicationSubnetGroup'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        PendingModifiedValues:
+          $ref: '#/components/schemas/ReplicationPendingModifiedValues'
+        MultiAZ:
+          $ref: '#/components/schemas/Boolean'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/Boolean'
+        KmsKeyId:
+          $ref: '#/components/schemas/String'
+        ReplicationInstanceArn:
+          $ref: '#/components/schemas/String'
+        ReplicationInstancePublicIpAddress:
+          $ref: '#/components/schemas/String'
+        ReplicationInstancePrivateIpAddress:
+          $ref: '#/components/schemas/String'
+        ReplicationInstancePublicIpAddresses:
+          $ref: '#/components/schemas/ReplicationInstancePublicIpAddressList'
+        ReplicationInstancePrivateIpAddresses:
+          $ref: '#/components/schemas/ReplicationInstancePrivateIpAddressList'
+        PubliclyAccessible:
+          $ref: '#/components/schemas/Boolean'
+        SecondaryAvailabilityZone:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    ReplicationInstanceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicationInstance'
+    ReplicationInstancePrivateIpAddressList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ReplicationInstancePublicIpAddressList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ReplicationPendingModifiedValues:
+      type: object
+      properties:
+        ReplicationInstanceClass:
+          $ref: '#/components/schemas/String'
+        AllocatedStorage:
+          $ref: '#/components/schemas/IntegerOptional'
+        MultiAZ:
+          $ref: '#/components/schemas/BooleanOptional'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    ReplicationSubnetGroup:
+      type: object
+      properties:
+        ReplicationSubnetGroupIdentifier:
+          $ref: '#/components/schemas/String'
+        ReplicationSubnetGroupDescription:
+          $ref: '#/components/schemas/String'
+        VpcId:
+          $ref: '#/components/schemas/String'
+        SubnetGroupStatus:
+          $ref: '#/components/schemas/String'
+        Subnets:
+          $ref: '#/components/schemas/SubnetList'
+      description: <p/>
+    ReplicationSubnetGroupDoesNotCoverEnoughAZs:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The replication subnet group does not cover enough Availability Zones (AZs). Edit the replication subnet group and add more AZs.
+    ReplicationSubnetGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicationSubnetGroup'
+    ReplicationTask:
+      type: object
+      properties:
+        ReplicationTaskIdentifier:
+          $ref: '#/components/schemas/String'
+        SourceEndpointArn:
+          $ref: '#/components/schemas/String'
+        TargetEndpointArn:
+          $ref: '#/components/schemas/String'
+        ReplicationInstanceArn:
+          $ref: '#/components/schemas/String'
+        MigrationType:
+          $ref: '#/components/schemas/MigrationTypeValue'
+        TableMappings:
+          $ref: '#/components/schemas/String'
+        ReplicationTaskSettings:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+        LastFailureMessage:
+          $ref: '#/components/schemas/String'
+        StopReason:
+          $ref: '#/components/schemas/String'
+        ReplicationTaskCreationDate:
+          $ref: '#/components/schemas/TStamp'
+        ReplicationTaskStartDate:
+          $ref: '#/components/schemas/TStamp'
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+        ReplicationTaskStats:
+          $ref: '#/components/schemas/ReplicationTaskStats'
+      description: <p/>
+    ReplicationTaskList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicationTask'
+    ReplicationTaskStats:
+      type: object
+      properties:
+        FullLoadProgressPercent:
+          $ref: '#/components/schemas/Integer'
+        ElapsedTimeMillis:
+          $ref: '#/components/schemas/Long'
+        TablesLoaded:
+          $ref: '#/components/schemas/Integer'
+        TablesLoading:
+          $ref: '#/components/schemas/Integer'
+        TablesQueued:
+          $ref: '#/components/schemas/Integer'
+        TablesErrored:
+          $ref: '#/components/schemas/Integer'
+      description: <p/>
+    ResourceAlreadyExistsFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The resource you are attempting to create already exists.
+    ResourceNotFoundFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The resource could not be found.
+    ResourceQuotaExceededFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The quota for this resource quota has been exceeded.
+    S3Settings:
+      type: object
+      properties:
+        ServiceAccessRoleArn:
+          $ref: '#/components/schemas/String'
+        ExternalTableDefinition:
+          $ref: '#/components/schemas/String'
+        CsvRowDelimiter:
+          $ref: '#/components/schemas/String'
+        CsvDelimiter:
+          $ref: '#/components/schemas/String'
+        BucketFolder:
+          $ref: '#/components/schemas/String'
+        BucketName:
+          $ref: '#/components/schemas/String'
+        CompressionType:
+          $ref: '#/components/schemas/CompressionTypeValue'
+      description: <p/>
+    SNSInvalidTopicFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The SNS topic is invalid.
+    SNSNoAuthorizationFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: You are not authorized for the SNS subscription.
+    SchemaList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SecretString:
+      type: string
+      format: password
+    SourceIdsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SourceType:
+      type: string
+      enum:
+        - replication-instance
+    StartReplicationTaskMessage:
+      type: object
+      required:
+        - ReplicationTaskArn
+        - StartReplicationTaskType
+      example:
+        CdcStartTime: '2016-12-14T13:33:20Z'
+        ReplicationTaskArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+        StartReplicationTaskType: start-replication
+      properties:
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+        StartReplicationTaskType:
+          $ref: '#/components/schemas/StartReplicationTaskTypeValue'
+        CdcStartTime:
+          $ref: '#/components/schemas/TStamp'
+      description: <p/>
+    StartReplicationTaskResponse:
+      type: object
+      example:
+        ReplicationTask:
+          MigrationType: full-load
+          ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+          ReplicationTaskArn: 'arn:aws:dms:us-east-1:123456789012:task:OEAMB3NXSTZ6LFYZFEPPBBXPYM'
+          ReplicationTaskCreationDate: '2016-12-14T18:25:43Z'
+          ReplicationTaskIdentifier: task1
+          ReplicationTaskSettings: '{"TargetMetadata":{"TargetSchema":"","SupportLobs":true,"FullLobMode":true,"LobChunkSize":64,"LimitedSizeLobMode":false,"LobMaxSize":0},"FullLoadSettings":{"FullLoadEnabled":true,"ApplyChangesEnabled":false,"TargetTablePrepMode":"DROP_AND_CREATE","CreatePkAfterFullLoad":false,"StopTaskCachedChangesApplied":false,"StopTaskCachedChangesNotApplied":false,"ResumeEnabled":false,"ResumeMinTableSize":100000,"ResumeOnlyClusteredPKTables":true,"MaxFullLoadSubTasks":8,"TransactionConsistencyTimeout":600,"CommitRate":10000},"Logging":{"EnableLogging":false}}'
+          SourceEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE'
+          Status: creating
+          TableMappings: 'file://mappingfile.json'
+          TargetEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
+      properties:
+        ReplicationTask:
+          $ref: '#/components/schemas/ReplicationTask'
+      description: <p/>
+    StartReplicationTaskTypeValue:
+      type: string
+      enum:
+        - start-replication
+        - resume-processing
+        - reload-target
+    StopReplicationTaskMessage:
+      type: object
+      required:
+        - ReplicationTaskArn
+      example:
+        ReplicationTaskArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
+      properties:
+        ReplicationTaskArn:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    StopReplicationTaskResponse:
+      type: object
+      example:
+        ReplicationTask:
+          MigrationType: full-load
+          ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+          ReplicationTaskArn: 'arn:aws:dms:us-east-1:123456789012:task:OEAMB3NXSTZ6LFYZFEPPBBXPYM'
+          ReplicationTaskCreationDate: '2016-12-14T18:25:43Z'
+          ReplicationTaskIdentifier: task1
+          ReplicationTaskSettings: '{"TargetMetadata":{"TargetSchema":"","SupportLobs":true,"FullLobMode":true,"LobChunkSize":64,"LimitedSizeLobMode":false,"LobMaxSize":0},"FullLoadSettings":{"FullLoadEnabled":true,"ApplyChangesEnabled":false,"TargetTablePrepMode":"DROP_AND_CREATE","CreatePkAfterFullLoad":false,"StopTaskCachedChangesApplied":false,"StopTaskCachedChangesNotApplied":false,"ResumeEnabled":false,"ResumeMinTableSize":100000,"ResumeOnlyClusteredPKTables":true,"MaxFullLoadSubTasks":8,"TransactionConsistencyTimeout":600,"CommitRate":10000},"Logging":{"EnableLogging":false}}'
+          SourceEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ZW5UAN6P4E77EC7YWHK4RZZ3BE'
+          Status: creating
+          TableMappings: 'file://mappingfile.json'
+          TargetEndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:ASXWXJZLNWNT5HTWCGV2BUJQ7E'
+      properties:
+        ReplicationTask:
+          $ref: '#/components/schemas/ReplicationTask'
+      description: <p/>
+    StorageQuotaExceededFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The storage quota has been exceeded.
+    String:
+      type: string
+    Subnet:
+      type: object
+      properties:
+        SubnetIdentifier:
+          $ref: '#/components/schemas/String'
+        SubnetAvailabilityZone:
+          $ref: '#/components/schemas/AvailabilityZone'
+        SubnetStatus:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    SubnetAlreadyInUse:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The specified subnet is already in use.
+    SubnetIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SubnetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Subnet'
+    SupportedEndpointType:
+      type: object
+      properties:
+        EngineName:
+          $ref: '#/components/schemas/String'
+        SupportsCDC:
+          $ref: '#/components/schemas/Boolean'
+        EndpointType:
+          $ref: '#/components/schemas/ReplicationEndpointTypeValue'
+      description: <p/>
+    SupportedEndpointTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SupportedEndpointType'
+    TStamp:
+      type: string
+      format: date-time
+    TableListToReload:
+      type: array
+      items:
+        $ref: '#/components/schemas/TableToReload'
+    TableStatistics:
+      type: object
+      properties:
+        SchemaName:
+          $ref: '#/components/schemas/String'
+        TableName:
+          $ref: '#/components/schemas/String'
+        Inserts:
+          $ref: '#/components/schemas/Long'
+        Deletes:
+          $ref: '#/components/schemas/Long'
+        Updates:
+          $ref: '#/components/schemas/Long'
+        Ddls:
+          $ref: '#/components/schemas/Long'
+        FullLoadRows:
+          $ref: '#/components/schemas/Long'
+        FullLoadCondtnlChkFailedRows:
+          $ref: '#/components/schemas/Long'
+        FullLoadErrorRows:
+          $ref: '#/components/schemas/Long'
+        LastUpdateTime:
+          $ref: '#/components/schemas/TStamp'
+        TableState:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    TableStatisticsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TableStatistics'
+    TableToReload:
+      type: object
+      properties:
+        SchemaName:
+          $ref: '#/components/schemas/String'
+        TableName:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    Tag:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/String'
+        Value:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TestConnectionMessage:
+      type: object
+      required:
+        - ReplicationInstanceArn
+        - EndpointArn
+      example:
+        EndpointArn: 'arn:aws:dms:us-east-1:123456789012:endpoint:RAAR3R22XSH46S3PWLC3NJAWKM'
+        ReplicationInstanceArn: 'arn:aws:dms:us-east-1:123456789012:rep:6UTDJGBOUS3VI3SUWA66XFJCJQ'
+      properties:
+        ReplicationInstanceArn:
+          $ref: '#/components/schemas/String'
+        EndpointArn:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    TestConnectionResponse:
+      type: object
+      example:
+        Connection: {}
+      properties:
+        Connection:
+          $ref: '#/components/schemas/Connection'
+      description: <p/>
+    UpgradeDependencyFailureFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: An upgrade dependency is preventing the database migration.
+    VpcSecurityGroupIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    VpcSecurityGroupMembership:
+      type: object
+      properties:
+        VpcSecurityGroupId:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+      description: <p/>
+    VpcSecurityGroupMembershipList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VpcSecurityGroupMembership'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

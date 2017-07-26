@@ -1,0 +1,1272 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://budgets.amazonaws.com/'
+info:
+  version: '2016-10-20'
+  x-release: v4
+  title: AWS Budgets
+  description: All public APIs for AWS Budgets
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: budgets
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/budgets-2016-10-20.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/budgets/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CreateBudget
+      description: Create a new budget
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBudgetResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: CreationLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreationLimitExceededException'
+        '483':
+          description: DuplicateRecordException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRecordException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBudgetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateNotification':
+    post:
+      operationId: CreateNotification
+      description: Create a new Notification with subscribers for a budget
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateNotificationResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: CreationLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreationLimitExceededException'
+        '484':
+          description: DuplicateRecordException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRecordException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNotificationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateSubscriber':
+    post:
+      operationId: CreateSubscriber
+      description: Create a new Subscriber for a notification
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSubscriberResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: CreationLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreationLimitExceededException'
+        '483':
+          description: DuplicateRecordException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRecordException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubscriberRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteBudget':
+    post:
+      operationId: DeleteBudget
+      description: Delete a budget and related notifications
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBudgetResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBudgetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteNotification':
+    post:
+      operationId: DeleteNotification
+      description: Delete a notification and related subscribers
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteNotificationResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteNotificationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSubscriber':
+    post:
+      operationId: DeleteSubscriber
+      description: Delete a Subscriber for a notification
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSubscriberResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSubscriberRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeBudget':
+    post:
+      operationId: DescribeBudget
+      description: Get a single budget
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBudgetResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeBudgetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeBudgets':
+    post:
+      operationId: DescribeBudgets
+      description: Get all budgets for an account
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBudgetsResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: ExpiredNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredNextTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeBudgetsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeNotificationsForBudget':
+    post:
+      operationId: DescribeNotificationsForBudget
+      description: Get notifications of a budget
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeNotificationsForBudgetResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: ExpiredNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredNextTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeNotificationsForBudgetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSubscribersForNotification':
+    post:
+      operationId: DescribeSubscribersForNotification
+      description: Get subscribers of a notification
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSubscribersForNotificationResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: ExpiredNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredNextTokenException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSubscribersForNotificationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateBudget':
+    post:
+      operationId: UpdateBudget
+      description: Update the information of a budget already created
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBudgetResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBudgetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateNotification':
+    post:
+      operationId: UpdateNotification
+      description: Update the information about a notification already created
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateNotificationResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNotificationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateSubscriber':
+    post:
+      operationId: UpdateSubscriber
+      description: Update a subscriber
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSubscriberResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSubscriberRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AccountId:
+      type: string
+      description: Account Id of the customer. It should be a 12 digit number.
+      minLength: 12
+      maxLength: 12
+    Budget:
+      type: object
+      required:
+        - BudgetName
+        - BudgetLimit
+        - CostTypes
+        - TimeUnit
+        - TimePeriod
+        - BudgetType
+      properties:
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        BudgetLimit:
+          $ref: '#/components/schemas/Spend'
+        CostFilters:
+          $ref: '#/components/schemas/CostFilters'
+        CostTypes:
+          $ref: '#/components/schemas/CostTypes'
+        TimeUnit:
+          $ref: '#/components/schemas/TimeUnit'
+        TimePeriod:
+          $ref: '#/components/schemas/TimePeriod'
+        CalculatedSpend:
+          $ref: '#/components/schemas/CalculatedSpend'
+        BudgetType:
+          $ref: '#/components/schemas/BudgetType'
+      description: AWS Budget model
+    BudgetName:
+      type: string
+      pattern: '[^:]+'
+      description: 'A string represents the budget name. No ":" character is allowed.'
+      maxLength: 100
+    BudgetType:
+      type: string
+      enum:
+        - USAGE
+        - COST
+      description: The type of a budget. Can be COST or USAGE.
+    Budgets:
+      type: array
+      description: A list of budgets
+      items:
+        $ref: '#/components/schemas/Budget'
+    CalculatedSpend:
+      type: object
+      required:
+        - ActualSpend
+      properties:
+        ActualSpend:
+          $ref: '#/components/schemas/Spend'
+        ForecastedSpend:
+          $ref: '#/components/schemas/Spend'
+      description: A structure holds the actual and forecasted spend for a budget.
+    ComparisonOperator:
+      type: string
+      enum:
+        - GREATER_THAN
+        - LESS_THAN
+        - EQUAL_TO
+      description: 'The comparison operator of a notification. Currently we support less than, equal to and greater than.'
+    CostFilters:
+      type: array
+      description: A map represents the cost filters applied to the budget.
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/GenericString'
+          value:
+            $ref: '#/components/schemas/DimensionValues'
+    CostTypes:
+      type: object
+      required:
+        - IncludeTax
+        - IncludeSubscription
+        - UseBlended
+      properties:
+        IncludeTax:
+          $ref: '#/components/schemas/GenericBoolean'
+        IncludeSubscription:
+          $ref: '#/components/schemas/GenericBoolean'
+        UseBlended:
+          $ref: '#/components/schemas/GenericBoolean'
+      description: This includes the options for getting the cost of a budget.
+    CreateBudgetRequest:
+      type: object
+      required:
+        - AccountId
+        - Budget
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        Budget:
+          $ref: '#/components/schemas/Budget'
+        NotificationsWithSubscribers:
+          $ref: '#/components/schemas/NotificationWithSubscribersList'
+      description: Request of CreateBudget
+    CreateBudgetResponse:
+      type: object
+      properties: {}
+      description: Response of CreateBudget
+    CreateNotificationRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - Notification
+        - Subscribers
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        Notification:
+          $ref: '#/components/schemas/Notification'
+        Subscribers:
+          $ref: '#/components/schemas/Subscribers'
+      description: Request of CreateNotification
+    CreateNotificationResponse:
+      type: object
+      properties: {}
+      description: Response of CreateNotification
+    CreateSubscriberRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - Notification
+        - Subscriber
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        Notification:
+          $ref: '#/components/schemas/Notification'
+        Subscriber:
+          $ref: '#/components/schemas/Subscriber'
+      description: Request of CreateSubscriber
+    CreateSubscriberResponse:
+      type: object
+      properties: {}
+      description: Response of CreateSubscriber
+    CreationLimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/errorMessage'
+      description: 'The exception is thrown when customer tries to create a record (e.g. budget), but the number this record already exceeds the limitation.'
+    DeleteBudgetRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+      description: Request of DeleteBudget
+    DeleteBudgetResponse:
+      type: object
+      properties: {}
+      description: Response of DeleteBudget
+    DeleteNotificationRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - Notification
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        Notification:
+          $ref: '#/components/schemas/Notification'
+      description: Request of DeleteNotification
+    DeleteNotificationResponse:
+      type: object
+      properties: {}
+      description: Response of DeleteNotification
+    DeleteSubscriberRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - Notification
+        - Subscriber
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        Notification:
+          $ref: '#/components/schemas/Notification'
+        Subscriber:
+          $ref: '#/components/schemas/Subscriber'
+      description: Request of DeleteSubscriber
+    DeleteSubscriberResponse:
+      type: object
+      properties: {}
+      description: Response of DeleteSubscriber
+    DescribeBudgetRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+      description: Request of DescribeBudget
+    DescribeBudgetResponse:
+      type: object
+      properties:
+        Budget:
+          $ref: '#/components/schemas/Budget'
+      description: Response of DescribeBudget
+    DescribeBudgetsRequest:
+      type: object
+      required:
+        - AccountId
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
+      description: Request of DescribeBudgets
+    DescribeBudgetsResponse:
+      type: object
+      properties:
+        Budgets:
+          $ref: '#/components/schemas/Budgets'
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
+      description: Response of DescribeBudgets
+    DescribeNotificationsForBudgetRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
+      description: Request of DescribeNotificationsForBudget
+    DescribeNotificationsForBudgetResponse:
+      type: object
+      properties:
+        Notifications:
+          $ref: '#/components/schemas/Notifications'
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
+      description: Response of GetNotificationsForBudget
+    DescribeSubscribersForNotificationRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - Notification
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        Notification:
+          $ref: '#/components/schemas/Notification'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
+      description: Request of DescribeSubscribersForNotification
+    DescribeSubscribersForNotificationResponse:
+      type: object
+      properties:
+        Subscribers:
+          $ref: '#/components/schemas/Subscribers'
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
+      description: Response of DescribeSubscribersForNotification
+    DimensionValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/GenericString'
+    DuplicateRecordException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The exception is thrown when customer tries to create a record (e.g. budget) that already exists.
+    ExpiredNextTokenException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/errorMessage'
+      description: This exception is thrown if the paging token is expired - past its TTL
+    GenericBoolean:
+      type: boolean
+      description: A generic boolean value.
+    GenericString:
+      type: string
+      description: A generic String.
+    GenericTimestamp:
+      type: string
+      description: A generic timestamp. In Java it is transformed to a Date object.
+      format: date-time
+    InternalErrorException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/errorMessage'
+      description: This exception is thrown on an unknown internal failure.
+    InvalidNextTokenException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/errorMessage'
+      description: 'This exception is thrown if paging token signature didn''t match the token, or the paging token isn''t for this request'
+    InvalidParameterException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/errorMessage'
+      description: 'This exception is thrown if any request is given an invalid parameter. E.g., if a required Date field is null.'
+    MaxResults:
+      type: integer
+      description: An integer to represent how many entries should a pagianted response contains. Maxium is set to 100.
+      minimum: 1
+      maximum: 100
+    NotFoundException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/errorMessage'
+      description: 'This exception is thrown if a requested entity is not found. E.g., if a budget id doesn''t exist for an account ID.'
+    Notification:
+      type: object
+      required:
+        - NotificationType
+        - ComparisonOperator
+        - Threshold
+      properties:
+        NotificationType:
+          $ref: '#/components/schemas/NotificationType'
+        ComparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperator'
+        Threshold:
+          $ref: '#/components/schemas/NotificationThreshold'
+      description: Notification model. Each budget may contain multiple notifications with different settings.
+    NotificationThreshold:
+      type: number
+      description: The threshold of the a notification. It should be a number between 0 and 100.
+      format: double
+      minimum: 0.1
+      maximum: 300
+    NotificationType:
+      type: string
+      enum:
+        - ACTUAL
+        - FORECASTED
+      description: The type of a notification. It should be ACTUAL or FORECASTED.
+    NotificationWithSubscribers:
+      type: object
+      required:
+        - Notification
+        - Subscribers
+      properties:
+        Notification:
+          $ref: '#/components/schemas/Notification'
+        Subscribers:
+          $ref: '#/components/schemas/Subscribers'
+      description: A structure to relate notification and a list of subscribers who belong to the notification.
+    NotificationWithSubscribersList:
+      type: array
+      description: 'A list of Notifications, each with a list of subscribers.'
+      items:
+        $ref: '#/components/schemas/NotificationWithSubscribers'
+      maxItems: 5
+    Notifications:
+      type: array
+      description: A list of notifications.
+      items:
+        $ref: '#/components/schemas/Notification'
+    NumericValue:
+      type: string
+      pattern: '[0-9]*(\.)?[0-9]+'
+      description: A string to represent NumericValue.
+    Spend:
+      type: object
+      required:
+        - Amount
+        - Unit
+      properties:
+        Amount:
+          $ref: '#/components/schemas/NumericValue'
+        Unit:
+          $ref: '#/components/schemas/GenericString'
+      description: A structure represent either a cost spend or usage spend. Contains an amount and a unit.
+    Subscriber:
+      type: object
+      required:
+        - SubscriptionType
+        - Address
+      properties:
+        SubscriptionType:
+          $ref: '#/components/schemas/SubscriptionType'
+        Address:
+          $ref: '#/components/schemas/GenericString'
+      description: Subscriber model. Each notification may contain multiple subscribers with different addresses.
+    Subscribers:
+      type: array
+      description: A list of subscribers.
+      items:
+        $ref: '#/components/schemas/Subscriber'
+      minItems: 1
+      maxItems: 11
+    SubscriptionType:
+      type: string
+      enum:
+        - SNS
+        - EMAIL
+      description: The subscription type of the subscriber. It can be SMS or EMAIL.
+    TimePeriod:
+      type: object
+      required:
+        - Start
+        - End
+      properties:
+        Start:
+          $ref: '#/components/schemas/GenericTimestamp'
+        End:
+          $ref: '#/components/schemas/GenericTimestamp'
+      description: A time period indicated the start date and end date of a budget.
+    TimeUnit:
+      type: string
+      enum:
+        - MONTHLY
+        - QUARTERLY
+        - ANNUALLY
+      description: 'The time unit of the budget. e.g. weekly, monthly, etc.'
+    UpdateBudgetRequest:
+      type: object
+      required:
+        - AccountId
+        - NewBudget
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        NewBudget:
+          $ref: '#/components/schemas/Budget'
+      description: Request of UpdateBudget
+    UpdateBudgetResponse:
+      type: object
+      properties: {}
+      description: Response of UpdateBudget
+    UpdateNotificationRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - OldNotification
+        - NewNotification
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        OldNotification:
+          $ref: '#/components/schemas/Notification'
+        NewNotification:
+          $ref: '#/components/schemas/Notification'
+      description: Request of UpdateNotification
+    UpdateNotificationResponse:
+      type: object
+      properties: {}
+      description: Response of UpdateNotification
+    UpdateSubscriberRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - Notification
+        - OldSubscriber
+        - NewSubscriber
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        Notification:
+          $ref: '#/components/schemas/Notification'
+        OldSubscriber:
+          $ref: '#/components/schemas/Subscriber'
+        NewSubscriber:
+          $ref: '#/components/schemas/Subscriber'
+      description: Request of UpdateSubscriber
+    UpdateSubscriberResponse:
+      type: object
+      properties: {}
+      description: Response of UpdateSubscriber
+    errorMessage:
+      type: string
+      description: The error message the exception carries.
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

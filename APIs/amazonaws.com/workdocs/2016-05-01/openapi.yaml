@@ -1,0 +1,3007 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://workdocs.amazonaws.com/'
+info:
+  version: '2016-05-01'
+  x-release: v4
+  title: Amazon WorkDocs
+  description: '<p>The WorkDocs API is designed for the following use cases:</p> <ul> <li> <p>File Migration: File migration applications are supported for users who want to migrate their files from an on-premise or off-premise file system or service. Users can insert files into a user directory structure, as well as allow for basic metadata changes, such as modifications to the permissions of files.</p> </li> <li> <p>Security: Support security applications are supported for users who have additional security needs, such as anti-virus or data loss prevention. The APIs, in conjunction with Amazon CloudTrail, allow these applications to detect when changes occur in Amazon WorkDocs, so the application can take the necessary actions and replace the target file. The application can also choose to email the user if the target file violates the policy.</p> </li> <li> <p>eDiscovery/Analytics: General administrative applications are supported, such as eDiscovery and analytics. These applications can choose to mimic and/or record the actions in an Amazon WorkDocs site, in conjunction with Amazon CloudTrails, to replicate data for eDiscovery, backup, or analytical applications.</p> </li> </ul> <p>All Amazon WorkDocs APIs are Amazon authenticated, certificate-signed APIs. They not only require the use of the AWS SDK, but also allow for the exclusive use of IAM users and roles to help facilitate access, trust, and permission policies. By creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM user gains full administrative visibility into the entire Amazon WorkDocs site (or as set in the IAM policy). This includes, but is not limited to, the ability to modify file permissions and upload any file to any user. This allows developers to perform the three use cases above, as well as give users the ability to grant access on a selective basis using the IAM model.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: workdocs
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/workdocs-2016-05-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/workdocs/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  '/api/v1/documents/{DocumentId}/versions/{VersionId}':
+    patch:
+      operationId: UpdateDocumentVersion
+      description: '<p>Changes the status of the document version to ACTIVE. </p> <p>Amazon WorkDocs also sets its document container to ACTIVE. This is the last step in a document upload, after the client uploads the document to an S3-presigned URL returned by <a>InitiateDocumentVersionUpload</a>. </p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+        '484':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '485':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '486':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: DocumentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: VersionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDocumentVersionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/users/{UserId}/activation':
+    delete:
+      operationId: DeactivateUser
+      description: 'Deactivates the specified user, which revokes the user''s access to Amazon WorkDocs.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '483':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: UserId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivateUserRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/resources/{ResourceId}/permissions':
+    delete:
+      operationId: RemoveAllResourcePermissions
+      description: Removes all the permissions from the specified resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '482':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: ResourceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveAllResourcePermissionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}/versions/{VersionId}/comment':
+    post:
+      operationId: CreateComment
+      description: Adds a new comment to the specified document version.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCommentResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+        '482':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '483':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '484':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: DocumentLockedForCommentsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentLockedForCommentsException'
+      parameters:
+        - name: DocumentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: VersionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommentRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/resources/{ResourceId}/customMetadata':
+    delete:
+      operationId: DeleteCustomMetadata
+      description: Deletes custom metadata from the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCustomMetadataResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '483':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+        '484':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: ResourceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCustomMetadataRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /api/v1/folders:
+    post:
+      operationId: CreateFolder
+      description: Creates a folder with the specified name and parent folder.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFolderResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: EntityAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityAlreadyExistsException'
+        '482':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '485':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '486':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFolderRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/resources/{ResourceId}/labels':
+    delete:
+      operationId: DeleteLabels
+      description: Deletes the specified list of labels from a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteLabelsResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '483':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: ResourceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteLabelsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/organizations/{OrganizationId}/subscriptions':
+    get:
+      operationId: DescribeNotificationSubscriptions
+      description: Lists the specified notification subscriptions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeNotificationSubscriptionsResponse'
+        '480':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '481':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: OrganizationId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeNotificationSubscriptionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /api/v1/users:
+    get:
+      operationId: DescribeUsers
+      description: '<p>Describes the specified users. You can describe all users or filter the results (for example, by status or organization).</p> <p>By default, Amazon WorkDocs returns the first 24 active or pending users. If there are more results, the response includes a marker that you can use to request the next set of results.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeUsersResponse'
+        '480':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '482':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeUsersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}/versions/{VersionId}/comment/{CommentId}':
+    delete:
+      operationId: DeleteComment
+      description: Deletes the specified comment from the document version.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+        '482':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '483':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '484':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: DocumentLockedForCommentsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentLockedForCommentsException'
+      parameters:
+        - name: DocumentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: VersionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: CommentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCommentRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}':
+    patch:
+      operationId: UpdateDocument
+      description: 'Updates the specified attributes of a document. The user must have access to both the document and its parent folder, if applicable.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: EntityAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityAlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '485':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '486':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '487':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '488':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: DocumentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDocumentRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/folders/{FolderId}':
+    patch:
+      operationId: UpdateFolder
+      description: 'Updates the specified attributes of the specified folder. The user must have access to both the folder and its parent folder, if applicable.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: EntityAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityAlreadyExistsException'
+        '482':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '486':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '487':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '488':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: FolderId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFolderRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/folders/{FolderId}/contents':
+    get:
+      operationId: DescribeFolderContents
+      description: '<p>Describes the contents of the specified folder, including its documents and subfolders.</p> <p>By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFolderContentsResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+        - name: FolderId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeFolderContentsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/organizations/{OrganizationId}/subscriptions/{SubscriptionId}':
+    delete:
+      operationId: DeleteNotificationSubscription
+      description: Deletes the specified subscription from the specified organization.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '481':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+      parameters:
+        - name: OrganizationId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: SubscriptionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteNotificationSubscriptionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/users/{UserId}':
+    patch:
+      operationId: UpdateUser
+      description: 'Updates the specified attributes of the specified user, and grants or revokes administrative privileges to the Amazon WorkDocs site.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateUserResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '483':
+          description: IllegalUserStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalUserStateException'
+        '484':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: DeactivatingLastSystemUserException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeactivatingLastSystemUserException'
+      parameters:
+        - name: UserId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /api/v1/activities:
+    get:
+      operationId: DescribeActivities
+      description: Describes the user activities in a specified time period.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeActivitiesResponse'
+        '480':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeActivitiesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}/versions/{VersionId}/comments':
+    get:
+      operationId: DescribeComments
+      description: List all the comments for the specified document version.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeCommentsResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+        '482':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '483':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '484':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: DocumentId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: VersionId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeCommentsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}/versions':
+    get:
+      operationId: DescribeDocumentVersions
+      description: '<p>Retrieves the document versions for the specified document.</p> <p>By default, only active versions are returned.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDocumentVersionsResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '483':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '484':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+      parameters:
+        - name: Limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+        - name: DocumentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDocumentVersionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /api/v1/me/root:
+    get:
+      operationId: DescribeRootFolders
+      description: Describes the current user's special folders; the <code>RootFolder</code> and the <code>RecyleBin</code>. <code>RootFolder</code> is the root of user's files and folders and <code>RecyleBin</code> is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRootFoldersResponse'
+        '480':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeRootFoldersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /api/v1/me:
+    get:
+      operationId: GetCurrentUser
+      description: Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCurrentUserResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '483':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCurrentUserRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/documents/{DocumentId}/path':
+    get:
+      operationId: GetDocumentPath
+      description: '<p>Retrieves the path information (the hierarchy from the root folder) for the requested document.</p> <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested document and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the names of the parent folders.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocumentPathResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '483':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: DocumentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDocumentPathRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/folders/{FolderId}/path':
+    get:
+      operationId: GetFolderPath
+      description: '<p>Retrieves the path information (the hierarchy from the root folder) for the specified folder.</p> <p>By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested folder and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the parent folder names.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFolderPathResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '482':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '483':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: FolderId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetFolderPathRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /api/v1/documents:
+    post:
+      operationId: InitiateDocumentVersionUpload
+      description: '<p>Creates a new document object and version object.</p> <p>The client specifies the parent folder ID and name of the document to upload. The ID is optionally specified when creating a new version of an existing document. This is the first step to upload a document. Next, upload the document to the URL returned from the call, and then call <a>UpdateDocumentVersion</a>.</p> <p>To cancel the document upload, call <a>AbortDocumentVersionUpload</a>.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiateDocumentVersionUploadResponse'
+        '480':
+          description: EntityNotExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotExistsException'
+        '481':
+          description: EntityAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityAlreadyExistsException'
+        '482':
+          description: StorageLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageLimitExceededException'
+        '483':
+          description: StorageLimitWillExceedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorageLimitWillExceedException'
+        '484':
+          description: ProhibitedStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProhibitedStateException'
+        '485':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '486':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '487':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '488':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '489':
+          description: DraftUploadOutOfSyncException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DraftUploadOutOfSyncException'
+        '490':
+          description: ResourceAlreadyCheckedOutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyCheckedOutException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitiateDocumentVersionUploadRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v1/resources/{ResourceId}/permissions/{PrincipalId}':
+    delete:
+      operationId: RemoveResourcePermission
+      description: Removes the permission for the specified principal from the specified resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperationException'
+        '481':
+          description: UnauthorizedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResourceAccessException'
+        '482':
+          description: FailedDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedDependencyException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: ResourceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: PrincipalId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveResourcePermissionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AbortDocumentVersionUploadRequest:
+      type: object
+      properties: {}
+    ActivateUserRequest:
+      type: object
+      properties: {}
+    ActivateUserResponse:
+      type: object
+      properties:
+        User:
+          $ref: '#/components/schemas/User'
+    Activity:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/ActivityType'
+        TimeStamp:
+          $ref: '#/components/schemas/TimestampType'
+        OrganizationId:
+          $ref: '#/components/schemas/IdType'
+        Initiator:
+          $ref: '#/components/schemas/UserMetadata'
+        Participants:
+          $ref: '#/components/schemas/Participants'
+        ResourceMetadata:
+          $ref: '#/components/schemas/ResourceMetadata'
+        OriginalParent:
+          $ref: '#/components/schemas/ResourceMetadata'
+        CommentMetadata:
+          $ref: '#/components/schemas/CommentMetadata'
+      description: Describes the activity information.
+    ActivityType:
+      type: string
+      enum:
+        - DOCUMENT_CHECKED_IN
+        - DOCUMENT_CHECKED_OUT
+        - DOCUMENT_RENAMED
+        - DOCUMENT_VERSION_UPLOADED
+        - DOCUMENT_VERSION_DELETED
+        - DOCUMENT_RECYCLED
+        - DOCUMENT_RESTORED
+        - DOCUMENT_REVERTED
+        - DOCUMENT_SHARED
+        - DOCUMENT_UNSHARED
+        - DOCUMENT_SHARE_PERMISSION_CHANGED
+        - DOCUMENT_SHAREABLE_LINK_CREATED
+        - DOCUMENT_SHAREABLE_LINK_REMOVED
+        - DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED
+        - DOCUMENT_MOVED
+        - DOCUMENT_COMMENT_ADDED
+        - DOCUMENT_COMMENT_DELETED
+        - DOCUMENT_ANNOTATION_ADDED
+        - DOCUMENT_ANNOTATION_DELETED
+        - FOLDER_CREATED
+        - FOLDER_DELETED
+        - FOLDER_RENAMED
+        - FOLDER_RECYCLED
+        - FOLDER_RESTORED
+        - FOLDER_SHARED
+        - FOLDER_UNSHARED
+        - FOLDER_SHARE_PERMISSION_CHANGED
+        - FOLDER_SHAREABLE_LINK_CREATED
+        - FOLDER_SHAREABLE_LINK_REMOVED
+        - FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED
+        - FOLDER_MOVED
+    AddResourcePermissionsRequest:
+      type: object
+      required:
+        - Principals
+      properties:
+        Principals:
+          $ref: '#/components/schemas/SharePrincipalList'
+    AddResourcePermissionsResponse:
+      type: object
+      properties:
+        ShareResults:
+          $ref: '#/components/schemas/ShareResultsList'
+    AuthenticationHeaderType:
+      type: string
+      minLength: 1
+      maxLength: 8199
+      format: password
+    BooleanType:
+      type: boolean
+    Comment:
+      type: object
+      required:
+        - CommentId
+      properties:
+        CommentId:
+          $ref: '#/components/schemas/CommentIdType'
+        ParentId:
+          $ref: '#/components/schemas/CommentIdType'
+        ThreadId:
+          $ref: '#/components/schemas/CommentIdType'
+        Text:
+          $ref: '#/components/schemas/CommentTextType'
+        Contributor:
+          $ref: '#/components/schemas/User'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        Status:
+          $ref: '#/components/schemas/CommentStatusType'
+        Visibility:
+          $ref: '#/components/schemas/CommentVisibilityType'
+        RecipientId:
+          $ref: '#/components/schemas/IdType'
+      description: Describes a comment.
+    CommentIdType:
+      type: string
+      pattern: '[\w+-.@]+'
+      minLength: 1
+      maxLength: 128
+    CommentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Comment'
+    CommentMetadata:
+      type: object
+      properties:
+        CommentId:
+          $ref: '#/components/schemas/CommentIdType'
+        Contributor:
+          $ref: '#/components/schemas/User'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        CommentStatus:
+          $ref: '#/components/schemas/CommentStatusType'
+        RecipientId:
+          $ref: '#/components/schemas/IdType'
+      description: Describes the metadata of a comment.
+    CommentStatusType:
+      type: string
+      enum:
+        - DRAFT
+        - PUBLISHED
+        - DELETED
+    CommentTextType:
+      type: string
+      minLength: 1
+      maxLength: 2048
+      format: password
+    CommentVisibilityType:
+      type: string
+      enum:
+        - PUBLIC
+        - PRIVATE
+    ConcurrentModificationException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The resource hierarchy is changing.
+    CreateCommentRequest:
+      type: object
+      required:
+        - Text
+      properties:
+        ParentId:
+          $ref: '#/components/schemas/CommentIdType'
+        ThreadId:
+          $ref: '#/components/schemas/CommentIdType'
+        Text:
+          $ref: '#/components/schemas/CommentTextType'
+        Visibility:
+          $ref: '#/components/schemas/CommentVisibilityType'
+        NotifyCollaborators:
+          $ref: '#/components/schemas/BooleanType'
+    CreateCommentResponse:
+      type: object
+      properties:
+        Comment:
+          $ref: '#/components/schemas/Comment'
+    CreateCustomMetadataRequest:
+      type: object
+      required:
+        - CustomMetadata
+      properties:
+        CustomMetadata:
+          $ref: '#/components/schemas/CustomMetadataMap'
+    CreateCustomMetadataResponse:
+      type: object
+      properties: {}
+    CreateFolderRequest:
+      type: object
+      required:
+        - ParentFolderId
+      properties:
+        Name:
+          $ref: '#/components/schemas/ResourceNameType'
+        ParentFolderId:
+          $ref: '#/components/schemas/ResourceIdType'
+    CreateFolderResponse:
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/FolderMetadata'
+    CreateLabelsRequest:
+      type: object
+      required:
+        - Labels
+      properties:
+        Labels:
+          $ref: '#/components/schemas/Labels'
+    CreateLabelsResponse:
+      type: object
+      properties: {}
+    CreateNotificationSubscriptionRequest:
+      type: object
+      required:
+        - Endpoint
+        - Protocol
+        - SubscriptionType
+      properties:
+        Endpoint:
+          $ref: '#/components/schemas/SubscriptionEndPointType'
+        Protocol:
+          $ref: '#/components/schemas/SubscriptionProtocolType'
+        SubscriptionType:
+          $ref: '#/components/schemas/SubscriptionType'
+    CreateNotificationSubscriptionResponse:
+      type: object
+      properties:
+        Subscription:
+          $ref: '#/components/schemas/Subscription'
+    CreateUserRequest:
+      type: object
+      required:
+        - Username
+        - GivenName
+        - Surname
+        - Password
+      properties:
+        OrganizationId:
+          $ref: '#/components/schemas/IdType'
+        Username:
+          $ref: '#/components/schemas/UsernameType'
+        EmailAddress:
+          $ref: '#/components/schemas/EmailAddressType'
+        GivenName:
+          $ref: '#/components/schemas/UserAttributeValueType'
+        Surname:
+          $ref: '#/components/schemas/UserAttributeValueType'
+        Password:
+          $ref: '#/components/schemas/PasswordType'
+        TimeZoneId:
+          $ref: '#/components/schemas/TimeZoneIdType'
+        StorageRule:
+          $ref: '#/components/schemas/StorageRuleType'
+    CreateUserResponse:
+      type: object
+      properties:
+        User:
+          $ref: '#/components/schemas/User'
+    CustomMetadataKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomMetadataKeyType'
+      maxItems: 8
+    CustomMetadataKeyType:
+      type: string
+      pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
+      minLength: 1
+      maxLength: 56
+    CustomMetadataLimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The limit has been reached on the number of custom properties for the specified resource.
+    CustomMetadataMap:
+      type: array
+      minItems: 1
+      maxItems: 8
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/CustomMetadataKeyType'
+          value:
+            $ref: '#/components/schemas/CustomMetadataValueType'
+    CustomMetadataValueType:
+      type: string
+      pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
+      minLength: 1
+      maxLength: 256
+    DeactivateUserRequest:
+      type: object
+      properties: {}
+    DeactivatingLastSystemUserException:
+      type: object
+      properties: {}
+      description: The last user in the organization is being deactivated.
+    DeleteCommentRequest:
+      type: object
+      properties: {}
+    DeleteCustomMetadataRequest:
+      type: object
+      properties: {}
+    DeleteCustomMetadataResponse:
+      type: object
+      properties: {}
+    DeleteDocumentRequest:
+      type: object
+      properties: {}
+    DeleteFolderContentsRequest:
+      type: object
+      properties: {}
+    DeleteFolderRequest:
+      type: object
+      properties: {}
+    DeleteLabelsRequest:
+      type: object
+      properties: {}
+    DeleteLabelsResponse:
+      type: object
+      properties: {}
+    DeleteNotificationSubscriptionRequest:
+      type: object
+      properties: {}
+    DeleteUserRequest:
+      type: object
+      properties: {}
+    DescribeActivitiesRequest:
+      type: object
+      properties: {}
+    DescribeActivitiesResponse:
+      type: object
+      properties:
+        UserActivities:
+          $ref: '#/components/schemas/UserActivities'
+        Marker:
+          $ref: '#/components/schemas/MarkerType'
+    DescribeCommentsRequest:
+      type: object
+      properties: {}
+    DescribeCommentsResponse:
+      type: object
+      properties:
+        Comments:
+          $ref: '#/components/schemas/CommentList'
+        Marker:
+          $ref: '#/components/schemas/MarkerType'
+    DescribeDocumentVersionsRequest:
+      type: object
+      properties: {}
+    DescribeDocumentVersionsResponse:
+      type: object
+      properties:
+        DocumentVersions:
+          $ref: '#/components/schemas/DocumentVersionMetadataList'
+        Marker:
+          $ref: '#/components/schemas/PageMarkerType'
+    DescribeFolderContentsRequest:
+      type: object
+      properties: {}
+    DescribeFolderContentsResponse:
+      type: object
+      properties:
+        Folders:
+          $ref: '#/components/schemas/FolderMetadataList'
+        Documents:
+          $ref: '#/components/schemas/DocumentMetadataList'
+        Marker:
+          $ref: '#/components/schemas/PageMarkerType'
+    DescribeNotificationSubscriptionsRequest:
+      type: object
+      properties: {}
+    DescribeNotificationSubscriptionsResponse:
+      type: object
+      properties:
+        Subscriptions:
+          $ref: '#/components/schemas/SubscriptionList'
+        Marker:
+          $ref: '#/components/schemas/PageMarkerType'
+    DescribeResourcePermissionsRequest:
+      type: object
+      properties: {}
+    DescribeResourcePermissionsResponse:
+      type: object
+      properties:
+        Principals:
+          $ref: '#/components/schemas/PrincipalList'
+        Marker:
+          $ref: '#/components/schemas/PageMarkerType'
+    DescribeRootFoldersRequest:
+      type: object
+      properties: {}
+    DescribeRootFoldersResponse:
+      type: object
+      properties:
+        Folders:
+          $ref: '#/components/schemas/FolderMetadataList'
+        Marker:
+          $ref: '#/components/schemas/PageMarkerType'
+    DescribeUsersRequest:
+      type: object
+      properties: {}
+    DescribeUsersResponse:
+      type: object
+      properties:
+        Users:
+          $ref: '#/components/schemas/OrganizationUserList'
+        TotalNumberOfUsers:
+          $ref: '#/components/schemas/SizeType'
+        Marker:
+          $ref: '#/components/schemas/PageMarkerType'
+    DocumentContentType:
+      type: string
+      minLength: 1
+      maxLength: 128
+    DocumentLockedForCommentsException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: This exception is thrown when the document is locked for comments and user tries to create or delete a comment on that document.
+    DocumentMetadata:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ResourceIdType'
+        CreatorId:
+          $ref: '#/components/schemas/IdType'
+        ParentFolderId:
+          $ref: '#/components/schemas/ResourceIdType'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        ModifiedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        LatestVersionMetadata:
+          $ref: '#/components/schemas/DocumentVersionMetadata'
+        ResourceState:
+          $ref: '#/components/schemas/ResourceStateType'
+        Labels:
+          $ref: '#/components/schemas/Labels'
+      description: Describes the document.
+    DocumentMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DocumentMetadata'
+    DocumentSourceType:
+      type: string
+      enum:
+        - ORIGINAL
+        - WITH_COMMENTS
+    DocumentSourceUrlMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/DocumentSourceType'
+          value:
+            $ref: '#/components/schemas/UrlType'
+    DocumentStatusType:
+      type: string
+      enum:
+        - INITIALIZED
+        - ACTIVE
+    DocumentThumbnailType:
+      type: string
+      enum:
+        - SMALL
+        - SMALL_HQ
+        - LARGE
+    DocumentThumbnailUrlMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/DocumentThumbnailType'
+          value:
+            $ref: '#/components/schemas/UrlType'
+    DocumentVersionIdType:
+      type: string
+      pattern: '[\w+-.@]+'
+      minLength: 1
+      maxLength: 128
+    DocumentVersionMetadata:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/DocumentVersionIdType'
+        Name:
+          $ref: '#/components/schemas/ResourceNameType'
+        ContentType:
+          $ref: '#/components/schemas/DocumentContentType'
+        Size:
+          $ref: '#/components/schemas/SizeType'
+        Signature:
+          $ref: '#/components/schemas/HashType'
+        Status:
+          $ref: '#/components/schemas/DocumentStatusType'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        ModifiedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        ContentCreatedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        ContentModifiedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        CreatorId:
+          $ref: '#/components/schemas/IdType'
+        Thumbnail:
+          $ref: '#/components/schemas/DocumentThumbnailUrlMap'
+        Source:
+          $ref: '#/components/schemas/DocumentSourceUrlMap'
+      description: Describes a version of a document.
+    DocumentVersionMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DocumentVersionMetadata'
+    DocumentVersionStatus:
+      type: string
+      enum:
+        - ACTIVE
+    DraftUploadOutOfSyncException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: This exception is thrown when a valid checkout ID is not presented on document version upload calls for a document that has been checked out from Web client.
+    EmailAddressType:
+      type: string
+      pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+      minLength: 1
+      maxLength: 256
+    EntityAlreadyExistsException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The resource already exists.
+    EntityIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IdType'
+    EntityNotExistsException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+        EntityIds:
+          $ref: '#/components/schemas/EntityIdList'
+      description: The resource does not exist.
+    ErrorMessageType:
+      type: string
+    FailedDependencyException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: 'The AWS Directory Service cannot reach an on-premises instance. Or a dependency under the control of the organization is failing, such as a connected active directory.'
+    FieldNamesType:
+      type: string
+      pattern: '[\w,]+'
+      minLength: 1
+      maxLength: 256
+    FolderContentType:
+      type: string
+      enum:
+        - ALL
+        - DOCUMENT
+        - FOLDER
+    FolderMetadata:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ResourceIdType'
+        Name:
+          $ref: '#/components/schemas/ResourceNameType'
+        CreatorId:
+          $ref: '#/components/schemas/IdType'
+        ParentFolderId:
+          $ref: '#/components/schemas/ResourceIdType'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        ModifiedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        ResourceState:
+          $ref: '#/components/schemas/ResourceStateType'
+        Signature:
+          $ref: '#/components/schemas/HashType'
+        Labels:
+          $ref: '#/components/schemas/Labels'
+        Size:
+          $ref: '#/components/schemas/SizeType'
+        LatestVersionSize:
+          $ref: '#/components/schemas/SizeType'
+      description: Describes a folder.
+    FolderMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FolderMetadata'
+    GetCurrentUserRequest:
+      type: object
+      properties: {}
+    GetCurrentUserResponse:
+      type: object
+      properties:
+        User:
+          $ref: '#/components/schemas/User'
+    GetDocumentPathRequest:
+      type: object
+      properties: {}
+    GetDocumentPathResponse:
+      type: object
+      properties:
+        Path:
+          $ref: '#/components/schemas/ResourcePath'
+    GetDocumentRequest:
+      type: object
+      properties: {}
+    GetDocumentResponse:
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/DocumentMetadata'
+        CustomMetadata:
+          $ref: '#/components/schemas/CustomMetadataMap'
+    GetDocumentVersionRequest:
+      type: object
+      properties: {}
+    GetDocumentVersionResponse:
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/DocumentVersionMetadata'
+        CustomMetadata:
+          $ref: '#/components/schemas/CustomMetadataMap'
+    GetFolderPathRequest:
+      type: object
+      properties: {}
+    GetFolderPathResponse:
+      type: object
+      properties:
+        Path:
+          $ref: '#/components/schemas/ResourcePath'
+    GetFolderRequest:
+      type: object
+      properties: {}
+    GetFolderResponse:
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/FolderMetadata'
+        CustomMetadata:
+          $ref: '#/components/schemas/CustomMetadataMap'
+    GroupMetadata:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/IdType'
+        Name:
+          $ref: '#/components/schemas/GroupNameType'
+      description: Describes the metadata of a user group.
+    GroupMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupMetadata'
+    GroupNameType:
+      type: string
+    HashType:
+      type: string
+      pattern: '[&\w+-.@]+'
+      minLength: 0
+      maxLength: 128
+    HeaderNameType:
+      type: string
+      pattern: '[\w-]+'
+      minLength: 1
+      maxLength: 256
+    HeaderValueType:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    IdType:
+      type: string
+      pattern: '[&\w+-.@]+'
+      minLength: 1
+      maxLength: 256
+    IllegalUserStateException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The user is undergoing transfer of ownership.
+    InitiateDocumentVersionUploadRequest:
+      type: object
+      required:
+        - ParentFolderId
+      properties:
+        Id:
+          $ref: '#/components/schemas/ResourceIdType'
+        Name:
+          $ref: '#/components/schemas/ResourceNameType'
+        ContentCreatedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        ContentModifiedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        ContentType:
+          $ref: '#/components/schemas/DocumentContentType'
+        DocumentSizeInBytes:
+          $ref: '#/components/schemas/SizeType'
+        ParentFolderId:
+          $ref: '#/components/schemas/ResourceIdType'
+    InitiateDocumentVersionUploadResponse:
+      type: object
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/DocumentMetadata'
+        UploadMetadata:
+          $ref: '#/components/schemas/UploadMetadata'
+    InvalidArgumentException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The pagination marker and/or limit fields are not valid.
+    InvalidOperationException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The operation is invalid.
+    Label:
+      type: string
+      pattern: '[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*'
+      minLength: 1
+      maxLength: 32
+    Labels:
+      type: array
+      items:
+        $ref: '#/components/schemas/Label'
+      maxItems: 20
+    LimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: 'The maximum of 100,000 folders under the parent folder has been exceeded.'
+    LimitType:
+      type: integer
+      minimum: 1
+      maximum: 999
+    LocaleType:
+      type: string
+      enum:
+        - en
+        - fr
+        - ko
+        - de
+        - es
+        - ja
+        - ru
+        - zh_CN
+        - zh_TW
+        - pt_BR
+        - default
+    MarkerType:
+      type: string
+      pattern: '[\u0000-\u00FF]+'
+      minLength: 1
+      maxLength: 2048
+    MessageType:
+      type: string
+      minLength: 0
+      maxLength: 2048
+      format: password
+    OrderType:
+      type: string
+      enum:
+        - ASCENDING
+        - DESCENDING
+    OrganizationUserList:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+    PageMarkerType:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    Participants:
+      type: object
+      properties:
+        Users:
+          $ref: '#/components/schemas/UserMetadataList'
+        Groups:
+          $ref: '#/components/schemas/GroupMetadataList'
+      description: Describes the users and/or user groups.
+    PasswordType:
+      type: string
+      pattern: '[\u0020-\u00FF]+'
+      minLength: 4
+      maxLength: 32
+      format: password
+    PermissionInfo:
+      type: object
+      properties:
+        Role:
+          $ref: '#/components/schemas/RoleType'
+        Type:
+          $ref: '#/components/schemas/RolePermissionType'
+      description: Describes the permissions.
+    PermissionInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PermissionInfo'
+    PositiveSizeType:
+      type: integer
+      minimum: 0
+    Principal:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/IdType'
+        Type:
+          $ref: '#/components/schemas/PrincipalType'
+        Roles:
+          $ref: '#/components/schemas/PermissionInfoList'
+      description: Describes a resource.
+    PrincipalList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Principal'
+    PrincipalType:
+      type: string
+      enum:
+        - USER
+        - GROUP
+        - INVITE
+        - ANONYMOUS
+        - ORGANIZATION
+    ProhibitedStateException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The specified document version is not in the INITIALIZED state.
+    RemoveAllResourcePermissionsRequest:
+      type: object
+      properties: {}
+    RemoveResourcePermissionRequest:
+      type: object
+      properties: {}
+    ResourceAlreadyCheckedOutException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The resource is already checked out.
+    ResourceIdType:
+      type: string
+      pattern: '[\w+-.@]+'
+      minLength: 1
+      maxLength: 128
+    ResourceMetadata:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/ResourceType'
+        Name:
+          $ref: '#/components/schemas/ResourceNameType'
+        OriginalName:
+          $ref: '#/components/schemas/ResourceNameType'
+        Id:
+          $ref: '#/components/schemas/ResourceIdType'
+        VersionId:
+          $ref: '#/components/schemas/DocumentVersionIdType'
+        Owner:
+          $ref: '#/components/schemas/UserMetadata'
+        ParentId:
+          $ref: '#/components/schemas/ResourceIdType'
+      description: Describes the metadata of a resource.
+    ResourceNameType:
+      type: string
+      pattern: '[\u0020-\u202D\u202F-\uFFFF]+'
+      minLength: 1
+      maxLength: 255
+    ResourcePath:
+      type: object
+      properties:
+        Components:
+          $ref: '#/components/schemas/ResourcePathComponentList'
+      description: Describes the path information of a resource.
+    ResourcePathComponent:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/IdType'
+        Name:
+          $ref: '#/components/schemas/ResourceNameType'
+      description: Describes the resource path.
+    ResourcePathComponentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourcePathComponent'
+    ResourceSortType:
+      type: string
+      enum:
+        - DATE
+        - NAME
+    ResourceStateType:
+      type: string
+      enum:
+        - ACTIVE
+        - RESTORING
+        - RECYCLING
+        - RECYCLED
+    ResourceType:
+      type: string
+      enum:
+        - FOLDER
+        - DOCUMENT
+    RolePermissionType:
+      type: string
+      enum:
+        - DIRECT
+        - INHERITED
+    RoleType:
+      type: string
+      enum:
+        - VIEWER
+        - CONTRIBUTOR
+        - OWNER
+        - COOWNER
+    SearchQueryType:
+      type: string
+      pattern: '[\u0020-\uFFFF]+'
+      minLength: 1
+      maxLength: 512
+      format: password
+    ServiceUnavailableException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: One or more of the dependencies is unavailable.
+    SharePrincipal:
+      type: object
+      required:
+        - Id
+        - Type
+        - Role
+      properties:
+        Id:
+          $ref: '#/components/schemas/IdType'
+        Type:
+          $ref: '#/components/schemas/PrincipalType'
+        Role:
+          $ref: '#/components/schemas/RoleType'
+      description: 'Describes the recipient type and ID, if available.'
+    SharePrincipalList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SharePrincipal'
+    ShareResult:
+      type: object
+      properties:
+        PrincipalId:
+          $ref: '#/components/schemas/IdType'
+        Role:
+          $ref: '#/components/schemas/RoleType'
+        Status:
+          $ref: '#/components/schemas/ShareStatusType'
+        ShareId:
+          $ref: '#/components/schemas/ResourceIdType'
+        StatusMessage:
+          $ref: '#/components/schemas/MessageType'
+      description: Describes the share results of a resource.
+    ShareResultsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ShareResult'
+    ShareStatusType:
+      type: string
+      enum:
+        - SUCCESS
+        - FAILURE
+    SignedHeaderMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/HeaderNameType'
+          value:
+            $ref: '#/components/schemas/HeaderValueType'
+    SizeType:
+      type: integer
+    StorageLimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The storage limit has been exceeded.
+    StorageLimitWillExceedException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The storage limit will be exceeded.
+    StorageRuleType:
+      type: object
+      properties:
+        StorageAllocatedInBytes:
+          $ref: '#/components/schemas/PositiveSizeType'
+        StorageType:
+          $ref: '#/components/schemas/StorageType'
+      description: Describes the storage for a user.
+    StorageType:
+      type: string
+      enum:
+        - UNLIMITED
+        - QUOTA
+    Subscription:
+      type: object
+      properties:
+        SubscriptionId:
+          $ref: '#/components/schemas/IdType'
+        EndPoint:
+          $ref: '#/components/schemas/SubscriptionEndPointType'
+        Protocol:
+          $ref: '#/components/schemas/SubscriptionProtocolType'
+      description: Describes a subscription.
+    SubscriptionEndPointType:
+      type: string
+      minLength: 1
+      maxLength: 256
+    SubscriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Subscription'
+      maxItems: 256
+    SubscriptionProtocolType:
+      type: string
+      enum:
+        - HTTPS
+    SubscriptionType:
+      type: string
+      enum:
+        - ALL
+    TimeZoneIdType:
+      type: string
+      minLength: 1
+      maxLength: 256
+    TimestampType:
+      type: string
+      format: date-time
+    TooManyLabelsException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The limit has been reached on the number of labels for the specified resource.
+    TooManySubscriptionsException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: You've reached the limit on the number of subscriptions for the WorkDocs instance.
+    UnauthorizedOperationException:
+      type: object
+      properties: {}
+      description: The operation is not permitted.
+    UnauthorizedResourceAccessException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessageType'
+      description: The caller does not have access to perform the action on the resource.
+    UpdateDocumentRequest:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/ResourceNameType'
+        ParentFolderId:
+          $ref: '#/components/schemas/ResourceIdType'
+        ResourceState:
+          $ref: '#/components/schemas/ResourceStateType'
+    UpdateDocumentVersionRequest:
+      type: object
+      properties:
+        VersionStatus:
+          $ref: '#/components/schemas/DocumentVersionStatus'
+    UpdateFolderRequest:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/ResourceNameType'
+        ParentFolderId:
+          $ref: '#/components/schemas/ResourceIdType'
+        ResourceState:
+          $ref: '#/components/schemas/ResourceStateType'
+    UpdateUserRequest:
+      type: object
+      properties:
+        GivenName:
+          $ref: '#/components/schemas/UserAttributeValueType'
+        Surname:
+          $ref: '#/components/schemas/UserAttributeValueType'
+        Type:
+          $ref: '#/components/schemas/UserType'
+        StorageRule:
+          $ref: '#/components/schemas/StorageRuleType'
+        TimeZoneId:
+          $ref: '#/components/schemas/TimeZoneIdType'
+        Locale:
+          $ref: '#/components/schemas/LocaleType'
+    UpdateUserResponse:
+      type: object
+      properties:
+        User:
+          $ref: '#/components/schemas/User'
+    UploadMetadata:
+      type: object
+      properties:
+        UploadUrl:
+          $ref: '#/components/schemas/UrlType'
+        SignedHeaders:
+          $ref: '#/components/schemas/SignedHeaderMap'
+      description: Describes the upload.
+    UrlType:
+      type: string
+      minLength: 1
+      maxLength: 1024
+      format: password
+    User:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/IdType'
+        Username:
+          $ref: '#/components/schemas/UsernameType'
+        EmailAddress:
+          $ref: '#/components/schemas/EmailAddressType'
+        GivenName:
+          $ref: '#/components/schemas/UserAttributeValueType'
+        Surname:
+          $ref: '#/components/schemas/UserAttributeValueType'
+        OrganizationId:
+          $ref: '#/components/schemas/IdType'
+        RootFolderId:
+          $ref: '#/components/schemas/ResourceIdType'
+        RecycleBinFolderId:
+          $ref: '#/components/schemas/ResourceIdType'
+        Status:
+          $ref: '#/components/schemas/UserStatusType'
+        Type:
+          $ref: '#/components/schemas/UserType'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        ModifiedTimestamp:
+          $ref: '#/components/schemas/TimestampType'
+        TimeZoneId:
+          $ref: '#/components/schemas/TimeZoneIdType'
+        Locale:
+          $ref: '#/components/schemas/LocaleType'
+        Storage:
+          $ref: '#/components/schemas/UserStorageMetadata'
+      description: Describes a user.
+    UserActivities:
+      type: array
+      items:
+        $ref: '#/components/schemas/Activity'
+    UserAttributeValueType:
+      type: string
+      minLength: 1
+      maxLength: 64
+    UserFilterType:
+      type: string
+      enum:
+        - ALL
+        - ACTIVE_PENDING
+    UserIdsType:
+      type: string
+      pattern: '[&\w+-.@, ]+'
+      minLength: 1
+      maxLength: 2000
+    UserMetadata:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/IdType'
+        Username:
+          $ref: '#/components/schemas/UsernameType'
+        GivenName:
+          $ref: '#/components/schemas/UserAttributeValueType'
+        Surname:
+          $ref: '#/components/schemas/UserAttributeValueType'
+        EmailAddress:
+          $ref: '#/components/schemas/EmailAddressType'
+      description: Describes the metadata of the user.
+    UserMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserMetadata'
+    UserSortType:
+      type: string
+      enum:
+        - USER_NAME
+        - FULL_NAME
+        - STORAGE_LIMIT
+        - USER_STATUS
+        - STORAGE_USED
+    UserStatusType:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+        - PENDING
+    UserStorageMetadata:
+      type: object
+      properties:
+        StorageUtilizedInBytes:
+          $ref: '#/components/schemas/SizeType'
+        StorageRule:
+          $ref: '#/components/schemas/StorageRuleType'
+      description: Describes the storage for a user.
+    UserType:
+      type: string
+      enum:
+        - USER
+        - ADMIN
+    UsernameType:
+      type: string
+      pattern: '[\w\-+.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z]+)?'
+      minLength: 1
+      maxLength: 256
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

@@ -1,0 +1,1871 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://management.azure.com/'
+info:
+  description: REST API for Azure Server Management Service.
+  title: ServerManagement
+  version: 2016-07-01-preview
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-servermanagement/2016-07-01-preview/swagger/servermanagement.json'
+      version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: arm-servermanagement
+  x-tags:
+    - Azure
+    - Microsoft
+security:
+  - azure_auth:
+      - user_impersonation
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.ServerManagement/gateways':
+    get:
+      description: Returns gateways in a subscription.
+      operationId: Gateway_List
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResources'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResources'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Gateways
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.ServerManagement/nodes':
+    get:
+      description: Lists nodes in a subscription.
+      operationId: Node_List
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeResources'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NodeResources'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Nodes
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways':
+    get:
+      description: Returns gateways in a resource group.
+      operationId: Gateway_ListForResourceGroup
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResources'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResources'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Gateways
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways/{gatewayName}':
+    delete:
+      description: Deletes a gateway from a resource group.
+      operationId: Gateway_Delete
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The gateway name (256 characters maximum).
+          in: path
+          name: gatewayName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+      responses:
+        '200':
+          description: The object exists and was deleted successfully.
+        '204':
+          description: The request is well formed but the resource does not exist.
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Gateways
+    get:
+      description: Gets a gateway.
+      operationId: Gateway_Get
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The gateway name (256 characters maximum)
+          in: path
+          name: gatewayName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+        - description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: query
+          name: $expand
+          required: false
+          x-ms-enum:
+            modelAsString: false
+            name: GatewayExpandOption
+          schema:
+            type: string
+            enum:
+              - status
+              - download
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResource'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Gateways
+    patch:
+      description: Updates a gateway belonging to a resource group.
+      operationId: Gateway_Update
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The gateway name (256 characters maximum).
+          in: path
+          name: gatewayName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+      responses:
+        '200':
+          description: Update completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResource'
+        '202':
+          description: 'Accepted: The location header contains the URL where the status of the long running operation can be checked.'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-ms-long-running-operation: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GatewayParameters'
+        description: Parameters supplied to the Update operation.
+        required: true
+    put:
+      description: Creates or updates a ManagementService gateway.
+      operationId: Gateway_Create
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The gateway name (256 characters maximum).
+          in: path
+          name: gatewayName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResource'
+        '201':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GatewayResource'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Gateways
+      x-ms-long-running-operation: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GatewayParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GatewayParameters'
+        description: Parameters supplied to the CreateOrUpdate operation.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways/{gatewayName}/profile':
+    post:
+      description: Gets a gateway profile.
+      operationId: Gateway_GetProfile
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The gateway name (256 characters maximum).
+          in: path
+          name: gatewayName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayProfile'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GatewayProfile'
+        '202':
+          description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Gateways
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways/{gatewayName}/regenerateprofile':
+    post:
+      description: Regenerate a gateway's profile
+      operationId: Gateway_RegenerateProfile
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The gateway name (256 characters maximum).
+          in: path
+          name: gatewayName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+      responses:
+        '200':
+          description: The operation completed successfully.
+        '202':
+          description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Gateways
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/gateways/{gatewayName}/upgradetolatest':
+    post:
+      description: Upgrades a gateway.
+      operationId: Gateway_Upgrade
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The gateway name (256 characters maximum).
+          in: path
+          name: gatewayName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+      responses:
+        '200':
+          description: The operation completed successfully.
+        '202':
+          description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Gateways
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes':
+    get:
+      description: Lists nodes in a resource group.
+      operationId: Node_ListForResourceGroup
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeResources'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NodeResources'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Nodes
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}':
+    delete:
+      description: deletes a management node
+      operationId: Node_Delete
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+      responses:
+        '200':
+          description: The object exists and was deleted successfully.
+        '204':
+          description: The request is well formed but the resource does not exist.
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Nodes
+    get:
+      description: Gets a management node.
+      operationId: Node_Get
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+      responses:
+        '200':
+          description: The object exists and was deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NodeResource'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Nodes
+    patch:
+      description: Updates a management node.
+      operationId: Node_Update
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NodeResource'
+        '202':
+          description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Nodes
+      x-ms-long-running-operation: true
+      requestBody:
+        $ref: '#/components/requestBodies/NodeParameters'
+    put:
+      description: Creates or updates a management node.
+      operationId: Node_Create
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NodeResource'
+        '201':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/NodeResource'
+        '202':
+          description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Nodes
+      x-ms-long-running-operation: true
+      requestBody:
+        $ref: '#/components/requestBodies/NodeParameters'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}':
+    delete:
+      description: Deletes a session for a node.
+      operationId: Session_Delete
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+        - description: The sessionId from the user.
+          in: path
+          name: session
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+        '204':
+          description: The request is well formed but the resource does not exist.
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Sessions
+    get:
+      description: Gets a session for a node.
+      operationId: Session_Get
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+        - description: The sessionId from the user.
+          in: path
+          name: session
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SessionResource'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Sessions
+    put:
+      description: Creates a session for a node.
+      operationId: Session_Create
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+        - description: The sessionId from the user.
+          in: path
+          name: session
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SessionResource'
+        '201':
+          description: 'Created: the session was created.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SessionResource'
+        '202':
+          description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - Sessions
+      x-ms-long-running-operation: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SessionParameters'
+        description: Parameters supplied to the CreateOrUpdate operation.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}/features/powerShellConsole/pssessions':
+    get:
+      description: Gets a list of the active sessions.
+      operationId: PowerShell_ListSession
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+        - description: The sessionId from the user.
+          in: path
+          name: session
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellSessionResources'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellSessionResources'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - PowerShell
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}/features/powerShellConsole/pssessions/{pssession}':
+    get:
+      description: Gets the status of a command.
+      operationId: PowerShell_GetCommandStatus
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+        - description: The sessionId from the user.
+          in: path
+          name: session
+          required: true
+          schema:
+            type: string
+        - description: The PowerShell sessionId from the user.
+          in: path
+          name: pssession
+          required: true
+          schema:
+            type: string
+        - description: Gets current output from an ongoing call.
+          in: query
+          name: $expand
+          required: false
+          x-ms-enum:
+            modelAsString: false
+            name: PowerShellExpandOption
+          schema:
+            type: string
+            enum:
+              - output
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellCommandStatus'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellCommandStatus'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - PowerShell
+    patch:
+      description: Updates a running PowerShell command with more data.
+      operationId: PowerShell_UpdateCommand
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+        - description: The sessionId from the user.
+          in: path
+          name: session
+          required: true
+          schema:
+            type: string
+        - description: The PowerShell sessionId from the user.
+          in: path
+          name: pssession
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellCommandResults'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellCommandResults'
+        '202':
+          description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - PowerShell
+      x-ms-long-running-operation: true
+    put:
+      description: Creates a PowerShell session.
+      operationId: PowerShell_CreateSession
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+        - description: The sessionId from the user.
+          in: path
+          name: session
+          required: true
+          schema:
+            type: string
+        - description: The PowerShell sessionId from the user.
+          in: path
+          name: pssession
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The operation completed succesfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellSessionResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellSessionResource'
+        '202':
+          description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - PowerShell
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}/features/powerShellConsole/pssessions/{pssession}/cancel':
+    post:
+      description: Cancels a PowerShell command.
+      operationId: PowerShell_CancelCommand
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+        - description: The sessionId from the user.
+          in: path
+          name: session
+          required: true
+          schema:
+            type: string
+        - description: The PowerShell sessionId from the user.
+          in: path
+          name: pssession
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The cancellation was completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellCommandResults'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellCommandResults'
+        '202':
+          description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - PowerShell
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}/features/powerShellConsole/pssessions/{pssession}/invokeCommand':
+    post:
+      description: Creates a PowerShell script and invokes it.
+      operationId: PowerShell_InvokeCommand
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+        - description: The sessionId from the user.
+          in: path
+          name: session
+          required: true
+          schema:
+            type: string
+        - description: The PowerShell sessionId from the user.
+          in: path
+          name: pssession
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellCommandResults'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellCommandResults'
+        '202':
+          description: 'Accepted: Location header contains the URL where the status of the long running operation can be checked.'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - PowerShell
+      x-ms-long-running-operation: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PowerShellCommandParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PowerShellCommandParameters'
+        description: Parameters supplied to the Invoke PowerShell Command operation.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServerManagement/nodes/{nodeName}/sessions/{session}/features/powerShellConsole/pssessions/{pssession}/tab':
+    post:
+      description: Gets tab completion values for a command.
+      operationId: PowerShell_TabCompletion
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - description: The resource group name uniquely identifies the resource group within the user subscriptionId.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            pattern: '[a-zA-Z0-9]+'
+        - description: The node name (256 characters maximum).
+          in: path
+          name: nodeName
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+            pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]*$'
+        - description: The sessionId from the user.
+          in: path
+          name: session
+          required: true
+          schema:
+            type: string
+        - description: The PowerShell sessionId from the user.
+          in: path
+          name: pssession
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request was succesfully completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellTabCompletionResults'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PowerShellTabCompletionResults'
+        default:
+          description: 'Default Response. It will be deserialized as per the error definition specified in the schema, and an exception will be thrown.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+        - PowerShell
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PowerShellTabCompletionParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PowerShellTabCompletionParameters'
+        description: Parameters supplied to the tab completion call.
+        required: true
+components:
+  schemas:
+    EncryptionJwkResource:
+      description: The public key of the gateway.
+      properties:
+        alg:
+          type: string
+        e:
+          type: string
+        kty:
+          type: string
+        'n':
+          type: string
+      type: object
+    Error:
+      description: Error message.
+      properties:
+        code:
+          format: int32
+          type: integer
+        fields:
+          type: string
+        message:
+          type: string
+    GatewayParameters:
+      description: Collection of parameters for operations on a gateway resource.
+      properties:
+        location:
+          description: Location of the resource.
+          type: string
+        properties:
+          description: Collection of properties.
+          properties:
+            upgradeMode:
+              description: 'The upgradeMode property gives the flexibility to gateway to auto upgrade itself. If properties value not specified, then we assume upgradeMode = Automatic.'
+              enum:
+                - Manual
+                - Automatic
+              type: string
+              x-ms-enum:
+                modelAsString: false
+                name: upgradeMode
+          type: object
+          x-ms-client-flatten: true
+        tags:
+          description: Resource tags.
+          type: object
+    GatewayProfile:
+      description: JSON properties that the gateway service uses know how to communicate with the resource.
+      properties:
+        dataPlaneServiceBaseAddress:
+          description: The Dataplane connection URL.
+          type: string
+        environment:
+          description: 'The environment for the gateway (DEV, DogFood, or Production).'
+          type: string
+        gatewayId:
+          description: The ID of the gateway.
+          type: string
+        messagingAccount:
+          description: Messaging Account.
+          type: string
+        messagingKey:
+          description: Messaging Key.
+          type: string
+        messagingNamespace:
+          description: Messaging namespace.
+          type: string
+        requestQueue:
+          description: Request queue name.
+          type: string
+        responseTopic:
+          description: Response topic name.
+          type: string
+        statusBlobSignature:
+          description: The gateway status blob SAS URL.
+          type: string
+        upgradeManifestUrl:
+          description: Gateway upgrade manifest URL.
+          type: string
+    GatewayResource:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Data model for an arm gateway resource.
+      properties:
+        properties:
+          description: Collection of properties.
+          properties:
+            activeMessageCount:
+              description: Number of active messages.
+              type: integer
+            created:
+              description: UTC date and time when gateway was first added to management service.
+              format: date-time
+              type: string
+            desiredVersion:
+              description: Latest available MSI version.
+              type: string
+            installerDownload:
+              description: Installer download uri.
+              readOnly: true
+              type: string
+            instances:
+              description: Names of the nodes in the gateway.
+              items:
+                $ref: '#/components/schemas/GatewayStatus'
+              type: array
+            latestPublishedMsiVersion:
+              description: Last published MSI version.
+              type: string
+            minimumVersion:
+              description: Minimum gateway version.
+              readOnly: true
+              type: string
+            publishedTimeUtc:
+              description: The date/time of the last published gateway.
+              format: date-time
+              type: string
+            updated:
+              description: UTC date and time when node was last updated.
+              format: date-time
+              type: string
+            upgradeMode:
+              description: 'The upgradeMode property gives the flexibility to gateway to auto upgrade itself. If properties value not specified, then we assume upgradeMode = Automatic.'
+              enum:
+                - Manual
+                - Automatic
+              type: string
+              x-ms-enum:
+                modelAsString: false
+                name: upgradeMode
+          type: object
+          x-ms-client-flatten: true
+    GatewayResources:
+      description: Collection of Gateway Resources.
+      properties:
+        nextLink:
+          description: The URL to the next set of resources.
+          type: string
+        value:
+          description: Collection of Gateway Resources.
+          items:
+            $ref: '#/components/schemas/GatewayResource'
+          type: array
+      type: object
+    GatewayStatus:
+      description: Expanded gateway status information.
+      properties:
+        activeMessageCount:
+          description: Active message count.
+          type: integer
+        allowGatewayGroupPolicyStatus:
+          description: Status of the allowGatewayGroupPolicy setting.
+          type: boolean
+        availableMemoryMByte:
+          description: The available memory on the gateway host machine in megabytes.
+          type: number
+        encryptionCertificateThumbprint:
+          description: Thumbprint of the encryption certificate.
+          type: string
+        encryptionJwk:
+          $ref: '#/components/schemas/EncryptionJwkResource'
+        friendlyOsName:
+          description: The Plaintext description of the OS on the gateway.
+          type: string
+        gatewayCpuUtilizationPercent:
+          description: The CPU utilization of the gateway process (numeric value between 0 and 100).
+          format: float
+          maximum: 100
+          minimum: 0
+          type: number
+        gatewayId:
+          description: The gateway resource ID.
+          type: string
+        gatewayVersion:
+          description: The version of the gateway that is installed on the system.
+          type: string
+        gatewayWorkingSetMByte:
+          description: The working set size of the gateway process in megabytes.
+          type: number
+        groupPolicyError:
+          description: The group policy error.
+          type: string
+        installedDate:
+          description: The date the gateway was installed.
+          format: date-time
+          type: string
+        latestPublishedMsiVersion:
+          description: Latest published version of the gateway install MSI.
+          type: string
+        logicalProcessorCount:
+          description: Number of logical processors in the gateway system.
+          type: integer
+        name:
+          description: The computer name of the gateway system.
+          type: string
+        publishedTimeUtc:
+          description: Gateway install MSI published time.
+          format: date-time
+          type: string
+        requireMfaGroupPolicyStatus:
+          description: Status of the requireMfaGroupPolicy setting.
+          type: boolean
+        secondaryEncryptionCertificateThumbprint:
+          description: Secondary thumbprint of the encryption certificate.
+          type: string
+        secondaryEncryptionJwk:
+          $ref: '#/components/schemas/EncryptionJwkResource'
+        statusUpdated:
+          description: UTC date and time when gateway status was last updated.
+          format: date-time
+          type: string
+        totalCpuUtilizationPercent:
+          description: CPU Utilization of the whole system.
+          type: number
+    NodeParameters:
+      description: Parameter collection for operations on arm node resource.
+      properties:
+        location:
+          description: Location of the resource.
+          type: string
+        properties:
+          description: Collection of properties.
+          properties:
+            connectionName:
+              description: myhost.domain.com
+              type: string
+            gatewayId:
+              description: Gateway ID which will manage this node.
+              type: string
+            password:
+              description: Password associated with user name.
+              format: password
+              type: string
+            userName:
+              description: User name to be used to connect to node.
+              type: string
+          type: object
+          x-ms-client-flatten: true
+        tags:
+          description: Resource tags.
+          type: object
+    NodeResource:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: A Node Resource.
+      properties:
+        properties:
+          description: Collection of properties.
+          properties:
+            connectionName:
+              description: myhost.domain.com
+              type: string
+            created:
+              description: UTC date and time when node was first added to management service.
+              format: date-time
+              type: string
+            gatewayId:
+              description: ID of the gateway.
+              type: string
+            updated:
+              description: UTC date and time when node was last updated.
+              format: date-time
+              type: string
+          type: object
+          x-ms-client-flatten: true
+    NodeResources:
+      description: A collection of node resource objects.
+      properties:
+        nextLink:
+          description: The URL to the next set of resources.
+          type: string
+        value:
+          description: Collection of Node Resources.
+          items:
+            $ref: '#/components/schemas/NodeResource'
+          type: array
+      type: object
+    PowerShellCommandParameters:
+      description: The parameters to a PowerShell script execution command.
+      properties:
+        properties:
+          description: Collection of properties.
+          properties:
+            command:
+              description: Script to execute.
+              type: string
+          type: object
+          x-ms-client-flatten: true
+    PowerShellCommandResult:
+      description: Results from invoking a PowerShell command.
+      properties:
+        backgroundColor:
+          description: The HTML color string representing the background color.
+          type: string
+        caption:
+          description: Text that precedes the prompt.
+          type: string
+        descriptions:
+          description: Collection of PromptFieldDescription objects that contains the user input.
+          items:
+            $ref: '#/components/schemas/PromptFieldDescription'
+          type: array
+        exitCode:
+          description: The exit code from a executable that was called from PowerShell.
+          type: integer
+        foregroundColor:
+          description: The HTML color string representing the foreground color.
+          type: string
+        id:
+          description: ID of the prompt message.
+          type: integer
+        message:
+          description: Text of the prompt.
+          type: string
+        messageType:
+          description: The type of message.
+          type: integer
+        prompt:
+          description: The interactive prompt message.
+          type: string
+        value:
+          description: Actual result text from the PowerShell Command.
+          type: string
+    PowerShellCommandResults:
+      description: A collection of results from a PowerShell command.
+      properties:
+        command:
+          type: string
+        completed:
+          type: boolean
+        pssession:
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PowerShellCommandResult'
+          type: array
+      type: object
+    PowerShellCommandStatus:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: Result status from invoking a PowerShell command.
+      properties:
+        properties:
+          $ref: '#/components/schemas/PowerShellCommandResults'
+    PowerShellSessionResource:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: A PowerShell session resource (practically equivalent to a runspace instance).
+      properties:
+        properties:
+          description: Collection of properties.
+          properties:
+            disconnectedOn:
+              description: Timestamp of last time the service disconnected from the runspace.
+              format: date-time
+              type: string
+            expiresOn:
+              description: Timestamp when the runspace expires.
+              format: date-time
+              type: string
+            name:
+              description: Name of the runspace.
+              type: string
+            runspaceAvailability:
+              description: The availability of the runspace.
+              type: string
+            sessionId:
+              description: The PowerShell Session ID.
+              type: string
+            state:
+              description: The runspace state.
+              type: string
+            version:
+              $ref: '#/components/schemas/Version'
+          type: object
+          x-ms-client-flatten: true
+    PowerShellSessionResources:
+      description: A collection of PowerShell session resources
+      properties:
+        nextLink:
+          description: The URL to the next set of resources.
+          type: string
+        value:
+          description: Collection of PowerShell session resources.
+          items:
+            $ref: '#/components/schemas/PowerShellSessionResource'
+          type: array
+      type: object
+    PowerShellTabCompletionParameters:
+      description: Collection of parameters for PowerShell tab completion.
+      properties:
+        command:
+          description: Command to get tab completion for.
+          type: string
+    PowerShellTabCompletionResults:
+      description: An array of strings representing the different values that can be selected through.
+      properties:
+        results:
+          items:
+            type: string
+          type: array
+    PromptFieldDescription:
+      description: Field description for the implementation of PSHostUserInterface.Prompt
+      properties:
+        helpMessage:
+          description: The help message of the prompt.
+          type: string
+        label:
+          description: The label text of the prompt.
+          type: string
+        name:
+          description: The name of the prompt.
+          type: string
+        promptFieldType:
+          enum:
+            - String
+            - SecureString
+            - Credential
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: PromptFieldType
+        promptFieldTypeIsList:
+          description: When set to 'true' the prompt field type is a list of values.
+          type: boolean
+    PromptMessageResponse:
+      description: The response to a prompt message.
+      properties:
+        response:
+          description: The list of responses a cmdlet expects.
+          items:
+            type: string
+          type: array
+    Resource:
+      description: Resource Manager Resource Information.
+      properties:
+        etag:
+          type: string
+        id:
+          description: Resource Manager Resource ID.
+          readOnly: true
+          type: string
+        location:
+          description: Resource Manager Resource Location.
+          readOnly: true
+          type: string
+        name:
+          description: Resource Manager Resource Name.
+          readOnly: true
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: Resource Manager Resource Tags.
+          type: object
+        type:
+          description: Resource Manager Resource Type.
+          readOnly: true
+          type: string
+      x-ms-azure-resource: true
+    SessionParameters:
+      description: Parameter collection for creation and other operations on sessions.
+      properties:
+        properties:
+          description: Collection of properties
+          properties:
+            EncryptionCertificateThumbprint:
+              description: Encryption certificate thumbprint.
+              type: string
+            credentialDataFormat:
+              description: Credential data format.
+              enum:
+                - RsaEncrypted
+              type: string
+              x-ms-enum:
+                modelAsString: false
+                name: credentialDataFormat
+            password:
+              description: Encrypted Password associated with user name.
+              type: string
+            retentionPeriod:
+              description: Session retention period.
+              enum:
+                - Session
+                - Persistent
+              type: string
+              x-ms-enum:
+                modelAsString: false
+                name: retentionPeriod
+            userName:
+              description: Encrypted User name to be used to connect to node.
+              type: string
+          type: object
+          x-ms-client-flatten: true
+    SessionResource:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      description: The session object.
+      properties:
+        properties:
+          description: Collection of properties.
+          properties:
+            created:
+              description: UTC date and time when node was first added to management service.
+              format: date-time
+              type: string
+            updated:
+              description: UTC date and time when node was last updated.
+              format: date-time
+              type: string
+            userName:
+              description: The username connecting to the session.
+              type: string
+          type: object
+          x-ms-client-flatten: true
+    Version:
+      description: A multipart-numeric version number.
+      properties:
+        build:
+          description: The third number of the version.
+          type: integer
+        major:
+          description: The leftmost number of the version.
+          type: integer
+        majorRevision:
+          description: The MSW of the fourth part.
+          type: integer
+        minor:
+          description: The second leftmost number of the version.
+          type: integer
+        minorRevision:
+          description: The LSW of the fourth part.
+          type: integer
+        revision:
+          description: The fourth number of the version.
+          type: integer
+  parameters:
+    ApiVersionParameter:
+      description: Client API Version.
+      in: query
+      name: api-version
+      required: true
+      schema:
+        type: string
+    SubscriptionIdParameter:
+      description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+      in: path
+      name: subscriptionId
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    NodeParameters:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NodeParameters'
+        text/json:
+          schema:
+            $ref: '#/components/schemas/NodeParameters'
+      description: Parameters supplied to the CreateOrUpdate operation.
+      required: true
+  securitySchemes:
+    azure_auth:
+      description: Azure Active Directory OAuth2 Flow.
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+          scopes:
+            user_impersonation: impersonate your user account

@@ -1,0 +1,485 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://cloudsearchdomain.amazonaws.com/'
+info:
+  version: '2013-01-01'
+  x-release: v4
+  title: Amazon CloudSearch Domain
+  description: '<p>You use the AmazonCloudSearch2013 API to upload documents to a search domain and search those documents. </p> <p>The endpoints for submitting <code>UploadDocuments</code>, <code>Search</code>, and <code>Suggest</code> requests are domain-specific. To get the endpoints for your domain, use the Amazon CloudSearch configuration service <code>DescribeDomains</code> action. The domain endpoints are also displayed on the domain dashboard in the Amazon CloudSearch console. You submit suggest requests to the search endpoint. </p> <p>For more information, see the <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide">Amazon CloudSearch Developer Guide</a>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: cloudsearchdomain
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudsearchdomain-2013-01-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/cloudsearchdomain/'
+security:
+  - hmac: []
+paths:
+  /2013-01-01/search?format=sdk&pretty=true:
+    get:
+      operationId: Search
+      description: '<p>Retrieves a list of documents that match the specified search criteria. How you specify the search criteria depends on which query parser you use. Amazon CloudSearch supports four query parsers:</p> <ul> <li><code>simple</code>: search all <code>text</code> and <code>text-array</code> fields for the specified string. Search for phrases, individual terms, and prefixes. </li> <li><code>structured</code>: search specific fields, construct compound queries using Boolean operators, and use advanced features such as term boosting and proximity searching.</li> <li><code>lucene</code>: specify search criteria using the Apache Lucene query parser syntax.</li> <li><code>dismax</code>: specify search criteria using the simplified subset of the Apache Lucene query parser syntax defined by the DisMax query parser.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html">Searching Your Data</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p> <p>The endpoint for submitting <code>Search</code> requests is domain-specific. You submit search requests to a domain''s search endpoint. To get the search endpoint for your domain, use the Amazon CloudSearch configuration service <code>DescribeDomains</code> action. A domain''s endpoints are also displayed on the domain dashboard in the Amazon CloudSearch console. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '480':
+          description: SearchException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2013-01-01/suggest?format=sdk&pretty=true:
+    get:
+      operationId: Suggest
+      description: '<p>Retrieves autocomplete suggestions for a partial query string. You can use suggestions enable you to display likely matches before users finish typing. In Amazon CloudSearch, suggestions are based on the contents of a particular text field. When you request suggestions, Amazon CloudSearch finds all of the documents whose values in the suggester field start with the specified query string. The beginning of the field must match the query string to be considered a match. </p> <p>For more information about configuring suggesters and retrieving suggestions, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html">Getting Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>. </p> <p>The endpoint for submitting <code>Suggest</code> requests is domain-specific. You submit suggest requests to a domain''s search endpoint. To get the search endpoint for your domain, use the Amazon CloudSearch configuration service <code>DescribeDomains</code> action. A domain''s endpoints are also displayed on the domain dashboard in the Amazon CloudSearch console. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuggestResponse'
+        '480':
+          description: SearchException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuggestRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2013-01-01/documents/batch?format=sdk:
+    post:
+      operationId: UploadDocuments
+      description: '<p>Posts a batch of documents to a search domain for indexing. A document batch is a collection of add and delete operations that represent the documents you want to add, update, or delete from your domain. Batches can be described in either JSON or XML. Each item that you want Amazon CloudSearch to return as a search result (such as a product) is represented as a document. Every document has a unique ID and one or more fields that contain the data that you want to search and return in results. Individual documents cannot contain more than 1 MB of data. The entire batch cannot exceed 5 MB. To get the best possible upload performance, group add and delete operations in batches that are close the 5 MB limit. Submitting a large volume of single-document batches can overload a domain''s document service. </p> <p>The endpoint for submitting <code>UploadDocuments</code> requests is domain-specific. To get the document endpoint for your domain, use the Amazon CloudSearch configuration service <code>DescribeDomains</code> action. A domain''s endpoints are also displayed on the domain dashboard in the Amazon CloudSearch console. </p> <p>For more information about formatting your data for Amazon CloudSearch, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/preparing-data.html">Preparing Your Data</a> in the <i>Amazon CloudSearch Developer Guide</i>. For more information about uploading data for indexing, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/uploading-data.html">Uploading Data</a> in the <i>Amazon CloudSearch Developer Guide</i>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadDocumentsResponse'
+        '480':
+          description: DocumentServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadDocumentsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    Adds:
+      type: integer
+    Blob:
+      type: string
+    Bucket:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/String'
+        count:
+          $ref: '#/components/schemas/Long'
+      description: 'A container for facet information. '
+    BucketInfo:
+      type: object
+      properties:
+        buckets:
+          $ref: '#/components/schemas/BucketList'
+      description: A container for the calculated facet values and counts.
+    BucketList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Bucket'
+    ContentType:
+      type: string
+      enum:
+        - application/json
+        - application/xml
+    Cursor:
+      type: string
+    Deletes:
+      type: integer
+    DocumentServiceException:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/String'
+        message:
+          $ref: '#/components/schemas/String'
+      description: Information about any problems encountered while processing an upload request.
+    DocumentServiceWarning:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: A warning returned by the document service when an issue is discovered while processing an upload request.
+    DocumentServiceWarnings:
+      type: array
+      items:
+        $ref: '#/components/schemas/DocumentServiceWarning'
+    Double:
+      type: number
+      format: double
+    Expr:
+      type: string
+    Exprs:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    Facet:
+      type: string
+    Facets:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/BucketInfo'
+    FieldStats:
+      type: object
+      properties:
+        min:
+          $ref: '#/components/schemas/String'
+        max:
+          $ref: '#/components/schemas/String'
+        count:
+          $ref: '#/components/schemas/Long'
+        missing:
+          $ref: '#/components/schemas/Long'
+        sum:
+          $ref: '#/components/schemas/Double'
+        sumOfSquares:
+          $ref: '#/components/schemas/Double'
+        mean:
+          $ref: '#/components/schemas/String'
+        stddev:
+          $ref: '#/components/schemas/Double'
+      description: The statistics for a field calculated in the request.
+    FieldValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    Fields:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/FieldValue'
+    FilterQuery:
+      type: string
+    Highlight:
+      type: string
+    Highlights:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    Hit:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/String'
+        fields:
+          $ref: '#/components/schemas/Fields'
+        exprs:
+          $ref: '#/components/schemas/Exprs'
+        highlights:
+          $ref: '#/components/schemas/Highlights'
+      description: Information about a document that matches the search request.
+    HitList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Hit'
+    Hits:
+      type: object
+      properties:
+        found:
+          $ref: '#/components/schemas/Long'
+        start:
+          $ref: '#/components/schemas/Long'
+        cursor:
+          $ref: '#/components/schemas/String'
+        hit:
+          $ref: '#/components/schemas/HitList'
+      description: The collection of documents that match the search request.
+    Long:
+      type: integer
+    Partial:
+      type: boolean
+    Query:
+      type: string
+    QueryOptions:
+      type: string
+    QueryParser:
+      type: string
+      enum:
+        - simple
+        - structured
+        - lucene
+        - dismax
+    Return:
+      type: string
+    SearchException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: Information about any problems encountered while processing a search request.
+    SearchRequest:
+      type: object
+      properties: {}
+      description: Container for the parameters to the <code>Search</code> request.
+    SearchResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/SearchStatus'
+        hits:
+          $ref: '#/components/schemas/Hits'
+        facets:
+          $ref: '#/components/schemas/Facets'
+        stats:
+          $ref: '#/components/schemas/Stats'
+      description: 'The result of a <code>Search</code> request. Contains the documents that match the specified search criteria and any requested fields, highlights, and facet information.'
+    SearchStatus:
+      type: object
+      properties:
+        timems:
+          $ref: '#/components/schemas/Long'
+        rid:
+          $ref: '#/components/schemas/String'
+      description: Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).
+    Size:
+      type: integer
+    Sort:
+      type: string
+    Start:
+      type: integer
+    Stat:
+      type: string
+    Stats:
+      type: array
+      description: The statistics calculated in the request.
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/FieldStats'
+    String:
+      type: string
+    SuggestModel:
+      type: object
+      properties:
+        query:
+          $ref: '#/components/schemas/String'
+        found:
+          $ref: '#/components/schemas/Long'
+        suggestions:
+          $ref: '#/components/schemas/Suggestions'
+      description: Container for the suggestion information returned in a <code>SuggestResponse</code>.
+    SuggestRequest:
+      type: object
+      properties: {}
+      description: Container for the parameters to the <code>Suggest</code> request.
+    SuggestResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/SuggestStatus'
+        suggest:
+          $ref: '#/components/schemas/SuggestModel'
+      description: Contains the response to a <code>Suggest</code> request.
+    SuggestStatus:
+      type: object
+      properties:
+        timems:
+          $ref: '#/components/schemas/Long'
+        rid:
+          $ref: '#/components/schemas/String'
+      description: Contains the resource id (<code>rid</code>) and the time it took to process the request (<code>timems</code>).
+    Suggester:
+      type: string
+    SuggestionMatch:
+      type: object
+      properties:
+        suggestion:
+          $ref: '#/components/schemas/String'
+        score:
+          $ref: '#/components/schemas/Long'
+        id:
+          $ref: '#/components/schemas/String'
+      description: 'An autocomplete suggestion that matches the query string specified in a <code>SuggestRequest</code>. '
+    Suggestions:
+      type: array
+      items:
+        $ref: '#/components/schemas/SuggestionMatch'
+    SuggestionsSize:
+      type: integer
+    UploadDocumentsRequest:
+      type: object
+      required:
+        - documents
+      properties:
+        documents:
+          $ref: '#/components/schemas/Blob'
+      description: Container for the parameters to the <code>UploadDocuments</code> request.
+    UploadDocumentsResponse:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/String'
+        adds:
+          $ref: '#/components/schemas/Adds'
+        deletes:
+          $ref: '#/components/schemas/Deletes'
+        warnings:
+          $ref: '#/components/schemas/DocumentServiceWarnings'
+      description: Contains the response to an <code>UploadDocuments</code> request.
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

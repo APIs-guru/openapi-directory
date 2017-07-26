@@ -1,0 +1,111 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://management.azure.com/'
+info:
+  title: InsightsClient
+  version: '2014-04-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2014-04-01/swagger/insightsClient_UsageMetrics.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: insights
+  x-tags:
+    - Azure
+    - Microsoft
+paths:
+  '/{resourceUri}/usages':
+    get:
+      description: The List operation lists the usage metrics for the resource.
+      operationId: UsageMetrics_List
+      parameters:
+        - $ref: '#/components/parameters/ResourceUriParameter'
+        - description: 'Client Api Version. NOTE: This is not a client property, it must be explicit in the call and there is no default value.'
+          in: query
+          name: api-version
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful request to get the list of usage metric values
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageMetricCollection'
+      tags:
+        - UsageMetrics
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/UsageMetric'
+      x-ms-pageable: {}
+components:
+  schemas:
+    LocalizableString:
+      description: The localizable string class.
+      properties:
+        localizedValue:
+          description: the locale specific value.
+          type: string
+        value:
+          description: the invariant value.
+          type: string
+      required:
+        - value
+    UsageMetric:
+      description: Usage Metric data.
+      properties:
+        currentValue:
+          description: the current value for the usage metric.
+          format: double
+          type: number
+        id:
+          description: the id for the usage metric.
+          type: string
+        limit:
+          description: the quota limit the usage metric.
+          format: double
+          type: number
+        name:
+          $ref: '#/components/schemas/LocalizableString'
+        nextResetTime:
+          description: the next reset time for the current value.
+          format: date-time
+          type: string
+        quotaPeriod:
+          description: the amount of time it takes to reset the value.
+          format: duration
+          type: string
+        unit:
+          description: the unit for the usage metric.
+          type: string
+    UsageMetricCollection:
+      description: Represents collection of usage metrics.
+      properties:
+        value:
+          description: the usage values.
+          items:
+            $ref: '#/components/schemas/UsageMetric'
+          type: array
+      required:
+        - value
+  parameters:
+    ResourceUriParameter:
+      description: The identifier of the resource.
+      in: path
+      name: resourceUri
+      required: true
+      x-ms-parameter-location: method
+      x-ms-skip-url-encoding: true
+      schema:
+        type: string
+      allowReserved: true

@@ -1,0 +1,2746 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://elasticloadbalancing.amazonaws.com/'
+info:
+  version: '2012-06-01'
+  x-release: v4
+  title: Elastic Load Balancing
+  description: '<fullname>Elastic Load Balancing</fullname> <p>A load balancer distributes incoming traffic across your EC2 instances. This enables you to increase the availability of your application. The load balancer also monitors the health of its registered instances and ensures that it routes traffic only to healthy instances. You configure your load balancer to accept incoming traffic by specifying one or more listeners, which are configured with a protocol and port number for connections from clients to the load balancer and a protocol and port number for connections from the load balancer to the instances.</p> <p>Elastic Load Balancing supports two types of load balancers: Classic Load Balancers and Application Load Balancers (new). A Classic Load Balancer makes routing and load balancing decisions either at the transport layer (TCP/SSL) or the application layer (HTTP/HTTPS), and supports either EC2-Classic or a VPC. An Application Load Balancer makes routing and load balancing decisions at the application layer (HTTP/HTTPS), supports path-based routing, and can route requests to one or more ports on each EC2 instance or container instance in your virtual private cloud (VPC). For more information, see the <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/what-is-load-balancing.html">Elastic Load Balancing User Guide</a>.</p> <p>This reference covers the 2012-06-01 API, which supports Classic Load Balancers. The 2015-12-01 API supports Application Load Balancers.</p> <p>To get started, create a load balancer with one or more listeners using <a>CreateLoadBalancer</a>. Register your instances with the load balancer using <a>RegisterInstancesWithLoadBalancer</a>.</p> <p>All Elastic Load Balancing operations are <i>idempotent</i>, which means that they complete at most one time. If you repeat an operation, it succeeds with a 200 OK response code.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: elasticloadbalancing
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/elasticloadbalancing-2012-06-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: false
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/elasticloadbalancing/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddTags
+      description: '<p>Adds the specified tags to the specified load balancer. Each load balancer can have a maximum of 10 tags.</p> <p>Each tag consists of a key and an optional value. If a tag with the same key is already associated with the load balancer, <code>AddTags</code> updates its value.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html">Tag Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AddTagsOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: TooManyTagsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '482':
+          description: DuplicateTagKeysException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DuplicateTagKeysException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTagsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ApplySecurityGroupsToLoadBalancer':
+    post:
+      operationId: ApplySecurityGroupsToLoadBalancer
+      description: '<p>Associates one or more security groups with your load balancer in a virtual private cloud (VPC). The specified security groups override the previously associated security groups.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups">Security Groups for Load Balancers in a VPC</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApplySecurityGroupsToLoadBalancerOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+        '482':
+          description: InvalidSecurityGroupException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSecurityGroupException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplySecurityGroupsToLoadBalancerInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AttachLoadBalancerToSubnets':
+    post:
+      operationId: AttachLoadBalancerToSubnets
+      description: '<p>Adds one or more subnets to the set of configured subnets for the specified load balancer.</p> <p>The load balancer evenly distributes requests across all registered subnets. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html">Add or Remove Subnets for Your Load Balancer in a VPC</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AttachLoadBalancerToSubnetsOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+        '482':
+          description: SubnetNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubnetNotFoundException'
+        '483':
+          description: InvalidSubnetException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSubnetException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachLoadBalancerToSubnetsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ConfigureHealthCheck':
+    post:
+      operationId: ConfigureHealthCheck
+      description: '<p>Specifies the health check settings to use when evaluating the health state of your EC2 instances.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html">Configure Health Checks for Your Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigureHealthCheckOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigureHealthCheckInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateAppCookieStickinessPolicy':
+    post:
+      operationId: CreateAppCookieStickinessPolicy
+      description: '<p>Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie. This policy can be associated only with HTTP/HTTPS listeners.</p> <p>This policy is similar to the policy created by <a>CreateLBCookieStickinessPolicy</a>, except that the lifetime of the special Elastic Load Balancing cookie, <code>AWSELB</code>, follows the lifetime of the application-generated cookie specified in the policy configuration. The load balancer only inserts a new stickiness cookie when the application response includes a new application cookie.</p> <p>If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application">Application-Controlled Session Stickiness</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateAppCookieStickinessPolicyOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: DuplicatePolicyNameException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DuplicatePolicyNameException'
+        '482':
+          description: TooManyPoliciesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyPoliciesException'
+        '483':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppCookieStickinessPolicyInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateLBCookieStickinessPolicy':
+    post:
+      operationId: CreateLBCookieStickinessPolicy
+      description: '<p>Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period. This policy can be associated only with HTTP/HTTPS listeners.</p> <p>When a load balancer implements this policy, the load balancer uses a special cookie to track the instance for each request. When the load balancer receives a request, it first checks to see if this cookie is present in the request. If so, the load balancer sends the request to the application server specified in the cookie. If not, the load balancer sends the request to a server that is chosen based on the existing load-balancing algorithm.</p> <p>A cookie is inserted into the response for binding subsequent requests from the same user to that server. The validity of the cookie is based on the cookie expiration time, which is specified in the policy configuration.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration">Duration-Based Session Stickiness</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateLBCookieStickinessPolicyOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: DuplicatePolicyNameException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DuplicatePolicyNameException'
+        '482':
+          description: TooManyPoliciesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyPoliciesException'
+        '483':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLBCookieStickinessPolicyInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateLoadBalancer':
+    post:
+      operationId: CreateLoadBalancer
+      description: '<p>Creates a Classic Load Balancer.</p> <p>You can add listeners, security groups, subnets, and tags when you create your load balancer, or you can add them later using <a>CreateLoadBalancerListeners</a>, <a>ApplySecurityGroupsToLoadBalancer</a>, <a>AttachLoadBalancerToSubnets</a>, and <a>AddTags</a>.</p> <p>To describe your current load balancers, see <a>DescribeLoadBalancers</a>. When you are finished with a load balancer, you can delete it using <a>DeleteLoadBalancer</a>.</p> <p>You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html">Limits for Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateAccessPointOutput'
+        '480':
+          description: DuplicateAccessPointNameException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DuplicateAccessPointNameException'
+        '481':
+          description: TooManyAccessPointsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyAccessPointsException'
+        '482':
+          description: CertificateNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CertificateNotFoundException'
+        '483':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+        '484':
+          description: SubnetNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubnetNotFoundException'
+        '485':
+          description: InvalidSubnetException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSubnetException'
+        '486':
+          description: InvalidSecurityGroupException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSecurityGroupException'
+        '487':
+          description: InvalidSchemeException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSchemeException'
+        '488':
+          description: TooManyTagsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '489':
+          description: DuplicateTagKeysException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DuplicateTagKeysException'
+        '490':
+          description: UnsupportedProtocolException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UnsupportedProtocolException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccessPointInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateLoadBalancerListeners':
+    post:
+      operationId: CreateLoadBalancerListeners
+      description: '<p>Creates one or more listeners for the specified load balancer. If a listener with the specified port does not already exist, it is created; otherwise, the properties of the new listener must match the properties of the existing listener.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html">Listeners for Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateLoadBalancerListenerOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: DuplicateListenerException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DuplicateListenerException'
+        '482':
+          description: CertificateNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CertificateNotFoundException'
+        '483':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+        '484':
+          description: UnsupportedProtocolException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UnsupportedProtocolException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLoadBalancerListenerInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateLoadBalancerPolicy':
+    post:
+      operationId: CreateLoadBalancerPolicy
+      description: '<p>Creates a policy with the specified attributes for the specified load balancer.</p> <p>Policies are settings that are saved for your load balancer and that can be applied to the listener or the application server, depending on the policy type.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateLoadBalancerPolicyOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: PolicyTypeNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PolicyTypeNotFoundException'
+        '482':
+          description: DuplicatePolicyNameException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DuplicatePolicyNameException'
+        '483':
+          description: TooManyPoliciesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TooManyPoliciesException'
+        '484':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLoadBalancerPolicyInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLoadBalancer':
+    post:
+      operationId: DeleteLoadBalancer
+      description: '<p>Deletes the specified load balancer.</p> <p>If you are attempting to recreate a load balancer, you must reconfigure all settings. The DNS name associated with a deleted load balancer are no longer usable. The name and associated DNS record of the deleted load balancer no longer exist and traffic sent to any of its IP addresses is no longer delivered to your instances.</p> <p>If the load balancer does not exist or has already been deleted, the call to <code>DeleteLoadBalancer</code> still succeeds.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteAccessPointOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAccessPointInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLoadBalancerListeners':
+    post:
+      operationId: DeleteLoadBalancerListeners
+      description: Deletes the specified listeners from the specified load balancer.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteLoadBalancerListenerOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteLoadBalancerListenerInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLoadBalancerPolicy':
+    post:
+      operationId: DeleteLoadBalancerPolicy
+      description: Deletes the specified policy from the specified load balancer. This policy must not be enabled for any listeners.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteLoadBalancerPolicyOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteLoadBalancerPolicyInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeregisterInstancesFromLoadBalancer':
+    post:
+      operationId: DeregisterInstancesFromLoadBalancer
+      description: '<p>Deregisters the specified instances from the specified load balancer. After the instance is deregistered, it no longer receives traffic from the load balancer.</p> <p>You can use <a>DescribeLoadBalancers</a> to verify that the instance is deregistered from the load balancer.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html">Register or De-Register EC2 Instances</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeregisterEndPointsOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: InvalidEndPointException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidEndPointException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeregisterEndPointsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAccountLimits':
+    post:
+      operationId: DescribeAccountLimits
+      description: '<p>Describes the current Elastic Load Balancing resource limits for your AWS account.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html">Limits for Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeAccountLimitsOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAccountLimitsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeInstanceHealth':
+    post:
+      operationId: DescribeInstanceHealth
+      description: 'Describes the state of the specified instances with respect to the specified load balancer. If no instances are specified, the call describes the state of all instances that are currently registered with the load balancer. If instances are specified, their state is returned even if they are no longer registered with the load balancer. The state of terminated instances is not returned.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeEndPointStateOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: InvalidEndPointException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidEndPointException'
+      x-waiters:
+        - delay: 15
+          operation: DescribeInstanceHealth
+          maxAttempts: 40
+          acceptors:
+            - expected: OutOfService
+              matcher: pathAll
+              state: success
+              argument: 'InstanceStates[].State'
+            - matcher: error
+              expected: InvalidInstance
+              state: success
+        - acceptors:
+            - argument: 'InstanceStates[].State'
+              expected: InService
+              matcher: pathAny
+              state: success
+          delay: 15
+          maxAttempts: 40
+          operation: DescribeInstanceHealth
+        - acceptors:
+            - argument: 'InstanceStates[].State'
+              expected: InService
+              matcher: pathAll
+              state: success
+            - matcher: error
+              expected: InvalidInstance
+              state: retry
+          delay: 15
+          maxAttempts: 40
+          operation: DescribeInstanceHealth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEndPointStateInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLoadBalancerAttributes':
+    post:
+      operationId: DescribeLoadBalancerAttributes
+      description: Describes the attributes for the specified load balancer.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeLoadBalancerAttributesOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: LoadBalancerAttributeNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LoadBalancerAttributeNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLoadBalancerAttributesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLoadBalancerPolicies':
+    post:
+      operationId: DescribeLoadBalancerPolicies
+      description: '<p>Describes the specified policies.</p> <p>If you specify a load balancer name, the action returns the descriptions of all policies created for the load balancer. If you specify a policy name associated with your load balancer, the action returns the description of that policy. If you don''t specify a load balancer name, the action returns descriptions of the specified sample policies, or descriptions of all sample policies. The names of the sample policies have the <code>ELBSample-</code> prefix.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeLoadBalancerPoliciesOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: PolicyNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PolicyNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLoadBalancerPoliciesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLoadBalancerPolicyTypes':
+    post:
+      operationId: DescribeLoadBalancerPolicyTypes
+      description: '<p>Describes the specified load balancer policy types or all load balancer policy types.</p> <p>The description of each type indicates how it can be used. For example, some policies can be used only with layer 7 listeners, some policies can be used only with layer 4 listeners, and some policies can be used only with your EC2 instances.</p> <p>You can use <a>CreateLoadBalancerPolicy</a> to create a policy configuration for any of these policy types. Then, depending on the policy type, use either <a>SetLoadBalancerPoliciesOfListener</a> or <a>SetLoadBalancerPoliciesForBackendServer</a> to set the policy.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeLoadBalancerPolicyTypesOutput'
+        '480':
+          description: PolicyTypeNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PolicyTypeNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLoadBalancerPolicyTypesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLoadBalancers':
+    post:
+      operationId: DescribeLoadBalancers
+      description: 'Describes the specified the load balancers. If no load balancers are specified, the call describes all of your load balancers.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeAccessPointsOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: DependencyThrottleException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DependencyThrottleException'
+      parameters:
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAccessPointsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTags':
+    post:
+      operationId: DescribeTags
+      description: Describes the tags associated with the specified load balancers.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeTagsOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTagsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DetachLoadBalancerFromSubnets':
+    post:
+      operationId: DetachLoadBalancerFromSubnets
+      description: '<p>Removes the specified subnets from the set of configured subnets for the load balancer.</p> <p>After a subnet is removed, all EC2 instances registered with the load balancer in the removed subnet go into the <code>OutOfService</code> state. Then, the load balancer balances the traffic among the remaining routable subnets.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetachLoadBalancerFromSubnetsOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachLoadBalancerFromSubnetsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisableAvailabilityZonesForLoadBalancer':
+    post:
+      operationId: DisableAvailabilityZonesForLoadBalancer
+      description: '<p>Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer.</p> <p>There must be at least one Availability Zone registered with a load balancer at all times. After an Availability Zone is removed, all instances registered with the load balancer that are in the removed Availability Zone go into the <code>OutOfService</code> state. Then, the load balancer attempts to equally balance the traffic among its remaining Availability Zones.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html">Add or Remove Availability Zones</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RemoveAvailabilityZonesOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveAvailabilityZonesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EnableAvailabilityZonesForLoadBalancer':
+    post:
+      operationId: EnableAvailabilityZonesForLoadBalancer
+      description: '<p>Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer.</p> <p>The load balancer evenly distributes requests across all its registered Availability Zones that contain instances.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html">Add or Remove Availability Zones</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AddAvailabilityZonesOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddAvailabilityZonesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyLoadBalancerAttributes':
+    post:
+      operationId: ModifyLoadBalancerAttributes
+      description: '<p>Modifies the attributes of the specified load balancer.</p> <p>You can modify the load balancer attributes, such as <code>AccessLogs</code>, <code>ConnectionDraining</code>, and <code>CrossZoneLoadBalancing</code> by either enabling or disabling them. Or, you can modify the load balancer attribute <code>ConnectionSettings</code> by specifying an idle connection timeout value for your load balancer.</p> <p>For more information, see the following in the <i>Classic Load Balancer Guide</i>:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html">Cross-Zone Load Balancing</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html">Connection Draining</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html">Access Logs</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html">Idle Connection Timeout</a> </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModifyLoadBalancerAttributesOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: LoadBalancerAttributeNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LoadBalancerAttributeNotFoundException'
+        '482':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyLoadBalancerAttributesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RegisterInstancesWithLoadBalancer':
+    post:
+      operationId: RegisterInstancesWithLoadBalancer
+      description: '<p>Adds the specified instances to the specified load balancer.</p> <p>The instance must be a running instance in the same network as the load balancer (EC2-Classic or the same VPC). If you have EC2-Classic instances and a load balancer in a VPC with ClassicLink enabled, you can link the EC2-Classic instances to that VPC and then register the linked EC2-Classic instances with the load balancer in the VPC.</p> <p>Note that <code>RegisterInstanceWithLoadBalancer</code> completes when the request has been registered. Instance registration takes a little time to complete. To check the state of the registered instances, use <a>DescribeLoadBalancers</a> or <a>DescribeInstanceHealth</a>.</p> <p>After the instance is registered, it starts receiving traffic and requests from the load balancer. Any instance that is not in one of the Availability Zones registered for the load balancer is moved to the <code>OutOfService</code> state. If an Availability Zone is added to the load balancer later, any instances registered with the load balancer move to the <code>InService</code> state.</p> <p>To deregister instances from a load balancer, use <a>DeregisterInstancesFromLoadBalancer</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html">Register or De-Register EC2 Instances</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RegisterEndPointsOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: InvalidEndPointException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidEndPointException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterEndPointsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveTags':
+    post:
+      operationId: RemoveTags
+      description: Removes one or more tags from the specified load balancer.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RemoveTagsOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveTagsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetLoadBalancerListenerSSLCertificate':
+    post:
+      operationId: SetLoadBalancerListenerSSLCertificate
+      description: '<p>Sets the certificate that terminates the specified listener''s SSL connections. The specified certificate replaces any prior certificate that was used on the same load balancer and port.</p> <p>For more information about updating your SSL certificate, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html">Replace the SSL Certificate for Your Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetLoadBalancerListenerSSLCertificateOutput'
+        '480':
+          description: CertificateNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CertificateNotFoundException'
+        '481':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '482':
+          description: ListenerNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListenerNotFoundException'
+        '483':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+        '484':
+          description: UnsupportedProtocolException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UnsupportedProtocolException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetLoadBalancerListenerSSLCertificateInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetLoadBalancerPoliciesForBackendServer':
+    post:
+      operationId: SetLoadBalancerPoliciesForBackendServer
+      description: '<p>Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies. At this time, only the back-end server authentication policy type can be applied to the instance ports; this policy type is composed of multiple public key policies.</p> <p>Each time you use <code>SetLoadBalancerPoliciesForBackendServer</code> to enable the policies, use the <code>PolicyNames</code> parameter to list the policies that you want to enable.</p> <p>You can use <a>DescribeLoadBalancers</a> or <a>DescribeLoadBalancerPolicies</a> to verify that the policy is associated with the EC2 instance.</p> <p>For more information about enabling back-end instance authentication, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt">Configure Back-end Instance Authentication</a> in the <i>Classic Load Balancer Guide</i>. For more information about Proxy Protocol, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html">Configure Proxy Protocol Support</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetLoadBalancerPoliciesForBackendServerOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: PolicyNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PolicyNotFoundException'
+        '482':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetLoadBalancerPoliciesForBackendServerInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetLoadBalancerPoliciesOfListener':
+    post:
+      operationId: SetLoadBalancerPoliciesOfListener
+      description: '<p>Replaces the current set of policies for the specified load balancer port with the specified set of policies.</p> <p>To enable back-end server authentication, use <a>SetLoadBalancerPoliciesForBackendServer</a>.</p> <p>For more information about setting policies, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html">Update the SSL Negotiation Configuration</a>, <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration">Duration-Based Session Stickiness</a>, and <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application">Application-Controlled Session Stickiness</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetLoadBalancerPoliciesOfListenerOutput'
+        '480':
+          description: AccessPointNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccessPointNotFoundException'
+        '481':
+          description: PolicyNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PolicyNotFoundException'
+        '482':
+          description: ListenerNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListenerNotFoundException'
+        '483':
+          description: InvalidConfigurationRequestException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetLoadBalancerPoliciesOfListenerInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AccessLog:
+      type: object
+      required:
+        - Enabled
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/AccessLogEnabled'
+        S3BucketName:
+          $ref: '#/components/schemas/S3BucketName'
+        EmitInterval:
+          $ref: '#/components/schemas/AccessLogInterval'
+        S3BucketPrefix:
+          $ref: '#/components/schemas/AccessLogPrefix'
+      description: Information about the <code>AccessLog</code> attribute.
+    AccessLogEnabled:
+      type: boolean
+    AccessLogInterval:
+      type: integer
+    AccessLogPrefix:
+      type: string
+    AccessPointName:
+      type: string
+    AccessPointNotFoundException:
+      type: object
+      properties: {}
+      description: The specified load balancer does not exist.
+    AccessPointPort:
+      type: integer
+    AddAvailabilityZonesInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - AvailabilityZones
+      example:
+        AvailabilityZones:
+          - us-west-2b
+        LoadBalancerName: my-load-balancer
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZones'
+      description: Contains the parameters for EnableAvailabilityZonesForLoadBalancer.
+    AddAvailabilityZonesOutput:
+      type: object
+      example:
+        AvailabilityZones:
+          - us-west-2a
+          - us-west-2b
+      properties:
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZones'
+      description: Contains the output of EnableAvailabilityZonesForLoadBalancer.
+    AddTagsInput:
+      type: object
+      required:
+        - LoadBalancerNames
+        - Tags
+      example:
+        LoadBalancerNames:
+          - my-load-balancer
+        Tags:
+          - Key: project
+            Value: lima
+          - Key: department
+            Value: digital-media
+      properties:
+        LoadBalancerNames:
+          $ref: '#/components/schemas/LoadBalancerNames'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: Contains the parameters for AddTags.
+    AddTagsOutput:
+      type: object
+      properties: {}
+      description: Contains the output of AddTags.
+    AdditionalAttribute:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/AdditionalAttributeKey'
+        Value:
+          $ref: '#/components/schemas/AdditionalAttributeValue'
+      description: This data type is reserved.
+    AdditionalAttributeKey:
+      type: string
+      pattern: '^[a-zA-Z0-9.]+$'
+      maxLength: 256
+    AdditionalAttributeValue:
+      type: string
+      pattern: '^[a-zA-Z0-9.]+$'
+      maxLength: 256
+    AdditionalAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/AdditionalAttribute'
+      maxItems: 10
+    AppCookieStickinessPolicies:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppCookieStickinessPolicy'
+    AppCookieStickinessPolicy:
+      type: object
+      properties:
+        PolicyName:
+          $ref: '#/components/schemas/PolicyName'
+        CookieName:
+          $ref: '#/components/schemas/CookieName'
+      description: Information about a policy for application-controlled session stickiness.
+    ApplySecurityGroupsToLoadBalancerInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - SecurityGroups
+      example:
+        LoadBalancerName: my-load-balancer
+        SecurityGroups:
+          - sg-fc448899
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        SecurityGroups:
+          $ref: '#/components/schemas/SecurityGroups'
+      description: Contains the parameters for ApplySecurityGroupsToLoadBalancer.
+    ApplySecurityGroupsToLoadBalancerOutput:
+      type: object
+      example:
+        SecurityGroups:
+          - sg-fc448899
+      properties:
+        SecurityGroups:
+          $ref: '#/components/schemas/SecurityGroups'
+      description: Contains the output of ApplySecurityGroupsToLoadBalancer.
+    AttachLoadBalancerToSubnetsInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - Subnets
+      example:
+        LoadBalancerName: my-load-balancer
+        Subnets:
+          - subnet-0ecac448
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        Subnets:
+          $ref: '#/components/schemas/Subnets'
+      description: Contains the parameters for AttachLoaBalancerToSubnets.
+    AttachLoadBalancerToSubnetsOutput:
+      type: object
+      example:
+        Subnets:
+          - subnet-15aaab61
+          - subnet-0ecac448
+      properties:
+        Subnets:
+          $ref: '#/components/schemas/Subnets'
+      description: Contains the output of AttachLoadBalancerToSubnets.
+    AttributeName:
+      type: string
+    AttributeType:
+      type: string
+    AttributeValue:
+      type: string
+    AvailabilityZone:
+      type: string
+    AvailabilityZones:
+      type: array
+      items:
+        $ref: '#/components/schemas/AvailabilityZone'
+    BackendServerDescription:
+      type: object
+      properties:
+        InstancePort:
+          $ref: '#/components/schemas/InstancePort'
+        PolicyNames:
+          $ref: '#/components/schemas/PolicyNames'
+      description: Information about the configuration of an EC2 instance.
+    BackendServerDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/BackendServerDescription'
+    Cardinality:
+      type: string
+    CertificateNotFoundException:
+      type: object
+      properties: {}
+      description: 'The specified ARN does not refer to a valid SSL certificate in AWS Identity and Access Management (IAM) or AWS Certificate Manager (ACM). Note that if you recently uploaded the certificate to IAM, this error might indicate that the certificate is not fully available yet.'
+    ConfigureHealthCheckInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - HealthCheck
+      example:
+        HealthCheck:
+          HealthyThreshold: 2
+          Interval: 30
+          Target: 'HTTP:80/png'
+          Timeout: 3
+          UnhealthyThreshold: 2
+        LoadBalancerName: my-load-balancer
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        HealthCheck:
+          $ref: '#/components/schemas/HealthCheck'
+      description: Contains the parameters for ConfigureHealthCheck.
+    ConfigureHealthCheckOutput:
+      type: object
+      example:
+        HealthCheck:
+          HealthyThreshold: 2
+          Interval: 30
+          Target: 'HTTP:80/png'
+          Timeout: 3
+          UnhealthyThreshold: 2
+      properties:
+        HealthCheck:
+          $ref: '#/components/schemas/HealthCheck'
+      description: Contains the output of ConfigureHealthCheck.
+    ConnectionDraining:
+      type: object
+      required:
+        - Enabled
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/ConnectionDrainingEnabled'
+        Timeout:
+          $ref: '#/components/schemas/ConnectionDrainingTimeout'
+      description: Information about the <code>ConnectionDraining</code> attribute.
+    ConnectionDrainingEnabled:
+      type: boolean
+    ConnectionDrainingTimeout:
+      type: integer
+    ConnectionSettings:
+      type: object
+      required:
+        - IdleTimeout
+      properties:
+        IdleTimeout:
+          $ref: '#/components/schemas/IdleTimeout'
+      description: Information about the <code>ConnectionSettings</code> attribute.
+    CookieExpirationPeriod:
+      type: integer
+    CookieName:
+      type: string
+    CreateAccessPointInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - Listeners
+      example:
+        Listeners:
+          - InstancePort: 80
+            InstanceProtocol: HTTP
+            LoadBalancerPort: 80
+            Protocol: HTTP
+        LoadBalancerName: my-load-balancer
+        Scheme: internal
+        SecurityGroups:
+          - sg-a61988c3
+        Subnets:
+          - subnet-15aaab61
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        Listeners:
+          $ref: '#/components/schemas/Listeners'
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZones'
+        Subnets:
+          $ref: '#/components/schemas/Subnets'
+        SecurityGroups:
+          $ref: '#/components/schemas/SecurityGroups'
+        Scheme:
+          $ref: '#/components/schemas/LoadBalancerScheme'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: Contains the parameters for CreateLoadBalancer.
+    CreateAccessPointOutput:
+      type: object
+      example:
+        DNSName: internal-my-load-balancer-123456789.us-west-2.elb.amazonaws.com
+      properties:
+        DNSName:
+          $ref: '#/components/schemas/DNSName'
+      description: Contains the output for CreateLoadBalancer.
+    CreateAppCookieStickinessPolicyInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - PolicyName
+        - CookieName
+      example:
+        CookieName: my-app-cookie
+        LoadBalancerName: my-load-balancer
+        PolicyName: my-app-cookie-policy
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        PolicyName:
+          $ref: '#/components/schemas/PolicyName'
+        CookieName:
+          $ref: '#/components/schemas/CookieName'
+      description: Contains the parameters for CreateAppCookieStickinessPolicy.
+    CreateAppCookieStickinessPolicyOutput:
+      type: object
+      properties: {}
+      description: Contains the output for CreateAppCookieStickinessPolicy.
+    CreateLBCookieStickinessPolicyInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - PolicyName
+      example:
+        CookieExpirationPeriod: 60
+        LoadBalancerName: my-load-balancer
+        PolicyName: my-duration-cookie-policy
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        PolicyName:
+          $ref: '#/components/schemas/PolicyName'
+        CookieExpirationPeriod:
+          $ref: '#/components/schemas/CookieExpirationPeriod'
+      description: Contains the parameters for CreateLBCookieStickinessPolicy.
+    CreateLBCookieStickinessPolicyOutput:
+      type: object
+      properties: {}
+      description: Contains the output for CreateLBCookieStickinessPolicy.
+    CreateLoadBalancerListenerInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - Listeners
+      example:
+        Listeners:
+          - InstancePort: 80
+            InstanceProtocol: HTTP
+            LoadBalancerPort: 443
+            Protocol: HTTPS
+            SSLCertificateId: 'arn:aws:iam::123456789012:server-certificate/my-server-cert'
+        LoadBalancerName: my-load-balancer
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        Listeners:
+          $ref: '#/components/schemas/Listeners'
+      description: Contains the parameters for CreateLoadBalancerListeners.
+    CreateLoadBalancerListenerOutput:
+      type: object
+      properties: {}
+      description: Contains the parameters for CreateLoadBalancerListener.
+    CreateLoadBalancerPolicyInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - PolicyName
+        - PolicyTypeName
+      example:
+        LoadBalancerName: my-load-balancer
+        PolicyAttributes:
+          - AttributeName: PublicKeyPolicyName
+            AttributeValue: my-PublicKey-policy
+        PolicyName: my-authentication-policy
+        PolicyTypeName: BackendServerAuthenticationPolicyType
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        PolicyName:
+          $ref: '#/components/schemas/PolicyName'
+        PolicyTypeName:
+          $ref: '#/components/schemas/PolicyTypeName'
+        PolicyAttributes:
+          $ref: '#/components/schemas/PolicyAttributes'
+      description: Contains the parameters for CreateLoadBalancerPolicy.
+    CreateLoadBalancerPolicyOutput:
+      type: object
+      properties: {}
+      description: Contains the output of CreateLoadBalancerPolicy.
+    CreatedTime:
+      type: string
+      format: date-time
+    CrossZoneLoadBalancing:
+      type: object
+      required:
+        - Enabled
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/CrossZoneLoadBalancingEnabled'
+      description: Information about the <code>CrossZoneLoadBalancing</code> attribute.
+    CrossZoneLoadBalancingEnabled:
+      type: boolean
+    DNSName:
+      type: string
+    DefaultValue:
+      type: string
+    DeleteAccessPointInput:
+      type: object
+      required:
+        - LoadBalancerName
+      example:
+        LoadBalancerName: my-load-balancer
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+      description: Contains the parameters for DeleteLoadBalancer.
+    DeleteAccessPointOutput:
+      type: object
+      properties: {}
+      description: Contains the output of DeleteLoadBalancer.
+    DeleteLoadBalancerListenerInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - LoadBalancerPorts
+      example:
+        LoadBalancerName: my-load-balancer
+        LoadBalancerPorts:
+          - 80
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        LoadBalancerPorts:
+          $ref: '#/components/schemas/Ports'
+      description: Contains the parameters for DeleteLoadBalancerListeners.
+    DeleteLoadBalancerListenerOutput:
+      type: object
+      properties: {}
+      description: Contains the output of DeleteLoadBalancerListeners.
+    DeleteLoadBalancerPolicyInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - PolicyName
+      example:
+        LoadBalancerName: my-load-balancer
+        PolicyName: my-duration-cookie-policy
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        PolicyName:
+          $ref: '#/components/schemas/PolicyName'
+      description: Contains the parameters for DeleteLoadBalancerPolicy.
+    DeleteLoadBalancerPolicyOutput:
+      type: object
+      properties: {}
+      description: Contains the output of DeleteLoadBalancerPolicy.
+    DependencyThrottleException:
+      type: object
+      properties: {}
+    DeregisterEndPointsInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - Instances
+      example:
+        Instances:
+          - InstanceId: i-d6f6fae3
+        LoadBalancerName: my-load-balancer
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        Instances:
+          $ref: '#/components/schemas/Instances'
+      description: Contains the parameters for DeregisterInstancesFromLoadBalancer.
+    DeregisterEndPointsOutput:
+      type: object
+      example:
+        Instances:
+          - InstanceId: i-207d9717
+          - InstanceId: i-afefb49b
+      properties:
+        Instances:
+          $ref: '#/components/schemas/Instances'
+      description: Contains the output of DeregisterInstancesFromLoadBalancer.
+    DescribeAccessPointsInput:
+      type: object
+      example:
+        LoadBalancerNames:
+          - my-load-balancer
+      properties:
+        LoadBalancerNames:
+          $ref: '#/components/schemas/LoadBalancerNames'
+        Marker:
+          $ref: '#/components/schemas/Marker'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+      description: Contains the parameters for DescribeLoadBalancers.
+    DescribeAccessPointsOutput:
+      type: object
+      example:
+        LoadBalancerDescriptions:
+          - AvailabilityZones:
+              - us-west-2a
+            BackendServerDescriptions:
+              - InstancePort: 80
+                PolicyNames:
+                  - my-ProxyProtocol-policy
+            CanonicalHostedZoneName: my-load-balancer-1234567890.us-west-2.elb.amazonaws.com
+            CanonicalHostedZoneNameID: Z3DZXE0EXAMPLE
+            CreatedTime: '2015-03-19T03:24:02.650Z'
+            DNSName: my-load-balancer-1234567890.us-west-2.elb.amazonaws.com
+            HealthCheck:
+              HealthyThreshold: 2
+              Interval: 30
+              Target: 'HTTP:80/png'
+              Timeout: 3
+              UnhealthyThreshold: 2
+            Instances:
+              - InstanceId: i-207d9717
+              - InstanceId: i-afefb49b
+            ListenerDescriptions:
+              - Listener:
+                  InstancePort: 80
+                  InstanceProtocol: HTTP
+                  LoadBalancerPort: 80
+                  Protocol: HTTP
+                PolicyNames: []
+              - Listener:
+                  InstancePort: 443
+                  InstanceProtocol: HTTPS
+                  LoadBalancerPort: 443
+                  Protocol: HTTPS
+                  SSLCertificateId: 'arn:aws:iam::123456789012:server-certificate/my-server-cert'
+                PolicyNames:
+                  - ELBSecurityPolicy-2015-03
+            LoadBalancerName: my-load-balancer
+            Policies:
+              AppCookieStickinessPolicies: []
+              LBCookieStickinessPolicies:
+                - CookieExpirationPeriod: 60
+                  PolicyName: my-duration-cookie-policy
+              OtherPolicies:
+                - my-PublicKey-policy
+                - my-authentication-policy
+                - my-SSLNegotiation-policy
+                - my-ProxyProtocol-policy
+                - ELBSecurityPolicy-2015-03
+            Scheme: internet-facing
+            SecurityGroups:
+              - sg-a61988c3
+            SourceSecurityGroup:
+              GroupName: my-elb-sg
+              OwnerAlias: '123456789012'
+            Subnets:
+              - subnet-15aaab61
+            VPCId: vpc-a01106c2
+      properties:
+        LoadBalancerDescriptions:
+          $ref: '#/components/schemas/LoadBalancerDescriptions'
+        NextMarker:
+          $ref: '#/components/schemas/Marker'
+      description: Contains the parameters for DescribeLoadBalancers.
+    DescribeAccountLimitsInput:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/Marker'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+    DescribeAccountLimitsOutput:
+      type: object
+      properties:
+        Limits:
+          $ref: '#/components/schemas/Limits'
+        NextMarker:
+          $ref: '#/components/schemas/Marker'
+    DescribeEndPointStateInput:
+      type: object
+      required:
+        - LoadBalancerName
+      example:
+        LoadBalancerName: my-load-balancer
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        Instances:
+          $ref: '#/components/schemas/Instances'
+      description: Contains the parameters for DescribeInstanceHealth.
+    DescribeEndPointStateOutput:
+      type: object
+      example:
+        InstanceStates:
+          - Description: N/A
+            InstanceId: i-207d9717
+            ReasonCode: N/A
+            State: InService
+          - Description: N/A
+            InstanceId: i-afefb49b
+            ReasonCode: N/A
+            State: InService
+      properties:
+        InstanceStates:
+          $ref: '#/components/schemas/InstanceStates'
+      description: Contains the output for DescribeInstanceHealth.
+    DescribeLoadBalancerAttributesInput:
+      type: object
+      required:
+        - LoadBalancerName
+      example:
+        LoadBalancerName: my-load-balancer
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+      description: Contains the parameters for DescribeLoadBalancerAttributes.
+    DescribeLoadBalancerAttributesOutput:
+      type: object
+      example:
+        LoadBalancerAttributes:
+          AccessLog:
+            Enabled: false
+          ConnectionDraining:
+            Enabled: false
+            Timeout: 300
+          ConnectionSettings:
+            IdleTimeout: 60
+          CrossZoneLoadBalancing:
+            Enabled: false
+      properties:
+        LoadBalancerAttributes:
+          $ref: '#/components/schemas/LoadBalancerAttributes'
+      description: Contains the output of DescribeLoadBalancerAttributes.
+    DescribeLoadBalancerPoliciesInput:
+      type: object
+      example:
+        LoadBalancerName: my-load-balancer
+        PolicyNames:
+          - my-authentication-policy
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        PolicyNames:
+          $ref: '#/components/schemas/PolicyNames'
+      description: Contains the parameters for DescribeLoadBalancerPolicies.
+    DescribeLoadBalancerPoliciesOutput:
+      type: object
+      example:
+        PolicyDescriptions:
+          - PolicyAttributeDescriptions:
+              - AttributeName: PublicKeyPolicyName
+                AttributeValue: my-PublicKey-policy
+            PolicyName: my-authentication-policy
+            PolicyTypeName: BackendServerAuthenticationPolicyType
+      properties:
+        PolicyDescriptions:
+          $ref: '#/components/schemas/PolicyDescriptions'
+      description: Contains the output of DescribeLoadBalancerPolicies.
+    DescribeLoadBalancerPolicyTypesInput:
+      type: object
+      example:
+        PolicyTypeNames:
+          - ProxyProtocolPolicyType
+      properties:
+        PolicyTypeNames:
+          $ref: '#/components/schemas/PolicyTypeNames'
+      description: Contains the parameters for DescribeLoadBalancerPolicyTypes.
+    DescribeLoadBalancerPolicyTypesOutput:
+      type: object
+      example:
+        PolicyTypeDescriptions:
+          - Description: Policy that controls whether to include the IP address and port of the originating request for TCP messages. This policy operates on TCP listeners only.
+            PolicyAttributeTypeDescriptions:
+              - AttributeName: ProxyProtocol
+                AttributeType: Boolean
+                Cardinality: ONE
+            PolicyTypeName: ProxyProtocolPolicyType
+      properties:
+        PolicyTypeDescriptions:
+          $ref: '#/components/schemas/PolicyTypeDescriptions'
+      description: Contains the output of DescribeLoadBalancerPolicyTypes.
+    DescribeTagsInput:
+      type: object
+      required:
+        - LoadBalancerNames
+      example:
+        LoadBalancerNames:
+          - my-load-balancer
+      properties:
+        LoadBalancerNames:
+          $ref: '#/components/schemas/LoadBalancerNamesMax20'
+      description: Contains the parameters for DescribeTags.
+    DescribeTagsOutput:
+      type: object
+      example:
+        TagDescriptions:
+          - LoadBalancerName: my-load-balancer
+            Tags:
+              - Key: project
+                Value: lima
+              - Key: department
+                Value: digital-media
+      properties:
+        TagDescriptions:
+          $ref: '#/components/schemas/TagDescriptions'
+      description: Contains the output for DescribeTags.
+    Description:
+      type: string
+    DetachLoadBalancerFromSubnetsInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - Subnets
+      example:
+        LoadBalancerName: my-load-balancer
+        Subnets:
+          - subnet-0ecac448
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        Subnets:
+          $ref: '#/components/schemas/Subnets'
+      description: Contains the parameters for DetachLoadBalancerFromSubnets.
+    DetachLoadBalancerFromSubnetsOutput:
+      type: object
+      example:
+        Subnets:
+          - subnet-15aaab61
+      properties:
+        Subnets:
+          $ref: '#/components/schemas/Subnets'
+      description: Contains the output of DetachLoadBalancerFromSubnets.
+    DuplicateAccessPointNameException:
+      type: object
+      properties: {}
+      description: The specified load balancer name already exists for this account.
+    DuplicateListenerException:
+      type: object
+      properties: {}
+      description: 'A listener already exists for the specified load balancer name and port, but with a different instance port, protocol, or SSL certificate.'
+    DuplicatePolicyNameException:
+      type: object
+      properties: {}
+      description: A policy with the specified name already exists for this load balancer.
+    DuplicateTagKeysException:
+      type: object
+      properties: {}
+      description: A tag key was specified more than once.
+    EndPointPort:
+      type: integer
+    HealthCheck:
+      type: object
+      required:
+        - Target
+        - Interval
+        - Timeout
+        - UnhealthyThreshold
+        - HealthyThreshold
+      properties:
+        Target:
+          $ref: '#/components/schemas/HealthCheckTarget'
+        Interval:
+          $ref: '#/components/schemas/HealthCheckInterval'
+        Timeout:
+          $ref: '#/components/schemas/HealthCheckTimeout'
+        UnhealthyThreshold:
+          $ref: '#/components/schemas/UnhealthyThreshold'
+        HealthyThreshold:
+          $ref: '#/components/schemas/HealthyThreshold'
+      description: Information about a health check.
+    HealthCheckInterval:
+      type: integer
+      minimum: 5
+      maximum: 300
+    HealthCheckTarget:
+      type: string
+    HealthCheckTimeout:
+      type: integer
+      minimum: 2
+      maximum: 60
+    HealthyThreshold:
+      type: integer
+      minimum: 2
+      maximum: 10
+    IdleTimeout:
+      type: integer
+      minimum: 1
+      maximum: 3600
+    Instance:
+      type: object
+      properties:
+        InstanceId:
+          $ref: '#/components/schemas/InstanceId'
+      description: The ID of an EC2 instance.
+    InstanceId:
+      type: string
+    InstancePort:
+      type: integer
+      minimum: 1
+      maximum: 65535
+    InstanceState:
+      type: object
+      properties:
+        InstanceId:
+          $ref: '#/components/schemas/InstanceId'
+        State:
+          $ref: '#/components/schemas/State'
+        ReasonCode:
+          $ref: '#/components/schemas/ReasonCode'
+        Description:
+          $ref: '#/components/schemas/Description'
+      description: Information about the state of an EC2 instance.
+    InstanceStates:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceState'
+    Instances:
+      type: array
+      items:
+        $ref: '#/components/schemas/Instance'
+    InvalidConfigurationRequestException:
+      type: object
+      properties: {}
+      description: The requested configuration change is not valid.
+    InvalidEndPointException:
+      type: object
+      properties: {}
+      description: The specified endpoint is not valid.
+    InvalidSchemeException:
+      type: object
+      properties: {}
+      description: The specified value for the schema is not valid. You can only specify a scheme for load balancers in a VPC.
+    InvalidSecurityGroupException:
+      type: object
+      properties: {}
+      description: One or more of the specified security groups do not exist.
+    InvalidSubnetException:
+      type: object
+      properties: {}
+      description: The specified VPC has no associated Internet gateway.
+    LBCookieStickinessPolicies:
+      type: array
+      items:
+        $ref: '#/components/schemas/LBCookieStickinessPolicy'
+    LBCookieStickinessPolicy:
+      type: object
+      properties:
+        PolicyName:
+          $ref: '#/components/schemas/PolicyName'
+        CookieExpirationPeriod:
+          $ref: '#/components/schemas/CookieExpirationPeriod'
+      description: Information about a policy for duration-based session stickiness.
+    Limit:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/Name'
+        Max:
+          $ref: '#/components/schemas/Max'
+      description: Information about an Elastic Load Balancing resource limit for your AWS account.
+    Limits:
+      type: array
+      items:
+        $ref: '#/components/schemas/Limit'
+    Listener:
+      type: object
+      required:
+        - Protocol
+        - LoadBalancerPort
+        - InstancePort
+      properties:
+        Protocol:
+          $ref: '#/components/schemas/Protocol'
+        LoadBalancerPort:
+          $ref: '#/components/schemas/AccessPointPort'
+        InstanceProtocol:
+          $ref: '#/components/schemas/Protocol'
+        InstancePort:
+          $ref: '#/components/schemas/InstancePort'
+        SSLCertificateId:
+          $ref: '#/components/schemas/SSLCertificateId'
+      description: '<p>Information about a listener.</p> <p>For information about the protocols and the ports supported by Elastic Load Balancing, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html">Listeners for Your Classic Load Balancer</a> in the <i>Classic Load Balancer Guide</i>.</p>'
+    ListenerDescription:
+      type: object
+      properties:
+        Listener:
+          $ref: '#/components/schemas/Listener'
+        PolicyNames:
+          $ref: '#/components/schemas/PolicyNames'
+      description: The policies enabled for a listener.
+    ListenerDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListenerDescription'
+    ListenerNotFoundException:
+      type: object
+      properties: {}
+      description: The load balancer does not have a listener configured at the specified port.
+    Listeners:
+      type: array
+      items:
+        $ref: '#/components/schemas/Listener'
+    LoadBalancerAttributeNotFoundException:
+      type: object
+      properties: {}
+      description: The specified load balancer attribute does not exist.
+    LoadBalancerAttributes:
+      type: object
+      properties:
+        CrossZoneLoadBalancing:
+          $ref: '#/components/schemas/CrossZoneLoadBalancing'
+        AccessLog:
+          $ref: '#/components/schemas/AccessLog'
+        ConnectionDraining:
+          $ref: '#/components/schemas/ConnectionDraining'
+        ConnectionSettings:
+          $ref: '#/components/schemas/ConnectionSettings'
+        AdditionalAttributes:
+          $ref: '#/components/schemas/AdditionalAttributes'
+      description: The attributes for a load balancer.
+    LoadBalancerDescription:
+      type: object
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        DNSName:
+          $ref: '#/components/schemas/DNSName'
+        CanonicalHostedZoneName:
+          $ref: '#/components/schemas/DNSName'
+        CanonicalHostedZoneNameID:
+          $ref: '#/components/schemas/DNSName'
+        ListenerDescriptions:
+          $ref: '#/components/schemas/ListenerDescriptions'
+        Policies:
+          $ref: '#/components/schemas/Policies'
+        BackendServerDescriptions:
+          $ref: '#/components/schemas/BackendServerDescriptions'
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZones'
+        Subnets:
+          $ref: '#/components/schemas/Subnets'
+        VPCId:
+          $ref: '#/components/schemas/VPCId'
+        Instances:
+          $ref: '#/components/schemas/Instances'
+        HealthCheck:
+          $ref: '#/components/schemas/HealthCheck'
+        SourceSecurityGroup:
+          $ref: '#/components/schemas/SourceSecurityGroup'
+        SecurityGroups:
+          $ref: '#/components/schemas/SecurityGroups'
+        CreatedTime:
+          $ref: '#/components/schemas/CreatedTime'
+        Scheme:
+          $ref: '#/components/schemas/LoadBalancerScheme'
+      description: Information about a load balancer.
+    LoadBalancerDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/LoadBalancerDescription'
+    LoadBalancerNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessPointName'
+    LoadBalancerNamesMax20:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessPointName'
+      minItems: 1
+      maxItems: 20
+    LoadBalancerScheme:
+      type: string
+    Marker:
+      type: string
+    Max:
+      type: string
+    ModifyLoadBalancerAttributesInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - LoadBalancerAttributes
+      example:
+        LoadBalancerAttributes:
+          ConnectionDraining:
+            Enabled: true
+            Timeout: 300
+        LoadBalancerName: my-load-balancer
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        LoadBalancerAttributes:
+          $ref: '#/components/schemas/LoadBalancerAttributes'
+      description: Contains the parameters for ModifyLoadBalancerAttributes.
+    ModifyLoadBalancerAttributesOutput:
+      type: object
+      example:
+        LoadBalancerAttributes:
+          ConnectionDraining:
+            Enabled: true
+            Timeout: 300
+        LoadBalancerName: my-load-balancer
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        LoadBalancerAttributes:
+          $ref: '#/components/schemas/LoadBalancerAttributes'
+      description: Contains the output of ModifyLoadBalancerAttributes.
+    Name:
+      type: string
+    PageSize:
+      type: integer
+      minimum: 1
+      maximum: 400
+    Policies:
+      type: object
+      properties:
+        AppCookieStickinessPolicies:
+          $ref: '#/components/schemas/AppCookieStickinessPolicies'
+        LBCookieStickinessPolicies:
+          $ref: '#/components/schemas/LBCookieStickinessPolicies'
+        OtherPolicies:
+          $ref: '#/components/schemas/PolicyNames'
+      description: The policies for a load balancer.
+    PolicyAttribute:
+      type: object
+      properties:
+        AttributeName:
+          $ref: '#/components/schemas/AttributeName'
+        AttributeValue:
+          $ref: '#/components/schemas/AttributeValue'
+      description: Information about a policy attribute.
+    PolicyAttributeDescription:
+      type: object
+      properties:
+        AttributeName:
+          $ref: '#/components/schemas/AttributeName'
+        AttributeValue:
+          $ref: '#/components/schemas/AttributeValue'
+      description: Information about a policy attribute.
+    PolicyAttributeDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyAttributeDescription'
+    PolicyAttributeTypeDescription:
+      type: object
+      properties:
+        AttributeName:
+          $ref: '#/components/schemas/AttributeName'
+        AttributeType:
+          $ref: '#/components/schemas/AttributeType'
+        Description:
+          $ref: '#/components/schemas/Description'
+        DefaultValue:
+          $ref: '#/components/schemas/DefaultValue'
+        Cardinality:
+          $ref: '#/components/schemas/Cardinality'
+      description: Information about a policy attribute type.
+    PolicyAttributeTypeDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyAttributeTypeDescription'
+    PolicyAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyAttribute'
+    PolicyDescription:
+      type: object
+      properties:
+        PolicyName:
+          $ref: '#/components/schemas/PolicyName'
+        PolicyTypeName:
+          $ref: '#/components/schemas/PolicyTypeName'
+        PolicyAttributeDescriptions:
+          $ref: '#/components/schemas/PolicyAttributeDescriptions'
+      description: Information about a policy.
+    PolicyDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyDescription'
+    PolicyName:
+      type: string
+    PolicyNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyName'
+    PolicyNotFoundException:
+      type: object
+      properties: {}
+      description: One or more of the specified policies do not exist.
+    PolicyTypeDescription:
+      type: object
+      properties:
+        PolicyTypeName:
+          $ref: '#/components/schemas/PolicyTypeName'
+        Description:
+          $ref: '#/components/schemas/Description'
+        PolicyAttributeTypeDescriptions:
+          $ref: '#/components/schemas/PolicyAttributeTypeDescriptions'
+      description: Information about a policy type.
+    PolicyTypeDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyTypeDescription'
+    PolicyTypeName:
+      type: string
+    PolicyTypeNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyTypeName'
+    PolicyTypeNotFoundException:
+      type: object
+      properties: {}
+      description: One or more of the specified policy types do not exist.
+    Ports:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessPointPort'
+    Protocol:
+      type: string
+    ReasonCode:
+      type: string
+    RegisterEndPointsInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - Instances
+      example:
+        Instances:
+          - InstanceId: i-d6f6fae3
+        LoadBalancerName: my-load-balancer
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        Instances:
+          $ref: '#/components/schemas/Instances'
+      description: Contains the parameters for RegisterInstancesWithLoadBalancer.
+    RegisterEndPointsOutput:
+      type: object
+      example:
+        Instances:
+          - InstanceId: i-d6f6fae3
+          - InstanceId: i-207d9717
+          - InstanceId: i-afefb49b
+      properties:
+        Instances:
+          $ref: '#/components/schemas/Instances'
+      description: Contains the output of RegisterInstancesWithLoadBalancer.
+    RemoveAvailabilityZonesInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - AvailabilityZones
+      example:
+        AvailabilityZones:
+          - us-west-2a
+        LoadBalancerName: my-load-balancer
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZones'
+      description: Contains the parameters for DisableAvailabilityZonesForLoadBalancer.
+    RemoveAvailabilityZonesOutput:
+      type: object
+      example:
+        AvailabilityZones:
+          - us-west-2b
+      properties:
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZones'
+      description: Contains the output for DisableAvailabilityZonesForLoadBalancer.
+    RemoveTagsInput:
+      type: object
+      required:
+        - LoadBalancerNames
+        - Tags
+      example:
+        LoadBalancerNames:
+          - my-load-balancer
+        Tags:
+          - Key: project
+      properties:
+        LoadBalancerNames:
+          $ref: '#/components/schemas/LoadBalancerNames'
+        Tags:
+          $ref: '#/components/schemas/TagKeyList'
+      description: Contains the parameters for RemoveTags.
+    RemoveTagsOutput:
+      type: object
+      properties: {}
+      description: Contains the output of RemoveTags.
+    S3BucketName:
+      type: string
+    SSLCertificateId:
+      type: string
+    SecurityGroupId:
+      type: string
+    SecurityGroupName:
+      type: string
+    SecurityGroupOwnerAlias:
+      type: string
+    SecurityGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupId'
+    SetLoadBalancerListenerSSLCertificateInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - LoadBalancerPort
+        - SSLCertificateId
+      example:
+        LoadBalancerName: my-load-balancer
+        LoadBalancerPort: 443
+        SSLCertificateId: 'arn:aws:iam::123456789012:server-certificate/new-server-cert'
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        LoadBalancerPort:
+          $ref: '#/components/schemas/AccessPointPort'
+        SSLCertificateId:
+          $ref: '#/components/schemas/SSLCertificateId'
+      description: Contains the parameters for SetLoadBalancerListenerSSLCertificate.
+    SetLoadBalancerListenerSSLCertificateOutput:
+      type: object
+      properties: {}
+      description: Contains the output of SetLoadBalancerListenerSSLCertificate.
+    SetLoadBalancerPoliciesForBackendServerInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - InstancePort
+        - PolicyNames
+      example:
+        InstancePort: 80
+        LoadBalancerName: my-load-balancer
+        PolicyNames:
+          - my-ProxyProtocol-policy
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        InstancePort:
+          $ref: '#/components/schemas/EndPointPort'
+        PolicyNames:
+          $ref: '#/components/schemas/PolicyNames'
+      description: Contains the parameters for SetLoadBalancerPoliciesForBackendServer.
+    SetLoadBalancerPoliciesForBackendServerOutput:
+      type: object
+      properties: {}
+      description: Contains the output of SetLoadBalancerPoliciesForBackendServer.
+    SetLoadBalancerPoliciesOfListenerInput:
+      type: object
+      required:
+        - LoadBalancerName
+        - LoadBalancerPort
+        - PolicyNames
+      example:
+        LoadBalancerName: my-load-balancer
+        LoadBalancerPort: 80
+        PolicyNames:
+          - my-SSLNegotiation-policy
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        LoadBalancerPort:
+          $ref: '#/components/schemas/AccessPointPort'
+        PolicyNames:
+          $ref: '#/components/schemas/PolicyNames'
+      description: Contains the parameters for SetLoadBalancePoliciesOfListener.
+    SetLoadBalancerPoliciesOfListenerOutput:
+      type: object
+      properties: {}
+      description: Contains the output of SetLoadBalancePoliciesOfListener.
+    SourceSecurityGroup:
+      type: object
+      properties:
+        OwnerAlias:
+          $ref: '#/components/schemas/SecurityGroupOwnerAlias'
+        GroupName:
+          $ref: '#/components/schemas/SecurityGroupName'
+      description: Information about a source security group.
+    State:
+      type: string
+    SubnetId:
+      type: string
+    SubnetNotFoundException:
+      type: object
+      properties: {}
+      description: One or more of the specified subnets do not exist.
+    Subnets:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubnetId'
+    Tag:
+      type: object
+      required:
+        - Key
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+      description: Information about a tag.
+    TagDescription:
+      type: object
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/AccessPointName'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: The tags associated with a load balancer.
+    TagDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagDescription'
+    TagKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKeyOnly'
+      minItems: 1
+    TagKeyOnly:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+      description: The key of a tag.
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+    TagValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 0
+      maxLength: 256
+    TooManyAccessPointsException:
+      type: object
+      properties: {}
+      description: The quota for the number of load balancers has been reached.
+    TooManyPoliciesException:
+      type: object
+      properties: {}
+      description: The quota for the number of policies for this load balancer has been reached.
+    TooManyTagsException:
+      type: object
+      properties: {}
+      description: The quota for the number of tags that can be assigned to a load balancer has been reached.
+    UnhealthyThreshold:
+      type: integer
+      minimum: 2
+      maximum: 10
+    UnsupportedProtocolException:
+      type: object
+      properties: {}
+      description: The specified protocol or signature version is not supported.
+    VPCId:
+      type: string
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

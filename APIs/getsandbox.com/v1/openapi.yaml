@@ -1,0 +1,738 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://getsandbox.com/api/'
+info:
+  contact:
+    email: hello@getsandbox.com
+    name: Sandbox Support
+    url: 'https://getsandbox.com'
+  description: Sandbox API
+  termsOfService: 'https://getsandbox.com/policy/customer-agreement'
+  title: Sandbox
+  version: v1
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    backgroundColor: '#161924'
+    url: 'https://getsandbox.com/lib/img/logo-white-72dpi.png'
+  x-origin:
+    - format: swagger
+      url: 'https://getsandbox.com/lib/js/vendor/swagger/swagger.json'
+      version: '2.0'
+  x-providerName: getsandbox.com
+  x-tags:
+    - sandbox
+    - API
+    - REST
+    - SOAP
+    - Swagger
+    - OpenAPI
+externalDocs:
+  url: 'https://getsandbox.com/docs/api/overview'
+tags:
+  - name: Activity
+  - name: Sandbox
+paths:
+  /1/activity/search:
+    get:
+      description: ''
+      operationId: getSandboxesActivity
+      parameters:
+        - description: 'Timestamp to start search from, epoch time in milliseconds.'
+          in: query
+          name: fromTimestamp
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - description: Comma-separated list of Sandbox names to search.
+          in: query
+          name: sourceSandboxes
+          required: false
+          schema:
+            type: string
+        - description: 'A keyword to search activities by, will match any part of the ActivityMessage.'
+          in: query
+          name: keyword
+          required: false
+          schema:
+            type: string
+        - description: 'Flag to return all types of activity, defaults to just Requests'
+          in: query
+          name: allTypes
+          required: false
+          schema:
+            type: boolean
+        - description: Maximum number of results to return
+          in: query
+          name: maxResults
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ActivityMessage'
+                type: array
+              examples:
+                response:
+                  value: |-
+                    [
+                      {
+                        "createdTimestamp": 1464829513623,
+                        "messageType": "request",
+                        "sandboxId": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
+                        "messageObject": {
+                          "request": {
+                            "transport": "HTTP",
+                            "sandboxId": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
+                            "sandboxName": "testbox",
+                            "fullSandboxName": "testbox",
+                            "fullSandboxId": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
+                            "headers": {
+                              "Accept": "*/*",
+                              "Host": "testbox.getsandbox.com",
+                              "User-Agent": "curl/7.43.0",
+                              "X-Forwarded-For": "10.0.2.2"
+                            },
+                            "properties": {},
+                            "body": "",
+                            "ip": "10.0.2.2",
+                            "cookies": {},
+                            "query": {},
+                            "accepted": ["*/*"],
+                            "url": "/hello",
+                            "params": {},
+                            "method": "GET",
+                            "path": "/hello",
+                            "rawUrl": "/hello",
+                            "received_timestamp": 1464829513575
+                          },
+                          "responses": [
+                            {
+                              "transport": "HTTP",
+                              "body": "[\n  \"hello\"\n]",
+                              "headers": {
+                                "Content-Type": "application/json"
+                              },
+                              "cookies": [],
+                              "responded_timestamp": 1464829513609,
+                              "duration_ms": 34,
+                              "status": 200
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "createdTimestamp": 1464829507925,
+                        "messageType": "request",
+                        "sandboxId": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
+                        "messageObject": {
+                          "request": {
+                            "transport": "HTTP",
+                            "sandboxId": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
+                            "sandboxName": "testbox",
+                            "fullSandboxName": "testbox",
+                            "fullSandboxId": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
+                            "headers": {
+                              "Accept": "*/*",
+                              "Host": "testbox.getsandbox.com",
+                              "User-Agent": "curl/7.43.0",
+                              "X-Forwarded-For": "10.0.2.2"
+                            },
+                            "properties": {},
+                            "body": "",
+                            "ip": "10.0.2.2",
+                            "cookies": {},
+                            "query": {},
+                            "accepted": ["*/*"],
+                            "url": "/hello",
+                            "params": {},
+                            "method": "GET",
+                            "path": "/hello",
+                            "rawUrl": "/hello",
+                            "received_timestamp": 1464829507856
+                          },
+                          "responses": [
+                            {
+                              "transport": "HTTP",
+                              "body": "[\n  \"hello\",\n  \"hello\",\n  \"hello\",\n  \"hello\",\n  \"hello\",\n  \"hello\"\n]",
+                              "headers": {
+                                "Content-Type": "application/json"
+                              },
+                              "cookies": [],
+                              "responded_timestamp": 1464829507885,
+                              "duration_ms": 29,
+                              "status": 200
+                            }
+                          ]
+                        }
+                      }
+                    ]
+      summary: searchActivity
+      tags:
+        - Activity
+  /1/sandboxes:
+    get:
+      description: ''
+      operationId: getSandboxes
+      parameters:
+        - in: query
+          name: filterType
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Sandbox'
+                type: array
+              examples:
+                response:
+                  value: |-
+                    [
+                      {
+                        "id": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
+                        "name": "testbox",
+                        "description": "",
+                        "configuredRoutes": [],
+                        "hasRepository": true,
+                        "apiDefinition": "None",
+                        "stackType": "JavaScript",
+                        "runtimeVersion": "VERSION_2",
+                        "proxyStatus": "STARTED",
+                        "transportType": "HTTP",
+                        "properties": {},
+                        "gitUrl": "http://git.getsandbox.com/testbox.git",
+                        "sandboxUrl": "http://testbox.getsandbox.com"
+                      }
+                    ]
+      summary: getSandboxes
+      tags:
+        - Sandbox
+    post:
+      description: ''
+      operationId: createSandbox
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandbox'
+              examples:
+                response:
+                  value: |-
+                    {
+                      "id": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
+                      "name": "testbox",
+                      "description": "",
+                      "configuredRoutes": [],
+                      "hasRepository": true,
+                      "apiDefinition": "None",
+                      "stackType": "JavaScript",
+                      "runtimeVersion": "VERSION_2",
+                      "proxyStatus": "STARTED",
+                      "transportType": "HTTP",
+                      "properties": {},
+                      "gitUrl": "http://git.getsandbox.com/testbox.git",
+                      "sandboxUrl": "http://testbox.getsandbox.com"
+                    }
+      summary: createSandbox
+      tags:
+        - Sandbox
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSandbox'
+        description: Sandbox to be created
+        required: true
+  '/1/sandboxes/{sandboxName}':
+    delete:
+      description: ''
+      operationId: deleteSandbox
+      parameters:
+        - description: Name of the Sandbox
+          in: path
+          name: sandboxName
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: successful operation
+      summary: deleteSandbox
+      tags:
+        - Sandbox
+    get:
+      description: ''
+      operationId: getSandbox
+      parameters:
+        - description: Name of the Sandbox
+          in: path
+          name: sandboxName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandbox'
+              examples:
+                response:
+                  value: |-
+                    {
+                      "id": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
+                      "name": "testbox",
+                      "description": "",
+                      "configuredRoutes": [],
+                      "hasRepository": true,
+                      "apiDefinition": "None",
+                      "stackType": "JavaScript",
+                      "runtimeVersion": "VERSION_2",
+                      "proxyStatus": "STARTED",
+                      "transportType": "HTTP",
+                      "properties": {},
+                      "gitUrl": "http://git.getsandbox.com/testbox.git",
+                      "sandboxUrl": "http://testbox.getsandbox.com"
+                    }
+      summary: getSandbox
+      tags:
+        - Sandbox
+    put:
+      description: ''
+      operationId: updateSandbox
+      parameters:
+        - description: Name of the Sandbox
+          in: path
+          name: sandboxName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandbox'
+              examples:
+                response:
+                  value: |-
+                    {
+                      "id": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
+                      "name": "testbox",
+                      "description": "",
+                      "configuredRoutes": [],
+                      "hasRepository": true,
+                      "apiDefinition": "None",
+                      "stackType": "JavaScript",
+                      "runtimeVersion": "VERSION_2",
+                      "proxyStatus": "STARTED",
+                      "transportType": "HTTP",
+                      "properties": {},
+                      "gitUrl": "http://git.getsandbox.com/testbox.git",
+                      "sandboxUrl": "http://testbox.getsandbox.com"
+                    }
+      summary: updateSandbox
+      tags:
+        - Sandbox
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sandbox'
+        description: Fields to updated on given Sandbox
+        required: true
+  '/1/sandboxes/{sandboxName}/fork':
+    get:
+      description: ''
+      operationId: forkSandbox
+      parameters:
+        - description: Name of the Sandbox
+          in: path
+          name: sandboxName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandbox'
+              examples:
+                response:
+                  value: |-
+                    {
+                      "id": "s-328f0d3a-7cf8-400c-a5e8-dc0e84b737b3",
+                      "name": "testbox",
+                      "description": "",
+                      "configuredRoutes": [],
+                      "hasRepository": true,
+                      "apiDefinition": "None",
+                      "stackType": "JavaScript",
+                      "runtimeVersion": "VERSION_2",
+                      "proxyStatus": "STARTED",
+                      "transportType": "HTTP",
+                      "properties": {},
+                      "gitUrl": "http://git.getsandbox.com/testbox.git",
+                      "sandboxUrl": "http://testbox.getsandbox.com"
+                    }
+      summary: forkSandbox
+      tags:
+        - Sandbox
+  '/1/sandboxes/{sandboxName}/state':
+    delete:
+      description: ''
+      operationId: deleteSandboxState
+      parameters:
+        - description: Name of the Sandbox
+          in: path
+          name: sandboxName
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: successful operation
+      summary: deleteSandboxState
+      tags:
+        - Sandbox
+    get:
+      description: ''
+      operationId: getSandboxState
+      parameters:
+        - description: Name of the Sandbox
+          in: path
+          name: sandboxName
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: successful operation
+      summary: getSandboxState
+      tags:
+        - Sandbox
+components:
+  schemas:
+    ActivityMessage:
+      properties:
+        createdTimestamp:
+          description: Epoch time in milliseconds when the message was created
+          format: int64
+          type: integer
+        message:
+          description: The details of the message when type is 'log'
+          type: string
+        messageObject:
+          $ref: '#/components/schemas/RuntimeTransaction'
+        messageType:
+          enum:
+            - request
+            - log
+          type: string
+        sandboxId:
+          description: The ID of the sandbox that generated this message
+          type: string
+      type: object
+    ConfiguredRouteDetails:
+      properties:
+        activeErrorOverride:
+          default: false
+          description: Whether error overrides are enabled or not.
+          type: boolean
+        activeLatency:
+          default: false
+          description: Whether latency delays are enabled or not.
+          type: boolean
+        defaultLatency:
+          description: A delay in milliseconds applied to requests at a 'normal' level.
+          format: int32
+          maximum: 30000
+          minimum: 0
+          type: integer
+        errorOverrideType:
+          description: The type of error override applied to this route.
+          enum:
+            - NONE
+            - TIMEOUT
+            - SERVICE_DOWN
+          type: string
+        loadLatency:
+          description: A delay in milliseconds applied to requests at a 'high' level.
+          format: int32
+          maximum: 30000
+          minimum: 0
+          type: integer
+        loadThreshold:
+          description: The threshold in transactions/second to signify 'high' load
+          format: int32
+          maximum: 100
+          minimum: 0
+          type: integer
+        method:
+          type: string
+        path:
+          type: string
+        properties:
+          additionalProperties:
+            type: string
+          type: object
+        routeConfig:
+          $ref: '#/components/schemas/RouteConfig'
+        transport:
+          type: string
+      required:
+        - errorOverrideType
+      type: object
+    CreateSandbox:
+      properties:
+        commitBaseTemplate:
+          default: false
+          description: Whether to commit the example Sandbox definition upon creation.
+          type: boolean
+        description:
+          description: Text describing this Sandbox.
+          maxLength: 255
+          minLength: 0
+          pattern: '^[A-Za-z-_ 0-9]*$'
+          type: string
+        name:
+          description: 'Optional name to give the Sandbox, will be generated if omitted.'
+          pattern: '^[A-Za-z-_ 0-9]*$'
+          type: string
+        ownerOrganisationName:
+          description: Name of the team this Sandbox should be created under.
+          maxLength: 36
+          minLength: 2
+          pattern: '^[a-zA-Z-_0-9]*$'
+          type: string
+        parentSandboxName:
+          description: 'Name of the Sandbox this should be created under, if exists will be a ''clone''.'
+          pattern: '^[A-Za-z-_ 0-9]*$'
+          type: string
+        transportType:
+          enum:
+            - HTTP
+            - JMS
+          type: string
+      type: object
+    Error:
+      properties:
+        code:
+          type: string
+        detailedMessage:
+          description: Longer message describing the error.
+          type: string
+        field:
+          description: Message describing which field the error relates to.
+          type: string
+        message:
+          description: Short message describing the error.
+          type: string
+      type: object
+    RouteConfig:
+      properties:
+        errorStrategy:
+          enum:
+            - NONE
+            - TIMEOUT
+            - SERVICE_DOWN
+          type: string
+        latencyMs:
+          format: int32
+          type: integer
+        latencyMultiplier:
+          format: int32
+          type: integer
+        latencyType:
+          enum:
+            - NONE
+            - CONSTANT
+            - LINEAR
+          type: string
+        method:
+          type: string
+        path:
+          type: string
+      type: object
+    RuntimeRequest:
+      properties:
+        body:
+          description: The body of the given request.
+          type: string
+        contentType:
+          description: 'The content type of the body, for example ''application/json''.'
+          type: string
+        fullSandboxId:
+          description: The parent ID of the Sandbox that received the request.
+          type: string
+        fullSandboxName:
+          description: The parent name of the Sandbox that received the request.
+          type: string
+        headers:
+          additionalProperties:
+            type: string
+          description: Transport headers for the given request.
+          type: object
+        ip:
+          description: The requestor IP address.
+          type: string
+        properties:
+          additionalProperties:
+            type: string
+          type: object
+        receivedTimestamp:
+          description: The epoch time in milliseconds when the request was received.
+          format: int64
+          type: integer
+        sandboxId:
+          description: The ID of the Sandbox that received the request.
+          type: string
+        sandboxName:
+          description: The name of the Sandbox that received the request.
+          type: string
+        transport:
+          description: 'Which transport the request was for, ''HTTP'' or ''JMS''.'
+          type: string
+      type: object
+    RuntimeResponse:
+      properties:
+        body:
+          description: The body of the given response.
+          type: string
+        durationMillis:
+          description: Duration in milliseconds of the processing time in Sandbox.
+          format: int64
+          type: integer
+        error:
+          $ref: '#/components/schemas/Error'
+        headers:
+          additionalProperties:
+            type: string
+          description: Transport headers for the given response.
+          type: object
+        respondedTimestamp:
+          description: The epoch time in milliseconds when the response was sent.
+          format: int64
+          type: integer
+        transport:
+          description: 'Which transport the request was for, ''HTTP'' or ''JMS''.'
+          type: string
+      type: object
+    RuntimeTransaction:
+      properties:
+        request:
+          $ref: '#/components/schemas/RuntimeRequest'
+        responses:
+          items:
+            $ref: '#/components/schemas/RuntimeResponse'
+          type: array
+        sandboxName:
+          description: The source sandbox name.
+          type: string
+      type: object
+    Sandbox:
+      properties:
+        apiDefinition:
+          description: The import source of this Sandbox.
+          enum:
+            - None
+            - Apiary
+            - Swagger_V2_Json
+            - RAML_V08
+            - WSDL
+          type: string
+        childSandboxes:
+          description: Clones of this Sandbox.
+          items:
+            $ref: '#/components/schemas/Sandbox'
+          type: array
+          uniqueItems: true
+        configuredRoutes:
+          description: 'Extra configuration applied to some routes, delays, overrides etc.'
+          items:
+            $ref: '#/components/schemas/ConfiguredRouteDetails'
+          type: array
+          uniqueItems: true
+        description:
+          maxLength: 255
+          minLength: 0
+          pattern: '^[A-Za-z0-9 _\-]*$'
+          type: string
+        gitAccessToken:
+          type: string
+        gitUrl:
+          description: The git clone URL.
+          type: string
+        hasRepository:
+          default: false
+          description: Whether this Sandbox has a git repository or not.
+          type: boolean
+        id:
+          description: The ID of the Sandbox.
+          type: string
+        ipWhitelist:
+          description: 'The list of IPs allowed to make requests, all allowed if omitted.'
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        name:
+          pattern: '^[a-z0-9\-]*$'
+          type: string
+        parentSandbox:
+          $ref: '#/components/schemas/Sandbox'
+        properties:
+          additionalProperties:
+            type: object
+          type: object
+        proxyStatus:
+          description: The listener status.
+          enum:
+            - STARTED
+            - STOPPED
+          type: string
+        runtimeVersion:
+          description: The library version of this Sandbox.
+          enum:
+            - VERSION_1
+            - VERSION_2
+          type: string
+        sandboxUrl:
+          description: The request URL for this Sandbox.
+          type: string
+        stackType:
+          enum:
+            - JavaScript
+          type: string
+        transportType:
+          description: The listener transport.
+          enum:
+            - HTTP
+            - JMS
+          type: string
+      required:
+        - name
+      type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: API_Key
+      type: apiKey

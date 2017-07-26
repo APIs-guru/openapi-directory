@@ -1,0 +1,756 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://streams.dynamodb.amazonaws.com/'
+info:
+  version: '2012-08-10'
+  x-release: v4
+  title: Amazon DynamoDB Streams
+  description: '<fullname>Amazon DynamoDB</fullname> <p>Amazon DynamoDB Streams provides API actions for accessing streams and processing stream records. To learn more about application development with Streams, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html">Capturing Table Activity with DynamoDB Streams</a> in the Amazon DynamoDB Developer Guide.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: streams.dynamodb
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/streams.dynamodb-2012-08-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/dynamodb/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: DescribeStream
+      description: '<p>Returns information about a stream, including the current status of the stream, its Amazon Resource Name (ARN), the composition of its shards, and its corresponding DynamoDB table.</p> <note> <p>You can call <code>DescribeStream</code> at a maximum rate of 10 times per second.</p> </note> <p>Each shard in the stream has a <code>SequenceNumberRange</code> associated with it. If the <code>SequenceNumberRange</code> has a <code>StartingSequenceNumber</code> but no <code>EndingSequenceNumber</code>, then the shard is still open (able to receive more stream records). If both <code>StartingSequenceNumber</code> and <code>EndingSequenceNumber</code> are present, then that shard is closed and can no longer receive more data.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStreamOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStreamInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetRecords':
+    post:
+      operationId: GetRecords
+      description: '<p>Retrieves the stream records from a given shard.</p> <p>Specify a shard iterator using the <code>ShardIterator</code> parameter. The shard iterator specifies the position in the shard from which you want to start reading stream records sequentially. If there are no stream records available in the portion of the shard that the iterator points to, <code>GetRecords</code> returns an empty list. Note that it might take multiple calls to get to a portion of the shard that contains stream records.</p> <note> <p> <code>GetRecords</code> can retrieve a maximum of 1 MB of data or 1000 stream records, whichever comes first.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRecordsOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '483':
+          description: ExpiredIteratorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpiredIteratorException'
+        '484':
+          description: TrimmedDataAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrimmedDataAccessException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRecordsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetShardIterator':
+    post:
+      operationId: GetShardIterator
+      description: <p>Returns a shard iterator. A shard iterator provides information about how to retrieve the stream records from within a shard. Use the shard iterator in a subsequent <code>GetRecords</code> request to read the stream records from the shard.</p> <note> <p>A shard iterator expires 15 minutes after it is returned to the requester.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetShardIteratorOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '482':
+          description: TrimmedDataAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrimmedDataAccessException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetShardIteratorInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListStreams':
+    post:
+      operationId: ListStreams
+      description: '<p>Returns an array of stream ARNs associated with the current account and endpoint. If the <code>TableName</code> parameter is present, then <code>ListStreams</code> will return only the streams ARNs for that table.</p> <note> <p>You can call <code>ListStreams</code> at a maximum rate of 5 times per second.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStreamsOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStreamsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AttributeMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValue'
+    AttributeName:
+      type: string
+      maxLength: 65535
+    AttributeValue:
+      type: object
+      properties:
+        S:
+          $ref: '#/components/schemas/StringAttributeValue'
+        'N':
+          $ref: '#/components/schemas/NumberAttributeValue'
+        B:
+          $ref: '#/components/schemas/BinaryAttributeValue'
+        SS:
+          $ref: '#/components/schemas/StringSetAttributeValue'
+        NS:
+          $ref: '#/components/schemas/NumberSetAttributeValue'
+        BS:
+          $ref: '#/components/schemas/BinarySetAttributeValue'
+        M:
+          $ref: '#/components/schemas/MapAttributeValue'
+        L:
+          $ref: '#/components/schemas/ListAttributeValue'
+        'NULL':
+          $ref: '#/components/schemas/NullAttributeValue'
+        BOOL:
+          $ref: '#/components/schemas/BooleanAttributeValue'
+      description: '<p>Represents the data for an attribute. You can set one, and only one, of the elements.</p> <p>Each attribute in an item is a name-value pair. An attribute can be single-valued or multi-valued set. For example, a book item can have title and authors attributes. Each book has one title but can have many authors. The multi-valued attribute is a set; duplicate values are not allowed.</p>'
+    BinaryAttributeValue:
+      type: string
+    BinarySetAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/BinaryAttributeValue'
+    BooleanAttributeValue:
+      type: boolean
+    Date:
+      type: string
+      format: date-time
+    DescribeStreamInput:
+      type: object
+      required:
+        - StreamArn
+      example:
+        StreamArn: 'arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252'
+      properties:
+        StreamArn:
+          $ref: '#/components/schemas/StreamArn'
+        Limit:
+          $ref: '#/components/schemas/PositiveIntegerObject'
+        ExclusiveStartShardId:
+          $ref: '#/components/schemas/ShardId'
+      description: Represents the input of a <code>DescribeStream</code> operation.
+    DescribeStreamOutput:
+      type: object
+      example:
+        StreamDescription:
+          CreationRequestDateTime: 'Wed May 20 13:51:10 PDT 2015'
+          KeySchema:
+            - AttributeName: ForumName
+              KeyType: HASH
+            - AttributeName: Subject
+              KeyType: RANGE
+          Shards:
+            - SequenceNumberRange:
+                EndingSequenceNumber: '20500000000000000910398'
+                StartingSequenceNumber: '20500000000000000910398'
+              ShardId: shardId-00000001414562045508-2bac9cd2
+            - ParentShardId: shardId-00000001414562045508-2bac9cd2
+              SequenceNumberRange:
+                EndingSequenceNumber: '820400000000000001192334'
+                StartingSequenceNumber: '820400000000000001192334'
+              ShardId: shardId-00000001414576573621-f55eea83
+            - ParentShardId: shardId-00000001414576573621-f55eea83
+              SequenceNumberRange:
+                EndingSequenceNumber: '1683700000000000001135967'
+                StartingSequenceNumber: '1683700000000000001135967'
+              ShardId: shardId-00000001414592258131-674fd923
+            - ParentShardId: shardId-00000001414592258131-674fd923
+              SequenceNumberRange:
+                StartingSequenceNumber: '2574600000000000000935255'
+              ShardId: shardId-00000001414608446368-3a1afbaf
+          StreamArn: 'arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252'
+          StreamLabel: '2015-05-20T20:51:10.252'
+          StreamStatus: ENABLED
+          StreamViewType: NEW_AND_OLD_IMAGES
+          TableName: Forum
+      properties:
+        StreamDescription:
+          $ref: '#/components/schemas/StreamDescription'
+      description: Represents the output of a <code>DescribeStream</code> operation.
+    ErrorMessage:
+      type: string
+    ExpiredIteratorException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The shard iterator has expired and can no longer be used to retrieve stream records. A shard iterator expires 15 minutes after it is retrieved using the <code>GetShardIterator</code> action.
+    GetRecordsInput:
+      type: object
+      required:
+        - ShardIterator
+      example:
+        ShardIterator: 'arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252|1|AAAAAAAAAAEvJp6D+zaQ...  <remaining characters omitted> ...'
+      properties:
+        ShardIterator:
+          $ref: '#/components/schemas/ShardIterator'
+        Limit:
+          $ref: '#/components/schemas/PositiveIntegerObject'
+      description: Represents the input of a <code>GetRecords</code> operation.
+    GetRecordsOutput:
+      type: object
+      example:
+        NextShardIterator: 'arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252|1|AAAAAAAAAAGQBYshYDEe ... <remaining characters omitted> ...'
+        Records:
+          - awsRegion: us-west-2
+            dynamodb:
+              ApproximateCreationDateTime: '1.46480646E9'
+              Keys:
+                ForumName:
+                  S: DynamoDB
+                Subject:
+                  S: DynamoDB Thread 3
+              SequenceNumber: '300000000000000499659'
+              SizeBytes: 41
+              StreamViewType: KEYS_ONLY
+            eventID: e2fd9c34eff2d779b297b26f5fef4206
+            eventName: INSERT
+            eventSource: 'aws:dynamodb'
+            eventVersion: '1.0'
+          - awsRegion: us-west-2
+            dynamodb:
+              ApproximateCreationDateTime: '1.46480527E9'
+              Keys:
+                ForumName:
+                  S: DynamoDB
+                Subject:
+                  S: DynamoDB Thread 1
+              SequenceNumber: '400000000000000499660'
+              SizeBytes: 41
+              StreamViewType: KEYS_ONLY
+            eventID: 4b25bd0da9a181a155114127e4837252
+            eventName: MODIFY
+            eventSource: 'aws:dynamodb'
+            eventVersion: '1.0'
+          - awsRegion: us-west-2
+            dynamodb:
+              ApproximateCreationDateTime: '1.46480646E9'
+              Keys:
+                ForumName:
+                  S: DynamoDB
+                Subject:
+                  S: DynamoDB Thread 2
+              SequenceNumber: '500000000000000499661'
+              SizeBytes: 41
+              StreamViewType: KEYS_ONLY
+            eventID: 740280c73a3df7842edab3548a1b08ad
+            eventName: REMOVE
+            eventSource: 'aws:dynamodb'
+            eventVersion: '1.0'
+      properties:
+        Records:
+          $ref: '#/components/schemas/RecordList'
+        NextShardIterator:
+          $ref: '#/components/schemas/ShardIterator'
+      description: Represents the output of a <code>GetRecords</code> operation.
+    GetShardIteratorInput:
+      type: object
+      required:
+        - StreamArn
+        - ShardId
+        - ShardIteratorType
+      example:
+        ShardId: 00000001414576573621-f55eea83
+        ShardIteratorType: TRIM_HORIZON
+        StreamArn: 'arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252'
+      properties:
+        StreamArn:
+          $ref: '#/components/schemas/StreamArn'
+        ShardId:
+          $ref: '#/components/schemas/ShardId'
+        ShardIteratorType:
+          $ref: '#/components/schemas/ShardIteratorType'
+        SequenceNumber:
+          $ref: '#/components/schemas/SequenceNumber'
+      description: Represents the input of a <code>GetShardIterator</code> operation.
+    GetShardIteratorOutput:
+      type: object
+      example:
+        ShardIterator: 'arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252|1|AAAAAAAAAAEvJp6D+zaQ...  <remaining characters omitted> ...'
+      properties:
+        ShardIterator:
+          $ref: '#/components/schemas/ShardIterator'
+      description: Represents the output of a <code>GetShardIterator</code> operation.
+    Identity:
+      type: object
+      properties:
+        PrincipalId:
+          $ref: '#/components/schemas/String'
+        Type:
+          $ref: '#/components/schemas/String'
+      description: Contains details about the type of identity that made the request.
+    InternalServerError:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: An error occurred on the server side.
+    KeySchema:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeySchemaElement'
+      minItems: 1
+      maxItems: 2
+    KeySchemaAttributeName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    KeySchemaElement:
+      type: object
+      required:
+        - AttributeName
+        - KeyType
+      properties:
+        AttributeName:
+          $ref: '#/components/schemas/KeySchemaAttributeName'
+        KeyType:
+          $ref: '#/components/schemas/KeyType'
+      description: '<p>Represents <i>a single element</i> of a key schema. A key schema specifies the attributes that make up the primary key of a table, or the key attributes of an index.</p> <p>A <code>KeySchemaElement</code> represents exactly one attribute of the primary key. For example, a simple primary key (partition key) would be represented by one <code>KeySchemaElement</code>. A composite primary key (partition key and sort key) would require one <code>KeySchemaElement</code> for the partition key, and another <code>KeySchemaElement</code> for the sort key.</p> <note> <p>The partition key of an item is also known as its <i>hash attribute</i>. The term "hash attribute" derives from DynamoDB''s usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.</p> <p>The sort key of an item is also known as its <i>range attribute</i>. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.</p> </note>'
+    KeyType:
+      type: string
+      enum:
+        - HASH
+        - RANGE
+    LimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Your request rate is too high. The AWS SDKs for DynamoDB automatically retry requests that receive this exception. Your request is eventually successful, unless your retry queue is too large to finish. Reduce the frequency of requests and use exponential backoff. For more information, go to <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#APIRetries">Error Retries and Exponential Backoff</a> in the <i>Amazon DynamoDB Developer Guide</i>.'
+    ListAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeValue'
+    ListStreamsInput:
+      type: object
+      example: {}
+      properties:
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        Limit:
+          $ref: '#/components/schemas/PositiveIntegerObject'
+        ExclusiveStartStreamArn:
+          $ref: '#/components/schemas/StreamArn'
+      description: Represents the input of a <code>ListStreams</code> operation.
+    ListStreamsOutput:
+      type: object
+      example:
+        Streams:
+          - StreamArn: 'arn:aws:dynamodb:us-wesst-2:111122223333:table/Forum/stream/2015-05-20T20:51:10.252'
+            StreamLabel: '2015-05-20T20:51:10.252'
+            TableName: Forum
+          - StreamArn: 'arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-20T20:50:02.714'
+            StreamLabel: '2015-05-20T20:50:02.714'
+            TableName: Forum
+          - StreamArn: 'arn:aws:dynamodb:us-west-2:111122223333:table/Forum/stream/2015-05-19T23:03:50.641'
+            StreamLabel: '2015-05-19T23:03:50.641'
+            TableName: Forum
+      properties:
+        Streams:
+          $ref: '#/components/schemas/StreamList'
+        LastEvaluatedStreamArn:
+          $ref: '#/components/schemas/StreamArn'
+      description: Represents the output of a <code>ListStreams</code> operation.
+    MapAttributeValue:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/AttributeName'
+          value:
+            $ref: '#/components/schemas/AttributeValue'
+    NullAttributeValue:
+      type: boolean
+    NumberAttributeValue:
+      type: string
+    NumberSetAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/NumberAttributeValue'
+    OperationType:
+      type: string
+      enum:
+        - INSERT
+        - MODIFY
+        - REMOVE
+    PositiveIntegerObject:
+      type: integer
+      minimum: 1
+    PositiveLongObject:
+      type: integer
+      minimum: 1
+    Record:
+      type: object
+      properties:
+        eventID:
+          $ref: '#/components/schemas/String'
+        eventName:
+          $ref: '#/components/schemas/OperationType'
+        eventVersion:
+          $ref: '#/components/schemas/String'
+        eventSource:
+          $ref: '#/components/schemas/String'
+        awsRegion:
+          $ref: '#/components/schemas/String'
+        dynamodb:
+          $ref: '#/components/schemas/StreamRecord'
+        userIdentity:
+          $ref: '#/components/schemas/Identity'
+      description: A description of a unique event within a stream.
+    RecordList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Record'
+    ResourceNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The operation tried to access a nonexistent stream.
+    SequenceNumber:
+      type: string
+      minLength: 21
+      maxLength: 40
+    SequenceNumberRange:
+      type: object
+      properties:
+        StartingSequenceNumber:
+          $ref: '#/components/schemas/SequenceNumber'
+        EndingSequenceNumber:
+          $ref: '#/components/schemas/SequenceNumber'
+      description: The beginning and ending sequence numbers for the stream records contained within a shard.
+    Shard:
+      type: object
+      properties:
+        ShardId:
+          $ref: '#/components/schemas/ShardId'
+        SequenceNumberRange:
+          $ref: '#/components/schemas/SequenceNumberRange'
+        ParentShardId:
+          $ref: '#/components/schemas/ShardId'
+      description: A uniquely identified group of stream records within a stream.
+    ShardDescriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Shard'
+    ShardId:
+      type: string
+      minLength: 28
+      maxLength: 65
+    ShardIterator:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    ShardIteratorType:
+      type: string
+      enum:
+        - TRIM_HORIZON
+        - LATEST
+        - AT_SEQUENCE_NUMBER
+        - AFTER_SEQUENCE_NUMBER
+    Stream:
+      type: object
+      properties:
+        StreamArn:
+          $ref: '#/components/schemas/StreamArn'
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        StreamLabel:
+          $ref: '#/components/schemas/String'
+      description: Represents all of the data describing a particular stream.
+    StreamArn:
+      type: string
+      minLength: 37
+      maxLength: 1024
+    StreamDescription:
+      type: object
+      properties:
+        StreamArn:
+          $ref: '#/components/schemas/StreamArn'
+        StreamLabel:
+          $ref: '#/components/schemas/String'
+        StreamStatus:
+          $ref: '#/components/schemas/StreamStatus'
+        StreamViewType:
+          $ref: '#/components/schemas/StreamViewType'
+        CreationRequestDateTime:
+          $ref: '#/components/schemas/Date'
+        TableName:
+          $ref: '#/components/schemas/TableName'
+        KeySchema:
+          $ref: '#/components/schemas/KeySchema'
+        Shards:
+          $ref: '#/components/schemas/ShardDescriptionList'
+        LastEvaluatedShardId:
+          $ref: '#/components/schemas/ShardId'
+      description: Represents all of the data describing a particular stream.
+    StreamList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Stream'
+    StreamRecord:
+      type: object
+      properties:
+        ApproximateCreationDateTime:
+          $ref: '#/components/schemas/Date'
+        Keys:
+          $ref: '#/components/schemas/AttributeMap'
+        NewImage:
+          $ref: '#/components/schemas/AttributeMap'
+        OldImage:
+          $ref: '#/components/schemas/AttributeMap'
+        SequenceNumber:
+          $ref: '#/components/schemas/SequenceNumber'
+        SizeBytes:
+          $ref: '#/components/schemas/PositiveLongObject'
+        StreamViewType:
+          $ref: '#/components/schemas/StreamViewType'
+      description: A description of a single data modification that was performed on an item in a DynamoDB table.
+    StreamStatus:
+      type: string
+      enum:
+        - ENABLING
+        - ENABLED
+        - DISABLING
+        - DISABLED
+    StreamViewType:
+      type: string
+      enum:
+        - NEW_IMAGE
+        - OLD_IMAGE
+        - NEW_AND_OLD_IMAGES
+        - KEYS_ONLY
+    String:
+      type: string
+    StringAttributeValue:
+      type: string
+    StringSetAttributeValue:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringAttributeValue'
+    TableName:
+      type: string
+      pattern: '[a-zA-Z0-9_.-]+'
+      minLength: 3
+      maxLength: 255
+    TrimmedDataAccessException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: '<p>The operation attempted to read past the oldest stream record in a shard.</p> <p>In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records whose age exceeds this limit are subject to removal (trimming) from the stream. You might receive a TrimmedDataAccessException if:</p> <ul> <li><p>You request a shard iterator with a sequence number older than the trim point (24 hours).</p> </li> <li><p>You obtain a shard iterator, but before you use the iterator in a <code>GetRecords</code> request, a stream record in the shard exceeds the 24 hour period and is trimmed. This causes the iterator to access a record that no longer exists.</p> </li> </ul>'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
