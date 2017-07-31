@@ -259,7 +259,7 @@ paths:
   '/bots/{name}':
     delete:
       operationId: DeleteBot
-      description: '<p>Deletes all versions of the bot, including the <code>$LATEST</code> version. To delete a specific version of the bot, use the operation.</p> <p>If a bot has an alias, you can''t delete it. Instead, the <code>DeleteBot</code> operation returns a <code>ResourceInUseException</code> exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the <code>DeleteBot</code> operation is successful.</p> <p>This operation requires permissions for the <code>lex:DeleteBot</code> action.</p>'
+      description: '<p>Deletes all versions of the bot, including the <code>$LATEST</code> version. To delete a specific version of the bot, use the <a>DeleteBotVersion</a> operation.</p> <p>If a bot has an alias, you can''t delete it. Instead, the <code>DeleteBot</code> operation returns a <code>ResourceInUseException</code> exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the <code>DeleteBot</code> operation is successful.</p> <p>This operation requires permissions for the <code>lex:DeleteBot</code> action.</p>'
       responses:
         '204':
           description: Success
@@ -416,7 +416,7 @@ paths:
   '/bots/{name}/versions/{version}':
     delete:
       operationId: DeleteBotVersion
-      description: '<p>Deletes a specific version of a bot. To delete all versions of a bot, use the operation. </p> <p>This operation requires permissions for the <code>lex:DeleteBotVersion</code> action.</p>'
+      description: '<p>Deletes a specific version of a bot. To delete all versions of a bot, use the <a>DeleteBot</a> operation. </p> <p>This operation requires permissions for the <code>lex:DeleteBotVersion</code> action.</p>'
       responses:
         '204':
           description: Success
@@ -471,7 +471,7 @@ paths:
   '/intents/{name}':
     delete:
       operationId: DeleteIntent
-      description: '<p>Deletes all versions of the intent, including the <code>$LATEST</code> version. To delete a specific version of the intent, use the operation.</p> <p> You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see <a>how-it-works</a>), you must remove those references first. </p> <note> <p> If you get the <code>ResourceInUseException</code> exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to <code>DeleteIntent</code> is successful. </p> </note> <p> This operation requires permission for the <code>lex:DeleteIntent</code> action. </p>'
+      description: '<p>Deletes all versions of the intent, including the <code>$LATEST</code> version. To delete a specific version of the intent, use the <a>DeleteIntentVersion</a> operation.</p> <p> You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see <a>how-it-works</a>), you must remove those references first. </p> <note> <p> If you get the <code>ResourceInUseException</code> exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to <code>DeleteIntent</code> is successful. </p> </note> <p> This operation requires permission for the <code>lex:DeleteIntent</code> action. </p>'
       responses:
         '204':
           description: Success
@@ -571,7 +571,7 @@ paths:
   '/slottypes/{name}':
     delete:
       operationId: DeleteSlotType
-      description: '<p>Deletes all versions of the slot type, including the <code>$LATEST</code> version. To delete a specific version of the slot type, use the operation.</p> <p> You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first. </p> <note> <p> If you get the <code>ResourceInUseException</code> exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the slot type again, repeat until the slot type has no references and the <code>DeleteSlotType</code> call is successful. </p> </note> <p>This operation requires permission for the <code>lex:DeleteSlotType</code> action.</p>'
+      description: '<p>Deletes all versions of the slot type, including the <code>$LATEST</code> version. To delete a specific version of the slot type, use the <a>DeleteSlotTypeVersion</a> operation.</p> <p> You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first. </p> <note> <p> If you get the <code>ResourceInUseException</code> exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the slot type again, repeat until the slot type has no references and the <code>DeleteSlotType</code> call is successful. </p> </note> <p>This operation requires permission for the <code>lex:DeleteSlotType</code> action.</p>'
       responses:
         '204':
           description: Success
@@ -622,7 +622,7 @@ paths:
   '/slottypes/{name}/version/{version}':
     delete:
       operationId: DeleteSlotTypeVersion
-      description: '<p>Deletes a specific version of a slot type. To delete all versions of a slot type, use the operation. </p> <p>This operation requires permissions for the <code>lex:DeleteSlotTypeVersion</code> action.</p>'
+      description: '<p>Deletes a specific version of a slot type. To delete all versions of a slot type, use the <a>DeleteSlotType</a> operation. </p> <p>This operation requires permissions for the <code>lex:DeleteSlotTypeVersion</code> action.</p>'
       responses:
         '204':
           description: Success
@@ -677,7 +677,7 @@ paths:
   '/bots/{botName}/utterances/{userId}':
     delete:
       operationId: DeleteUtterances
-      description: '<p>Deletes stored utterances.</p> <p>Amazon Lex stores the utterances that users send to your bot unless the <code>childDirected</code> field in the bot is set to <code>true</code>. Utterances are stored for 15 days for use with the operation, and then stored indefinately for use in improving the ability of your bot to respond to user input.</p> <p>Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.</p> <p>This operation requires permissions for the <code>lex:DeleteUtterances</code> action.</p>'
+      description: '<p>Deletes stored utterances.</p> <p>Amazon Lex stores the utterances that users send to your bot unless the <code>childDirected</code> field in the bot is set to <code>true</code>. Utterances are stored for 15 days for use with the <a>GetUtterancesView</a> operation, and then stored indefinately for use in improving the ability of your bot to respond to user input.</p> <p>Use the <code>DeleteStoredUtterances</code> operation to manually delete stored utterances for a specific user.</p> <p>This operation requires permissions for the <code>lex:DeleteUtterances</code> action.</p>'
       responses:
         '204':
           description: Success
@@ -1385,7 +1385,7 @@ paths:
   '/bots/{botname}/utterances?view=aggregation':
     get:
       operationId: GetUtterancesView
-      description: '<p>Use the <code>GetUtterancesView</code> operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to.</p> <p>For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the <code>GetUtterancesView</code> operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the <code>OrderFlowers</code> intent so that your bot recognizes that utterance.</p> <p>After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions. </p> <p>Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.</p> <p>If the bot''s <code>childDirected</code> field is set to <code>true</code>, utterances for the bot are not stored and cannot be retrieved with the <code>GetUtterancesView</code> operation. For more information, see .</p> <p>This operation requires permissions for the <code>lex:GetUtterancesView</code> action.</p>'
+      description: '<p>Use the <code>GetUtterancesView</code> operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to.</p> <p>For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the <code>GetUtterancesView</code> operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the <code>OrderFlowers</code> intent so that your bot recognizes that utterance.</p> <p>After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions. </p> <p>Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.</p> <p>If the bot''s <code>childDirected</code> field is set to <code>true</code>, utterances for the bot are not stored and cannot be retrieved with the <code>GetUtterancesView</code> operation. For more information, see <a>PutBot</a>.</p> <p>This operation requires permissions for the <code>lex:GetUtterancesView</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -1426,7 +1426,7 @@ paths:
   '/bots/{name}/versions/$LATEST':
     put:
       operationId: PutBot
-      description: '<p>Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the <code/> response <code>FAILED</code>. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p> <p>If you specify the name of an existing bot, the fields in the request replace the existing values in the <code>$LATEST</code> version of the bot. Amazon Lex removes any fields that you don''t provide values for in the request, except for the <code>idleTTLInSeconds</code> and <code>privacySettings</code> fields, which are set to their default values. If you don''t specify values for required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutBot</code> action. For more information, see <a>auth-and-access-control</a>.</p>'
+      description: '<p>Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the <code/> response <code>FAILED</code>. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see <a>how-it-works</a>. </p> <p>If you specify the name of an existing bot, the fields in the request replace the existing values in the <code>$LATEST</code> version of the bot. Amazon Lex removes any fields that you don''t provide values for in the request, except for the <code>idleTTLInSeconds</code> and <code>privacySettings</code> fields, which are set to their default values. If you don''t specify values for required fields, Amazon Lex throws an exception.</p> <p>This operation requires permissions for the <code>lex:PutBot</code> action. For more information, see <a>auth-and-access-control</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1796,13 +1796,13 @@ definitions:
         description: A description of the bot.
       intents:
         $ref: '#/definitions/IntentList'
-        description: 'An array of <code>Intent</code> objects. For more information, see .'
+        description: 'An array of <code>Intent</code> objects. For more information, see <a>PutBot</a>.'
       clarificationPrompt:
         $ref: '#/definitions/Prompt'
-        description: 'The message that Amazon Lex uses when it doesn''t understand the user''s request. For more information, see . '
+        description: 'The message that Amazon Lex uses when it doesn''t understand the user''s request. For more information, see <a>PutBot</a>. '
       abortStatement:
         $ref: '#/definitions/Statement'
-        description: 'The message that Amazon Lex uses to abort a conversation. For more information, see .'
+        description: 'The message that Amazon Lex uses to abort a conversation. For more information, see <a>PutBot</a>.'
       status:
         $ref: '#/definitions/Status'
         description: ' When you send a request to create or update a bot, Amazon Lex sets the <code>status</code> response element to <code>BUILDING</code>. After Amazon Lex builds the bot, it sets <code>status</code> to <code>READY</code>. If Amazon Lex can''t build the bot, it sets <code>status</code> to <code>FAILED</code>. Amazon Lex returns the reason for the failure in the <code>failureReason</code> response element. '
@@ -1817,7 +1817,7 @@ definitions:
         description: The date when the bot version was created.
       idleSessionTTLInSeconds:
         $ref: '#/definitions/SessionTTL'
-        description: 'The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. For more information, see .'
+        description: 'The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. For more information, see <a>PutBot</a>.'
       voiceId:
         $ref: '#/definitions/String'
         description: The Amazon Polly voice ID that Amazon Lex uses for voice interactions with the user.
@@ -1976,11 +1976,11 @@ definitions:
     properties:
       prompt:
         $ref: '#/definitions/Prompt'
-        description: 'Obtains information from the user. '
+        description: 'Prompts for information from the user. '
       rejectionStatement:
         $ref: '#/definitions/Statement'
-        description: 'If the user answers "no" to the question defined in <code>confirmationPrompt</code>, Amazon Lex responds with this statement to acknowledge that the intent was canceled. '
-    description: 'After an intent is fulfilled, you might prompt the user for additional activity. For example, after the <code>OrderPizza</code> intent is fulfilled (the pizza order is placed with a pizzeria), you might prompt the user to find out whether the user wants to order drinks (another intent you defined in your bot).'
+        description: 'If the user answers "no" to the question defined in the <code>prompt</code> field, Amazon Lex responds with this statement to acknowledge that the intent was canceled. '
+    description: 'A prompt for additional activity after an intent is fulfilled. For example, after the <code>OrderPizza</code> intent is fulfilled, you might prompt the user to find out whether the user wants to order drinks.'
   FulfillmentActivity:
     type: object
     required:
@@ -2120,13 +2120,13 @@ definitions:
         description: A description of the bot.
       intents:
         $ref: '#/definitions/IntentList'
-        description: 'An array of <code>intent</code> objects. For more information, see .'
+        description: 'An array of <code>intent</code> objects. For more information, see <a>PutBot</a>.'
       clarificationPrompt:
         $ref: '#/definitions/Prompt'
-        description: 'The message Amazon Lex uses when it doesn''t understand the user''s request. For more information, see . '
+        description: 'The message Amazon Lex uses when it doesn''t understand the user''s request. For more information, see <a>PutBot</a>. '
       abortStatement:
         $ref: '#/definitions/Statement'
-        description: 'The message that Amazon Lex returns when the user elects to end the conversation without completing it. For more information, see .'
+        description: 'The message that Amazon Lex returns when the user elects to end the conversation without completing it. For more information, see <a>PutBot</a>.'
       status:
         $ref: '#/definitions/Status'
         description: 'The status of the bot. If the bot is ready to run, the status is <code>READY</code>. If there was a problem with building the bot, the status is <code>FAILED</code> and the <code>failureReason</code> explains why the bot did not build. If the bot was saved but not built, the status is <code>NOT BUILT</code>.'
@@ -2141,10 +2141,10 @@ definitions:
         description: The date that the bot was created.
       idleSessionTTLInSeconds:
         $ref: '#/definitions/SessionTTL'
-        description: 'The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. For more information, see .'
+        description: 'The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. For more information, see <a>PutBot</a>.'
       voiceId:
         $ref: '#/definitions/String'
-        description: 'The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .'
+        description: 'The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see <a>PutBot</a>.'
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the bot used to identify a specific revision of the bot's <code>$LATEST</code> version.
@@ -2338,22 +2338,22 @@ definitions:
         description: An array of sample utterances configured for the intent.
       confirmationPrompt:
         $ref: '#/definitions/Prompt'
-        description: 'If defined in the bot, Amazon Lex uses prompt to confirm the intent before fulfilling the user''s request. For more information, see . '
+        description: 'If defined in the bot, Amazon Lex uses prompt to confirm the intent before fulfilling the user''s request. For more information, see <a>PutIntent</a>. '
       rejectionStatement:
         $ref: '#/definitions/Statement'
         description: 'If the user answers "no" to the question defined in <code>confirmationPrompt</code>, Amazon Lex responds with this statement to acknowledge that the intent was canceled. '
       followUpPrompt:
         $ref: '#/definitions/FollowUpPrompt'
-        description: 'If defined in the bot, Amazon Lex uses this prompt to solicit additional user activity after the intent is fulfilled. For more information, see .'
+        description: 'If defined in the bot, Amazon Lex uses this prompt to solicit additional user activity after the intent is fulfilled. For more information, see <a>PutIntent</a>.'
       conclusionStatement:
         $ref: '#/definitions/Statement'
         description: 'After the Lambda function specified in the <code>fulfillmentActivity</code> element fulfills the intent, Amazon Lex conveys this statement to the user.'
       dialogCodeHook:
         $ref: '#/definitions/CodeHook'
-        description: 'If defined in the bot, Amazon Amazon Lex invokes this Lambda function for each user input. For more information, see . '
+        description: 'If defined in the bot, Amazon Amazon Lex invokes this Lambda function for each user input. For more information, see <a>PutIntent</a>. '
       fulfillmentActivity:
         $ref: '#/definitions/FulfillmentActivity'
-        description: 'Describes how the intent is fulfilled. For more information, see . '
+        description: 'Describes how the intent is fulfilled. For more information, see <a>PutIntent</a>. '
       parentIntentSignature:
         $ref: '#/definitions/BuiltinIntentSignature'
         description: A unique identifier for a built-in intent.
@@ -2399,7 +2399,7 @@ definitions:
     properties:
       intents:
         $ref: '#/definitions/IntentMetadataList'
-        description: 'An array of <code>Intent</code> objects. For more information, see .'
+        description: 'An array of <code>Intent</code> objects. For more information, see <a>PutBot</a>.'
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'If the response is truncated, the response includes a pagination token that you can specify in your next request to fetch the next page of intents. '
@@ -2498,7 +2498,7 @@ definitions:
         description: The name of the bot for which utterance information was returned.
       utterances:
         $ref: '#/definitions/ListsOfUtterances'
-        description: 'An array of objects, each containing a list of objects describing the utterances that were processed by your bot. The response contains a maximum of 100 <code>UtteranceData</code> objects for each version.'
+        description: 'An array of <a>UtteranceList</a> objects, each containing a list of <a>UtteranceData</a> objects describing the utterances that were processed by your bot. The response contains a maximum of 100 <code>UtteranceData</code> objects for each version.'
   Intent:
     type: object
     required:
@@ -2740,7 +2740,7 @@ definitions:
         description: 'An array of <code>Intent</code> objects. Each intent represents a command that a user can express. For example, a pizza ordering bot might support an OrderPizza intent. For more information, see <a>how-it-works</a>.'
       clarificationPrompt:
         $ref: '#/definitions/Prompt'
-        description: 'When Amazon Lex doesn''t understand the user''s intent, it uses one of these messages to get clarification. For example, "Sorry, I didn''t understand. Please repeat." Amazon Lex repeats the clarification prompt the number of times specified in <code>maxAttempts</code>. If Amazon Lex still can''t understand, it sends the message specified in <code>abortStatement</code>. '
+        description: '<p>When Amazon Lex doesn''t understand the user''s intent, it uses this message to get clarification. To specify how many times Amazon Lex should repeate the clarification prompt, use the <code>maxAttempts</code> field. If Amazon Lex still doesn''t understand, it sends the message in the <code>abortStatement</code> field. </p> <p>When you create a clarification prompt, make sure that it suggests the correct response from the user. for example, for a bot that orders pizza and drinks, you might create this clarification prompt: "What would you like to do? You can say ''Order a pizza'' or ''Order a drink.''"</p>'
       abortStatement:
         $ref: '#/definitions/Statement'
         description: '<p>When Amazon Lex can''t understand the user''s input in context, it tries to elicit the information a few times. After that, Amazon Lex sends the message defined in <code>abortStatement</code> to the user, and then aborts the conversation. To set the number of retries, use the <code>valueElicitationPrompt</code> field for the slot type. </p> <p>For example, in a pizza ordering bot, Amazon Lex might ask a user "What type of crust would you like?" If the user''s response is not one of the expected responses (for example, "thin crust, "deep dish," etc.), Amazon Lex tries to elicit a correct response a few more times. </p> <p>For example, in a pizza ordering application, <code>OrderPizza</code> might be one of the intents. This intent might require the <code>CrustType</code> slot. You specify the <code>valueElicitationPrompt</code> field when you create the <code>CrustType</code> slot.</p>'
@@ -2749,7 +2749,7 @@ definitions:
         description: '<p>The maximum time in seconds that Amazon Lex retains the data gathered in a conversation.</p> <p>A user interaction session remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Lex deletes any data provided before the timeout.</p> <p>For example, suppose that a user chooses the OrderPizza intent, but gets sidetracked halfway through placing an order. If the user doesn''t complete the order within the specified time, Amazon Lex discards the slot information that it gathered, and the user must start over.</p> <p>If you don''t include the <code>idleSessionTTLInSeconds</code> element in a <code>PutBot</code> operation request, Amazon Lex uses the default value. This is also true if the request replaces an existing bot.</p> <p>The default is 300 seconds (5 minutes).</p>'
       voiceId:
         $ref: '#/definitions/String'
-        description: 'The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see <a href="http://docs.aws.amazon.com/polly/latest/dg/API_Voice.html">Voice</a> in the <i>Amazon Polly Developer Guide</i>.'
+        description: 'The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see <a href="http://docs.aws.amazon.com/polly/latest/dg/voicelist.html">Available Voices</a> in the <i>Amazon Polly Developer Guide</i>.'
       checksum:
         $ref: '#/definitions/String'
         description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new bot, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a bot, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
@@ -2800,13 +2800,13 @@ definitions:
         description: A description of the bot.
       intents:
         $ref: '#/definitions/IntentList'
-        description: 'An array of <code>Intent</code> objects. For more information, see .'
+        description: 'An array of <code>Intent</code> objects. For more information, see <a>PutBot</a>.'
       clarificationPrompt:
         $ref: '#/definitions/Prompt'
-        description: ' The prompts that Amazon Lex uses when it doesn''t understand the user''s intent. For more information, see . '
+        description: ' The prompts that Amazon Lex uses when it doesn''t understand the user''s intent. For more information, see <a>PutBot</a>. '
       abortStatement:
         $ref: '#/definitions/Statement'
-        description: 'The message that Amazon Lex uses to abort a conversation. For more information, see .'
+        description: 'The message that Amazon Lex uses to abort a conversation. For more information, see <a>PutBot</a>.'
       status:
         $ref: '#/definitions/Status'
         description: '<p> When you send a request to create a bot with <code>processBehavior</code> set to <code>BUILD</code>, Amazon Lex sets the <code>status</code> response element to <code>BUILDING</code>. After Amazon Lex builds the bot, it sets <code>status</code> to <code>READY</code>. If Amazon Lex can''t build the bot, Amazon Lex sets <code>status</code> to <code>FAILED</code>. Amazon Lex returns the reason for the failure in the <code>failureReason</code> response element. </p> <p>When you set <code>processBehavior</code>to <code>SAVE</code>, Amazon Lex sets the status code to <code>NOT BUILT</code>.</p>'
@@ -2821,10 +2821,10 @@ definitions:
         description: The date that the bot was created.
       idleSessionTTLInSeconds:
         $ref: '#/definitions/SessionTTL'
-        description: 'The maximum length of time that Amazon Lex retains the data gathered in a conversation. For more information, see .'
+        description: 'The maximum length of time that Amazon Lex retains the data gathered in a conversation. For more information, see <a>PutBot</a>.'
       voiceId:
         $ref: '#/definitions/String'
-        description: 'The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .'
+        description: 'The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see <a>PutBot</a>.'
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the bot that you created.
@@ -2937,7 +2937,7 @@ definitions:
         description: '<p>When the user answers "no" to the question defined in <code>confirmationPrompt</code>, Amazon Lex responds with this statement to acknowledge that the intent was canceled. </p> <note> <p>You must provide both the <code>rejectionStatement</code> and the <code>confirmationPrompt</code>, or neither.</p> </note>'
       followUpPrompt:
         $ref: '#/definitions/FollowUpPrompt'
-        description: '<p>A user prompt for additional activity after an intent is fulfilled. For example, after the <code>OrderPizza</code> intent is fulfilled (your Lambda function placed an order with a pizzeria), you might prompt the user to find if they want to order a drink (assuming that you have defined an <code>OrderDrink</code> intent in your bot).</p> <note> <p>The <code>followUpPrompt</code> and <code>conclusionStatement</code> are mutually exclusive. You can specify only one. For example, your bot may not solicit both the following: </p> <p> Follow up prompt - "<code>$session.FirstName</code>, your pizza order has been placed. Would you like to order a drink or a dessert?" </p> <p> Conclusion statement - "<code>$session.FirstName</code>, your pizza order has been placed." </p> </note>'
+        description: '<p>Amazon Lex uses this prompt to solicit additional activity after fulfilling an intent. For example, after the <code>OrderPizza</code> intent is fulfilled, you might prompt the user to order a drink.</p> <p>The action that Amazon Lex takes depends on the user''s response, as follows:</p> <ul> <li> <p>If the user says "Yes" it responds with the clarification prompt that is configured for the bot.</p> </li> <li> <p>if the user says "Yes" and continues with an utterance that triggers an intent it starts a conversation for the intent.</p> </li> <li> <p>If the user says "No" it responds with the rejection statement configured for the the follow-up prompt.</p> </li> <li> <p>If it doesn''t recognize the utterance it repeats the follow-up prompt again.</p> </li> </ul> <p>The <code>followUpPrompt</code> field and the <code>conclusionStatement</code> field are mutually exclusive. You can specify only one. </p>'
       conclusionStatement:
         $ref: '#/definitions/Statement'
         description: '<p> The statement that you want Amazon Lex to convey to the user after the intent is successfully fulfilled by the Lambda function. </p> <p>This element is relevant only if you provide a Lambda function in the <code>fulfillmentActivity</code>. If you return the intent to the client application, you can''t specify this element.</p> <note> <p>The <code>followUpPrompt</code> and <code>conclusionStatement</code> are mutually exclusive. You can specify only one.</p> </note>'
@@ -3264,7 +3264,7 @@ definitions:
         description: A collection of message objects.
       responseCard:
         $ref: '#/definitions/ResponseCard'
-        description: ' At runtime, if the client is using the API, Amazon Lex includes the response card in the response. It substitutes all of the session attributes and slot values for placeholders in the response card. '
+        description: ' At runtime, if the client is using the <a href="http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html">PostText</a> API, Amazon Lex includes the response card in the response. It substitutes all of the session attributes and slot values for placeholders in the response card. '
     description: 'A collection of messages that convey information to the user. At runtime, Amazon Lex selects the message to convey. '
   Status:
     type: string
@@ -3318,7 +3318,7 @@ definitions:
         description: The version of the bot that processed the list.
       utterances:
         $ref: '#/definitions/ListOfUtterance'
-        description: One or more objects that contain information about the utterances that have been made to a bot. The maximum number of object is 100.
+        description: One or more <a>UtteranceData</a> objects that contain information about the utterances that have been made to a bot. The maximum number of object is 100.
     description: Provides a list of utterances that have been made to a specific version of your bot. The list contains a maximum of 100 utterances.
   UtteranceString:
     type: string

@@ -122,12 +122,49 @@ paths:
           description: IncompatibleImageException
           schema:
             $ref: '#/definitions/IncompatibleImageException'
+        '484':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
       parameters:
         - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/AssociateFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDirectoryConfig':
+    post:
+      operationId: CreateDirectoryConfig
+      description: Creates a directory configuration with the given parameters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDirectoryConfigResult'
+        '480':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDirectoryConfigRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -171,6 +208,14 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '486':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+        '487':
+          description: IncompatibleImageException
+          schema:
+            $ref: '#/definitions/IncompatibleImageException'
       parameters:
         - name: body
           in: body
@@ -277,6 +322,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDirectoryConfig':
+    post:
+      operationId: DeleteDirectoryConfig
+      description: Deletes the directory configuration with the given parameters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDirectoryConfigResult'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDirectoryConfigRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteFleet':
     post:
       operationId: DeleteFleet
@@ -351,6 +429,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDirectoryConfigs':
+    post:
+      operationId: DescribeDirectoryConfigs
+      description: Returns a list describing the specified directory configurations.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDirectoryConfigsResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDirectoryConfigsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeFleets':
     post:
       operationId: DescribeFleets
@@ -377,15 +484,15 @@ paths:
           acceptors:
             - state: success
               matcher: pathAll
-              argument: 'fleets[].state'
+              argument: 'Fleets[].State'
               expected: ACTIVE
             - state: failure
               matcher: pathAny
-              argument: 'fleets[].state'
+              argument: 'Fleets[].State'
               expected: PENDING_DEACTIVATE
             - state: failure
               matcher: pathAny
-              argument: 'fleets[].state'
+              argument: 'Fleets[].State'
               expected: INACTIVE
         - delay: 30
           maxAttempts: 40
@@ -393,15 +500,15 @@ paths:
           acceptors:
             - state: success
               matcher: pathAll
-              argument: 'fleets[].state'
+              argument: 'Fleets[].State'
               expected: INACTIVE
             - state: failure
               matcher: pathAny
-              argument: 'fleets[].state'
+              argument: 'Fleets[].State'
               expected: PENDING_ACTIVATE
             - state: failure
               matcher: pathAny
-              argument: 'fleets[].state'
+              argument: 'Fleets[].State'
               expected: ACTIVE
     parameters:
       - $ref: '#/parameters/Action'
@@ -445,7 +552,7 @@ paths:
   '/#DescribeSessions':
     post:
       operationId: DescribeSessions
-      description: 'Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.'
+      description: 'Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. To retrieve the next set of items, pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.'
       responses:
         '200':
           description: Success
@@ -474,7 +581,7 @@ paths:
   '/#DescribeStacks':
     post:
       operationId: DescribeStacks
-      description: 'If stack names are not provided, this operation describes the specified stacks; otherwise, all stacks in the account are described. Pass the <code>nextToken</code> value in a subsequent call to this operation to retrieve the next set of items.'
+      description: 'If stack names are not provided, this operation describes the specified stacks; otherwise, all stacks in the account are described. To retrieve the next set of items, pass the <code>nextToken</code> value in a subsequent call to this operation.'
       responses:
         '200':
           description: Success
@@ -686,6 +793,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDirectoryConfig':
+    post:
+      operationId: UpdateDirectoryConfig
+      description: Updates the directory configuration with the given parameters.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDirectoryConfigResult'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDirectoryConfigRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateFleet':
     post:
       operationId: UpdateFleet
@@ -727,6 +871,10 @@ paths:
           description: IncompatibleImageException
           schema:
             $ref: '#/definitions/IncompatibleImageException'
+        '488':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
       parameters:
         - name: body
           in: body
@@ -793,6 +941,15 @@ paths:
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
+  AccountName:
+    type: string
+    minLength: 1
+    format: password
+  AccountPassword:
+    type: string
+    minLength: 1
+    maxLength: 127
+    format: password
   Application:
     type: object
     properties:
@@ -813,7 +970,7 @@ definitions:
         description: A list of arguments that are passed to the application at launch.
       Enabled:
         $ref: '#/definitions/Boolean'
-        description: An application can be disabled after image creation if there is a problem.
+        description: 'If there is a problem, an application can be disabled after image creation.'
       Metadata:
         $ref: '#/definitions/Metadata'
         description: Additional attributes that describe the application.
@@ -883,6 +1040,28 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: An API error occurred. Wait a few minutes and try again.
+  CreateDirectoryConfigRequest:
+    type: object
+    required:
+      - DirectoryName
+      - OrganizationalUnitDistinguishedNames
+      - ServiceAccountCredentials
+    properties:
+      DirectoryName:
+        $ref: '#/definitions/DirectoryName'
+        description: 'The fully qualified name of the directory, such as corp.example.com'
+      OrganizationalUnitDistinguishedNames:
+        $ref: '#/definitions/OrganizationalUnitDistinguishedNamesList'
+        description: The list of the distinguished names of organizational units to place computer accounts in.
+      ServiceAccountCredentials:
+        $ref: '#/definitions/ServiceAccountCredentials'
+        description: 'The <i>AccountName</i> and <i>AccountPassword</i> values for the service account, which are used by the streaming instance to connect to the directory.'
+  CreateDirectoryConfigResult:
+    type: object
+    properties:
+      DirectoryConfig:
+        $ref: '#/definitions/DirectoryConfig'
+        description: Directory configuration details.
   CreateFleetRequest:
     type: object
     required:
@@ -899,7 +1078,7 @@ definitions:
         description: Unique name of the image used by the fleet.
       InstanceType:
         $ref: '#/definitions/String'
-        description: The instance type of compute resources for the fleet. Fleet instances are launched from this instance type.
+        description: '<p>The instance type of compute resources for the fleet. Fleet instances are launched from this instance type. Available instance types are:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> </ul>'
       ComputeCapacity:
         $ref: '#/definitions/ComputeCapacity'
         description: The parameters for the capacity allocated to the fleet.
@@ -920,7 +1099,10 @@ definitions:
         description: The display name of the fleet.
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
-        description: Enables or disables default Internet access for the fleet.
+        description: Enables or disables default internet access for the fleet.
+      DomainJoinInfo:
+        $ref: '#/definitions/DomainJoinInfo'
+        description: 'The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.'
     description: Contains the parameters for the new fleet to create.
   CreateFleetResult:
     type: object
@@ -965,7 +1147,7 @@ definitions:
         $ref: '#/definitions/String'
         description: The fleet for which the URL is generated.
       UserId:
-        $ref: '#/definitions/UserId'
+        $ref: '#/definitions/StreamingUrlUserId'
         description: A unique user ID for whom the URL is generated.
       ApplicationId:
         $ref: '#/definitions/String'
@@ -984,7 +1166,18 @@ definitions:
         description: The URL to start the AppStream 2.0 streaming session.
       Expires:
         $ref: '#/definitions/Timestamp'
-        description: 'Elapsed seconds after the Unix epoch, at which time this URL expires.'
+        description: 'Elapsed seconds after the Unix epoch, when this URL expires.'
+  DeleteDirectoryConfigRequest:
+    type: object
+    required:
+      - DirectoryName
+    properties:
+      DirectoryName:
+        $ref: '#/definitions/DirectoryName'
+        description: The name of the directory configuration to be deleted.
+  DeleteDirectoryConfigResult:
+    type: object
+    properties: {}
   DeleteFleetRequest:
     type: object
     required:
@@ -1007,6 +1200,27 @@ definitions:
   DeleteStackResult:
     type: object
     properties: {}
+  DescribeDirectoryConfigsRequest:
+    type: object
+    properties:
+      DirectoryNames:
+        $ref: '#/definitions/DirectoryNameList'
+        description: A specific list of directory names.
+      MaxResults:
+        $ref: '#/definitions/Integer'
+        description: The size of each page of results.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'The DescribeDirectoryConfigsResult.NextToken from a previous call to DescribeDirectoryConfigs. If this is the first call, pass null.'
+  DescribeDirectoryConfigsResult:
+    type: object
+    properties:
+      DirectoryConfigs:
+        $ref: '#/definitions/DirectoryConfigList'
+        description: The list of directory configurations.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: 'If not null, more results are available. To retrieve the next set of items, pass this value for the NextToken parameter in a subsequent call to DescribeDirectoryConfigs.'
   DescribeFleetsRequest:
     type: object
     properties:
@@ -1091,6 +1305,34 @@ definitions:
   Description:
     type: string
     maxLength: 256
+  DirectoryConfig:
+    type: object
+    required:
+      - DirectoryName
+    properties:
+      DirectoryName:
+        $ref: '#/definitions/DirectoryName'
+        description: 'The fully qualified name of the directory, such as corp.example.com'
+      OrganizationalUnitDistinguishedNames:
+        $ref: '#/definitions/OrganizationalUnitDistinguishedNamesList'
+        description: The list of the distinguished names of organizational units in which to place computer accounts.
+      ServiceAccountCredentials:
+        $ref: '#/definitions/ServiceAccountCredentials'
+        description: 'The <i>AccountName</i> and <i>AccountPassword</i> of the service account, to be used by the streaming instance to connect to the directory.'
+      CreatedTime:
+        $ref: '#/definitions/Timestamp'
+        description: The time stamp when the directory configuration was created within AppStream 2.0.
+    description: 'Full directory configuration details, which are used to join domains for the AppStream 2.0 streaming instances.'
+  DirectoryConfigList:
+    type: array
+    items:
+      $ref: '#/definitions/DirectoryConfig'
+  DirectoryName:
+    type: string
+  DirectoryNameList:
+    type: array
+    items:
+      $ref: '#/definitions/DirectoryName'
   DisassociateFleetRequest:
     type: object
     required:
@@ -1109,6 +1351,16 @@ definitions:
   DisplayName:
     type: string
     maxLength: 100
+  DomainJoinInfo:
+    type: object
+    properties:
+      DirectoryName:
+        $ref: '#/definitions/DirectoryName'
+        description: 'The fully qualified name of the directory, such as corp.example.com'
+      OrganizationalUnitDistinguishedName:
+        $ref: '#/definitions/OrganizationalUnitDistinguishedName'
+        description: The distinguished name of the organizational unit to place the computer account in.
+    description: 'The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.'
   ErrorMessage:
     type: string
     description: The error message in the exception.
@@ -1174,13 +1426,17 @@ definitions:
         description: The list of fleet errors is appended to this list.
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
-        description: 'Whether default Internet access is enabled for the fleet. '
+        description: 'Whether default internet access is enabled for the fleet. '
+      DomainJoinInfo:
+        $ref: '#/definitions/DomainJoinInfo'
+        description: 'The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.'
     description: Contains the parameters for a fleet.
   FleetAttribute:
     type: string
     enum:
       - VPC_CONFIGURATION
       - VPC_CONFIGURATION_SECURITY_GROUP_IDS
+      - DOMAIN_JOIN_INFO
     description: Fleet attribute.
   FleetAttributes:
     type: array
@@ -1211,6 +1467,20 @@ definitions:
       - SUBNET_NOT_FOUND
       - IMAGE_NOT_FOUND
       - INVALID_SUBNET_CONFIGURATION
+      - SECURITY_GROUPS_NOT_FOUND
+      - IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION
+      - DOMAIN_JOIN_ERROR_FILE_NOT_FOUND
+      - DOMAIN_JOIN_ERROR_ACCESS_DENIED
+      - DOMAIN_JOIN_ERROR_LOGON_FAILURE
+      - DOMAIN_JOIN_ERROR_INVALID_PARAMETER
+      - DOMAIN_JOIN_ERROR_MORE_DATA
+      - DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN
+      - DOMAIN_JOIN_ERROR_NOT_SUPPORTED
+      - DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME
+      - DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED
+      - DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED
+      - DOMAIN_JOIN_NERR_PASSWORD_EXPIRED
+      - DOMAIN_JOIN_INTERNAL_SERVICE_ERROR
   FleetErrors:
     type: array
     items:
@@ -1246,7 +1516,7 @@ definitions:
         description: The display name for the image.
       State:
         $ref: '#/definitions/ImageState'
-        description: 'The image starts in the <b>PENDING</b> state, and then moves to <b>AVAILABLE</b> if image creation succeeds and <b>FAILED</b> if image creation has failed.'
+        description: 'The image starts in the <b>PENDING</b> state. If image creation succeeds, it moves to <b>AVAILABLE</b>. If image creation fails, it moves to <b>FAILED</b>.'
       Visibility:
         $ref: '#/definitions/VisibilityType'
         description: The visibility of an image to the user; images can be public or private.
@@ -1267,7 +1537,7 @@ definitions:
         description: The applications associated with an image.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The timestamp when the image was created.
+        description: The time stamp when the image was created.
       PublicBaseImageReleasedDate:
         $ref: '#/definitions/Timestamp'
         description: 'The AWS release date of the public base image. For private images, this date is the release date of the base image from which the image was created.'
@@ -1386,6 +1656,13 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: The attempted operation is not permitted.
+  OrganizationalUnitDistinguishedName:
+    type: string
+    maxLength: 2000
+  OrganizationalUnitDistinguishedNamesList:
+    type: array
+    items:
+      $ref: '#/definitions/OrganizationalUnitDistinguishedName'
   PlatformType:
     type: string
     enum:
@@ -1424,6 +1701,19 @@ definitions:
     items:
       $ref: '#/definitions/String'
     maxItems: 5
+  ServiceAccountCredentials:
+    type: object
+    required:
+      - AccountName
+      - AccountPassword
+    properties:
+      AccountName:
+        $ref: '#/definitions/AccountName'
+        description: 'The user name of an account in the directory that is used by AppStream 2.0 streaming instances to connect to the directory. This account must have the following privileges: create computer objects, join computers to the domain, change/reset the password on descendant computer objects for the organizational units specified.'
+      AccountPassword:
+        $ref: '#/definitions/AccountPassword'
+        description: The password for the user account for directory actions.
+    description: 'The <i>AccountName</i> and <i>AccountPassword</i> of the service account, to be used by the streaming instance to connect to the directory.'
   Session:
     type: object
     required:
@@ -1483,7 +1773,7 @@ definitions:
         description: A display name for the stack.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The timestamp when the stack was created.
+        description: The time stamp when the stack was created.
       StorageConnectors:
         $ref: '#/definitions/StorageConnectorList'
         description: The storage connectors to be enabled for the stack.
@@ -1560,6 +1850,11 @@ definitions:
     enum:
       - HOMEFOLDERS
     description: 'The type of storage connector. The possible values include: HOMEFOLDERS.'
+  StreamingUrlUserId:
+    type: string
+    pattern: '[\w+=,.@-]*'
+    minLength: 2
+    maxLength: 32
   String:
     type: string
     minLength: 1
@@ -1575,6 +1870,26 @@ definitions:
   Timestamp:
     type: string
     format: date-time
+  UpdateDirectoryConfigRequest:
+    type: object
+    required:
+      - DirectoryName
+    properties:
+      DirectoryName:
+        $ref: '#/definitions/DirectoryName'
+        description: The name of the existing directory configuration to be updated.
+      OrganizationalUnitDistinguishedNames:
+        $ref: '#/definitions/OrganizationalUnitDistinguishedNamesList'
+        description: The list of the distinguished names of organizational units to place computer accounts in.
+      ServiceAccountCredentials:
+        $ref: '#/definitions/ServiceAccountCredentials'
+        description: 'The <i>AccountName</i> and <i>AccountPassword</i> values for the service account, which are used by the streaming instance to connect to the directory'
+  UpdateDirectoryConfigResult:
+    type: object
+    properties:
+      DirectoryConfig:
+        $ref: '#/definitions/DirectoryConfig'
+        description: The updated directory configuration details.
   UpdateFleetRequest:
     type: object
     required:
@@ -1588,7 +1903,7 @@ definitions:
         description: The name of the fleet.
       InstanceType:
         $ref: '#/definitions/String'
-        description: The instance type of compute resources for the fleet. Fleet instances are launched from this instance type.
+        description: '<p>The instance type of compute resources for the fleet. Fleet instances are launched from this instance type. Available instance types are:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> </ul>'
       ComputeCapacity:
         $ref: '#/definitions/ComputeCapacity'
         description: 'The parameters for the capacity allocated to the fleet. '
@@ -1612,7 +1927,10 @@ definitions:
         description: The name displayed to end users on the AppStream 2.0 portal.
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
-        description: Enables or disables default Internet access for the fleet.
+        description: Enables or disables default internet access for the fleet.
+      DomainJoinInfo:
+        $ref: '#/definitions/DomainJoinInfo'
+        description: 'The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.'
       AttributesToDelete:
         $ref: '#/definitions/FleetAttributes'
         description: Fleet attributes to be deleted.

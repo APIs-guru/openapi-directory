@@ -455,18 +455,22 @@ paths:
           schema:
             $ref: '#/definitions/AccessDeniedException'
         '486':
+          description: DirectoryNotEnabledException
+          schema:
+            $ref: '#/definitions/DirectoryNotEnabledException'
+        '487':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '487':
+        '488':
           description: InvalidAttachmentException
           schema:
             $ref: '#/definitions/InvalidAttachmentException'
-        '488':
+        '489':
           description: ValidationException
           schema:
             $ref: '#/definitions/ValidationException'
-        '489':
+        '490':
           description: FacetValidationException
           schema:
             $ref: '#/definitions/FacetValidationException'
@@ -1502,10 +1506,14 @@ paths:
           schema:
             $ref: '#/definitions/AccessDeniedException'
         '486':
+          description: DirectoryNotEnabledException
+          schema:
+            $ref: '#/definitions/DirectoryNotEnabledException'
+        '487':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '487':
+        '488':
           description: FacetValidationException
           schema:
             $ref: '#/definitions/FacetValidationException'
@@ -2364,14 +2372,18 @@ paths:
           schema:
             $ref: '#/definitions/AccessDeniedException'
         '486':
+          description: DirectoryNotEnabledException
+          schema:
+            $ref: '#/definitions/DirectoryNotEnabledException'
+        '487':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '487':
+        '488':
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
-        '488':
+        '489':
           description: FacetValidationException
           schema:
             $ref: '#/definitions/FacetValidationException'
@@ -2875,14 +2887,18 @@ paths:
           schema:
             $ref: '#/definitions/AccessDeniedException'
         '486':
+          description: DirectoryNotEnabledException
+          schema:
+            $ref: '#/definitions/DirectoryNotEnabledException'
+        '487':
           description: ResourceNotFoundException
           schema:
             $ref: '#/definitions/ResourceNotFoundException'
-        '487':
+        '488':
           description: InvalidNextTokenException
           schema:
             $ref: '#/definitions/InvalidNextTokenException'
-        '488':
+        '489':
           description: FacetValidationException
           schema:
             $ref: '#/definitions/FacetValidationException'
@@ -3973,14 +3989,108 @@ definitions:
       LinkName:
         $ref: '#/definitions/LinkName'
         description: The name of the link.
-    description: Represents the output of an <code>AttachObject</code> operation.
+    description: Represents the output of an <a>AttachObject</a> operation.
   BatchAttachObjectResponse:
     type: object
     properties:
       attachedObjectIdentifier:
         $ref: '#/definitions/ObjectIdentifier'
         description: The <code>ObjectIdentifier</code> of the object that has been attached.
-    description: Represents the output batch <code>AttachObject</code> response operation.
+    description: Represents the output batch <a>AttachObject</a> response operation.
+  BatchAttachPolicy:
+    type: object
+    required:
+      - PolicyReference
+      - ObjectReference
+    properties:
+      PolicyReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that is associated with the policy object.
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the object to which the policy will be attached.
+    description: "Attaches a policy object to a regular object inside a <a>BatchRead</a> operation.\_For more information, see <a>AttachPolicy</a> and <a>BatchReadRequest$Operations</a>."
+  BatchAttachPolicyResponse:
+    type: object
+    properties: {}
+    description: Represents the output of an <a>AttachPolicy</a> response operation.
+  BatchAttachToIndex:
+    type: object
+    required:
+      - IndexReference
+      - TargetReference
+    properties:
+      IndexReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the index that you are attaching the object to.
+      TargetReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the object that you are attaching to the index.
+    description: 'Attaches the specified object to the specified index inside a <a>BatchRead</a> operation. For more information, see <a>AttachToIndex</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchAttachToIndexResponse:
+    type: object
+    properties:
+      AttachedObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The <code>ObjectIdentifier</code> of the object that was attached to the index.
+    description: Represents the output of a <a>AttachToIndex</a> response operation.
+  BatchAttachTypedLink:
+    type: object
+    required:
+      - SourceObjectReference
+      - TargetObjectReference
+      - TypedLinkFacet
+      - Attributes
+    properties:
+      SourceObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Identifies the source object that the typed link will attach to.
+      TargetObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Identifies the target object that the typed link will attach to.
+      TypedLinkFacet:
+        $ref: '#/definitions/TypedLinkSchemaAndFacetName'
+        description: Identifies the typed link facet that is associated with the typed link.
+      Attributes:
+        $ref: '#/definitions/AttributeNameAndValueList'
+        description: A set of attributes that are associated with the typed link.
+    description: 'Attaches a typed link to a specified source and target object inside a <a>BatchRead</a> operation. For more information, see <a>AttachTypedLink</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchAttachTypedLinkResponse:
+    type: object
+    properties:
+      TypedLinkSpecifier:
+        $ref: '#/definitions/TypedLinkSpecifier'
+        description: Returns a typed link specifier as output.
+    description: Represents the output of a <a>AttachTypedLink</a> response operation.
+  BatchCreateIndex:
+    type: object
+    required:
+      - OrderedIndexedAttributeList
+      - IsUnique
+    properties:
+      OrderedIndexedAttributeList:
+        $ref: '#/definitions/AttributeKeyList'
+        description: Specifies the attributes that should be indexed on. Currently only a single attribute is supported.
+      IsUnique:
+        $ref: '#/definitions/Bool'
+        description: Indicates whether the attribute that is being indexed has unique values or not.
+      ParentReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the parent object that contains the index object.
+      LinkName:
+        $ref: '#/definitions/LinkName'
+        description: The name of the link between the parent object and the index object.
+      BatchReferenceName:
+        $ref: '#/definitions/BatchReferenceName'
+        description: 'The batch reference name. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches">Batches</a> for more information.'
+    description: 'Creates an index object inside of a <a>BatchRead</a> operation. For more information, see <a>CreateIndex</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchCreateIndexResponse:
+    type: object
+    properties:
+      ObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The <code>ObjectIdentifier</code> of the index created by this operation.
+    description: Represents the output of a <a>CreateIndex</a> response operation.
   BatchCreateObject:
     type: object
     required:
@@ -4005,14 +4115,14 @@ definitions:
       BatchReferenceName:
         $ref: '#/definitions/BatchReferenceName'
         description: 'The batch reference name. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches">Batches</a> for more information.'
-    description: Represents the output of a <code>CreateObject</code> operation.
+    description: Represents the output of a <a>CreateObject</a> operation.
   BatchCreateObjectResponse:
     type: object
     properties:
       ObjectIdentifier:
         $ref: '#/definitions/ObjectIdentifier'
         description: The ID that is associated with the object.
-    description: Represents the output of a <code>CreateObject</code> response operation.
+    description: Represents the output of a <a>CreateObject</a> response operation.
   BatchDeleteObject:
     type: object
     required:
@@ -4021,11 +4131,31 @@ definitions:
       ObjectReference:
         $ref: '#/definitions/ObjectReference'
         description: The reference that identifies the object.
-    description: Represents the output of a <code>DeleteObject</code> operation.
+    description: Represents the output of a <a>DeleteObject</a> operation.
   BatchDeleteObjectResponse:
     type: object
     properties: {}
-    description: Represents the output of a <code>DeleteObject</code> response operation.
+    description: Represents the output of a <a>DeleteObject</a> response operation.
+  BatchDetachFromIndex:
+    type: object
+    required:
+      - IndexReference
+      - TargetReference
+    properties:
+      IndexReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the index object.
+      TargetReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the object being detached from the index.
+    description: 'Detaches the specified object from the specified index inside a <a>BatchRead</a> operation. For more information, see <a>DetachFromIndex</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchDetachFromIndexResponse:
+    type: object
+    properties:
+      DetachedObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The <code>ObjectIdentifier</code> of the object that was detached from the index.
+    description: Represents the output of a <a>DetachFromIndex</a> response operation.
   BatchDetachObject:
     type: object
     required:
@@ -4042,14 +4172,130 @@ definitions:
       BatchReferenceName:
         $ref: '#/definitions/BatchReferenceName'
         description: 'The batch reference name. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches">Batches</a> for more information.'
-    description: Represents the output of a <code>DetachObject</code> operation.
+    description: Represents the output of a <a>DetachObject</a> operation.
   BatchDetachObjectResponse:
     type: object
     properties:
       detachedObjectIdentifier:
         $ref: '#/definitions/ObjectIdentifier'
         description: The <code>ObjectIdentifier</code> of the detached object.
-    description: Represents the output of a <code>DetachObject</code> response operation.
+    description: Represents the output of a <a>DetachObject</a> response operation.
+  BatchDetachTypedLink:
+    type: object
+    required:
+      - TypedLinkSpecifier
+    properties:
+      TypedLinkSpecifier:
+        $ref: '#/definitions/TypedLinkSpecifier'
+        description: Used to accept a typed link specifier as input.
+    description: 'Detaches a typed link from a specified source and target object inside a <a>BatchRead</a> operation. For more information, see <a>DetachTypedLink</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchDetachTypedLinkResponse:
+    type: object
+    properties: {}
+    description: Represents the output of a <a>DetachTypedLink</a> response operation.
+  BatchGetObjectInformation:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the object.
+    description: 'Retrieves metadata about an object inside a <a>BatchRead</a> operation. For more information, see <a>GetObjectInformation</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchGetObjectInformationResponse:
+    type: object
+    properties:
+      SchemaFacets:
+        $ref: '#/definitions/SchemaFacetList'
+        description: The facets attached to the specified object.
+      ObjectIdentifier:
+        $ref: '#/definitions/ObjectIdentifier'
+        description: The <code>ObjectIdentifier</code> of the specified object.
+    description: Represents the output of a <a>GetObjectInformation</a> response operation.
+  BatchListAttachedIndices:
+    type: object
+    required:
+      - TargetReference
+    properties:
+      TargetReference:
+        $ref: '#/definitions/ObjectReference'
+        description: A reference to the object that has indices attached.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+    description: 'Lists indices attached to an object inside a <a>BatchRead</a> operation. For more information, see <a>ListAttachedIndices</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchListAttachedIndicesResponse:
+    type: object
+    properties:
+      IndexAttachments:
+        $ref: '#/definitions/IndexAttachmentList'
+        description: The indices attached to the specified object.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+    description: Represents the output of a <a>ListAttachedIndices</a> response operation.
+  BatchListIncomingTypedLinks:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the object whose attributes will be listed.
+      FilterAttributeRanges:
+        $ref: '#/definitions/TypedLinkAttributeRangeList'
+        description: 'Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.'
+      FilterTypedLink:
+        $ref: '#/definitions/TypedLinkSchemaAndFacetName'
+        description: 'Filters are interpreted in the order of the attributes on the typed link facet, not the order in which they are supplied to any API calls.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+    description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object inside a <a>BatchRead</a> operation. For more information, see <a>ListIncomingTypedLinks</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchListIncomingTypedLinksResponse:
+    type: object
+    properties:
+      LinkSpecifiers:
+        $ref: '#/definitions/TypedLinkSpecifierList'
+        description: Returns one or more typed link specifiers as output.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+    description: Represents the output of a <a>ListIncomingTypedLinks</a> response operation.
+  BatchListIndex:
+    type: object
+    required:
+      - IndexReference
+    properties:
+      RangesOnIndexedValues:
+        $ref: '#/definitions/ObjectAttributeRangeList'
+        description: Specifies the ranges of indexed values that you want to query.
+      IndexReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference to the index to list.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+    description: 'Lists objects attached to the specified index inside a <a>BatchRead</a> operation. For more information, see <a>ListIndex</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchListIndexResponse:
+    type: object
+    properties:
+      IndexAttachments:
+        $ref: '#/definitions/IndexAttachmentList'
+        description: The objects and indexed values attached to the index.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+    description: Represents the output of a <a>ListIndex</a> response operation.
   BatchListObjectAttributes:
     type: object
     required:
@@ -4067,7 +4313,7 @@ definitions:
       FacetFilter:
         $ref: '#/definitions/SchemaFacet'
         description: Used to filter the list of object attributes that are associated with a certain facet.
-    description: Represents the output of a <code>ListObjectAttributes</code> operation.
+    description: Represents the output of a <a>ListObjectAttributes</a> operation.
   BatchListObjectAttributesResponse:
     type: object
     properties:
@@ -4077,7 +4323,7 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
-    description: Represents the output of a <code>ListObjectAttributes</code> response operation.
+    description: Represents the output of a <a>ListObjectAttributes</a> response operation.
   BatchListObjectChildren:
     type: object
     required:
@@ -4092,7 +4338,7 @@ definitions:
       MaxResults:
         $ref: '#/definitions/NumberResults'
         description: Maximum number of items to be retrieved in a single call. This is an approximate number.
-    description: Represents the output of a <code>ListObjectChildren</code> operation.
+    description: Represents the output of a <a>ListObjectChildren</a> operation.
   BatchListObjectChildrenResponse:
     type: object
     properties:
@@ -4102,7 +4348,138 @@ definitions:
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
-    description: Represents the output of a <code>ListObjectChildren</code> response operation.
+    description: Represents the output of a <a>ListObjectChildren</a> response operation.
+  BatchListObjectParentPaths:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the object whose attributes will be listed.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+    description: 'Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects inside a <a>BatchRead</a> operation. For more information, see <a>ListObjectParentPaths</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchListObjectParentPathsResponse:
+    type: object
+    properties:
+      PathToObjectIdentifiersList:
+        $ref: '#/definitions/PathToObjectIdentifiersList'
+        description: Returns the path to the <code>ObjectIdentifiers</code> that are associated with the directory.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+    description: Represents the output of a <a>ListObjectParentPaths</a> response operation.
+  BatchListObjectPolicies:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the object whose attributes will be listed.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+    description: 'Returns policies attached to an object in pagination fashion inside a <a>BatchRead</a> operation. For more information, see <a>ListObjectPolicies</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchListObjectPoliciesResponse:
+    type: object
+    properties:
+      AttachedPolicyIds:
+        $ref: '#/definitions/ObjectIdentifierList'
+        description: 'A list of policy <code>ObjectIdentifiers</code>, that are attached to the object.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+    description: Represents the output of a <a>ListObjectPolicies</a> response operation.
+  BatchListOutgoingTypedLinks:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the object whose attributes will be listed.
+      FilterAttributeRanges:
+        $ref: '#/definitions/TypedLinkAttributeRangeList'
+        description: 'Provides range filters for multiple attributes. When providing ranges to typed link selection, any inexact ranges must be specified at the end. Any attributes that do not have a range specified are presumed to match the entire range.'
+      FilterTypedLink:
+        $ref: '#/definitions/TypedLinkSchemaAndFacetName'
+        description: 'Filters are interpreted in the order of the attributes defined on the typed link facet, not the order they are supplied to any API calls.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+    description: 'Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object inside a <a>BatchRead</a> operation. For more information, see <a>ListOutgoingTypedLinks</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchListOutgoingTypedLinksResponse:
+    type: object
+    properties:
+      TypedLinkSpecifiers:
+        $ref: '#/definitions/TypedLinkSpecifierList'
+        description: Returns a typed link specifier as output.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+    description: Represents the output of a <a>ListOutgoingTypedLinks</a> response operation.
+  BatchListPolicyAttachments:
+    type: object
+    required:
+      - PolicyReference
+    properties:
+      PolicyReference:
+        $ref: '#/definitions/ObjectReference'
+        description: The reference that identifies the policy object.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+    description: 'Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached inside a <a>BatchRead</a> operation. For more information, see <a>ListPolicyAttachments</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchListPolicyAttachmentsResponse:
+    type: object
+    properties:
+      ObjectIdentifiers:
+        $ref: '#/definitions/ObjectIdentifierList'
+        description: A list of <code>ObjectIdentifiers</code> to which the policy is attached.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+    description: Represents the output of a <a>ListPolicyAttachments</a> response operation.
+  BatchLookupPolicy:
+    type: object
+    required:
+      - ObjectReference
+    properties:
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Reference that identifies the object whose policies will be looked up.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+      MaxResults:
+        $ref: '#/definitions/NumberResults'
+        description: The maximum number of results to retrieve.
+    description: 'Lists all policies from the root of the Directory to the object specified inside a <a>BatchRead</a> operation. For more information, see <a>LookupPolicy</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchLookupPolicyResponse:
+    type: object
+    properties:
+      PolicyToPathList:
+        $ref: '#/definitions/PolicyToPathList'
+        description: 'Provides list of path to policies. Policies contain <code>PolicyId</code>, <code>ObjectIdentifier</code>, and <code>PolicyType</code>. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The pagination token.
+    description: Represents the output of a <a>LookupPolicy</a> response operation.
   BatchOperationIndex:
     type: integer
   BatchReadException:
@@ -4124,6 +4501,13 @@ definitions:
       - InvalidNextTokenException
       - AccessDeniedException
       - NotNodeException
+      - FacetValidationException
+      - CannotListParentOfRootException
+      - NotIndexException
+      - NotPolicyException
+      - DirectoryNotEnabledException
+      - LimitExceededException
+      - InternalServiceException
   BatchReadOperation:
     type: object
     properties:
@@ -4133,6 +4517,33 @@ definitions:
       ListObjectChildren:
         $ref: '#/definitions/BatchListObjectChildren'
         description: Returns a paginated list of child objects that are associated with a given object.
+      ListAttachedIndices:
+        $ref: '#/definitions/BatchListAttachedIndices'
+        description: Lists indices attached to an object.
+      ListObjectParentPaths:
+        $ref: '#/definitions/BatchListObjectParentPaths'
+        description: 'Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure">Directory Structure</a>.'
+      GetObjectInformation:
+        $ref: '#/definitions/BatchGetObjectInformation'
+        description: Retrieves metadata about an object.
+      ListObjectPolicies:
+        $ref: '#/definitions/BatchListObjectPolicies'
+        description: Returns policies attached to an object in pagination fashion.
+      ListPolicyAttachments:
+        $ref: '#/definitions/BatchListPolicyAttachments'
+        description: Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached.
+      LookupPolicy:
+        $ref: '#/definitions/BatchLookupPolicy'
+        description: 'Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don''t have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don''t lead to the root from the target object are ignored. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
+      ListIndex:
+        $ref: '#/definitions/BatchListIndex'
+        description: Lists objects attached to the specified index.
+      ListOutgoingTypedLinks:
+        $ref: '#/definitions/BatchListOutgoingTypedLinks'
+        description: 'Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      ListIncomingTypedLinks:
+        $ref: '#/definitions/BatchListIncomingTypedLinks'
+        description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
     description: Represents the output of a <code>BatchRead</code> operation.
   BatchReadOperationList:
     type: array
@@ -4175,6 +4586,33 @@ definitions:
       ListObjectChildren:
         $ref: '#/definitions/BatchListObjectChildrenResponse'
         description: Returns a paginated list of child objects that are associated with a given object.
+      GetObjectInformation:
+        $ref: '#/definitions/BatchGetObjectInformationResponse'
+        description: Retrieves metadata about an object.
+      ListAttachedIndices:
+        $ref: '#/definitions/BatchListAttachedIndicesResponse'
+        description: Lists indices attached to an object.
+      ListObjectParentPaths:
+        $ref: '#/definitions/BatchListObjectParentPathsResponse'
+        description: 'Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure">Directory Structure</a>.'
+      ListObjectPolicies:
+        $ref: '#/definitions/BatchListObjectPoliciesResponse'
+        description: Returns policies attached to an object in pagination fashion.
+      ListPolicyAttachments:
+        $ref: '#/definitions/BatchListPolicyAttachmentsResponse'
+        description: Returns all of the <code>ObjectIdentifiers</code> to which a given policy is attached.
+      LookupPolicy:
+        $ref: '#/definitions/BatchLookupPolicyResponse'
+        description: 'Lists all policies from the root of the <a>Directory</a> to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don''t have the policies attached, it returns the <code>ObjectIdentifier</code> for such objects. If policies are present, it returns <code>ObjectIdentifier</code>, <code>policyId</code>, and <code>policyType</code>. Paths that don''t lead to the root from the target object are ignored. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies">Policies</a>.'
+      ListIndex:
+        $ref: '#/definitions/BatchListIndexResponse'
+        description: Lists objects attached to the specified index.
+      ListOutgoingTypedLinks:
+        $ref: '#/definitions/BatchListOutgoingTypedLinksResponse'
+        description: 'Returns a paginated list of all the outgoing <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      ListIncomingTypedLinks:
+        $ref: '#/definitions/BatchListIncomingTypedLinksResponse'
+        description: 'Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
     description: Represents the output of a <code>BatchRead</code> success response operation.
   BatchReferenceName:
     type: string
@@ -4237,6 +4675,14 @@ definitions:
       - ObjectNotDetachedException
       - ResourceNotFoundException
       - AccessDeniedException
+      - InvalidAttachmentException
+      - NotIndexException
+      - IndexedAttributeMissingException
+      - ObjectAlreadyDetachedException
+      - NotPolicyException
+      - DirectoryNotEnabledException
+      - LimitExceededException
+      - UnsupportedIndexTypeException
   BatchWriteOperation:
     type: object
     properties:
@@ -4261,6 +4707,24 @@ definitions:
       RemoveFacetFromObject:
         $ref: '#/definitions/BatchRemoveFacetFromObject'
         description: A batch operation that removes a facet from an object.
+      AttachPolicy:
+        $ref: '#/definitions/BatchAttachPolicy'
+        description: Attaches a policy object to a regular object. An object can have a limited number of attached policies.
+      CreateIndex:
+        $ref: '#/definitions/BatchCreateIndex'
+        description: 'Creates an index object. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html">Indexing</a> for more information.'
+      AttachToIndex:
+        $ref: '#/definitions/BatchAttachToIndex'
+        description: Attaches the specified object to the specified index.
+      DetachFromIndex:
+        $ref: '#/definitions/BatchDetachFromIndex'
+        description: Detaches the specified object from the specified index.
+      AttachTypedLink:
+        $ref: '#/definitions/BatchAttachTypedLink'
+        description: 'Attaches a typed link to a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      DetachTypedLink:
+        $ref: '#/definitions/BatchDetachTypedLink'
+        description: 'Detaches a typed link from a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
     description: 'Represents the output of a <code>BatchWrite</code> operation. '
   BatchWriteOperationList:
     type: array
@@ -4290,6 +4754,24 @@ definitions:
       RemoveFacetFromObject:
         $ref: '#/definitions/BatchRemoveFacetFromObjectResponse'
         description: The result of a batch remove facet from object operation.
+      AttachPolicy:
+        $ref: '#/definitions/BatchAttachPolicyResponse'
+        description: Attaches a policy object to a regular object. An object can have a limited number of attached policies.
+      CreateIndex:
+        $ref: '#/definitions/BatchCreateIndexResponse'
+        description: 'Creates an index object. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html">Indexing</a> for more information.'
+      AttachToIndex:
+        $ref: '#/definitions/BatchAttachToIndexResponse'
+        description: Attaches the specified object to the specified index.
+      DetachFromIndex:
+        $ref: '#/definitions/BatchDetachFromIndexResponse'
+        description: Detaches the specified object from the specified index.
+      AttachTypedLink:
+        $ref: '#/definitions/BatchAttachTypedLinkResponse'
+        description: 'Attaches a typed link to a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
+      DetachTypedLink:
+        $ref: '#/definitions/BatchDetachTypedLinkResponse'
+        description: 'Detaches a typed link from a specified source and target object. For more information, see <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink">Typed link</a>.'
     description: Represents the output of a <code>BatchWrite</code> response operation.
   BatchWriteOperationResponseList:
     type: array
@@ -4953,7 +5435,7 @@ definitions:
     properties:
       TargetReference:
         $ref: '#/definitions/ObjectReference'
-        description: A reference to the object to that has indices attached.
+        description: A reference to the object that has indices attached.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The pagination token.
@@ -5837,7 +6319,7 @@ definitions:
         description: 'A set of key-value pairs associated with the typed link. Typed link attributes are used when you have data values that are related to the link itself, and not to one of the two objects being linked. Identity attributes also serve to distinguish the link from others of the same type between the same objects.'
       IdentityAttributeOrder:
         $ref: '#/definitions/AttributeNameList'
-        description: 'The set of attributes that distinguish links made from this facet from each other, in the order of significance. Listing typed links can filter on the values of these attributes. See <a>ListOutgoingTypedLinks</a> and <a>ListIncomingTypeLinks</a> for details.'
+        description: 'The set of attributes that distinguish links made from this facet from each other, in the order of significance. Listing typed links can filter on the values of these attributes. See <a>ListOutgoingTypedLinks</a> and <a>ListIncomingTypedLinks</a> for details.'
     description: 'Defines the typed links structure and its attributes. To create a typed link facet, use the <a>CreateTypedLinkFacet</a> API.'
   TypedLinkFacetAttributeUpdate:
     type: object

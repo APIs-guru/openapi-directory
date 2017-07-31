@@ -856,6 +856,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDefaultVpc':
+    post:
+      operationId: CreateDefaultVpc
+      description: '<p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html">Default VPC and Default Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. You cannot specify the components of the default VPC yourself.</p> <p>You can create a default VPC if you deleted your previous default VPC. You cannot have more than one default VPC per region. </p> <p>If your account supports EC2-Classic, you cannot use this action to create a default VPC in a region that supports EC2-Classic. If you want a default VPC in a region that supports EC2-Classic, see "I really want a default VPC for my existing EC2 account. Is that possible?" in the <a href="http://aws.amazon.com/vpc/faqs/#Default_VPCs">Default VPCs FAQ</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDefaultVpcResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDefaultVpcRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateDhcpOptions':
     post:
       operationId: CreateDhcpOptions
@@ -1144,6 +1169,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/CreateNetworkInterfaceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateNetworkInterfacePermission':
+    post:
+      operationId: CreateNetworkInterfacePermission
+      description: '<p>Grants an AWS authorized partner account permission to attach the specified network interface to an instance in their account.</p> <p>You can grant permission to a single AWS account only, and only one account at a time.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateNetworkInterfacePermissionResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateNetworkInterfacePermissionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1774,6 +1824,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteNetworkInterfaceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteNetworkInterfacePermission':
+    post:
+      operationId: DeleteNetworkInterfacePermission
+      description: 'Deletes a permission for a network interface. By default, you cannot delete the permission if the account for which you''re removing the permission has attached the network interface to an instance. However, you can force delete the permission, regardless of any attachment.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteNetworkInterfacePermissionResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteNetworkInterfacePermissionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2444,6 +2519,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeElasticGpus':
+    post:
+      operationId: DescribeElasticGpus
+      description: 'Describes the Elastic GPUs associated with your instances. For more information about Elastic GPUs, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-gpus.html">Amazon EC2 Elastic GPUs</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeElasticGpusResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeElasticGpusRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeExportTasks':
     post:
       operationId: DescribeExportTasks
@@ -2838,7 +2938,7 @@ paths:
   '/#DescribeInstanceStatus':
     post:
       operationId: DescribeInstanceStatus
-      description: '<p>Describes the status of one or more instances. By default, only running instances are described, unless specified otherwise.</p> <p>Instance status includes the following components:</p> <ul> <li> <p> <b>Status checks</b> - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html">Status Checks for Your Instances</a> and <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html">Troubleshooting Instances with Failed Status Checks</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <b>Scheduled events</b> - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html">Scheduled Events for Your Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <b>Instance state</b> - You can manage your instances from the moment you launch them through their termination. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> </ul>'
+      description: '<p>Describes the status of one or more instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances.</p> <p>Instance status includes the following components:</p> <ul> <li> <p> <b>Status checks</b> - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-system-instance-status-check.html">Status Checks for Your Instances</a> and <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html">Troubleshooting Instances with Failed Status Checks</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <b>Scheduled events</b> - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html">Scheduled Events for Your Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <b>Instance state</b> - You can manage your instances from the moment you launch them through their termination. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html">Instance Lifecycle</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -3178,6 +3278,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeNetworkInterfaceAttributeRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeNetworkInterfacePermissions':
+    post:
+      operationId: DescribeNetworkInterfacePermissions
+      description: 'Describes the permissions for your network interfaces. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeNetworkInterfacePermissionsResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeNetworkInterfacePermissionsRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -7478,6 +7603,20 @@ definitions:
         $ref: '#/definitions/CustomerGateway'
         description: Information about the customer gateway.
     description: Contains the output of CreateCustomerGateway.
+  CreateDefaultVpcRequest:
+    type: object
+    properties:
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    description: Contains the parameters for CreateDefaultVpc.
+  CreateDefaultVpcResult:
+    type: object
+    properties:
+      Vpc:
+        $ref: '#/definitions/Vpc'
+        description: Information about the VPC.
+    description: Contains the output of CreateDefaultVpc.
   CreateDhcpOptionsRequest:
     type: object
     required:
@@ -7824,6 +7963,35 @@ definitions:
         $ref: '#/definitions/NetworkAcl'
         description: Information about the network ACL.
     description: Contains the output of CreateNetworkAcl.
+  CreateNetworkInterfacePermissionRequest:
+    type: object
+    required:
+      - NetworkInterfaceId
+      - Permission
+    properties:
+      NetworkInterfaceId:
+        $ref: '#/definitions/String'
+        description: The ID of the network interface.
+      AwsAccountId:
+        $ref: '#/definitions/String'
+        description: The AWS account ID.
+      AwsService:
+        $ref: '#/definitions/String'
+        description: The AWS service. Currently not supported.
+      Permission:
+        $ref: '#/definitions/InterfacePermissionType'
+        description: The type of permission to grant.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    description: Contains the parameters for CreateNetworkInterfacePermission.
+  CreateNetworkInterfacePermissionResult:
+    type: object
+    properties:
+      InterfacePermission:
+        $ref: '#/definitions/NetworkInterfacePermission'
+        description: Information about the permission for the network interface.
+    description: Contains the output of CreateNetworkInterfacePermission.
   CreateNetworkInterfaceRequest:
     type: object
     required:
@@ -8561,6 +8729,28 @@ definitions:
         $ref: '#/definitions/String'
         description: The ID of the network ACL.
     description: Contains the parameters for DeleteNetworkAcl.
+  DeleteNetworkInterfacePermissionRequest:
+    type: object
+    required:
+      - NetworkInterfacePermissionId
+    properties:
+      NetworkInterfacePermissionId:
+        $ref: '#/definitions/String'
+        description: The ID of the network interface permission.
+      Force:
+        $ref: '#/definitions/Boolean'
+        description: Specify <code>true</code> to remove the permission even if the network interface is attached to an instance.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    description: Contains the parameters for DeleteNetworkInterfacePermission.
+  DeleteNetworkInterfacePermissionResult:
+    type: object
+    properties:
+      Return:
+        $ref: '#/definitions/Boolean'
+        description: 'Returns <code>true</code> if the request succeeds, otherwise returns an error.'
+    description: Contains the output for DeleteNetworkInterfacePermission.
   DeleteNetworkInterfaceRequest:
     type: object
     required:
@@ -9075,6 +9265,36 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results.
+  DescribeElasticGpusRequest:
+    type: object
+    properties:
+      ElasticGpuIds:
+        $ref: '#/definitions/ElasticGpuIdSet'
+        description: One or more Elastic GPU IDs.
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone in which the Elastic GPU resides.</p> </li> <li> <p> <code>elastic-gpu-health</code> - The status of the Elastic GPU (<code>OK</code> | <code>IMPAIRED</code>).</p> </li> <li> <p> <code>elastic-gpu-state</code> - The state of the Elastic GPU (<code>ATTACHED</code>).</p> </li> <li> <p> <code>elastic-gpu-type</code> - The type of Elastic GPU; for example, <code>eg1.medium</code>.</p> </li> <li> <p> <code>instance-id</code> - The ID of the instance to which the Elastic GPU is associated.</p> </li> </ul>'
+      MaxResults:
+        $ref: '#/definitions/Integer'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to request the next page of results.
+  DescribeElasticGpusResult:
+    type: object
+    properties:
+      ElasticGpuSet:
+        $ref: '#/definitions/ElasticGpuSet'
+        description: Information about the Elastic GPUs.
+      MaxResults:
+        $ref: '#/definitions/Integer'
+        description: The total number of items to return. If the total number of items available is more than the value specified in max-items then a Next-Token will be provided in the output that you can use to resume pagination.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   DescribeExportTasksRequest:
     type: object
     properties:
@@ -9682,6 +9902,32 @@ definitions:
         $ref: '#/definitions/AttributeBooleanValue'
         description: Indicates whether source/destination checking is enabled.
     description: Contains the output of DescribeNetworkInterfaceAttribute.
+  DescribeNetworkInterfacePermissionsRequest:
+    type: object
+    properties:
+      NetworkInterfacePermissionIds:
+        $ref: '#/definitions/NetworkInterfacePermissionIdList'
+        description: One or more network interface permission IDs.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: <p>One or more filters.</p> <ul> <li> <p> <code>network-interface-permission.network-interface-permission-id</code> - The ID of the permission.</p> </li> <li> <p> <code>network-interface-permission.network-interface-id</code> - The ID of the network interface.</p> </li> <li> <p> <code>network-interface-permission.aws-account-id</code> - The AWS account ID.</p> </li> <li> <p> <code>network-interface-permission.aws-service</code> - The AWS service.</p> </li> <li> <p> <code>network-interface-permission.permission</code> - The type of permission (<code>INSTANCE-ATTACH</code> | <code>EIP-ASSOCIATE</code>).</p> </li> </ul>
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to request the next page of results.
+      MaxResults:
+        $ref: '#/definitions/Integer'
+        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. If this parameter is not specified, up to 50 results are returned by default.'
+    description: Contains the parameters for DescribeNetworkInterfacePermissions.
+  DescribeNetworkInterfacePermissionsResult:
+    type: object
+    properties:
+      NetworkInterfacePermissions:
+        $ref: '#/definitions/NetworkInterfacePermissionList'
+        description: The network interface permissions.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results.
+    description: Contains the output for DescribeNetworkInterfacePermissions.
   DescribeNetworkInterfacesRequest:
     type: object
     example:
@@ -10217,7 +10463,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>description</code> - A description of the snapshot.</p> </li> <li> <p> <code>owner-alias</code> - Value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM consolew.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the snapshot.</p> </li> <li> <p> <code>progress</code> - The progress of the snapshot, as a percentage (for example, 80%).</p> </li> <li> <p> <code>snapshot-id</code> - The snapshot ID.</p> </li> <li> <p> <code>start-time</code> - The time stamp when the snapshot was initiated.</p> </li> <li> <p> <code>status</code> - The status of the snapshot (<code>pending</code> | <code>completed</code> | <code>error</code>).</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify <code>tag:Purpose</code> for the filter name and <code>X</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag''s value is), and the tag value X (regardless of what the tag''s key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>volume-id</code> - The ID of the volume the snapshot is for.</p> </li> <li> <p> <code>volume-size</code> - The size of the volume, in GiB.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>description</code> - A description of the snapshot.</p> </li> <li> <p> <code>owner-alias</code> - Value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the snapshot.</p> </li> <li> <p> <code>progress</code> - The progress of the snapshot, as a percentage (for example, 80%).</p> </li> <li> <p> <code>snapshot-id</code> - The snapshot ID.</p> </li> <li> <p> <code>start-time</code> - The time stamp when the snapshot was initiated.</p> </li> <li> <p> <code>status</code> - The status of the snapshot (<code>pending</code> | <code>completed</code> | <code>error</code>).</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify <code>tag:Purpose</code> for the filter name and <code>X</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag''s value is), and the tag value X (regardless of what the tag''s key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>volume-id</code> - The ID of the volume the snapshot is for.</p> </li> <li> <p> <code>volume-size</code> - The size of the volume, in GiB.</p> </li> </ul>'
       MaxResults:
         $ref: '#/definitions/Integer'
         description: 'The maximum number of snapshot results returned by <code>DescribeSnapshots</code> in paginated output. When this parameter is used, <code>DescribeSnapshots</code> only returns <code>MaxResults</code> results in a single page along with a <code>NextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>DescribeSnapshots</code> request with the returned <code>NextToken</code> value. This value can be between 5 and 1000; if <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned. If this parameter is not used, then <code>DescribeSnapshots</code> returns all results. You cannot specify this parameter and the snapshot IDs parameter in the same request.'
@@ -11458,6 +11704,85 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EgressOnlyInternetGateway'
+  ElasticGpuAssociation:
+    type: object
+    properties:
+      ElasticGpuId:
+        $ref: '#/definitions/String'
+        description: The ID of the Elastic GPU.
+      ElasticGpuAssociationId:
+        $ref: '#/definitions/String'
+        description: The ID of the association.
+      ElasticGpuAssociationState:
+        $ref: '#/definitions/String'
+        description: The state of the association between the instance and the Elastic GPU.
+      ElasticGpuAssociationTime:
+        $ref: '#/definitions/String'
+        description: The time the Elastic GPU was associated with the instance.
+    description: Describes the association between an instance and an Elastic GPU.
+  ElasticGpuAssociationList:
+    type: array
+    items:
+      $ref: '#/definitions/ElasticGpuAssociation'
+  ElasticGpuHealth:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/ElasticGpuStatus'
+        description: The health status.
+    description: Describes the status of an Elastic GPU.
+  ElasticGpuIdSet:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  ElasticGpuSet:
+    type: array
+    items:
+      $ref: '#/definitions/ElasticGpus'
+  ElasticGpuSpecification:
+    type: object
+    required:
+      - Type
+    properties:
+      Type:
+        $ref: '#/definitions/String'
+        description: The type of Elastic GPU.
+    description: A specification for an Elastic GPU.
+  ElasticGpuSpecifications:
+    type: array
+    items:
+      $ref: '#/definitions/ElasticGpuSpecification'
+  ElasticGpuState:
+    type: string
+    enum:
+      - ATTACHED
+  ElasticGpuStatus:
+    type: string
+    enum:
+      - OK
+      - IMPAIRED
+  ElasticGpus:
+    type: object
+    properties:
+      ElasticGpuId:
+        $ref: '#/definitions/String'
+        description: The ID of the Elastic GPU.
+      AvailabilityZone:
+        $ref: '#/definitions/String'
+        description: The Availability Zone in the which the Elastic GPU resides.
+      ElasticGpuType:
+        $ref: '#/definitions/String'
+        description: The type of Elastic GPU.
+      ElasticGpuHealth:
+        $ref: '#/definitions/ElasticGpuHealth'
+        description: The status of the Elastic GPU.
+      ElasticGpuState:
+        $ref: '#/definitions/ElasticGpuState'
+        description: The state of the Elastic GPU.
+      InstanceId:
+        $ref: '#/definitions/String'
+        description: The ID of the instance to which the Elastic GPU is attached.
+    description: Describes an Elastic GPU.
   EnableVgwRoutePropagationRequest:
     type: object
     required:
@@ -12811,6 +13136,9 @@ definitions:
       InstanceLifecycle:
         $ref: '#/definitions/InstanceLifecycleType'
         description: Indicates whether this is a Spot instance or a Scheduled Instance.
+      ElasticGpuAssociations:
+        $ref: '#/definitions/ElasticGpuAssociationList'
+        description: The Elastic GPU associated with the instance.
       NetworkInterfaces:
         $ref: '#/definitions/InstanceNetworkInterfaceList'
         description: '[EC2-VPC] One or more network interfaces for the instance.'
@@ -13369,6 +13697,9 @@ definitions:
       - cc2.8xlarge
       - g2.2xlarge
       - g2.8xlarge
+      - g3.4xlarge
+      - g3.8xlarge
+      - g3.16xlarge
       - cg1.4xlarge
       - p2.xlarge
       - p2.8xlarge
@@ -13385,6 +13716,11 @@ definitions:
       $ref: '#/definitions/InstanceType'
   Integer:
     type: integer
+  InterfacePermissionType:
+    type: string
+    enum:
+      - INSTANCE-ATTACH
+      - EIP-ASSOCIATE
   InternetGateway:
     type: object
     properties:
@@ -13721,7 +14057,7 @@ definitions:
         description: '<p>Modifies the <code>DeleteOnTermination</code> attribute for volumes that are currently attached. The volume must be owned by the caller. If no value is specified for <code>DeleteOnTermination</code>, the default is <code>true</code> and the volume is deleted when the instance is terminated.</p> <p>To add instance store volumes to an Amazon EBS-backed instance, you must add them when you launch the instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html#Using_OverridingAMIBDM">Updating the Block Device Mapping when Launching an Instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       DisableApiTermination:
         $ref: '#/definitions/AttributeBooleanValue'
-        description: 'If the value is <code>true</code>, you can''t terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use this paramater for Spot Instances.'
+        description: 'If the value is <code>true</code>, you can''t terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use this parameter for Spot Instances.'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -14399,6 +14735,53 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/NetworkInterface'
+  NetworkInterfacePermission:
+    type: object
+    properties:
+      NetworkInterfacePermissionId:
+        $ref: '#/definitions/String'
+        description: The ID of the network interface permission.
+      NetworkInterfaceId:
+        $ref: '#/definitions/String'
+        description: The ID of the network interface.
+      AwsAccountId:
+        $ref: '#/definitions/String'
+        description: The AWS account ID.
+      AwsService:
+        $ref: '#/definitions/String'
+        description: The AWS service.
+      Permission:
+        $ref: '#/definitions/InterfacePermissionType'
+        description: The type of permission.
+      PermissionState:
+        $ref: '#/definitions/NetworkInterfacePermissionState'
+        description: Information about the state of the permission.
+    description: Describes a permission for a network interface.
+  NetworkInterfacePermissionIdList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  NetworkInterfacePermissionList:
+    type: array
+    items:
+      $ref: '#/definitions/NetworkInterfacePermission'
+  NetworkInterfacePermissionState:
+    type: object
+    properties:
+      State:
+        $ref: '#/definitions/NetworkInterfacePermissionStateCode'
+        description: The state of the permission.
+      StatusMessage:
+        $ref: '#/definitions/String'
+        description: 'A status message, if applicable.'
+    description: Describes the state of a network interface permission.
+  NetworkInterfacePermissionStateCode:
+    type: string
+    enum:
+      - pending
+      - granted
+      - revoking
+      - revoked
   NetworkInterfacePrivateIpAddress:
     type: object
     properties:
@@ -16186,6 +16569,9 @@ definitions:
       PrivateIpAddress:
         $ref: '#/definitions/String'
         description: '<p>[EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet.</p> <p>Only one private IP address can be designated as primary. You can''t specify this option if you''ve specified the option to designate a private IP address as the primary IP address in a network interface specification. You cannot specify this option if you''re launching more than one instance in the request.</p>'
+      ElasticGpuSpecification:
+        $ref: '#/definitions/ElasticGpuSpecifications'
+        description: An Elastic GPU to associate with the instance.
       TagSpecifications:
         $ref: '#/definitions/TagSpecificationList'
         description: The tags to apply to the resources during launch. You can tag instances and volumes. The specified tags are applied to all instances or volumes that are created during launch.
@@ -16902,6 +17288,9 @@ definitions:
       WeightedCapacity:
         $ref: '#/definitions/Double'
         description: '<p>The number of units provided by the specified instance type. These are the same units that you chose to set the target capacity in terms (instances or a performance characteristic such as vCPUs, memory, or I/O).</p> <p>If the target capacity divided by this value is not a whole number, we round the number of instances to the next whole number. If this value is not specified, the default is 1.</p>'
+      TagSpecifications:
+        $ref: '#/definitions/SpotFleetTagSpecificationList'
+        description: The tags to apply during creation.
     description: Describes the launch specification for one or more Spot instances.
   SpotFleetMonitoring:
     type: object
@@ -16986,6 +17375,20 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SpotFleetRequestConfig'
+  SpotFleetTagSpecification:
+    type: object
+    properties:
+      ResourceType:
+        $ref: '#/definitions/ResourceType'
+        description: 'The type of resource. Currently, the only resource type that is supported is <code>instance</code>.'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags.
+    description: The tags for a Spot fleet resource.
+  SpotFleetTagSpecificationList:
+    type: array
+    items:
+      $ref: '#/definitions/SpotFleetTagSpecification'
   SpotInstanceRequest:
     type: object
     properties:

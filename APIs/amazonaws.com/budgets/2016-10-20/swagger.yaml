@@ -657,15 +657,16 @@ definitions:
     description: AWS Budget model
   BudgetName:
     type: string
-    pattern: '[^:]+'
-    description: 'A string represents the budget name. No ":" character is allowed.'
+    pattern: '[^:\\]+'
+    description: 'A string represents the budget name. No ":" and "\" character is allowed.'
     maxLength: 100
   BudgetType:
     type: string
     enum:
       - USAGE
       - COST
-    description: The type of a budget. Can be COST or USAGE.
+      - RI_UTILIZATION
+    description: 'The type of a budget. It should be COST, USAGE, or RI_UTILIZATION.'
   Budgets:
     type: array
     description: A list of budgets
@@ -1033,7 +1034,7 @@ definitions:
       Amount:
         $ref: '#/definitions/NumericValue'
       Unit:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/UnitValue'
     description: A structure represent either a cost spend or usage spend. Contains an amount and a unit.
   Subscriber:
     type: object
@@ -1073,10 +1074,15 @@ definitions:
   TimeUnit:
     type: string
     enum:
+      - DAILY
       - MONTHLY
       - QUARTERLY
       - ANNUALLY
-    description: 'The time unit of the budget. e.g. weekly, monthly, etc.'
+    description: 'The time unit of the budget. e.g. MONTHLY, QUARTERLY, etc.'
+  UnitValue:
+    type: string
+    description: A string to represent budget spend unit. It should be not null and not empty.
+    minLength: 1
   UpdateBudgetRequest:
     type: object
     required:

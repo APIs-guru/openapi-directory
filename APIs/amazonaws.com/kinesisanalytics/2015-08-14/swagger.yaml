@@ -99,7 +99,7 @@ paths:
   /:
     post:
       operationId: AddApplicationCloudWatchLoggingOption
-      description: 'Adds a CloudWatch log stream to monitor application configuration errors. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html">Monitoring Configuration Errors</a>.'
+      description: 'Adds a CloudWatch log stream to monitor application configuration errors. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html">Working with Amazon CloudWatch Logs</a>.'
       responses:
         '200':
           description: Success
@@ -162,6 +162,10 @@ paths:
           description: ConcurrentModificationException
           schema:
             $ref: '#/definitions/ConcurrentModificationException'
+        '484':
+          description: CodeValidationException
+          schema:
+            $ref: '#/definitions/CodeValidationException'
       parameters:
         - name: body
           in: body
@@ -341,7 +345,7 @@ paths:
   '/#DeleteApplicationCloudWatchLoggingOption':
     post:
       operationId: DeleteApplicationCloudWatchLoggingOption
-      description: 'Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html">Monitoring Configuration Errors</a>.'
+      description: 'Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html">Working with Amazon CloudWatch Logs</a>.'
       responses:
         '200':
           description: Success
@@ -511,6 +515,10 @@ paths:
           description: ResourceProvisionedThroughputExceededException
           schema:
             $ref: '#/definitions/ResourceProvisionedThroughputExceededException'
+        '483':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
       parameters:
         - name: body
           in: body
@@ -681,13 +689,13 @@ definitions:
     properties:
       ApplicationName:
         $ref: '#/definitions/ApplicationName'
-        description: The Amazon Kinesis Analytics application name.
+        description: The Kinesis Analytics application name.
       CurrentApplicationVersionId:
         $ref: '#/definitions/ApplicationVersionId'
-        description: The version ID of the Amazon Kinesis Analytics application.
+        description: The version ID of the Kinesis Analytics application.
       CloudWatchLoggingOption:
         $ref: '#/definitions/CloudWatchLoggingOption'
-        description: 'Provide the CloudWatch log stream ARN and the IAM role ARN. Note: To write application messages to CloudWatch, the IAM role used must have the <code>PutLogEvents</code> policy action enabled. '
+        description: 'Provides the CloudWatch log stream Amazon Resource Name (ARN) and the IAM role ARN. Note: To write application messages to CloudWatch, the IAM role that is used must have the <code>PutLogEvents</code> policy action enabled.'
   AddApplicationCloudWatchLoggingOptionResponse:
     type: object
     properties: {}
@@ -799,7 +807,7 @@ definitions:
         description: 'Describes reference data sources configured for the application. For more information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. '
       CloudWatchLoggingOptionDescriptions:
         $ref: '#/definitions/CloudWatchLoggingOptionDescriptions'
-        description: 'Describes the CloudWatch log streams configured to receive application messages. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html">Monitoring Configuration Errors</a>. '
+        description: 'Describes the CloudWatch log streams that are configured to receive application messages. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html">Working with Amazon CloudWatch Logs</a>. '
       ApplicationCode:
         $ref: '#/definitions/ApplicationCode'
         description: Returns the application code that you provided to perform data analysis on any of the in-application streams in your application.
@@ -896,8 +904,8 @@ definitions:
         description: ARN of the CloudWatch log to receive application messages.
       RoleARN:
         $ref: '#/definitions/RoleARN'
-        description: 'IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role used must have the <code>PutLogEvents</code> policy action enabled.'
-    description: 'Provides a description of CloudWatch logging options, including the log stream ARN and the role ARN.'
+        description: 'IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role that is used must have the <code>PutLogEvents</code> policy action enabled.'
+    description: 'Provides a description of CloudWatch logging options, including the log stream Amazon Resource Name (ARN) and the role ARN.'
   CloudWatchLoggingOptionDescription:
     type: object
     required:
@@ -974,7 +982,7 @@ definitions:
         description: '<p>You can configure application output to write data from any of the in-application streams to up to five destinations.</p> <p>These destinations can be Amazon Kinesis streams, Amazon Kinesis Firehose delivery streams, or both.</p> <p>In the configuration, you specify the in-application stream name, the destination stream Amazon Resource Name (ARN), and the format to use when writing data. You must also provide an IAM role that Amazon Kinesis Analytics can assume to write to the destination stream on your behalf.</p> <p>In the output configuration, you also provide the output stream Amazon Resource Name (ARN) and the format of data in the stream (for example, JSON, CSV). You also must provide an IAM role that Amazon Kinesis Analytics can assume to write to this stream on your behalf.</p>'
       CloudWatchLoggingOptions:
         $ref: '#/definitions/CloudWatchLoggingOptions'
-        description: 'Use this parameter to configure a CloudWatch log stream to monitor application configuration errors. For more information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html">Monitoring Configuration Errors</a>.'
+        description: 'Use this parameter to configure a CloudWatch log stream to monitor application configuration errors. For more information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html">Working with Amazon CloudWatch Logs</a>.'
       ApplicationCode:
         $ref: '#/definitions/ApplicationCode'
         description: '<p>One or more SQL statements that read input data, transform it, and generate output. For example, you can write a SQL statement that reads data from one in-application stream, generates a running average of the number of advertisement clicks by vendor, and insert resulting rows in another in-application stream using pumps. For more inforamtion about the typical pattern, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html">Application Code</a>. </p> <p>You can provide such series of SQL statements, where output of one statement can be used as the input for the next statement. You store intermediate results by creating in-application streams and pumps.</p> <p>Note that the application code must create the streams with names specified in the <code>Outputs</code>. For example, if your <code>Outputs</code> defines output streams named <code>ExampleOutputStream1</code> and <code>ExampleOutputStream2</code>, then your application code must create these streams. </p>'
@@ -997,10 +1005,10 @@ definitions:
     properties:
       ApplicationName:
         $ref: '#/definitions/ApplicationName'
-        description: The Amazon Kinesis Analytics application name.
+        description: The Kinesis Analytics application name.
       CurrentApplicationVersionId:
         $ref: '#/definitions/ApplicationVersionId'
-        description: The version ID of the Amazon Kinesis Analytics application.
+        description: The version ID of the Kinesis Analytics application.
       CloudWatchLoggingOptionId:
         $ref: '#/definitions/Id'
         description: 'The <code>CloudWatchLoggingOptionId</code> of the CloudWatch logging option to delete. You can use the <a>DescribeApplication</a> operation to get the <code>CloudWatchLoggingOptionId</code>. '
@@ -1153,10 +1161,10 @@ definitions:
         description: 'Name prefix to use when creating in-application stream. Suppose you specify a prefix "MyInApplicationStream". Amazon Kinesis Analytics will then create one or more (as per the <code>InputParallelism</code> count you specified) in-application streams with names "MyInApplicationStream_001", "MyInApplicationStream_002" and so on. '
       KinesisStreamsInput:
         $ref: '#/definitions/KinesisStreamsInput'
-        description: 'If the streaming source is an Amazon Kinesis stream, identifies the stream''s Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.'
+        description: '<p>If the streaming source is an Amazon Kinesis stream, identifies the stream''s Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p> <p>Note: Either <code>KinesisStreamsInput</code> or <code>KinesisFirehoseInput</code> is required.</p>'
       KinesisFirehoseInput:
         $ref: '#/definitions/KinesisFirehoseInput'
-        description: 'If the streaming source is an Amazon Kinesis Firehose delivery stream, identifies the Firehose delivery stream''s ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.'
+        description: '<p>If the streaming source is an Amazon Kinesis Firehose delivery stream, identifies the Firehose delivery stream''s ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p> <p>Note: Either <code>KinesisStreamsInput</code> or <code>KinesisFirehoseInput</code> is required.</p>'
       InputParallelism:
         $ref: '#/definitions/InputParallelism'
         description: '<p>Describes the number of in-application streams to create. </p> <p>Data from your source will be routed to these in-application input streams.</p> <p> (see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>.</p>'
@@ -1222,7 +1230,7 @@ definitions:
   InputParallelismCount:
     type: integer
     minimum: 1
-    maximum: 10
+    maximum: 64
   InputParallelismUpdate:
     type: object
     properties:
@@ -1309,7 +1317,7 @@ definitions:
     properties:
       RecordRowPath:
         $ref: '#/definitions/RecordRowPath'
-        description: '<p>Path to the top-level parent that contains the records.</p> <p>For example, consider the following JSON record:</p> <p>In the <code>RecordRowPath</code>, <code>"$"</code> refers to the root and path <code>"$.vehicle.Model"</code> refers to the specific <code>"Model"</code> key in the JSON.</p>'
+        description: Path to the top-level parent that contains the records.
     description: Provides additional mapping information when JSON is the record format on the streaming source.
   KinesisFirehoseInput:
     type: object
@@ -1600,7 +1608,7 @@ definitions:
     type: string
   RecordColumnName:
     type: string
-    pattern: '[a-zA-Z][a-zA-Z0-9_]+'
+    pattern: '[a-zA-Z_][a-zA-Z0-9_]*'
   RecordColumnSqlType:
     type: string
   RecordColumns:
@@ -1768,6 +1776,12 @@ definitions:
         $ref: '#/definitions/RoleARN'
         description: ARN of the IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object and populate the in-application.
     description: 'Describes the S3 bucket name, object key name, and IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object on your behalf and populate the in-application reference table.'
+  ServiceUnavailableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'The service is unavailable, back off and retry the operation. '
   SourceSchema:
     type: object
     required:
