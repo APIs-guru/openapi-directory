@@ -1338,9 +1338,26 @@ definitions:
         type: string
       subType:
         description: |
-          The sub-type of the listing, i.e. SingleFamilyResidential,
-          Condo, etc. Or a list of Sub Types for Mobile, such as
-          Expando, Manufactured, Modular, etc.
+          A normalized representation of the listings sub-type.
+        enum:
+          - Apartment
+          - BoatSlip
+          - SingleFamilyResidence
+          - DeededParking
+          - Cabin
+          - Condominium
+          - Duplex
+          - ManufacturedHome
+          - Quadruplex
+          - StockCooperative
+          - Townhouse
+          - Timeshare
+          - Triplex
+          - ManufacturedOnLand
+        type: string
+      subTypeRaw:
+        description: |
+          The raw text representation of the property sub type.
         type: string
       subdivision:
         description: The subdivision or community name

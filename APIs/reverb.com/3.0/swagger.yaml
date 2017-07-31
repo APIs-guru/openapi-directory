@@ -342,6 +342,15 @@ paths:
           description: Unexpected error
       tags:
         - categories
+  /categories/taxonomy:
+    get:
+      description: Full taxonomy tree of categories including middle categories
+      responses:
+        default:
+          description: Unexpected error
+      summary: Full taxonomy tree of categories including middle categories
+      tags:
+        - categories
   '/categories/{product_type}/{category}':
     get:
       description: Get subcategory details
@@ -406,9 +415,28 @@ paths:
       summary: Returns a set of comparison shopping pages based on the current params
       tags:
         - comparison_shopping_pages
-  '/comparison_shopping_pages/{id}':
+  /comparison_shopping_pages/find:
     get:
       description: Show comparison shopping page
+      parameters:
+        - description: ID of the comparison shopping page
+          in: query
+          name: id
+          required: false
+          type: string
+        - description: Slug of the comparison shopping page
+          in: query
+          name: slug
+          required: false
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Show comparison shopping page
+      tags:
+        - comparison_shopping_pages
+  '/comparison_shopping_pages/{id}':
+    get:
       parameters:
         - in: path
           name: id
@@ -417,7 +445,6 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: Show comparison shopping page
       tags:
         - comparison_shopping_pages
   '/comparison_shopping_pages/{id}/listings':
@@ -451,6 +478,20 @@ paths:
         default:
           description: Unexpected error
       summary: View reviews of a comparison shopping page
+      tags:
+        - comparison_shopping_pages
+  '/comparison_shopping_pages/{slug}/similar':
+    get:
+      description: Returns a set of comparison shopping pages related to another one
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Returns a set of comparison shopping pages related to another one
       tags:
         - comparison_shopping_pages
   '/conversations/{id}/offer':
@@ -545,6 +586,18 @@ paths:
           description: Unexpected error
       tags:
         - curated_set
+  '/curated_sets/{slug}':
+    get:
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - curated_sets
   /currencies/display:
     get:
       description: List of supported display currencies for browsing listings
@@ -756,6 +809,13 @@ paths:
           name: watchers_count_min
           required: false
           type: integer
+        - description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+          in: query
+          items:
+            type: string
+          name: not_ids
+          required: false
+          type: array
         - default: 1
           in: query
           name: page
@@ -1110,6 +1170,13 @@ paths:
           name: watchers_count_min
           required: false
           type: integer
+        - description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+          in: query
+          items:
+            type: string
+          name: not_ids
+          required: false
+          type: array
         - default: 1
           in: query
           name: page
@@ -1124,6 +1191,23 @@ paths:
         default:
           description: Unexpected error
       summary: 'All listings including used, handmade, and brand new'
+      tags:
+        - listings
+  '/listings/{id}/negotiation':
+    get:
+      description: Returns the latest negotiation for the requesting user given a listing id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_offers
+      summary: Returns the latest negotiation for the requesting user given a listing id
       tags:
         - listings
   '/listings/{id}/offer':
@@ -1844,13 +1928,6 @@ paths:
       summary: Get your actionable status counts
       tags:
         - my
-  /my/curated_set:
-    get:
-      responses:
-        default:
-          description: Unexpected error
-      tags:
-        - my
   '/my/curated_set/product/{product_id}':
     delete:
       parameters:
@@ -1944,6 +2021,40 @@ paths:
         - oauth2:
             - read_lists
       summary: See what the user is following
+      tags:
+        - my
+  /my/follows/articles:
+    get:
+      description: Returns a user's ArticleCategoryFollows
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: Returns a user's ArticleCategoryFollows
+      tags:
+        - my
+    post:
+      description: Set a user's ArticleCategoryFollows
+      parameters:
+        - description: the content of the request
+          in: body
+          name: body
+          schema:
+            properties:
+              category_uuids:
+                type: string
+            required:
+              - category_uuids
+            type: object
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Set a user's ArticleCategoryFollows
       tags:
         - my
   '/my/follows/brands/{slug}':
@@ -2300,6 +2411,11 @@ paths:
               must_not:
                 description: 'Search term negation. If you want to exclude a term, add it here'
                 type: string
+              not_ids:
+                description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+                items:
+                  type: integer
+                type: array
               preferred_seller:
                 description: 'If true, include only items by Reverb Preferred Sellers'
                 type: boolean
@@ -2590,6 +2706,13 @@ paths:
           name: watchers_count_min
           required: false
           type: integer
+        - description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+          in: query
+          items:
+            type: string
+          name: not_ids
+          required: false
+          type: array
         - default: live
           description: 'Available: ["all", "draft", "ended", "live", "ordered", "sold_out", "suspended", "seller_unavailable"]. Defaults to ''live'''
           in: query
@@ -2761,6 +2884,13 @@ paths:
           name: watchers_count_min
           required: false
           type: integer
+        - description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+          in: query
+          items:
+            type: string
+          name: not_ids
+          required: false
+          type: array
       responses:
         default:
           description: Unexpected error
@@ -3548,6 +3678,18 @@ paths:
       summary: Get a summary of transactions for a given price guide
       tags:
         - priceguide
+  '/private/shops/by_slug/{slug}':
+    get:
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - private
   '/products/reviews/{id}':
     get:
       description: View a review

@@ -317,10 +317,16 @@ paths:
           type: string
         - collectionFormat: multi
           description: |-
-            The resource name, such as one returned by
-            [`people.connections.list`](/people/api/rest/v1/people.connections/list),
-            of one of the people to provide information about. You can include this
-            parameter up to 50 times in one request.
+            The resource names of the people to provide information about.
+
+            - To get information about the authenticated user, specify `people/me`.
+            - To get information about a google account, specify
+              `people/`<var>account_id</var>.
+            - To get information about a contact, specify the resource name that
+              identifies the contact as returned by
+            [`people.connections.list`](/people/api/rest/v1/people.connections/list).
+
+            You can include up to 50 resource names in one request.
           in: query
           items:
             type: string
@@ -505,7 +511,8 @@ paths:
             The resource name of the person to provide information about.
 
             - To get information about the authenticated user, specify `people/me`.
-            - To get information about a google account, specify `people/<account_id>`.
+            - To get information about a google account, specify
+             `people/`<var>account_id</var>.
             - To get information about a contact, specify the resource name that
               identifies the contact as returned by
             [`people.connections.list`](/people/api/rest/v1/people.connections/list).
@@ -584,7 +591,7 @@ paths:
             $ref: '#/definitions/UpdateContactGroupRequest'
         - description: |-
             The resource name for the contact group, assigned by the server. An ASCII
-            string, in the form of `contactGroups/<contact_group_id>`.
+            string, in the form of `contactGroups/`<var>contact_group_id</var>.
           in: path
           name: resourceName
           required: true
@@ -835,7 +842,8 @@ paths:
             $ref: '#/definitions/Person'
         - description: |-
             The resource name for the person, assigned by the server. An ASCII string
-            with a max length of 27 characters, in the form of `people/<person_id>`.
+            with a max length of 27 characters, in the form of
+            `people/`<var>person_id</var>.
           in: path
           name: resourceName
           required: true
@@ -1048,7 +1056,7 @@ definitions:
       resourceName:
         description: |-
           The resource name for the contact group, assigned by the server. An ASCII
-          string, in the form of `contactGroups/<contact_group_id>`.
+          string, in the form of `contactGroups/`<var>contact_group_id</var>.
         type: string
     type: object
   ContactGroupMembership:
@@ -1392,14 +1400,14 @@ definitions:
       resourceNamesToAdd:
         description: |-
           The resource names of the contact people to add in the form of in the form
-          `people/<person_id>`.
+          `people/`<var>person_id</var>.
         items:
           type: string
         type: array
       resourceNamesToRemove:
         description: |-
           The resource names of the contact people to remove in the form of in the
-          form of `people/<person_id>`.
+          form of `people/`<var>person_id</var>.
         items:
           type: string
         type: array
@@ -1419,13 +1427,13 @@ definitions:
       displayName:
         description: |-
           The read-only display name formatted according to the locale specified by
-          the viewer's account or the <code>Accept-Language</code> HTTP header.
+          the viewer's account or the `Accept-Language` HTTP header.
         type: string
       displayNameLastFirst:
         description: |-
           The read-only display name with the last name first formatted according to
           the locale specified by the viewer's account or the
-          <code>Accept-Language</code> HTTP header.
+          `Accept-Language` HTTP header.
         type: string
       familyName:
         description: The family name.
@@ -1698,7 +1706,8 @@ definitions:
       resourceName:
         description: |-
           The resource name for the person, assigned by the server. An ASCII string
-          with a max length of 27 characters, in the form of `people/<person_id>`.
+          with a max length of 27 characters, in the form of
+          `people/`<var>person_id</var>.
         type: string
       skills:
         description: The person's skills.
@@ -1835,7 +1844,7 @@ definitions:
       url:
         description: |-
           The URL of the photo. You can change the desired size by appending a query
-          parameter `sz=<size>` at the end of the url. Example:
+          parameter `sz=`<var>size</var> at the end of the url. Example:
           `https://lh3.googleusercontent.com/-T_wVWLlmg7w/AAAAAAAAAAI/AAAAAAAABa8/00gzXvDBYqw/s100/photo.jpg?sz=50`
         type: string
     type: object
@@ -1976,16 +1985,20 @@ definitions:
     properties:
       etag:
         description: |-
+          **Only populated in `person.metadata.sources`.**
+
           The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the
-          source. Used for web cache validation. Only populated in
-          person.metadata.sources.
+          source. Used for web cache validation.
         type: string
       id:
         description: The unique identifier within the source type generated by the server.
         type: string
       profileMetadata:
         $ref: '#/definitions/ProfileMetadata'
-        description: Metadata about a source of type PROFILE.
+        description: |-
+          **Only populated in `person.metadata.sources`.**
+
+          Metadata about a source of type PROFILE.
       type:
         description: The source type.
         enum:
@@ -1996,7 +2009,10 @@ definitions:
           - CONTACT
         type: string
       updateTime:
-        description: Last update timestamp of this source.
+        description: |-
+          **Only populated in `person.metadata.sources`.**
+
+          Last update timestamp of this source.
         format: google-datetime
         type: string
     type: object

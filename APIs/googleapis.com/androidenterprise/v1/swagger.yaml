@@ -406,6 +406,61 @@ paths:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
+  '/enterprises/{enterpriseId}/androidDevicePolicyConfig':
+    get:
+      description: Returns the Android Device Policy config resource.
+      operationId: androidenterprise.enterprises.getAndroidDevicePolicyConfig
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AndroidDevicePolicyConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - enterprises
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Sets the Android Device Policy config resource. EMM may use this API to enable or disable Android Device Policy support for the specified enterprise.
+      operationId: androidenterprise.enterprises.setAndroidDevicePolicyConfig
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AndroidDevicePolicyConfig'
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AndroidDevicePolicyConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - enterprises
   '/enterprises/{enterpriseId}/createWebToken':
     parameters:
       - $ref: '#/parameters/alt'
@@ -2770,6 +2825,17 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  AndroidDevicePolicyConfig:
+    description: The Android Device Policy configuration of an enterprise.
+    properties:
+      kind:
+        default: 'androidenterprise#androidDevicePolicyConfig'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#androidDevicePolicyConfig".'
+        type: string
+      state:
+        description: 'The state of Android Device Policy. "enabled" indicates that Android Device Policy is enabled for the enterprise and the EMM is allowed to manage devices with Android Device Policy, while "disabled" means that it cannot.'
+        type: string
     type: object
   AppRestrictionsSchema:
     description: Represents the list of app restrictions available to be pre-configured for the product.

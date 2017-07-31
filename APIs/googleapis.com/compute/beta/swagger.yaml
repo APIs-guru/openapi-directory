@@ -1523,7 +1523,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Disable this project as an XPN host project.
+      description: Disable this project as a shared VPC host project.
       operationId: compute.projects.disableXpnHost
       parameters:
         - description: Project ID for this request.
@@ -1566,7 +1566,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Disable an XPN resource associated with this host project.
+      description: Disable a serivce resource (a.k.a service project) associated with this host project.
       operationId: compute.projects.disableXpnResource
       parameters:
         - in: body
@@ -1613,7 +1613,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Enable this project as an XPN host project.
+      description: Enable this project as a shared VPC host project.
       operationId: compute.projects.enableXpnHost
       parameters:
         - description: Project ID for this request.
@@ -1656,7 +1656,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Enable XPN resource (a.k.a service project or service folder in the future) for a host project, so that subnetworks in the host project can be used by instances in the service project or folder.'
+      description: 'Enable service resource (a.k.a service project) for a host project, so that subnets in the host project can be used by instances in the service project.'
       operationId: compute.projects.enableXpnResource
       parameters:
         - in: body
@@ -1695,7 +1695,7 @@ paths:
         - projects
   '/{project}/getXpnHost':
     get:
-      description: Get the XPN host project that this project links to. May be empty if no link exists.
+      description: Get the shared VPC host project that this project links to. May be empty if no link exists.
       operationId: compute.projects.getXpnHost
       parameters:
         - description: Project ID for this request.
@@ -1729,7 +1729,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/getXpnResources':
     get:
-      description: Get XPN resources associated with this host project.
+      description: Get service resources (a.k.a service project) associated with this host project.
       operationId: compute.projects.getXpnResources
       parameters:
         - description: Project ID for this request.
@@ -7862,7 +7862,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: List all XPN host projects visible to the user in an organization.
+      description: List all shared VPC host projects visible to the user in an organization.
       operationId: compute.projects.listXpnHosts
       parameters:
         - description: Project ID for this request.
@@ -11324,7 +11324,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Patches the specified Router resource with the data included in the request. This method supports patch semantics.
+      description: Patches the specified Router resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
       operationId: compute.routers.patch
       parameters:
         - in: body
@@ -17937,13 +17937,13 @@ definitions:
   AcceleratorTypeAggregatedList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/AcceleratorTypesScopedList'
           description: '[Output Only] Name of the scope containing this set of accelerator types.'
-        description: '[Output Only] A map of scoped accelerator type lists.'
+        description: A list of AcceleratorTypesScopedList resources.
         type: object
       kind:
         default: 'compute#acceleratorTypeAggregatedList'
@@ -17972,7 +17972,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#acceleratorTypeList for lists of accelerator types.'
         type: string
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -18054,6 +18054,13 @@ definitions:
       address:
         description: The static external IP address represented by this resource.
         type: string
+      addressType:
+        description: 'The type of address to reserve. If unspecified, defaults to EXTERNAL.'
+        enum:
+          - EXTERNAL
+          - INTERNAL
+          - UNSPECIFIED_TYPE
+        type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -18103,6 +18110,12 @@ definitions:
           - IN_USE
           - RESERVED
         type: string
+      subnetwork:
+        description: |-
+          For external addresses, this field should not be used.
+
+          The URL of the subnetwork in which to reserve the address. If an IP address is specified, it must be within the subnetwork's IP range.
+        type: string
       users:
         description: '[Output Only] The URLs of the resources that are using this address.'
         items:
@@ -18118,7 +18131,7 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/AddressesScopedList'
           description: '[Output Only] Name of the scope containing this set of addresses.'
-        description: '[Output Only] A map of scoped address lists.'
+        description: A list of AddressesScopedList resources.
         type: object
       kind:
         default: 'compute#addressAggregatedList'
@@ -18135,10 +18148,10 @@ definitions:
     description: Contains a list of addresses.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of addresses.'
+        description: A list of Address resources.
         items:
           $ref: '#/definitions/Address'
         type: array
@@ -18150,7 +18163,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   AddressesScopedList:
@@ -18449,13 +18462,13 @@ definitions:
   AutoscalerAggregatedList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/AutoscalersScopedList'
           description: '[Output Only] Name of the scope containing this set of autoscalers.'
-        description: A map of scoped autoscaler lists.
+        description: A list of AutoscalersScopedList resources.
         type: object
       kind:
         default: 'compute#autoscalerAggregatedList'
@@ -18472,7 +18485,7 @@ definitions:
     description: Contains a list of Autoscaler resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of Autoscaler resources.
@@ -18689,11 +18702,11 @@ definitions:
         type: string
       group:
         description: |-
-          The fully-qualified URL of a zonal Instance Group resource. This instance group defines the list of instances that serve traffic. Member virtual machine instances from each instance group must live in the same zone as the instance group itself. No two backends in a backend service are allowed to use same Instance Group resource.
+          The fully-qualified URL of a Instance Group resource. This instance group defines the list of instances that serve traffic. Member virtual machine instances from each instance group must live in the same zone as the instance group itself. No two backends in a backend service are allowed to use same Instance Group resource.
 
           Note that you must specify an Instance Group resource using the fully-qualified URL, rather than a partial URL.
 
-          When the BackendService has load balancing scheme INTERNAL, the instance group must be in a zone within the same region as the BackendService.
+          When the BackendService has load balancing scheme INTERNAL, the instance group must be within the same region as the BackendService.
         type: string
       maxConnections:
         description: |-
@@ -18778,7 +18791,7 @@ definitions:
         description: Type of resource.
         type: string
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -18912,14 +18925,14 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/BackendServicesScopedList'
           description: Name of the scope containing this set of BackendServices.
-        description: A map of scoped BackendService lists.
+        description: A list of BackendServicesScopedList resources.
         type: object
       kind:
         default: 'compute#backendServiceAggregatedList'
         description: Type of resource.
         type: string
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -19154,13 +19167,13 @@ definitions:
   CommitmentAggregatedList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/CommitmentsScopedList'
           description: '[Output Only] Name of the scope containing this set of commitments.'
-        description: Commitments by scope.
+        description: A list of CommitmentsScopedList resources.
         type: object
       kind:
         default: 'compute#commitmentAggregatedList'
@@ -19177,7 +19190,7 @@ definitions:
     description: Contains a list of Commitment resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of Commitment resources.
@@ -19483,20 +19496,20 @@ definitions:
   DiskAggregatedList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/DisksScopedList'
           description: '[Output Only] Name of the scope containing this set of disks.'
-        description: '[Output Only] A map of scoped disk lists.'
+        description: A list of DisksScopedList resources.
         type: object
       kind:
         default: 'compute#diskAggregatedList'
         description: '[Output Only] Type of resource. Always compute#diskAggregatedList for aggregated lists of persistent disks.'
         type: string
       nextPageToken:
-        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -19518,7 +19531,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#diskList for lists of disks.'
         type: string
       nextPageToken:
-        description: 'This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -19582,13 +19595,13 @@ definitions:
   DiskTypeAggregatedList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/DiskTypesScopedList'
           description: '[Output Only] Name of the scope containing this set of disk types.'
-        description: '[Output Only] A map of scoped disk type lists.'
+        description: A list of DiskTypesScopedList resources.
         type: object
       kind:
         default: 'compute#diskTypeAggregatedList'
@@ -19605,10 +19618,10 @@ definitions:
     description: Contains a list of disk types.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of Disk Type resources.'
+        description: A list of DiskType resources.
         items:
           $ref: '#/definitions/DiskType'
         type: array
@@ -19845,7 +19858,7 @@ definitions:
           type: string
         type: array
       sourceTags:
-        description: 'If source tags are specified, the firewall will apply only to traffic with source IP that belongs to a tag listed in source tags. Source tags cannot be used to control traffic to an instance''s external IP address. Because tags are associated with an instance, not an IP address. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply.'
+        description: 'If source tags are specified, the firewall will apply only to traffic from VM instances in the same virtual network with a tag listed in the source tags. Source tags cannot be used to control traffic to an instance''s external IP address, it only applies to traffic between instances in the same virtual network. Because tags are associated with instances, not IP addresses. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply.'
         items:
           type: string
         type: array
@@ -19864,10 +19877,10 @@ definitions:
     description: Contains a list of firewalls.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of Firewall resources.'
+        description: A list of Firewall resources.
         items:
           $ref: '#/definitions/Firewall'
         type: array
@@ -19881,6 +19894,22 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+    type: object
+  FixedOrPercent:
+    description: Encapsulates numeric value that can be either absolute or relative.
+    properties:
+      calculated:
+        description: '[Output Only] Absolute value calculated based on mode: mode = fixed -> calculated = fixed = percent -> calculated = ceiling(percent/100 * base_value)'
+        format: int32
+        type: integer
+      fixed:
+        description: fixed must be non-negative.
+        format: int32
+        type: integer
+      percent:
+        description: 'percent must belong to [0, 100].'
+        format: int32
+        type: integer
     type: object
   ForwardingRule:
     description: 'A ForwardingRule resource. A ForwardingRule resource specifies which pool of target virtual machines to forward a packet to if it matches the given [IPAddress, IPProtocol, ports] tuple.'
@@ -19971,8 +20000,8 @@ definitions:
           Some types of forwarding target have constraints on the acceptable ports:  
           - TargetHttpProxy: 80, 8080 
           - TargetHttpsProxy: 443 
-          - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995 
-          - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995 
+          - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 5222 
+          - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 5222 
           - TargetVpnGateway: 500, 4500
           -
         type: string
@@ -20025,13 +20054,13 @@ definitions:
   ForwardingRuleAggregatedList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/ForwardingRulesScopedList'
           description: Name of the scope containing this set of addresses.
-        description: A map of scoped forwarding rule lists.
+        description: A list of ForwardingRulesScopedList resources.
         type: object
       kind:
         default: 'compute#forwardingRuleAggregatedList'
@@ -20048,7 +20077,7 @@ definitions:
     description: Contains a list of ForwardingRule resources.
     properties:
       id:
-        description: '[Output Only] Unique identifier for the resource. Set by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of ForwardingRule resources.
@@ -20249,7 +20278,7 @@ definitions:
     description: Contains a list of HealthCheck resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of HealthCheck resources.
@@ -20366,7 +20395,7 @@ definitions:
     description: Contains a list of HttpHealthCheck resources.
     properties:
       id:
-        description: '[Output Only] Unique identifier for the resource. Defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of HttpHealthCheck resources.
@@ -20590,10 +20619,10 @@ definitions:
     description: Contains a list of images.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of Image resources.'
+        description: A list of Image resources.
         items:
           $ref: '#/definitions/Image'
         type: array
@@ -20724,13 +20753,13 @@ definitions:
   InstanceAggregatedList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/InstancesScopedList'
           description: '[Output Only] Name of the scope containing this set of instances.'
-        description: '[Output Only] A map of scoped instance lists.'
+        description: A list of InstancesScopedList resources.
         type: object
       kind:
         default: 'compute#instanceAggregatedList'
@@ -20800,13 +20829,13 @@ definitions:
   InstanceGroupAggregatedList:
     properties:
       id:
-        description: '[Output Only] A unique identifier for this aggregated list of instance groups. The server generates this identifier.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/InstanceGroupsScopedList'
           description: The name of the scope that contains this set of instance groups.
-        description: A map of scoped instance group lists.
+        description: A list of InstanceGroupsScopedList resources.
         type: object
       kind:
         default: 'compute#instanceGroupAggregatedList'
@@ -20816,17 +20845,17 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] The URL for this resource type. The server generates this URL.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   InstanceGroupList:
     description: A list of InstanceGroup resources.
     properties:
       id:
-        description: '[Output Only] A unique identifier for this list of instance groups. The server generates this identifier.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: A list of instance groups.
+        description: A list of InstanceGroup resources.
         items:
           $ref: '#/definitions/InstanceGroup'
         type: array
@@ -20838,7 +20867,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] The URL for this resource type. The server generates this URL.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   InstanceGroupManager:
@@ -20895,6 +20924,9 @@ definitions:
         items:
           $ref: '#/definitions/NamedPort'
         type: array
+      pendingActions:
+        $ref: '#/definitions/InstanceGroupManagerPendingActionsSummary'
+        description: '[Output Only] The list of instance actions and the number of instances in this managed instance group that are pending for each of those actions.'
       region:
         description: '[Output Only] The URL of the region where the managed instance group resides (for regional resources).'
         type: string
@@ -20913,6 +20945,14 @@ definitions:
         description: The target number of running instances for this managed instance group. Deleting or abandoning instances reduces this number. Resizing the group changes this number.
         format: int32
         type: integer
+      updatePolicy:
+        $ref: '#/definitions/InstanceGroupManagerUpdatePolicy'
+        description: The update policy for this managed instance group.
+      versions:
+        description: 'Versions supported by this IGM. User should set this field if they need fine-grained control over how many instances in each version are run by this IGM. Versions are keyed by instanceTemplate. Every instanceTemplate can appear at most once. This field overrides instanceTemplate field. If both instanceTemplate and versions are set, the user receives a warning. "instanceTemplate: X" is semantically equivalent to "versions [ { instanceTemplate: X } ]". Exactly one version must have targetSize field left unset. Size of such a version will be calculated automatically.'
+        items:
+          $ref: '#/definitions/InstanceGroupManagerVersion'
+        type: array
       zone:
         description: '[Output Only] The URL of the zone where the managed instance group is located (for zonal resources).'
         type: string
@@ -20954,17 +20994,21 @@ definitions:
         description: '[Output Only] The number of instances in the managed instance group that are scheduled to be restarted or are currently being restarted.'
         format: int32
         type: integer
+      verifying:
+        description: '[Output Only] The number of instances in the managed instance group that are being verified. More details regarding verification process are covered in the documentation of ManagedInstance.InstanceAction.VERIFYING enum field.'
+        format: int32
+        type: integer
     type: object
   InstanceGroupManagerAggregatedList:
     properties:
       id:
-        description: '[Output Only] A unique identifier for this aggregated list of managed instance groups. The server generates this identifier.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/InstanceGroupManagersScopedList'
           description: '[Output Only] The name of the scope that contains this set of managed instance groups.'
-        description: '[Output Only] A map of filtered managed instance group lists.'
+        description: A list of InstanceGroupManagersScopedList resources.
         type: object
       kind:
         default: 'compute#instanceGroupManagerAggregatedList'
@@ -20974,7 +21018,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] The URL for this resource type. The server generates this URL.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   InstanceGroupManagerAutoHealingPolicy:
@@ -20991,10 +21035,10 @@ definitions:
     description: '[Output Only] A list of managed instance groups.'
     properties:
       id:
-        description: '[Output Only] A unique identifier for this resource type. The server generates this identifier.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of managed instance groups.'
+        description: A list of InstanceGroupManager resources.
         items:
           $ref: '#/definitions/InstanceGroupManager'
         type: array
@@ -21008,6 +21052,60 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+    type: object
+  InstanceGroupManagerPendingActionsSummary:
+    properties:
+      creating:
+        description: '[Output Only] The number of instances in the managed instance group that are pending to be created.'
+        format: int32
+        type: integer
+      deleting:
+        description: '[Output Only] The number of instances in the managed instance group that are pending to be deleted.'
+        format: int32
+        type: integer
+      recreating:
+        description: '[Output Only] The number of instances in the managed instance group that are pending to be recreated.'
+        format: int32
+        type: integer
+      restarting:
+        description: '[Output Only] The number of instances in the managed instance group that are pending to be restarted.'
+        format: int32
+        type: integer
+    type: object
+  InstanceGroupManagerUpdatePolicy:
+    properties:
+      maxSurge:
+        $ref: '#/definitions/FixedOrPercent'
+        description: 'Maximum number of instances that can be created above the InstanceGroupManager.targetSize during the update process. By default, a fixed value of 1 is used. Using maxSurge > 0 will cause instance names to change during the update process. At least one of { maxSurge, maxUnavailable } must be greater than 0.'
+      maxUnavailable:
+        $ref: '#/definitions/FixedOrPercent'
+        description: 'Maximum number of instances that can be unavailable during the update process. The instance is considered available if all of the following conditions are satisfied: 1. Instance''s status is RUNNING. 2. Instance''s liveness health check result was observed to be HEALTHY at least once. By default, a fixed value of 1 is used. At least one of { maxSurge, maxUnavailable } must be greater than 0.'
+      minReadySec:
+        description: 'Minimum number of seconds to wait for after a newly created instance becomes available. This value must be from range [0, 3600].'
+        format: int32
+        type: integer
+      minimalAction:
+        description: 'Minimal action to be taken on an instance. The order of action types is: RESTART < REPLACE.'
+        enum:
+          - REPLACE
+          - RESTART
+        type: string
+      type:
+        enum:
+          - OPPORTUNISTIC
+          - PROACTIVE
+        type: string
+    type: object
+  InstanceGroupManagerVersion:
+    properties:
+      instanceTemplate:
+        type: string
+      name:
+        description: Name of the version. Unique among all versions in the scope of this managed instance group.
+        type: string
+      targetSize:
+        $ref: '#/definitions/FixedOrPercent'
+        description: 'Intended number of instances that are created from instanceTemplate. The final number of instances created from instanceTemplate will be equal to: * if expressed as fixed number: min(targetSize.fixed, instanceGroupManager.targetSize), * if expressed as percent: ceiling(targetSize.percent * InstanceGroupManager.targetSize). If unset, this version will handle all the remaining instances.'
     type: object
   InstanceGroupManagersAbandonInstancesRequest:
     properties:
@@ -21147,10 +21245,10 @@ definitions:
   InstanceGroupsListInstances:
     properties:
       id:
-        description: '[Output Only] A unique identifier for this list of instances in the specified instance group. The server generates this identifier.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of instances and any named ports that are assigned to those instances.'
+        description: A list of InstanceWithNamedPorts resources.
         items:
           $ref: '#/definitions/InstanceWithNamedPorts'
         type: array
@@ -21162,7 +21260,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] The URL for this list of instances in the specified instance groups. The server generates this URL.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   InstanceGroupsListInstancesRequest:
@@ -21248,10 +21346,10 @@ definitions:
     description: Contains a list of instances.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of instances.'
+        description: A list of Instance resources.
         items:
           $ref: '#/definitions/Instance'
         type: array
@@ -21270,10 +21368,10 @@ definitions:
     description: Contains a list of instance referrers.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of referrers.'
+        description: A list of Reference resources.
         items:
           $ref: '#/definitions/Reference'
         type: array
@@ -21393,10 +21491,10 @@ definitions:
     description: A list of instance templates.
     properties:
       id:
-        description: '[Output Only] A unique identifier for this instance template. The server defines this identifier.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] list of InstanceTemplate resources.'
+        description: A list of InstanceTemplate resources.
         items:
           $ref: '#/definitions/InstanceTemplate'
         type: array
@@ -21408,7 +21506,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] The URL for this instance template list. The server defines this URL.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   InstanceWithNamedPorts:
@@ -21570,6 +21668,9 @@ definitions:
   LogConfigCloudAuditOptions:
     description: Write a Cloud Audit log
     properties:
+      isReadPermissionType:
+        description: True if the log is for a permission of type DATA_READ or ADMIN_READ.
+        type: boolean
       logName:
         description: The log_name to populate in the Cloud Audit Record.
         enum:
@@ -21641,13 +21742,13 @@ definitions:
   MachineTypeAggregatedList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/MachineTypesScopedList'
           description: '[Output Only] Name of the scope containing this set of machine types.'
-        description: '[Output Only] A map of scoped machine type lists.'
+        description: A list of MachineTypesScopedList resources.
         type: object
       kind:
         default: 'compute#machineTypeAggregatedList'
@@ -21664,10 +21765,10 @@ definitions:
     description: Contains a list of machine types.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of Machine Type resources.'
+        description: A list of MachineType resources.
         items:
           $ref: '#/definitions/MachineType'
         type: array
@@ -21754,6 +21855,7 @@ definitions:
           - RECREATING
           - REFRESHING
           - RESTARTING
+          - VERIFYING
         type: string
       id:
         description: '[Output only] The unique identifier for this resource. This field is empty when instance does not exist.'
@@ -21828,7 +21930,7 @@ definitions:
               pattern: '[a-zA-Z0-9-_]{1,128}'
               type: string
             value:
-              description: 'Value for the metadata entry. These are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on values is that their size must be less than or equal to 32768 bytes.'
+              description: 'Value for the metadata entry. These are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on values is that their size must be less than or equal to 262144 bytes (256 KiB).'
               type: string
           type: object
         type: array
@@ -21942,10 +22044,10 @@ definitions:
     description: Contains a list of networks.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of Network resources.'
+        description: A list of Network resources.
         items:
           $ref: '#/definitions/Network'
         type: array
@@ -22354,7 +22456,7 @@ definitions:
         $ref: '#/definitions/UsageExportLocation'
         description: The naming prefix for daily usage reports and the Google Cloud Storage bucket where they are stored.
       xpnProjectStatus:
-        description: '[Output Only] The role this project has in a Cross Project Network (XPN) configuration. Currently only HOST projects are differentiated.'
+        description: '[Output Only] The role this project has in a shared VPC configuration. Currently only HOST projects are differentiated.'
         enum:
           - HOST
           - UNSPECIFIED_XPN_PROJECT_STATUS
@@ -22364,25 +22466,25 @@ definitions:
     properties:
       xpnResource:
         $ref: '#/definitions/XpnResourceId'
-        description: XPN resource ID.
+        description: Service resource (a.k.a service project) ID.
     type: object
   ProjectsEnableXpnResourceRequest:
     properties:
       xpnResource:
         $ref: '#/definitions/XpnResourceId'
-        description: XPN resource ID.
+        description: Service resource (a.k.a service project) ID.
     type: object
   ProjectsGetXpnResources:
     properties:
       kind:
         default: 'compute#projectsGetXpnResources'
-        description: '[Output Only] Type of resource. Always compute#projectsGetXpnResources for lists of XPN resources.'
+        description: '[Output Only] Type of resource. Always compute#projectsGetXpnResources for lists of service resources (a.k.a service projects)'
         type: string
       nextPageToken:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       resources:
-        description: XPN resources attached to this project as their XPN host.
+        description: Serive resources (a.k.a service projects) attached to this project as their shared VPC host.
         items:
           $ref: '#/definitions/XpnResourceId'
         type: array
@@ -22390,7 +22492,7 @@ definitions:
   ProjectsListXpnHostsRequest:
     properties:
       organization:
-        description: 'Optional organization ID managed by Cloud Resource Manager, for which to list XPN host projects. If not specified, the organization will be inferred from the project.'
+        description: 'Optional organization ID managed by Cloud Resource Manager, for which to list shared VPC host projects. If not specified, the organization will be inferred from the project.'
         type: string
     type: object
   Quota:
@@ -22423,6 +22525,7 @@ definitions:
           - NETWORKS
           - NVIDIA_K80_GPUS
           - PREEMPTIBLE_CPUS
+          - PREEMPTIBLE_LOCAL_SSD_GB
           - REGIONAL_AUTOSCALERS
           - REGIONAL_INSTANCE_GROUP_MANAGERS
           - ROUTERS
@@ -22512,10 +22615,10 @@ definitions:
     description: Contains a list of autoscalers.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: A list of autoscalers.
+        description: A list of Autoscaler resources.
         items:
           $ref: '#/definitions/Autoscaler'
         type: array
@@ -22524,7 +22627,7 @@ definitions:
         description: Type of resource.
         type: string
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -22534,7 +22637,7 @@ definitions:
     description: Contains a list of InstanceGroup resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of InstanceGroup resources.
@@ -22549,17 +22652,17 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] The URL for this resource type. The server generates this URL.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   RegionInstanceGroupManagerList:
     description: Contains a list of managed instance groups.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: A list of managed instance groups.
+        description: A list of InstanceGroupManager resources.
         items:
           $ref: '#/definitions/InstanceGroupManager'
         type: array
@@ -22568,10 +22671,10 @@ definitions:
         description: '[Output Only] The resource type, which is always compute#instanceGroupManagerList for a list of managed instance groups that exist in th regional scope.'
         type: string
       nextPageToken:
-        description: '[Output only] A token used to continue a truncated list request.'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output only] The URL for this resource type. The server generates this URL.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   RegionInstanceGroupManagersAbandonInstancesRequest:
@@ -22637,10 +22740,10 @@ definitions:
   RegionInstanceGroupsListInstances:
     properties:
       id:
-        description: '[Output Only] Unique identifier for the resource. Defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: A list of instances and any named ports that are assigned to those instances.
+        description: A list of InstanceWithNamedPorts resources.
         items:
           $ref: '#/definitions/InstanceWithNamedPorts'
         type: array
@@ -22652,7 +22755,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   RegionInstanceGroupsListInstancesRequest:
@@ -22684,10 +22787,10 @@ definitions:
     description: Contains a list of region resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of Region resources.'
+        description: A list of Region resources.
         items:
           $ref: '#/definitions/Region'
         type: array
@@ -22848,10 +22951,10 @@ definitions:
     description: Contains a list of Route resources.
     properties:
       id:
-        description: '[Output Only] Unique identifier for the resource. Defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of Route resources.'
+        description: A list of Route resources.
         items:
           $ref: '#/definitions/Route'
         type: array
@@ -22914,13 +23017,13 @@ definitions:
     description: Contains a list of routers.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/RoutersScopedList'
           description: Name of the scope containing this set of routers.
-        description: A map of scoped router lists.
+        description: A list of Router resources.
         type: object
       kind:
         default: 'compute#routerAggregatedList'
@@ -22981,7 +23084,7 @@ definitions:
     description: Contains a list of Router resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of Router resources.
@@ -23329,10 +23432,10 @@ definitions:
     description: Contains a list of Snapshot resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of Snapshot resources.'
+        description: A list of Snapshot resources.
         items:
           $ref: '#/definitions/Snapshot'
         type: array
@@ -23382,7 +23485,7 @@ definitions:
     description: Contains a list of SslCertificate resources.
     properties:
       id:
-        description: '[Output Only] Unique identifier for the resource. Defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of SslCertificate resources.
@@ -23448,13 +23551,13 @@ definitions:
   SubnetworkAggregatedList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/SubnetworksScopedList'
           description: Name of the scope containing this set of Subnetworks.
-        description: '[Output] A map of scoped Subnetwork lists.'
+        description: A list of SubnetworksScopedList resources.
         type: object
       kind:
         default: 'compute#subnetworkAggregatedList'
@@ -23471,10 +23574,10 @@ definitions:
     description: Contains a list of Subnetwork resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: The Subnetwork resources.
+        description: A list of Subnetwork resources.
         items:
           $ref: '#/definitions/Subnetwork'
         type: array
@@ -23630,7 +23733,7 @@ definitions:
     description: A list of TargetHttpProxy resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of TargetHttpProxy resources.
@@ -23697,7 +23800,7 @@ definitions:
     description: Contains a list of TargetHttpsProxy resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of TargetHttpsProxy resources.
@@ -23764,7 +23867,7 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/TargetInstancesScopedList'
           description: Name of the scope containing this set of target instances.
-        description: A map of scoped target instance lists.
+        description: A list of TargetInstance resources.
         type: object
       kind:
         default: 'compute#targetInstanceAggregatedList'
@@ -23781,7 +23884,7 @@ definitions:
     description: Contains a list of TargetInstance resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of TargetInstance resources.
@@ -23920,13 +24023,13 @@ definitions:
   TargetPoolAggregatedList:
     properties:
       id:
-        description: '[Output Only] Unique identifier for the resource. Defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/TargetPoolsScopedList'
           description: Name of the scope containing this set of target pools.
-        description: '[Output Only] A map of scoped target pool lists.'
+        description: A list of TargetPool resources.
         type: object
       kind:
         default: 'compute#targetPoolAggregatedList'
@@ -23954,7 +24057,7 @@ definitions:
     description: Contains a list of TargetPool resources.
     properties:
       id:
-        description: '[Output Only] Unique identifier for the resource. Defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of TargetPool resources.
@@ -24133,7 +24236,7 @@ definitions:
     description: Contains a list of TargetSslProxy resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of TargetSslProxy resources.
@@ -24204,7 +24307,7 @@ definitions:
     description: Contains a list of TargetTcpProxy resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of TargetTcpProxy resources.
@@ -24274,13 +24377,13 @@ definitions:
   TargetVpnGatewayAggregatedList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/TargetVpnGatewaysScopedList'
           description: '[Output Only] Name of the scope containing this set of target VPN gateways.'
-        description: A map of scoped target vpn gateway lists.
+        description: A list of TargetVpnGateway resources.
         type: object
       kind:
         default: 'compute#targetVpnGatewayAggregatedList'
@@ -24297,10 +24400,10 @@ definitions:
     description: Contains a list of TargetVpnGateway resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of TargetVpnGateway resources.'
+        description: A list of TargetVpnGateway resources.
         items:
           $ref: '#/definitions/TargetVpnGateway'
         type: array
@@ -24459,7 +24562,7 @@ definitions:
     description: Contains a list of UrlMap resources.
     properties:
       id:
-        description: '[Output Only] Unique identifier for the resource. Set by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of UrlMap resources.
@@ -24615,13 +24718,13 @@ definitions:
   VpnTunnelAggregatedList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         additionalProperties:
           $ref: '#/definitions/VpnTunnelsScopedList'
           description: Name of the scope containing this set of vpn tunnels.
-        description: '[Output Only] A map of scoped vpn tunnel lists.'
+        description: A list of VpnTunnelsScopedList resources.
         type: object
       kind:
         default: 'compute#vpnTunnelAggregatedList'
@@ -24638,10 +24741,10 @@ definitions:
     description: Contains a list of VpnTunnel resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of VpnTunnel resources.'
+        description: A list of VpnTunnel resources.
         items:
           $ref: '#/definitions/VpnTunnel'
         type: array
@@ -24709,16 +24812,16 @@ definitions:
   XpnHostList:
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of XPN host project URLs.'
+        description: '[Output Only] A list of shared VPC host project URLs.'
         items:
           $ref: '#/definitions/Project'
         type: array
       kind:
         default: 'compute#xpnHostList'
-        description: '[Output Only] Type of resource. Always compute#xpnHostList for lists of XPN hosts.'
+        description: '[Output Only] Type of resource. Always compute#xpnHostList for lists of shared VPC hosts.'
         type: string
       nextPageToken:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
@@ -24728,13 +24831,13 @@ definitions:
         type: string
     type: object
   XpnResourceId:
-    description: XpnResourceId
+    description: Service resource (a.k.a service project) ID.
     properties:
       id:
-        description: 'The ID of the XPN resource. In the case of projects, this field matches the project''s name, not the canonical ID.'
+        description: 'The ID of the service resource. In the case of projects, this field matches the project ID (e.g., my-project), not the project number (e.g., 12345678).'
         type: string
       type:
-        description: The type of the XPN resource.
+        description: The type of the service resource.
         enum:
           - PROJECT
           - XPN_RESOURCE_TYPE_UNSPECIFIED
@@ -24788,7 +24891,7 @@ definitions:
         description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of Zone resources.'
+        description: A list of Zone resources.
         items:
           $ref: '#/definitions/Zone'
         type: array

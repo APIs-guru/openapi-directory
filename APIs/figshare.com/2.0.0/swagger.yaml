@@ -66,7 +66,7 @@ paths:
           description: The number of results included on a page. Used for pagination with page
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: page_size
           required: false
@@ -74,7 +74,7 @@ paths:
         - description: Number of results included on a page. Used for pagination with query
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: limit
           required: false
@@ -1193,7 +1193,7 @@ paths:
           description: The number of results included on a page. Used for pagination with page
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: page_size
           required: false
@@ -1201,7 +1201,7 @@ paths:
         - description: Number of results included on a page. Used for pagination with query
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: limit
           required: false
@@ -2093,7 +2093,7 @@ paths:
           description: The number of results included on a page. Used for pagination with page
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: page_size
           required: false
@@ -2101,7 +2101,7 @@ paths:
         - description: Number of results included on a page. Used for pagination with query
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: limit
           required: false
@@ -2252,7 +2252,7 @@ paths:
           description: The number of results included on a page. Used for pagination with page
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: page_size
           required: false
@@ -2260,7 +2260,7 @@ paths:
         - description: Number of results included on a page. Used for pagination with query
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: limit
           required: false
@@ -2863,7 +2863,7 @@ paths:
           description: The number of results included on a page. Used for pagination with page
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: page_size
           required: false
@@ -2871,7 +2871,7 @@ paths:
         - description: Number of results included on a page. Used for pagination with query
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: limit
           required: false
@@ -3097,7 +3097,7 @@ paths:
           description: The number of results included on a page. Used for pagination with page
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: page_size
           required: false
@@ -3105,7 +3105,7 @@ paths:
         - description: Number of results included on a page. Used for pagination with query
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: limit
           required: false
@@ -3174,6 +3174,11 @@ paths:
           name: item_type
           required: false
           type: integer
+        - description: only return collections with this doi
+          in: query
+          name: doi
+          required: false
+          type: string
       responses:
         '200':
           description: OK. An array of articles
@@ -3479,7 +3484,7 @@ paths:
           description: The number of results included on a page. Used for pagination with page
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: page_size
           required: false
@@ -3487,7 +3492,7 @@ paths:
         - description: Number of results included on a page. Used for pagination with query
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: limit
           required: false
@@ -3546,6 +3551,11 @@ paths:
         - description: only return collections with this resource_doi
           in: query
           name: resource_doi
+          required: false
+          type: string
+        - description: only return collections with this doi
+          in: query
+          name: doi
           required: false
           type: string
       responses:
@@ -3645,7 +3655,7 @@ paths:
           description: The number of results included on a page. Used for pagination with page
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: page_size
           required: false
@@ -3653,7 +3663,7 @@ paths:
         - description: Number of results included on a page. Used for pagination with query
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: limit
           required: false
@@ -3865,7 +3875,7 @@ paths:
           description: The number of results included on a page. Used for pagination with page
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: page_size
           required: false
@@ -3873,7 +3883,7 @@ paths:
         - description: Number of results included on a page. Used for pagination with query
           format: int64
           in: query
-          maximum: 100
+          maximum: 1000
           minimum: 1
           name: limit
           required: false
@@ -4391,6 +4401,10 @@ definitions:
     allOf:
       - $ref: '#/definitions/CommonSearch'
     properties:
+      doi:
+        description: only return collections with this doi
+        example: 10.6084/m9.figshare.1407024
+        type: string
       item_type:
         description: 'Only return collections with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 12 - Preprint'
         example: 1
@@ -4886,6 +4900,10 @@ definitions:
     allOf:
       - $ref: '#/definitions/CommonSearch'
     properties:
+      doi:
+        description: only return collections with this doi
+        example: 10.6084/m9.figshare.1407024
+        type: string
       resource_doi:
         description: only return collections with this resource_doi
         example: 10.6084/m9.figshare.1407024
@@ -5002,7 +5020,7 @@ definitions:
         description: Number of results included on a page. Used for pagination with query
         example: 10
         format: int64
-        maximum: 100
+        maximum: 1000
         minimum: 1
         type: integer
       modified_since:
@@ -5048,7 +5066,7 @@ definitions:
         description: The number of results included on a page. Used for pagination with page
         example: 10
         format: int64
-        maximum: 100
+        maximum: 1000
         minimum: 1
         type: integer
       published_since:
@@ -5214,7 +5232,7 @@ definitions:
         description: Number of results included on a page. Used for pagination with query
         example: 10
         format: int64
-        maximum: 100
+        maximum: 1000
         minimum: 1
         type: integer
       offset:
@@ -5259,7 +5277,7 @@ definitions:
         description: The number of results included on a page. Used for pagination with page
         example: 10
         format: int64
-        maximum: 100
+        maximum: 1000
         minimum: 1
         type: integer
       search_for:

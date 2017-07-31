@@ -2035,6 +2035,45 @@ paths:
       summary: Music Export Vendor Preferences
       tags:
         - Music Export
+  /my/plays:
+    post:
+      description: |
+        Write play events to the [User Activity Service](https://confluence.dev.bbc.co.uk/display/activity/About+the+User+Activity+Service).
+      operationId: writePlayEvent
+      parameters:
+        - default: Bearer OAUTH_TOKEN
+          description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Write Play Request
+          in: body
+          name: writePlayRequest
+          required: true
+          schema:
+            $ref: '#/definitions/writePlayRequest'
+      responses:
+        '202':
+          description: Request successfully sent to UAS.
+        '400':
+          description: The request was malformed.
+          schema:
+            $ref: '#/definitions/WritePlaysErrorResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/WritePlaysErrorResponse'
+      schemes:
+        - https
+      summary: Write Play Event
+      tags:
+        - Personalised Plays
   /my/radio/favourites:
     get:
       description: |
@@ -5367,4 +5406,58 @@ definitions:
       - short_title
       - title
       - type
+    type: object
+  WritePlaysError:
+    properties:
+      documentation:
+        type: string
+      id:
+        type: string
+      message:
+        type: string
+      replied_at:
+        type: string
+    required:
+      - id
+      - message
+      - replied_at
+    type: object
+  WritePlaysErrorResponse:
+    properties:
+      $schema:
+        type: string
+      errors:
+        items:
+          $ref: '#/definitions/WritePlaysError'
+        type: array
+    required:
+      - $schema
+      - errors
+    type: object
+  writePlayRequest:
+    properties:
+      action:
+        enum:
+          - started
+          - ended
+          - paused
+          - heartbeat
+        type: string
+      elaspsed_time:
+        type: integer
+      pid:
+        type: string
+      resource_type:
+        enum:
+          - episode
+          - clip
+        type: string
+      version_pid:
+        type: string
+    required:
+      - action
+      - elaspsed_time
+      - pid
+      - resource_type
+      - version_pid
     type: object

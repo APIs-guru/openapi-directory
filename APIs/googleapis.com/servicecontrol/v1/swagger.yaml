@@ -676,7 +676,7 @@ definitions:
         description: |-
           The resource being accessed, as a REST-style string. For example:
 
-              bigquery.googlapis.com/projects/PROJECTID/datasets/DATASETID
+              bigquery.googleapis.com/projects/PROJECTID/datasets/DATASETID
         type: string
     type: object
   CheckError:
@@ -726,6 +726,9 @@ definitions:
     type: object
   CheckInfo:
     properties:
+      consumerInfo:
+        $ref: '#/definitions/ConsumerInfo'
+        description: Consumer info of this check.
       unusedArguments:
         description: |-
           A list of fields and label keys that are ignored by the server.
@@ -785,6 +788,16 @@ definitions:
           Quota information for the check request associated with this response.
       serviceConfigId:
         description: The actual config id used to process the request.
+        type: string
+    type: object
+  ConsumerInfo:
+    description: '`ConsumerInfo` provides information about the consumer project.'
+    properties:
+      projectNumber:
+        description: |-
+          The Google cloud project number, e.g. 1234567890. A value of 0 indicates
+          no project number is found.
+        format: int64
         type: string
     type: object
   Distribution:
@@ -1243,6 +1256,7 @@ definitions:
         enum:
           - UNSPECIFIED
           - RESOURCE_EXHAUSTED
+          - OUT_OF_RANGE
           - BILLING_NOT_ACTIVE
           - PROJECT_DELETED
           - API_KEY_INVALID
@@ -1537,7 +1551,15 @@ definitions:
     description: Metadata about the request.
     properties:
       callerIp:
-        description: The IP address of the caller.
+        description: |-
+          The IP address of the caller.
+          For caller from internet, this will be public IPv4 or IPv6 address.
+          For caller from GCE VM with external IP address, this will be the VM's
+          external IP address. For caller from GCE VM without external IP address, if
+          the VM is in the same GCP organization (or project) as the accessed
+          resource, `caller_ip` will be the GCE VM's internal IPv4 address, otherwise
+          it will be redacted to "gce-internal-ip".
+          See https://cloud.google.com/compute/docs/vpc/ for more information.
         type: string
       callerSuppliedUserAgent:
         description: |-
@@ -1551,7 +1573,6 @@ definitions:
               The request was made by the Google Cloud SDK CLI (gcloud).
           +   `AppEngine-Google; (+http://code.google.com/appengine; appid: s~my-project`:
               The request was made from the `my-project` App Engine app.
-
           NOLINT
         type: string
     type: object
@@ -1659,8 +1680,8 @@ definitions:
         type: integer
       details:
         description: |-
-          A list of messages that carry the error details.  There will be a
-          common set of message types for APIs to use.
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.

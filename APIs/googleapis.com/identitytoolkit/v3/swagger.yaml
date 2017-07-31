@@ -806,6 +806,11 @@ definitions:
         items:
           type: string
         type: array
+      phoneNumber:
+        description: Privileged caller can query users by specified phone number.
+        items:
+          type: string
+        type: array
     type: object
   IdentitytoolkitRelyingpartyGetProjectConfigResponse:
     description: Response of getting the project configuration.
@@ -929,6 +934,9 @@ definitions:
       password:
         description: The new password of the user.
         type: string
+      phoneNumber:
+        description: Privileged caller can update user with specified phone number.
+        type: string
       photoUrl:
         description: The photo url of the user.
         type: string
@@ -1046,6 +1054,9 @@ definitions:
         type: string
       password:
         description: The new password of the user.
+        type: string
+      phoneNumber:
+        description: Privileged caller can create user with specified phone number.
         type: string
       photoUrl:
         description: The photo url of the user.

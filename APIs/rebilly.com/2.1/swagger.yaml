@@ -3306,7 +3306,7 @@ paths:
           - customers
           - payment-cards
           - subscriptions
-          - payments
+          - transactions
           - websites
           - contacts
           - products
@@ -3385,7 +3385,7 @@ paths:
           - customers
           - payment-cards
           - subscriptions
-          - payments
+          - transactions
           - websites
           - contacts
           - products
@@ -7896,6 +7896,43 @@ paths:
       summary: Update user's profile
       tags:
         - Profile
+  /profile/password:
+    post:
+      description: |
+        Updates user's password with the specified newPassword. And checks if currentPassword matches the actual one.
+      parameters:
+        - description: currentPassword and newPassword
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdatePassword'
+      responses:
+        '201':
+          description: Password updated successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Profile'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '422':
+          $ref: '#/responses/InvalidDataError'
+      summary: Updates user's password with the specified newPassword
+      tags:
+        - Profile
   /profile/totp-reset:
     post:
       description: |
@@ -10856,10 +10893,24 @@ definitions:
               - accountId
               - password
             type: object
+          mpi:
+            $ref: '#/definitions/A1GatewayMpis'
         required:
           - gatewayConfig
         type: object
     description: A1Gateway config
+  A1GatewayMpis:
+    description: A1Gateway Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - Other
+    required:
+      - name
+    type: object
   AcquirerName:
     description: Acquirer name
     enum:
@@ -10891,10 +10942,12 @@ definitions:
       - FundSend
       - GlobalCollect
       - Global East
+      - Gpaysafe
       - Heartland
       - HSBC
       - iCheque
       - Ilixium
+      - Jeton
       - Masapay
       - Merrick
       - Mission Valley Bank
@@ -12204,6 +12257,7 @@ definitions:
           - DataCashMpi
     required:
       - name
+    type: object
   DayOfWeek:
     enum:
       - Sunday
@@ -12765,10 +12819,24 @@ definitions:
             required:
               - accountId
             type: object
+          mpi:
+            $ref: '#/definitions/GETMpis'
         required:
           - gatewayConfig
         type: object
     description: GET Gateway config
+  GETMpis:
+    description: GET Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - Other
+    required:
+      - name
+    type: object
   GatewayAccount:
     discriminator: gatewayName
     properties:
@@ -12833,7 +12901,6 @@ definitions:
         type: integer
       method:
         $ref: '#/definitions/Method'
-        description: Payment Method
       monthlyLimit:
         description: Monthly Limit
         format: double
@@ -12937,9 +13004,11 @@ definitions:
       - GET
       - GlobalCollect
       - GlobalOne
+      - Gpaysafe
       - iCheque
       - Ilixium
       - JetPay
+      - Jeton
       - Moneris
       - NMI
       - OchaPay
@@ -13020,6 +13089,7 @@ definitions:
           - GlobalCollectMpi
     required:
       - name
+    type: object
   GlobalOne:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -13111,6 +13181,22 @@ definitions:
       - dispute-created
       - suspended-payment-completed
     type: string
+  Gpaysafe:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiKey:
+                description: Gpaysafe apiKey
+                type: string
+            required:
+              - apiKey
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Gpaysafe Gateway config
   Ilixium:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -13153,6 +13239,7 @@ definitions:
           - IlixiumMpi
     required:
       - name
+    type: object
   InvalidError:
     allOf:
       - $ref: '#/definitions/Error'
@@ -13268,6 +13355,11 @@ definitions:
           - voided
         readOnly: true
         type: string
+      subscriptionId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: 'The related Subscription''s ID if available, otherwise null'
+        readOnly: true
       taxes:
         description: Taxes applied to this invoice
         items:
@@ -13405,6 +13497,22 @@ definitions:
           - gatewayConfig
         type: object
     description: JetPay Gateway config
+  Jeton:
+    allOf:
+      - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          gatewayConfig:
+            properties:
+              apiKey:
+                description: Jeton apiKey
+                type: string
+            required:
+              - apiKey
+            type: object
+        required:
+          - gatewayConfig
+        type: object
+    description: Jeton Gateway config
   Layout:
     properties:
       _links:
@@ -13583,12 +13691,14 @@ definitions:
     description: The payment method
     enum:
       - ach
-      - Alipay
       - cash
-      - china-unionpay
-      - Flexepin
       - payment-card
       - paypal
+      - Alipay
+      - China UnionPay
+      - Flexepin
+      - Gpaysafe
+      - Jeton
       - OchaPay
       - SMSVoucher
       - UPayCard
@@ -13644,10 +13754,24 @@ definitions:
               - username
               - password
             type: object
+          mpi:
+            $ref: '#/definitions/NMIMpis'
         required:
           - gatewayConfig
         type: object
     description: NMI Gateway config
+  NMIMpis:
+    description: NMI Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - Other
+    required:
+      - name
+    type: object
   NewLink:
     properties:
       href:
@@ -13809,6 +13933,7 @@ definitions:
           - OptimalMpi
     required:
       - name
+    type: object
   Organization:
     properties:
       _links:
@@ -13877,7 +14002,10 @@ definitions:
     type: object
   Other:
     allOf:
+      - $ref: '#/definitions/A1GatewayMpis'
       - $ref: '#/definitions/eMerchantPayMpis'
+      - $ref: '#/definitions/GETMpis'
+      - $ref: '#/definitions/NMIMpis'
       - $ref: '#/definitions/PayvisionMpis'
       - $ref: '#/definitions/VantivLitleMpis'
       - $ref: '#/definitions/WalpayMpis'
@@ -14115,6 +14243,10 @@ definitions:
         description: The position in the sequence of retries
         readOnly: true
         type: integer
+      riskMetadata:
+        allOf:
+          - $ref: '#/definitions/RiskMetadata'
+        description: Risk metadata
       scheduledTime:
         description: The time the payment is scheduled for collection
         format: date-time
@@ -14364,7 +14496,6 @@ definitions:
         readOnly: true
       method:
         $ref: '#/definitions/Method'
-        description: Payment Method
       paymentInstrument:
         $ref: '#/definitions/PaymentTokenInstrument'
     required:
@@ -14468,6 +14599,7 @@ definitions:
           - Other
     required:
       - name
+    type: object
   Plan:
     properties:
       _links:
@@ -14982,6 +15114,48 @@ definitions:
         type: string
     required:
       - rel
+    type: object
+  RiskMetadata:
+    properties:
+      fingerprint:
+        description: The fingerprint
+        type: string
+      httpHeaders:
+        additionalProperties:
+          type: string
+        description: HTTP headers
+        example:
+          Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+          User-Agent: Mozilla/5.0
+        type: object
+      ipAddress:
+        description: The customer's IP
+        format: ipv4
+        type: string
+      isHosting:
+        description: True if customer's ip address is related to hosting
+        readOnly: true
+        type: boolean
+      isProxy:
+        description: True if customer's ip address is related to proxy
+        readOnly: true
+        type: boolean
+      isTor:
+        description: True if customer's ip address is related to TOR
+        readOnly: true
+        type: boolean
+      isVpn:
+        description: True if customer's ip address is related to VPN
+        readOnly: true
+        type: boolean
+      isp:
+        description: 'Internet Service Provider name, if available'
+        readOnly: true
+        type: string
+      vpnServiceName:
+        description: 'VPN service name, if available'
+        readOnly: true
+        type: string
     type: object
   Rule:
     description: The rule
@@ -15505,6 +15679,10 @@ definitions:
         description: Subscription renewal time
         format: date-time
         type: string
+      riskMetadata:
+        allOf:
+          - $ref: '#/definitions/RiskMetadata'
+        description: Risk metadata
       startTime:
         description: Subscription start time
         format: date-time
@@ -16046,6 +16224,10 @@ definitions:
         description: The position in the sequence of retries
         readOnly: true
         type: integer
+      riskMetadata:
+        allOf:
+          - $ref: '#/definitions/RiskMetadata'
+        description: Risk metadata
       riskScore:
         description: The transactions's risk score
         format: integer
@@ -16436,6 +16618,7 @@ definitions:
           - Other
     required:
       - name
+    type: object
   Walpay:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -16470,6 +16653,7 @@ definitions:
           - Other
     required:
       - name
+    type: object
   Webhook:
     properties:
       body:
@@ -16718,6 +16902,7 @@ definitions:
           - WirecardMpi
     required:
       - name
+    type: object
   Worldpay:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
@@ -16753,6 +16938,7 @@ definitions:
           - Other
     required:
       - name
+    type: object
   ach:
     allOf:
       - $ref: '#/definitions/PaymentInstrument'
@@ -16983,6 +17169,7 @@ definitions:
           - Other
     required:
       - name
+    type: object
   equals:
     allOf:
       - $ref: '#/definitions/Condition'

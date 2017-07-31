@@ -341,6 +341,7 @@ definitions:
             - FEATURE_UNSPECIFIED
             - LABEL_DETECTION
             - SHOT_CHANGE_DETECTION
+            - SAFE_SEARCH_DETECTION
           type: string
         type: array
       inputContent:
@@ -431,6 +432,71 @@ definitions:
           Otherwise, corresponds to one of `AnnotateSpec.segments`
           (if specified) or to shot boundaries (if requested).
     type: object
+  GoogleCloudVideointelligenceV1beta1_SafeSearchAnnotation:
+    description: |-
+      Safe search annotation (based on per-frame visual signals only).
+      If no unsafe content has been detected in a frame, no annotations
+      are present for that frame. If only some types of unsafe content
+      have been detected in a frame, the likelihood is set to `UNKNOWN`
+      for all other types of unsafe content.
+    properties:
+      adult:
+        description: Likelihood of adult content.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      medical:
+        description: Likelihood of medical content.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      racy:
+        description: Likelihood of racy content.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      spoof:
+        description: |-
+          Likelihood that an obvious modification was made to the original
+          version to make it appear funny or offensive.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+      timeOffset:
+        description: Video time offset in microseconds.
+        format: int64
+        type: string
+      violent:
+        description: Likelihood of violent content.
+        enum:
+          - UNKNOWN
+          - VERY_UNLIKELY
+          - UNLIKELY
+          - POSSIBLE
+          - LIKELY
+          - VERY_LIKELY
+        type: string
+    type: object
   GoogleCloudVideointelligenceV1beta1_VideoAnnotationProgress:
     description: Annotation progress for a single video.
     properties:
@@ -472,6 +538,11 @@ definitions:
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1beta1_LabelAnnotation'
         type: array
+      safeSearchAnnotations:
+        description: Safe search annotations.
+        items:
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1beta1_SafeSearchAnnotation'
+        type: array
       shotAnnotations:
         description: Shot annotations. Each shot is represented as a video segment.
         items:
@@ -497,6 +568,11 @@ definitions:
           Model to use for label detection.
           Supported values: "latest" and "stable" (the default).
         type: string
+      safeSearchDetectionModel:
+        description: |-
+          Model to use for safe search detection.
+          Supported values: "latest" and "stable" (the default).
+        type: string
       segments:
         description: |-
           Video segments to annotate. The segments may overlap and are not required
@@ -510,6 +586,11 @@ definitions:
           Model to use for shot change detection.
           Supported values: "latest" and "stable" (the default).
         type: string
+      stationaryCamera:
+        description: |-
+          Whether the video has been shot from a stationary (i.e. non-moving) camera.
+          When set to true, might improve detection accuracy for moving objects.
+        type: boolean
     type: object
   GoogleCloudVideointelligenceV1beta1_VideoSegment:
     description: Video segment.
@@ -627,8 +708,8 @@ definitions:
         type: integer
       details:
         description: |-
-          A list of messages that carry the error details.  There will be a
-          common set of message types for APIs to use.
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.

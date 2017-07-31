@@ -38,6 +38,7 @@ securityDefinitions:
     description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
+      'https://www.googleapis.com/auth/cloud-language': Apply machine learning models to reveal the structure and meaning of text
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
     type: oauth2
   Oauth2c:
@@ -45,6 +46,7 @@ securityDefinitions:
     description: Oauth 2.0 accessCode authentication
     flow: accessCode
     scopes:
+      'https://www.googleapis.com/auth/cloud-language': Apply machine learning models to reveal the structure and meaning of text
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
     tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
@@ -160,6 +162,10 @@ paths:
             $ref: '#/definitions/AnalyzeEntitiesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-language'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-language'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -194,6 +200,10 @@ paths:
           schema:
             $ref: '#/definitions/AnalyzeSentimentResponse'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-language'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -233,6 +243,10 @@ paths:
             $ref: '#/definitions/AnalyzeSyntaxResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-language'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-language'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -269,6 +283,10 @@ paths:
           schema:
             $ref: '#/definitions/AnnotateTextResponse'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-language'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
@@ -875,8 +893,8 @@ definitions:
         type: integer
       details:
         description: |-
-          A list of messages that carry the error details.  There will be a
-          common set of message types for APIs to use.
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.

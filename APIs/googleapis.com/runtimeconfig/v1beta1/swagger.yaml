@@ -129,13 +129,19 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: Deletes the waiter with the specified name.
-      operationId: runtimeconfig.projects.configs.waiters.delete
+      description: |-
+        Deletes a variable or multiple variables.
+
+        If you specify a variable name, then that variable is deleted. If you
+        specify a prefix and `recursive` is true, then all variables with that
+        prefix are deleted. You must set a `recursive` to true if you delete
+        variables by prefix.
+      operationId: runtimeconfig.projects.configs.variables.delete
       parameters:
         - description: |-
-            The Waiter resource to delete, in the format:
+            The name of the variable to delete, in the format:
 
-             `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/waiters/[WAITER_NAME]`
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIABLE_NAME]`
           in: path
           name: name
           required: true
@@ -164,14 +170,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a single waiter.
-      operationId: runtimeconfig.projects.configs.waiters.get
+      description: Gets information about a single variable.
+      operationId: runtimeconfig.projects.configs.variables.get
       parameters:
         - description: |-
-            The fully-qualified name of the Waiter resource object to retrieve, in the
-            format:
+            The name of the variable to return, in the format:
 
-            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/waiters/[WAITER_NAME]`
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIBLE_NAME]`
           in: path
           name: name
           required: true
@@ -181,7 +186,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Waiter'
+            $ref: '#/definitions/Variable'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -763,7 +768,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: runtimeconfig.projects.configs.waiters.testIamPermissions
+      operationId: runtimeconfig.projects.configs.variables.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.

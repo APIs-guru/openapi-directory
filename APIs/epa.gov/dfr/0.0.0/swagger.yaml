@@ -11,7 +11,7 @@ info:
     <BR><BR>DFR Rest Services provide multiple service endpoints, to retrieve detailed facility location, enforcement, compliance monitoring, and pollutant information for any single facility.  See the Detailed Facility Report (DFR) Help Page (https://echo.epa.gov/help/reports/detailed-facility-report-help) for additional information on the DFR.  Additionally, a Data Dictionary (https://echo.epa.gov/help/reports/dfr-data-dictionary) is also available.<BR><BR>
     There is one primary service end point, get_dfr, that provides all available DFR data.  All other service end points that are exposed, will return data on a single section of the DFR. <br>  
     <br>
-    Additional ECHO Resources:&nbsp&nbsp <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
+    Additional ECHO Resources:   <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
     <br>
   license:
     name: This page was built with the Swagger API.
@@ -2180,6 +2180,12 @@ definitions:
     required:
       - Message
     type: object
+  dfr4_CAEDDocuments:
+    description: CAED Documents
+    properties:
+      Dummy:
+        type: string
+    type: object
   dfr4_MapData:
     description: Map Data Object
     properties:
@@ -2517,6 +2523,11 @@ definitions:
         $ref: '#/definitions/dfr5_AirCompliance'
       AirQuality:
         $ref: '#/definitions/dfr6_AirQuality'
+      CAEDDocuments:
+        items:
+          $ref: '#/definitions/dfr4_CAEDDocuments'
+        title: Web Fire Documents
+        type: array
       CWA3YrCompliance:
         $ref: '#/definitions/dfr7_CWA3YrCompliance'
       CWACSCompliance:
@@ -2592,6 +2603,11 @@ definitions:
         $ref: '#/definitions/dfrT_ViolationsEnforcementActions'
       WaterQuality:
         $ref: '#/definitions/dfrU_WaterQuality'
+      WebFireDocuments:
+        items:
+          $ref: '#/definitions/dfr4_WebFireDocuments'
+        title: Web Fire Documents
+        type: array
     required:
       - Message
     type: object
@@ -2736,6 +2752,12 @@ definitions:
     type: object
     xml:
       name: Summaries
+  dfr4_WebFireDocuments:
+    description: Web Fire Documents
+    properties:
+      Dummy:
+        type: string
+    type: object
   dfr5_AirCompliance:
     description: Air Compliance Object
     properties:

@@ -273,6 +273,46 @@ paths:
             $ref: '#/definitions/GraphError'
       tags:
         - ApplicationPasswordCredentials
+  '/{tenantID}/domains':
+    get:
+      description: Gets a list of domains for the current tenant.
+      operationId: Domains_List
+      parameters:
+        - description: The filter to apply to the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: OK. The operation was successful.
+          schema:
+            $ref: '#/definitions/DomainListResult'
+      tags:
+        - Domain
+      x-ms-odata: '#/definitions/User'
+      x-ms-pageable: {}
+  '/{tenantID}/domains/{domainName}':
+    get:
+      description: Gets a specific domain in the current tenant.
+      operationId: Domains_Get
+      parameters:
+        - description: name of the domain.
+          in: path
+          name: domainName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: OK. The operation was successful.
+          schema:
+            $ref: '#/definitions/Domain'
+      tags:
+        - Domain
   '/{tenantID}/getObjectsByObjectIds':
     post:
       description: Gets AD group membership for the specified AD object IDs.
@@ -904,21 +944,55 @@ definitions:
   AADObject:
     description: The properties of an Active Directory object.
     properties:
+      appId:
+        description: The application ID.
+        readOnly: true
+        type: string
+      appPermissions:
+        description: The application permissions.
+        items:
+          type: string
+        readOnly: true
+        type: array
+      availableToOtherTenants:
+        description: Whether the application is be available to other tenants.
+        readOnly: true
+        type: boolean
       displayName:
         description: The display name of the object.
         type: string
+      homepage:
+        description: The home page of the application.
+        readOnly: true
+        type: string
+      identifierUris:
+        description: A collection of URIs for the application.
+        items:
+          type: string
+        readOnly: true
+        type: array
       mail:
         description: The primary email address of the object.
         type: string
       mailEnabled:
         description: Whether the AAD object is mail-enabled.
         type: boolean
+      mailNickname:
+        description: The mail alias for the user.
+        readOnly: true
+        type: string
       objectId:
         description: The ID of the object.
         type: string
       objectType:
         description: The type of AAD object.
         type: string
+      replyUrls:
+        description: A collection of reply URLs for the application.
+        items:
+          type: string
+        readOnly: true
+        type: array
       securityEnabled:
         description: Whether the AAD object is security-enabled.
         type: boolean
@@ -929,6 +1003,10 @@ definitions:
         type: array
       signInName:
         description: The sign-in name of the object.
+        type: string
+      usageLocation:
+        description: 'A two letter country code (ISO standard 3166). Required for users that will be assigned licenses due to legal requirement to check for availability of services in countries. Examples include: "US", "JP", and "GB".'
+        readOnly: true
         type: string
       userPrincipalName:
         description: The principal name of the object.
@@ -1087,6 +1165,34 @@ definitions:
       value:
         description: 'True if the specified user, group, contact, or service principal has either direct or transitive membership in the specified group; otherwise, false.'
         type: boolean
+  Domain:
+    description: Active Directory Domain information.
+    properties:
+      authenticationType:
+        description: the type of the authentication into the domain.
+        readOnly: true
+        type: string
+      isDefault:
+        description: if this is the default domain in the tenant.
+        readOnly: true
+        type: boolean
+      isVerified:
+        description: if this domain's ownership is verified.
+        readOnly: true
+        type: boolean
+      name:
+        description: the domain name.
+        type: string
+    required:
+      - name
+  DomainListResult:
+    description: Server response for Get tenant domains API call.
+    properties:
+      value:
+        description: the list of domains.
+        items:
+          $ref: '#/definitions/Domain'
+        type: array
   ErrorMessage:
     description: Active Directory error message.
     properties:

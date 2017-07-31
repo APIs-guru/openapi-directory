@@ -1638,6 +1638,15 @@ definitions:
           for the keys of this map are 0 through 8, inclusive.
         type: object
     type: object
+  MasterProperties:
+    description: |-
+      The properties of Page that are only
+      relevant for pages with page_type MASTER.
+    properties:
+      displayName:
+        description: The human-readable name of the master.
+        type: string
+    type: object
   NestingLevel:
     description: |-
       Contains properties describing the look and feel of a list bullet at a given
@@ -1753,6 +1762,9 @@ definitions:
       layoutProperties:
         $ref: '#/definitions/LayoutProperties'
         description: Layout specific properties. Only set if page_type = LAYOUT.
+      masterProperties:
+        $ref: '#/definitions/MasterProperties'
+        description: Master specific properties. Only set if page_type = MASTER.
       notesProperties:
         $ref: '#/definitions/NotesProperties'
         description: Notes specific properties. Only set if page_type = NOTES.

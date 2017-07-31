@@ -1040,6 +1040,9 @@ definitions:
       first_name:
         description: The first name of this user
         type: string
+      has_taken_a_ride:
+        description: Indicates whether this user has taken at least one Lyft ride
+        type: boolean
       id:
         description: The unique ID of this user
         type: string
@@ -1050,6 +1053,7 @@ definitions:
       - id
       - first_name
       - last_name
+      - has_taken_a_ride
     type: object
   RatingRequest:
     description: Rating and optional feedback and tip

@@ -183,7 +183,7 @@ paths:
       description: |-
         Returns the list of all active breakpoints for the debuggee.
 
-        The breakpoint specification (location, condition, and expression
+        The breakpoint specification (`location`, `condition`, and `expressions`
         fields) is semantically immutable, although the field values may
         change. For example, an agent may update the location line number
         to reflect the actual line where the breakpoint was set, but this
@@ -271,7 +271,7 @@ paths:
 
         Updates to active breakpoint fields are only allowed if the new value
         does not change the breakpoint specification. Updates to the `location`,
-        `condition` and `expression` fields should not alter the breakpoint
+        `condition` and `expressions` fields should not alter the breakpoint
         semantics. These may only make changes such as canonicalizing a value
         or snapping the location to the correct line of code.
       operationId: clouddebugger.controller.debuggees.breakpoints.update
@@ -965,7 +965,7 @@ definitions:
           List of breakpoints matching the request.
           The fields `id` and `location` are guaranteed to be set on each breakpoint.
           The fields: `stack_frames`, `evaluated_expressions` and `variable_table`
-          are cleared on each breakpoint regardless of it's status.
+          are cleared on each breakpoint regardless of its status.
         items:
           $ref: '#/definitions/Breakpoint'
         type: array
@@ -1125,7 +1125,7 @@ definitions:
         $ref: '#/definitions/Breakpoint'
         description: |-
           Updated breakpoint information.
-          The field 'id' must be set.
+          The field `id` must be set.
     type: object
   UpdateActiveBreakpointResponse:
     description: |-

@@ -5,10 +5,11 @@ schemes:
 host: api.deutschebahn.com
 basePath: /stada/v2
 info:
-  description: The API provides station data for german railway stations managed by DB Station&Service AG as described in its swagger file.
+  description: 'An API providing master data for german railway stations by DB Station&Service AG. '
   title: Stationsdatenbereitstellung
-  version: 2.0.47
+  version: 2.1.02
   x-apisguru-categories:
+    - transport
     - open_data
   x-logo:
     backgroundColor: '#FFFFFF'
@@ -47,7 +48,7 @@ paths:
 
         _searchstring=berlin*&federalstate=hamburg&federalsate=hessen&logicaloperator=or_ will return all stations with a name starting with 'berlin' as well as all stations in Hamburg and Hessen.
 
-        If no 'limit' parameter is given, the number of hits (stations) is set to its maximum value of 100.
+        If no 'limit' parameter is given, the number of hits (stations) is set to its maximum value of 10000.
 
         To specify parameter values containing German umlauts, the following encoding has to be used
           * ä  => %C3%A4
@@ -64,7 +65,7 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: 'The maximum number of hits to be returned by that query. If ''limit'' is set greater than 100, it will be reset to 100 internally and only 100 hits will be returned.'
+        - description: 'The maximum number of hits to be returned by that query. If ''limit'' is set greater than 10000, it will be reset to 10000 internally and only 10000 hits will be returned.'
           format: int64
           in: query
           name: limit
@@ -76,7 +77,7 @@ paths:
           name: searchstring
           required: false
           type: string
-        - description: 'Filter by station category. Category ranges as well as lists of categories are also supported (e.g. category=2-4 or category=1,3-5). The category must be between 1 and 7, otherwise a parameter exception is returned.'
+        - description: 'Filter by station category. Category ranges are supported as well as lists of categories (e.g. category=2-4 or category=1,3-5). The category must be between 1 and 7 otherwise a parameter exception is returned.'
           format: string
           in: query
           name: category
@@ -86,6 +87,18 @@ paths:
           format: string
           in: query
           name: federalstate
+          required: false
+          type: string
+        - description: Filter by EVA number. Wildcards are not allowed here.
+          format: int64
+          in: query
+          name: eva
+          required: false
+          type: integer
+        - description: Filter by Ril100-identifier. Wildcards are not allowed here.
+          format: string
+          in: query
+          name: ril
           required: false
           type: string
         - description: 'Logical operator to combine query parameters (default=AND). See above for further details.  Allowed values: or, and'
@@ -362,7 +375,7 @@ definitions:
       address:
         $ref: '#/definitions/Address'
       email:
-        description: email adress of the 3-S-Zentrale
+        description: email adress of the 3-S-Zentrale (no longer supported!)
         type: string
       internalFaxNumber:
         description: internal fax number
@@ -371,7 +384,7 @@ definitions:
         description: internal phone number
         type: string
       mobilePhoneNumber:
-        description: mobile phone number
+        description: mobile phone number (no longer supported!)
         type: string
       name:
         description: unique identifier of 3SZentrale
@@ -440,11 +453,20 @@ definitions:
       hasBicycleParking:
         description: public bicycle parking y/n
         type: boolean
+      hasCarRental:
+        description: car sharing or car rental y/n
+        type: boolean
+      hasDBLounge:
+        description: DB lounge y/n
+        type: boolean
       hasLocalPublicTransport:
         description: local public transport y/n
         type: boolean
       hasLockerSystem:
         description: public facilities y/n
+        type: boolean
+      hasLostAndFound:
+        description: lost and found y/n
         type: boolean
       hasMobilityService:
         description: 'values are ''no'', ''yes, advance notification is requested...'' or ''yes, advance notification is required...'''
@@ -455,14 +477,23 @@ definitions:
       hasPublicFacilities:
         description: public facilities y/n
         type: boolean
+      hasRailwayMission:
+        description: railway mission y/n
+        type: boolean
       hasSteplessAccess:
         $ref: '#/definitions/Partial'
         description: 'stepless access is availiable yes, no or partial'
       hasTaxiRank:
         description: taxi rank in front of the station y/n
         type: boolean
+      hasTravelCenter:
+        description: local travel center y/n
+        type: boolean
       hasTravelNecessities:
         description: a shop for travel necessities y/n
+        type: boolean
+      hasWiFi:
+        description: public Wi-Fi is available y/n
         type: boolean
       localServiceStaff:
         $ref: '#/definitions/Schedule'
@@ -474,6 +505,10 @@ definitions:
         type: string
       number:
         description: unique identifier representing a specific railway station
+        format: int32
+        type: integer
+      priceCategory:
+        description: determines in some respect the price for train stops at a specific station (1..7)
         format: int32
         type: integer
       regionalbereich:

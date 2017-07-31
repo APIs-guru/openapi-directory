@@ -149,7 +149,7 @@ paths:
           description: source_language and target_language are same.
         '404':
           description: Unknown source_language and/or target_language.
-      summary: Lists available domains in a given bilingual language dataset.
+      summary: Lists available domains in a bilingual dataset
       tags:
         - Utility
   '/domains/{source_language}':
@@ -182,14 +182,14 @@ paths:
             title: DomainsResults
         '404':
           description: Unknown source_language.
-      summary: Lists available domains in a given monolingual language dataset.
+      summary: Lists available domains in a monolingual dataset
       tags:
         - Utility
   '/entries/{source_language}/{word_id}/sentences':
     get:
       description: |
 
-        Retrieve list of sentences and list of [senses](/glossary?tag=#sense&expand) (English language only).
+        Use this to retrieve sentences extracted from  corpora which show how a word is used in the language. This is available for English and Spanish. For English, the sentences are linked to the correct sense of the word in the dictionary. In Spanish, they are linked at the headword level.
           <div id="sentences"></div>
       externalDocs:
         description: find more info here
@@ -218,15 +218,14 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Retrieve corpus sentences for a given word.
+      summary: Retrieve corpus sentences for a given word
       tags:
         - The Sentence Dictionary
   '/entries/{source_lang}/{word_id}':
     get:
       description: |
 
-        Retrieve available [dictionary entries](/glossary?tag=#entry&expand) for a given word and language. 
-
+        Use this to retrieve definitions, pronunciations, example sentences, grammatical information and word origins. It only works for dictionary headwords, so you may need to use the Lemmatron first if your input is likely to be an inflected form (e.g., 'swimming'). This would return the linked headword (e.g., 'swim') which you can then use in teh Entries endpoint.Unless epcified using a region filter, the default lookup will be the Oxford Dictioanry of English (GB). 
           <div id="dictionary_entries"></div>
       externalDocs:
         description: find more info here
@@ -248,14 +247,14 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Retrieve dictionary entries for a given word.
+      summary: Retrieve dictionary information for a given word
       tags:
         - Dictionary entries
   '/entries/{source_lang}/{word_id}/antonyms':
     get:
       description: |
 
-        Retrieve available [antonyms](/glossary?tag=#thesaurus&expand) for a given word and language. 
+        Retrieve words that are opposite in meaning to the input word (antonym).
 
           <div id="antonyms"></div>
       externalDocs:
@@ -278,113 +277,14 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Retrieve antonyms for a given word.
+      summary: Retrieve words that mean the opposite
       tags:
         - Thesaurus
-  '/entries/{source_lang}/{word_id}/definitions':
-    get:
-      description: |
-
-        Find available [dictionary entries](/glossary?tag=#entry&expand) for given word and language. Filter results by categories. 
-
-          <div id="dictionary_entries_filters_definitions"></div>
-      parameters:
-        - $ref: '#/parameters/monolingual-source_lang'
-        - $ref: '#/parameters/entriesWordId'
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
-      responses:
-        '200':
-          description: Successful response.
-          schema:
-            $ref: '#/definitions/RetrieveEntry'
-            title: RetrieveEntryResults
-        '404':
-          description: |
-            no entry is found matching supplied source_lang and id
-            and/or that entry has no senses with translations in the target language. 
-        '500':
-          description: |
-            Internal Error. An error occurred while processing the data.
-      summary: Retrieve only definitions in entry search.
-      tags:
-        - Dictionary entries
-  '/entries/{source_lang}/{word_id}/examples':
-    get:
-      description: |
-
-        Find available [dictionary entries](/glossary?tag=#entry&expand) for given word and language. Filter results by categories. 
-
-          <div id="dictionary_entries_filters_examples"></div>
-      parameters:
-        - description: IANA language code
-          enum:
-            - en
-            - es
-          in: path
-          name: source_lang
-          required: true
-          type: string
-        - $ref: '#/parameters/entriesWordId'
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
-      responses:
-        '200':
-          description: Successful response.
-          schema:
-            $ref: '#/definitions/RetrieveEntry'
-            title: RetrieveEntryResults
-        '404':
-          description: |
-            no entry is found matching supplied source_lang and id
-            and/or that entry has no senses with translations in the target language. 
-        '500':
-          description: |
-            Internal Error. An error occurred while processing the data.
-      summary: Retrieve only example sentences in entry search.
-      tags:
-        - Dictionary entries
-  '/entries/{source_lang}/{word_id}/pronunciations':
-    get:
-      description: |
-
-        Find available [dictionary entries](/glossary?tag=#entry&expand) for given word and language. Filter results by categories. 
-
-          <div id="dictionary_entries_filters_pronunciations"></div>
-      parameters:
-        - description: IANA language code
-          enum:
-            - en
-          in: path
-          name: source_lang
-          required: true
-          type: string
-        - $ref: '#/parameters/entriesWordId'
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
-      responses:
-        '200':
-          description: Successful response.
-          schema:
-            $ref: '#/definitions/RetrieveEntry'
-            title: RetrieveEntryResults
-        '404':
-          description: |
-            no entry is found matching supplied source_lang and id
-            and/or that entry has no senses with translations in the target language. 
-        '500':
-          description: |
-            Internal Error. An error occurred while processing the data.
-      summary: Retrieve only pronunciations in entry search.
-      tags:
-        - Dictionary entries
   '/entries/{source_lang}/{word_id}/regions={region}':
     get:
       description: |
 
-        Retrieve available [dictionary entries](/glossary?tag=#entry&expand) for given word and language. 
-
-          <div id="dictionary_entries"></div>
+        USe this filter to restrict the lookup to either our Oxford Dictionary of English (GB) or New Oxford American Dictionary (US).
       externalDocs:
         description: find more info here
         url: 'https://helloreverb.com/about'
@@ -397,7 +297,7 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/entriesWordId'
-        - description: Region filter parameter. gb = Great Britain English. us = United States English. Default is gb.
+        - description: Region filter parameter. gb = Oxford Dictionary of English. us = New Oxford American Dictionary.
           enum:
             - gb
             - us
@@ -420,14 +320,14 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Specify GB or US dictionary for English entry search.
+      summary: Specify GB or US dictionary for English entry search
       tags:
         - Dictionary entries
   '/entries/{source_lang}/{word_id}/synonyms':
     get:
       description: |
 
-        Retrieve available [synonyms](/glossary?tag=#thesaurus&expand) for a given word and language. 
+        Use this to retrieve words that are similar in meaning to the input word (synonym).
 
           <div id="synonyms"></div>
       externalDocs:
@@ -450,7 +350,7 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Retrieve synonyms for a given word.
+      summary: Retrieve words that are similar
       tags:
         - Thesaurus
   '/entries/{source_lang}/{word_id}/synonyms;antonyms':
@@ -480,14 +380,14 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Retrieve synonyms and antonyms for a given word.
+      summary: Retrieve synonyms and antonyms for a given word
       tags:
         - Thesaurus
   '/entries/{source_lang}/{word_id}/{filters}':
     get:
       description: |
 
-        Find available [dictionary entries](/glossary?tag=#entry&expand) for given word and language. Filter results by categories. 
+        Use filters to limit the entry information that is returned. For example, you may only require definitions and not everything else, or just pronunciations. The full list of filters can be retrieved from the filters Utility endpoint. You can also specify values within the filter using '='. For example 'grammaticalFeatures=singular'. Filters can also be combined using a semicolon.
 
           <div id="dictionary_entries_filters"></div>
       parameters:
@@ -509,14 +409,14 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Apply filters to entry search.
+      summary: Apply filters to response
       tags:
         - Dictionary entries
   '/entries/{source_translation_language}/{word_id}/translations={target_translation_language}':
     get:
       description: |
-        Returns target language translations for a given word ID and source language. 
-        In the event that a word in the dataset does not have a direct translation, the response will be a [definition](/glossary?tag=#entry&expand) in the target language.
+
+        Use this to return translations for a given word. In the event that a word in the dataset does not have a direct translation, the response will be a [definition](/glossary?tag=#entry&expand) in the target language.
 
           <div id="translation"></div>
       parameters:
@@ -537,7 +437,7 @@ paths:
           required: true
           type: string
         - default: change
-          description: An Entry identifier. Case-sensitive.
+          description: The source word
           in: path
           name: word_id
           required: true
@@ -574,7 +474,7 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Find translation for a given word.
+      summary: Retrieve translation for a given word
       tags:
         - Translation
   /filters:
@@ -592,7 +492,7 @@ paths:
             title: FiltersResults
         '500':
           description: Internal Error. An error occurred while processing the data.
-      summary: Lists available filters.
+      summary: Lists available filters
       tags:
         - Utility
   '/filters/{endpoint}':
@@ -621,7 +521,7 @@ paths:
           description: Unknown endpoint.
         '500':
           description: Internal Error. An error occurred while processing the data.
-      summary: Lists available filters for specific endpoint.
+      summary: Lists available filters for specific endpoint
       tags:
         - Utility
   '/grammaticalFeatures/{source_language}':
@@ -657,20 +557,20 @@ paths:
             title: RegistersResults
         '404':
           description: Unknown source_language.
-      summary: Lists available grammatical features in a given language dataset.
+      summary: Lists available grammatical features in a dataset
       tags:
         - Utility
   '/inflections/{source_lang}/{word_id}':
     get:
       description: |
 
-        Retrieve available [lemmas](/glossary?tag=#lemma&expand) for a given [inflected](/glossary?tag=#inflection&expand) wordform. 
+        Use this to check if a word exists in the dictionary, or what 'root' form it links to (e.g., swimming > swim). The response tells you the possible [lemmas](/glossary?tag=#lemma&expand) for a given [inflected](/glossary?tag=#inflection&expand) word. This can then be combined with other endpoints to retrieve more information.
 
           <div id="lemmatron"></div>
       parameters:
         - $ref: '#/parameters/monolingual-lemmatron-source_lang'
-        - default: changed
-          description: An inflected wordform. Case-sensitive.
+        - default: swimming
+          description: The input word
           in: path
           name: word_id
           required: true
@@ -686,7 +586,7 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Retrieve lemmas for a given inflected wordform.
+      summary: Check a word exists in the dictionary and retrieve its root form
       tags:
         - Lemmatron
   '/inflections/{source_lang}/{word_id}/{filters}':
@@ -699,7 +599,7 @@ paths:
       parameters:
         - $ref: '#/parameters/monolingual-lemmatron-source_lang'
         - default: change
-          description: An inflected wordform. Case-sensitive.
+          description: The input word
           in: path
           name: word_id
           required: true
@@ -716,7 +616,7 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Apply filters to Lemmatron response
+      summary: Apply optional filters to Lemmatron response
       tags:
         - Lemmatron
   /languages:
@@ -774,7 +674,7 @@ paths:
           description: Unknown sourceLanguage and/or targetLanguage.
         '500':
           description: Internal Error. An error occurred while processing the data.
-      summary: Lists available monolingual and bilingual language datasets in the API.
+      summary: Lists available dictionaries
       tags:
         - Utility
   '/lexicalcategories/{language}':
@@ -814,7 +714,7 @@ paths:
           description: Unknown language.
         '500':
           description: Internal Error. An error occurred while processing the data.
-      summary: Lists available lexical categories in a given language dataset.
+      summary: Lists available lexical categories in a dataset
       tags:
         - Utility
   '/regions/{source_language}':
@@ -839,7 +739,7 @@ paths:
             title: RegionsResults
         '404':
           description: Unknown source_language.
-      summary: Lists available regions in a given monolingual language dataset.
+      summary: Lists available regions in a monolingual dataset
       tags:
         - Utility
   '/registers/{source_language}':
@@ -875,7 +775,7 @@ paths:
           description: Unknown source_language.
         '500':
           description: Internal Error. An error occurred while processing the data.
-      summary: Lists available registers in a given monolingual language dataset.
+      summary: Lists available registers in a  monolingual dataset
       tags:
         - Utility
   '/registers/{source_register_language}/{target_register_language}':
@@ -926,14 +826,14 @@ paths:
           description: Unknown source_language and/or target_language.
         '500':
           description: Internal Error. An error occurred while processing the data.
-      summary: Lists available registers in a given bilingual language dataset.
+      summary: Lists available registers in a bilingual dataset
       tags:
         - Utility
   '/search/{source_lang}':
     get:
       description: |
 
-        Retrieve available results for a search query and language. 
+        Use this to retrieve possible headword matches for a given string of text. The results are culculated using headword matching, fuzzy matching, and lemmatization 
 
           <div id="search"></div>
       externalDocs:
@@ -952,7 +852,7 @@ paths:
           required: true
           type: string
         - default: eye
-          description: Search string.
+          description: Search string
           in: query
           name: q
           required: false
@@ -965,7 +865,7 @@ paths:
           name: prefix
           required: false
           type: boolean
-        - description: 'Filter words with specific region(s) E.g., regions=us. For now gb, us are available for en language.'
+        - description: 'If searching in English, filter words with specific region(s) either ''us'' or ''gb''.'
           in: query
           name: regions
           required: false
@@ -994,14 +894,14 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Find results for search query.
+      summary: Retrieve possible matches to input
       tags:
         - Search
   '/search/{source_search_language}/translations={target_search_language}':
     get:
       description: |
 
-        Find available translation results  for a search query and language. 
+        Use this to find matches in our translation dictionaries.
 
           <div id="search_translation"></div>
       externalDocs:
@@ -1082,13 +982,13 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Find translation results for search query.
+      summary: Retrieve possible translation matches to input
       tags:
         - Search
   '/wordlist/{source_lang}/{filters_advanced}':
     get:
       description: |
-        Advanced options for retrieving [wordlist](/glossary?tag=#wordlist&expand) - exclude filter, filter by word length or match by substring (prefix). 
+        Use this to apply more complex filters to the list of words. For example, you may only want to filter out words for which all senses match the filter, or only its 'prime sense'. You can also filter by word length or match by substring (prefix). 
 
           <div id="wordlist_advanced"></div>
       parameters:
@@ -1104,7 +1004,7 @@ paths:
           name: exclude
           required: false
           type: string
-        - description: 'Semicolon separated list of parameters-value pairs (same as filters). Excludes those senses of a particular headword that match specified exclusion attributes (lexical categories, domains, etc.) from results but includes the headword if it has other permitted senses.'
+        - description: 'Semicolon separated list of parameters-value pairs (same as filters). Excludes only those senses of a particular headword that match specified exclusion attributes (lexical categories, domains, etc.) from results but includes the headword if it has other permitted senses.'
           in: query
           name: exclude_senses
           required: false
@@ -1160,13 +1060,14 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Retrieve list of words for category with advanced options.
+      summary: Retrieve list of words for category with advanced options
       tags:
         - Wordlist
   '/wordlist/{source_lang}/{filters_basic}':
     get:
       description: |
-        Retrieve list of words for particular [domain](/glossary?tag=#domain&expand), [lexical category](/glossary?tag=#lexicalcategory&expand), [register](/glossary?tag=#register&expand) and/or [region](/glossary?tag=#region&expand).  
+
+        Use this to retrieve a list of words for particular [domain](/glossary?tag=#domain&expand), [lexical category](/glossary?tag=#lexicalcategory&expand), [register](/glossary?tag=#register&expand) and/or [region](/glossary?tag=#region&expand). View the full list of possible filters using the filters Utility endpoint.  The response only includes headwords, not all their possible inflections. If you require a full wordlist including inflected forms, contact us and we can help.
 
           <div id="wordlist"></div>
       parameters:
@@ -1182,7 +1083,7 @@ paths:
           name: limit
           required: false
           type: string
-        - description: Offset the start number of the result.
+        - description: Offset the start number of the result
           in: query
           name: offset
           required: false
@@ -1203,7 +1104,7 @@ paths:
         '500':
           description: |
             Internal Error. An error occurred while processing the data.
-      summary: Retrieve list of words for category.
+      summary: Retrieve a list of words in a category
       tags:
         - Wordlist
 definitions:

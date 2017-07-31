@@ -3456,6 +3456,19 @@ definitions:
             type: object
         type: object
     description: User details (view for organization teacher / admin)
+  UserInstruments:
+    description: |
+      An array of the instrument identifiers that the user plays.
+      This is mainly used to display a list of the instruments in the Flat's UI or instruments icons.
+      The format of the strings is `{instrument-group}.{instrument-id}`.
+    example:
+      - keyboards.grand-piano
+      - brass.trumpet
+      - strings.violin
+    items:
+      pattern: '^[a-z]+\.[a-z]+$'
+      type: string
+    type: array
   UserPublic:
     allOf:
       - $ref: '#/definitions/UserPublicSummary'
@@ -3469,12 +3482,17 @@ definitions:
           followingCount:
             description: Number of people the user follow
             type: integer
+          instruments:
+            $ref: '#/definitions/UserInstruments'
           likedScoresCount:
             description: Number of the scores liked by the user
             type: integer
           ownedPublicScoresCount:
             description: Number of public score the user have
             type: integer
+          profileTheme:
+            description: Theme (background) for the profile
+            type: string
           registrationDate:
             description: Date the user signed up
             format: date-time
@@ -3488,6 +3506,9 @@ definitions:
       followingCount: 0
       htmlUrl: 'https://flat.io/flat'
       id: '000000000000000000000001'
+      instruments:
+        - woodwinds.flute
+        - woodwinds.clarinet
       isPowerUser: true
       likedScoresCount: 1
       name: Flat Team
@@ -3496,6 +3517,7 @@ definitions:
       ownedPublicScoresCount: 10
       picture: 'https://flat.io/img/logo_flat.svg'
       printableName: Flat Team
+      profileTheme: blue-8
       registrationDate: '2015-01-19T00:22:02.387Z'
       username: flat
   UserPublicSummary:

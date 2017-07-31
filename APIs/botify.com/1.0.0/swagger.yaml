@@ -879,7 +879,7 @@ paths:
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/UrlsAggs'
+              $ref: '#/definitions/Aggs'
             type: array
         default:
           description: error payload
@@ -1321,6 +1321,7 @@ paths:
             - current
             - disappeared
             - new
+            - gsc_keywords
           in: query
           name: area
           required: false
@@ -1412,6 +1413,16 @@ definitions:
         type: array
     required:
       - exporters
+    type: object
+  Aggs:
+    properties:
+      error:
+        $ref: '#/definitions/ErrorAgg'
+      status:
+        format: int64
+        type: integer
+    required:
+      - status
     type: object
   Analysis:
     properties:
@@ -1814,6 +1825,16 @@ definitions:
             type: string
         type: object
     type: object
+  ErrorAgg:
+    properties:
+      error_code:
+        type: string
+      message:
+        type: string
+    required:
+      - message
+      - error_code
+    type: object
   FieldValues:
     properties:
       count:
@@ -2185,25 +2206,6 @@ definitions:
   UrlDetail:
     properties: {}
     type: object
-  UrlsAgg:
-    properties:
-      aggs:
-        items:
-          type: object
-        type: array
-    type: object
-  UrlsAggs:
-    properties:
-      data:
-        $ref: '#/definitions/UrlsAgg'
-      error:
-        $ref: '#/definitions/UrlsErrorAgg'
-      status:
-        format: int64
-        type: integer
-    required:
-      - status
-    type: object
   UrlsAggsQueries:
     items:
       $ref: '#/definitions/UrlsAggsQuery'
@@ -2217,16 +2219,6 @@ definitions:
         type: array
       filters:
         type: object
-    type: object
-  UrlsErrorAgg:
-    properties:
-      error_code:
-        type: string
-      message:
-        type: string
-    required:
-      - message
-      - error_code
     type: object
   UrlsQuery:
     description: Urls query

@@ -536,7 +536,7 @@ paths:
       tags:
         - accounts
     get:
-      description: 'Retrieves a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account.'
+      description: 'Retrieves a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
       operationId: content.accounts.get
       parameters:
         - description: The ID of the managing account.
@@ -570,7 +570,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: 'Updates a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account. This method supports patch semantics.'
+      description: 'Updates a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account. This method supports patch semantics.'
       operationId: content.accounts.patch
       parameters:
         - description: The ID of the managing account.
@@ -604,7 +604,7 @@ paths:
       tags:
         - accounts
     put:
-      description: 'Updates a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account.'
+      description: 'Updates a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
       operationId: content.accounts.update
       parameters:
         - description: The ID of the managing account.
@@ -647,7 +647,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Claims the website of a Merchant Center sub-account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account.'
+      description: 'Claims the website of a Merchant Center sub-account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
       operationId: content.accounts.claimwebsite
       parameters:
         - description: The ID of the account whose website is claimed.
@@ -716,7 +716,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/accountstatuses/{accountId}':
     get:
-      description: 'Retrieves the status of a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account.'
+      description: 'Retrieves the status of a Merchant Center account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
       operationId: content.accountstatuses.get
       parameters:
         - description: The ID of the managing account.
@@ -789,7 +789,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/accounttax/{accountId}':
     get:
-      description: 'Retrieves the tax settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account.'
+      description: 'Retrieves the tax settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
       operationId: content.accounttax.get
       parameters:
         - description: The ID of the managing account.
@@ -823,7 +823,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: 'Updates the tax settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account. This method supports patch semantics.'
+      description: 'Updates the tax settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account. This method supports patch semantics.'
       operationId: content.accounttax.patch
       parameters:
         - description: The ID of the managing account.
@@ -857,7 +857,7 @@ paths:
       tags:
         - accounttax
     put:
-      description: 'Updates the tax settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account.'
+      description: 'Updates the tax settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
       operationId: content.accounttax.update
       parameters:
         - description: The ID of the managing account.
@@ -1919,7 +1919,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/shippingsettings/{accountId}':
     get:
-      description: 'Retrieves the shipping settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account.'
+      description: 'Retrieves the shipping settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
       operationId: content.shippingsettings.get
       parameters:
         - description: The ID of the managing account.
@@ -1953,7 +1953,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: 'Updates the shipping settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account. This method supports patch semantics.'
+      description: 'Updates the shipping settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account. This method supports patch semantics.'
       operationId: content.shippingsettings.patch
       parameters:
         - description: The ID of the managing account.
@@ -1987,7 +1987,7 @@ paths:
       tags:
         - shippingsettings
     put:
-      description: 'Updates the shipping settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself or sub-accounts if the managing account is a multi-client account.'
+      description: 'Updates the shipping settings of the account. This method can only be called for accounts to which the managing account has access: either the managing account itself for any Merchant Center account, or any sub-account when the managing account is a multi-client account.'
       operationId: content.shippingsettings.update
       parameters:
         - description: The ID of the managing account.
@@ -2674,6 +2674,9 @@ definitions:
       password:
         description: An optional password for fetch_url.
         type: string
+      paused:
+        description: Whether the scheduled fetch is paused or not.
+        type: boolean
       timeZone:
         description: 'Time zone used for schedule. UTC by default. E.g., "America/Los_Angeles".'
         type: string
@@ -3186,7 +3189,7 @@ definitions:
         description: 'The date when the order was placed, in ISO 8601 format.'
         type: string
       promotions:
-        description: The details of the merchant provided promotions applied to the order. More details about the program are  here.
+        description: The details of the merchant provided promotions applied to the order. More details about the program are here.
         items:
           $ref: '#/definitions/OrderPromotion'
         type: array
@@ -4376,7 +4379,7 @@ definitions:
         $ref: '#/definitions/Price'
         description: 'Fixed shipping price, represented as a number.'
       region:
-        description: The geographic region to which a shipping rate applies (e.g. zip code).
+        description: The geographic region to which a shipping rate applies.
         type: string
       service:
         description: A free-form description of the service class or delivery speed.
@@ -4436,6 +4439,9 @@ definitions:
       link:
         description: The link to the product.
         type: string
+      product:
+        $ref: '#/definitions/Product'
+        description: Product data after applying all the join inputs.
       productId:
         description: The id of the product for which status is reported.
         type: string
@@ -4612,6 +4618,8 @@ definitions:
         description: 'An entry ID, unique within the batch request.'
         format: uint32
         type: integer
+      includeAttributes:
+        type: boolean
       merchantId:
         description: The ID of the managing account.
         format: uint64
@@ -4862,7 +4870,7 @@ definitions:
         description: Identifier of one of the predefined delivery addresses for the delivery.
         type: string
       promotions:
-        description: The details of the merchant provided promotions applied to the order. More details about the program are  here.
+        description: The details of the merchant provided promotions applied to the order. More details about the program are here.
         items:
           $ref: '#/definitions/OrderPromotion'
         type: array

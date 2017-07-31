@@ -1187,7 +1187,7 @@ definitions:
         description: 'Required. The client-assigned sink identifier, unique within the project. Example: "my-syslog-errors-to-pubsub". Sink identifiers are limited to 100 characters and can include only the following characters: upper and lower-case alphanumeric characters, underscores, hyphens, and periods.'
         type: string
       outputVersionFormat:
-        description: Optional. The log entry format to use for this sink's exported log entries. The v2 format is used by default. The v1 format is deprecated and should be used only as part of a migration effort to v2. See Migration to the v2 API.
+        description: Deprecated. The log entry format to use for this sink's exported log entries. The v2 format is used by default and cannot be changed.
         enum:
           - VERSION_FORMAT_UNSPECIFIED
           - V2

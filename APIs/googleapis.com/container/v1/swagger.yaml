@@ -1651,6 +1651,19 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
 definitions:
+  AcceleratorConfig:
+    description: AcceleratorConfig represents a Hardware Accelerator request.
+    properties:
+      acceleratorCount:
+        description: The number of the accelerator cards exposed to an instance.
+        format: int64
+        type: string
+      acceleratorType:
+        description: |-
+          The accelerator type resource name. List of supported accelerators
+          [here](/compute/docs/gpus/#Introduction)
+        type: string
+    type: object
   AddonsConfig:
     description: |-
       Configuration for the addons that can be automatically spun up in the
@@ -1667,6 +1680,9 @@ definitions:
         description: |-
           Configuration for the HTTP (L7) load balancing controller addon, which
           makes it easy to set up HTTP load balancers for services in a cluster.
+      kubernetesDashboard:
+        $ref: '#/definitions/KubernetesDashboard'
+        description: Configuration for the Kubernetes Dashboard.
     type: object
   AutoUpgradeOptions:
     description: |-
@@ -1688,6 +1704,16 @@ definitions:
   CancelOperationRequest:
     description: CancelOperationRequest cancels a single operation.
     properties: {}
+    type: object
+  CidrBlock:
+    description: CidrBlock contains an optional name and one CIDR block.
+    properties:
+      cidrBlock:
+        description: cidr_block must be specified in CIDR notation.
+        type: string
+      displayName:
+        description: display_name is an optional field for users to identify CIDR blocks.
+        type: string
     type: object
   ClientCertificateConfig:
     description: Configuration for client certificates on the cluster.
@@ -1809,6 +1835,11 @@ definitions:
       masterAuth:
         $ref: '#/definitions/MasterAuth'
         description: The authentication information for accessing the master endpoint.
+      masterAuthorizedNetworksConfig:
+        $ref: '#/definitions/MasterAuthorizedNetworksConfig'
+        description: |-
+          Master authorized networks is a Beta feature.
+          The configuration options for master authorized networks feature.
       monitoringService:
         description: |-
           The monitoring service the cluster should use to write metrics.
@@ -1937,6 +1968,11 @@ definitions:
         items:
           type: string
         type: array
+      desiredMasterAuthorizedNetworksConfig:
+        $ref: '#/definitions/MasterAuthorizedNetworksConfig'
+        description: |-
+          Master authorized networks is a Beta feature.
+          The desired configuration options for master authorized networks feature.
       desiredMasterVersion:
         description: |-
           The Kubernetes version to change the master to. The only valid value is the
@@ -2099,6 +2135,13 @@ definitions:
         description: Whether alias IPs will be used for pod IPs in the cluster.
         type: boolean
     type: object
+  KubernetesDashboard:
+    description: Configuration for the Kubernetes Dashboard.
+    properties:
+      disabled:
+        description: Whether the Kubernetes Dashboard is enabled for this cluster.
+        type: boolean
+    type: object
   LegacyAbac:
     description: |-
       Configuration for the legacy Attribute Based Access Control authorization
@@ -2195,6 +2238,25 @@ definitions:
           providing an empty username.
         type: string
     type: object
+  MasterAuthorizedNetworksConfig:
+    description: |-
+      Master authorized networks is a Beta feature.
+      Configuration options for the master authorized networks feature. Enabled
+      master authorized networks will disallow all external traffic to access
+      Kubernetes master through HTTPS except traffic from the given CIDR blocks,
+      Google Compute Engine Public IPs and Google Prod IPs.
+    properties:
+      cidrBlocks:
+        description: |-
+          cidr_blocks define up to 10 external networks that could access
+          Kubernetes master through HTTPS.
+        items:
+          $ref: '#/definitions/CidrBlock'
+        type: array
+      enabled:
+        description: Whether or not master authorized networks is enabled.
+        type: boolean
+    type: object
   NetworkPolicy:
     description: |-
       Configuration options for the NetworkPolicy feature.
@@ -2206,13 +2268,21 @@ definitions:
       provider:
         description: The selected network policy provider.
         enum:
-          - UNKNOWN
+          - PROVIDER_UNSPECIFIED
           - CALICO
         type: string
     type: object
   NodeConfig:
     description: Parameters that describe the nodes in a cluster.
     properties:
+      accelerators:
+        description: |-
+          A list of hardware accelerators to be attached to each node.
+          See https://cloud.google.com/compute/docs/gpus for more information about
+          support for GPUs.
+        items:
+          $ref: '#/definitions/AcceleratorConfig'
+        type: array
       diskSizeGb:
         description: |-
           Size of the disk attached to each node, specified in GB.

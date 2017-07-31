@@ -147,6 +147,13 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: Controls the set of fields returned in the LIST response.
+          enum:
+            - BASIC_CERTIFICATE
+            - FULL_CERTIFICATE
+          in: query
+          name: view
+          type: string
       responses:
         '200':
           description: Successful response
@@ -548,7 +555,7 @@ paths:
           name: domainMappingsId
           required: true
           type: string
-        - description: 'Whether a managed certificate should be provided by App Engine. If true, a certificate ID must be manaually set in the DomainMapping resource to configure SSL for this domain. If false, a managed certificate will be provisioned and a certificate ID will be automatically populated. Only applicable if ssl_settings.certificate_id is specified in the update mask.'
+        - description: 'Whether a managed certificate should be provided by App Engine. If true, a certificate ID must be manually set in the DomainMapping resource to configure SSL for this domain. If false, a managed certificate will be provisioned and a certificate ID will be automatically populated. Only applicable if ssl_settings.certificate_id is specified in the update mask.'
           in: query
           name: noManagedCertificate
           type: boolean
@@ -789,7 +796,7 @@ definitions:
         description: 'The user-specified display name of the certificate. This is not guaranteed to be unique. Example: My Certificate.'
         type: string
       domainMappingsCount:
-        description: Aggregate count of the domain mappings with this certificate mapped. This count includes domain mappings on applications for which the user does not have VIEWER permissions.Only returned by GET requests when specifically requested by the view=FULL option.@OutputOnly
+        description: Aggregate count of the domain mappings with this certificate mapped. This count includes domain mappings on applications for which the user does not have VIEWER permissions.Only returned by GET or LIST requests when specifically requested by the view=FULL_CERTIFICATE option.@OutputOnly
         format: int32
         type: integer
       domainNames:
@@ -811,7 +818,7 @@ definitions:
         description: 'Full path to the AuthorizedCertificate resource in the API. Example: apps/myapp/authorizedCertificates/12345.@OutputOnly'
         type: string
       visibleDomainMappings:
-        description: 'The full paths to user visible Domain Mapping resources that have this certificate mapped. Example: apps/myapp/domainMappings/example.com.This may not represent the full list of mapped domain mappings if the user does not have VIEWER permissions on all of the applications that have this certificate mapped. See domain_mappings_count for a complete count.Only returned by GET requests when specifically requested by the view=FULL option.@OutputOnly'
+        description: 'The full paths to user visible Domain Mapping resources that have this certificate mapped. Example: apps/myapp/domainMappings/example.com.This may not represent the full list of mapped domain mappings if the user does not have VIEWER permissions on all of the applications that have this certificate mapped. See domain_mappings_count for a complete count.Only returned by GET or LIST requests when specifically requested by the view=FULL_CERTIFICATE option.@OutputOnly'
         items:
           type: string
         type: array
@@ -1192,7 +1199,7 @@ definitions:
         format: int32
         type: integer
       details:
-        description: A list of messages that carry the error details. There will be a common set of message types for APIs to use.
+        description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.

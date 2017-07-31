@@ -906,7 +906,7 @@ definitions:
         format: int64
         type: string
     type: object
-  GoogleCloudMlV1__AutomaticScaling:
+  GoogleCloudMlV1__AutoScaling:
     description: Options for automatically scaling a model.
     properties:
       minNodes:
@@ -1711,8 +1711,8 @@ definitions:
       information about all of the versions of a given model by calling
       [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
     properties:
-      automaticScaling:
-        $ref: '#/definitions/GoogleCloudMlV1__AutomaticScaling'
+      autoScaling:
+        $ref: '#/definitions/GoogleCloudMlV1__AutoScaling'
         description: |-
           Automatically scale the number of nodes used to serve the model in
           response to increases and decreases in traffic. Care should be
@@ -1728,7 +1728,7 @@ definitions:
           create the version. See the
           [overview of model
           deployment](/ml-engine/docs/concepts/deployment-overview) for more
-          informaiton.
+          information.
 
           When passing Version to
           [projects.models.versions.create](/ml-engine/reference/rest/v1/projects.models.versions/create)
@@ -1759,7 +1759,7 @@ definitions:
         $ref: '#/definitions/GoogleCloudMlV1__ManualScaling'
         description: |-
           Manually select the number of nodes to use for serving the
-          model. You should generally use `automatic_scaling` with an appropriate
+          model. You should generally use `auto_scaling` with an appropriate
           `min_nodes` instead, but this option is available if you want more
           predictable billing. Beware that latency and error rates will increase
           if the traffic exceeds that capability of the system to serve it based
@@ -1784,7 +1784,7 @@ definitions:
           - FAILED
         type: string
     type: object
-  GoogleCloudMlV1beta1__AutomaticScaling:
+  GoogleCloudMlV1beta1__AutoScaling:
     description: Options for automatically scaling a model.
     properties:
       minNodes:
@@ -1818,7 +1818,7 @@ definitions:
           The number of nodes to allocate for this model. These nodes are always up,
           starting from the time the model is deployed, so the cost of operating
           this model will be proportional to `nodes` * number of hours since
-          last billing cycle.
+          last billing cycle plus the cost for each prediction performed.
         format: int32
         type: integer
     type: object
@@ -1864,8 +1864,8 @@ definitions:
       information about all of the versions of a given model by calling
       [projects.models.versions.list](/ml-engine/reference/rest/v1beta1/projects.models.versions/list).
     properties:
-      automaticScaling:
-        $ref: '#/definitions/GoogleCloudMlV1beta1__AutomaticScaling'
+      autoScaling:
+        $ref: '#/definitions/GoogleCloudMlV1beta1__AutoScaling'
         description: |-
           Automatically scale the number of nodes used to serve the model in
           response to increases and decreases in traffic. Care should be
@@ -1881,7 +1881,7 @@ definitions:
           create the version. See the
           [overview of model
           deployment](/ml-engine/docs/concepts/deployment-overview) for more
-          informaiton.
+          information.
 
           When passing Version to
           [projects.models.versions.create](/ml-engine/reference/rest/v1beta1/projects.models.versions/create)
@@ -1912,11 +1912,11 @@ definitions:
         $ref: '#/definitions/GoogleCloudMlV1beta1__ManualScaling'
         description: |-
           Manually select the number of nodes to use for serving the
-          model. You should generally use `automatic_scaling` with an appropriate
-          `min_nodes` instead, but this option is available if you want predictable
-          billing. Beware that latency and error rates will increase if the
-          traffic exceeds that capability of the system to serve it based on
-          the selected number of nodes.
+          model. You should generally use `auto_scaling` with an appropriate
+          `min_nodes` instead, but this option is available if you want more
+          predictable billing. Beware that latency and error rates will increase
+          if the traffic exceeds that capability of the system to serve it based
+          on the selected number of nodes.
       name:
         description: |-
           Required.The name specified for the version when it was created.
@@ -2507,8 +2507,8 @@ definitions:
         type: integer
       details:
         description: |-
-          A list of messages that carry the error details.  There will be a
-          common set of message types for APIs to use.
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.

@@ -704,6 +704,12 @@ definitions:
         type: string
       website:
         type: string
+  SectorVO:
+    properties:
+      name:
+        type: string
+      parent_industry:
+        type: string
   Stock:
     properties:
       exchange:
@@ -771,6 +777,10 @@ definitions:
         type: string
       revenue:
         type: string
+      sectors:
+        items:
+          $ref: '#/definitions/SectorVO'
+        type: array
       short_name:
         type: string
       stock:

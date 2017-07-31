@@ -602,11 +602,11 @@ paths:
           in: query
           name: syncToken
           type: string
-        - description: 'Upper bound (exclusive) for an event''s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.'
+        - description: 'Upper bound (exclusive) for an event''s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If timeMin is set, timeMax must be greater than timeMin.'
           in: query
           name: timeMax
           type: string
-        - description: 'Lower bound (inclusive) for an event''s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.'
+        - description: 'Lower bound (inclusive) for an event''s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If timeMax is set, timeMin must be smaller than timeMax.'
           in: query
           name: timeMin
           type: string
@@ -857,11 +857,11 @@ paths:
           in: query
           name: syncToken
           type: string
-        - description: 'Upper bound (exclusive) for an event''s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.'
+        - description: 'Upper bound (exclusive) for an event''s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If timeMin is set, timeMax must be greater than timeMin.'
           in: query
           name: timeMax
           type: string
-        - description: 'Lower bound (inclusive) for an event''s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.'
+        - description: 'Lower bound (inclusive) for an event''s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored. If timeMax is set, timeMin must be smaller than timeMax.'
           in: query
           name: timeMin
           type: string
@@ -1941,28 +1941,6 @@ definitions:
         format: date-time
         type: string
     type: object
-  DeepLinkData:
-    properties:
-      links:
-        items:
-          $ref: '#/definitions/Link'
-        type: array
-      url:
-        type: string
-    type: object
-  DisplayInfo:
-    properties:
-      appIconUrl:
-        type: string
-      appShortTitle:
-        type: string
-      appTitle:
-        type: string
-      linkShortTitle:
-        type: string
-      linkTitle:
-        type: string
-    type: object
   Error:
     properties:
       domain:
@@ -2207,8 +2185,8 @@ definitions:
         default: opaque
         description: |-
           Whether the event blocks time on the calendar. Optional. Possible values are:  
-          - "opaque" - The event blocks time on the calendar. This is the default value. 
-          - "transparent" - The event does not block time on the calendar.
+          - "opaque" - Default value. The event does block time on the calendar. This is equivalent to setting Show me as to Busy in the Calendar UI. 
+          - "transparent" - The event does not block time on the calendar. This is equivalent to setting Show me as to Available in the Calendar UI.
         type: string
       updated:
         description: Last modification time of the event (as a RFC3339 timestamp). Read-only.
@@ -2301,15 +2279,6 @@ definitions:
         type: string
       timeZone:
         description: 'The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. "Europe/Zurich".) For recurring events this field is required and specifies the time zone in which the recurrence is expanded. For single events this field is optional and indicates a custom time zone for the event start/end.'
-        type: string
-    type: object
-  EventHabitInstance:
-    properties:
-      data:
-        $ref: '#/definitions/HabitInstanceData'
-        description: Metadata specific to this instance.
-      parentId:
-        description: Id of the habit this instance belongs to.
         type: string
     type: object
   EventReminder:
@@ -2459,39 +2428,6 @@ definitions:
       timeMin:
         description: The start of the interval.
         format: date-time
-        type: string
-    type: object
-  HabitInstanceData:
-    properties:
-      status:
-        type: string
-      statusInferred:
-        type: boolean
-      type:
-        type: string
-    type: object
-  LaunchInfo:
-    properties:
-      appId:
-        type: string
-      installUrl:
-        type: string
-      intentAction:
-        type: string
-      uri:
-        type: string
-    type: object
-  Link:
-    properties:
-      applinkingSource:
-        type: string
-      displayInfo:
-        $ref: '#/definitions/DisplayInfo'
-      launchInfo:
-        $ref: '#/definitions/LaunchInfo'
-      platform:
-        type: string
-      url:
         type: string
     type: object
   Setting:

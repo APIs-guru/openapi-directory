@@ -7,7 +7,7 @@ info:
   title: Transport for London Unified
   version: v1
   x-apisguru-categories:
-    - location
+    - transport
     - open_data
   x-logo:
     url: 'https://pbs.twimg.com/profile_images/773531056670646272/dsuVeVSg.jpg'
@@ -1141,6 +1141,33 @@ paths:
       summary: Gets the next arrival predictions for all stops of a given mode
       tags:
         - Mode
+  '/Occupancy/BikePoints/{ids}':
+    get:
+      deprecated: false
+      operationId: Occupancy_GetBikePointsOccupancies
+      parameters:
+        - description: ''
+          in: path
+          items:
+            type: string
+          name: ids
+          required: true
+          type: array
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/BikePointOccupancy'
+            type: array
+      summary: Get the occupancy for bike points.
+      tags:
+        - Occupancy
   /Occupancy/CarPark:
     get:
       deprecated: false
@@ -2263,7 +2290,6 @@ paths:
   '/StopPoint/{ids}':
     get:
       deprecated: false
-      operationId: StopPoint_Get
       parameters:
         - description: "A comma-separated list of stop point ids (station naptan code e.g. 940GZZLUASL). Max. approx. 20 ids.\r\n            You can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name."
           in: path
@@ -2506,6 +2532,38 @@ paths:
               $ref: '#/definitions/StopPointRouteSection'
             type: array
       summary: Returns the route sections for all the lines that service the given stop point ids
+      tags:
+        - StopPoint
+  '/StopPoint/{id}/placeTypes':
+    get:
+      deprecated: false
+      parameters:
+        - description: A naptan id for a stop point (station naptan code e.g. 940GZZLUASL).
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: A comcomma-separated value representing the place types.
+          in: query
+          items:
+            type: string
+          name: placeTypes
+          required: true
+          type: array
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Place'
+            type: array
+      summary: Get a list of places corresponding to a given id and place types.
       tags:
         - StopPoint
   '/StopPoint/{stopPointId}/CarParks':
@@ -2883,6 +2941,28 @@ definitions:
         format: int32
         type: integer
       occupied:
+        format: int32
+        type: integer
+    type: object
+  BikePointOccupancy:
+    description: Bike point occupancy
+    properties:
+      bikesCount:
+        description: Total bike counts
+        format: int32
+        type: integer
+      emptyDocks:
+        description: Empty docks
+        format: int32
+        type: integer
+      id:
+        description: Id of the bike point such as BikePoints_1
+        type: string
+      name:
+        description: Name / Common name of the bike point
+        type: string
+      totalDocks:
+        description: Total docks available
         format: int32
         type: integer
     type: object

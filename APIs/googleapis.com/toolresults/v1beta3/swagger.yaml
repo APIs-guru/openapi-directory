@@ -1529,7 +1529,7 @@ definitions:
         type: string
       testExecutionMatrixId:
         description: |-
-          TestExecution Matrix ID that the Test Service uses.
+          TestExecution Matrix ID that the TestExecutionService uses.
 
           - In response: present if set by create - In create: optional - In update: never set
         type: string
@@ -1897,11 +1897,17 @@ definitions:
   StackTrace:
     description: A stacktrace.
     properties:
+      clusterId:
+        description: Exception cluster ID
+        type: string
       exception:
         description: |-
           The stack trace message.
 
           Required
+        type: string
+      reportId:
+        description: Exception report ID
         type: string
     type: object
   Status:

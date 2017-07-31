@@ -492,6 +492,12 @@ definitions:
       Provides information to the recognizer that specifies how to process the
       request.
     properties:
+      enableWordTimeOffsets:
+        description: |-
+          *Optional* If `true`, a list of `words` are returned in the top result,
+          containing the start and end timestamps for those words. The default value,
+          'false' does not return any word-level timing information.
+        type: boolean
       encoding:
         description: '*Required* Encoding of audio data sent in all `RecognitionAudio` messages.'
         enum:
@@ -603,6 +609,11 @@ definitions:
       transcript:
         description: '*Output-only* Transcript text representing the words that the user spoke.'
         type: string
+      words:
+        description: '*Output-only* List of word-specific information for each recognized word.'
+        items:
+          $ref: '#/definitions/WordInfo'
+        type: array
     type: object
   SpeechRecognitionResult:
     description: A speech recognition result corresponding to a portion of the audio.
@@ -678,8 +689,8 @@ definitions:
         type: integer
       details:
         description: |-
-          A list of messages that carry the error details.  There will be a
-          common set of message types for APIs to use.
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
@@ -690,5 +701,34 @@ definitions:
           A developer-facing error message, which should be in English. Any
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
+        type: string
+    type: object
+  WordInfo:
+    description: |-
+      Word-specific information detected along with speech recognition when certain
+      request parameters are set.
+    properties:
+      endTime:
+        description: |-
+          *Output-only* Time offset relative to the beginning of the audio,
+          and corresponding to the end of the spoken word.
+          This field is only set if `enable_word_time_offsets=true` and only
+          in the top hypothesis.
+          This is an experimental feature and the accuracy of the time offset can
+          vary.
+        format: google-duration
+        type: string
+      startTime:
+        description: |-
+          *Output-only* Time offset relative to the beginning of the audio,
+          and corresponding to the start of the spoken word.
+          This field is only set if `enable_word_time_offsets=true` and only
+          in the top hypothesis.
+          This is an experimental feature and the accuracy of the time offset can
+          vary.
+        format: google-duration
+        type: string
+      word:
+        description: '*Output-only* The word corresponding to this set of information.'
         type: string
     type: object

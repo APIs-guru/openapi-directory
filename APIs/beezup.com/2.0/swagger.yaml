@@ -4387,6 +4387,11 @@ paths:
           name: channelCatalogId
           required: true
           type: string
+        - format: uri
+          in: query
+          name: redirectionPageUrl
+          required: true
+          type: string
       responses:
         '200':
           description: Successfully fetched channel catalog properties
@@ -4730,10 +4735,6 @@ paths:
           description: Could not process request for given parameters values. Please check error message for more details.
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
-        '404':
-          description: No orders have been found for this request.
-          schema:
-            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
           $ref: '#/responses/GeneralError'
       security:
@@ -4758,10 +4759,6 @@ paths:
             $ref: '#/definitions/orderListLight'
         '400':
           description: Could not process request for given parameters values. Please check error message for more details.
-          schema:
-            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
-        '404':
-          description: No orders have been found for this request.
           schema:
             $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         default:
@@ -7099,13 +7096,14 @@ definitions:
     type: object
   channelCatalogMarketplacePropertiesLinks:
     properties:
+      externalConfigurationPage:
+        $ref: '#/definitions/externalLinks.GetExternalConfigurationPageLink'
       self:
         $ref: '#/definitions/links.GetChannelCatalogMarketplacePropertiesLink'
       settings:
         $ref: '#/definitions/links.GetChannelCatalogMarketplaceSettingsLink'
     required:
       - self
-      - settings
     type: object
   channelCatalogMarketplaceProperty:
     allOf:
@@ -8360,10 +8358,12 @@ definitions:
       - reportFilterId
     type: object
   createStoreRequest:
-    description: The request to create a store
+    description: 'The request to create a store. The store identifier is optional, if null it will be automatically computed.'
     properties:
       countryIsoCodeAlpha3:
         $ref: '#/definitions/storeCountryIsoCodeAlpha3'
+      id:
+        $ref: '#/definitions/BeezUP.Common.StoreId'
       name:
         $ref: '#/definitions/storeName'
       sectors:
@@ -8845,6 +8845,9 @@ definitions:
       - storeId
       - orderListRequestWithoutPagination
     type: object
+  externalLinks.GetExternalConfigurationPageLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
   feedType:
     description: The Feed Type
     enum:
@@ -10671,6 +10674,10 @@ definitions:
         description: The store name
         example: My Store 1
         type: string
+      enabled:
+        description: The enabled status of the Channel Catalog
+        example: true
+        type: boolean
       links:
         $ref: '#/definitions/marketplaceChannelCatalogLinks'
       lovLinks:
@@ -10697,6 +10704,7 @@ definitions:
       marketplaceTechnicalCode:
         $ref: '#/definitions/BeezUP.Common.MarketplaceTechnicalCode'
     required:
+      - enabled
       - marketplaceTechnicalCode
       - marketplaceBusinessCode
       - marketplaceMarketPlaceId

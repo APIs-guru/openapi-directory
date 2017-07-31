@@ -1243,10 +1243,7 @@ definitions:
           The data of the domain. For example, if charting stock prices over time,
           this is the data representing the dates.
       reversed:
-        description: |-
-          True to reverse the order of the domain values (horizontal axis).
-          Not applicable to Gauge, Geo, Histogram, Org, Pie, Radar, and Treemap
-          charts.
+        description: True to reverse the order of the domain values (horizontal axis).
         type: boolean
     type: object
   BasicChartSeries:
@@ -1791,6 +1788,9 @@ definitions:
       data:
         $ref: '#/definitions/ChartData'
         description: The data of the CandlestickDomain.
+      reversed:
+        description: True to reverse the order of the domain values (horizontal axis).
+        type: boolean
     type: object
   CandlestickSeries:
     description: The series of a CandlestickData.
@@ -1972,6 +1972,11 @@ definitions:
   ChartSpec:
     description: The specifications of a chart.
     properties:
+      altText:
+        description: |-
+          The alternative text that describes the chart.  This is often used
+          for accessibility.
+        type: string
       backgroundColor:
         $ref: '#/definitions/Color'
         description: |-

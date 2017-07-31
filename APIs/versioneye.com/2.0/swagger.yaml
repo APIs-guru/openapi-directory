@@ -342,6 +342,88 @@ paths:
       summary: Returns the inventory list of the organisation
       tags:
         - organisations
+  '/organisations/{orga_name}/inventory_diff':
+    get:
+      operationId: getOrganisationsOrgaNameInventoryDiff
+      parameters:
+        - description: ID of the inventory diff object
+          in: query
+          name: inventory_diff_id
+          required: false
+          type: string
+        - format: int32
+          in: path
+          name: orga_name
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Returns the inventory diff object
+      summary: Returns the inventory diff object
+      tags:
+        - organisations
+    post:
+      consumes:
+        - application/json
+      description: |-
+
+        This Endpoint takes 2 inventory filters and calculates the difference between them.
+        The diff object contains wich items have been removed and/or added compared to the inventory1 filter.
+        The response of this Endpoint is the ID of the diff object, which is calculated async in the background.
+                      
+      operationId: postOrganisationsOrgaNameInventoryDiff
+      parameters:
+        - description: 'Inventory1, filter by team name'
+          in: formData
+          name: f1_team_name
+          required: false
+          type: string
+        - description: 'Inventory1, filter by programming language'
+          in: formData
+          name: f1_language
+          required: false
+          type: string
+        - description: 'Inventory1, filter down by project version'
+          in: formData
+          name: f1_project_version
+          required: false
+          type: string
+        - description: 'Inventory1, post processing filter. Possible values are ''ALL'', ''duplicates_only'', ''show_duplicates'''
+          in: formData
+          name: f1_post_filter
+          required: false
+          type: string
+        - description: 'Inventory2, filter by team name'
+          in: formData
+          name: f2_team_name
+          required: false
+          type: string
+        - description: 'Inventory2, filter by programming language'
+          in: formData
+          name: f2_language
+          required: false
+          type: string
+        - description: 'Inventory2, filter down by project version'
+          in: formData
+          name: f2_project_version
+          required: false
+          type: string
+        - description: 'Inventory2, post processing filter. Possible values are ''ALL'', ''duplicates_only'', ''show_duplicates'''
+          in: formData
+          name: f2_post_filter
+          required: false
+          type: string
+        - format: int32
+          in: path
+          name: orga_name
+          required: true
+          type: integer
+      responses:
+        '201':
+          description: Creates an inventory diff object
+      summary: Creates an inventory diff object
+      tags:
+        - organisations
   '/organisations/{orga_name}/projects':
     get:
       description: Returns the list of projects

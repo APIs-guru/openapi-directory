@@ -15,15 +15,15 @@ info:
     <BR><BR>
     The recommended use scenario for get_facilities, get_qid, get_map, and get_downoad is:
     <br>
-    <br><b>1)</b>&nbsp Use get_facilities to validate passed query parameters, obtain summary statistics and to obtain a query_id (QID).  QIDs are time sensitive and will be valid for approximately 30 minutes.
-    <br><b>2)</b>&nbsp Use get_qid, with the returned QID, to paginate through arrays of facility results.
-    <br><b>3)</b>&nbsp Use get_map, with the returned QID, to zoom in/out and pan on the clustered and individual facility coordinates that meet the QID query criteria.
-    <br><b>4)</b>&nbsp Use get_download, with the returned QID, to generate a Comma Separated Value (CSV) file of facility information that meets the QID query criteria.
+    <br><b>1)</b>  Use get_facilities to validate passed query parameters, obtain summary statistics and to obtain a query_id (QID).  QIDs are time sensitive and will be valid for approximately 30 minutes.
+    <br><b>2)</b>  Use get_qid, with the returned QID, to paginate through arrays of facility results.
+    <br><b>3)</b>  Use get_map, with the returned QID, to zoom in/out and pan on the clustered and individual facility coordinates that meet the QID query criteria.
+    <br><b>4)</b>  Use get_download, with the returned QID, to generate a Comma Separated Value (CSV) file of facility information that meets the QID query criteria.
     <br>
     <br>
     Use the qcolumns parameter to customize your search results.  Use the Metdata service endpoint for a list of available output objects, their Column Ids, and their definitions to help you build your customized output. 
     <br><br>
-    Additional ECHO Resources:&nbsp&nbsp <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
+    Additional ECHO Resources:   <a href="https://echo.epa.gov/tools/web-services">Web Services</a>, <a href="https://echo.epa.gov/resources/echo-data/about-the-data">About ECHO's Data</a>, <a href="https://echo.epa.gov/tools/data-downloads">Data Downloads</a>
     <br>
   license:
     name: This page was built with the Swagger API.
@@ -2465,7 +2465,6 @@ definitions:
         example: '0'
         type: string
       EisIDs:
-        example: '7509611'
         type: string
       EjscreenFlag:
         type: string
@@ -2953,6 +2952,14 @@ definitions:
         type: string
       AIRCity:
         type: string
+      AIRCmsCategoryCode:
+        description: AIR CMS Category Code
+        title: AIR CMS Category Code
+        type: string
+      AIRCmsCategoryDesc:
+        description: AIR CMS Category Description
+        title: AIR CMS Category Description
+        type: string
       AIRCounty:
         description: The name of the county where the AIR facility is located.
         example: Racine
@@ -3148,7 +3155,6 @@ definitions:
         example: '0'
         type: string
       EisIDs:
-        example: '7509611'
         type: string
       EjscreenFlag:
         type: string
@@ -3912,7 +3918,6 @@ definitions:
         example: 0
         type: number
       EisIDs:
-        example: '7509611'
         type: string
       EjscreenFlag:
         type: string

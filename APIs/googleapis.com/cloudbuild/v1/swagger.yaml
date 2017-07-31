@@ -824,6 +824,19 @@ definitions:
         items:
           type: string
         type: array
+      volumes:
+        description: |-
+          List of volumes to mount into the build step.
+
+          Each volume will be created as an empty volume prior to execution of the
+          build step. Upon completion of the build, volumes and their contents will
+          be discarded.
+
+          Using a named volume in only one step is not valid as it is indicative
+          of a mis-configured build request.
+        items:
+          $ref: '#/definitions/Volume'
+        type: array
       waitFor:
         description: |-
           The ID(s) of the step(s) that this build step depends on.
@@ -1216,5 +1229,25 @@ definitions:
 
           This object must be a gzipped archive file (.tar.gz) containing source to
           build.
+        type: string
+    type: object
+  Volume:
+    description: |-
+      Volume describes a Docker container volume which is mounted into build steps
+      in order to persist files across build step execution.
+    properties:
+      name:
+        description: |-
+          Name of the volume to mount.
+
+          Volume names must be unique per build step and must be valid names for
+          Docker volumes. Each named volume must be used by at least two build steps.
+        type: string
+      path:
+        description: |-
+          Path at which to mount the volume.
+
+          Paths must be absolute and cannot conflict with other volume paths on the
+          same build step or with certain reserved volume paths.
         type: string
     type: object
