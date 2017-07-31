@@ -1,0 +1,273 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.ebay.com
+basePath: /commerce/taxonomy/v1_beta
+info:
+  contact:
+    name: eBay Inc.
+  description: The Commerce Taxonomy API helps sellers determine the best eBay category when listing their inventory and buyers to determine the appropriate categories in which to browse or search.
+  license:
+    name: eBay API License Agreement
+    url: 'https://go.developer.ebay.com/api-license-agreement'
+  title: Commerce Taxonomy
+  version: v1_beta.0.0
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://pbs.twimg.com/profile_images/667048357307662338/PzXHlU9N_400x400.png'
+  x-origin:
+    - format: swagger
+      url: 'https://developer.ebay.com/api-docs/master/commerce/taxonomy/openapi/2/commerce_taxonomy_v1_beta.json'
+      version: '2.0'
+  x-providerName: ebay.com
+  x-serviceName: commerce-taxonomy
+produces:
+  - application/json
+securityDefinitions:
+  Client Credentials:
+    description: The security definitions for this API. Please check individual operations for applicable scopes.
+    flow: application
+    scopes:
+      'https://api.ebay.com/oauth/api_scope': View public data from eBay
+    tokenUrl: 'https://api.ebay.com/identity/v1/oauth2/token'
+    type: oauth2
+paths:
+  '/category_tree/{category_tree_id}':
+    get:
+      description: 'This call retrieves the complete category tree that is identified by the category_tree_id parameter. The value of category_tree_id was returned by the Get a Default Category Tree ID call in the categoryTreeId field. The response contains details of all nodes of the specified eBay category tree, as well as the eBay marketplaces that use this category tree. Note: This call can return a very large payload, so you are strongly advised to submit the request with the following HTTP header: &nbsp;&nbsp;Accept-Encoding: application/gzip With this header (in addition to the required headers described under HTTP Request Headers), the call returns the response with gzip compression.'
+      operationId: getCategoryTree
+      parameters:
+        - description: The unique identifier of the eBay category tree being requested.
+          in: path
+          name: category_tree_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CategoryTree'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope'
+      summary: Retrieve the complete category tree corresponding to a specified category tree ID.
+      tags:
+        - category_tree
+  '/category_tree/{category_tree_id}/get_category_subtree':
+    get:
+      description: 'This call retrieves the details of all nodes of the category tree hierarchy (the subtree) below a specified category of a category tree. You identify the tree using the category_tree_id parameter, which was returned by the Get a Default Category Tree ID call in the categoryTreeId field. Note: This call can return a very large payload, so you are strongly advised to submit the request with the following HTTP header: &nbsp;&nbsp;Accept-Encoding: application/gzip With this header (in addition to the required headers described under HTTP Request Headers), the call returns the response with gzip compression.'
+      operationId: getCategorySubtree
+      parameters:
+        - description: 'The unique identifier of the category at the top of the subtree being requested. Note: If the category_id submitted identifies the root node of the tree, this call returns an error. To retrieve the complete tree, use this value with the Get a Category Tree call. If the category_id submitted identifies a leaf node of the tree, the call response will contain information about only that leaf node, which is a valid subtree.'
+          in: query
+          name: category_id
+          required: true
+          type: string
+        - description: The unique identifier of the eBay category tree from which a category subtree is being requested.
+          in: path
+          name: category_tree_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CategorySubtree'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope'
+      summary: Retrieve all nodes of the category tree hierarchy (the subtree) below a specified category in a specified category tree.
+      tags:
+        - category_tree
+  '/category_tree/{category_tree_id}/get_category_suggestions':
+    get:
+      description: 'This call returns an array of category tree leaf nodes in the specified category tree that are considered by eBay to most closely correspond to the query string q. Returned with each suggested node is a localized name for that category (based on the Accept-Language header specified for the call), and details about each of the category''s ancestor nodes, extending from its immediate parent up to the root of the category tree. Note: This call can return a large payload, so you are advised to submit the request with the following HTTP header: &nbsp;&nbsp;Accept-Encoding: application/gzip With this header (in addition to the required headers described under HTTP Request Headers), the call returns the response with gzip compression. You identify the tree using the category_tree_id parameter, which was returned by the Get a Default Category Tree ID call in the categoryTreeId field. Important: This call is not supported in the Sandbox environment. It will return a response payload in which the categoryName fields contain random or boilerplate text regardless of the query submitted.'
+      operationId: getCategorySuggestions
+      parameters:
+        - description: The unique identifier of the eBay category tree for which suggested nodes are being requested.
+          in: path
+          name: category_tree_id
+          required: true
+          type: string
+        - description: 'A quoted string that describes or characterizes the item being offered for sale. The string format is free form, and can contain any combination of phrases or keywords. eBay will parse the string and return suggested categories for the item.'
+          in: query
+          name: q
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CategorySuggestionResponse'
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+        '404':
+          description: Not found
+        '500':
+          description: Internal Server Error
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope'
+      summary: Return an array of suggested categories that eBay has determined correspond to keywords that describe a product.
+      tags:
+        - category_tree
+  /get_default_category_tree_id:
+    get:
+      description: 'A given eBay marketplace might use multiple category trees, but one of those trees is considered to be the default for that marketplace. This call retrieves a reference to the default category tree associated with the specified eBay marketplace ID. The response includes only the tree''s unique identifier and version, which you can use to retrieve more details about the tree, its structure, and its individual category nodes.'
+      operationId: getDefaultCategoryTreeId
+      parameters:
+        - description: 'The ID of the eBay marketplace for which the category tree ID is being requested. For a list of supported marketplace IDs, see Marketplaces with Default Category Trees.'
+          in: query
+          name: marketplace_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BaseCategoryTree'
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope'
+      summary: Retrieve the default category tree reference for a specific eBay marketplace.
+      tags:
+        - category_tree
+definitions:
+  AncestorReference:
+    description: This type contains information about one of the ancestors of a suggested category. An ordered list of these references describes the path from the suggested category to the root of the category tree it belongs to.
+    properties:
+      categoryId:
+        description: 'The unique identifier of the eBay ancestor category. Note: The root node of a full default category tree includes the categoryId field, but its value should not be relied upon. It provides no useful information for application development.'
+        type: string
+      categoryName:
+        description: 'The canonical name of the ancestor category identified by categoryId. Note: Don''t depend on category names to be unique within a given category tree.'
+        type: string
+      categorySubtreeNodeHref:
+        description: The href portion of the Get a Category Subtree call that retrieves the subtree below the ancestor category node.
+        type: string
+      categoryTreeNodeLevel:
+        description: 'The absolute level of the ancestor category node in the hierarchy of its category tree. Note: The root node of any full category tree is always at level 0.'
+        type: integer
+    type: object
+  BaseCategoryTree:
+    description: This type contains identifying information for the category tree associated with a particular eBay marketplace.
+    properties:
+      categoryTreeId:
+        description: The unique identifier of the eBay category tree for the specified marketplace.
+        type: string
+      categoryTreeVersion:
+        description: The version of the category tree identified by categoryTreeId. It's a good idea to cache this value for comparison so you can determine if this category tree has been modified in subsequent calls.
+        type: string
+    type: object
+  Category:
+    description: This type contains information about a particular eBay product category.
+    properties:
+      categoryId:
+        description: 'The unique identifier of the eBay category within its category tree. Note: The root node of a full default category tree includes the categoryId field, but its value should not be relied upon. It provides no useful information for application development.'
+        type: string
+      categoryName:
+        description: 'The canonical name of the category identified by categoryId. Note: Don''t depend on category names to be unique within a given category tree.'
+        type: string
+    type: object
+  CategorySubtree:
+    description: 'This type contains information about a particular subtree of a specified eBay category tree. A category subtree consists of a non-root node of the category tree, and all of its descendants down to the leaf nodes.'
+    properties:
+      categorySubtreeNode:
+        $ref: '#/definitions/CategoryTreeNode'
+      categoryTreeId:
+        description: The unique identifier of the eBay category tree to which this subtree belongs.
+        type: string
+      categoryTreeVersion:
+        description: The version of the category tree identified by categoryTreeId. It's a good idea to cache this value for comparison so you can determine if this category tree has been modified in subsequent calls.
+        type: string
+    type: object
+  CategorySuggestion:
+    description: This type contains information about a suggested category tree leaf node that corresponds to keywords provided in the request. It includes details about each of the category's ancestor nodes extending up to the root of the category tree.
+    properties:
+      category:
+        $ref: '#/definitions/Category'
+      categoryTreeNodeAncestors:
+        description: 'An ordered list of category references that describes the location of the suggested category in the specified category tree. The list identifies the category''s ancestry as a sequence of parent nodes, from the current node''s immediate parent to the root node of the category tree. Note: The root node of a full default category tree includes categoryId and categoryName fields, but their values should not be relied upon. They provide no useful information for application development.'
+        items:
+          $ref: '#/definitions/AncestorReference'
+        type: array
+      categoryTreeNodeLevel:
+        description: 'The absolute level of the category tree node in the hierarchy of its category tree. Note: The root node of any full category tree is always at level 0.'
+        type: integer
+      relevancy:
+        description: 'The relevancy classification of the category suggestion. [[DW: Need examples of this value]]'
+        type: string
+    type: object
+  CategorySuggestionResponse:
+    description: 'This type contains an array of suggested category tree nodes that are considered by eBay to most closely correspond to the keywords provided in a query string, from a specified category tree.'
+    properties:
+      categorySuggestions:
+        description: 'Contains details about one or more suggested categories that correspond to the provided keywords. The array of suggested categories is sorted in order of eBay''s confidence of the relevance of each category (the first category is the most relevant). Important: This call is not supported in the Sandbox environment. It will return a response payload in which the categoryName fields contain random or boilerplate text regardless of the query submitted.'
+        items:
+          $ref: '#/definitions/CategorySuggestion'
+        type: array
+      categoryTreeId:
+        description: The unique identifier of the eBay category tree from which suggestions are returned.
+        type: string
+      categoryTreeVersion:
+        description: The version of the category tree identified by categoryTreeId. It's a good idea to cache this value for comparison so you can determine if this category tree has been modified in subsequent calls.
+        type: string
+    type: object
+  CategoryTree:
+    description: This type contains information about all nodes of a specified eBay category tree.
+    properties:
+      applicableMarketplaceIds:
+        description: A list of one or more identifiers of the eBay marketplaces that use this category tree.
+        items:
+          description: ' For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/taxonomy/types/MarketplaceIdEnum.html''>eBay API documentation</a>'
+          type: string
+        type: array
+      categoryTreeId:
+        description: The unique identifier of this eBay category tree.
+        type: string
+      categoryTreeVersion:
+        description: The version of this category tree. It's a good idea to cache this value for comparison so you can determine if this category tree has been modified in subsequent calls.
+        type: string
+      rootCategoryNode:
+        $ref: '#/definitions/CategoryTreeNode'
+    type: object
+  CategoryTreeNode:
+    description: 'This type contains information about all nodes of a category tree or subtree hierarchy, including and below the specified <b>Category</b>, down to the leaf nodes. It is a recursive structure.'
+    properties:
+      category:
+        $ref: '#/definitions/Category'
+      categoryTreeNodeLevel:
+        description: 'The absolute level of the current category tree node in the hierarchy of its category tree. Note: The root node of any full category tree is always at level 0.'
+        type: integer
+      childCategoryTreeNodes:
+        description: 'An array of one or more category tree nodes that are the immediate children of the current category tree node, as well as their children, recursively down to the leaf nodes. Returned only if the the current category tree node is not a leaf node (the value of leafCategoryTreeNode is false).'
+        items:
+          $ref: '#/definitions/CategoryTreeNode'
+        type: array
+      leafCategoryTreeNode:
+        description: 'A value of true indicates that the current category tree node is a leaf node (it has no child nodes). A value of false indicates that the current node has one or more child nodes, which are identified by the childCategoryTreeNodes array. Returned only if the value of this field is true.'
+        type: boolean
+      parentCategoryTreeNodeHref:
+        description: The href portion of the Get a Category Subtree call that retrieves the subtree below the parent of this category tree node. Not returned if the current category tree node is the root node of its tree.
+        type: string
+    type: object
