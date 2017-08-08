@@ -2115,10 +2115,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendBuckets
     put:
@@ -2359,10 +2355,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendServices
     put:
@@ -2618,23 +2610,23 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: 'Updates the specified firewall rule with the data included in the request. Using PUT method, can only update following fields of firewall rule: allowed, description, sourceRanges, sourceTags, targetTags. This method supports patch semantics.'
+      description: Updates the specified firewall rule with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
       operationId: compute.firewalls.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Firewall'
+        - description: Name of the firewall rule to patch.
+          in: path
+          name: firewall
+          required: true
+          type: string
         - description: Project ID for this request.
           in: path
           name: project
           required: true
           type: string
-        - description: Name of the firewall rule to update.
-          in: path
-          name: firewall
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Firewall'
       responses:
         '200':
           description: Successful response
@@ -3104,10 +3096,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - healthChecks
     put:
@@ -3348,10 +3336,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpHealthChecks
     put:
@@ -3592,10 +3576,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpsHealthChecks
     put:
@@ -6245,10 +6225,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - urlMaps
     put:
@@ -6915,10 +6891,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionAutoscalers
     post:
@@ -7305,10 +7277,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionBackendServices
     put:
@@ -9003,10 +8971,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - routers
     put:
@@ -10872,10 +10836,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - autoscalers
     post:
@@ -14676,7 +14636,7 @@ definitions:
         description: |-
           Specifies the balancing mode for this backend. For global HTTP(S) or TCP/SSL load balancing, the default is UTILIZATION. Valid values are UTILIZATION, RATE (for HTTP(S)) and CONNECTION (for TCP/SSL).
 
-          This cannot be used for internal load balancing.
+          For Internal Load Balancing, the default and only supported mode is CONNECTION.
         enum:
           - CONNECTION
           - RATE
@@ -15332,7 +15292,7 @@ definitions:
         description: |-
           Size of the persistent disk, specified in GB. You can specify this field when creating a persistent disk using the sourceImage or sourceSnapshot parameter, or specify it alone to create an empty persistent disk.
 
-          If you specify this field along with sourceImage or sourceSnapshot, the value of sizeGb must not be less than the size of the sourceImage or the size of the snapshot.
+          If you specify this field along with sourceImage or sourceSnapshot, the value of sizeGb must not be less than the size of the sourceImage or the size of the snapshot. Acceptable values are 1 to 65536, inclusive.
         format: int64
         type: string
       sourceImage:
@@ -15652,7 +15612,7 @@ definitions:
         items:
           properties:
             IPProtocol:
-              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, sctp), or the IP protocol number.'
+              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp), or the IP protocol number.'
               type: string
             ports:
               description: |-
@@ -15667,8 +15627,36 @@ definitions:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
+      denied:
+        description: The list of DENY rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a permitted connection.
+        items:
+          properties:
+            IPProtocol:
+              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp), or the IP protocol number.'
+              type: string
+            ports:
+              description: |-
+                An optional list of ports to which this rule applies. This field is only applicable for UDP or TCP protocol. Each entry must be either an integer or a range. If not specified, this rule applies to connections through any port.
+
+                Example inputs include: ["22"], ["80","443"], and ["12345-12349"].
+              items:
+                type: string
+              type: array
+          type: object
+        type: array
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      destinationRanges:
+        description: 'If destination ranges are specified, the firewall will apply only to traffic that has destination IP address in these ranges. These ranges must be expressed in CIDR format. Only IPv4 is supported.'
+        items:
+          type: string
+        type: array
+      direction:
+        description: 'Direction of traffic to which this firewall applies; default is INGRESS. Note: For INGRESS traffic, it is NOT supported to specify destinationRanges; For EGRESS traffic, it is NOT supported to specify sourceRanges OR sourceTags.'
+        enum:
+          - EGRESS
+          - INGRESS
         type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -15691,6 +15679,10 @@ definitions:
           - projects/myproject/global/networks/my-network 
           - global/networks/default
         type: string
+      priority:
+        description: 'Priority for this rule. This is an integer between 0 and 65535, both inclusive. When not specified, the value assumed is 1000. Relative priorities determine precedence of conflicting rules. Lower value of priority implies higher precedence (eg, a rule with priority 0 has higher precedence than a rule with priority 1). DENY rules take precedence over ALLOW rules having equal priority.'
+        format: int32
+        type: integer
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
@@ -15700,7 +15692,7 @@ definitions:
           type: string
         type: array
       sourceTags:
-        description: 'If source tags are specified, the firewall will apply only to traffic from VM instances in the same virtual network with a tag listed in the source tags. Source tags cannot be used to control traffic to an instance''s external IP address, it only applies to traffic between instances in the same virtual network. Because tags are associated with instances, not IP addresses. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply.'
+        description: 'If source tags are specified, the firewall rule applies only to traffic with source IPs that match the primary network interfaces of VM instances that have the tag and are in the same VPC network. Source tags cannot be used to control traffic to an instance''s external IP address, it only applies to traffic between instances in the same virtual network. Because tags are associated with instances, not IP addresses. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply.'
         items:
           type: string
         type: array
@@ -15809,8 +15801,8 @@ definitions:
           Some types of forwarding target have constraints on the acceptable ports:  
           - TargetHttpProxy: 80, 8080 
           - TargetHttpsProxy: 443 
-          - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 5222 
-          - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 5222 
+          - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1883, 5222 
+          - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1883, 5222 
           - TargetVpnGateway: 500, 4500
           -
         type: string
@@ -16481,7 +16473,7 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       networkInterfaces:
-        description: 'An array of configurations for this interface. This specifies how this interface is configured to interact with other network services, such as connecting to the internet. Only one interface is supported per instance.'
+        description: 'An array of network configurations for this instance. These specify how interfaces are configured to interact with other network services, such as connecting to the internet. Multiple interfaces are supported per instance.'
         items:
           $ref: '#/definitions/NetworkInterface'
         type: array
@@ -16503,7 +16495,7 @@ definitions:
         description: '[Output Only] Whether a VM has been restricted for start because Compute Engine has detected suspicious activity.'
         type: boolean
       status:
-        description: '[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, and TERMINATED.'
+        description: '[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, STOPPED, SUSPENDING, SUSPENDED, and TERMINATED.'
         enum:
           - PROVISIONING
           - RUNNING
@@ -18076,6 +18068,8 @@ definitions:
           - REGIONAL_INSTANCE_GROUP_MANAGERS
           - ROUTERS
           - ROUTES
+          - SECURITY_POLICIES
+          - SECURITY_POLICY_RULES
           - SNAPSHOTS
           - SSD_TOTAL_GB
           - SSL_CERTIFICATES

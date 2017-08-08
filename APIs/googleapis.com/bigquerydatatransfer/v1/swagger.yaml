@@ -132,7 +132,7 @@ paths:
   '/v1/{name}':
     delete:
       description: Deletes the specified transfer run.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.delete
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.delete
       parameters:
         - description: |-
             The field will contain name of the resource requested, for example:
@@ -162,7 +162,7 @@ paths:
       description: |-
         Retrieves a supported data source and returns its settings,
         which can be used for UI rendering.
-      operationId: bigquerydatatransfer.projects.locations.dataSources.get
+      operationId: bigquerydatatransfer.projects.dataSources.get
       parameters:
         - description: |-
             The field will contain name of the resource requested, for example:
@@ -210,7 +210,7 @@ paths:
       description: |-
         Updates a data transfer configuration.
         All fields must be set, even if they are not updated.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.patch
+      operationId: bigquerydatatransfer.projects.transferConfigs.patch
       parameters:
         - description: |-
             Optional OAuth2 authorization code to use with this transfer configuration.
@@ -267,6 +267,63 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/{name}/locations':
+    get:
+      description: Lists information about the supported locations for this service.
+      operationId: bigquerydatatransfer.projects.locations.list
+      parameters:
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
+        - description: 'The resource that owns the locations collection, if applicable.'
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListLocationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{name}:checkValidCreds':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -286,7 +343,7 @@ paths:
       description: |-
         Returns true if valid credentials exist for the given data source and
         requesting user.
-      operationId: bigquerydatatransfer.projects.locations.dataSources.checkValidCreds
+      operationId: bigquerydatatransfer.projects.dataSources.checkValidCreds
       parameters:
         - in: body
           name: body
@@ -423,7 +480,7 @@ paths:
       description: |-
         Lists supported data sources and returns their settings,
         which can be used for UI rendering.
-      operationId: bigquerydatatransfer.projects.locations.dataSources.list
+      operationId: bigquerydatatransfer.projects.dataSources.list
       parameters:
         - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
@@ -483,7 +540,7 @@ paths:
   '/v1/{parent}/runs':
     get:
       description: Returns information about running and completed jobs.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.list
       parameters:
         - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
@@ -566,7 +623,7 @@ paths:
   '/v1/{parent}/transferConfigs':
     get:
       description: Returns information about all data transfers in the project.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.list
       parameters:
         - collectionFormat: multi
           description: 'When specified, only configurations of requested data sources are returned.'
@@ -575,20 +632,20 @@ paths:
             type: string
           name: dataSourceIds
           type: array
-        - description: Page size. The default page size is the maximum value of 1000 results.
+        - collectionFormat: multi
+          description: Page size. The default page size is the maximum value of 1000 results.
           in: query
+          items:
+            type: string
           name: pageSize
           type: integer
-        - collectionFormat: multi
-          description: |-
+        - description: |-
             Pagination token, which can be used to request a specific page
             of `ListTransfersRequest` list results. For multiple-page
             results, `ListTransfersResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
           in: query
-          items:
-            type: string
           name: pageToken
           type: string
         - description: |-
@@ -635,7 +692,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new data transfer configuration.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.create
+      operationId: bigquerydatatransfer.projects.transferConfigs.create
       parameters:
         - description: |-
             Optional OAuth2 authorization code to use with this transfer configuration.
@@ -692,7 +749,7 @@ paths:
   '/v1/{parent}/transferLogs':
     get:
       description: Returns user facing log messages for the data transfer run.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.transferLogs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.transferLogs.list
       parameters:
         - collectionFormat: multi
           description: |-
@@ -784,7 +841,7 @@ paths:
         For each date - or whatever granularity the data source supports - in the
         range, one transfer run is created.
         Note that runs are created per UTC time in the time range.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns
+      operationId: bigquerydatatransfer.projects.transferConfigs.scheduleRuns
       parameters:
         - in: body
           name: body
@@ -1050,6 +1107,18 @@ definitions:
           @OutputOnly
         type: string
     type: object
+  ListLocationsResponse:
+    description: The response message for Locations.ListLocations.
+    properties:
+      locations:
+        description: A list of locations that matches the specified filter in the request.
+        items:
+          $ref: '#/definitions/Location'
+        type: array
+      nextPageToken:
+        description: The standard List next-page token.
+        type: string
+    type: object
   ListTransferConfigsResponse:
     description: The returned list of pipelines in the project.
     properties:
@@ -1106,6 +1175,33 @@ definitions:
         items:
           $ref: '#/definitions/TransferRun'
         type: array
+    type: object
+  Location:
+    description: A resource that represents Google Cloud Platform location.
+    properties:
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          Cross-service attributes for the location. For example
+
+              {"cloud.googleapis.com/region": "us-east1"}
+        type: object
+      locationId:
+        description: 'The canonical id for this location. For example: `"us-east1"`.'
+        type: string
+      metadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          Service-specific metadata. For example the available capacity at the given
+          location.
+        type: object
+      name:
+        description: |-
+          Resource name for the location, which may vary between implementations.
+          For example: `"projects/example-project/locations/us-east1"`
+        type: string
     type: object
   ScheduleTransferRunsRequest:
     description: A request to schedule transfer runs for a time range.

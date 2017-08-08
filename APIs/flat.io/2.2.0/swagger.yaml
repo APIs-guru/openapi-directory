@@ -2266,13 +2266,6 @@ definitions:
       - active
       - archived
     type: string
-  ClassStreamPostMode:
-    description: The post mode on the stream
-    enum:
-      - everybodyCanPost
-      - everybodyCanComment
-      - teachersCanPost
-    type: string
   ClassUpdate:
     description: Update of a classroom
     example:
@@ -3466,7 +3459,7 @@ definitions:
       - brass.trumpet
       - strings.violin
     items:
-      pattern: '^[a-z]+\.[a-z]+$'
+      pattern: '^[a-z-]+\.[a-z-]+$'
       type: string
     type: array
   UserPublic:
@@ -3488,7 +3481,7 @@ definitions:
             description: Number of the scores liked by the user
             type: integer
           ownedPublicScoresCount:
-            description: Number of public score the user have
+            description: Number of public scores the user have
             type: integer
           profileTheme:
             description: Theme (background) for the profile

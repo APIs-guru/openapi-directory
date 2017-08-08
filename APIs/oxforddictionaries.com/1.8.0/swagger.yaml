@@ -10,7 +10,7 @@ info:
     url: 'https://developer.oxforddictionaries.com/api-terms-and-conditions'
   termsOfService: 'http://helloreverb.com/terms/'
   title: Oxford Dictionaries
-  version: 1.7.0
+  version: 1.8.0
   x-apisguru-categories:
     - text
   x-logo:
@@ -79,6 +79,8 @@ parameters:
       - lv
       - hi
       - sw
+      - ta
+      - gu
     in: path
     name: source_lang
     required: true
@@ -91,6 +93,8 @@ parameters:
       - hi
       - lv
       - sw
+      - ta
+      - gu
     in: path
     name: source_lang
     required: true
@@ -168,6 +172,8 @@ paths:
             - ur
             - de
             - pt
+            - ta
+            - gu
           in: path
           name: source_language
           required: true
@@ -543,6 +549,8 @@ paths:
             - sw
             - de
             - pt
+            - ta
+            - gu
           in: path
           name: source_language
           required: true
@@ -640,6 +648,8 @@ paths:
             - ro
             - de
             - pt
+            - ta
+            - gu
           in: query
           name: sourceLanguage
           required: false
@@ -698,6 +708,8 @@ paths:
             - ro
             - de
             - pt
+            - ta
+            - gu
           in: path
           name: language
           required: true
@@ -759,6 +771,8 @@ paths:
             - ur
             - de
             - pt
+            - ta
+            - gu
           in: path
           name: source_language
           required: true
@@ -847,6 +861,8 @@ paths:
             - hi
             - lv
             - sw
+            - ta
+            - gu
           in: path
           name: source_lang
           required: true

@@ -3121,6 +3121,12 @@ definitions:
         type: boolean
       doNotIncrementBuildNumberOnPullRequests:
         type: boolean
+      dotnetCsprojFile:
+        type: string
+      dotnetCsprojPackageVersionFormat:
+        type: string
+      dotnetCsprojVersionFormat:
+        type: string
       environmentVariables:
         items:
           $ref: '#/definitions/StoredNameValue'
@@ -3138,6 +3144,10 @@ definitions:
       hostsEntries:
         items:
           $ref: '#/definitions/HostEntry'
+        type: array
+      hotFixScripts:
+        items:
+          $ref: '#/definitions/Script'
         type: array
       includeBranches:
         items:
@@ -3214,6 +3224,8 @@ definitions:
       packageWebApplicationProjectsXCopy:
         type: boolean
       patchAssemblyInfo:
+        type: boolean
+      patchDotnetCsproj:
         type: boolean
       platform:
         items:

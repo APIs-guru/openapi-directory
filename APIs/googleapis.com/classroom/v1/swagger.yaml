@@ -161,7 +161,8 @@ paths:
     get:
       description: |-
         Returns a list of courses that the requesting user is permitted to view,
-        restricted to those that match the request.
+        restricted to those that match the request. Returned courses are ordered by
+        creation time, with the most recently created coming first.
 
         This method returns the following error codes:
 
@@ -633,12 +634,42 @@ paths:
           required: true
           type: string
         - description: |-
-            Identifer of the student work to request.
+            Identifier of the student work to request.
             This may be set to the string literal `"-"` to request student work for
             all course work in the specified course.
           in: path
           name: courseWorkId
           required: true
+          type: string
+        - description: |-
+            Requested lateness value. If specified, returned student submissions are
+            restricted by the requested value.
+            If unspecified, submissions are returned regardless of `late` value.
+          enum:
+            - LATE_VALUES_UNSPECIFIED
+            - LATE_ONLY
+            - NOT_LATE_ONLY
+          in: query
+          name: late
+          type: string
+        - description: |-
+            Maximum number of items to return. Zero or unspecified indicates that the
+            server may assign a maximum.
+
+            The server may return fewer than the specified number of results.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            nextPageToken
+            value returned from a previous
+            list call,
+            indicating that the subsequent page of results should be returned.
+
+            The list request
+            must be otherwise identical to the one that resulted in this token.
+          in: query
+          name: pageToken
           type: string
         - collectionFormat: multi
           description: |-
@@ -666,36 +697,6 @@ paths:
             * the string literal `"me"`, indicating the requesting user
           in: query
           name: userId
-          type: string
-        - description: |-
-            Maximum number of items to return. Zero or unspecified indicates that the
-            server may assign a maximum.
-
-            The server may return fewer than the specified number of results.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            Requested lateness value. If specified, returned student submissions are
-            restricted by the requested value.
-            If unspecified, submissions are returned regardless of `late` value.
-          enum:
-            - LATE_VALUES_UNSPECIFIED
-            - LATE_ONLY
-            - NOT_LATE_ONLY
-          in: query
-          name: late
-          type: string
-        - description: |-
-            nextPageToken
-            value returned from a previous
-            list call,
-            indicating that the subsequent page of results should be returned.
-
-            The list request
-            must be otherwise identical to the one that resulted in this token.
-          in: query
-          name: pageToken
           type: string
       responses:
         '200':
@@ -1956,6 +1957,10 @@ paths:
             * CourseNotModifiable
       operationId: classroom.courses.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Course'
         - description: |-
             Identifier of the course to update.
             This identifier can be either the Classroom-assigned identifier or an
@@ -1975,6 +1980,11 @@ paths:
             * `description`
             * `room`
             * `courseState`
+            * `ownerId`
+
+            Note: patches to ownerId are treated as being effective immediately, but in
+            practice it may take some time for the ownership transfer of all affected
+            resources to complete.
 
             When set in a query parameter, this field should be specified as
 
@@ -1982,10 +1992,6 @@ paths:
           in: query
           name: updateMask
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Course'
       responses:
         '200':
           description: Successful response
@@ -2984,8 +2990,9 @@ definitions:
           * the email address of the user
           * the string literal `"me"`, indicating the requesting user
 
-          This must be set in a create request. Specifying this field in a course
-          update mask results in an `INVALID_ARGUMENT` error.
+          This must be set in a create request. Admins can also specify this field
+          in a patch course request to
+          transfer ownership. In other contexts, it is read-only.
         type: string
       room:
         description: |-
@@ -3343,6 +3350,35 @@ definitions:
           - CREATE_COURSE
         type: string
     type: object
+  GradeHistory:
+    description: The history of each grade on this submission.
+    properties:
+      actorUserId:
+        description: The teacher who made the grade change.
+        type: string
+      gradeChangeType:
+        description: The type of grade change at this time in the submission grade history.
+        enum:
+          - UNKNOWN_GRADE_CHANGE_TYPE
+          - DRAFT_GRADE_POINTS_EARNED_CHANGE
+          - ASSIGNED_GRADE_POINTS_EARNED_CHANGE
+          - MAX_POINTS_CHANGE
+        type: string
+      gradeTimestamp:
+        description: When the grade of the submission was changed.
+        format: google-datetime
+        type: string
+      maxPoints:
+        description: |-
+          The denominator of the grade at this time in the submission grade
+          history.
+        format: double
+        type: number
+      pointsEarned:
+        description: The numerator of the grade at this time in the submission grade history.
+        format: double
+        type: number
+    type: object
   Guardian:
     description: |-
       Association between a student and a guardian of that student. The guardian
@@ -3417,6 +3453,7 @@ definitions:
           - COURSE_ROLE_UNSPECIFIED
           - STUDENT
           - TEACHER
+          - OWNER
         type: string
       userId:
         description: |-
@@ -3682,6 +3719,27 @@ definitions:
         description: Student response to a short-answer question.
         type: string
     type: object
+  StateHistory:
+    description: The history of each state this submission has been in.
+    properties:
+      actorUserId:
+        description: The teacher or student who made the change
+        type: string
+      state:
+        description: The workflow pipeline stage.
+        enum:
+          - STATE_UNSPECIFIED
+          - CREATED
+          - TURNED_IN
+          - RETURNED
+          - RECLAIMED_BY_STUDENT
+          - STUDENT_EDITED_AFTER_TURN_IN
+        type: string
+      stateTimestamp:
+        description: When the submission entered this state.
+        format: google-datetime
+        type: string
+    type: object
   Student:
     description: Student in a course.
     properties:
@@ -3734,7 +3792,8 @@ definitions:
       assignedGrade:
         description: |-
           Optional grade. If unset, no grade was set.
-          This must be a non-negative integer value.
+          This value must be non-negative. Decimal (i.e. non-integer) values are
+          allowed, but will be rounded to two decimal places.
 
           This may be modified only by course teachers.
         format: double
@@ -3786,7 +3845,8 @@ definitions:
       draftGrade:
         description: |-
           Optional pending grade. If unset, no grade was set.
-          This must be a non-negative integer value.
+          This value must be non-negative. Decimal (i.e. non-integer) values are
+          allowed, but will be rounded to two decimal places.
 
           This is only visible to and modifiable by course teachers.
         format: double
@@ -3823,6 +3883,14 @@ definitions:
           - RETURNED
           - RECLAIMED_BY_STUDENT
         type: string
+      submissionHistory:
+        description: |-
+          The history of the submission (includes state and grade histories).
+
+          Read-only.
+        items:
+          $ref: '#/definitions/SubmissionHistory'
+        type: array
       updateTime:
         description: |-
           Last update time of this submission.
@@ -3837,6 +3905,18 @@ definitions:
 
           Read-only.
         type: string
+    type: object
+  SubmissionHistory:
+    description: |-
+      The history of the submission. This currently includes state and grade
+      histories.
+    properties:
+      gradeHistory:
+        $ref: '#/definitions/GradeHistory'
+        description: 'The grade history information of the submission, if present.'
+      stateHistory:
+        $ref: '#/definitions/StateHistory'
+        description: 'The state history information of the submission, if present.'
     type: object
   Teacher:
     description: Teacher of a course.

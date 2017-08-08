@@ -104,7 +104,7 @@ paths:
           name: signature
           required: true
           type: string
-        - description: 'The account to which you want to deposit. Available values: cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs, dao, etc, amp, 1st, rep, ans, zec, zmc, gnt, gxs, qtum, eos, snt'
+        - description: 'The account to which you want to deposit. Available values: cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs, dao, etc, amp, 1st, rep, ans, zec, zmc, gnt, gxs, qtum, eos, snt, bcc, omg'
           in: query
           name: currency
           required: true
@@ -134,7 +134,7 @@ paths:
           name: signature
           required: true
           type: string
-        - description: 'Currency value contains  cny,btc,eth,pls,note,bts,bitcny,bitusd,bitbtc,yun,nxt,ltc,doge,sc,dgd,dcs,dao,etc,amp,1st,rep,ans,zec,zmc,gnt,gxs,qtum,eos,snt'
+        - description: 'Currency value contains  cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs, dao, etc, amp, 1st, rep, ans, zec, zmc, gnt, gxs, qtum, eos, snt, bcc, omg'
           in: query
           name: currency
           required: false
@@ -144,7 +144,8 @@ paths:
           name: limit
           required: false
           type: integer
-        - in: query
+        - description: 'State value contains  submitting, cancelled, submitted, rejected, accepted, checked, warning'
+          in: query
           name: state
           required: false
           type: string
@@ -382,7 +383,7 @@ paths:
           name: market
           required: true
           type: string
-        - description: 'Filter order by state, default to ''wait'' (active orders).'
+        - description: 'Filter order by state. One of ''wait'', ''done'', or ''cancel''. An order in ''wait'' is an active order, waiting fullfillment; a ''done'' order is an order fullfilled; ''cancel'' means the order has been cancelled. Default to ''wait''.'
           in: query
           name: state
           required: false
@@ -397,7 +398,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: 'If set, returned orders will be sorted in specific order, default to ''asc''.'
+        - description: 'If set, returned orders will be sorted in specific order. One of ''asc'' or ''desc'', default to ''asc''.'
           in: query
           name: order_by
           required: false
@@ -622,7 +623,7 @@ paths:
           name: to
           required: false
           type: integer
-        - description: 'If set, returned trades will be sorted in specific order, default to ''desc''.'
+        - description: 'If set, returned trades will be sorted in specific order. One of ''asc'' or ''desc'', default to ''desc''.'
           in: query
           name: order_by
           required: false
@@ -677,7 +678,7 @@ paths:
           name: to
           required: false
           type: integer
-        - description: 'If set, returned trades will be sorted in specific order, default to ''desc''.'
+        - description: 'If set, returned trades will be sorted in specific order. One of ''asc'' or ''desc'', default to ''desc''.'
           in: query
           name: order_by
           required: false

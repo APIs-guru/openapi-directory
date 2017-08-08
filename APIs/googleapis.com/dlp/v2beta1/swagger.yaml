@@ -541,6 +541,40 @@ definitions:
         description: This field will contain an InspectOperationResult object.
         type: object
     type: object
+  GooglePrivacyDlpV2beta1BigQueryOptions:
+    description: Options defining BigQuery table and row identifiers.
+    properties:
+      identifyingFields:
+        description: |-
+          References to fields uniquely identifying rows within the table.
+          Nested fields in the format, like `person.birthdate.year`, are allowed.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        type: array
+      tableReference:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1BigQueryTable'
+        description: Complete BigQuery table reference.
+    type: object
+  GooglePrivacyDlpV2beta1BigQueryTable:
+    description: |-
+      Message defining the location of a BigQuery table. A table is uniquely
+      identified  by its project_id, dataset_id, and table_name. Within a query
+      a table is often referenced with a string in the format of:
+      `<project_id>:<dataset_id>.<table_id>` or
+      `<project_id>.<dataset_id>.<table_id>`.
+    properties:
+      datasetId:
+        description: Dataset ID of the table.
+        type: string
+      projectId:
+        description: |-
+          The Google Cloud Platform project ID of the project containing the table.
+          If omitted, project ID is inferred from the API call.
+        type: string
+      tableId:
+        description: Name of the table.
+        type: string
+    type: object
   GooglePrivacyDlpV2beta1CategoryDescription:
     description: Info Type Category description.
     properties:
@@ -630,11 +664,13 @@ definitions:
           identifier for the Operation, and the `count` is a counter used for
           tracking the number of files written. <p>The CSV file(s) contain the
           following columns regardless of storage type scanned: <li>id <li>info_type
-          <li>likelihood <li>byte size of finding <li>quote <li>time_stamp<br/>
+          <li>likelihood <li>byte size of finding <li>quote <li>timestamp<br/>
           <p>For Cloud Storage the next columns are: <li>file_path
           <li>start_offset<br/>
           <p>For Cloud Datastore the next columns are: <li>project_id
-          <li>namespace_id <li>path <li>column_name <li>offset
+          <li>namespace_id <li>path <li>column_name <li>offset<br/>
+          <p>For BigQuery the next columns are: <li>row_number <li>project_id
+          <li>dataset_id <li>table_id
       storageConfig:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1StorageConfig'
         description: Specification of the data set to process.
@@ -735,12 +771,12 @@ definitions:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
         description: |-
           Only one per info_type should be provided per request. If not
-          specified, and redact_all_text is false, the DLP API will redacts all
+          specified, and redact_all_text is false, the DLP API will redact all
           text that it matches against all info_types that are found, but not
           specified in another ImageRedactionConfig.
       redactAllText:
         description: |-
-          If true, all text found in the image, regardless if it matches an
+          If true, all text found in the image, regardless whether it matches an
           info_type, is redacted.
         type: boolean
       redactionColor:
@@ -996,6 +1032,9 @@ definitions:
       storagePath:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1CloudStoragePath'
         description: The path to a Google Cloud Storage location to store output.
+      table:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1BigQueryTable'
+        description: Store findings in a new table in the dataset.
     type: object
   GooglePrivacyDlpV2beta1PartitionId:
     description: |-
@@ -1129,6 +1168,9 @@ definitions:
   GooglePrivacyDlpV2beta1StorageConfig:
     description: Shared message indicating Cloud storage type.
     properties:
+      bigQueryOptions:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1BigQueryOptions'
+        description: BigQuery options specification.
       cloudStorageOptions:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1CloudStorageOptions'
         description: Google Cloud Storage options specification.

@@ -2505,10 +2505,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendBuckets
     put:
@@ -3023,10 +3019,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendServices
     put:
@@ -3600,10 +3592,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - firewalls
     put:
@@ -3927,10 +3915,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - globalForwardingRules
   '/{project}/global/forwardingRules/{forwardingRule}/setTarget':
@@ -4306,10 +4290,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - healthChecks
     put:
@@ -4633,10 +4613,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpHealthChecks
     put:
@@ -4960,10 +4936,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpsHealthChecks
     put:
@@ -6162,10 +6134,92 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnects
+  '/{project}/global/interconnects/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.interconnects.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - interconnects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/interconnects/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.interconnects.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
       tags:
         - interconnects
   '/{project}/global/interconnects/{resource}/testIamPermissions':
@@ -6772,10 +6826,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - networks
   '/{project}/global/networks/{network}/addPeering':
@@ -7728,10 +7778,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - securityPolicies
   '/{project}/global/snapshots':
@@ -9831,10 +9877,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - urlMaps
     put:
@@ -10673,10 +10715,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionAutoscalers
     post:
@@ -11167,10 +11205,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionBackendServices
     put:
@@ -12359,10 +12393,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - forwardingRules
   '/{project}/regions/{region}/forwardingRules/{forwardingRule}/setTarget':
@@ -12790,10 +12820,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionInstanceGroupManagers
     put:
@@ -14175,6 +14201,54 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/interconnectAttachments/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.interconnectAttachments.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnectAttachments
   '/{project}/regions/{region}/interconnectAttachments/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -14691,10 +14765,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - routers
     put:
@@ -15249,10 +15319,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - subnetworks
   '/{project}/regions/{region}/subnetworks/{subnetwork}/expandIpCidrRange':
@@ -17218,10 +17284,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - autoscalers
     post:
@@ -18857,10 +18919,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - instanceGroupManagers
     put:
@@ -20717,6 +20775,58 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - instances
+  '/{project}/zones/{zone}/instances/{instance}/getGuestAttributes':
+    get:
+      description: Returns the specified guest attributes entry.
+      operationId: compute.instances.getGuestAttributes
+      parameters:
+        - description: Name of the instance scoping this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Specifies the key for the guest attributes entry.
+          in: query
+          name: variableKey
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GuestAttributes'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - instances
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/instances/{instance}/referrers':
     get:
       description: Retrieves the list of referrers to instances contained within the specified zone.
@@ -21706,7 +21816,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Updates the specified access config from an instance's network interface with the data included in the request.
+      description: Updates the specified access config from an instance's network interface with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
       operationId: compute.instances.updateAccessConfig
       parameters:
         - in: body
@@ -23067,6 +23177,19 @@ definitions:
           - LOG_TYPE_UNSPECIFIED
         type: string
     type: object
+  AuthorizationLoggingOptions:
+    description: Authorization-related information used by Cloud Audit Logging.
+    properties:
+      permissionType:
+        description: The type of the permission that was checked.
+        enum:
+          - ADMIN_READ
+          - ADMIN_WRITE
+          - DATA_READ
+          - DATA_WRITE
+          - PERMISSION_TYPE_UNSPECIFIED
+        type: string
+    type: object
   Autoscaler:
     description: 'Represents an Autoscaler resource. Autoscalers allow you to automatically scale virtual machine instances in managed instance groups according to an autoscaling policy that you define. For more information, read Autoscaling Groups of Instances.'
     properties:
@@ -23373,7 +23496,7 @@ definitions:
         description: |-
           Specifies the balancing mode for this backend. For global HTTP(S) or TCP/SSL load balancing, the default is UTILIZATION. Valid values are UTILIZATION, RATE (for HTTP(S)) and CONNECTION (for TCP/SSL).
 
-          This cannot be used for internal load balancing.
+          For Internal Load Balancing, the default and only supported mode is CONNECTION.
         enum:
           - CONNECTION
           - RATE
@@ -24181,7 +24304,7 @@ definitions:
         description: |-
           Size of the persistent disk, specified in GB. You can specify this field when creating a persistent disk using the sourceImage or sourceSnapshot parameter, or specify it alone to create an empty persistent disk.
 
-          If you specify this field along with sourceImage or sourceSnapshot, the value of sizeGb must not be less than the size of the sourceImage or the size of the snapshot.
+          If you specify this field along with sourceImage or sourceSnapshot, the value of sizeGb must not be less than the size of the sourceImage or the size of the snapshot. Acceptable values are 1 to 65536, inclusive.
         format: int64
         type: string
       sourceImage:
@@ -24542,7 +24665,7 @@ definitions:
         items:
           properties:
             IPProtocol:
-              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, sctp), or the IP protocol number.'
+              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp), or the IP protocol number.'
               type: string
             ports:
               description: |-
@@ -24562,7 +24685,7 @@ definitions:
         items:
           properties:
             IPProtocol:
-              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, sctp), or the IP protocol number.'
+              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp), or the IP protocol number.'
               type: string
             ports:
               description: |-
@@ -24588,6 +24711,9 @@ definitions:
           - EGRESS
           - INGRESS
         type: string
+      enableLogging:
+        description: 'This field denotes whether to enable logging for a particular firewall rule. If logging is enabled, logs will be exported to the configured export destination for all firewall logs in the network. Logs may be exported to BigQuery or Pub/Sub.'
+        type: boolean
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         format: uint64
@@ -24627,7 +24753,7 @@ definitions:
           type: string
         type: array
       sourceTags:
-        description: 'If source tags are specified, the firewall will apply only to traffic from VM instances in the same virtual network with a tag listed in the source tags. Source tags cannot be used to control traffic to an instance''s external IP address, it only applies to traffic between instances in the same virtual network. Because tags are associated with instances, not IP addresses. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply.'
+        description: 'If source tags are specified, the firewall rule applies only to traffic with source IPs that match the primary network interfaces of VM instances that have the tag and are in the same VPC network. Source tags cannot be used to control traffic to an instance''s external IP address, it only applies to traffic between instances in the same virtual network. Because tags are associated with instances, not IP addresses. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply.'
         items:
           type: string
         type: array
@@ -24781,8 +24907,8 @@ definitions:
           Some types of forwarding target have constraints on the acceptable ports:  
           - TargetHttpProxy: 80, 8080 
           - TargetHttpsProxy: 443 
-          - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 5222 
-          - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 5222 
+          - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1883, 5222 
+          - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1883, 5222 
           - TargetVpnGateway: 500, 4500
           -
         type: string
@@ -24937,6 +25063,23 @@ definitions:
           type: string
         description: 'A list of labels to apply for this resource. Each label key & value must comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. For example, "webserver-frontend": "images". A label value can also be empty (e.g. "my-label": "").'
         type: object
+    type: object
+  GuestAttributes:
+    description: A guest attributes entry.
+    properties:
+      kind:
+        default: 'compute#guestAttributes'
+        description: '[Output Only] Type of the resource. Always compute#guestAttributes for guest attributes entry.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      variableKey:
+        description: The key to search for.
+        type: string
+      variableValue:
+        description: '[Output Only] The value found for the requested key.'
+        type: string
     type: object
   GuestOsFeature:
     description: Guest OS features.
@@ -25843,7 +25986,7 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       networkInterfaces:
-        description: 'An array of configurations for this interface. This specifies how this interface is configured to interact with other network services, such as connecting to the internet. Only one interface is supported per instance.'
+        description: 'An array of network configurations for this instance. These specify how interfaces are configured to interact with other network services, such as connecting to the internet. Multiple interfaces are supported per instance.'
         items:
           $ref: '#/definitions/NetworkInterface'
         type: array
@@ -25865,7 +26008,7 @@ definitions:
         description: '[Output Only] Whether a VM has been restricted for start because Compute Engine has detected suspicious activity.'
         type: boolean
       status:
-        description: '[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, and TERMINATED.'
+        description: '[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, STOPPED, SUSPENDING, SUSPENDED, and TERMINATED.'
         enum:
           - PROVISIONING
           - RUNNING
@@ -26075,7 +26218,7 @@ definitions:
         description: '[Output Only] The URL for this managed instance group. The server defines this URL.'
         type: string
       serviceAccount:
-        description: 'Service account will be used as credentials for all operations performed by managed instance group on instances. The service accounts needs all permissions required to create and delete instances. When not specified, the service account {projectNumber}@cloudservices.gserviceaccount.com will be used.'
+        description: '[Output Only] The service account to be used as credentials for all operations performed by the managed instance group on instances. The service accounts needs all permissions required to create and delete instances. By default, the service account {projectNumber}@cloudservices.gserviceaccount.com is used.'
         type: string
       statefulPolicy:
         $ref: '#/definitions/InstanceGroupManagerStatefulPolicy'
@@ -26913,6 +27056,11 @@ definitions:
       adminEnabled:
         description: 'Administrative status of the interconnect. When this is set to ?true?, the Interconnect is functional and may carry traffic (assuming there are functional InterconnectAttachments and other requirements are satisfied). When set to ?false?, no packets will be carried over this Interconnect and no BGP routes will be exchanged over it. By default, it is set to ?true?.'
         type: boolean
+      circuitInfos:
+        description: '[Output Only] List of CircuitInfo objects, that describe the individual circuits in this LAG.'
+        items:
+          $ref: '#/definitions/InterconnectCircuitInfo'
+        type: array
       connectionAuthorization:
         description: '[Output Only] URL to retrieve the Letter Of Authority and Customer Facility Assignment (LOA-CFA) documentation relating to this Interconnect. This documentation authorizes the facility provider to connect to the specified crossconnect ports.'
         type: string
@@ -27142,6 +27290,19 @@ definitions:
             type: string
         type: object
     type: object
+  InterconnectCircuitInfo:
+    description: 'Describes a single physical circuit between the Customer and Google. CircuitInfo objects are created by Google, so all fields are output only. Next id: 4'
+    properties:
+      customerDemarcId:
+        description: Customer-side demarc ID for this circuit. This will only be set if it was provided by the Customer to Google during circuit turn-up.
+        type: string
+      googleCircuitId:
+        description: Google-assigned unique ID for this circuit. Assigned at circuit turn-up.
+        type: string
+      googleDemarcId:
+        description: Google-side demarc ID for this circuit. Assigned at circuit turn-up and provided by Google to the customer in the LOA.
+        type: string
+    type: object
   InterconnectList:
     description: 'Response to the list request, and contains a list of interconnects.'
     properties:
@@ -27254,6 +27415,9 @@ definitions:
         enum:
           - LP_GLOBAL
           - LP_LOCAL_REGION
+        type: string
+      region:
+        description: URL for the region of this location.
         type: string
       regionKey:
         description: Scope key for the region of this location.
@@ -27409,9 +27573,9 @@ definitions:
   LogConfigCloudAuditOptions:
     description: Write a Cloud Audit log
     properties:
-      isReadPermissionType:
-        description: True if the log is for a permission of type DATA_READ or ADMIN_READ.
-        type: boolean
+      authorizationLoggingOptions:
+        $ref: '#/definitions/AuthorizationLoggingOptions'
+        description: Information used by the Cloud Audit Logging pipeline.
       logName:
         description: The log_name to populate in the Cloud Audit Record.
         enum:
@@ -28362,6 +28526,7 @@ definitions:
           - INSTANCE_GROUPS
           - INSTANCE_GROUP_MANAGERS
           - INSTANCE_TEMPLATES
+          - INTERCONNECTS
           - IN_USE_ADDRESSES
           - LOCAL_SSD_TOTAL_GB
           - NETWORKS
@@ -28373,6 +28538,8 @@ definitions:
           - REGIONAL_INSTANCE_GROUP_MANAGERS
           - ROUTERS
           - ROUTES
+          - SECURITY_POLICIES
+          - SECURITY_POLICY_RULES
           - SNAPSHOTS
           - SSD_TOTAL_GB
           - SSL_CERTIFICATES
@@ -29373,6 +29540,9 @@ definitions:
   SecurityPolicyRuleMatcher:
     description: Represents a match condition that incoming traffic is evaluated against. Exactly one field must be specified.
     properties:
+      config:
+        $ref: '#/definitions/SecurityPolicyRuleMatcherConfig'
+        description: The configuration options available when specifying versioned_expr. This field must be specified if versioned_expr is specified and cannot be specified if versioned_expr is not specified.
       srcIpRanges:
         description: CIDR IP address range. Only IPv4 is supported.
         items:
@@ -29380,6 +29550,20 @@ definitions:
         type: array
       srcRegionCodes:
         description: Match by country or region code.
+        items:
+          type: string
+        type: array
+      versionedExpr:
+        description: 'Preconfigured versioned expression. If this field is specified, config must also be specified. Available preconfigured expressions along with their requirements are: SRC_IPS_V1 - must specify the corresponding src_ip_range field in config.'
+        enum:
+          - SRC_IPS_V1
+          - VERSIONED_EXPR_UNSPECIFIED
+        type: string
+    type: object
+  SecurityPolicyRuleMatcherConfig:
+    properties:
+      srcIpRanges:
+        description: CIDR IP address range. Only IPv4 is supported.
         items:
           type: string
         type: array

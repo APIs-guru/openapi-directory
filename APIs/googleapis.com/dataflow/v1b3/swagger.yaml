@@ -185,7 +185,7 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/jobs':
     get:
-      description: List the jobs of a project.
+      description: List the jobs of a project in a given region.
       operationId: dataflow.projects.jobs.list
       parameters:
         - description: The project which owns the jobs.
@@ -817,6 +817,89 @@ paths:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
+  '/v1b3/projects/{projectId}/jobs:aggregated':
+    get:
+      description: List the jobs of a project across all regions.
+      operationId: dataflow.projects.jobs.aggregated
+      parameters:
+        - description: The kind of filter to use.
+          enum:
+            - UNKNOWN
+            - ALL
+            - TERMINATED
+            - ACTIVE
+          in: query
+          name: filter
+          type: string
+        - description: The location that contains this job.
+          in: query
+          name: location
+          type: string
+        - description: |-
+            If there are many jobs, limit response to at most this many.
+            The actual number of jobs returned will be the lesser of max_responses
+            and an unspecified server-defined limit.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Set this to the 'next_page_token' field of a previous response
+            to request additional results in a long list.
+          in: query
+          name: pageToken
+          type: string
+        - description: The project which owns the jobs.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Level of information requested in response. Default is `JOB_VIEW_SUMMARY`.
+          enum:
+            - JOB_VIEW_UNKNOWN
+            - JOB_VIEW_SUMMARY
+            - JOB_VIEW_ALL
+            - JOB_VIEW_DESCRIPTION
+          in: query
+          name: view
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListJobsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1b3/projects/{projectId}/locations/{location}/WorkerMessages':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -876,7 +959,7 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/locations/{location}/jobs':
     get:
-      description: List the jobs of a project.
+      description: List the jobs of a project in a given region.
       operationId: dataflow.projects.locations.jobs.list
       parameters:
         - description: The project which owns the jobs.

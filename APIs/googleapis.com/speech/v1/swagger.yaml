@@ -494,9 +494,10 @@ definitions:
     properties:
       enableWordTimeOffsets:
         description: |-
-          *Optional* If `true`, a list of `words` are returned in the top result,
-          containing the start and end timestamps for those words. The default value,
-          'false' does not return any word-level timing information.
+          *Optional* If `true`, the top result includes a list of words and
+          the start and end time offsets (timestamps) for those words. If
+          `false`, no word-level time offset information is returned. The default is
+          `false`.
         type: boolean
       encoding:
         description: '*Required* Encoding of audio data sent in all `RecognitionAudio` messages.'
@@ -610,7 +611,7 @@ definitions:
         description: '*Output-only* Transcript text representing the words that the user spoke.'
         type: string
       words:
-        description: '*Output-only* List of word-specific information for each recognized word.'
+        description: '*Output-only* A list of word-specific information for each recognized word.'
         items:
           $ref: '#/definitions/WordInfo'
         type: array
@@ -622,7 +623,7 @@ definitions:
         description: |-
           *Output-only* May contain one or more recognition hypotheses (up to the
           maximum specified in `max_alternatives`).
-          These alternatives are ordered in terms of accuracy, with the first/top
+          These alternatives are ordered in terms of accuracy, with the top (first)
           alternative being the most probable, as ranked by the recognizer.
         items:
           $ref: '#/definitions/SpeechRecognitionAlternative'
@@ -705,8 +706,9 @@ definitions:
     type: object
   WordInfo:
     description: |-
-      Word-specific information detected along with speech recognition when certain
-      request parameters are set.
+      Word-specific information for recognized words. Word information is only
+      included in the response when certain request parameters are set, such
+      as `enable_word_time_offsets`.
     properties:
       endTime:
         description: |-

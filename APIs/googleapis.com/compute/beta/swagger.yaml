@@ -117,6 +117,9 @@ tags:
   - name: instanceGroups
   - name: instanceTemplates
   - name: instances
+  - name: interconnectAttachments
+  - name: interconnectLocations
+  - name: interconnects
   - name: licenses
   - name: machineTypes
   - name: networks
@@ -130,6 +133,7 @@ tags:
   - name: regions
   - name: routers
   - name: routes
+  - name: securityPolicies
   - name: snapshots
   - name: sslCertificates
   - name: subnetworks
@@ -945,6 +949,76 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - instances
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/interconnectAttachments':
+    get:
+      description: Retrieves an aggregated list of interconnect attachments.
+      operationId: compute.interconnectAttachments.aggregatedList
+      parameters:
+        - description: |-
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InterconnectAttachmentAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - interconnectAttachments
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -2286,10 +2360,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendBuckets
     put:
@@ -2566,10 +2636,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendServices
     put:
@@ -2659,6 +2725,58 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - backendServices
+  '/{project}/global/backendServices/{backendService}/setSecurityPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the security policy for the specified backend service.
+      operationId: compute.backendServices.setSecurityPolicy
+      parameters:
+        - description: Name of the BackendService resource to which the security policy should be set. The name should conform to RFC1035.
+          in: path
+          name: backendService
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SecurityPolicyReference'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
       tags:
         - backendServices
   '/{project}/global/backendServices/{resource}/testIamPermissions':
@@ -2939,10 +3057,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - firewalls
     put:
@@ -3598,10 +3712,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - healthChecks
     put:
@@ -3925,10 +4035,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpHealthChecks
     put:
@@ -4252,10 +4358,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - httpsHealthChecks
     put:
@@ -4977,6 +5079,399 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - instanceTemplates
+  '/{project}/global/interconnectLocations':
+    get:
+      description: Retrieves the list of interconnect locations available to the specified project.
+      operationId: compute.interconnectLocations.list
+      parameters:
+        - description: |-
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InterconnectLocationList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - interconnectLocations
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/interconnectLocations/{interconnectLocation}':
+    get:
+      description: Returns the details for the specified interconnect location. Get a list of available interconnect locations by making a list() request.
+      operationId: compute.interconnectLocations.get
+      parameters:
+        - description: Name of the interconnect location to return.
+          in: path
+          name: interconnectLocation
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InterconnectLocation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - interconnectLocations
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/interconnects':
+    get:
+      description: Retrieves the list of interconnect available to the specified project.
+      operationId: compute.interconnects.list
+      parameters:
+        - description: |-
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InterconnectList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - interconnects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a Interconnect in the specified project using the data included in the request.
+      operationId: compute.interconnects.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Interconnect'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnects
+  '/{project}/global/interconnects/{interconnect}':
+    delete:
+      description: Deletes the specified interconnect.
+      operationId: compute.interconnects.delete
+      parameters:
+        - description: Name of the interconnect to delete.
+          in: path
+          name: interconnect
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnects
+    get:
+      description: Returns the specified interconnect. Get a list of available interconnects by making a list() request.
+      operationId: compute.interconnects.get
+      parameters:
+        - description: Name of the interconnect to return.
+          in: path
+          name: interconnect
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Interconnect'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - interconnects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the specified interconnect with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+      operationId: compute.interconnects.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Interconnect'
+        - description: Name of the interconnect to update.
+          in: path
+          name: interconnect
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnects
+  '/{project}/global/interconnects/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.interconnects.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - interconnects
   '/{project}/global/licenses/{license}':
     get:
       description: Returns the specified License resource.
@@ -5787,6 +6282,286 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/securityPolicies':
+    get:
+      description: List all the policies that have been configured for the specified project.
+      operationId: compute.securityPolicies.list
+      parameters:
+        - description: |-
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SecurityPoliciesList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - securityPolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a new policy in the specified project using the data included in the request.
+      operationId: compute.securityPolicies.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SecurityPolicy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - securityPolicies
+  '/{project}/global/securityPolicies/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.securityPolicies.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - securityPolicies
+  '/{project}/global/securityPolicies/{securityPolicy}':
+    delete:
+      description: Deletes the specified policy.
+      operationId: compute.securityPolicies.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the security policy to delete.
+          in: path
+          name: securityPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - securityPolicies
+    get:
+      description: List all of the ordered rules present in a single specified policy.
+      operationId: compute.securityPolicies.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the security policy to update.
+          in: path
+          name: securityPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SecurityPolicy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - securityPolicies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Patches the specified policy with the data included in the request.
+      operationId: compute.securityPolicies.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SecurityPolicy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the security policy to update.
+          in: path
+          name: securityPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - securityPolicies
   '/{project}/global/snapshots':
     get:
       description: Retrieves the list of Snapshot resources contained within the specified project.
@@ -7708,10 +8483,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - urlMaps
     put:
@@ -8550,10 +9321,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionAutoscalers
     post:
@@ -9044,10 +9811,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionBackendServices
     put:
@@ -10002,10 +10765,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionInstanceGroupManagers
     put:
@@ -10905,6 +11664,268 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionInstanceGroups
+  '/{project}/regions/{region}/interconnectAttachments':
+    get:
+      description: Retrieves the list of interconnect attachments contained within the specified region.
+      operationId: compute.interconnectAttachments.list
+      parameters:
+        - description: |-
+            Sets a filter {expression} for filtering listed resources. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use name ne example-instance.
+
+            You can filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InterconnectAttachmentList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - interconnectAttachments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates an InterconnectAttachment in the specified project using the data included in the request.
+      operationId: compute.interconnectAttachments.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InterconnectAttachment'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnectAttachments
+  '/{project}/regions/{region}/interconnectAttachments/{interconnectAttachment}':
+    delete:
+      description: Deletes the specified interconnect attachment.
+      operationId: compute.interconnectAttachments.delete
+      parameters:
+        - description: Name of the interconnect attachment to delete.
+          in: path
+          name: interconnectAttachment
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - interconnectAttachments
+    get:
+      description: Returns the specified interconnect attachment.
+      operationId: compute.interconnectAttachments.get
+      parameters:
+        - description: Name of the interconnect attachment to return.
+          in: path
+          name: interconnectAttachment
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InterconnectAttachment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - interconnectAttachments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/interconnectAttachments/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.interconnectAttachments.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - interconnectAttachments
   '/{project}/regions/{region}/operations':
     get:
       description: Retrieves a list of Operation resources contained within the specified region.
@@ -11369,10 +12390,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - routers
     put:
@@ -13740,10 +14757,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - autoscalers
     post:
@@ -14802,10 +15815,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
           Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - instanceGroupManagers
     put:
@@ -18406,6 +19415,19 @@ definitions:
           - LOG_TYPE_UNSPECIFIED
         type: string
     type: object
+  AuthorizationLoggingOptions:
+    description: Authorization-related information used by Cloud Audit Logging.
+    properties:
+      permissionType:
+        description: The type of the permission that was checked.
+        enum:
+          - ADMIN_READ
+          - ADMIN_WRITE
+          - DATA_READ
+          - DATA_WRITE
+          - PERMISSION_TYPE_UNSPECIFIED
+        type: string
+    type: object
   Autoscaler:
     description: 'Represents an Autoscaler resource. Autoscalers allow you to automatically scale virtual machine instances in managed instance groups according to an autoscaling policy that you define. For more information, read Autoscaling Groups of Instances.'
     properties:
@@ -18684,7 +19706,7 @@ definitions:
         description: |-
           Specifies the balancing mode for this backend. For global HTTP(S) or TCP/SSL load balancing, the default is UTILIZATION. Valid values are UTILIZATION, RATE (for HTTP(S)) and CONNECTION (for TCP/SSL).
 
-          This cannot be used for internal load balancing.
+          For Internal Load Balancing, the default and only supported mode is CONNECTION.
         enum:
           - CONNECTION
           - RATE
@@ -18890,6 +19912,9 @@ definitions:
         type: string
       region:
         description: '[Output Only] URL of the region where the regional backend service resides. This field is not applicable to global backend services.'
+        type: string
+      securityPolicy:
+        description: '[Output Only] The resource URL for the security policy associated with this backend service.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -19425,7 +20450,7 @@ definitions:
         description: |-
           Size of the persistent disk, specified in GB. You can specify this field when creating a persistent disk using the sourceImage or sourceSnapshot parameter, or specify it alone to create an empty persistent disk.
 
-          If you specify this field along with sourceImage or sourceSnapshot, the value of sizeGb must not be less than the size of the sourceImage or the size of the snapshot.
+          If you specify this field along with sourceImage or sourceSnapshot, the value of sizeGb must not be less than the size of the sourceImage or the size of the snapshot. Acceptable values are 1 to 65536, inclusive.
         format: int64
         type: string
       sourceImage:
@@ -19773,7 +20798,7 @@ definitions:
         items:
           properties:
             IPProtocol:
-              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, sctp), or the IP protocol number.'
+              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp), or the IP protocol number.'
               type: string
             ports:
               description: |-
@@ -19793,7 +20818,7 @@ definitions:
         items:
           properties:
             IPProtocol:
-              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, sctp), or the IP protocol number.'
+              description: 'The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp), or the IP protocol number.'
               type: string
             ports:
               description: |-
@@ -19858,7 +20883,7 @@ definitions:
           type: string
         type: array
       sourceTags:
-        description: 'If source tags are specified, the firewall will apply only to traffic from VM instances in the same virtual network with a tag listed in the source tags. Source tags cannot be used to control traffic to an instance''s external IP address, it only applies to traffic between instances in the same virtual network. Because tags are associated with instances, not IP addresses. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply.'
+        description: 'If source tags are specified, the firewall rule applies only to traffic with source IPs that match the primary network interfaces of VM instances that have the tag and are in the same VPC network. Source tags cannot be used to control traffic to an instance''s external IP address, it only applies to traffic between instances in the same virtual network. Because tags are associated with instances, not IP addresses. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply.'
         items:
           type: string
         type: array
@@ -20000,8 +21025,8 @@ definitions:
           Some types of forwarding target have constraints on the acceptable ports:  
           - TargetHttpProxy: 80, 8080 
           - TargetHttpsProxy: 443 
-          - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 5222 
-          - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 5222 
+          - TargetTcpProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1883, 5222 
+          - TargetSslProxy: 25, 43, 110, 143, 195, 443, 465, 587, 700, 993, 995, 1883, 5222 
           - TargetVpnGateway: 500, 4500
           -
         type: string
@@ -20707,7 +21732,7 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       networkInterfaces:
-        description: 'An array of configurations for this interface. This specifies how this interface is configured to interact with other network services, such as connecting to the internet. Only one interface is supported per instance.'
+        description: 'An array of network configurations for this instance. These specify how interfaces are configured to interact with other network services, such as connecting to the internet. Multiple interfaces are supported per instance.'
         items:
           $ref: '#/definitions/NetworkInterface'
         type: array
@@ -20729,7 +21754,7 @@ definitions:
         description: '[Output Only] Whether a VM has been restricted for start because Compute Engine has detected suspicious activity.'
         type: boolean
       status:
-        description: '[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, and TERMINATED.'
+        description: '[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, STOPPED, SUSPENDING, SUSPENDED, and TERMINATED.'
         enum:
           - PROVISIONING
           - RUNNING
@@ -20934,7 +21959,7 @@ definitions:
         description: '[Output Only] The URL for this managed instance group. The server defines this URL.'
         type: string
       serviceAccount:
-        description: 'Service account will be used as credentials for all operations performed by managed instance group on instances. The service accounts needs all permissions required to create and delete instances. When not specified, the service account {projectNumber}@cloudservices.gserviceaccount.com will be used.'
+        description: '[Output Only] The service account to be used as credentials for all operations performed by the managed instance group on instances. The service accounts needs all permissions required to create and delete instances. By default, the service account {projectNumber}@cloudservices.gserviceaccount.com is used.'
         type: string
       targetPools:
         description: The URLs for all TargetPool resources to which instances in the instanceGroup field are added. The target pools automatically apply to all of the instances in the managed instance group.
@@ -21637,6 +22662,415 @@ definitions:
           $ref: '#/definitions/CustomerEncryptionKeyProtectedDisk'
         type: array
     type: object
+  Interconnect:
+    description: 'Protocol definitions for Mixer API to support Interconnect. Next available tag: 23'
+    properties:
+      adminEnabled:
+        description: 'Administrative status of the interconnect. When this is set to ?true?, the Interconnect is functional and may carry traffic (assuming there are functional InterconnectAttachments and other requirements are satisfied). When set to ?false?, no packets will be carried over this Interconnect and no BGP routes will be exchanged over it. By default, it is set to ?true?.'
+        type: boolean
+      circuitInfos:
+        description: '[Output Only] List of CircuitInfo objects, that describe the individual circuits in this LAG.'
+        items:
+          $ref: '#/definitions/InterconnectCircuitInfo'
+        type: array
+      connectionAuthorization:
+        description: '[Output Only] URL to retrieve the Letter Of Authority and Customer Facility Assignment (LOA-CFA) documentation relating to this Interconnect. This documentation authorizes the facility provider to connect to the specified crossconnect ports.'
+        type: string
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      customerName:
+        description: 'Customer name, to put in the Letter of Authorization as the party authorized to request a crossconnect.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      expectedOutages:
+        description: '[Output Only] List of outages expected for this Interconnect.'
+        items:
+          $ref: '#/definitions/InterconnectOutageNotification'
+        type: array
+      googleIpAddress:
+        description: '[Output Only] IP address configured on the Google side of the Interconnect link. This can be used only for ping tests.'
+        type: string
+      googleReferenceId:
+        description: '[Output Only] Google reference ID; to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.'
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      interconnectAttachments:
+        description: '[Output Only] A list of the URLs of all InterconnectAttachments configured to use this Interconnect.'
+        items:
+          type: string
+        type: array
+      interconnectType:
+        enum:
+          - IT_PRIVATE
+        type: string
+      kind:
+        default: 'compute#interconnect'
+        description: '[Output Only] Type of the resource. Always compute#interconnect for interconnects.'
+        type: string
+      linkType:
+        enum:
+          - LINK_TYPE_ETHERNET_10G_LR
+        type: string
+      location:
+        description: URL of the InterconnectLocation object that represents where this connection is to be provisioned.
+        type: string
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      nocContactEmail:
+        description: 'Email address to contact the customer NOC for operations and maintenance notifications regarding this Interconnect. If specified, this will be used for notifications in addition to all other forms described, such as Stackdriver logs alerting and Cloud Notifications.'
+        type: string
+      operationalStatus:
+        description: '[Output Only] The current status of whether or not this Interconnect is functional.'
+        enum:
+          - OS_ACTIVE
+          - OS_UNPROVISIONED
+        type: string
+      peerIpAddress:
+        description: '[Output Only] IP address configured on the customer side of the Interconnect link. The customer should configure this IP address during turnup when prompted by Google NOC. This can be used only for ping tests.'
+        type: string
+      provisionedLinkCount:
+        description: '[Output Only] Number of links actually provisioned in this interconnect.'
+        format: int32
+        type: integer
+      requestedLinkCount:
+        description: 'Target number of physical links in the link bundle, as requested by the customer.'
+        format: int32
+        type: integer
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  InterconnectAttachment:
+    description: 'Protocol definitions for Mixer API to support InterconnectAttachment. Next available tag: 14'
+    properties:
+      cloudRouterIpAddress:
+        description: '[Output Only] IPv4 address + prefix length to be configured on Cloud Router Interface for this interconnect attachment.'
+        type: string
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      customerRouterIpAddress:
+        description: '[Output Only] IPv4 address + prefix length to be configured on the customer router subinterface for this interconnect attachment.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      googleReferenceId:
+        description: '[Output Only] Google reference ID, to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.'
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      interconnect:
+        description: URL of the underlying Interconnect object that this attachment's traffic will traverse through.
+        type: string
+      kind:
+        default: 'compute#interconnectAttachment'
+        description: '[Output Only] Type of the resource. Always compute#interconnectAttachment for interconnect attachments.'
+        type: string
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      operationalStatus:
+        description: '[Output Only] The current status of whether or not this interconnect attachment is functional.'
+        enum:
+          - OS_ACTIVE
+          - OS_UNPROVISIONED
+        type: string
+      privateInterconnectInfo:
+        $ref: '#/definitions/InterconnectAttachmentPrivateInfo'
+        description: '[Output Only] Information specific to a Private InterconnectAttachment. Only populated if the interconnect that this is attached is of type IT_PRIVATE.'
+      region:
+        description: '[Output Only] URL of the region where the regional interconnect attachment resides.'
+        type: string
+      router:
+        description: URL of the cloud router to be used for dynamic routing. This router must be in the same region as this InterconnectAttachment. The InterconnectAttachment will automatically connect the Interconnect to the network & region within which the Cloud Router is configured.
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  InterconnectAttachmentAggregatedList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/InterconnectAttachmentsScopedList'
+          description: Name of the scope containing this set of interconnect attachments.
+        description: A list of InterconnectAttachmentsScopedList resources.
+        type: object
+      kind:
+        default: 'compute#interconnectAttachmentAggregatedList'
+        description: '[Output Only] Type of resource. Always compute#interconnectAttachmentAggregatedList for aggregated lists of interconnect attachments.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
+  InterconnectAttachmentList:
+    description: 'Response to the list request, and contains a list of interconnect attachments.'
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of InterconnectAttachment resources.
+        items:
+          $ref: '#/definitions/InterconnectAttachment'
+        type: array
+      kind:
+        default: 'compute#interconnectAttachmentList'
+        description: '[Output Only] Type of resource. Always compute#interconnectAttachmentList for lists of interconnect attachments.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
+  InterconnectAttachmentPrivateInfo:
+    description: Private information for an interconnect attachment when this belongs to an interconnect of type IT_PRIVATE.
+    properties:
+      tag8021q:
+        description: '[Output Only] 802.1q encapsulation tag to be used for traffic between Google and the customer, going to and from this network and region.'
+        format: uint32
+        type: integer
+    type: object
+  InterconnectAttachmentsScopedList:
+    properties:
+      interconnectAttachments:
+        description: List of interconnect attachments contained in this scope.
+        items:
+          $ref: '#/definitions/InterconnectAttachment'
+        type: array
+      warning:
+        description: Informational warning which replaces the list of addresses when the list is empty.
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  InterconnectCircuitInfo:
+    description: 'Describes a single physical circuit between the Customer and Google. CircuitInfo objects are created by Google, so all fields are output only. Next id: 4'
+    properties:
+      customerDemarcId:
+        description: Customer-side demarc ID for this circuit. This will only be set if it was provided by the Customer to Google during circuit turn-up.
+        type: string
+      googleCircuitId:
+        description: Google-assigned unique ID for this circuit. Assigned at circuit turn-up.
+        type: string
+      googleDemarcId:
+        description: Google-side demarc ID for this circuit. Assigned at circuit turn-up and provided by Google to the customer in the LOA.
+        type: string
+    type: object
+  InterconnectList:
+    description: 'Response to the list request, and contains a list of interconnects.'
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of Interconnect resources.
+        items:
+          $ref: '#/definitions/Interconnect'
+        type: array
+      kind:
+        default: 'compute#interconnectList'
+        description: '[Output Only] Type of resource. Always compute#interconnectList for lists of interconnects.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
+  InterconnectLocation:
+    description: Protocol definitions for Mixer API to support InterconnectLocation.
+    properties:
+      address:
+        description: '[Output Only] The postal address of the Point of Presence, each line in the address is separated by a newline character.'
+        type: string
+      availabilityZone:
+        description: 'Availability zone for this location. Within a city, maintenance will not be simultaneously scheduled in more than one availability zone. Example: "zone1" or "zone2".'
+        type: string
+      city:
+        description: 'City designator used by the Interconnect UI to locate this InterconnectLocation within the Continent. For example: "Chicago, IL", "Amsterdam, Netherlands".'
+        type: string
+      continent:
+        description: Continent for this location. Used by the location picker in the Interconnect UI.
+        enum:
+          - C_AFRICA
+          - C_ASIA_PAC
+          - C_EUROPE
+          - C_NORTH_AMERICA
+          - C_SOUTH_AMERICA
+        type: string
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: '[Output Only] An optional description of the resource.'
+        type: string
+      facilityProvider:
+        description: '[Output Only] The name of the provider for this facility (e.g., EQUINIX).'
+        type: string
+      facilityProviderFacilityId:
+        description: '[Output Only] A provider-assigned Identifier for this facility (e.g., Ashburn-DC1).'
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#interconnectLocation'
+        description: '[Output Only] Type of the resource. Always compute#interconnectLocation for interconnect locations.'
+        type: string
+      name:
+        description: '[Output Only] Name of the resource.'
+        type: string
+      peeringdbFacilityId:
+        description: '[Output Only] The peeringdb identifier for this facility (corresponding with a netfac type in peeringdb).'
+        type: string
+      regionInfos:
+        description: '[Output Only] A list of InterconnectLocation.RegionInfo objects, that describe parameters pertaining to the relation between this InterconnectLocation and various Google Cloud regions.'
+        items:
+          $ref: '#/definitions/InterconnectLocationRegionInfo'
+        type: array
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  InterconnectLocationList:
+    description: 'Response to the list request, and contains a list of interconnect locations.'
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of InterconnectLocation resources.
+        items:
+          $ref: '#/definitions/InterconnectLocation'
+        type: array
+      kind:
+        default: 'compute#interconnectLocationList'
+        description: '[Output Only] Type of resource. Always compute#interconnectLocationList for lists of interconnect locations.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
+  InterconnectLocationRegionInfo:
+    description: 'Information about any potential InterconnectAttachments between an Interconnect at a specific InterconnectLocation, and a specific Cloud Region.'
+    properties:
+      expectedRttMs:
+        description: 'Expected round-trip time in milliseconds, from this InterconnectLocation to a VM in this region.'
+        format: int64
+        type: string
+      locationPresence:
+        description: Identifies the network presence of this location.
+        enum:
+          - LP_GLOBAL
+          - LP_LOCAL_REGION
+        type: string
+      region:
+        description: URL for the region of this location.
+        type: string
+      regionKey:
+        description: Scope key for the region of this location.
+        type: string
+    type: object
+  InterconnectOutageNotification:
+    description: 'Description of a planned outage on this Interconnect. Next id: 9'
+    properties:
+      affectedCircuits:
+        description: 'Iff issue_type is IT_PARTIAL_OUTAGE, a list of the Google-side circuit IDs that will be affected.'
+        items:
+          type: string
+        type: array
+      description:
+        description: Short user-visible description of the purpose of the outage.
+        type: string
+      endTime:
+        format: int64
+        type: string
+      issueType:
+        enum:
+          - IT_OUTAGE
+          - IT_PARTIAL_OUTAGE
+        type: string
+      name:
+        description: Unique identifier for this outage notification.
+        type: string
+      source:
+        enum:
+          - NSRC_GOOGLE
+        type: string
+      startTime:
+        description: Scheduled start and end times for the outage (milliseconds since Unix epoch).
+        format: int64
+        type: string
+      state:
+        enum:
+          - NS_ACTIVE
+          - NS_CANCELED
+        type: string
+    type: object
   License:
     description: A license resource.
     properties:
@@ -21668,9 +23102,9 @@ definitions:
   LogConfigCloudAuditOptions:
     description: Write a Cloud Audit log
     properties:
-      isReadPermissionType:
-        description: True if the log is for a permission of type DATA_READ or ADMIN_READ.
-        type: boolean
+      authorizationLoggingOptions:
+        $ref: '#/definitions/AuthorizationLoggingOptions'
+        description: Information used by the Cloud Audit Logging pipeline.
       logName:
         description: The log_name to populate in the Cloud Audit Record.
         enum:
@@ -22520,6 +23954,7 @@ definitions:
           - INSTANCE_GROUPS
           - INSTANCE_GROUP_MANAGERS
           - INSTANCE_TEMPLATES
+          - INTERCONNECTS
           - IN_USE_ADDRESSES
           - LOCAL_SSD_TOTAL_GB
           - NETWORKS
@@ -22530,6 +23965,8 @@ definitions:
           - REGIONAL_INSTANCE_GROUP_MANAGERS
           - ROUTERS
           - ROUTES
+          - SECURITY_POLICIES
+          - SECURITY_POLICY_RULES
           - SNAPSHOTS
           - SSD_TOTAL_GB
           - SSL_CERTIFICATES
@@ -23072,6 +24509,9 @@ definitions:
       ipRange:
         description: 'IP address and range of the interface. The IP range must be in the RFC3927 link-local IP space. The value must be a CIDR-formatted string, for example: 169.254.0.1/30. NOTE: Do not truncate the address as it represents the IP address of the interface.'
         type: string
+      linkedInterconnectAttachment:
+        description: URI of the linked interconnect attachment. It must be in the same region as the router. Each interface can have at most one linked resource and it could either be a VPN Tunnel or an interconnect attachment.
+        type: string
       linkedVpnTunnel:
         description: URI of the linked VPN tunnel. It must be in the same region as the router. Each interface can have at most one linked resource and it could either be a VPN Tunnel or an interconnect attachment.
         type: string
@@ -23309,6 +24749,99 @@ definitions:
       preemptible:
         description: 'Defines whether the instance is preemptible. This can only be set during instance creation, it cannot be set or changed after the instance has been created.'
         type: boolean
+    type: object
+  SecurityPoliciesList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of SecurityPolicy resources.
+        items:
+          $ref: '#/definitions/SecurityPolicy'
+        type: array
+      kind:
+        default: 'compute#securityPoliciesList'
+        description: '[Output Only] Type of resource. Always compute#securityPoliciesList for listsof securityPolicies'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+    type: object
+  SecurityPolicy:
+    description: A security policy is comprised of one or more rules. It can also be associated with one or more 'targets'.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      fingerprint:
+        description: |-
+          Specifies a fingerprint for this resource, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.
+
+          To see the latest fingerprint, make get() request to the security policy.
+        format: byte
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#securityPolicy'
+        description: '[Output only] Type of the resource. Always compute#securityPolicyfor security policies'
+        type: string
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      rules:
+        description: 'List of rules that belong to this policy. There must always be a default rule (rule with priority 2147483647 and match "*"). If no rules are provided when creating a security policy, a default rule with action "allow" will be added.'
+        items:
+          $ref: '#/definitions/SecurityPolicyRule'
+        type: array
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  SecurityPolicyReference:
+    properties:
+      securityPolicy:
+        type: string
+    type: object
+  SecurityPolicyRule:
+    description: Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny).
+    properties:
+      action:
+        description: 'The Action to preform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      kind:
+        default: 'compute#securityPolicyRule'
+        description: '[Output only] Type of the resource. Always compute#rulefor security policies'
+        type: string
+      match:
+        $ref: '#/definitions/SecurityPolicyRuleMatcher'
+        description: 'A match condition that incoming traffic is evaluated against. If it evaluates to true, the corresponding ?action? is enforced.'
+      preview:
+        description: 'If set to true, the specified action is not enforced.'
+        type: boolean
+      priority:
+        description: An integer indicating the priority of a rule in the list. The priority must be a positive value between 0 and 2147483647. Rules are evaluated in the increasing order of priority.
+        format: int32
+        type: integer
+    type: object
+  SecurityPolicyRuleMatcher:
+    description: Represents a match condition that incoming traffic is evaluated against. Exactly one field must be specified.
+    properties:
+      srcIpRanges:
+        description: CIDR IP address range. Only IPv4 is supported.
+        items:
+          type: string
+        type: array
     type: object
   SerialPortOutput:
     description: An instance's serial console output.

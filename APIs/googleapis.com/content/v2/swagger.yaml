@@ -2224,6 +2224,11 @@ definitions:
       accountId:
         description: The ID of the account for which the status is reported.
         type: string
+      accountLevelIssues:
+        description: A list of account level issues.
+        items:
+          $ref: '#/definitions/AccountStatusAccountLevelIssue'
+        type: array
       dataQualityIssues:
         description: A list of data quality issues.
         items:
@@ -2236,6 +2241,24 @@ definitions:
       websiteClaimed:
         description: Whether the account's website is claimed or not.
         type: boolean
+    type: object
+  AccountStatusAccountLevelIssue:
+    properties:
+      country:
+        description: Country for which this issue is reported.
+        type: string
+      detail:
+        description: Additional details about the issue.
+        type: string
+      id:
+        description: Issue identifier.
+        type: string
+      severity:
+        description: Severity of the issue.
+        type: string
+      title:
+        description: Short description of the issue.
+        type: string
     type: object
   AccountStatusDataQualityIssue:
     properties:

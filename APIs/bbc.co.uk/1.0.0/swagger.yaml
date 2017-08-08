@@ -112,6 +112,15 @@ parameters:
     name: q
     required: false
     type: string
+  rights:
+    description: Only return available results for the web/mobile.
+    enum:
+      - web
+      - mobile
+    in: query
+    name: rights
+    required: true
+    type: string
   since:
     description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
     in: query
@@ -168,6 +177,50 @@ paths:
       summary: Categories
       tags:
         - Categories
+  '/collections/{pid}/members.json':
+    get:
+      description: |
+        Episodes and Clips from Collection
+      operationId: getCollectionMembers
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProgrammesResponse'
+        '404':
+          description: Collection not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Collection Members
+      tags:
+        - Collections
   /music/popular/artists:
     get:
       description: |
@@ -754,7 +807,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicFavouritesResponse'
+            $ref: '#/definitions/PersonalisedMusicResponse'
         default:
           description: Unexpected error
           schema:
@@ -798,7 +851,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicFavouritesResponse'
+            $ref: '#/definitions/PersonalisedMusicResponse'
         default:
           description: Unexpected error
           schema:
@@ -903,7 +956,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicFavouritesResponse'
+            $ref: '#/definitions/PersonalisedMusicResponse'
         default:
           description: Unexpected error
           schema:
@@ -998,7 +1051,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicFavouritesResponse'
+            $ref: '#/definitions/PersonalisedMusicResponse'
         default:
           description: Unexpected error
           schema:
@@ -1053,7 +1106,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicFavouritesResponse'
+            $ref: '#/definitions/PersonalisedMusicResponse'
         default:
           description: Unexpected error
           schema:
@@ -1184,7 +1237,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicFollowsResponse'
+            $ref: '#/definitions/PersonalisedMusicResponse'
         default:
           description: Unexpected error
           schema:
@@ -1422,7 +1475,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicFollowsResponse'
+            $ref: '#/definitions/PersonalisedMusicResponse'
         default:
           description: Unexpected error
           schema:
@@ -1571,7 +1624,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicFollowsResponse'
+            $ref: '#/definitions/PersonalisedMusicResponse'
         default:
           description: Unexpected error
           schema:
@@ -2064,16 +2117,67 @@ paths:
         '400':
           description: The request was malformed.
           schema:
-            $ref: '#/definitions/WritePlaysErrorResponse'
+            $ref: '#/definitions/ErrorResponse'
         '401':
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/WritePlaysErrorResponse'
+            $ref: '#/definitions/ErrorResponse'
       schemes:
         - https
       summary: Write Play Event
       tags:
         - Personalised Plays
+  /my/programmes/recommendations.json:
+    get:
+      description: |
+        Recommended Programmes from the Audience Platforms' Recomendations Service
+      operationId: getRecommendations
+      parameters:
+        - default: Bearer OAUTH_TOKEN
+          description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - description: Only return available results for the web/mobile.
+          enum:
+            - web
+            - mobile
+          in: query
+          name: rights
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProgrammesResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Recommended Programmes
+      tags:
+        - Recommendations
   /my/radio/favourites:
     get:
       description: |
@@ -3393,6 +3497,22 @@ paths:
           name: sort
           required: false
           type: string
+        - description: Filter by container. Accepts any brand or series pid
+          in: query
+          name: container
+          required: false
+          type: string
+        - description: Filter by programme type. Accepts comma separated values
+          enum:
+            - brand
+            - series
+            - episode
+            - clip
+            - 'episode,clip'
+          in: query
+          name: type
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -3846,6 +3966,34 @@ definitions:
       - short_synopsis
       - titles
       - type
+    type: object
+  Error:
+    properties:
+      href:
+        type: string
+      id:
+        type: string
+      message:
+        type: string
+      replied_at:
+        type: string
+    required:
+      - href
+      - id
+      - message
+      - replied_at
+    type: object
+  ErrorResponse:
+    properties:
+      $schema:
+        type: string
+      errors:
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+    required:
+      - $schema
+      - errors
     type: object
   ExternalPartner:
     properties:
@@ -4376,6 +4524,52 @@ definitions:
     required:
       - type
     type: object
+  PersonalisedMusicActivity:
+    properties:
+      action:
+        type: string
+      activity:
+        type: string
+      added_at:
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/PersonalisedMusicData'
+        type: array
+      domain:
+        type: string
+      id:
+        type: string
+      meta_data:
+        $ref: '#/definitions/PersonalisedMusicMetaData'
+      type:
+        type: string
+      urn:
+        type: string
+    required:
+      - action
+      - activity
+      - added_at
+      - data
+      - domain
+      - id
+      - meta_data
+      - type
+      - urn
+    type: object
+  PersonalisedMusicArtist:
+    properties:
+      id:
+        type: string
+      images:
+        items:
+          $ref: '#/definitions/PersonalisedMusicImage'
+        type: array
+      name:
+        type: string
+      role:
+        type: string
+    type: object
   PersonalisedMusicBatchRequest:
     properties:
       action:
@@ -4397,6 +4591,59 @@ definitions:
       - domain
       - id
       - type
+    type: object
+  PersonalisedMusicClip:
+    properties:
+      contributors:
+        items:
+          type: string
+        type: array
+      endDate:
+        type: string
+      entityType:
+        type: string
+      imageUrl:
+        type: string
+      masterbrandMid:
+        type: string
+      mediaType:
+        type: string
+      parentProgramme:
+        $ref: '#/definitions/PersonalisedMusicClipParentProgramme'
+      pid:
+        type: string
+      startDate:
+        type: string
+      synopsis:
+        type: string
+      title:
+        type: string
+      version:
+        $ref: '#/definitions/PersonalisedMusicVersion'
+    type: object
+  PersonalisedMusicClipParentProgramme:
+    properties:
+      entityType:
+        type: string
+      pid:
+        type: string
+      title:
+        type: string
+    type: object
+  PersonalisedMusicData:
+    properties:
+      artist:
+        $ref: '#/definitions/PersonalisedMusicArtist'
+      clip:
+        $ref: '#/definitions/PersonalisedMusicClip'
+      genre:
+        $ref: '#/definitions/PersonalisedMusicGenre'
+      playlist:
+        $ref: '#/definitions/PersonalisedMusicPlaylist'
+      service:
+        $ref: '#/definitions/PersonalisedMusicService'
+      track:
+        $ref: '#/definitions/PersonalisedMusicTrack'
     type: object
   PersonalisedMusicError:
     properties:
@@ -4423,79 +4670,7 @@ definitions:
       - errors
       - schema
     type: object
-  PersonalisedMusicFavourite:
-    properties:
-      track:
-        $ref: '#/definitions/PersonalisedMusicTrack'
-    type: object
-  PersonalisedMusicFavouritesActivity:
-    properties:
-      action:
-        type: string
-      activity:
-        type: string
-      added_at:
-        type: string
-      data:
-        items:
-          $ref: '#/definitions/PersonalisedMusicFavourite'
-        type: array
-      domain:
-        type: string
-      id:
-        type: string
-      meta_data:
-        $ref: '#/definitions/PersonalisedMusicMetaData'
-      type:
-        type: string
-      urn:
-        type: string
-    required:
-      - action
-      - activity
-      - added_at
-      - data
-      - domain
-      - id
-      - meta_data
-      - type
-      - urn
-    type: object
-  PersonalisedMusicFavouritesResponse:
-    properties:
-      limit:
-        type: integer
-      method:
-        type: string
-      offset:
-        type: integer
-      replied_at:
-        type: string
-      results:
-        items:
-          $ref: '#/definitions/PersonalisedMusicFavouritesActivity'
-        type: array
-      schema:
-        type: string
-      total:
-        type: integer
-    required:
-      - limit
-      - method
-      - offset
-      - replied_at
-      - results
-      - schema
-      - total
-    type: object
-  PersonalisedMusicFollow:
-    properties:
-      genre:
-        $ref: '#/definitions/PersonalisedMusicFollowGenre'
-    required:
-      - genre
-    type: object
-  PersonalisedMusicFollowGenre:
+  PersonalisedMusicGenre:
     properties:
       id:
         type: string
@@ -4505,68 +4680,15 @@ definitions:
         type: string
       type:
         type: string
-    required:
-      - id
-      - key
-      - title
-      - type
     type: object
-  PersonalisedMusicFollowsActivity:
+  PersonalisedMusicImage:
     properties:
-      action:
-        type: string
-      activity:
-        type: string
-      added_at:
-        type: string
-      data:
-        items:
-          $ref: '#/definitions/PersonalisedMusicFollow'
-        type: array
-      domain:
+      format:
         type: string
       id:
         type: string
       type:
         type: string
-      urn:
-        type: string
-    required:
-      - action
-      - activity
-      - added_at
-      - data
-      - domain
-      - id
-      - type
-      - urn
-    type: object
-  PersonalisedMusicFollowsResponse:
-    properties:
-      limit:
-        type: integer
-      method:
-        type: string
-      offset:
-        type: integer
-      replied_at:
-        type: string
-      results:
-        items:
-          $ref: '#/definitions/PersonalisedMusicFollowsActivity'
-        type: array
-      schema:
-        type: string
-      total:
-        type: integer
-    required:
-      - limit
-      - method
-      - offset
-      - replied_at
-      - results
-      - schema
-      - total
     type: object
   PersonalisedMusicMetaData:
     properties:
@@ -4574,6 +4696,46 @@ definitions:
         type: string
     required:
       - key
+    type: object
+  PersonalisedMusicPlaylist:
+    properties:
+      description:
+        type: string
+      images:
+        items:
+          $ref: '#/definitions/PersonalisedMusicImage'
+        type: array
+      playback_type:
+        type: string
+      service_id:
+        type: string
+      title:
+        type: string
+      tracks:
+        $ref: '#/definitions/PersonalisedMusicTrack'
+      type:
+        type: string
+      updated_at:
+        type: string
+      version:
+        $ref: '#/definitions/PersonalisedMusicPlaylistVersion'
+    type: object
+  PersonalisedMusicPlaylistVersion:
+    properties:
+      duration:
+        type: string
+      expires_at:
+        type: string
+      id:
+        type: string
+      starts_at:
+        type: string
+      warnings:
+        items:
+          type: string
+        type: array
+    required:
+      - warnings
     type: object
   PersonalisedMusicRequest:
     properties:
@@ -4587,6 +4749,44 @@ definitions:
         $ref: '#/definitions/PersonalisedMusicMetaData'
     required:
       - action
+    type: object
+  PersonalisedMusicResponse:
+    properties:
+      limit:
+        type: integer
+      method:
+        type: string
+      offset:
+        type: integer
+      replied_at:
+        type: string
+      results:
+        items:
+          $ref: '#/definitions/PersonalisedMusicActivity'
+        type: array
+      schema:
+        type: string
+      total:
+        type: integer
+    required:
+      - limit
+      - method
+      - offset
+      - replied_at
+      - results
+      - schema
+      - total
+    type: object
+  PersonalisedMusicService:
+    properties:
+      id:
+        type: string
+      key:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
     type: object
   PersonalisedMusicSuccess:
     properties:
@@ -4622,7 +4822,7 @@ definitions:
       type:
         type: string
       version:
-        $ref: '#/definitions/PersonalisedMusicTrackVersion'
+        $ref: '#/definitions/PersonalisedMusicVersion'
     required:
       - contributions
       - id
@@ -4685,15 +4885,16 @@ definitions:
       - source
       - type
     type: object
-  PersonalisedMusicTrackVersion:
+  PersonalisedMusicVersion:
     properties:
       classical:
         type: boolean
+      duration:
+        type: string
       radio:
         type: boolean
-    required:
-      - classical
-      - radio
+      vpid:
+        type: string
     type: object
   PersonalisedRadioActivity:
     properties:
@@ -5407,33 +5608,6 @@ definitions:
       - title
       - type
     type: object
-  WritePlaysError:
-    properties:
-      documentation:
-        type: string
-      id:
-        type: string
-      message:
-        type: string
-      replied_at:
-        type: string
-    required:
-      - id
-      - message
-      - replied_at
-    type: object
-  WritePlaysErrorResponse:
-    properties:
-      $schema:
-        type: string
-      errors:
-        items:
-          $ref: '#/definitions/WritePlaysError'
-        type: array
-    required:
-      - $schema
-      - errors
-    type: object
   writePlayRequest:
     properties:
       action:
@@ -5443,7 +5617,7 @@ definitions:
           - paused
           - heartbeat
         type: string
-      elaspsed_time:
+      elapsed_time:
         type: integer
       pid:
         type: string
@@ -5456,7 +5630,7 @@ definitions:
         type: string
     required:
       - action
-      - elaspsed_time
+      - elapsed_time
       - pid
       - resource_type
       - version_pid

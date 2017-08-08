@@ -11101,18 +11101,23 @@ definitions:
         description: Request JSON-string
         type: string
       requestHeaders:
-        description: Request headers array
-        items:
+        additionalProperties:
           type: string
-        type: array
+        example:
+          Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+          User-Agent: Mozilla/5.0
+        type: object
       response:
         description: Response JSON-string
         type: string
       responseHeaders:
-        description: Response headers array
-        items:
+        additionalProperties:
           type: string
-        type: array
+        example:
+          Rate-Limit-Limit: 5000
+          Rate-Limit-Remaining: 4999
+          Rate-Limit-Reset: 'Mon, 31 Jul 2017 04:16:00 +0000'
+        type: object
       status:
         description: HTTP response code
         type: integer
@@ -12134,6 +12139,9 @@ definitions:
       description:
         description: The custom field description
         type: string
+      isUsed:
+        description: A flag to represent that the custom field is used on a record of the resource.
+        type: boolean
       name:
         description: The name of the custom field
         type: string
@@ -14075,14 +14083,17 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
+          - $ref: '#/definitions/CustomerLink'
+          - $ref: '#/definitions/ContactLink'
+          - $ref: '#/definitions/ApprovalUrlLink'
+        maxItems: 4
         minItems: 1
         readOnly: true
         type: array
       billingAddress:
         allOf:
           - $ref: '#/definitions/ContactObject'
-        description: Billing Address. Required if PayPal account is not created from Token
+        description: The Customer's Billing Address.
       createdTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -14104,6 +14115,7 @@ definitions:
           - inactive
           - active
           - deactivated
+        readOnly: true
         type: string
       updatedTime:
         allOf:
@@ -14112,6 +14124,9 @@ definitions:
       username:
         description: PayPal username.
         type: string
+    required:
+      - customerId
+      - billingAddress
     type: object
   Payeezy:
     allOf:
@@ -16955,6 +16970,15 @@ definitions:
           - bankAccountId
         type: object
     description: ACH payment instrument object
+  add-risk-score:
+    allOf:
+      - $ref: '#/definitions/RuleAction'
+      - description: Add risk score
+        properties:
+          score:
+            default: 0
+            type: integer
+        type: object
   and:
     allOf:
       - $ref: '#/definitions/Condition'

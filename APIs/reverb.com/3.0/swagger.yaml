@@ -94,11 +94,29 @@ paths:
         - accounts
   /articles:
     get:
-      description: See all Reverb blog posts
+      parameters:
+        - default: 1
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 24
+          in: query
+          name: per_page
+          required: false
+          type: integer
+        - in: query
+          name: offset
+          required: false
+          type: integer
+        - description: What's being searched for
+          in: query
+          name: query
+          required: false
+          type: string
       responses:
         default:
           description: Unexpected error
-      summary: See all Reverb blog posts
       tags:
         - articles
   /articles/featured:
@@ -480,6 +498,20 @@ paths:
       summary: View reviews of a comparison shopping page
       tags:
         - comparison_shopping_pages
+  '/comparison_shopping_pages/{slug}/also_purchased':
+    get:
+      description: Returns a set of comparison shopping pages that have also been purchased by similar users
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Returns a set of comparison shopping pages that have also been purchased by similar users
+      tags:
+        - comparison_shopping_pages
   '/comparison_shopping_pages/{slug}/similar':
     get:
       description: Returns a set of comparison shopping pages related to another one
@@ -824,6 +856,10 @@ paths:
         - default: 24
           in: query
           name: per_page
+          required: false
+          type: integer
+        - in: query
+          name: offset
           required: false
           type: integer
       responses:
@@ -1185,6 +1221,10 @@ paths:
         - default: 24
           in: query
           name: per_page
+          required: false
+          type: integer
+        - in: query
+          name: offset
           required: false
           type: integer
       responses:
@@ -1802,6 +1842,10 @@ paths:
         - default: 24
           in: query
           name: per_page
+          required: false
+          type: integer
+        - in: query
+          name: offset
           required: false
           type: integer
       responses:
@@ -2914,6 +2958,10 @@ paths:
           name: per_page
           required: false
           type: integer
+        - in: query
+          name: offset
+          required: false
+          type: integer
       responses:
         default:
           description: Unexpected error
@@ -2978,6 +3026,10 @@ paths:
         - default: 24
           in: query
           name: per_page
+          required: false
+          type: integer
+        - in: query
+          name: offset
           required: false
           type: integer
       responses:
@@ -3224,6 +3276,10 @@ paths:
           name: per_page
           required: false
           type: integer
+        - in: query
+          name: offset
+          required: false
+          type: integer
       responses:
         default:
           description: Unexpected error
@@ -3265,6 +3321,10 @@ paths:
         - default: 24
           in: query
           name: per_page
+          required: false
+          type: integer
+        - in: query
+          name: offset
           required: false
           type: integer
       responses:
@@ -3325,6 +3385,10 @@ paths:
         - default: 24
           in: query
           name: per_page
+          required: false
+          type: integer
+        - in: query
+          name: offset
           required: false
           type: integer
       responses:
@@ -3427,6 +3491,10 @@ paths:
         - default: 24
           in: query
           name: per_page
+          required: false
+          type: integer
+        - in: query
+          name: offset
           required: false
           type: integer
         - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'

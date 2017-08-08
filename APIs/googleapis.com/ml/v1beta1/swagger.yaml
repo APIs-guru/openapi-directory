@@ -413,8 +413,6 @@ paths:
             Required. The name of the version to make the default for the model. You
             can get the names of all the versions of a model by calling
             [projects.models.versions.list](/ml-engine/reference/rest/v1beta1/projects.models.versions/list).
-
-            Authorization: `ml.models.update` permission is required on the parent model.
           in: path
           name: name
           required: true
@@ -933,7 +931,10 @@ definitions:
         type: integer
     type: object
   GoogleCloudMlV1__OperationMetadata:
-    description: Represents the metadata of the long-running operation.
+    description: |-
+      Represents the metadata of the long-running operation.
+
+      Next ID: 9
     properties:
       createTime:
         description: The time the operation was submitted.
@@ -973,6 +974,8 @@ definitions:
       prediction requests. A model can have multiple versions. You can get
       information about all of the versions of a given model by calling
       [projects.models.versions.list](/ml-engine/reference/rest/v1/projects.models.versions/list).
+
+      Next ID: 18
     properties:
       autoScaling:
         $ref: '#/definitions/GoogleCloudMlV1__AutoScaling'
@@ -1175,7 +1178,10 @@ definitions:
         type: array
     type: object
   GoogleCloudMlV1beta1__Job:
-    description: Represents a training or prediction job.
+    description: |-
+      Represents a training or prediction job.
+
+      Next ID: 16
     properties:
       createTime:
         description: Output only. When the job was created.
@@ -1281,6 +1287,8 @@ definitions:
       A model can have multiple versions, each of which is a deployed, trained
       model ready to receive prediction requests. The model itself is just a
       container.
+
+      Next ID: 8
     properties:
       defaultVersion:
         $ref: '#/definitions/GoogleCloudMlV1beta1__Version'
@@ -1320,7 +1328,10 @@ definitions:
         type: array
     type: object
   GoogleCloudMlV1beta1__OperationMetadata:
-    description: Represents the metadata of the long-running operation.
+    description: |-
+      Represents the metadata of the long-running operation.
+
+      Next ID: 9
     properties:
       createTime:
         description: The time the operation was submitted.
@@ -1610,6 +1621,14 @@ definitions:
   GoogleCloudMlV1beta1__PredictionInput:
     description: Represents input parameters for a prediction job.
     properties:
+      batchSize:
+        description: |-
+          Optional. Number of records per batch, defaults to 64.
+          The service will buffer batch_size number of records in memory before
+          invoking one Tensorflow prediction call internally. So take the record
+          size and memory available into consideration when setting this parameter.
+        format: int64
+        type: string
       dataFormat:
         description: Required. The format of the input data files.
         enum:
@@ -1863,6 +1882,8 @@ definitions:
       prediction requests. A model can have multiple versions. You can get
       information about all of the versions of a given model by calling
       [projects.models.versions.list](/ml-engine/reference/rest/v1beta1/projects.models.versions/list).
+
+      Next ID: 18
     properties:
       autoScaling:
         $ref: '#/definitions/GoogleCloudMlV1beta1__AutoScaling'
@@ -1949,7 +1970,29 @@ definitions:
         type: string
     type: object
   GoogleIamV1_LogConfig_CounterOptions:
-    description: Options for counters
+    description: |-
+      Increment a streamz counter with the specified metric and field names.
+
+      Metric names should start with a '/', generally be lowercase-only,
+      and end in "_count". Field names should not contain an initial slash.
+      The actual exported metric names will have "/iam/policy" prepended.
+
+      Field names correspond to IAM request parameters and field values are
+      their respective values.
+
+      At present the only supported field names are
+         - "iam_principal", corresponding to IAMContext.principal;
+         - "" (empty string), resulting in one aggretated counter with no field.
+
+      Examples:
+        counter { metric: "/debug_access_count"  field: "iam_principal" }
+        ==> increment counter /iam/policy/backend_debug_access_count
+                              {iam_principal=[value of IAMContext.principal]}
+
+      At this time we do not support:
+      * multiple field names (though this may be supported in the future)
+      * decrementing the counter
+      * incrementing it by anything other than 1
     properties:
       field:
         description: The field value to attribute.
@@ -1960,7 +2003,15 @@ definitions:
     type: object
   GoogleIamV1_LogConfig_DataAccessOptions:
     description: Write a Data Access (Gin) log
-    properties: {}
+    properties:
+      logMode:
+        description: |-
+          Whether Gin logging should happen in a fail-closed manner at the caller.
+          This is relevant only in the LocalIAM implementation, for now.
+        enum:
+          - LOG_MODE_UNSPECIFIED
+          - LOG_FAIL_CLOSED
+        type: string
     type: object
   GoogleIamV1__AuditConfig:
     description: |-
@@ -2165,30 +2216,7 @@ definitions:
         type: array
     type: object
   GoogleIamV1__LogConfig:
-    description: |-
-      Specifies what kind of log the caller must write
-      Increment a streamz counter with the specified metric and field names.
-
-      Metric names should start with a '/', generally be lowercase-only,
-      and end in "_count". Field names should not contain an initial slash.
-      The actual exported metric names will have "/iam/policy" prepended.
-
-      Field names correspond to IAM request parameters and field values are
-      their respective values.
-
-      At present the only supported field names are
-         - "iam_principal", corresponding to IAMContext.principal;
-         - "" (empty string), resulting in one aggretated counter with no field.
-
-      Examples:
-        counter { metric: "/debug_access_count"  field: "iam_principal" }
-        ==> increment counter /iam/policy/backend_debug_access_count
-                              {iam_principal=[value of IAMContext.principal]}
-
-      At this time we do not support:
-      * multiple field names (though this may be supported in the future)
-      * decrementing the counter
-      * incrementing it by anything other than 1
+    description: Specifies what kind of log the caller must write
     properties:
       cloudAudit:
         $ref: '#/definitions/GoogleIamV1_LogConfig_CloudAuditOptions'

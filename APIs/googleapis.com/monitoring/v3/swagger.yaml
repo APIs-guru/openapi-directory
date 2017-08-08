@@ -639,7 +639,6 @@ paths:
             - REDUCE_PERCENTILE_95
             - REDUCE_PERCENTILE_50
             - REDUCE_PERCENTILE_05
-            - REDUCE_FRACTION_LESS_THAN
           in: query
           name: aggregation.crossSeriesReducer
           type: string
@@ -669,14 +668,9 @@ paths:
             - ALIGN_PERCENTILE_95
             - ALIGN_PERCENTILE_50
             - ALIGN_PERCENTILE_05
-            - ALIGN_MAKE_DISTRIBUTION
           in: query
           name: aggregation.perSeriesAligner
           type: string
-        - description: The threshold used by the REDUCE_FRACTION_LESS_THAN cross-series reducer.
-          in: query
-          name: aggregation.reduceFractionLessThanParams.threshold
-          type: number
         - description: |
             A monitoring filter that specifies which time series should be returned. The filter must specify a single metric type, and can additionally specify metric labels and other information. For example:
             metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
@@ -701,10 +695,6 @@ paths:
         - description: 'Specifies the order in which the points of the time series should be returned. By default, results are not ordered. Currently, this field must be left blank.'
           in: query
           name: orderBy
-          type: string
-        - description: 'If outputPeriod is specified, the data in the response will have the given period. Must be equal to or longer than alignmentPeriod. Must not be used when view is HEADERS. Only used when interval describes an interval longer than a single point.'
-          in: query
-          name: outputPeriod
           type: string
         - description: 'A positive number that is the maximum number of results to return. When view field sets to FULL, it limits the number of Points server will return; if view field is HEADERS, it limits the number of TimeSeries server will return.'
           in: query

@@ -1178,6 +1178,83 @@ paths:
       tags:
         - projects
 definitions:
+  AndroidAppInfo:
+    description: Android app information.
+    properties:
+      name:
+        description: The name of the app. Optional
+        type: string
+      packageName:
+        description: The package name of the app. Required.
+        type: string
+      versionCode:
+        description: The internal version code of the app. Optional.
+        type: string
+      versionName:
+        description: The version name of the app. Optional.
+        type: string
+    type: object
+  AndroidInstrumentationTest:
+    description: |-
+      A test of an Android application that can control an Android component independently of its normal lifecycle.
+
+      See  for more information on types of Android tests.
+    properties:
+      testPackageId:
+        description: The java package for the test to be executed. Required
+        type: string
+      testRunnerClass:
+        description: The InstrumentationTestRunner class. Required
+        type: string
+      testTargets:
+        description: |-
+          Each target must be fully qualified with the package name or class name, in one of these formats: - "package package_name" - "class package_name.class_name" - "class package_name.class_name#method_name"
+
+          If empty, all targets in the module will be run.
+        items:
+          type: string
+        type: array
+      useOrchestrator:
+        description: 'The flag indicates whether Android Test Orchestrator will be used to run test or not. Test orchestrator is used if either: - orchestrator_option field is USE_ORCHESTRATOR, and test runner is compatible with orchestrator. Or - orchestrator_option field is unspecified or ORCHESTRATOR_OPTION_UNSPECIFIED, and test runner is compatible with orchestrator.'
+        type: boolean
+    type: object
+  AndroidRoboTest:
+    description: 'A test of an android application that explores the application on a virtual or physical Android device, finding culprits and crashes as it goes.'
+    properties:
+      appInitialActivity:
+        description: The initial activity that should be used to start the app. Optional
+        type: string
+      bootstrapPackageId:
+        description: The java package for the bootstrap. Optional
+        type: string
+      bootstrapRunnerClass:
+        description: The runner class for the bootstrap. Optional
+        type: string
+      maxDepth:
+        description: The max depth of the traversal stack Robo can explore. Optional
+        format: int32
+        type: integer
+      maxSteps:
+        description: The max number of steps/actions Robo can execute. Default is no limit (0). Optional
+        format: int32
+        type: integer
+    type: object
+  AndroidTest:
+    description: An Android mobile test specification.
+    properties:
+      androidAppInfo:
+        $ref: '#/definitions/AndroidAppInfo'
+        description: Infomation about the application under test.
+      androidInstrumentationTest:
+        $ref: '#/definitions/AndroidInstrumentationTest'
+        description: An Android instrumentation test.
+      androidRoboTest:
+        $ref: '#/definitions/AndroidRoboTest'
+        description: An Android robo test.
+      testTimeout:
+        $ref: '#/definitions/Duration'
+        description: Max time a test is allowed to run before it is automatically cancelled.
+    type: object
   Any:
     description: |-
       `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.
@@ -1382,6 +1459,12 @@ definitions:
           Classify the result, for example into SUCCESS or FAILURE
 
           - In response: present if set by create/update request - In create/update request: optional
+      specification:
+        $ref: '#/definitions/Specification'
+        description: |-
+          Lightweight information about execution request.
+
+          - In response: present if set by create - In create: optional - In update: optional
       state:
         description: |-
           The initial state is IN_PROGRESS.
@@ -1768,6 +1851,13 @@ definitions:
         description: If the requested OS version doesn't run on the specific device model.
         type: boolean
     type: object
+  Specification:
+    description: The details about how to run the execution.
+    properties:
+      androidTest:
+        $ref: '#/definitions/AndroidTest'
+        description: An Android mobile test execution specification.
+    type: object
   StackTrace:
     description: A stacktrace.
     properties:
@@ -2044,17 +2134,33 @@ definitions:
           - In response: always set - In create/update request: optional
     type: object
   TestIssue:
-    description: An abnormal event observed during the test execution.
+    description: An issue detected occurring during a test execution.
     properties:
       errorMessage:
-        description: |-
-          A brief human-readable message describing the abnormal event.
-
-          Required.
+        description: A brief human-readable message describing the issue. Required.
+        type: string
+      severity:
+        description: Severity of issue. Required.
+        enum:
+          - info
+          - severe
+          - unspecifiedSeverity
+          - warning
         type: string
       stackTrace:
         $ref: '#/definitions/StackTrace'
-        description: Optional.
+        description: Deprecated in favor of stack trace fields inside specific warnings.
+      type:
+        description: Type of issue. Required.
+        enum:
+          - anr
+          - fatalException
+          - nativeCrash
+          - unspecifiedType
+        type: string
+      warning:
+        $ref: '#/definitions/Any'
+        description: Warning message with additional details of the issue. Should always be a message from com.google.devtools.toolresults.v1.warnings Required.
     type: object
   TestSuiteOverview:
     description: |-

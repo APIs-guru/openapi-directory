@@ -1265,25 +1265,34 @@ definitions:
         type: string
     type: object
   Api:
-    description: Api is a light-weight descriptor for a protocol buffer service.
+    description: |-
+      Api is a light-weight descriptor for an API Interface.
+
+      Interfaces are also described as "protocol buffer services" in some contexts,
+      such as by the "service" keyword in a .proto file, but they are different
+      from API Services, which represent a concrete implementation of an interface
+      as opposed to simply a description of methods and bindings. They are also
+      sometimes simply referred to as "APIs" in other contexts, such as the name of
+      this message itself. See https://cloud.google.com/apis/design/glossary for
+      detailed terminology.
     properties:
       methods:
-        description: 'The methods of this api, in unspecified order.'
+        description: 'The methods of this interface, in unspecified order.'
         items:
           $ref: '#/definitions/Method'
         type: array
       mixins:
-        description: Included APIs. See Mixin.
+        description: Included interfaces. See Mixin.
         items:
           $ref: '#/definitions/Mixin'
         type: array
       name:
         description: |-
-          The fully qualified name of this api, including package name
-          followed by the api's simple name.
+          The fully qualified name of this interface, including package name
+          followed by the interface's simple name.
         type: string
       options:
-        description: Any metadata attached to the API.
+        description: Any metadata attached to the interface.
         items:
           $ref: '#/definitions/Option'
         type: array
@@ -1300,13 +1309,12 @@ definitions:
         type: string
       version:
         description: |
-          A version string for this api. If specified, must have the form
-          `major-version.minor-version`, as in `1.10`. If the minor version
-          is omitted, it defaults to zero. If the entire version field is
-          empty, the major version is derived from the package name, as
-          outlined below. If the field is not empty, the version in the
-          package name will be verified to be consistent with what is
-          provided here.
+          A version string for this interface. If specified, must have the form
+          `major-version.minor-version`, as in `1.10`. If the minor version is
+          omitted, it defaults to zero. If the entire version field is empty, the
+          major version is derived from the package name, as outlined below. If the
+          field is not empty, the version in the package name will be verified to be
+          consistent with what is provided here.
 
           The versioning schema uses [semantic
           versioning](http://semver.org) where the major version number
@@ -1316,10 +1324,10 @@ definitions:
           chosen based on the product plan.
 
           The major version is also reflected in the package name of the
-          API, which must end in `v<major-version>`, as in
+          interface, which must end in `v<major-version>`, as in
           `google.feature.v1`. For major versions 0 and 1, the suffix can
           be omitted. Zero major versions must only be used for
-          experimental, none-GA apis.
+          experimental, non-GA interfaces.
         type: string
     type: object
   AuditConfig:
@@ -1453,6 +1461,11 @@ definitions:
 
               audiences: bookstore_android.apps.googleusercontent.com,
                          bookstore_web.apps.googleusercontent.com
+        type: string
+      authorizationUrl:
+        description: |-
+          Redirect URL if JWT token is required but no present or is expired.
+          Implement authorizationUrl of securityDefinitions in OpenAPI spec.
         type: string
       id:
         description: |-
@@ -1710,9 +1723,6 @@ definitions:
   CloudAuditOptions:
     description: Write a Cloud Audit log
     properties:
-      isReadPermissionType:
-        description: True if the log is for a permission of type DATA_READ or ADMIN_READ.
-        type: boolean
       logName:
         description: The log_name to populate in the Cloud Audit Record.
         enum:
@@ -1925,7 +1935,29 @@ definitions:
         type: string
     type: object
   CounterOptions:
-    description: Options for counters
+    description: |-
+      Increment a streamz counter with the specified metric and field names.
+
+      Metric names should start with a '/', generally be lowercase-only,
+      and end in "_count". Field names should not contain an initial slash.
+      The actual exported metric names will have "/iam/policy" prepended.
+
+      Field names correspond to IAM request parameters and field values are
+      their respective values.
+
+      At present the only supported field names are
+         - "iam_principal", corresponding to IAMContext.principal;
+         - "" (empty string), resulting in one aggretated counter with no field.
+
+      Examples:
+        counter { metric: "/debug_access_count"  field: "iam_principal" }
+        ==> increment counter /iam/policy/backend_debug_access_count
+                              {iam_principal=[value of IAMContext.principal]}
+
+      At this time we do not support:
+      * multiple field names (though this may be supported in the future)
+      * decrementing the counter
+      * incrementing it by anything other than 1
     properties:
       field:
         description: The field value to attribute.
@@ -1998,7 +2030,15 @@ definitions:
     type: object
   DataAccessOptions:
     description: Write a Data Access (Gin) log
-    properties: {}
+    properties:
+      logMode:
+        description: |-
+          Whether Gin logging should happen in a fail-closed manner at the caller.
+          This is relevant only in the LocalIAM implementation, for now.
+        enum:
+          - LOG_MODE_UNSPECIFIED
+          - LOG_FAIL_CLOSED
+        type: string
     type: object
   DeleteServiceStrategy:
     description: |-
@@ -2781,43 +2821,6 @@ definitions:
           NOTE: the referred field must be not a repeated field and must be present
           at the top-level of response message type.
         type: string
-      restCollection:
-        description: |-
-          Optional. The REST collection name is by default derived from the URL
-          pattern. If specified, this field overrides the default collection name.
-          Example:
-
-              rpc AddressesAggregatedList(AddressesAggregatedListRequest)
-                  returns (AddressesAggregatedListResponse) {
-                option (google.api.http) = {
-                  get: "/v1/projects/{project_id}/aggregated/addresses"
-                  rest_collection: "projects.addresses"
-                };
-              }
-
-          This method has the automatically derived collection name
-          "projects.aggregated". Because, semantically, this rpc is actually an
-          operation on the "projects.addresses" collection, the `rest_collection`
-          field is configured to override the derived collection name.
-        type: string
-      restMethodName:
-        description: |-
-          Optional. The rest method name is by default derived from the URL
-          pattern. If specified, this field overrides the default method name.
-          Example:
-
-              rpc CreateResource(CreateResourceRequest)
-                  returns (CreateResourceResponse) {
-                option (google.api.http) = {
-                  post: "/v1/resources",
-                  body: "resource",
-                  rest_method_name: "insert"
-                };
-              }
-
-          This method has the automatically derived rest method name "create", but
-           for backwards compatability with apiary, it is specified as insert.
-        type: string
       selector:
         description: |-
           Selects methods to which this rule applies.
@@ -2891,30 +2894,7 @@ definitions:
         type: array
     type: object
   LogConfig:
-    description: |-
-      Specifies what kind of log the caller must write
-      Increment a streamz counter with the specified metric and field names.
-
-      Metric names should start with a '/', generally be lowercase-only,
-      and end in "_count". Field names should not contain an initial slash.
-      The actual exported metric names will have "/iam/policy" prepended.
-
-      Field names correspond to IAM request parameters and field values are
-      their respective values.
-
-      At present the only supported field names are
-         - "iam_principal", corresponding to IAMContext.principal;
-         - "" (empty string), resulting in one aggretated counter with no field.
-
-      Examples:
-        counter { metric: "/debug_access_count"  field: "iam_principal" }
-        ==> increment counter /iam/policy/backend_debug_access_count
-                              {iam_principal=[value of IAMContext.principal]}
-
-      At this time we do not support:
-      * multiple field names (though this may be supported in the future)
-      * decrementing the counter
-      * incrementing it by anything other than 1
+    description: Specifies what kind of log the caller must write
     properties:
       cloudAudit:
         $ref: '#/definitions/CloudAuditOptions'
@@ -3130,7 +3110,7 @@ definitions:
         type: string
     type: object
   Method:
-    description: Method represents a method of an api.
+    description: Method represents a method of an API interface.
     properties:
       name:
         description: The simple name of this method.
@@ -3322,9 +3302,9 @@ definitions:
     type: object
   Mixin:
     description: |-
-      Declares an API to be included in this API. The including API must
-      redeclare all the methods from the included API, but documentation
-      and options are inherited as follows:
+      Declares an API Interface to be included in this interface. The including
+      interface must redeclare all the methods from the included interface, but
+      documentation and options are inherited as follows:
 
       - If after comment and whitespace stripping, the documentation
         string of the redeclared method is empty, it will be inherited
@@ -3336,7 +3316,8 @@ definitions:
 
       - If an http annotation is inherited, the path pattern will be
         modified as follows. Any version prefix will be replaced by the
-        version of the including API plus the root path if specified.
+        version of the including interface plus the root path if
+        specified.
 
       Example of a simple mixin:
 
@@ -3401,7 +3382,7 @@ definitions:
           }
     properties:
       name:
-        description: The fully qualified name of the API which is included.
+        description: The fully qualified name of the interface which is included.
         type: string
       root:
         description: |-
@@ -4106,10 +4087,10 @@ definitions:
         description: API backend configuration.
       configVersion:
         description: |-
-          The version of the service configuration. The config version may
-          influence interpretation of the configuration, for example, to
-          determine defaults. This is documented together with applicable
-          options. The current default for the config version itself is `3`.
+          The semantic version of the service configuration. The config version
+          affects the interpretation of the service configuration. For example,
+          certain features are enabled by default for certain config versions.
+          The latest config version is `3`.
         format: uint32
         type: integer
       context:

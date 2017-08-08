@@ -4494,8 +4494,11 @@ definitions:
         description: A designation of the type or nature of the violation.
         title: Violation
         type: string
+      ViolationType:
+        type: string
     required:
       - SourceID
+      - ViolationType
       - Violation
       - Agency
       - Qtr1Status
@@ -5004,8 +5007,6 @@ definitions:
           $ref: '#/definitions/dfre_Source'
         title: Sources
         type: array
-    required:
-      - Sources
     type: object
   dfrR_Chemicals:
     description: Chemicals Object
@@ -5077,8 +5078,6 @@ definitions:
     description: Header Object
     properties:
       Year1:
-        description: Air Facility System (AFS) ID.
-        example: VA0000005151044014
         type: string
       Year2:
         type: string
@@ -5122,9 +5121,6 @@ definitions:
           $ref: '#/definitions/dfrR_Header'
         title: Header
         type: array
-    required:
-      - Header
-      - Chemicals
     type: object
   dfrS_Tribes:
     description: Tribes Object
@@ -5997,8 +5993,6 @@ definitions:
           $ref: '#/definitions/dfre_ReleaseYear'
         title: Release Year
         type: array
-    required:
-      - ReleaseYear
     type: object
   dfrf_Results:
     description: Results Object

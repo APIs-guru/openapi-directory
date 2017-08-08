@@ -3384,6 +3384,8 @@ definitions:
       BioAnalyMethods:
         description: 'Displays the analytic methods used by the facility to analyze enteric viruses, fecal coliforms, helminth ova, Salmonella sp., and other regulated parameters as reported on the Biosolids Program Report.'
         type: string
+      BioCertifier:
+        type: string
       BioCommentText:
         description: Free text allowing the user to provide comments on the annual program report.
         type: string
@@ -3391,7 +3393,6 @@ definitions:
         description: 'Indicates if the facility is currently in violation for biosolids under the Clean Water Act, in the 12th or 13th quarter.'
         type: string
       BioFacTypes:
-        description: Indicates the reporting obligation reason.
         type: string
       BioIncinerationSum:
         description: The amount (dry metric tons) of biosolids incinerated.
@@ -3444,6 +3445,9 @@ definitions:
       BioReportYear:
         description: The calendar year corresponding to the Annual Biosolids Report.
         type: string
+      BioReportingObligations:
+        description: Indicates the reporting obligation reason.
+        type: string
       BioSurfaceDispSum:
         description: The amount of surface disposal in dry metric tons (DMT).
         type: string
@@ -3461,6 +3465,8 @@ definitions:
         type: string
       BioVioLastYear:
         description: 'A flag (values of 1 for Yes, 0 for No) that a Bisolids Violation occurred in the last 4 quarters.'
+        type: string
+      BioVioLastYearFlag:
         type: string
       BioViolFlag:
         description: 'Displays "Yes" if the facility is in violation for biosolids under the Clean Water Act, in the last three years.'
@@ -3851,6 +3857,18 @@ definitions:
         type: string
       EjscreenFlagUs:
         type: string
+      ElectrRptWaiverEffDate:
+        type: string
+      ElectrRptWaiverExpDate:
+        type: string
+      ElectrRptWaiverTypeCode:
+        type: string
+      ElectrRptWaiverTypeDesc:
+        type: string
+      ElectrSubmissionTypeCode:
+        type: string
+      ElectrSubmissionTypeDesc:
+        type: string
       ExposedActivity:
         description: Description of onsite industrial activities exposed to stormwater and potential spill and leak areas.
         type: string
@@ -3995,6 +4013,8 @@ definitions:
         type: string
       MsgpVisualAssessmentSmmry:
         type: string
+      NPDESDataGroups:
+        type: string
       NPDESIDs:
         description: Clean Water Act ID from the ICIS-NPDES (Integrated Compliance Information System - National Pollutant Discharge Elimination System)
         title: ICS-NPDES Clean Water Act Identifier
@@ -4073,6 +4093,8 @@ definitions:
       PermitComponents:
         example: POTW
         type: string
+      PermittingAgency:
+        type: string
       PollInViolation:
         description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
         example: 'Chlorine|Flow, in conduit or thru treatment plant|Oil and grease|Solids, total suspended|Thermal Discharge|pH'
@@ -4148,6 +4170,16 @@ definitions:
         type: string
       SpeciesCriticalHabitalFlag:
         description: This identifies if Endangered Species Act (ESA) provisions are met.
+        type: string
+      StateAuthBiosolids:
+        type: string
+      StateAuthFedfac:
+        type: string
+      StateAuthGen:
+        type: string
+      StateAuthNPDES:
+        type: string
+      StateAuthPretreat:
         type: string
       Statute:
         description: |-
@@ -4425,7 +4457,21 @@ definitions:
       - CWPBioIeaCount
       - CWPBioPenalties
       - BioVioLastYear
+      - BioVioLastYearFlag
       - VioLastYear
+      - StateAuthNPDES
+      - StateAuthFedfac
+      - StateAuthPretreat
+      - StateAuthGen
+      - StateAuthBiosolids
+      - NPDESDataGroups
+      - PermittingAgency
+      - ElectrRptWaiverTypeCode
+      - ElectrRptWaiverTypeDesc
+      - ElectrRptWaiverEffDate
+      - ElectrRptWaiverExpDate
+      - ElectrSubmissionTypeCode
+      - ElectrSubmissionTypeDesc
       - Score
     type: object
   cwa1_MapData:
@@ -4818,6 +4864,8 @@ definitions:
       BioAnalyMethods:
         description: 'Displays the analytic methods used by the facility to analyze enteric viruses, fecal coliforms, helminth ova, Salmonella sp., and other regulated parameters as reported on the Biosolids Program Report.'
         type: string
+      BioCertifier:
+        type: string
       BioCommentText:
         description: Free text allowing the user to provide comments on the annual program report.
         type: string
@@ -4825,7 +4873,6 @@ definitions:
         description: 'Indicates if the facility is currently in violation for biosolids under the Clean Water Act, in the 12th or 13th quarter.'
         type: string
       BioFacTypes:
-        description: Indicates the reporting obligation reason.
         type: string
       BioIncinerationSum:
         description: The amount (dry metric tons) of biosolids incinerated.
@@ -4878,6 +4925,9 @@ definitions:
       BioReportYear:
         description: The calendar year corresponding to the Annual Biosolids Report.
         type: string
+      BioReportingObligations:
+        description: Indicates the reporting obligation reason.
+        type: string
       BioSurfaceDispSum:
         description: The amount of surface disposal in dry metric tons (DMT).
         type: string
@@ -4895,6 +4945,8 @@ definitions:
         type: string
       BioVioLastYear:
         description: 'A flag (values of 1 for Yes, 0 for No) that a Bisolids Violation occurred in the last 4 quarters.'
+        type: string
+      BioVioLastYearFlag:
         type: string
       BioViolFlag:
         description: 'Displays "Yes" if the facility is in violation for biosolids under the Clean Water Act, in the last three years.'
@@ -5285,6 +5337,18 @@ definitions:
         type: string
       EjscreenFlagUs:
         type: string
+      ElectrRptWaiverEffDate:
+        type: string
+      ElectrRptWaiverExpDate:
+        type: string
+      ElectrRptWaiverTypeCode:
+        type: string
+      ElectrRptWaiverTypeDesc:
+        type: string
+      ElectrSubmissionTypeCode:
+        type: string
+      ElectrSubmissionTypeDesc:
+        type: string
       ExposedActivity:
         description: Description of onsite industrial activities exposed to stormwater and potential spill and leak areas.
         type: string
@@ -5429,6 +5493,8 @@ definitions:
         type: string
       MsgpVisualAssessmentSmmry:
         type: string
+      NPDESDataGroups:
+        type: string
       NPDESIDs:
         description: Clean Water Act ID from the ICIS-NPDES (Integrated Compliance Information System - National Pollutant Discharge Elimination System)
         title: ICS-NPDES Clean Water Act Identifier
@@ -5512,6 +5578,8 @@ definitions:
       PermitComponents:
         example: POTW
         type: string
+      PermittingAgency:
+        type: string
       PollInViolation:
         description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
         example: 'Chlorine|Flow, in conduit or thru treatment plant|Oil and grease|Solids, total suspended|Thermal Discharge|pH'
@@ -5587,6 +5655,16 @@ definitions:
         type: string
       SpeciesCriticalHabitalFlag:
         description: This identifies if Endangered Species Act (ESA) provisions are met.
+        type: string
+      StateAuthBiosolids:
+        type: string
+      StateAuthFedfac:
+        type: string
+      StateAuthGen:
+        type: string
+      StateAuthNPDES:
+        type: string
+      StateAuthPretreat:
         type: string
       Statute:
         description: |-
@@ -5820,7 +5898,6 @@ definitions:
       - BioReportDate
       - BioTotalVolumeAmt
       - BioCommentText
-      - BioFacTypes
       - BioTrtmntProcesses
       - BioAnalyMethodCatgrys
       - BioAnalyMethods
@@ -5865,7 +5942,21 @@ definitions:
       - CWPBioIeaCount
       - CWPBioPenalties
       - BioVioLastYear
+      - BioVioLastYearFlag
       - VioLastYear
+      - StateAuthNPDES
+      - StateAuthFedfac
+      - StateAuthPretreat
+      - StateAuthGen
+      - StateAuthBiosolids
+      - NPDESDataGroups
+      - PermittingAgency
+      - ElectrRptWaiverTypeCode
+      - ElectrRptWaiverTypeDesc
+      - ElectrRptWaiverEffDate
+      - ElectrRptWaiverExpDate
+      - ElectrSubmissionTypeCode
+      - ElectrSubmissionTypeDesc
       - Score
     type: object
   cwa2_Results:
@@ -6216,6 +6307,8 @@ definitions:
       BioAnalyMethods:
         description: 'Displays the analytic methods used by the facility to analyze enteric viruses, fecal coliforms, helminth ova, Salmonella sp., and other regulated parameters as reported on the Biosolids Program Report.'
         type: string
+      BioCertifier:
+        type: string
       BioCommentText:
         description: Free text allowing the user to provide comments on the annual program report.
         type: string
@@ -6223,10 +6316,13 @@ definitions:
         description: 'Indicates if the facility is currently in violation for biosolids under the Clean Water Act, in the 12th or 13th quarter.'
         type: number
       BioFacTypes:
-        description: Indicates the reporting obligation reason.
         type: string
       BioIncinerationSum:
         description: The amount (dry metric tons) of biosolids incinerated.
+        type: number
+      BioInspDef5yrCnt:
+        description: The count of Inspection Deficiencies that have been found in the last 5 years.
+        example: 0
         type: number
       BioLandApplicationSum:
         description: The amount (dry metric tons) of biosolids land applied.
@@ -6277,6 +6373,9 @@ definitions:
       BioReportYear:
         description: The calendar year corresponding to the Annual Biosolids Report.
         type: string
+      BioReportingObligations:
+        description: Indicates the reporting obligation reason.
+        type: string
       BioSurfaceDispSum:
         description: The amount of surface disposal in dry metric tons (DMT).
         type: number
@@ -6296,6 +6395,8 @@ definitions:
       BioVioLastYear:
         description: 'A flag (values of 1 for Yes, 0 for No) that a Bisolids Violation occurred in the last 4 quarters.'
         type: number
+      BioVioLastYearFlag:
+        type: string
       BioViolFlag:
         description: 'Displays "Yes" if the facility is in violation for biosolids under the Clean Water Act, in the last three years.'
         type: number
@@ -6685,6 +6786,18 @@ definitions:
         type: string
       EjscreenFlagUs:
         type: string
+      ElectrRptWaiverEffDate:
+        type: string
+      ElectrRptWaiverExpDate:
+        type: string
+      ElectrRptWaiverTypeCode:
+        type: string
+      ElectrRptWaiverTypeDesc:
+        type: string
+      ElectrSubmissionTypeCode:
+        type: string
+      ElectrSubmissionTypeDesc:
+        type: string
       ExposedActivity:
         description: Description of onsite industrial activities exposed to stormwater and potential spill and leak areas.
         type: string
@@ -6821,6 +6934,8 @@ definitions:
         type: string
       MsgpVisualAssessmentSmmry:
         type: string
+      NPDESDataGroups:
+        type: string
       NPDESIDs:
         description: Clean Water Act ID from the ICIS-NPDES (Integrated Compliance Information System - National Pollutant Discharge Elimination System)
         title: ICS-NPDES Clean Water Act Identifier
@@ -6899,6 +7014,8 @@ definitions:
       PermitComponents:
         example: POTW
         type: string
+      PermittingAgency:
+        type: string
       PollInViolation:
         description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
         example: 'Chlorine|Flow, in conduit or thru treatment plant|Oil and grease|Solids, total suspended|Thermal Discharge|pH'
@@ -6974,6 +7091,16 @@ definitions:
         type: string
       SpeciesCriticalHabitalFlag:
         description: This identifies if Endangered Species Act (ESA) provisions are met.
+        type: string
+      StateAuthBiosolids:
+        type: string
+      StateAuthFedfac:
+        type: string
+      StateAuthGen:
+        type: string
+      StateAuthNPDES:
+        type: string
+      StateAuthPretreat:
         type: string
       Statute:
         description: |-
@@ -7249,7 +7376,21 @@ definitions:
       - CWPBioIeaCount
       - CWPBioPenalties
       - BioVioLastYear
+      - BioVioLastYearFlag
       - VioLastYear
+      - StateAuthNPDES
+      - StateAuthFedfac
+      - StateAuthPretreat
+      - StateAuthGen
+      - StateAuthBiosolids
+      - NPDESDataGroups
+      - PermittingAgency
+      - ElectrRptWaiverTypeCode
+      - ElectrRptWaiverTypeDesc
+      - ElectrRptWaiverEffDate
+      - ElectrRptWaiverExpDate
+      - ElectrSubmissionTypeCode
+      - ElectrSubmissionTypeDesc
       - Score
     type: object
   met_Results:
