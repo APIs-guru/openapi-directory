@@ -877,6 +877,29 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeTargetHealthInput'
+      x-waiters:
+        - delay: 15
+          maxAttempts: 40
+          operation: DescribeTargetHealth
+          acceptors:
+            - argument: 'TargetHealthDescriptions[].TargetHealth.State'
+              expected: healthy
+              matcher: pathAll
+              state: success
+            - matcher: error
+              expected: InvalidInstance
+              state: retry
+        - delay: 15
+          maxAttempts: 40
+          operation: DescribeTargetHealth
+          acceptors:
+            - matcher: error
+              expected: InvalidTarget
+              state: success
+            - argument: 'TargetHealthDescriptions[].TargetHealth.State'
+              expected: unused
+              matcher: pathAll
+              state: success
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'

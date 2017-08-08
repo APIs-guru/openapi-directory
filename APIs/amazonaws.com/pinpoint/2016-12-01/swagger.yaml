@@ -96,6 +96,55 @@ securityDefinitions:
 security:
   - hmac: []
 paths:
+  /v1/apps:
+    get:
+      operationId: GetApps
+      description: Returns information about your apps.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAppsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAppsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/v1/apps/{application-id}/campaigns':
     get:
       operationId: GetCampaigns
@@ -347,6 +396,59 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateApnsSandboxChannelRequest'
+        - name: application-id
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/apps/{application-id}':
+    get:
+      operationId: GetApp
+      description: Returns information about an app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetAppResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+        '483':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '484':
+          description: MethodNotAllowedException
+          schema:
+            $ref: '#/definitions/MethodNotAllowedException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetAppRequest'
         - name: application-id
           in: path
           type: string
@@ -1338,7 +1440,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       Id:
         $ref: '#/definitions/__string'
-        description: 'Channel ID. Not used, only for backwards compatibility.'
+        description: Channel ID. Not used. Present only for backwards compatibility.
       IsArchived:
         $ref: '#/definitions/__boolean'
         description: Is this channel archived
@@ -1437,7 +1539,7 @@ definitions:
         description: Last date this was updated
       Platform:
         $ref: '#/definitions/__string'
-        description: The platform type. Will be APNS.
+        description: The platform type. Will be APNS_SANDBOX.
       Version:
         $ref: '#/definitions/__integer'
         description: Version of channel
@@ -1512,7 +1614,10 @@ definitions:
         description: Body override. If specified will override default body.
       ChannelType:
         $ref: '#/definitions/ChannelType'
-        description: Type of channel of this address
+        description: |-
+          The channel type.
+
+          Valid values: GCM | APNS | SMS | EMAIL
       Context:
         $ref: '#/definitions/MapOf__string'
         description: A map of custom attributes to attributes to be attached to the message for this address. This payload is added to the push notification's 'data.pinpoint' object or added to the email/sms delivery receipt event attributes.
@@ -1526,6 +1631,16 @@ definitions:
         $ref: '#/definitions/__string'
         description: Title override. If specified will override default title if applicable.
     description: Address configuration.
+  ApplicationResponse:
+    type: object
+    properties:
+      Id:
+        $ref: '#/definitions/__string'
+        description: The unique application ID.
+      Name:
+        $ref: '#/definitions/__string'
+        description: The display name of the application.
+    description: Application Response.
   ApplicationSettingsResource:
     type: object
     properties:
@@ -1542,6 +1657,16 @@ definitions:
         $ref: '#/definitions/QuietTime'
         description: The default quiet time for the app. Each campaign for this app sends no messages during this time unless the campaign overrides the default with a quiet time of its own.
     description: Application settings.
+  ApplicationsResponse:
+    type: object
+    properties:
+      Item:
+        $ref: '#/definitions/ListOfApplicationResponse'
+        description: List of applications returned in this page.
+      NextToken:
+        $ref: '#/definitions/__string'
+        description: The string that you use in a subsequent request to get the next page of results in a paginated response.
+    description: Get Applications Result.
   AttributeDimension:
     type: object
     properties:
@@ -1576,6 +1701,9 @@ definitions:
       Body:
         $ref: '#/definitions/__string'
         description: The email text body.
+      FromAddress:
+        $ref: '#/definitions/__string'
+        description: The email address used to send the email from. Defaults to use FromAddress specified in the Email Channel.
       HtmlBody:
         $ref: '#/definitions/__string'
         description: The email html body.
@@ -1707,6 +1835,27 @@ definitions:
       - ADM
       - SMS
       - EMAIL
+  CreateAppRequest:
+    type: object
+    required:
+      - CreateApplicationRequest
+    properties:
+      CreateApplicationRequest:
+        $ref: '#/definitions/CreateApplicationRequest'
+  CreateAppResponse:
+    type: object
+    required:
+      - ApplicationResponse
+    properties:
+      ApplicationResponse:
+        $ref: '#/definitions/ApplicationResponse'
+  CreateApplicationRequest:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/__string'
+        description: The display name of the application. Used in the Amazon Pinpoint console.
+    description: Application Request.
   CreateCampaignRequest:
     type: object
     required:
@@ -1804,6 +1953,16 @@ definitions:
     properties:
       APNSSandboxChannelResponse:
         $ref: '#/definitions/APNSSandboxChannelResponse'
+  DeleteAppRequest:
+    type: object
+    properties: {}
+  DeleteAppResponse:
+    type: object
+    required:
+      - ApplicationResponse
+    properties:
+      ApplicationResponse:
+        $ref: '#/definitions/ApplicationResponse'
   DeleteCampaignRequest:
     type: object
     properties: {}
@@ -1925,7 +2084,7 @@ definitions:
     properties:
       ApplicationId:
         $ref: '#/definitions/__string'
-        description: Application id
+        description: The unique ID of the application to which the email channel belongs.
       CreationDate:
         $ref: '#/definitions/__string'
         description: The date that the settings were last updated in ISO 8601 format.
@@ -1974,7 +2133,7 @@ definitions:
         description: |-
           The channel type.
 
-          Valid values: APNS, GCM
+          Valid values: GCM | APNS | SMS | EMAIL
       Demographic:
         $ref: '#/definitions/EndpointDemographic'
         description: The endpoint demographic attributes.
@@ -1998,8 +2157,9 @@ definitions:
         description: |-
           Indicates whether a user has opted out of receiving messages with one of the following values:
 
-          ALL – User receives all messages.
-          NONE – User receives no messages.
+          ALL - User has opted out of all messages.
+
+          NONE - Users has not opted out and receives all messages.
       RequestId:
         $ref: '#/definitions/__string'
         description: The unique ID for the most recent request to update the endpoint.
@@ -2079,7 +2239,7 @@ definitions:
         description: |-
           The channel type.
 
-          Valid values: APNS, GCM
+          Valid values: GCM | APNS | SMS | EMAIL
       Demographic:
         $ref: '#/definitions/EndpointDemographic'
         description: The endpoint demographic attributes.
@@ -2100,8 +2260,9 @@ definitions:
         description: |-
           Indicates whether a user has opted out of receiving messages with one of the following values:
 
-          ALL – User receives all messages.
-          NONE – User receives no messages.
+          ALL - User has opted out of all messages.
+
+          NONE - Users has not opted out and receives all messages.
       RequestId:
         $ref: '#/definitions/__string'
         description: The unique ID for the most recent request to update the endpoint.
@@ -2126,7 +2287,7 @@ definitions:
         description: |-
           The channel type.
 
-          Valid values: APNS, GCM
+          Valid values: GCM | APNS | SMS | EMAIL
       CohortId:
         $ref: '#/definitions/__string'
         description: 'A number from 0 - 99 that represents the cohort the endpoint is assigned to. Endpoints are grouped into cohorts randomly, and each cohort contains approximately 1 percent of the endpoints for an app. Amazon Pinpoint assigns cohorts to the holdout or treatment allocations for a campaign.'
@@ -2156,8 +2317,9 @@ definitions:
         description: |-
           Indicates whether a user has opted out of receiving messages with one of the following values:
 
-          ALL – User receives all messages.
-          NONE – User receives no messages.
+          ALL - User has opted out of all messages.
+
+          NONE - Users has not opted out and receives all messages.
       RequestId:
         $ref: '#/definitions/__string'
         description: The unique ID for the most recent request to update the endpoint.
@@ -2253,7 +2415,7 @@ definitions:
         description: If the channel is enabled for sending messages.
       Id:
         $ref: '#/definitions/__string'
-        description: 'Channel ID. Not used, only for backwards compatibility.'
+        description: Channel ID. Not used. Present only for backwards compatibility.
       IsArchived:
         $ref: '#/definitions/__boolean'
         description: Is this channel archived
@@ -2339,6 +2501,16 @@ definitions:
     properties:
       APNSSandboxChannelResponse:
         $ref: '#/definitions/APNSSandboxChannelResponse'
+  GetAppRequest:
+    type: object
+    properties: {}
+  GetAppResponse:
+    type: object
+    required:
+      - ApplicationResponse
+    properties:
+      ApplicationResponse:
+        $ref: '#/definitions/ApplicationResponse'
   GetApplicationSettingsRequest:
     type: object
     properties: {}
@@ -2349,6 +2521,16 @@ definitions:
     properties:
       ApplicationSettingsResource:
         $ref: '#/definitions/ApplicationSettingsResource'
+  GetAppsRequest:
+    type: object
+    properties: {}
+  GetAppsResponse:
+    type: object
+    required:
+      - ApplicationsResponse
+    properties:
+      ApplicationsResponse:
+        $ref: '#/definitions/ApplicationsResponse'
   GetCampaignActivitiesRequest:
     type: object
     properties: {}
@@ -2667,6 +2849,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ActivityResponse'
+  ListOfApplicationResponse:
+    type: array
+    items:
+      $ref: '#/definitions/ApplicationResponse'
   ListOfCampaignResponse:
     type: array
     items:
@@ -2788,6 +2974,9 @@ definitions:
       MediaUrl:
         $ref: '#/definitions/__string'
         description: 'The URL that points to the media resource, for example a .mp4 or .gif file.'
+      RawContent:
+        $ref: '#/definitions/__string'
+        description: The Raw JSON formatted string to be used as the payload. This value overrides the message.
       SilentPush:
         $ref: '#/definitions/__boolean'
         description: |-
@@ -2912,7 +3101,6 @@ definitions:
     properties:
       EventStream:
         $ref: '#/definitions/EventStream'
-    description: PutEventStream Response
   QuietTime:
     type: object
     properties:
@@ -2958,7 +3146,7 @@ definitions:
     properties:
       ApplicationId:
         $ref: '#/definitions/__string'
-        description: Application id
+        description: The unique ID of the application to which the SMS channel belongs.
       CreationDate:
         $ref: '#/definitions/__string'
         description: The date that the settings were last updated in ISO 8601 format.

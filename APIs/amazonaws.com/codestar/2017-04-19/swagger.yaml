@@ -696,7 +696,7 @@ definitions:
         description: 'A user- or system-generated token that identifies the entity that requested the team member association to the project. This token can be used to repeat the request. '
       userArn:
         $ref: '#/definitions/UserArn'
-        description: The Amazon Resource Name (ARN) for the IAM user you want to add to the DevHub project.
+        description: The Amazon Resource Name (ARN) for the IAM user you want to add to the AWS CodeStar project.
       projectRole:
         $ref: '#/definitions/Role'
         description: The AWS CodeStar project role that will apply to this user. This role determines what actions a user can take in an AWS CodeStar project.
@@ -928,6 +928,7 @@ definitions:
     pattern: '^[\w-.+]+@[\w-.+]+$'
     minLength: 3
     maxLength: 128
+    format: password
   InvalidNextTokenException:
     type: object
     properties: {}
@@ -1039,7 +1040,7 @@ definitions:
     type: string
     pattern: '^[\w/+=]+$'
     minLength: 1
-    maxLength: 256
+    maxLength: 512
   ProjectAlreadyExistsException:
     type: object
     properties: {}
@@ -1239,7 +1240,7 @@ definitions:
         description: 'The date the user profile was last modified, in timestamp format.'
   UserArn:
     type: string
-    pattern: 'arn:aws:iam::\d{12}:user\/[\w-]+'
+    pattern: '^arn:aws:iam::\d{12}:user(?:(\u002F)|(\u002F[\u0021-\u007E]+\u002F))[\w+=,.@-]+$'
     minLength: 32
     maxLength: 95
   UserProfileAlreadyExistsException:

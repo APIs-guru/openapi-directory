@@ -733,6 +733,18 @@ paths:
           description: InvalidBlueGreenDeploymentConfigurationException
           schema:
             $ref: '#/definitions/InvalidBlueGreenDeploymentConfigurationException'
+        '503':
+          description: InvalidEC2TagCombinationException
+          schema:
+            $ref: '#/definitions/InvalidEC2TagCombinationException'
+        '504':
+          description: InvalidOnPremisesTagCombinationException
+          schema:
+            $ref: '#/definitions/InvalidOnPremisesTagCombinationException'
+        '505':
+          description: TagSetListLimitExceededException
+          schema:
+            $ref: '#/definitions/TagSetListLimitExceededException'
       parameters:
         - name: body
           in: body
@@ -1970,6 +1982,18 @@ paths:
           description: InvalidBlueGreenDeploymentConfigurationException
           schema:
             $ref: '#/definitions/InvalidBlueGreenDeploymentConfigurationException'
+        '502':
+          description: InvalidEC2TagCombinationException
+          schema:
+            $ref: '#/definitions/InvalidEC2TagCombinationException'
+        '503':
+          description: InvalidOnPremisesTagCombinationException
+          schema:
+            $ref: '#/definitions/InvalidOnPremisesTagCombinationException'
+        '504':
+          description: TagSetListLimitExceededException
+          schema:
+            $ref: '#/definitions/TagSetListLimitExceededException'
       parameters:
         - name: body
           in: body
@@ -2343,10 +2367,10 @@ definitions:
         description: '<p>If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation.</p> <p>CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn''t specified for the deployment or the deployment group.</p> <p>For more information about the predefined deployment configurations in AWS CodeDeploy, see <a href="http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html">Working with Deployment Groups in AWS CodeDeploy</a> in the AWS CodeDeploy User Guide.</p>'
       ec2TagFilters:
         $ref: '#/definitions/EC2TagFilterList'
-        description: The Amazon EC2 tags on which to filter. The deployment group will include EC2 instances with any of the specified tags.
+        description: The Amazon EC2 tags on which to filter. The deployment group will include EC2 instances with any of the specified tags. Cannot be used in the same call as ec2TagSet.
       onPremisesInstanceTagFilters:
         $ref: '#/definitions/TagFilterList'
-        description: The on-premises instance tags on which to filter. The deployment group will include on-premises instances with any of the specified tags.
+        description: The on-premises instance tags on which to filter. The deployment group will include on-premises instances with any of the specified tags. Cannot be used in the same call as OnPremisesTagSet.
       autoScalingGroups:
         $ref: '#/definitions/AutoScalingGroupNameList'
         description: A list of associated Auto Scaling groups.
@@ -2371,6 +2395,12 @@ definitions:
       loadBalancerInfo:
         $ref: '#/definitions/LoadBalancerInfo'
         description: Information about the load balancer used in a deployment.
+      ec2TagSet:
+        $ref: '#/definitions/EC2TagSet'
+        description: Information about groups of tags applied to EC2 instances. The deployment group will include only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.
+      onPremisesTagSet:
+        $ref: '#/definitions/OnPremisesTagSet'
+        description: Information about groups of tags applied to on-premises instances. The deployment group will include only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
     description: Represents the input of a CreateDeploymentGroup operation.
   CreateDeploymentGroupOutput:
     type: object
@@ -2547,10 +2577,10 @@ definitions:
         description: The deployment configuration name.
       ec2TagFilters:
         $ref: '#/definitions/EC2TagFilterList'
-        description: The Amazon EC2 tags on which to filter.
+        description: The Amazon EC2 tags on which to filter. The deployment group includes EC2 instances with any of the specified tags.
       onPremisesInstanceTagFilters:
         $ref: '#/definitions/TagFilterList'
-        description: The on-premises instance tags on which to filter.
+        description: The on-premises instance tags on which to filter. The deployment group includes on-premises instances with any of the specified tags.
       autoScalingGroups:
         $ref: '#/definitions/AutoScalingGroupList'
         description: A list of associated Auto Scaling groups.
@@ -2584,6 +2614,12 @@ definitions:
       lastAttemptedDeployment:
         $ref: '#/definitions/LastDeploymentInfo'
         description: Information about the most recent attempted deployment to the deployment group.
+      ec2TagSet:
+        $ref: '#/definitions/EC2TagSet'
+        description: Information about groups of tags applied to an EC2 instance. The deployment group includes only EC2 instances identified by all the tag groups. Cannot be used in the same call as ec2TagFilters.
+      onPremisesTagSet:
+        $ref: '#/definitions/OnPremisesTagSet'
+        description: Information about groups of tags applied to an on-premises instance. The deployment group includes only on-premises instances identified by all the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
     description: Information about a deployment group.
   DeploymentGroupInfoList:
     type: array
@@ -2837,6 +2873,17 @@ definitions:
       - KEY_ONLY
       - VALUE_ONLY
       - KEY_AND_VALUE
+  EC2TagSet:
+    type: object
+    properties:
+      ec2TagSetList:
+        $ref: '#/definitions/EC2TagSetList'
+        description: 'A list containing other lists of EC2 instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.'
+    description: Information about groups of EC2 instance tags.
+  EC2TagSetList:
+    type: array
+    items:
+      $ref: '#/definitions/EC2TagFilterList'
   ELBInfo:
     type: object
     properties:
@@ -3267,6 +3314,10 @@ definitions:
     type: object
     properties: {}
     description: An invalid deployment style was specified. Valid deployment types include "IN_PLACE" and "BLUE_GREEN". Valid deployment options include "WITH_TRAFFIC_CONTROL" and "WITHOUT_TRAFFIC_CONTROL".
+  InvalidEC2TagCombinationException:
+    type: object
+    properties: {}
+    description: 'A call was submitted that specified both Ec2TagFilters and Ec2TagSet, but only one of these data types can be used in a single call.'
   InvalidEC2TagException:
     type: object
     properties: {}
@@ -3311,6 +3362,10 @@ definitions:
     type: object
     properties: {}
     description: The next token was specified in an invalid format.
+  InvalidOnPremisesTagCombinationException:
+    type: object
+    properties: {}
+    description: 'A call was submitted that specified both OnPremisesTagFilters and OnPremisesTagSet, but only one of these data types can be used in a single call.'
   InvalidOperationException:
     type: object
     properties: {}
@@ -3657,6 +3712,17 @@ definitions:
     type: string
   NullableBoolean:
     type: boolean
+  OnPremisesTagSet:
+    type: object
+    properties:
+      onPremisesTagSetList:
+        $ref: '#/definitions/OnPremisesTagSetList'
+        description: 'A list containing other lists of on-premises instance tag groups. In order for an instance to be included in the deployment group, it must be identified by all the tag groups in the list.'
+    description: Information about groups of on-premises instance tags.
+  OnPremisesTagSetList:
+    type: array
+    items:
+      $ref: '#/definitions/TagFilterList'
   RegisterApplicationRevisionInput:
     type: object
     required:
@@ -3883,15 +3949,22 @@ definitions:
     type: object
     properties: {}
     description: A tag was not specified.
+  TagSetListLimitExceededException:
+    type: object
+    properties: {}
+    description: The number of tag groups included in the tag set list exceeded the maximum allowed limit of 3.
   TargetInstances:
     type: object
     properties:
       tagFilters:
         $ref: '#/definitions/EC2TagFilterList'
-        description: 'The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment.'
+        description: 'The tag filter key, type, and value used to identify Amazon EC2 instances in a replacement environment for a blue/green deployment. Cannot be used in the same call as ec2TagSet.'
       autoScalingGroups:
         $ref: '#/definitions/AutoScalingGroupNameList'
         description: The names of one or more Auto Scaling groups to identify a replacement environment for a blue/green deployment.
+      ec2TagSet:
+        $ref: '#/definitions/EC2TagSet'
+        description: Information about the groups of EC2 instance tags that an instance must be identified by in order for it to be included in the replacement environment for a blue/green deployment. Cannot be used in the same call as tagFilters.
     description: Information about the instances to be used in the replacement environment in a blue/green deployment.
   TimeRange:
     type: object
@@ -4010,6 +4083,12 @@ definitions:
       loadBalancerInfo:
         $ref: '#/definitions/LoadBalancerInfo'
         description: Information about the load balancer used in a deployment.
+      ec2TagSet:
+        $ref: '#/definitions/EC2TagSet'
+        description: Information about groups of tags applied to on-premises instances. The deployment group will include only EC2 instances identified by all the tag groups.
+      onPremisesTagSet:
+        $ref: '#/definitions/OnPremisesTagSet'
+        description: Information about an on-premises instance tag set. The deployment group will include only on-premises instances identified by all the tag groups.
     description: Represents the input of an UpdateDeploymentGroup operation.
   UpdateDeploymentGroupOutput:
     type: object

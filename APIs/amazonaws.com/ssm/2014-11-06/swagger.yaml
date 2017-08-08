@@ -698,7 +698,7 @@ paths:
   '/#DeleteParameters':
     post:
       operationId: DeleteParameters
-      description: Delete a list of parameters.
+      description: Delete a list of parameters. This API is used to delete parameters by using the Amazon EC2 console.
       responses:
         '200':
           description: Success
@@ -1620,7 +1620,7 @@ paths:
   '/#DescribeParameters':
     post:
       operationId: DescribeParameters
-      description: Get information about a parameter.
+      description: '<p>Get information about a parameter.</p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p>'
       responses:
         '200':
           description: Success
@@ -2245,7 +2245,7 @@ paths:
   '/#GetParametersByPath':
     post:
       operationId: GetParametersByPath
-      description: 'Retrieve parameters in a specific hierarchy. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a>. '
+      description: '<p>Retrieve parameters in a specific hierarchy. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html">Working with Systems Manager Parameters</a>. </p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p>'
       responses:
         '200':
           description: Success
@@ -3081,6 +3081,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RemoveTagsFromResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#SendAutomationSignal':
+    post:
+      operationId: SendAutomationSignal
+      description: 'Sends a signal to an Automation execution to change the current behavior or status of the execution. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SendAutomationSignalResult'
+        '480':
+          description: AutomationExecutionNotFoundException
+          schema:
+            $ref: '#/definitions/AutomationExecutionNotFoundException'
+        '481':
+          description: InvalidAutomationSignalException
+          schema:
+            $ref: '#/definitions/InvalidAutomationSignalException'
+        '482':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SendAutomationSignalRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3966,6 +4003,7 @@ definitions:
     enum:
       - Pending
       - InProgress
+      - Waiting
       - Success
       - TimedOut
       - Cancelled
@@ -6432,6 +6470,12 @@ definitions:
       Message:
         $ref: '#/definitions/String'
     description: 'The supplied parameters for invoking the specified Automation document are incorrect. For example, they may not match the set of parameters permitted for the specified Automation document.'
+  InvalidAutomationSignalException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: The signal is not valid for the current Automation execution.
   InvalidCommandId:
     type: object
     properties: {}
@@ -8422,6 +8466,24 @@ definitions:
     type: string
     minLength: 1
     maxLength: 256
+  SendAutomationSignalRequest:
+    type: object
+    required:
+      - AutomationExecutionId
+      - SignalType
+    properties:
+      AutomationExecutionId:
+        $ref: '#/definitions/AutomationExecutionId'
+        description: The unique identifier for an existing Automation execution that you want to send the signal to.
+      SignalType:
+        $ref: '#/definitions/SignalType'
+        description: 'The type of signal. Valid signal types include the following: Approve and Reject '
+      Payload:
+        $ref: '#/definitions/AutomationParameterMap'
+        description: 'The data sent with the signal. The data schema depends on the type of signal used in the request. '
+  SendAutomationSignalResult:
+    type: object
+    properties: {}
   SendCommandRequest:
     type: object
     required:
@@ -8480,6 +8542,11 @@ definitions:
         description: The request as it was received by Systems Manager. Also provides the command ID which can be used future references to this request.
   ServiceRole:
     type: string
+  SignalType:
+    type: string
+    enum:
+      - Approve
+      - Reject
   SnapshotDownloadUrl:
     type: string
   SnapshotId:
