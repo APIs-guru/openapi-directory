@@ -1,0 +1,538 @@
+swagger: '2.0'
+schemes:
+  - https
+  - http
+host: api.tvmaze.com
+basePath: /v1
+info:
+  contact:
+    url: 'http://www.tvmaze.com'
+  description: |
+    Access to the user API is only possible for users with a [premium](http://www.tvmaze.com/premium) account. A user can only access their own user data.
+
+    Authentication uses HTTP Basic. Use the TVmaze username as authentication username, and the TVmaze API key as authentication password. Your API key can be found on your [dashboard](http://www.tvmaze.com/dashboard). To try out these API calls from this page, click the "Authorize" button on top and input your credentials.
+  title: TVmaze user
+  version: '1.0'
+  x-apisguru-categories:
+    - media
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://pbs.twimg.com/profile_images/515600283242463232/-APY1VAo_400x400.png'
+  x-origin:
+    - format: swagger
+      url: 'http://static.tvmaze.com/apidoc/v1.yaml'
+      version: '2.0'
+  x-providerName: tvmaze.com
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  usertoken:
+    type: basic
+security:
+  - usertoken: []
+paths:
+  /user/episodes:
+    get:
+      parameters:
+        - description: Only return episodes from this specific show
+          in: query
+          name: show_id
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: An array of marked episodes
+          schema:
+            items:
+              $ref: '#/definitions/MarkedEpisode'
+            type: array
+      summary: List the marked episodes
+      tags:
+        - marked episodes
+  '/user/episodes/{episode_id}':
+    delete:
+      responses:
+        '200':
+          description: the episode is now unmarked
+        '404':
+          description: this episode was not marked
+      summary: Unmark an episode
+      tags:
+        - marked episodes
+    get:
+      responses:
+        '200':
+          description: The marked episode
+          schema:
+            $ref: '#/definitions/MarkedEpisode'
+        '404':
+          description: This episode is not marked
+      summary: Check if an episode is marked
+      tags:
+        - marked episodes
+    parameters:
+      - in: path
+        name: episode_id
+        required: true
+        type: integer
+    put:
+      description: Set `marked_at` to `NULL` or leave it out to use the current time.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MarkedEpisode'
+      responses:
+        '200':
+          description: this episode is now marked
+          schema:
+            $ref: '#/definitions/MarkedEpisode'
+        '404':
+          description: this episode does not exist
+        '422':
+          description: invalid input data
+      summary: Mark an episode
+      tags:
+        - marked episodes
+  /user/follows/networks:
+    get:
+      parameters:
+        - description: Embed full network info
+          enum:
+            - network
+          in: query
+          name: embed
+          required: false
+          type: string
+      responses:
+        '200':
+          description: An array of followed networks
+          schema:
+            items:
+              $ref: '#/definitions/NetworkFollow'
+            type: array
+      summary: List the followed networks
+      tags:
+        - followed networks
+  '/user/follows/networks/{network_id}':
+    delete:
+      responses:
+        '200':
+          description: the network is now unfollowed
+        '404':
+          description: this network was not followed
+      summary: Unfollow a network
+      tags:
+        - followed networks
+    get:
+      responses:
+        '200':
+          description: The followed network
+          schema:
+            $ref: '#/definitions/NetworkFollow'
+        '404':
+          description: this network is not followed
+      summary: Check if a network is followed
+      tags:
+        - followed networks
+    parameters:
+      - in: path
+        name: network_id
+        required: true
+        type: integer
+    put:
+      responses:
+        '200':
+          description: this network is now followed
+          schema:
+            $ref: '#/definitions/NetworkFollow'
+        '404':
+          description: this network does not exist
+      summary: Follow a network
+      tags:
+        - followed networks
+  /user/follows/people:
+    get:
+      parameters:
+        - description: Embed full person info
+          enum:
+            - person
+          in: query
+          name: embed
+          required: false
+          type: string
+      responses:
+        '200':
+          description: An array of followed people
+          schema:
+            items:
+              $ref: '#/definitions/PersonFollow'
+            type: array
+      summary: List the followed people
+      tags:
+        - followed people
+  '/user/follows/people/{person_id}':
+    delete:
+      responses:
+        '200':
+          description: the person is now unfollowed
+        '404':
+          description: this person was not followed
+      summary: Unfollow a person
+      tags:
+        - followed people
+    get:
+      responses:
+        '200':
+          description: The followed person
+          schema:
+            $ref: '#/definitions/PersonFollow'
+        '404':
+          description: this person is not followed
+      summary: Check if a person is followed
+      tags:
+        - followed people
+    parameters:
+      - in: path
+        name: person_id
+        required: true
+        type: integer
+    put:
+      responses:
+        '200':
+          description: this person is now followed
+          schema:
+            $ref: '#/definitions/PersonFollow'
+        '404':
+          description: this person does not exist
+      summary: Follow a person
+      tags:
+        - followed people
+  /user/follows/shows:
+    get:
+      parameters:
+        - description: Embed full show info
+          enum:
+            - show
+          in: query
+          name: embed
+          required: false
+          type: string
+      responses:
+        '200':
+          description: An array of followed shows
+          schema:
+            items:
+              $ref: '#/definitions/ShowFollow'
+            type: array
+      summary: List the followed shows
+      tags:
+        - followed shows
+  '/user/follows/shows/{show_id}':
+    delete:
+      responses:
+        '200':
+          description: The show is now unfollowed
+        '404':
+          description: This show was not followed
+      summary: Unfollow a show
+      tags:
+        - followed shows
+    get:
+      responses:
+        '200':
+          description: The followed show
+          schema:
+            $ref: '#/definitions/ShowFollow'
+        '404':
+          description: This show is not followed
+      summary: Check if a show is followed
+      tags:
+        - followed shows
+    parameters:
+      - in: path
+        name: show_id
+        required: true
+        type: integer
+    put:
+      responses:
+        '200':
+          description: This show is now followed
+          schema:
+            $ref: '#/definitions/ShowFollow'
+        '404':
+          description: This show does not exist
+      summary: Follow a show
+      tags:
+        - followed shows
+  /user/follows/webchannels:
+    get:
+      parameters:
+        - description: Embed full webchannel info
+          enum:
+            - webchannel
+          in: query
+          name: embed
+          required: false
+          type: string
+      responses:
+        '200':
+          description: An array of followed webchannels
+          schema:
+            items:
+              $ref: '#/definitions/WebchannelFollow'
+            type: array
+      summary: List the followed webchannels
+      tags:
+        - followed webchannels
+  '/user/follows/webchannels/{webchannel_id}':
+    delete:
+      responses:
+        '200':
+          description: the webchannel is now unfollowed
+        '404':
+          description: this webchannel was not followed
+      summary: Unfollow a webchannel
+      tags:
+        - followed webchannels
+    get:
+      responses:
+        '200':
+          description: The followed webchannel
+          schema:
+            $ref: '#/definitions/WebchannelFollow'
+        '404':
+          description: this webchannel is not followed
+      summary: Check if a webchannel is followed
+      tags:
+        - followed webchannels
+    parameters:
+      - in: path
+        name: webchannel_id
+        required: true
+        type: integer
+    put:
+      responses:
+        '200':
+          description: this webchannel is now followed
+          schema:
+            $ref: '#/definitions/WebchannelFollow'
+        '404':
+          description: this webchannel does not exist
+      summary: Follow a webchannel
+      tags:
+        - followed webchannels
+  /user/votes/episodes:
+    get:
+      responses:
+        '200':
+          description: An array of episode votes
+          schema:
+            items:
+              $ref: '#/definitions/EpisodeVote'
+            type: array
+      summary: List the episodes voted for
+      tags:
+        - voted episodes
+  '/user/votes/episodes/{episode_id}':
+    delete:
+      responses:
+        '200':
+          description: The episode vote is now removed
+        '404':
+          description: This episode was not voted for
+      summary: Remove an episode vote
+      tags:
+        - voted episodes
+    get:
+      responses:
+        '200':
+          description: The episode vote
+          schema:
+            $ref: '#/definitions/EpisodeVote'
+        '404':
+          description: This episode is not voted for
+      summary: Check if an episode is voted for
+      tags:
+        - voted episodes
+    parameters:
+      - in: path
+        name: episode_id
+        required: true
+        type: integer
+    put:
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EpisodeVote'
+      responses:
+        '200':
+          description: This episode is now voted for
+          schema:
+            $ref: '#/definitions/EpisodeVote'
+        '404':
+          description: This episode does not exist
+      summary: Vote for an episode
+      tags:
+        - voted episodes
+  /user/votes/shows:
+    get:
+      parameters:
+        - description: Embed full show info
+          enum:
+            - show
+          in: query
+          name: embed
+          required: false
+          type: string
+      responses:
+        '200':
+          description: An array of show votes
+          schema:
+            items:
+              $ref: '#/definitions/ShowVote'
+            type: array
+      summary: List the shows voted for
+      tags:
+        - voted shows
+  '/user/votes/shows/{show_id}':
+    delete:
+      responses:
+        '200':
+          description: The show vote is now removed
+        '404':
+          description: This show was not voted for
+      summary: Remove a show vote
+      tags:
+        - voted shows
+    get:
+      responses:
+        '200':
+          description: The show vote
+          schema:
+            $ref: '#/definitions/ShowVote'
+        '404':
+          description: This show is not voted for
+      summary: Check if a show is voted for
+      tags:
+        - voted shows
+    parameters:
+      - in: path
+        name: show_id
+        required: true
+        type: integer
+    put:
+      description: Set `voted_at` to `NULL` or leave it out to use the current time.
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ShowVote'
+      responses:
+        '200':
+          description: This show is now voted for
+          schema:
+            $ref: '#/definitions/ShowVote'
+        '404':
+          description: This show does not exist
+      summary: Vote for a show
+      tags:
+        - voted shows
+definitions:
+  EpisodeVote:
+    properties:
+      episode_id:
+        readOnly: true
+        type: integer
+      vote:
+        description: The vote number
+        maximum: 10
+        minimum: 1
+        type: integer
+      voted_at:
+        description: Epoch timestamp for when the user voted for the episode
+        readOnly: true
+        type: integer
+    type: object
+  MarkedEpisode:
+    properties:
+      episode_id:
+        readOnly: true
+        type: integer
+      marked_at:
+        description: 'Epoch timestamp for when the user watched the episode, or 0 for unknown.'
+        type: integer
+      type:
+        description: '0 for watched, 1 for acquired, 2 for skipped'
+        enum:
+          - 0
+          - 1
+          - 2
+        type: integer
+    type: object
+  Network:
+    type: object
+  NetworkFollow:
+    properties:
+      _embedded:
+        properties:
+          network:
+            $ref: '#/definitions/Network'
+        type: object
+      network_id:
+        type: integer
+    type: object
+  Person:
+    type: object
+  PersonFollow:
+    properties:
+      _embedded:
+        properties:
+          person:
+            $ref: '#/definitions/Person'
+        type: object
+      person_id:
+        type: integer
+    type: object
+  Show:
+    type: object
+  ShowFollow:
+    properties:
+      _embedded:
+        properties:
+          show:
+            $ref: '#/definitions/Show'
+        type: object
+      show_id:
+        type: integer
+    type: object
+  ShowVote:
+    properties:
+      show_id:
+        readOnly: true
+        type: integer
+      vote:
+        description: The vote number
+        maximum: 10
+        minimum: 1
+        type: integer
+      voted_at:
+        description: Epoch timestamp for when the user voted for the episode
+        readOnly: true
+        type: integer
+    type: object
+  Webchannel:
+    type: object
+  WebchannelFollow:
+    properties:
+      _embedded:
+        properties:
+          webchannel:
+            $ref: '#/definitions/Webchannel'
+        type: object
+      webchannel_id:
+        type: integer
+    type: object
