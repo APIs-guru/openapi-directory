@@ -4180,6 +4180,23 @@ definitions:
         $ref: '#/definitions/ObjectIdentifier'
         description: The <code>ObjectIdentifier</code> of the detached object.
     description: Represents the output of a <a>DetachObject</a> response operation.
+  BatchDetachPolicy:
+    type: object
+    required:
+      - PolicyReference
+      - ObjectReference
+    properties:
+      PolicyReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Reference that identifies the policy object.
+      ObjectReference:
+        $ref: '#/definitions/ObjectReference'
+        description: Reference that identifies the object whose policy object will be detached.
+    description: 'Detaches the specified policy from the specified directory inside a <a>BatchRead</a> operation. For more information, see <a>DetachPolicy</a> and <a>BatchReadRequest$Operations</a>.'
+  BatchDetachPolicyResponse:
+    type: object
+    properties: {}
+    description: Represents the output of a <a>DetachPolicy</a> response operation.
   BatchDetachTypedLink:
     type: object
     required:
@@ -4710,6 +4727,9 @@ definitions:
       AttachPolicy:
         $ref: '#/definitions/BatchAttachPolicy'
         description: Attaches a policy object to a regular object. An object can have a limited number of attached policies.
+      DetachPolicy:
+        $ref: '#/definitions/BatchDetachPolicy'
+        description: Detaches a policy from a <a>Directory</a>.
       CreateIndex:
         $ref: '#/definitions/BatchCreateIndex'
         description: 'Creates an index object. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html">Indexing</a> for more information.'
@@ -4757,6 +4777,9 @@ definitions:
       AttachPolicy:
         $ref: '#/definitions/BatchAttachPolicyResponse'
         description: Attaches a policy object to a regular object. An object can have a limited number of attached policies.
+      DetachPolicy:
+        $ref: '#/definitions/BatchDetachPolicyResponse'
+        description: Detaches a policy from a <a>Directory</a>.
       CreateIndex:
         $ref: '#/definitions/BatchCreateIndexResponse'
         description: 'Creates an index object. See <a href="http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html">Indexing</a> for more information.'

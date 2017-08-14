@@ -447,6 +447,59 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AdminDisableProviderForUser':
+    post:
+      operationId: AdminDisableProviderForUser
+      description: '<p>Disables the user from signing in with the specified external (SAML or social) identity provider. If the user to disable is a Cognito User Pools native username + password user, they are not permitted to use their password to sign-in. If the user to disable is a linked external IdP user, any link between that user and an existing user is removed. The next time the external user (no longer attached to the previously linked <code>DestinationUser</code>) signs in, they must create a new user account. See <a href="API_AdminLinkProviderForUser.html">AdminLinkProviderForUser</a>.</p> <p>This action is enabled only for admin access and requires developer credentials.</p> <p>The <code>ProviderName</code> must match the value specified when creating an IdP for the pool. </p> <p>To disable a native username + password user, the <code>ProviderName</code> value must be <code>Cognito</code> and the <code>ProviderAttributeName</code> must be <code>Cognito_Subject</code>, with the <code>ProviderAttributeValue</code> being the name that is used in the user pool for the user.</p> <p>The <code>ProviderAttributeName</code> must always be <code>Cognito_Subject</code> for social identity providers. The <code>ProviderAttributeValue</code> must always be the exact subject that was used when the user was originally linked as a source user.</p> <p>For de-linking a SAML identity, there are two scenarios. If the linked identity has not yet been used to sign-in, the <code>ProviderAttributeName</code> and <code>ProviderAttributeValue</code> must be the same values that were used for the <code>SourceUser</code> when the identities were originally linked in the <a href="API_AdminLinkProviderForUser.html">AdminLinkProviderForUser</a> call. (If the linking was done with <code>ProviderAttributeName</code> set to <code>Cognito_Subject</code>, the same applies here). However, if the user has already signed in, the <code>ProviderAttributeName</code> must be <code>Cognito_Subject</code> and <code>ProviderAttributeValue</code> must be the subject of the SAML assertion.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AdminDisableProviderForUserResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '484':
+          description: UserNotFoundException
+          schema:
+            $ref: '#/definitions/UserNotFoundException'
+        '485':
+          description: AliasExistsException
+          schema:
+            $ref: '#/definitions/AliasExistsException'
+        '486':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AdminDisableProviderForUserRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#AdminDisableUser':
     post:
       operationId: AdminDisableUser
@@ -769,6 +822,59 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AdminInitiateAuthRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AdminLinkProviderForUser':
+    post:
+      operationId: AdminLinkProviderForUser
+      description: '<p>Links an existing user account in a user pool (<code>DestinationUser</code>) to an identity from an external identity provider (<code>SourceUser</code>) based on a specified attribute name and value from the external identity provider. This allows you to create a link from the existing user account to an external federated user identity that has not yet been used to sign in, so that the federated user identity can be used to sign in as the existing user account. </p> <p> For example, if there is an existing user with a username and password, this API links that user to a federated user identity, so that when the federated user identity is used, the user signs in as the existing user account. </p> <important> <p>Because this API allows a user with an external federated identity to sign in as an existing user in the user pool, it is critical that it only be used with external identity providers and provider attributes that have been trusted by the application owner.</p> </important> <p>See also <a href="API_AdminDisableProviderForUser.html">AdminDisableProviderForUser</a>.</p> <p>This action is enabled only for admin access and requires developer credentials.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AdminLinkProviderForUserResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '482':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '483':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '484':
+          description: UserNotFoundException
+          schema:
+            $ref: '#/definitions/UserNotFoundException'
+        '485':
+          description: AliasExistsException
+          schema:
+            $ref: '#/definitions/AliasExistsException'
+        '486':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AdminLinkProviderForUserRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1724,6 +1830,55 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateResourceServer':
+    post:
+      operationId: CreateResourceServer
+      description: Creates a new OAuth2.0 resource server and defines custom scopes in it.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateResourceServerResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '485':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateResourceServerRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateUserImportJob':
     post:
       operationId: CreateUserImportJob
@@ -2026,10 +2181,53 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteResourceServer':
+    post:
+      operationId: DeleteResourceServer
+      description: Deletes a resource server.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteResourceServerRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteUser':
     post:
       operationId: DeleteUser
-      description: Allows a user to delete one's self.
+      description: Allows a user to delete himself or herself.
       responses:
         '200':
           description: Success
@@ -2304,6 +2502,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeIdentityProviderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeResourceServer':
+    post:
+      operationId: DescribeResourceServer
+      description: Describes a resource server.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeResourceServerResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeResourceServerRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2834,6 +3077,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetUICustomization':
+    post:
+      operationId: GetUICustomization
+      description: 'Gets the UI Customization information for a particular app client''s app UI, if there is something set. If nothing is set for the particular client, but there is an existing pool level customization (app <code>clientId</code> will be <code>ALL</code>), then that is returned. If nothing is present, then an empty shape is returned.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetUICustomizationResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetUICustomizationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#GetUser':
     post:
       operationId: GetUser
@@ -3257,6 +3545,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListResourceServers':
+    post:
+      operationId: ListResourceServers
+      description: Lists the resource servers for a user pool.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListResourceServersResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListResourceServersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListUserImportJobs':
     post:
       operationId: ListUserImportJobs
@@ -3660,6 +3993,51 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#SetUICustomization':
+    post:
+      operationId: SetUICustomization
+      description: '<p>Sets the UI customization information for a user pool''s built-in app UI.</p> <p>You can specify app UI customization settings for a single client (with a specific <code>clientId</code>) or for all clients (by setting the <code>clientId</code> to <code>ALL</code>). If you specify <code>ALL</code>, the default configuration will be used for every client that has no UI customization set previously. If you specify UI customization settings for a particular client, it will no longer fall back to the <code>ALL</code> configuration. </p> <note> <p>To use this API, your user pool must have a domain associated with it. Otherwise, there is no place to host the app''s pages, and the service will throw an error.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SetUICustomizationResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SetUICustomizationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#SetUserSettings':
     post:
       operationId: SetUserSettings
@@ -4037,6 +4415,51 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateIdentityProviderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateResourceServer':
+    post:
+      operationId: UpdateResourceServer
+      description: Updates the name and scopes of resource server. All other fields are read-only.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateResourceServerResponse'
+        '480':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: NotAuthorizedException
+          schema:
+            $ref: '#/definitions/NotAuthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: InternalErrorException
+          schema:
+            $ref: '#/definitions/InternalErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateResourceServerRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4437,7 +4860,7 @@ definitions:
     properties:
       User:
         $ref: '#/definitions/UserType'
-        description: The user returned in the request to create a new user.
+        description: The newly created user.
     description: Represents the response from the server to the request to create the user.
   AdminCreateUserUnusedAccountValidityDaysType:
     type: integer
@@ -4477,6 +4900,21 @@ definitions:
         $ref: '#/definitions/UsernameType'
         description: The user name of the user you wish to delete.
     description: Represents the request to delete a user as an administrator.
+  AdminDisableProviderForUserRequest:
+    type: object
+    required:
+      - UserPoolId
+      - User
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/StringType'
+        description: The user pool ID for the user pool.
+      User:
+        $ref: '#/definitions/ProviderUserIdentifierType'
+        description: The user to be disabled.
+  AdminDisableProviderForUserResponse:
+    type: object
+    properties: {}
   AdminDisableUserRequest:
     type: object
     required:
@@ -4633,6 +5071,25 @@ definitions:
         $ref: '#/definitions/AuthenticationResultType'
         description: 'The result of the authentication response. This is only returned if the caller does not need to pass another challenge. If the caller does need to pass another challenge before it gets tokens, <code>ChallengeName</code>, <code>ChallengeParameters</code>, and <code>Session</code> are returned.'
     description: 'Initiates the authentication response, as an administrator.'
+  AdminLinkProviderForUserRequest:
+    type: object
+    required:
+      - UserPoolId
+      - DestinationUser
+      - SourceUser
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/StringType'
+        description: The user pool ID for the user pool.
+      DestinationUser:
+        $ref: '#/definitions/ProviderUserIdentifierType'
+        description: '<p>The existing user in the user pool to be linked to the external identity provider user account. Can be a native (Username + Password) Cognito User Pools user or a federated user (for example, a SAML or Facebook user). If the user doesn''t exist, an exception is thrown. This is the user that is returned when the new user (with the linked identity provider attribute) signs in.</p> <p>The <code>ProviderAttributeValue</code> for the <code>DestinationUser</code> must match the username for the user in the user pool. The <code>ProviderAttributeName</code> will always be ignored.</p>'
+      SourceUser:
+        $ref: '#/definitions/ProviderUserIdentifierType'
+        description: '<p>An external identity provider account for a user who does not currently exist yet in the user pool. This user must be a federated user (for example, a SAML or Facebook user), not another native user.</p> <p>If the <code>SourceUser</code> is a federated social identity provider user (Facebook, Google, or Login with Amazon), you must set the <code>ProviderAttributeName</code> to <code>Cognito_Subject</code>. For social identity providers, the <code>ProviderName</code> will be <code>Facebook</code>, <code>Google</code>, or <code>LoginWithAmazon</code>, and Cognito will automatically parse the Facebook, Google, and Login with Amazon tokens for <code>id</code>, <code>sub</code>, and <code>user_id</code>, respectively. The <code>ProviderAttributeValue</code> for the user must be the same value as the <code>id</code>, <code>sub</code>, or <code>user_id</code> value found in the social identity provider token.</p> <p/> <p>For SAML, the <code>ProviderAttributeName</code> can be any value that matches a claim in the SAML assertion. If you wish to link SAML users based on the subject of the SAML assertion, you should map the subject to a claim through the SAML identity provider and submit that claim name as the <code>ProviderAttributeName</code>. If you set <code>ProviderAttributeName</code> to <code>Cognito_Subject</code>, Cognito will automatically parse the default unique identifier found in the subject from the SAML token.</p>'
+  AdminLinkProviderForUserResponse:
+    type: object
+    properties: {}
   AdminListDevicesRequest:
     type: object
     required:
@@ -4877,13 +5334,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/AttributeType'
+  AttributeMappingKeyType:
+    type: string
+    minLength: 1
+    maxLength: 32
   AttributeMappingType:
     type: array
     items:
       type: object
       properties:
         key:
-          $ref: '#/definitions/CustomAttributeNameType'
+          $ref: '#/definitions/AttributeMappingKeyType'
         value:
           $ref: '#/definitions/StringType'
   AttributeNameListType:
@@ -4952,6 +5413,10 @@ definitions:
     description: The result type of the authentication result.
   BooleanType:
     type: boolean
+  CSSType:
+    type: string
+  CSSVersionType:
+    type: string
   CallbackURLsListType:
     type: array
     items:
@@ -5120,7 +5585,7 @@ definitions:
     properties:
       ClientId:
         $ref: '#/definitions/ClientIdType'
-        description: The ID of the client associated with the user pool.
+        description: The app client ID of the app associated with the user pool.
       SecretHash:
         $ref: '#/definitions/SecretHashType'
         description: A keyed-hash message authentication code (HMAC) calculated using the secret key of a user pool client and username plus the client ID in the message.
@@ -5147,7 +5612,7 @@ definitions:
     properties:
       ClientId:
         $ref: '#/definitions/ClientIdType'
-        description: The ID of the client associated with the user pool.
+        description: The ID of the app client associated with the user pool.
       SecretHash:
         $ref: '#/definitions/SecretHashType'
         description: A keyed-hash message authentication code (HMAC) calculated using the secret key of a user pool client and username plus the client ID in the message.
@@ -5209,7 +5674,7 @@ definitions:
         $ref: '#/definitions/UserPoolIdType'
         description: The user pool ID.
       ProviderName:
-        $ref: '#/definitions/ProviderNameType'
+        $ref: '#/definitions/ProviderNameTypeV1'
         description: The identity provider name.
       ProviderType:
         $ref: '#/definitions/IdentityProviderTypeType'
@@ -5231,6 +5696,33 @@ definitions:
       IdentityProvider:
         $ref: '#/definitions/IdentityProviderType'
         description: The newly created identity provider object.
+  CreateResourceServerRequest:
+    type: object
+    required:
+      - UserPoolId
+      - Identifier
+      - Name
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID for the user pool.
+      Identifier:
+        $ref: '#/definitions/ResourceServerIdentifierType'
+        description: 'A unique resource server identifier for the resource server. This could be an HTTPS endpoint where the resource server is located. For example, <code>https://my-weather-api.example.com</code>.'
+      Name:
+        $ref: '#/definitions/ResourceServerNameType'
+        description: A friendly name for the resource server.
+      Scopes:
+        $ref: '#/definitions/ResourceServerScopeListType'
+        description: 'A list of scopes. Each scope is map, where the keys are <code>name</code> and <code>description</code>.'
+  CreateResourceServerResponse:
+    type: object
+    required:
+      - ResourceServer
+    properties:
+      ResourceServer:
+        $ref: '#/definitions/ResourceServerType'
+        description: The newly created resource server.
   CreateUserImportJobRequest:
     type: object
     required:
@@ -5358,6 +5850,9 @@ definitions:
       EmailVerificationSubject:
         $ref: '#/definitions/EmailVerificationSubjectType'
         description: A string representing the email verification subject.
+      VerificationMessageTemplate:
+        $ref: '#/definitions/VerificationMessageTemplateType'
+        description: The template for the verification message that the user sees when the app requests permission to access the user's information.
       SmsAuthenticationMessage:
         $ref: '#/definitions/SmsVerificationMessageType'
         description: A string representing the SMS authentication message.
@@ -5404,6 +5899,11 @@ definitions:
   DateType:
     type: string
     format: date-time
+  DefaultEmailOptionType:
+    type: string
+    enum:
+      - CONFIRM_WITH_LINK
+      - CONFIRM_WITH_CODE
   DeleteGroupRequest:
     type: object
     required:
@@ -5428,6 +5928,18 @@ definitions:
       ProviderName:
         $ref: '#/definitions/ProviderNameType'
         description: The identity provider name.
+  DeleteResourceServerRequest:
+    type: object
+    required:
+      - UserPoolId
+      - Identifier
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID for the user pool that hosts the resource server.
+      Identifier:
+        $ref: '#/definitions/ResourceServerIdentifierType'
+        description: The identifier for the resource server.
   DeleteUserAttributesRequest:
     type: object
     required:
@@ -5456,7 +5968,7 @@ definitions:
         description: The user pool ID for the user pool where you want to delete the client.
       ClientId:
         $ref: '#/definitions/ClientIdType'
-        description: The ID of the client associated with the user pool.
+        description: The app client ID of the app associated with the user pool.
     description: Represents the request to delete a user pool client.
   DeleteUserPoolDomainRequest:
     type: object
@@ -5520,6 +6032,26 @@ definitions:
       IdentityProvider:
         $ref: '#/definitions/IdentityProviderType'
         description: The identity provider that was deleted.
+  DescribeResourceServerRequest:
+    type: object
+    required:
+      - UserPoolId
+      - Identifier
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID for the user pool that hosts the resource server.
+      Identifier:
+        $ref: '#/definitions/ResourceServerIdentifierType'
+        description: The identifier for the resource server
+  DescribeResourceServerResponse:
+    type: object
+    required:
+      - ResourceServer
+    properties:
+      ResourceServer:
+        $ref: '#/definitions/ResourceServerType'
+        description: The resource server.
   DescribeUserImportJobRequest:
     type: object
     required:
@@ -5551,7 +6083,7 @@ definitions:
         description: The user pool ID for the user pool you want to describe.
       ClientId:
         $ref: '#/definitions/ClientIdType'
-        description: The ID of the client associated with the user pool.
+        description: The app client ID of the app associated with the user pool.
     description: Represents the request to describe a user pool client.
   DescribeUserPoolClientResponse:
     type: object
@@ -5682,10 +6214,12 @@ definitions:
       - DELETING
       - UPDATING
       - ACTIVE
+      - FAILED
   DomainType:
     type: string
+    pattern: '^[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?$'
     minLength: 1
-    maxLength: 1024
+    maxLength: 63
   DomainVersionType:
     type: string
     minLength: 1
@@ -5709,11 +6243,21 @@ definitions:
         $ref: '#/definitions/EmailAddressType'
         description: The REPLY-TO email address.
     description: The email configuration type.
+  EmailVerificationMessageByLinkType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*\{##[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*##\}[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*'
+    minLength: 6
+    maxLength: 20000
   EmailVerificationMessageType:
     type: string
     pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*\{####\}[\p{L}\p{M}\p{S}\p{N}\p{P}\s*]*'
     minLength: 6
     maxLength: 20000
+  EmailVerificationSubjectByLinkType:
+    type: string
+    pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s]+'
+    minLength: 1
+    maxLength: 140
   EmailVerificationSubjectType:
     type: string
     pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}\s]+'
@@ -5852,6 +6396,25 @@ definitions:
       IdentityProvider:
         $ref: '#/definitions/IdentityProviderType'
         description: The identity provider object.
+  GetUICustomizationRequest:
+    type: object
+    required:
+      - UserPoolId
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID for the user pool.
+      ClientId:
+        $ref: '#/definitions/ClientIdType'
+        description: The client ID for the client app.
+  GetUICustomizationResponse:
+    type: object
+    required:
+      - UICustomization
+    properties:
+      UICustomization:
+        $ref: '#/definitions/UICustomizationType'
+        description: The UI customization information.
   GetUserAttributeVerificationCodeRequest:
     type: object
     required:
@@ -5982,6 +6545,9 @@ definitions:
     type: string
     enum:
       - SAML
+      - Facebook
+      - Google
+      - LoginWithAmazon
   IdpIdentifierType:
     type: string
     pattern: '[\w\s+=.@-]+'
@@ -5993,6 +6559,10 @@ definitions:
       $ref: '#/definitions/IdpIdentifierType'
     minItems: 0
     maxItems: 50
+  ImageFileType:
+    type: string
+  ImageUrlType:
+    type: string
   InitiateAuthRequest:
     type: object
     required:
@@ -6208,6 +6778,35 @@ definitions:
     type: integer
     minimum: 1
     maximum: 60
+  ListResourceServersLimitType:
+    type: integer
+    minimum: 1
+    maximum: 50
+  ListResourceServersRequest:
+    type: object
+    required:
+      - UserPoolId
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID for the user pool.
+      MaxResults:
+        $ref: '#/definitions/ListResourceServersLimitType'
+        description: The maximum number of resource servers to return.
+      NextToken:
+        $ref: '#/definitions/PaginationKeyType'
+        description: A pagination token.
+  ListResourceServersResponse:
+    type: object
+    required:
+      - ResourceServers
+    properties:
+      ResourceServers:
+        $ref: '#/definitions/ResourceServersListType'
+        description: The resource servers.
+      NextToken:
+        $ref: '#/definitions/PaginationKeyType'
+        description: A pagination token.
   ListUserImportJobsRequest:
     type: object
     required:
@@ -6519,6 +7118,24 @@ definitions:
     pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
     minLength: 1
     maxLength: 32
+  ProviderNameTypeV1:
+    type: string
+    pattern: '[^_][\p{L}\p{M}\p{S}\p{N}\p{P}][^_]+'
+    minLength: 1
+    maxLength: 32
+  ProviderUserIdentifierType:
+    type: object
+    properties:
+      ProviderName:
+        $ref: '#/definitions/ProviderNameType'
+        description: 'The name of the provider, for example, Facebook, Google, or Login with Amazon.'
+      ProviderAttributeName:
+        $ref: '#/definitions/StringType'
+        description: 'The name of the provider attribute to link to, for example, <code>NameID</code>.'
+      ProviderAttributeValue:
+        $ref: '#/definitions/StringType'
+        description: 'The value of the provider attribute to link to, for example, <code>xxxxx_account</code>.'
+    description: A container for information about an identity provider for a user pool.
   ProvidersListType:
     type: array
     items:
@@ -6572,6 +7189,63 @@ definitions:
         $ref: '#/definitions/MessageType'
         description: The message returned when the Amazon Cognito service returns a resource not found exception.
     description: This exception is thrown when the Amazon Cognito service cannot find the requested resource.
+  ResourceServerIdentifierType:
+    type: string
+    pattern: '[\x21\x23-\x5B\x5D-\x7E]+'
+    minLength: 1
+    maxLength: 256
+  ResourceServerNameType:
+    type: string
+    pattern: '[\w\s+=,.@-]+'
+    minLength: 1
+    maxLength: 256
+  ResourceServerScopeDescriptionType:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ResourceServerScopeListType:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceServerScopeType'
+    maxItems: 25
+  ResourceServerScopeNameType:
+    type: string
+    pattern: '[\x21\x23-\x2E\x30-\x5B\x5D-\x7E]+'
+    minLength: 1
+    maxLength: 256
+  ResourceServerScopeType:
+    type: object
+    required:
+      - ScopeName
+      - ScopeDescription
+    properties:
+      ScopeName:
+        $ref: '#/definitions/ResourceServerScopeNameType'
+        description: The name of the scope.
+      ScopeDescription:
+        $ref: '#/definitions/ResourceServerScopeDescriptionType'
+        description: A description of the scope.
+    description: A resource server scope.
+  ResourceServerType:
+    type: object
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID for the user pool that hosts the resource server.
+      Identifier:
+        $ref: '#/definitions/ResourceServerIdentifierType'
+        description: The identifier for the resource server.
+      Name:
+        $ref: '#/definitions/ResourceServerNameType'
+        description: The name of the resource server.
+      Scopes:
+        $ref: '#/definitions/ResourceServerScopeListType'
+        description: A list of scopes that are defined for the resource server.
+    description: A container for information about a resource server for a user pool.
+  ResourceServersListType:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceServerType'
   RespondToAuthChallengeRequest:
     type: object
     required:
@@ -6653,6 +7327,7 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ScopeType'
+    maxItems: 25
   ScopeType:
     type: string
     pattern: '[\x21\x23-\x5B\x5D-\x7E]+'
@@ -6676,6 +7351,31 @@ definitions:
     type: string
     minLength: 20
     maxLength: 2048
+  SetUICustomizationRequest:
+    type: object
+    required:
+      - UserPoolId
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID for the user pool.
+      ClientId:
+        $ref: '#/definitions/ClientIdType'
+        description: The client ID for the client app.
+      CSS:
+        $ref: '#/definitions/CSSType'
+        description: The CSS values in the UI customization.
+      ImageFile:
+        $ref: '#/definitions/ImageFileType'
+        description: The uploaded logo image for the UI customization.
+  SetUICustomizationResponse:
+    type: object
+    required:
+      - UICustomization
+    properties:
+      UICustomization:
+        $ref: '#/definitions/UICustomizationType'
+        description: The UI customization information.
   SetUserSettingsRequest:
     type: object
     required:
@@ -6831,6 +7531,31 @@ definitions:
         $ref: '#/definitions/MessageType'
         description: The message returned when the Amazon Cognito service returns a too many requests exception.
     description: This exception is thrown when the user has made too many requests for a given operation.
+  UICustomizationType:
+    type: object
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID for the user pool.
+      ClientId:
+        $ref: '#/definitions/ClientIdType'
+        description: The client ID for the client app.
+      ImageUrl:
+        $ref: '#/definitions/ImageUrlType'
+        description: The logo image for the UI customization.
+      CSS:
+        $ref: '#/definitions/CSSType'
+        description: The CSS values in the UI customization.
+      CSSVersion:
+        $ref: '#/definitions/CSSVersionType'
+        description: The CSS version number.
+      LastModifiedDate:
+        $ref: '#/definitions/DateType'
+        description: The last-modified date for the UI customization.
+      CreationDate:
+        $ref: '#/definitions/DateType'
+        description: The creation date for the UI customization.
+    description: A container for the UI customization information for a user pool's built-in app UI.
   UnexpectedLambdaException:
     type: object
     properties:
@@ -6927,6 +7652,33 @@ definitions:
       IdentityProvider:
         $ref: '#/definitions/IdentityProviderType'
         description: The identity provider object.
+  UpdateResourceServerRequest:
+    type: object
+    required:
+      - UserPoolId
+      - Identifier
+      - Name
+    properties:
+      UserPoolId:
+        $ref: '#/definitions/UserPoolIdType'
+        description: The user pool ID for the user pool.
+      Identifier:
+        $ref: '#/definitions/ResourceServerIdentifierType'
+        description: The identifier for the resource server.
+      Name:
+        $ref: '#/definitions/ResourceServerNameType'
+        description: The name of the resource server.
+      Scopes:
+        $ref: '#/definitions/ResourceServerScopeListType'
+        description: The scope values to be set for the resource server.
+  UpdateResourceServerResponse:
+    type: object
+    required:
+      - ResourceServer
+    properties:
+      ResourceServer:
+        $ref: '#/definitions/ResourceServerType'
+        description: The resource server.
   UpdateUserAttributesRequest:
     type: object
     required:
@@ -6982,7 +7734,7 @@ definitions:
         description: A list of allowed callback URLs for the identity providers.
       LogoutURLs:
         $ref: '#/definitions/LogoutURLsListType'
-        description: A list ofallowed logout URLs for the identity providers.
+        description: A list of allowed logout URLs for the identity providers.
       DefaultRedirectURI:
         $ref: '#/definitions/RedirectUrlType'
         description: The default redirect URI. Must be in the <code>CallbackURLs</code> list.
@@ -7029,6 +7781,9 @@ definitions:
       EmailVerificationSubject:
         $ref: '#/definitions/EmailVerificationSubjectType'
         description: The subject of the email verification message.
+      VerificationMessageTemplate:
+        $ref: '#/definitions/VerificationMessageTemplateType'
+        description: The template for verification messages.
       SmsAuthenticationMessage:
         $ref: '#/definitions/SmsVerificationMessageType'
         description: The contents of the SMS authentication message.
@@ -7214,7 +7969,7 @@ definitions:
         description: A list of allowed callback URLs for the identity providers.
       LogoutURLs:
         $ref: '#/definitions/LogoutURLsListType'
-        description: A list ofallowed logout URLs for the identity providers.
+        description: A list of allowed logout URLs for the identity providers.
       DefaultRedirectURI:
         $ref: '#/definitions/RedirectUrlType'
         description: The default redirect URI. Must be in the <code>CallbackURLs</code> list.
@@ -7227,7 +7982,7 @@ definitions:
       AllowedOAuthFlowsUserPoolClient:
         $ref: '#/definitions/BooleanType'
         description: Set to TRUE if the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
-    description: A user pool of the client type.
+    description: Contains information about a user pool client.
   UserPoolDescriptionType:
     type: object
     properties:
@@ -7337,6 +8092,9 @@ definitions:
       EmailVerificationSubject:
         $ref: '#/definitions/EmailVerificationSubjectType'
         description: The subject of the email verification message.
+      VerificationMessageTemplate:
+        $ref: '#/definitions/VerificationMessageTemplateType'
+        description: The template for verification messages.
       SmsAuthenticationMessage:
         $ref: '#/definitions/SmsVerificationMessageType'
         description: The contents of the SMS authentication message.
@@ -7429,6 +8187,28 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/UserType'
+  VerificationMessageTemplateType:
+    type: object
+    properties:
+      SmsMessage:
+        $ref: '#/definitions/SmsVerificationMessageType'
+        description: The SMS message template.
+      EmailMessage:
+        $ref: '#/definitions/EmailVerificationMessageType'
+        description: The email message template.
+      EmailSubject:
+        $ref: '#/definitions/EmailVerificationSubjectType'
+        description: The subject line for the email message template.
+      EmailMessageByLink:
+        $ref: '#/definitions/EmailVerificationMessageByLinkType'
+        description: The email message template for sending a confirmation link to the user.
+      EmailSubjectByLink:
+        $ref: '#/definitions/EmailVerificationSubjectByLinkType'
+        description: The subject line for the email message template for sending a confirmation link to the user.
+      DefaultEmailOption:
+        $ref: '#/definitions/DefaultEmailOptionType'
+        description: The default email option.
+    description: The template for verification messages.
   VerifiedAttributeType:
     type: string
     enum:
