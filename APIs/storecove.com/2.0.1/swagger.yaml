@@ -1,0 +1,1425 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.storecove.com
+basePath: /api/v2
+info:
+  contact:
+    email: apisupport@storecove.nl
+  description: Storecove API
+  title: Storecove
+  version: 2.0.1
+  x-apisguru-categories:
+    - finance
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://www.storecove.com/assets/v2/logo-b0d52166b7aedce1c08416e14480dcefd5db3f8a68704a6b802c37b189dd8894.png'
+  x-origin:
+    - format: swagger
+      url: 'https://www.storecove.com/api/v2/openapi.json'
+      version: '2.0'
+  x-providerName: storecove.com
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - Bearer: []
+tags:
+  - name: InvoiceSubmissions
+  - name: Shops
+  - name: ShopAccounts
+  - name: ShopAccountRequests
+paths:
+  /invoice_submissions:
+    post:
+      description: |-
+        Submit an invoice for delivery.
+        include::examples/invoice_submissions/create_invoice_submission/tabs.adoc[]
+      operationId: create_invoice_submission
+      parameters:
+        - description: Invoice to submit
+          in: body
+          name: invoice_submission
+          required: true
+          schema:
+            $ref: '#/definitions/InvoiceSubmission'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/InvoiceSubmissionResult'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity
+          schema:
+            items:
+              $ref: '#/definitions/ErrorModel'
+            type: array
+      summary: Submit a new invoice
+      tags:
+        - InvoiceSubmissions
+  /invoice_submissions/preflight:
+    post:
+      description: |-
+        Check whether Storecove can deliver an invoice for a list of ids.
+        include::examples/invoice_submissions/preflight_invoice_recipient/tabs.adoc[]
+      operationId: preflight_invoice_recipient
+      parameters:
+        - description: The invoice recipient to preflight
+          in: body
+          name: invoice_recipient_preflight
+          required: true
+          schema:
+            $ref: '#/definitions/InvoiceRecipientPreflight'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PreflightInvoiceRecipientResult'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity
+          schema:
+            items:
+              $ref: '#/definitions/ErrorModel'
+            type: array
+      summary: Preflight an invoice recipient
+      tags:
+        - InvoiceSubmissions
+  /shop_account_requests:
+    get:
+      description: |-
+        Retrieve all active ShopAccountRequests for one of your entities.
+        include::examples/shop_account_requests/shop_account_requests_index/tabs.adoc[]
+      operationId: shop_account_requests_index
+      parameters:
+        - description: Filter by the external_user_id
+          in: query
+          name: external_user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/ShopAccountRequestResult'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Get ShopAccountRequests
+      tags:
+        - ShopAccountRequests
+    post:
+      description: |-
+        Create a new ShopAccountRequest
+        include::examples/shop_account_requests/create_shop_account_request/tabs.adoc[]
+      operationId: create_shop_account_request
+      parameters:
+        - description: ShopAccountRequest to add
+          in: body
+          name: shop_account_request
+          required: true
+          schema:
+            $ref: '#/definitions/ShopAccountRequestInput'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ShopAccountRequestResult'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity
+          schema:
+            items:
+              $ref: '#/definitions/ErrorModel'
+            type: array
+      summary: Create ShopAccountRequest
+      tags:
+        - ShopAccountRequests
+  '/shop_account_requests/{id}':
+    delete:
+      description: |-
+        Delete a specific ShopAccountRequest
+        include::examples/shop_account_requests/delete_shop_account_request/tabs.adoc[]
+      operationId: delete_shop_account_request
+      parameters:
+        - description: shop_account_request id
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Delete ShopAccountRequest
+      tags:
+        - ShopAccountRequests
+    get:
+      description: |-
+        Show a specific ShopAccountRequest
+        include::examples/shop_account_requests/get_shop_account_request/tabs.adoc[]
+      operationId: get_shop_account_request
+      parameters:
+        - description: shop_account_request id
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ShopAccountRequestResult'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Get ShopAccountRequest
+      tags:
+        - ShopAccountRequests
+    patch:
+      description: |-
+        Update a specific ShopAccountRequest
+        include::examples/shop_account_requests/update_shop_account_request/tabs.adoc[]
+      operationId: update_shop_account_request
+      parameters:
+        - description: shop_account_request id
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: ShopAccountRequest updates
+          in: body
+          name: shop_account_request
+          required: true
+          schema:
+            $ref: '#/definitions/ShopAccountRequestUpdate'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ShopAccountRequestResult'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity
+          schema:
+            items:
+              $ref: '#/definitions/ErrorModel'
+            type: array
+      summary: Update ShopAccountRequest
+      tags:
+        - ShopAccountRequests
+  /shop_accounts:
+    get:
+      description: |-
+        Retrieve all active ShopAccounts for one of your entities.
+        include::examples/shop_accounts/shop_accounts_index/tabs.adoc[]
+      operationId: shop_accounts_index
+      parameters:
+        - description: Filter by the external_user_id
+          in: query
+          name: external_user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/ShopAccountResult'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Get ShopAccounts for an entity
+      tags:
+        - ShopAccounts
+    post:
+      description: |-
+        Create a new ShopAccount.
+        include::examples/shop_accounts/create_shop_account/tabs.adoc[]
+      operationId: create_shop_account
+      parameters:
+        - description: ShopAccount to add
+          in: body
+          name: shop_account
+          required: true
+          schema:
+            $ref: '#/definitions/ShopAccountInput'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ShopAccountResult'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity
+          schema:
+            items:
+              $ref: '#/definitions/ErrorModel'
+            type: array
+      summary: Create ShopAccount
+      tags:
+        - ShopAccounts
+  /shop_accounts/auth_failures:
+    get:
+      description: |-
+        Get ShopAccounts with authorization failures.
+        include::examples/shop_accounts/shop_accounts_auth_failures/tabs.adoc[]
+      operationId: shop_accounts_auth_failures
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/ShopAccountResult'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Get ShopAccounts with authorization failures
+      tags:
+        - ShopAccounts
+  '/shop_accounts/{id}':
+    delete:
+      description: |-
+        Delete a specific ShopAccount.
+        include::examples/shop_accounts/delete_shop_account/tabs.adoc[]
+      operationId: delete_shop_account
+      parameters:
+        - description: shop_account id
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Delete ShopAccount
+      tags:
+        - ShopAccounts
+    get:
+      description: |-
+        Get a specific ShopAccount.
+        include::examples/shop_accounts/get_shop_account/tabs.adoc[]
+      operationId: get_shop_account
+      parameters:
+        - description: shop_account id
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ShopAccountResult'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Get ShopAccount
+      tags:
+        - ShopAccounts
+    patch:
+      description: |-
+        Update a specific ShopAccount.
+        include::examples/shop_accounts/update_shop_account/tabs.adoc[]
+      operationId: update_shop_account
+      parameters:
+        - description: shop_account id
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: ShopAccount updates
+          in: body
+          name: shop_account
+          required: true
+          schema:
+            $ref: '#/definitions/ShopAccountUpdate'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ShopAccountResult'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '422':
+          description: Unprocessable Entity
+          schema:
+            items:
+              $ref: '#/definitions/ErrorModel'
+            type: array
+      summary: Update ShopAccount
+      tags:
+        - ShopAccounts
+  /shops:
+    get:
+      description: |-
+        Get all available shops.
+        include::examples/shops/shops_index/tabs.adoc[]
+      operationId: shops_index
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/Shop'
+            type: array
+        '401':
+          description: Unauthorized
+      summary: Get Shops
+      tags:
+        - Shops
+definitions:
+  AccountingCostCode:
+    description: The code in the chart of accounts used by the receiver of the invoice.
+    properties:
+      code:
+        description: ''
+        minLength: 1
+        title: ''
+        type: string
+      list:
+        description: ''
+        minLength: 1
+        title: ''
+        type: string
+      listAgency:
+        description: ''
+        minLength: 1
+        title: ''
+        type: string
+      listVersion:
+        description: ''
+        minLength: 1
+        title: ''
+        type: string
+    title: Accounting cost code
+    type: object
+  AccountingCustomerParty:
+    description: The customer receiving the invoice.
+    properties:
+      accountId:
+        description: The account id you assigned to the customer.
+        title: Account id
+        type: string
+      party:
+        $ref: '#/definitions/Party'
+    required:
+      - party
+    title: Customer
+    type: object
+  Country:
+    description: An ISO 3166-1 alpha-2 country code.
+    enum:
+      - AD
+      - AE
+      - AF
+      - AG
+      - AI
+      - AL
+      - AM
+      - AO
+      - AQ
+      - AR
+      - AS
+      - AT
+      - AU
+      - AW
+      - AX
+      - AZ
+      - BA
+      - BB
+      - BD
+      - BE
+      - BF
+      - BG
+      - BH
+      - BI
+      - BJ
+      - BL
+      - BM
+      - BN
+      - BO
+      - BQ
+      - BR
+      - BS
+      - BT
+      - BV
+      - BW
+      - BY
+      - BZ
+      - CA
+      - CC
+      - CD
+      - CF
+      - CG
+      - CH
+      - CI
+      - CK
+      - CL
+      - CM
+      - CN
+      - CO
+      - CR
+      - CU
+      - CV
+      - CW
+      - CX
+      - CY
+      - CZ
+      - DE
+      - DJ
+      - DK
+      - DM
+      - DO
+      - DZ
+      - EC
+      - EE
+      - EG
+      - EH
+      - ER
+      - ES
+      - ET
+      - FI
+      - FJ
+      - FK
+      - FM
+      - FO
+      - FR
+      - GA
+      - GB
+      - GD
+      - GE
+      - GF
+      - GG
+      - GH
+      - GI
+      - GL
+      - GM
+      - GN
+      - GP
+      - GQ
+      - GR
+      - GS
+      - GT
+      - GU
+      - GW
+      - GY
+      - HK
+      - HM
+      - HN
+      - HR
+      - HT
+      - HU
+      - ID
+      - IE
+      - IL
+      - IM
+      - IN
+      - IO
+      - IQ
+      - IR
+      - IS
+      - IT
+      - JE
+      - JM
+      - JO
+      - JP
+      - KE
+      - KG
+      - KH
+      - KI
+      - KM
+      - KN
+      - KP
+      - KR
+      - KW
+      - KY
+      - KZ
+      - LA
+      - LB
+      - LC
+      - LI
+      - LK
+      - LR
+      - LS
+      - LT
+      - LU
+      - LV
+      - LY
+      - MA
+      - MC
+      - MD
+      - ME
+      - MF
+      - MG
+      - MH
+      - MK
+      - ML
+      - MM
+      - MN
+      - MO
+      - MP
+      - MQ
+      - MR
+      - MS
+      - MT
+      - MU
+      - MV
+      - MW
+      - MX
+      - MY
+      - MZ
+      - NA
+      - NC
+      - NE
+      - NF
+      - NG
+      - NI
+      - NL
+      - 'NO'
+      - NP
+      - NR
+      - NU
+      - NZ
+      - OM
+      - PA
+      - PE
+      - PF
+      - PG
+      - PH
+      - PK
+      - PL
+      - PM
+      - PN
+      - PR
+      - PS
+      - PT
+      - PW
+      - PY
+      - QA
+      - RE
+      - RO
+      - RS
+      - RU
+      - RW
+      - SA
+      - SB
+      - SC
+      - SD
+      - SE
+      - SG
+      - SH
+      - SI
+      - SJ
+      - SK
+      - SL
+      - SM
+      - SN
+      - SO
+      - SR
+      - SS
+      - ST
+      - SV
+      - SX
+      - SY
+      - SZ
+      - TC
+      - TD
+      - TF
+      - TG
+      - TH
+      - TJ
+      - TK
+      - TL
+      - TM
+      - TN
+      - TO
+      - TR
+      - TT
+      - TV
+      - TW
+      - TZ
+      - UA
+      - UG
+      - UM
+      - US
+      - UY
+      - UZ
+      - VA
+      - VC
+      - VE
+      - VG
+      - VI
+      - VN
+      - VU
+      - WF
+      - WS
+      - YE
+      - YT
+      - ZA
+      - ZM
+      - ZW
+    title: Country
+    type: string
+  CurrencyCode:
+    description: The ISO 4217 currency code.
+    enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XFU
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+    title: Currency
+    type: string
+  ErrorModel:
+    properties:
+      details:
+        type: string
+      source:
+        type: string
+  InvoiceLine:
+    properties:
+      accountingCostCode:
+        $ref: '#/definitions/AccountingCostCode'
+      amountExcludingVat:
+        description: The amount excluding VAT. Should equal quantity x itemPrice (if these are both present). A difference of 5 cents or 1% between the calculated value and the provided value is allowed.
+        title: amountExcludingVat
+        type: number
+      description:
+        description: The description for this invoice line.
+        minLength: 1
+        title: Description
+        type: string
+      id:
+        description: Your id for this invoice line.
+        minLength: 1
+        title: Id
+        type: string
+      imageUrl:
+        description: A URL to an image for the product in the invoice line.
+        format: uri
+        title: Image URL
+        type: string
+      invoicePeriod:
+        description: 'The period (or specific date) to which the invoice line applies. Format: yyyy-mm-dd - yyyy-mm-dd.'
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} - [0-9]{4}-[0-9]{2}-[0-9]{2}$'
+        title: Invoice period
+        type: string
+      itemPrice:
+        default: 1
+        description: The price per item (may be fractional)
+        title: Item price
+        type: number
+      quantity:
+        default: 1
+        description: The number of items (may be fractional).
+        title: Quantity
+        type: number
+      tax:
+        description: The tax for this invoice line.
+        properties:
+          amount:
+            description: The amount of VAT. Should equal percentage x amountExcludingVat. A difference of 5 cents or 1% between the calculated value and the provided value is allowed.
+            title: Amount of VAT
+            type: number
+          country:
+            $ref: '#/definitions/Country'
+          percentage:
+            description: The percentage VAT. This should be a valid VAT percentage in the country at the time of the issueDate of this invoice.
+            title: Percentage VAT
+            type: number
+        required:
+          - amount
+          - percentage
+          - country
+        title: Tax
+        type: object
+    required:
+      - description
+      - amountExcludingVat
+    title: Invoice line
+    type: object
+  InvoiceRecipient:
+    description: 'Ids that identify this invoice recipient. The list of identifiers should match with the accountingCustomerParty. I.e., you should not be sending an invoice for one accountingCustomerParty to the publicIdentifier of another.'
+    properties:
+      fallbackEmail:
+        description: The email address the invoice should be sent to if none of the other identifiers can be used
+        format: email
+        title: Fallback email
+        type: string
+      id:
+        description: Your id for this organization. This should match the id that you use for the Storecove widget (if you use that).
+        minLength: 2
+        title: Entity id
+        type: string
+      publicIdentifiers:
+        $ref: '#/definitions/PublicIdentifiers'
+        description: 'The public identifiers for this invoice recipient. Either an id, or one or more public identifiers must be given'
+    title: Recipient ids
+    type: object
+  InvoiceRecipientPreflight:
+    description: Identifies the invoice recipient to preflight
+    properties:
+      invoiceRecipient:
+        $ref: '#/definitions/InvoiceRecipient'
+      supplierId:
+        description: 'The supplier id, provided by Storecove.'
+        title: Supplier id
+        type: integer
+    required:
+      - supplierId
+      - invoiceRecipient
+    title: Invoice recipient preflight
+    type: object
+  InvoiceSubmission:
+    description: 'The invoice you want Storecove to process, with some meta-data.'
+    properties:
+      document:
+        description: The invoice in PDF form. The document should be base64 encoded and the enocded string length should not exceed 2MB (2097152 bytes).
+        minLength: 5
+        title: Document
+        type: string
+      documentUrl:
+        description: 'A URL to retrieve the PDF document via HTTP GET. If the link expires, please allow at least 7 days of validity.'
+        format: uri
+        title: Document Url
+        type: string
+      invoice:
+        description: The invoice to send
+        properties:
+          accountingCostCode:
+            $ref: '#/definitions/AccountingCostCode'
+          accountingCustomerParty:
+            $ref: '#/definitions/AccountingCustomerParty'
+            description: The receiving party
+          amountIncludingVat:
+            description: 'amountIncludingVat is important because of rounding differences. In many invoices, the sum of the line item amounts excluding VAT and the VAT amounts is not equal to first summing the line items without VAT, and then applying VAT. The difference is automatically calculated and included in the electronic invoice, so the receiving accounting package can process the electronic invoice without problems.'
+            title: Amount including VAT
+            type: number
+          billingReference:
+            description: A reference to a commercial invoice or corrective invoice of which the current invoice is a correction.
+            title: Billing reference
+            type: string
+          buyerReference:
+            description: A reference provided by the buyer used for internal routing of the document.
+            title: Buyer reference
+            type: string
+          contractDocumentReference:
+            description: A reference to a contract or framework agreement that this invoice relates to.
+            title: Contract document reference
+            type: string
+          documentCurrencyCode:
+            $ref: '#/definitions/CurrencyCode'
+            default: EUR
+            description: 'The documentCurrencyCode is the currency for the entire invoice. We currently do not support invoices in multiple currencies. If left out, will default to EUR'
+          dueDate:
+            description: 'Format: yyyy-mm-dd.'
+            pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+            title: Due date
+            type: string
+          invoiceLines:
+            description: An array of invoice lines.
+            items:
+              $ref: '#/definitions/InvoiceLine'
+            minItems: 1
+            title: Invoice lines
+            type: array
+          invoiceNumber:
+            description: 'The invoice number you assigned to the invoice. The invoiceNumber should be unique for the supplierId and year of the issueDate. This means invoice numbers can be reused in different years, as is customary in some countries.'
+            minLength: 1
+            title: Invoice number
+            type: string
+          invoicePeriod:
+            description: 'The period (or specific date) to which the invoice applies. Format: yyyy-mm-dd - yyyy-mm-dd.'
+            pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} - [0-9]{4}-[0-9]{2}-[0-9]{2}$'
+            title: Invoice period
+            type: string
+          invoiceType:
+            default: '380'
+            description: 'Use 380 for a regular invoice, 384 for a Corrective invoice.'
+            enum:
+              - '380'
+              - '384'
+            title: Type of invoice
+            type: string
+          issueDate:
+            description: 'Format: yyyy-mm-dd.'
+            pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+            title: Invoice issue date
+            type: string
+          orderReference:
+            description: A reference to an order for this invoice.
+            title: Order reference
+            type: string
+          paymentMeansCode:
+            description: 'Leave empty. Defaults to 31 if an IBAN is provided, otherwise defaults to 1. But leave empty.'
+            title: Payment Means Code
+            type: string
+          paymentMeansIban:
+            description: The IBAN the amount payable should be transferred to
+            title: IBAN
+            type: string
+          paymentMeansPaymentId:
+            description: The payment id that you will use to match the payment against the invoice.
+            title: Payment Id
+            type: string
+          projectReference:
+            description: Information about the project this invoice relates to.
+            title: Project Reference
+            type: string
+          taxPointDate:
+            description: 'The tax date is the date on which the supply of goods or of services was made or completed or the date on which the payment on account was made insofar as that date can be determined and differs from the date of the issue of the invoice. EU 2006-112 Article 226 Point 7. Note: For the Dutch TAX authorities the tac date should be the same as the issue date.'
+            pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+            title: Tax date
+            type: string
+          vatReverseCharge:
+            default: false
+            description: Whether or not the invoice is reverse charged
+            type: boolean
+        required:
+          - invoiceNumber
+          - issueDate
+          - accountingCustomerParty
+          - invoiceLines
+          - amountIncludingVat
+        title: Invoice
+        type: object
+      invoiceRecipient:
+        $ref: '#/definitions/InvoiceRecipient'
+      legalSupplierId:
+        description: 'If a supplierId has more than one legal entity to send invoices from, specify the legal entity here. If you have not received one or more legal entities, don''t supply this field.'
+        title: The legal supplier id
+        type: integer
+      mode:
+        description: The mode in which to run this invoice submission.
+        enum:
+          - direct
+        title: Mode
+        type: string
+      supplierId:
+        description: 'The supplier id, provided by Storecove.'
+        title: Supplier id
+        type: integer
+    required:
+      - mode
+      - supplierId
+      - invoiceRecipient
+      - invoice
+    title: Invoice submission
+    type: object
+  InvoiceSubmissionResult:
+    description: The result of an invoice submission
+    properties:
+      guid:
+        description: A (V4) GUID for the invoice submission
+        title: GUID
+        type: string
+    title: Invoice submission result
+    type: object
+  LegalEntity:
+    properties:
+      city:
+        type: string
+      country:
+        type: string
+      county:
+        type: string
+      identifiers:
+        items:
+          $ref: '#/definitions/LegalEntityIdentifier'
+        type: array
+      line1:
+        type: string
+      line2:
+        type: string
+      name:
+        type: string
+      zip:
+        type: string
+  LegalEntityIdentifier:
+    properties:
+      identifier:
+        type: string
+      scheme:
+        type: string
+      scheme_agency:
+        type: string
+  Logos:
+    properties:
+      medium:
+        type: string
+      small:
+        type: string
+      thumb:
+        type: string
+  Party:
+    description: A party that can receive or send invoices
+    properties:
+      address:
+        description: The company address
+        properties:
+          city:
+            description: The name of the city.
+            minLength: 2
+            title: City
+            type: string
+          country:
+            $ref: '#/definitions/Country'
+          county:
+            description: An optional county name.
+            title: County
+            type: string
+          department:
+            description: The department the invoice is addressed to
+            title: Department
+            type: string
+          number:
+            description: 'This number will be added to the street1 element. The number can be provided in this field OR in the street1 field, but not in both.'
+            title: Building number
+            type: string
+          postbox:
+            description: The postbox number
+            title: Postbox
+            type: string
+          street1:
+            description: 'The street name. The number can be provided in this fiedl OR in the number field, but not in both.'
+            minLength: 2
+            title: Street 1
+            type: string
+          street2:
+            description: The second street field. Use this if you used the first field for the building name.
+            title: Street 2
+            type: string
+          zip:
+            description: The zipcode/postalzone.
+            minLength: 2
+            title: Zipcode
+            type: string
+        required:
+          - country
+        title: Address
+        type: object
+      companyName:
+        description: The name of the company receiving the invoice
+        minLength: 2
+        title: Company name
+        type: string
+      contact:
+        description: The billing contact
+        properties:
+          email:
+            format: email
+            title: Last name
+            type: string
+          firstName:
+            title: First name
+            type: string
+          lastName:
+            title: Last name
+            type: string
+        required:
+          - email
+        title: Contact
+        type: object
+    required:
+      - companyName
+      - address
+    title: Party
+    type: object
+  PreflightInvoiceRecipientResult:
+    description: The result of preflighting an invoice recipient
+    properties:
+      code:
+        description: The result code of the preflight request
+        enum:
+          - ok
+          - nok
+        title: Result code
+        type: string
+    title: Preflight invoice recipient result
+    type: object
+  PublicIdentifier:
+    description: A public identifier for this customer.
+    properties:
+      id:
+        description: The actual identifier.
+        minLength: 2
+        title: Identifier
+        type: string
+      scheme:
+        description: 'The scheme of the public identifier, e.g. chambre of commerce number (for The Netherlands: NL:KVK), VAT, IBAN, or NL:OIN (OIN is a Dutch government organizaton id). The full list can be found on https://joinup.ec.europa.eu/svn/peppol/TransportInfrastructure/PEPPOL_Policy%20for%20use%20of%20identifiers-300.pdf.'
+        minLength: 3
+        title: Scheme
+        type: string
+    required:
+      - scheme
+      - id
+    title: Public identifier
+    type: object
+  PublicIdentifiers:
+    description: A list of public identifiers that uniquely identifiy this customer.
+    items:
+      $ref: '#/definitions/PublicIdentifier'
+    title: Public identifiers
+    type: array
+  Shop:
+    properties:
+      description:
+        type: string
+      id:
+        format: int64
+        type: integer
+      legal_entities:
+        items:
+          $ref: '#/definitions/LegalEntity'
+        type: array
+      logo:
+        $ref: '#/definitions/Logos'
+      name:
+        type: string
+  ShopAccountInput:
+    properties:
+      email:
+        description: |
+          This is email address determines where the invoices for all ShopAccounts
+          in the same _external_user_id_ group are sent. Each time you create or
+          update a ShopAccount for an _external_user_id_ and also provide
+          __email__, the email destination for all the ShopAccounts in the
+          _external_user_id_ group are updated at the same time.
+
+          We suggest you provide an immutable email address. If your user can
+          change the email address to which the invoices are to be sent, then you
+          will need to do an update for one of the ShopAccounts for that user in
+          order for Storecove to start using the new email address.
+
+          Note that this field is mandatory for the first ShopAccount that you create for an entity.
+        type: string
+      external_user_id:
+        description: |
+          The _external_user_id_ is what identifies the entity for which you create
+          this ShopAccount. This could be a user, however, if your
+          users can manage multiple organizations/administrations, then it is a
+          better idea to put the organization/administration identifier in this
+          field, because the _external_user_id_ groups the ShopAccounts into a set
+          that all deliver their invoices to the same destination (typically an
+          email address).
+        type: string
+      password:
+        description: The password for the account.
+        type: string
+      shop_id:
+        description: The id of the Shop the account is for.
+        format: int64
+        type: integer
+      username:
+        description: The username for the account. The username needs to be unique in combination with the shop_id.
+        type: string
+    required:
+      - username
+      - password
+      - external_user_id
+      - shop_id
+  ShopAccountRequestInput:
+    properties:
+      external_user_id:
+        type: string
+      password:
+        type: string
+      request_name:
+        type: string
+      request_url:
+        type: string
+      username:
+        type: string
+    required:
+      - username
+      - password
+      - external_user_id
+      - request_name
+      - request_url
+  ShopAccountRequestResult:
+    properties:
+      external_user_id:
+        type: string
+      id:
+        format: int64
+        type: integer
+      request_name:
+        type: string
+      request_url:
+        type: string
+      username:
+        type: string
+  ShopAccountRequestUpdate:
+    properties:
+      password:
+        type: string
+      request_name:
+        type: string
+      request_url:
+        type: string
+      username:
+        type: string
+  ShopAccountResult:
+    properties:
+      email:
+        description: See <<_openapi_shopaccountinput>>.
+        type: string
+      external_user_id:
+        description: See <<_openapi_shopaccountinput>>.
+        type: string
+      from_date:
+        description: |-
+          The date from invoices will be collected. This field defaults to the first day of the month
+                                   the ShopAccount was created in.
+        format: date
+        type: string
+      id:
+        description: The Storecove id for the ShopAccount
+        format: int64
+        type: integer
+      shop:
+        $ref: '#/definitions/Shop'
+        description: See <<_openapi_shopaccountinput>>.
+      sign_in_error_confirmed:
+        description: |-
+          Whether or not Storecove has detected and confirmed a sign-in failure. This field is reset
+                                   to false each time a ShopAccount is updated and the username or password has changed.
+        type: boolean
+      sign_in_error_confirmed_at:
+        description: The date on which the sign-in error was confirmed.
+        format: date
+        type: string
+      username:
+        description: See <<_openapi_shopaccountinput>>.
+        type: string
+  ShopAccountUpdate:
+    properties:
+      email:
+        description: See <<_openapi_shopaccountinput>>.
+        type: string
+      password:
+        description: See <<_openapi_shopaccountinput>>.
+        type: string
+      username:
+        description: See <<_openapi_shopaccountinput>>.
+        type: string
