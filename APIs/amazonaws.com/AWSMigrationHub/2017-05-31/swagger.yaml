@@ -1,0 +1,1513 @@
+swagger: '2.0'
+info:
+  version: '2017-05-31'
+  x-release: v4
+  title: AWS Migration Hub
+  description: <p/>
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: mgh
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/AWSMigrationHub-2017-05-31.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/mgh/'
+host: mgh.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AssociateCreatedArtifact
+      description: '<p>Associates a created artifact of an AWS cloud resource, the target receiving the migration, with the migration task performed by a migration tool. This API has the following traits:</p> <ul> <li> <p>Migration tools can call the <code>AssociateCreatedArtifact</code> operation to indicate which AWS artifact is associated with a migration task.</p> </li> <li> <p>The created artifact name must be provided in ARN (Amazon Resource Name) format which will contain information about type and region; for example: <code>arn:aws:ec2:us-east-1:488216288981:image/ami-6d0ba87b</code>.</p> </li> <li> <p>Examples of the AWS resource behind the created artifact are, AMI''s, EC2 instance, or DMS endpoint, etc.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateCreatedArtifactResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: DryRunOperation
+          schema:
+            $ref: '#/definitions/DryRunOperation'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+        '485':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '486':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateCreatedArtifactRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AssociateDiscoveredResource':
+    post:
+      operationId: AssociateDiscoveredResource
+      description: Associates a discovered resource ID from Application Discovery Service (ADS) with a migration task.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateDiscoveredResourceResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: DryRunOperation
+          schema:
+            $ref: '#/definitions/DryRunOperation'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+        '485':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '486':
+          description: PolicyErrorException
+          schema:
+            $ref: '#/definitions/PolicyErrorException'
+        '487':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateDiscoveredResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateProgressUpdateStream':
+    post:
+      operationId: CreateProgressUpdateStream
+      description: 'Creates a progress update stream which is an AWS resource used for access control as well as a namespace for migration task names that is implicitly linked to your AWS account. It must uniquely identify the migration tool as it is used for all updates made by the tool; however, it does not need to be unique for each AWS account because it is scoped to the AWS account.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateProgressUpdateStreamResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: DryRunOperation
+          schema:
+            $ref: '#/definitions/DryRunOperation'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+        '485':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateProgressUpdateStreamRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteProgressUpdateStream':
+    post:
+      operationId: DeleteProgressUpdateStream
+      description: '<p>Deletes a progress update stream, including all of its tasks, which was previously created as an AWS resource used for access control. This API has the following traits:</p> <ul> <li> <p>The only parameter needed for <code>DeleteProgressUpdateStream</code> is the stream name (same as a <code>CreateProgressUpdateStream</code> call).</p> </li> <li> <p>The call will return, and a background process will asynchronously be doing the actual delete of the stream and all of its resources (tasks, associated resources, resource attributes, created artifacts).</p> </li> <li> <p>If the stream takes time to be deleted, it might still show up on a <code>ListProgressUpdateStreams</code> call.</p> </li> <li> <p> <code>CreateProgressUpdateStream</code>, <code>ImportMigrationTask</code>, <code>NotifyMigrationTaskState</code>, and all Associate[*] APIs realted to the tasks belonging to the stream will throw "InvalidInputException" if the stream of the same name is in the process of being deleted.</p> </li> <li> <p>Once the stream and all of its resources are deleted, <code>CreateProgressUpdateStream</code> for a stream of the same name will succeed, and that stream will be an entirely new logical resource (without any resources associated with the old stream).</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteProgressUpdateStreamResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: DryRunOperation
+          schema:
+            $ref: '#/definitions/DryRunOperation'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+        '485':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '486':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteProgressUpdateStreamRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeApplicationState':
+    post:
+      operationId: DescribeApplicationState
+      description: Gets the migration status of an application.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeApplicationStateResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '484':
+          description: PolicyErrorException
+          schema:
+            $ref: '#/definitions/PolicyErrorException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeApplicationStateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeMigrationTask':
+    post:
+      operationId: DescribeMigrationTask
+      description: Retrieves a list of all attributes associated with a specific migration task.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeMigrationTaskResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeMigrationTaskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateCreatedArtifact':
+    post:
+      operationId: DisassociateCreatedArtifact
+      description: '<p>Disassociates a created artifact of an AWS resource with a migration task performed by a migration tool that was previously associated. This API has the following traits:</p> <ul> <li> <p>A migration user can call the <code>DisassociateCreatedArtifacts</code> operation to disassociate a created AWS Artifact from a migration task.</p> </li> <li> <p>The created artifact name must be provided in ARN (Amazon Resource Name) format which will contain information about type and region; for example: <code>arn:aws:ec2:us-east-1:488216288981:image/ami-6d0ba87b</code>.</p> </li> <li> <p>Examples of the AWS resource behind the created artifact are, AMI''s, EC2 instance, or RDS instance, etc.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateCreatedArtifactResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: DryRunOperation
+          schema:
+            $ref: '#/definitions/DryRunOperation'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+        '485':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '486':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateCreatedArtifactRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateDiscoveredResource':
+    post:
+      operationId: DisassociateDiscoveredResource
+      description: Disassociate an Application Discovery Service (ADS) discovered resource from a migration task.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateDiscoveredResourceResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: DryRunOperation
+          schema:
+            $ref: '#/definitions/DryRunOperation'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+        '485':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '486':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateDiscoveredResourceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ImportMigrationTask':
+    post:
+      operationId: ImportMigrationTask
+      description: '<p>Registers a new migration task which represents a server, database, etc., being migrated to AWS by a migration tool.</p> <p>This API is a prerequisite to calling the <code>NotifyMigrationTaskState</code> API as the migration tool must first register the migration task with Migration Hub.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ImportMigrationTaskResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: DryRunOperation
+          schema:
+            $ref: '#/definitions/DryRunOperation'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+        '485':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '486':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ImportMigrationTaskRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListCreatedArtifacts':
+    post:
+      operationId: ListCreatedArtifacts
+      description: '<p>Lists the created artifacts attached to a given migration task in an update stream. This API has the following traits:</p> <ul> <li> <p>Gets the list of the created artifacts while migration is taking place.</p> </li> <li> <p>Shows the artifacts created by the migration tool that was associated by the <code>AssociateCreatedArtifact</code> API. </p> </li> <li> <p>Lists created artifacts in a paginated interface. </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListCreatedArtifactsResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListCreatedArtifactsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListDiscoveredResources':
+    post:
+      operationId: ListDiscoveredResources
+      description: Lists discovered resources associated with the given <code>MigrationTask</code>.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDiscoveredResourcesResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '484':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDiscoveredResourcesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListMigrationTasks':
+    post:
+      operationId: ListMigrationTasks
+      description: '<p>Lists all, or filtered by resource name, migration tasks associated with the user account making this call. This API has the following traits:</p> <ul> <li> <p>Can show a summary list of the most recent migration tasks.</p> </li> <li> <p>Can show a summary list of migration tasks associated with a given discovered resource.</p> </li> <li> <p>Lists migration tasks in a paginated interface.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListMigrationTasksResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '484':
+          description: PolicyErrorException
+          schema:
+            $ref: '#/definitions/PolicyErrorException'
+        '485':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListMigrationTasksRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListProgressUpdateStreams':
+    post:
+      operationId: ListProgressUpdateStreams
+      description: Lists progress update streams associated with the user account making this call.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListProgressUpdateStreamsResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListProgressUpdateStreamsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#NotifyApplicationState':
+    post:
+      operationId: NotifyApplicationState
+      description: 'Sets the migration state of an application. For a given application identified by the value passed to <code>ApplicationId</code>, its status is set or updated by passing one of three values to <code>Status</code>: <code>NOT_STARTED | IN_PROGRESS | COMPLETED</code>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/NotifyApplicationStateResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: DryRunOperation
+          schema:
+            $ref: '#/definitions/DryRunOperation'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+        '485':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '486':
+          description: PolicyErrorException
+          schema:
+            $ref: '#/definitions/PolicyErrorException'
+        '487':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/NotifyApplicationStateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#NotifyMigrationTaskState':
+    post:
+      operationId: NotifyMigrationTaskState
+      description: '<p>Notifies Migration Hub of the current status, progress, or other detail regarding a migration task. This API has the following traits:</p> <ul> <li> <p>Migration tools will call the <code>NotifyMigrationTaskState</code> API to share the latest progress and status.</p> </li> <li> <p> <code>MigrationTaskName</code> is used for addressing updates to the correct target.</p> </li> <li> <p> <code>ProgressUpdateStream</code> is used for access control and to provide a namespace for each migration tool.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/NotifyMigrationTaskStateResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: DryRunOperation
+          schema:
+            $ref: '#/definitions/DryRunOperation'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+        '485':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '486':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/NotifyMigrationTaskStateRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutResourceAttributes':
+    post:
+      operationId: PutResourceAttributes
+      description: '<p>Provides identifying details of the resource being migrated so that it can be associated in the Application Discovery Service (ADS)''s repository. This association occurs asynchronously after <code>PutResourceAttributes</code> returns.</p> <important> <p>Keep in mind that subsequent calls to PutResourceAttributes will override previously stored attributes. For example, if it is first called with a MAC address, but later, it is desired to <i>add</i> an IP address, it will then be required to call it with <i>both</i> the IP and MAC addresses to prevent overiding the MAC address.</p> </important> <note> <p>Because this is an asynchronous call, it will always return 200, whether an association occurs or not. To confirm if an association was found based on the provided details, call <code>ListAssociatedResource</code>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutResourceAttributesResult'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '482':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '483':
+          description: DryRunOperation
+          schema:
+            $ref: '#/definitions/DryRunOperation'
+        '484':
+          description: UnauthorizedOperation
+          schema:
+            $ref: '#/definitions/UnauthorizedOperation'
+        '485':
+          description: InvalidInputException
+          schema:
+            $ref: '#/definitions/InvalidInputException'
+        '486':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutResourceAttributesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AccessDeniedException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Exception raised when the account making the call is not whitelisted or there are other authentication errors.
+  ApplicationId:
+    type: string
+    minLength: 1
+    maxLength: 1600
+  ApplicationStatus:
+    type: string
+    enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - COMPLETED
+  AssociateCreatedArtifactRequest:
+    type: object
+    required:
+      - ProgressUpdateStream
+      - MigrationTaskName
+      - CreatedArtifact
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: 'The name of the ProgressUpdateStream. '
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: Unique identifier that references the migration task.
+      CreatedArtifact:
+        $ref: '#/definitions/CreatedArtifact'
+        description: 'An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS instance, etc.) '
+      DryRun:
+        $ref: '#/definitions/DryRun'
+        description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
+  AssociateCreatedArtifactResult:
+    type: object
+    properties: {}
+  AssociateDiscoveredResourceRequest:
+    type: object
+    required:
+      - ProgressUpdateStream
+      - MigrationTaskName
+      - DiscoveredResource
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: The name of the ProgressUpdateStream.
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: The identifier given to the MigrationTask.
+      DiscoveredResource:
+        $ref: '#/definitions/DiscoveredResource'
+        description: Object representing a Resource.
+      DryRun:
+        $ref: '#/definitions/DryRun'
+        description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
+  AssociateDiscoveredResourceResult:
+    type: object
+    properties: {}
+  ConfigurationId:
+    type: string
+    minLength: 1
+  CreateProgressUpdateStreamRequest:
+    type: object
+    required:
+      - ProgressUpdateStreamName
+    properties:
+      ProgressUpdateStreamName:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: 'The name of the ProgressUpdateStream. '
+      DryRun:
+        $ref: '#/definitions/DryRun'
+        description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
+  CreateProgressUpdateStreamResult:
+    type: object
+    properties: {}
+  CreatedArtifact:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/CreatedArtifactName'
+        description: An ARN that uniquely identifies the result of a migration task.
+      Description:
+        $ref: '#/definitions/CreatedArtifactDescription'
+        description: A description that can be free-form text to record additional detail about the artifact for clarity or for later reference.
+    description: 'An ARN of the AWS cloud resource target receiving the migration (e.g., AMI, EC2 instance, RDS instance, etc.).'
+  CreatedArtifactDescription:
+    type: string
+    minLength: 0
+    maxLength: 500
+  CreatedArtifactList:
+    type: array
+    items:
+      $ref: '#/definitions/CreatedArtifact'
+  CreatedArtifactName:
+    type: string
+    pattern: 'arn:[a-z-]+:[a-z0-9-]+:(?:[a-z0-9-]+|):(?:[0-9]{12}|):.*'
+    minLength: 1
+    maxLength: 1600
+  DeleteProgressUpdateStreamRequest:
+    type: object
+    required:
+      - ProgressUpdateStreamName
+    properties:
+      ProgressUpdateStreamName:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: 'The name of the ProgressUpdateStream. '
+      DryRun:
+        $ref: '#/definitions/DryRun'
+        description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
+  DeleteProgressUpdateStreamResult:
+    type: object
+    properties: {}
+  DescribeApplicationStateRequest:
+    type: object
+    required:
+      - ApplicationId
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/ApplicationId'
+        description: The configurationId in ADS that uniquely identifies the grouped application.
+  DescribeApplicationStateResult:
+    type: object
+    properties:
+      ApplicationStatus:
+        $ref: '#/definitions/ApplicationStatus'
+        description: 'Status of the application - Not Started, In-Progress, Complete.'
+      LastUpdatedTime:
+        $ref: '#/definitions/UpdateDateTime'
+        description: The timestamp when the application status was last updated.
+  DescribeMigrationTaskRequest:
+    type: object
+    required:
+      - ProgressUpdateStream
+      - MigrationTaskName
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: 'The name of the ProgressUpdateStream. '
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: The identifier given to the MigrationTask.
+  DescribeMigrationTaskResult:
+    type: object
+    properties:
+      MigrationTask:
+        $ref: '#/definitions/MigrationTask'
+        description: Object encapsulating information about the migration task.
+  DisassociateCreatedArtifactRequest:
+    type: object
+    required:
+      - ProgressUpdateStream
+      - MigrationTaskName
+      - CreatedArtifactName
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: 'The name of the ProgressUpdateStream. '
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: Unique identifier that references the migration task to be disassociated with the artifact.
+      CreatedArtifactName:
+        $ref: '#/definitions/CreatedArtifactName'
+        description: 'An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance, RDS instance, etc.)'
+      DryRun:
+        $ref: '#/definitions/DryRun'
+        description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
+  DisassociateCreatedArtifactResult:
+    type: object
+    properties: {}
+  DisassociateDiscoveredResourceRequest:
+    type: object
+    required:
+      - ProgressUpdateStream
+      - MigrationTaskName
+      - ConfigurationId
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: The name of the ProgressUpdateStream.
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: The identifier given to the MigrationTask.
+      ConfigurationId:
+        $ref: '#/definitions/ConfigurationId'
+        description: ConfigurationId of the ADS resource to be disassociated.
+      DryRun:
+        $ref: '#/definitions/DryRun'
+        description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
+  DisassociateDiscoveredResourceResult:
+    type: object
+    properties: {}
+  DiscoveredResource:
+    type: object
+    required:
+      - ConfigurationId
+    properties:
+      ConfigurationId:
+        $ref: '#/definitions/ConfigurationId'
+        description: The configurationId in ADS that uniquely identifies the on-premise resource.
+      Description:
+        $ref: '#/definitions/DiscoveredResourceDescription'
+        description: A description that can be free-form text to record additional detail about the discovered resource for clarity or later reference.
+    description: Object representing the on-premises resource being migrated.
+  DiscoveredResourceDescription:
+    type: string
+    minLength: 0
+    maxLength: 500
+  DiscoveredResourceList:
+    type: array
+    items:
+      $ref: '#/definitions/DiscoveredResource'
+  DryRun:
+    type: boolean
+  DryRunOperation:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Exception raised to indicate a successfully authorized action when the <code>DryRun</code> flag is set to "true".
+  ErrorMessage:
+    type: string
+  ImportMigrationTaskRequest:
+    type: object
+    required:
+      - ProgressUpdateStream
+      - MigrationTaskName
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: 'The name of the ProgressUpdateStream. '
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: Unique identifier that references the migration task.
+      DryRun:
+        $ref: '#/definitions/DryRun'
+        description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
+  ImportMigrationTaskResult:
+    type: object
+    properties: {}
+  InternalServerError:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Exception raised when there is an internal, configuration, or dependency error encountered.'
+  InvalidInputException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Exception raised when the provided input violates a policy constraint or is entered in the wrong format or data type.
+  LatestResourceAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceAttribute'
+    minItems: 0
+    maxItems: 100
+  ListCreatedArtifactsRequest:
+    type: object
+    required:
+      - ProgressUpdateStream
+      - MigrationTaskName
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: 'The name of the ProgressUpdateStream. '
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: Unique identifier that references the migration task.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResultsCreatedArtifacts'
+        description: Maximum number of results to be returned per page.
+  ListCreatedArtifactsResult:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'If there are more created artifacts than the max result, return the next token to be passed to the next call as a bookmark of where to start from.'
+      CreatedArtifactList:
+        $ref: '#/definitions/CreatedArtifactList'
+        description: List of created artifacts up to the maximum number of results specified in the request.
+  ListDiscoveredResourcesRequest:
+    type: object
+    required:
+      - ProgressUpdateStream
+      - MigrationTaskName
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: The name of the ProgressUpdateStream.
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: The name of the MigrationTask.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResultsResources'
+        description: The maximum number of results returned per page.
+  ListDiscoveredResourcesResult:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'If there are more discovered resources than the max result, return the next token to be passed to the next call as a bookmark of where to start from.'
+      DiscoveredResourceList:
+        $ref: '#/definitions/DiscoveredResourceList'
+        description: Returned list of discovered resources associated with the given MigrationTask.
+  ListMigrationTasksRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: Value to specify how many results are returned per page.
+      ResourceName:
+        $ref: '#/definitions/ResourceName'
+        description: Filter migration tasks by discovered resource name.
+  ListMigrationTasksResult:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'If there are more migration tasks than the max result, return the next token to be passed to the next call as a bookmark of where to start from.'
+      MigrationTaskSummaryList:
+        $ref: '#/definitions/MigrationTaskSummaryList'
+        description: 'Lists the migration task''s summary which includes: <code>MigrationTaskName</code>, <code>ProgressPercent</code>, <code>ProgressUpdateStream</code>, <code>Status</code>, and the <code>UpdateDateTime</code> for each task.'
+  ListProgressUpdateStreamsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'If a <code>NextToken</code> was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in <code>NextToken</code>.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: Filter to limit the maximum number of results to list per page.
+  ListProgressUpdateStreamsResult:
+    type: object
+    properties:
+      ProgressUpdateStreamSummaryList:
+        $ref: '#/definitions/ProgressUpdateStreamSummaryList'
+        description: List of progress update streams up to the max number of results passed in the input.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'If there are more streams created than the max result, return the next token to be passed to the next call as a bookmark of where to start from.'
+  MaxResults:
+    type: integer
+    minimum: 1
+    maximum: 100
+  MaxResultsCreatedArtifacts:
+    type: integer
+    minimum: 1
+    maximum: 10
+  MaxResultsResources:
+    type: integer
+    minimum: 1
+    maximum: 10
+  MigrationTask:
+    type: object
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: A name that identifies the vendor of the migration tool being used.
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: Unique identifier that references the migration task.
+      Task:
+        $ref: '#/definitions/Task'
+        description: Task object encapsulating task information.
+      UpdateDateTime:
+        $ref: '#/definitions/UpdateDateTime'
+        description: The timestamp when the task was gathered.
+      ResourceAttributeList:
+        $ref: '#/definitions/LatestResourceAttributeList'
+        description: <p/>
+    description: Represents a migration task in a migration tool.
+  MigrationTaskName:
+    type: string
+    pattern: '[^:|]+'
+    minLength: 1
+    maxLength: 256
+  MigrationTaskSummary:
+    type: object
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: An AWS resource used for access control. It should uniquely identify the migration tool as it is used for all updates made by the tool.
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: Unique identifier that references the migration task.
+      Status:
+        $ref: '#/definitions/Status'
+        description: Status of the task.
+      ProgressPercent:
+        $ref: '#/definitions/ProgressPercent'
+        description: <p/>
+      StatusDetail:
+        $ref: '#/definitions/StatusDetail'
+        description: Detail information of what is being done within the overall status state.
+      UpdateDateTime:
+        $ref: '#/definitions/UpdateDateTime'
+        description: The timestamp when the task was gathered.
+    description: 'MigrationTaskSummary includes <code>MigrationTaskName</code>, <code>ProgressPercent</code>, <code>ProgressUpdateStream</code>, <code>Status</code>, and <code>UpdateDateTime</code> for each task.'
+  MigrationTaskSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/MigrationTaskSummary'
+  NextUpdateSeconds:
+    type: integer
+    minimum: 0
+  NotifyApplicationStateRequest:
+    type: object
+    required:
+      - ApplicationId
+      - Status
+    properties:
+      ApplicationId:
+        $ref: '#/definitions/ApplicationId'
+        description: The configurationId in ADS that uniquely identifies the grouped application.
+      Status:
+        $ref: '#/definitions/ApplicationStatus'
+        description: 'Status of the application - Not Started, In-Progress, Complete.'
+      DryRun:
+        $ref: '#/definitions/DryRun'
+        description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
+  NotifyApplicationStateResult:
+    type: object
+    properties: {}
+  NotifyMigrationTaskStateRequest:
+    type: object
+    required:
+      - ProgressUpdateStream
+      - MigrationTaskName
+      - Task
+      - UpdateDateTime
+      - NextUpdateSeconds
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: 'The name of the ProgressUpdateStream. '
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: Unique identifier that references the migration task.
+      Task:
+        $ref: '#/definitions/Task'
+        description: Information about the task's progress and status.
+      UpdateDateTime:
+        $ref: '#/definitions/UpdateDateTime'
+        description: The timestamp when the task was gathered.
+      NextUpdateSeconds:
+        $ref: '#/definitions/NextUpdateSeconds'
+        description: 'Number of seconds after the UpdateDateTime within which the Migration Hub can expect an update. If Migration Hub does not receive an update within the specified interval, then the migration task will be considered stale.'
+      DryRun:
+        $ref: '#/definitions/DryRun'
+        description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
+  NotifyMigrationTaskStateResult:
+    type: object
+    properties: {}
+  PolicyErrorException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Exception raised when there are problems accessing ADS (Application Discovery Service); most likely due to a misconfigured policy or the <code>ADSCaller</code> role is missing or not configured correctly.
+  ProgressPercent:
+    type: integer
+    minimum: 0
+    maximum: 100
+  ProgressUpdateStream:
+    type: string
+    pattern: '[^/:|\000-\037]+'
+    minLength: 1
+    maxLength: 50
+  ProgressUpdateStreamSummary:
+    type: object
+    properties:
+      ProgressUpdateStreamName:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: 'The name of the ProgressUpdateStream. '
+    description: Summary of the AWS resource used for access control that is implicitly linked to your AWS account.
+  ProgressUpdateStreamSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/ProgressUpdateStreamSummary'
+  PutResourceAttributesRequest:
+    type: object
+    required:
+      - ProgressUpdateStream
+      - MigrationTaskName
+      - ResourceAttributeList
+    properties:
+      ProgressUpdateStream:
+        $ref: '#/definitions/ProgressUpdateStream'
+        description: 'The name of the ProgressUpdateStream. '
+      MigrationTaskName:
+        $ref: '#/definitions/MigrationTaskName'
+        description: Unique identifier that references the migration task.
+      ResourceAttributeList:
+        $ref: '#/definitions/ResourceAttributeList'
+        description: Information about the resource that is being migrated. This data will be used to map the task to a resource in the Application Discovery Service (ADS)'s repository.
+      DryRun:
+        $ref: '#/definitions/DryRun'
+        description: Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
+  PutResourceAttributesResult:
+    type: object
+    properties: {}
+  ResourceAttribute:
+    type: object
+    required:
+      - Type
+      - Value
+    properties:
+      Type:
+        $ref: '#/definitions/ResourceAttributeType'
+        description: Type of resource.
+      Value:
+        $ref: '#/definitions/ResourceAttributeValue'
+        description: Value of the resource type.
+    description: Attribute associated with a resource.
+  ResourceAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceAttribute'
+    minItems: 1
+    maxItems: 100
+  ResourceAttributeType:
+    type: string
+    enum:
+      - IPV4_ADDRESS
+      - IPV6_ADDRESS
+      - MAC_ADDRESS
+      - FQDN
+      - VM_MANAGER_ID
+      - VM_MANAGED_OBJECT_REFERENCE
+      - VM_NAME
+      - VM_PATH
+      - BIOS_ID
+      - MOTHERBOARD_SERIAL_NUMBER
+      - LABEL
+  ResourceAttributeValue:
+    type: string
+    minLength: 1
+    maxLength: 256
+  ResourceName:
+    type: string
+    minLength: 1
+    maxLength: 1600
+  ResourceNotFoundException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: 'Exception raised when the request references a resource (ADS configuration, update stream, migration task, etc.) that does not exist in ADS (Application Discovery Service) or in Migration Hub''s repository.'
+  ServiceUnavailableException:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Exception raised when the service encounters throttled communication with upstream dependencies or is overloaded with requests.
+  Status:
+    type: string
+    enum:
+      - NOT_STARTED
+      - IN_PROGRESS
+      - FAILED
+      - COMPLETED
+  StatusDetail:
+    type: string
+    minLength: 0
+    maxLength: 500
+  Task:
+    type: object
+    required:
+      - Status
+    properties:
+      Status:
+        $ref: '#/definitions/Status'
+        description: 'Status of the task - Not Started, In-Progress, Complete.'
+      StatusDetail:
+        $ref: '#/definitions/StatusDetail'
+        description: Details of task status as notified by a migration tool. A tool might use this field to provide clarifying information about the status that is unique to that tool or that explains an error state.
+      ProgressPercent:
+        $ref: '#/definitions/ProgressPercent'
+        description: Indication of the percentage completion of the task.
+    description: Task object encapsulating task information.
+  Token:
+    type: string
+  UnauthorizedOperation:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/ErrorMessage'
+    description: Exception raised to indicate a request was not authorized when the <code>DryRun</code> flag is set to "true".
+  UpdateDateTime:
+    type: string
+    format: date-time
