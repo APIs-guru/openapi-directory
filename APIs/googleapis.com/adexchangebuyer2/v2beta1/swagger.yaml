@@ -1563,7 +1563,7 @@ paths:
             The ID of the creative status for which to retrieve a breakdown by detail.
             See
             [creative-status-codes](https://developers.google.com/ad-exchange/rtb/downloads/creative-status-codes).
-            Details are only available for statuses 14, 15, 17, 18, 19, 86, and 87.
+            Details are only available for statuses 10, 14, 15, 17, 18, 19, 86, and 87.
           in: path
           name: creativeStatusId
           required: true
@@ -2838,6 +2838,7 @@ definitions:
           - VENDOR
           - SENSITIVE_CATEGORY
           - PRODUCT_CATEGORY
+          - DISAPPROVAL_REASON
         type: string
       filteredBidDetailRows:
         description: |-

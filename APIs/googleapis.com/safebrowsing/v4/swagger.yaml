@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'The Safe Browsing API is an experimental API that allows client applications to check URLs against Google''s constantly-updated blacklists of suspected phishing and malware pages. Your client application can use the API to download an encrypted table for local, client-side lookups of URLs.'
+  description: Enables client applications to check web resources (most commonly URLs) against Google-generated lists of unsafe web resources.
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
@@ -513,7 +513,15 @@ definitions:
           - SOCIAL_ENGINEERING
           - UNWANTED_SOFTWARE
           - POTENTIALLY_HARMFUL_APPLICATION
+          - SOCIAL_ENGINEERING_INTERNAL
+          - API_ABUSE
           - MALICIOUS_BINARY
+          - CSD_WHITELIST
+          - CSD_DOWNLOAD_WHITELIST
+          - CLIENT_INCIDENT
+          - CLIENT_INCIDENT_WHITELIST
+          - APK_MALWARE_OFFLINE
+          - SUBRESOURCE_FILTER
         type: string
     type: object
   ListUpdateResponse:
@@ -586,7 +594,15 @@ definitions:
           - SOCIAL_ENGINEERING
           - UNWANTED_SOFTWARE
           - POTENTIALLY_HARMFUL_APPLICATION
+          - SOCIAL_ENGINEERING_INTERNAL
+          - API_ABUSE
           - MALICIOUS_BINARY
+          - CSD_WHITELIST
+          - CSD_DOWNLOAD_WHITELIST
+          - CLIENT_INCIDENT
+          - CLIENT_INCIDENT_WHITELIST
+          - APK_MALWARE_OFFLINE
+          - SUBRESOURCE_FILTER
         type: string
     type: object
   MetadataEntry:
@@ -776,7 +792,15 @@ definitions:
             - SOCIAL_ENGINEERING
             - UNWANTED_SOFTWARE
             - POTENTIALLY_HARMFUL_APPLICATION
+            - SOCIAL_ENGINEERING_INTERNAL
+            - API_ABUSE
             - MALICIOUS_BINARY
+            - CSD_WHITELIST
+            - CSD_DOWNLOAD_WHITELIST
+            - CLIENT_INCIDENT
+            - CLIENT_INCIDENT_WHITELIST
+            - APK_MALWARE_OFFLINE
+            - SUBRESOURCE_FILTER
           type: string
         type: array
     type: object
@@ -818,7 +842,15 @@ definitions:
           - SOCIAL_ENGINEERING
           - UNWANTED_SOFTWARE
           - POTENTIALLY_HARMFUL_APPLICATION
+          - SOCIAL_ENGINEERING_INTERNAL
+          - API_ABUSE
           - MALICIOUS_BINARY
+          - CSD_WHITELIST
+          - CSD_DOWNLOAD_WHITELIST
+          - CLIENT_INCIDENT
+          - CLIENT_INCIDENT_WHITELIST
+          - APK_MALWARE_OFFLINE
+          - SUBRESOURCE_FILTER
         type: string
     type: object
   ThreatMatch:
@@ -868,6 +900,14 @@ definitions:
           - SOCIAL_ENGINEERING
           - UNWANTED_SOFTWARE
           - POTENTIALLY_HARMFUL_APPLICATION
+          - SOCIAL_ENGINEERING_INTERNAL
+          - API_ABUSE
           - MALICIOUS_BINARY
+          - CSD_WHITELIST
+          - CSD_DOWNLOAD_WHITELIST
+          - CLIENT_INCIDENT
+          - CLIENT_INCIDENT_WHITELIST
+          - APK_MALWARE_OFFLINE
+          - SUBRESOURCE_FILTER
         type: string
     type: object

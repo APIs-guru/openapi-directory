@@ -282,7 +282,7 @@ paths:
   '/v2beta1/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.billingAccounts.logs.delete
+      operationId: logging.organizations.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -311,7 +311,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - organizations
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -449,7 +449,7 @@ paths:
   '/v2beta1/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.billingAccounts.logs.list
+      operationId: logging.organizations.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -493,7 +493,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - organizations
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -794,7 +794,7 @@ paths:
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/alt'
     put:
-      description: 'Updates a sink. If the named sink doesn''t exist, then this method is identical to sinks.create. If the named sink does exist, then this method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated filter might also have a new writer_identity; see the unique_writer_identity field.'
+      description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
       operationId: logging.projects.sinks.update
       parameters:
         - in: body
@@ -866,6 +866,9 @@ definitions:
       latency:
         description: 'The request processing latency on the server, from the time the request was received until the response was sent.'
         format: google-duration
+        type: string
+      protocol:
+        description: 'Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket"'
         type: string
       referer:
         description: 'The referer URL of the request, as defined in HTTP/1.1 Header Field Definitions (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).'
@@ -1151,7 +1154,7 @@ definitions:
         description: 'Required. The client-assigned metric identifier. Examples: "error_count", "nginx/requests".Metric identifiers are limited to 100 characters and can include only the following characters: A-Z, a-z, 0-9, and the special characters _-.,+!*'',()%/. The forward-slash character (/) denotes a hierarchy of name pieces, and it cannot be the first character of the name.The metric identifier in this field must not be URL-encoded (https://en.wikipedia.org/wiki/Percent-encoding). However, when the metric identifier appears as the [METRIC_ID] part of a metric_name API parameter, then the metric identifier must be URL-encoded. Example: "projects/my-project/metrics/nginx%2Frequests".'
         type: string
       version:
-        description: 'Output only. The API version that created or updated this metric. The version also dictates the syntax of the filter expression. When a value for this field is missing, the default value of V2 should be assumed.'
+        description: Output only. The API version that created or updated this metric. This value is currently always set to V2.
         enum:
           - V2
           - V1

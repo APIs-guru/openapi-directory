@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Executes Google Apps Script projects.
+  description: Executes functions in Google Apps Script projects.
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
@@ -173,17 +173,17 @@ paths:
         **File > Project properties** and click the **Scopes** tab.
       operationId: script.scripts.run
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ExecutionRequest'
         - description: |-
-            The project key of the script to be executed. To find the project key, open
+            The script ID of the script to be executed. To find the script ID, open
             the project in the script editor and select **File > Project properties**.
           in: path
           name: scriptId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ExecutionRequest'
       responses:
         '200':
           description: Successful response
@@ -322,40 +322,6 @@ definitions:
           they can only return primitive types such as a `string`, `number`, `array`,
           `object`, or `boolean`.
     type: object
-  JoinAsyncRequest:
-    description: |-
-      A request to retrieve the results from a collection of requests,
-      specified by the operation resource names.
-    properties:
-      names:
-        description: |-
-          List of operation resource names that we want to join,
-          as returned from a call to RunAsync.
-        items:
-          type: string
-        type: array
-      scriptId:
-        description: |-
-          The script id which specifies the script which all processes in the names
-          field must be from.
-        type: string
-      timeout:
-        description: Timeout for information retrieval in milliseconds.
-        format: google-duration
-        type: string
-    type: object
-  JoinAsyncResponse:
-    description: An object that provides the return value for the JoinAsync method.
-    properties:
-      results:
-        additionalProperties:
-          $ref: '#/definitions/Operation'
-        description: |-
-          The return values for each script function, in a map of operation resource
-          names to the Operation containing the result of the process. The response
-          will contain either an error or the result of the script function.
-        type: object
-    type: object
   Operation:
     description: |-
       The response will not arrive until the function finishes executing. The maximum runtime is listed in the guide to [limitations in Apps Script](https://developers.google.com/apps-script/guides/services/quotas#current_limitations).
@@ -364,7 +330,7 @@ definitions:
       <p>If the `run` call itself fails (for example, because of a malformed request or an authorization error), the method will return an HTTP response code in the 4XX range with a different format for the response body. Client libraries will automatically convert a 4XX response into an exception class.</p>
     properties:
       done:
-        description: This field is not used.
+        description: This field is only used with asynchronous executions and indicates whether or not the script execution has completed. A completed execution has a populated response field containing the `ExecutionResponse` from function that was executed.
         type: boolean
       error:
         $ref: '#/definitions/Status'
@@ -375,7 +341,7 @@ definitions:
         description: This field is not used.
         type: object
       name:
-        description: This field is not used.
+        description: This field is only used with asynchronous executions and contains a unique identifier that can be used to subsequently invoke a `get` `cancel` or `join` on the asynchronous script execution identified by this name.
         type: string
       response:
         additionalProperties:
@@ -398,7 +364,7 @@ definitions:
     description: 'If a `run` call succeeds but the script function (or Apps Script itself) throws an exception, the response body''s `error` field will contain this `Status` object.'
     properties:
       code:
-        description: 'The status code. For this API, this value will always be 3, corresponding to an INVALID_ARGUMENT error.'
+        description: 'The status code. For this API, this value will always be 3, corresponding to an <code>INVALID_ARGUMENT</code> error.'
         format: int32
         type: integer
       details:

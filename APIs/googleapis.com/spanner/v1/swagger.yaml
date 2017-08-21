@@ -344,16 +344,24 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a particular instance configuration.
-      operationId: spanner.projects.instanceConfigs.get
+      description: |-
+        Lists operations that match the specified filter in the request. If the
+        server doesn't support this method, it returns `UNIMPLEMENTED`.
+
+        NOTE: the `name` binding allows API services to override the binding
+        to use different resource name schemes, such as `users/*/operations`. To
+        override the binding, API services can add a binding such as
+        `"/v1/{name=users/*}/operations"` to their service configuration.
+        For backwards compatibility, the default name includes the operations
+        collection id, however overriding users must ensure the name binding
+        is the parent resource, without the operations collection id.
+      operationId: spanner.projects.instances.operations.list
       parameters:
         - description: The standard list filter.
           in: query
           name: filter
           type: string
-        - description: |-
-            Required. The name of the requested instance configuration. Values are of
-            the form `projects/<project>/instanceConfigs/<config>`.
+        - description: The name of the operation's parent resource.
           in: path
           name: name
           required: true
@@ -371,7 +379,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/InstanceConfig'
+            $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1452,6 +1460,19 @@ definitions:
           - DATA_READ
         type: string
     type: object
+  AuthorizationLoggingOptions:
+    description: Authorization-related information used by Cloud Audit Logging.
+    properties:
+      permissionType:
+        description: The type of the permission that was checked.
+        enum:
+          - PERMISSION_TYPE_UNSPECIFIED
+          - ADMIN_READ
+          - ADMIN_WRITE
+          - DATA_READ
+          - DATA_WRITE
+        type: string
+    type: object
   BeginTransactionRequest:
     description: The request for BeginTransaction.
     properties:
@@ -1536,9 +1557,9 @@ definitions:
   CloudAuditOptions:
     description: Write a Cloud Audit log
     properties:
-      isReadPermissionType:
-        description: True if the log is for a permission of type DATA_READ or ADMIN_READ.
-        type: boolean
+      authorizationLoggingOptions:
+        $ref: '#/definitions/AuthorizationLoggingOptions'
+        description: Information used by the Cloud Audit Logging pipeline.
       logName:
         description: The log_name to populate in the Cloud Audit Record.
         enum:
@@ -2928,8 +2949,8 @@ definitions:
         type: integer
       details:
         description: |-
-          A list of messages that carry the error details.  There will be a
-          common set of message types for APIs to use.
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.

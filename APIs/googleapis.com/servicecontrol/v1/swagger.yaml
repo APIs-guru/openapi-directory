@@ -658,7 +658,10 @@ definitions:
           It is not guaranteed that the principal was allowed to use this authority.
         type: string
       principalEmail:
-        description: The email address of the authenticated user making the request.
+        description: |-
+          The email address of the authenticated user making the request.
+          For privacy reasons, the principal email address is redacted for all
+          read-only operations that fail with a "permission denied" error.
         type: string
     type: object
   AuthorizationInfo:
@@ -1296,11 +1299,15 @@ definitions:
         additionalProperties:
           format: int32
           type: integer
-        description: |-
+        description: |
           Map of quota group name to the actual number of tokens consumed. If the
           quota check was not successful, then this will not be populated due to no
           quota consumption.
-          Deprecated: Use quota_metrics to get per quota group usage.
+
+          We are not merging this field with 'quota_metrics' field because of the
+          complexity of scaling in Chemist client code base. For simplicity, we will
+          keep this field for Castor (that scales quota usage) and 'quota_metrics'
+          for SuperQuota (that doesn't scale quota usage).
         type: object
       quotaMetrics:
         description: |-

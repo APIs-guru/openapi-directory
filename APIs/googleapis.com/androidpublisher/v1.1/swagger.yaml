@@ -228,6 +228,9 @@ definitions:
         default: 'androidpublisher#inappPurchase'
         description: This kind represents an inappPurchase object in the androidpublisher service.
         type: string
+      orderId:
+        description: The order id associated with the purchase of the inapp product.
+        type: string
       purchaseState:
         description: |-
           The purchase state of the order. Possible values are:  

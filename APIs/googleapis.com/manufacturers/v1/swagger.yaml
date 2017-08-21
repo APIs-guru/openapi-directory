@@ -222,9 +222,10 @@ paths:
         Gets the product from a Manufacturer Center account, including product
         issues.
 
-        A recently updated product takes some time to be processed before any
-        changes are visible. While some issues may be available once the product
-        has been processed, other issues may take days to appear.
+        A recently updated product takes around 15 minutes to process. Changes are
+        only visible after it has been processed. While some issues may be
+        available once the product has been processed, other issues may take days
+        to appear.
       operationId: manufacturers.accounts.products.get
       parameters:
         - description: |-
@@ -497,6 +498,12 @@ definitions:
         description: |-
           The suggested retail price (MSRP) of the product. For more information,
           see https://support.google.com/manufacturers/answer/6124116#price.
+      targetAccountId:
+        description: |-
+          The target account id. Should only be used in the accounts of the data
+          partners.
+        format: int64
+        type: string
       theme:
         description: |-
           The theme of the product. For more information, see

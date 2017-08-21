@@ -794,8 +794,52 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
+    patch:
+      description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
+      operationId: logging.billingAccounts.sinks.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogSink'
+        - description: |-
+            Required. The full resource name of the sink to update, including the parent resource and the sink identifier:
+            "projects/[PROJECT_ID]/sinks/[SINK_ID]"
+            "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
+            "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
+            "folders/[FOLDER_ID]/sinks/[SINK_ID]"
+            Example: "projects/my-project-id/sinks/my-sink-id".
+          in: path
+          name: sinkName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Optional. See sinks.create for a description of this field. When updating a sink, the effect of this field on the value of writer_identity in the updated sink depends on both the old and new values of this field:
+            If the old and new values of this field are both false or both true, then there is no change to the sink's writer_identity.
+            If the old value is false and the new value is true, then writer_identity is changed to a unique service account.
+            It is an error if the old value is true and the new value is set to false or defaulted to false.
+          in: query
+          name: uniqueWriterIdentity
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogSink'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/logging.admin'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/logging.admin'
+      tags:
+        - billingAccounts
     put:
-      description: 'Updates a sink. If the named sink doesn''t exist, then this method is identical to sinks.create. If the named sink does exist, then this method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated filter might also have a new writer_identity; see the unique_writer_identity field.'
+      description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
       operationId: logging.billingAccounts.sinks.update
       parameters:
         - in: body
@@ -867,6 +911,9 @@ definitions:
       latency:
         description: 'The request processing latency on the server, from the time the request was received until the response was sent.'
         format: google-duration
+        type: string
+      protocol:
+        description: 'Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket"'
         type: string
       referer:
         description: 'The referer URL of the request, as defined in HTTP/1.1 Header Field Definitions (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).'
@@ -1152,7 +1199,7 @@ definitions:
         description: 'Required. The client-assigned metric identifier. Examples: "error_count", "nginx/requests".Metric identifiers are limited to 100 characters and can include only the following characters: A-Z, a-z, 0-9, and the special characters _-.,+!*'',()%/. The forward-slash character (/) denotes a hierarchy of name pieces, and it cannot be the first character of the name.The metric identifier in this field must not be URL-encoded (https://en.wikipedia.org/wiki/Percent-encoding). However, when the metric identifier appears as the [METRIC_ID] part of a metric_name API parameter, then the metric identifier must be URL-encoded. Example: "projects/my-project/metrics/nginx%2Frequests".'
         type: string
       version:
-        description: 'Output only. The API version that created or updated this metric. The version also dictates the syntax of the filter expression. When a value for this field is missing, the default value of V2 should be assumed.'
+        description: Output only. The API version that created or updated this metric. This value is currently always set to V2.
         enum:
           - V2
           - V1

@@ -2161,22 +2161,22 @@ paths:
       description: 'Lists the purchases that were cancelled, refunded or charged-back.'
       operationId: androidpublisher.purchases.voidedpurchases.list
       parameters:
-        - description: 'The package name of the application for which voided purchases need to be returned (for example, ''com.some.thing'').'
-          in: path
-          name: packageName
-          required: true
-          type: string
-        - description: 'The time, in milliseconds since the Epoch, of the newest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be greater than the current time and is ignored if a pagination token is set. Default value is current time.'
+        - description: 'The time, in milliseconds since the Epoch, of the newest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be greater than the current time and is ignored if a pagination token is set. Default value is current time. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.'
           in: query
           name: endTime
           type: string
         - in: query
           name: maxResults
           type: integer
+        - description: 'The package name of the application for which voided purchases need to be returned (for example, ''com.some.thing'').'
+          in: path
+          name: packageName
+          required: true
+          type: string
         - in: query
           name: startIndex
           type: integer
-        - description: 'The time, in milliseconds since the Epoch, of the oldest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be older than 30 days and is ignored if a pagination token is set. Default value is current time minus 30 days.'
+        - description: 'The time, in milliseconds since the Epoch, of the oldest voided in-app product purchase that you want to see in the response. The value of this parameter cannot be older than 30 days and is ignored if a pagination token is set. Default value is current time minus 30 days. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.'
           in: query
           name: startTime
           type: string
@@ -2336,6 +2336,9 @@ definitions:
     properties:
       sha1:
         description: 'A sha1 hash of the APK payload, encoded as a hex string and matching the output of the sha1sum command.'
+        type: string
+      sha256:
+        description: 'A sha256 hash of the APK payload, encoded as a hex string and matching the output of the sha256sum command.'
         type: string
     type: object
   ApkListing:
@@ -2828,6 +2831,9 @@ definitions:
         default: 'androidpublisher#productPurchase'
         description: This kind represents an inappPurchase object in the androidpublisher service.
         type: string
+      orderId:
+        description: The order id associated with the purchase of the inapp product.
+        type: string
       purchaseState:
         description: |-
           The purchase state of the order. Possible values are:  
@@ -2947,11 +2953,15 @@ definitions:
         default: 'androidpublisher#subscriptionPurchase'
         description: This kind represents a subscriptionPurchase object in the androidpublisher service.
         type: string
+      orderId:
+        description: The order id of the latest recurring order associated with the purchase of the subscription.
+        type: string
       paymentState:
         description: |-
           The payment state of the subscription. Possible values are:  
           - Payment pending 
-          - Payment received
+          - Payment received 
+          - Free trial
         format: int32
         type: integer
       priceAmountMicros:

@@ -3631,6 +3631,170 @@ paths:
       summary: Programme by Pid
       tags:
         - Radio
+  /v2/broadcasts:
+    get:
+      description: |
+        All broadcasts
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - description: Filter by Service ID. E.g. bbc_radio_fourfm
+          in: query
+          name: service_id
+          required: false
+          type: string
+        - description: Filter by date. E.g. 2016-06-17
+          in: query
+          name: date
+          required: false
+          type: string
+        - description: 'Sort by provided query. E.g. ''start_at'' sorts in ascending order, and ''-start_at'' sorts in descending order'
+          enum:
+            - start_at
+            - '-start_at'
+            - end_at
+            - '-end_at'
+          in: query
+          name: sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BroadcastsResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Broadcasts
+      tags:
+        - Schedules
+  /v2/broadcasts/latest:
+    get:
+      description: |
+        Broadcasts for the current day
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - description: Filter by Service ID. E.g. bbc_radio_fourfm
+          in: query
+          name: service_id
+          required: false
+          type: string
+        - description: Filter what is on air. E.g. 'now' returns current programme being broadcasted.
+          enum:
+            - now
+            - previous
+            - next
+          in: query
+          name: on_air
+          required: false
+          type: string
+        - description: Filter what will be on air next in minutes. E.g. '240' returns programmes broadcasted in the next four hurs
+          in: query
+          name: next
+          required: false
+          type: string
+        - description: Filter what was on air previously in minutes. E.g. '240' returns programmes broadcasted in the previous four hurs
+          in: query
+          name: previous
+          required: false
+          type: string
+        - description: 'Sort by provided query. E.g. ''start_at'' sorts in ascending order, and ''-start_at'' sorts in descending order'
+          enum:
+            - start_at
+            - '-start_at'
+            - end_at
+            - '-end_at'
+          in: query
+          name: sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BroadcastsResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Latest Broadcasts
+      tags:
+        - Schedules
+  '/v2/broadcasts/{pid}':
+    get:
+      description: |
+        Find broadcast by PID
+      operationId: getBroadcastByPid
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BroadcastsResponse'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Broadcasts by PID
+      tags:
+        - Schedules
 definitions:
   AncestorSummary:
     properties:
@@ -3731,6 +3895,72 @@ definitions:
       - titles
       - total_available_episodes
       - type
+    type: object
+  Broadcast:
+    properties:
+      duration:
+        type: integer
+      end:
+        type: string
+      is_audio_described:
+        type: boolean
+      is_blanked:
+        type: boolean
+      is_critical:
+        type: boolean
+      is_live:
+        type: boolean
+      is_repeat:
+        type: boolean
+      is_webcast:
+        type: boolean
+      pid:
+        type: string
+      programme:
+        $ref: '#/definitions/ProgrammeSummary'
+      service_id:
+        type: string
+      start:
+        type: string
+      type:
+        type: string
+      version_pid:
+        type: string
+    required:
+      - duration
+      - end
+      - is_audio_described
+      - is_blanked
+      - is_critical
+      - is_live
+      - is_repeat
+      - is_webcast
+      - pid
+      - service_id
+      - start
+      - type
+      - version_pid
+    type: object
+  BroadcastsResponse:
+    properties:
+      $schema:
+        type: string
+      limit:
+        type: integer
+      offset:
+        type: integer
+      results:
+        items:
+          $ref: '#/definitions/Broadcast'
+        type: array
+      total:
+        type: integer
+    required:
+      - $schema
+      - limit
+      - offset
+      - results
+      - total
     type: object
   CategoriesResponse:
     properties:

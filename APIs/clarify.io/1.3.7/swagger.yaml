@@ -6,7 +6,7 @@ basePath: /
 info:
   description: The API to Search and Understand Audio & Video Data.
   title: Clarify
-  version: 1.3.6
+  version: 1.3.7
   x-apisguru-categories:
     - search
   x-logo:
@@ -114,7 +114,7 @@ paths:
           name: notify_url
           required: false
           type: string
-        - description: A string that can refer to an item in an external system. Up to 64 characters.
+        - description: A string that can refer to an item in an external system. Up to 128 characters.
           in: formData
           name: external_id
           required: false
@@ -199,7 +199,7 @@ paths:
           name: notify_url
           required: false
           type: string
-        - description: A string that can refer to an item in an external system. Up to 64 characters.
+        - description: A string that can refer to an item in an external system. Up to 128 characters.
           in: formData
           name: external_id
           required: false
@@ -851,7 +851,7 @@ definitions:
         description: 'Date the bundle was created, ex. "2014-02-25T14:23:45Z"'
         type: string
       external_id:
-        description: A string that can refer to an item in an external system. Up to 64 characters.
+        description: A string that can refer to an item in an external system. Up to 128 characters.
         type: string
       id:
         description: id of the bundle

@@ -849,6 +849,9 @@ definitions:
         description: Max temperature of the day (measured @ date_max_temp)
         format: float
         type: number
+      pressure_trend:
+        description: Pressure evolution trend
+        type: string
       sum_rain_1:
         description: Amount of rain in last hour
         format: float
@@ -857,6 +860,9 @@ definitions:
         description: Amount of rain today
         format: float
         type: number
+      temp_trend:
+        description: Temperature evolution trend
+        type: string
       time_utc:
         format: int32
         type: integer
@@ -1538,7 +1544,8 @@ definitions:
       measured:
         $ref: '#/definitions/NAThermMeasure'
       plug_connected_boiler:
-        type: boolean
+        format: int32
+        type: integer
       rf_status:
         format: int32
         type: integer

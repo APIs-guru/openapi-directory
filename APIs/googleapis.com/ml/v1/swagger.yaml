@@ -702,7 +702,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: ml.projects.models.getIamPolicy
+      operationId: ml.projects.jobs.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -757,7 +757,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: ml.projects.models.setIamPolicy
+      operationId: ml.projects.jobs.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -807,7 +807,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: ml.projects.models.testIamPermissions
+      operationId: ml.projects.jobs.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -1196,6 +1196,8 @@ definitions:
           - CREATE_VERSION
           - DELETE_VERSION
           - DELETE_MODEL
+          - UPDATE_MODEL
+          - UPDATE_VERSION
         type: string
       startTime:
         description: The time operation processing started.
@@ -1798,6 +1800,7 @@ definitions:
           - READY
           - CREATING
           - FAILED
+          - DELETING
         type: string
     type: object
   GoogleCloudMlV1beta1__AutoScaling:
@@ -1865,6 +1868,8 @@ definitions:
           - CREATE_VERSION
           - DELETE_VERSION
           - DELETE_MODEL
+          - UPDATE_MODEL
+          - UPDATE_VERSION
         type: string
       startTime:
         description: The time operation processing started.
@@ -1956,6 +1961,7 @@ definitions:
           - READY
           - CREATING
           - FAILED
+          - DELETING
         type: string
     type: object
   GoogleIamV1_LogConfig_CloudAuditOptions:

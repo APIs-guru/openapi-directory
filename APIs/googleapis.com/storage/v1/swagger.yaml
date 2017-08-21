@@ -1078,7 +1078,7 @@ paths:
       description: Retrieves a list of notification subscriptions for a given bucket.
       operationId: storage.notifications.list
       parameters:
-        - description: Name of a GCS bucket.
+        - description: Name of a Google Cloud Storage bucket.
           in: path
           name: bucket
           required: true
@@ -1349,11 +1349,11 @@ paths:
           in: query
           name: contentEncoding
           type: string
-        - description: Makes the operation conditional on whether the object's current generation matches the given value.
+        - description: Makes the operation conditional on whether the object's current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: Makes the operation conditional on whether the object's current generation does not match the given value.
+        - description: 'Makes the operation conditional on whether the object''s current generation does not match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.'
           in: query
           name: ifGenerationNotMatch
           type: string
@@ -1512,11 +1512,11 @@ paths:
           in: query
           name: generation
           type: string
-        - description: Makes the operation conditional on whether the object's current generation matches the given value.
+        - description: Makes the operation conditional on whether the object's current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: Makes the operation conditional on whether the object's current generation does not match the given value.
+        - description: 'Makes the operation conditional on whether the object''s current generation does not match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.'
           in: query
           name: ifGenerationNotMatch
           type: string
@@ -1568,11 +1568,11 @@ paths:
           in: query
           name: generation
           type: string
-        - description: Makes the operation conditional on whether the object's generation matches the given value.
+        - description: Makes the operation conditional on whether the object's current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: Makes the operation conditional on whether the object's generation does not match the given value.
+        - description: 'Makes the operation conditional on whether the object''s current generation does not match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.'
           in: query
           name: ifGenerationNotMatch
           type: string
@@ -1653,11 +1653,11 @@ paths:
           in: query
           name: generation
           type: string
-        - description: Makes the operation conditional on whether the object's current generation matches the given value.
+        - description: Makes the operation conditional on whether the object's current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: Makes the operation conditional on whether the object's current generation does not match the given value.
+        - description: 'Makes the operation conditional on whether the object''s current generation does not match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.'
           in: query
           name: ifGenerationNotMatch
           type: string
@@ -1729,11 +1729,11 @@ paths:
           in: query
           name: generation
           type: string
-        - description: Makes the operation conditional on whether the object's current generation matches the given value.
+        - description: Makes the operation conditional on whether the object's current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: Makes the operation conditional on whether the object's current generation does not match the given value.
+        - description: 'Makes the operation conditional on whether the object''s current generation does not match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.'
           in: query
           name: ifGenerationNotMatch
           type: string
@@ -2274,7 +2274,7 @@ paths:
           in: query
           name: destinationPredefinedAcl
           type: string
-        - description: Makes the operation conditional on whether the object's current generation matches the given value.
+        - description: Makes the operation conditional on whether the object's current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
           in: query
           name: ifGenerationMatch
           type: string
@@ -2348,11 +2348,11 @@ paths:
           in: query
           name: destinationPredefinedAcl
           type: string
-        - description: Makes the operation conditional on whether the destination object's current generation matches the given value.
+        - description: Makes the operation conditional on whether the destination object's current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: Makes the operation conditional on whether the destination object's current generation does not match the given value.
+        - description: 'Makes the operation conditional on whether the destination object''s current generation does not match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.'
           in: query
           name: ifGenerationNotMatch
           type: string
@@ -2364,11 +2364,11 @@ paths:
           in: query
           name: ifMetagenerationNotMatch
           type: string
-        - description: Makes the operation conditional on whether the source object's generation matches the given value.
+        - description: Makes the operation conditional on whether the source object's current generation matches the given value.
           in: query
           name: ifSourceGenerationMatch
           type: string
-        - description: Makes the operation conditional on whether the source object's generation does not match the given value.
+        - description: Makes the operation conditional on whether the source object's current generation does not match the given value.
           in: query
           name: ifSourceGenerationNotMatch
           type: string
@@ -2467,11 +2467,11 @@ paths:
           in: query
           name: destinationPredefinedAcl
           type: string
-        - description: Makes the operation conditional on whether the destination object's current generation matches the given value.
+        - description: Makes the operation conditional on whether the object's current generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: Makes the operation conditional on whether the destination object's current generation does not match the given value.
+        - description: 'Makes the operation conditional on whether the object''s current generation does not match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.'
           in: query
           name: ifGenerationNotMatch
           type: string
@@ -2483,11 +2483,11 @@ paths:
           in: query
           name: ifMetagenerationNotMatch
           type: string
-        - description: Makes the operation conditional on whether the source object's generation matches the given value.
+        - description: Makes the operation conditional on whether the source object's current generation matches the given value.
           in: query
           name: ifSourceGenerationMatch
           type: string
-        - description: Makes the operation conditional on whether the source object's generation does not match the given value.
+        - description: Makes the operation conditional on whether the source object's current generation does not match the given value.
           in: query
           name: ifSourceGenerationNotMatch
           type: string
@@ -2597,7 +2597,7 @@ paths:
         - channels
   '/projects/{projectId}/serviceAccount':
     get:
-      description: Get the email address of this project's GCS service account.
+      description: Get the email address of this project's Google Cloud Storage service account.
       operationId: storage.projects.serviceAccount.get
       parameters:
         - description: Project ID
@@ -3054,7 +3054,7 @@ definitions:
         description: Content-Language of the object data.
         type: string
       contentType:
-        description: 'Content-Type of the object data. If contentType is not specified, object downloads will be served as application/octet-stream.'
+        description: 'Content-Type of the object data. If an object is stored without a Content-Type, it is served as application/octet-stream.'
         type: string
       crc32c:
         description: 'CRC32c checksum, as described in RFC 4960, Appendix B; encoded using base64 in big-endian byte order. For more information about using the CRC32c checksum, see Hashes and ETags: Best Practices.'
@@ -3287,7 +3287,7 @@ definitions:
         description: 'The kind of item this is. For policies, this is always storage#policy. This field is ignored on input.'
         type: string
       resourceId:
-        description: 'The ID of the resource to which this policy belongs. Will be of the form buckets/bucket for buckets, and buckets/bucket/objects/object for objects. A specific generation may be specified by appending #generationNumber to the end of the object name, e.g. buckets/my-bucket/objects/data.txt#17. The current generation can be denoted with #0. This field is ignored on input.'
+        description: 'The ID of the resource to which this policy belongs. Will be of the form projects/_/buckets/bucket for buckets, and projects/_/buckets/bucket/objects/object for objects. A specific generation may be specified by appending #generationNumber to the end of the object name, e.g. projects/_/buckets/my-bucket/objects/data.txt#17. The current generation can be denoted with #0. This field is ignored on input.'
         type: string
     type: object
   RewriteResponse:

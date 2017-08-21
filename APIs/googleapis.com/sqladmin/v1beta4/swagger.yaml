@@ -1833,7 +1833,7 @@ definitions:
         format: int64
         type: string
       databaseVersion:
-        description: 'The database engine type and version. The databaseVersion can not be changed after instance creation. Can be MYSQL_5_5, MYSQL_5_6 or MYSQL_5_7. Defaults to MYSQL_5_6. MYSQL_5_7 is applicable only to Second Generation instances.'
+        description: 'The database engine type and version. The databaseVersion field can not be changed after instance creation. MySQL Second Generation instances: MYSQL_5_7 (default) or MYSQL_5_6. PostgreSQL instances: POSTGRES_9_6 MySQL First Generation instances: MYSQL_5_6 (default) or MYSQL_5_5'
         type: string
       etag:
         description: HTTP 1.1 Entity tag for the resource.
@@ -1848,6 +1848,9 @@ definitions:
             description: 'The name of the failover replica. If specified at instance creation, a failover replica is created for the instance. The name doesn''t include the project ID. This property is applicable only to Second Generation instances.'
             type: string
         type: object
+      gceZone:
+        description: 'The GCE zone that the instance is serving from. In case when the instance is failed over to standby zone, this value may be different with what user specified in the settings.'
+        type: string
       instanceType:
         description: |-
           The instance type. This can be one of the following.
@@ -2061,7 +2064,7 @@ definitions:
           CSV: The file contains CSV data.
         type: string
       importUser:
-        description: The PostgreSQL user to use for this import operation. Defaults to cloudsqlsuperuser. Does not apply to MySQL instances.
+        description: The PostgreSQL user for this import operation. Defaults to cloudsqlsuperuser. Used only for PostgreSQL instances.
         type: string
       kind:
         default: 'sql#importContext'
@@ -2141,7 +2144,7 @@ definitions:
         description: Whether the instance should be assigned an IP address or not.
         type: boolean
       requireSsl:
-        description: Whether the mysqld should default to 'REQUIRE X509' for users connecting over IP.
+        description: Whether SSL connections over IP should be enforced or not.
         type: boolean
     type: object
   IpMapping:

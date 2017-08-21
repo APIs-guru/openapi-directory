@@ -1244,6 +1244,14 @@ definitions:
     type: object
   ExplainQueryStage:
     properties:
+      computeMsAvg:
+        description: Milliseconds the average shard spent on CPU-bound tasks.
+        format: int64
+        type: string
+      computeMsMax:
+        description: Milliseconds the slowest shard spent on CPU-bound tasks.
+        format: int64
+        type: string
       computeRatioAvg:
         description: Relative amount of time the average shard spent on CPU-bound tasks.
         format: double
@@ -1258,6 +1266,14 @@ definitions:
         type: string
       name:
         description: Human-readable name for stage.
+        type: string
+      readMsAvg:
+        description: Milliseconds the average shard spent reading input.
+        format: int64
+        type: string
+      readMsMax:
+        description: Milliseconds the slowest shard spent reading input.
+        format: int64
         type: string
       readRatioAvg:
         description: Relative amount of time the average shard spent reading input.
@@ -1275,6 +1291,14 @@ definitions:
         description: Number of records written by the stage.
         format: int64
         type: string
+      shuffleOutputBytes:
+        description: Total number of bytes written to shuffle.
+        format: int64
+        type: string
+      shuffleOutputBytesSpilled:
+        description: Total number of bytes written to shuffle and spilled to disk.
+        format: int64
+        type: string
       status:
         description: Current status for the stage.
         type: string
@@ -1283,6 +1307,14 @@ definitions:
         items:
           $ref: '#/definitions/ExplainQueryStep'
         type: array
+      waitMsAvg:
+        description: Milliseconds the average shard spent waiting to be scheduled.
+        format: int64
+        type: string
+      waitMsMax:
+        description: Milliseconds the slowest shard spent waiting to be scheduled.
+        format: int64
+        type: string
       waitRatioAvg:
         description: Relative amount of time the average shard spent waiting to be scheduled.
         format: double
@@ -1291,6 +1323,14 @@ definitions:
         description: Relative amount of time the slowest shard spent waiting to be scheduled.
         format: double
         type: number
+      writeMsAvg:
+        description: Milliseconds the average shard spent on writing output.
+        format: int64
+        type: string
+      writeMsMax:
+        description: Milliseconds the slowest shard spent on writing output.
+        format: int64
+        type: string
       writeRatioAvg:
         description: Relative amount of time the average shard spent on writing output.
         format: double
@@ -1342,7 +1382,7 @@ definitions:
         description: '[Required] The data format. For CSV files, specify "CSV". For Google sheets, specify "GOOGLE_SHEETS". For newline-delimited JSON, specify "NEWLINE_DELIMITED_JSON". For Avro files, specify "AVRO". For Google Cloud Datastore backups, specify "DATASTORE_BACKUP". [Beta] For Google Cloud Bigtable, specify "BIGTABLE".'
         type: string
       sourceUris:
-        description: '[Required] The fully-qualified URIs that point to your data in Google Cloud. For Google Cloud Storage URIs: Each URI can contain one ''*'' wildcard character and it must come after the ''bucket'' name. Size limits related to load jobs apply to external data sources. For Google Cloud Bigtable URIs: Exactly one URI can be specified and it has be a fully specified and valid HTTPS URL for a Google Cloud Bigtable table. For Google Cloud Datastore backups, exactly one URI can be specified, and it must end with ''.backup_info''. Also, the ''*'' wildcard character is not allowed.'
+        description: '[Required] The fully-qualified URIs that point to your data in Google Cloud. For Google Cloud Storage URIs: Each URI can contain one ''*'' wildcard character and it must come after the ''bucket'' name. Size limits related to load jobs apply to external data sources. For Google Cloud Bigtable URIs: Exactly one URI can be specified and it has be a fully specified and valid HTTPS URL for a Google Cloud Bigtable table. For Google Cloud Datastore backups, exactly one URI can be specified. Also, the ''*'' wildcard character is not allowed.'
         items:
           type: string
         type: array
@@ -1557,10 +1597,13 @@ definitions:
         description: '[Optional] The format of the data files. For CSV files, specify "CSV". For datastore backups, specify "DATASTORE_BACKUP". For newline-delimited JSON, specify "NEWLINE_DELIMITED_JSON". For Avro, specify "AVRO". The default value is CSV.'
         type: string
       sourceUris:
-        description: '[Required] The fully-qualified URIs that point to your data in Google Cloud. For Google Cloud Storage URIs: Each URI can contain one ''*'' wildcard character and it must come after the ''bucket'' name. Size limits related to load jobs apply to external data sources. For Google Cloud Bigtable URIs: Exactly one URI can be specified and it has be a fully specified and valid HTTPS URL for a Google Cloud Bigtable table. For Google Cloud Datastore backups: Exactly one URI can be specified, and it must end with ''.backup_info''. Also, the ''*'' wildcard character is not allowed.'
+        description: '[Required] The fully-qualified URIs that point to your data in Google Cloud. For Google Cloud Storage URIs: Each URI can contain one ''*'' wildcard character and it must come after the ''bucket'' name. Size limits related to load jobs apply to external data sources. For Google Cloud Bigtable URIs: Exactly one URI can be specified and it has be a fully specified and valid HTTPS URL for a Google Cloud Bigtable table. For Google Cloud Datastore backups: Exactly one URI can be specified. Also, the ''*'' wildcard character is not allowed.'
         items:
           type: string
         type: array
+      timePartitioning:
+        $ref: '#/definitions/TimePartitioning'
+        description: '[Experimental] If specified, configures time-based partitioning for the destination table.'
       writeDisposition:
         description: '[Optional] Specifies the action that occurs if the destination table already exists. The following values are supported: WRITE_TRUNCATE: If the table already exists, BigQuery overwrites the table data. WRITE_APPEND: If the table already exists, BigQuery appends the data to the table. WRITE_EMPTY: If the table already exists and contains data, a ''duplicate'' error is returned in the job result. The default value is WRITE_APPEND. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion.'
         type: string
@@ -1620,6 +1663,9 @@ definitions:
           $ref: '#/definitions/ExternalDataConfiguration'
         description: '[Optional] If querying an external data source outside of BigQuery, describes the data format, location and other properties of the data source. By defining these properties, the data source can then be queried as if it were a standard BigQuery table.'
         type: object
+      timePartitioning:
+        $ref: '#/definitions/TimePartitioning'
+        description: '[Experimental] If specified, configures time-based partitioning for the destination table.'
       useLegacySql:
         description: 'Specifies whether to use BigQuery''s legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery''s standard SQL: https://cloud.google.com/bigquery/sql-reference/ When useLegacySql is set to false, the value of flattenResults is ignored; query will be run as if flattenResults is false.'
         type: boolean

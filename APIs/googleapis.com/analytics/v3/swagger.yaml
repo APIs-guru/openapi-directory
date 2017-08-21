@@ -3883,6 +3883,11 @@ definitions:
         items:
           type: string
         type: array
+      schema:
+        description: Collection of schema headers of the custom data source.
+        items:
+          type: string
+        type: array
       selfLink:
         description: Link for this Analytics custom data source.
         type: string
@@ -3894,6 +3899,7 @@ definitions:
         format: date-time
         type: string
       uploadType:
+        description: Upload type of the custom data source.
         type: string
       webPropertyId:
         description: Web property ID of the form UA-XXXXX-YY to which this custom data source belongs.
@@ -5949,6 +5955,10 @@ definitions:
         type: string
       status:
         description: 'Upload status. Possible values: PENDING, COMPLETED, FAILED, DELETING, DELETED.'
+        type: string
+      uploadTime:
+        description: Time this file is uploaded.
+        format: date-time
         type: string
     type: object
   Uploads:

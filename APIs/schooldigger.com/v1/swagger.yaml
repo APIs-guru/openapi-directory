@@ -2081,6 +2081,10 @@ definitions:
         items:
           $ref: '#/definitions/clsSD2SchoolReviewSummary'
         type: array
+      reviews:
+        items:
+          $ref: '#/definitions/clsSD2SchoolReview'
+        type: array
       schoolName:
         description: School Name
         type: string
@@ -2232,6 +2236,64 @@ definitions:
         format: int32
         type: integer
       teachersFulltimeRank:
+        format: int32
+        type: integer
+    type: object
+  clsSD2SchoolReview:
+    description: A single school review submitted by a site user
+    properties:
+      comment:
+        type: string
+      commentsEnabled:
+        type: boolean
+      createDateTime:
+        description: The date the review was submitted
+        format: date-time
+        type: string
+      fips:
+        type: string
+      helpfulNo:
+        format: int32
+        type: integer
+      helpfulYes:
+        format: int32
+        type: integer
+      iP4:
+        type: string
+      id:
+        format: int32
+        type: integer
+      inappropriate:
+        type: boolean
+      leaid:
+        type: string
+      numStars:
+        format: int32
+        type: integer
+      schoolnum:
+        type: string
+      showUserName:
+        type: boolean
+      status:
+        enum:
+          - NeedsAdministratorVerification
+          - AvailableForViewing
+          - Rejected
+          - NeedsUserEmailVerification
+          - NeedsUserEmailVerificationNeedsAdministratorVerification
+          - NeedsUserEmailVerificationFirstWarning
+          - Timeout
+        type: string
+      submitterType:
+        enum:
+          - Parent
+          - Student
+          - Teacher
+          - Principal
+          - Citizen
+          - All
+        type: string
+      userID:
         format: int32
         type: integer
     type: object

@@ -1533,7 +1533,7 @@ definitions:
         description: 'This is always sql#ipConfiguration.'
         type: string
       requireSsl:
-        description: Whether the mysqld should default to 'REQUIRE X509' for users connecting over IP.
+        description: Whether SSL connections over IP should be enforced or not.
         type: boolean
     type: object
   IpMapping:

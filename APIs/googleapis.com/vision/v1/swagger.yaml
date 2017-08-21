@@ -1293,9 +1293,7 @@ definitions:
     description: Metadata for online images.
     properties:
       score:
-        description: |-
-          Overall relevancy score for the image.
-          Not normalized and not comparable across different image queries.
+        description: (Deprecated) Overall relevancy score for the image.
         format: float
         type: number
       url:
@@ -1306,9 +1304,7 @@ definitions:
     description: Metadata for web pages.
     properties:
       score:
-        description: |-
-          Overall relevancy score for the web page.
-          Not normalized and not comparable across different image queries.
+        description: (Deprecated) Overall relevancy score for the web page.
         format: float
         type: number
       url:

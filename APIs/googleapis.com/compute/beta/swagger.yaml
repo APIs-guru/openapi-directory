@@ -4732,7 +4732,9 @@ paths:
         - description: |-
             An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
 
-            For example, consider a situation where you make an initial request and then the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
           type: string
@@ -5705,6 +5707,49 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+    patch:
+      description: Patches the specified network with the data included in the request.
+      operationId: compute.networks.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Network'
+        - description: Name of the network to update.
+          in: path
+          name: network
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - networks
   '/{project}/global/networks/{network}/addPeering':
     parameters:
       - $ref: '#/parameters/alt'
@@ -6486,7 +6531,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the security policy to update.
+        - description: Name of the security policy to get.
           in: path
           name: securityPolicy
           required: true
@@ -9301,7 +9346,7 @@ paths:
         - description: |-
             An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
 
-            For example, consider a situation where you make an initial request and then the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
 
             The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
@@ -9391,7 +9436,9 @@ paths:
         - description: |-
             An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
 
-            For example, consider a situation where you make an initial request and then the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
           type: string
@@ -19857,7 +19904,7 @@ definitions:
         type: string
       healthChecks:
         description: |-
-          The list of URLs to the HttpHealthCheck or HttpsHealthCheck resource for health checking this BackendService. Currently at most one health check can be specified, and a health check is required for GCE backend services. A health check must not be specified for GAE app backend and Cloud Function backend.
+          The list of URLs to the HttpHealthCheck or HttpsHealthCheck resource for health checking this BackendService. Currently at most one health check can be specified, and a health check is required for Compute Engine backend services. A health check must not be specified for App Engine backend and Cloud Function backend.
 
           For internal load balancing, a URL to a HealthCheck resource must be specified instead.
         items:
@@ -19874,6 +19921,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#backendService for backend services.'
         type: string
       loadBalancingScheme:
+        description: Indicates whether the backend service will be used with internal or external load balancing. A backend service created for one type of load balancing cannot be used with the other. Possible values are INTERNAL and EXTERNAL.
         enum:
           - EXTERNAL
           - INTERNAL
@@ -23098,6 +23146,9 @@ definitions:
       counter:
         $ref: '#/definitions/LogConfigCounterOptions'
         description: Counter options.
+      dataAccess:
+        $ref: '#/definitions/LogConfigDataAccessOptions'
+        description: Data access options.
     type: object
   LogConfigCloudAuditOptions:
     description: Write a Cloud Audit log
@@ -23114,13 +23165,34 @@ definitions:
         type: string
     type: object
   LogConfigCounterOptions:
-    description: Options for counters
+    description: |-
+      Increment a streamz counter with the specified metric and field names.
+
+      Metric names should start with a '/', generally be lowercase-only, and end in "_count". Field names should not contain an initial slash. The actual exported metric names will have "/iam/policy" prepended.
+
+      Field names correspond to IAM request parameters and field values are their respective values.
+
+      At present the only supported field names are - "iam_principal", corresponding to IAMContext.principal; - "" (empty string), resulting in one aggretated counter with no field.
+
+      Examples: counter { metric: "/debug_access_count" field: "iam_principal" } ==> increment counter /iam/policy/backend_debug_access_count {iam_principal=[value of IAMContext.principal]}
+
+      At this time we do not support: * multiple field names (though this may be supported in the future) * decrementing the counter * incrementing it by anything other than 1
     properties:
       field:
         description: The field value to attribute.
         type: string
       metric:
         description: The metric to update.
+        type: string
+    type: object
+  LogConfigDataAccessOptions:
+    description: Write a Data Access (Gin) log
+    properties:
+      logMode:
+        description: 'Whether Gin logging should happen in a fail-closed manner at the caller. This is relevant only in the LocalIAM implementation, for now.'
+        enum:
+          - LOG_FAIL_CLOSED
+          - LOG_MODE_UNSPECIFIED
         type: string
     type: object
   MachineType:
@@ -23424,6 +23496,9 @@ definitions:
         items:
           $ref: '#/definitions/NetworkPeering'
         type: array
+      routingConfig:
+        $ref: '#/definitions/NetworkRoutingConfig'
+        description: The network-level routing configuration for this network. Used by Cloud Router to determine what type of network-wide routing behavior to enforce.
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
@@ -23516,6 +23591,16 @@ definitions:
         type: string
       stateDetails:
         description: '[Output Only] Details about the current state of the peering.'
+        type: string
+    type: object
+  NetworkRoutingConfig:
+    description: 'A routing configuration attached to a network resource. The message includes the list of routers associated with the network, and a flag indicating the type of routing behavior to enforce network-wide.'
+    properties:
+      routingMode:
+        description: 'The network-wide routing mode to use. If set to REGIONAL, this network''s cloud routers will only advertise routes with subnetworks of this network in the same region as the router. If set to GLOBAL, this network''s cloud routers will advertise routes with all subnetworks of this network, across regions.'
+        enum:
+          - GLOBAL
+          - REGIONAL
         type: string
     type: object
   NetworksAddPeeringRequest:
@@ -24821,7 +24906,7 @@ definitions:
         type: string
       kind:
         default: 'compute#securityPolicyRule'
-        description: '[Output only] Type of the resource. Always compute#rulefor security policies'
+        description: '[Output only] Type of the resource. Always compute#securityPolicyRule for security policy rules'
         type: string
       match:
         $ref: '#/definitions/SecurityPolicyRuleMatcher'

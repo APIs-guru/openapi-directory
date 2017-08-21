@@ -373,6 +373,11 @@ paths:
           name: walkingOptimization
           required: false
           type: boolean
+        - description: 'A boolean to indicate whether to return one or more taxi journeys. Note, setting this to true will override "useMultiModalCall".'
+          in: query
+          name: taxiOnlyTrip
+          required: false
+          type: boolean
       produces:
         - application/json
         - text/json

@@ -148,14 +148,14 @@ paths:
       description: |-
         Registers the debuggee with the controller service.
 
-        All agents attached to the same application should call this method with
-        the same request content to get back the same stable `debuggee_id`. Agents
-        should call this method again whenever `google.rpc.Code.NOT_FOUND` is
-        returned from any controller method.
+        All agents attached to the same application must call this method with
+        exactly the same request content to get back the same stable `debuggee_id`.
+        Agents should call this method again whenever `google.rpc.Code.NOT_FOUND`
+        is returned from any controller method.
 
-        This allows the controller service to disable the agent or recover from any
-        data loss. If the debuggee is disabled by the server, the response will
-        have `is_disabled` set to `true`.
+        This protocol allows the controller service to disable debuggees, recover
+        from data loss, or change the `debuggee_id` format. Agents must handle
+        `debuggee_id` value changing upon re-registration.
       operationId: clouddebugger.controller.debuggees.register
       parameters:
         - in: body
@@ -202,19 +202,20 @@ paths:
           required: true
           type: string
         - description: |-
-            If set to `true`, returns `google.rpc.Code.OK` status and sets the
-            `wait_expired` response field to `true` when the server-selected timeout
-            has expired (recommended).
+            If set to `true` (recommended), returns `google.rpc.Code.OK` status and
+            sets the `wait_expired` response field to `true` when the server-selected
+            timeout has expired.
 
-            If set to `false`, returns `google.rpc.Code.ABORTED` status when the
-            server-selected timeout has expired (deprecated).
+            If set to `false` (deprecated), returns `google.rpc.Code.ABORTED` status
+            when the server-selected timeout has expired.
           in: query
           name: successOnTimeout
           type: boolean
         - description: |-
-            A wait token that, if specified, blocks the method call until the list
-            of active breakpoints has changed, or a server selected timeout has
-            expired.  The value should be set from the last returned response.
+            A token that, if specified, blocks the method call until the list
+            of active breakpoints has changed, or a server-selected timeout has
+            expired. The value should be set from the `next_wait_token` field in
+            the last response. The initial value should be set to `"init"`.
           in: query
           name: waitToken
           type: string
@@ -266,8 +267,7 @@ paths:
     put:
       description: |-
         Updates the breakpoint state or mutable fields.
-        The entire Breakpoint message must be sent back to the controller
-        service.
+        The entire Breakpoint message must be sent back to the controller service.
 
         Updates to active breakpoint fields are only allowed if the new value
         does not change the breakpoint specification. Updates to the `location`,
@@ -308,12 +308,12 @@ paths:
         - controller
   /v2/debugger/debuggees:
     get:
-      description: Lists all the debuggees that the user can set breakpoints to.
+      description: Lists all the debuggees that the user has access to.
       operationId: clouddebugger.debugger.debuggees.list
       parameters:
         - description: |-
             The client version making the call.
-            Following: `domain/type/version` (e.g., `google.com/intellij/v1`).
+            Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
           type: string
@@ -362,11 +362,36 @@ paths:
       description: Lists all breakpoints for the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.list
       parameters:
+        - description: Only breakpoints with the specified action will pass the filter.
+          enum:
+            - CAPTURE
+            - LOG
+          in: query
+          name: action.value
+          type: string
+        - description: |-
+            The client version making the call.
+            Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+          in: query
+          name: clientVersion
+          type: string
         - description: ID of the debuggee whose breakpoints to list.
           in: path
           name: debuggeeId
           required: true
           type: string
+        - description: |-
+            When set to `true`, the response includes the list of breakpoints set by
+            any user. Otherwise, it includes only breakpoints set by the caller.
+          in: query
+          name: includeAllUsers
+          type: boolean
+        - description: |-
+            When set to `true`, the response includes active and inactive
+            breakpoints. Otherwise, it includes only active breakpoints.
+          in: query
+          name: includeInactive
+          type: boolean
         - description: |-
             This field is deprecated. The following fields are always stripped out of
             the result: `stack_frames`, `evaluated_expressions` and `variable_table`.
@@ -382,31 +407,6 @@ paths:
           in: query
           name: waitToken
           type: string
-        - description: |-
-            The client version making the call.
-            Following: `domain/type/version` (e.g., `google.com/intellij/v1`).
-          in: query
-          name: clientVersion
-          type: string
-        - description: Only breakpoints with the specified action will pass the filter.
-          enum:
-            - CAPTURE
-            - LOG
-          in: query
-          name: action.value
-          type: string
-        - description: |-
-            When set to `true`, the response includes the list of breakpoints set by
-            any user. Otherwise, it includes only breakpoints set by the caller.
-          in: query
-          name: includeAllUsers
-          type: boolean
-        - description: |-
-            When set to `true`, the response includes active and inactive
-            breakpoints. Otherwise, it includes only active breakpoints.
-          in: query
-          name: includeInactive
-          type: boolean
       responses:
         '200':
           description: Successful response
@@ -456,21 +456,21 @@ paths:
       description: Sets the breakpoint to the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.set
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Breakpoint'
+        - description: |-
+            The client version making the call.
+            Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
+          in: query
+          name: clientVersion
+          type: string
         - description: ID of the debuggee where the breakpoint is to be set.
           in: path
           name: debuggeeId
           required: true
           type: string
-        - description: |-
-            The client version making the call.
-            Following: `domain/type/version` (e.g., `google.com/intellij/v1`).
-          in: query
-          name: clientVersion
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Breakpoint'
       responses:
         '200':
           description: Successful response
@@ -492,11 +492,6 @@ paths:
       description: Deletes the breakpoint from the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.delete
       parameters:
-        - description: ID of the debuggee whose breakpoint to delete.
-          in: path
-          name: debuggeeId
-          required: true
-          type: string
         - description: ID of the breakpoint to delete.
           in: path
           name: breakpointId
@@ -504,9 +499,14 @@ paths:
           type: string
         - description: |-
             The client version making the call.
-            Following: `domain/type/version` (e.g., `google.com/intellij/v1`).
+            Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
+          type: string
+        - description: ID of the debuggee whose breakpoint to delete.
+          in: path
+          name: debuggeeId
+          required: true
           type: string
       responses:
         '200':
@@ -528,11 +528,6 @@ paths:
       description: Gets breakpoint information.
       operationId: clouddebugger.debugger.debuggees.breakpoints.get
       parameters:
-        - description: ID of the debuggee whose breakpoint to get.
-          in: path
-          name: debuggeeId
-          required: true
-          type: string
         - description: ID of the breakpoint to get.
           in: path
           name: breakpointId
@@ -540,9 +535,14 @@ paths:
           type: string
         - description: |-
             The client version making the call.
-            Following: `domain/type/version` (e.g., `google.com/intellij/v1`).
+            Schema: `domain/type/version` (e.g., `google.com/intellij/v1`).
           in: query
           name: clientVersion
+          type: string
+        - description: ID of the debuggee whose breakpoint to get.
+          in: path
+          name: debuggeeId
+          required: true
           type: string
       responses:
         '200':
@@ -765,17 +765,17 @@ definitions:
     type: object
   Debuggee:
     description: |-
-      Represents the application to debug. The application may include one or more
+      Represents the debugged application. The application may include one or more
       replicated processes executing the same code. Each of these processes is
       attached with a debugger agent, carrying out the debugging commands.
-      The agents attached to the same debuggee are identified by using exactly the
-      same field values when registering.
+      Agents attached to the same debuggee identify themselves as such by using
+      exactly the same Debuggee message value when registering.
     properties:
       agentVersion:
         description: |-
-          Version ID of the agent release. The version ID is structured as
-          following: `domain/type/vmajor.minor` (for example
-          `google.com/gcp-java/v1.1`).
+          Version ID of the agent.
+          Schema: `domain/language-platform/vmajor.minor` (for example
+          `google.com/java-gcp/v1.1`).
         type: string
       description:
         description: |-
@@ -788,9 +788,7 @@ definitions:
           References to the locations and revisions of the source code used in the
           deployed application.
 
-          Contexts describing a remote repo related to the source code
-          have a `category` label of `remote_repo`. Source snapshot source
-          contexts have a `category` of `snapshot`.
+          NOTE: this field is experimental and can be ignored.
         items:
           $ref: '#/definitions/ExtendedSourceContext'
         type: array
@@ -804,8 +802,8 @@ definitions:
         type: boolean
       isInactive:
         description: |-
-          If set to `true`, indicates that the debuggee is considered as inactive by
-          the Controller service.
+          If set to `true`, indicates that Controller service does not detect any
+          activity from the debuggee agents and the application is possibly stopped.
         type: boolean
       labels:
         additionalProperties:
@@ -817,16 +815,12 @@ definitions:
       project:
         description: |-
           Project the debuggee is associated with.
-          Use the project number when registering a Google Cloud Platform project.
+          Use project number or id when registering a Google Cloud Platform project.
         type: string
       sourceContexts:
         description: |-
           References to the locations and revisions of the source code used in the
           deployed application.
-
-          NOTE: This field is deprecated. Consumers should use
-          `ext_source_contexts` if it is not empty. Debug agents should populate
-          both this field and `ext_source_contexts`.
         items:
           $ref: '#/definitions/SourceContext'
         type: array
@@ -838,9 +832,12 @@ definitions:
           informational or an error status.
       uniquifier:
         description: |-
-          Debuggee uniquifier within the project.
-          Any string that identifies the application within the project can be used.
-          Including environment and version or build IDs is recommended.
+          Uniquifier to further distiguish the application.
+          It is possible that different applications might have identical values in
+          the debuggee message, thus, incorrectly identified as a single application
+          by the Controller service. This field adds salt to further distiguish the
+          application. Agents should consider seeding this field with value that
+          identifies the code, binary, configuration and environment.
         type: string
     type: object
   Empty:
@@ -948,13 +945,14 @@ definitions:
         type: array
       nextWaitToken:
         description: |-
-          A wait token that can be used in the next method call to block until
+          A token that can be used in the next method call to block until
           the list of breakpoints changes.
         type: string
       waitExpired:
         description: |-
-          The `wait_expired` field is set to true by the server when the
-          request times out and the field `success_on_timeout` is set to true.
+          If set to `true`, indicates that there is no change to the
+          list of active breakpoints and the server-selected timeout has expired.
+          The `breakpoints` field would be empty and should be ignored.
         type: boolean
     type: object
   ListBreakpointsResponse:
@@ -981,10 +979,9 @@ definitions:
       debuggees:
         description: |-
           List of debuggees accessible to the calling user.
-          Note that the `description` field is the only human readable field
-          that should be displayed to the user.
-          The fields `debuggee.id` and  `description` fields are guaranteed to be
-          set on each debuggee.
+          The fields `debuggee.id` and `description` are guaranteed to be set.
+          The `description` field is a human readable field provided by agents and
+          can be displayed to users.
         items:
           $ref: '#/definitions/Debuggee'
         type: array
@@ -1019,6 +1016,9 @@ definitions:
         description: |-
           Debuggee resource.
           The field `id` is guranteed to be set (in addition to the echoed fields).
+          If the field `is_disabled` is set to `true`, the agent should disable
+          itself by removing all breakpoints and detaching from the application.
+          It should however continue to poll `RegisterDebuggee` until reenabled.
     type: object
   RepoId:
     description: A unique identifier for a cloud repo.
@@ -1126,6 +1126,7 @@ definitions:
         description: |-
           Updated breakpoint information.
           The field `id` must be set.
+          The agent must echo all Breakpoint specification fields in the update.
     type: object
   UpdateActiveBreakpointResponse:
     description: |-

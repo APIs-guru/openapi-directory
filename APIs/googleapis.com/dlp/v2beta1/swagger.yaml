@@ -634,6 +634,9 @@ definitions:
         description: Content data to inspect or redact.
         format: byte
         type: string
+      table:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Table'
+        description: Structured content for inspection.
       type:
         description: |-
           Type of the content, as defined in Content-Type HTTP header.
@@ -652,6 +655,9 @@ definitions:
       inspectConfig:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectConfig'
         description: Configuration for the inspector.
+      operationConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1OperationConfig'
+        description: Additional configuration settings for long running operations.
       outputConfig:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1OutputStorageConfig'
         description: |-
@@ -807,6 +813,23 @@ definitions:
         description: Internal name of the info type.
         type: string
     type: object
+  GooglePrivacyDlpV2beta1InfoTypeLimit:
+    description: |-
+      Max findings configuration per info type, per content item or long running
+      operation.
+    properties:
+      infoType:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
+        description: |-
+          Type of information the findings limit applies to. Only one limit per
+          info_type should be provided. If InfoTypeLimit does not have an
+          info_type, the DLP API applies the limit against all info_types that are
+          found but not specified in another InfoTypeLimit.
+      maxFindings:
+        description: Max findings limit for the given info type.
+        format: int32
+        type: integer
+    type: object
   GooglePrivacyDlpV2beta1InfoTypeStatistics:
     description: Statistics regarding a specific InfoType.
     properties:
@@ -832,6 +855,11 @@ definitions:
           When true, a contextual quote from the data that triggered a finding is
           included in the response; see Finding.quote.
         type: boolean
+      infoTypeLimits:
+        description: Configuration of findings limit given for specified info types.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoTypeLimit'
+        type: array
       infoTypes:
         description: |-
           Restricts what info_types to look for. The values must correspond to
@@ -1025,6 +1053,17 @@ definitions:
       recordKey:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1RecordKey'
         description: Key of the finding.
+      tableLocation:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1TableLocation'
+        description: Location within a `ContentItem.Table`.
+    type: object
+  GooglePrivacyDlpV2beta1OperationConfig:
+    description: Additional configuration for inspect long running operations.
+    properties:
+      maxItemFindings:
+        description: 'Max number of findings per file, Datastore entity or database row.'
+        format: int64
+        type: string
     type: object
   GooglePrivacyDlpV2beta1OutputStorageConfig:
     description: Cloud repository for storing output.
@@ -1165,6 +1204,13 @@ definitions:
         description: Content replacing sensitive information of given type. Max 256 chars.
         type: string
     type: object
+  GooglePrivacyDlpV2beta1Row:
+    properties:
+      values:
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        type: array
+    type: object
   GooglePrivacyDlpV2beta1StorageConfig:
     description: Shared message indicating Cloud storage type.
     properties:
@@ -1177,6 +1223,47 @@ definitions:
       datastoreOptions:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1DatastoreOptions'
         description: Google Cloud Datastore options specification.
+    type: object
+  GooglePrivacyDlpV2beta1Table:
+    description: 'Structured content to inspect. Up to 50,000 `Value`s per request allowed.'
+    properties:
+      headers:
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        type: array
+      rows:
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1Row'
+        type: array
+    type: object
+  GooglePrivacyDlpV2beta1TableLocation:
+    description: Location of a finding within a `ContentItem.Table`.
+    properties:
+      rowIndex:
+        description: The zero-based index of the row where the finding is located.
+        format: int64
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1Value:
+    description: Set of primitive values supported by the system.
+    properties:
+      booleanValue:
+        type: boolean
+      dateValue:
+        $ref: '#/definitions/GoogleTypeDate'
+      floatValue:
+        format: double
+        type: number
+      integerValue:
+        format: int64
+        type: string
+      stringValue:
+        type: string
+      timeValue:
+        $ref: '#/definitions/GoogleTypeTimeOfDay'
+      timestampValue:
+        format: google-datetime
+        type: string
     type: object
   GoogleProtobufEmpty:
     description: |-
@@ -1265,4 +1352,58 @@ definitions:
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
         type: string
+    type: object
+  GoogleTypeDate:
+    description: |-
+      Represents a whole calendar date, e.g. date of birth. The time of day and
+      time zone are either specified elsewhere or are not significant. The date
+      is relative to the Proleptic Gregorian Calendar. The day may be 0 to
+      represent a year and month where the day is not significant, e.g. credit card
+      expiration date. The year may be 0 to represent a month and day independent
+      of year, e.g. anniversary date. Related types are google.type.TimeOfDay
+      and `google.protobuf.Timestamp`.
+    properties:
+      day:
+        description: |-
+          Day of month. Must be from 1 to 31 and valid for the year and month, or 0
+          if specifying a year/month where the day is not significant.
+        format: int32
+        type: integer
+      month:
+        description: Month of year. Must be from 1 to 12.
+        format: int32
+        type: integer
+      year:
+        description: |-
+          Year of date. Must be from 1 to 9999, or 0 if specifying a date without
+          a year.
+        format: int32
+        type: integer
+    type: object
+  GoogleTypeTimeOfDay:
+    description: |-
+      Represents a time of day. The date and time zone are either not significant
+      or are specified elsewhere. An API may choose to allow leap seconds. Related
+      types are google.type.Date and `google.protobuf.Timestamp`.
+    properties:
+      hours:
+        description: |-
+          Hours of day in 24 hour format. Should be from 0 to 23. An API may choose
+          to allow the value "24:00:00" for scenarios like business closing time.
+        format: int32
+        type: integer
+      minutes:
+        description: Minutes of hour of day. Must be from 0 to 59.
+        format: int32
+        type: integer
+      nanos:
+        description: 'Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.'
+        format: int32
+        type: integer
+      seconds:
+        description: |-
+          Seconds of minutes of the time. Must normally be from 0 to 59. An API may
+          allow the value 60 if it allows leap-seconds.
+        format: int32
+        type: integer
     type: object

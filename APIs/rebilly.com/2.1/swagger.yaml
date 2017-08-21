@@ -14995,7 +14995,27 @@ definitions:
   RebillyProcessor:
     allOf:
       - $ref: '#/definitions/GatewayAccount'
+      - properties:
+          mpi:
+            $ref: '#/definitions/RebillyProcessorMpis'
+        type: object
     description: RebillyProcessor Gateway config
+  RebillyProcessorMpi:
+    allOf:
+      - $ref: '#/definitions/RebillyProcessorMpis'
+    description: RebillyProcessor Integrated
+  RebillyProcessorMpis:
+    description: RebillyProcessorMpis Mpis
+    discriminator: name
+    properties:
+      name:
+        allOf:
+          - $ref: '#/definitions/MpiName'
+        enum:
+          - RebillySandboxMpi
+    required:
+      - name
+    type: object
   RedemptionRestriction:
     allOf:
       - $ref: '#/definitions/GenericRestriction'
@@ -15132,6 +15152,21 @@ definitions:
     type: object
   RiskMetadata:
     properties:
+      accuracyRadius:
+        description: Accuracy radius for specified ipAddress (kilometers)
+        readOnly: true
+        type: integer
+      city:
+        description: City for specified ipAddress
+        example: New York
+        readOnly: true
+        type: string
+      country:
+        description: Country ISO Alpha-2 code for specified ipAddress
+        example: US
+        maxLength: 2
+        readOnly: true
+        type: string
       fingerprint:
         description: The fingerprint
         type: string
@@ -15165,6 +15200,26 @@ definitions:
         type: boolean
       isp:
         description: 'Internet Service Provider name, if available'
+        readOnly: true
+        type: string
+      latitude:
+        description: Latitude for specified ipAddress
+        format: double
+        readOnly: true
+        type: number
+      longitude:
+        description: Longitude for specified ipAddress
+        format: double
+        readOnly: true
+        type: number
+      postalCode:
+        description: Postal code for specified ipAddress
+        maxLength: 10
+        readOnly: true
+        type: string
+      timeZone:
+        description: Time zone for specified ipAddress
+        example: America/New_York
         readOnly: true
         type: string
       vpnServiceName:

@@ -1238,7 +1238,10 @@ definitions:
       transferJob:
         $ref: '#/definitions/TransferJob'
         description: |-
-          The job to update.
+          The job to update. `transferJob` is expected to specify only three fields:
+          `description`, `transferSpec`, and `status`.  An UpdateTransferJobRequest
+          that specifies other fields will be rejected with an error
+          `INVALID_ARGUMENT`.
           Required.
       updateTransferJobFieldMask:
         description: |-

@@ -741,6 +741,9 @@ paths:
           name: pageSize
           type: integer
         - description: Optional pagination token returned in an earlier ListRolesResponse.
+          enum:
+            - BASIC
+            - FULL
           in: query
           name: pageToken
           type: string
@@ -1047,8 +1050,6 @@ definitions:
   CreateServiceAccountKeyRequest:
     description: The service account key create request.
     properties:
-      includePublicKeyData:
-        type: boolean
       keyAlgorithm:
         description: |-
           Which type of key and algorithm to use for the key.

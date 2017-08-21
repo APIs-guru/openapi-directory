@@ -129,19 +129,13 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: |-
-        Deletes a variable or multiple variables.
-
-        If you specify a variable name, then that variable is deleted. If you
-        specify a prefix and `recursive` is true, then all variables with that
-        prefix are deleted. You must set a `recursive` to true if you delete
-        variables by prefix.
-      operationId: runtimeconfig.projects.configs.variables.delete
+      description: Deletes the waiter with the specified name.
+      operationId: runtimeconfig.projects.configs.waiters.delete
       parameters:
         - description: |-
-            The name of the variable to delete, in the format:
+            The Waiter resource to delete, in the format:
 
-            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIABLE_NAME]`
+             `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/waiters/[WAITER_NAME]`
           in: path
           name: name
           required: true
@@ -170,13 +164,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a single variable.
-      operationId: runtimeconfig.projects.configs.variables.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: runtimeconfig.projects.configs.operations.get
       parameters:
-        - description: |-
-            The name of the variable to return, in the format:
-
-            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIBLE_NAME]`
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -186,7 +180,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Variable'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -768,7 +762,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: runtimeconfig.projects.configs.variables.testIamPermissions
+      operationId: runtimeconfig.projects.configs.operations.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
@@ -1142,8 +1136,8 @@ definitions:
         type: integer
       details:
         description: |-
-          A list of messages that carry the error details.  There will be a
-          common set of message types for APIs to use.
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.

@@ -1408,6 +1408,9 @@ definitions:
         items:
           $ref: '#/definitions/ErrorDetail'
         type: array
+      error_uri:
+        description: 'When a user must go through another flow before requesting a ride, this URI specifies which flow to use (e.g. an account challenge flow in a web view)'
+        type: string
       primetime_confirmation_token:
         description: A token that confirms the user has accepted current Prime Time charges (Deprecated)
         type: string

@@ -404,6 +404,53 @@ paths:
             $ref: '#/definitions/Execution'
       tags:
         - projects
+  '/{projectId}/histories/{historyId}/executions/{executionId}/clusters':
+    get:
+      description: |-
+        Lists Screenshot Clusters
+
+        Returns the list of screenshot clusters corresponding to an execution. Screenshot clusters are created after the execution is finished. Clusters are created from a set of screenshots. Between any two screenshots, a matching score is calculated based off their metadata that determines how similar they are. Screenshots are placed in the cluster that has screens which have the highest matching scores.
+      operationId: toolresults.projects.histories.executions.clusters.list
+      parameters:
+        - description: |-
+            An Execution id.
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListScreenshotClustersResponse'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{projectId}/histories/{historyId}/executions/{executionId}/steps':
     get:
       description: |-
@@ -1638,6 +1685,14 @@ definitions:
           $ref: '#/definitions/PerfSample'
         type: array
     type: object
+  ListScreenshotClustersResponse:
+    properties:
+      clusters:
+        description: The set of clustres associated with an execution Always set
+        items:
+          $ref: '#/definitions/ScreenshotCluster'
+        type: array
+    type: object
   ListStepThumbnailsResponse:
     description: A response containing the thumbnails in a step.
     properties:
@@ -1837,6 +1892,38 @@ definitions:
           Required.
         items:
           $ref: '#/definitions/FileReference'
+        type: array
+    type: object
+  Screen:
+    properties:
+      fileReference:
+        description: File reference of the png file. Required.
+        type: string
+      locale:
+        description: Locale of the device that the screenshot was taken on. Required.
+        type: string
+      model:
+        description: Model of the device that the screenshot was taken on. Required.
+        type: string
+      version:
+        description: OS version of the device that the screenshot was taken on. Required.
+        type: string
+    type: object
+  ScreenshotCluster:
+    properties:
+      activity:
+        description: A string that describes the activity of every screen in the cluster.
+        type: string
+      clusterId:
+        description: A unique identifier for the cluster.
+        type: string
+      keyScreen:
+        $ref: '#/definitions/Screen'
+        description: 'A singular screen that represents the cluster as a whole. This screen will act as the "cover" of the entire cluster. When users look at the clusters, only the key screen from each cluster will be shown. Which screen is the key screen is determined by the ClusteringAlgorithm'
+      screens:
+        description: Full list of screens.
+        items:
+          $ref: '#/definitions/Screen'
         type: array
     type: object
   SkippedDetail:
