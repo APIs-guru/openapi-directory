@@ -45,6 +45,10 @@ First please see if you can make your fix upstream with the owner of the API def
 
 Check the `info.contact` section of the API definition or the `x-origin` to see if there is an email contact, or a GitHub repository you can contribute to.
 
+#### Do not amend swagger.yaml files directly
+
+If you do this, your changes will be overwritten the next time the API update scripts are run.
+
 #### Creating a fixup.yaml patch
 
 To do this, you will need to fork the repository and clone your fork locally.
