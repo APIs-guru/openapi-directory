@@ -1,0 +1,1477 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://cognito-sync.amazonaws.com/'
+info:
+  version: '2014-06-30'
+  x-release: v4
+  title: Amazon Cognito Sync
+  description: '<fullname>Amazon Cognito Sync</fullname> <p>Amazon Cognito Sync provides an AWS service and client library that enable cross-device syncing of application-related user data. High-level client libraries are available for both iOS and Android. You can use these libraries to persist data locally so that it''s available even if the device is offline. Developer credentials don''t need to be stored on the mobile device to access the service. You can use Amazon Cognito to obtain a normalized user ID and credentials. User data is persisted in a dataset that can store up to 1 MB of key-value pairs, and you can have up to 20 datasets per user identity.</p> <p>With Amazon Cognito Sync, the data stored for each identity is accessible only to credentials assigned to that identity. In order to use the Cognito Sync service, you need to make API calls using credentials retrieved with <a href="http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/Welcome.html">Amazon Cognito Identity service</a>.</p> <p>If you want to use Cognito Sync in an Android or iOS application, you will probably want to make API calls via the AWS Mobile SDK. To learn more, see the <a href="http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/cognito-sync.html">Developer Guide for Android</a> and the <a href="http://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-sync.html">Developer Guide for iOS</a>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: cognito-sync
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cognito-sync-2014-06-30.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/cognito-sync/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  '/identitypools/{IdentityPoolId}/bulkpublish':
+    post:
+      operationId: BulkPublish
+      description: '<p>Initiates a bulk publish of all existing datasets for an Identity Pool to the configured stream. Customers are limited to one successful bulk publish per 24 hours. Bulk publish is an asynchronous request, customers can see the status of the request via the GetBulkPublishDetails operation.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkPublishResponse'
+        '400':
+          description: AlreadyStreamedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyStreamedException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkPublishRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}':
+    post:
+      operationId: UpdateRecords
+      description: '<p>Posts updates to records and adds and deletes records for a dataset and user.</p> <p>The sync count in the record patch is your last known sync count for that record. The server will reject an UpdateRecords request with a ResourceConflictException if you try to patch a record with a new value but a stale sync count.</p> <p>For example, if the sync count on the server is 5 for a key called highScore and you try and submit a new highScore with sync count of 4, the request will be rejected. To obtain the current sync count for a record, call ListRecords. On a successful update of the record, the response returns the new sync count for that record. You should present that sync count the next time you try to update that same record. When the record does not exist, specify the sync count as 0.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRecordsResponse'
+        '400':
+          description: InvalidLambdaFunctionOutputException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLambdaFunctionOutputException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '409':
+          description: ResourceConflictException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: IdentityId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: DatasetName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRecordsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}':
+    get:
+      operationId: DescribeIdentityPoolUsage
+      description: '<p>Gets usage details (for example, data storage) about a particular identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeIdentityPoolUsageResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeIdentityPoolUsageRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/identities/{IdentityId}':
+    get:
+      operationId: DescribeIdentityUsage
+      description: '<p>Gets usage information for an identity, including number of datasets and data usage.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeIdentityUsageResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: IdentityId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeIdentityUsageRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/getBulkPublishDetails':
+    post:
+      operationId: GetBulkPublishDetails
+      description: <p>Get the status of the last BulkPublish operation for an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBulkPublishDetailsResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBulkPublishDetailsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/events':
+    post:
+      operationId: SetCognitoEvents
+      description: '<p>Sets the AWS Lambda function for a given event type for an identity pool. This request only updates the key/value pair specified. Other key/values pairs are not updated. To remove a key value pair, pass a empty value for the particular key.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetCognitoEventsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/configuration':
+    post:
+      operationId: SetIdentityPoolConfiguration
+      description: <p>Sets the necessary configuration for push sync.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetIdentityPoolConfigurationResponse'
+        '400':
+          description: ConcurrentModificationException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetIdentityPoolConfigurationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets':
+    get:
+      operationId: ListDatasets
+      description: '<p>Lists datasets for an identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p> <p>ListDatasets can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use the Cognito Identity credentials to make this API call.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatasetsResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: IdentityId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDatasetsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /identitypools:
+    get:
+      operationId: ListIdentityPoolUsage
+      description: <p>Gets a list of identity pools registered with Cognito.</p> <p>ListIdentityPoolUsage can only be called with developer credentials. You cannot make this API call with the temporary user credentials provided by Cognito Identity.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIdentityPoolUsageResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListIdentityPoolUsageRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/records':
+    get:
+      operationId: ListRecords
+      description: '<p>Gets paginated records, optionally changed after a particular sync count for a dataset and identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data.</p> <p>ListRecords can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecordsResponse'
+        '400':
+          description: InvalidParameterException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: IdentityId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: DatasetName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRecordsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/identity/{IdentityId}/device':
+    post:
+      operationId: RegisterDevice
+      description: <p>Registers a device to receive push sync notifications.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterDeviceResponse'
+        '400':
+          description: InvalidConfigurationException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: IdentityId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDeviceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/subscriptions/{DeviceId}':
+    delete:
+      operationId: UnsubscribeFromDataset
+      description: <p>Unsubscribes from receiving notifications when a dataset is modified by another device.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsubscribeFromDatasetResponse'
+        '400':
+          description: InvalidConfigurationException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationException'
+        '403':
+          description: NotAuthorizedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '429':
+          description: TooManyRequestsException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '500':
+          description: InternalErrorException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      parameters:
+        - name: IdentityPoolId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: IdentityId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: DatasetName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: DeviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnsubscribeFromDatasetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AlreadyStreamedException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully.
+    ApplicationArn:
+      type: string
+      pattern: 'arn:aws:sns:[-0-9a-z]+:\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+'
+    ApplicationArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationArn'
+    AssumeRoleArn:
+      type: string
+      pattern: 'arn:aws:iam::\d+:role/.*'
+      minLength: 20
+      maxLength: 2048
+    Boolean:
+      type: boolean
+    BulkPublishRequest:
+      type: object
+      properties: {}
+      description: The input for the BulkPublish operation.
+    BulkPublishResponse:
+      type: object
+      properties:
+        IdentityPoolId:
+          $ref: '#/components/schemas/IdentityPoolId'
+      description: The output for the BulkPublish operation.
+    BulkPublishStatus:
+      type: string
+      enum:
+        - NOT_STARTED
+        - IN_PROGRESS
+        - FAILED
+        - SUCCEEDED
+    ClientContext:
+      type: string
+    CognitoEventType:
+      type: string
+    CognitoStreams:
+      type: object
+      properties:
+        StreamName:
+          $ref: '#/components/schemas/StreamName'
+        RoleArn:
+          $ref: '#/components/schemas/AssumeRoleArn'
+        StreamingStatus:
+          $ref: '#/components/schemas/StreamingStatus'
+      description: Configuration options for configure Cognito streams.
+    ConcurrentModificationException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: Thrown if there are parallel requests to modify a resource.
+    Dataset:
+      type: object
+      properties:
+        IdentityId:
+          $ref: '#/components/schemas/IdentityId'
+        DatasetName:
+          $ref: '#/components/schemas/DatasetName'
+        CreationDate:
+          $ref: '#/components/schemas/Date'
+        LastModifiedDate:
+          $ref: '#/components/schemas/Date'
+        LastModifiedBy:
+          $ref: '#/components/schemas/String'
+        DataStorage:
+          $ref: '#/components/schemas/Long'
+        NumRecords:
+          $ref: '#/components/schemas/Long'
+      description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
+    DatasetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Dataset'
+    DatasetName:
+      type: string
+      pattern: '[a-zA-Z0-9_.:-]+'
+      minLength: 1
+      maxLength: 128
+    Date:
+      type: string
+      format: date-time
+    DeleteDatasetRequest:
+      type: object
+      properties: {}
+      description: A request to delete the specific dataset.
+    DeleteDatasetResponse:
+      type: object
+      properties:
+        Dataset:
+          $ref: '#/components/schemas/Dataset'
+      description: Response to a successful DeleteDataset request.
+    DescribeDatasetRequest:
+      type: object
+      properties: {}
+      description: 'A request for meta data about a dataset (creation date, number of records, size) by owner and dataset name.'
+    DescribeDatasetResponse:
+      type: object
+      properties:
+        Dataset:
+          $ref: '#/components/schemas/Dataset'
+      description: Response to a successful DescribeDataset request.
+    DescribeIdentityPoolUsageRequest:
+      type: object
+      properties: {}
+      description: A request for usage information about the identity pool.
+    DescribeIdentityPoolUsageResponse:
+      type: object
+      properties:
+        IdentityPoolUsage:
+          $ref: '#/components/schemas/IdentityPoolUsage'
+      description: Response to a successful DescribeIdentityPoolUsage request.
+    DescribeIdentityUsageRequest:
+      type: object
+      properties: {}
+      description: A request for information about the usage of an identity pool.
+    DescribeIdentityUsageResponse:
+      type: object
+      properties:
+        IdentityUsage:
+          $ref: '#/components/schemas/IdentityUsage'
+      description: The response to a successful DescribeIdentityUsage request.
+    DeviceId:
+      type: string
+      minLength: 1
+      maxLength: 256
+    DuplicateRequestException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool.
+    Events:
+      type: array
+      maxItems: 1
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/CognitoEventType'
+          value:
+            $ref: '#/components/schemas/LambdaFunctionArn'
+    ExceptionMessage:
+      type: string
+    GetBulkPublishDetailsRequest:
+      type: object
+      properties: {}
+      description: The input for the GetBulkPublishDetails operation.
+    GetBulkPublishDetailsResponse:
+      type: object
+      properties:
+        IdentityPoolId:
+          $ref: '#/components/schemas/IdentityPoolId'
+        BulkPublishStartTime:
+          $ref: '#/components/schemas/Date'
+        BulkPublishCompleteTime:
+          $ref: '#/components/schemas/Date'
+        BulkPublishStatus:
+          $ref: '#/components/schemas/BulkPublishStatus'
+        FailureMessage:
+          $ref: '#/components/schemas/String'
+      description: The output for the GetBulkPublishDetails operation.
+    GetCognitoEventsRequest:
+      type: object
+      properties: {}
+      description: A request for a list of the configured Cognito Events
+    GetCognitoEventsResponse:
+      type: object
+      properties:
+        Events:
+          $ref: '#/components/schemas/Events'
+      description: The response from the GetCognitoEvents request
+    GetIdentityPoolConfigurationRequest:
+      type: object
+      properties: {}
+      description: The input for the GetIdentityPoolConfiguration operation.
+    GetIdentityPoolConfigurationResponse:
+      type: object
+      properties:
+        IdentityPoolId:
+          $ref: '#/components/schemas/IdentityPoolId'
+        PushSync:
+          $ref: '#/components/schemas/PushSync'
+        CognitoStreams:
+          $ref: '#/components/schemas/CognitoStreams'
+      description: The output for the GetIdentityPoolConfiguration operation.
+    IdentityId:
+      type: string
+      pattern: '[\w-]+:[0-9a-f-]+'
+      minLength: 1
+      maxLength: 55
+    IdentityPoolId:
+      type: string
+      pattern: '[\w-]+:[0-9a-f-]+'
+      minLength: 1
+      maxLength: 55
+    IdentityPoolUsage:
+      type: object
+      properties:
+        IdentityPoolId:
+          $ref: '#/components/schemas/IdentityPoolId'
+        SyncSessionsCount:
+          $ref: '#/components/schemas/Long'
+        DataStorage:
+          $ref: '#/components/schemas/Long'
+        LastModifiedDate:
+          $ref: '#/components/schemas/Date'
+      description: Usage information for the identity pool.
+    IdentityPoolUsageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IdentityPoolUsage'
+    IdentityUsage:
+      type: object
+      properties:
+        IdentityId:
+          $ref: '#/components/schemas/IdentityId'
+        IdentityPoolId:
+          $ref: '#/components/schemas/IdentityPoolId'
+        LastModifiedDate:
+          $ref: '#/components/schemas/Date'
+        DatasetCount:
+          $ref: '#/components/schemas/Integer'
+        DataStorage:
+          $ref: '#/components/schemas/Long'
+      description: Usage information for the identity.
+    Integer:
+      type: integer
+    IntegerString:
+      type: integer
+    InternalErrorException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: Indicates an internal service error.
+    InvalidConfigurationException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+    InvalidLambdaFunctionOutputException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The AWS Lambda function returned invalid output or an exception.
+    InvalidParameterException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: Thrown when a request parameter does not comply with the associated constraints.
+    LambdaFunctionArn:
+      type: string
+    LambdaThrottledException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: 'AWS Lambda throttled your account, please contact AWS Support'
+    LimitExceededException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: Thrown when the limit on the number of objects or operations has been exceeded.
+    ListDatasetsRequest:
+      type: object
+      properties: {}
+      description: Request for a list of datasets for an identity.
+    ListDatasetsResponse:
+      type: object
+      properties:
+        Datasets:
+          $ref: '#/components/schemas/DatasetList'
+        Count:
+          $ref: '#/components/schemas/Integer'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: Returned for a successful ListDatasets request.
+    ListIdentityPoolUsageRequest:
+      type: object
+      properties: {}
+      description: A request for usage information on an identity pool.
+    ListIdentityPoolUsageResponse:
+      type: object
+      properties:
+        IdentityPoolUsages:
+          $ref: '#/components/schemas/IdentityPoolUsageList'
+        MaxResults:
+          $ref: '#/components/schemas/Integer'
+        Count:
+          $ref: '#/components/schemas/Integer'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: Returned for a successful ListIdentityPoolUsage request.
+    ListRecordsRequest:
+      type: object
+      properties: {}
+      description: A request for a list of records.
+    ListRecordsResponse:
+      type: object
+      properties:
+        Records:
+          $ref: '#/components/schemas/RecordList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+        Count:
+          $ref: '#/components/schemas/Integer'
+        DatasetSyncCount:
+          $ref: '#/components/schemas/Long'
+        LastModifiedBy:
+          $ref: '#/components/schemas/String'
+        MergedDatasetNames:
+          $ref: '#/components/schemas/MergedDatasetNameList'
+        DatasetExists:
+          $ref: '#/components/schemas/Boolean'
+        DatasetDeletedAfterRequestedSyncCount:
+          $ref: '#/components/schemas/Boolean'
+        SyncSessionToken:
+          $ref: '#/components/schemas/String'
+      description: Returned for a successful ListRecordsRequest.
+    Long:
+      type: integer
+    MergedDatasetNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    NotAuthorizedException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: Thrown when a user is not authorized to access the requested resource.
+    Operation:
+      type: string
+      enum:
+        - replace
+        - remove
+    Platform:
+      type: string
+      enum:
+        - APNS
+        - APNS_SANDBOX
+        - GCM
+        - ADM
+    PushSync:
+      type: object
+      properties:
+        ApplicationArns:
+          $ref: '#/components/schemas/ApplicationArnList'
+        RoleArn:
+          $ref: '#/components/schemas/AssumeRoleArn'
+      description: Configuration options to be applied to the identity pool.
+    PushToken:
+      type: string
+    Record:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/RecordKey'
+        Value:
+          $ref: '#/components/schemas/RecordValue'
+        SyncCount:
+          $ref: '#/components/schemas/Long'
+        LastModifiedDate:
+          $ref: '#/components/schemas/Date'
+        LastModifiedBy:
+          $ref: '#/components/schemas/String'
+        DeviceLastModifiedDate:
+          $ref: '#/components/schemas/Date'
+      description: The basic data structure of a dataset.
+    RecordKey:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    RecordList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Record'
+    RecordPatch:
+      type: object
+      required:
+        - Op
+        - Key
+        - SyncCount
+      properties:
+        Op:
+          $ref: '#/components/schemas/Operation'
+        Key:
+          $ref: '#/components/schemas/RecordKey'
+        Value:
+          $ref: '#/components/schemas/RecordValue'
+        SyncCount:
+          $ref: '#/components/schemas/Long'
+        DeviceLastModifiedDate:
+          $ref: '#/components/schemas/Date'
+      description: An update operation for a record.
+    RecordPatchList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecordPatch'
+    RecordValue:
+      type: string
+      maxLength: 1048575
+    RegisterDeviceRequest:
+      type: object
+      required:
+        - Platform
+        - Token
+      properties:
+        Platform:
+          $ref: '#/components/schemas/Platform'
+        Token:
+          $ref: '#/components/schemas/PushToken'
+      description: A request to RegisterDevice.
+    RegisterDeviceResponse:
+      type: object
+      properties:
+        DeviceId:
+          $ref: '#/components/schemas/DeviceId'
+      description: Response to a RegisterDevice request.
+    ResourceConflictException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: Thrown if an update can't be applied because the resource was changed by another call and this would result in a conflict.
+    ResourceNotFoundException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: Thrown if the resource doesn't exist.
+    SetCognitoEventsRequest:
+      type: object
+      required:
+        - Events
+      properties:
+        Events:
+          $ref: '#/components/schemas/Events'
+      description: <p>A request to configure Cognito Events"</p>"
+    SetIdentityPoolConfigurationRequest:
+      type: object
+      properties:
+        PushSync:
+          $ref: '#/components/schemas/PushSync'
+        CognitoStreams:
+          $ref: '#/components/schemas/CognitoStreams'
+      description: The input for the SetIdentityPoolConfiguration operation.
+    SetIdentityPoolConfigurationResponse:
+      type: object
+      properties:
+        IdentityPoolId:
+          $ref: '#/components/schemas/IdentityPoolId'
+        PushSync:
+          $ref: '#/components/schemas/PushSync'
+        CognitoStreams:
+          $ref: '#/components/schemas/CognitoStreams'
+      description: The output for the SetIdentityPoolConfiguration operation
+    StreamName:
+      type: string
+      minLength: 1
+      maxLength: 128
+    StreamingStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    String:
+      type: string
+    SubscribeToDatasetRequest:
+      type: object
+      properties: {}
+      description: A request to SubscribeToDatasetRequest.
+    SubscribeToDatasetResponse:
+      type: object
+      properties: {}
+      description: Response to a SubscribeToDataset request.
+    SyncSessionToken:
+      type: string
+    TooManyRequestsException:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: Thrown if the request is throttled.
+    UnsubscribeFromDatasetRequest:
+      type: object
+      properties: {}
+      description: A request to UnsubscribeFromDataset.
+    UnsubscribeFromDatasetResponse:
+      type: object
+      properties: {}
+      description: Response to an UnsubscribeFromDataset request.
+    UpdateRecordsRequest:
+      type: object
+      required:
+        - SyncSessionToken
+      properties:
+        DeviceId:
+          $ref: '#/components/schemas/DeviceId'
+        RecordPatches:
+          $ref: '#/components/schemas/RecordPatchList'
+        SyncSessionToken:
+          $ref: '#/components/schemas/SyncSessionToken'
+      description: A request to post updates to records or add and delete records for a dataset and user.
+    UpdateRecordsResponse:
+      type: object
+      properties:
+        Records:
+          $ref: '#/components/schemas/RecordList'
+      description: Returned for a successful UpdateRecordsRequest.
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

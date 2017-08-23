@@ -1,0 +1,5931 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://rms.api.bbc.co.uk/'
+info:
+  description: We encapsulate Radio & Music business logic for iPlayer Radio and BBC Music products on all platforms. We add value by reliably providing the right blend of metadata needed by clients.
+  title: Radio & Music Services
+  version: 1.0.0
+  x-apisguru-categories:
+    - media
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/BBC_Radio_logo.svg/140px-BBC_Radio_logo.svg.png'
+  x-origin:
+    - format: swagger
+      url: 'https://rms.api.bbc.co.uk/docs/swagger.json'
+      version: '2.0'
+  x-providerName: bbc.co.uk
+paths:
+  /categories.json:
+    get:
+      description: |
+        Retrieve Categories
+      operationId: getCategories
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Filter by provided query. E.g. 'promoted' returns promoted categories
+          in: query
+          name: kind
+          required: false
+          schema:
+            type: string
+            enum:
+              - promoted
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoriesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryErrorResponse'
+      summary: Categories
+      tags:
+        - Categories
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  /music/popular/artists:
+    get:
+      description: |
+        List of Most Popular artists from BBC Music.
+      operationId: getMusicPopularArtists
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
+          in: query
+          name: since
+          required: false
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
+          in: query
+          name: until
+          required: false
+          schema:
+            type: string
+        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+          in: query
+          name: decomposed
+          required: false
+          schema:
+            type: boolean
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityArtists'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityError'
+      summary: Popular Artists
+      tags:
+        - Music Popularity
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  '/music/popular/artists/{id}':
+    get:
+      description: |
+        Popularity Artist By Id
+      operationId: getMusicPopularArtistById
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
+          in: query
+          name: since
+          required: false
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
+          in: query
+          name: until
+          required: false
+          schema:
+            type: string
+        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+          in: query
+          name: decomposed
+          required: false
+          schema:
+            type: boolean
+        - description: MusicBrainz Id - Used to get single resource score
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityArtists'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityError'
+      summary: Single Artist Popularity
+      tags:
+        - Music Popularity
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  /music/popular/playlists:
+    get:
+      description: |
+        List of Most Popular playlists from BBC Music.
+      operationId: getMusicPopularPlaylists
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
+          in: query
+          name: since
+          required: false
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
+          in: query
+          name: until
+          required: false
+          schema:
+            type: string
+        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+          in: query
+          name: decomposed
+          required: false
+          schema:
+            type: boolean
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityPlaylists'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityError'
+      summary: Popular Playlists
+      tags:
+        - Music Popularity
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  '/music/popular/playlists/{id}':
+    get:
+      description: |
+        Popular playlist by Id
+      operationId: getMusicPopularPlaylistById
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
+          in: query
+          name: since
+          required: false
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
+          in: query
+          name: until
+          required: false
+          schema:
+            type: string
+        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+          in: query
+          name: decomposed
+          required: false
+          schema:
+            type: boolean
+        - description: BBC Music Playlist Id - Used to get single resource score
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityPlaylists'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityError'
+      summary: Single Playlist Popularity
+      tags:
+        - Music Popularity
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  /music/popular/tracks:
+    get:
+      description: |
+        List of popular tracks for BBC Music. Filter by time, network, artist, playlist or programme.
+      operationId: getMusicPopularTracks
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
+          in: query
+          name: since
+          required: false
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
+          in: query
+          name: until
+          required: false
+          schema:
+            type: string
+        - description: Return items with given Network ID
+          in: query
+          name: network
+          required: false
+          schema:
+            type: string
+        - description: Items with given Programme Pid
+          in: query
+          name: programme
+          required: false
+          schema:
+            type: string
+        - description: MusicBrainz artist ID
+          in: query
+          name: artist
+          required: false
+          schema:
+            type: string
+        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+          in: query
+          name: decomposed
+          required: false
+          schema:
+            type: boolean
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityTracks'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityError'
+      summary: Popular Tracks
+      tags:
+        - Music Popularity
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  '/music/popular/tracks/{id}':
+    get:
+      description: |
+        Popular Track for BBC Music
+      operationId: getMusicPopularTrackById
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
+          in: query
+          name: since
+          required: false
+          schema:
+            type: string
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
+          in: query
+          name: until
+          required: false
+          schema:
+            type: string
+        - description: Return items with given Network ID
+          in: query
+          name: network
+          required: false
+          schema:
+            type: string
+        - description: Items with given Programme Pid
+          in: query
+          name: programme
+          required: false
+          schema:
+            type: string
+        - description: MusicBrainz artist ID
+          in: query
+          name: artist
+          required: false
+          schema:
+            type: string
+        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+          in: query
+          name: decomposed
+          required: false
+          schema:
+            type: boolean
+        - description: BBC Music Track Id - Used to get single resource score
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityTracks'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicPopularityError'
+      summary: Single Track Popularity
+      tags:
+        - Music Popularity
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  /my/music/export:
+    get:
+      description: |
+        Returns status of all previous third party export actions for a given BBC Music user.
+      operationId: getMusicExport
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportJob'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportErrorResponse'
+      summary: Music Exports
+      tags:
+        - Music Export
+  /my/music/exports/jobs:
+    get:
+      description: |
+        All items associated to a users export request
+      operationId: getMusicExportJobs
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Boolean age check
+          in: query
+          name: over16
+          required: true
+          schema:
+            type: boolean
+        - description: Specify Vendor Jobs
+          in: query
+          name: vendor
+          required: false
+          schema:
+            type: string
+            enum:
+              - spotify
+              - deezer
+              - youtube
+              - itunes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportJob'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportErrorResponse'
+      summary: Music Export Jobs
+      tags:
+        - Music Export
+    post:
+      description: |
+        Create Export Job for a user
+      operationId: postMusicExportJob
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Boolean age check
+          in: query
+          name: over16
+          required: true
+          schema:
+            type: boolean
+        - description: Specify Vendor Jobs
+          in: query
+          name: vendor
+          required: false
+          schema:
+            type: string
+            enum:
+              - spotify
+              - deezer
+              - youtube
+              - itunes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportSuccess'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportErrorResponse'
+      summary: Music Export Jobs
+      tags:
+        - Music Export
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/MusicExportJob'
+              type: array
+        required: true
+  /my/music/exports/tracks:
+    get:
+      description: |
+        Retrieves vendor and status specific tracks
+      operationId: getMusicExportTracks
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Boolean age check
+          in: query
+          name: over16
+          required: true
+          schema:
+            type: boolean
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: Specify Vendor Tracks
+          in: query
+          name: vendor
+          required: false
+          schema:
+            type: string
+            enum:
+              - spotify
+              - deezer
+              - youtube
+              - itunes
+        - description: Specify Track status
+          in: query
+          name: status
+          required: false
+          schema:
+            type: string
+            enum:
+              - failed
+              - done
+              - pending
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportJob'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportErrorResponse'
+      summary: Music Export Tracks
+      tags:
+        - Music Export
+  /my/music/favourites:
+    get:
+      description: |
+        List of favourited tracks and clips for a given user for BBC Music.
+      operationId: getPersonalisedMusicFavourites
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: Filters activities based on the type of action
+          in: query
+          name: action
+          required: false
+          schema:
+            type: string
+            enum:
+              - favourited
+              - unfavourited
+        - description: 'Omits music data from the response, defaults to true'
+          in: query
+          name: music-data
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicFavouritesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: Favourite Tracks or Clips
+      tags:
+        - Personalised Music
+    post:
+      description: |
+        Add multiple tracks and/or clips to a BBC Music user's favourites.
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: postPersonalisedMusicFavouritesBatch
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicFavouritesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: Favourite Tracks or Clips
+      tags:
+        - Personalised Music
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedMusicBatchRequestArray'
+    put:
+      description: |
+        Update tracks or clips from a BBC Music user favourites.
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: putPersonalisedMusicFavouritesBatch
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicSuccess'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: Favourite Tracks or Clips
+      tags:
+        - Personalised Music
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedMusicBatchRequestArray'
+  '/my/music/favourites/{type}':
+    get:
+      description: |
+        List of favourited tracks or clips for a given user for BBC Music.
+      operationId: getPersonalisedMusicFavouritesByType
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Music favourite types: Clips or Tracks'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - clips
+              - tracks
+        - description: Filters activities based on the type of action
+          in: query
+          name: action
+          required: false
+          schema:
+            type: string
+            enum:
+              - favourited
+              - unfavourited
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicFavouritesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: Favourite Tracks or Clips by Type
+      tags:
+        - Personalised Music
+  '/my/music/favourites/{type}/{id}':
+    delete:
+      description: |
+        Delete track or clip from a BBC Music user favourites.
+      operationId: deletePersonalisedMusicFavouritesByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Music favourite types: Clips or Tracks'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - clips
+              - tracks
+        - description: Clip PID or Track ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicSuccess'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: Favourite Track or Clip
+      tags:
+        - Personalised Music
+    get:
+      description: |
+        Check to see if a single track or clip entity is in a users favourites - determines UX of add button.
+      operationId: getPersonalisedMusicFavouritesByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Music favourite types: Clips or Tracks'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - clips
+              - tracks
+        - description: Clip PID or Track ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicFavouritesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: Favourite Track or Clip
+      tags:
+        - Personalised Music
+    post:
+      description: |
+        Add track or clip to a BBC Music user favourites.
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: postPersonalisedMusicFavouritesByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Music favourite types: Clips or Tracks'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - clips
+              - tracks
+        - description: Clip PID or Track ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicFavouritesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: Favourite Track or Clip
+      tags:
+        - Personalised Music
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedMusicRequest'
+    put:
+      description: |
+        Update tracks or clips from a BBC Music user favourites.
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: putPersonalisedMusicFavouritesByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Music favourite types: Clips or Tracks'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - clips
+              - tracks
+        - description: Clip PID or Track ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicSuccess'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: Favourite Track or Clip
+      tags:
+        - Personalised Music
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedMusicRequest'
+  /my/music/follows:
+    get:
+      description: |
+        List of followed networks, categories, artists, playlists and genres for a given user for BBC Music.
+      operationId: getPersonalisedMusicFollows
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Filters activities based on the type of action
+          in: query
+          name: action
+          required: false
+          schema:
+            type: string
+            enum:
+              - followed
+              - unfollowed
+        - description: 'Omits music data from the response, defaults to true'
+          in: query
+          name: music-data
+          required: false
+          schema:
+            type: boolean
+        - description: Specify context to be passed to Music API
+          in: query
+          name: music_context
+          required: false
+          schema:
+            type: string
+            enum:
+              - events
+              - ivote
+              - music
+              - musicplaylist
+              - programmes
+              - radio
+              - unknown
+        - description: Specify location to be passed to Music API
+          in: query
+          name: music_within_uk
+          required: false
+          schema:
+            type: boolean
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicFollowsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: 'Followed Networks, Categories, Artists, Playlists and Genres'
+      tags:
+        - Personalised Music
+    post:
+      description: |
+        Add networks, categories, artists, playlists, networks, genres or services in a users follows
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: postPersonalisedMusicFollowsBatch
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Filters activities based on the type of action
+          in: query
+          name: action
+          required: false
+          schema:
+            type: string
+            enum:
+              - followed
+              - unfollowed
+        - description: 'Omits music data from the response, defaults to true'
+          in: query
+          name: music-data
+          required: false
+          schema:
+            type: boolean
+        - description: Specify context to be passed to Music API
+          in: query
+          name: music_context
+          required: false
+          schema:
+            type: string
+            enum:
+              - events
+              - ivote
+              - music
+              - musicplaylist
+              - programmes
+              - radio
+              - unknown
+        - description: Specify location to be passed to Music API
+          in: query
+          name: music_within_uk
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicSuccess'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: 'Followed Networks, Categories, Artists, Playlists and Genres'
+      tags:
+        - Personalised Music
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedMusicBatchRequestArray2'
+    put:
+      description: |
+        Update networks, categories, artists, playlists, networks, genres or services in a users follows
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: putPersonalisedMusicFollowsBatch
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Filters activities based on the type of action
+          in: query
+          name: action
+          required: false
+          schema:
+            type: string
+            enum:
+              - followed
+              - unfollowed
+        - description: 'Omits music data from the response, defaults to true'
+          in: query
+          name: music-data
+          required: false
+          schema:
+            type: boolean
+        - description: Specify context to be passed to Music API
+          in: query
+          name: music_context
+          required: false
+          schema:
+            type: string
+            enum:
+              - events
+              - ivote
+              - music
+              - musicplaylist
+              - programmes
+              - radio
+              - unknown
+        - description: Specify location to be passed to Music API
+          in: query
+          name: music_within_uk
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicSuccess'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: 'Followed Networks, Categories, Artists, Playlists and Genres'
+      tags:
+        - Personalised Music
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedMusicBatchRequestArray2'
+  '/my/music/follows/{type}':
+    get:
+      description: |
+        List of followed networks, categories, artists, playlists, networks, genres, categories or services for a given BBC Music user.
+      operationId: getPersonalisedMusicFollowsByType
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Music follows types: Playlists, Services, Genres & Artists'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - playlists
+              - services
+              - networks
+              - genres
+              - categories
+              - artists
+        - description: Filters activities based on the type of action
+          in: query
+          name: action
+          required: false
+          schema:
+            type: string
+            enum:
+              - followed
+              - unfollowed
+        - description: 'Omits music data from the response, defaults to true'
+          in: query
+          name: music-data
+          required: false
+          schema:
+            type: boolean
+        - description: Specify context to be passed to Music API
+          in: query
+          name: music_context
+          required: false
+          schema:
+            type: string
+            enum:
+              - events
+              - ivote
+              - music
+              - musicplaylist
+              - programmes
+              - radio
+              - unknown
+        - description: Specify location to be passed to Music API
+          in: query
+          name: music_within_uk
+          required: false
+          schema:
+            type: boolean
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicFollowsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: 'Followed Networks, Categories, Artists, Playlists and Genres by Type'
+      tags:
+        - Personalised Music
+  '/my/music/follows/{type}/{id}':
+    delete:
+      description: |
+        Remove a single network, category, artist, playlist, network, genre or service entity is in a users follows
+      operationId: deletePersonalisedMusicFollowsByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Music follows types: Playlists, Services, Genres & Artists'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - playlists
+              - services
+              - networks
+              - genres
+              - categories
+              - artists
+        - description: 'Playlists, Services, Networks, Genres, Categories or Artists ID'
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: 'Omits music data from the response, defaults to true'
+          in: query
+          name: music-data
+          required: false
+          schema:
+            type: boolean
+        - description: Specify context to be passed to Music API
+          in: query
+          name: music_context
+          required: false
+          schema:
+            type: string
+            enum:
+              - events
+              - ivote
+              - music
+              - musicplaylist
+              - programmes
+              - radio
+              - unknown
+        - description: Specify location to be passed to Music API
+          in: query
+          name: music_within_uk
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicSuccess'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: 'Followed Network, Category, Artist, Playlist and Genre'
+      tags:
+        - Personalised Music
+    get:
+      description: |
+        Check to see if a single network, category, artist, playlist, network, genre or service entity is in a users follows - determines UX of add button.
+      operationId: getPersonalisedMusicFollowsByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Music follows types: Playlists, Services, Genres & Artists'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - playlists
+              - services
+              - networks
+              - genres
+              - categories
+              - artists
+        - description: 'Playlists, Services, Networks, Genres, Categories or Artists ID'
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: 'Omits music data from the response, defaults to true'
+          in: query
+          name: music-data
+          required: false
+          schema:
+            type: boolean
+        - description: Specify context to be passed to Music API
+          in: query
+          name: music_context
+          required: false
+          schema:
+            type: string
+            enum:
+              - events
+              - ivote
+              - music
+              - musicplaylist
+              - programmes
+              - radio
+              - unknown
+        - description: Specify location to be passed to Music API
+          in: query
+          name: music_within_uk
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicFollowsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: 'Followed Network, Category, Artist, Playlist and Genre'
+      tags:
+        - Personalised Music
+    post:
+      description: |
+        Add a single network, category, artist, playlist, network, genre or service entity is in a users follows
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: postPersonalisedMusicFollowsByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Music follows types: Playlists, Services, Genres & Artists'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - playlists
+              - services
+              - networks
+              - genres
+              - categories
+              - artists
+        - description: 'Playlists, Services, Networks, Genres, Categories or Artists ID'
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: 'Omits music data from the response, defaults to true'
+          in: query
+          name: music-data
+          required: false
+          schema:
+            type: boolean
+        - description: Specify context to be passed to Music API
+          in: query
+          name: music_context
+          required: false
+          schema:
+            type: string
+            enum:
+              - events
+              - ivote
+              - music
+              - musicplaylist
+              - programmes
+              - radio
+              - unknown
+        - description: Specify location to be passed to Music API
+          in: query
+          name: music_within_uk
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicSuccess'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: 'Followed Network, Category, Artist, Playlist and Genre'
+      tags:
+        - Personalised Music
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedMusicRequest2'
+    put:
+      description: |
+        Update a single network, category, artist, playlist, network, genre or service entity is in a users follows
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: putPersonalisedMusicFollowsByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Music follows types: Playlists, Services, Genres & Artists'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - playlists
+              - services
+              - networks
+              - genres
+              - categories
+              - artists
+        - description: 'Playlists, Services, Networks, Genres, Categories or Artists ID'
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: 'Omits music data from the response, defaults to true'
+          in: query
+          name: music-data
+          required: false
+          schema:
+            type: boolean
+        - description: Specify context to be passed to Music API
+          in: query
+          name: music_context
+          required: false
+          schema:
+            type: string
+            enum:
+              - events
+              - ivote
+              - music
+              - musicplaylist
+              - programmes
+              - radio
+              - unknown
+        - description: Specify location to be passed to Music API
+          in: query
+          name: music_within_uk
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicSuccess'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedMusicErrorResponse'
+      summary: 'Followed Network, Category, Artist, Playlist and Genre'
+      tags:
+        - Personalised Music
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedMusicRequest2'
+  /my/music/preferences/export:
+    delete:
+      description: |
+        Remove export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
+      operationId: deleteMusicPreferencesExport
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportSuccess'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportErrorResponse'
+      summary: Music Export Preferences
+      tags:
+        - Music Export
+    get:
+      description: |
+        Returns export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
+      operationId: getMusicPreferencesExport
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportPreferencesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportErrorResponse'
+      summary: Music Export Preferences
+      tags:
+        - Music Export
+    post:
+      description: |
+        Create export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
+      operationId: postMusicPreferencesExport
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportSuccess'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportErrorResponse'
+      summary: Music Export Preferences
+      tags:
+        - Music Export
+      requestBody:
+        $ref: '#/components/requestBodies/MusicExportPreferences'
+  '/my/music/preferences/export/{vendor}':
+    delete:
+      description: |
+        Remove Vendor specific export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
+      operationId: deleteMusicPreferencesExportVendor
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Supported 3rd Party Vendor
+          in: path
+          name: vendor
+          required: true
+          schema:
+            type: string
+            enum:
+              - spotify
+              - deezer
+              - youtube
+              - itunes
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportErrorResponse'
+      summary: Music Export Vendor Preferences
+      tags:
+        - Music Export
+    get:
+      description: |
+        Returns vendor specific export preferences for a given BBC Music user.
+      operationId: getMusicPreferencesExportVendor
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Supported 3rd Party Vendor
+          in: path
+          name: vendor
+          required: true
+          schema:
+            type: string
+            enum:
+              - spotify
+              - deezer
+              - youtube
+              - itunes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportPreferencesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportErrorResponse'
+      summary: Music Export Vendor Preferences
+      tags:
+        - Music Export
+    post:
+      description: |
+        Create Vendor specific export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
+      operationId: postMusicPreferencesExportVendor
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Supported 3rd Party Vendor
+          in: path
+          name: vendor
+          required: true
+          schema:
+            type: string
+            enum:
+              - spotify
+              - deezer
+              - youtube
+              - itunes
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportErrorResponse'
+      summary: Music Export Vendor Preferences
+      tags:
+        - Music Export
+      requestBody:
+        $ref: '#/components/requestBodies/MusicExportPreferences'
+    put:
+      description: |
+        Update vendor specific export preferences for a given BBC Music user.
+      operationId: putMusicPreferencesExportVendor
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Supported 3rd Party Vendor
+          in: path
+          name: vendor
+          required: true
+          schema:
+            type: string
+            enum:
+              - spotify
+              - deezer
+              - youtube
+              - itunes
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MusicExportErrorResponse'
+      summary: Music Export Vendor Preferences
+      tags:
+        - Music Export
+      requestBody:
+        $ref: '#/components/requestBodies/MusicExportPreferences'
+  /my/radio/favourites:
+    get:
+      description: |
+        List of favourited episodes and clips for a given user for iPlayer Radio.
+
+        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+        and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
+         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
+      operationId: getPersonalisedRadioFavourites
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: Sort order for Personalised Radio results
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - programme_titles
+              - available_from_date
+              - available_to_date
+        - description: Include items which have been 'soft' unfavourited in response. I.e items with UAS type of 'unfavourited'
+          in: query
+          name: show_all_activity
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Favourite Episodes and Clips
+      tags:
+        - Personalised Radio
+    post:
+      description: |
+        Add User favourites
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: postPersonalisedRadioBatch
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioSuccessResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Favourite Episodes and Clips
+      tags:
+        - Personalised Radio
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedRadioBatchRequestArray'
+    put:
+      description: |
+        Update user favourites
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: putPersonalisedRadioBatch
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioSuccessResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Favourite Episodes and Clips
+      tags:
+        - Personalised Radio
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedRadioBatchRequestArray'
+  '/my/radio/favourites/{type}':
+    get:
+      description: |
+        List of followed 'clips' or 'episode' items for a given iPlayer Radio user
+
+        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+        and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
+         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
+      operationId: getPersonalisedRadioFavouritesByType
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Radio favourite types: Clips or Episodes'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - clips
+              - episodes
+        - description: Sort order for Personalised Radio results
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - programme_titles
+              - available_from_date
+              - available_to_date
+        - description: Include items which have been 'soft' unfavourited in response. I.e items with UAS type of 'unfavourited'
+          in: query
+          name: show_all_activity
+          required: false
+          schema:
+            type: boolean
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Favourite Episodes and Clips by Type
+      tags:
+        - Personalised Radio
+  '/my/radio/favourites/{type}/{pid}':
+    delete:
+      description: |
+        Remove User favourite
+      operationId: deletePersonalisedRadioByActivityTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Radio favourite types: Clips or Episodes'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - clips
+              - episodes
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioSuccessResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Favourite Episode or Clip
+      tags:
+        - Personalised Radio
+    get:
+      description: |
+        Check to see if a single clip or episode entity is in a users favourites - determines UX of add button.
+
+        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+        and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
+         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
+      operationId: getPersonalisedRadioByActivityTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Radio favourite types: Clips or Episodes'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - clips
+              - episodes
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+        - description: Include items which have been 'soft' unfavourited in response. I.e items with UAS type of 'unfavourited'
+          in: query
+          name: show_all_activity
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Favourite Episode or Clip
+      tags:
+        - Personalised Radio
+    post:
+      description: |
+        Add User favourite
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: postPersonalisedRadioByActivityTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Radio favourite types: Clips or Episodes'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - clips
+              - episodes
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioSuccessResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Favourite Episode or Clip
+      tags:
+        - Personalised Radio
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedRadioRequest'
+    put:
+      description: |
+        Update user favourite
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: putPersonalisedRadioByActivityTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Radio favourite types: Clips or Episodes'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - clips
+              - episodes
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioSuccessResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Favourite Episode or Clip
+      tags:
+        - Personalised Radio
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedRadioRequest'
+  /my/radio/follows:
+    get:
+      description: |
+        List of favourited brands and series for a given user for iPlayer Radio.
+
+        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+        and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
+         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
+      operationId: getPersonalisedRadioFollows
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: Sort order for Personalised Radio results
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - programme_titles
+              - available_from_date
+              - available_to_date
+        - description: Include items which have been 'soft' unfollowed in response. I.e items with UAS type of 'unfollowed'
+          in: query
+          name: show_all_activity
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Followed Brands and Series
+      tags:
+        - Personalised Radio
+    post:
+      description: |
+        Add 'brand' or 'series' items to a users iPlayer Radio follows
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: postPersonalisedRadioFollowsBatch
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioSuccessResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Followed Brands and Series
+      tags:
+        - Personalised Radio
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedRadioBatchRequestArray2'
+    put:
+      description: |
+        Update 'brands' or 'series' items from a users iPlayer Radio follows
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: putPersonalisedRadioFollowsBatch
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioSuccessResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Followed Brands and Series
+      tags:
+        - Personalised Radio
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedRadioBatchRequestArray2'
+  '/my/radio/follows/{type}':
+    get:
+      description: |
+        List of followed 'brand' or 'series' items for a given iPlayer Radio user
+
+        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+        and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
+         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
+      operationId: getPersonalisedRadioFollowsByType
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Radio follows types: Brands or Series'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - brands
+              - series
+        - description: Sort order for Personalised Radio results
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - programme_titles
+              - available_from_date
+              - available_to_date
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: Include items which have been 'soft' unfollowed in response. I.e items with UAS type of 'unfollowed'
+          in: query
+          name: show_all_activity
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Followed Brands or Series by Type
+      tags:
+        - Personalised Radio
+  '/my/radio/follows/{type}/{pid}':
+    delete:
+      description: |
+        Remove 'brand' or 'series' items from a users iPlayer Radio follows
+      operationId: deletePersonalisedRadioFollowsByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Radio follows types: Brands or Series'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - brands
+              - series
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioSuccessResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Followed Brand or Series
+      tags:
+        - Personalised Radio
+    get:
+      description: |
+        Check to see if a single brand or series entity is in a users follows - determines UX of add button.
+      operationId: getPersonalisedRadioFollowsByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Radio follows types: Brands or Series'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - brands
+              - series
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Followed Brand or Series
+      tags:
+        - Personalised Radio
+    post:
+      description: |
+        Add 'brand' or 'series' items from a users iPlayer Radio follows
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: postPersonalisedRadioFollowsByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Radio follows types: Brands or Series'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - brands
+              - series
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioSuccessResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Followed Brand or Series
+      tags:
+        - Personalised Radio
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedRadioRequest2'
+    put:
+      description: |
+        Update 'brand' or 'series' items from a users iPlayer Radio follows
+
+        N.B. Any HTML tags submitted in metadata will be removed
+      operationId: putPersonalisedRadioFollowsByTypeById
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Supported Radio follows types: Brands or Series'
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - brands
+              - series
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioSuccessResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Followed Brand or Series
+      tags:
+        - Personalised Radio
+      requestBody:
+        $ref: '#/components/requestBodies/PersonalisedRadioRequest2'
+  /my/radio/plays:
+    get:
+      description: |
+        Returns mixed episode and clip plays for a given BBC iPlayer radio user.
+
+        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+        and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
+         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
+      operationId: getPersonalisedRadioPlays
+      parameters:
+        - description: Bearer OAUTH_TOKEN
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            default: Bearer OAUTH_TOKEN
+        - description: Authentication type
+          in: header
+          name: X-Authentication-Provider
+          required: true
+          schema:
+            type: string
+            default: idv5
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: Sort order for Personalised Radio results
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - programme_titles
+              - available_from_date
+              - available_to_date
+        - description: Include expired/unavailable items
+          in: query
+          name: show_all_activity
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalisedRadioErrorResponse'
+      summary: Played Episode or Clip
+      tags:
+        - Personalised Radio
+  /podcasts.json:
+    get:
+      description: |
+        Retrieve all Podcasts
+      operationId: getPodcasts
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: Sort order for Podcasts results
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - title
+              - '-title'
+              - available_from_date
+              - '-available_from_date'
+        - description: Network Master Brand ID (mid)
+          in: query
+          name: network
+          required: false
+          schema:
+            type: string
+        - description: Network URL key
+          in: query
+          name: network_url_key
+          required: false
+          schema:
+            type: string
+        - description: Category ID
+          in: query
+          name: category
+          required: false
+          schema:
+            type: string
+        - description: Search query String
+          in: query
+          name: q
+          required: false
+          schema:
+            type: string
+        - description: 'Local, National or Regional Coverage'
+          in: query
+          name: coverage
+          required: false
+          schema:
+            type: string
+            enum:
+              - local
+              - national
+              - regional
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodcastsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodcastErrorResponse'
+      summary: All Podcasts
+      tags:
+        - Podcasts
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  /podcasts/featured.json:
+    get:
+      description: |
+        Retrieve featured podcasts
+      operationId: getPodcastsFeatured
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodcastsFeaturedResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodcastErrorResponse'
+      summary: Featured Podcasts
+      tags:
+        - Podcasts
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  '/podcasts/{pid}.json':
+    get:
+      description: |
+        Retrieve data about the podcast with the supplied PID
+      operationId: getPodcastByPid
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodcastsResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodcastErrorResponse'
+      summary: Podcast
+      tags:
+        - Podcasts
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  '/podcasts/{pid}/episodes.json':
+    get:
+      description: |
+        Retrieve all episodes for a specific podcast
+      operationId: getPodcastEpisodes
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+        - description: Paginated results offset
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Paginated results limit
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodcastEpisodesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PodcastErrorResponse'
+      summary: Podcast Episodes
+      tags:
+        - Podcasts
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  /radio/categories.json:
+    get:
+      deprecated: true
+      description: |
+        All iPlayer Radio categories - contains business logic for blend of PIPs genres and formats.
+      operationId: getRadioCategories
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadioCategoriesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadioErrorResponse'
+      summary: Categories
+      tags:
+        - Radio
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  /radio/networks.json:
+    get:
+      description: |
+        All iPlayer Radio networks - contains business logic for masterbrand and service relationships
+      operationId: getRadioNetworks
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Returns all networks needed for iPlayer Radio responsive web navigation
+          in: query
+          name: preset
+          required: false
+          schema:
+            type: boolean
+        - description: Returns all networks available internationally
+          in: query
+          name: international
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworksResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadioErrorResponse'
+      summary: Networks
+      tags:
+        - Radio
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  /radio/popular.json:
+    get:
+      description: |
+        Retrieve Popular Episodes & Clips
+      operationId: getPopularEpisodesClips
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Programme type required. Accepts comma separated values
+          in: query
+          name: type
+          required: false
+          schema:
+            type: string
+            enum:
+              - episode
+              - clip
+              - 'episode,clip'
+        - description: Filter by deduplication rule. E.g. 'tleo' returns programmes with distinct top level episode objects
+          in: query
+          name: distinct
+          required: false
+          schema:
+            type: string
+            enum:
+              - tleo
+        - description: Filter by network master brand ID (mid). Accepts comma separated values
+          in: query
+          name: network
+          required: false
+          schema:
+            type: string
+        - description: Filter by network URL key. Accepts comma separated values
+          in: query
+          name: network_url_key
+          required: false
+          schema:
+            type: string
+        - description: Filter by category. Accepts comma separated values
+          in: query
+          name: category
+          required: false
+          schema:
+            type: string
+        - description: Filter by format. Accepts comma separated values
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+        - description: Filter by group. Accepts comma separated values
+          in: query
+          name: group
+          required: false
+          schema:
+            type: string
+            enum:
+              - tv
+              - radio
+              - 'tv,radio'
+        - description: Filter by programme media type. Accepts comma separated values
+          in: query
+          name: media_type
+          required: false
+          schema:
+            type: string
+            enum:
+              - audio
+              - video
+              - 'audio,video'
+        - description: 'Filter by container. Accepts any pid e.g. brand,series,episode'
+          in: query
+          name: container
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by media set name. Accepts comma separated combinations of the following: pc,mobile-download,android-download-high,apple-ios-download-high,mobile-cellular-main,mobile-phone-main,iptv-all'
+          in: query
+          name: media_set
+          required: false
+          style: form
+          schema:
+            type: array
+            items: {}
+            enum:
+              - pc
+              - mobile-download
+              - android-download-high
+              - apple-ios-download-high
+              - mobile-cellular-main
+              - mobile-phone-main
+              - iptv-all
+        - description: Search query String
+          in: query
+          name: q
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PopularResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PopularErrorResponse'
+      summary: Popular Episodes & Clips
+      tags:
+        - Popularity
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  /radio/programmes.json:
+    get:
+      description: |
+        Provides a paginated list of programmes by PID (brand, series, episode and clip). Accepts various filters and sorting methods.
+
+        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+        and Clip Summaries so we are defining results as an array of Programme Summary here.  This will be resolved in V3 with full support for
+         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
+      operationId: getRadioProgrammes
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: 'Filter by provided query. E.g. ''tleo'' returns top level objects, ie. brands, orphaned series, and orphaned episodes'
+          in: query
+          name: kind
+          required: false
+          schema:
+            type: string
+            enum:
+              - tleo
+        - description: Filter by network master brand ID (mid). Accepts comma separated values
+          in: query
+          name: network
+          required: false
+          schema:
+            type: string
+        - description: Filter by network URL key. Accepts comma separated values
+          in: query
+          name: network_url_key
+          required: false
+          schema:
+            type: string
+        - description: Filter by category id. Accepts comma separated values. See /category endpoint below for the type of response provided
+          in: query
+          name: category
+          required: false
+          schema:
+            type: string
+        - description: 'Sort by provided query. E.g. ''title'' sorts in ascending order, and -title sorts in descending order'
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum:
+              - available_from_date
+              - '-available_from_date'
+              - title
+              - '-title'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgrammesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadioErrorResponse'
+      summary: Programmes
+      tags:
+        - Radio
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  '/radio/programmes/{pid}.json':
+    get:
+      description: |
+        Find programmes by PID (brand, series, episode and clip)
+
+        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+        and Clip Summaries so we are defining results as an array of Programme Summary here.  This will be resolved in V3 with full support for
+         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
+      operationId: getRadioProgrammesByPid
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgrammesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadioErrorResponse'
+      summary: Programme by Pid
+      tags:
+        - Radio
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  /radio/v1/programmes.json:
+    get:
+      deprecated: true
+      description: |
+        Find programmes by PID (brand, series, episode and clip). Accepts one or many pids separated by commas.
+
+        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+        and Clip Summaries so we are defining results as an array of Programme Summary here.  This will be resolved in V3 with full support for
+         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
+      operationId: getRadioProgrammesV1
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: Returns programme information for one or more pids
+          in: query
+          name: pids
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgrammesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadioErrorResponse'
+      summary: Programmes
+      tags:
+        - Radio
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+  '/radio/v1/programmes/{pid}.json':
+    get:
+      deprecated: true
+      description: |
+        Find programmes by PID (brand, series, episode and clip)
+
+        N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+        and Clip Summaries so we are defining results as an array of Programme Summary here.  This will be resolved in V3 with full support for
+         anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
+      operationId: getRadioProgrammesByPidV1
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          schema:
+            type: string
+        - description: pid
+          in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgrammesResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RadioErrorResponse'
+      summary: Programme by Pid
+      tags:
+        - Radio
+      servers:
+        - url: 'http://rms.api.bbc.co.uk/'
+components:
+  schemas:
+    AncestorSummary:
+      properties:
+        ancestor_type:
+          type: string
+        id:
+          type: string
+        images:
+          items:
+            $ref: '#/components/schemas/Image'
+          type: array
+        titles:
+          $ref: '#/components/schemas/AncestorTitles'
+        type:
+          type: string
+      required:
+        - ancestor_type
+        - id
+        - images
+        - titles
+        - type
+      type: object
+    AncestorTitles:
+      properties:
+        title:
+          type: string
+        type:
+          type: string
+      required:
+        - title
+        - type
+      type: object
+    AvailableVersions:
+      properties:
+        available:
+          type: string
+        available_from_date:
+          type: string
+        available_to_date:
+          type: string
+        duration:
+          type: string
+        has_guidance:
+          type: boolean
+        media_set:
+          type: string
+        type:
+          type: string
+        version_pid:
+          type: string
+        version_type:
+          type: string
+      required:
+        - available
+        - available_from_date
+        - available_to_date
+        - duration
+        - has_guidance
+        - media_set
+        - type
+        - version_pid
+        - version_type
+      type: object
+    BrandSummary:
+      properties:
+        available_versions:
+          items:
+            $ref: '#/components/schemas/AvailableVersions'
+          type: array
+        images:
+          items:
+            $ref: '#/components/schemas/Image'
+          type: array
+        latest_available_episodes:
+          items:
+            $ref: '#/components/schemas/EpisodeSummary'
+          type: array
+        network_summary:
+          $ref: '#/components/schemas/NetworkSummary'
+        pid:
+          type: string
+        short_synopsis:
+          type: string
+        titles:
+          $ref: '#/components/schemas/ProgrammeTitles'
+        total_available_episodes:
+          type: integer
+        type:
+          enum:
+            - brand_summary
+          type: string
+      required:
+        - images
+        - latest_available_episodes
+        - network_summary
+        - pid
+        - short_synopsis
+        - titles
+        - total_available_episodes
+        - type
+      type: object
+    CategoriesResponse:
+      properties:
+        $schema:
+          type: string
+        limit:
+          type: integer
+        offset:
+          type: integer
+        results:
+          items:
+            $ref: '#/components/schemas/Category'
+          type: array
+        total:
+          type: integer
+      required:
+        - $schema
+        - limit
+        - offset
+        - results
+        - total
+      type: object
+    Category:
+      properties:
+        category_type:
+          type: string
+        child_categories:
+          items:
+            $ref: '#/components/schemas/ChildCategory'
+          type: array
+        id:
+          type: string
+        pip_id:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        url_key:
+          type: string
+      required:
+        - category_type
+        - child_categories
+        - id
+        - pip_id
+        - title
+        - type
+        - url_key
+      type: object
+    CategoryError:
+      properties:
+        href:
+          type: string
+        id:
+          type: string
+        message:
+          type: string
+        replied_at:
+          type: string
+        status:
+          type: integer
+      required:
+        - href
+        - id
+        - message
+        - replied_at
+        - status
+      type: object
+    CategoryErrorResponse:
+      properties:
+        $schema:
+          type: string
+        errors:
+          items:
+            $ref: '#/components/schemas/CategoryError'
+          type: array
+      required:
+        - $schema
+        - errors
+      type: object
+    CategorySummary:
+      properties:
+        category_type:
+          type: string
+        key:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+      required:
+        - category_type
+        - key
+        - title
+        - type
+      type: object
+    ChildCategory:
+      properties:
+        category_type:
+          type: string
+        child_categories:
+          items:
+            $ref: '#/components/schemas/ChildCategory'
+          type: array
+        id:
+          type: string
+        pip_id:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        url_key:
+          type: string
+      required:
+        - category_type
+        - child_categories
+        - id
+        - pip_id
+        - title
+        - type
+        - url_key
+      type: object
+    ClipSummary:
+      properties:
+        ancestors:
+          items:
+            $ref: '#/components/schemas/AncestorSummary'
+          type: array
+        available_versions:
+          items:
+            $ref: '#/components/schemas/AvailableVersions'
+          type: array
+        images:
+          items:
+            $ref: '#/components/schemas/Image'
+          type: array
+        media_type:
+          type: string
+        network_summary:
+          $ref: '#/components/schemas/NetworkSummary'
+        pid:
+          type: string
+        release_date:
+          type: string
+        short_synopsis:
+          type: string
+        titles:
+          $ref: '#/components/schemas/ProgrammeTitles'
+        type:
+          enum:
+            - clip_summary
+          type: string
+      required:
+        - ancestors
+        - available_versions
+        - images
+        - media_type
+        - network_summary
+        - pid
+        - release_date
+        - short_synopsis
+        - titles
+        - type
+      type: object
+    Contact:
+      properties:
+        handle:
+          type: string
+        name:
+          type: string
+        service:
+          type: string
+        url:
+          type: string
+      required:
+        - handle
+        - name
+        - service
+        - url
+      type: object
+    DateRange:
+      properties:
+        end:
+          type: string
+        start:
+          type: string
+      required:
+        - end
+        - start
+      type: object
+    Empty:
+      type: object
+      nullable: true
+    EpisodeSummary:
+      properties:
+        ancestors:
+          items:
+            $ref: '#/components/schemas/AncestorSummary'
+          type: array
+        available_versions:
+          items:
+            $ref: '#/components/schemas/AvailableVersions'
+          type: array
+        images:
+          items:
+            $ref: '#/components/schemas/Image'
+          type: array
+        media_type:
+          type: string
+        network_summary:
+          $ref: '#/components/schemas/NetworkSummary'
+        pid:
+          type: string
+        release_date:
+          type: string
+        short_synopsis:
+          type: string
+        titles:
+          $ref: '#/components/schemas/ProgrammeTitles'
+        type:
+          enum:
+            - episode_summary
+          type: string
+      required:
+        - ancestors
+        - available_versions
+        - images
+        - media_type
+        - network_summary
+        - pid
+        - release_date
+        - short_synopsis
+        - titles
+        - type
+      type: object
+    ExternalPartner:
+      properties:
+        type:
+          type: string
+        value:
+          type: string
+      required:
+        - type
+        - value
+      type: object
+    Image:
+      properties:
+        id:
+          type: string
+        image_type:
+          type: string
+        template_url:
+          type: string
+        type:
+          type: string
+      required:
+        - id
+        - image_type
+        - template_url
+        - type
+      type: object
+    MetaData:
+      properties:
+        miscellaneous:
+          $ref: '#/components/schemas/Miscellaneous'
+        origin:
+          $ref: '#/components/schemas/Origin'
+        programme_type:
+          type: string
+        type:
+          type: string
+      required:
+        - miscellaneous
+        - origin
+        - programme_type
+        - type
+      type: object
+    Miscellaneous:
+      properties:
+        title:
+          type: string
+      required:
+        - title
+      type: object
+    MusicExportError:
+      properties:
+        message:
+          type: string
+        replied_at:
+          type: integer
+        status:
+          type: integer
+      required:
+        - message
+        - replied_at
+        - status
+      type: object
+    MusicExportErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/MusicExportError'
+          type: array
+        schema:
+          type: string
+      required:
+        - errors
+        - schema
+      type: object
+    MusicExportJob:
+      properties:
+        created_at:
+          type: string
+        id:
+          type: string
+        job_id:
+          type: string
+        status:
+          type: string
+        vendor:
+          type: string
+      required:
+        - created_at
+        - id
+        - job_id
+        - status
+        - vendor
+      type: object
+    MusicExportPreferences:
+      properties:
+        access_expires_at:
+          type: string
+        access_token:
+          type: string
+        add_plus_export:
+          type: boolean
+        authorization_code:
+          type: string
+        last_export:
+          type: string
+        legacy_state:
+          type: string
+        partner_id:
+          type: string
+        refresh_token:
+          type: string
+        terms:
+          type: boolean
+        vendor:
+          type: string
+      required:
+        - access_expires_at
+        - access_token
+        - add_plus_export
+        - authorization_code
+        - last_export
+        - legacy_state
+        - partner_id
+        - refresh_token
+        - terms
+        - vendor
+      type: object
+    MusicExportPreferencesResponse:
+      properties:
+        method:
+          type: string
+        replied_at:
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MusicExportPreferences'
+          type: array
+        schema:
+          type: string
+        total:
+          type: integer
+      required:
+        - method
+        - replied_at
+        - results
+        - schema
+        - total
+      type: object
+    MusicExportSuccess:
+      properties:
+        method:
+          type: string
+        replied_at:
+          type: string
+        schema:
+          type: string
+      required:
+        - method
+        - replied_at
+        - schema
+      type: object
+    MusicPopularityArtist:
+      properties:
+        gid:
+          type: string
+        id:
+          type: string
+        imagePid:
+          type: string
+        name:
+          type: string
+        score:
+          type: integer
+        sortName:
+          type: string
+      required:
+        - gid
+        - id
+        - imagePid
+        - name
+        - score
+        - sortName
+      type: object
+    MusicPopularityArtists:
+      properties:
+        limit:
+          type: integer
+        method:
+          type: string
+        offset:
+          type: integer
+        repliedAt:
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MusicPopularityArtist'
+          type: array
+        schema:
+          type: string
+        total:
+          type: integer
+      required:
+        - method
+        - repliedAt
+        - results
+        - schema
+        - total
+      type: object
+    MusicPopularityError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        schema:
+          type: string
+      type: object
+    MusicPopularityPlaylist:
+      properties:
+        categories:
+          items:
+            type: string
+          type: array
+        commentsEnabled:
+          type: boolean
+        description:
+          type: string
+        externalPartners:
+          items:
+            $ref: '#/components/schemas/ExternalPartner'
+          type: array
+        genre:
+          type: string
+        id:
+          type: string
+        imagePid:
+          type: string
+        imageUrl:
+          type: string
+        kind:
+          type: string
+        mood:
+          type: string
+        oneOff:
+          type: boolean
+        playlistPlaybackType:
+          type: string
+        score:
+          type: integer
+        serviceId:
+          type: string
+        title:
+          type: string
+        updatedAt:
+          type: string
+        visibility:
+          type: string
+        wideImagePid:
+          type: string
+        wideImageUrl:
+          type: string
+      required:
+        - categories
+        - commentsEnabled
+        - description
+        - externalPartners
+        - genre
+        - id
+        - imagePid
+        - imageUrl
+        - kind
+        - mood
+        - oneOff
+        - playlistPlaybackType
+        - score
+        - serviceId
+        - title
+        - updatedAt
+        - visibility
+        - wideImagePid
+        - wideImageUrl
+      type: object
+    MusicPopularityPlaylists:
+      properties:
+        limit:
+          type: integer
+        method:
+          type: string
+        offset:
+          type: integer
+        repliedAt:
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MusicPopularityPlaylist'
+          type: array
+        schema:
+          type: string
+        total:
+          type: integer
+      required:
+        - method
+        - repliedAt
+        - results
+        - schema
+        - total
+      type: object
+    MusicPopularityTrack:
+      properties:
+        album:
+          type: string
+        artistGid:
+          type: string
+        artistName:
+          type: string
+        artists:
+          items:
+            $ref: '#/components/schemas/MusicTrackArtist'
+          type: array
+        baseTitle:
+          type: string
+        classical:
+          type: boolean
+        id:
+          type: string
+        mergedIds:
+          items:
+            type: string
+          type: array
+        preferredMultiplayRecordAudio:
+          $ref: '#/components/schemas/MusicRecordAudio'
+        preferredRecordAudio:
+          $ref: '#/components/schemas/MusicRecordAudio'
+        radioEdit:
+          type: boolean
+        recordAudio:
+          items:
+            $ref: '#/components/schemas/MusicRecordAudio'
+          type: array
+        recordImageHref:
+          type: string
+        recordImagePid:
+          type: string
+        score:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+      required:
+        - id
+        - score
+      type: object
+    MusicPopularityTracks:
+      properties:
+        limit:
+          type: integer
+        method:
+          type: string
+        offset:
+          type: integer
+        repliedAt:
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/MusicPopularityTrack'
+          type: array
+        schema:
+          type: string
+        total:
+          type: integer
+      required:
+        - method
+        - repliedAt
+        - results
+        - schema
+        - total
+      type: object
+    MusicRecordAudio:
+      properties:
+        audioType:
+          type: string
+        duration:
+          type: integer
+        identifier:
+          type: string
+        resourceType:
+          type: string
+      required:
+        - audioType
+        - duration
+        - identifier
+        - resourceType
+      type: object
+    MusicTrackArtist:
+      properties:
+        gid:
+          type: string
+        imagePid:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+        sortName:
+          type: string
+      required:
+        - gid
+        - imagePid
+        - name
+        - role
+        - sortName
+      type: object
+    Network:
+      properties:
+        active:
+          type: boolean
+        contacts:
+          items:
+            $ref: '#/components/schemas/Contact'
+          type: array
+        date_ranges:
+          items:
+            $ref: '#/components/schemas/DateRange'
+          type: array
+        group:
+          type: string
+        id:
+          type: string
+        international:
+          type: boolean
+        key:
+          type: string
+        preset:
+          type: boolean
+        promoted_category_summaries:
+          items:
+            $ref: '#/components/schemas/CategorySummary'
+          type: array
+        services:
+          items:
+            $ref: '#/components/schemas/Service'
+          type: array
+        short_title:
+          type: string
+        sort:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+      required:
+        - active
+        - contacts
+        - date_ranges
+        - group
+        - id
+        - international
+        - key
+        - preset
+        - services
+        - short_title
+        - sort
+        - title
+        - type
+      type: object
+    NetworkSummary:
+      properties:
+        active:
+          type: boolean
+        group:
+          type: string
+        id:
+          type: string
+        key:
+          type: string
+        titles:
+          $ref: '#/components/schemas/NetworkTitles'
+        type:
+          type: string
+      required:
+        - active
+        - group
+        - id
+        - key
+        - titles
+        - type
+      type: object
+    NetworkTitles:
+      properties:
+        long_title:
+          type: string
+        short_title:
+          type: string
+        type:
+          type: string
+      required:
+        - long_title
+        - short_title
+        - type
+      type: object
+    NetworksResponse:
+      properties:
+        $schema:
+          type: string
+        limit:
+          type: integer
+        offset:
+          type: integer
+        results:
+          items:
+            $ref: '#/components/schemas/Network'
+          type: array
+        total:
+          type: integer
+      required:
+        - $schema
+        - limit
+        - offset
+        - results
+        - total
+      type: object
+    Origin:
+      properties:
+        type:
+          type: string
+      required:
+        - type
+      type: object
+    PersonalisedMusicBatchRequest:
+      properties:
+        action:
+          type: string
+        added_at:
+          type: string
+        context:
+          type: string
+        domain:
+          type: string
+        id:
+          type: string
+        meta_data:
+          $ref: '#/components/schemas/PersonalisedMusicMetaData'
+        type:
+          type: string
+      required:
+        - action
+        - domain
+        - id
+        - type
+      type: object
+    PersonalisedMusicError:
+      properties:
+        message:
+          type: string
+        replied_at:
+          type: integer
+        status:
+          type: integer
+      required:
+        - message
+        - replied_at
+        - status
+      type: object
+    PersonalisedMusicErrorResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/PersonalisedMusicError'
+          type: array
+        schema:
+          type: string
+      required:
+        - errors
+        - schema
+      type: object
+    PersonalisedMusicFavourite:
+      properties:
+        track:
+          $ref: '#/components/schemas/PersonalisedMusicTrack'
+      type: object
+    PersonalisedMusicFavouritesActivity:
+      properties:
+        action:
+          type: string
+        activity:
+          type: string
+        added_at:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/PersonalisedMusicFavourite'
+          type: array
+        domain:
+          type: string
+        id:
+          type: string
+        meta_data:
+          $ref: '#/components/schemas/PersonalisedMusicMetaData'
+        type:
+          type: string
+        urn:
+          type: string
+      required:
+        - action
+        - activity
+        - added_at
+        - data
+        - domain
+        - id
+        - meta_data
+        - type
+        - urn
+      type: object
+    PersonalisedMusicFavouritesResponse:
+      properties:
+        limit:
+          type: integer
+        method:
+          type: string
+        offset:
+          type: integer
+        replied_at:
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PersonalisedMusicFavouritesActivity'
+          type: array
+        schema:
+          type: string
+        total:
+          type: integer
+      required:
+        - limit
+        - method
+        - offset
+        - replied_at
+        - results
+        - schema
+        - total
+      type: object
+    PersonalisedMusicFollow:
+      properties:
+        genre:
+          $ref: '#/components/schemas/PersonalisedMusicFollowGenre'
+      required:
+        - genre
+      type: object
+    PersonalisedMusicFollowGenre:
+      properties:
+        id:
+          type: string
+        key:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+      required:
+        - id
+        - key
+        - title
+        - type
+      type: object
+    PersonalisedMusicFollowsActivity:
+      properties:
+        action:
+          type: string
+        activity:
+          type: string
+        added_at:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/PersonalisedMusicFollow'
+          type: array
+        domain:
+          type: string
+        id:
+          type: string
+        type:
+          type: string
+        urn:
+          type: string
+      required:
+        - action
+        - activity
+        - added_at
+        - data
+        - domain
+        - id
+        - type
+        - urn
+      type: object
+    PersonalisedMusicFollowsResponse:
+      properties:
+        limit:
+          type: integer
+        method:
+          type: string
+        offset:
+          type: integer
+        replied_at:
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PersonalisedMusicFollowsActivity'
+          type: array
+        schema:
+          type: string
+        total:
+          type: integer
+      required:
+        - limit
+        - method
+        - offset
+        - replied_at
+        - results
+        - schema
+        - total
+      type: object
+    PersonalisedMusicMetaData:
+      properties:
+        key:
+          type: string
+      required:
+        - key
+      type: object
+    PersonalisedMusicRequest:
+      properties:
+        action:
+          type: string
+        added_at:
+          type: string
+        context:
+          type: string
+        meta_data:
+          $ref: '#/components/schemas/PersonalisedMusicMetaData'
+      required:
+        - action
+      type: object
+    PersonalisedMusicSuccess:
+      properties:
+        method:
+          type: string
+        replied_at:
+          type: string
+        schema:
+          type: string
+      required:
+        - method
+        - replied_at
+        - schema
+      type: object
+    PersonalisedMusicTrack:
+      properties:
+        contributions:
+          items:
+            $ref: '#/components/schemas/PersonalisedMusicTrackContribution'
+          type: array
+        id:
+          type: string
+        images:
+          items:
+            $ref: '#/components/schemas/PersonalisedMusicTrackImage'
+          type: array
+        media:
+          items:
+            $ref: '#/components/schemas/PersonalisedMusicTrackMedia'
+          type: array
+        title:
+          type: string
+        type:
+          type: string
+        version:
+          $ref: '#/components/schemas/PersonalisedMusicTrackVersion'
+      required:
+        - contributions
+        - id
+        - images
+        - media
+        - title
+        - type
+        - version
+      type: object
+    PersonalisedMusicTrackContribution:
+      properties:
+        id:
+          type: string
+        images:
+          items:
+            $ref: '#/components/schemas/PersonalisedMusicTrackImage'
+          type: array
+        name:
+          type: string
+        role:
+          type: string
+      required:
+        - id
+        - images
+        - name
+        - role
+      type: object
+    PersonalisedMusicTrackImage:
+      properties:
+        format:
+          type: string
+        id:
+          type: string
+        type:
+          type: string
+      required:
+        - format
+        - id
+        - type
+      type: object
+    PersonalisedMusicTrackMedia:
+      properties:
+        duration:
+          type: integer
+        format:
+          type: string
+        id:
+          type: string
+        scope:
+          type: string
+        source:
+          type: string
+        type:
+          type: string
+      required:
+        - duration
+        - format
+        - id
+        - scope
+        - source
+        - type
+      type: object
+    PersonalisedMusicTrackVersion:
+      properties:
+        classical:
+          type: boolean
+        radio:
+          type: boolean
+      required:
+        - classical
+        - radio
+      type: object
+    PersonalisedRadioActivity:
+      properties:
+        action:
+          type: string
+        activity:
+          type: string
+        added_at:
+          type: string
+        data:
+          $ref: '#/components/schemas/ProgrammeSummary'
+        domain:
+          type: string
+        id:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/MetaData'
+        type:
+          type: string
+        uas_type:
+          type: string
+        urn:
+          type: string
+      required:
+        - action
+        - activity
+        - added_at
+        - data
+        - domain
+        - id
+        - metadata
+        - type
+        - uas_type
+        - urn
+      type: object
+    PersonalisedRadioBatchRequest:
+      properties:
+        action:
+          type: string
+        added_at:
+          type: string
+        context:
+          type: string
+        id:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/PersonalisedRadioMetaData'
+        type:
+          type: string
+      required:
+        - action
+      type: object
+    PersonalisedRadioErrorResponse:
+      properties:
+        $schema:
+          type: string
+        errors:
+          items:
+            $ref: '#/components/schemas/PersonalisedRadioErrorResponse_errors'
+          type: array
+      required:
+        - $schema
+        - errors
+      type: object
+    PersonalisedRadioErrorResponse_errors:
+      properties:
+        code:
+          type: string
+        detail:
+          type: string
+        href:
+          type: string
+        id:
+          type: string
+        status:
+          type: integer
+        timestamp:
+          type: integer
+        title:
+          type: string
+      required:
+        - code
+        - detail
+        - href
+        - id
+        - status
+        - timestamp
+        - title
+    PersonalisedRadioMetaData:
+      properties:
+        key:
+          type: string
+      required:
+        - key
+      type: object
+    PersonalisedRadioRequest:
+      properties:
+        action:
+          type: string
+        added_at:
+          type: string
+        context:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/PersonalisedRadioMetaData'
+      required:
+        - action
+      type: object
+    PersonalisedRadioResponse:
+      properties:
+        $schema:
+          type: string
+        limit:
+          type: integer
+        method:
+          type: string
+        offset:
+          type: integer
+        replied_at:
+          type: string
+        results:
+          items:
+            $ref: '#/components/schemas/PersonalisedRadioActivity'
+          type: array
+        total:
+          type: integer
+      required:
+        - $schema
+        - limit
+        - method
+        - offset
+        - replied_at
+        - results
+        - total
+      type: object
+    PersonalisedRadioSuccessResponse:
+      properties:
+        $schema:
+          type: string
+        method:
+          type: string
+        replied_at:
+          type: string
+      required:
+        - $schema
+        - method
+        - replied_at
+      type: object
+    Podcast:
+      properties:
+        category_summaries:
+          items:
+            $ref: '#/components/schemas/CategorySummary'
+          type: array
+        days_available:
+          type: integer
+        entity_type:
+          type: string
+        first_published_date:
+          type: string
+        frequency:
+          type: string
+        images:
+          items:
+            $ref: '#/components/schemas/Image'
+          type: array
+        latest_available_episodes:
+          items:
+            $ref: '#/components/schemas/PodcastEpisodeSummary'
+          type: array
+        network_summary:
+          $ref: '#/components/schemas/NetworkSummary'
+        pid:
+          type: string
+        rss_url:
+          type: string
+        synopses:
+          $ref: '#/components/schemas/PodcastSynopses'
+        territory:
+          type: string
+        titles:
+          $ref: '#/components/schemas/ProgrammeTitles'
+        total_available_episodes:
+          type: integer
+        type:
+          type: string
+        updated_at:
+          type: string
+      required:
+        - category_summaries
+        - days_available
+        - entity_type
+        - first_published_date
+        - frequency
+        - images
+        - latest_available_episodes
+        - network_summary
+        - pid
+        - rss_url
+        - synopses
+        - territory
+        - titles
+        - total_available_episodes
+        - type
+        - updated_at
+      type: object
+    PodcastEpisodeSummary:
+      properties:
+        asset_url:
+          type: string
+        available_versions:
+          items:
+            $ref: '#/components/schemas/AvailableVersions'
+          type: array
+        images:
+          items:
+            $ref: '#/components/schemas/Image'
+          type: array
+        media_type:
+          type: string
+        network_summary:
+          $ref: '#/components/schemas/NetworkSummary'
+        pid:
+          type: string
+        release_date:
+          type: string
+        short_synopsis:
+          type: string
+        titles:
+          $ref: '#/components/schemas/ProgrammeTitles'
+        type:
+          type: string
+      required:
+        - asset_url
+        - available_versions
+        - images
+        - media_type
+        - network_summary
+        - pid
+        - release_date
+        - short_synopsis
+        - titles
+        - type
+      type: object
+    PodcastEpisodesResponse:
+      properties:
+        $schema:
+          type: string
+        limit:
+          type: number
+        offset:
+          type: number
+        results:
+          items:
+            $ref: '#/components/schemas/PodcastEpisodeSummary'
+          type: array
+        total:
+          type: number
+      required:
+        - $schema
+        - limit
+        - offset
+        - results
+        - total
+    PodcastError:
+      properties:
+        href:
+          type: string
+        id:
+          type: string
+        message:
+          type: string
+        replied_at:
+          type: string
+        status:
+          type: number
+      type: object
+    PodcastErrorResponse:
+      properties:
+        $schema:
+          type: string
+        errors:
+          items:
+            $ref: '#/components/schemas/PodcastError'
+          type: array
+      type: object
+    PodcastSynopses:
+      properties:
+        long:
+          type: string
+        medium:
+          type: string
+        short:
+          type: string
+        type:
+          type: string
+      required:
+        - long
+        - medium
+        - short
+        - type
+      type: object
+    PodcastsFeatured:
+      properties:
+        featured_podcasts:
+          items:
+            $ref: '#/components/schemas/Podcast'
+          type: array
+        title:
+          type: string
+        type:
+          type: string
+      type: object
+    PodcastsFeaturedResponse:
+      properties:
+        $schema:
+          type: string
+        limit:
+          type: number
+        offset:
+          type: number
+        results:
+          items:
+            $ref: '#/components/schemas/PodcastsFeatured'
+          type: array
+        total:
+          type: number
+      required:
+        - $schema
+        - limit
+        - offset
+        - results
+        - total
+    PodcastsResponse:
+      properties:
+        $schema:
+          type: string
+        limit:
+          type: integer
+        offset:
+          type: integer
+        results:
+          items:
+            $ref: '#/components/schemas/Podcast'
+          type: array
+        total:
+          type: integer
+      required:
+        - $schema
+        - limit
+        - offset
+        - results
+        - total
+      type: object
+    PopularError:
+      properties:
+        href:
+          type: string
+        id:
+          type: string
+        message:
+          type: string
+        replied_at:
+          type: string
+        status:
+          type: integer
+      required:
+        - href
+        - id
+        - message
+        - replied_at
+        - status
+      type: object
+    PopularErrorResponse:
+      properties:
+        $schema:
+          type: string
+        errors:
+          items:
+            $ref: '#/components/schemas/PopularError'
+          type: array
+      required:
+        - $schema
+        - errors
+      type: object
+    PopularItemSummary:
+      properties:
+        data:
+          $ref: '#/components/schemas/ProgrammeSummary'
+        id:
+          type: string
+        score:
+          type: integer
+        type:
+          type: string
+      required:
+        - data
+        - id
+        - score
+        - type
+      type: object
+    PopularResponse:
+      properties:
+        $schema:
+          type: string
+        limit:
+          type: integer
+        offset:
+          type: integer
+        results:
+          items:
+            $ref: '#/components/schemas/PopularItemSummary'
+          type: array
+        total:
+          type: integer
+      required:
+        - $schema
+        - limit
+        - offset
+        - results
+        - total
+      type: object
+    Programme:
+      properties:
+        images:
+          items:
+            $ref: '#/components/schemas/Image'
+          type: array
+        latest_available_episodes:
+          items:
+            $ref: '#/components/schemas/EpisodeSummary'
+          type: array
+        network_summary:
+          $ref: '#/components/schemas/NetworkSummary'
+        pid:
+          type: string
+        short_synopsis:
+          type: string
+        titles:
+          $ref: '#/components/schemas/ProgrammeTitles'
+        total_available_episodes:
+          type: integer
+        type:
+          enum:
+            - brand_summary
+            - series_summary
+            - episode_summary
+            - clip_summary
+          type: string
+      required:
+        - images
+        - network_summary
+        - pid
+        - short_synopsis
+        - titles
+        - type
+      type: object
+    ProgrammeSummary:
+      properties:
+        pid:
+          type: string
+        type:
+          enum:
+            - brand_summary
+            - series_summary
+            - episode_summary
+            - clip_summary
+          type: string
+      required:
+        - pid
+        - type
+      type: object
+    ProgrammeTitles:
+      properties:
+        display_title:
+          type: string
+        entity_title:
+          type: string
+        primary_title:
+          type: string
+        secondary_title:
+          type: string
+        type:
+          type: string
+      required:
+        - type
+      type: object
+    ProgrammesResponse:
+      properties:
+        $schema:
+          type: string
+        limit:
+          type: integer
+        offset:
+          type: integer
+        results:
+          items:
+            $ref: '#/components/schemas/ProgrammeSummary'
+          type: array
+        total:
+          type: integer
+      required:
+        - $schema
+        - limit
+        - offset
+        - results
+        - total
+      type: object
+    RadioCategoriesResponse:
+      properties:
+        $schema:
+          type: string
+        limit:
+          type: integer
+        offset:
+          type: integer
+        results:
+          items:
+            $ref: '#/components/schemas/RadioCategory'
+          type: array
+        total:
+          type: integer
+      required:
+        - $schema
+        - limit
+        - offset
+        - results
+        - total
+      type: object
+    RadioCategory:
+      properties:
+        available_episodes:
+          $ref: '#/components/schemas/Empty'
+        child_categories:
+          items:
+            $ref: '#/components/schemas/RadioChildCategory'
+          type: array
+        id:
+          type: string
+        latest_episode:
+          $ref: '#/components/schemas/Empty'
+        original_categories:
+          items:
+            $ref: '#/components/schemas/RadioOriginalCategory'
+          type: array
+        title:
+          type: string
+        translation_key:
+          type: string
+        type:
+          type: string
+      required:
+        - available_episodes
+        - child_categories
+        - id
+        - latest_episode
+        - original_categories
+        - title
+        - translation_key
+        - type
+      type: object
+    RadioChildCategory:
+      properties:
+        id:
+          type: string
+        original_categories:
+          items:
+            $ref: '#/components/schemas/RadioOriginalCategory'
+          type: array
+        title:
+          type: string
+        translation_key:
+          type: string
+        type:
+          type: string
+      required:
+        - id
+        - original_categories
+        - title
+        - translation_key
+        - type
+      type: object
+    RadioError:
+      properties:
+        code:
+          type: string
+        detail:
+          type: string
+        href:
+          type: string
+        id:
+          type: string
+        status:
+          type: integer
+        timestamp:
+          type: integer
+        title:
+          type: string
+      required:
+        - code
+        - detail
+        - href
+        - id
+        - status
+        - timestamp
+        - title
+      type: object
+    RadioErrorResponse:
+      properties:
+        $schema:
+          type: string
+        errors:
+          items:
+            $ref: '#/components/schemas/RadioError'
+          type: array
+      required:
+        - $schema
+        - errors
+      type: object
+    RadioOriginalCategory:
+      properties:
+        category_type:
+          type: string
+        id:
+          type: string
+        key:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+      required:
+        - category_type
+        - id
+        - key
+        - title
+        - type
+      type: object
+    SeriesSummary:
+      properties:
+        ancestors:
+          items:
+            $ref: '#/components/schemas/AncestorSummary'
+          type: array
+        images:
+          items:
+            $ref: '#/components/schemas/Image'
+          type: array
+        latest_available_episodes:
+          items:
+            $ref: '#/components/schemas/EpisodeSummary'
+          type: array
+        network_summary:
+          $ref: '#/components/schemas/NetworkSummary'
+        pid:
+          type: string
+        short_synopsis:
+          type: string
+        titles:
+          $ref: '#/components/schemas/ProgrammeTitles'
+        total_available_episodes:
+          type: integer
+        type:
+          enum:
+            - series_summary
+          type: string
+      required:
+        - ancestors
+        - images
+        - latest_available_episodes
+        - network_summary
+        - pid
+        - short_synopsis
+        - titles
+        - total_available_episodes
+        - type
+      type: object
+    Service:
+      properties:
+        active:
+          type: boolean
+        coverage:
+          type: string
+        date_ranges:
+          items:
+            $ref: '#/components/schemas/DateRange'
+          type: array
+        default:
+          type: boolean
+        default_language:
+          type: string
+        id:
+          type: string
+        region:
+          type: string
+        short_title:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+      required:
+        - active
+        - coverage
+        - date_ranges
+        - default
+        - default_language
+        - id
+        - region
+        - short_title
+        - title
+        - type
+      type: object
+  parameters:
+    Authorization:
+      description: Bearer OAUTH_TOKEN
+      in: header
+      name: Authorization
+      required: true
+      schema:
+        type: string
+        default: Bearer OAUTH_TOKEN
+    X-API-Key:
+      description: API_KEY
+      in: header
+      name: X-API-Key
+      required: true
+      schema:
+        type: string
+    X-Authentication-Provider:
+      description: Authentication type
+      in: header
+      name: X-Authentication-Provider
+      required: true
+      schema:
+        type: string
+        default: idv5
+    artist:
+      description: MusicBrainz artist ID
+      in: query
+      name: artist
+      required: false
+      schema:
+        type: string
+    category:
+      description: Category ID
+      in: query
+      name: category
+      required: false
+      schema:
+        type: string
+    coverage:
+      description: 'Local, National or Regional Coverage'
+      in: query
+      name: coverage
+      required: false
+      schema:
+        type: string
+        enum:
+          - local
+          - national
+          - regional
+    decomposed:
+      description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+      in: query
+      name: decomposed
+      required: false
+      schema:
+        type: boolean
+    limit:
+      description: Paginated results limit
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+    network:
+      description: Return items with given Network ID
+      in: query
+      name: network
+      required: false
+      schema:
+        type: string
+    offset:
+      description: Paginated results offset
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+    over16:
+      description: Boolean age check
+      in: query
+      name: over16
+      required: true
+      schema:
+        type: boolean
+    pid:
+      description: pid
+      in: path
+      name: pid
+      required: true
+      schema:
+        type: string
+    programme:
+      description: Items with given Programme Pid
+      in: query
+      name: programme
+      required: false
+      schema:
+        type: string
+    q:
+      description: Search query String
+      in: query
+      name: q
+      required: false
+      schema:
+        type: string
+    since:
+      description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
+      in: query
+      name: since
+      required: false
+      schema:
+        type: string
+    sort:
+      description: Sort order for Podcasts results
+      in: query
+      name: sort
+      required: false
+      schema:
+        type: string
+        enum:
+          - title
+          - '-title'
+          - available_from_date
+          - '-available_from_date'
+    until:
+      description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
+      in: query
+      name: until
+      required: false
+      schema:
+        type: string
+  requestBodies:
+    PersonalisedMusicBatchRequestArray:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/PersonalisedMusicBatchRequest'
+            type: array
+      description: Action favourited or unfavourited
+      required: true
+    PersonalisedMusicRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PersonalisedMusicRequest'
+      description: Action favourited or unfavourited
+      required: true
+    PersonalisedMusicBatchRequestArray2:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/PersonalisedMusicBatchRequest'
+            type: array
+      description: Action followed or unfollowed
+      required: true
+    PersonalisedMusicRequest2:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PersonalisedMusicRequest'
+      description: Action followed or unfollowed
+      required: true
+    MusicExportPreferences:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MusicExportPreferences'
+      required: true
+    PersonalisedRadioBatchRequestArray:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/PersonalisedRadioBatchRequest'
+            type: array
+      description: Action favourited or unfavourited
+      required: true
+    PersonalisedRadioRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PersonalisedRadioRequest'
+      description: Action favourited or unfavourited
+      required: true
+    PersonalisedRadioBatchRequestArray2:
+      content:
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/PersonalisedRadioBatchRequest'
+            type: array
+      description: Action followed or unfollowed
+      required: true
+    PersonalisedRadioRequest2:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PersonalisedRadioRequest'
+      description: Action followed or unfollowed
+      required: true

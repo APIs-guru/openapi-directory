@@ -1,0 +1,2315 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.motaword.com/'
+info:
+  description: Use MotaWord API to post and track your translation projects.
+  title: MotaWord
+  version: alpha-0.1.0
+  x-apiClientRegistration:
+    url: 'https://www.motaword.com/developer/register'
+  x-logo:
+    url: 'https://dentycj2qhk72.cloudfront.net/new/images/new_logo_horizontal.png'
+  x-origin:
+    - format: swagger
+      url: 'https://api.motaword.com/swagger'
+      version: '2.0'
+  x-providerName: motaword.com
+externalDocs:
+  url: 'https://www.motaword.com/developer'
+paths:
+  /:
+    get:
+      description: |
+        The root endpoint will provide you a JSON Swagger definition.
+      operationId: getEndpoints
+      responses:
+        '200':
+          description: JSON representation of our Swagger API definition.
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: Authentication error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Available endpoints
+      tags:
+        - Static
+  /formats:
+    get:
+      description: |
+        Get a list of supported formats for documents, style guides and extensions.
+      operationId: getFormats
+      responses:
+        '200':
+          description: A list of supported formats
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Formats'
+                type: object
+      security:
+        - client_credentials: []
+      summary: Get a list of supported formats
+      tags:
+        - Static
+  /glossary:
+    get:
+      description: Download your corporate account's global glossary. This endpoint is available only for corporate account customers.
+      operationId: downloadGlobalGlossary
+      responses:
+        '200':
+          description: Glossary file streamed.
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: GlossaryNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Download the global glossary.
+      tags:
+        - Account
+        - Glossary
+    post:
+      description: Update your corporate account's global glossary. This endpoint is available only for corporate account customers.
+      operationId: updateGlobalGlossary
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    default: success
+                    type: string
+                type: object
+        '400':
+          description: FileTooLarge FileTooSmall NoFileUploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: UnsupportedGlossaryFormat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Create or update the global glossary.
+      tags:
+        - Account
+        - Glossary
+      requestBody:
+        $ref: '#/components/requestBodies/updateGlobalGlossary'
+  /languages:
+    get:
+      description: Get a list of supported languages
+      operationId: getLanguages
+      responses:
+        '200':
+          description: A list of supported languages
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Language'
+                type: array
+      security:
+        - client_credentials: []
+      summary: Get a list of supported languages
+      tags:
+        - Static
+  /me:
+    get:
+      operationId: getAccount
+      responses:
+        '200':
+          description: Account summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: UserNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get your account information and summary.
+      tags:
+        - Account
+  /projects:
+    get:
+      description: Get a list of your projects
+      operationId: getProjects
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Project list
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ProjectList'
+                type: object
+      security:
+        - client_credentials: []
+      summary: Get a list of your projects
+      tags:
+        - Project
+    post:
+      description: Create a new project
+      operationId: createProject
+      responses:
+        '200':
+          description: Newly created project
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: object
+        '400':
+          description: FileTooLarge FileTooSmall FileWasAlreadyUploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: UnsupportedDocumentFormat UnsupportedStyleGuideFormat UnsupportedGlossaryFormat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '406':
+          description: UnsupportedLanguage TooManyGlossaries ProjectAlreadyHasGlossary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: ProjectInsertFailed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get a new quote
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+  '/projects/{id}':
+    delete:
+      description: Delete(cancel) a project.
+      operationId: deleteProject
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Project canceled successfully
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    default: success
+                    type: string
+                type: object
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Delete a project
+      tags:
+        - Project
+    get:
+      description: Get single project
+      operationId: getProject
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Project model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get single project
+      tags:
+        - Project
+    put:
+      description: Update project language pairs
+      operationId: updateProject
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Updated project
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: object
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '406':
+          description: UnsupportedLanguage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Update project language pairs
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                source_language:
+                  type: string
+                'target_languages[]':
+                  type: array
+                  items:
+                    type: string
+                callback_url:
+                  description: 'Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, ''translated'', ''proofread'', ''completed''.'
+                  type: string
+                custom:
+                  description: 'Optional. This is a consistent custom data parameter that will be given to you in the response across every request of this project model. Values should be provided like this, custom[my_key] = my_value. If you previously provided one, it will be replaced.'
+                  type: array
+                  items:
+                    type: string
+              required:
+                - source_language
+  '/projects/{id}/cancel':
+    post:
+      operationId: cancelProject
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Project canceled successfully
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    default: success
+                    type: string
+                type: object
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Cancel your translation project
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                reason:
+                  description: Cancellation reason
+                  type: string
+  '/projects/{id}/download':
+    post:
+      description: Download the latest translation package. You must have given a /package call beforehand and wait until the packaging status is 'completed'.
+      operationId: download
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 'Translation package streamed. The streamed file is always a ZIP file, except when the API client is configured for Drupal and Wordpress.'
+          content:
+            application/json:
+              schema:
+                type: string
+        '402':
+          description: ProjectNotLaunchedYet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: TranslationPackageNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Download the latest translation package.
+      tags:
+        - Project
+  '/projects/{id}/download/{language}':
+    post:
+      description: Download only the translation package of this language. You must have given a /package call beforehand and wait until the packaging status is 'completed'.
+      operationId: downloadLanguage
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Language code. You can download the translation of only a specific language.
+          in: path
+          name: language
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Translation package streamed. The streamed file is always a ZIP file, except when the API client is configured for Drupal and Wordpress.'
+          content:
+            application/json:
+              schema:
+                type: string
+        '402':
+          description: ProjectNotLaunchedYet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: TranslationPackageNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Download the latest translation package.
+      tags:
+        - Project
+  '/projects/{id}/launch':
+    post:
+      operationId: launchProject
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Project launched successfully
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    default: started
+                    type: string
+                type: object
+        '400':
+          description: MissingPaymentCode MissingCorporateAccount MissingPaymentMethod
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: CorporateAccountNotAllowedForApiPayment ApiClientMissingPaymentInformation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Launch your translation project
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                payment_method:
+                  description: 'Optional. Determines which method to use for payment. Options are ''corporate'', ''client''.'
+                  type: string
+                  enum:
+                    - corporate
+                    - client
+                payment_code:
+                  description: 'Optional. According to your corporate account configuration, this may be required.'
+                  type: string
+                budget_code:
+                  description: Optional with corporate accounts. Not available for others.
+                  type: string
+  '/projects/{id}/package':
+    post:
+      description: 'Package the translation project, make it ready to be downloaded.'
+      operationId: package
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: 'If you want to package and download the translation synchronously, mark this parameter as ''0''. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call.'
+          in: query
+          name: async
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Packaged translation streamed.
+          content:
+            application/json:
+              schema:
+                type: string
+        '402':
+          description: ProjectNotLaunchedYet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: TranslationPackageNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Package the translation of all languages to be downloaded.
+      tags:
+        - Project
+  '/projects/{id}/package/check':
+    get:
+      description: This request will tell you the current progress of the translation packaging. You will use the 'key' provided by the /package call.
+      operationId: trackPackage
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: This is the package tracking key provided in the response of a /package call.
+          in: query
+          name: key
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Current status of packaging process.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageStatus'
+        '402':
+          description: ProjectNotLaunchedYet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: PackagingStatusMissing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Track the status of translation packaging.
+      tags:
+        - Project
+  '/projects/{id}/package/{language}':
+    post:
+      description: 'Package the translation project, make it ready to be downloaded.'
+      operationId: packageLanguage
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Language code. You can package the translation of only a specific language.
+          in: path
+          name: language
+          required: true
+          schema:
+            type: string
+        - description: 'If you want to package and download the translation synchronously, mark this parameter as ''0''. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call.'
+          in: query
+          name: async
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: 'Packaging status and tracking code. With the package key, you can track the progress of translation packaging.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Package'
+        '201':
+          description: 'Packaged translation streamed. Status code is actually 200, not 201.'
+          content:
+            application/json:
+              schema:
+                type: string
+        '402':
+          description: ProjectNotLaunchedYet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: TranslationPackageNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Package the translation of a specific target language to be downloaded.
+      tags:
+        - Project
+  '/projects/{id}/progress':
+    get:
+      description: Get the progress of an already launched project.
+      operationId: getProgress
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Progress information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Progress'
+        '402':
+          description: ProjectNotLaunchedYet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get project progress
+      tags:
+        - Project
+  '/projects/{id}/reports':
+    post:
+      operationId: submitProjectReports
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Report submitted successfully
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    default: success
+                    type: string
+                type: object
+        '400':
+          description: MissingMessage
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Submit reports for a project
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                activity_type:
+                  description: Activity Type
+                  type: string
+                message:
+                  description: Report Message
+                  type: string
+  '/projects/{projectId}/activities':
+    get:
+      description: 'Get a list of realtime activities on the project, such as translation suggestion and translation approval.'
+      operationId: getActivities
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of activity models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityList'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get a list of realtime activities.
+      tags:
+        - Activity
+  '/projects/{projectId}/activities/{activityId}':
+    get:
+      description: Get a single realtime activity.
+      operationId: getActivity
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Activity ID
+          in: path
+          name: activityId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Activity model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        '404':
+          description: ProjectActivityNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get a single realtime activity.
+      tags:
+        - Activity
+    post:
+      description: Submit a comment to an activity.
+      operationId: submitComment
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Activity ID
+          in: path
+          name: activityId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Comment model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '404':
+          description: ProjectActivityNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Submit a comment to an activity.
+      tags:
+        - Activity
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                comment:
+                  description: Comment text.
+                  type: string
+              required:
+                - comment
+  '/projects/{projectId}/activities/{activityId}/comments':
+    get:
+      description: Get a list of comments belonging to this activity.
+      operationId: getActivityComments
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Activity ID
+          in: path
+          name: activityId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A list of Comment models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentList'
+        '404':
+          description: ProjectActivityNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get a list of comments belonging to this activity.
+      tags:
+        - Activity
+  '/projects/{projectId}/comments':
+    get:
+      description: Get a list of activity comments throughout the whole project.
+      operationId: getComments
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: A list of Comment models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentList'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get a list of activity comments throughout the whole project.
+      tags:
+        - Activity
+  '/projects/{projectId}/documents':
+    get:
+      description: Get a list of documents
+      operationId: getDocuments
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A list of document models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentList'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get a list of documents
+      tags:
+        - Document
+    post:
+      description: Upload a new document
+      operationId: createDocument
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A list of successfully added new documents.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '400':
+          description: FileTooLarge FileTooSmall FileWasAlreadyUploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: UnsupportedDocumentFormat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '406':
+          description: InvalidDocumentScheme
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: ProjectAlreadyStarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Upload a new document
+      tags:
+        - Document
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                'schemes[]':
+                  description: 'JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.'
+                  type: string
+        required: true
+  '/projects/{projectId}/documents/{documentId}':
+    delete:
+      description: Delete the document
+      operationId: deleteDocument
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Document ID
+          in: path
+          name: documentId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Document deleted successfully
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    default: success
+                    type: string
+                type: object
+        '404':
+          description: DocumentNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: ProjectAlreadyStarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Delete the document
+      tags:
+        - Document
+    get:
+      description: Get single document
+      operationId: getDocument
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Document ID
+          in: path
+          name: documentId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Document model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '404':
+          description: DocumentNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get single document
+      tags:
+        - Document
+    put:
+      description: Update the document. File name and contents will replaced with the new one.
+      operationId: updateDocument
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Document ID
+          in: path
+          name: documentId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Updated document model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '400':
+          description: FileTooLarge FileTooSmall FileWasAlreadyUploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: DocumentNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: UnsupportedDocumentFormat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '406':
+          description: InvalidDocumentScheme
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: ProjectAlreadyStarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Update the document.
+      tags:
+        - Document
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                schemes:
+                  description: 'JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.'
+                  type: string
+  '/projects/{projectId}/documents/{documentId}/download':
+    get:
+      description: Download a document
+      operationId: downloadDocument
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Document ID
+          in: path
+          name: documentId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Document streamed
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: DocumentNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Download a document
+      tags:
+        - Document
+  '/projects/{projectId}/glossaries':
+    get:
+      description: Get a list of glossaries
+      operationId: getGlossaries
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A list of glossary models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlossaryList'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get a list of glossaries
+      tags:
+        - Glossary
+    post:
+      description: Upload a new glossary
+      operationId: createGlossary
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Newly created glossary model.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Glossary'
+        '400':
+          description: FileTooLarge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: UnsupportedGlossaryFormat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '406':
+          description: ProjectAlreadyHasGlossary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: ProjectAlreadyStarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Upload a new glossary
+      tags:
+        - Glossary
+      requestBody:
+        $ref: '#/components/requestBodies/updateGlobalGlossary'
+  '/projects/{projectId}/glossaries/{glossaryId}':
+    delete:
+      description: Delete the glossary
+      operationId: deleteGlossary
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Glossary ID
+          in: path
+          name: glossaryId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Glossary deleted successfully
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    default: success
+                    type: string
+                type: object
+        '404':
+          description: GlossaryNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: ProjectAlreadyStarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Delete the glossary
+      tags:
+        - Glossary
+    get:
+      description: Get single glossary
+      operationId: getGlossary
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Glossary ID
+          in: path
+          name: glossaryId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Glossary model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Glossary'
+        '404':
+          description: GlossaryNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get single glossary
+      tags:
+        - Glossary
+    put:
+      description: Update the glossary. File name and contents will replaced with the new one.
+      operationId: updateGlossary
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Glossary ID
+          in: path
+          name: glossaryId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Updated glossary model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Glossary'
+        '400':
+          description: FileTooLarge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: GlossaryNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: UnsupportedGlossaryFormat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: ProjectAlreadyStarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Update the glossary.
+      tags:
+        - Glossary
+      requestBody:
+        $ref: '#/components/requestBodies/updateGlobalGlossary'
+  '/projects/{projectId}/glossaries/{glossaryId}/download':
+    get:
+      description: Download a glossary
+      operationId: downloadGlossary
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Glossary ID
+          in: path
+          name: glossaryId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Glossary streamed
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: GlossaryNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Download a glossary
+      tags:
+        - Glossary
+  '/projects/{projectId}/styleguides':
+    get:
+      description: Get a list of style guides
+      operationId: getStyleGuides
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: A list of style guide models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StyleGuideList'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get a list of style guides
+      tags:
+        - Style Guide
+    post:
+      description: Upload a new style guide
+      operationId: createStyleGuide
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Newly created style guide model or a list of new style guide models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StyleGuide'
+        '400':
+          description: FileTooLarge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: ProjectNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: UnsupportedStyleGuideFormat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: ProjectAlreadyStarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Upload a new style guide
+      tags:
+        - Style Guide
+      requestBody:
+        $ref: '#/components/requestBodies/updateGlobalGlossary'
+  '/projects/{projectId}/styleguides/{styleGuideId}':
+    delete:
+      description: Delete the style guide
+      operationId: deleteStyleGuide
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Style Guide ID
+          in: path
+          name: styleGuideId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Style guide deleted successfully
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    default: success
+                    type: string
+                type: object
+        '404':
+          description: StyleGuideNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: ProjectAlreadyStarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Delete the style guide
+      tags:
+        - Style Guide
+    get:
+      description: Get single style guide
+      operationId: getStyleGuide
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Style Guide ID
+          in: path
+          name: styleGuideId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Style guide model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StyleGuide'
+        '404':
+          description: StyleGuideNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Get single style guide
+      tags:
+        - Style Guide
+    put:
+      description: Update the style guide. File name and contents will replaced with the new one.
+      operationId: updteStyleGuide
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Style guide ID
+          in: path
+          name: styleGuideId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Updated style guide model
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StyleGuide'
+        '400':
+          description: FileTooLarge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: StyleGuideNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: UnsupportedStyleGuideFormat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: ProjectAlreadyStarted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Update the style guide.
+      tags:
+        - Style Guide
+      requestBody:
+        $ref: '#/components/requestBodies/updateGlobalGlossary'
+  '/projects/{projectId}/styleguides/{styleGuideId}/download':
+    get:
+      description: Download a style guide
+      operationId: downloadStyleGuide
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: Style Guide ID
+          in: path
+          name: styleGuideId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Style guide streamed
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: StyleGuideNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Download a style guide
+      tags:
+        - Style Guide
+  /styleguide:
+    get:
+      description: Download your corporate account's global style guide. This endpoint is available only for corporate account customers.
+      operationId: downloadGlobalStyleGuide
+      responses:
+        '200':
+          description: Style guide file streamed.
+          content:
+            application/json:
+              schema:
+                type: string
+        '404':
+          description: StyleGuideNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Download the global style guide.
+      tags:
+        - Account
+        - Style Guide
+    post:
+      description: Update your corporate account's global style guide. This endpoint is available only for corporate account customers.
+      operationId: updateGlobalStyleGuide
+      responses:
+        '200':
+          description: Success response
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    default: success
+                    type: string
+                type: object
+        '400':
+          description: FileTooLarge FileTooSmall NoFileUploaded MissingCorporateAccount
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '405':
+          description: UnsupportedStyleGuideFormat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - client_credentials: []
+      summary: Create or update the global style guide.
+      tags:
+        - Account
+        - Style Guide
+      requestBody:
+        $ref: '#/components/requestBodies/updateGlobalGlossary'
+  /token:
+    post:
+      description: |
+        MotaWord API is using OAuth2 procedures when authenticating or authorizing your API call. Currently, we only allow Client Credential type flow.
+      operationId: getAccessToken
+      parameters:
+        - description: HTTP Basic Authorization header.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Authentication response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        default:
+          description: Authentication error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Retrieve an access token to interact with the API.
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  description: OAuth2 grant type. Currently only 'client_credentials' available.
+                  type: string
+              required:
+                - grant_type
+components:
+  schemas:
+    Account:
+      properties:
+        billing:
+          properties:
+            city:
+              type: string
+            country:
+              type: string
+            name:
+              type: string
+            state:
+              type: string
+            street:
+              type: string
+            zip:
+              type: string
+          type: object
+        created_at:
+          type: integer
+        id:
+          type: integer
+        links:
+          properties:
+            projects:
+              properties:
+                href:
+                  type: string
+              type: object
+            self:
+              properties:
+                href:
+                  type: string
+              type: object
+          type: object
+        name:
+          type: string
+        stats:
+          properties:
+            started_projects:
+              type: integer
+            total_projects:
+              type: integer
+          type: object
+    Activity:
+      properties:
+        activity_at:
+          format: date
+          type: string
+        id:
+          type: integer
+        links:
+          $ref: '#/components/schemas/ActivityLinks'
+        source_text:
+          description: Source text
+          type: string
+        target_text:
+          description: 'Target text of the activity, which is actually the translation of the source text.'
+          type: string
+        translator:
+          description: Unique identifier of the translator/proofreader of this activity.
+          type: integer
+        type:
+          description: 'Currently there are two available activity types; ''translated'', ''proofread''.'
+          enum:
+            - translated
+            - proofread
+          type: string
+      type: object
+    ActivityLinks:
+      allOf:
+        - $ref: '#/components/schemas/LinksMeta'
+      properties:
+        comments:
+          properties:
+            href:
+              type: string
+          type: object
+        project:
+          properties:
+            href:
+              type: string
+          type: object
+      type: object
+    ActivityList:
+      properties:
+        activities:
+          items:
+            $ref: '#/components/schemas/Activity'
+          type: array
+        meta:
+          $ref: '#/components/schemas/PagingMeta'
+      type: object
+    Comment:
+      properties:
+        comment:
+          description: Comment text.
+          type: string
+        commented_at:
+          format: date
+          type: string
+        id:
+          type: integer
+        links:
+          $ref: '#/components/schemas/CommentLinks'
+      type: object
+    CommentLinks:
+      allOf:
+        - $ref: '#/components/schemas/LinksMeta'
+      properties:
+        activity:
+          description: Link to the activity to which this comment was submitted.
+          properties:
+            href:
+              type: string
+          type: object
+        project:
+          properties:
+            href:
+              type: string
+          type: object
+      type: object
+    CommentList:
+      properties:
+        activities:
+          items:
+            $ref: '#/components/schemas/Comment'
+          type: array
+        meta:
+          $ref: '#/components/schemas/PagingMeta'
+      type: object
+    Document:
+      properties:
+        id:
+          type: integer
+        links:
+          $ref: '#/components/schemas/DocumentLinks'
+        name:
+          type: string
+        scheme:
+          type: object
+        uploaded_at:
+          format: date
+          type: string
+        word_count:
+          type: integer
+      type: object
+    DocumentLinks:
+      allOf:
+        - $ref: '#/components/schemas/LinksMeta'
+      properties:
+        download:
+          properties:
+            href:
+              type: string
+          type: object
+        project:
+          properties:
+            href:
+              type: string
+          type: object
+      type: object
+    DocumentList:
+      properties:
+        documents:
+          items:
+            $ref: '#/components/schemas/Document'
+          type: array
+        meta:
+          $ref: '#/components/schemas/PagingMeta'
+      type: object
+    Error:
+      properties:
+        code:
+          type: string
+        help:
+          type: string
+        http_code:
+          format: int32
+          type: integer
+        message:
+          type: string
+      type: object
+    Formats:
+      properties:
+        documents:
+          properties:
+            extensions:
+              items:
+                type: string
+              type: array
+            mimes:
+              items:
+                type: string
+              type: array
+          type: object
+        glossaries:
+          properties:
+            extensions:
+              items:
+                type: string
+              type: array
+          type: object
+        styleguides:
+          properties:
+            extensions:
+              items:
+                type: string
+              type: array
+          type: object
+      type: object
+    Glossary:
+      properties:
+        id:
+          type: integer
+        links:
+          $ref: '#/components/schemas/DocumentLinks'
+        name:
+          type: string
+        uploaded_at:
+          format: date
+          type: string
+      type: object
+    GlossaryList:
+      properties:
+        glossaries:
+          items:
+            $ref: '#/components/schemas/Glossary'
+          type: array
+        meta:
+          $ref: '#/components/schemas/PagingMeta'
+      type: object
+    Language:
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+      type: object
+    LanguageProgress:
+      properties:
+        languageCode:
+          $ref: '#/components/schemas/ProgressSub'
+      type: object
+    LinksMeta:
+      properties:
+        self:
+          properties:
+            href:
+              type: string
+          type: object
+      type: object
+    Package:
+      properties:
+        key:
+          description: This is the unique package tracking key. You can use this key to track the current progress of the translation packaging with /package/check call.
+          type: string
+        status:
+          description: 'The status of translation packaging. Possible values are ''started'', ''packaging'', ''completed''. When completed, you can make a /download call to download the last translation package.'
+          enum:
+            - started
+            - packaging
+            - completed
+          type: string
+      type: object
+    PackageStatus:
+      properties:
+        status:
+          description: 'The status of translation packaging. Possible values are ''started'', ''packaging'', ''completed''. When completed, you can make a /download call to download the last translation package.'
+          enum:
+            - started
+            - packaging
+            - completed
+          type: string
+      type: object
+    PagingLinksMeta:
+      allOf:
+        - $ref: '#/components/schemas/LinksMeta'
+      properties:
+        next:
+          type: string
+        previous:
+          type: string
+      type: object
+    PagingMeta:
+      properties:
+        paging:
+          properties:
+            links:
+              $ref: '#/components/schemas/PagingLinksMeta'
+            page:
+              default: 1
+              type: integer
+            per_page:
+              default: 10
+              type: integer
+            total_count:
+              type: integer
+          type: object
+      type: object
+    Progress:
+      allOf:
+        - $ref: '#/components/schemas/ProgressSub'
+      properties:
+        languages:
+          $ref: '#/components/schemas/LanguageProgress'
+        links:
+          $ref: '#/components/schemas/ProgressLink'
+      type: object
+    ProgressLink:
+      allOf:
+        - $ref: '#/components/schemas/LinksMeta'
+      properties:
+        project:
+          properties:
+            href:
+              type: string
+          type: object
+      type: object
+    ProgressSub:
+      properties:
+        proofreading:
+          type: integer
+        total:
+          type: integer
+        translation:
+          type: integer
+      type: object
+    Project:
+      properties:
+        callback_url:
+          description: Callback URL to notify when project status changed.
+          type: string
+        created_at:
+          format: date
+          type: string
+        custom:
+          description: Custom data provided while creating a new project.
+          type: object
+        delivery_at:
+          format: date
+          type: string
+        errors:
+          description: 'A list of errors. Visible when creating a project and uploading your documents at the same time, in case of multiple errors.'
+          items:
+            $ref: '#/components/schemas/Error'
+          type: array
+        id:
+          type: integer
+        links:
+          $ref: '#/components/schemas/ProjectLinks'
+        price:
+          properties:
+            amount:
+              format: float
+              type: number
+            currency:
+              default: usd
+              type: string
+          type: object
+        source_language:
+          type: string
+        status:
+          enum:
+            - pending
+            - started
+            - completed
+          type: string
+        target_languages:
+          items:
+            type: string
+          type: array
+        valid_until:
+          description: Available only if status is `pending`
+          format: date
+          type: string
+        word_count:
+          type: integer
+      type: object
+    ProjectLinks:
+      allOf:
+        - $ref: '#/components/schemas/LinksMeta'
+      properties:
+        documents:
+          properties:
+            href:
+              type: string
+          type: object
+        glossaries:
+          properties:
+            href:
+              type: string
+          type: object
+        styleguides:
+          properties:
+            href:
+              type: string
+          type: object
+      type: object
+    ProjectList:
+      properties:
+        meta:
+          $ref: '#/components/schemas/PagingMeta'
+        projects:
+          items:
+            $ref: '#/components/schemas/Project'
+          type: array
+      type: object
+    StyleGuide:
+      properties:
+        id:
+          type: integer
+        links:
+          $ref: '#/components/schemas/DocumentLinks'
+        name:
+          type: string
+        uploaded_at:
+          format: date
+          type: string
+      type: object
+    StyleGuideList:
+      properties:
+        meta:
+          $ref: '#/components/schemas/PagingMeta'
+        styleguides:
+          items:
+            $ref: '#/components/schemas/StyleGuide'
+          type: array
+      type: object
+    Token:
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+        scope:
+          type: string
+        token_type:
+          type: string
+  requestBodies:
+    updateGlobalGlossary:
+      content:
+        application/octet-stream:
+          schema:
+            type: string
+            format: binary
+      required: true
+  securitySchemes:
+    client_credentials:
+      description: 'OAuth2 authentication, Client Credentials flow.'
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://api.motaword.com/token'
+          tokenUrl: 'https://api.motaword.com/token'
+          scopes:
+            '*': '*'

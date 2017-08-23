@@ -1,0 +1,4113 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.reverb.com/api'
+info:
+  contact:
+    email: integrations@reverb.com
+    name: Reverb API
+    url: 'https://www.reverb-api.com'
+  description: reverb
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  termsOfService: 'https://reverb.com/page/terms'
+  title: reverb
+  version: '3.0'
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    url: 'https://d1g5417jjjo7sf.cloudfront.net/assets/top-level/reverb-logo-d2c75af0b020521f0bc5e90c883a13b5.svg'
+  x-origin:
+    - format: swagger
+      url: 'https://s3.amazonaws.com/swagger.reverb.com/swagger.json'
+      version: '2.0'
+  x-providerName: reverb.com
+externalDocs:
+  url: 'https://dev.reverb.com/'
+paths:
+  /accounts:
+    post:
+      description: Create an account.
+      responses:
+        default:
+          description: Unexpected error
+      summary: Create an account.
+      tags:
+        - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                accept_terms:
+                  description: Accept the Reverb terms of use and privacy policy
+                  type: boolean
+                email:
+                  description: Email address.
+                  type: string
+                first_name:
+                  description: First Name
+                  type: string
+                last_name:
+                  description: Last Name
+                  type: string
+                newsletter_opt_in:
+                  description: Subscribe to gear deals by email
+                  type: boolean
+                password:
+                  description: Password (at least 8 characters).
+                  type: string
+              required:
+                - email
+                - password
+                - first_name
+                - last_name
+              type: object
+        description: the content of the request
+  /articles:
+    get:
+      description: See all Reverb blog posts
+      responses:
+        default:
+          description: Unexpected error
+      summary: See all Reverb blog posts
+      tags:
+        - articles
+  /articles/featured:
+    get:
+      description: See featured Reverb blog posts
+      responses:
+        default:
+          description: Unexpected error
+      summary: See featured Reverb blog posts
+      tags:
+        - articles
+  /articles/multiple:
+    get:
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - articles
+  /articles/recently_featured:
+    get:
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - articles
+  '/articles/{slug}':
+    get:
+      description: Display a single article
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Display a single article
+      tags:
+        - articles
+  '/articles/{slug}/related-listings':
+    get:
+      description: Find listings related to an article
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Find listings related to an article
+      tags:
+        - articles
+  /auth/forgot_password:
+    post:
+      description: Send a password reset email
+      responses:
+        default:
+          description: Unexpected error
+      summary: Send a password reset email
+      tags:
+        - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  type: string
+              required:
+                - email
+              type: object
+        description: the content of the request
+  /auth/logout:
+    put:
+      description: Logout (primarily for mobile clients)
+      responses:
+        default:
+          description: Unexpected error
+      summary: Logout (primarily for mobile clients)
+      tags:
+        - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                device_token:
+                  type: string
+                device_type:
+                  enum:
+                    - ios
+                    - android
+                  type: string
+              required:
+                - device_type
+              type: object
+        description: the content of the request
+  /autosuggest:
+    get:
+      description: Autosuggest terms for searches
+      responses:
+        default:
+          description: Unexpected error
+      summary: Autosuggest terms for searches
+      tags:
+        - autosuggest
+  /bump/new/bids:
+    delete:
+      description: Remove bump for new bids
+      parameters:
+        - description: An array of product IDs to set bids for
+          in: query
+          name: products
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_listings
+      summary: Remove bump for new bids
+      tags:
+        - bump
+    put:
+      description: Update bump for new bids
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_listings
+      summary: Update bump for new bids
+      tags:
+        - bump
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                bid:
+                  description: 'The bid for the product as a decimal, i.e. ''0.035'' means a 3.5% bid'
+                  enum:
+                    - '0.005'
+                    - '0.01'
+                    - '0.015'
+                    - '0.02'
+                    - '0.025'
+                    - '0.03'
+                    - '0.035'
+                  type: string
+                products:
+                  description: An array of product IDs to set bids for
+                  items:
+                    type: integer
+                  type: array
+              required:
+                - products
+                - bid
+              type: object
+        description: the content of the request
+  /cart:
+    get:
+      description: Get all cart items
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get all cart items
+      tags:
+        - cart
+  '/cart/move_to_watch_list/{cart_item_id}':
+    post:
+      description: Remove a cart item and add it to watch list
+      parameters:
+        - in: path
+          name: cart_item_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Remove a cart item and add it to watch list
+      tags:
+        - cart
+  '/cart/{id}':
+    delete:
+      description: Remove a product from the cart
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Remove a product from the cart
+      tags:
+        - cart
+    post:
+      description: Add product to the cart
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Add product to the cart
+      tags:
+        - cart
+    put:
+      description: Update cart item details
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Update cart item details
+      tags:
+        - cart
+  /categories:
+    get:
+      description: List of supported product categories
+      responses:
+        default:
+          description: Unexpected error
+      summary: List of supported product categories
+      tags:
+        - categories
+  /categories/flat:
+    get:
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - categories
+  '/categories/{product_type}/{category}':
+    get:
+      description: Get subcategory details
+      parameters:
+        - in: path
+          name: product_type
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: category
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get subcategory details
+      tags:
+        - categories
+  '/categories/{uuid}':
+    get:
+      description: Get category details
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get category details
+      tags:
+        - categories
+  /collections:
+    get:
+      description: List of curated collections
+      responses:
+        default:
+          description: Unexpected error
+      summary: List of curated collections
+      tags:
+        - collections
+  '/collections/{slug}':
+    get:
+      description: Collection details
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Collection details
+      tags:
+        - collections
+  /comparison_shopping_pages:
+    get:
+      description: Returns a set of comparison shopping pages based on the current params
+      responses:
+        default:
+          description: Unexpected error
+      summary: Returns a set of comparison shopping pages based on the current params
+      tags:
+        - comparison_shopping_pages
+  '/comparison_shopping_pages/{id}':
+    get:
+      description: Show comparison shopping page
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Show comparison shopping page
+      tags:
+        - comparison_shopping_pages
+  '/comparison_shopping_pages/{id}/listings':
+    get:
+      description: Return new or used listings for a comparison shopping page
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: Condition of the listing
+          in: query
+          name: condition
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Return new or used listings for a comparison shopping page
+      tags:
+        - comparison_shopping_pages
+  '/comparison_shopping_pages/{id}/reviews':
+    get:
+      description: View reviews of a comparison shopping page
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: View reviews of a comparison shopping page
+      tags:
+        - comparison_shopping_pages
+  '/conversations/{id}/offer':
+    post:
+      description: Make an offer to the other participant in the conversation
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_offers
+      summary: Make an offer to the other participant in the conversation
+      tags:
+        - conversations
+      requestBody:
+        $ref: '#/components/requestBodies/Body'
+  /countries:
+    get:
+      description: Retrieve a list of country codes with corresponding subregions
+      responses:
+        default:
+          description: Unexpected error
+      summary: Retrieve a list of country codes with corresponding subregions
+      tags:
+        - countries
+  '/curated_set/{user_id}/handpicked':
+    get:
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - curated_set
+  /currencies/display:
+    get:
+      description: List of supported display currencies for browsing listings
+      responses:
+        default:
+          description: Unexpected error
+      summary: List of supported display currencies for browsing listings
+      tags:
+        - currencies
+  /currencies/listing:
+    get:
+      description: List of supported listing currencies for shops
+      responses:
+        default:
+          description: Unexpected error
+      summary: List of supported listing currencies for shops
+      tags:
+        - currencies
+  '/feedback/{feedback_id}':
+    get:
+      description: Feedback details
+      parameters:
+        - in: path
+          name: feedback_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Feedback details
+      tags:
+        - feedback
+  '/handpicked/{slug}':
+    get:
+      description: Handpicked collection details
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Handpicked collection details
+      tags:
+        - handpicked
+  /listing_conditions:
+    get:
+      description: List of supported product conditions
+      responses:
+        default:
+          description: Unexpected error
+      summary: List of supported product conditions
+      tags:
+        - listing_conditions
+  /listings:
+    get:
+      description: Default search of listings includes only used & handmade. Add a filter to view all listings or use the /listings/all endpoint.
+      parameters:
+        - description: Search query.
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: Maximum current auction price
+          in: query
+          name: auction_price_max
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: Category slug from /api/categories
+          in: query
+          name: category
+          required: false
+          schema:
+            type: string
+        - description: Product type slug from /api/categories
+          in: query
+          name: product_type
+          required: false
+          schema:
+            type: string
+        - description: 'Condition: all,new,b-stock,used,non-functioning'
+          in: query
+          name: conditions
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Decade: e.g. 1970s, early 70s'
+          in: query
+          name: decade
+          required: false
+          schema:
+            type: string
+        - description: 'Visual finish of the item, common for guitars'
+          in: query
+          name: finish
+          required: false
+          schema:
+            type: string
+        - description: Handmade items only
+          in: query
+          name: handmade
+          required: false
+          schema:
+            type: boolean
+        - description: City where item is located
+          in: query
+          name: item_city
+          required: false
+          schema:
+            type: string
+        - description: DEPRECATED - Country code where item is located
+          in: query
+          name: item_country
+          required: false
+          schema:
+            type: string
+        - description: Country code where item is located
+          in: query
+          name: item_region
+          required: false
+          schema:
+            type: string
+        - description: State or region code where item is located
+          in: query
+          name: item_state
+          required: false
+          schema:
+            type: string
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
+          in: query
+          name: make
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Model of item (e.g. Stratocaster)
+          in: query
+          name: model
+          required: false
+          schema:
+            type: string
+        - description: 'Search term negation. If you want to exclude a term, add it here'
+          in: query
+          name: must_not
+          required: false
+          schema:
+            type: string
+        - description: Maximum price of search results (USD)
+          in: query
+          name: price_max
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: Minimum price of search results (USD)
+          in: query
+          name: price_min
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: The currency to be used for the price filters
+          in: query
+          name: currency
+          required: false
+          schema:
+            type: string
+        - description: Maximum year of manufacture
+          in: query
+          name: year_max
+          required: false
+          schema:
+            type: integer
+        - description: Minumum year of manufacture
+          in: query
+          name: year_min
+          required: false
+          schema:
+            type: integer
+        - description: 'If true, include only items that accept gift cards'
+          in: query
+          name: accepts_gift_cards
+          required: false
+          schema:
+            type: boolean
+        - description: 'If true, include only items by Reverb Preferred Sellers'
+          in: query
+          name: preferred_seller
+          required: false
+          schema:
+            type: boolean
+        - description: Slug of shop to search
+          in: query
+          name: shop
+          required: false
+          schema:
+            type: string
+        - description: ID of shop to search
+          in: query
+          name: shop_id
+          required: false
+          schema:
+            type: string
+        - description: 'Type of listing: auctions,offers'
+          in: query
+          name: listing_type
+          required: false
+          schema:
+            type: string
+        - description: Limit search to items that ship to this country code
+          in: query
+          name: ships_to
+          required: false
+          schema:
+            type: string
+        - description: 'If true, exclude auctions'
+          in: query
+          name: exclude_auctions
+          required: false
+          schema:
+            type: boolean
+        - description: 'If true, only show items that can be purchased with a payment plan'
+          in: query
+          name: accepts_payment_plans
+          required: false
+          schema:
+            type: boolean
+        - description: Minimum number of watchers (used to find popular items)
+          in: query
+          name: watchers_count_min
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+            default: 24
+      responses:
+        default:
+          description: Unexpected error
+      summary: Default search of listings includes only used & handmade. Add a filter to view all listings or use the /listings/all endpoint.
+      tags:
+        - listings
+    post:
+      description: Create a listing
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_listings
+      summary: Create a listing
+      tags:
+        - listings
+      requestBody:
+        $ref: '#/components/requestBodies/Body2'
+  /listings/all:
+    get:
+      description: 'All listings including used, handmade, and brand new'
+      parameters:
+        - description: Search query.
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: Maximum current auction price
+          in: query
+          name: auction_price_max
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: Category slug from /api/categories
+          in: query
+          name: category
+          required: false
+          schema:
+            type: string
+        - description: Product type slug from /api/categories
+          in: query
+          name: product_type
+          required: false
+          schema:
+            type: string
+        - description: 'Condition: all,new,b-stock,used,non-functioning'
+          in: query
+          name: conditions
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Decade: e.g. 1970s, early 70s'
+          in: query
+          name: decade
+          required: false
+          schema:
+            type: string
+        - description: 'Visual finish of the item, common for guitars'
+          in: query
+          name: finish
+          required: false
+          schema:
+            type: string
+        - description: Handmade items only
+          in: query
+          name: handmade
+          required: false
+          schema:
+            type: boolean
+        - description: City where item is located
+          in: query
+          name: item_city
+          required: false
+          schema:
+            type: string
+        - description: DEPRECATED - Country code where item is located
+          in: query
+          name: item_country
+          required: false
+          schema:
+            type: string
+        - description: Country code where item is located
+          in: query
+          name: item_region
+          required: false
+          schema:
+            type: string
+        - description: State or region code where item is located
+          in: query
+          name: item_state
+          required: false
+          schema:
+            type: string
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
+          in: query
+          name: make
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Model of item (e.g. Stratocaster)
+          in: query
+          name: model
+          required: false
+          schema:
+            type: string
+        - description: 'Search term negation. If you want to exclude a term, add it here'
+          in: query
+          name: must_not
+          required: false
+          schema:
+            type: string
+        - description: Maximum price of search results (USD)
+          in: query
+          name: price_max
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: Minimum price of search results (USD)
+          in: query
+          name: price_min
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: The currency to be used for the price filters
+          in: query
+          name: currency
+          required: false
+          schema:
+            type: string
+        - description: Maximum year of manufacture
+          in: query
+          name: year_max
+          required: false
+          schema:
+            type: integer
+        - description: Minumum year of manufacture
+          in: query
+          name: year_min
+          required: false
+          schema:
+            type: integer
+        - description: 'If true, include only items that accept gift cards'
+          in: query
+          name: accepts_gift_cards
+          required: false
+          schema:
+            type: boolean
+        - description: 'If true, include only items by Reverb Preferred Sellers'
+          in: query
+          name: preferred_seller
+          required: false
+          schema:
+            type: boolean
+        - description: Slug of shop to search
+          in: query
+          name: shop
+          required: false
+          schema:
+            type: string
+        - description: ID of shop to search
+          in: query
+          name: shop_id
+          required: false
+          schema:
+            type: string
+        - description: 'Type of listing: auctions,offers'
+          in: query
+          name: listing_type
+          required: false
+          schema:
+            type: string
+        - description: Limit search to items that ship to this country code
+          in: query
+          name: ships_to
+          required: false
+          schema:
+            type: string
+        - description: 'If true, exclude auctions'
+          in: query
+          name: exclude_auctions
+          required: false
+          schema:
+            type: boolean
+        - description: 'If true, only show items that can be purchased with a payment plan'
+          in: query
+          name: accepts_payment_plans
+          required: false
+          schema:
+            type: boolean
+        - description: Minimum number of watchers (used to find popular items)
+          in: query
+          name: watchers_count_min
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+            default: 24
+      responses:
+        default:
+          description: Unexpected error
+      summary: 'All listings including used, handmade, and brand new'
+      tags:
+        - listings
+  '/listings/{id}/offer':
+    post:
+      description: Make an offer to the seller of a listing
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_offers
+      summary: Make an offer to the seller of a listing
+      tags:
+        - listings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                message:
+                  description: Message to include with counter offer
+                  type: string
+                price:
+                  description: Offer price
+                  type: string
+                shipping_price:
+                  description: Shipping price (sellers only)
+                  type: string
+              required:
+                - price
+              type: object
+        description: the content of the request
+  '/listings/{listing_id}/bump':
+    get:
+      description: View available bump tiers and stats for a listing
+      parameters:
+        - in: path
+          name: listing_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_listings
+      summary: View available bump tiers and stats for a listing
+      tags:
+        - listings
+  '/listings/{listing_id}/bump/{budget_type}':
+    post:
+      description: Bump a listing
+      parameters:
+        - in: path
+          name: listing_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: budget_type
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_listings
+      summary: Bump a listing
+      tags:
+        - listings
+  '/listings/{listing_id}/conversations':
+    post:
+      description: Start a conversation with a seller
+      parameters:
+        - in: path
+          name: listing_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_messages
+      summary: Start a conversation with a seller
+      tags:
+        - listings
+      requestBody:
+        $ref: '#/components/requestBodies/Body3'
+  '/listings/{listing_id}/images':
+    get:
+      description: View the images associated with a particular listing
+      parameters:
+        - in: path
+          name: listing_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_listings
+      summary: View the images associated with a particular listing
+      tags:
+        - listings
+  '/listings/{listing_id}/images/{image_id}':
+    delete:
+      description: Delete an image from a listing
+      parameters:
+        - in: path
+          name: listing_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: image_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_listings
+      summary: Delete an image from a listing
+      tags:
+        - listings
+  '/listings/{listing_id}/product_bundle':
+    get:
+      description: Find a product bundle attached to a listing
+      parameters:
+        - in: path
+          name: listing_id
+          required: true
+          schema:
+            type: string
+        - description: Pass to see non-live bundles as the seller
+          in: query
+          name: for_seller
+          required: false
+          schema:
+            type: boolean
+      responses:
+        default:
+          description: Unexpected error
+      summary: Find a product bundle attached to a listing
+      tags:
+        - listings
+  '/listings/{listing_id}/sales':
+    get:
+      description: See all sales that include a listing.
+      parameters:
+        - in: path
+          name: listing_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: See all sales that include a listing.
+      tags:
+        - listings
+  '/listings/{slug}':
+    delete:
+      description: Delete a draft listing. Cannot be used on non-drafts.
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_listings
+      summary: Delete a draft listing. Cannot be used on non-drafts.
+      tags:
+        - listings
+    get:
+      description: Listing details
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Listing details
+      tags:
+        - listings
+    put:
+      description: Update a listing
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_listings
+      summary: Update a listing
+      tags:
+        - listings
+      requestBody:
+        $ref: '#/components/requestBodies/Body2'
+  '/listings/{slug}/edit':
+    get:
+      description: Edit listing.
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_listings
+      summary: Edit listing.
+      tags:
+        - listings
+  '/listings/{slug}/flag':
+    post:
+      description: Flag a listing for inappropriate content or fraud
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Flag a listing for inappropriate content or fraud
+      tags:
+        - listings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                reason:
+                  description: 'Valid reasons: ''Sexuality/nudity'', ''Hateful or inappropriate speech'', ''Item not as described or potential fraud'', ''Trademark infringement'', ''Other'''
+                  type: string
+              required:
+                - reason
+              type: object
+        description: the content of the request
+  '/listings/{slug}/reviews':
+    get:
+      description: View reviews of a listing
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: View reviews of a listing
+      tags:
+        - listings
+    post:
+      description: Create a review for a listing
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_reviews
+      summary: Create a review for a listing
+      tags:
+        - listings
+  '/listings/{slug}/similar_listings':
+    get:
+      description: Listing details
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Listing details
+      tags:
+        - listings
+  /my/account:
+    get:
+      description: Get account details
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_profile
+      summary: Get account details
+      tags:
+        - my
+    put:
+      description: Update account details
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_profile
+      summary: Update account details
+      tags:
+        - my
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                currency:
+                  description: The currency preference for the account
+                  type: string
+                first_name:
+                  description: The first name of the account holder
+                  type: string
+                last_name:
+                  description: The last name of the account holder
+                  type: string
+                shipping_region_code:
+                  description: The shipping region preference for the account
+                  type: string
+              type: object
+        description: the content of the request
+  /my/addresses:
+    get:
+      description: See all addresses in your address book
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_profile
+      summary: See all addresses in your address book
+      tags:
+        - my
+    post:
+      description: Create a new address in your address book
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_profile
+      summary: Create a new address in your address book
+      tags:
+        - my
+  '/my/addresses/{address_id}':
+    delete:
+      description: Delete an existing address in your address book
+      parameters:
+        - in: path
+          name: address_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_profile
+      summary: Delete an existing address in your address book
+      tags:
+        - my
+    put:
+      description: Update an existing address in your address book
+      parameters:
+        - in: path
+          name: address_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_profile
+      summary: Update an existing address in your address book
+      tags:
+        - my
+  /my/conversations:
+    get:
+      description: Get a list of your conversations
+      parameters:
+        - description: Query string to search conversations by
+          in: query
+          name: search
+          required: false
+          schema:
+            type: string
+        - description: Show unread conversations only
+          in: query
+          name: unread_only
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+            default: 24
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_messages
+      summary: Get a list of your conversations
+      tags:
+        - my
+    post:
+      description: Start a conversation
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_messages
+      summary: Start a conversation
+      tags:
+        - my
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                body:
+                  description: The body of the message
+                  type: string
+                cloudinary_photos:
+                  description: An array of cloudinary data hashes (Reverb internal use only).
+                  items:
+                    type: string
+                  type: array
+                listing_id:
+                  description: The id of the listing being discussed
+                  type: integer
+                recipient_id:
+                  description: The id of the user you are trying to contact
+                  type: integer
+              required:
+                - body
+              type: object
+        description: the content of the request
+  '/my/conversations/{conversation_id}/messages':
+    post:
+      description: Send a message
+      parameters:
+        - in: path
+          name: conversation_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_messages
+      summary: Send a message
+      tags:
+        - my
+      requestBody:
+        $ref: '#/components/requestBodies/Body3'
+  '/my/conversations/{id}':
+    get:
+      description: Display conversation details with messages in natural time order (oldest to newest)
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_messages
+      summary: Display conversation details with messages in natural time order (oldest to newest)
+      tags:
+        - my
+    put:
+      description: Mark a conversation read/unread
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_messages
+      summary: Mark a conversation read/unread
+      tags:
+        - my
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                read:
+                  description: Should the conversation be marked as read
+                  type: boolean
+              type: object
+        description: the content of the request
+  /my/counts:
+    get:
+      description: Get your actionable status counts
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_profile
+      summary: Get your actionable status counts
+      tags:
+        - my
+  /my/curated_set:
+    get:
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - my
+  '/my/curated_set/product/{product_id}':
+    delete:
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - my
+    post:
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - my
+  /my/feed:
+    get:
+      description: Get listings from your feed
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: Get listings from your feed
+      tags:
+        - my
+  /my/feed/customize:
+    get:
+      description: get your feed customization options
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: get your feed customization options
+      tags:
+        - my
+  /my/feed/grid:
+    get:
+      description: get your feed
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: get your feed
+      tags:
+        - my
+  /my/feedback/received:
+    get:
+      description: List of received feedback
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_feedback
+      summary: List of received feedback
+      tags:
+        - my
+  /my/feedback/sent:
+    get:
+      description: List of sent feedback
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_feedback
+      summary: List of sent feedback
+      tags:
+        - my
+  /my/follows:
+    get:
+      description: See what the user is following
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: See what the user is following
+      tags:
+        - my
+  '/my/follows/brands/{slug}':
+    delete:
+      description: Unfollow a brand
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Unfollow a brand
+      tags:
+        - my
+    get:
+      description: Follow status for a brand
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: Follow status for a brand
+      tags:
+        - my
+    post:
+      description: Follow a brand
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Follow a brand
+      tags:
+        - my
+  '/my/follows/categories/{category}/{subcategory}':
+    delete:
+      description: Unfollow a subcategory
+      parameters:
+        - in: path
+          name: category
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: subcategory
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Unfollow a subcategory
+      tags:
+        - my
+    get:
+      description: Follow status for a subcategory
+      parameters:
+        - in: path
+          name: category
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: subcategory
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: Follow status for a subcategory
+      tags:
+        - my
+    post:
+      description: Follow a subcategory
+      parameters:
+        - in: path
+          name: category
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: subcategory
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Follow a subcategory
+      tags:
+        - my
+  '/my/follows/categories/{identifier}':
+    delete:
+      description: Unfollow a category
+      parameters:
+        - in: path
+          name: identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Unfollow a category
+      tags:
+        - my
+    get:
+      description: Follow status for a category
+      parameters:
+        - in: path
+          name: identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: Follow status for a category
+      tags:
+        - my
+    post:
+      description: Follow a category
+      parameters:
+        - in: path
+          name: identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Follow a category
+      tags:
+        - my
+  '/my/follows/collections/{slug}':
+    delete:
+      description: Unfollow a collection
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Unfollow a collection
+      tags:
+        - my
+    get:
+      description: Follow status for a collection
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: Follow status for a collection
+      tags:
+        - my
+    post:
+      description: Follow a collection
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Follow a collection
+      tags:
+        - my
+  '/my/follows/handpicked/{slug}':
+    delete:
+      description: Unfollow a handpicked collection
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Unfollow a handpicked collection
+      tags:
+        - my
+    get:
+      description: Follow status for a handpicked collection
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: Follow status for a handpicked collection
+      tags:
+        - my
+    post:
+      description: Follow a handpicked collection
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Follow a handpicked collection
+      tags:
+        - my
+  /my/follows/search:
+    get:
+      description: Follow status for a search
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: Follow status for a search
+      tags:
+        - my
+    post:
+      description: Follow a search
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Follow a search
+      tags:
+        - my
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                accepts_gift_cards:
+                  description: 'If true, include only items that accept gift cards'
+                  type: boolean
+                accepts_payment_plans:
+                  description: 'If true, only show items that can be purchased with a payment plan'
+                  type: boolean
+                auction_price_max:
+                  description: Maximum current auction price
+                  format: float
+                  type: number
+                category:
+                  description: Category slug from /api/categories
+                  type: string
+                conditions:
+                  description: 'Condition: all,new,b-stock,used,non-functioning'
+                  enum:
+                    - all
+                    - new
+                    - b-stock
+                    - used
+                    - non-functioning
+                  items:
+                    type: string
+                  type: array
+                currency:
+                  description: The currency to be used for the price filters
+                  enum:
+                    - USD
+                    - CAD
+                    - EUR
+                    - GBP
+                    - AUD
+                    - JPY
+                    - NZD
+                    - MXN
+                  type: string
+                decade:
+                  description: 'Decade: e.g. 1970s, early 70s'
+                  type: string
+                exclude_auctions:
+                  description: 'If true, exclude auctions'
+                  type: boolean
+                finish:
+                  description: 'Visual finish of the item, common for guitars'
+                  type: string
+                handmade:
+                  description: Handmade items only
+                  type: boolean
+                item_city:
+                  description: City where item is located
+                  type: string
+                item_country:
+                  description: DEPRECATED - Country code where item is located
+                  type: string
+                item_region:
+                  description: Country code where item is located
+                  type: string
+                item_state:
+                  description: State or region code where item is located
+                  type: string
+                listing_type:
+                  description: 'Type of listing: auctions,offers'
+                  enum:
+                    - auctions
+                    - offers
+                  type: string
+                make:
+                  description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
+                  items:
+                    type: string
+                  type: array
+                model:
+                  description: Model of item (e.g. Stratocaster)
+                  type: string
+                must_not:
+                  description: 'Search term negation. If you want to exclude a term, add it here'
+                  type: string
+                preferred_seller:
+                  description: 'If true, include only items by Reverb Preferred Sellers'
+                  type: boolean
+                price_max:
+                  description: Maximum price of search results (USD)
+                  format: float
+                  type: number
+                price_min:
+                  description: Minimum price of search results (USD)
+                  format: float
+                  type: number
+                product_type:
+                  description: Product type slug from /api/categories
+                  type: string
+                query:
+                  description: Search query.
+                  type: string
+                ships_to:
+                  description: Limit search to items that ship to this country code
+                  type: string
+                shop:
+                  description: Slug of shop to search
+                  type: string
+                shop_id:
+                  description: ID of shop to search
+                  type: string
+                watchers_count_min:
+                  description: Minimum number of watchers (used to find popular items)
+                  type: integer
+                year_max:
+                  description: Maximum year of manufacture
+                  type: integer
+                year_min:
+                  description: Minumum year of manufacture
+                  type: integer
+              type: object
+        description: the content of the request
+  '/my/follows/shops/{slug}':
+    delete:
+      description: Unfollow a shop
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Unfollow a shop
+      tags:
+        - my
+    get:
+      description: Follow status for a shop
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: Follow status for a shop
+      tags:
+        - my
+    post:
+      description: Follow a shop
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Follow a shop
+      tags:
+        - my
+  '/my/follows/{follow_id}':
+    delete:
+      description: Delete a follow
+      parameters:
+        - in: path
+          name: follow_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Delete a follow
+      tags:
+        - my
+  '/my/follows/{follow_id}/alert':
+    delete:
+      parameters:
+        - in: path
+          name: follow_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - my
+    post:
+      parameters:
+        - in: path
+          name: follow_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - my
+  /my/listings:
+    get:
+      description: Retrieve a list of live listings for the seller. To search all listings specify state=all
+      parameters:
+        - description: Search query.
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: Maximum current auction price
+          in: query
+          name: auction_price_max
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: Category slug from /api/categories
+          in: query
+          name: category
+          required: false
+          schema:
+            type: string
+        - description: Product type slug from /api/categories
+          in: query
+          name: product_type
+          required: false
+          schema:
+            type: string
+        - description: 'Condition: all,new,b-stock,used,non-functioning'
+          in: query
+          name: conditions
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Decade: e.g. 1970s, early 70s'
+          in: query
+          name: decade
+          required: false
+          schema:
+            type: string
+        - description: 'Visual finish of the item, common for guitars'
+          in: query
+          name: finish
+          required: false
+          schema:
+            type: string
+        - description: Handmade items only
+          in: query
+          name: handmade
+          required: false
+          schema:
+            type: boolean
+        - description: City where item is located
+          in: query
+          name: item_city
+          required: false
+          schema:
+            type: string
+        - description: DEPRECATED - Country code where item is located
+          in: query
+          name: item_country
+          required: false
+          schema:
+            type: string
+        - description: Country code where item is located
+          in: query
+          name: item_region
+          required: false
+          schema:
+            type: string
+        - description: State or region code where item is located
+          in: query
+          name: item_state
+          required: false
+          schema:
+            type: string
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
+          in: query
+          name: make
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Model of item (e.g. Stratocaster)
+          in: query
+          name: model
+          required: false
+          schema:
+            type: string
+        - description: 'Search term negation. If you want to exclude a term, add it here'
+          in: query
+          name: must_not
+          required: false
+          schema:
+            type: string
+        - description: Maximum price of search results (USD)
+          in: query
+          name: price_max
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: Minimum price of search results (USD)
+          in: query
+          name: price_min
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: The currency to be used for the price filters
+          in: query
+          name: currency
+          required: false
+          schema:
+            type: string
+        - description: Maximum year of manufacture
+          in: query
+          name: year_max
+          required: false
+          schema:
+            type: integer
+        - description: Minumum year of manufacture
+          in: query
+          name: year_min
+          required: false
+          schema:
+            type: integer
+        - description: 'If true, include only items that accept gift cards'
+          in: query
+          name: accepts_gift_cards
+          required: false
+          schema:
+            type: boolean
+        - description: 'If true, include only items by Reverb Preferred Sellers'
+          in: query
+          name: preferred_seller
+          required: false
+          schema:
+            type: boolean
+        - description: Slug of shop to search
+          in: query
+          name: shop
+          required: false
+          schema:
+            type: string
+        - description: ID of shop to search
+          in: query
+          name: shop_id
+          required: false
+          schema:
+            type: string
+        - description: 'Type of listing: auctions,offers'
+          in: query
+          name: listing_type
+          required: false
+          schema:
+            type: string
+        - description: Limit search to items that ship to this country code
+          in: query
+          name: ships_to
+          required: false
+          schema:
+            type: string
+        - description: 'If true, exclude auctions'
+          in: query
+          name: exclude_auctions
+          required: false
+          schema:
+            type: boolean
+        - description: 'If true, only show items that can be purchased with a payment plan'
+          in: query
+          name: accepts_payment_plans
+          required: false
+          schema:
+            type: boolean
+        - description: Minimum number of watchers (used to find popular items)
+          in: query
+          name: watchers_count_min
+          required: false
+          schema:
+            type: integer
+        - description: 'Available: ["all", "draft", "ended", "live", "ordered", "sold_out", "suspended", "seller_unavailable"]. Defaults to ''live'''
+          in: query
+          name: state
+          required: false
+          schema:
+            type: string
+            default: live
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_listings
+      summary: Retrieve a list of live listings for the seller. To search all listings specify state=all
+      tags:
+        - my
+  /my/listings/drafts:
+    get:
+      description: Retrieve a list your draft listings
+      parameters:
+        - description: Search query.
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: Maximum current auction price
+          in: query
+          name: auction_price_max
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: Category slug from /api/categories
+          in: query
+          name: category
+          required: false
+          schema:
+            type: string
+        - description: Product type slug from /api/categories
+          in: query
+          name: product_type
+          required: false
+          schema:
+            type: string
+        - description: 'Condition: all,new,b-stock,used,non-functioning'
+          in: query
+          name: conditions
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Decade: e.g. 1970s, early 70s'
+          in: query
+          name: decade
+          required: false
+          schema:
+            type: string
+        - description: 'Visual finish of the item, common for guitars'
+          in: query
+          name: finish
+          required: false
+          schema:
+            type: string
+        - description: Handmade items only
+          in: query
+          name: handmade
+          required: false
+          schema:
+            type: boolean
+        - description: City where item is located
+          in: query
+          name: item_city
+          required: false
+          schema:
+            type: string
+        - description: DEPRECATED - Country code where item is located
+          in: query
+          name: item_country
+          required: false
+          schema:
+            type: string
+        - description: Country code where item is located
+          in: query
+          name: item_region
+          required: false
+          schema:
+            type: string
+        - description: State or region code where item is located
+          in: query
+          name: item_state
+          required: false
+          schema:
+            type: string
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
+          in: query
+          name: make
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Model of item (e.g. Stratocaster)
+          in: query
+          name: model
+          required: false
+          schema:
+            type: string
+        - description: 'Search term negation. If you want to exclude a term, add it here'
+          in: query
+          name: must_not
+          required: false
+          schema:
+            type: string
+        - description: Maximum price of search results (USD)
+          in: query
+          name: price_max
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: Minimum price of search results (USD)
+          in: query
+          name: price_min
+          required: false
+          schema:
+            type: number
+            format: float
+        - description: The currency to be used for the price filters
+          in: query
+          name: currency
+          required: false
+          schema:
+            type: string
+        - description: Maximum year of manufacture
+          in: query
+          name: year_max
+          required: false
+          schema:
+            type: integer
+        - description: Minumum year of manufacture
+          in: query
+          name: year_min
+          required: false
+          schema:
+            type: integer
+        - description: 'If true, include only items that accept gift cards'
+          in: query
+          name: accepts_gift_cards
+          required: false
+          schema:
+            type: boolean
+        - description: 'If true, include only items by Reverb Preferred Sellers'
+          in: query
+          name: preferred_seller
+          required: false
+          schema:
+            type: boolean
+        - description: Slug of shop to search
+          in: query
+          name: shop
+          required: false
+          schema:
+            type: string
+        - description: ID of shop to search
+          in: query
+          name: shop_id
+          required: false
+          schema:
+            type: string
+        - description: 'Type of listing: auctions,offers'
+          in: query
+          name: listing_type
+          required: false
+          schema:
+            type: string
+        - description: Limit search to items that ship to this country code
+          in: query
+          name: ships_to
+          required: false
+          schema:
+            type: string
+        - description: 'If true, exclude auctions'
+          in: query
+          name: exclude_auctions
+          required: false
+          schema:
+            type: boolean
+        - description: 'If true, only show items that can be purchased with a payment plan'
+          in: query
+          name: accepts_payment_plans
+          required: false
+          schema:
+            type: boolean
+        - description: Minimum number of watchers (used to find popular items)
+          in: query
+          name: watchers_count_min
+          required: false
+          schema:
+            type: integer
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_listings
+      summary: Retrieve a list your draft listings
+      tags:
+        - my
+  /my/listings/negotiations:
+    get:
+      description: Get a list of active negotiations as a seller
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+            default: 24
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_offers
+      summary: Get a list of active negotiations as a seller
+      tags:
+        - my
+  '/my/listings/{slug}/state/end':
+    put:
+      description: End a listing
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_listings
+      summary: End a listing
+      tags:
+        - my
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                reason:
+                  description: 'The reason this listing is being ended. Valid reasons: ["not_sold", "reverb_sale"].'
+                  enum:
+                    - not_sold
+                    - reverb_sale
+                  type: string
+              required:
+                - reason
+              type: object
+        description: the content of the request
+  /my/lists:
+    get:
+      description: 'Get a list of your lists (wishlist, watch list, etc)'
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: 'Get a list of your lists (wishlist, watch list, etc)'
+      tags:
+        - my
+  /my/negotiations/buying:
+    get:
+      description: Get a list of active negotiations as a buyer
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+            default: 24
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_offers
+      summary: Get a list of active negotiations as a buyer
+      tags:
+        - my
+  '/my/negotiations/{id}':
+    get:
+      description: Get offer details
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_offers
+      summary: Get offer details
+      tags:
+        - my
+  '/my/negotiations/{id}/accept':
+    post:
+      description: Accept an offer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_offers
+      summary: Accept an offer
+      tags:
+        - my
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                message:
+                  description: Message to include with accepted offer
+                  type: string
+              type: object
+        description: the content of the request
+  '/my/negotiations/{id}/counter':
+    post:
+      description: Counter an offer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_offers
+      summary: Counter an offer
+      tags:
+        - my
+      requestBody:
+        $ref: '#/components/requestBodies/Body'
+  '/my/negotiations/{id}/decline':
+    post:
+      description: Decline an offer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_offers
+      summary: Decline an offer
+      tags:
+        - my
+  /my/orders/awaiting_feedback:
+    get:
+      description: List of orders that need feedback
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_feedback
+      summary: List of orders that need feedback
+      tags:
+        - my
+  /my/orders/buying/all:
+    get:
+      description: 'Returns all orders, newest first.'
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_orders
+      summary: 'Returns all orders, newest first.'
+      tags:
+        - my
+  /my/orders/buying/unpaid:
+    get:
+      description: 'Returns unpaid orders, newest first.'
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_orders
+      summary: 'Returns unpaid orders, newest first.'
+      tags:
+        - my
+  '/my/orders/buying/{id}':
+    get:
+      description: Returns order details for a buyer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_orders
+      summary: Returns order details for a buyer
+      tags:
+        - my
+  '/my/orders/buying/{id}/mark_received':
+    post:
+      description: Marks an order as received by the buyer
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_orders
+      summary: Marks an order as received by the buyer
+      tags:
+        - my
+  /my/orders/selling/all:
+    get:
+      description: 'Get all seller orders, newest first.'
+      parameters:
+        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: created_start_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: created_end_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: updated_start_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: updated_end_date
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+            default: 24
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_orders
+      summary: 'Get all seller orders, newest first.'
+      tags:
+        - my
+  /my/orders/selling/awaiting_shipment:
+    get:
+      description: 'Get seller orders awaiting shipment, newest first.'
+      parameters:
+        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: created_start_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: created_end_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: updated_start_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: updated_end_date
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+            default: 24
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_orders
+      summary: 'Get seller orders awaiting shipment, newest first.'
+      tags:
+        - my
+  '/my/orders/selling/buyer_history/{buyer_id}':
+    get:
+      description: See previous orders from buyer
+      parameters:
+        - in: path
+          name: buyer_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_orders
+      summary: See previous orders from buyer
+      tags:
+        - my
+  /my/orders/selling/unpaid:
+    get:
+      description: 'Get unpaid seller orders, newest first.'
+      parameters:
+        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: created_start_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: created_end_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: updated_start_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: updated_end_date
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+            default: 24
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_orders
+      summary: 'Get unpaid seller orders, newest first.'
+      tags:
+        - my
+  '/my/orders/selling/{id}':
+    get:
+      description: Returns order details for a seller
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_orders
+      summary: Returns order details for a seller
+      tags:
+        - my
+  '/my/orders/selling/{id}/mark_picked_up':
+    post:
+      description: Marks an order as picked up
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_orders
+      summary: Marks an order as picked up
+      tags:
+        - my
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                date:
+                  description: Date the item was picked up.
+                  type: string
+              type: object
+        description: the content of the request
+  '/my/orders/selling/{id}/ship':
+    post:
+      description: Marks an order as shipped
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_orders
+      summary: Marks an order as shipped
+      tags:
+        - my
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                provider:
+                  description: 'Shipping provider: One of UPS, USPS, FedEx, DHL, DHLExpress, DHLGlobalMail, DHL Germany, Canada Post, Royal Mail, PostNL, Australia Post, EMS, La Poste, China Post, GLS, Parcelforce, Purolator, Interlogistica, Correos España, Ukraine Post, Other'
+                  type: string
+                send_notification:
+                  description: Should we send an email notification to the buyer
+                  type: boolean
+                tracking_number:
+                  description: Tracking number provided by the shipping provider
+                  type: string
+              required:
+                - provider
+                - tracking_number
+                - send_notification
+              type: object
+        description: the content of the request
+  /my/payments/selling:
+    get:
+      description: Get payments
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+            default: 24
+        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: created_start_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: created_end_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: updated_start_date
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+          in: query
+          name: updated_end_date
+          required: false
+          schema:
+            type: string
+        - description: Look up payments by order id
+          in: query
+          name: order_id
+          required: false
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_orders
+      summary: Get payments
+      tags:
+        - my
+  '/my/payments/selling/{id}':
+    get:
+      description: Get payment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_orders
+      summary: Get payment
+      tags:
+        - my
+  /my/viewed_listings:
+    get:
+      description: Get a list of your recently viewed listings.
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: Get a list of your recently viewed listings.
+      tags:
+        - my
+  /my/wishlist:
+    get:
+      description: Get a list of wishlisted items
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: Get a list of wishlisted items
+      tags:
+        - my
+  '/my/wishlist/{id}':
+    delete:
+      description: Remove a listing from your wishlist
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Remove a listing from your wishlist
+      tags:
+        - my
+    put:
+      description: Add a listing to your wishlist
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Add a listing to your wishlist
+      tags:
+        - my
+  '/orders/{order_id}/feedback/buyer':
+    get:
+      description: Feedback details for an order's buyer
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Feedback details for an order's buyer
+      tags:
+        - orders
+    post:
+      description: Add feedback about an order's buyer
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_feedback
+      summary: Add feedback about an order's buyer
+      tags:
+        - orders
+  '/orders/{order_id}/feedback/seller':
+    get:
+      description: Feedback details for an order's seller
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Feedback details for an order's seller
+      tags:
+        - orders
+    post:
+      description: Add feedback about an order's seller
+      parameters:
+        - in: path
+          name: order_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_feedback
+      summary: Add feedback about an order's seller
+      tags:
+        - orders
+  /payment_methods:
+    get:
+      description: Get list of payment methods
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get list of payment methods
+      tags:
+        - payment_methods
+  /priceguide:
+    get:
+      description: Search the Price Guide
+      parameters:
+        - description: Search query.
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Search the Price Guide
+      tags:
+        - priceguide
+  '/priceguide/{id}':
+    get:
+      description: Retrieve a Price Guide
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Retrieve a Price Guide
+      tags:
+        - priceguide
+  '/priceguide/{id}/transactions':
+    get:
+      description: Get a list of paginated transactions for a price guide.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: condition
+          required: false
+          schema:
+            type: string
+            default: used
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get a list of paginated transactions for a price guide.
+      tags:
+        - priceguide
+  '/priceguide/{id}/transactions/summary':
+    get:
+      description: Get a summary of transactions for a given price guide
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: number_of_months
+          required: false
+          schema:
+            type: integer
+            default: 3
+        - in: query
+          name: condition
+          required: false
+          schema:
+            type: string
+            default: used
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get a summary of transactions for a given price guide
+      tags:
+        - priceguide
+  '/products/reviews/{id}':
+    get:
+      description: View a review
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: View a review
+      tags:
+        - products
+    put:
+      description: Update a review
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_reviews
+      summary: Update a review
+      tags:
+        - products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                body:
+                  description: Content of the review
+                  type: string
+                rating:
+                  description: Rating from 1 to 5
+                  type: integer
+                title:
+                  description: Title for the review
+                  type: string
+              type: object
+        description: the content of the request
+  '/products/{slug}/reviews':
+    get:
+      description: View reviews of a product
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: View reviews of a product
+      tags:
+        - products
+    post:
+      description: Create a review for a product
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_reviews
+      summary: Create a review for a product
+      tags:
+        - products
+  /sales/reverb:
+    get:
+      description: View upcoming and live Reverb official sales.
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_listings
+      summary: View upcoming and live Reverb official sales.
+      tags:
+        - sales
+  /sales/seller:
+    get:
+      description: View your created sales.
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_listings
+      summary: View your created sales.
+      tags:
+        - sales
+  '/sales/{sale_id}/listings':
+    delete:
+      description: Remove a listing from a sale
+      parameters:
+        - in: path
+          name: sale_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_listings
+      summary: Remove a listing from a sale
+      tags:
+        - sales
+    post:
+      description: Add listings to a sale
+      parameters:
+        - in: path
+          name: sale_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_listings
+      summary: Add listings to a sale
+      tags:
+        - sales
+  '/sales/{slug}':
+    get:
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - sales
+  /shipping/providers:
+    get:
+      description: List of supported shipping providers
+      responses:
+        default:
+          description: Unexpected error
+      summary: List of supported shipping providers
+      tags:
+        - shipping
+  /shipping/regions:
+    get:
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - shipping
+  /shop:
+    get:
+      description: Get your own shop details
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_profile
+      summary: Get your own shop details
+      tags:
+        - shop
+    put:
+      description: Update your shop profile
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_profile
+      summary: Update your shop profile
+      tags:
+        - shop
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                address:
+                  properties:
+                    country_code:
+                      type: string
+                    extended_address:
+                      type: string
+                    locality:
+                      type: string
+                    name:
+                      type: string
+                    phone:
+                      type: string
+                    postal_code:
+                      type: string
+                    region:
+                      type: string
+                    street_address:
+                      type: string
+                  type: object
+                currency:
+                  enum:
+                    - USD
+                    - CAD
+                    - EUR
+                    - GBP
+                    - AUD
+                    - JPY
+                    - NZD
+                    - MXN
+                  type: string
+                description:
+                  type: string
+                name:
+                  type: string
+                payment_policy:
+                  type: string
+                return_policy:
+                  type: string
+                shipping_policy:
+                  type: string
+                website:
+                  type: string
+              type: object
+        description: the content of the request
+  /shop/listing_conditions:
+    get:
+      description: List of supported product conditions
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_profile
+      summary: List of supported product conditions
+      tags:
+        - shop
+  /shop/payment_methods:
+    get:
+      description: Get accepted payment methods
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_profile
+      summary: Get accepted payment methods
+      tags:
+        - shop
+  /shop/stats:
+    get:
+      description: Get listings stats
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_profile
+      summary: Get listings stats
+      tags:
+        - shop
+  /shop/stats/activity:
+    get:
+      description: Get shop activity for a particular time period
+      parameters:
+        - description: 'Filter by date in ISO8601 format - e.g: 2015-04-09T10:52:23-05:00'
+          in: query
+          name: start_time
+          required: true
+          schema:
+            type: string
+        - description: 'Filter by date in ISO8601 format - e.g: 2015-04-09T10:52:23-05:00'
+          in: query
+          name: end_time
+          required: false
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_profile
+      summary: Get shop activity for a particular time period
+      tags:
+        - shop
+  /shop/vacation:
+    delete:
+      description: Disable vacation mode. All listings will be re-enabled.
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_profile
+      summary: Disable vacation mode. All listings will be re-enabled.
+      tags:
+        - shop
+    get:
+      description: Returns shop vacation status
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_profile
+      summary: Returns shop vacation status
+      tags:
+        - shop
+    post:
+      description: Enable vacation mode. All listings will be unavailable until vacation mode is turned off.
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_profile
+      summary: Enable vacation mode. All listings will be unavailable until vacation mode is turned off.
+      tags:
+        - shop
+  '/shops/{shop_id}/shipping_profiles':
+    get:
+      description: List of shipping profiles for your shop
+      parameters:
+        - in: path
+          name: shop_id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_profile
+      summary: List of shipping profiles for your shop
+      tags:
+        - shops
+  '/shops/{slug}':
+    get:
+      description: Get details on a shop.
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get details on a shop.
+      tags:
+        - shops
+  '/shops/{slug}/feedback':
+    get:
+      description: Get seller's feedback
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get seller's feedback
+      tags:
+        - shops
+  '/shops/{slug}/feedback/buyer':
+    get:
+      description: Get seller's feedback as a buyer
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get seller's feedback as a buyer
+      tags:
+        - shops
+  '/shops/{slug}/feedback/seller':
+    get:
+      description: Get seller's feedback as a seller
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get seller's feedback as a seller
+      tags:
+        - shops
+  /wants:
+    get:
+      description: A list of wanted items by the user
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - read_lists
+      summary: A list of wanted items by the user
+      tags:
+        - wants
+  '/wants/{id}':
+    delete:
+      description: Unmark an item wanted.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Unmark an item wanted.
+      tags:
+        - wants
+    put:
+      description: Mark an item wanted. Returns 200 on success or 422 on failure.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      security:
+        - oauth2:
+            - write_lists
+      summary: Mark an item wanted. Returns 200 on success or 422 on failure.
+      tags:
+        - wants
+  /webhooks/registrations:
+    get:
+      description: Get webhook registrations
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get webhook registrations
+      tags:
+        - webhooks
+    post:
+      description: Register a webhook
+      responses:
+        default:
+          description: Unexpected error
+      summary: Register a webhook
+      tags:
+        - webhooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                topic:
+                  description: 'Valid values: listings/update, listings/publish, listings/bumps-ran-out, orders/create, orders/update, payments/create, payments/update, app/uninstalled'
+                  enum:
+                    - listings/update
+                    - listings/publish
+                    - listings/bumps-ran-out
+                    - orders/create
+                    - orders/update
+                    - payments/create
+                    - payments/update
+                    - app/uninstalled
+                  type: string
+                url:
+                  type: string
+              required:
+                - url
+                - topic
+              type: object
+        description: the content of the request
+  '/webhooks/registrations/{id}':
+    delete:
+      description: Remove a webhook
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Remove a webhook
+      tags:
+        - webhooks
+    get:
+      description: Get details of a webhook registration
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get details of a webhook registration
+      tags:
+        - webhooks
+components:
+  schemas: {}
+  requestBodies:
+    Body:
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                description: Message to include with counter offer
+                type: string
+              price:
+                properties:
+                  amount:
+                    description: 'The amount of money being expressed, as a decimal number'
+                    type: string
+                  currency:
+                    description: The currency the money will be expressed in
+                    enum:
+                      - USD
+                      - CAD
+                      - EUR
+                      - GBP
+                      - AUD
+                      - JPY
+                      - NZD
+                      - MXN
+                    type: string
+                required:
+                  - amount
+                  - currency
+                type: object
+              shipping_price:
+                description: Shipping price (sellers only)
+                properties:
+                  amount:
+                    description: 'The amount of money being expressed, as a decimal number'
+                    type: string
+                  currency:
+                    description: The currency the money will be expressed in
+                    enum:
+                      - USD
+                      - CAD
+                      - EUR
+                      - GBP
+                      - AUD
+                      - JPY
+                      - NZD
+                      - MXN
+                    type: string
+                required:
+                  - amount
+                  - currency
+                type: object
+            required:
+              - price
+            type: object
+      description: the content of the request
+    Body2:
+      content:
+        application/json:
+          schema:
+            properties:
+              categories:
+                items:
+                  properties:
+                    uuid:
+                      description: UUID of the category for this listing.
+                      type: string
+                  type: object
+                type: array
+              condition:
+                description: Condition
+                properties:
+                  uuid:
+                    description: Condition UUID
+                    enum:
+                      - fbf35668-96a0-4baa-bcde-ab18d6b1b329
+                      - 6a9dfcad-600b-46c8-9e08-ce6e5057921e
+                      - 98777886-76d0-44c8-865e-bb40e669e934
+                      - f7a3f48c-972a-44c6-b01a-0cd27488d3f6
+                      - ae4d9114-1bd7-4ec5-a4ba-6653af5ac84d
+                      - df268ad1-c462-4ba6-b6db-e007e23922ea
+                      - ac5b9c1e-dc78-466d-b0b3-7cf712967a48
+                      - 6db7df88-293b-4017-a1c1-cdb5e599fa1a
+                      - 9225283f-60c2-4413-ad18-1f5eba7a856f
+                      - 7c3f45de-2ae0-4c81-8400-fdb6b1d74890
+                    type: string
+                required:
+                  - uuid
+                type: object
+              description:
+                description: Product description. Please keep formatting to a minimum.
+                type: string
+              finish:
+                description: 'Finish, e.g. ''Sunburst'''
+                type: string
+              has_inventory:
+                description: Set true if selling more than one
+                type: boolean
+              inventory:
+                description: Number of items available for sale. Reverb will increment and decrement automatically.
+                type: integer
+              location:
+                properties:
+                  country_code:
+                    description: 'Ex: US'
+                    type: string
+                  locality:
+                    description: 'Ex: Chicago'
+                    type: string
+                  region:
+                    description: 'Ex: IL'
+                    type: string
+                type: object
+              make:
+                description: 'ex: Fender, Gibson'
+                type: string
+              model:
+                description: 'ex: Stratocaster, SG'
+                type: string
+              offers_enabled:
+                description: 'Whether the listing accepts negotiated offers (default: true)'
+                type: boolean
+              origin_country_code:
+                description: 'Country of origin/manufacture, ISO code (e.g: US)'
+                type: string
+              photos:
+                description: 'An array of image URLs. Ex: [''http://my.site.com/image.jpg'']'
+                items:
+                  type: string
+                type: array
+              price:
+                properties:
+                  amount:
+                    description: 'The amount of money being expressed, as a decimal number'
+                    type: string
+                  currency:
+                    description: The currency the money will be expressed in
+                    enum:
+                      - USD
+                      - CAD
+                      - EUR
+                      - GBP
+                      - AUD
+                      - JPY
+                      - NZD
+                      - MXN
+                    type: string
+                required:
+                  - amount
+                  - currency
+                type: object
+              publish:
+                description: Publish your listing if draft
+                type: boolean
+              seller:
+                properties:
+                  paypal_email:
+                    type: string
+                type: object
+              seller_cost:
+                description: 'Cost of goods in your currency (internal use only, not shown to buyers)'
+                type: string
+              shipping:
+                properties:
+                  local:
+                    description: True if you offer local pickup
+                    type: boolean
+                  rates:
+                    description: List of shipping rates. Set to null to clear rates.
+                    items:
+                      properties:
+                        rate:
+                          properties:
+                            amount:
+                              description: 'The amount of money being expressed, as a decimal number'
+                              type: string
+                            currency:
+                              description: The currency the money will be expressed in
+                              enum:
+                                - USD
+                                - CAD
+                                - EUR
+                                - GBP
+                                - AUD
+                                - JPY
+                                - NZD
+                                - MXN
+                              type: string
+                          required:
+                            - amount
+                            - currency
+                          type: object
+                        region_code:
+                          description: Country code or subregion/superregion code. Full list of codes at /api/shipping/regions
+                          type: string
+                      type: object
+                    type: array
+                type: object
+              shipping_profile_id:
+                description: id of a shop's shipping profile
+                type: string
+              shipping_profile_name:
+                description: 'DEPRECATED, please use shipping_profile_id. Name of a shipping profile'
+                type: string
+              sku:
+                description: Unique identifier for product
+                type: string
+              sold_as_is:
+                description: This item is sold As-Is and cannot be returned
+                type: boolean
+              tax_exempt:
+                description: Listing is exempt from taxes / VAT
+                type: boolean
+              title:
+                description: Title of your listing
+                type: string
+              upc:
+                description: Valid UPC code
+                type: string
+              upc_does_not_apply:
+                description: 'True if a brand new product has no UPC code, ie for a handmade or custom item'
+                type: string
+              year:
+                description: 'Supports many formats. Ex: 1979, mid-70s, late 90s'
+                type: string
+            type: object
+      description: the content of the request
+    Body3:
+      content:
+        application/json:
+          schema:
+            properties:
+              body:
+                type: string
+            required:
+              - body
+            type: object
+      description: the content of the request
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://reverb.com/oauth/token'
+          scopes:
+            public: ''
+            read_feedback: ''
+            read_listings: ''
+            read_lists: ''
+            read_messages: ''
+            read_offers: ''
+            read_orders: ''
+            read_profile: ''
+            write_feedback: ''
+            write_listings: ''
+            write_lists: ''
+            write_messages: ''
+            write_offers: ''
+            write_orders: ''
+            write_profile: ''
+            write_reviews: ''

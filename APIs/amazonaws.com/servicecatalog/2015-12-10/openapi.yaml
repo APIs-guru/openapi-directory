@@ -1,0 +1,3992 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://servicecatalog.amazonaws.com/'
+info:
+  version: '2015-12-10'
+  x-release: v4
+  title: AWS Service Catalog
+  description: '<fullname>AWS Service Catalog</fullname> <p> <b>Overview</b> </p> <p> <a href="https://aws.amazon.com/servicecatalog/">AWS Service Catalog</a> allows organizations to create and manage catalogs of IT services that are approved for use on AWS. This documentation provides reference material for the AWS Service Catalog end user API. To get the most out of this documentation, be familiar with the terminology discussed in <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html">AWS Service Catalog Concepts</a>.</p> <p> <i>Additional Resources</i> </p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html">AWS Service Catalog Administrator Guide</a> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/servicecatalog/latest/userguide/introduction.html">AWS Service Catalog User Guide</a> </p> </li> </ul>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: servicecatalog
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/servicecatalog-2015-12-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/servicecatalog/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AcceptPortfolioShare
+      description: Accepts an offer to share a portfolio.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptPortfolioShareOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptPortfolioShareInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AssociatePrincipalWithPortfolio':
+    post:
+      operationId: AssociatePrincipalWithPortfolio
+      description: Associates the specified principal ARN with the specified portfolio.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociatePrincipalWithPortfolioOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociatePrincipalWithPortfolioInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AssociateProductWithPortfolio':
+    post:
+      operationId: AssociateProductWithPortfolio
+      description: Associates a product with a portfolio.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateProductWithPortfolioOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateProductWithPortfolioInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AssociateTagOptionWithResource':
+    post:
+      operationId: AssociateTagOptionWithResource
+      description: Associate a TagOption identifier with a resource identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateTagOptionWithResourceOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '485':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateTagOptionWithResourceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateConstraint':
+    post:
+      operationId: CreateConstraint
+      description: 'Creates a new constraint. For more information, see <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints.html">Using Constraints</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConstraintOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConstraintInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreatePortfolio':
+    post:
+      operationId: CreatePortfolio
+      description: Creates a new portfolio.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePortfolioOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePortfolioInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreatePortfolioShare':
+    post:
+      operationId: CreatePortfolioShare
+      description: Creates a new portfolio share.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePortfolioShareOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePortfolioShareInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateProduct':
+    post:
+      operationId: CreateProduct
+      description: Creates a new product.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProductOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateProvisioningArtifact':
+    post:
+      operationId: CreateProvisioningArtifact
+      description: <p>Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you.</p> <p>See the bottom of this topic for an example JSON request.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProvisioningArtifactOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProvisioningArtifactInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateTagOption':
+    post:
+      operationId: CreateTagOption
+      description: Create a new TagOption.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTagOptionOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+        '481':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTagOptionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteConstraint':
+    post:
+      operationId: DeleteConstraint
+      description: Deletes the specified constraint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteConstraintOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteConstraintInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeletePortfolio':
+    post:
+      operationId: DeletePortfolio
+      description: 'Deletes the specified portfolio. This operation does not work with a portfolio that has been shared with you or if it has products, users, constraints, or shared accounts associated with it.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePortfolioOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '483':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePortfolioInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeletePortfolioShare':
+    post:
+      operationId: DeletePortfolioShare
+      description: Deletes the specified portfolio share.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePortfolioShareOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePortfolioShareInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteProduct':
+    post:
+      operationId: DeleteProduct
+      description: 'Deletes the specified product. This operation does not work with a product that has been shared with you or is associated with a portfolio. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteProductOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '483':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteProductInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteProvisioningArtifact':
+    post:
+      operationId: DeleteProvisioningArtifact
+      description: 'Deletes the specified provisioning artifact. This operation does not work on a provisioning artifact associated with a product that has been shared with you, or on the last provisioning artifact associated with a product (a product must have at least one provisioning artifact).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteProvisioningArtifactOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteProvisioningArtifactInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConstraint':
+    post:
+      operationId: DescribeConstraint
+      description: Retrieves detailed information for a specified constraint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConstraintOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConstraintInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribePortfolio':
+    post:
+      operationId: DescribePortfolio
+      description: Retrieves detailed information and any tags associated with the specified portfolio.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePortfolioOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribePortfolioInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeProduct':
+    post:
+      operationId: DescribeProduct
+      description: <p>Retrieves information about a specified product.</p> <p>This operation is functionally identical to <a>DescribeProductView</a> except that it takes as input <code>ProductId</code> instead of <code>ProductViewId</code>.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeProductOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeProductInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeProductAsAdmin':
+    post:
+      operationId: DescribeProductAsAdmin
+      description: 'Retrieves information about a specified product, run with administrator access.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeProductAsAdminOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeProductAsAdminInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeProductView':
+    post:
+      operationId: DescribeProductView
+      description: <p>Retrieves information about a specified product.</p> <p>This operation is functionally identical to <a>DescribeProduct</a> except that it takes as input <code>ProductViewId</code> instead of <code>ProductId</code>.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeProductViewOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeProductViewInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeProvisionedProduct':
+    post:
+      operationId: DescribeProvisionedProduct
+      description: Retrieve detailed information about the provisioned product.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeProvisionedProductOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeProvisionedProductInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeProvisioningArtifact':
+    post:
+      operationId: DescribeProvisioningArtifact
+      description: Retrieves detailed information about the specified provisioning artifact.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeProvisioningArtifactOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeProvisioningArtifactInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeProvisioningParameters':
+    post:
+      operationId: DescribeProvisioningParameters
+      description: '<p>Provides information about parameters required to provision a specified product in a specified manner. Use this operation to obtain the list of <code>ProvisioningArtifactParameters</code> parameters available to call the <a>ProvisionProduct</a> operation for the specified product.</p> <p>If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to the <code>ProvisionProduct</code> operation, do not include conflicted TagOption keys as tags. Calls to <code>ProvisionProduct</code> with empty TagOption values cause the error "Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i> ". Calls to <code>ProvisionProduct</code> with conflicted TagOption keys automatically tag the provisioned product with the conflicted keys with the value "<code>sc-tagoption-conflict-portfolioId-productId</code>".</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeProvisioningParametersOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeProvisioningParametersInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeRecord':
+    post:
+      operationId: DescribeRecord
+      description: 'Retrieves a paginated list of the full details of a specific request. Use this operation after calling a request operation (<a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRecordOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeRecordInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTagOption':
+    post:
+      operationId: DescribeTagOption
+      description: Describes a TagOption.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTagOptionOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTagOptionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisassociatePrincipalFromPortfolio':
+    post:
+      operationId: DisassociatePrincipalFromPortfolio
+      description: Disassociates a previously associated principal ARN from a specified portfolio.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociatePrincipalFromPortfolioOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociatePrincipalFromPortfolioInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateProductFromPortfolio':
+    post:
+      operationId: DisassociateProductFromPortfolio
+      description: 'Disassociates the specified product from the specified portfolio. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateProductFromPortfolioOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateProductFromPortfolioInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateTagOptionFromResource':
+    post:
+      operationId: DisassociateTagOptionFromResource
+      description: Disassociates a TagOption from a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateTagOptionFromResourceOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateTagOptionFromResourceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListAcceptedPortfolioShares':
+    post:
+      operationId: ListAcceptedPortfolioShares
+      description: Lists details of all portfolios for which sharing was accepted by this account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAcceptedPortfolioSharesOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAcceptedPortfolioSharesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListConstraintsForPortfolio':
+    post:
+      operationId: ListConstraintsForPortfolio
+      description: Retrieves detailed constraint information for the specified portfolio and product.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListConstraintsForPortfolioOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListConstraintsForPortfolioInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListLaunchPaths':
+    post:
+      operationId: ListLaunchPaths
+      description: 'Returns a paginated list of all paths to a specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLaunchPathsOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListLaunchPathsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListPortfolioAccess':
+    post:
+      operationId: ListPortfolioAccess
+      description: Lists the account IDs that have been authorized sharing of the specified portfolio.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPortfolioAccessOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPortfolioAccessInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListPortfolios':
+    post:
+      operationId: ListPortfolios
+      description: Lists all portfolios in the catalog.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPortfoliosOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPortfoliosInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListPortfoliosForProduct':
+    post:
+      operationId: ListPortfoliosForProduct
+      description: Lists all portfolios that the specified product is associated with.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPortfoliosForProductOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPortfoliosForProductInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListPrincipalsForPortfolio':
+    post:
+      operationId: ListPrincipalsForPortfolio
+      description: Lists all principal ARNs associated with the specified portfolio.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPrincipalsForPortfolioOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPrincipalsForPortfolioInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListProvisioningArtifacts':
+    post:
+      operationId: ListProvisioningArtifacts
+      description: Lists all provisioning artifacts associated with the specified product.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProvisioningArtifactsOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListProvisioningArtifactsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListRecordHistory':
+    post:
+      operationId: ListRecordHistory
+      description: 'Returns a paginated list of all performed requests, in the form of RecordDetails objects that are filtered as specified.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecordHistoryOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRecordHistoryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListResourcesForTagOption':
+    post:
+      operationId: ListResourcesForTagOption
+      description: Lists resources associated with a TagOption.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResourcesForTagOptionOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      parameters:
+        - name: PageSize
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: PageToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListResourcesForTagOptionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTagOptions':
+    post:
+      operationId: ListTagOptions
+      description: Lists detailed TagOptions information.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagOptionsOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      parameters:
+        - name: PageSize
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: PageToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagOptionsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ProvisionProduct':
+    post:
+      operationId: ProvisionProduct
+      description: '<p>Requests a <i>provision</i> of a specified product. A <i>provisioned product</i> is a resourced instance for a product. For example, provisioning a CloudFormation-template-backed product results in launching a CloudFormation stack and all the underlying resources that come with it. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation. The error "Parameter validation failed: Missing required parameter in Tags[<i>N</i>]:<i>Value</i>" indicates that your request contains a tag which has a tag key but no corresponding tag value (value is empty or null). Your call may have included values returned from a <code>DescribeProvisioningParameters</code> call that resulted in a TagOption key with an empty list. This happens when TagOption keys are in conflict. For more information, see <a>DescribeProvisioningParameters</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionProductOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisionProductInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RejectPortfolioShare':
+    post:
+      operationId: RejectPortfolioShare
+      description: Rejects an offer to share a portfolio.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RejectPortfolioShareOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RejectPortfolioShareInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ScanProvisionedProducts':
+    post:
+      operationId: ScanProvisionedProducts
+      description: 'Returns a paginated list of all the ProvisionedProduct objects that are currently available (not terminated). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanProvisionedProductsOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScanProvisionedProductsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SearchProducts':
+    post:
+      operationId: SearchProducts
+      description: '<p>Returns a paginated list all of the <code>Products</code> objects to which the caller has access. </p> <p>The output of this operation can be used as input for other operations, such as <a>DescribeProductView</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchProductsOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchProductsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SearchProductsAsAdmin':
+    post:
+      operationId: SearchProductsAsAdmin
+      description: 'Retrieves summary and status information about all products created within the caller''s account. If a portfolio ID is provided, this operation retrieves information for only those products that are associated with the specified portfolio.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchProductsAsAdminOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchProductsAsAdminInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TerminateProvisionedProduct':
+    post:
+      operationId: TerminateProvisionedProduct
+      description: '<p>Requests termination of an existing ProvisionedProduct object. If there are <code>Tags</code> associated with the object, they are terminated when the ProvisionedProduct object is terminated. </p> <p>This operation does not delete any records associated with the ProvisionedProduct object.</p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TerminateProvisionedProductOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminateProvisionedProductInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateConstraint':
+    post:
+      operationId: UpdateConstraint
+      description: Updates an existing constraint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConstraintOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConstraintInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdatePortfolio':
+    post:
+      operationId: UpdatePortfolio
+      description: Updates the specified portfolio's details. This operation does not work with a product that has been shared with you.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePortfolioOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePortfolioInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateProduct':
+    post:
+      operationId: UpdateProduct
+      description: Updates an existing product.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProductOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '482':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateProvisionedProduct':
+    post:
+      operationId: UpdateProvisionedProduct
+      description: '<p>Requests updates to the configuration of an existing ProvisionedProduct object. If there are tags associated with the object, they cannot be updated or added with this operation. Depending on the specific updates requested, this operation may update with no interruption, with some interruption, or replace the ProvisionedProduct object entirely. </p> <p>You can check the status of this request using the <a>DescribeRecord</a> operation.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProvisionedProductOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProvisionedProductInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateProvisioningArtifact':
+    post:
+      operationId: UpdateProvisioningArtifact
+      description: Updates an existing provisioning artifact's information. This operation does not work on a provisioning artifact associated with a product that has been shared with you.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProvisioningArtifactOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProvisioningArtifactInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTagOption':
+    post:
+      operationId: UpdateTagOption
+      description: Updates an existing TagOption.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTagOptionOutput'
+        '480':
+          description: TagOptionNotMigratedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagOptionNotMigratedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '483':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTagOptionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AcceptLanguage:
+      type: string
+    AcceptPortfolioShareInput:
+      type: object
+      required:
+        - PortfolioId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+    AcceptPortfolioShareOutput:
+      type: object
+      properties: {}
+    AccessLevelFilter:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/AccessLevelFilterKey'
+        Value:
+          $ref: '#/components/schemas/AccessLevelFilterValue'
+      description: The access level to limit results.
+    AccessLevelFilterKey:
+      type: string
+      enum:
+        - Account
+        - Role
+        - User
+    AccessLevelFilterValue:
+      type: string
+    AccountId:
+      type: string
+      pattern: '^[0-9]{12}$'
+    AccountIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccountId'
+    AddTags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      maxItems: 20
+    AllowedValue:
+      type: string
+    AllowedValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/AllowedValue'
+    ApproximateCount:
+      type: integer
+    AssociatePrincipalWithPortfolioInput:
+      type: object
+      required:
+        - PortfolioId
+        - PrincipalARN
+        - PrincipalType
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+        PrincipalARN:
+          $ref: '#/components/schemas/PrincipalARN'
+        PrincipalType:
+          $ref: '#/components/schemas/PrincipalType'
+    AssociatePrincipalWithPortfolioOutput:
+      type: object
+      properties: {}
+    AssociateProductWithPortfolioInput:
+      type: object
+      required:
+        - ProductId
+        - PortfolioId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+        SourcePortfolioId:
+          $ref: '#/components/schemas/Id'
+    AssociateProductWithPortfolioOutput:
+      type: object
+      properties: {}
+    AssociateTagOptionWithResourceInput:
+      type: object
+      required:
+        - ResourceId
+        - TagOptionId
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/ResourceId'
+        TagOptionId:
+          $ref: '#/components/schemas/TagOptionId'
+    AssociateTagOptionWithResourceOutput:
+      type: object
+      properties: {}
+    AttributeValue:
+      type: string
+    ConstraintDescription:
+      type: string
+      maxLength: 2000
+    ConstraintDetail:
+      type: object
+      properties:
+        ConstraintId:
+          $ref: '#/components/schemas/Id'
+        Type:
+          $ref: '#/components/schemas/ConstraintType'
+        Description:
+          $ref: '#/components/schemas/ConstraintDescription'
+        Owner:
+          $ref: '#/components/schemas/AccountId'
+      description: Detailed constraint information.
+    ConstraintDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConstraintDetail'
+    ConstraintParameters:
+      type: string
+    ConstraintSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConstraintSummary'
+    ConstraintSummary:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/ConstraintType'
+        Description:
+          $ref: '#/components/schemas/ConstraintDescription'
+      description: An administrator-specified constraint to apply when provisioning a product.
+    ConstraintType:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    CreateConstraintInput:
+      type: object
+      required:
+        - PortfolioId
+        - ProductId
+        - Parameters
+        - Type
+        - IdempotencyToken
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        Parameters:
+          $ref: '#/components/schemas/ConstraintParameters'
+        Type:
+          $ref: '#/components/schemas/ConstraintType'
+        Description:
+          $ref: '#/components/schemas/ConstraintDescription'
+        IdempotencyToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+    CreateConstraintOutput:
+      type: object
+      properties:
+        ConstraintDetail:
+          $ref: '#/components/schemas/ConstraintDetail'
+        ConstraintParameters:
+          $ref: '#/components/schemas/ConstraintParameters'
+        Status:
+          $ref: '#/components/schemas/Status'
+    CreatePortfolioInput:
+      type: object
+      required:
+        - DisplayName
+        - ProviderName
+        - IdempotencyToken
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        DisplayName:
+          $ref: '#/components/schemas/PortfolioDisplayName'
+        Description:
+          $ref: '#/components/schemas/PortfolioDescription'
+        ProviderName:
+          $ref: '#/components/schemas/ProviderName'
+        Tags:
+          $ref: '#/components/schemas/AddTags'
+        IdempotencyToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+    CreatePortfolioOutput:
+      type: object
+      properties:
+        PortfolioDetail:
+          $ref: '#/components/schemas/PortfolioDetail'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+    CreatePortfolioShareInput:
+      type: object
+      required:
+        - PortfolioId
+        - AccountId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+    CreatePortfolioShareOutput:
+      type: object
+      properties: {}
+    CreateProductInput:
+      type: object
+      required:
+        - Name
+        - Owner
+        - ProductType
+        - ProvisioningArtifactParameters
+        - IdempotencyToken
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Name:
+          $ref: '#/components/schemas/ProductViewName'
+        Owner:
+          $ref: '#/components/schemas/ProductViewOwner'
+        Description:
+          $ref: '#/components/schemas/ProductViewShortDescription'
+        Distributor:
+          $ref: '#/components/schemas/ProductViewOwner'
+        SupportDescription:
+          $ref: '#/components/schemas/SupportDescription'
+        SupportEmail:
+          $ref: '#/components/schemas/SupportEmail'
+        SupportUrl:
+          $ref: '#/components/schemas/SupportUrl'
+        ProductType:
+          $ref: '#/components/schemas/ProductType'
+        Tags:
+          $ref: '#/components/schemas/AddTags'
+        ProvisioningArtifactParameters:
+          $ref: '#/components/schemas/ProvisioningArtifactProperties'
+        IdempotencyToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+    CreateProductOutput:
+      type: object
+      properties:
+        ProductViewDetail:
+          $ref: '#/components/schemas/ProductViewDetail'
+        ProvisioningArtifactDetail:
+          $ref: '#/components/schemas/ProvisioningArtifactDetail'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+    CreateProvisioningArtifactInput:
+      type: object
+      required:
+        - ProductId
+        - Parameters
+        - IdempotencyToken
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        Parameters:
+          $ref: '#/components/schemas/ProvisioningArtifactProperties'
+        IdempotencyToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+    CreateProvisioningArtifactOutput:
+      type: object
+      properties:
+        ProvisioningArtifactDetail:
+          $ref: '#/components/schemas/ProvisioningArtifactDetail'
+        Info:
+          $ref: '#/components/schemas/ProvisioningArtifactInfo'
+        Status:
+          $ref: '#/components/schemas/Status'
+    CreateTagOptionInput:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagOptionKey'
+        Value:
+          $ref: '#/components/schemas/TagOptionValue'
+    CreateTagOptionOutput:
+      type: object
+      properties:
+        TagOptionDetail:
+          $ref: '#/components/schemas/TagOptionDetail'
+    CreatedTime:
+      type: string
+      format: date-time
+    CreationTime:
+      type: string
+      format: date-time
+    DefaultValue:
+      type: string
+    DeleteConstraintInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+    DeleteConstraintOutput:
+      type: object
+      properties: {}
+    DeletePortfolioInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+    DeletePortfolioOutput:
+      type: object
+      properties: {}
+    DeletePortfolioShareInput:
+      type: object
+      required:
+        - PortfolioId
+        - AccountId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+    DeletePortfolioShareOutput:
+      type: object
+      properties: {}
+    DeleteProductInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+    DeleteProductOutput:
+      type: object
+      properties: {}
+    DeleteProvisioningArtifactInput:
+      type: object
+      required:
+        - ProductId
+        - ProvisioningArtifactId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        ProvisioningArtifactId:
+          $ref: '#/components/schemas/Id'
+    DeleteProvisioningArtifactOutput:
+      type: object
+      properties: {}
+    DescribeConstraintInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+    DescribeConstraintOutput:
+      type: object
+      properties:
+        ConstraintDetail:
+          $ref: '#/components/schemas/ConstraintDetail'
+        ConstraintParameters:
+          $ref: '#/components/schemas/ConstraintParameters'
+        Status:
+          $ref: '#/components/schemas/Status'
+    DescribePortfolioInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+    DescribePortfolioOutput:
+      type: object
+      properties:
+        PortfolioDetail:
+          $ref: '#/components/schemas/PortfolioDetail'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+        TagOptions:
+          $ref: '#/components/schemas/TagOptionDetails'
+    DescribeProductAsAdminInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+    DescribeProductAsAdminOutput:
+      type: object
+      properties:
+        ProductViewDetail:
+          $ref: '#/components/schemas/ProductViewDetail'
+        ProvisioningArtifactSummaries:
+          $ref: '#/components/schemas/ProvisioningArtifactSummaries'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+        TagOptions:
+          $ref: '#/components/schemas/TagOptionDetails'
+    DescribeProductInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+    DescribeProductOutput:
+      type: object
+      properties:
+        ProductViewSummary:
+          $ref: '#/components/schemas/ProductViewSummary'
+        ProvisioningArtifacts:
+          $ref: '#/components/schemas/ProvisioningArtifacts'
+    DescribeProductViewInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+    DescribeProductViewOutput:
+      type: object
+      properties:
+        ProductViewSummary:
+          $ref: '#/components/schemas/ProductViewSummary'
+        ProvisioningArtifacts:
+          $ref: '#/components/schemas/ProvisioningArtifacts'
+    DescribeProvisionedProductInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+    DescribeProvisionedProductOutput:
+      type: object
+      properties:
+        ProvisionedProductDetail:
+          $ref: '#/components/schemas/ProvisionedProductDetail'
+    DescribeProvisioningArtifactInput:
+      type: object
+      required:
+        - ProvisioningArtifactId
+        - ProductId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProvisioningArtifactId:
+          $ref: '#/components/schemas/Id'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        Verbose:
+          $ref: '#/components/schemas/Verbose'
+    DescribeProvisioningArtifactOutput:
+      type: object
+      properties:
+        ProvisioningArtifactDetail:
+          $ref: '#/components/schemas/ProvisioningArtifactDetail'
+        Info:
+          $ref: '#/components/schemas/ProvisioningArtifactInfo'
+        Status:
+          $ref: '#/components/schemas/Status'
+    DescribeProvisioningParametersInput:
+      type: object
+      required:
+        - ProductId
+        - ProvisioningArtifactId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        ProvisioningArtifactId:
+          $ref: '#/components/schemas/Id'
+        PathId:
+          $ref: '#/components/schemas/Id'
+    DescribeProvisioningParametersOutput:
+      type: object
+      properties:
+        ProvisioningArtifactParameters:
+          $ref: '#/components/schemas/ProvisioningArtifactParameters'
+        ConstraintSummaries:
+          $ref: '#/components/schemas/ConstraintSummaries'
+        UsageInstructions:
+          $ref: '#/components/schemas/UsageInstructions'
+        TagOptions:
+          $ref: '#/components/schemas/TagOptionSummaries'
+    DescribeRecordInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+    DescribeRecordOutput:
+      type: object
+      properties:
+        RecordDetail:
+          $ref: '#/components/schemas/RecordDetail'
+        RecordOutputs:
+          $ref: '#/components/schemas/RecordOutputs'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    DescribeTagOptionInput:
+      type: object
+      required:
+        - Id
+      properties:
+        Id:
+          $ref: '#/components/schemas/TagOptionId'
+    DescribeTagOptionOutput:
+      type: object
+      properties:
+        TagOptionDetail:
+          $ref: '#/components/schemas/TagOptionDetail'
+    Description:
+      type: string
+    DisassociatePrincipalFromPortfolioInput:
+      type: object
+      required:
+        - PortfolioId
+        - PrincipalARN
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+        PrincipalARN:
+          $ref: '#/components/schemas/PrincipalARN'
+    DisassociatePrincipalFromPortfolioOutput:
+      type: object
+      properties: {}
+    DisassociateProductFromPortfolioInput:
+      type: object
+      required:
+        - ProductId
+        - PortfolioId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+    DisassociateProductFromPortfolioOutput:
+      type: object
+      properties: {}
+    DisassociateTagOptionFromResourceInput:
+      type: object
+      required:
+        - ResourceId
+        - TagOptionId
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/ResourceId'
+        TagOptionId:
+          $ref: '#/components/schemas/TagOptionId'
+    DisassociateTagOptionFromResourceOutput:
+      type: object
+      properties: {}
+    DuplicateResourceException:
+      type: object
+      properties: {}
+      description: The specified resource is a duplicate.
+    ErrorCode:
+      type: string
+    ErrorDescription:
+      type: string
+    HasDefaultPath:
+      type: boolean
+    Id:
+      type: string
+      minLength: 1
+      maxLength: 100
+    IdempotencyToken:
+      type: string
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
+      minLength: 1
+      maxLength: 128
+    IgnoreErrors:
+      type: boolean
+    InstructionType:
+      type: string
+    InstructionValue:
+      type: string
+    InvalidParametersException:
+      type: object
+      properties: {}
+      description: One or more parameters provided to the operation are invalid.
+    InvalidStateException:
+      type: object
+      properties: {}
+      description: An attempt was made to modify a resource that is in an invalid state. Inspect the resource you are using for this operation to ensure that all resource states are valid before retrying the operation.
+    LastRequestId:
+      type: string
+    LaunchPathSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/LaunchPathSummary'
+    LaunchPathSummary:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/Id'
+        ConstraintSummaries:
+          $ref: '#/components/schemas/ConstraintSummaries'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+        Name:
+          $ref: '#/components/schemas/PortfolioName'
+      description: Summary information about a path for a user to have access to a specified product.
+    LimitExceededException:
+      type: object
+      properties: {}
+      description: The current limits of the service would have been exceeded by this operation. Reduce the resource use or increase the service limits and retry the operation.
+    ListAcceptedPortfolioSharesInput:
+      type: object
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+    ListAcceptedPortfolioSharesOutput:
+      type: object
+      properties:
+        PortfolioDetails:
+          $ref: '#/components/schemas/PortfolioDetails'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListConstraintsForPortfolioInput:
+      type: object
+      required:
+        - PortfolioId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListConstraintsForPortfolioOutput:
+      type: object
+      properties:
+        ConstraintDetails:
+          $ref: '#/components/schemas/ConstraintDetails'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListLaunchPathsInput:
+      type: object
+      required:
+        - ProductId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListLaunchPathsOutput:
+      type: object
+      properties:
+        LaunchPathSummaries:
+          $ref: '#/components/schemas/LaunchPathSummaries'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListPortfolioAccessInput:
+      type: object
+      required:
+        - PortfolioId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+    ListPortfolioAccessOutput:
+      type: object
+      properties:
+        AccountIds:
+          $ref: '#/components/schemas/AccountIds'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListPortfoliosForProductInput:
+      type: object
+      required:
+        - ProductId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+    ListPortfoliosForProductOutput:
+      type: object
+      properties:
+        PortfolioDetails:
+          $ref: '#/components/schemas/PortfolioDetails'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListPortfoliosInput:
+      type: object
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+    ListPortfoliosOutput:
+      type: object
+      properties:
+        PortfolioDetails:
+          $ref: '#/components/schemas/PortfolioDetails'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListPrincipalsForPortfolioInput:
+      type: object
+      required:
+        - PortfolioId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListPrincipalsForPortfolioOutput:
+      type: object
+      properties:
+        Principals:
+          $ref: '#/components/schemas/Principals'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListProvisioningArtifactsInput:
+      type: object
+      required:
+        - ProductId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+    ListProvisioningArtifactsOutput:
+      type: object
+      properties:
+        ProvisioningArtifactDetails:
+          $ref: '#/components/schemas/ProvisioningArtifactDetails'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListRecordHistoryInput:
+      type: object
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        AccessLevelFilter:
+          $ref: '#/components/schemas/AccessLevelFilter'
+        SearchFilter:
+          $ref: '#/components/schemas/ListRecordHistorySearchFilter'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListRecordHistoryOutput:
+      type: object
+      properties:
+        RecordDetails:
+          $ref: '#/components/schemas/RecordDetails'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListRecordHistorySearchFilter:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/SearchFilterKey'
+        Value:
+          $ref: '#/components/schemas/SearchFilterValue'
+      description: The search filter to limit results when listing request history records.
+    ListResourcesForTagOptionInput:
+      type: object
+      required:
+        - TagOptionId
+      properties:
+        TagOptionId:
+          $ref: '#/components/schemas/TagOptionId'
+        ResourceType:
+          $ref: '#/components/schemas/ResourceType'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListResourcesForTagOptionOutput:
+      type: object
+      properties:
+        ResourceDetails:
+          $ref: '#/components/schemas/ResourceDetails'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListTagOptionsFilters:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagOptionKey'
+        Value:
+          $ref: '#/components/schemas/TagOptionValue'
+        Active:
+          $ref: '#/components/schemas/TagOptionActive'
+      description: The ListTagOptions filters.
+    ListTagOptionsInput:
+      type: object
+      properties:
+        Filters:
+          $ref: '#/components/schemas/ListTagOptionsFilters'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+    ListTagOptionsOutput:
+      type: object
+      properties:
+        TagOptionDetails:
+          $ref: '#/components/schemas/TagOptionDetails'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+    NoEcho:
+      type: boolean
+    NotificationArn:
+      type: string
+      pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+      minLength: 1
+      maxLength: 1224
+    NotificationArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/NotificationArn'
+      maxItems: 5
+    OutputKey:
+      type: string
+    OutputValue:
+      type: string
+    PageSize:
+      type: integer
+      minimum: 0
+      maximum: 20
+    PageToken:
+      type: string
+      pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
+    ParameterConstraints:
+      type: object
+      properties:
+        AllowedValues:
+          $ref: '#/components/schemas/AllowedValues'
+      description: The constraints that the administrator has put on the parameter.
+    ParameterKey:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    ParameterType:
+      type: string
+    ParameterValue:
+      type: string
+      maxLength: 4096
+    PortfolioDescription:
+      type: string
+      maxLength: 2000
+    PortfolioDetail:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/Id'
+        ARN:
+          $ref: '#/components/schemas/ResourceARN'
+        DisplayName:
+          $ref: '#/components/schemas/PortfolioDisplayName'
+        Description:
+          $ref: '#/components/schemas/PortfolioDescription'
+        CreatedTime:
+          $ref: '#/components/schemas/CreationTime'
+        ProviderName:
+          $ref: '#/components/schemas/ProviderName'
+      description: Detailed portfolio information.
+    PortfolioDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/PortfolioDetail'
+    PortfolioDisplayName:
+      type: string
+      minLength: 1
+      maxLength: 100
+    PortfolioName:
+      type: string
+    Principal:
+      type: object
+      properties:
+        PrincipalARN:
+          $ref: '#/components/schemas/PrincipalARN'
+        PrincipalType:
+          $ref: '#/components/schemas/PrincipalType'
+      description: A principal's ARN and type.
+    PrincipalARN:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    PrincipalType:
+      type: string
+      enum:
+        - IAM
+    Principals:
+      type: array
+      items:
+        $ref: '#/components/schemas/Principal'
+    ProductSource:
+      type: string
+      enum:
+        - ACCOUNT
+    ProductType:
+      type: string
+      enum:
+        - CLOUD_FORMATION_TEMPLATE
+        - MARKETPLACE
+    ProductViewAggregationType:
+      type: string
+    ProductViewAggregationValue:
+      type: object
+      properties:
+        Value:
+          $ref: '#/components/schemas/AttributeValue'
+        ApproximateCount:
+          $ref: '#/components/schemas/ApproximateCount'
+      description: 'A single product view aggregation value/count pair, containing metadata about each product to which the calling user has access.'
+    ProductViewAggregationValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProductViewAggregationValue'
+    ProductViewAggregations:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/ProductViewAggregationType'
+          value:
+            $ref: '#/components/schemas/ProductViewAggregationValues'
+    ProductViewDetail:
+      type: object
+      properties:
+        ProductViewSummary:
+          $ref: '#/components/schemas/ProductViewSummary'
+        Status:
+          $ref: '#/components/schemas/Status'
+        ProductARN:
+          $ref: '#/components/schemas/ResourceARN'
+        CreatedTime:
+          $ref: '#/components/schemas/CreatedTime'
+      description: Detailed product view information.
+    ProductViewDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProductViewDetail'
+    ProductViewDistributor:
+      type: string
+    ProductViewFilterBy:
+      type: string
+      enum:
+        - FullTextSearch
+        - Owner
+        - ProductType
+        - SourceProductId
+    ProductViewFilterValue:
+      type: string
+    ProductViewFilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProductViewFilterValue'
+    ProductViewFilters:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/ProductViewFilterBy'
+          value:
+            $ref: '#/components/schemas/ProductViewFilterValues'
+    ProductViewName:
+      type: string
+    ProductViewOwner:
+      type: string
+    ProductViewShortDescription:
+      type: string
+    ProductViewSortBy:
+      type: string
+      enum:
+        - Title
+        - VersionCount
+        - CreationDate
+    ProductViewSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProductViewSummary'
+    ProductViewSummary:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/Id'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        Name:
+          $ref: '#/components/schemas/ProductViewName'
+        Owner:
+          $ref: '#/components/schemas/ProductViewOwner'
+        ShortDescription:
+          $ref: '#/components/schemas/ProductViewShortDescription'
+        Type:
+          $ref: '#/components/schemas/ProductType'
+        Distributor:
+          $ref: '#/components/schemas/ProductViewDistributor'
+        HasDefaultPath:
+          $ref: '#/components/schemas/HasDefaultPath'
+        SupportEmail:
+          $ref: '#/components/schemas/SupportEmail'
+        SupportDescription:
+          $ref: '#/components/schemas/SupportDescription'
+        SupportUrl:
+          $ref: '#/components/schemas/SupportUrl'
+      description: The summary metadata about the specified product.
+    ProviderName:
+      type: string
+      minLength: 1
+      maxLength: 20
+    ProvisionProductInput:
+      type: object
+      required:
+        - ProductId
+        - ProvisioningArtifactId
+        - ProvisionedProductName
+        - ProvisionToken
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        ProvisioningArtifactId:
+          $ref: '#/components/schemas/Id'
+        PathId:
+          $ref: '#/components/schemas/Id'
+        ProvisionedProductName:
+          $ref: '#/components/schemas/ProvisionedProductName'
+        ProvisioningParameters:
+          $ref: '#/components/schemas/ProvisioningParameters'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+        NotificationArns:
+          $ref: '#/components/schemas/NotificationArns'
+        ProvisionToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+    ProvisionProductOutput:
+      type: object
+      properties:
+        RecordDetail:
+          $ref: '#/components/schemas/RecordDetail'
+    ProvisionedProductDetail:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/ProvisionedProductNameOrArn'
+        Arn:
+          $ref: '#/components/schemas/ProvisionedProductNameOrArn'
+        Type:
+          $ref: '#/components/schemas/ProvisionedProductType'
+        Id:
+          $ref: '#/components/schemas/ProvisionedProductId'
+        Status:
+          $ref: '#/components/schemas/ProvisionedProductStatus'
+        StatusMessage:
+          $ref: '#/components/schemas/ProvisionedProductStatusMessage'
+        CreatedTime:
+          $ref: '#/components/schemas/CreatedTime'
+        IdempotencyToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+        LastRecordId:
+          $ref: '#/components/schemas/LastRequestId'
+      description: Detailed information about a ProvisionedProduct object.
+    ProvisionedProductDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProvisionedProductDetail'
+    ProvisionedProductId:
+      type: string
+    ProvisionedProductName:
+      type: string
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]*'
+      minLength: 1
+      maxLength: 128
+    ProvisionedProductNameOrArn:
+      type: string
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+      minLength: 1
+      maxLength: 1224
+    ProvisionedProductStatus:
+      type: string
+      enum:
+        - AVAILABLE
+        - UNDER_CHANGE
+        - TAINTED
+        - ERROR
+    ProvisionedProductStatusMessage:
+      type: string
+    ProvisionedProductType:
+      type: string
+    ProvisioningArtifact:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/Id'
+        Name:
+          $ref: '#/components/schemas/ProvisioningArtifactName'
+        Description:
+          $ref: '#/components/schemas/ProvisioningArtifactDescription'
+        CreatedTime:
+          $ref: '#/components/schemas/ProvisioningArtifactCreatedTime'
+      description: Contains information indicating the ways in which a product can be provisioned.
+    ProvisioningArtifactCreatedTime:
+      type: string
+      format: date-time
+    ProvisioningArtifactDescription:
+      type: string
+    ProvisioningArtifactDetail:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/Id'
+        Name:
+          $ref: '#/components/schemas/ProvisioningArtifactName'
+        Description:
+          $ref: '#/components/schemas/ProvisioningArtifactName'
+        Type:
+          $ref: '#/components/schemas/ProvisioningArtifactType'
+        CreatedTime:
+          $ref: '#/components/schemas/CreationTime'
+      description: Detailed provisioning artifact information.
+    ProvisioningArtifactDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProvisioningArtifactDetail'
+    ProvisioningArtifactInfo:
+      type: array
+      minItems: 1
+      maxItems: 100
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/ProvisioningArtifactInfoKey'
+          value:
+            $ref: '#/components/schemas/ProvisioningArtifactInfoValue'
+    ProvisioningArtifactInfoKey:
+      type: string
+    ProvisioningArtifactInfoValue:
+      type: string
+    ProvisioningArtifactName:
+      type: string
+    ProvisioningArtifactParameter:
+      type: object
+      properties:
+        ParameterKey:
+          $ref: '#/components/schemas/ParameterKey'
+        DefaultValue:
+          $ref: '#/components/schemas/DefaultValue'
+        ParameterType:
+          $ref: '#/components/schemas/ParameterType'
+        IsNoEcho:
+          $ref: '#/components/schemas/NoEcho'
+        Description:
+          $ref: '#/components/schemas/Description'
+        ParameterConstraints:
+          $ref: '#/components/schemas/ParameterConstraints'
+      description: 'A parameter used to successfully provision the product. This value includes a list of allowable values and additional metadata. '
+    ProvisioningArtifactParameters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProvisioningArtifactParameter'
+    ProvisioningArtifactProperties:
+      type: object
+      required:
+        - Info
+      properties:
+        Name:
+          $ref: '#/components/schemas/ProvisioningArtifactName'
+        Description:
+          $ref: '#/components/schemas/ProvisioningArtifactDescription'
+        Info:
+          $ref: '#/components/schemas/ProvisioningArtifactInfo'
+        Type:
+          $ref: '#/components/schemas/ProvisioningArtifactType'
+      description: 'Provisioning artifact properties. For example request JSON, see <a>CreateProvisioningArtifact</a>.'
+    ProvisioningArtifactSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProvisioningArtifactSummary'
+    ProvisioningArtifactSummary:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/Id'
+        Name:
+          $ref: '#/components/schemas/ProvisioningArtifactName'
+        Description:
+          $ref: '#/components/schemas/ProvisioningArtifactDescription'
+        CreatedTime:
+          $ref: '#/components/schemas/ProvisioningArtifactCreatedTime'
+        ProvisioningArtifactMetadata:
+          $ref: '#/components/schemas/ProvisioningArtifactInfo'
+      description: Stores summary information about a provisioning artifact.
+    ProvisioningArtifactType:
+      type: string
+      enum:
+        - CLOUD_FORMATION_TEMPLATE
+        - MARKETPLACE_AMI
+        - MARKETPLACE_CAR
+    ProvisioningArtifacts:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProvisioningArtifact'
+    ProvisioningParameter:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/ParameterKey'
+        Value:
+          $ref: '#/components/schemas/ParameterValue'
+      description: The parameter key-value pairs used to provision a product.
+    ProvisioningParameters:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProvisioningParameter'
+    RecordDetail:
+      type: object
+      properties:
+        RecordId:
+          $ref: '#/components/schemas/Id'
+        ProvisionedProductName:
+          $ref: '#/components/schemas/ProvisionedProductName'
+        Status:
+          $ref: '#/components/schemas/RecordStatus'
+        CreatedTime:
+          $ref: '#/components/schemas/CreatedTime'
+        UpdatedTime:
+          $ref: '#/components/schemas/UpdatedTime'
+        ProvisionedProductType:
+          $ref: '#/components/schemas/ProvisionedProductType'
+        RecordType:
+          $ref: '#/components/schemas/RecordType'
+        ProvisionedProductId:
+          $ref: '#/components/schemas/Id'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        ProvisioningArtifactId:
+          $ref: '#/components/schemas/Id'
+        PathId:
+          $ref: '#/components/schemas/Id'
+        RecordErrors:
+          $ref: '#/components/schemas/RecordErrors'
+        RecordTags:
+          $ref: '#/components/schemas/RecordTags'
+      description: The full details of a specific ProvisionedProduct object.
+    RecordDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecordDetail'
+    RecordError:
+      type: object
+      properties:
+        Code:
+          $ref: '#/components/schemas/ErrorCode'
+        Description:
+          $ref: '#/components/schemas/ErrorDescription'
+      description: The error code and description resulting from an operation.
+    RecordErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecordError'
+    RecordOutput:
+      type: object
+      properties:
+        OutputKey:
+          $ref: '#/components/schemas/OutputKey'
+        OutputValue:
+          $ref: '#/components/schemas/OutputValue'
+        Description:
+          $ref: '#/components/schemas/Description'
+      description: 'An output for the specified Product object created as the result of a request. For example, a CloudFormation-backed product that creates an S3 bucket would have an output for the S3 bucket URL.'
+    RecordOutputs:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecordOutput'
+    RecordStatus:
+      type: string
+      enum:
+        - CREATED
+        - IN_PROGRESS
+        - IN_PROGRESS_IN_ERROR
+        - SUCCEEDED
+        - FAILED
+    RecordTag:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/RecordTagKey'
+        Value:
+          $ref: '#/components/schemas/RecordTagValue'
+      description: 'A tag associated with the record, stored as a key-value pair.'
+    RecordTagKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+      minLength: 1
+      maxLength: 128
+    RecordTagValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+      minLength: 1
+      maxLength: 256
+    RecordTags:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecordTag'
+      maxItems: 50
+    RecordType:
+      type: string
+    RejectPortfolioShareInput:
+      type: object
+      required:
+        - PortfolioId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+    RejectPortfolioShareOutput:
+      type: object
+      properties: {}
+    ResourceARN:
+      type: string
+      minLength: 1
+      maxLength: 150
+    ResourceDetail:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ResourceDetailId'
+        ARN:
+          $ref: '#/components/schemas/ResourceDetailARN'
+        Name:
+          $ref: '#/components/schemas/ResourceDetailName'
+        Description:
+          $ref: '#/components/schemas/ResourceDetailDescription'
+        CreatedTime:
+          $ref: '#/components/schemas/ResourceDetailCreatedTime'
+      description: Detailed resource information.
+    ResourceDetailARN:
+      type: string
+    ResourceDetailCreatedTime:
+      type: string
+      format: date-time
+    ResourceDetailDescription:
+      type: string
+    ResourceDetailId:
+      type: string
+    ResourceDetailName:
+      type: string
+    ResourceDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceDetail'
+    ResourceId:
+      type: string
+    ResourceInUseException:
+      type: object
+      properties: {}
+      description: The operation was requested against a resource that is currently in use. Free the resource from use and retry the operation.
+    ResourceNotFoundException:
+      type: object
+      properties: {}
+      description: The specified resource was not found.
+    ResourceType:
+      type: string
+    ScanProvisionedProductsInput:
+      type: object
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        AccessLevelFilter:
+          $ref: '#/components/schemas/AccessLevelFilter'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+    ScanProvisionedProductsOutput:
+      type: object
+      properties:
+        ProvisionedProducts:
+          $ref: '#/components/schemas/ProvisionedProductDetails'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    SearchFilterKey:
+      type: string
+    SearchFilterValue:
+      type: string
+    SearchProductsAsAdminInput:
+      type: object
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        PortfolioId:
+          $ref: '#/components/schemas/Id'
+        Filters:
+          $ref: '#/components/schemas/ProductViewFilters'
+        SortBy:
+          $ref: '#/components/schemas/ProductViewSortBy'
+        SortOrder:
+          $ref: '#/components/schemas/SortOrder'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+        ProductSource:
+          $ref: '#/components/schemas/ProductSource'
+    SearchProductsAsAdminOutput:
+      type: object
+      properties:
+        ProductViewDetails:
+          $ref: '#/components/schemas/ProductViewDetails'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    SearchProductsInput:
+      type: object
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Filters:
+          $ref: '#/components/schemas/ProductViewFilters'
+        PageSize:
+          $ref: '#/components/schemas/PageSize'
+        SortBy:
+          $ref: '#/components/schemas/ProductViewSortBy'
+        SortOrder:
+          $ref: '#/components/schemas/SortOrder'
+        PageToken:
+          $ref: '#/components/schemas/PageToken'
+    SearchProductsOutput:
+      type: object
+      properties:
+        ProductViewSummaries:
+          $ref: '#/components/schemas/ProductViewSummaries'
+        ProductViewAggregations:
+          $ref: '#/components/schemas/ProductViewAggregations'
+        NextPageToken:
+          $ref: '#/components/schemas/PageToken'
+    SortOrder:
+      type: string
+      enum:
+        - ASCENDING
+        - DESCENDING
+    Status:
+      type: string
+      enum:
+        - AVAILABLE
+        - CREATING
+        - FAILED
+    SupportDescription:
+      type: string
+    SupportEmail:
+      type: string
+    SupportUrl:
+      type: string
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+      description: Key-value pairs to associate with this provisioning. These tags are entirely discretionary and are propagated to the resources created in the provisioning.
+    TagKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    TagOptionActive:
+      type: boolean
+    TagOptionDetail:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagOptionKey'
+        Value:
+          $ref: '#/components/schemas/TagOptionValue'
+        Active:
+          $ref: '#/components/schemas/TagOptionActive'
+        Id:
+          $ref: '#/components/schemas/TagOptionId'
+      description: The TagOption details.
+    TagOptionDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagOptionDetail'
+    TagOptionId:
+      type: string
+      minLength: 1
+      maxLength: 100
+    TagOptionKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
+    TagOptionNotMigratedException:
+      type: object
+      properties: {}
+      description: An operation requiring TagOptions failed because the TagOptions migration process has not been performed for this account. Please use the AWS console to perform the migration process before retrying the operation.
+    TagOptionSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagOptionSummary'
+    TagOptionSummary:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagOptionKey'
+        Values:
+          $ref: '#/components/schemas/TagOptionValues'
+      description: The TagOption summary key-value pair.
+    TagOptionValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 256
+    TagOptionValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagOptionValue'
+    TagValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 256
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      maxItems: 50
+    TerminateProvisionedProductInput:
+      type: object
+      required:
+        - TerminateToken
+      properties:
+        ProvisionedProductName:
+          $ref: '#/components/schemas/ProvisionedProductNameOrArn'
+        ProvisionedProductId:
+          $ref: '#/components/schemas/Id'
+        TerminateToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+        IgnoreErrors:
+          $ref: '#/components/schemas/IgnoreErrors'
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+    TerminateProvisionedProductOutput:
+      type: object
+      properties:
+        RecordDetail:
+          $ref: '#/components/schemas/RecordDetail'
+    UpdateConstraintInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+        Description:
+          $ref: '#/components/schemas/ConstraintDescription'
+    UpdateConstraintOutput:
+      type: object
+      properties:
+        ConstraintDetail:
+          $ref: '#/components/schemas/ConstraintDetail'
+        ConstraintParameters:
+          $ref: '#/components/schemas/ConstraintParameters'
+        Status:
+          $ref: '#/components/schemas/Status'
+    UpdatePortfolioInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+        DisplayName:
+          $ref: '#/components/schemas/PortfolioDisplayName'
+        Description:
+          $ref: '#/components/schemas/PortfolioDescription'
+        ProviderName:
+          $ref: '#/components/schemas/ProviderName'
+        AddTags:
+          $ref: '#/components/schemas/AddTags'
+        RemoveTags:
+          $ref: '#/components/schemas/TagKeys'
+    UpdatePortfolioOutput:
+      type: object
+      properties:
+        PortfolioDetail:
+          $ref: '#/components/schemas/PortfolioDetail'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+    UpdateProductInput:
+      type: object
+      required:
+        - Id
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        Id:
+          $ref: '#/components/schemas/Id'
+        Name:
+          $ref: '#/components/schemas/ProductViewName'
+        Owner:
+          $ref: '#/components/schemas/ProductViewOwner'
+        Description:
+          $ref: '#/components/schemas/ProductViewShortDescription'
+        Distributor:
+          $ref: '#/components/schemas/ProductViewOwner'
+        SupportDescription:
+          $ref: '#/components/schemas/SupportDescription'
+        SupportEmail:
+          $ref: '#/components/schemas/SupportEmail'
+        SupportUrl:
+          $ref: '#/components/schemas/SupportUrl'
+        AddTags:
+          $ref: '#/components/schemas/AddTags'
+        RemoveTags:
+          $ref: '#/components/schemas/TagKeys'
+    UpdateProductOutput:
+      type: object
+      properties:
+        ProductViewDetail:
+          $ref: '#/components/schemas/ProductViewDetail'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+    UpdateProvisionedProductInput:
+      type: object
+      required:
+        - UpdateToken
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProvisionedProductName:
+          $ref: '#/components/schemas/ProvisionedProductNameOrArn'
+        ProvisionedProductId:
+          $ref: '#/components/schemas/Id'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        ProvisioningArtifactId:
+          $ref: '#/components/schemas/Id'
+        PathId:
+          $ref: '#/components/schemas/Id'
+        ProvisioningParameters:
+          $ref: '#/components/schemas/UpdateProvisioningParameters'
+        UpdateToken:
+          $ref: '#/components/schemas/IdempotencyToken'
+    UpdateProvisionedProductOutput:
+      type: object
+      properties:
+        RecordDetail:
+          $ref: '#/components/schemas/RecordDetail'
+    UpdateProvisioningArtifactInput:
+      type: object
+      required:
+        - ProductId
+        - ProvisioningArtifactId
+      properties:
+        AcceptLanguage:
+          $ref: '#/components/schemas/AcceptLanguage'
+        ProductId:
+          $ref: '#/components/schemas/Id'
+        ProvisioningArtifactId:
+          $ref: '#/components/schemas/Id'
+        Name:
+          $ref: '#/components/schemas/ProvisioningArtifactName'
+        Description:
+          $ref: '#/components/schemas/ProvisioningArtifactDescription'
+    UpdateProvisioningArtifactOutput:
+      type: object
+      properties:
+        ProvisioningArtifactDetail:
+          $ref: '#/components/schemas/ProvisioningArtifactDetail'
+        Info:
+          $ref: '#/components/schemas/ProvisioningArtifactInfo'
+        Status:
+          $ref: '#/components/schemas/Status'
+    UpdateProvisioningParameter:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/ParameterKey'
+        Value:
+          $ref: '#/components/schemas/ParameterValue'
+        UsePreviousValue:
+          $ref: '#/components/schemas/UsePreviousValue'
+      description: 'The parameter key-value pair used to update a ProvisionedProduct object. If <code>UsePreviousValue</code> is set to true, <code>Value</code> is ignored and the value for <code>Key</code> is kept as previously set (current value).'
+    UpdateProvisioningParameters:
+      type: array
+      items:
+        $ref: '#/components/schemas/UpdateProvisioningParameter'
+    UpdateTagOptionInput:
+      type: object
+      required:
+        - Id
+      properties:
+        Id:
+          $ref: '#/components/schemas/TagOptionId'
+        Value:
+          $ref: '#/components/schemas/TagOptionValue'
+        Active:
+          $ref: '#/components/schemas/TagOptionActive'
+    UpdateTagOptionOutput:
+      type: object
+      properties:
+        TagOptionDetail:
+          $ref: '#/components/schemas/TagOptionDetail'
+    UpdatedTime:
+      type: string
+      format: date-time
+    UsageInstruction:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/InstructionType'
+        Value:
+          $ref: '#/components/schemas/InstructionValue'
+      description: Additional information provided by the administrator.
+    UsageInstructions:
+      type: array
+      items:
+        $ref: '#/components/schemas/UsageInstruction'
+    UsePreviousValue:
+      type: boolean
+    Verbose:
+      type: boolean
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

@@ -1,0 +1,559 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://recsvm.rummblelabs.com/'
+  - url: 'https://recsvm.rummblelabs.com/'
+info:
+  description: Seldon is an Open Predictive Platform that currently allows item recommendations and general predictive models to be deployed based on structured historical data.
+  title: Seldon
+  version: 1.0.0
+  x-apisguru-categories:
+    - machine_learning
+  x-logo:
+    url: 'http://www.seldon.io/wp-content/uploads/2014/10/Seldon-Logo-trans.png'
+  x-origin:
+    - format: swagger
+      url: 'http://recsvm.rummblelabs.com/api-spec/seldon.json'
+      version: '2.0'
+  x-providerName: rummblelabs.com
+paths:
+  /actions:
+    post:
+      description: ''
+      operationId: postAction
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: post new action between a user and an item
+      tags:
+        - oauth actions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Action'
+        description: the json details
+        required: true
+  /items:
+    get:
+      description: ''
+      operationId: getItems
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+        - description: get all attributes for item
+          in: query
+          name: full
+          required: false
+          schema:
+            type: boolean
+        - description: keywords to match
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: limit items to a particular dimension
+          in: query
+          name: dimension
+          required: false
+          schema:
+            type: integer
+        - description: limit items to a particular type
+          in: query
+          name: type
+          required: false
+          schema:
+            type: integer
+        - description: limit number of items returned
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: get items
+      tags:
+        - oauth items
+    post:
+      description: ''
+      operationId: postItem
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: post new item
+      tags:
+        - oauth items
+      requestBody:
+        $ref: '#/components/requestBodies/Item'
+    put:
+      description: ''
+      operationId: putItem
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: update item
+      tags:
+        - oauth items
+      requestBody:
+        $ref: '#/components/requestBodies/Item'
+  /items/type:
+    get:
+      description: ''
+      operationId: getItemTypes
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: get item type
+      tags:
+        - oauth items
+  '/items/{itemId}':
+    get:
+      description: ''
+      operationId: getItem
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+        - description: the item id to get
+          in: path
+          name: itemId
+          required: true
+          schema:
+            type: string
+        - description: get all attributes for item
+          in: query
+          name: full
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: get item
+      tags:
+        - oauth items
+  /js/action/new:
+    get:
+      description: ''
+      operationId: addAction
+      parameters:
+        - description: consumer key
+          in: query
+          name: consumer_key
+          required: true
+          schema:
+            type: string
+            default: uggyecofcz
+        - description: user id
+          in: query
+          name: user
+          required: true
+          schema:
+            type: string
+        - description: item id
+          in: query
+          name: item
+          required: true
+          schema:
+            type: string
+        - description: type
+          in: query
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: JSONP callback
+          in: query
+          name: jsonpCallback
+          required: true
+          schema:
+            type: string
+        - description: time
+          in: query
+          name: timestamp
+          required: false
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: Add a user interaction
+      tags:
+        - js actions
+  /js/recommendations:
+    get:
+      description: ''
+      operationId: getRecommendation
+      parameters:
+        - description: consumer key
+          in: query
+          name: consumer_key
+          required: true
+          schema:
+            type: string
+            default: uggyecofcz
+        - description: user id
+          in: query
+          name: user
+          required: true
+          schema:
+            type: string
+        - description: currently viewed item id
+          in: query
+          name: item
+          required: false
+          schema:
+            type: string
+        - description: max number of recommendations to return
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: 'get recommendations for a particular item dimension (e.g., just sports articles)'
+          in: query
+          name: dimension
+          required: false
+          schema:
+            type: integer
+        - description: the fields to return
+          in: query
+          name: attributes
+          required: false
+          schema:
+            type: string
+            format: command separated list
+        - description: override default algorithms with specified algorithms
+          in: query
+          name: algorithms
+          required: false
+          schema:
+            type: string
+        - description: JSONP callback
+          in: query
+          name: jsonpCallback
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: Get recommendations for a user
+      tags:
+        - js recommendations
+  /token:
+    get:
+      description: ''
+      operationId: getToken
+      parameters:
+        - description: consumer key
+          in: query
+          name: consumer_key
+          required: true
+          schema:
+            type: string
+        - description: consumer secret
+          in: query
+          name: consumer_secret
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: get token
+      tags:
+        - token
+  /users:
+    get:
+      description: ''
+      operationId: getUsers
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+        - description: get all attributes for user
+          in: query
+          name: full
+          required: false
+          schema:
+            type: boolean
+        - description: keywords to match
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: limit number of users returned
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: get users
+      tags:
+        - oauth users
+    post:
+      description: ''
+      operationId: postUser
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: post new user
+      tags:
+        - oauth users
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+    put:
+      description: ''
+      operationId: updateUser
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: update user
+      tags:
+        - oauth users
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+  '/users/{userId}':
+    get:
+      description: ''
+      operationId: getUser
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+        - description: the user id to get
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+        - description: get all attributes for user
+          in: query
+          name: full
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: get a user
+      tags:
+        - oauth users
+  '/users/{userId}/actions':
+    get:
+      description: ''
+      operationId: getUserActions
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+        - description: the user id to get
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+        - description: get all attributes for user
+          in: query
+          name: full
+          required: false
+          schema:
+            type: boolean
+        - description: limit number of actions returned
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: get a user's recent actions
+      tags:
+        - oauth users
+        - oauth actions
+  '/users/{userId}/recommendations':
+    get:
+      description: ''
+      operationId: getUserRecommendations
+      parameters:
+        - description: oauth token
+          in: query
+          name: oauth_token
+          required: false
+          schema:
+            type: string
+        - description: the user id to get
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+        - description: get all attributes for user
+          in: query
+          name: full
+          required: false
+          schema:
+            type: boolean
+        - description: limit number of actions returned
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: 'get recommendations for a particular item dimension (e.g., just sports articles)'
+          in: query
+          name: dimension
+          required: false
+          schema:
+            type: integer
+        - description: override default algorithms with specified algorithms
+          in: query
+          name: algorithms
+          required: false
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid parameters
+      summary: get recommendations for a user
+      tags:
+        - oauth users
+        - oauth recommendations
+components:
+  schemas:
+    Action:
+      properties:
+        item:
+          example: item1234
+          type: string
+        type:
+          description: action type
+          type: integer
+        user:
+          example: user1234
+          type: string
+        value:
+          description: action value (e.g. a rating)
+          type: number
+      required:
+        - user
+        - item
+        - type
+    AttributesName:
+      properties:
+        attrName1:
+          example: attrValue1
+          type: string
+        attrName2:
+          example: attrValue2
+          type: string
+    Item:
+      properties:
+        attributesName:
+          $ref: '#/components/schemas/AttributesName'
+        id:
+          example: myid1234
+          type: string
+        type:
+          description: type of item
+          example: 1
+          type: integer
+      required:
+        - id
+    User:
+      properties:
+        active:
+          description: whether user is active
+          type: boolean
+        attributesName:
+          $ref: '#/components/schemas/AttributesName'
+        id:
+          example: myid1234
+          type: string
+        username:
+          description: name of user
+          example: Joe Bloggs
+          type: string
+      required:
+        - id
+  requestBodies:
+    Item:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Item'
+      description: the json details
+      required: true
+    User:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+      description: the json details
+      required: true

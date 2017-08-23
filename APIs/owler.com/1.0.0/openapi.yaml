@@ -1,0 +1,887 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.owler.com/'
+info:
+  description: 'Search for information on companies using a website or company name and get access to Company Data, News, Blog Posts, Competitor Lists and much more.'
+  title: Owler
+  version: 1.0.0
+  x-apisguru-categories:
+    - search
+  x-logo:
+    url: 'https://developers.owler.com/images/owler_logo.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
+      url: 'https://developers.owler.com/swagger/spec.json'
+      version: '1.2'
+  x-providerName: owler.com
+security:
+  - user_key: []
+tags:
+  - description: Provides Company information
+    name: CompanyAPI
+  - description: Provides company premium information.
+    name: CompanyPremiumAPI
+  - description: Provides Competitor information
+    name: CompetitorAPI
+  - description: Provides Competitor Premium information
+    name: CompetitorPremiumAPI
+  - description: Provides Feed information
+    name: FeedAPI
+paths:
+  /v1/company/basicsearch:
+    get:
+      description: The Company Basic Search API searches for a company based on the input and will returns results containing basic details about matching companies. By default the API returns the top 10 available results unless the limit is specified. The maximum limit is restricted to 30.
+      operationId: basicCompanySearch
+      parameters:
+        - description: Search term
+          in: query
+          name: q
+          required: true
+          schema:
+            type: string
+        - description: 'Fields to be searched - name, website, ticker, permid. If not specfied, will be searched against all fields'
+          in: query
+          name: fields
+          required: false
+          schema:
+            type: array
+            items:
+              enum:
+                - name
+                - website
+                - ticker
+                - permid
+              type: string
+        - description: 'Number of results to be displayed - 10 (by default, if not specified) to 30'
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: string
+        - description: 'Format of the response content - json (by default if not specified), xml'
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - xml
+              - json
+            default: json
+      responses:
+        '200':
+          description: Search Results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/basic_results'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/basic_results'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Basic Search Company by Ticker or Website or Name or PermID
+      tags:
+        - CompanyAPI
+  '/v1/company/competitor/id/{companyId}':
+    get:
+      description: The Competitors API provides basic information about top 3 competitors of a company specified in the Company Id
+      parameters:
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+        - description: 'Format of the response content - json (by default if not specified), xml'
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - xml
+              - json
+            default: json
+      responses:
+        '200':
+          description: Competitors Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyCompetitorVO'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CompanyCompetitorVO'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Competitor information by Id
+      tags:
+        - CompetitorAPI
+  '/v1/company/competitor/url/{website}':
+    get:
+      description: The Competitors API provides basic information about top 3 competitors of a company specified in the website
+      parameters:
+        - description: Company Id
+          in: path
+          name: website
+          required: true
+          schema:
+            type: string
+        - description: 'Format of the response content - json (by default if not specified), xml'
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - xml
+              - json
+            default: json
+      responses:
+        '200':
+          description: Competitors Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyCompetitorVO'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CompanyCompetitorVO'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Competitor information by URL
+      tags:
+        - CompetitorAPI
+  '/v1/company/competitorpremium/id/{companyId}':
+    get:
+      description: The Competitors API provides basic information about all competitors of a given company Id
+      parameters:
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+        - description: 'Pass pagination_id as * in the first API request. The API response will return top competitors along with the next pagination_id which can be passed in the subsequent API request to get the next set of competitors. Repeat this process until needed or till the pagination_id returned is blank. Note:Every response will have maximum of 50 competitors.'
+          in: query
+          name: pagination_id
+          required: false
+          schema:
+            type: string
+        - description: 'Format of the response content - json (by default if not specified), xml'
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - xml
+              - json
+            default: json
+      responses:
+        '200':
+          description: Competitors Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/competitors'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/competitors'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Competitor information by Id
+      tags:
+        - CompetitorPremiumAPI
+  '/v1/company/competitorpremium/url/{website}':
+    get:
+      description: The Competitors API provides basic information about all competitors of a given company Id
+      parameters:
+        - description: Company Id
+          in: path
+          name: website
+          required: true
+          schema:
+            type: string
+        - description: 'Pass pagination_id as * in the first API request. The API response will return top competitors along with the next pagination_id which can be passed in the subsequent API request to get the next set of competitors. Repeat this process until needed or till the pagination_id returned is blank. Note:Every response will have maximum of 50 competitors.'
+          in: query
+          name: pagination_id
+          required: false
+          schema:
+            type: string
+        - description: 'Format of the response content - json (by default if not specified), xml'
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - xml
+              - json
+            default: json
+      responses:
+        '200':
+          description: Competitors Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/competitors'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/competitors'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Competitor information by Url
+      tags:
+        - CompetitorPremiumAPI
+  '/v1/company/id/{companyId}':
+    get:
+      description: 'The Company Data API provides complete information about a company for the specified Company Id '
+      parameters:
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+        - description: 'Format of the response content - json (by default if not specified), xml'
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - xml
+              - json
+            default: json
+      responses:
+        '200':
+          description: Company Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/company'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/company'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Company by Id
+      tags:
+        - CompanyAPI
+  /v1/company/search:
+    get:
+      description: The Company Search API searches for a company based on the input and will returns results containing basic details about matching companies. By default the API returns the top 10 available results unless the limit is specified. The maximum limit is restricted to 30.
+      operationId: searchCompany
+      parameters:
+        - description: Search term
+          in: query
+          name: q
+          required: true
+          schema:
+            type: string
+        - description: 'Fields to be searched - name, website, ticker. If not specified, will be searched against all fields'
+          in: query
+          name: fields
+          required: false
+          schema:
+            type: array
+            items:
+              enum:
+                - name
+                - website
+                - ticker
+                - permid
+              type: string
+        - description: 'Number of results to be displayed - 10 (by default, if not specified) to 30'
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: string
+        - description: 'Format of the response content - json (by default if not specified), xml'
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - xml
+              - json
+            default: json
+      responses:
+        '200':
+          description: Search Results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/results'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/results'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Search Company by Ticker or Website or Name or PermID
+      tags:
+        - CompanyAPI
+  '/v1/company/url/{website}':
+    get:
+      description: 'The Company Data API provides complete information about a company for the specified URL '
+      parameters:
+        - description: Company Domain
+          in: path
+          name: website
+          required: true
+          schema:
+            type: string
+        - description: 'Format of the response content - json (by default if not specified), xml'
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - xml
+              - json
+            default: json
+      responses:
+        '200':
+          description: Company Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/company'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/company'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Company by URL
+      tags:
+        - CompanyAPI
+  '/v1/companypremium/id/{companyId}':
+    get:
+      description: 'The Company Premium Data API provides complete information about a company for the specified Company Id '
+      parameters:
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+        - description: 'Format of the response content - json (by default if not specified), xml'
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - xml
+              - json
+            default: json
+      responses:
+        '200':
+          description: Company Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/company'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/company'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Complete Company Info by Id
+      tags:
+        - CompanyPremiumAPI
+  '/v1/companypremium/url/{website}':
+    get:
+      description: 'The Company Data API provides complete information about a company for the specified URL '
+      parameters:
+        - description: Company Domain
+          in: path
+          name: website
+          required: true
+          schema:
+            type: string
+        - description: 'Format of the response content - json (by default if not specified), xml'
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - xml
+              - json
+            default: json
+      responses:
+        '200':
+          description: Company Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/company'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/company'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Basic Company Info by Url
+      tags:
+        - CompanyPremiumAPI
+  /v1/feed:
+    get:
+      description: The Feeds API provides a list of feeds and individual feed information for the given Company Ids and Category. By default the API returns the latest 10 feeds available unless the limit is specified. The maximum result is restricted to 100 feeds per API request.
+      operationId: getFeeds
+      parameters:
+        - description: 'Format of the response content - json (by default if not specified), xml'
+          in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum:
+              - xml
+              - json
+            default: json
+        - description: Company Ids separated by comma (Maximum of 150 Company Ids)
+          in: query
+          name: company_id
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Number of results to be displayed - 10 (by default, if not specified) to 100'
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: string
+            default: '10'
+        - description: Pass pagination_id as blank in the first API request. The API response will return the latest feeds along with the next pagination_id which can be passed in the subsequent API request to get the next set of feeds. Repeat this process until needed or till the pagination_id returned is blank
+          in: query
+          name: pagination_id
+          required: false
+          schema:
+            type: string
+            default: '*'
+        - description: 'Categories separated by comma. If not specified, will search against all categories'
+          in: query
+          name: category
+          required: false
+          schema:
+            type: array
+            items:
+              enum:
+                - NEWS
+                - PRESS
+                - FUNDING
+                - ACQUISITION
+                - PEOPLE
+                - BLOG
+                - VIDEOS
+              type: string
+      responses:
+        '200':
+          description: Feeds Data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/results'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/results'
+        '400':
+          description: Invalid Parameters
+        '403':
+          description: Authentication Failed
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+      summary: Get Feeds for given Company Ids
+      tags:
+        - FeedAPI
+components:
+  schemas:
+    Acquisition:
+      properties:
+        acquirer_company_id:
+          type: string
+        amount:
+          type: string
+        company_id:
+          type: string
+        date:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        undisclosed:
+          type: string
+        website:
+          type: string
+    Address:
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        phone:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+        street1:
+          type: string
+        street2:
+          type: string
+    Ceo:
+      properties:
+        ceo_rating:
+          type: string
+        first_name:
+          type: string
+        image_url:
+          type: string
+        last_name:
+          type: string
+    CompanyBasicSearchVO:
+      properties:
+        company_id:
+          format: int64
+          type: integer
+        hq_address:
+          $ref: '#/components/schemas/Address'
+        name:
+          type: string
+        perm_id:
+          type: string
+        profile_url:
+          type: string
+        short_name:
+          type: string
+        website:
+          type: string
+    CompanyBasicVO:
+      properties:
+        company_id:
+          format: int64
+          type: integer
+        logo_url:
+          type: string
+        name:
+          type: string
+        profile_url:
+          type: string
+        short_name:
+          type: string
+        website:
+          type: string
+      required:
+        - company_id
+        - name
+        - website
+        - logo_url
+        - profile_url
+    CompanyCompetitorVO:
+      properties:
+        competitor:
+          items:
+            $ref: '#/components/schemas/CompanyBasicVO'
+          type: array
+    CompanySearchResultVO:
+      properties:
+        company_id:
+          format: int64
+          type: integer
+        company_type:
+          enum:
+            - Private
+            - Public
+            - Product/Brand/Service
+            - NGO/NPO/NFP/Organization/Association
+            - Investment Company
+            - Government
+          type: string
+        description:
+          type: string
+        hq_address:
+          $ref: '#/components/schemas/Address'
+        logo_url:
+          type: string
+        name:
+          type: string
+        perm_id:
+          type: string
+        profile_url:
+          type: string
+        short_name:
+          type: string
+        stock:
+          $ref: '#/components/schemas/Stock'
+        website:
+          type: string
+      required:
+        - company_id
+        - name
+        - website
+        - logo_url
+        - profile_url
+    CompetitorBasicVO:
+      properties:
+        company_id:
+          format: int64
+          type: integer
+        logo_url:
+          type: string
+        name:
+          type: string
+        profile_url:
+          type: string
+        score:
+          format: int64
+          type: integer
+        short_name:
+          type: string
+        website:
+          type: string
+      required:
+        - company_id
+        - name
+        - website
+        - logo_url
+        - profile_url
+        - score
+    FeedsVO:
+      properties:
+        category:
+          type: string
+        company:
+          $ref: '#/components/schemas/CompanyBasicVO'
+        enclosure_image:
+          type: string
+        feed_date:
+          type: string
+        id:
+          type: string
+        owler_feed_url:
+          type: string
+        publisher_logo:
+          type: string
+        publisher_name:
+          type: string
+        source_url:
+          type: string
+        title:
+          type: string
+    Funding:
+      properties:
+        amount:
+          type: string
+        date:
+          type: string
+        investor:
+          items:
+            $ref: '#/components/schemas/Investor'
+          type: array
+        type:
+          type: string
+        undisclosed:
+          type: string
+    Investor:
+      properties:
+        company_id:
+          type: string
+        name:
+          type: string
+        website:
+          type: string
+    Stock:
+      properties:
+        exchange:
+          type: string
+        ticker:
+          type: string
+    basic_results:
+      properties:
+        company:
+          items:
+            $ref: '#/components/schemas/CompanyBasicSearchVO'
+          type: array
+    company:
+      properties:
+        acquisition:
+          items:
+            $ref: '#/components/schemas/Acquisition'
+          type: array
+        ceo:
+          $ref: '#/components/schemas/Ceo'
+        company_id:
+          format: int64
+          type: integer
+        company_type:
+          enum:
+            - Private
+            - Public
+            - Product/Brand/Service
+            - NGO/NPO/NFP/Organization/Association
+            - Investment Company
+            - Government
+          type: string
+        description:
+          type: string
+        employee_count:
+          type: string
+        facebook_link:
+          type: string
+        founded_date:
+          type: string
+        funding:
+          items:
+            $ref: '#/components/schemas/Funding'
+          type: array
+        hq_address:
+          $ref: '#/components/schemas/Address'
+        industries:
+          items:
+            type: string
+          type: array
+        linkedin_link:
+          type: string
+        logo_url:
+          type: string
+        name:
+          type: string
+        perm_id:
+          type: string
+        portfolio_company_ids:
+          items:
+            format: int32
+            type: integer
+          type: array
+        profile_url:
+          type: string
+        revenue:
+          type: string
+        short_name:
+          type: string
+        stock:
+          $ref: '#/components/schemas/Stock'
+        twitter_link:
+          type: string
+        website:
+          type: string
+        youtube_link:
+          type: string
+      required:
+        - company_id
+        - name
+        - website
+        - logo_url
+        - profile_url
+    competitors:
+      properties:
+        competitor:
+          items:
+            $ref: '#/components/schemas/CompetitorBasicVO'
+          type: array
+        pagination_id:
+          type: string
+    results:
+      properties:
+        feeds:
+          items:
+            $ref: '#/components/schemas/FeedsVO'
+          type: array
+        pagination_id:
+          type: string
+  securitySchemes:
+    user_key:
+      description: API Access Key
+      in: header
+      name: user_key
+      type: apiKey

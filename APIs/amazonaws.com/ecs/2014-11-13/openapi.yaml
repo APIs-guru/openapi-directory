@@ -1,0 +1,3375 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://ecs.amazonaws.com/'
+info:
+  version: '2014-11-13'
+  x-release: v4
+  title: Amazon EC2 Container Service
+  description: '<p>Amazon EC2 Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes it easy to run, stop, and manage Docker containers on a cluster of EC2 instances. Amazon ECS lets you launch and stop container-enabled applications with simple API calls, allows you to get the state of your cluster from a centralized service, and gives you access to many familiar Amazon EC2 features like security groups, Amazon EBS volumes, and IAM roles.</p> <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs, isolation policies, and availability requirements. Amazon EC2 Container Service eliminates the need for you to operate your own cluster management and configuration management systems or worry about scaling your management infrastructure.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: ecs
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ecs-2014-11-13.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/ecs/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CreateCluster
+      description: 'Creates a new Amazon ECS cluster. By default, your account receives a <code>default</code> cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the <code>CreateCluster</code> action.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateClusterResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClusterRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateService':
+    post:
+      operationId: CreateService
+      description: '<p>Runs and maintains a desired number of tasks from a specified task definition. If the number of tasks running in a service drops below <code>desiredCount</code>, Amazon ECS spawns another copy of the task in the specified cluster. To update an existing service, see <a>UpdateService</a>.</p> <p>In addition to maintaining the desired count of tasks in your service, you can optionally run your service behind a load balancer. The load balancer distributes traffic across the tasks that are associated with the service. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html">Service Load Balancing</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> <p>You can optionally specify a deployment configuration for your service. During a deployment (which is triggered by changing the task definition or the desired count of a service with an <a>UpdateService</a> operation), the service scheduler uses the <code>minimumHealthyPercent</code> and <code>maximumPercent</code> parameters to determine the deployment strategy.</p> <p>The <code>minimumHealthyPercent</code> represents a lower limit on the number of your service''s tasks that must remain in the <code>RUNNING</code> state during a deployment, as a percentage of the <code>desiredCount</code> (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a <code>desiredCount</code> of four tasks and a <code>minimumHealthyPercent</code> of 50%, the scheduler can stop two existing tasks to free up cluster capacity before starting two new tasks. Tasks for services that <i>do not</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state. Tasks for services that <i>do</i> use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance they are hosted on is reported as healthy by the load balancer. The default value for <code>minimumHealthyPercent</code> is 50% in the console and 100% for the AWS CLI, the AWS SDKs, and the APIs.</p> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of your service''s tasks that are allowed in the <code>RUNNING</code> or <code>PENDING</code> state during a deployment, as a percentage of the <code>desiredCount</code> (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service has a <code>desiredCount</code> of four tasks and a <code>maximumPercent</code> value of 200%, the scheduler can start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default value for <code>maximumPercent</code> is 200%.</p> <p>When the service scheduler launches new tasks, it determines task placement in your cluster using the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service''s task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy) with the <code>placementStrategy</code> parameter):</p> <ul> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateServiceResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateServiceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteAttributes':
+    post:
+      operationId: DeleteAttributes
+      description: Deletes one or more custom attributes from an Amazon ECS resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAttributesResponse'
+        '480':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+        '481':
+          description: TargetNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TargetNotFoundException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAttributesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteCluster':
+    post:
+      operationId: DeleteCluster
+      description: Deletes the specified cluster. You must deregister all container instances from this cluster before you may delete it. You can list the container instances in a cluster with <a>ListContainerInstances</a> and deregister them with <a>DeregisterContainerInstance</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteClusterResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+        '484':
+          description: ClusterContainsContainerInstancesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterContainsContainerInstancesException'
+        '485':
+          description: ClusterContainsServicesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterContainsServicesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteClusterRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteService':
+    post:
+      operationId: DeleteService
+      description: '<p>Deletes a specified service within a cluster. You can delete a service if you have no running tasks in it and the desired task count is zero. If the service is actively maintaining tasks, you cannot delete it, and you must update the service to a desired task count of zero. For more information, see <a>UpdateService</a>.</p> <note> <p>When you delete a service, if there are still running tasks that require cleanup, the service status moves from <code>ACTIVE</code> to <code>DRAINING</code>, and the service is no longer visible in the console or in <a>ListServices</a> API operations. After the tasks have stopped, then the service status moves from <code>DRAINING</code> to <code>INACTIVE</code>. Services in the <code>DRAINING</code> or <code>INACTIVE</code> status can still be viewed with <a>DescribeServices</a> API operations; however, in the future, <code>INACTIVE</code> services may be cleaned up and purged from Amazon ECS record keeping, and <a>DescribeServices</a> API operations on those services will return a <code>ServiceNotFoundException</code> error.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteServiceResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+        '484':
+          description: ServiceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteServiceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeregisterContainerInstance':
+    post:
+      operationId: DeregisterContainerInstance
+      description: '<p>Deregisters an Amazon ECS container instance from the specified cluster. This instance is no longer available to run tasks.</p> <p>If you intend to use the container instance for some other purpose after deregistration, you should stop all of the tasks running on the container instance before deregistration to avoid any orphaned tasks from consuming resources.</p> <p>Deregistering a container instance removes the instance from a cluster, but it does not terminate the EC2 instance; if you are finished using the instance, be sure to terminate it in the Amazon EC2 console to stop billing.</p> <note> <p>If you terminate a running container instance, Amazon ECS automatically deregisters the instance from your cluster (stopped container instances or instances with disconnected agents are not automatically deregistered when terminated).</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeregisterContainerInstanceResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeregisterContainerInstanceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeregisterTaskDefinition':
+    post:
+      operationId: DeregisterTaskDefinition
+      description: '<p>Deregisters the specified task definition by family and revision. Upon deregistration, the task definition is marked as <code>INACTIVE</code>. Existing tasks and services that reference an <code>INACTIVE</code> task definition continue to run without disruption. Existing services that reference an <code>INACTIVE</code> task definition can still scale up or down by modifying the service''s desired count.</p> <p>You cannot use an <code>INACTIVE</code> task definition to run new tasks or create new services, and you cannot update an existing service to reference an <code>INACTIVE</code> task definition (although there may be up to a 10 minute window following deregistration where these restrictions have not yet taken effect).</p> <note> <p>At this time, <code>INACTIVE</code> task definitions remain discoverable in your account indefinitely; however, this behavior is subject to change in the future, so you should not rely on <code>INACTIVE</code> task definitions persisting beyond the life cycle of any associated tasks and services.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeregisterTaskDefinitionResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeregisterTaskDefinitionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeClusters':
+    post:
+      operationId: DescribeClusters
+      description: Describes one or more of your clusters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeClustersResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeClustersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeContainerInstances':
+    post:
+      operationId: DescribeContainerInstances
+      description: Describes Amazon EC2 Container Service container instances. Returns metadata about registered and remaining resources on each container instance requested.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeContainerInstancesResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeContainerInstancesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeServices':
+    post:
+      operationId: DescribeServices
+      description: Describes the specified services running in your cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeServicesResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+      x-waiters:
+        - delay: 15
+          operation: DescribeServices
+          maxAttempts: 40
+          acceptors:
+            - expected: MISSING
+              matcher: pathAny
+              state: failure
+              argument: 'failures[].reason'
+            - expected: DRAINING
+              matcher: pathAny
+              state: failure
+              argument: 'services[].status'
+            - expected: INACTIVE
+              matcher: pathAny
+              state: failure
+              argument: 'services[].status'
+            - expected: true
+              matcher: path
+              state: success
+              argument: 'length(services[?!(length(deployments) == `1` && runningCount == desiredCount)]) == `0`'
+        - delay: 15
+          operation: DescribeServices
+          maxAttempts: 40
+          acceptors:
+            - expected: MISSING
+              matcher: pathAny
+              state: failure
+              argument: 'failures[].reason'
+            - expected: INACTIVE
+              matcher: pathAny
+              state: success
+              argument: 'services[].status'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeServicesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTaskDefinition':
+    post:
+      operationId: DescribeTaskDefinition
+      description: '<p>Describes a task definition. You can specify a <code>family</code> and <code>revision</code> to find information about a specific task definition, or you can simply specify the family to find the latest <code>ACTIVE</code> revision in that family.</p> <note> <p>You can only describe <code>INACTIVE</code> task definitions while an active task or service references them.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTaskDefinitionResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTaskDefinitionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTasks':
+    post:
+      operationId: DescribeTasks
+      description: Describes a specified task or tasks.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTasksResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+      x-waiters:
+        - delay: 6
+          operation: DescribeTasks
+          maxAttempts: 100
+          acceptors:
+            - expected: STOPPED
+              matcher: pathAny
+              state: failure
+              argument: 'tasks[].lastStatus'
+            - expected: MISSING
+              matcher: pathAny
+              state: failure
+              argument: 'failures[].reason'
+            - expected: RUNNING
+              matcher: pathAll
+              state: success
+              argument: 'tasks[].lastStatus'
+        - delay: 6
+          operation: DescribeTasks
+          maxAttempts: 100
+          acceptors:
+            - expected: STOPPED
+              matcher: pathAll
+              state: success
+              argument: 'tasks[].lastStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTasksRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DiscoverPollEndpoint':
+    post:
+      operationId: DiscoverPollEndpoint
+      description: '<note> <p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p> </note> <p>Returns an endpoint for the Amazon EC2 Container Service agent to poll for updates.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoverPollEndpointResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiscoverPollEndpointRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListAttributes':
+    post:
+      operationId: ListAttributes
+      description: 'Lists the attributes for Amazon ECS resources within a specified target type and cluster. When you specify a target type and cluster, <code>ListAttributes</code> returns a list of attribute objects, one for each attribute on each resource. You can filter the list of results to a single attribute name to only return results that have that name. You can also filter the results by attribute name and value, for example, to see which container instances in a cluster are running a Linux AMI (<code>ecs.os-type=linux</code>). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAttributesResponse'
+        '480':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAttributesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListClusters':
+    post:
+      operationId: ListClusters
+      description: Returns a list of existing clusters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListClustersResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListClustersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListContainerInstances':
+    post:
+      operationId: ListContainerInstances
+      description: 'Returns a list of container instances in a specified cluster. You can filter the results of a <code>ListContainerInstances</code> operation with cluster query language statements inside the <code>filter</code> parameter. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster Query Language</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContainerInstancesResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListContainerInstancesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListServices':
+    post:
+      operationId: ListServices
+      description: Lists the services that are running in a specified cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListServicesResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListServicesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTaskDefinitionFamilies':
+    post:
+      operationId: ListTaskDefinitionFamilies
+      description: <p>Returns a list of task definition families that are registered to your account (which may include task definition families that no longer have any <code>ACTIVE</code> task definition revisions).</p> <p>You can filter out task definition families that do not contain any <code>ACTIVE</code> task definition revisions by setting the <code>status</code> parameter to <code>ACTIVE</code>. You can also filter the results with the <code>familyPrefix</code> parameter.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTaskDefinitionFamiliesResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTaskDefinitionFamiliesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTaskDefinitions':
+    post:
+      operationId: ListTaskDefinitions
+      description: Returns a list of task definitions that are registered to your account. You can filter the results by family name with the <code>familyPrefix</code> parameter or by status with the <code>status</code> parameter.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTaskDefinitionsResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTaskDefinitionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTasks':
+    post:
+      operationId: ListTasks
+      description: '<p>Returns a list of tasks for a specified cluster. You can filter the results by family name, by a particular container instance, or by the desired status of the task with the <code>family</code>, <code>containerInstance</code>, and <code>desiredStatus</code> parameters.</p> <p>Recently-stopped tasks might appear in the returned results. Currently, stopped tasks appear in the returned results for at least one hour. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTasksResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+        '484':
+          description: ServiceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTasksRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutAttributes':
+    post:
+      operationId: PutAttributes
+      description: 'Create or update an attribute on an Amazon ECS resource. If the attribute does not exist, it is created. If the attribute exists, its value is replaced with the specified value. To delete an attribute, use <a>DeleteAttributes</a>. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes">Attributes</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutAttributesResponse'
+        '480':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+        '481':
+          description: TargetNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TargetNotFoundException'
+        '482':
+          description: AttributeLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttributeLimitExceededException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutAttributesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RegisterContainerInstance':
+    post:
+      operationId: RegisterContainerInstance
+      description: '<note> <p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p> </note> <p>Registers an EC2 instance into the specified cluster. This instance becomes available to place containers on.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterContainerInstanceResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterContainerInstanceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RegisterTaskDefinition':
+    post:
+      operationId: RegisterTaskDefinition
+      description: '<p>Registers a new task definition from the supplied <code>family</code> and <code>containerDefinitions</code>. Optionally, you can add data volumes to your containers with the <code>volumes</code> parameter. For more information about task definition parameters and defaults, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> <p>You can specify an IAM role for your task with the <code>taskRoleArn</code> parameter. When you specify an IAM role for a task, its containers can then use the latest versions of the AWS CLI or SDKs to make API requests to the AWS services that are specified in the IAM policy associated with the role. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html">IAM Roles for Tasks</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> <p>You can specify a Docker networking mode for the containers in your task definition with the <code>networkMode</code> parameter. The available network modes correspond to those described in <a href="https://docs.docker.com/engine/reference/run/#/network-settings">Network settings</a> in the Docker run reference.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterTaskDefinitionResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterTaskDefinitionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RunTask':
+    post:
+      operationId: RunTask
+      description: '<p>Starts a new task using the specified task definition.</p> <p>You can allow Amazon ECS to place tasks for you, or you can customize how Amazon ECS places tasks using placement constraints and placement strategies. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html">Scheduling Tasks</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> <p>Alternatively, you can use <a>StartTask</a> to use your own scheduler or place tasks manually on specific container instances.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunTaskResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunTaskRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartTask':
+    post:
+      operationId: StartTask
+      description: '<p>Starts a new task from the specified task definition on the specified container instance or instances.</p> <p>Alternatively, you can use <a>RunTask</a> to place tasks for you. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html">Scheduling Tasks</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartTaskResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartTaskRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopTask':
+    post:
+      operationId: StopTask
+      description: '<p>Stops a running task.</p> <p>When <a>StopTask</a> is called on a task, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a default 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p> <note> <p>The default 30-second timeout can be configured on the Amazon ECS container agent with the <code>ECS_CONTAINER_STOP_TIMEOUT</code> variable. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html">Amazon ECS Container Agent Configuration</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopTaskResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopTaskRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SubmitContainerStateChange':
+    post:
+      operationId: SubmitContainerStateChange
+      description: '<note> <p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p> </note> <p>Sent to acknowledge that a container changed states.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitContainerStateChangeResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitContainerStateChangeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SubmitTaskStateChange':
+    post:
+      operationId: SubmitTaskStateChange
+      description: '<note> <p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p> </note> <p>Sent to acknowledge that a task changed states.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitTaskStateChangeResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitTaskStateChangeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateContainerAgent':
+    post:
+      operationId: UpdateContainerAgent
+      description: '<p>Updates the Amazon ECS container agent on a specified container instance. Updating the Amazon ECS container agent does not interrupt running tasks or services on the container instance. The process for updating the agent differs depending on whether your container instance was launched with the Amazon ECS-optimized AMI or another operating system.</p> <p> <code>UpdateContainerAgent</code> requires the Amazon ECS-optimized AMI or Amazon Linux with the <code>ecs-init</code> service installed and running. For help updating the Amazon ECS container agent on other operating systems, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent">Manually Updating the Amazon ECS Container Agent</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateContainerAgentResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+        '484':
+          description: UpdateInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateInProgressException'
+        '485':
+          description: NoUpdateAvailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoUpdateAvailableException'
+        '486':
+          description: MissingVersionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingVersionException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateContainerAgentRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateContainerInstancesState':
+    post:
+      operationId: UpdateContainerInstancesState
+      description: '<p>Modifies the status of an Amazon ECS container instance.</p> <p>You can change the status of a container instance to <code>DRAINING</code> to manually remove an instance from a cluster, for example to perform system updates, update the Docker daemon, or scale down the cluster size. </p> <p>When you set a container instance to <code>DRAINING</code>, Amazon ECS prevents new tasks from being scheduled for placement on the container instance and replacement service tasks are started on other container instances in the cluster if the resources are available. Service tasks on the container instance that are in the <code>PENDING</code> state are stopped immediately.</p> <p>Service tasks on the container instance that are in the <code>RUNNING</code> state are stopped and replaced according the service''s deployment configuration parameters, <code>minimumHealthyPercent</code> and <code>maximumPercent</code>. Note that you can change the deployment configuration of your service using <a>UpdateService</a>.</p> <ul> <li> <p>If <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore <code>desiredCount</code> temporarily during task replacement. For example, <code>desiredCount</code> is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. If the minimum is 100%, the service scheduler can''t remove existing tasks until the replacement tasks are considered healthy. Tasks for services that do not use a load balancer are considered healthy if they are in the <code>RUNNING</code> state. Tasks for services that use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance they are hosted on is reported as healthy by the load balancer.</p> </li> <li> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during task replacement, which enables you to define the replacement batch size. For example, if <code>desiredCount</code> of four tasks, a maximum of 200% starts four new tasks before stopping the four tasks to be drained (provided that the cluster resources required to do this are available). If the maximum is 100%, then replacement tasks can''t start until the draining tasks have stopped.</p> </li> </ul> <p>Any <code>PENDING</code> or <code>RUNNING</code> tasks that do not belong to a service are not affected; you must wait for them to finish or stop them manually.</p> <p>A container instance has completed draining when it has no more <code>RUNNING</code> tasks. You can verify this using <a>ListTasks</a>.</p> <p>When you set a container instance to <code>ACTIVE</code>, the Amazon ECS scheduler can begin scheduling tasks on the instance again.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateContainerInstancesStateResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateContainerInstancesStateRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateService':
+    post:
+      operationId: UpdateService
+      description: '<p>Modifies the desired count, deployment configuration, or task definition used in a service.</p> <p>You can add to or subtract from the number of instantiations of a task definition in a service by specifying the cluster that the service is running in and a new <code>desiredCount</code> parameter.</p> <p>You can use <a>UpdateService</a> to modify your task definition and deploy a new version of your service.</p> <p>You can also update the deployment configuration of a service. When a deployment is triggered by updating the task definition of a service, the service scheduler uses the deployment configuration parameters, <code>minimumHealthyPercent</code> and <code>maximumPercent</code>, to determine the deployment strategy.</p> <ul> <li> <p>If <code>minimumHealthyPercent</code> is below 100%, the scheduler can ignore <code>desiredCount</code> temporarily during a deployment. For example, if <code>desiredCount</code> is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. Tasks for services that do not use a load balancer are considered healthy if they are in the <code>RUNNING</code> state. Tasks for services that use a load balancer are considered healthy if they are in the <code>RUNNING</code> state and the container instance they are hosted on is reported as healthy by the load balancer.</p> </li> <li> <p>The <code>maximumPercent</code> parameter represents an upper limit on the number of running tasks during a deployment, which enables you to define the deployment batch size. For example, if <code>desiredCount</code> is four tasks, a maximum of 200% starts four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available).</p> </li> </ul> <p>When <a>UpdateService</a> stops a task during a deployment, the equivalent of <code>docker stop</code> is issued to the containers running in the task. This results in a <code>SIGTERM</code> and a 30-second timeout, after which <code>SIGKILL</code> is sent and the containers are forcibly stopped. If the container handles the <code>SIGTERM</code> gracefully and exits within 30 seconds from receiving it, no <code>SIGKILL</code> is sent.</p> <p>When the service scheduler launches new tasks, it determines task placement in your cluster with the following logic:</p> <ul> <li> <p>Determine which of the container instances in your cluster can support your service''s task definition (for example, they have the required CPU, memory, ports, and container instance attributes).</p> </li> <li> <p>By default, the service scheduler attempts to balance tasks across Availability Zones in this manner (although you can choose a different placement strategy):</p> <ul> <li> <p>Sort the valid container instances by the fewest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have zero, valid container instances in either zone B or C are considered optimal for placement.</p> </li> <li> <p>Place the new service task on a valid container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the fewest number of running tasks for this service.</p> </li> </ul> </li> </ul> <p>When the service scheduler stops running tasks, it attempts to maintain balance across the Availability Zones in your cluster using the following logic: </p> <ul> <li> <p>Sort the container instances by the largest number of running tasks for this service in the same Availability Zone as the instance. For example, if zone A has one running service task and zones B and C each have two, container instances in either zone B or C are considered optimal for termination.</p> </li> <li> <p>Stop the task on a container instance in an optimal Availability Zone (based on the previous steps), favoring container instances with the largest number of running tasks for this service.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateServiceResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ClusterNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundException'
+        '484':
+          description: ServiceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNotFoundException'
+        '485':
+          description: ServiceNotActiveException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNotActiveException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateServiceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AgentUpdateStatus:
+      type: string
+      enum:
+        - PENDING
+        - STAGING
+        - STAGED
+        - UPDATING
+        - UPDATED
+        - FAILED
+    Attribute:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/String'
+        targetType:
+          $ref: '#/components/schemas/TargetType'
+        targetId:
+          $ref: '#/components/schemas/String'
+      description: 'An attribute is a name-value pair associated with an Amazon ECS object. Attributes enable you to extend the Amazon ECS data model by adding custom metadata to your resources. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes">Attributes</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.'
+    AttributeLimitExceededException:
+      type: object
+      properties: {}
+      description: You can apply up to 10 custom attributes per resource. You can view the attributes of a resource with <a>ListAttributes</a>. You can remove existing attributes on a resource with <a>DeleteAttributes</a>.
+    Attributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Attribute'
+    Boolean:
+      type: boolean
+    BoxedBoolean:
+      type: boolean
+    BoxedInteger:
+      type: integer
+    ClientException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: 'These errors are usually caused by a client action, such as using an action or resource on behalf of a user that doesn''t have permission to use the action or resource, or specifying an identifier that is not valid.'
+    Cluster:
+      type: object
+      properties:
+        clusterArn:
+          $ref: '#/components/schemas/String'
+        clusterName:
+          $ref: '#/components/schemas/String'
+        status:
+          $ref: '#/components/schemas/String'
+        registeredContainerInstancesCount:
+          $ref: '#/components/schemas/Integer'
+        runningTasksCount:
+          $ref: '#/components/schemas/Integer'
+        pendingTasksCount:
+          $ref: '#/components/schemas/Integer'
+        activeServicesCount:
+          $ref: '#/components/schemas/Integer'
+      description: 'A regional grouping of one or more container instances on which you can run task requests. Each account receives a default cluster the first time you use the Amazon ECS service, but you may also create other clusters. Clusters may contain more than one instance type simultaneously.'
+    ClusterContainsContainerInstancesException:
+      type: object
+      properties: {}
+      description: 'You cannot delete a cluster that has registered container instances. You must first deregister the container instances before you can delete the cluster. For more information, see <a>DeregisterContainerInstance</a>.'
+    ClusterContainsServicesException:
+      type: object
+      properties: {}
+      description: 'You cannot delete a cluster that contains services. You must first update the service to reduce its desired task count to 0 and then delete the service. For more information, see <a>UpdateService</a> and <a>DeleteService</a>.'
+    ClusterNotFoundException:
+      type: object
+      properties: {}
+      description: The specified cluster could not be found. You can view your available clusters with <a>ListClusters</a>. Amazon ECS clusters are region-specific.
+    Clusters:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cluster'
+    Container:
+      type: object
+      properties:
+        containerArn:
+          $ref: '#/components/schemas/String'
+        taskArn:
+          $ref: '#/components/schemas/String'
+        name:
+          $ref: '#/components/schemas/String'
+        lastStatus:
+          $ref: '#/components/schemas/String'
+        exitCode:
+          $ref: '#/components/schemas/BoxedInteger'
+        reason:
+          $ref: '#/components/schemas/String'
+        networkBindings:
+          $ref: '#/components/schemas/NetworkBindings'
+      description: A Docker container that is part of a task.
+    ContainerDefinition:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/String'
+        image:
+          $ref: '#/components/schemas/String'
+        cpu:
+          $ref: '#/components/schemas/Integer'
+        memory:
+          $ref: '#/components/schemas/BoxedInteger'
+        memoryReservation:
+          $ref: '#/components/schemas/BoxedInteger'
+        links:
+          $ref: '#/components/schemas/StringList'
+        portMappings:
+          $ref: '#/components/schemas/PortMappingList'
+        essential:
+          $ref: '#/components/schemas/BoxedBoolean'
+        entryPoint:
+          $ref: '#/components/schemas/StringList'
+        command:
+          $ref: '#/components/schemas/StringList'
+        environment:
+          $ref: '#/components/schemas/EnvironmentVariables'
+        mountPoints:
+          $ref: '#/components/schemas/MountPointList'
+        volumesFrom:
+          $ref: '#/components/schemas/VolumeFromList'
+        hostname:
+          $ref: '#/components/schemas/String'
+        user:
+          $ref: '#/components/schemas/String'
+        workingDirectory:
+          $ref: '#/components/schemas/String'
+        disableNetworking:
+          $ref: '#/components/schemas/BoxedBoolean'
+        privileged:
+          $ref: '#/components/schemas/BoxedBoolean'
+        readonlyRootFilesystem:
+          $ref: '#/components/schemas/BoxedBoolean'
+        dnsServers:
+          $ref: '#/components/schemas/StringList'
+        dnsSearchDomains:
+          $ref: '#/components/schemas/StringList'
+        extraHosts:
+          $ref: '#/components/schemas/HostEntryList'
+        dockerSecurityOptions:
+          $ref: '#/components/schemas/StringList'
+        dockerLabels:
+          $ref: '#/components/schemas/DockerLabelsMap'
+        ulimits:
+          $ref: '#/components/schemas/UlimitList'
+        logConfiguration:
+          $ref: '#/components/schemas/LogConfiguration'
+      description: Container definitions are used in task definitions to describe the different containers that are launched as part of a task.
+    ContainerDefinitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerDefinition'
+    ContainerInstance:
+      type: object
+      properties:
+        containerInstanceArn:
+          $ref: '#/components/schemas/String'
+        ec2InstanceId:
+          $ref: '#/components/schemas/String'
+        version:
+          $ref: '#/components/schemas/Long'
+        versionInfo:
+          $ref: '#/components/schemas/VersionInfo'
+        remainingResources:
+          $ref: '#/components/schemas/Resources'
+        registeredResources:
+          $ref: '#/components/schemas/Resources'
+        status:
+          $ref: '#/components/schemas/String'
+        agentConnected:
+          $ref: '#/components/schemas/Boolean'
+        runningTasksCount:
+          $ref: '#/components/schemas/Integer'
+        pendingTasksCount:
+          $ref: '#/components/schemas/Integer'
+        agentUpdateStatus:
+          $ref: '#/components/schemas/AgentUpdateStatus'
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+        registeredAt:
+          $ref: '#/components/schemas/Timestamp'
+      description: An EC2 instance that is running the Amazon ECS agent and has been registered with a cluster.
+    ContainerInstanceStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - DRAINING
+    ContainerInstances:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerInstance'
+    ContainerOverride:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/String'
+        command:
+          $ref: '#/components/schemas/StringList'
+        environment:
+          $ref: '#/components/schemas/EnvironmentVariables'
+        cpu:
+          $ref: '#/components/schemas/BoxedInteger'
+        memory:
+          $ref: '#/components/schemas/BoxedInteger'
+        memoryReservation:
+          $ref: '#/components/schemas/BoxedInteger'
+      description: The overrides that should be sent to a container.
+    ContainerOverrides:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerOverride'
+    Containers:
+      type: array
+      items:
+        $ref: '#/components/schemas/Container'
+    CreateClusterRequest:
+      type: object
+      example:
+        clusterName: my_cluster
+      properties:
+        clusterName:
+          $ref: '#/components/schemas/String'
+    CreateClusterResponse:
+      type: object
+      example:
+        cluster:
+          activeServicesCount: 0
+          clusterArn: 'arn:aws:ecs:us-east-1:012345678910:cluster/my_cluster'
+          clusterName: my_cluster
+          pendingTasksCount: 0
+          registeredContainerInstancesCount: 0
+          runningTasksCount: 0
+          status: ACTIVE
+      properties:
+        cluster:
+          $ref: '#/components/schemas/Cluster'
+    CreateServiceRequest:
+      type: object
+      required:
+        - serviceName
+        - taskDefinition
+        - desiredCount
+      example:
+        desiredCount: 10
+        loadBalancers:
+          - containerName: simple-app
+            containerPort: 80
+            loadBalancerName: EC2Contai-EcsElast-15DCDAURT3ZO2
+        role: ecsServiceRole
+        serviceName: ecs-simple-service-elb
+        taskDefinition: console-sample-app-static
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        serviceName:
+          $ref: '#/components/schemas/String'
+        taskDefinition:
+          $ref: '#/components/schemas/String'
+        loadBalancers:
+          $ref: '#/components/schemas/LoadBalancers'
+        desiredCount:
+          $ref: '#/components/schemas/BoxedInteger'
+        clientToken:
+          $ref: '#/components/schemas/String'
+        role:
+          $ref: '#/components/schemas/String'
+        deploymentConfiguration:
+          $ref: '#/components/schemas/DeploymentConfiguration'
+        placementConstraints:
+          $ref: '#/components/schemas/PlacementConstraints'
+        placementStrategy:
+          $ref: '#/components/schemas/PlacementStrategies'
+    CreateServiceResponse:
+      type: object
+      example:
+        service:
+          clusterArn: 'arn:aws:ecs:us-east-1:012345678910:cluster/default'
+          createdAt: '2016-08-29T16:02:54.884Z'
+          deploymentConfiguration:
+            maximumPercent: 200
+            minimumHealthyPercent: 100
+          deployments:
+            - createdAt: '2016-08-29T16:02:54.884Z'
+              desiredCount: 10
+              id: ecs-svc/9223370564343000923
+              pendingCount: 0
+              runningCount: 0
+              status: PRIMARY
+              taskDefinition: 'arn:aws:ecs:us-east-1:012345678910:task-definition/console-sample-app-static:6'
+              updatedAt: '2016-08-29T16:02:54.884Z'
+          desiredCount: 10
+          events: []
+          loadBalancers:
+            - containerName: simple-app
+              containerPort: 80
+              loadBalancerName: EC2Contai-EcsElast-15DCDAURT3ZO2
+          pendingCount: 0
+          roleArn: 'arn:aws:iam::012345678910:role/ecsServiceRole'
+          runningCount: 0
+          serviceArn: 'arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service-elb'
+          serviceName: ecs-simple-service-elb
+          status: ACTIVE
+          taskDefinition: 'arn:aws:ecs:us-east-1:012345678910:task-definition/console-sample-app-static:6'
+      properties:
+        service:
+          $ref: '#/components/schemas/Service'
+    DeleteAttributesRequest:
+      type: object
+      required:
+        - attributes
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+    DeleteAttributesResponse:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+    DeleteClusterRequest:
+      type: object
+      required:
+        - cluster
+      example:
+        cluster: my_cluster
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+    DeleteClusterResponse:
+      type: object
+      example:
+        cluster:
+          activeServicesCount: 0
+          clusterArn: 'arn:aws:ecs:us-east-1:012345678910:cluster/my_cluster'
+          clusterName: my_cluster
+          pendingTasksCount: 0
+          registeredContainerInstancesCount: 0
+          runningTasksCount: 0
+          status: INACTIVE
+      properties:
+        cluster:
+          $ref: '#/components/schemas/Cluster'
+    DeleteServiceRequest:
+      type: object
+      required:
+        - service
+      example:
+        service: my-http-service
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        service:
+          $ref: '#/components/schemas/String'
+    DeleteServiceResponse:
+      type: object
+      example: {}
+      properties:
+        service:
+          $ref: '#/components/schemas/Service'
+    Deployment:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/String'
+        status:
+          $ref: '#/components/schemas/String'
+        taskDefinition:
+          $ref: '#/components/schemas/String'
+        desiredCount:
+          $ref: '#/components/schemas/Integer'
+        pendingCount:
+          $ref: '#/components/schemas/Integer'
+        runningCount:
+          $ref: '#/components/schemas/Integer'
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        updatedAt:
+          $ref: '#/components/schemas/Timestamp'
+      description: The details of an Amazon ECS service deployment.
+    DeploymentConfiguration:
+      type: object
+      properties:
+        maximumPercent:
+          $ref: '#/components/schemas/BoxedInteger'
+        minimumHealthyPercent:
+          $ref: '#/components/schemas/BoxedInteger'
+      description: Optional deployment parameters that control how many tasks run during the deployment and the ordering of stopping and starting tasks.
+    Deployments:
+      type: array
+      items:
+        $ref: '#/components/schemas/Deployment'
+    DeregisterContainerInstanceRequest:
+      type: object
+      required:
+        - containerInstance
+      example:
+        cluster: default
+        containerInstance: container_instance_UUID
+        force: true
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        containerInstance:
+          $ref: '#/components/schemas/String'
+        force:
+          $ref: '#/components/schemas/BoxedBoolean'
+    DeregisterContainerInstanceResponse:
+      type: object
+      example: {}
+      properties:
+        containerInstance:
+          $ref: '#/components/schemas/ContainerInstance'
+    DeregisterTaskDefinitionRequest:
+      type: object
+      required:
+        - taskDefinition
+      properties:
+        taskDefinition:
+          $ref: '#/components/schemas/String'
+    DeregisterTaskDefinitionResponse:
+      type: object
+      properties:
+        taskDefinition:
+          $ref: '#/components/schemas/TaskDefinition'
+    DescribeClustersRequest:
+      type: object
+      example:
+        clusters:
+          - default
+      properties:
+        clusters:
+          $ref: '#/components/schemas/StringList'
+    DescribeClustersResponse:
+      type: object
+      example:
+        clusters:
+          - clusterArn: 'arn:aws:ecs:us-east-1:aws_account_id:cluster/default'
+            clusterName: default
+            status: ACTIVE
+        failures: []
+      properties:
+        clusters:
+          $ref: '#/components/schemas/Clusters'
+        failures:
+          $ref: '#/components/schemas/Failures'
+    DescribeContainerInstancesRequest:
+      type: object
+      required:
+        - containerInstances
+      example:
+        cluster: default
+        containerInstances:
+          - f2756532-8f13-4d53-87c9-aed50dc94cd7
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        containerInstances:
+          $ref: '#/components/schemas/StringList'
+    DescribeContainerInstancesResponse:
+      type: object
+      example:
+        containerInstances:
+          - agentConnected: true
+            containerInstanceArn: 'arn:aws:ecs:us-east-1:012345678910:container-instance/f2756532-8f13-4d53-87c9-aed50dc94cd7'
+            ec2InstanceId: i-807f3249
+            pendingTasksCount: 0
+            registeredResources:
+              - name: CPU
+                type: INTEGER
+                doubleValue: 0
+                integerValue: 2048
+                longValue: 0
+              - name: MEMORY
+                type: INTEGER
+                doubleValue: 0
+                integerValue: 3768
+                longValue: 0
+              - name: PORTS
+                type: STRINGSET
+                doubleValue: 0
+                integerValue: 0
+                longValue: 0
+                stringSetValue:
+                  - '2376'
+                  - '22'
+                  - '51678'
+                  - '2375'
+            remainingResources:
+              - name: CPU
+                type: INTEGER
+                doubleValue: 0
+                integerValue: 1948
+                longValue: 0
+              - name: MEMORY
+                type: INTEGER
+                doubleValue: 0
+                integerValue: 3668
+                longValue: 0
+              - name: PORTS
+                type: STRINGSET
+                doubleValue: 0
+                integerValue: 0
+                longValue: 0
+                stringSetValue:
+                  - '2376'
+                  - '22'
+                  - '80'
+                  - '51678'
+                  - '2375'
+            runningTasksCount: 1
+            status: ACTIVE
+        failures: []
+      properties:
+        containerInstances:
+          $ref: '#/components/schemas/ContainerInstances'
+        failures:
+          $ref: '#/components/schemas/Failures'
+    DescribeServicesRequest:
+      type: object
+      required:
+        - services
+      example:
+        services:
+          - ecs-simple-service
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        services:
+          $ref: '#/components/schemas/StringList'
+    DescribeServicesResponse:
+      type: object
+      example:
+        failures: []
+        services:
+          - clusterArn: 'arn:aws:ecs:us-east-1:012345678910:cluster/default'
+            createdAt: '2016-08-29T16:25:52.130Z'
+            deploymentConfiguration:
+              maximumPercent: 200
+              minimumHealthyPercent: 100
+            deployments:
+              - createdAt: '2016-08-29T16:25:52.130Z'
+                desiredCount: 1
+                id: ecs-svc/9223370564341623665
+                pendingCount: 0
+                runningCount: 0
+                status: PRIMARY
+                taskDefinition: 'arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6'
+                updatedAt: '2016-08-29T16:25:52.130Z'
+            desiredCount: 1
+            events:
+              - createdAt: '2016-08-29T16:25:58.520Z'
+                id: 38c285e5-d335-4b68-8b15-e46dedc8e88d
+                message: '(service ecs-simple-service) was unable to place a task because no container instance met all of its requirements. The closest matching (container-instance 3f4de1c5-ffdd-4954-af7e-75b4be0c8841) is already using a port required by your task. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide.'
+            loadBalancers: []
+            pendingCount: 0
+            runningCount: 0
+            serviceArn: 'arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service'
+            serviceName: ecs-simple-service
+            status: ACTIVE
+            taskDefinition: 'arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6'
+      properties:
+        services:
+          $ref: '#/components/schemas/Services'
+        failures:
+          $ref: '#/components/schemas/Failures'
+    DescribeTaskDefinitionRequest:
+      type: object
+      required:
+        - taskDefinition
+      example:
+        taskDefinition: 'hello_world:8'
+      properties:
+        taskDefinition:
+          $ref: '#/components/schemas/String'
+    DescribeTaskDefinitionResponse:
+      type: object
+      example:
+        taskDefinition:
+          containerDefinitions:
+            - name: wordpress
+              cpu: 10
+              environment: []
+              essential: true
+              image: wordpress
+              links:
+                - mysql
+              memory: 500
+              mountPoints: []
+              portMappings:
+                - containerPort: 80
+                  hostPort: 80
+              volumesFrom: []
+            - name: mysql
+              cpu: 10
+              environment:
+                - name: MYSQL_ROOT_PASSWORD
+                  value: password
+              essential: true
+              image: mysql
+              memory: 500
+              mountPoints: []
+              portMappings: []
+              volumesFrom: []
+          family: hello_world
+          revision: 8
+          taskDefinitionArn: 'arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/hello_world:8'
+          volumes: []
+      properties:
+        taskDefinition:
+          $ref: '#/components/schemas/TaskDefinition'
+    DescribeTasksRequest:
+      type: object
+      required:
+        - tasks
+      example:
+        tasks:
+          - c5cba4eb-5dad-405e-96db-71ef8eefe6a8
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        tasks:
+          $ref: '#/components/schemas/StringList'
+    DescribeTasksResponse:
+      type: object
+      example:
+        failures: []
+        tasks:
+          - clusterArn: 'arn:aws:ecs:<region>:<aws_account_id>:cluster/default'
+            containerInstanceArn: 'arn:aws:ecs:<region>:<aws_account_id>:container-instance/18f9eda5-27d7-4c19-b133-45adc516e8fb'
+            containers:
+              - name: ecs-demo
+                containerArn: 'arn:aws:ecs:<region>:<aws_account_id>:container/7c01765b-c588-45b3-8290-4ba38bd6c5a6'
+                lastStatus: RUNNING
+                networkBindings:
+                  - bindIP: 0.0.0.0
+                    containerPort: 80
+                    hostPort: 80
+                taskArn: 'arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8'
+            desiredStatus: RUNNING
+            lastStatus: RUNNING
+            overrides:
+              containerOverrides:
+                - name: ecs-demo
+            startedBy: ecs-svc/9223370608528463088
+            taskArn: 'arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8'
+            taskDefinitionArn: 'arn:aws:ecs:<region>:<aws_account_id>:task-definition/amazon-ecs-sample:1'
+      properties:
+        tasks:
+          $ref: '#/components/schemas/Tasks'
+        failures:
+          $ref: '#/components/schemas/Failures'
+    DesiredStatus:
+      type: string
+      enum:
+        - RUNNING
+        - PENDING
+        - STOPPED
+    DiscoverPollEndpointRequest:
+      type: object
+      properties:
+        containerInstance:
+          $ref: '#/components/schemas/String'
+        cluster:
+          $ref: '#/components/schemas/String'
+    DiscoverPollEndpointResponse:
+      type: object
+      properties:
+        endpoint:
+          $ref: '#/components/schemas/String'
+        telemetryEndpoint:
+          $ref: '#/components/schemas/String'
+    DockerLabelsMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    Double:
+      type: number
+      format: double
+    EnvironmentVariables:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeyValuePair'
+    Failure:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/String'
+        reason:
+          $ref: '#/components/schemas/String'
+      description: A failed resource.
+    Failures:
+      type: array
+      items:
+        $ref: '#/components/schemas/Failure'
+    HostEntry:
+      type: object
+      required:
+        - hostname
+        - ipAddress
+      properties:
+        hostname:
+          $ref: '#/components/schemas/String'
+        ipAddress:
+          $ref: '#/components/schemas/String'
+      description: 'Hostnames and IP address entries that are added to the <code>/etc/hosts</code> file of a container via the <code>extraHosts</code> parameter of its <a>ContainerDefinition</a>. '
+    HostEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/HostEntry'
+    HostVolumeProperties:
+      type: object
+      properties:
+        sourcePath:
+          $ref: '#/components/schemas/String'
+      description: Details on a container instance host volume.
+    Integer:
+      type: integer
+    InvalidParameterException:
+      type: object
+      properties: {}
+      description: The specified parameter is invalid. Review the available parameters for the API request.
+    KeyValuePair:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/String'
+        value:
+          $ref: '#/components/schemas/String'
+      description: A key and value pair object.
+    ListAttributesRequest:
+      type: object
+      required:
+        - targetType
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        targetType:
+          $ref: '#/components/schemas/TargetType'
+        attributeName:
+          $ref: '#/components/schemas/String'
+        attributeValue:
+          $ref: '#/components/schemas/String'
+        nextToken:
+          $ref: '#/components/schemas/String'
+        maxResults:
+          $ref: '#/components/schemas/BoxedInteger'
+    ListAttributesResponse:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+        nextToken:
+          $ref: '#/components/schemas/String'
+    ListClustersRequest:
+      type: object
+      example: {}
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/String'
+        maxResults:
+          $ref: '#/components/schemas/BoxedInteger'
+    ListClustersResponse:
+      type: object
+      example:
+        clusterArns:
+          - 'arn:aws:ecs:us-east-1:<aws_account_id>:cluster/test'
+          - 'arn:aws:ecs:us-east-1:<aws_account_id>:cluster/default'
+      properties:
+        clusterArns:
+          $ref: '#/components/schemas/StringList'
+        nextToken:
+          $ref: '#/components/schemas/String'
+    ListContainerInstancesRequest:
+      type: object
+      example:
+        cluster: default
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        filter:
+          $ref: '#/components/schemas/String'
+        nextToken:
+          $ref: '#/components/schemas/String'
+        maxResults:
+          $ref: '#/components/schemas/BoxedInteger'
+        status:
+          $ref: '#/components/schemas/ContainerInstanceStatus'
+    ListContainerInstancesResponse:
+      type: object
+      example:
+        containerInstanceArns:
+          - 'arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/f6bbb147-5370-4ace-8c73-c7181ded911f'
+          - 'arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb'
+      properties:
+        containerInstanceArns:
+          $ref: '#/components/schemas/StringList'
+        nextToken:
+          $ref: '#/components/schemas/String'
+    ListServicesRequest:
+      type: object
+      example: {}
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        nextToken:
+          $ref: '#/components/schemas/String'
+        maxResults:
+          $ref: '#/components/schemas/BoxedInteger'
+    ListServicesResponse:
+      type: object
+      example:
+        serviceArns:
+          - 'arn:aws:ecs:us-east-1:012345678910:service/my-http-service'
+      properties:
+        serviceArns:
+          $ref: '#/components/schemas/StringList'
+        nextToken:
+          $ref: '#/components/schemas/String'
+    ListTaskDefinitionFamiliesRequest:
+      type: object
+      example:
+        familyPrefix: hpcc
+      properties:
+        familyPrefix:
+          $ref: '#/components/schemas/String'
+        status:
+          $ref: '#/components/schemas/TaskDefinitionFamilyStatus'
+        nextToken:
+          $ref: '#/components/schemas/String'
+        maxResults:
+          $ref: '#/components/schemas/BoxedInteger'
+    ListTaskDefinitionFamiliesResponse:
+      type: object
+      example:
+        families:
+          - hpcc
+          - hpcc-c4-8xlarge
+      properties:
+        families:
+          $ref: '#/components/schemas/StringList'
+        nextToken:
+          $ref: '#/components/schemas/String'
+    ListTaskDefinitionsRequest:
+      type: object
+      example:
+        familyPrefix: wordpress
+      properties:
+        familyPrefix:
+          $ref: '#/components/schemas/String'
+        status:
+          $ref: '#/components/schemas/TaskDefinitionStatus'
+        sort:
+          $ref: '#/components/schemas/SortOrder'
+        nextToken:
+          $ref: '#/components/schemas/String'
+        maxResults:
+          $ref: '#/components/schemas/BoxedInteger'
+    ListTaskDefinitionsResponse:
+      type: object
+      example:
+        taskDefinitionArns:
+          - 'arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:3'
+          - 'arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:4'
+          - 'arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:5'
+          - 'arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/wordpress:6'
+      properties:
+        taskDefinitionArns:
+          $ref: '#/components/schemas/StringList'
+        nextToken:
+          $ref: '#/components/schemas/String'
+    ListTasksRequest:
+      type: object
+      example:
+        cluster: default
+        containerInstance: f6bbb147-5370-4ace-8c73-c7181ded911f
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        containerInstance:
+          $ref: '#/components/schemas/String'
+        family:
+          $ref: '#/components/schemas/String'
+        nextToken:
+          $ref: '#/components/schemas/String'
+        maxResults:
+          $ref: '#/components/schemas/BoxedInteger'
+        startedBy:
+          $ref: '#/components/schemas/String'
+        serviceName:
+          $ref: '#/components/schemas/String'
+        desiredStatus:
+          $ref: '#/components/schemas/DesiredStatus'
+    ListTasksResponse:
+      type: object
+      example:
+        taskArns:
+          - 'arn:aws:ecs:us-east-1:012345678910:task/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84'
+      properties:
+        taskArns:
+          $ref: '#/components/schemas/StringList'
+        nextToken:
+          $ref: '#/components/schemas/String'
+    LoadBalancer:
+      type: object
+      properties:
+        targetGroupArn:
+          $ref: '#/components/schemas/String'
+        loadBalancerName:
+          $ref: '#/components/schemas/String'
+        containerName:
+          $ref: '#/components/schemas/String'
+        containerPort:
+          $ref: '#/components/schemas/BoxedInteger'
+      description: Details on a load balancer that is used with a service.
+    LoadBalancers:
+      type: array
+      items:
+        $ref: '#/components/schemas/LoadBalancer'
+    LogConfiguration:
+      type: object
+      required:
+        - logDriver
+      properties:
+        logDriver:
+          $ref: '#/components/schemas/LogDriver'
+        options:
+          $ref: '#/components/schemas/LogConfigurationOptionsMap'
+      description: Log configuration options to send to a custom log driver for the container.
+    LogConfigurationOptionsMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    LogDriver:
+      type: string
+      enum:
+        - json-file
+        - syslog
+        - journald
+        - gelf
+        - fluentd
+        - awslogs
+        - splunk
+    Long:
+      type: integer
+    MissingVersionException:
+      type: object
+      properties: {}
+      description: Amazon ECS is unable to determine the current version of the Amazon ECS container agent on the container instance and does not have enough information to proceed with an update. This could be because the agent running on the container instance is an older or custom version that does not use our version information.
+    MountPoint:
+      type: object
+      properties:
+        sourceVolume:
+          $ref: '#/components/schemas/String'
+        containerPath:
+          $ref: '#/components/schemas/String'
+        readOnly:
+          $ref: '#/components/schemas/BoxedBoolean'
+      description: Details on a volume mount point that is used in a container definition.
+    MountPointList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MountPoint'
+    NetworkBinding:
+      type: object
+      properties:
+        bindIP:
+          $ref: '#/components/schemas/String'
+        containerPort:
+          $ref: '#/components/schemas/BoxedInteger'
+        hostPort:
+          $ref: '#/components/schemas/BoxedInteger'
+        protocol:
+          $ref: '#/components/schemas/TransportProtocol'
+      description: 'Details on the network bindings between a container and its host container instance. After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <code>networkBindings</code> section of <a>DescribeTasks</a> API responses.'
+    NetworkBindings:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkBinding'
+    NetworkMode:
+      type: string
+      enum:
+        - bridge
+        - host
+        - none
+    NoUpdateAvailableException:
+      type: object
+      properties: {}
+      description: 'There is no update available for this Amazon ECS container agent. This could be because the agent is already running the latest version, or it is so old that there is no update path to the current version.'
+    PlacementConstraint:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/PlacementConstraintType'
+        expression:
+          $ref: '#/components/schemas/String'
+      description: 'An object representing a constraint on task placement. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html">Task Placement Constraints</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.'
+    PlacementConstraintType:
+      type: string
+      enum:
+        - distinctInstance
+        - memberOf
+    PlacementConstraints:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlacementConstraint'
+    PlacementStrategies:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlacementStrategy'
+    PlacementStrategy:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/PlacementStrategyType'
+        field:
+          $ref: '#/components/schemas/String'
+      description: 'The task placement strategy for a task or service. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html">Task Placement Strategies</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.'
+    PlacementStrategyType:
+      type: string
+      enum:
+        - random
+        - spread
+        - binpack
+    PortMapping:
+      type: object
+      properties:
+        containerPort:
+          $ref: '#/components/schemas/BoxedInteger'
+        hostPort:
+          $ref: '#/components/schemas/BoxedInteger'
+        protocol:
+          $ref: '#/components/schemas/TransportProtocol'
+      description: 'Port mappings allow containers to access ports on the host container instance to send or receive traffic. Port mappings are specified as part of the container definition. After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <code>networkBindings</code> section of <a>DescribeTasks</a> API responses.'
+    PortMappingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PortMapping'
+    PutAttributesRequest:
+      type: object
+      required:
+        - attributes
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+    PutAttributesResponse:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+    RegisterContainerInstanceRequest:
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        instanceIdentityDocument:
+          $ref: '#/components/schemas/String'
+        instanceIdentityDocumentSignature:
+          $ref: '#/components/schemas/String'
+        totalResources:
+          $ref: '#/components/schemas/Resources'
+        versionInfo:
+          $ref: '#/components/schemas/VersionInfo'
+        containerInstanceArn:
+          $ref: '#/components/schemas/String'
+        attributes:
+          $ref: '#/components/schemas/Attributes'
+    RegisterContainerInstanceResponse:
+      type: object
+      properties:
+        containerInstance:
+          $ref: '#/components/schemas/ContainerInstance'
+    RegisterTaskDefinitionRequest:
+      type: object
+      required:
+        - family
+        - containerDefinitions
+      example:
+        containerDefinitions:
+          - name: sleep
+            command:
+              - sleep
+              - '360'
+            cpu: 10
+            essential: true
+            image: busybox
+            memory: 10
+        family: sleep360
+        taskRoleArn: ''
+        volumes: []
+      properties:
+        family:
+          $ref: '#/components/schemas/String'
+        taskRoleArn:
+          $ref: '#/components/schemas/String'
+        networkMode:
+          $ref: '#/components/schemas/NetworkMode'
+        containerDefinitions:
+          $ref: '#/components/schemas/ContainerDefinitions'
+        volumes:
+          $ref: '#/components/schemas/VolumeList'
+        placementConstraints:
+          $ref: '#/components/schemas/TaskDefinitionPlacementConstraints'
+    RegisterTaskDefinitionResponse:
+      type: object
+      example:
+        taskDefinition:
+          containerDefinitions:
+            - name: sleep
+              command:
+                - sleep
+                - '360'
+              cpu: 10
+              environment: []
+              essential: true
+              image: busybox
+              memory: 10
+              mountPoints: []
+              portMappings: []
+              volumesFrom: []
+          family: sleep360
+          revision: 1
+          taskDefinitionArn: 'arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:19'
+          volumes: []
+      properties:
+        taskDefinition:
+          $ref: '#/components/schemas/TaskDefinition'
+    RequiresAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Attribute'
+    Resource:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/String'
+        type:
+          $ref: '#/components/schemas/String'
+        doubleValue:
+          $ref: '#/components/schemas/Double'
+        longValue:
+          $ref: '#/components/schemas/Long'
+        integerValue:
+          $ref: '#/components/schemas/Integer'
+        stringSetValue:
+          $ref: '#/components/schemas/StringList'
+      description: Describes the resources available for a container instance.
+    Resources:
+      type: array
+      items:
+        $ref: '#/components/schemas/Resource'
+    RunTaskRequest:
+      type: object
+      required:
+        - taskDefinition
+      example:
+        cluster: default
+        taskDefinition: 'sleep360:1'
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        taskDefinition:
+          $ref: '#/components/schemas/String'
+        overrides:
+          $ref: '#/components/schemas/TaskOverride'
+        count:
+          $ref: '#/components/schemas/BoxedInteger'
+        startedBy:
+          $ref: '#/components/schemas/String'
+        group:
+          $ref: '#/components/schemas/String'
+        placementConstraints:
+          $ref: '#/components/schemas/PlacementConstraints'
+        placementStrategy:
+          $ref: '#/components/schemas/PlacementStrategies'
+    RunTaskResponse:
+      type: object
+      example:
+        tasks:
+          - containerInstanceArn: 'arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb'
+            containers:
+              - name: sleep
+                containerArn: 'arn:aws:ecs:us-east-1:<aws_account_id>:container/58591c8e-be29-4ddf-95aa-ee459d4c59fd'
+                lastStatus: PENDING
+                taskArn: 'arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0'
+            desiredStatus: RUNNING
+            lastStatus: PENDING
+            overrides:
+              containerOverrides:
+                - name: sleep
+            taskArn: 'arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0'
+            taskDefinitionArn: 'arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:1'
+      properties:
+        tasks:
+          $ref: '#/components/schemas/Tasks'
+        failures:
+          $ref: '#/components/schemas/Failures'
+    ServerException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: These errors are usually caused by a server issue.
+    Service:
+      type: object
+      properties:
+        serviceArn:
+          $ref: '#/components/schemas/String'
+        serviceName:
+          $ref: '#/components/schemas/String'
+        clusterArn:
+          $ref: '#/components/schemas/String'
+        loadBalancers:
+          $ref: '#/components/schemas/LoadBalancers'
+        status:
+          $ref: '#/components/schemas/String'
+        desiredCount:
+          $ref: '#/components/schemas/Integer'
+        runningCount:
+          $ref: '#/components/schemas/Integer'
+        pendingCount:
+          $ref: '#/components/schemas/Integer'
+        taskDefinition:
+          $ref: '#/components/schemas/String'
+        deploymentConfiguration:
+          $ref: '#/components/schemas/DeploymentConfiguration'
+        deployments:
+          $ref: '#/components/schemas/Deployments'
+        roleArn:
+          $ref: '#/components/schemas/String'
+        events:
+          $ref: '#/components/schemas/ServiceEvents'
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        placementConstraints:
+          $ref: '#/components/schemas/PlacementConstraints'
+        placementStrategy:
+          $ref: '#/components/schemas/PlacementStrategies'
+      description: Details on a service within a cluster
+    ServiceEvent:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/String'
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        message:
+          $ref: '#/components/schemas/String'
+      description: Details on an event associated with a service.
+    ServiceEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceEvent'
+    ServiceNotActiveException:
+      type: object
+      properties: {}
+      description: 'The specified service is not active. You cannot update a service that is not active. If you have previously deleted a service, you can re-create it with <a>CreateService</a>.'
+    ServiceNotFoundException:
+      type: object
+      properties: {}
+      description: The specified service could not be found. You can view your available services with <a>ListServices</a>. Amazon ECS services are cluster-specific and region-specific.
+    Services:
+      type: array
+      items:
+        $ref: '#/components/schemas/Service'
+    SortOrder:
+      type: string
+      enum:
+        - ASC
+        - DESC
+    StartTaskRequest:
+      type: object
+      required:
+        - taskDefinition
+        - containerInstances
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        taskDefinition:
+          $ref: '#/components/schemas/String'
+        overrides:
+          $ref: '#/components/schemas/TaskOverride'
+        containerInstances:
+          $ref: '#/components/schemas/StringList'
+        startedBy:
+          $ref: '#/components/schemas/String'
+        group:
+          $ref: '#/components/schemas/String'
+    StartTaskResponse:
+      type: object
+      properties:
+        tasks:
+          $ref: '#/components/schemas/Tasks'
+        failures:
+          $ref: '#/components/schemas/Failures'
+    StopTaskRequest:
+      type: object
+      required:
+        - task
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        task:
+          $ref: '#/components/schemas/String'
+        reason:
+          $ref: '#/components/schemas/String'
+    StopTaskResponse:
+      type: object
+      properties:
+        task:
+          $ref: '#/components/schemas/Task'
+    String:
+      type: string
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SubmitContainerStateChangeRequest:
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        task:
+          $ref: '#/components/schemas/String'
+        containerName:
+          $ref: '#/components/schemas/String'
+        status:
+          $ref: '#/components/schemas/String'
+        exitCode:
+          $ref: '#/components/schemas/BoxedInteger'
+        reason:
+          $ref: '#/components/schemas/String'
+        networkBindings:
+          $ref: '#/components/schemas/NetworkBindings'
+    SubmitContainerStateChangeResponse:
+      type: object
+      properties:
+        acknowledgment:
+          $ref: '#/components/schemas/String'
+    SubmitTaskStateChangeRequest:
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        task:
+          $ref: '#/components/schemas/String'
+        status:
+          $ref: '#/components/schemas/String'
+        reason:
+          $ref: '#/components/schemas/String'
+    SubmitTaskStateChangeResponse:
+      type: object
+      properties:
+        acknowledgment:
+          $ref: '#/components/schemas/String'
+    TargetNotFoundException:
+      type: object
+      properties: {}
+      description: The specified target could not be found. You can view your available container instances with <a>ListContainerInstances</a>. Amazon ECS container instances are cluster-specific and region-specific.
+    TargetType:
+      type: string
+      enum:
+        - container-instance
+    Task:
+      type: object
+      properties:
+        taskArn:
+          $ref: '#/components/schemas/String'
+        clusterArn:
+          $ref: '#/components/schemas/String'
+        taskDefinitionArn:
+          $ref: '#/components/schemas/String'
+        containerInstanceArn:
+          $ref: '#/components/schemas/String'
+        overrides:
+          $ref: '#/components/schemas/TaskOverride'
+        lastStatus:
+          $ref: '#/components/schemas/String'
+        desiredStatus:
+          $ref: '#/components/schemas/String'
+        containers:
+          $ref: '#/components/schemas/Containers'
+        startedBy:
+          $ref: '#/components/schemas/String'
+        version:
+          $ref: '#/components/schemas/Long'
+        stoppedReason:
+          $ref: '#/components/schemas/String'
+        createdAt:
+          $ref: '#/components/schemas/Timestamp'
+        startedAt:
+          $ref: '#/components/schemas/Timestamp'
+        stoppedAt:
+          $ref: '#/components/schemas/Timestamp'
+        group:
+          $ref: '#/components/schemas/String'
+      description: Details on a task in a cluster.
+    TaskDefinition:
+      type: object
+      properties:
+        taskDefinitionArn:
+          $ref: '#/components/schemas/String'
+        containerDefinitions:
+          $ref: '#/components/schemas/ContainerDefinitions'
+        family:
+          $ref: '#/components/schemas/String'
+        taskRoleArn:
+          $ref: '#/components/schemas/String'
+        networkMode:
+          $ref: '#/components/schemas/NetworkMode'
+        revision:
+          $ref: '#/components/schemas/Integer'
+        volumes:
+          $ref: '#/components/schemas/VolumeList'
+        status:
+          $ref: '#/components/schemas/TaskDefinitionStatus'
+        requiresAttributes:
+          $ref: '#/components/schemas/RequiresAttributes'
+        placementConstraints:
+          $ref: '#/components/schemas/TaskDefinitionPlacementConstraints'
+      description: Details of a task definition.
+    TaskDefinitionFamilyStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+        - ALL
+    TaskDefinitionPlacementConstraint:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TaskDefinitionPlacementConstraintType'
+        expression:
+          $ref: '#/components/schemas/String'
+      description: 'An object representing a constraint on task placement in the task definition. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html">Task Placement Constraints</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.'
+    TaskDefinitionPlacementConstraintType:
+      type: string
+      enum:
+        - memberOf
+    TaskDefinitionPlacementConstraints:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskDefinitionPlacementConstraint'
+    TaskDefinitionStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+    TaskOverride:
+      type: object
+      properties:
+        containerOverrides:
+          $ref: '#/components/schemas/ContainerOverrides'
+        taskRoleArn:
+          $ref: '#/components/schemas/String'
+      description: The overrides associated with a task.
+    Tasks:
+      type: array
+      items:
+        $ref: '#/components/schemas/Task'
+    Timestamp:
+      type: string
+      format: date-time
+    TransportProtocol:
+      type: string
+      enum:
+        - tcp
+        - udp
+    Ulimit:
+      type: object
+      required:
+        - name
+        - softLimit
+        - hardLimit
+      properties:
+        name:
+          $ref: '#/components/schemas/UlimitName'
+        softLimit:
+          $ref: '#/components/schemas/Integer'
+        hardLimit:
+          $ref: '#/components/schemas/Integer'
+      description: The <code>ulimit</code> settings to pass to the container.
+    UlimitList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Ulimit'
+    UlimitName:
+      type: string
+      enum:
+        - core
+        - cpu
+        - data
+        - fsize
+        - locks
+        - memlock
+        - msgqueue
+        - nice
+        - nofile
+        - nproc
+        - rss
+        - rtprio
+        - rttime
+        - sigpending
+        - stack
+    UpdateContainerAgentRequest:
+      type: object
+      required:
+        - containerInstance
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        containerInstance:
+          $ref: '#/components/schemas/String'
+    UpdateContainerAgentResponse:
+      type: object
+      properties:
+        containerInstance:
+          $ref: '#/components/schemas/ContainerInstance'
+    UpdateContainerInstancesStateRequest:
+      type: object
+      required:
+        - containerInstances
+        - status
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        containerInstances:
+          $ref: '#/components/schemas/StringList'
+        status:
+          $ref: '#/components/schemas/ContainerInstanceStatus'
+    UpdateContainerInstancesStateResponse:
+      type: object
+      properties:
+        containerInstances:
+          $ref: '#/components/schemas/ContainerInstances'
+        failures:
+          $ref: '#/components/schemas/Failures'
+    UpdateInProgressException:
+      type: object
+      properties: {}
+      description: 'There is already a current Amazon ECS container agent update in progress on the specified container instance. If the container agent becomes disconnected while it is in a transitional stage, such as <code>PENDING</code> or <code>STAGING</code>, the update process can get stuck in that state. However, when the agent reconnects, it resumes where it stopped previously.'
+    UpdateServiceRequest:
+      type: object
+      required:
+        - service
+      example:
+        desiredCount: 10
+        service: my-http-service
+      properties:
+        cluster:
+          $ref: '#/components/schemas/String'
+        service:
+          $ref: '#/components/schemas/String'
+        desiredCount:
+          $ref: '#/components/schemas/BoxedInteger'
+        taskDefinition:
+          $ref: '#/components/schemas/String'
+        deploymentConfiguration:
+          $ref: '#/components/schemas/DeploymentConfiguration'
+    UpdateServiceResponse:
+      type: object
+      example: {}
+      properties:
+        service:
+          $ref: '#/components/schemas/Service'
+    VersionInfo:
+      type: object
+      properties:
+        agentVersion:
+          $ref: '#/components/schemas/String'
+        agentHash:
+          $ref: '#/components/schemas/String'
+        dockerVersion:
+          $ref: '#/components/schemas/String'
+      description: The Docker and Amazon ECS container agent version information about a container instance.
+    Volume:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/String'
+        host:
+          $ref: '#/components/schemas/HostVolumeProperties'
+      description: A data volume used in a task definition.
+    VolumeFrom:
+      type: object
+      properties:
+        sourceContainer:
+          $ref: '#/components/schemas/String'
+        readOnly:
+          $ref: '#/components/schemas/BoxedBoolean'
+      description: Details on a data volume from another container in the same task definition.
+    VolumeFromList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VolumeFrom'
+    VolumeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Volume'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

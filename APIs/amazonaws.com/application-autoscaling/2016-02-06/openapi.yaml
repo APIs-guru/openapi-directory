@@ -1,0 +1,1116 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://autoscaling.amazonaws.com/'
+info:
+  version: '2016-02-06'
+  x-release: v4
+  title: Application Auto Scaling
+  description: '<p>With Application Auto Scaling, you can automatically scale your AWS resources. The experience similar to that of <a href="https://aws.amazon.com/autoscaling/">Auto Scaling</a>. You can use Application Auto Scaling to accomplish the following tasks:</p> <ul> <li> <p>Define scaling policies to automatically scale your AWS resources</p> </li> <li> <p>Scale your resources in response to CloudWatch alarms</p> </li> <li> <p>View the history of your scaling events</p> </li> </ul> <p>Application Auto Scaling can scale the following AWS resources:</p> <ul> <li> <p>Amazon ECS services. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html">Service Auto Scaling</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p> </li> <li> <p>Amazon EC2 Spot fleets. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/fleet-auto-scaling.html">Automatic Scaling for Spot Fleet</a> in the <i>Amazon EC2 User Guide</i>.</p> </li> <li> <p>Amazon EMR clusters. For more information, see <a href="http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/emr-automatic-scaling.html">Using Automatic Scaling in Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.</p> </li> <li> <p>AppStream 2.0 fleets. For more information, see <a href="http://docs.aws.amazon.com/appstream2/latest/developerguide/autoscaling.html">Fleet Auto Scaling for Amazon AppStream 2.0</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p> </li> <li> <p>Provisioned read and write capacity for Amazon DynamoDB tables and global secondary indexes. For more information, see <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TargetTracking.html">Auto Scaling for DynamoDB</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p> </li> </ul> <p>For a list of supported regions, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#as-app_region">AWS Regions and Endpoints: Application Auto Scaling</a> in the <i>AWS General Reference</i>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: autoscaling
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/application-autoscaling-2016-02-06.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/autoscaling/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: DeleteScalingPolicy
+      description: '<p>Deletes the specified Application Auto Scaling scaling policy.</p> <p>Deleting a policy deletes the underlying alarm action, but does not delete the CloudWatch alarm associated with the scaling policy, even if it no longer has an associated action.</p> <p>To create a scaling policy or update an existing one, see <a>PutScalingPolicy</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteScalingPolicyResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ObjectNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectNotFoundException'
+        '482':
+          description: ConcurrentUpdateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteScalingPolicyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeregisterScalableTarget':
+    post:
+      operationId: DeregisterScalableTarget
+      description: '<p>Deregisters a scalable target.</p> <p>Deregistering a scalable target deletes the scaling policies that are associated with it.</p> <p>To create a scalable target or update an existing one, see <a>RegisterScalableTarget</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeregisterScalableTargetResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ObjectNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectNotFoundException'
+        '482':
+          description: ConcurrentUpdateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeregisterScalableTargetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScalableTargets':
+    post:
+      operationId: DescribeScalableTargets
+      description: '<p>Provides descriptive information about the scalable targets in the specified namespace.</p> <p>You can filter the results using the <code>ResourceIds</code> and <code>ScalableDimension</code> parameters.</p> <p>To create a scalable target or update an existing one, see <a>RegisterScalableTarget</a>. If you are no longer using a scalable target, you can deregister it using <a>DeregisterScalableTarget</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeScalableTargetsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: ConcurrentUpdateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeScalableTargetsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScalingActivities':
+    post:
+      operationId: DescribeScalingActivities
+      description: '<p>Provides descriptive information about the scaling activities in the specified namespace from the previous six weeks.</p> <p>You can filter the results using the <code>ResourceId</code> and <code>ScalableDimension</code> parameters.</p> <p>Scaling activities are triggered by CloudWatch alarms that are associated with scaling policies. To view the scaling policies for a service namespace, see <a>DescribeScalingPolicies</a>. To create a scaling policy or update an existing one, see <a>PutScalingPolicy</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeScalingActivitiesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: ConcurrentUpdateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeScalingActivitiesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScalingPolicies':
+    post:
+      operationId: DescribeScalingPolicies
+      description: '<p>Provides descriptive information about the scaling policies in the specified namespace.</p> <p>You can filter the results using the <code>ResourceId</code>, <code>ScalableDimension</code>, and <code>PolicyNames</code> parameters.</p> <p>To create a scaling policy or update an existing one, see <a>PutScalingPolicy</a>. If you are no longer using a scaling policy, you can delete it using <a>DeleteScalingPolicy</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeScalingPoliciesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: FailedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedResourceAccessException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '483':
+          description: ConcurrentUpdateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentUpdateException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeScalingPoliciesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutScalingPolicy':
+    post:
+      operationId: PutScalingPolicy
+      description: '<p>Creates or updates a policy for an Application Auto Scaling scalable target.</p> <p>Each scalable target is identified by a service namespace, resource ID, and scalable dimension. A scaling policy applies to the scalable target identified by those three attributes. You cannot create a scaling policy without first registering a scalable target using <a>RegisterScalableTarget</a>.</p> <p>To update a policy, specify its policy name and the parameters that you want to change. Any parameters that you don''t specify are not changed by this update request.</p> <p>You can view the scaling policies for a service namespace using <a>DescribeScalingPolicies</a>. If you are no longer using a scaling policy, you can delete it using <a>DeleteScalingPolicy</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutScalingPolicyResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ObjectNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectNotFoundException'
+        '483':
+          description: ConcurrentUpdateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentUpdateException'
+        '484':
+          description: FailedResourceAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FailedResourceAccessException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutScalingPolicyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RegisterScalableTarget':
+    post:
+      operationId: RegisterScalableTarget
+      description: '<p>Registers or updates a scalable target. A scalable target is a resource that Application Auto Scaling can scale out or scale in. After you have registered a scalable target, you can use this operation to update the minimum and maximum values for your scalable dimension.</p> <p>After you register a scalable target, you can create and apply scaling policies using <a>PutScalingPolicy</a>. You can view the scaling policies for a service namespace using <a>DescribeScalableTargets</a>. If you are no longer using a scalable target, you can deregister it using <a>DeregisterScalableTarget</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterScalableTargetResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ConcurrentUpdateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentUpdateException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterScalableTargetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AdjustmentType:
+      type: string
+      enum:
+        - ChangeInCapacity
+        - PercentChangeInCapacity
+        - ExactCapacity
+    Alarm:
+      type: object
+      required:
+        - AlarmName
+        - AlarmARN
+      properties:
+        AlarmName:
+          $ref: '#/components/schemas/ResourceId'
+        AlarmARN:
+          $ref: '#/components/schemas/ResourceId'
+      description: Represents a CloudWatch alarm associated with a scaling policy.
+    Alarms:
+      type: array
+      items:
+        $ref: '#/components/schemas/Alarm'
+    ConcurrentUpdateException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Concurrent updates caused an exception, for example, if you request an update to an Application Auto Scaling resource that already has a pending update.'
+    Cooldown:
+      type: integer
+    CustomizedMetricSpecification:
+      type: object
+      required:
+        - MetricName
+        - Namespace
+        - Statistic
+      properties:
+        MetricName:
+          $ref: '#/components/schemas/MetricName'
+        Namespace:
+          $ref: '#/components/schemas/MetricNamespace'
+        Dimensions:
+          $ref: '#/components/schemas/MetricDimensions'
+        Statistic:
+          $ref: '#/components/schemas/MetricStatistic'
+        Unit:
+          $ref: '#/components/schemas/MetricUnit'
+      description: Configures a customized metric for a target tracking policy.
+    DeleteScalingPolicyRequest:
+      type: object
+      required:
+        - PolicyName
+        - ServiceNamespace
+        - ResourceId
+        - ScalableDimension
+      example:
+        PolicyName: web-app-cpu-lt-25
+        ResourceId: service/default/web-app
+        ScalableDimension: 'ecs:service:DesiredCount'
+        ServiceNamespace: ecs
+      properties:
+        PolicyName:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        ServiceNamespace:
+          $ref: '#/components/schemas/ServiceNamespace'
+        ResourceId:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        ScalableDimension:
+          $ref: '#/components/schemas/ScalableDimension'
+    DeleteScalingPolicyResponse:
+      type: object
+      example: {}
+      properties: {}
+    DeregisterScalableTargetRequest:
+      type: object
+      required:
+        - ServiceNamespace
+        - ResourceId
+        - ScalableDimension
+      example:
+        ResourceId: service/default/web-app
+        ScalableDimension: 'ecs:service:DesiredCount'
+        ServiceNamespace: ecs
+      properties:
+        ServiceNamespace:
+          $ref: '#/components/schemas/ServiceNamespace'
+        ResourceId:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        ScalableDimension:
+          $ref: '#/components/schemas/ScalableDimension'
+    DeregisterScalableTargetResponse:
+      type: object
+      example: {}
+      properties: {}
+    DescribeScalableTargetsRequest:
+      type: object
+      required:
+        - ServiceNamespace
+      example:
+        ServiceNamespace: ecs
+      properties:
+        ServiceNamespace:
+          $ref: '#/components/schemas/ServiceNamespace'
+        ResourceIds:
+          $ref: '#/components/schemas/ResourceIdsMaxLen1600'
+        ScalableDimension:
+          $ref: '#/components/schemas/ScalableDimension'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    DescribeScalableTargetsResponse:
+      type: object
+      example:
+        ScalableTargets:
+          - CreationTime: '2016-05-06T11:21:46.199Z'
+            MaxCapacity: 10
+            MinCapacity: 1
+            ResourceId: service/default/web-app
+            RoleARN: 'arn:aws:iam::012345678910:role/ApplicationAutoscalingECSRole'
+            ScalableDimension: 'ecs:service:DesiredCount'
+            ServiceNamespace: ecs
+      properties:
+        ScalableTargets:
+          $ref: '#/components/schemas/ScalableTargets'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    DescribeScalingActivitiesRequest:
+      type: object
+      required:
+        - ServiceNamespace
+      example:
+        ResourceId: service/default/web-app
+        ScalableDimension: 'ecs:service:DesiredCount'
+        ServiceNamespace: ecs
+      properties:
+        ServiceNamespace:
+          $ref: '#/components/schemas/ServiceNamespace'
+        ResourceId:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        ScalableDimension:
+          $ref: '#/components/schemas/ScalableDimension'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    DescribeScalingActivitiesResponse:
+      type: object
+      example:
+        ScalingActivities:
+          - ActivityId: e6c5f7d1-dbbb-4a3f-89b2-51f33e766399
+            Cause: monitor alarm web-app-cpu-lt-25 in state ALARM triggered policy web-app-cpu-lt-25
+            Description: Setting desired count to 1.
+            EndTime: '2016-05-06T16:04:32.111Z'
+            ResourceId: service/default/web-app
+            ScalableDimension: 'ecs:service:DesiredCount'
+            ServiceNamespace: ecs
+            StartTime: '2016-05-06T16:03:58.171Z'
+            StatusCode: Successful
+            StatusMessage: Successfully set desired count to 1. Change successfully fulfilled by ecs.
+      properties:
+        ScalingActivities:
+          $ref: '#/components/schemas/ScalingActivities'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    DescribeScalingPoliciesRequest:
+      type: object
+      required:
+        - ServiceNamespace
+      example:
+        ServiceNamespace: ecs
+      properties:
+        PolicyNames:
+          $ref: '#/components/schemas/ResourceIdsMaxLen1600'
+        ServiceNamespace:
+          $ref: '#/components/schemas/ServiceNamespace'
+        ResourceId:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        ScalableDimension:
+          $ref: '#/components/schemas/ScalableDimension'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    DescribeScalingPoliciesResponse:
+      type: object
+      example:
+        NextToken: ''
+        ScalingPolicies:
+          - Alarms:
+              - AlarmARN: 'arn:aws:cloudwatch:us-west-2:012345678910:alarm:web-app-cpu-gt-75'
+                AlarmName: web-app-cpu-gt-75
+            CreationTime: '2016-05-06T12:11:39.230Z'
+            PolicyARN: 'arn:aws:autoscaling:us-west-2:012345678910:scalingPolicy:6d8972f3-efc8-437c-92d1-6270f29a66e7:resource/ecs/service/default/web-app:policyName/web-app-cpu-gt-75'
+            PolicyName: web-app-cpu-gt-75
+            PolicyType: StepScaling
+            ResourceId: service/default/web-app
+            ScalableDimension: 'ecs:service:DesiredCount'
+            ServiceNamespace: ecs
+            StepScalingPolicyConfiguration:
+              AdjustmentType: PercentChangeInCapacity
+              Cooldown: 60
+              StepAdjustments:
+                - MetricIntervalLowerBound: 0
+                  ScalingAdjustment: 200
+      properties:
+        ScalingPolicies:
+          $ref: '#/components/schemas/ScalingPolicies'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    ErrorMessage:
+      type: string
+    FailedResourceAccessException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Failed access to resources caused an exception. This exception is thrown when Application Auto Scaling is unable to retrieve the alarms associated with a scaling policy due to a client error, for example, if the role ARN specified for a scalable target does not have permission to call the CloudWatch <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html">DescribeAlarms</a> API operation on behalf of your account.'
+    InternalServiceException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The service encountered an internal error.
+    InvalidNextTokenException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The next token supplied was invalid.
+    LimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Your account exceeded a limit. This exception is thrown when a per-account resource limit is exceeded. For more information, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_as-app">Application Auto Scaling Limits</a>.'
+    MaxResults:
+      type: integer
+    MetricAggregationType:
+      type: string
+      enum:
+        - Average
+        - Minimum
+        - Maximum
+    MetricDimension:
+      type: object
+      required:
+        - Name
+        - Value
+      properties:
+        Name:
+          $ref: '#/components/schemas/MetricDimensionName'
+        Value:
+          $ref: '#/components/schemas/MetricDimensionValue'
+      description: Describes the dimension of a metric.
+    MetricDimensionName:
+      type: string
+    MetricDimensionValue:
+      type: string
+    MetricDimensions:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricDimension'
+    MetricName:
+      type: string
+    MetricNamespace:
+      type: string
+    MetricScale:
+      type: number
+      format: double
+    MetricStatistic:
+      type: string
+      enum:
+        - Average
+        - Minimum
+        - Maximum
+        - SampleCount
+        - Sum
+    MetricType:
+      type: string
+      enum:
+        - DynamoDBReadCapacityUtilization
+        - DynamoDBWriteCapacityUtilization
+    MetricUnit:
+      type: string
+    MinAdjustmentMagnitude:
+      type: integer
+    ObjectNotFoundException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'The specified object could not be found. For any <code>Put</code> or <code>Register</code> API operation, which depends on the existence of a scalable target, this exception is thrown if the scalable target with the specified service namespace, resource ID, and scalable dimension does not exist. For any <code>Delete</code> or <code>Deregister</code> API operation, this exception is thrown if the resource that is to be deleted or deregistered cannot be found.'
+    PolicyName:
+      type: string
+      pattern: '\p{Print}+'
+      minLength: 1
+      maxLength: 256
+    PolicyType:
+      type: string
+      enum:
+        - StepScaling
+        - TargetTrackingScaling
+    PredefinedMetricSpecification:
+      type: object
+      required:
+        - PredefinedMetricType
+      properties:
+        PredefinedMetricType:
+          $ref: '#/components/schemas/MetricType'
+        ResourceLabel:
+          $ref: '#/components/schemas/ResourceLabel'
+      description: Configures a predefined metric for a target tracking policy.
+    PutScalingPolicyRequest:
+      type: object
+      required:
+        - PolicyName
+        - ServiceNamespace
+        - ResourceId
+        - ScalableDimension
+      example:
+        PolicyName: fleet-cpu-gt-75
+        PolicyType: StepScaling
+        ResourceId: spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3
+        ScalableDimension: 'ec2:spot-fleet-request:TargetCapacity'
+        ServiceNamespace: ec2
+        StepScalingPolicyConfiguration:
+          AdjustmentType: PercentChangeInCapacity
+          Cooldown: 180
+          StepAdjustments:
+            - MetricIntervalLowerBound: 0
+              ScalingAdjustment: 200
+      properties:
+        PolicyName:
+          $ref: '#/components/schemas/PolicyName'
+        ServiceNamespace:
+          $ref: '#/components/schemas/ServiceNamespace'
+        ResourceId:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        ScalableDimension:
+          $ref: '#/components/schemas/ScalableDimension'
+        PolicyType:
+          $ref: '#/components/schemas/PolicyType'
+        StepScalingPolicyConfiguration:
+          $ref: '#/components/schemas/StepScalingPolicyConfiguration'
+        TargetTrackingScalingPolicyConfiguration:
+          $ref: '#/components/schemas/TargetTrackingScalingPolicyConfiguration'
+    PutScalingPolicyResponse:
+      type: object
+      required:
+        - PolicyARN
+      example:
+        PolicyARN: 'arn:aws:autoscaling:us-east-1:012345678910:scalingPolicy:89406401-0cb7-4130-b770-d97cca0e446b:resource/ec2/spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3:policyName/fleet-cpu-gt-75'
+      properties:
+        PolicyARN:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        Alarms:
+          $ref: '#/components/schemas/Alarms'
+    RegisterScalableTargetRequest:
+      type: object
+      required:
+        - ServiceNamespace
+        - ResourceId
+        - ScalableDimension
+      example:
+        MaxCapacity: 10
+        MinCapacity: 1
+        ResourceId: spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3
+        RoleARN: 'arn:aws:iam::012345678910:role/ApplicationAutoscalingSpotRole'
+        ScalableDimension: 'ec2:spot-fleet-request:TargetCapacity'
+        ServiceNamespace: ec2
+      properties:
+        ServiceNamespace:
+          $ref: '#/components/schemas/ServiceNamespace'
+        ResourceId:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        ScalableDimension:
+          $ref: '#/components/schemas/ScalableDimension'
+        MinCapacity:
+          $ref: '#/components/schemas/ResourceCapacity'
+        MaxCapacity:
+          $ref: '#/components/schemas/ResourceCapacity'
+        RoleARN:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+    RegisterScalableTargetResponse:
+      type: object
+      example: {}
+      properties: {}
+    ResourceCapacity:
+      type: integer
+    ResourceId:
+      type: string
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    ResourceIdMaxLen1600:
+      type: string
+      minLength: 1
+      maxLength: 1600
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    ResourceIdsMaxLen1600:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceIdMaxLen1600'
+    ResourceLabel:
+      type: string
+      minLength: 1
+      maxLength: 1023
+    ScalableDimension:
+      type: string
+      enum:
+        - 'ecs:service:DesiredCount'
+        - 'ec2:spot-fleet-request:TargetCapacity'
+        - 'elasticmapreduce:instancegroup:InstanceCount'
+        - 'appstream:fleet:DesiredCapacity'
+        - 'dynamodb:table:ReadCapacityUnits'
+        - 'dynamodb:table:WriteCapacityUnits'
+        - 'dynamodb:index:ReadCapacityUnits'
+        - 'dynamodb:index:WriteCapacityUnits'
+    ScalableTarget:
+      type: object
+      required:
+        - ServiceNamespace
+        - ResourceId
+        - ScalableDimension
+        - MinCapacity
+        - MaxCapacity
+        - RoleARN
+        - CreationTime
+      properties:
+        ServiceNamespace:
+          $ref: '#/components/schemas/ServiceNamespace'
+        ResourceId:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        ScalableDimension:
+          $ref: '#/components/schemas/ScalableDimension'
+        MinCapacity:
+          $ref: '#/components/schemas/ResourceCapacity'
+        MaxCapacity:
+          $ref: '#/components/schemas/ResourceCapacity'
+        RoleARN:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        CreationTime:
+          $ref: '#/components/schemas/TimestampType'
+      description: Represents a scalable target.
+    ScalableTargets:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScalableTarget'
+    ScalingActivities:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScalingActivity'
+    ScalingActivity:
+      type: object
+      required:
+        - ActivityId
+        - ServiceNamespace
+        - ResourceId
+        - ScalableDimension
+        - Description
+        - Cause
+        - StartTime
+        - StatusCode
+      properties:
+        ActivityId:
+          $ref: '#/components/schemas/ResourceId'
+        ServiceNamespace:
+          $ref: '#/components/schemas/ServiceNamespace'
+        ResourceId:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        ScalableDimension:
+          $ref: '#/components/schemas/ScalableDimension'
+        Description:
+          $ref: '#/components/schemas/XmlString'
+        Cause:
+          $ref: '#/components/schemas/XmlString'
+        StartTime:
+          $ref: '#/components/schemas/TimestampType'
+        EndTime:
+          $ref: '#/components/schemas/TimestampType'
+        StatusCode:
+          $ref: '#/components/schemas/ScalingActivityStatusCode'
+        StatusMessage:
+          $ref: '#/components/schemas/XmlString'
+        Details:
+          $ref: '#/components/schemas/XmlString'
+      description: Represents a scaling activity.
+    ScalingActivityStatusCode:
+      type: string
+      enum:
+        - Pending
+        - InProgress
+        - Successful
+        - Overridden
+        - Unfulfilled
+        - Failed
+    ScalingAdjustment:
+      type: integer
+    ScalingPolicies:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScalingPolicy'
+    ScalingPolicy:
+      type: object
+      required:
+        - PolicyARN
+        - PolicyName
+        - ServiceNamespace
+        - ResourceId
+        - ScalableDimension
+        - PolicyType
+        - CreationTime
+      properties:
+        PolicyARN:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        PolicyName:
+          $ref: '#/components/schemas/PolicyName'
+        ServiceNamespace:
+          $ref: '#/components/schemas/ServiceNamespace'
+        ResourceId:
+          $ref: '#/components/schemas/ResourceIdMaxLen1600'
+        ScalableDimension:
+          $ref: '#/components/schemas/ScalableDimension'
+        PolicyType:
+          $ref: '#/components/schemas/PolicyType'
+        StepScalingPolicyConfiguration:
+          $ref: '#/components/schemas/StepScalingPolicyConfiguration'
+        TargetTrackingScalingPolicyConfiguration:
+          $ref: '#/components/schemas/TargetTrackingScalingPolicyConfiguration'
+        Alarms:
+          $ref: '#/components/schemas/Alarms'
+        CreationTime:
+          $ref: '#/components/schemas/TimestampType'
+      description: Represents a scaling policy.
+    ServiceNamespace:
+      type: string
+      enum:
+        - ecs
+        - elasticmapreduce
+        - ec2
+        - appstream
+        - dynamodb
+    StepAdjustment:
+      type: object
+      required:
+        - ScalingAdjustment
+      properties:
+        MetricIntervalLowerBound:
+          $ref: '#/components/schemas/MetricScale'
+        MetricIntervalUpperBound:
+          $ref: '#/components/schemas/MetricScale'
+        ScalingAdjustment:
+          $ref: '#/components/schemas/ScalingAdjustment'
+      description: '<p>Represents a step adjustment for a <a>StepScalingPolicyConfiguration</a>. Describes an adjustment based on the difference between the value of the aggregated CloudWatch metric and the breach threshold that you''ve defined for the alarm. </p> <p>For the following examples, suppose that you have an alarm with a breach threshold of 50:</p> <ul> <li> <p>To trigger the adjustment when the metric is greater than or equal to 50 and less than 60, specify a lower bound of 0 and an upper bound of 10.</p> </li> <li> <p>To trigger the adjustment when the metric is greater than 40 and less than or equal to 50, specify a lower bound of -10 and an upper bound of 0.</p> </li> </ul> <p>There are a few rules for the step adjustments for your step policy:</p> <ul> <li> <p>The ranges of your step adjustments can''t overlap or have a gap.</p> </li> <li> <p>At most one step adjustment can have a null lower bound. If one step adjustment has a negative lower bound, then there must be a step adjustment with a null lower bound.</p> </li> <li> <p>At most one step adjustment can have a null upper bound. If one step adjustment has a positive upper bound, then there must be a step adjustment with a null upper bound.</p> </li> <li> <p>The upper and lower bound can''t be null in the same step adjustment.</p> </li> </ul>'
+    StepAdjustments:
+      type: array
+      items:
+        $ref: '#/components/schemas/StepAdjustment'
+    StepScalingPolicyConfiguration:
+      type: object
+      properties:
+        AdjustmentType:
+          $ref: '#/components/schemas/AdjustmentType'
+        StepAdjustments:
+          $ref: '#/components/schemas/StepAdjustments'
+        MinAdjustmentMagnitude:
+          $ref: '#/components/schemas/MinAdjustmentMagnitude'
+        Cooldown:
+          $ref: '#/components/schemas/Cooldown'
+        MetricAggregationType:
+          $ref: '#/components/schemas/MetricAggregationType'
+      description: Represents a step scaling policy configuration.
+    TargetTrackingScalingPolicyConfiguration:
+      type: object
+      required:
+        - TargetValue
+      properties:
+        TargetValue:
+          $ref: '#/components/schemas/MetricScale'
+        PredefinedMetricSpecification:
+          $ref: '#/components/schemas/PredefinedMetricSpecification'
+        CustomizedMetricSpecification:
+          $ref: '#/components/schemas/CustomizedMetricSpecification'
+        ScaleOutCooldown:
+          $ref: '#/components/schemas/Cooldown'
+        ScaleInCooldown:
+          $ref: '#/components/schemas/Cooldown'
+      description: Represents a target tracking scaling policy configuration.
+    TimestampType:
+      type: string
+      format: date-time
+    ValidationException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: An exception was thrown for a validation issue. Review the available parameters for the API request.
+    XmlString:
+      type: string
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

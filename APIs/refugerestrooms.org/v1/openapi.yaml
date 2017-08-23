@@ -1,0 +1,229 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://www.refugerestrooms.org/api'
+info:
+  description: 'REFUGE is a web application that seeks to provide safe restroom access for transgender, intersex, and gender nonconforming individuals.'
+  title: Refuge Restrooms
+  version: v1
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    backgroundColor: '#4C4C4C'
+    url: 'https://pbs.twimg.com/profile_images/432717338270380032/BZWevLrA.jpeg'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
+      url: 'http://www.refugerestrooms.org/api/swagger_doc.json'
+      version: '1.2'
+  x-providerName: refugerestrooms.org
+tags:
+  - name: restrooms
+paths:
+  /v1/restrooms.json:
+    get:
+      operationId: GET--version-restrooms---format-
+      parameters:
+        - description: Page offset to fetch.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+        - description: Pad a number of results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Only return restrooms that are ADA accessible.
+          in: query
+          name: ada
+          required: false
+          schema:
+            type: boolean
+        - description: Only return restrooms that are unisex.
+          in: query
+          name: unisex
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get all restroom records ordered by date descending.
+      tags:
+        - restrooms
+  /v1/restrooms/by_date.json:
+    get:
+      operationId: GET--version-restrooms-by_date---format-
+      parameters:
+        - description: Page offset to fetch.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+        - description: Pad a number of results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Only return restrooms that are ADA accessible.
+          in: query
+          name: ada
+          required: false
+          schema:
+            type: boolean
+        - description: Only return restrooms that are unisex.
+          in: query
+          name: unisex
+          required: false
+          schema:
+            type: boolean
+        - description: Return restroom records updated (rather than created) since given date
+          in: query
+          name: updated
+          required: false
+          schema:
+            type: boolean
+        - description: Day
+          in: query
+          name: day
+          required: true
+          schema:
+            type: integer
+        - description: Month
+          in: query
+          name: month
+          required: true
+          schema:
+            type: integer
+        - description: Year
+          in: query
+          name: year
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search for restroom records updated or created on or after a given date
+      tags:
+        - restrooms
+  /v1/restrooms/by_location.json:
+    get:
+      operationId: GET--version-restrooms-by_location---format-
+      parameters:
+        - description: Page offset to fetch.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+        - description: Pad a number of results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Only return restrooms that are ADA accessible.
+          in: query
+          name: ada
+          required: false
+          schema:
+            type: boolean
+        - description: Only return restrooms that are unisex.
+          in: query
+          name: unisex
+          required: false
+          schema:
+            type: boolean
+        - description: latitude
+          in: query
+          name: lat
+          required: true
+          schema:
+            type: number
+            format: float
+        - description: longitude
+          in: query
+          name: lng
+          required: true
+          schema:
+            type: number
+            format: float
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search by location.
+      tags:
+        - restrooms
+  /v1/restrooms/search.json:
+    get:
+      operationId: GET--version-restrooms-search---format-
+      parameters:
+        - description: Page offset to fetch.
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+        - description: Number of results to return per page.
+          in: query
+          name: per_page
+          required: false
+          schema:
+            type: integer
+        - description: Pad a number of results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: Only return restrooms that are ADA accessible.
+          in: query
+          name: ada
+          required: false
+          schema:
+            type: boolean
+        - description: Only return restrooms that are unisex.
+          in: query
+          name: unisex
+          required: false
+          schema:
+            type: boolean
+        - description: Your search query.
+          in: query
+          name: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Perform full-text search of restroom records.
+      tags:
+        - restrooms
+components:
+  schemas: {}

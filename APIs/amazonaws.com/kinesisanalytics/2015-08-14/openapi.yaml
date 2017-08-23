@@ -1,0 +1,1806 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://kinesisanalytics.amazonaws.com/'
+info:
+  version: '2015-08-14'
+  x-release: v4
+  title: Amazon Kinesis Analytics
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: kinesisanalytics
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/kinesisanalytics-2015-08-14.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/kinesisanalytics/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddApplicationCloudWatchLoggingOption
+      description: 'Adds a CloudWatch log stream to monitor application configuration errors. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html">Monitoring Configuration Errors</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddApplicationCloudWatchLoggingOptionResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddApplicationCloudWatchLoggingOptionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AddApplicationInput':
+    post:
+      operationId: AddApplicationInput
+      description: '<p> Adds a streaming source to your Amazon Kinesis application. For conceptual information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. </p> <p>You can add a streaming source either when you create an application or you can use this operation to add a streaming source after you create an application. For more information, see <a>CreateApplication</a>.</p> <p>Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version. </p> <p>This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationInput</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddApplicationInputResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddApplicationInputRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AddApplicationOutput':
+    post:
+      operationId: AddApplicationOutput
+      description: '<p>Adds an external destination to your Amazon Kinesis Analytics application.</p> <p>If you want Amazon Kinesis Analytics to deliver data from an in-application stream within your application to an external destination (such as an Amazon Kinesis stream or a Firehose delivery stream), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.</p> <p> You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors. For conceptual information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Understanding Application Output (Destination)</a>. </p> <p> Note that any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p> <p>For the limits on the number of application inputs and outputs you can configure, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html">Limits</a>.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationOutput</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddApplicationOutputResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddApplicationOutputRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AddApplicationReferenceDataSource':
+    post:
+      operationId: AddApplicationReferenceDataSource
+      description: '<p>Adds a reference data source to an existing application.</p> <p>Amazon Kinesis Analytics reads reference data (that is, an Amazon S3 object) and creates an in-application table within your application. In the request, you provide the source (S3 bucket name and object key name), name of the in-application table to create, and the necessary mapping information that describes how data in Amazon S3 object maps to columns in the resulting in-application table.</p> <p> For conceptual information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. For the limits on data sources you can add to your application, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html">Limits</a>. </p> <p> This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationOutput</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddApplicationReferenceDataSourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddApplicationReferenceDataSourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateApplication':
+    post:
+      operationId: CreateApplication
+      description: '<p> Creates an Amazon Kinesis Analytics application. You can configure each application with one streaming source as input, application code to process the input, and up to five streaming destinations where you want Amazon Kinesis Analytics to write the output data from your application. For an overview, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works.html">How it Works</a>. </p> <p>In the input configuration, you map the streaming source to an in-application stream, which you can think of as a constantly updating table. In the mapping, you must provide a schema for the in-application stream and map each data column in the in-application stream to a data element in the streaming source.</p> <p>Your application code is one or more SQL statements that read input data, transform it, and generate output. Your application code can create one or more SQL artifacts like SQL streams or pumps.</p> <p>In the output configuration, you can configure the application to write data from in-application streams created in your applications to up to five streaming destinations.</p> <p> To read data from your source stream or write data to destination streams, Amazon Kinesis Analytics needs your permissions. You grant these permissions by creating IAM roles. This operation requires permissions to perform the <code>kinesisanalytics:CreateApplication</code> action. </p> <p> For introductory exercises to create an Amazon Kinesis Analytics application, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html">Getting Started</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationResponse'
+        '480':
+          description: CodeValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeValidationException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteApplication':
+    post:
+      operationId: DeleteApplication
+      description: '<p>Deletes the specified application. Amazon Kinesis Analytics halts application execution and deletes the application, including any application artifacts (such as in-application streams, reference table, and application code).</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:DeleteApplication</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteApplicationResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteApplicationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteApplicationCloudWatchLoggingOption':
+    post:
+      operationId: DeleteApplicationCloudWatchLoggingOption
+      description: 'Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-monitor-configuration.html">Monitoring Configuration Errors</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteApplicationCloudWatchLoggingOptionResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteApplicationCloudWatchLoggingOptionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteApplicationOutput':
+    post:
+      operationId: DeleteApplicationOutput
+      description: '<p>Deletes output destination configuration from your application configuration. Amazon Kinesis Analytics will no longer write data from the corresponding in-application stream to the external output destination.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:DeleteApplicationOutput</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteApplicationOutputResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteApplicationOutputRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteApplicationReferenceDataSource':
+    post:
+      operationId: DeleteApplicationReferenceDataSource
+      description: '<p>Deletes a reference data source configuration from the specified application configuration.</p> <p>If the application is running, Amazon Kinesis Analytics immediately removes the in-application table that you created using the <a>AddApplicationReferenceDataSource</a> operation. </p> <p>This operation requires permissions to perform the <code>kinesisanalytics.DeleteApplicationReferenceDataSource</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteApplicationReferenceDataSourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteApplicationReferenceDataSourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeApplication':
+    post:
+      operationId: DescribeApplication
+      description: '<p>Returns information about a specific Amazon Kinesis Analytics application.</p> <p>If you want to retrieve a list of all applications in your account, use the <a>ListApplications</a> operation.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:DescribeApplication</code> action. You can use <code>DescribeApplication</code> to get the current application versionId, which you need to call other operations such as <code>Update</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeApplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeApplicationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DiscoverInputSchema':
+    post:
+      operationId: DiscoverInputSchema
+      description: '<p>Infers a schema by evaluating sample records on the specified streaming source (Amazon Kinesis stream or Amazon Kinesis Firehose delivery stream). In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.</p> <p> You can use the inferred schema when configuring a streaming source for your application. For conceptual information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. Note that when you create an application using the Amazon Kinesis Analytics console, the console uses this operation to infer a schema and show it in the console user interface. </p> <p> This operation requires permissions to perform the <code>kinesisanalytics:DiscoverInputSchema</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscoverInputSchemaResponse'
+        '480':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '481':
+          description: UnableToDetectSchemaException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnableToDetectSchemaException'
+        '482':
+          description: ResourceProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceProvisionedThroughputExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiscoverInputSchemaRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListApplications':
+    post:
+      operationId: ListApplications
+      description: '<p>Returns a list of Amazon Kinesis Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status. If the response returns the <code>HasMoreApplications</code> value as true, you can send another request by adding the <code>ExclusiveStartApplicationName</code> in the request body, and set the value of this to the last application name from the previous response. </p> <p>If you want detailed information about a specific application, use <a>DescribeApplication</a>.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:ListApplications</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApplicationsResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListApplicationsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartApplication':
+    post:
+      operationId: StartApplication
+      description: '<p>Starts the specified Amazon Kinesis Analytics application. After creating an application, you must exclusively call this operation to start your application.</p> <p>After the application starts, it begins consuming the input data, processes it, and writes the output to the configured destination.</p> <p> The application status must be <code>READY</code> for you to start an application. You can get the application status in the console or using the <a>DescribeApplication</a> operation.</p> <p>After you start the application, you can stop the application from processing the input by calling the <a>StopApplication</a> operation.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:StartApplication</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartApplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: InvalidApplicationConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationConfigurationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartApplicationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopApplication':
+    post:
+      operationId: StopApplication
+      description: '<p>Stops the application from processing input data. You can stop an application only if it is in the running state. You can use the <a>DescribeApplication</a> operation to find the application state. After the application is stopped, Amazon Kinesis Analytics stops reading data from the input, the application stops processing data, and there is no output written to the destination. </p> <p>This operation requires permissions to perform the <code>kinesisanalytics:StopApplication</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopApplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopApplicationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateApplication':
+    post:
+      operationId: UpdateApplication
+      description: '<p>Updates an existing Amazon Kinesis Analytics application. Using this API, you can update application code, input configuration, and output configuration. </p> <p>Note that Amazon Kinesis Analytics updates the <code>CurrentApplicationVersionId</code> each time you update your application. </p> <p>This operation requires permission for the <code>kinesisanalytics:UpdateApplication</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateApplicationResponse'
+        '480':
+          description: CodeValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '483':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApplicationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AddApplicationCloudWatchLoggingOptionRequest:
+      type: object
+      required:
+        - ApplicationName
+        - CurrentApplicationVersionId
+        - CloudWatchLoggingOption
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        CurrentApplicationVersionId:
+          $ref: '#/components/schemas/ApplicationVersionId'
+        CloudWatchLoggingOption:
+          $ref: '#/components/schemas/CloudWatchLoggingOption'
+    AddApplicationCloudWatchLoggingOptionResponse:
+      type: object
+      properties: {}
+    AddApplicationInputRequest:
+      type: object
+      required:
+        - ApplicationName
+        - CurrentApplicationVersionId
+        - Input
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        CurrentApplicationVersionId:
+          $ref: '#/components/schemas/ApplicationVersionId'
+        Input:
+          $ref: '#/components/schemas/Input'
+      description: <p/>
+    AddApplicationInputResponse:
+      type: object
+      properties: {}
+      description: <p/>
+    AddApplicationOutputRequest:
+      type: object
+      required:
+        - ApplicationName
+        - CurrentApplicationVersionId
+        - Output
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        CurrentApplicationVersionId:
+          $ref: '#/components/schemas/ApplicationVersionId'
+        Output:
+          $ref: '#/components/schemas/Output'
+      description: <p/>
+    AddApplicationOutputResponse:
+      type: object
+      properties: {}
+      description: <p/>
+    AddApplicationReferenceDataSourceRequest:
+      type: object
+      required:
+        - ApplicationName
+        - CurrentApplicationVersionId
+        - ReferenceDataSource
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        CurrentApplicationVersionId:
+          $ref: '#/components/schemas/ApplicationVersionId'
+        ReferenceDataSource:
+          $ref: '#/components/schemas/ReferenceDataSource'
+      description: <p/>
+    AddApplicationReferenceDataSourceResponse:
+      type: object
+      properties: {}
+      description: <p/>
+    ApplicationCode:
+      type: string
+      minLength: 0
+      maxLength: 51200
+    ApplicationDescription:
+      type: string
+      minLength: 0
+      maxLength: 1024
+    ApplicationDetail:
+      type: object
+      required:
+        - ApplicationName
+        - ApplicationARN
+        - ApplicationStatus
+        - ApplicationVersionId
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        ApplicationDescription:
+          $ref: '#/components/schemas/ApplicationDescription'
+        ApplicationARN:
+          $ref: '#/components/schemas/ResourceARN'
+        ApplicationStatus:
+          $ref: '#/components/schemas/ApplicationStatus'
+        CreateTimestamp:
+          $ref: '#/components/schemas/Timestamp'
+        LastUpdateTimestamp:
+          $ref: '#/components/schemas/Timestamp'
+        InputDescriptions:
+          $ref: '#/components/schemas/InputDescriptions'
+        OutputDescriptions:
+          $ref: '#/components/schemas/OutputDescriptions'
+        ReferenceDataSourceDescriptions:
+          $ref: '#/components/schemas/ReferenceDataSourceDescriptions'
+        CloudWatchLoggingOptionDescriptions:
+          $ref: '#/components/schemas/CloudWatchLoggingOptionDescriptions'
+        ApplicationCode:
+          $ref: '#/components/schemas/ApplicationCode'
+        ApplicationVersionId:
+          $ref: '#/components/schemas/ApplicationVersionId'
+      description: 'Provides a description of the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configuration.'
+    ApplicationName:
+      type: string
+      pattern: '[a-zA-Z0-9_.-]+'
+      minLength: 1
+      maxLength: 128
+    ApplicationStatus:
+      type: string
+      enum:
+        - DELETING
+        - STARTING
+        - STOPPING
+        - READY
+        - RUNNING
+        - UPDATING
+    ApplicationSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ApplicationSummary'
+    ApplicationSummary:
+      type: object
+      required:
+        - ApplicationName
+        - ApplicationARN
+        - ApplicationStatus
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        ApplicationARN:
+          $ref: '#/components/schemas/ResourceARN'
+        ApplicationStatus:
+          $ref: '#/components/schemas/ApplicationStatus'
+      description: 'Provides application summary information, including the application Amazon Resource Name (ARN), name, and status.'
+    ApplicationUpdate:
+      type: object
+      properties:
+        InputUpdates:
+          $ref: '#/components/schemas/InputUpdates'
+        ApplicationCodeUpdate:
+          $ref: '#/components/schemas/ApplicationCode'
+        OutputUpdates:
+          $ref: '#/components/schemas/OutputUpdates'
+        ReferenceDataSourceUpdates:
+          $ref: '#/components/schemas/ReferenceDataSourceUpdates'
+        CloudWatchLoggingOptionUpdates:
+          $ref: '#/components/schemas/CloudWatchLoggingOptionUpdates'
+      description: Describes updates to apply to an existing Amazon Kinesis Analytics application.
+    ApplicationVersionId:
+      type: integer
+      minimum: 1
+      maximum: 999999999
+    BooleanObject:
+      type: boolean
+    BucketARN:
+      type: string
+      pattern: 'arn:.*'
+      minLength: 1
+      maxLength: 2048
+    CSVMappingParameters:
+      type: object
+      required:
+        - RecordRowDelimiter
+        - RecordColumnDelimiter
+      properties:
+        RecordRowDelimiter:
+          $ref: '#/components/schemas/RecordRowDelimiter'
+        RecordColumnDelimiter:
+          $ref: '#/components/schemas/RecordColumnDelimiter'
+      description: '<p>Provides additional mapping information when the record format uses delimiters, such as CSV. For example, the following sample records use CSV format, where the records use the <i>''\n''</i> as the row delimiter and a comma (",") as the column delimiter: </p> <p> <code>"name1", "address1" </code> </p> <p> <code>"name2, "address2"</code> </p>'
+    CloudWatchLoggingOption:
+      type: object
+      required:
+        - LogStreamARN
+        - RoleARN
+      properties:
+        LogStreamARN:
+          $ref: '#/components/schemas/LogStreamARN'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: 'Provides a description of CloudWatch logging options, including the log stream ARN and the role ARN.'
+    CloudWatchLoggingOptionDescription:
+      type: object
+      required:
+        - LogStreamARN
+        - RoleARN
+      properties:
+        CloudWatchLoggingOptionId:
+          $ref: '#/components/schemas/Id'
+        LogStreamARN:
+          $ref: '#/components/schemas/LogStreamARN'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: Description of the CloudWatch logging option.
+    CloudWatchLoggingOptionDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/CloudWatchLoggingOptionDescription'
+    CloudWatchLoggingOptionUpdate:
+      type: object
+      required:
+        - CloudWatchLoggingOptionId
+      properties:
+        CloudWatchLoggingOptionId:
+          $ref: '#/components/schemas/Id'
+        LogStreamARNUpdate:
+          $ref: '#/components/schemas/LogStreamARN'
+        RoleARNUpdate:
+          $ref: '#/components/schemas/RoleARN'
+      description: Describes CloudWatch logging option updates.
+    CloudWatchLoggingOptionUpdates:
+      type: array
+      items:
+        $ref: '#/components/schemas/CloudWatchLoggingOptionUpdate'
+    CloudWatchLoggingOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/CloudWatchLoggingOption'
+    CodeValidationException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: User-provided application code (query) is invalid. This can be a simple syntax error.
+    ConcurrentModificationException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Exception thrown as a result of concurrent modification to an application. For example, two individuals attempting to edit the same application at the same time.'
+    CreateApplicationRequest:
+      type: object
+      required:
+        - ApplicationName
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        ApplicationDescription:
+          $ref: '#/components/schemas/ApplicationDescription'
+        Inputs:
+          $ref: '#/components/schemas/Inputs'
+        Outputs:
+          $ref: '#/components/schemas/Outputs'
+        CloudWatchLoggingOptions:
+          $ref: '#/components/schemas/CloudWatchLoggingOptions'
+        ApplicationCode:
+          $ref: '#/components/schemas/ApplicationCode'
+      description: TBD
+    CreateApplicationResponse:
+      type: object
+      required:
+        - ApplicationSummary
+      properties:
+        ApplicationSummary:
+          $ref: '#/components/schemas/ApplicationSummary'
+      description: TBD
+    DeleteApplicationCloudWatchLoggingOptionRequest:
+      type: object
+      required:
+        - ApplicationName
+        - CurrentApplicationVersionId
+        - CloudWatchLoggingOptionId
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        CurrentApplicationVersionId:
+          $ref: '#/components/schemas/ApplicationVersionId'
+        CloudWatchLoggingOptionId:
+          $ref: '#/components/schemas/Id'
+    DeleteApplicationCloudWatchLoggingOptionResponse:
+      type: object
+      properties: {}
+    DeleteApplicationOutputRequest:
+      type: object
+      required:
+        - ApplicationName
+        - CurrentApplicationVersionId
+        - OutputId
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        CurrentApplicationVersionId:
+          $ref: '#/components/schemas/ApplicationVersionId'
+        OutputId:
+          $ref: '#/components/schemas/Id'
+      description: <p/>
+    DeleteApplicationOutputResponse:
+      type: object
+      properties: {}
+      description: <p/>
+    DeleteApplicationReferenceDataSourceRequest:
+      type: object
+      required:
+        - ApplicationName
+        - CurrentApplicationVersionId
+        - ReferenceId
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        CurrentApplicationVersionId:
+          $ref: '#/components/schemas/ApplicationVersionId'
+        ReferenceId:
+          $ref: '#/components/schemas/Id'
+    DeleteApplicationReferenceDataSourceResponse:
+      type: object
+      properties: {}
+    DeleteApplicationRequest:
+      type: object
+      required:
+        - ApplicationName
+        - CreateTimestamp
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        CreateTimestamp:
+          $ref: '#/components/schemas/Timestamp'
+      description: <p/>
+    DeleteApplicationResponse:
+      type: object
+      properties: {}
+      description: <p/>
+    DescribeApplicationRequest:
+      type: object
+      required:
+        - ApplicationName
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+      description: <p/>
+    DescribeApplicationResponse:
+      type: object
+      required:
+        - ApplicationDetail
+      properties:
+        ApplicationDetail:
+          $ref: '#/components/schemas/ApplicationDetail'
+      description: <p/>
+    DestinationSchema:
+      type: object
+      properties:
+        RecordFormatType:
+          $ref: '#/components/schemas/RecordFormatType'
+      description: 'Describes the data format when records are written to the destination. For more information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>. '
+    DiscoverInputSchemaRequest:
+      type: object
+      required:
+        - ResourceARN
+        - RoleARN
+        - InputStartingPositionConfiguration
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+        InputStartingPositionConfiguration:
+          $ref: '#/components/schemas/InputStartingPositionConfiguration'
+      description: <p/>
+    DiscoverInputSchemaResponse:
+      type: object
+      properties:
+        InputSchema:
+          $ref: '#/components/schemas/SourceSchema'
+        ParsedInputRecords:
+          $ref: '#/components/schemas/ParsedInputRecords'
+        RawInputRecords:
+          $ref: '#/components/schemas/RawInputRecords'
+      description: <p/>
+    ErrorMessage:
+      type: string
+    FileKey:
+      type: string
+    Id:
+      type: string
+      pattern: '[a-zA-Z0-9_.-]+'
+      minLength: 1
+      maxLength: 50
+    InAppStreamName:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9_]+'
+      minLength: 1
+      maxLength: 32
+    InAppStreamNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/InAppStreamName'
+    InAppTableName:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9_]+'
+      minLength: 1
+      maxLength: 32
+    Input:
+      type: object
+      required:
+        - NamePrefix
+        - InputSchema
+      properties:
+        NamePrefix:
+          $ref: '#/components/schemas/InAppStreamName'
+        KinesisStreamsInput:
+          $ref: '#/components/schemas/KinesisStreamsInput'
+        KinesisFirehoseInput:
+          $ref: '#/components/schemas/KinesisFirehoseInput'
+        InputParallelism:
+          $ref: '#/components/schemas/InputParallelism'
+        InputSchema:
+          $ref: '#/components/schemas/SourceSchema'
+      description: 'When you configure the application input, you specify the streaming source, the in-application stream name that is created, and the mapping between the two. For more information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. '
+    InputConfiguration:
+      type: object
+      required:
+        - Id
+        - InputStartingPositionConfiguration
+      properties:
+        Id:
+          $ref: '#/components/schemas/Id'
+        InputStartingPositionConfiguration:
+          $ref: '#/components/schemas/InputStartingPositionConfiguration'
+      description: 'When you start your application, you provide this configuration, which identifies the input source and the point in the input source at which you want the application to start processing records.'
+    InputConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/InputConfiguration'
+    InputDescription:
+      type: object
+      properties:
+        InputId:
+          $ref: '#/components/schemas/Id'
+        NamePrefix:
+          $ref: '#/components/schemas/InAppStreamName'
+        InAppStreamNames:
+          $ref: '#/components/schemas/InAppStreamNames'
+        KinesisStreamsInputDescription:
+          $ref: '#/components/schemas/KinesisStreamsInputDescription'
+        KinesisFirehoseInputDescription:
+          $ref: '#/components/schemas/KinesisFirehoseInputDescription'
+        InputSchema:
+          $ref: '#/components/schemas/SourceSchema'
+        InputParallelism:
+          $ref: '#/components/schemas/InputParallelism'
+        InputStartingPositionConfiguration:
+          $ref: '#/components/schemas/InputStartingPositionConfiguration'
+      description: 'Describes the application input configuration. For more information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. '
+    InputDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/InputDescription'
+    InputParallelism:
+      type: object
+      properties:
+        Count:
+          $ref: '#/components/schemas/InputParallelismCount'
+      description: 'Describes the number of in-application streams to create for a given streaming source. For information about parallelism, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. '
+    InputParallelismCount:
+      type: integer
+      minimum: 1
+      maximum: 10
+    InputParallelismUpdate:
+      type: object
+      properties:
+        CountUpdate:
+          $ref: '#/components/schemas/InputParallelismCount'
+      description: Provides updates to the parallelism count.
+    InputSchemaUpdate:
+      type: object
+      properties:
+        RecordFormatUpdate:
+          $ref: '#/components/schemas/RecordFormat'
+        RecordEncodingUpdate:
+          $ref: '#/components/schemas/RecordEncoding'
+        RecordColumnUpdates:
+          $ref: '#/components/schemas/RecordColumns'
+      description: ' Describes updates for the application''s input schema. '
+    InputStartingPosition:
+      type: string
+      enum:
+        - NOW
+        - TRIM_HORIZON
+        - LAST_STOPPED_POINT
+    InputStartingPositionConfiguration:
+      type: object
+      properties:
+        InputStartingPosition:
+          $ref: '#/components/schemas/InputStartingPosition'
+      description: Describes the point at which the application reads from the streaming source.
+    InputUpdate:
+      type: object
+      required:
+        - InputId
+      properties:
+        InputId:
+          $ref: '#/components/schemas/Id'
+        NamePrefixUpdate:
+          $ref: '#/components/schemas/InAppStreamName'
+        KinesisStreamsInputUpdate:
+          $ref: '#/components/schemas/KinesisStreamsInputUpdate'
+        KinesisFirehoseInputUpdate:
+          $ref: '#/components/schemas/KinesisFirehoseInputUpdate'
+        InputSchemaUpdate:
+          $ref: '#/components/schemas/InputSchemaUpdate'
+        InputParallelismUpdate:
+          $ref: '#/components/schemas/InputParallelismUpdate'
+      description: 'Describes updates to a specific input configuration (identified by the <code>InputId</code> of an application). '
+    InputUpdates:
+      type: array
+      items:
+        $ref: '#/components/schemas/InputUpdate'
+    Inputs:
+      type: array
+      items:
+        $ref: '#/components/schemas/Input'
+    InvalidApplicationConfigurationException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: User-provided application configuration is not valid.
+    InvalidArgumentException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: Specified input parameter value is invalid.
+    JSONMappingParameters:
+      type: object
+      required:
+        - RecordRowPath
+      properties:
+        RecordRowPath:
+          $ref: '#/components/schemas/RecordRowPath'
+      description: Provides additional mapping information when JSON is the record format on the streaming source.
+    KinesisFirehoseInput:
+      type: object
+      required:
+        - ResourceARN
+        - RoleARN
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: ' Identifies an Amazon Kinesis Firehose delivery stream as the streaming source. You provide the Firehose delivery stream''s Amazon Resource Name (ARN) and an IAM role ARN that enables Amazon Kinesis Analytics to access the stream on your behalf.'
+    KinesisFirehoseInputDescription:
+      type: object
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: ' Describes the Amazon Kinesis Firehose delivery stream that is configured as the streaming source in the application input configuration. '
+    KinesisFirehoseInputUpdate:
+      type: object
+      properties:
+        ResourceARNUpdate:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARNUpdate:
+          $ref: '#/components/schemas/RoleARN'
+      description: 'When updating application input configuration, provides information about an Amazon Kinesis Firehose delivery stream as the streaming source.'
+    KinesisFirehoseOutput:
+      type: object
+      required:
+        - ResourceARN
+        - RoleARN
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: 'When configuring application output, identifies an Amazon Kinesis Firehose delivery stream as the destination. You provide the stream Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to write to the stream on your behalf.'
+    KinesisFirehoseOutputDescription:
+      type: object
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: ' For an application output, describes the Amazon Kinesis Firehose delivery stream configured as its destination. '
+    KinesisFirehoseOutputUpdate:
+      type: object
+      properties:
+        ResourceARNUpdate:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARNUpdate:
+          $ref: '#/components/schemas/RoleARN'
+      description: ' When updating an output configuration using the <a>UpdateApplication</a> operation, provides information about an Amazon Kinesis Firehose delivery stream configured as the destination. '
+    KinesisStreamsInput:
+      type: object
+      required:
+        - ResourceARN
+        - RoleARN
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: ' Identifies an Amazon Kinesis stream as the streaming source. You provide the stream''s ARN and an IAM role ARN that enables Amazon Kinesis Analytics to access the stream on your behalf.'
+    KinesisStreamsInputDescription:
+      type: object
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: ' Describes the Amazon Kinesis stream that is configured as the streaming source in the application input configuration. '
+    KinesisStreamsInputUpdate:
+      type: object
+      properties:
+        ResourceARNUpdate:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARNUpdate:
+          $ref: '#/components/schemas/RoleARN'
+      description: 'When updating application input configuration, provides information about an Amazon Kinesis stream as the streaming source.'
+    KinesisStreamsOutput:
+      type: object
+      required:
+        - ResourceARN
+        - RoleARN
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: 'When configuring application output, identifies a Amazon Kinesis stream as the destination. You provide the stream Amazon Resource Name (ARN) and also an IAM role ARN that Amazon Kinesis Analytics can use to write to the stream on your behalf.'
+    KinesisStreamsOutputDescription:
+      type: object
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: ' For an application output, describes the Amazon Kinesis stream configured as its destination. '
+    KinesisStreamsOutputUpdate:
+      type: object
+      properties:
+        ResourceARNUpdate:
+          $ref: '#/components/schemas/ResourceARN'
+        RoleARNUpdate:
+          $ref: '#/components/schemas/RoleARN'
+      description: ' When updating an output configuration using the <a>UpdateApplication</a> operation, provides information about an Amazon Kinesis stream configured as the destination. '
+    LimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: Exceeded the number of applications allowed.
+    ListApplicationsInputLimit:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListApplicationsRequest:
+      type: object
+      properties:
+        Limit:
+          $ref: '#/components/schemas/ListApplicationsInputLimit'
+        ExclusiveStartApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+      description: <p/>
+    ListApplicationsResponse:
+      type: object
+      required:
+        - ApplicationSummaries
+        - HasMoreApplications
+      properties:
+        ApplicationSummaries:
+          $ref: '#/components/schemas/ApplicationSummaries'
+        HasMoreApplications:
+          $ref: '#/components/schemas/BooleanObject'
+      description: <p/>
+    LogStreamARN:
+      type: string
+      pattern: 'arn:.*'
+      minLength: 1
+      maxLength: 2048
+    MappingParameters:
+      type: object
+      properties:
+        JSONMappingParameters:
+          $ref: '#/components/schemas/JSONMappingParameters'
+        CSVMappingParameters:
+          $ref: '#/components/schemas/CSVMappingParameters'
+      description: 'When configuring application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.'
+    Output:
+      type: object
+      required:
+        - Name
+        - DestinationSchema
+      properties:
+        Name:
+          $ref: '#/components/schemas/InAppStreamName'
+        KinesisStreamsOutput:
+          $ref: '#/components/schemas/KinesisStreamsOutput'
+        KinesisFirehoseOutput:
+          $ref: '#/components/schemas/KinesisFirehoseOutput'
+        DestinationSchema:
+          $ref: '#/components/schemas/DestinationSchema'
+      description: '<p> Describes application output configuration in which you identify an in-application stream and a destination where you want the in-application stream data to be written. The destination can be an Amazon Kinesis stream or an Amazon Kinesis Firehose delivery stream. </p> <p/> <p>For limits on how many destinations an application can write and other limitations, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html">Limits</a>. </p>'
+    OutputDescription:
+      type: object
+      properties:
+        OutputId:
+          $ref: '#/components/schemas/Id'
+        Name:
+          $ref: '#/components/schemas/InAppStreamName'
+        KinesisStreamsOutputDescription:
+          $ref: '#/components/schemas/KinesisStreamsOutputDescription'
+        KinesisFirehoseOutputDescription:
+          $ref: '#/components/schemas/KinesisFirehoseOutputDescription'
+        DestinationSchema:
+          $ref: '#/components/schemas/DestinationSchema'
+      description: 'Describes the application output configuration, which includes the in-application stream name and the destination where the stream data is written. The destination can be an Amazon Kinesis stream or an Amazon Kinesis Firehose delivery stream. '
+    OutputDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/OutputDescription'
+    OutputUpdate:
+      type: object
+      required:
+        - OutputId
+      properties:
+        OutputId:
+          $ref: '#/components/schemas/Id'
+        NameUpdate:
+          $ref: '#/components/schemas/InAppStreamName'
+        KinesisStreamsOutputUpdate:
+          $ref: '#/components/schemas/KinesisStreamsOutputUpdate'
+        KinesisFirehoseOutputUpdate:
+          $ref: '#/components/schemas/KinesisFirehoseOutputUpdate'
+        DestinationSchemaUpdate:
+          $ref: '#/components/schemas/DestinationSchema'
+      description: ' Describes updates to the output configuration identified by the <code>OutputId</code>. '
+    OutputUpdates:
+      type: array
+      items:
+        $ref: '#/components/schemas/OutputUpdate'
+    Outputs:
+      type: array
+      items:
+        $ref: '#/components/schemas/Output'
+    ParsedInputRecord:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParsedInputRecordField'
+    ParsedInputRecordField:
+      type: string
+    ParsedInputRecords:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParsedInputRecord'
+    RawInputRecord:
+      type: string
+    RawInputRecords:
+      type: array
+      items:
+        $ref: '#/components/schemas/RawInputRecord'
+    RecordColumn:
+      type: object
+      required:
+        - Name
+        - SqlType
+      properties:
+        Name:
+          $ref: '#/components/schemas/RecordColumnName'
+        Mapping:
+          $ref: '#/components/schemas/RecordColumnMapping'
+        SqlType:
+          $ref: '#/components/schemas/RecordColumnSqlType'
+      description: <p>Describes the mapping of each data element in the streaming source to the corresponding column in the in-application stream.</p> <p>Also used to describe the format of the reference data source.</p>
+    RecordColumnDelimiter:
+      type: string
+      minLength: 1
+    RecordColumnMapping:
+      type: string
+    RecordColumnName:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9_]+'
+    RecordColumnSqlType:
+      type: string
+    RecordColumns:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecordColumn'
+      minItems: 1
+      maxItems: 1000
+    RecordEncoding:
+      type: string
+      pattern: UTF-8
+    RecordFormat:
+      type: object
+      required:
+        - RecordFormatType
+      properties:
+        RecordFormatType:
+          $ref: '#/components/schemas/RecordFormatType'
+        MappingParameters:
+          $ref: '#/components/schemas/MappingParameters'
+      description: ' Describes the record format and relevant mapping information that should be applied to schematize the records on the stream. '
+    RecordFormatType:
+      type: string
+      enum:
+        - JSON
+        - CSV
+    RecordRowDelimiter:
+      type: string
+      minLength: 1
+    RecordRowPath:
+      type: string
+    ReferenceDataSource:
+      type: object
+      required:
+        - TableName
+        - ReferenceSchema
+      properties:
+        TableName:
+          $ref: '#/components/schemas/InAppTableName'
+        S3ReferenceDataSource:
+          $ref: '#/components/schemas/S3ReferenceDataSource'
+        ReferenceSchema:
+          $ref: '#/components/schemas/SourceSchema'
+      description: 'Describes the reference data source by providing the source information (S3 bucket name and object key name), the resulting in-application table name that is created, and the necessary schema to map the data elements in the Amazon S3 object to the in-application table.'
+    ReferenceDataSourceDescription:
+      type: object
+      required:
+        - ReferenceId
+        - TableName
+        - S3ReferenceDataSourceDescription
+      properties:
+        ReferenceId:
+          $ref: '#/components/schemas/Id'
+        TableName:
+          $ref: '#/components/schemas/InAppTableName'
+        S3ReferenceDataSourceDescription:
+          $ref: '#/components/schemas/S3ReferenceDataSourceDescription'
+        ReferenceSchema:
+          $ref: '#/components/schemas/SourceSchema'
+      description: Describes the reference data source configured for an application.
+    ReferenceDataSourceDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceDataSourceDescription'
+    ReferenceDataSourceUpdate:
+      type: object
+      required:
+        - ReferenceId
+      properties:
+        ReferenceId:
+          $ref: '#/components/schemas/Id'
+        TableNameUpdate:
+          $ref: '#/components/schemas/InAppTableName'
+        S3ReferenceDataSourceUpdate:
+          $ref: '#/components/schemas/S3ReferenceDataSourceUpdate'
+        ReferenceSchemaUpdate:
+          $ref: '#/components/schemas/SourceSchema'
+      description: 'When you update a reference data source configuration for an application, this object provides all the updated values (such as the source bucket name and object key name), the in-application table name that is created, and updated mapping information that maps the data in the Amazon S3 object to the in-application reference table that is created.'
+    ReferenceDataSourceUpdates:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceDataSourceUpdate'
+    ResourceARN:
+      type: string
+      pattern: 'arn:[a-zA-Z0-9\-]+:[a-zA-Z0-9\-]+:[a-zA-Z0-9\-]*:\d{12}:[a-zA-Z_0-9+=,.@\-_/:]+'
+      minLength: 1
+      maxLength: 2048
+    ResourceInUseException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: Application is not available for this operation.
+    ResourceNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: Specified application can't be found.
+    ResourceProvisionedThroughputExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Discovery failed to get a record from the streaming source because of the Amazon Kinesis Streams ProvisionedThroughputExceededException. For more information, see <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetRecords.html">GetRecords</a> in the Amazon Kinesis Streams API Reference.'
+    RoleARN:
+      type: string
+      pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+      minLength: 1
+      maxLength: 2048
+    S3ReferenceDataSource:
+      type: object
+      required:
+        - BucketARN
+        - FileKey
+        - ReferenceRoleARN
+      properties:
+        BucketARN:
+          $ref: '#/components/schemas/BucketARN'
+        FileKey:
+          $ref: '#/components/schemas/FileKey'
+        ReferenceRoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: '<p>Identifies the S3 bucket and object that contains the reference data. Also identifies the IAM role Amazon Kinesis Analytics can assume to read this object on your behalf.</p> <p>An Amazon Kinesis Analytics application loads reference data only once. If the data changes, you call the <a>UpdateApplication</a> operation to trigger reloading of data into your application.</p>'
+    S3ReferenceDataSourceDescription:
+      type: object
+      required:
+        - BucketARN
+        - FileKey
+        - ReferenceRoleARN
+      properties:
+        BucketARN:
+          $ref: '#/components/schemas/BucketARN'
+        FileKey:
+          $ref: '#/components/schemas/FileKey'
+        ReferenceRoleARN:
+          $ref: '#/components/schemas/RoleARN'
+      description: Provides the bucket name and object key name that stores the reference data.
+    S3ReferenceDataSourceUpdate:
+      type: object
+      properties:
+        BucketARNUpdate:
+          $ref: '#/components/schemas/BucketARN'
+        FileKeyUpdate:
+          $ref: '#/components/schemas/FileKey'
+        ReferenceRoleARNUpdate:
+          $ref: '#/components/schemas/RoleARN'
+      description: 'Describes the S3 bucket name, object key name, and IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object on your behalf and populate the in-application reference table.'
+    SourceSchema:
+      type: object
+      required:
+        - RecordFormat
+        - RecordColumns
+      properties:
+        RecordFormat:
+          $ref: '#/components/schemas/RecordFormat'
+        RecordEncoding:
+          $ref: '#/components/schemas/RecordEncoding'
+        RecordColumns:
+          $ref: '#/components/schemas/RecordColumns'
+      description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.'
+    StartApplicationRequest:
+      type: object
+      required:
+        - ApplicationName
+        - InputConfigurations
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        InputConfigurations:
+          $ref: '#/components/schemas/InputConfigurations'
+      description: <p/>
+    StartApplicationResponse:
+      type: object
+      properties: {}
+      description: <p/>
+    StopApplicationRequest:
+      type: object
+      required:
+        - ApplicationName
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+      description: <p/>
+    StopApplicationResponse:
+      type: object
+      properties: {}
+      description: <p/>
+    Timestamp:
+      type: string
+      format: date-time
+    UnableToDetectSchemaException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+        RawInputRecords:
+          $ref: '#/components/schemas/RawInputRecords'
+      description: 'Data format is not valid, Amazon Kinesis Analytics is not able to detect schema for the given streaming source.'
+    UpdateApplicationRequest:
+      type: object
+      required:
+        - ApplicationName
+        - CurrentApplicationVersionId
+        - ApplicationUpdate
+      properties:
+        ApplicationName:
+          $ref: '#/components/schemas/ApplicationName'
+        CurrentApplicationVersionId:
+          $ref: '#/components/schemas/ApplicationVersionId'
+        ApplicationUpdate:
+          $ref: '#/components/schemas/ApplicationUpdate'
+    UpdateApplicationResponse:
+      type: object
+      properties: {}
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

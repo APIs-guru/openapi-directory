@@ -1,0 +1,2313 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://cloudsearch.amazonaws.com/'
+info:
+  version: '2013-01-01'
+  x-release: v4
+  title: Amazon CloudSearch
+  description: '<fullname>Amazon CloudSearch Configuration Service</fullname> <p>You use the Amazon CloudSearch configuration service to create, configure, and manage search domains. Configuration service requests are submitted using the AWS Query protocol. AWS Query requests are HTTP or HTTPS requests submitted via HTTP GET or POST with a query parameter named Action.</p> <p>The endpoint for configuration service requests is region-specific: cloudsearch.<i>region</i>.amazonaws.com. For example, cloudsearch.us-east-1.amazonaws.com. For a current list of supported regions and endpoints, see <a href="http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region" target="_blank">Regions and Endpoints</a>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: cloudsearch
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudsearch-2013-01-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/cloudsearch/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: BuildSuggesters
+      description: 'Indexes the search suggestions. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html#configuring-suggesters">Configuring Suggesters</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BuildSuggestersResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildSuggestersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateDomain':
+    post:
+      operationId: CreateDomain
+      description: 'Creates a new search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html" target="_blank">Creating a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateDomainResponse'
+        '409':
+          description: LimitExceededException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DefineAnalysisScheme':
+    post:
+      operationId: DefineAnalysisScheme
+      description: 'Configures an analysis scheme that can be applied to a <code>text</code> or <code>text-array</code> field to define language-specific text processing options. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DefineAnalysisSchemeResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefineAnalysisSchemeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DefineExpression':
+    post:
+      operationId: DefineExpression
+      description: 'Configures an <code><a>Expression</a></code> for the search domain. Used to create new expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DefineExpressionResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefineExpressionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DefineIndexField':
+    post:
+      operationId: DefineIndexField
+      description: 'Configures an <code><a>IndexField</a></code> for the search domain. Used to create new fields and modify existing ones. You must specify the name of the domain you are configuring and an index field configuration. The index field configuration specifies a unique name, the index field type, and the options you want to configure for the field. The options you can specify depend on the <code><a>IndexFieldType</a></code>. If the field exists, the new configuration replaces the old one. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DefineIndexFieldResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefineIndexFieldRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DefineSuggester':
+    post:
+      operationId: DefineSuggester
+      description: 'Configures a suggester for a domain. A suggester enables you to display possible matches before users finish typing their queries. When you configure a suggester, you must specify the name of the text field you want to search for possible matches and a unique name for the suggester. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DefineSuggesterResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefineSuggesterRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteAnalysisScheme':
+    post:
+      operationId: DeleteAnalysisScheme
+      description: 'Deletes an analysis scheme. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteAnalysisSchemeResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAnalysisSchemeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDomain':
+    post:
+      operationId: DeleteDomain
+      description: 'Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html" target="_blank">Deleting a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteDomainResponse'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteExpression':
+    post:
+      operationId: DeleteExpression
+      description: 'Removes an <code><a>Expression</a></code> from the search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteExpressionResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteExpressionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteIndexField':
+    post:
+      operationId: DeleteIndexField
+      description: 'Removes an <code><a>IndexField</a></code> from the search domain. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteIndexFieldResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteIndexFieldRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSuggester':
+    post:
+      operationId: DeleteSuggester
+      description: 'Deletes a suggester. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteSuggesterResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSuggesterRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAnalysisSchemes':
+    post:
+      operationId: DescribeAnalysisSchemes
+      description: 'Gets the analysis schemes configured for a domain. An analysis scheme defines language-specific text processing options for a <code>text</code> field. Can be limited to specific analysis schemes by name. By default, shows all analysis schemes and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html" target="_blank">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeAnalysisSchemesResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAnalysisSchemesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAvailabilityOptions':
+    post:
+      operationId: DescribeAvailabilityOptions
+      description: 'Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeAvailabilityOptionsResponse'
+        '409':
+          description: DisabledOperationException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAvailabilityOptionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDomains':
+    post:
+      operationId: DescribeDomains
+      description: 'Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default. To get the number of searchable documents in a domain, use the console or submit a <code>matchall</code> request to your domain''s search endpoint: <code>q=matchall&amp;amp;q.parser=structured&amp;amp;size=0</code>. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html" target="_blank">Getting Information about a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeDomainsResponse'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDomainsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeExpressions':
+    post:
+      operationId: DescribeExpressions
+      description: 'Gets the expressions configured for the search domain. Can be limited to specific expressions by name. By default, shows all expressions and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeExpressionsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeExpressionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeIndexFields':
+    post:
+      operationId: DescribeIndexFields
+      description: 'Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. By default, shows all fields and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html" target="_blank">Getting Domain Information</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeIndexFieldsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeIndexFieldsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScalingParameters':
+    post:
+      operationId: DescribeScalingParameters
+      description: 'Gets the scaling parameters configured for a domain. A domain''s scaling parameters specify the desired search instance type and replication count. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html" target="_blank">Configuring Scaling Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeScalingParametersResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeScalingParametersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeServiceAccessPolicies':
+    post:
+      operationId: DescribeServiceAccessPolicies
+      description: 'Gets information about the access policies that control access to the domain''s document and search endpoints. By default, shows the configuration with any pending changes. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeServiceAccessPoliciesResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeServiceAccessPoliciesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSuggesters':
+    post:
+      operationId: DescribeSuggesters
+      description: 'Gets the suggesters configured for a domain. A suggester enables you to display possible matches before users finish typing their queries. Can be limited to specific suggesters by name. By default, shows all suggesters and includes any pending changes to the configuration. Set the <code>Deployed</code> option to <code>true</code> to show the active configuration and exclude pending changes. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html" target="_blank">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeSuggestersResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSuggestersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#IndexDocuments':
+    post:
+      operationId: IndexDocuments
+      description: Tells the search domain to start indexing its documents using the latest indexing options. This operation must be invoked to activate options whose <a>OptionStatus</a> is <code>RequiresIndexDocuments</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/IndexDocumentsResponse'
+        '409':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndexDocumentsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListDomainNames':
+    post:
+      operationId: ListDomainNames
+      description: Lists all search domains owned by an account.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListDomainNamesResponse'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateAvailabilityOptions':
+    post:
+      operationId: UpdateAvailabilityOptions
+      description: 'Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html" target="_blank">Configuring Availability Options</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UpdateAvailabilityOptionsResponse'
+        '409':
+          description: DisabledOperationException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAvailabilityOptionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateScalingParameters':
+    post:
+      operationId: UpdateScalingParameters
+      description: 'Configures scaling parameters for a domain. A domain''s scaling parameters specify the desired search instance type and replication count. Amazon CloudSearch will still automatically scale your domain based on the volume of data and traffic, but not below the desired instance type and replication count. If the Multi-AZ option is enabled, these values control the resources used per Availability Zone. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html" target="_blank">Configuring Scaling Options</a> in the <i>Amazon CloudSearch Developer Guide</i>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UpdateScalingParametersResponse'
+        '409':
+          description: InvalidTypeException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidTypeException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateScalingParametersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateServiceAccessPolicies':
+    post:
+      operationId: UpdateServiceAccessPolicies
+      description: 'Configures the access rules that control access to the domain''s document and search endpoints. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank"> Configuring Access for an Amazon CloudSearch Domain</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UpdateServiceAccessPoliciesResponse'
+        '409':
+          description: InvalidTypeException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidTypeException'
+        '480':
+          description: BaseException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '500':
+          description: InternalException
+          x-aws-exception: true
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateServiceAccessPoliciesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    APIVersion:
+      type: string
+      description: 'The Amazon CloudSearch API version for a domain: 2011-02-01 or 2013-01-01.'
+    ARN:
+      type: string
+      description: 'The Amazon Resource Name (ARN) of the search domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
+    AccessPoliciesStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/PolicyDocument'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: 'The configured access rules for the domain''s document and search endpoints, and the current status of those rules.'
+    AlgorithmicStemming:
+      type: string
+      enum:
+        - none
+        - minimal
+        - light
+        - full
+    AnalysisOptions:
+      type: object
+      properties:
+        Synonyms:
+          $ref: '#/components/schemas/String'
+        Stopwords:
+          $ref: '#/components/schemas/String'
+        StemmingDictionary:
+          $ref: '#/components/schemas/String'
+        JapaneseTokenizationDictionary:
+          $ref: '#/components/schemas/String'
+        AlgorithmicStemming:
+          $ref: '#/components/schemas/AlgorithmicStemming'
+      description: 'Synonyms, stopwords, and stemming options for an analysis scheme. Includes tokenization dictionary for Japanese.'
+    AnalysisScheme:
+      type: object
+      required:
+        - AnalysisSchemeName
+        - AnalysisSchemeLanguage
+      properties:
+        AnalysisSchemeName:
+          $ref: '#/components/schemas/StandardName'
+        AnalysisSchemeLanguage:
+          $ref: '#/components/schemas/AnalysisSchemeLanguage'
+        AnalysisOptions:
+          $ref: '#/components/schemas/AnalysisOptions'
+      description: 'Configuration information for an analysis scheme. Each analysis scheme has a unique name and specifies the language of the text to be processed. The following options can be configured for an analysis scheme: <code>Synonyms</code>, <code>Stopwords</code>, <code>StemmingDictionary</code>, <code>JapaneseTokenizationDictionary</code> and <code>AlgorithmicStemming</code>.'
+    AnalysisSchemeLanguage:
+      type: string
+      enum:
+        - ar
+        - bg
+        - ca
+        - cs
+        - da
+        - de
+        - el
+        - en
+        - es
+        - eu
+        - fa
+        - fi
+        - fr
+        - ga
+        - gl
+        - he
+        - hi
+        - hu
+        - hy
+        - id
+        - it
+        - ja
+        - ko
+        - lv
+        - mul
+        - nl
+        - 'no'
+        - pt
+        - ro
+        - ru
+        - sv
+        - th
+        - tr
+        - zh-Hans
+        - zh-Hant
+      description: 'An <a href="http://tools.ietf.org/html/rfc4646" target="_blank">IETF RFC 4646</a> language code or <code>mul</code> for multiple languages.'
+    AnalysisSchemeStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/AnalysisScheme'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: The status and configuration of an <code>AnalysisScheme</code>.
+    AnalysisSchemeStatusList:
+      type: array
+      description: A list of the analysis schemes configured for a domain.
+      items:
+        $ref: '#/components/schemas/AnalysisSchemeStatus'
+    AvailabilityOptionsStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/MultiAZ'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: The status and configuration of the domain's availability options.
+    BaseException:
+      type: object
+      properties:
+        Code:
+          $ref: '#/components/schemas/ErrorCode'
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: An error occurred while processing the request.
+    Boolean:
+      type: boolean
+    BuildSuggestersRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+      description: Container for the parameters to the <code><a>BuildSuggester</a></code> operation. Specifies the name of the domain you want to update.
+    BuildSuggestersResponse:
+      type: object
+      properties:
+        FieldNames:
+          $ref: '#/components/schemas/FieldNameList'
+      description: The result of a <code>BuildSuggester</code> request. Contains a list of the fields used for suggestions.
+    CreateDomainRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+      description: Container for the parameters to the <code><a>CreateDomain</a></code> operation. Specifies a name for the new search domain.
+    CreateDomainResponse:
+      type: object
+      properties:
+        DomainStatus:
+          $ref: '#/components/schemas/DomainStatus'
+      description: The result of a <code>CreateDomainRequest</code>. Contains the status of a newly created domain.
+    DateArrayOptions:
+      type: object
+      properties:
+        DefaultValue:
+          $ref: '#/components/schemas/FieldValue'
+        SourceFields:
+          $ref: '#/components/schemas/FieldNameCommaList'
+        FacetEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SearchEnabled:
+          $ref: '#/components/schemas/Boolean'
+        ReturnEnabled:
+          $ref: '#/components/schemas/Boolean'
+      description: Options for a field that contains an array of dates. Present if <code>IndexFieldType</code> specifies the field is of type <code>date-array</code>. All options are enabled by default.
+    DateOptions:
+      type: object
+      properties:
+        DefaultValue:
+          $ref: '#/components/schemas/FieldValue'
+        SourceField:
+          $ref: '#/components/schemas/FieldName'
+        FacetEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SearchEnabled:
+          $ref: '#/components/schemas/Boolean'
+        ReturnEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SortEnabled:
+          $ref: '#/components/schemas/Boolean'
+      description: 'Options for a date field. Dates and times are specified in UTC (Coordinated Universal Time) according to IETF RFC3339: yyyy-mm-ddT00:00:00Z. Present if <code>IndexFieldType</code> specifies the field is of type <code>date</code>. All options are enabled by default.'
+    DefineAnalysisSchemeRequest:
+      type: object
+      required:
+        - DomainName
+        - AnalysisScheme
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        AnalysisScheme:
+          $ref: '#/components/schemas/AnalysisScheme'
+      description: Container for the parameters to the <code><a>DefineAnalysisScheme</a></code> operation. Specifies the name of the domain you want to update and the analysis scheme configuration.
+    DefineAnalysisSchemeResponse:
+      type: object
+      required:
+        - AnalysisScheme
+      properties:
+        AnalysisScheme:
+          $ref: '#/components/schemas/AnalysisSchemeStatus'
+      description: The result of a <code><a>DefineAnalysisScheme</a></code> request. Contains the status of the newly-configured analysis scheme.
+    DefineExpressionRequest:
+      type: object
+      required:
+        - DomainName
+        - Expression
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        Expression:
+          $ref: '#/components/schemas/Expression'
+      description: Container for the parameters to the <code><a>DefineExpression</a></code> operation. Specifies the name of the domain you want to update and the expression you want to configure.
+    DefineExpressionResponse:
+      type: object
+      required:
+        - Expression
+      properties:
+        Expression:
+          $ref: '#/components/schemas/ExpressionStatus'
+      description: The result of a <code>DefineExpression</code> request. Contains the status of the newly-configured expression.
+    DefineIndexFieldRequest:
+      type: object
+      required:
+        - DomainName
+        - IndexField
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        IndexField:
+          $ref: '#/components/schemas/IndexField'
+      description: Container for the parameters to the <code><a>DefineIndexField</a></code> operation. Specifies the name of the domain you want to update and the index field configuration.
+    DefineIndexFieldResponse:
+      type: object
+      required:
+        - IndexField
+      properties:
+        IndexField:
+          $ref: '#/components/schemas/IndexFieldStatus'
+      description: The result of a <code><a>DefineIndexField</a></code> request. Contains the status of the newly-configured index field.
+    DefineSuggesterRequest:
+      type: object
+      required:
+        - DomainName
+        - Suggester
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        Suggester:
+          $ref: '#/components/schemas/Suggester'
+      description: Container for the parameters to the <code><a>DefineSuggester</a></code> operation. Specifies the name of the domain you want to update and the suggester configuration.
+    DefineSuggesterResponse:
+      type: object
+      required:
+        - Suggester
+      properties:
+        Suggester:
+          $ref: '#/components/schemas/SuggesterStatus'
+      description: The result of a <code>DefineSuggester</code> request. Contains the status of the newly-configured suggester.
+    DeleteAnalysisSchemeRequest:
+      type: object
+      required:
+        - DomainName
+        - AnalysisSchemeName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        AnalysisSchemeName:
+          $ref: '#/components/schemas/StandardName'
+      description: 'Container for the parameters to the <code><a>DeleteAnalysisScheme</a></code> operation. Specifies the name of the domain you want to update and the analysis scheme you want to delete. '
+    DeleteAnalysisSchemeResponse:
+      type: object
+      required:
+        - AnalysisScheme
+      properties:
+        AnalysisScheme:
+          $ref: '#/components/schemas/AnalysisSchemeStatus'
+      description: The result of a <code>DeleteAnalysisScheme</code> request. Contains the status of the deleted analysis scheme.
+    DeleteDomainRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+      description: Container for the parameters to the <code><a>DeleteDomain</a></code> operation. Specifies the name of the domain you want to delete.
+    DeleteDomainResponse:
+      type: object
+      properties:
+        DomainStatus:
+          $ref: '#/components/schemas/DomainStatus'
+      description: 'The result of a <code>DeleteDomain</code> request. Contains the status of a newly deleted domain, or no status if the domain has already been completely deleted.'
+    DeleteExpressionRequest:
+      type: object
+      required:
+        - DomainName
+        - ExpressionName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        ExpressionName:
+          $ref: '#/components/schemas/StandardName'
+      description: Container for the parameters to the <code><a>DeleteExpression</a></code> operation. Specifies the name of the domain you want to update and the name of the expression you want to delete.
+    DeleteExpressionResponse:
+      type: object
+      required:
+        - Expression
+      properties:
+        Expression:
+          $ref: '#/components/schemas/ExpressionStatus'
+      description: The result of a <code><a>DeleteExpression</a></code> request. Specifies the expression being deleted.
+    DeleteIndexFieldRequest:
+      type: object
+      required:
+        - DomainName
+        - IndexFieldName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        IndexFieldName:
+          $ref: '#/components/schemas/DynamicFieldName'
+      description: Container for the parameters to the <code><a>DeleteIndexField</a></code> operation. Specifies the name of the domain you want to update and the name of the index field you want to delete.
+    DeleteIndexFieldResponse:
+      type: object
+      required:
+        - IndexField
+      properties:
+        IndexField:
+          $ref: '#/components/schemas/IndexFieldStatus'
+      description: The result of a <code><a>DeleteIndexField</a></code> request.
+    DeleteSuggesterRequest:
+      type: object
+      required:
+        - DomainName
+        - SuggesterName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        SuggesterName:
+          $ref: '#/components/schemas/StandardName'
+      description: Container for the parameters to the <code><a>DeleteSuggester</a></code> operation. Specifies the name of the domain you want to update and name of the suggester you want to delete.
+    DeleteSuggesterResponse:
+      type: object
+      required:
+        - Suggester
+      properties:
+        Suggester:
+          $ref: '#/components/schemas/SuggesterStatus'
+      description: The result of a <code>DeleteSuggester</code> request. Contains the status of the deleted suggester.
+    DescribeAnalysisSchemesRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        AnalysisSchemeNames:
+          $ref: '#/components/schemas/StandardNameList'
+        Deployed:
+          $ref: '#/components/schemas/Boolean'
+      description: 'Container for the parameters to the <code><a>DescribeAnalysisSchemes</a></code> operation. Specifies the name of the domain you want to describe. To limit the response to particular analysis schemes, specify the names of the analysis schemes you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>. '
+    DescribeAnalysisSchemesResponse:
+      type: object
+      required:
+        - AnalysisSchemes
+      properties:
+        AnalysisSchemes:
+          $ref: '#/components/schemas/AnalysisSchemeStatusList'
+      description: The result of a <code>DescribeAnalysisSchemes</code> request. Contains the analysis schemes configured for the domain specified in the request.
+    DescribeAvailabilityOptionsRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        Deployed:
+          $ref: '#/components/schemas/Boolean'
+      description: 'Container for the parameters to the <code><a>DescribeAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the Deployed option to <code>true</code>.'
+    DescribeAvailabilityOptionsResponse:
+      type: object
+      properties:
+        AvailabilityOptions:
+          $ref: '#/components/schemas/AvailabilityOptionsStatus'
+      description: 'The result of a <code>DescribeAvailabilityOptions</code> request. Indicates whether or not the Multi-AZ option is enabled for the domain specified in the request. '
+    DescribeDomainsRequest:
+      type: object
+      properties:
+        DomainNames:
+          $ref: '#/components/schemas/DomainNameList'
+      description: 'Container for the parameters to the <code><a>DescribeDomains</a></code> operation. By default shows the status of all domains. To restrict the response to particular domains, specify the names of the domains you want to describe.'
+    DescribeDomainsResponse:
+      type: object
+      required:
+        - DomainStatusList
+      properties:
+        DomainStatusList:
+          $ref: '#/components/schemas/DomainStatusList'
+      description: The result of a <code>DescribeDomains</code> request. Contains the status of the domains specified in the request or all domains owned by the account.
+    DescribeExpressionsRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        ExpressionNames:
+          $ref: '#/components/schemas/StandardNameList'
+        Deployed:
+          $ref: '#/components/schemas/Boolean'
+      description: 'Container for the parameters to the <code><a>DescribeDomains</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular expressions, specify the names of the expressions you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
+    DescribeExpressionsResponse:
+      type: object
+      required:
+        - Expressions
+      properties:
+        Expressions:
+          $ref: '#/components/schemas/ExpressionStatusList'
+      description: The result of a <code>DescribeExpressions</code> request. Contains the expressions configured for the domain specified in the request.
+    DescribeIndexFieldsRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        FieldNames:
+          $ref: '#/components/schemas/DynamicFieldNameList'
+        Deployed:
+          $ref: '#/components/schemas/Boolean'
+      description: 'Container for the parameters to the <code><a>DescribeIndexFields</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular index fields, specify the names of the index fields you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
+    DescribeIndexFieldsResponse:
+      type: object
+      required:
+        - IndexFields
+      properties:
+        IndexFields:
+          $ref: '#/components/schemas/IndexFieldStatusList'
+      description: The result of a <code>DescribeIndexFields</code> request. Contains the index fields configured for the domain specified in the request.
+    DescribeScalingParametersRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+      description: 'Container for the parameters to the <code><a>DescribeScalingParameters</a></code> operation. Specifies the name of the domain you want to describe. '
+    DescribeScalingParametersResponse:
+      type: object
+      required:
+        - ScalingParameters
+      properties:
+        ScalingParameters:
+          $ref: '#/components/schemas/ScalingParametersStatus'
+      description: The result of a <code>DescribeScalingParameters</code> request. Contains the scaling parameters configured for the domain specified in the request.
+    DescribeServiceAccessPoliciesRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        Deployed:
+          $ref: '#/components/schemas/Boolean'
+      description: 'Container for the parameters to the <code><a>DescribeServiceAccessPolicies</a></code> operation. Specifies the name of the domain you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
+    DescribeServiceAccessPoliciesResponse:
+      type: object
+      required:
+        - AccessPolicies
+      properties:
+        AccessPolicies:
+          $ref: '#/components/schemas/AccessPoliciesStatus'
+      description: The result of a <code>DescribeServiceAccessPolicies</code> request.
+    DescribeSuggestersRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        SuggesterNames:
+          $ref: '#/components/schemas/StandardNameList'
+        Deployed:
+          $ref: '#/components/schemas/Boolean'
+      description: 'Container for the parameters to the <code><a>DescribeSuggester</a></code> operation. Specifies the name of the domain you want to describe. To restrict the response to particular suggesters, specify the names of the suggesters you want to describe. To show the active configuration and exclude any pending changes, set the <code>Deployed</code> option to <code>true</code>.'
+    DescribeSuggestersResponse:
+      type: object
+      required:
+        - Suggesters
+      properties:
+        Suggesters:
+          $ref: '#/components/schemas/SuggesterStatusList'
+      description: The result of a <code>DescribeSuggesters</code> request.
+    DisabledOperationException:
+      type: object
+      properties: {}
+      description: The request was rejected because it attempted an operation which is not enabled.
+    DocumentSuggesterOptions:
+      type: object
+      required:
+        - SourceField
+      properties:
+        SourceField:
+          $ref: '#/components/schemas/FieldName'
+        FuzzyMatching:
+          $ref: '#/components/schemas/SuggesterFuzzyMatching'
+        SortExpression:
+          $ref: '#/components/schemas/String'
+      description: Options for a search suggester.
+    DomainId:
+      type: string
+      description: An internally generated unique identifier for a domain.
+      minLength: 1
+      maxLength: 64
+    DomainName:
+      type: string
+      pattern: '[a-z][a-z0-9\-]+'
+      description: 'A string that represents the name of a domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+      minLength: 3
+      maxLength: 28
+    DomainNameList:
+      type: array
+      description: A list of domain names.
+      items:
+        $ref: '#/components/schemas/DomainName'
+    DomainNameMap:
+      type: array
+      description: A collection of domain names.
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/DomainName'
+          value:
+            $ref: '#/components/schemas/APIVersion'
+    DomainStatus:
+      type: object
+      required:
+        - DomainId
+        - DomainName
+        - RequiresIndexDocuments
+      properties:
+        DomainId:
+          $ref: '#/components/schemas/DomainId'
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        ARN:
+          $ref: '#/components/schemas/ARN'
+        Created:
+          $ref: '#/components/schemas/Boolean'
+        Deleted:
+          $ref: '#/components/schemas/Boolean'
+        DocService:
+          $ref: '#/components/schemas/ServiceEndpoint'
+        SearchService:
+          $ref: '#/components/schemas/ServiceEndpoint'
+        RequiresIndexDocuments:
+          $ref: '#/components/schemas/Boolean'
+        Processing:
+          $ref: '#/components/schemas/Boolean'
+        SearchInstanceType:
+          $ref: '#/components/schemas/SearchInstanceType'
+        SearchPartitionCount:
+          $ref: '#/components/schemas/PartitionCount'
+        SearchInstanceCount:
+          $ref: '#/components/schemas/InstanceCount'
+        Limits:
+          $ref: '#/components/schemas/Limits'
+      description: The current status of the search domain.
+    DomainStatusList:
+      type: array
+      description: A list that contains the status of each requested domain.
+      items:
+        $ref: '#/components/schemas/DomainStatus'
+    Double:
+      type: number
+      format: double
+    DoubleArrayOptions:
+      type: object
+      properties:
+        DefaultValue:
+          $ref: '#/components/schemas/Double'
+        SourceFields:
+          $ref: '#/components/schemas/FieldNameCommaList'
+        FacetEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SearchEnabled:
+          $ref: '#/components/schemas/Boolean'
+        ReturnEnabled:
+          $ref: '#/components/schemas/Boolean'
+      description: Options for a field that contains an array of double-precision 64-bit floating point values. Present if <code>IndexFieldType</code> specifies the field is of type <code>double-array</code>. All options are enabled by default.
+    DoubleOptions:
+      type: object
+      properties:
+        DefaultValue:
+          $ref: '#/components/schemas/Double'
+        SourceField:
+          $ref: '#/components/schemas/FieldName'
+        FacetEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SearchEnabled:
+          $ref: '#/components/schemas/Boolean'
+        ReturnEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SortEnabled:
+          $ref: '#/components/schemas/Boolean'
+      description: Options for a double-precision 64-bit floating point field. Present if <code>IndexFieldType</code> specifies the field is of type <code>double</code>. All options are enabled by default.
+    DynamicFieldName:
+      type: string
+      pattern: '([a-z][a-z0-9_]*\*?|\*[a-z0-9_]*)'
+      minLength: 1
+      maxLength: 64
+    DynamicFieldNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DynamicFieldName'
+    ErrorCode:
+      type: string
+      description: A machine-parsable string error or warning code.
+    ErrorMessage:
+      type: string
+      description: A human-readable string error or warning message.
+    Expression:
+      type: object
+      required:
+        - ExpressionName
+        - ExpressionValue
+      properties:
+        ExpressionName:
+          $ref: '#/components/schemas/StandardName'
+        ExpressionValue:
+          $ref: '#/components/schemas/ExpressionValue'
+      description: 'A named expression that can be evaluated at search time. Can be used to sort the search results, define other expressions, or return computed information in the search results. '
+    ExpressionStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/Expression'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: The value of an <code>Expression</code> and its current status.
+    ExpressionStatusList:
+      type: array
+      description: Contains the status of multiple expressions.
+      items:
+        $ref: '#/components/schemas/ExpressionStatus'
+    ExpressionValue:
+      type: string
+      description: 'The expression to evaluate for sorting while processing a search request. The <code>Expression</code> syntax is based on JavaScript expressions. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html" target="_blank">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+      minLength: 1
+      maxLength: 10240
+    FieldName:
+      type: string
+      pattern: '[a-z][a-z0-9_]*'
+      description: '<p>A string that represents the name of an index field. CloudSearch supports regular index fields as well as dynamic fields. A dynamic field''s name defines a pattern that begins or ends with a wildcard. Any document fields that don''t map to a regular index field but do match a dynamic field''s pattern are configured with the dynamic field''s indexing options. </p> <p>Regular field names begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore). Dynamic field names must begin or end with a wildcard (*). The wildcard can also be the only character in a dynamic field name. Multiple wildcards, and wildcards embedded within a string are not supported. </p> <p>The name <code>score</code> is reserved and cannot be used as a field name. To reference a document''s ID, you can use the name <code>_id</code>. </p>'
+      minLength: 1
+      maxLength: 64
+    FieldNameCommaList:
+      type: string
+      pattern: '\s*[a-z*][a-z0-9_]*\*?\s*(,\s*[a-z*][a-z0-9_]*\*?\s*)*'
+    FieldNameList:
+      type: array
+      description: A list of field names.
+      items:
+        $ref: '#/components/schemas/FieldName'
+    FieldValue:
+      type: string
+      description: The value of a field attribute.
+      minLength: 0
+      maxLength: 1024
+    IndexDocumentsRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+      description: Container for the parameters to the <code><a>IndexDocuments</a></code> operation. Specifies the name of the domain you want to re-index.
+    IndexDocumentsResponse:
+      type: object
+      properties:
+        FieldNames:
+          $ref: '#/components/schemas/FieldNameList'
+      description: 'The result of an <code>IndexDocuments</code> request. Contains the status of the indexing operation, including the fields being indexed.'
+    IndexField:
+      type: object
+      required:
+        - IndexFieldName
+        - IndexFieldType
+      properties:
+        IndexFieldName:
+          $ref: '#/components/schemas/DynamicFieldName'
+        IndexFieldType:
+          $ref: '#/components/schemas/IndexFieldType'
+        IntOptions:
+          $ref: '#/components/schemas/IntOptions'
+        DoubleOptions:
+          $ref: '#/components/schemas/DoubleOptions'
+        LiteralOptions:
+          $ref: '#/components/schemas/LiteralOptions'
+        TextOptions:
+          $ref: '#/components/schemas/TextOptions'
+        DateOptions:
+          $ref: '#/components/schemas/DateOptions'
+        LatLonOptions:
+          $ref: '#/components/schemas/LatLonOptions'
+        IntArrayOptions:
+          $ref: '#/components/schemas/IntArrayOptions'
+        DoubleArrayOptions:
+          $ref: '#/components/schemas/DoubleArrayOptions'
+        LiteralArrayOptions:
+          $ref: '#/components/schemas/LiteralArrayOptions'
+        TextArrayOptions:
+          $ref: '#/components/schemas/TextArrayOptions'
+        DateArrayOptions:
+          $ref: '#/components/schemas/DateArrayOptions'
+      description: 'Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.'
+    IndexFieldStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/IndexField'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: The value of an <code>IndexField</code> and its current status.
+    IndexFieldStatusList:
+      type: array
+      description: Contains the status of multiple index fields.
+      items:
+        $ref: '#/components/schemas/IndexFieldStatus'
+    IndexFieldType:
+      type: string
+      enum:
+        - int
+        - double
+        - literal
+        - text
+        - date
+        - latlon
+        - int-array
+        - double-array
+        - literal-array
+        - text-array
+        - date-array
+      description: 'The type of field. The valid options for a field depend on the field type. For more information about the supported field types, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html" target="_blank">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>.'
+    InstanceCount:
+      type: integer
+      minimum: 1
+    IntArrayOptions:
+      type: object
+      properties:
+        DefaultValue:
+          $ref: '#/components/schemas/Long'
+        SourceFields:
+          $ref: '#/components/schemas/FieldNameCommaList'
+        FacetEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SearchEnabled:
+          $ref: '#/components/schemas/Boolean'
+        ReturnEnabled:
+          $ref: '#/components/schemas/Boolean'
+      description: Options for a field that contains an array of 64-bit signed integers. Present if <code>IndexFieldType</code> specifies the field is of type <code>int-array</code>. All options are enabled by default.
+    IntOptions:
+      type: object
+      properties:
+        DefaultValue:
+          $ref: '#/components/schemas/Long'
+        SourceField:
+          $ref: '#/components/schemas/FieldName'
+        FacetEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SearchEnabled:
+          $ref: '#/components/schemas/Boolean'
+        ReturnEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SortEnabled:
+          $ref: '#/components/schemas/Boolean'
+      description: Options for a 64-bit signed integer field. Present if <code>IndexFieldType</code> specifies the field is of type <code>int</code>. All options are enabled by default.
+    InternalException:
+      type: object
+      properties: {}
+      description: 'An internal error occurred while processing the request. If this problem persists, report an issue from the <a href="http://status.aws.amazon.com/" target="_blank">Service Health Dashboard</a>.'
+    InvalidTypeException:
+      type: object
+      properties: {}
+      description: The request was rejected because it specified an invalid type definition.
+    LatLonOptions:
+      type: object
+      properties:
+        DefaultValue:
+          $ref: '#/components/schemas/FieldValue'
+        SourceField:
+          $ref: '#/components/schemas/FieldName'
+        FacetEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SearchEnabled:
+          $ref: '#/components/schemas/Boolean'
+        ReturnEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SortEnabled:
+          $ref: '#/components/schemas/Boolean'
+      description: Options for a latlon field. A latlon field contains a location stored as a latitude and longitude value pair. Present if <code>IndexFieldType</code> specifies the field is of type <code>latlon</code>. All options are enabled by default.
+    LimitExceededException:
+      type: object
+      properties: {}
+      description: The request was rejected because a resource limit has already been met.
+    Limits:
+      type: object
+      required:
+        - MaximumReplicationCount
+        - MaximumPartitionCount
+      properties:
+        MaximumReplicationCount:
+          $ref: '#/components/schemas/MaximumReplicationCount'
+        MaximumPartitionCount:
+          $ref: '#/components/schemas/MaximumPartitionCount'
+    ListDomainNamesResponse:
+      type: object
+      properties:
+        DomainNames:
+          $ref: '#/components/schemas/DomainNameMap'
+      description: The result of a <code>ListDomainNames</code> request. Contains a list of the domains owned by an account.
+    LiteralArrayOptions:
+      type: object
+      properties:
+        DefaultValue:
+          $ref: '#/components/schemas/FieldValue'
+        SourceFields:
+          $ref: '#/components/schemas/FieldNameCommaList'
+        FacetEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SearchEnabled:
+          $ref: '#/components/schemas/Boolean'
+        ReturnEnabled:
+          $ref: '#/components/schemas/Boolean'
+      description: Options for a field that contains an array of literal strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal-array</code>. All options are enabled by default.
+    LiteralOptions:
+      type: object
+      properties:
+        DefaultValue:
+          $ref: '#/components/schemas/FieldValue'
+        SourceField:
+          $ref: '#/components/schemas/FieldName'
+        FacetEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SearchEnabled:
+          $ref: '#/components/schemas/Boolean'
+        ReturnEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SortEnabled:
+          $ref: '#/components/schemas/Boolean'
+      description: Options for literal field. Present if <code>IndexFieldType</code> specifies the field is of type <code>literal</code>. All options are enabled by default.
+    Long:
+      type: integer
+    MaximumPartitionCount:
+      type: integer
+      minimum: 1
+    MaximumReplicationCount:
+      type: integer
+      minimum: 1
+    MultiAZ:
+      type: boolean
+    OptionState:
+      type: string
+      enum:
+        - RequiresIndexDocuments
+        - Processing
+        - Active
+        - FailedToValidate
+      description: '<p>The state of processing a change to an option. One of:</p> <ul> <li>RequiresIndexDocuments: The option''s latest value will not be deployed until <a>IndexDocuments</a> has been called and indexing is complete.</li> <li>Processing: The option''s latest value is in the process of being activated.</li> <li>Active: The option''s latest value is fully deployed. </li> <li>FailedToValidate: The option value is not compatible with the domain''s data and cannot be used to index the data. You must either modify the option value or update or remove the incompatible documents.</li> </ul>'
+    OptionStatus:
+      type: object
+      required:
+        - CreationDate
+        - UpdateDate
+        - State
+      properties:
+        CreationDate:
+          $ref: '#/components/schemas/UpdateTimestamp'
+        UpdateDate:
+          $ref: '#/components/schemas/UpdateTimestamp'
+        UpdateVersion:
+          $ref: '#/components/schemas/UIntValue'
+        State:
+          $ref: '#/components/schemas/OptionState'
+        PendingDeletion:
+          $ref: '#/components/schemas/Boolean'
+      description: The status of domain configuration option.
+    PartitionCount:
+      type: integer
+      description: The number of partitions used to hold the domain's index.
+      minimum: 1
+    PartitionInstanceType:
+      type: string
+      enum:
+        - search.m1.small
+        - search.m1.large
+        - search.m2.xlarge
+        - search.m2.2xlarge
+        - search.m3.medium
+        - search.m3.large
+        - search.m3.xlarge
+        - search.m3.2xlarge
+      description: The instance type (such as <code>search.m1.small</code>) on which an index partition is hosted.
+    PolicyDocument:
+      type: string
+      description: 'Access rules for a domain''s document or search service endpoints. For more information, see <a href="http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html" target="_blank">Configuring Access for a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. The maximum size of a policy document is 100 KB.'
+    ResourceNotFoundException:
+      type: object
+      properties: {}
+      description: The request was rejected because it attempted to reference a resource that does not exist.
+    ScalingParameters:
+      type: object
+      properties:
+        DesiredInstanceType:
+          $ref: '#/components/schemas/PartitionInstanceType'
+        DesiredReplicationCount:
+          $ref: '#/components/schemas/UIntValue'
+        DesiredPartitionCount:
+          $ref: '#/components/schemas/UIntValue'
+      description: The desired instance type and desired number of replicas of each index partition.
+    ScalingParametersStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/ScalingParameters'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: 'The status and configuration of a search domain''s scaling parameters. '
+    SearchInstanceType:
+      type: string
+      description: The instance type (such as <code>search.m1.small</code>) that is being used to process search requests.
+    ServiceEndpoint:
+      type: object
+      properties:
+        Endpoint:
+          $ref: '#/components/schemas/ServiceUrl'
+      description: The endpoint to which service requests can be submitted.
+    ServiceUrl:
+      type: string
+      description: 'The endpoint to which service requests can be submitted. For example, <code>search-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com</code> or <code>doc-imdb-movies-oopcnjfn6ugofer3zx5iadxxca.eu-west-1.cloudsearch.amazonaws.com</code>.'
+    StandardName:
+      type: string
+      pattern: '[a-z][a-z0-9_]*'
+      description: 'Names must begin with a letter and can contain the following characters: a-z (lowercase), 0-9, and _ (underscore).'
+      minLength: 1
+      maxLength: 64
+    StandardNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StandardName'
+    String:
+      type: string
+    Suggester:
+      type: object
+      required:
+        - SuggesterName
+        - DocumentSuggesterOptions
+      properties:
+        SuggesterName:
+          $ref: '#/components/schemas/StandardName'
+        DocumentSuggesterOptions:
+          $ref: '#/components/schemas/DocumentSuggesterOptions'
+      description: 'Configuration information for a search suggester. Each suggester has a unique name and specifies the text field you want to use for suggestions. The following options can be configured for a suggester: <code>FuzzyMatching</code>, <code>SortExpression</code>. '
+    SuggesterFuzzyMatching:
+      type: string
+      enum:
+        - none
+        - low
+        - high
+    SuggesterStatus:
+      type: object
+      required:
+        - Options
+        - Status
+      properties:
+        Options:
+          $ref: '#/components/schemas/Suggester'
+        Status:
+          $ref: '#/components/schemas/OptionStatus'
+      description: The value of a <code>Suggester</code> and its current status.
+    SuggesterStatusList:
+      type: array
+      description: Contains the status of multiple suggesters.
+      items:
+        $ref: '#/components/schemas/SuggesterStatus'
+    TextArrayOptions:
+      type: object
+      properties:
+        DefaultValue:
+          $ref: '#/components/schemas/FieldValue'
+        SourceFields:
+          $ref: '#/components/schemas/FieldNameCommaList'
+        ReturnEnabled:
+          $ref: '#/components/schemas/Boolean'
+        HighlightEnabled:
+          $ref: '#/components/schemas/Boolean'
+        AnalysisScheme:
+          $ref: '#/components/schemas/Word'
+      description: Options for a field that contains an array of text strings. Present if <code>IndexFieldType</code> specifies the field is of type <code>text-array</code>. A <code>text-array</code> field is always searchable. All options are enabled by default.
+    TextOptions:
+      type: object
+      properties:
+        DefaultValue:
+          $ref: '#/components/schemas/FieldValue'
+        SourceField:
+          $ref: '#/components/schemas/FieldName'
+        ReturnEnabled:
+          $ref: '#/components/schemas/Boolean'
+        SortEnabled:
+          $ref: '#/components/schemas/Boolean'
+        HighlightEnabled:
+          $ref: '#/components/schemas/Boolean'
+        AnalysisScheme:
+          $ref: '#/components/schemas/Word'
+      description: Options for text field. Present if <code>IndexFieldType</code> specifies the field is of type <code>text</code>. A <code>text</code> field is always searchable. All options are enabled by default.
+    UIntValue:
+      type: integer
+      minimum: 0
+    UpdateAvailabilityOptionsRequest:
+      type: object
+      required:
+        - DomainName
+        - MultiAZ
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        MultiAZ:
+          $ref: '#/components/schemas/Boolean'
+      description: Container for the parameters to the <code><a>UpdateAvailabilityOptions</a></code> operation. Specifies the name of the domain you want to update and the Multi-AZ availability option.
+    UpdateAvailabilityOptionsResponse:
+      type: object
+      properties:
+        AvailabilityOptions:
+          $ref: '#/components/schemas/AvailabilityOptionsStatus'
+      description: 'The result of a <code>UpdateAvailabilityOptions</code> request. Contains the status of the domain''s availability options. '
+    UpdateScalingParametersRequest:
+      type: object
+      required:
+        - DomainName
+        - ScalingParameters
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        ScalingParameters:
+          $ref: '#/components/schemas/ScalingParameters'
+      description: Container for the parameters to the <code><a>UpdateScalingParameters</a></code> operation. Specifies the name of the domain you want to update and the scaling parameters you want to configure.
+    UpdateScalingParametersResponse:
+      type: object
+      required:
+        - ScalingParameters
+      properties:
+        ScalingParameters:
+          $ref: '#/components/schemas/ScalingParametersStatus'
+      description: The result of a <code>UpdateScalingParameters</code> request. Contains the status of the newly-configured scaling parameters.
+    UpdateServiceAccessPoliciesRequest:
+      type: object
+      required:
+        - DomainName
+        - AccessPolicies
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        AccessPolicies:
+          $ref: '#/components/schemas/PolicyDocument'
+      description: Container for the parameters to the <code><a>UpdateServiceAccessPolicies</a></code> operation. Specifies the name of the domain you want to update and the access rules you want to configure.
+    UpdateServiceAccessPoliciesResponse:
+      type: object
+      required:
+        - AccessPolicies
+      properties:
+        AccessPolicies:
+          $ref: '#/components/schemas/AccessPoliciesStatus'
+      description: The result of an <code>UpdateServiceAccessPolicies</code> request. Contains the new access policies.
+    UpdateTimestamp:
+      type: string
+      format: date-time
+    Word:
+      type: string
+      pattern: '[\S]+'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

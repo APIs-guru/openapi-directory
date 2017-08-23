@@ -1,0 +1,5465 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://www.googleapis.com/admin/directory/v1'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'The Admin SDK Directory API lets you view and manage enterprise resources such as users and groups, administrative notifications, security features, and more.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Admin Directory
+  version: directory_v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - analytics
+  x-logo:
+    url: 'https://www.gstatic.com/images/icons/material/product/2x/admin_64dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://www.googleapis.com/discovery/v1/apis/admin/directory_v1/rest'
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: admin
+externalDocs:
+  url: 'https://developers.google.com/admin-sdk/directory/'
+tags:
+  - name: asps
+  - name: channels
+  - name: chromeosdevices
+  - name: customers
+  - name: domainAliases
+  - name: domains
+  - name: groups
+  - name: members
+  - name: mobiledevices
+  - name: notifications
+  - name: orgunits
+  - name: privileges
+  - name: resources
+  - name: roleAssignments
+  - name: roles
+  - name: schemas
+  - name: tokens
+  - name: users
+  - name: verificationCodes
+paths:
+  /admin/directory_v1/channels/stop:
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Stop watching resources through this channel
+      operationId: admin.channels.stop
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+      tags:
+        - channels
+      requestBody:
+        $ref: '#/components/requestBodies/Channel'
+  '/customer/{customerId}/devices/chromeos':
+    get:
+      description: Retrieve all Chrome OS Devices of a customer (paginated)
+      operationId: directory.chromeosdevices.list
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of results to return. Default is 100
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+        - description: Column to use for sorting results
+          in: query
+          name: orderBy
+          schema:
+            type: string
+            enum:
+              - annotatedLocation
+              - annotatedUser
+              - lastSync
+              - notes
+              - serialNumber
+              - status
+              - supportEndDate
+        - description: Full path of the organization unit or its Id
+          in: query
+          name: orgUnitPath
+          schema:
+            type: string
+        - description: Token to specify next page in the list
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Restrict information returned to a set of selected fields.
+          in: query
+          name: projection
+          schema:
+            type: string
+            enum:
+              - BASIC
+              - FULL
+        - description: 'Search string in the format given at http://support.google.com/chromeos/a/bin/answer.py?hl=en&answer=1698333'
+          in: query
+          name: query
+          schema:
+            type: string
+        - description: Whether to return results in ascending or descending order. Only of use when orderBy is also used
+          in: query
+          name: sortOrder
+          schema:
+            type: string
+            enum:
+              - ASCENDING
+              - DESCENDING
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ChromeOsDevices'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
+      tags:
+        - chromeosdevices
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/customer/{customerId}/devices/chromeos/{deviceId}':
+    get:
+      description: Retrieve Chrome OS Device
+      operationId: directory.chromeosdevices.get
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of Chrome OS Device
+          in: path
+          name: deviceId
+          required: true
+          schema:
+            type: string
+        - description: Restrict information returned to a set of selected fields.
+          in: query
+          name: projection
+          schema:
+            type: string
+            enum:
+              - BASIC
+              - FULL
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ChromeOsDevice'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly'
+      tags:
+        - chromeosdevices
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Update Chrome OS Device. This method supports patch semantics.
+      operationId: directory.chromeosdevices.patch
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of Chrome OS Device
+          in: path
+          name: deviceId
+          required: true
+          schema:
+            type: string
+        - description: Restrict information returned to a set of selected fields.
+          in: query
+          name: projection
+          schema:
+            type: string
+            enum:
+              - BASIC
+              - FULL
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ChromeOsDevice'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+      tags:
+        - chromeosdevices
+      requestBody:
+        $ref: '#/components/requestBodies/ChromeOsDevice'
+    put:
+      description: Update Chrome OS Device
+      operationId: directory.chromeosdevices.update
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of Chrome OS Device
+          in: path
+          name: deviceId
+          required: true
+          schema:
+            type: string
+        - description: Restrict information returned to a set of selected fields.
+          in: query
+          name: projection
+          schema:
+            type: string
+            enum:
+              - BASIC
+              - FULL
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ChromeOsDevice'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+      tags:
+        - chromeosdevices
+      requestBody:
+        $ref: '#/components/requestBodies/ChromeOsDevice'
+  '/customer/{customerId}/devices/chromeos/{resourceId}/action':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Take action on Chrome OS Device
+      operationId: directory.chromeosdevices.action
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of Chrome OS Device
+          in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.chromeos'
+      tags:
+        - chromeosdevices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChromeOsDeviceAction'
+  '/customer/{customerId}/devices/mobile':
+    get:
+      description: Retrieve all Mobile Devices of a customer (paginated)
+      operationId: directory.mobiledevices.list
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of results to return. Default is 100
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+        - description: Column to use for sorting results
+          in: query
+          name: orderBy
+          schema:
+            type: string
+            enum:
+              - deviceId
+              - email
+              - lastSync
+              - model
+              - name
+              - os
+              - status
+              - type
+        - description: Token to specify next page in the list
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Restrict information returned to a set of selected fields.
+          in: query
+          name: projection
+          schema:
+            type: string
+            enum:
+              - BASIC
+              - FULL
+        - description: 'Search string in the format given at http://support.google.com/a/bin/answer.py?hl=en&answer=1408863#search'
+          in: query
+          name: query
+          schema:
+            type: string
+        - description: Whether to return results in ascending or descending order. Only of use when orderBy is also used
+          in: query
+          name: sortOrder
+          schema:
+            type: string
+            enum:
+              - ASCENDING
+              - DESCENDING
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MobileDevices'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
+      tags:
+        - mobiledevices
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/customer/{customerId}/devices/mobile/{resourceId}':
+    delete:
+      description: Delete Mobile Device
+      operationId: directory.mobiledevices.delete
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of Mobile Device
+          in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+      tags:
+        - mobiledevices
+    get:
+      description: Retrieve Mobile Device
+      operationId: directory.mobiledevices.get
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Restrict information returned to a set of selected fields.
+          in: query
+          name: projection
+          schema:
+            type: string
+            enum:
+              - BASIC
+              - FULL
+        - description: Immutable ID of Mobile Device
+          in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MobileDevice'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly'
+      tags:
+        - mobiledevices
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/customer/{customerId}/devices/mobile/{resourceId}/action':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Take action on Mobile Device
+      operationId: directory.mobiledevices.action
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of Mobile Device
+          in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.device.mobile.action'
+      tags:
+        - mobiledevices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MobileDeviceAction'
+  '/customer/{customerId}/orgunits':
+    get:
+      description: Retrieve all Organization Units
+      operationId: directory.orgunits.list
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: the URL-encoded organization unit's path or its Id
+          in: query
+          name: orgUnitPath
+          schema:
+            type: string
+            default: ''
+        - description: Whether to return all sub-organizations or just immediate children
+          in: query
+          name: type
+          schema:
+            type: string
+            enum:
+              - all
+              - children
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrgUnits'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit.readonly'
+      tags:
+        - orgunits
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Add Organization Unit
+      operationId: directory.orgunits.insert
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrgUnit'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+      tags:
+        - orgunits
+      requestBody:
+        $ref: '#/components/requestBodies/OrgUnit'
+  '/customer/{customerId}/orgunits/{orgUnitPath}':
+    delete:
+      description: Remove Organization Unit
+      operationId: directory.orgunits.delete
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Full path of the organization unit or its Id
+          in: path
+          name: orgUnitPath
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+      tags:
+        - orgunits
+    get:
+      description: Retrieve Organization Unit
+      operationId: directory.orgunits.get
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Full path of the organization unit or its Id
+          in: path
+          name: orgUnitPath
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrgUnit'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit.readonly'
+      tags:
+        - orgunits
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Update Organization Unit. This method supports patch semantics.
+      operationId: directory.orgunits.patch
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Full path of the organization unit or its Id
+          in: path
+          name: orgUnitPath
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrgUnit'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+      tags:
+        - orgunits
+      requestBody:
+        $ref: '#/components/requestBodies/OrgUnit'
+    put:
+      description: Update Organization Unit
+      operationId: directory.orgunits.update
+      parameters:
+        - description: Immutable id of the Google Apps account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Full path of the organization unit or its Id
+          in: path
+          name: orgUnitPath
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OrgUnit'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.orgunit'
+      tags:
+        - orgunits
+      requestBody:
+        $ref: '#/components/requestBodies/OrgUnit'
+  '/customer/{customerId}/schemas':
+    get:
+      description: Retrieve all schemas for a customer
+      operationId: directory.schemas.list
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Schemas'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
+      tags:
+        - schemas
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Create schema.
+      operationId: directory.schemas.insert
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Schema'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+      tags:
+        - schemas
+      requestBody:
+        $ref: '#/components/requestBodies/Schema'
+  '/customer/{customerId}/schemas/{schemaKey}':
+    delete:
+      description: Delete schema
+      operationId: directory.schemas.delete
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Name or immutable Id of the schema
+          in: path
+          name: schemaKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+      tags:
+        - schemas
+    get:
+      description: Retrieve schema
+      operationId: directory.schemas.get
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Name or immutable Id of the schema
+          in: path
+          name: schemaKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Schema'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema.readonly'
+      tags:
+        - schemas
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Update schema. This method supports patch semantics.
+      operationId: directory.schemas.patch
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Name or immutable Id of the schema.
+          in: path
+          name: schemaKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Schema'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+      tags:
+        - schemas
+      requestBody:
+        $ref: '#/components/requestBodies/Schema'
+    put:
+      description: Update schema
+      operationId: directory.schemas.update
+      parameters:
+        - description: Immutable ID of the G Suite account
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Name or immutable Id of the schema.
+          in: path
+          name: schemaKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Schema'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.userschema'
+      tags:
+        - schemas
+      requestBody:
+        $ref: '#/components/requestBodies/Schema'
+  '/customer/{customer}/domainaliases':
+    get:
+      description: Lists the domain aliases of the customer.
+      operationId: directory.domainAliases.list
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Name of the parent domain for which domain aliases are to be fetched.
+          in: query
+          name: parentDomainName
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DomainAliases'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+      tags:
+        - domainAliases
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Inserts a Domain alias of the customer.
+      operationId: directory.domainAliases.insert
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DomainAlias'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+      tags:
+        - domainAliases
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainAlias'
+  '/customer/{customer}/domainaliases/{domainAliasName}':
+    delete:
+      description: Deletes a Domain Alias of the customer.
+      operationId: directory.domainAliases.delete
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Name of domain alias to be retrieved.
+          in: path
+          name: domainAliasName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+      tags:
+        - domainAliases
+    get:
+      description: Retrieves a domain alias of the customer.
+      operationId: directory.domainAliases.get
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Name of domain alias to be retrieved.
+          in: path
+          name: domainAliasName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DomainAlias'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+      tags:
+        - domainAliases
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/customer/{customer}/domains':
+    get:
+      description: Lists the domains of the customer.
+      operationId: directory.domains.list
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Domains2'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+      tags:
+        - domains
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Inserts a domain of the customer.
+      operationId: directory.domains.insert
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Domains'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+      tags:
+        - domains
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Domains'
+  '/customer/{customer}/domains/{domainName}':
+    delete:
+      description: Deletes a domain of the customer.
+      operationId: directory.domains.delete
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Name of domain to be deleted
+          in: path
+          name: domainName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+      tags:
+        - domains
+    get:
+      description: Retrieves a domain of the customer.
+      operationId: directory.domains.get
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Name of domain to be retrieved
+          in: path
+          name: domainName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Domains'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.domain.readonly'
+      tags:
+        - domains
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/customer/{customer}/notifications':
+    get:
+      description: Retrieves a list of notifications.
+      operationId: directory.notifications.list
+      parameters:
+        - description: The unique ID for the customer's G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: The ISO 639-1 code of the language notifications are returned in. The default is English (en).
+          in: query
+          name: language
+          schema:
+            type: string
+        - description: Maximum number of notifications to return per page. The default is 100.
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+        - description: The token to specify the page of results to retrieve.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Notifications'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+      tags:
+        - notifications
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/customer/{customer}/notifications/{notificationId}':
+    delete:
+      description: Deletes a notification
+      operationId: directory.notifications.delete
+      parameters:
+        - description: The unique ID for the customer's G Suite account. The customerId is also returned as part of the Users resource.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: The unique ID of the notification.
+          in: path
+          name: notificationId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+      tags:
+        - notifications
+    get:
+      description: Retrieves a notification.
+      operationId: directory.notifications.get
+      parameters:
+        - description: The unique ID for the customer's G Suite account. The customerId is also returned as part of the Users resource.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: The unique ID of the notification.
+          in: path
+          name: notificationId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Notification'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+      tags:
+        - notifications
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Updates a notification. This method supports patch semantics.
+      operationId: directory.notifications.patch
+      parameters:
+        - description: The unique ID for the customer's G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: The unique ID of the notification.
+          in: path
+          name: notificationId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Notification'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+      tags:
+        - notifications
+      requestBody:
+        $ref: '#/components/requestBodies/Notification'
+    put:
+      description: Updates a notification.
+      operationId: directory.notifications.update
+      parameters:
+        - description: The unique ID for the customer's G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: The unique ID of the notification.
+          in: path
+          name: notificationId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Notification'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.notifications'
+      tags:
+        - notifications
+      requestBody:
+        $ref: '#/components/requestBodies/Notification'
+  '/customer/{customer}/resources/calendars':
+    get:
+      description: Retrieves a list of calendar resources for an account.
+      operationId: directory.resources.calendars.list
+      parameters:
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of results to return.
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+        - description: Token to specify the next page in the list.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CalendarResources'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Inserts a calendar resource.
+      operationId: directory.resources.calendars.insert
+      parameters:
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CalendarResource'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+      requestBody:
+        $ref: '#/components/requestBodies/CalendarResource'
+  '/customer/{customer}/resources/calendars/{calendarResourceId}':
+    delete:
+      description: Deletes a calendar resource.
+      operationId: directory.resources.calendars.delete
+      parameters:
+        - description: The unique ID of the calendar resource to delete.
+          in: path
+          name: calendarResourceId
+          required: true
+          schema:
+            type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+    get:
+      description: Retrieves a calendar resource.
+      operationId: directory.resources.calendars.get
+      parameters:
+        - description: The unique ID of the calendar resource to retrieve.
+          in: path
+          name: calendarResourceId
+          required: true
+          schema:
+            type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CalendarResource'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Updates a calendar resource. This method supports patch semantics.
+      operationId: directory.resources.calendars.patch
+      parameters:
+        - description: The unique ID of the calendar resource to update.
+          in: path
+          name: calendarResourceId
+          required: true
+          schema:
+            type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CalendarResource'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+      requestBody:
+        $ref: '#/components/requestBodies/CalendarResource'
+    put:
+      description: Updates a calendar resource.
+      operationId: directory.resources.calendars.update
+      parameters:
+        - description: The unique ID of the calendar resource to update.
+          in: path
+          name: calendarResourceId
+          required: true
+          schema:
+            type: string
+        - description: 'The unique ID for the customer''s G Suite account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CalendarResource'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+      requestBody:
+        $ref: '#/components/requestBodies/CalendarResource'
+  '/customer/{customer}/roleassignments':
+    get:
+      description: Retrieves a paginated list of all roleAssignments.
+      operationId: directory.roleAssignments.list
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of results to return.
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+        - description: Token to specify the next page in the list.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: 'Immutable ID of a role. If included in the request, returns only role assignments containing this role ID.'
+          in: query
+          name: roleId
+          schema:
+            type: string
+        - description: 'The user''s primary email address, alias email address, or unique user ID. If included in the request, returns role assignments only for this user.'
+          in: query
+          name: userKey
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RoleAssignments'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+      tags:
+        - roleAssignments
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Creates a role assignment.
+      operationId: directory.roleAssignments.insert
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RoleAssignment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+      tags:
+        - roleAssignments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleAssignment'
+  '/customer/{customer}/roleassignments/{roleAssignmentId}':
+    delete:
+      description: Deletes a role assignment.
+      operationId: directory.roleAssignments.delete
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of the role assignment.
+          in: path
+          name: roleAssignmentId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+      tags:
+        - roleAssignments
+    get:
+      description: Retrieve a role assignment.
+      operationId: directory.roleAssignments.get
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of the role assignment.
+          in: path
+          name: roleAssignmentId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RoleAssignment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+      tags:
+        - roleAssignments
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/customer/{customer}/roles':
+    get:
+      description: Retrieves a paginated list of all the roles in a domain.
+      operationId: directory.roles.list
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of results to return.
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - description: Token to specify the next page in the list.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Roles'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+      tags:
+        - roles
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Creates a role.
+      operationId: directory.roles.insert
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Role'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+      tags:
+        - roles
+      requestBody:
+        $ref: '#/components/requestBodies/Role'
+  '/customer/{customer}/roles/ALL/privileges':
+    get:
+      description: Retrieves a paginated list of all privileges for a customer.
+      operationId: directory.privileges.list
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Privileges'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+      tags:
+        - privileges
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/customer/{customer}/roles/{roleId}':
+    delete:
+      description: Deletes a role.
+      operationId: directory.roles.delete
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of the role.
+          in: path
+          name: roleId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+      tags:
+        - roles
+    get:
+      description: Retrieves a role.
+      operationId: directory.roles.get
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of the role.
+          in: path
+          name: roleId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Role'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly'
+      tags:
+        - roles
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Updates a role. This method supports patch semantics.
+      operationId: directory.roles.patch
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of the role.
+          in: path
+          name: roleId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Role'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+      tags:
+        - roles
+      requestBody:
+        $ref: '#/components/requestBodies/Role'
+    put:
+      description: Updates a role.
+      operationId: directory.roles.update
+      parameters:
+        - description: Immutable ID of the G Suite account.
+          in: path
+          name: customer
+          required: true
+          schema:
+            type: string
+        - description: Immutable ID of the role.
+          in: path
+          name: roleId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Role'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.rolemanagement'
+      tags:
+        - roles
+      requestBody:
+        $ref: '#/components/requestBodies/Role'
+  '/customers/{customerKey}':
+    get:
+      description: Retrieves a customer.
+      operationId: directory.customers.get
+      parameters:
+        - description: Id of the customer to be retrieved
+          in: path
+          name: customerKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Customer'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.customer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.customer'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.customer.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.customer.readonly'
+      tags:
+        - customers
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Updates a customer. This method supports patch semantics.
+      operationId: directory.customers.patch
+      parameters:
+        - description: Id of the customer to be updated
+          in: path
+          name: customerKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Customer'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.customer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.customer'
+      tags:
+        - customers
+      requestBody:
+        $ref: '#/components/requestBodies/Customer'
+    put:
+      description: Updates a customer.
+      operationId: directory.customers.update
+      parameters:
+        - description: Id of the customer to be updated
+          in: path
+          name: customerKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Customer'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.customer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.customer'
+      tags:
+        - customers
+      requestBody:
+        $ref: '#/components/requestBodies/Customer'
+  /groups:
+    get:
+      description: Retrieve all groups in a domain (paginated)
+      operationId: directory.groups.list
+      parameters:
+        - description: 'Immutable ID of the G Suite account. In case of multi-domain, to fetch all groups for a customer, fill this field instead of domain.'
+          in: query
+          name: customer
+          schema:
+            type: string
+        - description: Name of the domain. Fill this field to get groups from only this domain. To return all groups in a multi-domain fill customer field instead.
+          in: query
+          name: domain
+          schema:
+            type: string
+        - description: Maximum number of results to return. Default is 200
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+        - description: Token to specify next page in the list
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: 'Email or immutable Id of the user if only those groups are to be listed, the given user is a member of. If Id, it should match with id of user object'
+          in: query
+          name: userKey
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Groups'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+      tags:
+        - groups
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Create Group
+      operationId: directory.groups.insert
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Group'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+      tags:
+        - groups
+      requestBody:
+        $ref: '#/components/requestBodies/Group'
+  '/groups/{groupKey}':
+    delete:
+      description: Delete Group
+      operationId: directory.groups.delete
+      parameters:
+        - description: Email or immutable Id of the group
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+      tags:
+        - groups
+    get:
+      description: Retrieve Group
+      operationId: directory.groups.get
+      parameters:
+        - description: Email or immutable Id of the group
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Group'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+      tags:
+        - groups
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Update Group. This method supports patch semantics.
+      operationId: directory.groups.patch
+      parameters:
+        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Group'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+      tags:
+        - groups
+      requestBody:
+        $ref: '#/components/requestBodies/Group'
+    put:
+      description: Update Group
+      operationId: directory.groups.update
+      parameters:
+        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Group'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+      tags:
+        - groups
+      requestBody:
+        $ref: '#/components/requestBodies/Group'
+  '/groups/{groupKey}/aliases':
+    get:
+      description: List all aliases for a group
+      operationId: directory.groups.aliases.list
+      parameters:
+        - description: Email or immutable Id of the group
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Aliases'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+      tags:
+        - groups
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Add a alias for the group
+      operationId: directory.groups.aliases.insert
+      parameters:
+        - description: Email or immutable Id of the group
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Alias'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+      tags:
+        - groups
+      requestBody:
+        $ref: '#/components/requestBodies/Alias'
+  '/groups/{groupKey}/aliases/{alias}':
+    delete:
+      description: Remove a alias for the group
+      operationId: directory.groups.aliases.delete
+      parameters:
+        - description: Email or immutable Id of the group
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+        - description: The alias to be removed
+          in: path
+          name: alias
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+      tags:
+        - groups
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/groups/{groupKey}/members':
+    get:
+      description: Retrieve all members in a group (paginated)
+      operationId: directory.members.list
+      parameters:
+        - description: Email or immutable Id of the group
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of results to return. Default is 200
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+        - description: Token to specify next page in the list
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Comma separated role values to filter list results on.
+          in: query
+          name: roles
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Members'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+      tags:
+        - members
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Add user to the specified group.
+      operationId: directory.members.insert
+      parameters:
+        - description: Email or immutable Id of the group
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Member'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+      tags:
+        - members
+      requestBody:
+        $ref: '#/components/requestBodies/Member'
+  '/groups/{groupKey}/members/{memberKey}':
+    delete:
+      description: Remove membership.
+      operationId: directory.members.delete
+      parameters:
+        - description: Email or immutable Id of the group
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+        - description: Email or immutable Id of the member
+          in: path
+          name: memberKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+      tags:
+        - members
+    get:
+      description: Retrieve Group Member
+      operationId: directory.members.get
+      parameters:
+        - description: Email or immutable Id of the group
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+        - description: Email or immutable Id of the member
+          in: path
+          name: memberKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Member'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.readonly'
+      tags:
+        - members
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Update membership of a user in the specified group. This method supports patch semantics.
+      operationId: directory.members.patch
+      parameters:
+        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+        - description: 'Email or immutable Id of the user. If Id, it should match with id of member object'
+          in: path
+          name: memberKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Member'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+      tags:
+        - members
+      requestBody:
+        $ref: '#/components/requestBodies/Member'
+    put:
+      description: Update membership of a user in the specified group.
+      operationId: directory.members.update
+      parameters:
+        - description: 'Email or immutable Id of the group. If Id, it should match with id of group object'
+          in: path
+          name: groupKey
+          required: true
+          schema:
+            type: string
+        - description: 'Email or immutable Id of the user. If Id, it should match with id of member object'
+          in: path
+          name: memberKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Member'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.group.member'
+      tags:
+        - members
+      requestBody:
+        $ref: '#/components/requestBodies/Member'
+  /users:
+    get:
+      description: Retrieve either deleted users or all users in a domain (paginated)
+      operationId: directory.users.list
+      parameters:
+        - description: Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
+          in: query
+          name: customFieldMask
+          schema:
+            type: string
+        - description: 'Immutable ID of the G Suite account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.'
+          in: query
+          name: customer
+          schema:
+            type: string
+        - description: Name of the domain. Fill this field to get users from only this domain. To return all users in a multi-domain fill customer field instead.
+          in: query
+          name: domain
+          schema:
+            type: string
+        - description: Event on which subscription is intended (if subscribing)
+          in: query
+          name: event
+          schema:
+            type: string
+            enum:
+              - add
+              - delete
+              - makeAdmin
+              - undelete
+              - update
+        - description: Maximum number of results to return. Default is 100. Max allowed is 500
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+        - description: Column to use for sorting results
+          in: query
+          name: orderBy
+          schema:
+            type: string
+            enum:
+              - email
+              - familyName
+              - givenName
+        - description: Token to specify next page in the list
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: What subset of fields to fetch for this user.
+          in: query
+          name: projection
+          schema:
+            type: string
+            enum:
+              - basic
+              - custom
+              - full
+            default: basic
+        - description: 'Query string search. Should be of the form "". Complete documentation is at https://developers.google.com/admin-sdk/directory/v1/guides/search-users'
+          in: query
+          name: query
+          schema:
+            type: string
+        - description: If set to true retrieves the list of deleted users. Default is false
+          in: query
+          name: showDeleted
+          schema:
+            type: string
+        - description: Whether to return results in ascending or descending order.
+          in: query
+          name: sortOrder
+          schema:
+            type: string
+            enum:
+              - ASCENDING
+              - DESCENDING
+        - description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+          in: query
+          name: viewType
+          schema:
+            type: string
+            enum:
+              - admin_view
+              - domain_public
+            default: admin_view
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Users'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+      tags:
+        - users
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: create user.
+      operationId: directory.users.insert
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+      tags:
+        - users
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+  /users/watch:
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Watch for changes in users list
+      operationId: directory.users.watch
+      parameters:
+        - description: Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
+          in: query
+          name: customFieldMask
+          schema:
+            type: string
+        - description: 'Immutable ID of the G Suite account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.'
+          in: query
+          name: customer
+          schema:
+            type: string
+        - description: Name of the domain. Fill this field to get users from only this domain. To return all users in a multi-domain fill customer field instead.
+          in: query
+          name: domain
+          schema:
+            type: string
+        - description: Event on which subscription is intended (if subscribing)
+          in: query
+          name: event
+          schema:
+            type: string
+            enum:
+              - add
+              - delete
+              - makeAdmin
+              - undelete
+              - update
+        - description: Maximum number of results to return. Default is 100. Max allowed is 500
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+        - description: Column to use for sorting results
+          in: query
+          name: orderBy
+          schema:
+            type: string
+            enum:
+              - email
+              - familyName
+              - givenName
+        - description: Token to specify next page in the list
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: What subset of fields to fetch for this user.
+          in: query
+          name: projection
+          schema:
+            type: string
+            enum:
+              - basic
+              - custom
+              - full
+            default: basic
+        - description: 'Query string search. Should be of the form "". Complete documentation is at https://developers.google.com/admin-sdk/directory/v1/guides/search-users'
+          in: query
+          name: query
+          schema:
+            type: string
+        - description: If set to true retrieves the list of deleted users. Default is false
+          in: query
+          name: showDeleted
+          schema:
+            type: string
+        - description: Whether to return results in ascending or descending order.
+          in: query
+          name: sortOrder
+          schema:
+            type: string
+            enum:
+              - ASCENDING
+              - DESCENDING
+        - description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+          in: query
+          name: viewType
+          schema:
+            type: string
+            enum:
+              - admin_view
+              - domain_public
+            default: admin_view
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Channel'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+      tags:
+        - users
+      requestBody:
+        $ref: '#/components/requestBodies/Channel'
+  '/users/{userKey}':
+    delete:
+      description: Delete user
+      operationId: directory.users.delete
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+      tags:
+        - users
+    get:
+      description: retrieve user
+      operationId: directory.users.get
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+        - description: Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
+          in: query
+          name: customFieldMask
+          schema:
+            type: string
+        - description: What subset of fields to fetch for this user.
+          in: query
+          name: projection
+          schema:
+            type: string
+            enum:
+              - basic
+              - custom
+              - full
+            default: basic
+        - description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+          in: query
+          name: viewType
+          schema:
+            type: string
+            enum:
+              - admin_view
+              - domain_public
+            default: admin_view
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+      tags:
+        - users
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: update user. This method supports patch semantics.
+      operationId: directory.users.patch
+      parameters:
+        - description: 'Email or immutable Id of the user. If Id, it should match with id of user object'
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+      tags:
+        - users
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+    put:
+      description: update user
+      operationId: directory.users.update
+      parameters:
+        - description: 'Email or immutable Id of the user. If Id, it should match with id of user object'
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+      tags:
+        - users
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+  '/users/{userKey}/aliases':
+    get:
+      description: List all aliases for a user
+      operationId: directory.users.aliases.list
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+        - description: Event on which subscription is intended (if subscribing)
+          in: query
+          name: event
+          schema:
+            type: string
+            enum:
+              - add
+              - delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Aliases'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+      tags:
+        - users
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Add a alias for the user
+      operationId: directory.users.aliases.insert
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Alias'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+      tags:
+        - users
+      requestBody:
+        $ref: '#/components/requestBodies/Alias'
+  '/users/{userKey}/aliases/watch':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Watch for changes in user aliases list
+      operationId: directory.users.aliases.watch
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+        - description: Event on which subscription is intended (if subscribing)
+          in: query
+          name: event
+          schema:
+            type: string
+            enum:
+              - add
+              - delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Channel'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+      tags:
+        - users
+      requestBody:
+        $ref: '#/components/requestBodies/Channel'
+  '/users/{userKey}/aliases/{alias}':
+    delete:
+      description: Remove a alias for the user
+      operationId: directory.users.aliases.delete
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+        - description: The alias to be removed
+          in: path
+          name: alias
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.alias'
+      tags:
+        - users
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/users/{userKey}/asps':
+    get:
+      description: List the ASPs issued by a user.
+      operationId: directory.asps.list
+      parameters:
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Asps'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+      tags:
+        - asps
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/users/{userKey}/asps/{codeId}':
+    delete:
+      description: Delete an ASP issued by a user.
+      operationId: directory.asps.delete
+      parameters:
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+        - description: The unique ID of the ASP to be deleted.
+          in: path
+          name: codeId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+      tags:
+        - asps
+    get:
+      description: Get information about an ASP issued by a user.
+      operationId: directory.asps.get
+      parameters:
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+        - description: The unique ID of the ASP.
+          in: path
+          name: codeId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Asp'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+      tags:
+        - asps
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/users/{userKey}/makeAdmin':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: change admin status of a user
+      operationId: directory.users.makeAdmin
+      parameters:
+        - description: Email or immutable Id of the user as admin
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+      tags:
+        - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserMakeAdmin'
+  '/users/{userKey}/photos/thumbnail':
+    delete:
+      description: Remove photos for the user
+      operationId: directory.users.photos.delete
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+      tags:
+        - users
+    get:
+      description: Retrieve photo of a user
+      operationId: directory.users.photos.get
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserPhoto'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+      tags:
+        - users
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Add a photo for the user. This method supports patch semantics.
+      operationId: directory.users.photos.patch
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserPhoto'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+      tags:
+        - users
+      requestBody:
+        $ref: '#/components/requestBodies/UserPhoto'
+    put:
+      description: Add a photo for the user
+      operationId: directory.users.photos.update
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserPhoto'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+      tags:
+        - users
+      requestBody:
+        $ref: '#/components/requestBodies/UserPhoto'
+  '/users/{userKey}/tokens':
+    get:
+      description: Returns the set of tokens specified user has issued to 3rd party applications.
+      operationId: directory.tokens.list
+      parameters:
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Tokens'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+      tags:
+        - tokens
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/users/{userKey}/tokens/{clientId}':
+    delete:
+      description: Delete all access tokens issued by a user for an application.
+      operationId: directory.tokens.delete
+      parameters:
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+        - description: The Client ID of the application the token is issued to.
+          in: path
+          name: clientId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+      tags:
+        - tokens
+    get:
+      description: Get information about an access token issued by a user.
+      operationId: directory.tokens.get
+      parameters:
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+        - description: The Client ID of the application the token is issued to.
+          in: path
+          name: clientId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Token'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+      tags:
+        - tokens
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/users/{userKey}/undelete':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Undelete a deleted user
+      operationId: directory.users.undelete
+      parameters:
+        - description: The immutable id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user'
+      tags:
+        - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUndelete'
+  '/users/{userKey}/verificationCodes':
+    get:
+      description: Returns the current set of valid backup verification codes for the specified user.
+      operationId: directory.verificationCodes.list
+      parameters:
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VerificationCodes'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+      tags:
+        - verificationCodes
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/users/{userKey}/verificationCodes/generate':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Generate new backup verification codes for the user.
+      operationId: directory.verificationCodes.generate
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+      tags:
+        - verificationCodes
+  '/users/{userKey}/verificationCodes/invalidate':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Invalidate the current backup verification codes for the user.
+      operationId: directory.verificationCodes.invalidate
+      parameters:
+        - description: Email or immutable Id of the user
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/admin.directory.user.security'
+      tags:
+        - verificationCodes
+components:
+  schemas:
+    Alias:
+      description: JSON template for Alias object in Directory API.
+      properties:
+        alias:
+          description: A alias email
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        id:
+          description: Unique id of the group (Read-only) Unique id of the user (Read-only)
+          type: string
+        kind:
+          default: 'admin#directory#alias'
+          description: Kind of resource this is.
+          type: string
+        primaryEmail:
+          description: Group's primary email (Read-only) User's primary email (Read-only)
+          type: string
+      type: object
+    Aliases:
+      description: JSON response template to list aliases in Directory API.
+      properties:
+        aliases:
+          description: List of alias objects.
+          items: {}
+          type: array
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#aliases'
+          description: Kind of resource this is.
+          type: string
+      type: object
+    Asp:
+      description: The template that returns individual ASP (Access Code) data.
+      properties:
+        codeId:
+          description: The unique ID of the ASP.
+          format: int32
+          type: integer
+        creationTime:
+          description: The time when the ASP was created. Expressed in Unix time format.
+          format: int64
+          type: string
+        etag:
+          description: ETag of the ASP.
+          type: string
+        kind:
+          default: 'admin#directory#asp'
+          description: 'The type of the API resource. This is always admin#directory#asp.'
+          type: string
+        lastTimeUsed:
+          description: The time when the ASP was last used. Expressed in Unix time format.
+          format: int64
+          type: string
+        name:
+          description: 'The name of the application that the user, represented by their userId, entered when the ASP was created.'
+          type: string
+        userKey:
+          description: The unique ID of the user who issued the ASP.
+          type: string
+      type: object
+    Asps:
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        items:
+          description: A list of ASP resources.
+          items:
+            $ref: '#/components/schemas/Asp'
+          type: array
+        kind:
+          default: 'admin#directory#aspList'
+          description: 'The type of the API resource. This is always admin#directory#aspList.'
+          type: string
+      type: object
+    CalendarResource:
+      description: JSON template for Calendar Resource object in Directory API.
+      properties:
+        etags:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#resources#calendars#CalendarResource'
+          description: 'The type of the resource. For calendar resources, the value is admin#directory#resources#calendars#CalendarResource.'
+          type: string
+        resourceDescription:
+          description: The brief description of the calendar resource.
+          type: string
+        resourceEmail:
+          description: The read-only email ID for the calendar resource. Generated as part of creating a new calendar resource.
+          type: string
+        resourceId:
+          description: The unique ID for the calendar resource.
+          type: string
+        resourceName:
+          description: 'The name of the calendar resource. For example, Training Room 1A'
+          type: string
+        resourceType:
+          description: The type of the calendar resource. Used for grouping resources in the calendar user interface.
+          type: string
+      type: object
+    CalendarResources:
+      description: JSON template for Calendar Resource List Response object in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        items:
+          description: The CalendarResources in this page of results.
+          items:
+            $ref: '#/components/schemas/CalendarResource'
+          type: array
+        kind:
+          default: 'admin#directory#resources#calendars#calendarResourcesList'
+          description: 'Identifies this as a collection of CalendarResources. This is always admin#directory#resources#calendars#calendarResourcesList.'
+          type: string
+        nextPageToken:
+          description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          type: string
+      type: object
+    Channel:
+      description: An notification channel used to watch for resource changes.
+      properties:
+        address:
+          description: The address where notifications are delivered for this channel.
+          type: string
+        expiration:
+          description: 'Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.'
+          format: int64
+          type: string
+        id:
+          description: A UUID or similar unique string that identifies this channel.
+          type: string
+        kind:
+          default: 'api#channel'
+          description: 'Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string "api#channel".'
+          type: string
+        params:
+          additionalProperties:
+            description: Declares a new parameter by name.
+            type: string
+          description: Additional parameters controlling delivery channel behavior. Optional.
+          type: object
+        payload:
+          description: A Boolean value to indicate whether payload is wanted. Optional.
+          type: boolean
+        resourceId:
+          description: An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
+          type: string
+        resourceUri:
+          description: A version-specific identifier for the watched resource.
+          type: string
+        token:
+          description: An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
+          type: string
+        type:
+          description: The type of delivery mechanism used for this channel.
+          type: string
+      type: object
+    ChromeOsDevice:
+      description: JSON template for Chrome Os Device resource in Directory API.
+      properties:
+        activeTimeRanges:
+          description: List of active time ranges (Read-only)
+          items:
+            properties:
+              activeTime:
+                description: Duration in milliseconds
+                format: int32
+                type: integer
+              date:
+                description: Date of usage
+                format: date
+                type: string
+            type: object
+          type: array
+        annotatedAssetId:
+          description: AssetId specified during enrollment or through later annotation
+          type: string
+        annotatedLocation:
+          description: Address or location of the device as noted by the administrator
+          type: string
+        annotatedUser:
+          description: User of the device
+          type: string
+        bootMode:
+          description: Chromebook boot mode (Read-only)
+          type: string
+        deviceId:
+          description: Unique identifier of Chrome OS Device (Read-only)
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        ethernetMacAddress:
+          description: Chromebook Mac Address on ethernet network interface (Read-only)
+          type: string
+        firmwareVersion:
+          description: Chromebook firmware version (Read-only)
+          type: string
+        kind:
+          default: 'admin#directory#chromeosdevice'
+          description: Kind of resource this is.
+          type: string
+        lastEnrollmentTime:
+          description: Date and time the device was last enrolled (Read-only)
+          format: date-time
+          type: string
+        lastSync:
+          description: Date and time the device was last synchronized with the policy settings in the G Suite administrator control panel (Read-only)
+          format: date-time
+          type: string
+        macAddress:
+          description: Chromebook Mac Address on wifi network interface (Read-only)
+          type: string
+        meid:
+          description: Mobile Equipment identifier for the 3G mobile card in the Chromebook (Read-only)
+          type: string
+        model:
+          description: Chromebook Model (Read-only)
+          type: string
+        notes:
+          description: Notes added by the administrator
+          type: string
+        orderNumber:
+          description: Chromebook order number (Read-only)
+          type: string
+        orgUnitPath:
+          description: OrgUnit of the device
+          type: string
+        osVersion:
+          description: Chromebook Os Version (Read-only)
+          type: string
+        platformVersion:
+          description: Chromebook platform version (Read-only)
+          type: string
+        recentUsers:
+          description: 'List of recent device users, in descending order by last login time (Read-only)'
+          items:
+            properties:
+              email:
+                description: Email address of the user. Present only if the user type is managed
+                type: string
+              type:
+                description: The type of the user
+                type: string
+            type: object
+          type: array
+        serialNumber:
+          description: Chromebook serial number (Read-only)
+          type: string
+        status:
+          description: status of the device (Read-only)
+          type: string
+        supportEndDate:
+          description: Final date the device will be supported (Read-only)
+          format: date-time
+          type: string
+        willAutoRenew:
+          description: Will Chromebook auto renew after support end date (Read-only)
+          type: boolean
+      type: object
+    ChromeOsDeviceAction:
+      description: JSON request template for firing actions on ChromeOs Device in Directory Devices API.
+      properties:
+        action:
+          description: Action to be taken on the ChromeOs Device
+          type: string
+        deprovisionReason:
+          type: string
+      type: object
+    ChromeOsDevices:
+      description: JSON response template for List Chrome OS Devices operation in Directory API.
+      properties:
+        chromeosdevices:
+          description: List of Chrome OS Device objects.
+          items:
+            $ref: '#/components/schemas/ChromeOsDevice'
+          type: array
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#chromeosdevices'
+          description: Kind of resource this is.
+          type: string
+        nextPageToken:
+          description: Token used to access next page of this result.
+          type: string
+      type: object
+    Customer:
+      description: JSON template for Customer Resource object in Directory API.
+      properties:
+        alternateEmail:
+          description: The customer's secondary contact email address. This email address cannot be on the same domain as the customerDomain
+          type: string
+        customerCreationTime:
+          description: The customer's creation time (Readonly)
+          format: date-time
+          type: string
+        customerDomain:
+          description: The customer's primary domain name string. Do not include the www prefix when creating a new customer.
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        id:
+          description: The unique ID for the customer's G Suite account. (Readonly)
+          type: string
+        kind:
+          default: 'admin#directory#customer'
+          description: 'Identifies the resource as a customer. Value: admin#directory#customer'
+          type: string
+        language:
+          description: The customer's ISO 639-2 language code. The default value is en-US
+          type: string
+        phoneNumber:
+          description: The customer's contact phone number in E.164 format.
+          type: string
+        postalAddress:
+          $ref: '#/components/schemas/CustomerPostalAddress'
+      type: object
+    CustomerPostalAddress:
+      description: JSON template for postal address of a customer.
+      properties:
+        addressLine1:
+          description: A customer's physical address. The address can be composed of one to three lines.
+          type: string
+        addressLine2:
+          description: Address line 2 of the address.
+          type: string
+        addressLine3:
+          description: Address line 3 of the address.
+          type: string
+        contactName:
+          description: The customer contact's name.
+          type: string
+        countryCode:
+          description: This is a required property. For countryCode information see the ISO 3166 country code elements.
+          type: string
+        locality:
+          description: Name of the locality. An example of a locality value is the city of San Francisco.
+          type: string
+        organizationName:
+          description: The company or company division name.
+          type: string
+        postalCode:
+          description: 'The postal code. A postalCode example is a postal zip code such as 10009. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.'
+          type: string
+        region:
+          description: Name of the region. An example of a region value is NY for the state of New York.
+          type: string
+      type: object
+    DomainAlias:
+      description: JSON template for Domain Alias object in Directory API.
+      properties:
+        creationTime:
+          description: The creation time of the domain alias. (Read-only).
+          format: int64
+          type: string
+        domainAliasName:
+          description: The domain alias name.
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#domainAlias'
+          description: Kind of resource this is.
+          type: string
+        parentDomainName:
+          description: The parent domain name that the domain alias is associated with. This can either be a primary or secondary domain name within a customer.
+          type: string
+        verified:
+          description: Indicates the verification state of a domain alias. (Read-only)
+          type: boolean
+      type: object
+    DomainAliases:
+      description: JSON response template to list domain aliases in Directory API.
+      properties:
+        domainAliases:
+          description: List of domain alias objects.
+          items:
+            $ref: '#/components/schemas/DomainAlias'
+          type: array
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#domainAliases'
+          description: Kind of resource this is.
+          type: string
+      type: object
+    Domains:
+      description: JSON template for Domain object in Directory API.
+      properties:
+        creationTime:
+          description: Creation time of the domain. (Read-only).
+          format: int64
+          type: string
+        domainAliases:
+          description: List of domain alias objects. (Read-only)
+          items:
+            $ref: '#/components/schemas/DomainAlias'
+          type: array
+        domainName:
+          description: The domain name of the customer.
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        isPrimary:
+          description: Indicates if the domain is a primary domain (Read-only).
+          type: boolean
+        kind:
+          default: 'admin#directory#domain'
+          description: Kind of resource this is.
+          type: string
+        verified:
+          description: Indicates the verification state of a domain. (Read-only).
+          type: boolean
+      type: object
+    Domains2:
+      description: JSON response template to list Domains in Directory API.
+      properties:
+        domains:
+          description: List of domain objects.
+          items:
+            $ref: '#/components/schemas/Domains'
+          type: array
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#domains'
+          description: Kind of resource this is.
+          type: string
+      type: object
+    Group:
+      description: JSON template for Group resource in Directory API.
+      properties:
+        adminCreated:
+          description: Is the group created by admin (Read-only) *
+          type: boolean
+        aliases:
+          description: List of aliases (Read-only)
+          items:
+            type: string
+          type: array
+        description:
+          description: Description of the group
+          type: string
+        directMembersCount:
+          description: Group direct members count
+          format: int64
+          type: string
+        email:
+          description: Email of Group
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        id:
+          description: Unique identifier of Group (Read-only)
+          type: string
+        kind:
+          default: 'admin#directory#group'
+          description: Kind of resource this is.
+          type: string
+        name:
+          description: Group name
+          type: string
+        nonEditableAliases:
+          description: List of non editable aliases (Read-only)
+          items:
+            type: string
+          type: array
+      type: object
+    Groups:
+      description: JSON response template for List Groups operation in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        groups:
+          description: List of group objects.
+          items:
+            $ref: '#/components/schemas/Group'
+          type: array
+        kind:
+          default: 'admin#directory#groups'
+          description: Kind of resource this is.
+          type: string
+        nextPageToken:
+          description: Token used to access next page of this result.
+          type: string
+      type: object
+    Member:
+      description: JSON template for Member resource in Directory API.
+      properties:
+        email:
+          description: Email of member (Read-only)
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        id:
+          description: Unique identifier of customer member (Read-only) Unique identifier of group (Read-only) Unique identifier of member (Read-only)
+          type: string
+        kind:
+          default: 'admin#directory#member'
+          description: Kind of resource this is.
+          type: string
+        role:
+          description: Role of member
+          type: string
+        status:
+          description: Status of member (Immutable)
+          type: string
+        type:
+          description: Type of member (Immutable)
+          type: string
+      type: object
+    Members:
+      description: JSON response template for List Members operation in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#members'
+          description: Kind of resource this is.
+          type: string
+        members:
+          description: List of member objects.
+          items:
+            $ref: '#/components/schemas/Member'
+          type: array
+        nextPageToken:
+          description: Token used to access next page of this result.
+          type: string
+      type: object
+    MobileDevice:
+      description: JSON template for Mobile Device resource in Directory API.
+      properties:
+        adbStatus:
+          description: Adb (USB debugging) enabled or disabled on device (Read-only)
+          type: boolean
+        applications:
+          description: List of applications installed on Mobile Device
+          items:
+            properties:
+              displayName:
+                description: Display name of application
+                type: string
+              packageName:
+                description: Package name of application
+                type: string
+              permission:
+                description: List of Permissions for application
+                items:
+                  type: string
+                type: array
+              versionCode:
+                description: Version code of application
+                format: int32
+                type: integer
+              versionName:
+                description: Version name of application
+                type: string
+            type: object
+          type: array
+        basebandVersion:
+          description: Mobile Device Baseband version (Read-only)
+          type: string
+        bootloaderVersion:
+          description: Mobile Device Bootloader version (Read-only)
+          type: string
+        brand:
+          description: Mobile Device Brand (Read-only)
+          type: string
+        buildNumber:
+          description: Mobile Device Build number (Read-only)
+          type: string
+        defaultLanguage:
+          description: The default locale used on the Mobile Device (Read-only)
+          type: string
+        developerOptionsStatus:
+          description: Developer options enabled or disabled on device (Read-only)
+          type: boolean
+        deviceCompromisedStatus:
+          description: Mobile Device compromised status (Read-only)
+          type: string
+        deviceId:
+          description: Mobile Device serial number (Read-only)
+          type: string
+        devicePasswordStatus:
+          description: DevicePasswordStatus (Read-only)
+          type: string
+        email:
+          description: List of owner user's email addresses (Read-only)
+          items:
+            type: string
+          type: array
+        encryptionStatus:
+          description: Mobile Device Encryption Status (Read-only)
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        firstSync:
+          description: Date and time the device was first synchronized with the policy settings in the G Suite administrator control panel (Read-only)
+          format: date-time
+          type: string
+        hardware:
+          description: Mobile Device Hardware (Read-only)
+          type: string
+        hardwareId:
+          description: Mobile Device Hardware Id (Read-only)
+          type: string
+        imei:
+          description: Mobile Device IMEI number (Read-only)
+          type: string
+        kernelVersion:
+          description: Mobile Device Kernel version (Read-only)
+          type: string
+        kind:
+          default: 'admin#directory#mobiledevice'
+          description: Kind of resource this is.
+          type: string
+        lastSync:
+          description: Date and time the device was last synchronized with the policy settings in the G Suite administrator control panel (Read-only)
+          format: date-time
+          type: string
+        managedAccountIsOnOwnerProfile:
+          description: Boolean indicating if this account is on owner/primary profile or not (Read-only)
+          type: boolean
+        manufacturer:
+          description: Mobile Device manufacturer (Read-only)
+          type: string
+        meid:
+          description: Mobile Device MEID number (Read-only)
+          type: string
+        model:
+          description: Name of the model of the device
+          type: string
+        name:
+          description: List of owner user's names (Read-only)
+          items:
+            type: string
+          type: array
+        networkOperator:
+          description: Mobile Device mobile or network operator (if available) (Read-only)
+          type: string
+        os:
+          description: Name of the mobile operating system
+          type: string
+        otherAccountsInfo:
+          description: List of accounts added on device (Read-only)
+          items:
+            type: string
+          type: array
+        privilege:
+          description: DMAgentPermission (Read-only)
+          type: string
+        releaseVersion:
+          description: Mobile Device release version version (Read-only)
+          type: string
+        resourceId:
+          description: Unique identifier of Mobile Device (Read-only)
+          type: string
+        securityPatchLevel:
+          description: Mobile Device Security patch level (Read-only)
+          format: int64
+          type: string
+        serialNumber:
+          description: Mobile Device SSN or Serial Number (Read-only)
+          type: string
+        status:
+          description: Status of the device (Read-only)
+          type: string
+        supportsWorkProfile:
+          description: Work profile supported on device (Read-only)
+          type: boolean
+        type:
+          description: The type of device (Read-only)
+          type: string
+        unknownSourcesStatus:
+          description: Unknown sources enabled or disabled on device (Read-only)
+          type: boolean
+        userAgent:
+          description: Mobile Device user agent
+          type: string
+        wifiMacAddress:
+          description: Mobile Device WiFi MAC address (Read-only)
+          type: string
+      type: object
+    MobileDeviceAction:
+      description: JSON request template for firing commands on Mobile Device in Directory Devices API.
+      properties:
+        action:
+          description: Action to be taken on the Mobile Device
+          type: string
+      type: object
+    MobileDevices:
+      description: JSON response template for List Mobile Devices operation in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#mobiledevices'
+          description: Kind of resource this is.
+          type: string
+        mobiledevices:
+          description: List of Mobile Device objects.
+          items:
+            $ref: '#/components/schemas/MobileDevice'
+          type: array
+        nextPageToken:
+          description: Token used to access next page of this result.
+          type: string
+      type: object
+    Notification:
+      description: Template for a notification resource.
+      properties:
+        body:
+          description: Body of the notification (Read-only)
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        fromAddress:
+          description: Address from which the notification is received (Read-only)
+          type: string
+        isUnread:
+          description: Boolean indicating whether the notification is unread or not.
+          type: boolean
+        kind:
+          default: 'admin#directory#notification'
+          description: The type of the resource.
+          type: string
+        notificationId:
+          type: string
+        sendTime:
+          description: Time at which notification was sent (Read-only)
+          format: date-time
+          type: string
+        subject:
+          description: Subject of the notification (Read-only)
+          type: string
+      type: object
+    Notifications:
+      description: Template for notifications list response.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        items:
+          description: List of notifications in this page.
+          items:
+            $ref: '#/components/schemas/Notification'
+          type: array
+        kind:
+          default: 'admin#directory#notifications'
+          description: The type of the resource.
+          type: string
+        nextPageToken:
+          description: Token for fetching the next page of notifications.
+          type: string
+        unreadNotificationsCount:
+          description: Number of unread notification for the domain.
+          format: int32
+          type: integer
+      type: object
+    OrgUnit:
+      description: JSON template for Org Unit resource in Directory API.
+      properties:
+        blockInheritance:
+          description: Should block inheritance
+          type: boolean
+        description:
+          description: Description of OrgUnit
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#orgUnit'
+          description: Kind of resource this is.
+          type: string
+        name:
+          description: Name of OrgUnit
+          type: string
+        orgUnitId:
+          description: Id of OrgUnit
+          type: string
+        orgUnitPath:
+          description: Path of OrgUnit
+          type: string
+        parentOrgUnitId:
+          description: Id of parent OrgUnit
+          type: string
+        parentOrgUnitPath:
+          description: Path of parent OrgUnit
+          type: string
+      type: object
+    OrgUnits:
+      description: JSON response template for List Organization Units operation in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#orgUnits'
+          description: Kind of resource this is.
+          type: string
+        organizationUnits:
+          description: List of user objects.
+          items:
+            $ref: '#/components/schemas/OrgUnit'
+          type: array
+      type: object
+    Privilege:
+      description: JSON template for privilege resource in Directory API.
+      properties:
+        childPrivileges:
+          description: A list of child privileges. Privileges for a service form a tree. Each privilege can have a list of child privileges; this list is empty for a leaf privilege.
+          items:
+            $ref: '#/components/schemas/Privilege'
+          type: array
+        etag:
+          description: ETag of the resource.
+          type: string
+        isOuScopable:
+          description: If the privilege can be restricted to an organization unit.
+          type: boolean
+        kind:
+          default: 'admin#directory#privilege'
+          description: 'The type of the API resource. This is always admin#directory#privilege.'
+          type: string
+        privilegeName:
+          description: The name of the privilege.
+          type: string
+        serviceId:
+          description: The obfuscated ID of the service this privilege is for.
+          type: string
+        serviceName:
+          description: The name of the service this privilege is for.
+          type: string
+      type: object
+    Privileges:
+      description: JSON response template for List privileges operation in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        items:
+          description: A list of Privilege resources.
+          items:
+            $ref: '#/components/schemas/Privilege'
+          type: array
+        kind:
+          default: 'admin#directory#privileges'
+          description: 'The type of the API resource. This is always admin#directory#privileges.'
+          type: string
+      type: object
+    Role:
+      description: JSON template for role resource in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        isSuperAdminRole:
+          description: Returns true if the role is a super admin role.
+          type: boolean
+        isSystemRole:
+          description: Returns true if this is a pre-defined system role.
+          type: boolean
+        kind:
+          default: 'admin#directory#role'
+          description: 'The type of the API resource. This is always admin#directory#role.'
+          type: string
+        roleDescription:
+          description: A short description of the role.
+          type: string
+        roleId:
+          description: ID of the role.
+          format: int64
+          type: string
+        roleName:
+          description: Name of the role.
+          type: string
+        rolePrivileges:
+          description: The set of privileges that are granted to this role.
+          items:
+            properties:
+              privilegeName:
+                description: The name of the privilege.
+                type: string
+              serviceId:
+                description: The obfuscated ID of the service this privilege is for.
+                type: string
+            type: object
+          type: array
+      type: object
+    RoleAssignment:
+      description: JSON template for roleAssignment resource in Directory API.
+      properties:
+        assignedTo:
+          description: The unique ID of the user this role is assigned to.
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#roleAssignment'
+          description: 'The type of the API resource. This is always admin#directory#roleAssignment.'
+          type: string
+        orgUnitId:
+          description: 'If the role is restricted to an organization unit, this contains the ID for the organization unit the exercise of this role is restricted to.'
+          type: string
+        roleAssignmentId:
+          description: ID of this roleAssignment.
+          format: int64
+          type: string
+        roleId:
+          description: The ID of the role that is assigned.
+          format: int64
+          type: string
+        scopeType:
+          description: |-
+            The scope in which this role is assigned. Possible values are: 
+            - CUSTOMER
+            - ORG_UNIT
+          type: string
+      type: object
+    RoleAssignments:
+      description: JSON response template for List roleAssignments operation in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        items:
+          description: A list of RoleAssignment resources.
+          items:
+            $ref: '#/components/schemas/RoleAssignment'
+          type: array
+        kind:
+          default: 'admin#directory#roleAssignments'
+          description: 'The type of the API resource. This is always admin#directory#roleAssignments.'
+          type: string
+        nextPageToken:
+          type: string
+      type: object
+    Roles:
+      description: JSON response template for List roles operation in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        items:
+          description: A list of Role resources.
+          items:
+            $ref: '#/components/schemas/Role'
+          type: array
+        kind:
+          default: 'admin#directory#roles'
+          description: 'The type of the API resource. This is always admin#directory#roles.'
+          type: string
+        nextPageToken:
+          type: string
+      type: object
+    Schema:
+      description: JSON template for Schema resource in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        fields:
+          description: Fields of Schema
+          items:
+            $ref: '#/components/schemas/SchemaFieldSpec'
+          type: array
+        kind:
+          default: 'admin#directory#schema'
+          description: Kind of resource this is.
+          type: string
+        schemaId:
+          description: Unique identifier of Schema (Read-only)
+          type: string
+        schemaName:
+          description: Schema name
+          type: string
+      type: object
+    SchemaFieldSpec:
+      description: JSON template for FieldSpec resource for Schemas in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        fieldId:
+          description: Unique identifier of Field (Read-only)
+          type: string
+        fieldName:
+          description: Name of the field.
+          type: string
+        fieldType:
+          description: Type of the field.
+          type: string
+        indexed:
+          default: true
+          description: Boolean specifying whether the field is indexed or not.
+          type: boolean
+        kind:
+          default: 'admin#directory#schema#fieldspec'
+          description: Kind of resource this is.
+          type: string
+        multiValued:
+          description: Boolean specifying whether this is a multi-valued field or not.
+          type: boolean
+        numericIndexingSpec:
+          description: 'Indexing spec for a numeric field. By default, only exact match queries will be supported for numeric fields. Setting the numericIndexingSpec allows range queries to be supported.'
+          properties:
+            maxValue:
+              description: 'Maximum value of this field. This is meant to be indicative rather than enforced. Values outside this range will still be indexed, but search may not be as performant.'
+              format: double
+              type: number
+            minValue:
+              description: 'Minimum value of this field. This is meant to be indicative rather than enforced. Values outside this range will still be indexed, but search may not be as performant.'
+              format: double
+              type: number
+          type: object
+        readAccessType:
+          default: ALL_DOMAIN_USERS
+          description: Read ACLs on the field specifying who can view values of this field. Valid values are "ALL_DOMAIN_USERS" and "ADMINS_AND_SELF".
+          type: string
+      type: object
+    Schemas:
+      description: JSON response template for List Schema operation in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#schemas'
+          description: Kind of resource this is.
+          type: string
+        schemas:
+          description: List of UserSchema objects.
+          items:
+            $ref: '#/components/schemas/Schema'
+          type: array
+      type: object
+    Token:
+      description: JSON template for token resource in Directory API.
+      properties:
+        anonymous:
+          description: Whether the application is registered with Google. The value is true if the application has an anonymous Client ID.
+          type: boolean
+        clientId:
+          description: The Client ID of the application the token is issued to.
+          type: string
+        displayText:
+          description: The displayable name of the application the token is issued to.
+          type: string
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#token'
+          description: 'The type of the API resource. This is always admin#directory#token.'
+          type: string
+        nativeApp:
+          description: Whether the token is issued to an installed application. The value is true if the application is installed to a desktop or mobile device.
+          type: boolean
+        scopes:
+          description: A list of authorization scopes the application is granted.
+          items:
+            type: string
+          type: array
+        userKey:
+          description: The unique ID of the user that issued the token.
+          type: string
+      type: object
+    Tokens:
+      description: JSON response template for List tokens operation in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        items:
+          description: A list of Token resources.
+          items:
+            $ref: '#/components/schemas/Token'
+          type: array
+        kind:
+          default: 'admin#directory#tokenList'
+          description: 'The type of the API resource. This is always admin#directory#tokenList.'
+          type: string
+      type: object
+    User:
+      description: JSON template for User object in Directory API.
+      properties:
+        addresses: {}
+        agreedToTerms:
+          description: Indicates if user has agreed to terms (Read-only)
+          readOnly: true
+          type: boolean
+        aliases:
+          description: List of aliases (Read-only)
+          items:
+            type: string
+          readOnly: true
+          type: array
+        changePasswordAtNextLogin:
+          description: Boolean indicating if the user should change password in next login
+          type: boolean
+        creationTime:
+          description: User's G Suite account creation time. (Read-only)
+          format: date-time
+          readOnly: true
+          type: string
+        customSchemas:
+          additionalProperties:
+            $ref: '#/components/schemas/UserCustomProperties'
+          description: Custom fields of the user.
+          type: object
+        customerId:
+          description: CustomerId of User (Read-only)
+          readOnly: true
+          type: string
+        deletionTime:
+          format: date-time
+          readOnly: true
+          type: string
+        emails: {}
+        etag:
+          description: ETag of the resource.
+          readOnly: true
+          type: string
+        externalIds: {}
+        hashFunction:
+          description: 'Hash function name for password. Supported are MD5, SHA-1 and crypt'
+          type: string
+        id:
+          description: Unique identifier of User (Read-only)
+          type: string
+        ims: {}
+        includeInGlobalAddressList:
+          description: Boolean indicating if user is included in Global Address List
+          type: boolean
+        ipWhitelisted:
+          description: Boolean indicating if ip is whitelisted
+          type: boolean
+        isAdmin:
+          description: Boolean indicating if the user is admin (Read-only)
+          readOnly: true
+          type: boolean
+        isDelegatedAdmin:
+          description: Boolean indicating if the user is delegated admin (Read-only)
+          readOnly: true
+          type: boolean
+        isEnforcedIn2Sv:
+          description: Is 2-step verification enforced (Read-only)
+          readOnly: true
+          type: boolean
+        isEnrolledIn2Sv:
+          description: Is enrolled in 2-step verification (Read-only)
+          readOnly: true
+          type: boolean
+        isMailboxSetup:
+          description: Is mailbox setup (Read-only)
+          readOnly: true
+          type: boolean
+        kind:
+          default: 'admin#directory#user'
+          description: Kind of resource this is.
+          readOnly: true
+          type: string
+        languages: {}
+        lastLoginTime:
+          description: User's last login time. (Read-only)
+          format: date-time
+          readOnly: true
+          type: string
+        locations: {}
+        name:
+          $ref: '#/components/schemas/UserName'
+        nonEditableAliases:
+          description: List of non editable aliases (Read-only)
+          items:
+            type: string
+          readOnly: true
+          type: array
+        notes: {}
+        orgUnitPath:
+          description: OrgUnit of User
+          type: string
+        organizations: {}
+        password:
+          description: User's password
+          type: string
+        phones: {}
+        posixAccounts: {}
+        primaryEmail:
+          description: username of User
+          type: string
+        relations: {}
+        sshPublicKeys: {}
+        suspended:
+          description: Indicates if user is suspended
+          type: boolean
+        suspensionReason:
+          description: Suspension reason if user is suspended (Read-only)
+          readOnly: true
+          type: string
+        thumbnailPhotoEtag:
+          description: ETag of the user's photo (Read-only)
+          readOnly: true
+          type: string
+        thumbnailPhotoUrl:
+          description: Photo Url of the user (Read-only)
+          readOnly: true
+          type: string
+        websites: {}
+      type: object
+    UserAbout:
+      description: JSON template for About (notes) of a user in Directory API.
+      properties:
+        contentType:
+          description: 'About entry can have a type which indicates the content type. It can either be plain or html. By default, notes contents are assumed to contain plain text.'
+          type: string
+        value:
+          description: Actual value of notes.
+          type: string
+      type: object
+    UserAddress:
+      description: JSON template for address.
+      properties:
+        country:
+          description: Country.
+          type: string
+        countryCode:
+          description: Country code.
+          type: string
+        customType:
+          description: Custom type.
+          type: string
+        extendedAddress:
+          description: Extended Address.
+          type: string
+        formatted:
+          description: Formatted address.
+          type: string
+        locality:
+          description: Locality.
+          type: string
+        poBox:
+          description: Other parts of address.
+          type: string
+        postalCode:
+          description: Postal code.
+          type: string
+        primary:
+          description: If this is user's primary address. Only one entry could be marked as primary.
+          type: boolean
+        region:
+          description: Region.
+          type: string
+        sourceIsStructured:
+          description: 'User supplied address was structured. Structured addresses are NOT supported at this time. You might be able to write structured addresses, but any values will eventually be clobbered.'
+          type: boolean
+        streetAddress:
+          description: Street.
+          type: string
+        type:
+          description: 'Each entry can have a type which indicates standard values of that entry. For example address could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value. Such type should have the CUSTOM value as type and also have a customType value.'
+          type: string
+      type: object
+    UserCustomProperties:
+      additionalProperties: {}
+      description: JSON template for a set of custom properties (i.e. all fields in a particular schema)
+      type: object
+    UserEmail:
+      description: JSON template for an email.
+      properties:
+        address:
+          description: Email id of the user.
+          type: string
+        customType:
+          description: Custom Type.
+          type: string
+        primary:
+          description: If this is user's primary email. Only one entry could be marked as primary.
+          type: boolean
+        type:
+          description: 'Each entry can have a type which indicates standard types of that entry. For example email could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value Such types should have the CUSTOM value as type and also have a customType value.'
+          type: string
+      type: object
+    UserExternalId:
+      description: JSON template for an externalId entry.
+      properties:
+        customType:
+          description: Custom type.
+          type: string
+        type:
+          description: The type of the Id.
+          type: string
+        value:
+          description: The value of the id.
+          type: string
+      type: object
+    UserIm:
+      description: JSON template for instant messenger of an user.
+      properties:
+        customProtocol:
+          description: Custom protocol.
+          type: string
+        customType:
+          description: Custom type.
+          type: string
+        im:
+          description: Instant messenger id.
+          type: string
+        primary:
+          description: If this is user's primary im. Only one entry could be marked as primary.
+          type: boolean
+        protocol:
+          description: 'Protocol used in the instant messenger. It should be one of the values from ImProtocolTypes map. Similar to type, it can take a CUSTOM value and specify the custom name in customProtocol field.'
+          type: string
+        type:
+          description: 'Each entry can have a type which indicates standard types of that entry. For example instant messengers could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value. Such types should have the CUSTOM value as type and also have a customType value.'
+          type: string
+      type: object
+    UserLanguage:
+      description: JSON template for a language entry.
+      properties:
+        customLanguage:
+          description: Other language. User can provide own language name if there is no corresponding Google III language code. If this is set LanguageCode can't be set
+          type: string
+        languageCode:
+          description: Language Code. Should be used for storing Google III LanguageCode string representation for language. Illegal values cause SchemaException.
+          type: string
+      type: object
+    UserLocation:
+      description: JSON template for a location entry.
+      properties:
+        area:
+          description: 'Textual location. This is most useful for display purposes to concisely describe the location. For example, "Mountain View, CA", "Near Seattle", "US-NYC-9TH 9A209A".'
+          type: string
+        buildingId:
+          description: Building Identifier.
+          type: string
+        customType:
+          description: Custom Type.
+          type: string
+        deskCode:
+          description: Most specific textual code of individual desk location.
+          type: string
+        floorName:
+          description: Floor name/number.
+          type: string
+        floorSection:
+          description: 'Floor section. More specific location within the floor. For example, if a floor is divided into sections "A", "B", and "C", this field would identify one of those values.'
+          type: string
+        type:
+          description: 'Each entry can have a type which indicates standard types of that entry. For example location could be of types default and desk. In addition to standard type, an entry can have a custom type and can give it any name. Such types should have "custom" as type and also have a customType value.'
+          type: string
+      type: object
+    UserMakeAdmin:
+      description: JSON request template for setting/revoking admin status of a user in Directory API.
+      properties:
+        status:
+          description: Boolean indicating new admin status of the user
+          type: boolean
+      type: object
+    UserName:
+      description: JSON template for name of a user in Directory API.
+      properties:
+        familyName:
+          description: Last Name
+          type: string
+        fullName:
+          description: Full Name
+          type: string
+        givenName:
+          description: First Name
+          type: string
+      type: object
+    UserOrganization:
+      description: JSON template for an organization entry.
+      properties:
+        costCenter:
+          description: The cost center of the users department.
+          type: string
+        customType:
+          description: Custom type.
+          type: string
+        department:
+          description: Department within the organization.
+          type: string
+        description:
+          description: Description of the organization.
+          type: string
+        domain:
+          description: The domain to which the organization belongs to.
+          type: string
+        fullTimeEquivalent:
+          description: The full-time equivalent percent within the organization (100000 = 100%).
+          format: int32
+          type: integer
+        location:
+          description: Location of the organization. This need not be fully qualified address.
+          type: string
+        name:
+          description: Name of the organization
+          type: string
+        primary:
+          description: If it user's primary organization.
+          type: boolean
+        symbol:
+          description: Symbol of the organization.
+          type: string
+        title:
+          description: Title (designation) of the user in the organization.
+          type: string
+        type:
+          description: 'Each entry can have a type which indicates standard types of that entry. For example organization could be of school, work etc. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a CustomType value.'
+          type: string
+      type: object
+    UserPhone:
+      description: JSON template for a phone entry.
+      properties:
+        customType:
+          description: Custom Type.
+          type: string
+        primary:
+          description: If this is user's primary phone or not.
+          type: boolean
+        type:
+          description: 'Each entry can have a type which indicates standard types of that entry. For example phone could be of home_fax, work, mobile etc. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.'
+          type: string
+        value:
+          description: Phone number.
+          type: string
+      type: object
+    UserPhoto:
+      description: JSON template for Photo object in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        height:
+          description: Height in pixels of the photo
+          format: int32
+          type: integer
+        id:
+          description: Unique identifier of User (Read-only)
+          type: string
+        kind:
+          default: 'admin#directory#user#photo'
+          description: Kind of resource this is.
+          type: string
+        mimeType:
+          description: Mime Type of the photo
+          type: string
+        photoData:
+          description: Base64 encoded photo data
+          format: byte
+          type: string
+        primaryEmail:
+          description: Primary email of User (Read-only)
+          type: string
+        width:
+          description: Width in pixels of the photo
+          format: int32
+          type: integer
+      type: object
+    UserPosixAccount:
+      description: 'JSON template for a POSIX account entry. Description of the field family: go/fbs-posix.'
+      properties:
+        gecos:
+          description: The GECOS (user information) for this account.
+          type: string
+        gid:
+          description: The default group ID.
+          format: int32
+          type: integer
+        homeDirectory:
+          description: The path to the home directory for this account.
+          type: string
+        primary:
+          description: If this is user's primary account within the SystemId.
+          type: boolean
+        shell:
+          description: The path to the login shell for this account.
+          type: string
+        systemId:
+          description: System identifier for which account Username or Uid apply to.
+          type: string
+        uid:
+          description: The POSIX compliant user ID.
+          format: int32
+          type: integer
+        username:
+          description: The username of the account.
+          type: string
+      type: object
+    UserRelation:
+      description: JSON template for a relation entry.
+      properties:
+        customType:
+          description: Custom Type.
+          type: string
+        type:
+          description: 'The relation of the user. Some of the possible values are mother, father, sister, brother, manager, assistant, partner.'
+          type: string
+        value:
+          description: The name of the relation.
+          type: string
+      type: object
+    UserSshPublicKey:
+      description: JSON template for a POSIX account entry.
+      properties:
+        expirationTimeUsec:
+          description: An expiration time in microseconds since epoch.
+          format: int64
+          type: string
+        fingerprint:
+          description: A SHA-256 fingerprint of the SSH public key. (Read-only)
+          readOnly: true
+          type: string
+        key:
+          description: An SSH public key.
+          type: string
+      type: object
+    UserUndelete:
+      description: JSON request template to undelete a user in Directory API.
+      properties:
+        orgUnitPath:
+          description: OrgUnit of User
+          type: string
+      type: object
+    UserWebsite:
+      description: JSON template for a website entry.
+      properties:
+        customType:
+          description: Custom Type.
+          type: string
+        primary:
+          description: If this is user's primary website or not.
+          type: boolean
+        type:
+          description: 'Each entry can have a type which indicates standard types of that entry. For example website could be of home, work, blog etc. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.'
+          type: string
+        value:
+          description: Website.
+          type: string
+      type: object
+    Users:
+      description: JSON response template for List Users operation in Apps Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#users'
+          description: Kind of resource this is.
+          type: string
+        nextPageToken:
+          description: Token used to access next page of this result.
+          type: string
+        trigger_event:
+          description: Event that triggered this response (only used in case of Push Response)
+          type: string
+        users:
+          description: List of user objects.
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      type: object
+    VerificationCode:
+      description: JSON template for verification codes in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'admin#directory#verificationCode'
+          description: 'The type of the resource. This is always admin#directory#verificationCode.'
+          type: string
+        userId:
+          description: The obfuscated unique ID of the user.
+          type: string
+        verificationCode:
+          description: A current verification code for the user. Invalidated or used verification codes are not returned as part of the result.
+          type: string
+      type: object
+    VerificationCodes:
+      description: JSON response template for List verification codes operation in Directory API.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        items:
+          description: A list of verification code resources.
+          items:
+            $ref: '#/components/schemas/VerificationCode'
+          type: array
+        kind:
+          default: 'admin#directory#verificationCodesList'
+          description: 'The type of the resource. This is always admin#directory#verificationCodesList.'
+          type: string
+      type: object
+  parameters:
+    alt:
+      description: Data format for the response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+        default: json
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    userIp:
+      description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      in: query
+      name: userIp
+      schema:
+        type: string
+  requestBodies:
+    Channel:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Channel'
+    ChromeOsDevice:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ChromeOsDevice'
+    OrgUnit:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrgUnit'
+    Schema:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Schema'
+    Notification:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Notification'
+    CalendarResource:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CalendarResource'
+    Role:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Role'
+    Customer:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Customer'
+    Group:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Group'
+    Alias:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Alias'
+    Member:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Member'
+    User:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    UserPhoto:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserPhoto'
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/admin.directory.customer': View and manage customer related information
+            'https://www.googleapis.com/auth/admin.directory.customer.readonly': View customer related information
+            'https://www.googleapis.com/auth/admin.directory.device.chromeos': View and manage your Chrome OS devices' metadata
+            'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly': View your Chrome OS devices' metadata
+            'https://www.googleapis.com/auth/admin.directory.device.mobile': View and manage your mobile devices' metadata
+            'https://www.googleapis.com/auth/admin.directory.device.mobile.action': Manage your mobile devices by performing administrative tasks
+            'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly': View your mobile devices' metadata
+            'https://www.googleapis.com/auth/admin.directory.domain': View and manage the provisioning of domains for your customers
+            'https://www.googleapis.com/auth/admin.directory.domain.readonly': View domains related to your customers
+            'https://www.googleapis.com/auth/admin.directory.group': View and manage the provisioning of groups on your domain
+            'https://www.googleapis.com/auth/admin.directory.group.member': View and manage group subscriptions on your domain
+            'https://www.googleapis.com/auth/admin.directory.group.member.readonly': View group subscriptions on your domain
+            'https://www.googleapis.com/auth/admin.directory.group.readonly': View groups on your domain
+            'https://www.googleapis.com/auth/admin.directory.notifications': View and manage notifications received on your domain
+            'https://www.googleapis.com/auth/admin.directory.orgunit': View and manage organization units on your domain
+            'https://www.googleapis.com/auth/admin.directory.orgunit.readonly': View organization units on your domain
+            'https://www.googleapis.com/auth/admin.directory.resource.calendar': View and manage the provisioning of calendar resources on your domain
+            'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly': View calendar resources on your domain
+            'https://www.googleapis.com/auth/admin.directory.rolemanagement': Manage delegated admin roles for your domain
+            'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly': View delegated admin roles for your domain
+            'https://www.googleapis.com/auth/admin.directory.user': View and manage the provisioning of users on your domain
+            'https://www.googleapis.com/auth/admin.directory.user.alias': View and manage user aliases on your domain
+            'https://www.googleapis.com/auth/admin.directory.user.alias.readonly': View user aliases on your domain
+            'https://www.googleapis.com/auth/admin.directory.user.readonly': View users on your domain
+            'https://www.googleapis.com/auth/admin.directory.user.security': Manage data access permissions for users on your domain
+            'https://www.googleapis.com/auth/admin.directory.userschema': View and manage the provisioning of user schemas on your domain
+            'https://www.googleapis.com/auth/admin.directory.userschema.readonly': View user schemas on your domain
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/admin.directory.customer': View and manage customer related information
+            'https://www.googleapis.com/auth/admin.directory.customer.readonly': View customer related information
+            'https://www.googleapis.com/auth/admin.directory.device.chromeos': View and manage your Chrome OS devices' metadata
+            'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly': View your Chrome OS devices' metadata
+            'https://www.googleapis.com/auth/admin.directory.device.mobile': View and manage your mobile devices' metadata
+            'https://www.googleapis.com/auth/admin.directory.device.mobile.action': Manage your mobile devices by performing administrative tasks
+            'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly': View your mobile devices' metadata
+            'https://www.googleapis.com/auth/admin.directory.domain': View and manage the provisioning of domains for your customers
+            'https://www.googleapis.com/auth/admin.directory.domain.readonly': View domains related to your customers
+            'https://www.googleapis.com/auth/admin.directory.group': View and manage the provisioning of groups on your domain
+            'https://www.googleapis.com/auth/admin.directory.group.member': View and manage group subscriptions on your domain
+            'https://www.googleapis.com/auth/admin.directory.group.member.readonly': View group subscriptions on your domain
+            'https://www.googleapis.com/auth/admin.directory.group.readonly': View groups on your domain
+            'https://www.googleapis.com/auth/admin.directory.notifications': View and manage notifications received on your domain
+            'https://www.googleapis.com/auth/admin.directory.orgunit': View and manage organization units on your domain
+            'https://www.googleapis.com/auth/admin.directory.orgunit.readonly': View organization units on your domain
+            'https://www.googleapis.com/auth/admin.directory.resource.calendar': View and manage the provisioning of calendar resources on your domain
+            'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly': View calendar resources on your domain
+            'https://www.googleapis.com/auth/admin.directory.rolemanagement': Manage delegated admin roles for your domain
+            'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly': View delegated admin roles for your domain
+            'https://www.googleapis.com/auth/admin.directory.user': View and manage the provisioning of users on your domain
+            'https://www.googleapis.com/auth/admin.directory.user.alias': View and manage user aliases on your domain
+            'https://www.googleapis.com/auth/admin.directory.user.alias.readonly': View user aliases on your domain
+            'https://www.googleapis.com/auth/admin.directory.user.readonly': View users on your domain
+            'https://www.googleapis.com/auth/admin.directory.user.security': Manage data access permissions for users on your domain
+            'https://www.googleapis.com/auth/admin.directory.userschema': View and manage the provisioning of user schemas on your domain
+            'https://www.googleapis.com/auth/admin.directory.userschema.readonly': View user schemas on your domain

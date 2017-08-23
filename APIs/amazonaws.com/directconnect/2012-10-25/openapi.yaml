@@ -1,0 +1,2563 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://directconnect.amazonaws.com/'
+info:
+  version: '2012-10-25'
+  x-release: v4
+  title: AWS Direct Connect
+  description: 'AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. With this connection in place, you can create virtual interfaces directly to the AWS cloud (for example, to Amazon Elastic Compute Cloud (Amazon EC2) and Amazon Simple Storage Service (Amazon S3)) and to Amazon Virtual Private Cloud (Amazon VPC), bypassing Internet service providers in your network path. An AWS Direct Connect location provides access to AWS in the region it is associated with, as well as access to other US regions. For example, you can provision a single connection to any AWS Direct Connect location in the US and use it to access public AWS services in all US Regions and AWS GovCloud (US).'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: directconnect
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/directconnect-2012-10-25.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/directconnect/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AllocateConnectionOnInterconnect
+      description: <p>Deprecated in favor of <a>AllocateHostedConnection</a>.</p> <p>Creates a hosted connection on an interconnect.</p> <p>Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the given interconnect.</p> <note> <p>This is intended for use by AWS Direct Connect partners only.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllocateConnectionOnInterconnectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AllocateHostedConnection':
+    post:
+      operationId: AllocateHostedConnection
+      description: <p>Creates a hosted connection on an interconnect or a link aggregation group (LAG).</p> <p>Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the given interconnect or LAG.</p> <note> <p>This is intended for use by AWS Direct Connect partners only.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllocateHostedConnectionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AllocatePrivateVirtualInterface':
+    post:
+      operationId: AllocatePrivateVirtualInterface
+      description: '<p>Provisions a private virtual interface to be owned by another AWS customer.</p> <p>Virtual interfaces created using this action must be confirmed by the virtual interface owner by using the <a>ConfirmPrivateVirtualInterface</a> action. Until then, the virtual interface will be in ''Confirming'' state, and will not be available for handling traffic.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualInterface'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllocatePrivateVirtualInterfaceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AllocatePublicVirtualInterface':
+    post:
+      operationId: AllocatePublicVirtualInterface
+      description: '<p>Provisions a public virtual interface to be owned by a different customer.</p> <p>The owner of a connection calls this function to provision a public virtual interface which will be owned by another AWS customer.</p> <p>Virtual interfaces created using this function must be confirmed by the virtual interface owner by calling ConfirmPublicVirtualInterface. Until this step has been completed, the virtual interface will be in ''Confirming'' state, and will not be available for handling traffic.</p> <p>When creating an IPv6 public virtual interface (addressFamily is ''ipv6''), the customer and amazon address fields should be left blank to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently not supported.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualInterface'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AllocatePublicVirtualInterfaceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AssociateConnectionWithLag':
+    post:
+      operationId: AssociateConnectionWithLag
+      description: '<p>Associates an existing connection with a link aggregation group (LAG). The connection is interrupted and re-established as a member of the LAG (connectivity to AWS will be interrupted). The connection must be hosted on the same AWS Direct Connect endpoint as the LAG, and its bandwidth must match the bandwidth for the LAG. You can reassociate a connection that''s currently associated with a different LAG; however, if removing the connection will cause the original LAG to fall below its setting for minimum number of operational connections, the request fails.</p> <p>Any virtual interfaces that are directly associated with the connection are automatically re-associated with the LAG. If the connection was originally associated with a different LAG, the virtual interfaces remain associated with the original LAG.</p> <p>For interconnects, any hosted connections are automatically re-associated with the LAG. If the interconnect was originally associated with a different LAG, the hosted connections remain associated with the original LAG.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateConnectionWithLagRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AssociateHostedConnection':
+    post:
+      operationId: AssociateHostedConnection
+      description: '<p>Associates a hosted connection and its virtual interfaces with a link aggregation group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted connection with a conflicting VLAN number or IP address, the operation fails. This action temporarily interrupts the hosted connection''s connectivity to AWS as it is being migrated.</p> <note> <p>This is intended for use by AWS Direct Connect partners only.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateHostedConnectionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AssociateVirtualInterface':
+    post:
+      operationId: AssociateVirtualInterface
+      description: '<p>Associates a virtual interface with a specified link aggregation group (LAG) or connection. Connectivity to AWS is temporarily interrupted as the virtual interface is being migrated. If the target connection or LAG has an associated virtual interface with a conflicting VLAN number or a conflicting IP address, the operation fails. </p> <p>Virtual interfaces associated with a hosted connection cannot be associated with a LAG; hosted connections must be migrated along with their virtual interfaces using <a>AssociateHostedConnection</a>.</p> <p>Hosted virtual interfaces (an interface for which the owner of the connection is not the owner of physical connection) can only be reassociated by the owner of the physical connection.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualInterface'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateVirtualInterfaceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ConfirmConnection':
+    post:
+      operationId: ConfirmConnection
+      description: '<p>Confirm the creation of a hosted connection on an interconnect.</p> <p>Upon creation, the hosted connection is initially in the ''Ordering'' state, and will remain in this state until the owner calls ConfirmConnection to confirm creation of the hosted connection.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfirmConnectionResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmConnectionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ConfirmPrivateVirtualInterface':
+    post:
+      operationId: ConfirmPrivateVirtualInterface
+      description: '<p>Accept ownership of a private virtual interface created by another customer.</p> <p>After the virtual interface owner calls this function, the virtual interface will be created and attached to the given virtual private gateway, and will be available for handling traffic.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfirmPrivateVirtualInterfaceResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmPrivateVirtualInterfaceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ConfirmPublicVirtualInterface':
+    post:
+      operationId: ConfirmPublicVirtualInterface
+      description: '<p>Accept ownership of a public virtual interface created by another customer.</p> <p>After the virtual interface owner calls this function, the specified virtual interface will be created and made available for handling traffic.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfirmPublicVirtualInterfaceResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmPublicVirtualInterfaceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateBGPPeer':
+    post:
+      operationId: CreateBGPPeer
+      description: '<p>Creates a new BGP peer on a specified virtual interface. The BGP peer cannot be in the same address family (IPv4/IPv6) of an existing BGP peer on the virtual interface.</p> <p>You must create a BGP peer for the corresponding address family in order to access AWS resources that also use that address family.</p> <p>When creating a IPv6 BGP peer, the Amazon address and customer address fields must be left blank. IPv6 addresses are automatically assigned from Amazon''s pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p> <p>For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBGPPeerResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBGPPeerRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateConnection':
+    post:
+      operationId: CreateConnection
+      description: '<p>Creates a new connection between the customer network and a specific AWS Direct Connect location.</p> <p>A connection links your internal network to an AWS Direct Connect location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end of the cable is connected to your router, the other to an AWS Direct Connect router. An AWS Direct Connect location provides access to Amazon Web Services in the region it is associated with. You can establish connections with AWS Direct Connect locations in multiple regions, but a connection in one region does not provide connectivity to other regions.</p> <p>You can automatically add the new connection to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new connection is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no connection will be created.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConnectionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateInterconnect':
+    post:
+      operationId: CreateInterconnect
+      description: '<p>Creates a new interconnect between a AWS Direct Connect partner''s network and a specific AWS Direct Connect location.</p> <p>An interconnect is a connection which is capable of hosting other connections. The AWS Direct Connect partner can use an interconnect to provide sub-1Gbps AWS Direct Connect service to tier 2 customers who do not have their own connections. Like a standard connection, an interconnect links the AWS Direct Connect partner''s network to an AWS Direct Connect location over a standard 1 Gbps or 10 Gbps Ethernet fiber-optic cable. One end is connected to the partner''s router, the other to an AWS Direct Connect router.</p> <p>You can automatically add the new interconnect to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new interconnect is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no interconnect will be created.</p> <p>For each end customer, the AWS Direct Connect partner provisions a connection on their interconnect by calling AllocateConnectionOnInterconnect. The end customer can then connect to AWS resources by creating a virtual interface on their connection, using the VLAN assigned to them by the AWS Direct Connect partner.</p> <note> <p>This is intended for use by AWS Direct Connect partners only.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Interconnect'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInterconnectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateLag':
+    post:
+      operationId: CreateLag
+      description: '<p>Creates a new link aggregation group (LAG) with the specified number of bundled physical connections between the customer network and a specific AWS Direct Connect location. A LAG is a logical interface that uses the Link Aggregation Control Protocol (LACP) to aggregate multiple 1 gigabit or 10 gigabit interfaces, allowing you to treat them as a single interface.</p> <p>All connections in a LAG must use the same bandwidth (for example, 10 Gbps), and must terminate at the same AWS Direct Connect endpoint.</p> <p>You can have up to 10 connections per LAG. Regardless of this limit, if you request more connections for the LAG than AWS Direct Connect can allocate on a single endpoint, no LAG is created.</p> <p>You can specify an existing physical connection or interconnect to include in the LAG (which counts towards the total number of connections). Doing so interrupts the current physical connection or hosted connections, and re-establishes them as a member of the LAG. The LAG will be created on the same AWS Direct Connect endpoint to which the connection terminates. Any virtual interfaces associated with the connection are automatically disassociated and re-associated with the LAG. The connection ID does not change.</p> <p>If the AWS account used to create a LAG is a registered AWS Direct Connect partner, the LAG is automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual interfaces cannot be directly configured.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lag'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLagRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreatePrivateVirtualInterface':
+    post:
+      operationId: CreatePrivateVirtualInterface
+      description: Creates a new private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface supports sending traffic to a single virtual private cloud (VPC).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualInterface'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePrivateVirtualInterfaceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreatePublicVirtualInterface':
+    post:
+      operationId: CreatePublicVirtualInterface
+      description: '<p>Creates a new public virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A public virtual interface supports sending traffic to public services of AWS such as Amazon Simple Storage Service (Amazon S3).</p> <p>When creating an IPv6 public virtual interface (addressFamily is ''ipv6''), the customer and amazon address fields should be left blank to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently not supported.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualInterface'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePublicVirtualInterfaceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteBGPPeer':
+    post:
+      operationId: DeleteBGPPeer
+      description: Deletes a BGP peer on the specified virtual interface that matches the specified customer address and ASN. You cannot delete the last BGP peer from a virtual interface.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBGPPeerResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBGPPeerRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteConnection':
+    post:
+      operationId: DeleteConnection
+      description: <p>Deletes the connection.</p> <p>Deleting a connection only stops the AWS Direct Connect port hour and data transfer charges. You need to cancel separately with the providers any services or charges for cross-connects or network circuits that connect you to the AWS Direct Connect location.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteConnectionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteInterconnect':
+    post:
+      operationId: DeleteInterconnect
+      description: <p>Deletes the specified interconnect.</p> <note> <p>This is intended for use by AWS Direct Connect partners only.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteInterconnectResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteInterconnectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLag':
+    post:
+      operationId: DeleteLag
+      description: Deletes a link aggregation group (LAG). You cannot delete a LAG if it has active virtual interfaces or hosted connections.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lag'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteLagRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteVirtualInterface':
+    post:
+      operationId: DeleteVirtualInterface
+      description: Deletes a virtual interface.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteVirtualInterfaceResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteVirtualInterfaceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConnectionLoa':
+    post:
+      operationId: DescribeConnectionLoa
+      description: '<p>Deprecated in favor of <a>DescribeLoa</a>.</p> <p>Returns the LOA-CFA for a Connection.</p> <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that your APN partner or service provider uses when establishing your cross connect to AWS at the colocation facility. For more information, see <a href="http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html">Requesting Cross Connects at AWS Direct Connect Locations</a> in the AWS Direct Connect user guide.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConnectionLoaResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConnectionLoaRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConnections':
+    post:
+      operationId: DescribeConnections
+      description: '<p>Displays all connections in this region.</p> <p>If a connection ID is provided, the call returns only that particular connection.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connections'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConnectionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConnectionsOnInterconnect':
+    post:
+      operationId: DescribeConnectionsOnInterconnect
+      description: <p>Deprecated in favor of <a>DescribeHostedConnections</a>.</p> <p>Returns a list of connections that have been provisioned on the given interconnect.</p> <note> <p>This is intended for use by AWS Direct Connect partners only.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connections'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConnectionsOnInterconnectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeHostedConnections':
+    post:
+      operationId: DescribeHostedConnections
+      description: <p>Returns a list of hosted connections that have been provisioned on the given interconnect or link aggregation group (LAG).</p> <note> <p>This is intended for use by AWS Direct Connect partners only.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connections'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeHostedConnectionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeInterconnectLoa':
+    post:
+      operationId: DescribeInterconnectLoa
+      description: '<p>Deprecated in favor of <a>DescribeLoa</a>.</p> <p>Returns the LOA-CFA for an Interconnect.</p> <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that is used when establishing your cross connect to AWS at the colocation facility. For more information, see <a href="http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html">Requesting Cross Connects at AWS Direct Connect Locations</a> in the AWS Direct Connect user guide.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeInterconnectLoaResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeInterconnectLoaRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeInterconnects':
+    post:
+      operationId: DescribeInterconnects
+      description: '<p>Returns a list of interconnects owned by the AWS account.</p> <p>If an interconnect ID is provided, it will only return this particular interconnect.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Interconnects'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeInterconnectsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLags':
+    post:
+      operationId: DescribeLags
+      description: '<p>Describes the link aggregation groups (LAGs) in your account. </p> <p>If a LAG ID is provided, only information about the specified LAG is returned.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lags'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLoa':
+    post:
+      operationId: DescribeLoa
+      description: '<p>Returns the LOA-CFA for a connection, interconnect, or link aggregation group (LAG).</p> <p>The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a document that is used when establishing your cross connect to AWS at the colocation facility. For more information, see <a href="http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html">Requesting Cross Connects at AWS Direct Connect Locations</a> in the AWS Direct Connect user guide.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Loa'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLoaRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLocations':
+    post:
+      operationId: DescribeLocations
+      description: Returns the list of AWS Direct Connect locations in the current AWS region. These are the locations that may be selected when calling CreateConnection or CreateInterconnect.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Locations'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTags':
+    post:
+      operationId: DescribeTags
+      description: Describes the tags associated with the specified Direct Connect resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTagsResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTagsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeVirtualGateways':
+    post:
+      operationId: DescribeVirtualGateways
+      description: '<p>Returns a list of virtual private gateways owned by the AWS account.</p> <p>You can create one or more AWS Direct Connect private virtual interfaces linking to a virtual private gateway. A virtual private gateway can be managed via Amazon Virtual Private Cloud (VPC) console or the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html">EC2 CreateVpnGateway</a> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualGateways'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeVirtualInterfaces':
+    post:
+      operationId: DescribeVirtualInterfaces
+      description: '<p>Displays all virtual interfaces for an AWS account. Virtual interfaces deleted fewer than 15 minutes before you make the request are also returned. If you specify a connection ID, only the virtual interfaces associated with the connection are returned. If you specify a virtual interface ID, then only a single virtual interface is returned.</p> <p>A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect location and the customer.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualInterfaces'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeVirtualInterfacesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateConnectionFromLag':
+    post:
+      operationId: DisassociateConnectionFromLag
+      description: '<p>Disassociates a connection from a link aggregation group (LAG). The connection is interrupted and re-established as a standalone connection (the connection is not deleted; to delete the connection, use the <a>DeleteConnection</a> request). If the LAG has associated virtual interfaces or hosted connections, they remain associated with the LAG. A disassociated connection owned by an AWS Direct Connect partner is automatically converted to an interconnect.</p> <p>If disassociating the connection will cause the LAG to fall below its setting for minimum number of operational connections, the request fails, except when it''s the last member of the LAG. If all connections are disassociated, the LAG continues to exist as an empty LAG with no physical connections. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateConnectionFromLagRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TagResource':
+    post:
+      operationId: TagResource
+      description: '<p>Adds the specified tags to the specified Direct Connect resource. Each Direct Connect resource can have a maximum of 50 tags.</p> <p>Each tag consists of a key and an optional value. If a tag with the same key is already associated with the Direct Connect resource, this action updates its value.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: DuplicateTagKeysException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateTagKeysException'
+        '481':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '482':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '483':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UntagResource':
+    post:
+      operationId: UntagResource
+      description: Removes one or more tags from the specified Direct Connect resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateLag':
+    post:
+      operationId: UpdateLag
+      description: '<p>Updates the attributes of a link aggregation group (LAG). </p> <p>You can update the following attributes: </p> <ul> <li> <p>The name of the LAG.</p> </li> <li> <p>The value for the minimum number of connections that must be operational for the LAG itself to be operational. </p> </li> </ul> <p>When you create a LAG, the default value for the minimum number of operational connections is zero (0). If you update this value, and the number of operational connections falls below the specified value, the LAG will automatically go down to avoid overutilization of the remaining connections. Adjusting this value should be done with care as it could force the LAG down if the value is set higher than the current number of operational connections.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lag'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLagRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    ASN:
+      type: integer
+      description: '<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p> <p>Example: 65000</p>'
+    AddressFamily:
+      type: string
+      enum:
+        - ipv4
+        - ipv6
+      description: '<p>Indicates the address family for the BGP peer.</p> <ul> <li> <p> <b>ipv4</b>: IPv4 address family</p> </li> <li> <p> <b>ipv6</b>: IPv6 address family</p> </li> </ul>'
+    AllocateConnectionOnInterconnectRequest:
+      type: object
+      required:
+        - bandwidth
+        - connectionName
+        - ownerAccount
+        - interconnectId
+        - vlan
+      properties:
+        bandwidth:
+          $ref: '#/components/schemas/Bandwidth'
+        connectionName:
+          $ref: '#/components/schemas/ConnectionName'
+        ownerAccount:
+          $ref: '#/components/schemas/OwnerAccount'
+        interconnectId:
+          $ref: '#/components/schemas/InterconnectId'
+        vlan:
+          $ref: '#/components/schemas/VLAN'
+      description: Container for the parameters to the AllocateConnectionOnInterconnect operation.
+    AllocateHostedConnectionRequest:
+      type: object
+      required:
+        - connectionId
+        - ownerAccount
+        - bandwidth
+        - connectionName
+        - vlan
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        ownerAccount:
+          $ref: '#/components/schemas/OwnerAccount'
+        bandwidth:
+          $ref: '#/components/schemas/Bandwidth'
+        connectionName:
+          $ref: '#/components/schemas/ConnectionName'
+        vlan:
+          $ref: '#/components/schemas/VLAN'
+      description: Container for the parameters to theHostedConnection operation.
+    AllocatePrivateVirtualInterfaceRequest:
+      type: object
+      required:
+        - connectionId
+        - ownerAccount
+        - newPrivateVirtualInterfaceAllocation
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        ownerAccount:
+          $ref: '#/components/schemas/OwnerAccount'
+        newPrivateVirtualInterfaceAllocation:
+          $ref: '#/components/schemas/NewPrivateVirtualInterfaceAllocation'
+      description: Container for the parameters to the AllocatePrivateVirtualInterface operation.
+    AllocatePublicVirtualInterfaceRequest:
+      type: object
+      required:
+        - connectionId
+        - ownerAccount
+        - newPublicVirtualInterfaceAllocation
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        ownerAccount:
+          $ref: '#/components/schemas/OwnerAccount'
+        newPublicVirtualInterfaceAllocation:
+          $ref: '#/components/schemas/NewPublicVirtualInterfaceAllocation'
+      description: Container for the parameters to the AllocatePublicVirtualInterface operation.
+    AmazonAddress:
+      type: string
+      description: '<p>IP address assigned to the Amazon interface.</p> <p>Example: 192.168.1.1/30 or 2001:db8::1/125</p>'
+    AssociateConnectionWithLagRequest:
+      type: object
+      required:
+        - connectionId
+        - lagId
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        lagId:
+          $ref: '#/components/schemas/LagId'
+      description: Container for the parameters to the AssociateConnectionWithLag operation.
+    AssociateHostedConnectionRequest:
+      type: object
+      required:
+        - connectionId
+        - parentConnectionId
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        parentConnectionId:
+          $ref: '#/components/schemas/ConnectionId'
+      description: Container for the parameters to the AssociateHostedConnection operation.
+    AssociateVirtualInterfaceRequest:
+      type: object
+      required:
+        - virtualInterfaceId
+        - connectionId
+      properties:
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+      description: Container for the parameters to the AssociateVirtualInterface operation.
+    AwsDevice:
+      type: string
+      description: '<p>An abstract ID for the physical Direct Connect endpoint.</p> <p>Example: EQC50-abcdef123456</p>'
+    BGPAuthKey:
+      type: string
+      description: '<p>The authentication key for BGP configuration.</p> <p>Example: asdf34example</p>'
+    BGPPeer:
+      type: object
+      properties:
+        asn:
+          $ref: '#/components/schemas/ASN'
+        authKey:
+          $ref: '#/components/schemas/BGPAuthKey'
+        addressFamily:
+          $ref: '#/components/schemas/AddressFamily'
+        amazonAddress:
+          $ref: '#/components/schemas/AmazonAddress'
+        customerAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        bgpPeerState:
+          $ref: '#/components/schemas/BGPPeerState'
+        bgpStatus:
+          $ref: '#/components/schemas/BGPStatus'
+      description: A structure containing information about a BGP peer.
+    BGPPeerList:
+      type: array
+      description: A list of the BGP peers configured on this virtual interface.
+      items:
+        $ref: '#/components/schemas/BGPPeer'
+    BGPPeerState:
+      type: string
+      enum:
+        - verifying
+        - pending
+        - available
+        - deleting
+        - deleted
+      description: '<p>The state of the BGP peer.</p> <ul> <li> <p> <b>Verifying</b>: The BGP peering addresses or ASN require validation before the BGP peer can be created. This state only applies to BGP peers on a public virtual interface. </p> </li> <li> <p> <b>Pending</b>: The BGP peer has been created, and is in this state until it is ready to be established.</p> </li> <li> <p> <b>Available</b>: The BGP peer can be established.</p> </li> <li> <p> <b>Deleting</b>: The BGP peer is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The BGP peer has been deleted and cannot be established.</p> </li> </ul>'
+    BGPStatus:
+      type: string
+      enum:
+        - up
+        - down
+      description: '<p>The Up/Down state of the BGP peer.</p> <ul> <li> <p> <b>Up</b>: The BGP peer is established.</p> </li> <li> <p> <b>Down</b>: The BGP peer is down.</p> </li> </ul>'
+    Bandwidth:
+      type: string
+      description: '<p>Bandwidth of the connection.</p> <p>Example: 1Gbps</p> <p>Default: None</p>'
+    BooleanFlag:
+      type: boolean
+    CIDR:
+      type: string
+    ConfirmConnectionRequest:
+      type: object
+      required:
+        - connectionId
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+      description: Container for the parameters to the ConfirmConnection operation.
+    ConfirmConnectionResponse:
+      type: object
+      properties:
+        connectionState:
+          $ref: '#/components/schemas/ConnectionState'
+      description: The response received when ConfirmConnection is called.
+    ConfirmPrivateVirtualInterfaceRequest:
+      type: object
+      required:
+        - virtualInterfaceId
+        - virtualGatewayId
+      properties:
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+        virtualGatewayId:
+          $ref: '#/components/schemas/VirtualGatewayId'
+      description: Container for the parameters to the ConfirmPrivateVirtualInterface operation.
+    ConfirmPrivateVirtualInterfaceResponse:
+      type: object
+      properties:
+        virtualInterfaceState:
+          $ref: '#/components/schemas/VirtualInterfaceState'
+      description: The response received when ConfirmPrivateVirtualInterface is called.
+    ConfirmPublicVirtualInterfaceRequest:
+      type: object
+      required:
+        - virtualInterfaceId
+      properties:
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+      description: Container for the parameters to the ConfirmPublicVirtualInterface operation.
+    ConfirmPublicVirtualInterfaceResponse:
+      type: object
+      properties:
+        virtualInterfaceState:
+          $ref: '#/components/schemas/VirtualInterfaceState'
+      description: The response received when ConfirmPublicVirtualInterface is called.
+    Connection:
+      type: object
+      properties:
+        ownerAccount:
+          $ref: '#/components/schemas/OwnerAccount'
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        connectionName:
+          $ref: '#/components/schemas/ConnectionName'
+        connectionState:
+          $ref: '#/components/schemas/ConnectionState'
+        region:
+          $ref: '#/components/schemas/Region'
+        location:
+          $ref: '#/components/schemas/LocationCode'
+        bandwidth:
+          $ref: '#/components/schemas/Bandwidth'
+        vlan:
+          $ref: '#/components/schemas/VLAN'
+        partnerName:
+          $ref: '#/components/schemas/PartnerName'
+        loaIssueTime:
+          $ref: '#/components/schemas/LoaIssueTime'
+        lagId:
+          $ref: '#/components/schemas/LagId'
+        awsDevice:
+          $ref: '#/components/schemas/AwsDevice'
+      description: A connection represents the physical network connection between the AWS Direct Connect location and the customer.
+    ConnectionId:
+      type: string
+      description: '<p>The ID of the connection. This field is also used as the ID type for operations that use multiple connection types (LAG, interconnect, and/or connection).</p> <p>Example: dxcon-fg5678gh</p> <p>Default: None</p>'
+    ConnectionList:
+      type: array
+      description: A list of connections.
+      items:
+        $ref: '#/components/schemas/Connection'
+    ConnectionName:
+      type: string
+      description: '<p>The name of the connection.</p> <p>Example: "<i>My Connection to AWS</i>"</p> <p>Default: None</p>'
+    ConnectionState:
+      type: string
+      enum:
+        - ordering
+        - requested
+        - pending
+        - available
+        - down
+        - deleting
+        - deleted
+        - rejected
+      description: '<p>State of the connection.</p> <ul> <li> <p> <b>Ordering</b>: The initial state of a hosted connection provisioned on an interconnect. The connection stays in the ordering state until the owner of the hosted connection confirms or declines the connection order.</p> </li> <li> <p> <b>Requested</b>: The initial state of a standard connection. The connection stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</p> </li> <li> <p> <b>Pending</b>: The connection has been approved, and is being initialized.</p> </li> <li> <p> <b>Available</b>: The network link is up, and the connection is ready for use.</p> </li> <li> <p> <b>Down</b>: The network link is down.</p> </li> <li> <p> <b>Deleting</b>: The connection is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The connection has been deleted.</p> </li> <li> <p> <b>Rejected</b>: A hosted connection in the ''Ordering'' state will enter the ''Rejected'' state if it is deleted by the end customer.</p> </li> </ul>'
+    Connections:
+      type: object
+      properties:
+        connections:
+          $ref: '#/components/schemas/ConnectionList'
+      description: A structure containing a list of connections.
+    Count:
+      type: integer
+    CreateBGPPeerRequest:
+      type: object
+      properties:
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+        newBGPPeer:
+          $ref: '#/components/schemas/NewBGPPeer'
+      description: Container for the parameters to the CreateBGPPeer operation.
+    CreateBGPPeerResponse:
+      type: object
+      properties:
+        virtualInterface:
+          $ref: '#/components/schemas/VirtualInterface'
+      description: The response received when CreateBGPPeer is called.
+    CreateConnectionRequest:
+      type: object
+      required:
+        - location
+        - bandwidth
+        - connectionName
+      properties:
+        location:
+          $ref: '#/components/schemas/LocationCode'
+        bandwidth:
+          $ref: '#/components/schemas/Bandwidth'
+        connectionName:
+          $ref: '#/components/schemas/ConnectionName'
+        lagId:
+          $ref: '#/components/schemas/LagId'
+      description: Container for the parameters to the CreateConnection operation.
+    CreateInterconnectRequest:
+      type: object
+      required:
+        - interconnectName
+        - bandwidth
+        - location
+      properties:
+        interconnectName:
+          $ref: '#/components/schemas/InterconnectName'
+        bandwidth:
+          $ref: '#/components/schemas/Bandwidth'
+        location:
+          $ref: '#/components/schemas/LocationCode'
+        lagId:
+          $ref: '#/components/schemas/LagId'
+      description: Container for the parameters to the CreateInterconnect operation.
+    CreateLagRequest:
+      type: object
+      required:
+        - numberOfConnections
+        - location
+        - connectionsBandwidth
+        - lagName
+      properties:
+        numberOfConnections:
+          $ref: '#/components/schemas/Count'
+        location:
+          $ref: '#/components/schemas/LocationCode'
+        connectionsBandwidth:
+          $ref: '#/components/schemas/Bandwidth'
+        lagName:
+          $ref: '#/components/schemas/LagName'
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+      description: Container for the parameters to the CreateLag operation.
+    CreatePrivateVirtualInterfaceRequest:
+      type: object
+      required:
+        - connectionId
+        - newPrivateVirtualInterface
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        newPrivateVirtualInterface:
+          $ref: '#/components/schemas/NewPrivateVirtualInterface'
+      description: Container for the parameters to the CreatePrivateVirtualInterface operation.
+    CreatePublicVirtualInterfaceRequest:
+      type: object
+      required:
+        - connectionId
+        - newPublicVirtualInterface
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        newPublicVirtualInterface:
+          $ref: '#/components/schemas/NewPublicVirtualInterface'
+      description: Container for the parameters to the CreatePublicVirtualInterface operation.
+    CustomerAddress:
+      type: string
+      description: '<p>IP address assigned to the customer interface.</p> <p>Example: 192.168.1.2/30 or 2001:db8::2/125</p>'
+    DeleteBGPPeerRequest:
+      type: object
+      properties:
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+        asn:
+          $ref: '#/components/schemas/ASN'
+        customerAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+      description: Container for the parameters to the DeleteBGPPeer operation.
+    DeleteBGPPeerResponse:
+      type: object
+      properties:
+        virtualInterface:
+          $ref: '#/components/schemas/VirtualInterface'
+      description: The response received when DeleteBGPPeer is called.
+    DeleteConnectionRequest:
+      type: object
+      required:
+        - connectionId
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+      description: Container for the parameters to the DeleteConnection operation.
+    DeleteInterconnectRequest:
+      type: object
+      required:
+        - interconnectId
+      properties:
+        interconnectId:
+          $ref: '#/components/schemas/InterconnectId'
+      description: Container for the parameters to the DeleteInterconnect operation.
+    DeleteInterconnectResponse:
+      type: object
+      properties:
+        interconnectState:
+          $ref: '#/components/schemas/InterconnectState'
+      description: The response received when DeleteInterconnect is called.
+    DeleteLagRequest:
+      type: object
+      required:
+        - lagId
+      properties:
+        lagId:
+          $ref: '#/components/schemas/LagId'
+      description: Container for the parameters to the DeleteLag operation.
+    DeleteVirtualInterfaceRequest:
+      type: object
+      required:
+        - virtualInterfaceId
+      properties:
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+      description: Container for the parameters to the DeleteVirtualInterface operation.
+    DeleteVirtualInterfaceResponse:
+      type: object
+      properties:
+        virtualInterfaceState:
+          $ref: '#/components/schemas/VirtualInterfaceState'
+      description: The response received when DeleteVirtualInterface is called.
+    DescribeConnectionLoaRequest:
+      type: object
+      required:
+        - connectionId
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        providerName:
+          $ref: '#/components/schemas/ProviderName'
+        loaContentType:
+          $ref: '#/components/schemas/LoaContentType'
+      description: Container for the parameters to the DescribeConnectionLoa operation.
+    DescribeConnectionLoaResponse:
+      type: object
+      properties:
+        loa:
+          $ref: '#/components/schemas/Loa'
+      description: The response received when DescribeConnectionLoa is called.
+    DescribeConnectionsOnInterconnectRequest:
+      type: object
+      required:
+        - interconnectId
+      properties:
+        interconnectId:
+          $ref: '#/components/schemas/InterconnectId'
+      description: Container for the parameters to the DescribeConnectionsOnInterconnect operation.
+    DescribeConnectionsRequest:
+      type: object
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+      description: Container for the parameters to the DescribeConnections operation.
+    DescribeHostedConnectionsRequest:
+      type: object
+      required:
+        - connectionId
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+      description: Container for the parameters to the DescribeHostedConnections operation.
+    DescribeInterconnectLoaRequest:
+      type: object
+      required:
+        - interconnectId
+      properties:
+        interconnectId:
+          $ref: '#/components/schemas/InterconnectId'
+        providerName:
+          $ref: '#/components/schemas/ProviderName'
+        loaContentType:
+          $ref: '#/components/schemas/LoaContentType'
+      description: Container for the parameters to the DescribeInterconnectLoa operation.
+    DescribeInterconnectLoaResponse:
+      type: object
+      properties:
+        loa:
+          $ref: '#/components/schemas/Loa'
+      description: The response received when DescribeInterconnectLoa is called.
+    DescribeInterconnectsRequest:
+      type: object
+      properties:
+        interconnectId:
+          $ref: '#/components/schemas/InterconnectId'
+      description: Container for the parameters to the DescribeInterconnects operation.
+    DescribeLagsRequest:
+      type: object
+      properties:
+        lagId:
+          $ref: '#/components/schemas/LagId'
+      description: Container for the parameters to the DescribeLags operation.
+    DescribeLoaRequest:
+      type: object
+      required:
+        - connectionId
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        providerName:
+          $ref: '#/components/schemas/ProviderName'
+        loaContentType:
+          $ref: '#/components/schemas/LoaContentType'
+      description: Container for the parameters to the DescribeLoa operation.
+    DescribeTagsRequest:
+      type: object
+      required:
+        - resourceArns
+      properties:
+        resourceArns:
+          $ref: '#/components/schemas/ResourceArnList'
+      description: Container for the parameters to the DescribeTags operation.
+    DescribeTagsResponse:
+      type: object
+      properties:
+        resourceTags:
+          $ref: '#/components/schemas/ResourceTagList'
+      description: The response received when DescribeTags is called.
+    DescribeVirtualInterfacesRequest:
+      type: object
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+      description: Container for the parameters to the DescribeVirtualInterfaces operation.
+    DirectConnectClientException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The API was called with invalid parameters. The error message will contain additional details about the cause.
+    DirectConnectServerException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: A server-side error occurred during the API call. The error message will contain additional details about the cause.
+    DisassociateConnectionFromLagRequest:
+      type: object
+      required:
+        - connectionId
+        - lagId
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        lagId:
+          $ref: '#/components/schemas/LagId'
+      description: Container for the parameters to the DisassociateConnectionFromLag operation.
+    DuplicateTagKeysException:
+      type: object
+      properties: {}
+      description: A tag key was specified more than once.
+    ErrorMessage:
+      type: string
+    Interconnect:
+      type: object
+      properties:
+        interconnectId:
+          $ref: '#/components/schemas/InterconnectId'
+        interconnectName:
+          $ref: '#/components/schemas/InterconnectName'
+        interconnectState:
+          $ref: '#/components/schemas/InterconnectState'
+        region:
+          $ref: '#/components/schemas/Region'
+        location:
+          $ref: '#/components/schemas/LocationCode'
+        bandwidth:
+          $ref: '#/components/schemas/Bandwidth'
+        loaIssueTime:
+          $ref: '#/components/schemas/LoaIssueTime'
+        lagId:
+          $ref: '#/components/schemas/LagId'
+        awsDevice:
+          $ref: '#/components/schemas/AwsDevice'
+      description: '<p>An interconnect is a connection that can host other connections.</p> <p>Like a standard AWS Direct Connect connection, an interconnect represents the physical connection between an AWS Direct Connect partner''s network and a specific Direct Connect location. An AWS Direct Connect partner who owns an interconnect can provision hosted connections on the interconnect for their end customers, thereby providing the end customers with connectivity to AWS services.</p> <p>The resources of the interconnect, including bandwidth and VLAN numbers, are shared by all of the hosted connections on the interconnect, and the owner of the interconnect determines how these resources are assigned.</p>'
+    InterconnectId:
+      type: string
+      description: '<p>The ID of the interconnect.</p> <p>Example: dxcon-abc123</p>'
+    InterconnectList:
+      type: array
+      description: A list of interconnects.
+      items:
+        $ref: '#/components/schemas/Interconnect'
+    InterconnectName:
+      type: string
+      description: '<p>The name of the interconnect.</p> <p>Example: "<i>1G Interconnect to AWS</i>"</p>'
+    InterconnectState:
+      type: string
+      enum:
+        - requested
+        - pending
+        - available
+        - down
+        - deleting
+        - deleted
+      description: '<p>State of the interconnect.</p> <ul> <li> <p> <b>Requested</b>: The initial state of an interconnect. The interconnect stays in the requested state until the Letter of Authorization (LOA) is sent to the customer.</p> </li> <li> <p> <b>Pending</b>: The interconnect has been approved, and is being initialized.</p> </li> <li> <p> <b>Available</b>: The network link is up, and the interconnect is ready for use.</p> </li> <li> <p> <b>Down</b>: The network link is down.</p> </li> <li> <p> <b>Deleting</b>: The interconnect is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The interconnect has been deleted.</p> </li> </ul>'
+    Interconnects:
+      type: object
+      properties:
+        interconnects:
+          $ref: '#/components/schemas/InterconnectList'
+      description: A structure containing a list of interconnects.
+    Lag:
+      type: object
+      properties:
+        connectionsBandwidth:
+          $ref: '#/components/schemas/Bandwidth'
+        numberOfConnections:
+          $ref: '#/components/schemas/Count'
+        lagId:
+          $ref: '#/components/schemas/LagId'
+        ownerAccount:
+          $ref: '#/components/schemas/OwnerAccount'
+        lagName:
+          $ref: '#/components/schemas/LagName'
+        lagState:
+          $ref: '#/components/schemas/LagState'
+        location:
+          $ref: '#/components/schemas/LocationCode'
+        region:
+          $ref: '#/components/schemas/Region'
+        minimumLinks:
+          $ref: '#/components/schemas/Count'
+        awsDevice:
+          $ref: '#/components/schemas/AwsDevice'
+        connections:
+          $ref: '#/components/schemas/ConnectionList'
+        allowsHostedConnections:
+          $ref: '#/components/schemas/BooleanFlag'
+      description: 'Describes a link aggregation group (LAG). A LAG is a connection that uses the Link Aggregation Control Protocol (LACP) to logically aggregate a bundle of physical connections. Like an interconnect, it can host other connections. All connections in a LAG must terminate on the same physical AWS Direct Connect endpoint, and must be the same bandwidth.'
+    LagId:
+      type: string
+      description: '<p>The ID of the LAG.</p> <p>Example: dxlag-fg5678gh</p>'
+    LagList:
+      type: array
+      description: A list of LAGs.
+      items:
+        $ref: '#/components/schemas/Lag'
+    LagName:
+      type: string
+    LagState:
+      type: string
+      enum:
+        - requested
+        - pending
+        - available
+        - down
+        - deleting
+        - deleted
+      description: '<p>The state of the LAG.</p> <ul> <li> <p> <b>Requested</b>: The initial state of a LAG. The LAG stays in the requested state until the Letter of Authorization (LOA) is available.</p> </li> <li> <p> <b>Pending</b>: The LAG has been approved, and is being initialized.</p> </li> <li> <p> <b>Available</b>: The network link is established, and the LAG is ready for use.</p> </li> <li> <p> <b>Down</b>: The network link is down.</p> </li> <li> <p> <b>Deleting</b>: The LAG is in the process of being deleted.</p> </li> <li> <p> <b>Deleted</b>: The LAG has been deleted.</p> </li> </ul>'
+    Lags:
+      type: object
+      properties:
+        lags:
+          $ref: '#/components/schemas/LagList'
+      description: A structure containing a list of LAGs.
+    Loa:
+      type: object
+      properties:
+        loaContent:
+          $ref: '#/components/schemas/LoaContent'
+        loaContentType:
+          $ref: '#/components/schemas/LoaContentType'
+      description: A structure containing the Letter of Authorization - Connecting Facility Assignment (LOA-CFA) for a connection.
+    LoaContent:
+      type: string
+      description: The binary contents of the LOA-CFA document.
+    LoaContentType:
+      type: string
+      enum:
+        - application/pdf
+      description: '<p>A standard media type indicating the content type of the LOA-CFA document. Currently, the only supported value is "application/pdf".</p> <p>Default: application/pdf</p>'
+    LoaIssueTime:
+      type: string
+      format: date-time
+    Location:
+      type: object
+      properties:
+        locationCode:
+          $ref: '#/components/schemas/LocationCode'
+      description: An AWS Direct Connect location where connections and interconnects can be requested.
+    LocationCode:
+      type: string
+      description: '<p>Where the connection is located.</p> <p>Example: EqSV5</p> <p>Default: None</p>'
+    LocationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Location'
+    LocationName:
+      type: string
+    Locations:
+      type: object
+      properties:
+        locations:
+          $ref: '#/components/schemas/LocationList'
+      description: 'A location is a network facility where AWS Direct Connect routers are available to be connected. Generally, these are colocation hubs where many network providers have equipment, and where cross connects can be delivered. Locations include a name and facility code, and must be provided when creating a connection.'
+    NewBGPPeer:
+      type: object
+      properties:
+        asn:
+          $ref: '#/components/schemas/ASN'
+        authKey:
+          $ref: '#/components/schemas/BGPAuthKey'
+        addressFamily:
+          $ref: '#/components/schemas/AddressFamily'
+        amazonAddress:
+          $ref: '#/components/schemas/AmazonAddress'
+        customerAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+      description: A structure containing information about a new BGP peer.
+    NewPrivateVirtualInterface:
+      type: object
+      required:
+        - virtualInterfaceName
+        - vlan
+        - asn
+        - virtualGatewayId
+      properties:
+        virtualInterfaceName:
+          $ref: '#/components/schemas/VirtualInterfaceName'
+        vlan:
+          $ref: '#/components/schemas/VLAN'
+        asn:
+          $ref: '#/components/schemas/ASN'
+        authKey:
+          $ref: '#/components/schemas/BGPAuthKey'
+        amazonAddress:
+          $ref: '#/components/schemas/AmazonAddress'
+        customerAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        addressFamily:
+          $ref: '#/components/schemas/AddressFamily'
+        virtualGatewayId:
+          $ref: '#/components/schemas/VirtualGatewayId'
+      description: A structure containing information about a new private virtual interface.
+    NewPrivateVirtualInterfaceAllocation:
+      type: object
+      required:
+        - virtualInterfaceName
+        - vlan
+        - asn
+      properties:
+        virtualInterfaceName:
+          $ref: '#/components/schemas/VirtualInterfaceName'
+        vlan:
+          $ref: '#/components/schemas/VLAN'
+        asn:
+          $ref: '#/components/schemas/ASN'
+        authKey:
+          $ref: '#/components/schemas/BGPAuthKey'
+        amazonAddress:
+          $ref: '#/components/schemas/AmazonAddress'
+        addressFamily:
+          $ref: '#/components/schemas/AddressFamily'
+        customerAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+      description: A structure containing information about a private virtual interface that will be provisioned on a connection.
+    NewPublicVirtualInterface:
+      type: object
+      required:
+        - virtualInterfaceName
+        - vlan
+        - asn
+      properties:
+        virtualInterfaceName:
+          $ref: '#/components/schemas/VirtualInterfaceName'
+        vlan:
+          $ref: '#/components/schemas/VLAN'
+        asn:
+          $ref: '#/components/schemas/ASN'
+        authKey:
+          $ref: '#/components/schemas/BGPAuthKey'
+        amazonAddress:
+          $ref: '#/components/schemas/AmazonAddress'
+        customerAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        addressFamily:
+          $ref: '#/components/schemas/AddressFamily'
+        routeFilterPrefixes:
+          $ref: '#/components/schemas/RouteFilterPrefixList'
+      description: A structure containing information about a new public virtual interface.
+    NewPublicVirtualInterfaceAllocation:
+      type: object
+      required:
+        - virtualInterfaceName
+        - vlan
+        - asn
+      properties:
+        virtualInterfaceName:
+          $ref: '#/components/schemas/VirtualInterfaceName'
+        vlan:
+          $ref: '#/components/schemas/VLAN'
+        asn:
+          $ref: '#/components/schemas/ASN'
+        authKey:
+          $ref: '#/components/schemas/BGPAuthKey'
+        amazonAddress:
+          $ref: '#/components/schemas/AmazonAddress'
+        customerAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        addressFamily:
+          $ref: '#/components/schemas/AddressFamily'
+        routeFilterPrefixes:
+          $ref: '#/components/schemas/RouteFilterPrefixList'
+      description: A structure containing information about a public virtual interface that will be provisioned on a connection.
+    OwnerAccount:
+      type: string
+    PartnerName:
+      type: string
+    ProviderName:
+      type: string
+    Region:
+      type: string
+      description: '<p>The AWS region where the connection is located.</p> <p>Example: us-east-1</p> <p>Default: None</p>'
+    ResourceArn:
+      type: string
+    ResourceArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceArn'
+    ResourceTag:
+      type: object
+      properties:
+        resourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+        tags:
+          $ref: '#/components/schemas/TagList'
+      description: The tags associated with a Direct Connect resource.
+    ResourceTagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceTag'
+    RouteFilterPrefix:
+      type: object
+      properties:
+        cidr:
+          $ref: '#/components/schemas/CIDR'
+      description: A route filter prefix that the customer can advertise through Border Gateway Protocol (BGP) over a public virtual interface.
+    RouteFilterPrefixList:
+      type: array
+      description: A list of routes to be advertised to the AWS network in this region (public virtual interface).
+      items:
+        $ref: '#/components/schemas/RouteFilterPrefix'
+    RouterConfig:
+      type: string
+    Tag:
+      type: object
+      required:
+        - key
+      properties:
+        key:
+          $ref: '#/components/schemas/TagKey'
+        value:
+          $ref: '#/components/schemas/TagValue'
+      description: Information about a tag.
+    TagKey:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 1
+      maxLength: 128
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+    TagResourceRequest:
+      type: object
+      required:
+        - resourceArn
+        - tags
+      properties:
+        resourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+        tags:
+          $ref: '#/components/schemas/TagList'
+      description: Container for the parameters to the TagResource operation.
+    TagResourceResponse:
+      type: object
+      properties: {}
+      description: The response received when TagResource is called.
+    TagValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 0
+      maxLength: 256
+    TooManyTagsException:
+      type: object
+      properties: {}
+      description: You have reached the limit on the number of tags that can be assigned to a Direct Connect resource.
+    UntagResourceRequest:
+      type: object
+      required:
+        - resourceArn
+        - tagKeys
+      properties:
+        resourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+        tagKeys:
+          $ref: '#/components/schemas/TagKeyList'
+      description: Container for the parameters to the UntagResource operation.
+    UntagResourceResponse:
+      type: object
+      properties: {}
+      description: The response received when UntagResource is called.
+    UpdateLagRequest:
+      type: object
+      required:
+        - lagId
+      properties:
+        lagId:
+          $ref: '#/components/schemas/LagId'
+        lagName:
+          $ref: '#/components/schemas/LagName'
+        minimumLinks:
+          $ref: '#/components/schemas/Count'
+      description: Container for the parameters to the UpdateLag operation.
+    VLAN:
+      type: integer
+      description: '<p>The VLAN ID.</p> <p>Example: 101</p>'
+    VirtualGateway:
+      type: object
+      properties:
+        virtualGatewayId:
+          $ref: '#/components/schemas/VirtualGatewayId'
+        virtualGatewayState:
+          $ref: '#/components/schemas/VirtualGatewayState'
+      description: '<p>You can create one or more AWS Direct Connect private virtual interfaces linking to your virtual private gateway.</p> <p>Virtual private gateways can be managed using the Amazon Virtual Private Cloud (Amazon VPC) console or the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html">Amazon EC2 CreateVpnGateway action</a>.</p>'
+    VirtualGatewayId:
+      type: string
+      description: '<p>The ID of the virtual private gateway to a VPC. This only applies to private virtual interfaces.</p> <p>Example: vgw-123er56</p>'
+    VirtualGatewayList:
+      type: array
+      description: A list of virtual private gateways.
+      items:
+        $ref: '#/components/schemas/VirtualGateway'
+    VirtualGatewayState:
+      type: string
+      description: '<p>State of the virtual private gateway.</p> <ul> <li> <p> <b>Pending</b>: This is the initial state after calling <i>CreateVpnGateway</i>.</p> </li> <li> <p> <b>Available</b>: Ready for use by a private virtual interface.</p> </li> <li> <p> <b>Deleting</b>: This is the initial state after calling <i>DeleteVpnGateway</i>.</p> </li> <li> <p> <b>Deleted</b>: In this state, a private virtual interface is unable to send traffic over this gateway.</p> </li> </ul>'
+    VirtualGateways:
+      type: object
+      properties:
+        virtualGateways:
+          $ref: '#/components/schemas/VirtualGatewayList'
+      description: A structure containing a list of virtual private gateways.
+    VirtualInterface:
+      type: object
+      properties:
+        ownerAccount:
+          $ref: '#/components/schemas/OwnerAccount'
+        virtualInterfaceId:
+          $ref: '#/components/schemas/VirtualInterfaceId'
+        location:
+          $ref: '#/components/schemas/LocationCode'
+        connectionId:
+          $ref: '#/components/schemas/ConnectionId'
+        virtualInterfaceType:
+          $ref: '#/components/schemas/VirtualInterfaceType'
+        virtualInterfaceName:
+          $ref: '#/components/schemas/VirtualInterfaceName'
+        vlan:
+          $ref: '#/components/schemas/VLAN'
+        asn:
+          $ref: '#/components/schemas/ASN'
+        authKey:
+          $ref: '#/components/schemas/BGPAuthKey'
+        amazonAddress:
+          $ref: '#/components/schemas/AmazonAddress'
+        customerAddress:
+          $ref: '#/components/schemas/CustomerAddress'
+        addressFamily:
+          $ref: '#/components/schemas/AddressFamily'
+        virtualInterfaceState:
+          $ref: '#/components/schemas/VirtualInterfaceState'
+        customerRouterConfig:
+          $ref: '#/components/schemas/RouterConfig'
+        virtualGatewayId:
+          $ref: '#/components/schemas/VirtualGatewayId'
+        routeFilterPrefixes:
+          $ref: '#/components/schemas/RouteFilterPrefixList'
+        bgpPeers:
+          $ref: '#/components/schemas/BGPPeerList'
+      description: A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect location and the customer.
+    VirtualInterfaceId:
+      type: string
+      description: '<p>The ID of the virtual interface.</p> <p>Example: dxvif-123dfg56</p> <p>Default: None</p>'
+    VirtualInterfaceList:
+      type: array
+      description: A list of virtual interfaces.
+      items:
+        $ref: '#/components/schemas/VirtualInterface'
+    VirtualInterfaceName:
+      type: string
+      description: '<p>The name of the virtual interface assigned by the customer.</p> <p>Example: "My VPC"</p>'
+    VirtualInterfaceState:
+      type: string
+      enum:
+        - confirming
+        - verifying
+        - pending
+        - available
+        - down
+        - deleting
+        - deleted
+        - rejected
+      description: '<p>State of the virtual interface.</p> <ul> <li> <p> <b>Confirming</b>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p> </li> <li> <p> <b>Verifying</b>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p> </li> <li> <p> <b>Pending</b>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p> </li> <li> <p> <b>Available</b>: A virtual interface that is able to forward traffic.</p> </li> <li> <p> <b>Down</b>: A virtual interface that is BGP down.</p> </li> <li> <p> <b>Deleting</b>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p> </li> <li> <p> <b>Deleted</b>: A virtual interface that cannot forward traffic.</p> </li> <li> <p> <b>Rejected</b>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the ''Confirming'' state is deleted by the virtual interface owner, the virtual interface will enter the ''Rejected'' state.</p> </li> </ul>'
+    VirtualInterfaceType:
+      type: string
+      description: '<p>The type of virtual interface.</p> <p>Example: private (Amazon VPC) or public (Amazon S3, Amazon DynamoDB, and so on.)</p>'
+    VirtualInterfaces:
+      type: object
+      properties:
+        virtualInterfaces:
+          $ref: '#/components/schemas/VirtualInterfaceList'
+      description: A structure containing a list of virtual interfaces.
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

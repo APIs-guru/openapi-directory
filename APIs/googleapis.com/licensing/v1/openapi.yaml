@@ -1,0 +1,472 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://www.googleapis.com/apps/licensing/v1/product'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Views and manages licenses for your domain.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Enterprise License Manager
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - enterprise
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://www.googleapis.com/discovery/v1/apis/licensing/v1/rest'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: licensing
+externalDocs:
+  url: 'https://developers.google.com/google-apps/licensing/'
+tags:
+  - name: licenseAssignments
+paths:
+  '/{productId}/sku/{skuId}/user':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Assign License.
+      operationId: licensing.licenseAssignments.insert
+      parameters:
+        - description: Name for product
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: Name for sku
+          in: path
+          name: skuId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LicenseAssignment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+      tags:
+        - licenseAssignments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicenseAssignmentInsert'
+  '/{productId}/sku/{skuId}/user/{userId}':
+    delete:
+      description: Revoke License.
+      operationId: licensing.licenseAssignments.delete
+      parameters:
+        - description: Name for product
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: Name for sku
+          in: path
+          name: skuId
+          required: true
+          schema:
+            type: string
+        - description: email id or unique Id of the user
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+      tags:
+        - licenseAssignments
+    get:
+      description: Get license assignment of a particular product and sku for a user
+      operationId: licensing.licenseAssignments.get
+      parameters:
+        - description: Name for product
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: Name for sku
+          in: path
+          name: skuId
+          required: true
+          schema:
+            type: string
+        - description: email id or unique Id of the user
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LicenseAssignment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+      tags:
+        - licenseAssignments
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Assign License. This method supports patch semantics.
+      operationId: licensing.licenseAssignments.patch
+      parameters:
+        - description: Name for product
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: Name for sku for which license would be revoked
+          in: path
+          name: skuId
+          required: true
+          schema:
+            type: string
+        - description: email id or unique Id of the user
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LicenseAssignment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+      tags:
+        - licenseAssignments
+      requestBody:
+        $ref: '#/components/requestBodies/LicenseAssignment'
+    put:
+      description: Assign License.
+      operationId: licensing.licenseAssignments.update
+      parameters:
+        - description: Name for product
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: Name for sku for which license would be revoked
+          in: path
+          name: skuId
+          required: true
+          schema:
+            type: string
+        - description: email id or unique Id of the user
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LicenseAssignment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+      tags:
+        - licenseAssignments
+      requestBody:
+        $ref: '#/components/requestBodies/LicenseAssignment'
+  '/{productId}/sku/{skuId}/users':
+    get:
+      description: List license assignments for given product and sku of the customer.
+      operationId: licensing.licenseAssignments.listForProductAndSku
+      parameters:
+        - description: Name for product
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: Name for sku
+          in: path
+          name: skuId
+          required: true
+          schema:
+            type: string
+        - description: CustomerId represents the customer for whom licenseassignments are queried
+          in: query
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of campaigns to return at one time. Must be positive. Optional. Default value is 100.
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+        - description: Token to fetch the next page.Optional. By default server will return first page
+          in: query
+          name: pageToken
+          schema:
+            type: string
+            default: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LicenseAssignmentList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+      tags:
+        - licenseAssignments
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/{productId}/users':
+    get:
+      description: List license assignments for given product of the customer.
+      operationId: licensing.licenseAssignments.listForProduct
+      parameters:
+        - description: Name for product
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: CustomerId represents the customer for whom licenseassignments are queried
+          in: query
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of campaigns to return at one time. Must be positive. Optional. Default value is 100.
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+            default: 100
+        - description: Token to fetch the next page.Optional. By default server will return first page
+          in: query
+          name: pageToken
+          schema:
+            type: string
+            default: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LicenseAssignmentList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/apps.licensing'
+      tags:
+        - licenseAssignments
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+components:
+  schemas:
+    LicenseAssignment:
+      description: Template for LiscenseAssignment Resource
+      properties:
+        etags:
+          description: ETag of the resource.
+          type: string
+        kind:
+          default: 'licensing#licenseAssignment'
+          description: Identifies the resource as a LicenseAssignment.
+          type: string
+        productId:
+          description: Id of the product.
+          type: string
+        productName:
+          description: Display Name of the product.
+          type: string
+        selfLink:
+          description: Link to this page.
+          type: string
+        skuId:
+          description: Id of the sku of the product.
+          type: string
+        skuName:
+          description: Display Name of the sku of the product.
+          type: string
+        userId:
+          description: Email id of the user.
+          type: string
+      type: object
+    LicenseAssignmentInsert:
+      description: Template for LicenseAssignment Insert request
+      properties:
+        userId:
+          description: Email id of the user
+          type: string
+      type: object
+    LicenseAssignmentList:
+      description: LicesnseAssignment List for a given product/sku for a customer.
+      properties:
+        etag:
+          description: ETag of the resource.
+          type: string
+        items:
+          description: The LicenseAssignments in this page of results.
+          items:
+            $ref: '#/components/schemas/LicenseAssignment'
+          type: array
+        kind:
+          default: 'licensing#licenseAssignmentList'
+          description: Identifies the resource as a collection of LicenseAssignments.
+          type: string
+        nextPageToken:
+          description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          type: string
+      type: object
+  parameters:
+    alt:
+      description: Data format for the response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+        default: json
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    userIp:
+      description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      in: query
+      name: userIp
+      schema:
+        type: string
+  requestBodies:
+    LicenseAssignment:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LicenseAssignment'
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/apps.licensing': View and manage G Suite licenses for your domain
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/apps.licensing': View and manage G Suite licenses for your domain

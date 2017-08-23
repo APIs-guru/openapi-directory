@@ -1,0 +1,1188 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.wealthport.com/gateway/public/endpoints/1.0'
+info:
+  description: 'Wealthport provides a simple, lightweight and open Web API based on the Open API 2.0 standard (<a href="https://www.openapis.org" target="_blank">https://www.openapis.org</a>). Our APIs offer a variety of operations related to managing Sources, Folders, Orders and Recipes. There are operations to submit and track Jobs, upload and download data files and many more.'
+  termsOfService: 'https://www.wealthport.com/terms-of-service'
+  title: Wealthport
+  version: '1.0'
+  x-apisguru-categories:
+    - analytics
+    - machine_learning
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://pbs.twimg.com/profile_images/522665269001342977/FKB9gZgO.png'
+  x-origin:
+    - format: swagger
+      url: 'https://wealthport.github.io/wealthport-api-docs/swagger.json'
+      version: '2.0'
+  x-providerName: wealthport.com
+tags:
+  - name: Folders
+  - name: Orders
+  - name: Recipes
+  - name: Sources
+paths:
+  /folders:
+    get:
+      description: Retrieves all Folders in the Data Inventory.
+      operationId: retrieveFolders
+      responses:
+        '200':
+          description: Folders successfully retrieved
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Existing_Folder'
+                type: array
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Retrieve Folders
+      tags:
+        - Folders
+    post:
+      description: Creates the specified Folder in the Data Inventory.
+      operationId: createFolder
+      responses:
+        '201':
+          description: Folder successfully created and available at the returned URL
+          content:
+            '*/*':
+              schema:
+                format: url
+                type: string
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '409':
+          description: Folder with same name already exists
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Create Folder
+      tags:
+        - Folders
+      requestBody:
+        $ref: '#/components/requestBodies/Folder_Request'
+  '/folders/{id}':
+    delete:
+      description: Deletes the specified Folder and all contained Sources from the Data Inventory.
+      operationId: deleteFolder
+      parameters:
+        - description: 'Folder ID of the Folder to delete, including any Sources contained'
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Folder successfully deleted
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Folder cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Delete Folder
+      tags:
+        - Folders
+    get:
+      description: Retrieves the specified Folder.
+      operationId: retrieveFolder
+      parameters:
+        - description: Folder ID of the Folder to retrieve
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Folder successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Existing_Folder'
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Folder cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Retrieve Folder
+      tags:
+        - Folders
+    put:
+      description: Updates the specified Folder.
+      operationId: updateFolder
+      parameters:
+        - description: Folder ID of the Folder to update
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Folder successfully updated
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Folder cannot be found
+        '409':
+          description: Folder with same name already exists
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Update Folder
+      tags:
+        - Folders
+      requestBody:
+        $ref: '#/components/requestBodies/Folder_Request'
+  '/folders/{id}/sources':
+    delete:
+      description: Deletes all Sources in the specified Folder.
+      operationId: deleteFolderSources
+      parameters:
+        - description: Folder ID of the Folder to delete all Sources from
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Sources successfully deleted
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Folder cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Delete Sources
+      tags:
+        - Folders
+    get:
+      description: Retrieves all Sources of the specified Folder.
+      operationId: retrieveFolderSources
+      parameters:
+        - description: Folder ID of the Folder to retrieve its Sources from
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sources successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Existing_Source'
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Folder cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Retrieve Sources
+      tags:
+        - Folders
+  '/jobs/{id}/result':
+    get:
+      description: Returns the result of a finished Job.
+      operationId: getResult
+      parameters:
+        - description: Job ID of the job to retrieve its result
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Job has finished, potentially with errors, result is returned as JSON in the response'
+          content:
+            text/plain:
+              schema:
+                type: string
+        '201':
+          description: 'Job has finished successfully, resulting source is available at the returned URL'
+          content:
+            text/plain:
+              schema:
+                format: url
+                type: string
+        '400':
+          description: 'Wrong or missing mandatory arguments, job has not yet finished or is not in a valid state'
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Job cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Get Result
+      tags:
+        - Orders
+  '/jobs/{id}/status':
+    get:
+      description: Retrieves the status of a Job.
+      operationId: getStatus
+      parameters:
+        - description: Job ID of the job to retrieve its status
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Job has finished, potentially with errors, result is available and Job ID is returned'
+          headers:
+            Location:
+              description: URL to the Get Result operation to retrieve the result
+              schema:
+                type: string
+                format: url
+          content:
+            text/plain:
+              schema:
+                type: string
+        '202':
+          description: 'Job is running, no result available yet and Job ID is returned'
+          headers:
+            Location:
+              description: URL to the Get Status operation to retrieve the result
+              schema:
+                type: string
+                format: url
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Job cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Get Status
+      tags:
+        - Orders
+  /orders:
+    get:
+      description: Retrieves all previously submitted Orders.
+      operationId: retrieveOrders
+      responses:
+        '200':
+          description: Orders successfully retrieved
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Existing_Order'
+                type: array
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Retrieve Orders
+      tags:
+        - Orders
+    post:
+      description: 'Creates a new Order to be submitted.<p>Orders reference one or more Sources, e.g. uploaded files, as well as one or more Folders (which again can contain Sources).The Recipe describes what to do with the referenced sources and where to publish the processing result to.</p>'
+      operationId: createOrder
+      responses:
+        '201':
+          description: Order successfully created and available at the returned URL
+          content:
+            '*/*':
+              schema:
+                format: url
+                type: string
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Create Order
+      tags:
+        - Orders
+      requestBody:
+        $ref: '#/components/requestBodies/Order_Request'
+  '/orders/{id}':
+    delete:
+      description: Deletes the specified Order.
+      operationId: deleteOrder
+      parameters:
+        - description: Order ID of the order to delete
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Order has been deleted
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Order cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Delete Order
+      tags:
+        - Orders
+    get:
+      description: Retrieves the specified Order.
+      operationId: retrieveOrder
+      parameters:
+        - description: Order ID of the order to retrieve
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Existing_Order'
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Order cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Retrieve Order
+      tags:
+        - Orders
+    put:
+      description: Updates the specified Order.
+      operationId: updateOrder
+      parameters:
+        - description: Order ID of the order to update
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order successfully updated
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Order cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Update Order
+      tags:
+        - Orders
+      requestBody:
+        $ref: '#/components/requestBodies/Order_Request'
+  '/orders/{id}/submit':
+    post:
+      description: Submits the specified Order for processing and launches a corresponding job.
+      operationId: submitOrder
+      parameters:
+        - description: Order ID of the order to submit for processing
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: 'Order has been submitted, Job is running and Job ID is returned'
+          headers:
+            Location:
+              description: URL to the Get Status operation to poll for processing status updates
+              schema:
+                type: string
+                format: url
+        '400':
+          description: 'Wrong or missing mandatory arguments, order has no recipe or is not valid otherwise'
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Order cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Submit Order
+      tags:
+        - Orders
+  /recipes:
+    get:
+      description: Retrieves all available Recipes.
+      operationId: retrieveRecipes
+      responses:
+        '200':
+          description: Recipes successfully retrieved
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Existing_Recipe'
+                type: array
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Retrieve Recipes
+      tags:
+        - Recipes
+  '/recipes/{id}':
+    get:
+      description: Retrieves the specified Recipe.
+      operationId: retrieveRecipe
+      parameters:
+        - description: Recipe ID of the recipe to retrieve
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Recipe successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Existing_Recipe'
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Recipe cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Retrieve Recipe
+      tags:
+        - Recipes
+  '/recipes/{id}/instructions':
+    get:
+      description: Retrieves the instructions of the specified Recipe.
+      operationId: retrieveInstructions
+      parameters:
+        - description: Recipe ID of the recipe whose instructions to retrieve
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instructions successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Recipe cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Retrieve Instructions
+      tags:
+        - Recipes
+    put:
+      description: Updates the instructions of the specified Recipe.
+      operationId: updateInstructions
+      parameters:
+        - description: Recipe ID of the recipe whose instructions to update
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instructions successfully updated
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Recipe cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Update Instructions
+      tags:
+        - Recipes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: JSON instructions to update the Recipe
+  /sources:
+    get:
+      description: Retrieves all Sources stored in the Data Inventory.
+      operationId: retrieveSources
+      responses:
+        '200':
+          description: Sources successfully retrieved
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Existing_Source'
+                type: array
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Retrieve Sources
+      tags:
+        - Sources
+    post:
+      description: Creates the specified Source.<p>Sources are either uploaded files or a reference to a database. They are referenced in orders to specify which data needs processing.</p><p>Most clients should probably use the Upload File API which implicitly creates a new source on successful file upload.</p>
+      operationId: createSource
+      responses:
+        '201':
+          description: Source successfully created and available at the returned URL
+          content:
+            '*/*':
+              schema:
+                format: url
+                type: string
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Create Source
+      tags:
+        - Sources
+      requestBody:
+        $ref: '#/components/requestBodies/Source_Request'
+  /sources/upload:
+    put:
+      description: 'Initiates a file upload and returns the URL where to upload the file to.<p>Calling this API generates a secure, unique and time-restricted URL where the file can be uploaded to. The URL is available in the <pre>Location</pre> HTTP header of the response. The temporal validity of the URL is available in the <pre>Cache-Control</pre> HTTP header of the response.Clients may perform a <pre>HTTP PUT</pre> request on the URL to upload the file using a form where a file <pre>sample.csv</pre> is passed as property <pre>file=sample.csv</pre>. For security reasons, clients must pass all HTTP headers as returned by the <pre>X-WP-Upload-Headers</pre> in the response, together with their values. This procedure ensures a secure, encrypted file upload.</p><p>Note that calling this API automatically generates a Source, there is no need to call the Create Source API.</p>'
+      operationId: getUploadUrl
+      parameters:
+        - description: Name of the source to create. The name must correspond to the exact file name of the file being uploaded.
+          in: query
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Existing source ID to create a new version from
+          in: query
+          name: source
+          required: false
+          schema:
+            type: string
+        - description: Folder ID where to upload source to
+          in: query
+          name: folder
+          required: false
+          schema:
+            type: string
+        - description: MIME type of the source file
+          in: query
+          name: contentType
+          required: false
+          schema:
+            type: string
+        - description: Encoding of the source file
+          in: query
+          name: encoding
+          required: false
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Source file upload initiated
+          headers:
+            Location:
+              description: URL where to upload the source file to
+              schema:
+                type: string
+                format: url
+            X-WP-Upload-Headers:
+              description: Comma-separated list of HTTP headers from the response whose values need to be passed again as HTTP headers to the <pre>HTTP PUT</pre> request when uploading the source file
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Wrong or missing mandatory argument
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Upload File
+      tags:
+        - Sources
+  '/sources/{id}':
+    delete:
+      description: Deletes the specified Source.
+      operationId: deleteSource
+      parameters:
+        - description: Source ID of the Source to delete
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Source successfully deleted
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Source cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Delete Source
+      tags:
+        - Sources
+    get:
+      description: Retrieves the specified Source.
+      operationId: retrieveSource
+      parameters:
+        - description: Source ID of the source to retrieve
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Source successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Existing_Source'
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Source cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Retrieve Source
+      tags:
+        - Sources
+    put:
+      description: Updates the specified Source.
+      operationId: updateSource
+      parameters:
+        - description: Source ID of Source to update
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Source successfully updated
+        '400':
+          description: Wrong or missing mandatory arguments
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Source cannot be found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Update Source
+      tags:
+        - Sources
+      requestBody:
+        $ref: '#/components/requestBodies/Source_Request'
+  '/sources/{id}/download':
+    get:
+      description: 'Initiates a file download and returns the URL where to download the file from.<p>Calling this API generates a secure, unique and time-restricted URL where the file can be downloaded from. The URL is available in the <pre>Location</pre> HTTP header of the response. The time restriction of the URL is availablein the <pre>Cache-Control</pre> HTTP header of the response.Clients may perform a <pre>HTTP GET</pre> request on the URL to download the file.</p>'
+      operationId: getDownloadUrl
+      parameters:
+        - description: Source ID of file to download
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Source file download initiated
+          headers:
+            Location:
+              description: URL where to download the file from
+              schema:
+                type: string
+                format: url
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Wrong or missing mandatory argument
+        '401':
+          description: Invalid or unauthorised API key
+        '403':
+          description: No permission to perform operation
+        '404':
+          description: Source not found
+      security:
+        - Using_HTTP_Header: []
+        - Using_URL_Query_Parameter: []
+      summary: Download File
+      tags:
+        - Sources
+components:
+  schemas:
+    Archivable_Object:
+      properties:
+        archived:
+          default: false
+          type: boolean
+        id:
+          maxLength: 36
+          minLength: 36
+          type: string
+      required:
+        - id
+      type: object
+    Existing_Folder:
+      description: Represents an existing folder.
+      properties:
+        bytes:
+          description: Size of the folder (in bytes)
+          example: '1048576'
+          format: int64
+          minimum: -1
+          type: integer
+        created:
+          description: ISO 8601 Date when he folder has been created
+          format: date-time
+          type: string
+        creator:
+          description: User ID of the user who created the folder
+          example: 899afd84-4051-471c-8438-48cb47816af1
+          maxLength: 36
+          minLength: 36
+          type: string
+        id:
+          description: Unique ID of the folder
+          example: 55ccb8ea-e15a-48f3-a2ba-c700f0d67a04
+          maxLength: 36
+          minLength: 36
+          type: string
+        name:
+          description: Name of the folder
+          example: My Folder
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+        - bytes
+        - created
+        - creator
+        - id
+        - name
+      type: object
+      xml:
+        name: folder
+    Existing_Order:
+      description: Represents an existing order.
+      properties:
+        bytes:
+          description: Size of the order (in bytes)
+          example: '1048576'
+          format: int64
+          minimum: -1
+          type: integer
+        created:
+          description: ISO 8601 Date when the order has been created
+          format: date-time
+          type: string
+        creator:
+          description: User ID of the user who created the order
+          example: 54a27cac-a457-443d-a3d5-c67fc20701ad
+          maxLength: 36
+          minLength: 36
+          type: string
+        folders:
+          description: Array of folder IDs to be referenced by the order
+          example: '[199abf1c-e250-45d6-a6b7-bb27aeacfad8, bf9b3da6-61c1-46a5-b873-c7ffa035153e]'
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          xml:
+            name: folder
+            wrapped: true
+        id:
+          description: Unique ID of the order
+          example: 44144a40-3dcd-469b-bd7d-04cf6797f6b6
+          maxLength: 36
+          minLength: 36
+          type: string
+        name:
+          description: Name of the order
+          example: My Order
+          maxLength: 255
+          minLength: 1
+          type: string
+        recipe:
+          description: Recipe to use when processing the order
+          example: d7927569-3431-4d23-a329-ec480385f6db
+          maxLength: 36
+          minLength: 36
+          type: string
+        sources:
+          description: Array of source IDs to be referenced by the order
+          example: '[29e2e192-8a57-43b1-be7d-929fc7461650, 4ce89cce-c96e-4c90-9cfa-75e7fd13adc9]'
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          xml:
+            name: source
+            wrapped: true
+      required:
+        - bytes
+        - created
+        - creator
+        - id
+        - name
+      type: object
+      xml:
+        name: order
+    Existing_Recipe:
+      description: Represents an existing recipe.
+      properties:
+        created:
+          description: ISO 8601 Date when the recipe has been created
+          format: date-time
+          type: string
+        creator:
+          description: User ID of the user who created the recipe
+          example: 9d7ce0d7-5c90-493d-9b4b-5254752ce68f
+          maxLength: 36
+          minLength: 36
+          type: string
+        id:
+          description: Unique ID of the recipe
+          example: 249a1f57-fae5-4ba0-b3fc-f65cc28b63d4
+          maxLength: 36
+          minLength: 36
+          type: string
+        name:
+          description: Name of the recipe
+          example: My Recipe
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+        - created
+        - creator
+        - id
+        - name
+      type: object
+      xml:
+        name: recipe
+    Existing_Source:
+      description: Represents an existing source.
+      properties:
+        bytes:
+          description: Size of the source (in bytes)
+          example: '1048576'
+          format: int64
+          minimum: -1
+          type: integer
+        created:
+          description: ISO 8601 Date when the source has been created
+          format: date-time
+          type: string
+        creator:
+          description: User ID of the user that created the source
+          example: a33f3d36-df1b-41b2-ab5d-54dd57c40414
+          maxLength: 36
+          minLength: 36
+          type: string
+        encoding:
+          description: Encoding of the source
+          example: UTF-8
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        folder:
+          description: Optional folder ID of the folder containing the source
+          example: 55e94cc2-89e5-4dad-8786-7d1b2daf9ac8
+          maxLength: 36
+          minLength: 36
+          type: string
+        folderName:
+          type: string
+        id:
+          description: Unique ID of the source
+          example: 1df110bf-8f71-44c8-b6b9-a5e1d49b4a6b
+          maxLength: 36
+          minLength: 36
+          type: string
+        mime:
+          description: MIME type of the source
+          enum:
+            - text/csv
+            - text/tab-separated-values
+            - text/x-bar-separated-values
+            - text/x-semicolon-separated-values
+            - application/x-ldjson
+            - application/xml
+            - application/vnd.ms-excel
+            - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+          example: text/csv
+          maxLength: 255
+          minLength: 1
+          type: string
+        name:
+          description: Name of the source
+          example: File.csv
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+        - bytes
+        - created
+        - creator
+        - id
+        - mime
+        - name
+      type: object
+      xml:
+        name: source
+    Folder_Request:
+      description: Represents a folder to be created or updated.
+      properties:
+        name:
+          description: Name of the folder
+          example: My Folder
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+        - name
+      type: object
+      xml:
+        name: folder
+    Order_Request:
+      description: Represents an order to be created or updated.
+      properties:
+        folders:
+          description: Array of folder IDs to be referenced by the order
+          example: '[199abf1c-e250-45d6-a6b7-bb27aeacfad8, bf9b3da6-61c1-46a5-b873-c7ffa035153e]'
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          xml:
+            name: folder
+            wrapped: true
+        name:
+          description: Name of the order
+          example: My Order
+          maxLength: 255
+          minLength: 1
+          type: string
+        recipe:
+          description: Recipe to use when processing the order
+          example: 66c5becb-5482-40c8-a192-cac702e17613
+          maxLength: 36
+          minLength: 36
+          type: string
+        sources:
+          description: Array of source IDs to be referenced by the order
+          example: '[29e2e192-8a57-43b1-be7d-929fc7461650, 4ce89cce-c96e-4c90-9cfa-75e7fd13adc9]'
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          xml:
+            name: source
+            wrapped: true
+      required:
+        - name
+      type: object
+      xml:
+        name: order
+    Source_Request:
+      description: Represents a source to be created or updated.
+      properties:
+        encoding:
+          description: Encoding of the source
+          example: UTF-8
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        folder:
+          description: Folder ID of the folder containing the source
+          example: 07187b90-2bbb-4508-90f7-6b23139204e2
+          maxLength: 36
+          minLength: 36
+          type: string
+        mime:
+          description: MIME type of the source
+          enum:
+            - text/csv
+            - text/tab-separated-values
+            - text/x-bar-separated-values
+            - text/x-semicolon-separated-values
+            - application/x-ldjson
+            - application/xml
+            - application/vnd.ms-excel
+            - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+          example: text/csv
+          maxLength: 2147483647
+          minLength: 1
+          type: string
+        name:
+          description: Name of the source
+          example: File.csv
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+        - mime
+        - name
+      type: object
+      xml:
+        name: source
+  requestBodies:
+    Folder_Request:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Folder_Request'
+      description: JSON
+    Order_Request:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Order_Request'
+      description: JSON
+    Source_Request:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Source_Request'
+      description: JSON
+  securitySchemes:
+    Using_HTTP_Header:
+      in: header
+      name: X-API-Key
+      type: apiKey
+    Using_URL_Query_Parameter:
+      in: query
+      name: apikey
+      type: apiKey

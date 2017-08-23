@@ -1,0 +1,63 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://1forge.com/forex-quotes'
+  - url: 'http://1forge.com/forex-quotes'
+info:
+  contact:
+    email: contact@1forge.com
+    name: 1Forge
+    url: 'http://1forge.com'
+  description: Stock and Forex Data and Realtime Quotes
+  title: 1Forge Finance APIs
+  version: 0.0.1
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    backgroundColor: '#24292e'
+    url: 'http://1forge.com/logo.png'
+  x-origin:
+    - format: swagger
+      url: 'http://1forge.com/openapi.json'
+      version: '2.0'
+  x-providerName: 1forge.com
+paths:
+  /quotes:
+    get:
+      description: Get quotes
+      externalDocs:
+        description: Find out more
+        url: 'http://1forge.com/forex-data-api'
+      responses:
+        '200':
+          description: A list of quotes
+      summary: Get quotes for all symbols
+      tags:
+        - forex
+        - finance
+        - quotes
+  /symbols:
+    get:
+      description: Symbol List
+      externalDocs:
+        description: Find out more
+        url: 'http://1forge.com/forex-data-api'
+      responses:
+        '200':
+          description: A list of symbols
+          content:
+            application/json:
+              schema:
+                example:
+                  - EURUSD
+                  - GBPJPY
+                  - AUDUSD
+                items:
+                  type: string
+                type: array
+      summary: Get a list of symbols for which we provide real-time quotes
+      tags:
+        - forex
+        - finance
+        - quotes
+components:
+  schemas: {}

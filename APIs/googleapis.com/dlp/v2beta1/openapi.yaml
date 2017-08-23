@@ -1,0 +1,1217 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://dlp.googleapis.com/'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'The Google Data Loss Prevention API provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: DLP
+  version: v2beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://dlp.googleapis.com/$discovery/rest?version=v2beta1'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: dlp
+externalDocs:
+  url: 'https://cloud.google.com/dlp/docs/'
+tags:
+  - name: content
+  - name: inspect
+  - name: rootCategories
+paths:
+  '/v2beta1/content:inspect':
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+    post:
+      description: |-
+        Finds potentially sensitive info in a list of strings.
+        This method has limits on input size, processing time, and output size.
+      operationId: dlp.content.inspect
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InspectContentResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InspectContentRequest'
+  '/v2beta1/content:redact':
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+    post:
+      description: |-
+        Redacts potentially sensitive info from a list of strings.
+        This method has limits on input size, processing time, and output size.
+      operationId: dlp.content.redact
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GooglePrivacyDlpV2beta1RedactContentResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - content
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GooglePrivacyDlpV2beta1RedactContentRequest'
+  /v2beta1/inspect/operations:
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+    post:
+      description: |-
+        Schedules a job scanning content in a Google Cloud Platform data
+        repository.
+      operationId: dlp.inspect.operations.create
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GoogleLongrunningOperation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - inspect
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GooglePrivacyDlpV2beta1CreateInspectOperationRequest'
+  /v2beta1/rootCategories:
+    get:
+      description: Returns the list of root categories of sensitive information.
+      operationId: dlp.rootCategories.list
+      parameters:
+        - description: |-
+            Optional language code for localized friendly category names.
+            If omitted or if localized strings are not available,
+            en-US strings will be returned.
+          in: query
+          name: languageCode
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GooglePrivacyDlpV2beta1ListRootCategoriesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - rootCategories
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/rootCategories/{category}/infoTypes':
+    get:
+      description: Returns sensitive information types for given category.
+      operationId: dlp.rootCategories.infoTypes.list
+      parameters:
+        - description: Category name as returned by ListRootCategories.
+          in: path
+          name: category
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+        - description: |-
+            Optional BCP-47 language code for localized info type friendly
+            names. If omitted, or if localized strings are not available,
+            en-US strings will be returned.
+          in: query
+          name: languageCode
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GooglePrivacyDlpV2beta1ListInfoTypesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - rootCategories
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/{name}':
+    delete:
+      description: This method is not supported and the server returns `UNIMPLEMENTED`.
+      operationId: dlp.inspect.operations.delete
+      parameters:
+        - description: The name of the operation resource to be deleted.
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GoogleProtobufEmpty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - inspect
+    get:
+      description: Fetch the list of long running operations.
+      operationId: dlp.inspect.operations.list
+      parameters:
+        - description: 'This parameter supports filtering by done, ie done=true or done=false.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The name of the operation's parent resource.
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+        - description: The list page size. The max allowed value is 256 and default is 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GoogleLongrunningListOperationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - inspect
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/{name}/findings':
+    get:
+      description: Returns list of results for given inspect operation result set id.
+      operationId: dlp.inspect.results.findings.list
+      parameters:
+        - description: |-
+            Restricts findings to items that match. Supports info_type and likelihood.
+            <p>Examples:<br/>
+            <li>info_type=EMAIL_ADDRESS
+            <li>info_type=PHONE_NUMBER,EMAIL_ADDRESS
+            <li>likelihood=VERY_LIKELY
+            <li>likelihood=VERY_LIKELY,LIKELY
+            <li>info_type=EMAIL_ADDRESS,likelihood=VERY_LIKELY,LIKELY
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: |-
+            Identifier of the results set returned as metadata of
+            the longrunning operation created by a call to CreateInspectOperation.
+            Should be in the format of `inspect/results/{id}.
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+        - description: |-
+            Maximum number of results to return.
+            If 0, the implementation selects a reasonable value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            The value returned by the last `ListInspectFindingsResponse`; indicates
+            that this is a continuation of a prior `ListInspectFindings` call, and that
+            the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GooglePrivacyDlpV2beta1ListInspectFindingsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - inspect
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/{name}:cancel':
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+    post:
+      description: Cancels an operation. Use the get method to check whether the cancellation succeeded or whether the operation completed despite cancellation.
+      operationId: dlp.inspect.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GoogleProtobufEmpty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - inspect
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleLongrunningCancelOperationRequest'
+components:
+  schemas:
+    GoogleLongrunningCancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
+      type: object
+    GoogleLongrunningListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: '#/components/schemas/GoogleLongrunningOperation'
+          type: array
+      type: object
+    GoogleLongrunningOperation:
+      description: |-
+        This resource represents a long-running operation that is the result of a
+        network API call.
+      properties:
+        done:
+          description: |-
+            If the value is `false`, it means the operation is still in progress.
+            If true, the operation is completed, and either `error` or `response` is
+            available.
+          type: boolean
+        error:
+          $ref: '#/components/schemas/GoogleRpcStatus'
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: This field will contain an InspectOperationMetadata object. This will always be returned with the Operation.
+          type: object
+        name:
+          description: 'The server-assigned name, The `name` should have the format of `inspect/operations/<identifier>`.'
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: This field will contain an InspectOperationResult object.
+          type: object
+      type: object
+    GooglePrivacyDlpV2beta1CategoryDescription:
+      description: Info Type Category description.
+      properties:
+        displayName:
+          description: Human readable form of the category name.
+          type: string
+        name:
+          description: Internal name of the category.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1CloudStorageKey:
+      description: Record key for a finding in a Cloud Storage file.
+      properties:
+        filePath:
+          description: Path to the file.
+          type: string
+        startOffset:
+          description: Byte offset of the referenced data in the file.
+          format: int64
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1CloudStorageOptions:
+      description: |-
+        Options defining a file or a set of files (path ending with *) within
+        a Google Cloud Storage bucket.
+      properties:
+        fileSet:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1FileSet'
+      type: object
+    GooglePrivacyDlpV2beta1CloudStoragePath:
+      description: A location in Cloud Storage.
+      properties:
+        path:
+          description: 'The url, in the format of `gs://bucket/<path>`.'
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1Color:
+      description: Represents a color in the RGB color space.
+      properties:
+        blue:
+          description: 'The amount of blue in the color as a value in the interval [0, 1].'
+          format: float
+          type: number
+        green:
+          description: 'The amount of green in the color as a value in the interval [0, 1].'
+          format: float
+          type: number
+        red:
+          description: 'The amount of red in the color as a value in the interval [0, 1].'
+          format: float
+          type: number
+      type: object
+    GooglePrivacyDlpV2beta1ContentItem:
+      description: Container structure for the content to inspect.
+      properties:
+        data:
+          description: Content data to inspect or redact.
+          format: byte
+          type: string
+        type:
+          description: |-
+            Type of the content, as defined in Content-Type HTTP header.
+            Supported types are: all "text" types, octet streams, PNG images,
+            JPEG images.
+          type: string
+        value:
+          description: String data to inspect or redact.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1CreateInspectOperationRequest:
+      description: |-
+        Request for scheduling a scan of a data subset from a Google Platform data
+        repository.
+      properties:
+        inspectConfig:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InspectConfig'
+        outputConfig:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1OutputStorageConfig'
+        storageConfig:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1StorageConfig'
+      type: object
+    GooglePrivacyDlpV2beta1DatastoreKey:
+      description: Record key for a finding in Cloud Datastore.
+      properties:
+        entityKey:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1Key'
+      type: object
+    GooglePrivacyDlpV2beta1DatastoreOptions:
+      description: Options defining a data set within Google Cloud Datastore.
+      properties:
+        kind:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1KindExpression'
+        partitionId:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1PartitionId'
+        projection:
+          description: |-
+            Properties to scan. If none are specified, all properties will be scanned
+            by default.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1Projection'
+          type: array
+      type: object
+    GooglePrivacyDlpV2beta1FieldId:
+      description: General identifier of a data field in a storage service.
+      properties:
+        columnName:
+          description: Column name describing the field.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1FileSet:
+      description: Set of files to scan.
+      properties:
+        url:
+          description: |-
+            The url, in the format `gs://<bucket>/<path>`. Trailing wildcard in the
+            path is allowed.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1Finding:
+      description: Container structure describing a single finding within a string or image.
+      properties:
+        createTime:
+          description: Timestamp when finding was detected.
+          format: google-datetime
+          type: string
+        infoType:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InfoType'
+        likelihood:
+          description: Estimate of how likely it is that the info_type is correct.
+          enum:
+            - LIKELIHOOD_UNSPECIFIED
+            - VERY_UNLIKELY
+            - UNLIKELY
+            - POSSIBLE
+            - LIKELY
+            - VERY_LIKELY
+          type: string
+        location:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1Location'
+        quote:
+          description: The specific string that may be potentially sensitive info.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1ImageLocation:
+      description: Bounding box encompassing detected text within an image.
+      properties:
+        height:
+          description: Height of the bounding box in pixels.
+          format: int32
+          type: integer
+        left:
+          description: 'Left coordinate of the bounding box. (0,0) is upper left.'
+          format: int32
+          type: integer
+        top:
+          description: 'Top coordinate of the bounding box. (0,0) is upper left.'
+          format: int32
+          type: integer
+        width:
+          description: Width of the bounding box in pixels.
+          format: int32
+          type: integer
+      type: object
+    GooglePrivacyDlpV2beta1ImageRedactionConfig:
+      description: Configuration for determing how redaction of images should occur.
+      properties:
+        infoType:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InfoType'
+        redactAllText:
+          description: |-
+            If true, all text found in the image, regardless if it matches an
+            info_type, is redacted.
+          type: boolean
+        redactionColor:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1Color'
+      type: object
+    GooglePrivacyDlpV2beta1InfoType:
+      description: Type of information detected by the API.
+      properties:
+        name:
+          description: |-
+            Name of the information type. For built-in info types, this is provided by
+            the API call ListInfoTypes. For user-defined info types, this is
+            provided by the user. All user-defined info types must have unique names,
+            and cannot conflict with built-in info type names.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1InfoTypeDescription:
+      description: Info type description.
+      properties:
+        categories:
+          description: List of categories this info type belongs to.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1CategoryDescription'
+          type: array
+        displayName:
+          description: Human readable form of the info type name.
+          type: string
+        name:
+          description: Internal name of the info type.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1InfoTypeStatistics:
+      description: Statistics regarding a specific InfoType.
+      properties:
+        count:
+          description: Number of findings for this info type.
+          format: int64
+          type: string
+        infoType:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InfoType'
+      type: object
+    GooglePrivacyDlpV2beta1InspectConfig:
+      description: |-
+        Configuration description of the scanning process.
+        When used with redactContent only info_types and min_likelihood are currently
+        used.
+      properties:
+        excludeTypes:
+          description: 'When true, excludes type information of the findings.'
+          type: boolean
+        includeQuote:
+          description: |-
+            When true, a contextual quote from the data that triggered a finding is
+            included in the response; see Finding.quote.
+          type: boolean
+        infoTypes:
+          description: |-
+            Restricts what info_types to look for. The values must correspond to
+            InfoType values returned by ListInfoTypes or found in documentation.
+            Empty info_types runs all enabled detectors.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InfoType'
+          type: array
+        maxFindings:
+          description: Limits the number of findings per content item or long running operation.
+          format: int32
+          type: integer
+        minLikelihood:
+          description: Only returns findings equal or above this threshold.
+          enum:
+            - LIKELIHOOD_UNSPECIFIED
+            - VERY_UNLIKELY
+            - UNLIKELY
+            - POSSIBLE
+            - LIKELY
+            - VERY_LIKELY
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1InspectContentRequest:
+      description: Request to search for potentially sensitive info in a list of items.
+      properties:
+        inspectConfig:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InspectConfig'
+        items:
+          description: |-
+            The list of items to inspect. Items in a single request are
+            considered "related" unless inspect_config.independent_inputs is true.
+            Up to 100 are allowed per request.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1ContentItem'
+          type: array
+      type: object
+    GooglePrivacyDlpV2beta1InspectContentResponse:
+      description: Results of inspecting a list of items.
+      properties:
+        results:
+          description: |-
+            Each content_item from the request has a result in this list, in the
+            same order as the request.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InspectResult'
+          type: array
+      type: object
+    GooglePrivacyDlpV2beta1InspectOperationMetadata:
+      description: Metadata returned within GetOperation for an inspect request.
+      properties:
+        createTime:
+          description: The time which this request was started.
+          format: google-datetime
+          type: string
+        infoTypeStats:
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InfoTypeStatistics'
+          type: array
+        processedBytes:
+          description: Total size in bytes that were processed.
+          format: int64
+          type: string
+        requestInspectConfig:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InspectConfig'
+        requestOutputConfig:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1OutputStorageConfig'
+        requestStorageConfig:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1StorageConfig'
+        totalEstimatedBytes:
+          description: Estimate of the number of bytes to process.
+          format: int64
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1InspectOperationResult:
+      description: The operational data.
+      properties:
+        name:
+          description: |-
+            The server-assigned name, which is only unique within the same service that
+            originally returns it. If you use the default HTTP mapping, the
+            `name` should have the format of `inspect/results/{id}`.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1InspectResult:
+      description: All the findings for a single scanned item.
+      properties:
+        findings:
+          description: List of findings for an item.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1Finding'
+          type: array
+        findingsTruncated:
+          description: |-
+            If true, then this item might have more findings than were returned,
+            and the findings returned are an arbitrary subset of all findings.
+            The findings list might be truncated because the input items were too
+            large, or because the server reached the maximum amount of resources
+            allowed for a single API call. For best results, divide the input into
+            smaller batches.
+          type: boolean
+      type: object
+    GooglePrivacyDlpV2beta1Key:
+      description: |-
+        A unique identifier for a Datastore entity.
+        If a key's partition ID or any of its path kinds or names are
+        reserved/read-only, the key is reserved/read-only.
+        A reserved/read-only key is forbidden in certain documented contexts.
+      properties:
+        partitionId:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1PartitionId'
+        path:
+          description: |-
+            The entity path.
+            An entity path consists of one or more elements composed of a kind and a
+            string or numerical identifier, which identify entities. The first
+            element identifies a _root entity_, the second element identifies
+            a _child_ of the root entity, the third element identifies a child of the
+            second entity, and so forth. The entities identified by all prefixes of
+            the path are called the element's _ancestors_.
+
+            A path can never be empty, and a path can have at most 100 elements.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1PathElement'
+          type: array
+      type: object
+    GooglePrivacyDlpV2beta1KindExpression:
+      description: A representation of a Datastore kind.
+      properties:
+        name:
+          description: The name of the kind.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1ListInfoTypesResponse:
+      description: Response to the ListInfoTypes request.
+      properties:
+        infoTypes:
+          description: Set of sensitive info types belonging to a category.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InfoTypeDescription'
+          type: array
+      type: object
+    GooglePrivacyDlpV2beta1ListInspectFindingsResponse:
+      description: Response to the ListInspectFindings request.
+      properties:
+        nextPageToken:
+          description: |-
+            If not empty, indicates that there may be more results that match the
+            request; this value should be passed in a new `ListInspectFindingsRequest`.
+          type: string
+        result:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InspectResult'
+      type: object
+    GooglePrivacyDlpV2beta1ListRootCategoriesResponse:
+      description: Response for ListRootCategories request.
+      properties:
+        categories:
+          description: List of all into type categories supported by the API.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1CategoryDescription'
+          type: array
+      type: object
+    GooglePrivacyDlpV2beta1Location:
+      description: Specifies the location of a finding within its source item.
+      properties:
+        byteRange:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1Range'
+        codepointRange:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1Range'
+        fieldId:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1FieldId'
+        imageBoxes:
+          description: Location within an image's pixels.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1ImageLocation'
+          type: array
+        recordKey:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1RecordKey'
+      type: object
+    GooglePrivacyDlpV2beta1OutputStorageConfig:
+      description: Cloud repository for storing output.
+      properties:
+        storagePath:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1CloudStoragePath'
+      type: object
+    GooglePrivacyDlpV2beta1PartitionId:
+      description: |-
+        Datastore partition ID.
+        A partition ID identifies a grouping of entities. The grouping is always
+        by project and namespace, however the namespace ID may be empty.
+
+        A partition ID contains several dimensions:
+        project ID and namespace ID.
+      properties:
+        namespaceId:
+          description: 'If not empty, the ID of the namespace to which the entities belong.'
+          type: string
+        projectId:
+          description: The ID of the project to which the entities belong.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1PathElement:
+      description: |-
+        A (kind, ID/name) pair used to construct a key path.
+
+        If either name or ID is set, the element is complete.
+        If neither is set, the element is incomplete.
+      properties:
+        id:
+          description: |-
+            The auto-allocated ID of the entity.
+            Never equal to zero. Values less than zero are discouraged and may not
+            be supported in the future.
+          format: int64
+          type: string
+        kind:
+          description: |-
+            The kind of the entity.
+            A kind matching regex `__.*__` is reserved/read-only.
+            A kind must not contain more than 1500 bytes when UTF-8 encoded.
+            Cannot be `""`.
+          type: string
+        name:
+          description: |-
+            The name of the entity.
+            A name matching regex `__.*__` is reserved/read-only.
+            A name must not be more than 1500 bytes when UTF-8 encoded.
+            Cannot be `""`.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1Projection:
+      description: A representation of a Datastore property in a projection.
+      properties:
+        property:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1PropertyReference'
+      type: object
+    GooglePrivacyDlpV2beta1PropertyReference:
+      description: A reference to a property relative to the Datastore kind expressions.
+      properties:
+        name:
+          description: |-
+            The name of the property.
+            If name includes "."s, it may be interpreted as a property name path.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1Range:
+      description: 'Generic half-open interval [start, end)'
+      properties:
+        end:
+          description: Index of the last character of the range (exclusive).
+          format: int64
+          type: string
+        start:
+          description: Index of the first character of the range (inclusive).
+          format: int64
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1RecordKey:
+      description: Message for a unique key indicating a record that contains a finding.
+      properties:
+        cloudStorageKey:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1CloudStorageKey'
+        datastoreKey:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1DatastoreKey'
+      type: object
+    GooglePrivacyDlpV2beta1RedactContentRequest:
+      description: |-
+        Request to search for potentially sensitive info in a list of items
+        and replace it with a default or provided content.
+      properties:
+        imageRedactionConfigs:
+          description: The configuration for specifying what content to redact from images.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1ImageRedactionConfig'
+          type: array
+        inspectConfig:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InspectConfig'
+        items:
+          description: The list of items to inspect. Up to 100 are allowed per request.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1ContentItem'
+          type: array
+        replaceConfigs:
+          description: |-
+            The strings to replace findings text findings with. Must specify at least
+            one of these or one ImageRedactionConfig if redacting images.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1ReplaceConfig'
+          type: array
+      type: object
+    GooglePrivacyDlpV2beta1RedactContentResponse:
+      description: Results of redacting a list of items.
+      properties:
+        items:
+          description: The redacted content.
+          items:
+            $ref: '#/components/schemas/GooglePrivacyDlpV2beta1ContentItem'
+          type: array
+      type: object
+    GooglePrivacyDlpV2beta1ReplaceConfig:
+      properties:
+        infoType:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1InfoType'
+        replaceWith:
+          description: Content replacing sensitive information of given type. Max 256 chars.
+          type: string
+      type: object
+    GooglePrivacyDlpV2beta1StorageConfig:
+      description: Shared message indicating Cloud storage type.
+      properties:
+        cloudStorageOptions:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1CloudStorageOptions'
+        datastoreOptions:
+          $ref: '#/components/schemas/GooglePrivacyDlpV2beta1DatastoreOptions'
+      type: object
+    GoogleProtobufEmpty:
+      description: |-
+        A generic empty message that you can re-use to avoid defining duplicated
+        empty messages in your APIs. A typical example is to use it as the request
+        or the response type of an API method. For instance:
+
+            service Foo {
+              rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+            }
+
+        The JSON representation for `Empty` is empty JSON object `{}`.
+      properties: {}
+      type: object
+    GoogleRpcStatus:
+      description: |-
+        The `Status` type defines a logical error model that is suitable for different
+        programming environments, including REST APIs and RPC APIs. It is used by
+        [gRPC](https://github.com/grpc). The error model is designed to be:
+
+        - Simple to use and understand for most users
+        - Flexible enough to meet unexpected needs
+
+        # Overview
+
+        The `Status` message contains three pieces of data: error code, error message,
+        and error details. The error code should be an enum value of
+        google.rpc.Code, but it may accept additional error codes if needed.  The
+        error message should be a developer-facing English message that helps
+        developers *understand* and *resolve* the error. If a localized user-facing
+        error message is needed, put the localized message in the error details or
+        localize it in the client. The optional error details may contain arbitrary
+        information about the error. There is a predefined set of error detail types
+        in the package `google.rpc` that can be used for common error conditions.
+
+        # Language mapping
+
+        The `Status` message is the logical representation of the error model, but it
+        is not necessarily the actual wire format. When the `Status` message is
+        exposed in different client libraries and different wire protocols, it can be
+        mapped differently. For example, it will likely be mapped to some exceptions
+        in Java, but more likely mapped to some error codes in C.
+
+        # Other uses
+
+        The error model and the `Status` message can be used in a variety of
+        environments, either with or without APIs, to provide a
+        consistent developer experience across different environments.
+
+        Example uses of this error model include:
+
+        - Partial errors. If a service needs to return partial errors to the client,
+            it may embed the `Status` in the normal response to indicate the partial
+            errors.
+
+        - Workflow errors. A typical workflow has multiple steps. Each step may
+            have a `Status` message for error reporting.
+
+        - Batch operations. If a client uses batch request and batch response, the
+            `Status` message should be used directly inside batch response, one for
+            each error sub-response.
+
+        - Asynchronous operations. If an API call embeds asynchronous operation
+            results in its response, the status of those operations should be
+            represented directly using the `Status` message.
+
+        - Logging. If some API errors are stored in logs, the message `Status` could
+            be used directly after any stripping needed for security/privacy reasons.
+      properties:
+        code:
+          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          format: int32
+          type: integer
+        details:
+          description: |-
+            A list of messages that carry the error details.  There is a common set of
+            message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: |-
+            A developer-facing error message, which should be in English. Any
+            user-facing error message should be localized and sent in the
+            google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+  parameters:
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+          - media
+          - proto
+        default: json
+    bearer_token:
+      description: OAuth bearer token.
+      in: query
+      name: bearer_token
+      schema:
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    pp:
+      description: Pretty-print response.
+      in: query
+      name: pp
+      schema:
+        type: boolean
+        default: true
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        type: string
+        enum:
+          - '1'
+          - '2'
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services

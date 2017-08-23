@@ -1,0 +1,1755 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://management.azure.com/'
+info:
+  description: REST API for Azure Logic Apps.
+  title: LogicManagementClient
+  version: 2015-02-01-preview
+  x-apisguru-categories:
+    - developer_tools
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-logic/2015-02-01-preview/swagger/logic.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: arm-logic
+  x-tags:
+    - Azure
+    - Microsoft
+    - applications
+    - automation
+    - integrations
+security:
+  - azure_auth:
+      - user_impersonation
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Logic/workflows':
+    get:
+      description: Gets a list of workflows by subscription.
+      operationId: Workflows_ListBySubscription
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - $ref: '#/components/parameters/api-version'
+        - description: The number of items to be included in the result.
+          in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowListResult'
+      tags:
+        - Workflows
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/WorkflowFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows':
+    get:
+      description: Gets a list of workflows by resource group.
+      operationId: Workflows_ListByResourceGroup
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+        - description: The number of items to be included in the result.
+          in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowListResult'
+      tags:
+        - Workflows
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/WorkflowFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}':
+    delete:
+      description: Deletes a workflow.
+      operationId: Workflows_Delete
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+      tags:
+        - Workflows
+    get:
+      description: Gets a workflow.
+      operationId: Workflows_Get
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+      tags:
+        - Workflows
+    patch:
+      description: Updates a workflow.
+      operationId: Workflows_Update
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+      tags:
+        - Workflows
+      requestBody:
+        $ref: '#/components/requestBodies/Workflow'
+    put:
+      description: Creates or updates a workflow.
+      operationId: Workflows_CreateOrUpdate
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+      tags:
+        - Workflows
+      requestBody:
+        $ref: '#/components/requestBodies/Workflow'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/accessKeys':
+    get:
+      description: Gets a list of workflow access keys.
+      operationId: WorkflowAccessKeys_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+        - description: The number of items to be included in the result.
+          in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowAccessKeyListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowAccessKeyListResult'
+      tags:
+        - WorkflowAccessKeys
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/accessKeys/{accessKeyName}':
+    delete:
+      description: Deletes a workflow access key.
+      operationId: WorkflowAccessKeys_Delete
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow access key name.
+          in: path
+          name: accessKeyName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+      tags:
+        - WorkflowAccessKeys
+    get:
+      description: Gets a workflow access key.
+      operationId: WorkflowAccessKeys_Get
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow access key name.
+          in: path
+          name: accessKeyName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowAccessKey'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowAccessKey'
+      tags:
+        - WorkflowAccessKeys
+    put:
+      description: Creates or updates a workflow access key.
+      operationId: WorkflowAccessKeys_CreateOrUpdate
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow access key name.
+          in: path
+          name: accessKeyName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowAccessKey'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowAccessKey'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowAccessKey'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowAccessKey'
+      tags:
+        - WorkflowAccessKeys
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowAccessKey'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowAccessKey'
+        description: The workflow access key.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/accessKeys/{accessKeyName}/list':
+    post:
+      description: Lists secret keys.
+      operationId: WorkflowAccessKeys_ListSecretKeys
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow access key name.
+          in: path
+          name: accessKeyName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowSecretKeys'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowSecretKeys'
+      tags:
+        - WorkflowAccessKeys
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/accessKeys/{accessKeyName}/regenerate':
+    post:
+      description: Regenerates secret key.
+      operationId: WorkflowAccessKeys_RegenerateSecretKey
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow access key name.
+          in: path
+          name: accessKeyName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowSecretKeys'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowSecretKeys'
+      tags:
+        - WorkflowAccessKeys
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegenerateSecretKeyParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RegenerateSecretKeyParameters'
+        description: The parameters.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/disable':
+    post:
+      description: Disables a workflow.
+      operationId: Workflows_Disable
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Workflows
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/enable':
+    post:
+      description: Enables a workflow.
+      operationId: Workflows_Enable
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Workflows
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/run':
+    post:
+      description: Runs a workflow.
+      operationId: Workflows_Run
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRun'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRun'
+      tags:
+        - Workflows
+      x-ms-long-running-operation: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunWorkflowParameters'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RunWorkflowParameters'
+        description: The parameters.
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs':
+    get:
+      description: Gets a list of workflow runs.
+      operationId: WorkflowRuns_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+        - description: The number of items to be included in the result.
+          in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRunListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRunListResult'
+      tags:
+        - WorkflowRuns
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/WorkflowRunFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}':
+    get:
+      description: Gets a workflow run.
+      operationId: WorkflowRuns_Get
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRun'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRun'
+      tags:
+        - WorkflowRuns
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions':
+    get:
+      description: Gets a list of workflow run actions.
+      operationId: WorkflowRunActions_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+        - description: The number of items to be included in the result.
+          in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRunActionListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRunActionListResult'
+      tags:
+        - WorkflowRunActions
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/WorkflowRunActionFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}':
+    get:
+      description: Gets a workflow run action.
+      operationId: WorkflowRunActions_Get
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          schema:
+            type: string
+        - description: The workflow action name.
+          in: path
+          name: actionName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRunAction'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowRunAction'
+      tags:
+        - WorkflowRunActions
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/cancel':
+    post:
+      description: Cancels a workflow run.
+      operationId: WorkflowRuns_Cancel
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow run name.
+          in: path
+          name: runName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - WorkflowRuns
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/':
+    get:
+      description: Gets a list of workflow triggers.
+      operationId: WorkflowTriggers_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+        - description: The number of items to be included in the result.
+          in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowTriggerListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowTriggerListResult'
+      tags:
+        - WorkflowTriggers
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/WorkflowTriggerFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}':
+    get:
+      description: Gets a workflow trigger.
+      operationId: WorkflowTriggers_Get
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow trigger name.
+          in: path
+          name: triggerName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowTrigger'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowTrigger'
+      tags:
+        - WorkflowTriggers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories':
+    get:
+      description: Gets a list of workflow trigger histories.
+      operationId: WorkflowTriggerHistories_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow trigger name.
+          in: path
+          name: triggerName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+        - description: The number of items to be included in the result.
+          in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowTriggerHistoryListResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowTriggerHistoryListResult'
+      tags:
+        - WorkflowTriggerHistories
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/WorkflowTriggerHistoryFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}':
+    get:
+      description: Gets a workflow trigger history.
+      operationId: WorkflowTriggerHistories_Get
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow trigger name.
+          in: path
+          name: triggerName
+          required: true
+          schema:
+            type: string
+        - description: The workflow trigger history name.
+          in: path
+          name: historyName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowTriggerHistory'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowTriggerHistory'
+      tags:
+        - WorkflowTriggerHistories
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/run':
+    post:
+      description: Runs a workflow trigger.
+      operationId: WorkflowTriggers_Run
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow trigger name.
+          in: path
+          name: triggerName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - WorkflowTriggers
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/validate':
+    post:
+      description: Validates a workflow.
+      operationId: Workflows_Validate
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Workflows
+      requestBody:
+        $ref: '#/components/requestBodies/Workflow'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/versions/{versionId}':
+    get:
+      description: Gets a workflow version.
+      operationId: WorkflowVersions_Get
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The workflow name.
+          in: path
+          name: workflowName
+          required: true
+          schema:
+            type: string
+        - description: The workflow versionId.
+          in: path
+          name: versionId
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowVersion'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowVersion'
+      tags:
+        - WorkflowVersions
+components:
+  schemas:
+    ContentHash:
+      properties:
+        algorithm:
+          description: Gets or sets the algorithm.
+          type: string
+        value:
+          description: Gets or sets the value.
+          type: string
+      type: object
+    ContentLink:
+      properties:
+        contentHash:
+          $ref: '#/components/schemas/ContentHash'
+        contentSize:
+          description: Gets or sets the content size.
+          format: int64
+          type: integer
+        contentVersion:
+          description: Gets or sets the content version.
+          type: string
+        metadata:
+          $ref: '#/components/schemas/Object'
+        uri:
+          description: Gets or sets the content link URI.
+          type: string
+      type: object
+    KeyType:
+      enum:
+        - NotSpecified
+        - Primary
+        - Secondary
+      type: string
+      x-ms-enum:
+        modelAsString: false
+        name: KeyType
+    Object:
+      properties: {}
+      type: object
+    ParameterType:
+      enum:
+        - NotSpecified
+        - String
+        - SecureString
+        - Int
+        - Float
+        - Bool
+        - Array
+        - Object
+        - SecureObject
+      type: string
+      x-ms-enum:
+        modelAsString: false
+        name: ParameterType
+    RecurrenceFrequency:
+      enum:
+        - Second
+        - Minute
+        - Hour
+        - Day
+        - Week
+        - Month
+        - Year
+      type: string
+      x-ms-enum:
+        modelAsString: false
+        name: RecurrenceFrequency
+    RegenerateSecretKeyParameters:
+      properties:
+        keyType:
+          $ref: '#/components/schemas/KeyType'
+      type: object
+    Resource:
+      properties:
+        id:
+          description: Gets or sets the resource id.
+          type: string
+        location:
+          description: Gets or sets the resource location.
+          type: string
+        name:
+          description: Gets the resource name.
+          type: string
+        tags:
+          additionalProperties:
+            type: string
+          description: Gets or sets the resource tags.
+          type: object
+        type:
+          description: Gets the resource type.
+          type: string
+      x-ms-azure-resource: true
+    ResourceReference:
+      properties:
+        id:
+          description: Gets or sets the resource id.
+          type: string
+        name:
+          description: Gets the resource name.
+          readOnly: true
+          type: string
+        type:
+          description: Gets the resource type.
+          readOnly: true
+          type: string
+      type: object
+    RunWorkflowParameters:
+      properties:
+        name:
+          description: Gets or sets the name of workflow run trigger.
+          type: string
+        outputs:
+          description: Gets or sets the outputs of workflow run trigger.
+          type: object
+      type: object
+    Sku:
+      properties:
+        name:
+          $ref: '#/components/schemas/SkuName'
+        plan:
+          $ref: '#/components/schemas/ResourceReference'
+      type: object
+    SkuName:
+      enum:
+        - NotSpecified
+        - Free
+        - Shared
+        - Basic
+        - Standard
+        - Premium
+      type: string
+      x-ms-enum:
+        modelAsString: false
+        name: SkuName
+    SubResource:
+      properties:
+        id:
+          description: Gets or sets the resource id.
+          type: string
+      x-ms-azure-resource: true
+    Workflow:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      properties:
+        properties:
+          $ref: '#/components/schemas/WorkflowProperties'
+      type: object
+    WorkflowAccessKey:
+      allOf:
+        - $ref: '#/components/schemas/SubResource'
+      properties:
+        name:
+          description: Gets the workflow access key name.
+          readOnly: true
+          type: string
+        properties:
+          $ref: '#/components/schemas/WorkflowAccessKeyProperties'
+        type:
+          description: Gets the workflow access key type.
+          readOnly: true
+          type: string
+      type: object
+    WorkflowAccessKeyListResult:
+      properties:
+        nextLink:
+          description: Gets or sets the URL to get the next set of results.
+          type: string
+        value:
+          description: Gets or sets a list of workflow access keys.
+          items:
+            $ref: '#/components/schemas/WorkflowAccessKey'
+          type: array
+      type: object
+    WorkflowAccessKeyProperties:
+      properties:
+        notAfter:
+          description: Gets or sets the not-after time.
+          format: date-time
+          type: string
+        notBefore:
+          description: Gets or sets the not-before time.
+          format: date-time
+          type: string
+      type: object
+    WorkflowFilter:
+      properties:
+        state:
+          $ref: '#/components/schemas/WorkflowState'
+      type: object
+    WorkflowListResult:
+      properties:
+        nextLink:
+          description: Gets or sets the URL to get the next set of results.
+          type: string
+        value:
+          description: Gets or sets the list of workflows.
+          items:
+            $ref: '#/components/schemas/Workflow'
+          type: array
+      type: object
+    WorkflowOutputParameter:
+      allOf:
+        - $ref: '#/components/schemas/WorkflowParameter'
+      properties:
+        error:
+          $ref: '#/components/schemas/Object'
+      type: object
+    WorkflowParameter:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Object'
+        type:
+          $ref: '#/components/schemas/ParameterType'
+        value:
+          $ref: '#/components/schemas/Object'
+      type: object
+    WorkflowProperties:
+      properties:
+        accessEndpoint:
+          description: Gets the access endpoint.
+          readOnly: true
+          type: string
+        changedTime:
+          description: Gets the changed time.
+          format: date-time
+          readOnly: true
+          type: string
+        createdTime:
+          description: Gets the created time.
+          format: date-time
+          readOnly: true
+          type: string
+        definition:
+          $ref: '#/components/schemas/Object'
+        definitionLink:
+          $ref: '#/components/schemas/ContentLink'
+        parameters:
+          additionalProperties:
+            $ref: '#/components/schemas/WorkflowParameter'
+          description: Gets or sets the parameters.
+          type: object
+        parametersLink:
+          $ref: '#/components/schemas/ContentLink'
+        provisioningState:
+          $ref: '#/components/schemas/WorkflowProvisioningState'
+        sku:
+          $ref: '#/components/schemas/Sku'
+        state:
+          $ref: '#/components/schemas/WorkflowState'
+        version:
+          description: Gets the version.
+          readOnly: true
+          type: string
+      type: object
+    WorkflowProvisioningState:
+      enum:
+        - NotSpecified
+        - Moving
+        - Succeeded
+      type: string
+      x-ms-enum:
+        modelAsString: false
+        name: WorkflowProvisioningState
+    WorkflowRun:
+      allOf:
+        - $ref: '#/components/schemas/SubResource'
+      properties:
+        name:
+          description: Gets the workflow run name.
+          readOnly: true
+          type: string
+        properties:
+          $ref: '#/components/schemas/WorkflowRunProperties'
+        type:
+          description: Gets the workflow run type.
+          readOnly: true
+          type: string
+      type: object
+    WorkflowRunAction:
+      allOf:
+        - $ref: '#/components/schemas/SubResource'
+      properties:
+        name:
+          description: Gets the workflow run action name.
+          readOnly: true
+          type: string
+        properties:
+          $ref: '#/components/schemas/WorkflowRunActionProperties'
+        type:
+          description: Gets the workflow run action type.
+          readOnly: true
+          type: string
+      type: object
+    WorkflowRunActionFilter:
+      properties:
+        status:
+          $ref: '#/components/schemas/WorkflowStatus'
+      type: object
+    WorkflowRunActionListResult:
+      properties:
+        nextLink:
+          description: Gets or sets the URL to get the next set of results.
+          type: string
+        value:
+          description: Gets or sets a list of workflow run actions.
+          items:
+            $ref: '#/components/schemas/WorkflowRunAction'
+          type: array
+      type: object
+    WorkflowRunActionProperties:
+      properties:
+        code:
+          description: Gets the code.
+          readOnly: true
+          type: string
+        endTime:
+          description: Gets the end time.
+          format: date-time
+          readOnly: true
+          type: string
+        error:
+          $ref: '#/components/schemas/Object'
+        inputsLink:
+          $ref: '#/components/schemas/ContentLink'
+        outputsLink:
+          $ref: '#/components/schemas/ContentLink'
+        startTime:
+          description: Gets the start time.
+          format: date-time
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/WorkflowStatus'
+        trackingId:
+          description: Gets the trackingId.
+          readOnly: true
+          type: string
+      type: object
+    WorkflowRunFilter:
+      properties:
+        status:
+          $ref: '#/components/schemas/WorkflowStatus'
+      type: object
+    WorkflowRunListResult:
+      properties:
+        nextLink:
+          description: Gets or sets the URL to get the next set of results.
+          type: string
+        value:
+          description: Gets or sets a list of workflow runs.
+          items:
+            $ref: '#/components/schemas/WorkflowRun'
+          type: array
+      type: object
+    WorkflowRunProperties:
+      properties:
+        code:
+          description: Gets the code.
+          readOnly: true
+          type: string
+        correlationId:
+          description: Gets the correlation id.
+          readOnly: true
+          type: string
+        endTime:
+          description: Gets the end time.
+          format: date-time
+          readOnly: true
+          type: string
+        error:
+          $ref: '#/components/schemas/Object'
+        outputs:
+          additionalProperties:
+            $ref: '#/components/schemas/WorkflowOutputParameter'
+          description: Gets the outputs.
+          readOnly: true
+          type: object
+        startTime:
+          description: Gets the start time.
+          format: date-time
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/WorkflowStatus'
+        trigger:
+          $ref: '#/components/schemas/WorkflowRunTrigger'
+        workflow:
+          $ref: '#/components/schemas/ResourceReference'
+      type: object
+    WorkflowRunTrigger:
+      properties:
+        code:
+          description: Gets the code.
+          readOnly: true
+          type: string
+        endTime:
+          description: Gets the end time.
+          format: date-time
+          readOnly: true
+          type: string
+        error:
+          $ref: '#/components/schemas/Object'
+        inputs:
+          $ref: '#/components/schemas/Object'
+        inputsLink:
+          $ref: '#/components/schemas/ContentLink'
+        name:
+          description: Gets the name.
+          readOnly: true
+          type: string
+        outputs:
+          $ref: '#/components/schemas/Object'
+        outputsLink:
+          $ref: '#/components/schemas/ContentLink'
+        startTime:
+          description: Gets the start time.
+          format: date-time
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/WorkflowStatus'
+        trackingId:
+          description: Gets the trackingId.
+          readOnly: true
+          type: string
+      type: object
+    WorkflowSecretKeys:
+      properties:
+        primarySecretKey:
+          description: Gets the primary secret key.
+          readOnly: true
+          type: string
+        secondarySecretKey:
+          description: Gets the secondary secret key.
+          readOnly: true
+          type: string
+      type: object
+    WorkflowState:
+      enum:
+        - NotSpecified
+        - Enabled
+        - Disabled
+        - Deleted
+        - Suspended
+      type: string
+      x-ms-enum:
+        modelAsString: false
+        name: WorkflowState
+    WorkflowStatus:
+      enum:
+        - NotSpecified
+        - Paused
+        - Running
+        - Waiting
+        - Succeeded
+        - Skipped
+        - Suspended
+        - Cancelled
+        - Failed
+        - Faulted
+        - TimedOut
+        - Aborted
+      type: string
+      x-ms-enum:
+        modelAsString: false
+        name: WorkflowStatus
+    WorkflowTrigger:
+      allOf:
+        - $ref: '#/components/schemas/SubResource'
+      properties:
+        name:
+          description: Gets the workflow trigger name.
+          readOnly: true
+          type: string
+        properties:
+          $ref: '#/components/schemas/WorkflowTriggerProperties'
+        type:
+          description: Gets the workflow trigger type.
+          readOnly: true
+          type: string
+      type: object
+    WorkflowTriggerFilter:
+      properties:
+        state:
+          $ref: '#/components/schemas/WorkflowState'
+      type: object
+    WorkflowTriggerHistory:
+      allOf:
+        - $ref: '#/components/schemas/SubResource'
+      properties:
+        name:
+          description: Gets the workflow trigger history name.
+          readOnly: true
+          type: string
+        properties:
+          $ref: '#/components/schemas/WorkflowTriggerHistoryProperties'
+        type:
+          description: Gets the workflow trigger history type.
+          readOnly: true
+          type: string
+      type: object
+    WorkflowTriggerHistoryFilter:
+      properties:
+        status:
+          $ref: '#/components/schemas/WorkflowStatus'
+      type: object
+    WorkflowTriggerHistoryListResult:
+      properties:
+        nextLink:
+          description: Gets or sets the URL to get the next set of results.
+          type: string
+        value:
+          description: Gets or sets a list of workflow trigger histories.
+          items:
+            $ref: '#/components/schemas/WorkflowTriggerHistory'
+          type: array
+      type: object
+    WorkflowTriggerHistoryProperties:
+      properties:
+        code:
+          description: Gets the code.
+          readOnly: true
+          type: string
+        endTime:
+          description: Gets the end time.
+          format: date-time
+          readOnly: true
+          type: string
+        error:
+          $ref: '#/components/schemas/Object'
+        fired:
+          description: Gets a value indicating whether trigger was fired.
+          readOnly: true
+          type: boolean
+        inputsLink:
+          $ref: '#/components/schemas/ContentLink'
+        outputsLink:
+          $ref: '#/components/schemas/ContentLink'
+        run:
+          $ref: '#/components/schemas/ResourceReference'
+        startTime:
+          description: Gets the start time.
+          format: date-time
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/WorkflowStatus'
+        trackingId:
+          description: Gets the tracking id.
+          readOnly: true
+          type: string
+      type: object
+    WorkflowTriggerListResult:
+      properties:
+        nextLink:
+          description: Gets or sets the URL to get the next set of results.
+          type: string
+        value:
+          description: Gets or sets a list of workflow triggers.
+          items:
+            $ref: '#/components/schemas/WorkflowTrigger'
+          type: array
+      type: object
+    WorkflowTriggerProperties:
+      properties:
+        changedTime:
+          description: Gets the changed time.
+          format: date-time
+          readOnly: true
+          type: string
+        createdTime:
+          description: Gets the created time.
+          format: date-time
+          readOnly: true
+          type: string
+        lastExecutionTime:
+          description: Gets the last execution time.
+          format: date-time
+          readOnly: true
+          type: string
+        nextExecutionTime:
+          description: Gets the next execution time.
+          format: date-time
+          readOnly: true
+          type: string
+        provisioningState:
+          $ref: '#/components/schemas/WorkflowTriggerProvisioningState'
+        recurrence:
+          $ref: '#/components/schemas/WorkflowTriggerRecurrence'
+        state:
+          $ref: '#/components/schemas/WorkflowState'
+        status:
+          $ref: '#/components/schemas/WorkflowStatus'
+        workflow:
+          $ref: '#/components/schemas/ResourceReference'
+      type: object
+    WorkflowTriggerProvisioningState:
+      enum:
+        - NotSpecified
+        - Creating
+        - Succeeded
+        - Updating
+      type: string
+      x-ms-enum:
+        modelAsString: false
+        name: WorkflowTriggerProvisioningState
+    WorkflowTriggerRecurrence:
+      properties:
+        frequency:
+          $ref: '#/components/schemas/RecurrenceFrequency'
+        interval:
+          description: Gets or sets the interval.
+          format: int32
+          type: integer
+        startTime:
+          description: Gets or sets the start time.
+          format: date-time
+          type: string
+        timeZone:
+          description: Gets or sets the time zone.
+          type: string
+      type: object
+    WorkflowVersion:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      properties:
+        properties:
+          $ref: '#/components/schemas/WorkflowVersionProperties'
+      type: object
+    WorkflowVersionProperties:
+      properties:
+        accessEndpoint:
+          description: Gets the access endpoint.
+          readOnly: true
+          type: string
+        changedTime:
+          description: Gets the changed time.
+          format: date-time
+          readOnly: true
+          type: string
+        createdTime:
+          description: Gets the created time.
+          format: date-time
+          readOnly: true
+          type: string
+        definition:
+          $ref: '#/components/schemas/Object'
+        definitionLink:
+          $ref: '#/components/schemas/ContentLink'
+        parameters:
+          additionalProperties:
+            $ref: '#/components/schemas/WorkflowParameter'
+          description: Gets or sets the parameters.
+          type: object
+        parametersLink:
+          $ref: '#/components/schemas/ContentLink'
+        sku:
+          $ref: '#/components/schemas/Sku'
+        state:
+          $ref: '#/components/schemas/WorkflowState'
+        version:
+          description: Gets the version.
+          readOnly: true
+          type: string
+      type: object
+  parameters:
+    api-version:
+      description: The API version.
+      in: query
+      name: api-version
+      required: true
+      schema:
+        type: string
+    subscriptionId:
+      description: The subscription id.
+      in: path
+      name: subscriptionId
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    Workflow:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Workflow'
+        text/json:
+          schema:
+            $ref: '#/components/schemas/Workflow'
+      description: The workflow.
+      required: true
+  securitySchemes:
+    azure_auth:
+      description: Azure Active Directory OAuth2 Flow.
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+          scopes:
+            user_impersonation: impersonate your user account

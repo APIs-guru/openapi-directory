@@ -1,0 +1,5988 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.tfl.gov.uk/'
+info:
+  description: 'Our unified API brings together data across all modes of transport into a single RESTful API. This API provides access to the most highly requested realtime and status infomation across all the modes of transport, in a single and consistent way. Access to the developer documentation is available at https://api.tfl.gov.uk'
+  title: Transport for London Unified
+  version: v1
+  x-apisguru-categories:
+    - location
+    - open_data
+  x-logo:
+    url: 'https://pbs.twimg.com/profile_images/773531056670646272/dsuVeVSg.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.tfl.gov.uk/swagger/docs/v1'
+      version: '2.0'
+  x-providerName: tfl.gov.uk
+paths:
+  '/AccidentStats/{year}':
+    get:
+      deprecated: false
+      operationId: AccidentStats_Get
+      parameters:
+        - description: The year for which to filter the accidents on.
+          in: path
+          name: year
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccidentDetail'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccidentDetail'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccidentDetail'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AccidentDetail'
+                type: array
+      summary: Gets all accident details for accidents occuring in the specified year
+      tags:
+        - AccidentStats
+  /AirQuality:
+    get:
+      deprecated: false
+      operationId: AirQuality_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+      summary: Gets air quality data feed
+      tags:
+        - AirQuality
+  /BikePoint:
+    get:
+      deprecated: false
+      operationId: BikePoint_GetAll
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+      summary: "Gets all bike point locations. The Place object has an addtionalProperties array which contains the nbBikes, nbDocks and nbSpaces\r\n            numbers which give the status of the BikePoint. A mismatch in these numbers i.e. nbDocks - (nbBikes + nbSpaces) != 0 indicates broken docks."
+      tags:
+        - BikePoint
+  /BikePoint/Search:
+    get:
+      deprecated: false
+      operationId: BikePoint_Search
+      parameters:
+        - description: The search term e.g. "St. James"
+          in: query
+          name: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+      summary: "Search for bike stations by their name, a bike point's name often contains information about the name of the street\r\n            or nearby landmarks, for example. Note that the search result does not contain the PlaceProperties i.e. the status\r\n            or occupancy of the BikePoint, to get that information you should retrieve the BikePoint by its id on /BikePoint/id."
+      tags:
+        - BikePoint
+  '/BikePoint/{id}':
+    get:
+      deprecated: false
+      operationId: BikePoint_Get
+      parameters:
+        - description: A bike point id (a list of ids can be obtained from the above BikePoint call)
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Place'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Place'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Place'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Place'
+      summary: Gets the bike point with the given id.
+      tags:
+        - BikePoint
+  /Cabwise/search:
+    get:
+      deprecated: false
+      operationId: Cabwise_Get
+      parameters:
+        - description: Latitude
+          in: query
+          name: lat
+          required: true
+          schema:
+            type: number
+            format: double
+        - description: Longitude
+          in: query
+          name: lon
+          required: true
+          schema:
+            type: number
+            format: double
+        - description: 'Operator Type e.g Minicab, Executive, Limousine'
+          in: query
+          name: optype
+          required: false
+          schema:
+            type: string
+        - description: Wheelchair accessible
+          in: query
+          name: wc
+          required: false
+          schema:
+            type: string
+        - description: The radius of the bounding circle in metres
+          in: query
+          name: radius
+          required: false
+          schema:
+            type: number
+            format: double
+        - description: Trading name of operating company
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: An optional parameter to limit the number of results return. Default and maximum is 20.
+          in: query
+          name: maxResults
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Legacy Format
+          in: query
+          name: legacyFormat
+          required: false
+          schema:
+            type: boolean
+        - description: Force Xml
+          in: query
+          name: forceXml
+          required: false
+          schema:
+            type: boolean
+        - description: Twenty Four Seven Only
+          in: query
+          name: twentyFourSevenOnly
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+      summary: Gets taxis and minicabs contact information
+      tags:
+        - Cabwise
+  '/Journey/JourneyResults/{from}/to/{to}':
+    get:
+      deprecated: false
+      operationId: Journey_JourneyResults
+      parameters:
+        - description: 'Origin of the journey. Can be WGS84 coordinates expressed as "lat,long", a UK postcode, a Naptan (StopPoint) id, an ICS StopId, or a free-text string (will cause disambiguation unless it exactly matches a point of interest name).'
+          in: path
+          name: from
+          required: true
+          schema:
+            type: string
+        - description: 'Destination of the journey. Can be WGS84 coordinates expressed as "lat,long", a UK postcode, a Naptan (StopPoint) id, an ICS StopId, or a free-text string (will cause disambiguation unless it exactly matches a point of interest name).'
+          in: path
+          name: to
+          required: true
+          schema:
+            type: string
+        - description: 'Travel through point on the journey. Can be WGS84 coordinates expressed as "lat,long", a UK postcode, a Naptan (StopPoint) id, an ICS StopId, or a free-text string (will cause disambiguation unless it exactly matches a point of interest name).'
+          in: query
+          name: via
+          required: false
+          schema:
+            type: string
+        - description: Does the journey cover stops outside London? eg. "nationalSearch=true"
+          in: query
+          name: nationalSearch
+          required: false
+          schema:
+            type: boolean
+        - description: The date must be in yyyyMMdd format
+          in: query
+          name: date
+          required: false
+          schema:
+            type: string
+        - description: The time must be in HHmm format
+          in: query
+          name: time
+          required: false
+          schema:
+            type: string
+        - description: 'Does the time given relate to arrival or leaving time? Possible options: "departing" | "arriving"'
+          in: query
+          name: timeIs
+          required: false
+          schema:
+            type: string
+            enum:
+              - Arriving
+              - Departing
+        - description: 'The journey preference eg possible options: "leastinterchange" | "leasttime" | "leastwalking"'
+          in: query
+          name: journeyPreference
+          required: false
+          schema:
+            type: string
+            enum:
+              - LeastInterchange
+              - LeastTime
+              - LeastWalking
+        - description: 'The mode must be a comma separated list of modes. eg possible options: "public-bus,overground,train,tube,coach,dlr,cablecar,tram,river,walking,cycle"'
+          in: query
+          name: mode
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'The accessibility preference must be a comma separated list eg. "noSolidStairs,noEscalators,noElevators,stepFreeToVehicle,stepFreeToPlatform"'
+          in: query
+          name: accessibilityPreference
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - NoRequirements
+                - NoSolidStairs
+                - NoEscalators
+                - NoElevators
+                - StepFreeToVehicle
+                - StepFreeToPlatform
+              type: string
+        - description: An optional name to associate with the origin of the journey in the results.
+          in: query
+          name: fromName
+          required: false
+          schema:
+            type: string
+        - description: An optional name to associate with the destination of the journey in the results.
+          in: query
+          name: toName
+          required: false
+          schema:
+            type: string
+        - description: An optional name to associate with the via point of the journey in the results.
+          in: query
+          name: viaName
+          required: false
+          schema:
+            type: string
+        - description: The max walking time in minutes for transfer eg. "120"
+          in: query
+          name: maxTransferMinutes
+          required: false
+          schema:
+            type: string
+        - description: The max walking time in minutes for journeys eg. "120"
+          in: query
+          name: maxWalkingMinutes
+          required: false
+          schema:
+            type: string
+        - description: 'The walking speed. eg possible options: "slow" | "average" | "fast".'
+          in: query
+          name: walkingSpeed
+          required: false
+          schema:
+            type: string
+            enum:
+              - Slow
+              - Average
+              - Fast
+        - description: 'The cycle preference. eg possible options: "allTheWay" | "leaveAtStation" | "takeOnTransport" | "cycleHire"'
+          in: query
+          name: cyclePreference
+          required: false
+          schema:
+            type: string
+            enum:
+              - None
+              - LeaveAtStation
+              - TakeOnTransport
+              - AllTheWay
+              - CycleHire
+        - description: 'Time adjustment command. eg possible options: "TripFirst" | "TripLast"'
+          in: query
+          name: adjustment
+          required: false
+          schema:
+            type: string
+        - description: 'A comma separated list of cycling proficiency levels. eg possible options: "easy,moderate,fast"'
+          in: query
+          name: bikeProficiency
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - Easy
+                - Moderate
+                - Fast
+              type: string
+        - description: Option to determine whether to return alternative cycling journey
+          in: query
+          name: alternativeCycle
+          required: false
+          schema:
+            type: boolean
+        - description: Option to determine whether to return alternative walking journey
+          in: query
+          name: alternativeWalking
+          required: false
+          schema:
+            type: boolean
+        - description: Flag to determine whether certain text (e.g. walking instructions) should be output with HTML tags or not.
+          in: query
+          name: applyHtmlMarkup
+          required: false
+          schema:
+            type: boolean
+        - description: 'A boolean to indicate whether or not to return 3 public transport journeys, a bus journey, a cycle hire journey, a personal cycle journey and a walking journey'
+          in: query
+          name: useMultiModalCall
+          required: false
+          schema:
+            type: boolean
+        - description: A boolean to indicate whether to optimize journeys using walking
+          in: query
+          name: walkingOptimization
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItineraryResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ItineraryResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ItineraryResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ItineraryResult'
+      summary: Perform a Journey Planner search from the parameters specified in simple types
+      tags:
+        - Journey
+  /Journey/Meta/Modes:
+    get:
+      deprecated: false
+      operationId: Journey_Meta
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+      summary: Gets a list of all of the available journey planner modes
+      tags:
+        - Journey
+  /Line/Meta/DisruptionCategories:
+    get:
+      deprecated: false
+      operationId: Line_MetaDisruptionCategories
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+      summary: Gets a list of valid disruption categories
+      tags:
+        - Line
+  /Line/Meta/Modes:
+    get:
+      deprecated: false
+      operationId: Line_MetaModes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+      summary: Gets a list of valid modes
+      tags:
+        - Line
+  /Line/Meta/ServiceTypes:
+    get:
+      deprecated: false
+      operationId: Line_MetaServiceTypes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+      summary: Gets a list of valid ServiceTypes to filter on
+      tags:
+        - Line
+  /Line/Meta/Severity:
+    get:
+      deprecated: false
+      operationId: Line_MetaSeverity
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StatusSeverity'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StatusSeverity'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StatusSeverity'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StatusSeverity'
+                type: array
+      summary: Gets a list of valid severity codes
+      tags:
+        - Line
+  '/Line/Mode/{modes}':
+    get:
+      deprecated: false
+      operationId: Line_GetByMode
+      parameters:
+        - description: 'A comma-separated list of modes e.g. tube,dlr'
+          in: path
+          name: modes
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+      summary: Gets lines that serve the given modes.
+      tags:
+        - Line
+  '/Line/Mode/{modes}/Disruption':
+    get:
+      deprecated: false
+      operationId: Line_DisruptionByMode
+      parameters:
+        - description: 'A comma-separated list of modes e.g. tube,dlr'
+          in: path
+          name: modes
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Disruption'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Disruption'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Disruption'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Disruption'
+                type: array
+      summary: Get disruptions for all lines of the given modes.
+      tags:
+        - Line
+  '/Line/Mode/{modes}/Route':
+    get:
+      deprecated: false
+      operationId: Line_RouteByMode
+      parameters:
+        - description: 'A comma-separated list of modes e.g. tube,dlr'
+          in: path
+          name: modes
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'A comma seperated list of service types to filter on. Supported values: Regular, Night. Defaulted to ''Regular'' if not specified'
+          in: query
+          name: serviceTypes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - Regular
+                - Night
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+      summary: 'Gets all lines and their valid routes for given modes, including the name and id of the originating and terminating stops for each route'
+      tags:
+        - Line
+  '/Line/Mode/{modes}/Status':
+    get:
+      deprecated: false
+      operationId: Line_StatusByMode
+      parameters:
+        - description: 'A comma-separated list of modes to filter by. e.g. tube,dlr'
+          in: path
+          name: modes
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Include details of the disruptions that are causing the line status including the affected stops and routes
+          in: query
+          name: detail
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+      summary: Gets the line status of for all lines for the given modes
+      tags:
+        - Line
+  /Line/Route:
+    get:
+      deprecated: false
+      operationId: Line_Route
+      parameters:
+        - description: 'A comma seperated list of service types to filter on. Supported values: Regular, Night. Defaulted to ''Regular'' if not specified'
+          in: query
+          name: serviceTypes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - Regular
+                - Night
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+      summary: 'Get all valid routes for all lines, including the name and id of the originating and terminating stops for each route.'
+      tags:
+        - Line
+  '/Line/Search/{query}':
+    get:
+      deprecated: false
+      operationId: Line_Search
+      parameters:
+        - description: Search term e.g victoria
+          in: path
+          name: query
+          required: true
+          schema:
+            type: string
+        - description: Optionally filter by the specified modes
+          in: query
+          name: modes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'A comma seperated list of service types to filter on. Supported values: Regular, Night. Defaulted to ''Regular'' if not specified'
+          in: query
+          name: serviceTypes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - Regular
+                - Night
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteSearchResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RouteSearchResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RouteSearchResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RouteSearchResponse'
+      summary: Search for lines or routes matching the query string
+      tags:
+        - Line
+  '/Line/Status/{severity}':
+    get:
+      deprecated: false
+      operationId: Line_StatusBySeverity
+      parameters:
+        - description: 'The level of severity (eg: a number from 0 to 14)'
+          in: path
+          name: severity
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+      summary: "Gets the line status for all lines with a given severity\r\n            A list of valid severity codes can be obtained from a call to Line/Meta/Severity"
+      tags:
+        - Line
+  '/Line/{ids}':
+    get:
+      deprecated: false
+      operationId: Line_Get
+      parameters:
+        - description: 'A comma-separated list of line ids e.g. victoria,circle,N133. Max. approx. 20 ids.'
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+      summary: Gets lines that match the specified line ids.
+      tags:
+        - Line
+  '/Line/{ids}/Arrivals':
+    get:
+      deprecated: false
+      parameters:
+        - description: 'Id of stop to get arrival predictions for (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
+          in: query
+          name: stopPointId
+          required: true
+          schema:
+            type: string
+        - description: 'A comma-separated list of line ids e.g. victoria,circle,N133. Max. approx. 20 ids.'
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+      summary: Get the list of arrival predictions for given line ids based at the given stop
+      tags:
+        - Line
+  '/Line/{ids}/Arrivals/{stopPointId}':
+    get:
+      deprecated: false
+      parameters:
+        - description: 'Id of stop to get arrival predictions for (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
+          in: path
+          name: stopPointId
+          required: true
+          schema:
+            type: string
+        - description: 'A comma-separated list of line ids e.g. victoria,circle,N133. Max. approx. 20 ids.'
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: The direction of travel. Can be inbound or outbound
+          in: query
+          name: direction
+          required: true
+          schema:
+            type: string
+            enum:
+              - inbound
+              - outbound
+              - all
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+      summary: Get the list of arrival predictions for given line ids based at the given stop going in the procided direction
+      tags:
+        - Line
+  '/Line/{ids}/Disruption':
+    get:
+      deprecated: false
+      operationId: Line_Disruption
+      parameters:
+        - description: 'A comma-separated list of line ids e.g. victoria,circle,N133. Max. approx. 20 ids.'
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Disruption'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Disruption'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Disruption'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Disruption'
+                type: array
+      summary: Get disruptions for the given line ids
+      tags:
+        - Line
+  '/Line/{ids}/Route':
+    get:
+      deprecated: false
+      operationId: Line_LineRoutesByIds
+      parameters:
+        - description: 'A comma-separated list of line ids e.g. victoria,circle,N133. Max. approx. 20 ids.'
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'A comma seperated list of service types to filter on. Supported values: Regular, Night. Defaulted to ''Regular'' if not specified'
+          in: query
+          name: serviceTypes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - Regular
+                - Night
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+      summary: 'Get all valid routes for given line ids, including the name and id of the originating and terminating stops for each route.'
+      tags:
+        - Line
+  '/Line/{ids}/Status':
+    get:
+      deprecated: false
+      operationId: Line_StatusByIds
+      parameters:
+        - description: 'A comma-separated list of line ids e.g. victoria,circle,N133. Max. approx. 20 ids.'
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Include details of the disruptions that are causing the line status including the affected stops and routes
+          in: query
+          name: detail
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+      summary: Gets the line status of for given line ids e.g Minor Delays
+      tags:
+        - Line
+  '/Line/{ids}/Status/{StartDate}/to/{EndDate}':
+    get:
+      deprecated: false
+      operationId: Line_Status
+      parameters:
+        - description: 'A comma-separated list of line ids e.g. victoria,circle,N133. Max. approx. 20 ids.'
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Include details of the disruptions that are causing the line status including the affected stops and routes
+          in: query
+          name: detail
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: startDate
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: endDate
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: dateRange.startDate
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: dateRange.endDate
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - in: path
+          name: StartDate
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: EndDate
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Line'
+                type: array
+      summary: Gets the line status for given line ids during the provided dates e.g Minor Delays
+      tags:
+        - Line
+  '/Line/{id}/Route/Sequence/{direction}':
+    get:
+      deprecated: false
+      operationId: Line_RouteSequence
+      parameters:
+        - description: A single line id e.g. victoria
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: The direction of travel. Can be inbound or outbound.
+          in: path
+          name: direction
+          required: true
+          schema:
+            type: string
+            enum:
+              - inbound
+              - outbound
+              - all
+        - description: 'A comma seperated list of service types to filter on. Supported values: Regular, Night. Defaulted to ''Regular'' if not specified'
+          in: query
+          name: serviceTypes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - Regular
+                - Night
+              type: string
+        - description: That excludes crowding from line disruptions. Can be true or false.
+          in: query
+          name: excludeCrowding
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteSequence'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RouteSequence'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RouteSequence'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RouteSequence'
+      summary: 'Gets all valid routes for given line id, including the sequence of stops on each route.'
+      tags:
+        - Line
+  '/Line/{id}/StopPoints':
+    get:
+      deprecated: false
+      operationId: Line_StopPoints
+      parameters:
+        - description: A single line id e.g. victoria
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+      summary: Gets a list of the stations that serve the given line id
+      tags:
+        - Line
+  '/Line/{id}/Timetable/{fromStopPointId}':
+    get:
+      deprecated: false
+      operationId: Line_Timetable
+      parameters:
+        - description: 'The originating station''s stop point id (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
+          in: path
+          name: fromStopPointId
+          required: true
+          schema:
+            type: string
+        - description: A single line id e.g. victoria
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimetableResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TimetableResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/TimetableResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TimetableResponse'
+      summary: Gets the timetable for a specified station on the give line
+      tags:
+        - Line
+  '/Line/{id}/Timetable/{fromStopPointId}/to/{toStopPointId}':
+    get:
+      deprecated: false
+      operationId: Line_TimetableTo
+      parameters:
+        - description: 'The originating station''s stop point id (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
+          in: path
+          name: fromStopPointId
+          required: true
+          schema:
+            type: string
+        - description: A single line id e.g. victoria
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: The destination stations's Naptan code
+          in: path
+          name: toStopPointId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimetableResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TimetableResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/TimetableResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TimetableResponse'
+      summary: Gets the timetable for a specified station on the give line with specified destination
+      tags:
+        - Line
+  /Mode/ActiveServiceTypes:
+    get:
+      deprecated: false
+      operationId: Mode_GetActiveServiceTypes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ActiveServiceType'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ActiveServiceType'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ActiveServiceType'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ActiveServiceType'
+                type: array
+      summary: "Returns the service type active for a mode.\r\n            Currently only supports tube"
+      tags:
+        - Mode
+  '/Mode/{mode}/Arrivals':
+    get:
+      deprecated: false
+      operationId: Mode_Arrivals
+      parameters:
+        - description: 'A mode name e.g. tube, dlr'
+          in: path
+          name: mode
+          required: true
+          schema:
+            type: string
+        - description: 'A number of arrivals to return for each stop, -1 to return all available.'
+          in: query
+          name: count
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+      summary: Gets the next arrival predictions for all stops of a given mode
+      tags:
+        - Mode
+  /Occupancy/CarPark:
+    get:
+      deprecated: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CarParkOccupancy'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CarParkOccupancy'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CarParkOccupancy'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/CarParkOccupancy'
+                type: array
+      summary: Gets the occupancy for all car parks that have occupancy data
+      tags:
+        - Occupancy
+  '/Occupancy/CarPark/{id}':
+    get:
+      deprecated: false
+      parameters:
+        - description: ''
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarParkOccupancy'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CarParkOccupancy'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/CarParkOccupancy'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CarParkOccupancy'
+      summary: Gets the occupancy for a car park with a given id
+      tags:
+        - Occupancy
+  /Place:
+    get:
+      deprecated: false
+      operationId: Place_GetByGeoBox
+      parameters:
+        - description: 'an optional list of comma separated property categories to return in the Place''s property bag. If null or empty, all categories of property are returned. Pass the keyword "none" to return no properties (a valid list of categories can be obtained from the /Place/Meta/categories endpoint)'
+          in: query
+          name: categories
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Defaults to false. If true child places e.g. individual charging stations at a charge point while be included, otherwise just the URLs of any child places will be returned'
+          in: query
+          name: includeChildren
+          required: false
+          schema:
+            type: boolean
+        - description: 'place types to filter on, or null to return all types'
+          in: query
+          name: type
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: An optional parameter to limit the results to active records only (Currently only the 'VariableMessageSign' place type is supported)
+          in: query
+          name: activeOnly
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: bbBoxpoints.swLat
+          required: true
+          schema:
+            type: number
+            format: double
+        - in: query
+          name: bbBoxpoints.swLon
+          required: true
+          schema:
+            type: number
+            format: double
+        - in: query
+          name: bbBoxpoints.neLat
+          required: true
+          schema:
+            type: number
+            format: double
+        - in: query
+          name: bbBoxpoints.neLon
+          required: true
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+      summary: "Gets the places that lie within the bounding box defined by the lat/lon of its north-west and south-east corners. Optionally filters\r\n            on type and can strip properties for a smaller payload."
+      tags:
+        - Place
+  '/Place/Address/Streets/{Postcode}':
+    get:
+      deprecated: false
+      operationId: Place_GetStreetsByPostCode
+      parameters:
+        - in: query
+          name: postcode
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: postcodeInput.postcode
+          required: false
+          schema:
+            type: string
+            pattern: '^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$'
+        - in: path
+          name: Postcode
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+      summary: Gets the set of streets associated with a post code.
+      tags:
+        - Place
+  /Place/Meta/Categories:
+    get:
+      deprecated: false
+      operationId: Place_MetaCategories
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PlaceCategory'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PlaceCategory'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PlaceCategory'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PlaceCategory'
+                type: array
+      summary: Gets a list of all of the available place property categories and keys.
+      tags:
+        - Place
+  /Place/Meta/PlaceTypes:
+    get:
+      deprecated: false
+      operationId: Place_MetaPlaceTypes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PlaceCategory'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PlaceCategory'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PlaceCategory'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PlaceCategory'
+                type: array
+      summary: Gets a list of the available types of Place.
+      tags:
+        - Place
+  /Place/Search:
+    get:
+      deprecated: false
+      operationId: Place_Search
+      parameters:
+        - description: 'The name of the place, you can use the /Place/Types/{types} endpoint to get a list of places for a given type including their names.'
+          in: query
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: A comma-separated list of the types to return. Max. approx 12 types.
+          in: query
+          name: types
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+      summary: Gets all places that matches the given query
+      tags:
+        - Place
+  '/Place/Type/{types}':
+    get:
+      deprecated: false
+      operationId: Place_GetByType
+      parameters:
+        - description: "A comma-separated list of the types to return. Max. approx 12 types.\r\n            A valid list of place types can be obtained from the /Place/Meta/placeTypes endpoint."
+          in: path
+          name: types
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: An optional parameter to limit the results to active records only (Currently only the 'VariableMessageSign' place type is supported)
+          in: query
+          name: activeOnly
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+      summary: Gets all places of a given type
+      tags:
+        - Place
+  '/Place/{id}':
+    get:
+      deprecated: false
+      operationId: Place_Get
+      parameters:
+        - description: 'The id of the place, you can use the /Place/Types/{types} endpoint to get a list of places for a given type including their ids'
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: 'Defaults to false. If true child places e.g. individual charging stations at a charge point while be included, otherwise just the URLs of any child places will be returned'
+          in: query
+          name: includeChildren
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+      summary: Gets the place with the given id.
+      tags:
+        - Place
+  '/Place/{type}/At/{Lat}/{Lon}':
+    get:
+      deprecated: false
+      operationId: Place_GetAt
+      parameters:
+        - description: The place type (a valid list of place types can be obtained from the /Place/Meta/placeTypes endpoint)
+          in: path
+          name: type
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: lat
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: lon
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: location.lat
+          required: true
+          schema:
+            type: number
+            format: double
+        - in: query
+          name: location.lon
+          required: true
+          schema:
+            type: number
+            format: double
+        - in: path
+          name: Lat
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: Lon
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+      summary: "Gets any places of the given type whose geography intersects the given latitude and longitude. In practice this means the Place\r\n            must be polygonal e.g. a BoroughBoundary."
+      tags:
+        - Place
+  '/Place/{type}/overlay/{z}/{Lat}/{Lon}/{width}/{height}':
+    get:
+      deprecated: false
+      operationId: Place_GetOverlay
+      parameters:
+        - description: The zoom level
+          in: path
+          name: z
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: The place type (a valid list of place types can be obtained from the /Place/Meta/placeTypes endpoint)
+          in: path
+          name: type
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: The width of the requested overlay.
+          in: path
+          name: width
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: The height of the requested overlay.
+          in: path
+          name: height
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: lat
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: lon
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: location.lat
+          required: true
+          schema:
+            type: number
+            format: double
+        - in: query
+          name: location.lon
+          required: true
+          schema:
+            type: number
+            format: double
+        - in: path
+          name: Lat
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: Lon
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+      summary: Gets the place overlay for a given set of co-ordinates and a given width/height.
+      tags:
+        - Place
+  /Road:
+    get:
+      deprecated: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+      summary: Gets all roads managed by TfL
+      tags:
+        - Road
+  /Road/Meta/Categories:
+    get:
+      deprecated: false
+      operationId: Road_MetaCategories
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+      summary: Gets a list of valid RoadDisruption categories
+      tags:
+        - Road
+  /Road/Meta/Severities:
+    get:
+      deprecated: false
+      operationId: Road_MetaSeverities
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StatusSeverity'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StatusSeverity'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StatusSeverity'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StatusSeverity'
+                type: array
+      summary: Gets a list of valid RoadDisruption severity codes
+      tags:
+        - Road
+  '/Road/all/Disruption/{disruptionIds}':
+    get:
+      deprecated: false
+      operationId: Road_DisruptionById
+      parameters:
+        - description: Comma-separated list of disruption identifiers to filter by.
+          in: path
+          name: disruptionIds
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Optional, defaults to false. When true, removes every property/node except for id, point, severity, severityDescription, startDate, endDate, corridor details, location and comments.'
+          in: query
+          name: stripContent
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoadDisruption'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RoadDisruption'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RoadDisruption'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RoadDisruption'
+            application/geo+json:
+              schema:
+                $ref: '#/components/schemas/RoadDisruption'
+      summary: Gets a list of active disruptions filtered by disruption Ids.
+      tags:
+        - Road
+  /Road/all/Street/Disruption:
+    get:
+      deprecated: false
+      operationId: Road_DisruptedStreets
+      parameters:
+        - description: 'Optional, the start time to filter on.'
+          in: query
+          name: startDate
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - description: 'Optional, The end time to filter on.'
+          in: query
+          name: endDate
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+      summary: 'Gets a list of disrupted streets. If no date filters are provided, current disruptions are returned.'
+      tags:
+        - Road
+  '/Road/{ids}':
+    get:
+      deprecated: false
+      parameters:
+        - description: 'Comma-separated list of road identifiers e.g. "A406, A2" (a full list of supported road identifiers can be found at the /Road/ endpoint)'
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+      summary: Gets the road with the specified id (e.g. A1)
+      tags:
+        - Road
+  '/Road/{ids}/Disruption':
+    get:
+      deprecated: false
+      operationId: Road_Disruption
+      parameters:
+        - description: 'Comma-separated list of road identifiers e.g. "A406, A2" use all for all to ignore id filter (a full list of supported road identifiers can be found at the /Road/ endpoint)'
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Optional, defaults to false. When true, removes every property/node except for id, point, severity, severityDescription, startDate, endDate, corridor details, location, comments and streets'
+          in: query
+          name: stripContent
+          required: false
+          schema:
+            type: boolean
+        - description: an optional list of Severity names to filter on (a valid list of severities can be obtained from the /Road/Meta/severities endpoint)
+          in: query
+          name: severities
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: an optional list of category names to filter on (a valid list of categories can be obtained from the /Road/Meta/categories endpoint)
+          in: query
+          name: categories
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Optional, defaults to true. When true, always includes disruptions that have road closures, regardless of the severity filter. When false, the severity filter works as normal.'
+          in: query
+          name: closures
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadDisruption'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadDisruption'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadDisruption'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadDisruption'
+                type: array
+            application/geo+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadDisruption'
+                type: array
+      summary: 'Get active disruptions, filtered by road ids'
+      tags:
+        - Road
+  '/Road/{ids}/Status':
+    get:
+      deprecated: false
+      operationId: Road_Status
+      parameters:
+        - description: 'Comma-separated list of road identifiers e.g. "A406, A2" or use "all" to ignore id filter (a full list of supported road identifiers can be found at the /Road/ endpoint)'
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: dateRangeNullable.startDate
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: dateRangeNullable.endDate
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoadCorridor'
+                type: array
+      summary: 'Gets the specified roads with the status aggregated over the date range specified, or now until the end of today if no dates are passed.'
+      tags:
+        - Road
+  /Search:
+    get:
+      deprecated: false
+      operationId: Search_Get
+      parameters:
+        - description: The search query
+          in: query
+          name: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+      summary: "Search the site for occurrences of the query string. The maximum number of results returned is equal to the maximum page size\r\n            of 100. To return subsequent pages, use the paginated overload."
+      tags:
+        - Search
+  /Search/BusSchedules:
+    get:
+      deprecated: false
+      operationId: Search_BusSchedules
+      parameters:
+        - description: The search query
+          in: query
+          name: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+      summary: Searches the bus schedules folder on S3 for a given bus number.
+      tags:
+        - Search
+  /Search/Meta/Categories:
+    get:
+      deprecated: false
+      operationId: Search_MetaCategories
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+      summary: Gets the available search categories.
+      tags:
+        - Search
+  /Search/Meta/SearchProviders:
+    get:
+      deprecated: false
+      operationId: Search_MetaSearchProviders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+      summary: Gets the available searchProvider names.
+      tags:
+        - Search
+  /Search/Meta/Sorts:
+    get:
+      deprecated: false
+      operationId: Search_MetaSorts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+      summary: Gets the available sorting options.
+      tags:
+        - Search
+  /StopPoint:
+    get:
+      deprecated: false
+      operationId: StopPoint_GetByGeoPoint
+      parameters:
+        - description: a list of stopTypes that should be returned (a list of valid stop types can be obtained from the StopPoint/meta/stoptypes endpoint)
+          in: query
+          name: stopTypes
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'the radius of the bounding circle in metres (default : 200)'
+          in: query
+          name: radius
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Re-arrange the output into a parent/child hierarchy
+          in: query
+          name: useStopPointHierarchy
+          required: false
+          schema:
+            type: boolean
+        - description: 'the list of modes to search (comma separated mode names e.g. tube,dlr)'
+          in: query
+          name: modes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'an optional list of comma separated property categories to return in the StopPoint''s property bag. If null or empty, all categories of property are returned. Pass the keyword "none" to return no properties (a valid list of categories can be obtained from the /StopPoint/Meta/categories endpoint)'
+          in: query
+          name: categories
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: true to return the lines that each stop point serves as a nested resource
+          in: query
+          name: returnLines
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: location.lat
+          required: true
+          schema:
+            type: number
+            format: double
+        - in: query
+          name: location.lon
+          required: true
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopPointsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/StopPointsResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/StopPointsResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StopPointsResponse'
+      summary: 'Gets a list of StopPoints within {radius} by the specified criteria'
+      tags:
+        - StopPoint
+  /StopPoint/Meta/Categories:
+    get:
+      deprecated: false
+      operationId: StopPoint_MetaCategories
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPointCategory'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPointCategory'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPointCategory'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPointCategory'
+                type: array
+      summary: Gets the list of available StopPoint additional information categories
+      tags:
+        - StopPoint
+  /StopPoint/Meta/Modes:
+    get:
+      deprecated: false
+      operationId: StopPoint_MetaModes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Mode'
+                type: array
+      summary: Gets the list of available StopPoint modes
+      tags:
+        - StopPoint
+  /StopPoint/Meta/StopTypes:
+    get:
+      deprecated: false
+      operationId: StopPoint_MetaStopTypes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+      summary: Gets the list of available StopPoint types
+      tags:
+        - StopPoint
+  '/StopPoint/Mode/{modes}':
+    get:
+      deprecated: false
+      operationId: StopPoint_GetByMode
+      parameters:
+        - description: 'A comma-seperated list of modes e.g. tube,dlr'
+          in: path
+          name: modes
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'The data set page to return. Page 1 equates to the first 1000 stop points, page 2 equates to 1001-2000 etc. Must be entered for bus mode as data set is too large.'
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopPointsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/StopPointsResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/StopPointsResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StopPointsResponse'
+      summary: Gets a list of StopPoints filtered by the modes available at that StopPoint.
+      tags:
+        - StopPoint
+  '/StopPoint/Mode/{modes}/Disruption':
+    get:
+      deprecated: false
+      operationId: StopPoint_DisruptionByMode
+      parameters:
+        - description: 'A comma-seperated list of modes e.g. tube,dlr'
+          in: path
+          name: modes
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: ''
+          in: query
+          name: includeRouteBlockedStops
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DisruptedPoint'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DisruptedPoint'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DisruptedPoint'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DisruptedPoint'
+                type: array
+      summary: Gets a distinct list of disrupted stop points for the given modes
+      tags:
+        - StopPoint
+  /StopPoint/Search:
+    get:
+      deprecated: false
+      parameters:
+        - description: 'The query string, case-insensitive. Leading and trailing wildcards are applied automatically.'
+          in: query
+          name: query
+          required: true
+          schema:
+            type: string
+        - description: 'An optional, parameter separated list of the modes to filter by'
+          in: query
+          name: modes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: True to only return stations in that have Fares data available for single fares to another station.
+          in: query
+          name: faresOnly
+          required: false
+          schema:
+            type: boolean
+        - description: "An optional result limit, defaulting to and with a maximum of 50. Since children of the stop point heirarchy are returned for matches,\r\n            it is possible that the flattened result set will contain more than 50 items."
+          in: query
+          name: maxResults
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'An optional, parameter separated list of the lines to filter by'
+          in: query
+          name: lines
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'If true, returns results including HUBs.'
+          in: query
+          name: includeHubs
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+      summary: 'Search StopPoints by their common name, or their 5-digit Countdown Bus Stop Code.'
+      tags:
+        - StopPoint
+  '/StopPoint/Search/{query}':
+    get:
+      deprecated: false
+      parameters:
+        - description: 'The query string, case-insensitive. Leading and trailing wildcards are applied automatically.'
+          in: path
+          name: query
+          required: true
+          schema:
+            type: string
+        - description: 'An optional, parameter separated list of the modes to filter by'
+          in: query
+          name: modes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: True to only return stations in that have Fares data available for single fares to another station.
+          in: query
+          name: faresOnly
+          required: false
+          schema:
+            type: boolean
+        - description: "An optional result limit, defaulting to and with a maximum of 50. Since children of the stop point heirarchy are returned for matches,\r\n            it is possible that the flattened result set will contain more than 50 items."
+          in: query
+          name: maxResults
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'An optional, parameter separated list of the lines to filter by'
+          in: query
+          name: lines
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'If true, returns results including HUBs.'
+          in: query
+          name: includeHubs
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+      summary: 'Search StopPoints by their common name, or their 5-digit Countdown Bus Stop Code.'
+      tags:
+        - StopPoint
+  /StopPoint/ServiceTypes:
+    get:
+      deprecated: false
+      operationId: StopPoint_GetServiceTypes
+      parameters:
+        - description: The Naptan id of the stop
+          in: query
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: The lines which contain the given Naptan id (all lines relevant to the given stoppoint if empty)
+          in: query
+          name: lineIds
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: The modes which the lines are relevant to (all if empty)
+          in: query
+          name: modes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LineServiceType'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LineServiceType'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LineServiceType'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LineServiceType'
+                type: array
+      summary: Gets the service types for a given stoppoint
+      tags:
+        - StopPoint
+  '/StopPoint/Sms/{id}':
+    get:
+      deprecated: false
+      operationId: StopPoint_GetBySms
+      parameters:
+        - description: 'A 5-digit Countdown Bus Stop Code e.g. 73241, 50435, 56334.'
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: 'If set to "web", a 302 redirect to relevant website bus stop page is returned. Valid values are : web. All other values are ignored.'
+          in: query
+          name: output
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+      summary: Gets a StopPoint for a given sms code.
+      tags:
+        - StopPoint
+  '/StopPoint/Type/{types}':
+    get:
+      deprecated: false
+      operationId: StopPoint_GetByType
+      parameters:
+        - description: "A comma-separated list of the types to return. Max. approx. 12 types. \r\n            A list of valid stop types can be obtained from the StopPoint/meta/stoptypes endpoint."
+          in: path
+          name: types
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+      summary: Gets all stop points of a given type
+      tags:
+        - StopPoint
+  '/StopPoint/{ids}':
+    get:
+      deprecated: false
+      operationId: StopPoint_Get
+      parameters:
+        - description: "A comma-separated list of stop point ids (station naptan code e.g. 940GZZLUASL). Max. approx. 20 ids.\r\n            You can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name."
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Include the crowding data (static). To Filter further use: /StopPoint/{ids}/Crowding/{line}'
+          in: query
+          name: includeCrowdingData
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+      summary: Gets a list of StopPoints corresponding to the given list of stop ids.
+      tags:
+        - StopPoint
+  '/StopPoint/{ids}/Disruption':
+    get:
+      deprecated: false
+      operationId: StopPoint_Disruption
+      parameters:
+        - description: "A comma-seperated list of stop point ids. Max. approx. 20 ids.\r\n            You can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name."
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'Specify true to return disruptions for entire family, or false to return disruptions for just this stop point. Defaults to false.'
+          in: query
+          name: getFamily
+          required: false
+          schema:
+            type: boolean
+        - description: ''
+          in: query
+          name: includeRouteBlockedStops
+          required: false
+          schema:
+            type: boolean
+        - description: Specify true to associate all disruptions with parent stop point. (Only applicable when getFamily is true).
+          in: query
+          name: flattenResponse
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DisruptedPoint'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DisruptedPoint'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DisruptedPoint'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DisruptedPoint'
+                type: array
+      summary: 'Gets all disruptions for the specified StopPointId, plus disruptions for any child Naptan records it may have.'
+      tags:
+        - StopPoint
+  '/StopPoint/{id}/Arrivals':
+    get:
+      deprecated: false
+      operationId: StopPoint_Arrivals
+      parameters:
+        - description: 'A StopPoint id (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+      summary: Gets the list of arrival predictions for the given stop point id
+      tags:
+        - StopPoint
+  '/StopPoint/{id}/CanReachOnLine/{lineId}':
+    get:
+      deprecated: false
+      operationId: StopPoint_ReachableFrom
+      parameters:
+        - description: 'The id (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name) of the stop point to filter by'
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: Line id of the line to filter by (e.g. victoria)
+          in: path
+          name: lineId
+          required: true
+          schema:
+            type: string
+        - description: 'A comma-separated list of service types to filter on. If not specified. Supported values: Regular, Night. Defaulted to ''Regular'' if not specified'
+          in: query
+          name: serviceTypes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - Regular
+                - Night
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+      summary: Gets Stopoints that are reachable from a station/line combination.
+      tags:
+        - StopPoint
+  '/StopPoint/{id}/Crowding/{line}':
+    get:
+      deprecated: false
+      operationId: StopPoint_Crowding
+      parameters:
+        - description: The Naptan id of the stop
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: 'A particular line e.g. victoria, circle, northern etc.'
+          in: path
+          name: line
+          required: true
+          schema:
+            type: string
+        - description: The direction of travel. Can be inbound or outbound.
+          in: query
+          name: direction
+          required: true
+          schema:
+            type: string
+            enum:
+              - inbound
+              - outbound
+              - all
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPoint'
+                type: array
+      summary: 'Gets all the Crowding data (static) for the StopPointId, plus crowding data for a given line and optionally a particular direction.'
+      tags:
+        - StopPoint
+  '/StopPoint/{id}/DirectionTo/{toStopPointId}':
+    get:
+      deprecated: false
+      operationId: StopPoint_Direction
+      parameters:
+        - description: 'Originating stop id (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: 'Destination stop id (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
+          in: path
+          name: toStopPointId
+          required: true
+          schema:
+            type: string
+        - description: Optional line id filter e.g. victoria
+          in: query
+          name: lineId
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+      summary: 'Returns the canonical direction, "inbound" or "outbound", for a given pair of stop point Ids in the direction from -&gt; to.'
+      tags:
+        - StopPoint
+  '/StopPoint/{id}/Route':
+    get:
+      deprecated: false
+      operationId: StopPoint_Route
+      parameters:
+        - description: 'A stop point id (station naptan codes e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: 'A comma-separated list of service types to filter on. If not specified. Supported values: Regular, Night. Defaulted to ''Regular'' if not specified'
+          in: query
+          name: serviceTypes
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              enum:
+                - Regular
+                - Night
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPointRouteSection'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPointRouteSection'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPointRouteSection'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/StopPointRouteSection'
+                type: array
+      summary: Returns the route sections for all the lines that service the given stop point ids
+      tags:
+        - StopPoint
+  '/StopPoint/{stopPointId}/CarParks':
+    get:
+      deprecated: false
+      operationId: StopPoint_GetCarParksById
+      parameters:
+        - description: stopPointId is required to get the car parks.
+          in: path
+          name: stopPointId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+      summary: Get car parks corresponding to the given stop point id.
+      tags:
+        - StopPoint
+  '/StopPoint/{stopPointId}/TaxiRanks':
+    get:
+      deprecated: false
+      operationId: StopPoint_GetTaxiRanksByIds
+      parameters:
+        - description: stopPointId is required to get the taxi ranks.
+          in: path
+          name: stopPointId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Place'
+                type: array
+      summary: Gets a list of taxi ranks corresponding to the given stop point id.
+      tags:
+        - StopPoint
+  '/TravelTimes/compareOverlay/{z}/mapcenter/{mapCenterLat}/{mapCenterLon}/pinlocation/{pinLat}/{pinLon}/dimensions/{width}/{height}':
+    get:
+      deprecated: false
+      operationId: TravelTime_GetCompareOverlay
+      parameters:
+        - description: The zoom level.
+          in: path
+          name: z
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: The latitude of the pin.
+          in: path
+          name: pinLat
+          required: true
+          schema:
+            type: number
+            format: double
+        - description: The longitude of the pin.
+          in: path
+          name: pinLon
+          required: true
+          schema:
+            type: number
+            format: double
+        - description: The map center latitude.
+          in: path
+          name: mapCenterLat
+          required: true
+          schema:
+            type: number
+            format: double
+        - description: The map center longitude.
+          in: path
+          name: mapCenterLon
+          required: true
+          schema:
+            type: number
+            format: double
+        - description: The title of the scenario.
+          in: query
+          name: scenarioTitle
+          required: true
+          schema:
+            type: string
+        - description: The id for the time of day (AM/INTER/PM)
+          in: query
+          name: timeOfDayId
+          required: true
+          schema:
+            type: string
+        - description: The id of the mode.
+          in: query
+          name: modeId
+          required: true
+          schema:
+            type: string
+        - description: The width of the requested overlay.
+          in: path
+          name: width
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: The height of the requested overlay.
+          in: path
+          name: height
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: The direction of travel.
+          in: query
+          name: direction
+          required: true
+          schema:
+            type: string
+            enum:
+              - Average
+              - From
+              - To
+        - description: The total minutes between the travel time bands
+          in: query
+          name: travelTimeInterval
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: compareType
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: compareValue
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+      summary: Gets the TravelTime overlay.
+      tags:
+        - TravelTime
+  '/TravelTimes/overlay/{z}/mapcenter/{mapCenterLat}/{mapCenterLon}/pinlocation/{pinLat}/{pinLon}/dimensions/{width}/{height}':
+    get:
+      deprecated: false
+      operationId: TravelTime_GetOverlay
+      parameters:
+        - description: The zoom level.
+          in: path
+          name: z
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: The latitude of the pin.
+          in: path
+          name: pinLat
+          required: true
+          schema:
+            type: number
+            format: double
+        - description: The longitude of the pin.
+          in: path
+          name: pinLon
+          required: true
+          schema:
+            type: number
+            format: double
+        - description: The map center latitude.
+          in: path
+          name: mapCenterLat
+          required: true
+          schema:
+            type: number
+            format: double
+        - description: The map center longitude.
+          in: path
+          name: mapCenterLon
+          required: true
+          schema:
+            type: number
+            format: double
+        - description: The title of the scenario.
+          in: query
+          name: scenarioTitle
+          required: true
+          schema:
+            type: string
+        - description: The id for the time of day (AM/INTER/PM)
+          in: query
+          name: timeOfDayId
+          required: true
+          schema:
+            type: string
+        - description: The id of the mode.
+          in: query
+          name: modeId
+          required: true
+          schema:
+            type: string
+        - description: The width of the requested overlay.
+          in: path
+          name: width
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: The height of the requested overlay.
+          in: path
+          name: height
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: The direction of travel.
+          in: query
+          name: direction
+          required: true
+          schema:
+            type: string
+            enum:
+              - Average
+              - From
+              - To
+        - description: The total minutes between the travel time bands
+          in: query
+          name: travelTimeInterval
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Object'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/Object'
+      summary: Gets the TravelTime overlay.
+      tags:
+        - TravelTime
+  /Vehicle/EmissionSurcharge:
+    get:
+      deprecated: false
+      operationId: Vehicle_GetVehicle
+      parameters:
+        - description: The Vehicle Registration Mark
+          in: query
+          name: vrm
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionsSurchargeVehicle'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EmissionsSurchargeVehicle'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/EmissionsSurchargeVehicle'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EmissionsSurchargeVehicle'
+      summary: Gets the Emissions Surcharge compliance for the Vehicle
+      tags:
+        - Vehicle
+  '/Vehicle/{ids}/Arrivals':
+    get:
+      deprecated: false
+      operationId: Vehicle_Get
+      parameters:
+        - description: 'A comma-separated list of vehicle ids e.g. LX58CFV,LX11AZB,LX58CFE. Max approx. 25 ids.'
+          in: path
+          name: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Prediction'
+                type: array
+      summary: Gets the predictions for a given list of vehicle Id's.
+      tags:
+        - Vehicle
+components:
+  schemas:
+    AccidentDetail:
+      properties:
+        borough:
+          type: string
+        casualties:
+          items:
+            $ref: '#/components/schemas/Casualty'
+          type: array
+        date:
+          format: date-time
+          type: string
+        id:
+          format: int32
+          type: integer
+        lat:
+          format: double
+          type: number
+        location:
+          type: string
+        lon:
+          format: double
+          type: number
+        severity:
+          type: string
+        vehicles:
+          items:
+            $ref: '#/components/schemas/Vehicle'
+          type: array
+      type: object
+    AccidentStatsOrderedSummary:
+      properties:
+        accidents:
+          format: int32
+          type: integer
+        borough:
+          type: string
+        year:
+          format: int32
+          type: integer
+      type: object
+    ActiveServiceType:
+      properties:
+        mode:
+          type: string
+        serviceType:
+          type: string
+      type: object
+    AdditionalProperties:
+      properties:
+        category:
+          type: string
+        key:
+          type: string
+        modified:
+          format: date-time
+          type: string
+        sourceSystemKey:
+          type: string
+        value:
+          type: string
+      type: object
+    ApiVersionInfo:
+      properties:
+        assemblies:
+          items:
+            type: string
+          type: array
+        label:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+        version:
+          type: string
+      type: object
+    Bay:
+      properties:
+        bayCount:
+          format: int32
+          type: integer
+        bayType:
+          type: string
+        free:
+          format: int32
+          type: integer
+        occupied:
+          format: int32
+          type: integer
+      type: object
+    CarParkOccupancy:
+      properties:
+        bays:
+          items:
+            $ref: '#/components/schemas/Bay'
+          type: array
+        carParkDetailsUrl:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    Casualty:
+      properties:
+        age:
+          format: int32
+          type: integer
+        ageBand:
+          type: string
+        class:
+          type: string
+        mode:
+          type: string
+        severity:
+          type: string
+      type: object
+    Coordinate:
+      properties:
+        easting:
+          format: double
+          type: number
+        latitude:
+          format: double
+          type: number
+        longitude:
+          format: double
+          type: number
+        northing:
+          format: double
+          type: number
+        xCoord:
+          format: int32
+          type: integer
+        yCoord:
+          format: int32
+          type: integer
+      type: object
+    Crowding:
+      properties:
+        passengerFlows:
+          description: Busiest times at a station (static information)
+          items:
+            $ref: '#/components/schemas/PassengerFlow'
+          type: array
+        trainLoadings:
+          description: 'Train Loading on a scale 1-6, 1 being "Very quiet" and 6 being "Exceptionally busy" (static information)'
+          items:
+            $ref: '#/components/schemas/TrainLoading'
+          type: array
+      type: object
+    CycleSuperhighway:
+      properties:
+        geography:
+          $ref: '#/components/schemas/DbGeography'
+        id:
+          description: The Id
+          type: string
+        label:
+          description: The long label to show on maps when zoomed in
+          type: string
+        labelShort:
+          description: The short label to show on maps
+          type: string
+        modified:
+          description: When the data was last updated
+          format: date-time
+          type: string
+        segmented:
+          description: True if the route is split into segments
+          type: boolean
+      type: object
+    DateRange:
+      properties:
+        endDate:
+          format: date-time
+          type: string
+        startDate:
+          format: date-time
+          type: string
+      type: object
+    DateRangeNullable:
+      properties:
+        endDate:
+          format: date-time
+          type: string
+        startDate:
+          format: date-time
+          type: string
+      type: object
+    DbGeography:
+      properties:
+        geography:
+          $ref: '#/components/schemas/DbGeographyWellKnownValue'
+      type: object
+    DbGeographyWellKnownValue:
+      properties:
+        coordinateSystemId:
+          format: int32
+          type: integer
+        wellKnownBinary:
+          format: byte
+          type: string
+        wellKnownText:
+          type: string
+      type: object
+    Disambiguation:
+      properties:
+        disambiguationOptions:
+          items:
+            $ref: '#/components/schemas/DisambiguationOption'
+          type: array
+      type: object
+    DisambiguationOption:
+      properties:
+        description:
+          type: string
+        uri:
+          type: string
+      type: object
+    DisruptedPoint:
+      properties:
+        additionalInformation:
+          type: string
+        appearance:
+          type: string
+        atcoCode:
+          type: string
+        commonName:
+          type: string
+        description:
+          type: string
+        fromDate:
+          format: date-time
+          type: string
+        mode:
+          type: string
+        stationAtcoCode:
+          type: string
+        toDate:
+          format: date-time
+          type: string
+        type:
+          type: string
+      type: object
+    Disruption:
+      description: Represents a disruption to a route within the transport network.
+      properties:
+        additionalInfo:
+          description: Gets or sets the additionaInfo of this disruption.
+          type: string
+        affectedRoutes:
+          description: Gets or sets the routes affected by this disruption
+          items:
+            $ref: '#/components/schemas/RouteSection'
+          type: array
+        affectedStops:
+          description: Gets or sets the stops affected by this disruption
+          items:
+            $ref: '#/components/schemas/StopPoint'
+          type: array
+        category:
+          description: Gets or sets the category of this dispruption.
+          enum:
+            - Undefined
+            - RealTime
+            - PlannedWork
+            - Information
+            - Event
+            - Crowding
+            - StatusAlert
+          type: string
+        categoryDescription:
+          description: Gets or sets the description of the category.
+          type: string
+        closureText:
+          type: string
+        created:
+          description: Gets or sets the date/time when this disruption was created.
+          format: date-time
+          type: string
+        description:
+          description: Gets or sets the description of this disruption.
+          type: string
+        isBlocking:
+          type: boolean
+        isWholeLine:
+          type: boolean
+        lastUpdate:
+          description: Gets or sets the date/time when this disruption was last updated.
+          format: date-time
+          type: string
+        type:
+          description: Gets or sets the disruption type of this dispruption.
+          type: string
+      type: object
+    EmissionsSurchargeVehicle:
+      description: ''
+      properties:
+        colour:
+          type: string
+        compliance:
+          enum:
+            - NotCompliant
+            - Compliant
+            - Exempt
+          type: string
+        make:
+          type: string
+        model:
+          type: string
+        type:
+          type: string
+        vrm:
+          type: string
+      type: object
+    Fare:
+      properties:
+        cap:
+          format: double
+          type: number
+        cost:
+          type: string
+        description:
+          type: string
+        id:
+          format: int32
+          type: integer
+        mode:
+          type: string
+        passengerType:
+          type: string
+        ticketTime:
+          type: string
+        ticketType:
+          type: string
+        validFrom:
+          format: date-time
+          type: string
+        validUntil:
+          format: date-time
+          type: string
+        zone:
+          type: string
+      type: object
+    FareBounds:
+      properties:
+        description:
+          type: string
+        displayName:
+          type: string
+        displayOrder:
+          format: int32
+          type: integer
+        from:
+          type: string
+        id:
+          format: int32
+          type: integer
+        isPopularFare:
+          type: boolean
+        isPopularTravelCard:
+          type: boolean
+        isTour:
+          type: boolean
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        operator:
+          type: string
+        routeCode:
+          type: string
+        to:
+          type: string
+        via:
+          type: string
+      type: object
+    FareDetails:
+      properties:
+        boundsId:
+          format: int32
+          type: integer
+        displayName:
+          type: string
+        displayOrder:
+          format: int32
+          type: integer
+        endDate:
+          format: date-time
+          type: string
+        from:
+          type: string
+        fromStation:
+          type: string
+        isTour:
+          type: boolean
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        mode:
+          type: string
+        operator:
+          type: string
+        passengerType:
+          type: string
+        routeCode:
+          type: string
+        routeDescription:
+          type: string
+        specialFare:
+          type: boolean
+        startDate:
+          format: date-time
+          type: string
+        throughFare:
+          type: boolean
+        ticketsAvailable:
+          items:
+            $ref: '#/components/schemas/Ticket'
+          type: array
+        to:
+          type: string
+        toStation:
+          type: string
+        validatorInformation:
+          type: string
+        via:
+          type: string
+      type: object
+    FaresMode:
+      properties:
+        description:
+          type: string
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+      type: object
+    FaresPeriod:
+      properties:
+        endDate:
+          format: date-time
+          type: string
+        id:
+          format: int32
+          type: integer
+        isFuture:
+          type: boolean
+        startDate:
+          format: date-time
+          type: string
+        viewableDate:
+          format: date-time
+          type: string
+      type: object
+    FaresSection:
+      properties:
+        header:
+          type: string
+        index:
+          format: int32
+          type: integer
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        rows:
+          items:
+            $ref: '#/components/schemas/FareDetails'
+          type: array
+      type: object
+    GeoCodeSearchMatch:
+      properties:
+        address:
+          description: A string describing the formatted address of the place. Adds additional context to the place's Name.
+          type: string
+        id:
+          type: string
+        lat:
+          format: double
+          type: number
+        lon:
+          format: double
+          type: number
+        name:
+          type: string
+        types:
+          description: The type of the place e.g. "street_address"
+          items:
+            type: string
+          type: array
+        url:
+          type: string
+      type: object
+    GeoPoint:
+      properties:
+        lat:
+          format: double
+          type: number
+        lon:
+          format: double
+          type: number
+      required:
+        - lat
+        - lon
+      type: object
+    GeoPointBBox:
+      properties:
+        neLat:
+          format: double
+          type: number
+        neLon:
+          format: double
+          type: number
+        swLat:
+          format: double
+          type: number
+        swLon:
+          format: double
+          type: number
+      required:
+        - swLat
+        - swLon
+        - neLat
+        - neLon
+      type: object
+    Identifier:
+      properties:
+        crowding:
+          $ref: '#/components/schemas/Crowding'
+        fullName:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        uri:
+          type: string
+      type: object
+    Instruction:
+      properties:
+        detailed:
+          type: string
+        steps:
+          items:
+            $ref: '#/components/schemas/InstructionStep'
+          type: array
+        summary:
+          type: string
+      type: object
+    InstructionStep:
+      properties:
+        cumulativeDistance:
+          format: int32
+          type: integer
+        cumulativeTravelTime:
+          format: int32
+          type: integer
+        description:
+          type: string
+        descriptionHeading:
+          type: string
+        distance:
+          format: int32
+          type: integer
+        latitude:
+          format: double
+          type: number
+        longitude:
+          format: double
+          type: number
+        pathAttribute:
+          $ref: '#/components/schemas/PathAttribute'
+        skyDirection:
+          format: int32
+          type: integer
+        skyDirectionDescription:
+          enum:
+            - North
+            - NorthEast
+            - East
+            - SouthEast
+            - South
+            - SouthWest
+            - West
+            - NorthWest
+          type: string
+        streetName:
+          type: string
+        trackType:
+          enum:
+            - CycleSuperHighway
+            - CanalTowpath
+            - QuietRoad
+            - ProvisionForCyclists
+            - BusyRoads
+            - None
+            - PushBike
+          type: string
+        turnDirection:
+          type: string
+      type: object
+    Interval:
+      properties:
+        stopId:
+          type: string
+        timeToArrival:
+          format: double
+          type: number
+      type: object
+    ItineraryResult:
+      description: A DTO representing a list of possible journeys.
+      properties:
+        cycleHireDockingStationData:
+          $ref: '#/components/schemas/JourneyPlannerCycleHireDockingStationData'
+        journeyVector:
+          $ref: '#/components/schemas/JourneyVector'
+        journeys:
+          items:
+            $ref: '#/components/schemas/Journey'
+          type: array
+        lines:
+          items:
+            $ref: '#/components/schemas/Line'
+          type: array
+        recommendedMaxAgeMinutes:
+          format: int32
+          type: integer
+        searchCriteria:
+          $ref: '#/components/schemas/SearchCriteria'
+        stopMessages:
+          items:
+            type: string
+          type: array
+      type: object
+    Journey:
+      description: Object that represents an end to end journey (see schematic).
+      properties:
+        arrivalDateTime:
+          format: date-time
+          type: string
+        duration:
+          format: int32
+          type: integer
+        legs:
+          items:
+            $ref: '#/components/schemas/Leg'
+          type: array
+        startDateTime:
+          format: date-time
+          type: string
+      type: object
+    JourneyPlannerCycleHireDockingStationData:
+      properties:
+        destinationId:
+          type: string
+        destinationNumberOfBikes:
+          format: int32
+          type: integer
+        destinationNumberOfEmptySlots:
+          format: int32
+          type: integer
+        originId:
+          type: string
+        originNumberOfBikes:
+          format: int32
+          type: integer
+        originNumberOfEmptySlots:
+          format: int32
+          type: integer
+      type: object
+    JourneyVector:
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+        uri:
+          type: string
+        via:
+          type: string
+      type: object
+    JpElevation:
+      properties:
+        distance:
+          format: int32
+          type: integer
+        endLat:
+          format: double
+          type: number
+        endLon:
+          format: double
+          type: number
+        gradient:
+          format: double
+          type: number
+        heightFromPreviousPoint:
+          format: int32
+          type: integer
+        startLat:
+          format: double
+          type: number
+        startLon:
+          format: double
+          type: number
+      type: object
+    KnownJourney:
+      properties:
+        hour:
+          type: string
+        intervalId:
+          format: int32
+          type: integer
+        minute:
+          type: string
+      type: object
+    Leg:
+      properties:
+        arrivalPoint:
+          $ref: '#/components/schemas/Point'
+        arrivalTime:
+          format: date-time
+          type: string
+        departurePoint:
+          $ref: '#/components/schemas/Point'
+        departureTime:
+          format: date-time
+          type: string
+        disruptions:
+          items:
+            $ref: '#/components/schemas/Disruption'
+          type: array
+        distance:
+          format: double
+          type: number
+        duration:
+          format: int32
+          type: integer
+        hasFixedLocations:
+          readOnly: true
+          type: boolean
+        instruction:
+          $ref: '#/components/schemas/Instruction'
+        isDisrupted:
+          readOnly: true
+          type: boolean
+        mode:
+          $ref: '#/components/schemas/Identifier'
+        obstacles:
+          items:
+            $ref: '#/components/schemas/Obstacle'
+          type: array
+        path:
+          $ref: '#/components/schemas/Path'
+        plannedWorks:
+          items:
+            $ref: '#/components/schemas/PlannedWork'
+          type: array
+        routeOptions:
+          items:
+            $ref: '#/components/schemas/RouteOption'
+          type: array
+        speed:
+          type: string
+      type: object
+    Line:
+      properties:
+        created:
+          format: date-time
+          type: string
+        crowding:
+          $ref: '#/components/schemas/Crowding'
+        disruptions:
+          items:
+            $ref: '#/components/schemas/Disruption'
+          type: array
+        id:
+          type: string
+        lineStatuses:
+          items:
+            $ref: '#/components/schemas/LineStatus'
+          type: array
+        modeName:
+          type: string
+        modified:
+          format: date-time
+          type: string
+        name:
+          type: string
+        routeSections:
+          items:
+            $ref: '#/components/schemas/MatchedRoute'
+          type: array
+        serviceTypes:
+          items:
+            $ref: '#/components/schemas/LineServiceTypeInfo'
+          type: array
+      type: object
+    LineGroup:
+      properties:
+        lineIdentifier:
+          items:
+            type: string
+          type: array
+        naptanIdReference:
+          type: string
+        stationAtcoCode:
+          type: string
+      type: object
+    LineModeGroup:
+      properties:
+        lineIdentifier:
+          items:
+            type: string
+          type: array
+        modeName:
+          type: string
+      type: object
+    LineRouteSection:
+      properties:
+        destination:
+          type: string
+        direction:
+          type: string
+        fromStation:
+          type: string
+        routeId:
+          format: int32
+          type: integer
+        serviceType:
+          type: string
+        toStation:
+          type: string
+        vehicleDestinationText:
+          type: string
+      type: object
+    LineServiceType:
+      properties:
+        lineName:
+          type: string
+        lineSpecificServiceTypes:
+          items:
+            $ref: '#/components/schemas/LineSpecificServiceType'
+          type: array
+      type: object
+    LineServiceTypeInfo:
+      properties:
+        name:
+          type: string
+        uri:
+          type: string
+      type: object
+    LineSpecificServiceType:
+      properties:
+        serviceType:
+          $ref: '#/components/schemas/LineServiceTypeInfo'
+        stopServesServiceType:
+          type: boolean
+      type: object
+    LineStatus:
+      properties:
+        created:
+          format: date-time
+          type: string
+        disruption:
+          $ref: '#/components/schemas/Disruption'
+        id:
+          format: int32
+          type: integer
+        lineId:
+          type: string
+        modified:
+          format: date-time
+          type: string
+        reason:
+          type: string
+        statusSeverity:
+          format: int32
+          type: integer
+        statusSeverityDescription:
+          type: string
+        validityPeriods:
+          items:
+            $ref: '#/components/schemas/ValidityPeriod'
+          type: array
+      type: object
+    MatchedRoute:
+      properties:
+        destination:
+          description: 'eg: Destination'
+          type: string
+        destinationName:
+          description: 'eg: Destination Name'
+          type: string
+        direction:
+          description: 'eg: N or S or I or O'
+          type: string
+        name:
+          description: Name such as "72"
+          type: string
+        originationName:
+          description: 'eg: Origination Name'
+          type: string
+        originator:
+          description: 'eg: Origination'
+          type: string
+        routeCode:
+          description: The route code
+          type: string
+        serviceType:
+          description: 'eg: Regular, Night'
+          type: string
+      type: object
+    MatchedRouteSections:
+      properties:
+        id:
+          format: int32
+          type: integer
+      type: object
+    MatchedStop:
+      properties:
+        accessibilitySummary:
+          type: string
+        direction:
+          type: string
+        hasDisruption:
+          type: boolean
+        icsId:
+          type: string
+        id:
+          type: string
+        lat:
+          format: double
+          type: number
+        lines:
+          items:
+            $ref: '#/components/schemas/Identifier'
+          type: array
+        lon:
+          format: double
+          type: number
+        modes:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        parentId:
+          type: string
+        routeId:
+          format: int32
+          type: integer
+        stationId:
+          type: string
+        status:
+          type: boolean
+        stopLetter:
+          type: string
+        stopType:
+          type: string
+        topMostParentId:
+          type: string
+        towards:
+          type: string
+        url:
+          type: string
+        zone:
+          type: string
+      type: object
+    Message:
+      properties:
+        bulletOrder:
+          format: int32
+          type: integer
+        header:
+          type: boolean
+        linkText:
+          type: string
+        messageText:
+          type: string
+        url:
+          type: string
+      type: object
+    Mode:
+      properties:
+        isFarePaying:
+          type: boolean
+        isScheduledService:
+          type: boolean
+        isTflService:
+          type: boolean
+        modeName:
+          type: string
+      type: object
+    Object:
+      properties: {}
+      type: object
+    Obstacle:
+      properties:
+        incline:
+          type: string
+        position:
+          type: string
+        stopId:
+          format: int32
+          type: integer
+        type:
+          type: string
+      type: object
+    OrderedRoute:
+      properties:
+        name:
+          type: string
+        naptanIds:
+          items:
+            type: string
+          type: array
+        serviceType:
+          type: string
+      type: object
+    PassengerFlow:
+      properties:
+        timeSlice:
+          description: 'Time in 24hr format with 15 minute intervals e.g. 0500-0515, 0515-0530 etc.'
+          type: string
+        value:
+          description: Count of passenger flow towards a platform
+          format: int32
+          type: integer
+      type: object
+    PassengerType:
+      properties:
+        description:
+          type: string
+        displayName:
+          type: string
+        displayOrder:
+          format: int32
+          type: integer
+        type:
+          type: string
+      type: object
+    Path:
+      properties:
+        elevation:
+          items:
+            $ref: '#/components/schemas/JpElevation'
+          type: array
+        lineString:
+          type: string
+        stopPoints:
+          items:
+            $ref: '#/components/schemas/Identifier'
+          type: array
+      type: object
+    PathAttribute:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    Period:
+      properties:
+        frequency:
+          $ref: '#/components/schemas/ServiceFrequency'
+        fromTime:
+          $ref: '#/components/schemas/TwentyFourHourClockTime'
+        toTime:
+          $ref: '#/components/schemas/TwentyFourHourClockTime'
+        type:
+          enum:
+            - Normal
+            - FrequencyHours
+            - FrequencyMinutes
+            - Unknown
+          type: string
+      type: object
+    Place:
+      properties:
+        additionalProperties:
+          description: A bag of additional key/value pairs with extra information about this place.
+          items:
+            $ref: '#/components/schemas/AdditionalProperties'
+          type: array
+        children:
+          items:
+            $ref: '#/components/schemas/Place'
+          type: array
+        childrenUrls:
+          items:
+            type: string
+          type: array
+        commonName:
+          description: A human readable name.
+          type: string
+        distance:
+          description: "The distance of the place from its search point, if this is the result\r\n            of a geographical search, otherwise zero."
+          format: double
+          type: number
+        id:
+          description: A unique identifier.
+          type: string
+        lat:
+          description: WGS84 latitude of the location.
+          format: double
+          type: number
+        lon:
+          description: WGS84 longitude of the location.
+          format: double
+          type: number
+        placeType:
+          description: The type of Place. See /Place/Meta/placeTypes for possible values.
+          type: string
+        url:
+          description: The unique location of this resource.
+          type: string
+      type: object
+    PlaceCategory:
+      properties:
+        availableKeys:
+          items:
+            type: string
+          type: array
+        category:
+          type: string
+      type: object
+    PlacePolygon:
+      properties:
+        commonName:
+          type: string
+        geoPoints:
+          items:
+            $ref: '#/components/schemas/GeoPoint'
+          type: array
+      type: object
+    PlannedWork:
+      properties:
+        createdDateTime:
+          format: date-time
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        lastUpdateDateTime:
+          format: date-time
+          type: string
+      type: object
+    Point:
+      description: Represents a point located at a latitude and longitude using the WGS84 co-ordinate system.
+      properties:
+        lat:
+          description: WGS84 latitude of the location.
+          format: double
+          type: number
+        lon:
+          description: WGS84 longitude of the location.
+          format: double
+          type: number
+      type: object
+    PostcodeInput:
+      properties:
+        postcode:
+          pattern: '^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$'
+          type: string
+      type: object
+    Prediction:
+      description: DTO to capture the prediction details
+      properties:
+        bearing:
+          description: Bearing (between 0 to 359)
+          type: string
+        currentLocation:
+          description: The current location of the vehicle.
+          type: string
+        destinationName:
+          description: Name of the destination
+          type: string
+        destinationNaptanId:
+          description: Naptan Identifier for the prediction's destination
+          type: string
+        direction:
+          description: Direction (unified to inbound/outbound)
+          type: string
+        expectedArrival:
+          description: The expected arrival time of the vehicle at the stop/station
+          format: date-time
+          type: string
+        id:
+          description: The identitier for the prediction
+          type: string
+        lineId:
+          description: Unique identifier for the Line
+          type: string
+        lineName:
+          description: Line Name
+          type: string
+        modeName:
+          description: The mode name of the station/line the prediction relates to
+          type: string
+        naptanId:
+          description: Identifier for the prediction
+          type: string
+        operationType:
+          description: 'The type of the operation (1: is new or has been updated, 2: should be deleted from any client cache)'
+          format: int32
+          type: integer
+        platformName:
+          description: 'Platform name (for bus, this is the stop letter)'
+          type: string
+        stationName:
+          description: Station name
+          type: string
+        timeToLive:
+          description: The expiry time for the prediction
+          format: date-time
+          type: string
+        timeToStation:
+          description: Prediction of the Time to station in seconds
+          format: int32
+          type: integer
+        timestamp:
+          description: Timestamp for when the prediction was inserted/modified (source column drives what objects are broadcast on each iteration)
+          format: date-time
+          type: string
+        timing:
+          $ref: '#/components/schemas/PredictionTiming'
+        towards:
+          description: Routing information or other descriptive text about the path of the vehicle towards the destination
+          type: string
+        vehicleId:
+          description: 'The actual vehicle in transit (for train modes, the leading car of the rolling set)'
+          type: string
+      type: object
+    PredictionTiming:
+      properties:
+        countdownServerAdjustment:
+          type: string
+        insert:
+          format: date-time
+          type: string
+        read:
+          format: date-time
+          type: string
+        received:
+          format: date-time
+          type: string
+        sent:
+          format: date-time
+          type: string
+        source:
+          format: date-time
+          type: string
+      type: object
+    Recommendation:
+      properties:
+        cost:
+          type: string
+        discountCard:
+          type: string
+        fareType:
+          type: string
+        gettingYourTicket:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        id:
+          format: int32
+          type: integer
+        keyFeatures:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        notes:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        priceComparison:
+          type: string
+        priceDescription:
+          type: string
+        product:
+          type: string
+        productType:
+          type: string
+        rank:
+          format: int32
+          type: integer
+        recommendedTopUp:
+          type: string
+        rule:
+          format: int32
+          type: integer
+        singleFare:
+          format: double
+          type: number
+        ticketTime:
+          type: string
+        ticketType:
+          type: string
+        zones:
+          type: string
+      type: object
+    RecommendationResponse:
+      properties:
+        recommendations:
+          items:
+            $ref: '#/components/schemas/Recommendation'
+          type: array
+      type: object
+    Redirect:
+      properties:
+        active:
+          type: boolean
+        longUrl:
+          type: string
+        shortUrl:
+          type: string
+      type: object
+    RoadCorridor:
+      properties:
+        bounds:
+          description: "The Bounds of the Corridor, given by the south-east followed by the north-west co-ordinate\r\n            pair in geoJSON format e.g. \"[[-1.241531,51.242151],[1.641223,53.765721]]\""
+          type: string
+        displayName:
+          description: "The display name of the Corridor e.g. \"North Circular (A406)\". This\r\n            may be identical to the Id."
+          type: string
+        envelope:
+          description: "The Envelope of the Corridor, given by the corner co-ordinates of a rectangular (four-point) polygon\r\n            in geoJSON format e.g. \"[[-1.241531,51.242151],[-1.241531,53.765721],[1.641223,53.765721],[1.641223,51.242151]]\""
+          type: string
+        group:
+          description: 'The group name of the Corridor e.g. "Central London". Most corridors are not grouped, in which case this field can be null.'
+          type: string
+        id:
+          description: The Id of the Corridor e.g. "A406"
+          type: string
+        statusAggregationEndDate:
+          description: 'The end of the period over which status has been aggregated, or null if this is the current corridor status.'
+          format: date-time
+          type: string
+        statusAggregationStartDate:
+          description: 'The start of the period over which status has been aggregated, or null if this is the current corridor status.'
+          format: date-time
+          type: string
+        statusSeverity:
+          description: Standard multi-mode status severity code
+          type: string
+        statusSeverityDescription:
+          description: Description of the status severity as applied to RoadCorridors
+          type: string
+        url:
+          description: URL to retrieve this Corridor.
+          type: string
+      type: object
+    RoadDisruption:
+      properties:
+        category:
+          description: 'Describes the nature of disruption e.g. Traffic Incidents, Works'
+          type: string
+        comments:
+          description: 'Full text of comments describing the disruption, including details of any road closures and diversions, where appropriate.'
+          type: string
+        corridorIds:
+          description: 'The Ids of affected corridors, if any.'
+          items:
+            type: string
+          type: array
+        currentUpdate:
+          description: "Text of the most recent update from the LSTCC on the state of the\r\n             disruption, including the current traffic impact and any advice to\r\n             road users."
+          type: string
+        currentUpdateDateTime:
+          description: "The time when the last CurrentUpdate description was recorded, \r\n            or null if no CurrentUpdate has been applied."
+          format: date-time
+          type: string
+        endDateTime:
+          description: "The date and time on which the disruption ended. For planned disruptions, this date will have a valid value. For unplanned \r\n            disruptions in progress, this field will be omitted."
+          format: date-time
+          type: string
+        geography:
+          $ref: '#/components/schemas/DbGeography'
+        geometry:
+          $ref: '#/components/schemas/DbGeography'
+        hasClosures:
+          description: "True if any of the affected Streets have a \"Full Closure\" status, false otherwise. A RoadDisruption that has HasClosures is considered a \r\n            Severe or Serious disruption for severity filtering purposes."
+          type: boolean
+        id:
+          description: Unique identifier for the road disruption
+          type: string
+        isProvisional:
+          description: True if the disruption is planned on a future date that is open to change
+          type: boolean
+        lastModifiedTime:
+          description: "The date and time on which the disruption was last modified in the system. This information can reliably be used by a developer to quickly\r\n            compare two instances of the same disruption to determine if it has been changed."
+          format: date-time
+          type: string
+        levelOfInterest:
+          description: "This describes the level of potential impact on traffic operations of the disruption. \r\n            High = e.g. a one-off disruption on a major or high profile route which will require a high level of operational attention \r\n            Medium = This is the default value \r\n            Low = e.g. a frequently occurring disruption which is well known"
+          type: string
+        linkText:
+          description: The text of any associated link
+          type: string
+        linkUrl:
+          description: The url of any associated link
+          type: string
+        location:
+          description: Main road name / number (borough) or preset area name where the disruption is located. This might be useful for a map popup where space is limited.
+          type: string
+        ordinal:
+          description: 'An ordinal of the disruption based on severity, level of interest and corridor.'
+          format: int32
+          type: integer
+        point:
+          description: 'Latitude and longitude (WGS84) of the centroid of the disruption, stored in a geoJSON-formatted string.'
+          type: string
+        publishEndDate:
+          format: date-time
+          type: string
+        publishStartDate:
+          description: TDM Additional properties
+          format: date-time
+          type: string
+        recurringSchedules:
+          items:
+            $ref: '#/components/schemas/RoadDisruptionSchedule'
+          type: array
+        roadDisruptionImpactAreas:
+          items:
+            $ref: '#/components/schemas/RoadDisruptionImpactArea'
+          type: array
+        roadDisruptionLines:
+          items:
+            $ref: '#/components/schemas/RoadDisruptionLine'
+          type: array
+        roadProject:
+          $ref: '#/components/schemas/RoadProject'
+        severity:
+          description: A description of the severity of the disruption.
+          type: string
+        startDateTime:
+          description: "The date and time which the disruption started. For a planned disruption (i.e. planned road works) this date will be in the future.\r\n            For unplanned disruptions, this will default to the date on which the disruption was first recorded, but may be adjusted by the operator."
+          format: date-time
+          type: string
+        status:
+          description: "This describes the status of the disruption.  \r\n            Active = currently in progress \r\n            Active Long Term = currently in progress and long term\r\n            Scheduled = scheduled to start within the next 180 days\r\n            Recurring Works = planned maintenance works that follow a regular routine or pattern and whose next occurrence is to start within the next 180 days.\r\n            Recently Cleared = recently cleared in the last 24 hours\r\n            Note that the status of Scheduled or Recurring Works disruptions will change to Active when they start, and will change status again when they end."
+          type: string
+        streets:
+          description: A collection of zero or more streets affected by the disruption.
+          items:
+            $ref: '#/components/schemas/Street'
+          type: array
+        subCategory:
+          description: 'Describes the sub-category of disruption e.g. Collapsed Manhole, Abnormal Load'
+          type: string
+        timeFrame:
+          type: string
+        url:
+          description: URL to retrieve this road disruption
+          type: string
+      type: object
+    RoadDisruptionImpactArea:
+      properties:
+        endDate:
+          format: date-time
+          type: string
+        endTime:
+          type: string
+        id:
+          format: int32
+          type: integer
+        polygon:
+          $ref: '#/components/schemas/DbGeography'
+        roadDisruptionId:
+          type: string
+        startDate:
+          format: date-time
+          type: string
+        startTime:
+          type: string
+      type: object
+    RoadDisruptionLine:
+      properties:
+        endDate:
+          format: date-time
+          type: string
+        endTime:
+          type: string
+        id:
+          format: int32
+          type: integer
+        isDiversion:
+          type: boolean
+        multiLineString:
+          $ref: '#/components/schemas/DbGeography'
+        roadDisruptionId:
+          type: string
+        startDate:
+          format: date-time
+          type: string
+        startTime:
+          type: string
+      type: object
+    RoadDisruptionSchedule:
+      properties:
+        endTime:
+          format: date-time
+          type: string
+        startTime:
+          format: date-time
+          type: string
+      type: object
+    RoadProject:
+      properties:
+        boroughsBenefited:
+          items:
+            type: string
+          type: array
+        constructionEndDate:
+          format: date-time
+          type: string
+        constructionStartDate:
+          format: date-time
+          type: string
+        consultationEndDate:
+          format: date-time
+          type: string
+        consultationPageUrl:
+          type: string
+        consultationStartDate:
+          format: date-time
+          type: string
+        contactEmail:
+          type: string
+        contactName:
+          type: string
+        cycleSuperhighwayId:
+          type: string
+        externalPageUrl:
+          type: string
+        phase:
+          enum:
+            - Unscoped
+            - Concept
+            - ConsultationEnded
+            - Consultation
+            - Construction
+            - Complete
+          type: string
+        projectDescription:
+          type: string
+        projectId:
+          type: string
+        projectName:
+          type: string
+        projectPageUrl:
+          type: string
+        projectSummaryPageUrl:
+          type: string
+        schemeName:
+          type: string
+      type: object
+    RouteOption:
+      properties:
+        directions:
+          items:
+            type: string
+          type: array
+        id:
+          description: The Id of the route
+          type: string
+        lineIdentifier:
+          $ref: '#/components/schemas/Identifier'
+        name:
+          description: Name such as "72"
+          type: string
+      type: object
+    RouteSearchMatch:
+      properties:
+        id:
+          type: string
+        lat:
+          format: double
+          type: number
+        lineId:
+          type: string
+        lineName:
+          type: string
+        lineRouteSection:
+          items:
+            $ref: '#/components/schemas/LineRouteSection'
+          type: array
+        lon:
+          format: double
+          type: number
+        matchedRouteSections:
+          items:
+            $ref: '#/components/schemas/MatchedRouteSections'
+          type: array
+        matchedStops:
+          items:
+            $ref: '#/components/schemas/MatchedStop'
+          type: array
+        mode:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+    RouteSearchResponse:
+      properties:
+        input:
+          type: string
+        searchMatches:
+          items:
+            $ref: '#/components/schemas/RouteSearchMatch'
+          type: array
+      type: object
+    RouteSection:
+      properties:
+        destinationName:
+          description: 'eg: Destination Name'
+          type: string
+        direction:
+          description: 'eg: N or S or I or O'
+          type: string
+        id:
+          description: The Id of the route
+          type: string
+        lineId:
+          description: The Id of the Line
+          type: string
+        lineString:
+          description: 'eg: Path coordindates'
+          type: string
+        name:
+          description: Name such as "72"
+          type: string
+        originationName:
+          description: 'eg: Origination Name'
+          type: string
+        routeCode:
+          description: The route code
+          type: string
+        routeSectionNaptanEntrySequence:
+          items:
+            $ref: '#/components/schemas/RouteSectionNaptanEntrySequence'
+          type: array
+      type: object
+    RouteSectionNaptanEntrySequence:
+      properties:
+        ordinal:
+          format: int32
+          type: integer
+        stopPoint:
+          $ref: '#/components/schemas/StopPoint'
+      type: object
+    RouteSequence:
+      properties:
+        direction:
+          type: string
+        isOutboundOnly:
+          type: boolean
+        lineId:
+          type: string
+        lineName:
+          type: string
+        lineStrings:
+          items:
+            type: string
+          type: array
+        mode:
+          type: string
+        orderedLineRoutes:
+          items:
+            $ref: '#/components/schemas/OrderedRoute'
+          type: array
+        stations:
+          items:
+            $ref: '#/components/schemas/MatchedStop'
+          type: array
+        stopPointSequences:
+          items:
+            $ref: '#/components/schemas/StopPointSequence'
+          type: array
+      type: object
+    Schedule:
+      properties:
+        firstJourney:
+          $ref: '#/components/schemas/KnownJourney'
+        knownJourneys:
+          items:
+            $ref: '#/components/schemas/KnownJourney'
+          type: array
+        lastJourney:
+          $ref: '#/components/schemas/KnownJourney'
+        name:
+          type: string
+        periods:
+          items:
+            $ref: '#/components/schemas/Period'
+          type: array
+      type: object
+    SearchCriteria:
+      properties:
+        dateTime:
+          format: date-time
+          type: string
+        dateTimeType:
+          enum:
+            - Arriving
+            - Departing
+          type: string
+        timeAdjustments:
+          $ref: '#/components/schemas/TimeAdjustments'
+      type: object
+    SearchMatch:
+      properties:
+        id:
+          type: string
+        lat:
+          format: double
+          type: number
+        lon:
+          format: double
+          type: number
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+    SearchResponse:
+      properties:
+        from:
+          format: int32
+          type: integer
+        matches:
+          items:
+            $ref: '#/components/schemas/SearchMatch'
+          type: array
+        maxScore:
+          format: double
+          type: number
+        page:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        provider:
+          type: string
+        query:
+          type: string
+        total:
+          format: int32
+          type: integer
+      type: object
+    ServiceFrequency:
+      properties:
+        highestFrequency:
+          format: double
+          type: number
+        lowestFrequency:
+          format: double
+          type: number
+      type: object
+    StationInterval:
+      properties:
+        id:
+          type: string
+        intervals:
+          items:
+            $ref: '#/components/schemas/Interval'
+          type: array
+      type: object
+    StatusSeverity:
+      properties:
+        description:
+          type: string
+        modeName:
+          type: string
+        severityLevel:
+          format: int32
+          type: integer
+      type: object
+    StopPoint:
+      properties:
+        accessibilitySummary:
+          type: string
+        additionalProperties:
+          description: A bag of additional key/value pairs with extra information about this place.
+          items:
+            $ref: '#/components/schemas/AdditionalProperties'
+          type: array
+        children:
+          items:
+            $ref: '#/components/schemas/Place'
+          type: array
+        childrenUrls:
+          items:
+            type: string
+          type: array
+        commonName:
+          description: A human readable name.
+          type: string
+        distance:
+          description: "The distance of the place from its search point, if this is the result\r\n            of a geographical search, otherwise zero."
+          format: double
+          type: number
+        fullName:
+          type: string
+        hubNaptanCode:
+          type: string
+        icsCode:
+          type: string
+        id:
+          description: A unique identifier.
+          type: string
+        indicator:
+          description: The indicator of the stop point e.g. "Stop K"
+          type: string
+        lat:
+          description: WGS84 latitude of the location.
+          format: double
+          type: number
+        lineGroup:
+          items:
+            $ref: '#/components/schemas/LineGroup'
+          type: array
+        lineModeGroups:
+          items:
+            $ref: '#/components/schemas/LineModeGroup'
+          type: array
+        lines:
+          items:
+            $ref: '#/components/schemas/Identifier'
+          type: array
+        lon:
+          description: WGS84 longitude of the location.
+          format: double
+          type: number
+        modes:
+          items:
+            type: string
+          type: array
+        naptanId:
+          type: string
+        naptanMode:
+          type: string
+        placeType:
+          description: The type of Place. See /Place/Meta/placeTypes for possible values.
+          type: string
+        platformName:
+          type: string
+        smsCode:
+          type: string
+        stationNaptan:
+          type: string
+        status:
+          type: boolean
+        stopLetter:
+          description: 'The stop letter, if it could be cleansed from the Indicator e.g. "K"'
+          type: string
+        stopType:
+          type: string
+        url:
+          description: The unique location of this resource.
+          type: string
+      type: object
+    StopPointCategory:
+      properties:
+        availableKeys:
+          items:
+            type: string
+          type: array
+        category:
+          type: string
+      type: object
+    StopPointRouteSection:
+      properties:
+        destinationName:
+          type: string
+        direction:
+          type: string
+        isActive:
+          type: boolean
+        lineId:
+          type: string
+        lineString:
+          type: string
+        mode:
+          type: string
+        naptanId:
+          type: string
+        routeSectionName:
+          type: string
+        serviceType:
+          type: string
+        validFrom:
+          format: date-time
+          type: string
+        validTo:
+          format: date-time
+          type: string
+        vehicleDestinationText:
+          type: string
+      type: object
+    StopPointSequence:
+      properties:
+        branchId:
+          description: The id of this branch.
+          format: int32
+          type: integer
+        direction:
+          type: string
+        lineId:
+          type: string
+        lineName:
+          type: string
+        nextBranchIds:
+          description: "The ids of the next branch(es) in the sequence. Note that the next and previous branch id can be\r\n            identical in the case of a looped route e.g. the Circle line."
+          items:
+            format: int32
+            type: integer
+          type: array
+        prevBranchIds:
+          description: "The ids of the previous branch(es) in the sequence. Note that the next and previous branch id can be\r\n            identical in the case of a looped route e.g. the Circle line."
+          items:
+            format: int32
+            type: integer
+          type: array
+        serviceType:
+          enum:
+            - Regular
+            - Night
+          type: string
+        stopPoint:
+          items:
+            $ref: '#/components/schemas/MatchedStop'
+          type: array
+      type: object
+    StopPointsResponse:
+      description: A paged response containing StopPoints
+      properties:
+        centrePoint:
+          description: The centre latitude/longitude of this list of StopPoints
+          items:
+            format: double
+            type: number
+          type: array
+        page:
+          description: The index of this page
+          format: int32
+          type: integer
+        pageSize:
+          description: The maximum size of the page in this response i.e. the maximum number of StopPoints
+          format: int32
+          type: integer
+        stopPoints:
+          description: Collection of stop points
+          items:
+            $ref: '#/components/schemas/StopPoint'
+          type: array
+        total:
+          description: The total number of StopPoints available across all pages
+          format: int32
+          type: integer
+      type: object
+    Street:
+      properties:
+        closure:
+          description: "Type of road closure. Some example values:\r\n            Open = road is open, not blocked, not closed, not restricted. It maybe that the disruption has been moved out of the carriageway.\r\n            Partial Closure = road is partially blocked, closed or restricted. \r\n            Full Closure = road is fully blocked or closed."
+          type: string
+        directions:
+          description: "The direction of the disruption on the street. Some example values:\r\n            All Directions\r\n            All Approaches\r\n            Clockwise\r\n            Anti-Clockwise\r\n            Northbound\r\n            Eastbound\r\n            Southbound\r\n            Westbound\r\n            Both Directions"
+          type: string
+        name:
+          description: Street name
+          type: string
+        segments:
+          description: Geographic description of the sections of this street that are affected.
+          items:
+            $ref: '#/components/schemas/StreetSegment'
+          type: array
+        sourceSystemId:
+          description: The ID from the source system of the disruption that this street belongs to.
+          format: int64
+          type: integer
+        sourceSystemKey:
+          description: The key of the source system of the disruption that this street belongs to.
+          type: string
+      type: object
+    StreetSegment:
+      properties:
+        lineString:
+          description: geoJSON formatted LineString containing two latitude/longitude (WGS84) pairs that identify the start and end points of the street segment.
+          type: string
+        sourceSystemId:
+          description: The ID from the source system of the disruption that this street belongs to.
+          format: int64
+          type: integer
+        sourceSystemKey:
+          description: The key of the source system of the disruption that this street belongs to.
+          type: string
+        toid:
+          description: A 16 digit unique integer identifying a OS ITN (Ordnance Survey Integrated Transport Network) road link.
+          type: string
+      type: object
+    Ticket:
+      properties:
+        cost:
+          type: string
+        description:
+          type: string
+        displayOrder:
+          format: int32
+          type: integer
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        mode:
+          type: string
+        passengerType:
+          type: string
+        ticketTime:
+          $ref: '#/components/schemas/TicketTime'
+        ticketType:
+          $ref: '#/components/schemas/TicketType'
+      type: object
+    TicketTime:
+      properties:
+        description:
+          type: string
+        type:
+          type: string
+      type: object
+    TicketType:
+      properties:
+        description:
+          type: string
+        type:
+          type: string
+      type: object
+    TimeAdjustment:
+      properties:
+        date:
+          type: string
+        time:
+          type: string
+        timeIs:
+          type: string
+        uri:
+          type: string
+      type: object
+    TimeAdjustments:
+      properties:
+        earlier:
+          $ref: '#/components/schemas/TimeAdjustment'
+        earliest:
+          $ref: '#/components/schemas/TimeAdjustment'
+        later:
+          $ref: '#/components/schemas/TimeAdjustment'
+        latest:
+          $ref: '#/components/schemas/TimeAdjustment'
+      type: object
+    Timetable:
+      properties:
+        departureStopId:
+          type: string
+        routes:
+          items:
+            $ref: '#/components/schemas/TimetableRoute'
+          type: array
+      type: object
+    TimetableResponse:
+      properties:
+        direction:
+          type: string
+        disambiguation:
+          $ref: '#/components/schemas/Disambiguation'
+        lineId:
+          type: string
+        lineName:
+          type: string
+        pdfUrl:
+          type: string
+        stations:
+          items:
+            $ref: '#/components/schemas/MatchedStop'
+          type: array
+        statusErrorMessage:
+          type: string
+        stops:
+          items:
+            $ref: '#/components/schemas/MatchedStop'
+          type: array
+        timetable:
+          $ref: '#/components/schemas/Timetable'
+      type: object
+    TimetableRoute:
+      properties:
+        schedules:
+          items:
+            $ref: '#/components/schemas/Schedule'
+          type: array
+        stationIntervals:
+          items:
+            $ref: '#/components/schemas/StationInterval'
+          type: array
+      type: object
+    TrainLoading:
+      properties:
+        direction:
+          description: Direction in regards to Journey Planner i.e. inbound or outbound
+          type: string
+        line:
+          description: The Line Name e.g. "Victoria"
+          type: string
+        lineDirection:
+          description: 'Direction of the Line e.g. NB, SB, WB etc.'
+          type: string
+        naptanTo:
+          description: Naptan of the adjacent station
+          type: string
+        platformDirection:
+          description: 'Direction displayed on the platform e.g. NB, SB, WB etc.'
+          type: string
+        timeSlice:
+          description: 'Time in 24hr format with 15 minute intervals e.g. 0500-0515, 0515-0530 etc.'
+          type: string
+        value:
+          description: "Scale between 1-6, \r\n             1 = Very quiet, 2 = Quiet, 3 = Fairly busy, 4 = Busy, 5 = Very busy, 6 = Exceptionally busy"
+          format: int32
+          type: integer
+      type: object
+    TwentyFourHourClockTime:
+      properties:
+        hour:
+          type: string
+        minute:
+          type: string
+      type: object
+    ValidityPeriod:
+      description: Represents a period for which a planned works is valid.
+      properties:
+        fromDate:
+          description: Gets or sets the start date.
+          format: date-time
+          type: string
+        isNow:
+          description: If true is a realtime status rather than planned or info
+          type: boolean
+        toDate:
+          description: Gets or sets the end date.
+          format: date-time
+          type: string
+      type: object
+    Vehicle:
+      properties:
+        type:
+          type: string
+      type: object
+  securitySchemes:
+    apiKey:
+      description: API Key Authentication
+      in: query
+      name: app_key
+      type: apiKey
+    appId:
+      description: Application ID
+      in: query
+      name: app_id
+      type: apiKey

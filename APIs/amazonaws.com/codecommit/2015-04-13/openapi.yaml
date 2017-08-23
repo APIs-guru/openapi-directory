@@ -1,0 +1,2370 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://codecommit.amazonaws.com/'
+info:
+  version: '2015-04-13'
+  x-release: v4
+  title: AWS CodeCommit
+  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference)</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: codecommit
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/codecommit-2015-04-13.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/codecommit/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: BatchGetRepositories
+      description: <p>Returns information about one or more repositories.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetRepositoriesOutput'
+        '480':
+          description: RepositoryNamesRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNamesRequiredException'
+        '481':
+          description: MaximumRepositoryNamesExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaximumRepositoryNamesExceededException'
+        '482':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '483':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '484':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '485':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '486':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '487':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetRepositoriesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateBranch':
+    post:
+      operationId: CreateBranch
+      description: '<p>Creates a new branch in a repository and points the branch to a commit.</p> <note> <p>Calling the create branch operation does not set a repository''s default branch. To do this, call the update default branch operation.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '483':
+          description: BranchNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchNameRequiredException'
+        '484':
+          description: BranchNameExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchNameExistsException'
+        '485':
+          description: InvalidBranchNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBranchNameException'
+        '486':
+          description: CommitIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitIdRequiredException'
+        '487':
+          description: CommitDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitDoesNotExistException'
+        '488':
+          description: InvalidCommitIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCommitIdException'
+        '489':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '490':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '491':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '492':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '493':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBranchInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateRepository':
+    post:
+      operationId: CreateRepository
+      description: 'Creates a new, empty repository.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRepositoryOutput'
+        '480':
+          description: RepositoryNameExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameExistsException'
+        '481':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '482':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '483':
+          description: InvalidRepositoryDescriptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryDescriptionException'
+        '484':
+          description: RepositoryLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryLimitExceededException'
+        '485':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '486':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '487':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '488':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '489':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRepositoryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRepository':
+    post:
+      operationId: DeleteRepository
+      description: '<p>Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.</p> <important><p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRepositoryOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '482':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '483':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '484':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '485':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '486':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRepositoryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetBlob':
+    post:
+      operationId: GetBlob
+      description: Returns the base-64 encoded content of an individual blob within a repository.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBlobOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '483':
+          description: BlobIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlobIdRequiredException'
+        '484':
+          description: InvalidBlobIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBlobIdException'
+        '485':
+          description: BlobIdDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlobIdDoesNotExistException'
+        '486':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '487':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '488':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '489':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '490':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+        '491':
+          description: FileTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileTooLargeException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBlobInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetBranch':
+    post:
+      operationId: GetBranch
+      description: 'Returns information about a repository branch, including its name and the last commit ID.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBranchOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '483':
+          description: BranchNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchNameRequiredException'
+        '484':
+          description: InvalidBranchNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBranchNameException'
+        '485':
+          description: BranchDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchDoesNotExistException'
+        '486':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '487':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '488':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '489':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '490':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBranchInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetCommit':
+    post:
+      operationId: GetCommit
+      description: 'Returns information about a commit, including commit message and committer information.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCommitOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '483':
+          description: CommitIdRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitIdRequiredException'
+        '484':
+          description: InvalidCommitIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCommitIdException'
+        '485':
+          description: CommitIdDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitIdDoesNotExistException'
+        '486':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '487':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '488':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '489':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '490':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCommitInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDifferences':
+    post:
+      operationId: GetDifferences
+      description: 'Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference). Results can be limited to a specified path.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDifferencesOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '483':
+          description: InvalidContinuationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidContinuationTokenException'
+        '484':
+          description: InvalidMaxResultsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidMaxResultsException'
+        '485':
+          description: InvalidCommitIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCommitIdException'
+        '486':
+          description: CommitRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitRequiredException'
+        '487':
+          description: InvalidCommitException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCommitException'
+        '488':
+          description: CommitDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitDoesNotExistException'
+        '489':
+          description: InvalidPathException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPathException'
+        '490':
+          description: PathDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PathDoesNotExistException'
+        '491':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '492':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '493':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '494':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '495':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      parameters:
+        - name: MaxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDifferencesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetRepository':
+    post:
+      operationId: GetRepository
+      description: <p>Returns information about a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRepositoryOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '483':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '484':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '485':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '486':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '487':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRepositoryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetRepositoryTriggers':
+    post:
+      operationId: GetRepositoryTriggers
+      description: Gets information about triggers configured for a repository.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRepositoryTriggersOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '481':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '482':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '483':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '484':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '485':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '486':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '487':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRepositoryTriggersInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListBranches':
+    post:
+      operationId: ListBranches
+      description: Gets information about one or more branches in a repository.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBranchesOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '483':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '484':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '485':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '486':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '487':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+        '488':
+          description: InvalidContinuationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidContinuationTokenException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListBranchesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListRepositories':
+    post:
+      operationId: ListRepositories
+      description: Gets information about one or more repositories.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRepositoriesOutput'
+        '480':
+          description: InvalidSortByException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSortByException'
+        '481':
+          description: InvalidOrderException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOrderException'
+        '482':
+          description: InvalidContinuationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidContinuationTokenException'
+      parameters:
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRepositoriesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutRepositoryTriggers':
+    post:
+      operationId: PutRepositoryTriggers
+      description: Replaces all triggers for a repository. This can be used to create or delete triggers.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutRepositoryTriggersOutput'
+        '480':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '481':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '482':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '483':
+          description: RepositoryTriggersListRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryTriggersListRequiredException'
+        '484':
+          description: MaximumRepositoryTriggersExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaximumRepositoryTriggersExceededException'
+        '485':
+          description: InvalidRepositoryTriggerNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerNameException'
+        '486':
+          description: InvalidRepositoryTriggerDestinationArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerDestinationArnException'
+        '487':
+          description: InvalidRepositoryTriggerRegionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerRegionException'
+        '488':
+          description: InvalidRepositoryTriggerCustomDataException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerCustomDataException'
+        '489':
+          description: MaximumBranchesExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaximumBranchesExceededException'
+        '490':
+          description: InvalidRepositoryTriggerBranchNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerBranchNameException'
+        '491':
+          description: InvalidRepositoryTriggerEventsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerEventsException'
+        '492':
+          description: RepositoryTriggerNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryTriggerNameRequiredException'
+        '493':
+          description: RepositoryTriggerDestinationArnRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryTriggerDestinationArnRequiredException'
+        '494':
+          description: RepositoryTriggerBranchNameListRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryTriggerBranchNameListRequiredException'
+        '495':
+          description: RepositoryTriggerEventsListRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryTriggerEventsListRequiredException'
+        '496':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '497':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '498':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '499':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '500':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutRepositoryTriggersInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TestRepositoryTriggers':
+    post:
+      operationId: TestRepositoryTriggers
+      description: 'Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test will send data from the last commit. If no data is available, sample data will be generated.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRepositoryTriggersOutput'
+        '480':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '481':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '482':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '483':
+          description: RepositoryTriggersListRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryTriggersListRequiredException'
+        '484':
+          description: MaximumRepositoryTriggersExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaximumRepositoryTriggersExceededException'
+        '485':
+          description: InvalidRepositoryTriggerNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerNameException'
+        '486':
+          description: InvalidRepositoryTriggerDestinationArnException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerDestinationArnException'
+        '487':
+          description: InvalidRepositoryTriggerRegionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerRegionException'
+        '488':
+          description: InvalidRepositoryTriggerCustomDataException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerCustomDataException'
+        '489':
+          description: MaximumBranchesExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MaximumBranchesExceededException'
+        '490':
+          description: InvalidRepositoryTriggerBranchNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerBranchNameException'
+        '491':
+          description: InvalidRepositoryTriggerEventsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryTriggerEventsException'
+        '492':
+          description: RepositoryTriggerNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryTriggerNameRequiredException'
+        '493':
+          description: RepositoryTriggerDestinationArnRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryTriggerDestinationArnRequiredException'
+        '494':
+          description: RepositoryTriggerBranchNameListRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryTriggerBranchNameListRequiredException'
+        '495':
+          description: RepositoryTriggerEventsListRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryTriggerEventsListRequiredException'
+        '496':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '497':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '498':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '499':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '500':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestRepositoryTriggersInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDefaultBranch':
+    post:
+      operationId: UpdateDefaultBranch
+      description: '<p>Sets or changes the default branch name for the specified repository.</p> <note> <p>If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '483':
+          description: BranchNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchNameRequiredException'
+        '484':
+          description: InvalidBranchNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBranchNameException'
+        '485':
+          description: BranchDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchDoesNotExistException'
+        '486':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '487':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '488':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '489':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '490':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDefaultBranchInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateRepositoryDescription':
+    post:
+      operationId: UpdateRepositoryDescription
+      description: <p>Sets or changes the comment or description for a repository.</p> <note> <p>The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page.</p> </note>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+        '483':
+          description: InvalidRepositoryDescriptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryDescriptionException'
+        '484':
+          description: EncryptionIntegrityChecksFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionIntegrityChecksFailedException'
+        '485':
+          description: EncryptionKeyAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyAccessDeniedException'
+        '486':
+          description: EncryptionKeyDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyDisabledException'
+        '487':
+          description: EncryptionKeyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyNotFoundException'
+        '488':
+          description: EncryptionKeyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncryptionKeyUnavailableException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRepositoryDescriptionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateRepositoryName':
+    post:
+      operationId: UpdateRepositoryName
+      description: 'Renames a repository. The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix ".git" is prohibited. For a full description of the limits on repository names, see <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">Limits</a> in the AWS CodeCommit User Guide.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: RepositoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryDoesNotExistException'
+        '481':
+          description: RepositoryNameExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameExistsException'
+        '482':
+          description: RepositoryNameRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNameRequiredException'
+        '483':
+          description: InvalidRepositoryNameException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRepositoryNameException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRepositoryNameInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AccountId:
+      type: string
+    AdditionalData:
+      type: string
+    Arn:
+      type: string
+    BatchGetRepositoriesInput:
+      type: object
+      required:
+        - repositoryNames
+      properties:
+        repositoryNames:
+          $ref: '#/components/schemas/RepositoryNameList'
+      description: Represents the input of a batch get repositories operation.
+    BatchGetRepositoriesOutput:
+      type: object
+      properties:
+        repositories:
+          $ref: '#/components/schemas/RepositoryMetadataList'
+        repositoriesNotFound:
+          $ref: '#/components/schemas/RepositoryNotFoundList'
+      description: Represents the output of a batch get repositories operation.
+    BlobIdDoesNotExistException:
+      type: object
+      properties: {}
+      description: The specified blob does not exist.
+    BlobIdRequiredException:
+      type: object
+      properties: {}
+      description: A blob ID is required but was not specified.
+    BlobMetadata:
+      type: object
+      properties:
+        blobId:
+          $ref: '#/components/schemas/ObjectId'
+        path:
+          $ref: '#/components/schemas/Path'
+        mode:
+          $ref: '#/components/schemas/Mode'
+      description: Returns information about a specific Git blob object.
+    BranchDoesNotExistException:
+      type: object
+      properties: {}
+      description: The specified branch does not exist.
+    BranchInfo:
+      type: object
+      properties:
+        branchName:
+          $ref: '#/components/schemas/BranchName'
+        commitId:
+          $ref: '#/components/schemas/CommitId'
+      description: Returns information about a branch.
+    BranchName:
+      type: string
+      minLength: 1
+      maxLength: 100
+    BranchNameExistsException:
+      type: object
+      properties: {}
+      description: The specified branch name already exists.
+    BranchNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BranchName'
+    BranchNameRequiredException:
+      type: object
+      properties: {}
+      description: A branch name is required but was not specified.
+    ChangeTypeEnum:
+      type: string
+      enum:
+        - A
+        - M
+        - D
+    CloneUrlHttp:
+      type: string
+    CloneUrlSsh:
+      type: string
+    Commit:
+      type: object
+      properties:
+        treeId:
+          $ref: '#/components/schemas/ObjectId'
+        parents:
+          $ref: '#/components/schemas/ParentList'
+        message:
+          $ref: '#/components/schemas/Message'
+        author:
+          $ref: '#/components/schemas/UserInfo'
+        committer:
+          $ref: '#/components/schemas/UserInfo'
+        additionalData:
+          $ref: '#/components/schemas/AdditionalData'
+      description: Returns information about a specific commit.
+    CommitDoesNotExistException:
+      type: object
+      properties: {}
+      description: 'The specified commit does not exist or no commit was specified, and the specified repository has no default branch.'
+    CommitId:
+      type: string
+    CommitIdDoesNotExistException:
+      type: object
+      properties: {}
+      description: The specified commit ID does not exist.
+    CommitIdRequiredException:
+      type: object
+      properties: {}
+      description: A commit ID was not specified.
+    CommitName:
+      type: string
+    CommitRequiredException:
+      type: object
+      properties: {}
+      description: A commit was not specified.
+    CreateBranchInput:
+      type: object
+      required:
+        - repositoryName
+        - branchName
+        - commitId
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        branchName:
+          $ref: '#/components/schemas/BranchName'
+        commitId:
+          $ref: '#/components/schemas/CommitId'
+      description: Represents the input of a create branch operation.
+    CreateRepositoryInput:
+      type: object
+      required:
+        - repositoryName
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        repositoryDescription:
+          $ref: '#/components/schemas/RepositoryDescription'
+      description: Represents the input of a create repository operation.
+    CreateRepositoryOutput:
+      type: object
+      properties:
+        repositoryMetadata:
+          $ref: '#/components/schemas/RepositoryMetadata'
+      description: Represents the output of a create repository operation.
+    CreationDate:
+      type: string
+      format: date-time
+    Date:
+      type: string
+    DeleteRepositoryInput:
+      type: object
+      required:
+        - repositoryName
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+      description: Represents the input of a delete repository operation.
+    DeleteRepositoryOutput:
+      type: object
+      properties:
+        repositoryId:
+          $ref: '#/components/schemas/RepositoryId'
+      description: Represents the output of a delete repository operation.
+    Difference:
+      type: object
+      properties:
+        beforeBlob:
+          $ref: '#/components/schemas/BlobMetadata'
+        afterBlob:
+          $ref: '#/components/schemas/BlobMetadata'
+        changeType:
+          $ref: '#/components/schemas/ChangeTypeEnum'
+      description: Returns information about a set of differences for a commit specifier.
+    DifferenceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Difference'
+    Email:
+      type: string
+    EncryptionIntegrityChecksFailedException:
+      type: object
+      properties: {}
+      description: An encryption integrity check failed.
+    EncryptionKeyAccessDeniedException:
+      type: object
+      properties: {}
+      description: An encryption key could not be accessed.
+    EncryptionKeyDisabledException:
+      type: object
+      properties: {}
+      description: The encryption key is disabled.
+    EncryptionKeyNotFoundException:
+      type: object
+      properties: {}
+      description: No encryption key was found.
+    EncryptionKeyUnavailableException:
+      type: object
+      properties: {}
+      description: The encryption key is not available.
+    FileTooLargeException:
+      type: object
+      properties: {}
+      description: 'The specified file exceeds the file size limit for AWS CodeCommit. For more information about limits in AWS CodeCommit, see <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html">AWS CodeCommit User Guide</a>.'
+    GetBlobInput:
+      type: object
+      required:
+        - repositoryName
+        - blobId
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        blobId:
+          $ref: '#/components/schemas/ObjectId'
+      description: Represents the input of a get blob operation.
+    GetBlobOutput:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          $ref: '#/components/schemas/blob'
+      description: Represents the output of a get blob operation.
+    GetBranchInput:
+      type: object
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        branchName:
+          $ref: '#/components/schemas/BranchName'
+      description: Represents the input of a get branch operation.
+    GetBranchOutput:
+      type: object
+      properties:
+        branch:
+          $ref: '#/components/schemas/BranchInfo'
+      description: Represents the output of a get branch operation.
+    GetCommitInput:
+      type: object
+      required:
+        - repositoryName
+        - commitId
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        commitId:
+          $ref: '#/components/schemas/ObjectId'
+      description: Represents the input of a get commit operation.
+    GetCommitOutput:
+      type: object
+      required:
+        - commit
+      properties:
+        commit:
+          $ref: '#/components/schemas/Commit'
+      description: Represents the output of a get commit operation.
+    GetDifferencesInput:
+      type: object
+      required:
+        - repositoryName
+        - afterCommitSpecifier
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        beforeCommitSpecifier:
+          $ref: '#/components/schemas/CommitName'
+        afterCommitSpecifier:
+          $ref: '#/components/schemas/CommitName'
+        beforePath:
+          $ref: '#/components/schemas/Path'
+        afterPath:
+          $ref: '#/components/schemas/Path'
+        MaxResults:
+          $ref: '#/components/schemas/Limit'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetDifferencesOutput:
+      type: object
+      properties:
+        differences:
+          $ref: '#/components/schemas/DifferenceList'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    GetRepositoryInput:
+      type: object
+      required:
+        - repositoryName
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+      description: Represents the input of a get repository operation.
+    GetRepositoryOutput:
+      type: object
+      properties:
+        repositoryMetadata:
+          $ref: '#/components/schemas/RepositoryMetadata'
+      description: Represents the output of a get repository operation.
+    GetRepositoryTriggersInput:
+      type: object
+      required:
+        - repositoryName
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+      description: Represents the input of a get repository triggers operation.
+    GetRepositoryTriggersOutput:
+      type: object
+      properties:
+        configurationId:
+          $ref: '#/components/schemas/RepositoryTriggersConfigurationId'
+        triggers:
+          $ref: '#/components/schemas/RepositoryTriggersList'
+      description: Represents the output of a get repository triggers operation.
+    InvalidBlobIdException:
+      type: object
+      properties: {}
+      description: The specified blob is not valid.
+    InvalidBranchNameException:
+      type: object
+      properties: {}
+      description: The specified branch name is not valid.
+    InvalidCommitException:
+      type: object
+      properties: {}
+      description: The specified commit is not valid.
+    InvalidCommitIdException:
+      type: object
+      properties: {}
+      description: The specified commit ID is not valid.
+    InvalidContinuationTokenException:
+      type: object
+      properties: {}
+      description: The specified continuation token is not valid.
+    InvalidMaxResultsException:
+      type: object
+      properties: {}
+      description: The specified number of maximum results is not valid.
+    InvalidOrderException:
+      type: object
+      properties: {}
+      description: The specified sort order is not valid.
+    InvalidPathException:
+      type: object
+      properties: {}
+      description: The specified path is not valid.
+    InvalidRepositoryDescriptionException:
+      type: object
+      properties: {}
+      description: The specified repository description is not valid.
+    InvalidRepositoryNameException:
+      type: object
+      properties: {}
+      description: '<p>At least one specified repository name is not valid.</p> <note> <p>This exception only occurs when a specified repository name is not valid. Other exceptions occur when a required repository parameter is missing, or when a specified repository does not exist.</p> </note>'
+    InvalidRepositoryTriggerBranchNameException:
+      type: object
+      properties: {}
+      description: One or more branch names specified for the trigger is not valid.
+    InvalidRepositoryTriggerCustomDataException:
+      type: object
+      properties: {}
+      description: The custom data provided for the trigger is not valid.
+    InvalidRepositoryTriggerDestinationArnException:
+      type: object
+      properties: {}
+      description: The Amazon Resource Name (ARN) for the trigger is not valid for the specified destination. The most common reason for this error is that the ARN does not meet the requirements for the service type.
+    InvalidRepositoryTriggerEventsException:
+      type: object
+      properties: {}
+      description: One or more events specified for the trigger is not valid. Check to make sure that all events specified match the requirements for allowed events.
+    InvalidRepositoryTriggerNameException:
+      type: object
+      properties: {}
+      description: The name of the trigger is not valid.
+    InvalidRepositoryTriggerRegionException:
+      type: object
+      properties: {}
+      description: The region for the trigger target does not match the region for the repository. Triggers must be created in the same region as the target for the trigger.
+    InvalidSortByException:
+      type: object
+      properties: {}
+      description: The specified sort by value is not valid.
+    LastModifiedDate:
+      type: string
+      format: date-time
+    Limit:
+      type: integer
+    ListBranchesInput:
+      type: object
+      required:
+        - repositoryName
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the input of a list branches operation.
+    ListBranchesOutput:
+      type: object
+      properties:
+        branches:
+          $ref: '#/components/schemas/BranchNameList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the output of a list branches operation.
+    ListRepositoriesInput:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+        sortBy:
+          $ref: '#/components/schemas/SortByEnum'
+        order:
+          $ref: '#/components/schemas/OrderEnum'
+      description: Represents the input of a list repositories operation.
+    ListRepositoriesOutput:
+      type: object
+      properties:
+        repositories:
+          $ref: '#/components/schemas/RepositoryNameIdPairList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: Represents the output of a list repositories operation.
+    MaximumBranchesExceededException:
+      type: object
+      properties: {}
+      description: The number of branches for the trigger was exceeded.
+    MaximumRepositoryNamesExceededException:
+      type: object
+      properties: {}
+      description: 'The maximum number of allowed repository names was exceeded. Currently, this number is 25.'
+    MaximumRepositoryTriggersExceededException:
+      type: object
+      properties: {}
+      description: The number of triggers allowed for the repository was exceeded.
+    Message:
+      type: string
+    Mode:
+      type: string
+    Name:
+      type: string
+    NextToken:
+      type: string
+    ObjectId:
+      type: string
+    OrderEnum:
+      type: string
+      enum:
+        - ascending
+        - descending
+    ParentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ObjectId'
+    Path:
+      type: string
+    PathDoesNotExistException:
+      type: object
+      properties: {}
+      description: The specified path does not exist.
+    PutRepositoryTriggersInput:
+      type: object
+      required:
+        - repositoryName
+        - triggers
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        triggers:
+          $ref: '#/components/schemas/RepositoryTriggersList'
+      description: Represents the input ofa put repository triggers operation.
+    PutRepositoryTriggersOutput:
+      type: object
+      properties:
+        configurationId:
+          $ref: '#/components/schemas/RepositoryTriggersConfigurationId'
+      description: Represents the output of a put repository triggers operation.
+    RepositoryDescription:
+      type: string
+      maxLength: 1000
+    RepositoryDoesNotExistException:
+      type: object
+      properties: {}
+      description: The specified repository does not exist.
+    RepositoryId:
+      type: string
+    RepositoryLimitExceededException:
+      type: object
+      properties: {}
+      description: A repository resource limit was exceeded.
+    RepositoryMetadata:
+      type: object
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountId'
+        repositoryId:
+          $ref: '#/components/schemas/RepositoryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        repositoryDescription:
+          $ref: '#/components/schemas/RepositoryDescription'
+        defaultBranch:
+          $ref: '#/components/schemas/BranchName'
+        lastModifiedDate:
+          $ref: '#/components/schemas/LastModifiedDate'
+        creationDate:
+          $ref: '#/components/schemas/CreationDate'
+        cloneUrlHttp:
+          $ref: '#/components/schemas/CloneUrlHttp'
+        cloneUrlSsh:
+          $ref: '#/components/schemas/CloneUrlSsh'
+        Arn:
+          $ref: '#/components/schemas/Arn'
+      description: Information about a repository.
+    RepositoryMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryMetadata'
+    RepositoryName:
+      type: string
+      pattern: '[\w\.-]+'
+      minLength: 1
+      maxLength: 100
+    RepositoryNameExistsException:
+      type: object
+      properties: {}
+      description: The specified repository name already exists.
+    RepositoryNameIdPair:
+      type: object
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        repositoryId:
+          $ref: '#/components/schemas/RepositoryId'
+      description: Information about a repository name and ID.
+    RepositoryNameIdPairList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryNameIdPair'
+    RepositoryNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryName'
+    RepositoryNameRequiredException:
+      type: object
+      properties: {}
+      description: A repository name is required but was not specified.
+    RepositoryNamesRequiredException:
+      type: object
+      properties: {}
+      description: A repository names object is required but was not specified.
+    RepositoryNotFoundList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryName'
+    RepositoryTrigger:
+      type: object
+      required:
+        - name
+        - destinationArn
+        - events
+      properties:
+        name:
+          $ref: '#/components/schemas/RepositoryTriggerName'
+        destinationArn:
+          $ref: '#/components/schemas/Arn'
+        customData:
+          $ref: '#/components/schemas/RepositoryTriggerCustomData'
+        branches:
+          $ref: '#/components/schemas/BranchNameList'
+        events:
+          $ref: '#/components/schemas/RepositoryTriggerEventList'
+      description: Information about a trigger for a repository.
+    RepositoryTriggerBranchNameListRequiredException:
+      type: object
+      properties: {}
+      description: At least one branch name is required but was not specified in the trigger configuration.
+    RepositoryTriggerCustomData:
+      type: string
+    RepositoryTriggerDestinationArnRequiredException:
+      type: object
+      properties: {}
+      description: A destination ARN for the target service for the trigger is required but was not specified.
+    RepositoryTriggerEventEnum:
+      type: string
+      enum:
+        - all
+        - updateReference
+        - createReference
+        - deleteReference
+    RepositoryTriggerEventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryTriggerEventEnum'
+    RepositoryTriggerEventsListRequiredException:
+      type: object
+      properties: {}
+      description: At least one event for the trigger is required but was not specified.
+    RepositoryTriggerExecutionFailure:
+      type: object
+      properties:
+        trigger:
+          $ref: '#/components/schemas/RepositoryTriggerName'
+        failureMessage:
+          $ref: '#/components/schemas/RepositoryTriggerExecutionFailureMessage'
+      description: A trigger failed to run.
+    RepositoryTriggerExecutionFailureList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryTriggerExecutionFailure'
+    RepositoryTriggerExecutionFailureMessage:
+      type: string
+    RepositoryTriggerName:
+      type: string
+    RepositoryTriggerNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryTriggerName'
+    RepositoryTriggerNameRequiredException:
+      type: object
+      properties: {}
+      description: A name for the trigger is required but was not specified.
+    RepositoryTriggersConfigurationId:
+      type: string
+    RepositoryTriggersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryTrigger'
+    RepositoryTriggersListRequiredException:
+      type: object
+      properties: {}
+      description: The list of triggers for the repository is required but was not specified.
+    SortByEnum:
+      type: string
+      enum:
+        - repositoryName
+        - lastModifiedDate
+    TestRepositoryTriggersInput:
+      type: object
+      required:
+        - repositoryName
+        - triggers
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        triggers:
+          $ref: '#/components/schemas/RepositoryTriggersList'
+      description: Represents the input of a test repository triggers operation.
+    TestRepositoryTriggersOutput:
+      type: object
+      properties:
+        successfulExecutions:
+          $ref: '#/components/schemas/RepositoryTriggerNameList'
+        failedExecutions:
+          $ref: '#/components/schemas/RepositoryTriggerExecutionFailureList'
+      description: Represents the output of a test repository triggers operation.
+    UpdateDefaultBranchInput:
+      type: object
+      required:
+        - repositoryName
+        - defaultBranchName
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        defaultBranchName:
+          $ref: '#/components/schemas/BranchName'
+      description: Represents the input of an update default branch operation.
+    UpdateRepositoryDescriptionInput:
+      type: object
+      required:
+        - repositoryName
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        repositoryDescription:
+          $ref: '#/components/schemas/RepositoryDescription'
+      description: Represents the input of an update repository description operation.
+    UpdateRepositoryNameInput:
+      type: object
+      required:
+        - oldName
+        - newName
+      properties:
+        oldName:
+          $ref: '#/components/schemas/RepositoryName'
+        newName:
+          $ref: '#/components/schemas/RepositoryName'
+      description: Represents the input of an update repository description operation.
+    UserInfo:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        email:
+          $ref: '#/components/schemas/Email'
+        date:
+          $ref: '#/components/schemas/Date'
+      description: Information about the user who made a specified commit.
+    blob:
+      type: string
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

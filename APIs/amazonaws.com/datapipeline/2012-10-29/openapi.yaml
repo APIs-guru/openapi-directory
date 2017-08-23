@@ -1,0 +1,1829 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://datapipeline.amazonaws.com/'
+info:
+  version: '2012-10-29'
+  x-release: v4
+  title: AWS Data Pipeline
+  description: '<p>AWS Data Pipeline configures and manages a data-driven workflow called a pipeline. AWS Data Pipeline handles the details of scheduling and ensuring that data dependencies are met so that your application can focus on processing the data.</p> <p>AWS Data Pipeline provides a JAR implementation of a task runner called AWS Data Pipeline Task Runner. AWS Data Pipeline Task Runner provides logic for common data management scenarios, such as performing database queries and running data analysis using Amazon Elastic MapReduce (Amazon EMR). You can use AWS Data Pipeline Task Runner as your task runner, or you can write your own task runner to provide custom data management.</p> <p>AWS Data Pipeline implements two main sets of functionality. Use the first set to create a pipeline and define data sources, schedules, dependencies, and the transforms to be performed on the data. Use the second set in your task runner application to receive the next task ready for processing. The logic for performing the task, such as querying the data, running data analysis, or converting the data from one format to another, is contained within the task runner. The task runner performs the task assigned to it by the web service, reporting progress to the web service as it does so. When the task is done, the task runner reports the final success or failure of the task to the web service.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: datapipeline
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/datapipeline-2012-10-29.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/datapipeline/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: ActivatePipeline
+      description: '<p>Validates the specified pipeline and starts processing pipeline tasks. If the pipeline does not pass validation, activation fails.</p> <p>If you need to pause the pipeline to investigate an issue with a component, such as a data source or script, call <a>DeactivatePipeline</a>.</p> <p>To activate a finished pipeline, modify the end date for the pipeline and then activate it.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivatePipelineOutput'
+        '480':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '481':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+        '482':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '483':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivatePipelineInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AddTags':
+    post:
+      operationId: AddTags
+      description: Adds or modifies tags for the specified pipeline.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddTagsOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '483':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTagsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreatePipeline':
+    post:
+      operationId: CreatePipeline
+      description: 'Creates a new, empty pipeline. Use <a>PutPipelineDefinition</a> to populate the pipeline.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePipelineOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePipelineInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeactivatePipeline':
+    post:
+      operationId: DeactivatePipeline
+      description: '<p>Deactivates the specified running pipeline. The pipeline is set to the <code>DEACTIVATING</code> state until the deactivation process completes.</p> <p>To resume a deactivated pipeline, use <a>ActivatePipeline</a>. By default, the pipeline resumes from the last completed execution. Optionally, you can specify the date and time to resume the pipeline.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeactivatePipelineOutput'
+        '480':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '481':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+        '482':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '483':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeactivatePipelineInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeletePipeline':
+    post:
+      operationId: DeletePipeline
+      description: '<p>Deletes a pipeline, its pipeline definition, and its run history. AWS Data Pipeline attempts to cancel instances associated with the pipeline that are currently being processed by task runners.</p> <p>Deleting a pipeline cannot be undone. You cannot query or restore a deleted pipeline. To temporarily pause a pipeline instead of deleting it, call <a>SetStatus</a> with the status set to <code>PAUSE</code> on individual components. Components that are paused by <a>SetStatus</a> can be resumed.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '481':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '482':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePipelineInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeObjects':
+    post:
+      operationId: DescribeObjects
+      description: Gets the object definitions for a set of objects associated with the pipeline. Object definitions are composed of a set of fields that define the properties of the object.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeObjectsOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '483':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+      parameters:
+        - name: marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeObjectsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribePipelines':
+    post:
+      operationId: DescribePipelines
+      description: '<p>Retrieves metadata about one or more pipelines. The information retrieved includes the name of the pipeline, the pipeline identifier, its current state, and the user account that owns the pipeline. Using account credentials, you can retrieve metadata about pipelines that you or your IAM users have created. If you are using an IAM user account, you can retrieve metadata about only those pipelines for which you have read permissions.</p> <p>To retrieve the full pipeline definition instead of metadata about the pipeline, call <a>GetPipelineDefinition</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePipelinesOutput'
+        '480':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '481':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+        '482':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '483':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribePipelinesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EvaluateExpression':
+    post:
+      operationId: EvaluateExpression
+      description: 'Task runners call <code>EvaluateExpression</code> to evaluate a string in the context of the specified object. For example, a task runner can evaluate SQL queries stored in Amazon S3.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluateExpressionOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: TaskNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskNotFoundException'
+        '482':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '484':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluateExpressionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetPipelineDefinition':
+    post:
+      operationId: GetPipelineDefinition
+      description: Gets the definition of the specified pipeline. You can call <code>GetPipelineDefinition</code> to retrieve the pipeline definition that you provided using <a>PutPipelineDefinition</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPipelineDefinitionOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '483':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPipelineDefinitionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListPipelines':
+    post:
+      operationId: ListPipelines
+      description: Lists the pipeline identifiers for all active pipelines that you have permission to access.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPipelinesOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPipelinesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PollForTask':
+    post:
+      operationId: PollForTask
+      description: '<p>Task runners call <code>PollForTask</code> to receive a task to perform from AWS Data Pipeline. The task runner specifies which tasks it can perform by setting a value for the <code>workerGroup</code> parameter. The task returned can come from any of the pipelines that match the <code>workerGroup</code> value passed in by the task runner and that was launched using the IAM user credentials specified by the task runner.</p> <p>If tasks are ready in the work queue, <code>PollForTask</code> returns a response immediately. If no tasks are available in the queue, <code>PollForTask</code> uses long-polling and holds on to a poll connection for up to a 90 seconds, during which time the first newly scheduled task is handed to the task runner. To accomodate this, set the socket timeout in your task runner to 90 seconds. The task runner should not call <code>PollForTask</code> again on the same <code>workerGroup</code> until it receives a response, and this can take up to 90 seconds. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PollForTaskOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: TaskNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PollForTaskInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutPipelineDefinition':
+    post:
+      operationId: PutPipelineDefinition
+      description: '<p>Adds tasks, schedules, and preconditions to the specified pipeline. You can use <code>PutPipelineDefinition</code> to populate a new pipeline.</p> <p> <code>PutPipelineDefinition</code> also validates the configuration as it adds it to the pipeline. Changes to the pipeline are saved unless one of the following three validation errors exists in the pipeline. </p> <ol> <li>An object is missing a name or identifier field.</li> <li>A string or reference field is empty.</li> <li>The number of objects in the pipeline exceeds the maximum allowed objects.</li> <li>The pipeline is in a FINISHED state.</li> </ol> <p> Pipeline object definitions are passed to the <code>PutPipelineDefinition</code> action and returned by the <a>GetPipelineDefinition</a> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutPipelineDefinitionOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '483':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutPipelineDefinitionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#QueryObjects':
+    post:
+      operationId: QueryObjects
+      description: Queries the specified pipeline for the names of objects that match the specified set of conditions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryObjectsOutput'
+        '480':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '481':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+        '482':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '483':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: limit
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryObjectsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveTags':
+    post:
+      operationId: RemoveTags
+      description: Removes existing tags from the specified pipeline.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveTagsOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '483':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveTagsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ReportTaskProgress':
+    post:
+      operationId: ReportTaskProgress
+      description: '<p>Task runners call <code>ReportTaskProgress</code> when assigned a task to acknowledge that it has the task. If the web service does not receive this acknowledgement within 2 minutes, it assigns the task in a subsequent <a>PollForTask</a> call. After this initial acknowledgement, the task runner only needs to report progress every 15 minutes to maintain its ownership of the task. You can change this reporting time from 15 minutes by specifying a <code>reportProgressTimeout</code> field in your pipeline.</p> <p>If a task runner does not report its status after 5 minutes, AWS Data Pipeline assumes that the task runner is unable to process the task and reassigns the task in a subsequent response to <a>PollForTask</a>. Task runners should call <code>ReportTaskProgress</code> every 60 seconds.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportTaskProgressOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: TaskNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskNotFoundException'
+        '483':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '484':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportTaskProgressInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ReportTaskRunnerHeartbeat':
+    post:
+      operationId: ReportTaskRunnerHeartbeat
+      description: 'Task runners call <code>ReportTaskRunnerHeartbeat</code> every 15 minutes to indicate that they are operational. If the AWS Data Pipeline Task Runner is launched on a resource managed by AWS Data Pipeline, the web service can use this call to detect when the task runner application has failed and restart a new instance.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportTaskRunnerHeartbeatOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportTaskRunnerHeartbeatInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetStatus':
+    post:
+      operationId: SetStatus
+      description: 'Requests that the status of the specified physical or logical pipeline objects be updated in the specified pipeline. This update might not occur immediately, but is eventually consistent. The status that can be set depends on the type of object (for example, DataNode or Activity). You cannot perform this operation on <code>FINISHED</code> pipelines and attempting to do so returns <code>InvalidRequestException</code>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '481':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+        '482':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '483':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetStatusInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetTaskStatus':
+    post:
+      operationId: SetTaskStatus
+      description: Task runners call <code>SetTaskStatus</code> to notify AWS Data Pipeline that a task is completed and provide information about the final status. A task runner makes this call regardless of whether the task was sucessful. A task runner does not need to call <code>SetTaskStatus</code> for tasks that are canceled by the web service during a call to <a>ReportTaskProgress</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetTaskStatusOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: TaskNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskNotFoundException'
+        '482':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '484':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetTaskStatusInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ValidatePipelineDefinition':
+    post:
+      operationId: ValidatePipelineDefinition
+      description: Validates the specified pipeline definition to ensure that it is well formed and can be run without error.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidatePipelineDefinitionOutput'
+        '480':
+          description: InternalServiceError
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '481':
+          description: InvalidRequestException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: PipelineNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineNotFoundException'
+        '483':
+          description: PipelineDeletedException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineDeletedException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidatePipelineDefinitionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    ActivatePipelineInput:
+      type: object
+      required:
+        - pipelineId
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        parameterValues:
+          $ref: '#/components/schemas/ParameterValueList'
+        startTimestamp:
+          $ref: '#/components/schemas/timestamp'
+      description: Contains the parameters for ActivatePipeline.
+    ActivatePipelineOutput:
+      type: object
+      properties: {}
+      description: Contains the output of ActivatePipeline.
+    AddTagsInput:
+      type: object
+      required:
+        - pipelineId
+        - tags
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        tags:
+          $ref: '#/components/schemas/tagList'
+      description: Contains the parameters for AddTags.
+    AddTagsOutput:
+      type: object
+      properties: {}
+      description: Contains the output of AddTags.
+    CreatePipelineInput:
+      type: object
+      required:
+        - name
+        - uniqueId
+      properties:
+        name:
+          $ref: '#/components/schemas/id'
+        uniqueId:
+          $ref: '#/components/schemas/id'
+        description:
+          $ref: '#/components/schemas/string'
+        tags:
+          $ref: '#/components/schemas/tagList'
+      description: Contains the parameters for CreatePipeline.
+    CreatePipelineOutput:
+      type: object
+      required:
+        - pipelineId
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+      description: Contains the output of CreatePipeline.
+    DeactivatePipelineInput:
+      type: object
+      required:
+        - pipelineId
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        cancelActive:
+          $ref: '#/components/schemas/cancelActive'
+      description: Contains the parameters for DeactivatePipeline.
+    DeactivatePipelineOutput:
+      type: object
+      properties: {}
+      description: Contains the output of DeactivatePipeline.
+    DeletePipelineInput:
+      type: object
+      required:
+        - pipelineId
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+      description: Contains the parameters for DeletePipeline.
+    DescribeObjectsInput:
+      type: object
+      required:
+        - pipelineId
+        - objectIds
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        objectIds:
+          $ref: '#/components/schemas/idList'
+        evaluateExpressions:
+          $ref: '#/components/schemas/boolean'
+        marker:
+          $ref: '#/components/schemas/string'
+      description: Contains the parameters for DescribeObjects.
+    DescribeObjectsOutput:
+      type: object
+      required:
+        - pipelineObjects
+      properties:
+        pipelineObjects:
+          $ref: '#/components/schemas/PipelineObjectList'
+        marker:
+          $ref: '#/components/schemas/string'
+        hasMoreResults:
+          $ref: '#/components/schemas/boolean'
+      description: Contains the output of DescribeObjects.
+    DescribePipelinesInput:
+      type: object
+      required:
+        - pipelineIds
+      properties:
+        pipelineIds:
+          $ref: '#/components/schemas/idList'
+      description: Contains the parameters for DescribePipelines.
+    DescribePipelinesOutput:
+      type: object
+      required:
+        - pipelineDescriptionList
+      properties:
+        pipelineDescriptionList:
+          $ref: '#/components/schemas/PipelineDescriptionList'
+      description: Contains the output of DescribePipelines.
+    EvaluateExpressionInput:
+      type: object
+      required:
+        - pipelineId
+        - objectId
+        - expression
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        objectId:
+          $ref: '#/components/schemas/id'
+        expression:
+          $ref: '#/components/schemas/longString'
+      description: Contains the parameters for EvaluateExpression.
+    EvaluateExpressionOutput:
+      type: object
+      required:
+        - evaluatedExpression
+      properties:
+        evaluatedExpression:
+          $ref: '#/components/schemas/longString'
+      description: Contains the output of EvaluateExpression.
+    Field:
+      type: object
+      required:
+        - key
+      properties:
+        key:
+          $ref: '#/components/schemas/fieldNameString'
+        stringValue:
+          $ref: '#/components/schemas/fieldStringValue'
+        refValue:
+          $ref: '#/components/schemas/fieldNameString'
+      description: A key-value pair that describes a property of a pipeline object. The value is specified as either a string value (<code>StringValue</code>) or a reference to another object (<code>RefValue</code>) but not as both.
+    GetPipelineDefinitionInput:
+      type: object
+      required:
+        - pipelineId
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        version:
+          $ref: '#/components/schemas/string'
+      description: Contains the parameters for GetPipelineDefinition.
+    GetPipelineDefinitionOutput:
+      type: object
+      properties:
+        pipelineObjects:
+          $ref: '#/components/schemas/PipelineObjectList'
+        parameterObjects:
+          $ref: '#/components/schemas/ParameterObjectList'
+        parameterValues:
+          $ref: '#/components/schemas/ParameterValueList'
+      description: Contains the output of GetPipelineDefinition.
+    InstanceIdentity:
+      type: object
+      properties:
+        document:
+          $ref: '#/components/schemas/string'
+        signature:
+          $ref: '#/components/schemas/string'
+      description: '<p><p>Identity information for the EC2 instance that is hosting the task runner. You can get this value by calling a metadata URI from the EC2 instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> Passing in this value proves that your task runner is running on an EC2 instance, and ensures the proper AWS Data Pipeline service charges are applied to your pipeline.</p></p>'
+    InternalServiceError:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: An internal service error occurred.
+    InvalidRequestException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: 'The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven''t exceeded any of the service limits for your account.'
+    ListPipelinesInput:
+      type: object
+      properties:
+        marker:
+          $ref: '#/components/schemas/string'
+      description: Contains the parameters for ListPipelines.
+    ListPipelinesOutput:
+      type: object
+      required:
+        - pipelineIdList
+      properties:
+        pipelineIdList:
+          $ref: '#/components/schemas/pipelineList'
+        marker:
+          $ref: '#/components/schemas/string'
+        hasMoreResults:
+          $ref: '#/components/schemas/boolean'
+      description: Contains the output of ListPipelines.
+    Operator:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/OperatorType'
+        values:
+          $ref: '#/components/schemas/stringList'
+      description: Contains a logical operation for comparing the value of a field with a specified value.
+    OperatorType:
+      type: string
+      enum:
+        - EQ
+        - REF_EQ
+        - LE
+        - GE
+        - BETWEEN
+    ParameterAttribute:
+      type: object
+      required:
+        - key
+        - stringValue
+      properties:
+        key:
+          $ref: '#/components/schemas/attributeNameString'
+        stringValue:
+          $ref: '#/components/schemas/attributeValueString'
+      description: The attributes allowed or specified with a parameter object.
+    ParameterAttributeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParameterAttribute'
+    ParameterObject:
+      type: object
+      required:
+        - id
+        - attributes
+      properties:
+        id:
+          $ref: '#/components/schemas/fieldNameString'
+        attributes:
+          $ref: '#/components/schemas/ParameterAttributeList'
+      description: Contains information about a parameter object.
+    ParameterObjectList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParameterObject'
+    ParameterValue:
+      type: object
+      required:
+        - id
+        - stringValue
+      properties:
+        id:
+          $ref: '#/components/schemas/fieldNameString'
+        stringValue:
+          $ref: '#/components/schemas/fieldStringValue'
+      description: 'A value or list of parameter values. '
+    ParameterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParameterValue'
+    PipelineDeletedException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The specified pipeline has been deleted.
+    PipelineDescription:
+      type: object
+      required:
+        - pipelineId
+        - name
+        - fields
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/id'
+        fields:
+          $ref: '#/components/schemas/fieldList'
+        description:
+          $ref: '#/components/schemas/string'
+        tags:
+          $ref: '#/components/schemas/tagList'
+      description: Contains pipeline metadata.
+    PipelineDescriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PipelineDescription'
+    PipelineIdName:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/id'
+      description: Contains the name and identifier of a pipeline.
+    PipelineNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: The specified pipeline was not found. Verify that you used the correct user and account identifiers.
+    PipelineObject:
+      type: object
+      required:
+        - id
+        - name
+        - fields
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        name:
+          $ref: '#/components/schemas/id'
+        fields:
+          $ref: '#/components/schemas/fieldList'
+      description: 'Contains information about a pipeline object. This can be a logical, physical, or physical attempt pipeline object. The complete set of components of a pipeline defines the pipeline.'
+    PipelineObjectList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PipelineObject'
+    PipelineObjectMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/id'
+          value:
+            $ref: '#/components/schemas/PipelineObject'
+    PollForTaskInput:
+      type: object
+      required:
+        - workerGroup
+      properties:
+        workerGroup:
+          $ref: '#/components/schemas/string'
+        hostname:
+          $ref: '#/components/schemas/id'
+        instanceIdentity:
+          $ref: '#/components/schemas/InstanceIdentity'
+      description: Contains the parameters for PollForTask.
+    PollForTaskOutput:
+      type: object
+      properties:
+        taskObject:
+          $ref: '#/components/schemas/TaskObject'
+      description: Contains the output of PollForTask.
+    PutPipelineDefinitionInput:
+      type: object
+      required:
+        - pipelineId
+        - pipelineObjects
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        pipelineObjects:
+          $ref: '#/components/schemas/PipelineObjectList'
+        parameterObjects:
+          $ref: '#/components/schemas/ParameterObjectList'
+        parameterValues:
+          $ref: '#/components/schemas/ParameterValueList'
+      description: Contains the parameters for PutPipelineDefinition.
+    PutPipelineDefinitionOutput:
+      type: object
+      required:
+        - errored
+      properties:
+        validationErrors:
+          $ref: '#/components/schemas/ValidationErrors'
+        validationWarnings:
+          $ref: '#/components/schemas/ValidationWarnings'
+        errored:
+          $ref: '#/components/schemas/boolean'
+      description: Contains the output of PutPipelineDefinition.
+    Query:
+      type: object
+      properties:
+        selectors:
+          $ref: '#/components/schemas/SelectorList'
+      description: Defines the query to run against an object.
+    QueryObjectsInput:
+      type: object
+      required:
+        - pipelineId
+        - sphere
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        query:
+          $ref: '#/components/schemas/Query'
+        sphere:
+          $ref: '#/components/schemas/string'
+        marker:
+          $ref: '#/components/schemas/string'
+        limit:
+          $ref: '#/components/schemas/int'
+      description: Contains the parameters for QueryObjects.
+    QueryObjectsOutput:
+      type: object
+      properties:
+        ids:
+          $ref: '#/components/schemas/idList'
+        marker:
+          $ref: '#/components/schemas/string'
+        hasMoreResults:
+          $ref: '#/components/schemas/boolean'
+      description: Contains the output of QueryObjects.
+    RemoveTagsInput:
+      type: object
+      required:
+        - pipelineId
+        - tagKeys
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        tagKeys:
+          $ref: '#/components/schemas/stringList'
+      description: Contains the parameters for RemoveTags.
+    RemoveTagsOutput:
+      type: object
+      properties: {}
+      description: Contains the output of RemoveTags.
+    ReportTaskProgressInput:
+      type: object
+      required:
+        - taskId
+      properties:
+        taskId:
+          $ref: '#/components/schemas/taskId'
+        fields:
+          $ref: '#/components/schemas/fieldList'
+      description: Contains the parameters for ReportTaskProgress.
+    ReportTaskProgressOutput:
+      type: object
+      required:
+        - canceled
+      properties:
+        canceled:
+          $ref: '#/components/schemas/boolean'
+      description: Contains the output of ReportTaskProgress.
+    ReportTaskRunnerHeartbeatInput:
+      type: object
+      required:
+        - taskrunnerId
+      properties:
+        taskrunnerId:
+          $ref: '#/components/schemas/id'
+        workerGroup:
+          $ref: '#/components/schemas/string'
+        hostname:
+          $ref: '#/components/schemas/id'
+      description: Contains the parameters for ReportTaskRunnerHeartbeat.
+    ReportTaskRunnerHeartbeatOutput:
+      type: object
+      required:
+        - terminate
+      properties:
+        terminate:
+          $ref: '#/components/schemas/boolean'
+      description: Contains the output of ReportTaskRunnerHeartbeat.
+    Selector:
+      type: object
+      properties:
+        fieldName:
+          $ref: '#/components/schemas/string'
+        operator:
+          $ref: '#/components/schemas/Operator'
+      description: A comparision that is used to determine whether a query should return this object.
+    SelectorList:
+      type: array
+      description: The list of Selectors that define queries on individual fields.
+      items:
+        $ref: '#/components/schemas/Selector'
+    SetStatusInput:
+      type: object
+      required:
+        - pipelineId
+        - objectIds
+        - status
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        objectIds:
+          $ref: '#/components/schemas/idList'
+        status:
+          $ref: '#/components/schemas/string'
+      description: Contains the parameters for SetStatus.
+    SetTaskStatusInput:
+      type: object
+      required:
+        - taskId
+        - taskStatus
+      properties:
+        taskId:
+          $ref: '#/components/schemas/taskId'
+        taskStatus:
+          $ref: '#/components/schemas/TaskStatus'
+        errorId:
+          $ref: '#/components/schemas/string'
+        errorMessage:
+          $ref: '#/components/schemas/errorMessage'
+        errorStackTrace:
+          $ref: '#/components/schemas/string'
+      description: Contains the parameters for SetTaskStatus.
+    SetTaskStatusOutput:
+      type: object
+      properties: {}
+      description: Contains the output of SetTaskStatus.
+    Tag:
+      type: object
+      required:
+        - key
+        - value
+      properties:
+        key:
+          $ref: '#/components/schemas/tagKey'
+        value:
+          $ref: '#/components/schemas/tagValue'
+      description: 'Tags are key/value pairs defined by a user and associated with a pipeline to control access. AWS Data Pipeline allows you to associate ten tags per pipeline. For more information, see <a href="http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.'
+    TaskNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: 'The specified task was not found. '
+    TaskObject:
+      type: object
+      properties:
+        taskId:
+          $ref: '#/components/schemas/taskId'
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        attemptId:
+          $ref: '#/components/schemas/id'
+        objects:
+          $ref: '#/components/schemas/PipelineObjectMap'
+      description: Contains information about a pipeline task that is assigned to a task runner.
+    TaskStatus:
+      type: string
+      enum:
+        - FINISHED
+        - FAILED
+        - 'FALSE'
+    ValidatePipelineDefinitionInput:
+      type: object
+      required:
+        - pipelineId
+        - pipelineObjects
+      properties:
+        pipelineId:
+          $ref: '#/components/schemas/id'
+        pipelineObjects:
+          $ref: '#/components/schemas/PipelineObjectList'
+        parameterObjects:
+          $ref: '#/components/schemas/ParameterObjectList'
+        parameterValues:
+          $ref: '#/components/schemas/ParameterValueList'
+      description: Contains the parameters for ValidatePipelineDefinition.
+    ValidatePipelineDefinitionOutput:
+      type: object
+      required:
+        - errored
+      properties:
+        validationErrors:
+          $ref: '#/components/schemas/ValidationErrors'
+        validationWarnings:
+          $ref: '#/components/schemas/ValidationWarnings'
+        errored:
+          $ref: '#/components/schemas/boolean'
+      description: Contains the output of ValidatePipelineDefinition.
+    ValidationError:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        errors:
+          $ref: '#/components/schemas/validationMessages'
+      description: Defines a validation error. Validation errors prevent pipeline activation. The set of validation errors that can be returned are defined by AWS Data Pipeline.
+    ValidationErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/ValidationError'
+    ValidationWarning:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        warnings:
+          $ref: '#/components/schemas/validationMessages'
+      description: Defines a validation warning. Validation warnings do not prevent pipeline activation. The set of validation warnings that can be returned are defined by AWS Data Pipeline.
+    ValidationWarnings:
+      type: array
+      items:
+        $ref: '#/components/schemas/ValidationWarning'
+    attributeNameString:
+      type: string
+      minLength: 1
+      maxLength: 256
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    attributeValueString:
+      type: string
+      minLength: 0
+      maxLength: 10240
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    boolean:
+      type: boolean
+    cancelActive:
+      type: boolean
+    errorMessage:
+      type: string
+    fieldList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Field'
+    fieldNameString:
+      type: string
+      minLength: 1
+      maxLength: 256
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    fieldStringValue:
+      type: string
+      minLength: 0
+      maxLength: 10240
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    id:
+      type: string
+      minLength: 1
+      maxLength: 1024
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    idList:
+      type: array
+      items:
+        $ref: '#/components/schemas/id'
+    int:
+      type: integer
+    longString:
+      type: string
+      minLength: 0
+      maxLength: 20971520
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    pipelineList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PipelineIdName'
+    string:
+      type: string
+      minLength: 0
+      maxLength: 1024
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    stringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    tagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    tagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 10
+    tagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    taskId:
+      type: string
+      minLength: 1
+      maxLength: 2048
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    timestamp:
+      type: string
+      format: date-time
+    validationMessage:
+      type: string
+      minLength: 0
+      maxLength: 10000
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    validationMessages:
+      type: array
+      items:
+        $ref: '#/components/schemas/validationMessage'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

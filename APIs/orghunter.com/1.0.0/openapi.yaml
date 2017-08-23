@@ -1,0 +1,180 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://data.orghunter.com/'
+info:
+  description: Get the latest IRS data and most up to date charity information for your website or application
+  title: OrgHunter
+  version: 1.0.0
+  x-logo:
+    url: 'http://orghunter.com/sites/all/themes/orghunter/img/logo.jpg'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
+      url: 'https://orghunter.3scale.net/swagger/spec.json'
+      version: '1.2'
+  x-providerName: orghunter.com
+security:
+  - user_key: []
+tags:
+  - description: Charity Financial API Test
+    name: CharityFinancial
+  - description: Charity Premium API Test
+    name: CharityPremium
+  - description: Charity GeoLocation API Test
+    name: GeoLocation
+  - description: Charity NTEE Classification/Categories API Test
+    name: categories
+  - description: Charity Basic API Test
+    name: details
+  - description: Charity Search Summary API Test
+    name: summary
+paths:
+  /v1/categories:
+    post:
+      description: <p>This operation provides a list of categories.</p>
+      operationId: get categories
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get categories!
+      tags:
+        - categories
+  /v1/charitybasic:
+    post:
+      description: <p>This operation detail data.</p>
+      parameters:
+        - description: ein (Employer Identification Number)
+          in: query
+          name: ein
+          x-data-threescale-name: ein
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get details!
+      tags:
+        - details
+  /v1/charityfinancial:
+    post:
+      description: <p>This operation detail data.</p>
+      parameters:
+        - description: ein (Employer Identification Number)
+          in: query
+          name: ein
+          x-data-threescale-name: ein
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get details!
+      tags:
+        - CharityFinancial
+  /v1/charitygeolocation:
+    post:
+      description: <p>This operation detail data.</p>
+      parameters:
+        - description: ein (Employer Identification Number)
+          in: query
+          name: ein
+          x-data-threescale-name: ein
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get details!
+      tags:
+        - GeoLocation
+  /v1/charitypremium:
+    post:
+      description: <p>This operation detail data.</p>
+      parameters:
+        - description: ein (Employer Identification Number)
+          in: query
+          name: ein
+          x-data-threescale-name: ein
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get details!
+      tags:
+        - CharityPremium
+  /v1/charitysearch:
+    post:
+      description: <p>This operation provides summary data.</p>
+      operationId: get summary
+      parameters:
+        - description: Employer Identification Number (EIN)
+          in: query
+          name: ein
+          x-data-threescale-name: ein
+          schema:
+            type: string
+        - description: 'Charity Name or Keyword. Example: humane society or cancer'
+          in: query
+          name: searchTerm
+          x-data-threescale-name: searchTerm
+          schema:
+            type: string
+        - description: 'City Name. Example: Miami'
+          in: query
+          name: city
+          x-data-threescale-name: city
+          schema:
+            type: string
+        - description: State Name - Two letter state abbreviation
+          in: query
+          name: state
+          x-data-threescale-name: state
+          schema:
+            type: string
+        - description: Zipcode Value - 5 digit zipcode value
+          in: query
+          name: zipCode
+          x-data-threescale-name: zipCode
+          schema:
+            type: string
+        - description: Category Value Selected from Categories API
+          in: query
+          name: category
+          x-data-threescale-name: category
+          schema:
+            type: string
+        - description: eligible=1 will return only organizations that are tax deductible and in good standing with the IRS
+          in: query
+          name: eligible
+          x-data-threescale-name: eligible
+          schema:
+            type: string
+        - description: Record Set Start Position
+          in: query
+          name: start
+          x-data-threescale-name: start
+          schema:
+            type: string
+        - description: Records Per Page. Default Value = 20
+          in: query
+          name: rows
+          x-data-threescale-name: rows
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get summary data!
+      tags:
+        - summary
+components:
+  schemas: {}
+  securitySchemes:
+    user_key:
+      description: Your API access key
+      in: query
+      name: user_key
+      type: apiKey

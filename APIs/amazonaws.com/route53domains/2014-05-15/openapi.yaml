@@ -1,0 +1,2255 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://route53domains.amazonaws.com/'
+info:
+  version: '2014-05-15'
+  x-release: v4
+  title: Amazon Route 53 Domains
+  description: Amazon Route 53 API actions let you register domain names and perform related operations.
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: route53domains
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/route53domains-2014-05-15.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/route53domains/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CheckDomainAvailability
+      description: 'This operation checks the availability of one domain name. Note that if the availability status of a domain is pending, you must submit another request to determine the availability of the domain name.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckDomainAvailabilityResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckDomainAvailabilityRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTagsForDomain':
+    post:
+      operationId: DeleteTagsForDomain
+      description: <p>This operation deletes the specified tags for a domain.</p> <p>All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTagsForDomainResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+        '482':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTagsForDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisableDomainAutoRenew':
+    post:
+      operationId: DisableDomainAutoRenew
+      description: This operation disables automatic renewal of domain registration for the specified domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisableDomainAutoRenewResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableDomainAutoRenewRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisableDomainTransferLock':
+    post:
+      operationId: DisableDomainTransferLock
+      description: 'This operation removes the transfer lock on the domain (specifically the <code>clientTransferProhibited</code> status) to allow domain transfers. We recommend you refrain from performing this action unless you intend to transfer the domain to a different registrar. Successful submission returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisableDomainTransferLockResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: DuplicateRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRequest'
+        '482':
+          description: TLDRulesViolation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TLDRulesViolation'
+        '483':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+        '484':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableDomainTransferLockRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EnableDomainAutoRenew':
+    post:
+      operationId: EnableDomainAutoRenew
+      description: '<p>This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires. The cost of renewing your domain registration is billed to your AWS account.</p> <p>The period during which you can renew a domain name varies by TLD. For a list of TLDs and their renewal policies, see <a href="http://wiki.gandi.net/en/domains/renew#renewal_restoration_and_deletion_times">"Renewal, restoration, and deletion times"</a> on the website for our registrar partner, Gandi. Route 53 requires that you renew before the end of the renewal period that is listed on the Gandi website so we can complete processing before the deadline.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnableDomainAutoRenewResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+        '482':
+          description: TLDRulesViolation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TLDRulesViolation'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableDomainAutoRenewRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EnableDomainTransferLock':
+    post:
+      operationId: EnableDomainTransferLock
+      description: 'This operation sets the transfer lock on the domain (specifically the <code>clientTransferProhibited</code> status) to prevent domain transfers. Successful submission returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnableDomainTransferLockResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: DuplicateRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRequest'
+        '482':
+          description: TLDRulesViolation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TLDRulesViolation'
+        '483':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+        '484':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableDomainTransferLockRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetContactReachabilityStatus':
+    post:
+      operationId: GetContactReachabilityStatus
+      description: '<p>For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation returns information about whether the registrant contact has responded.</p> <p>If you want us to resend the email, use the <code>ResendContactReachabilityEmail</code> operation.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContactReachabilityStatusResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+        '482':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetContactReachabilityStatusRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDomainDetail':
+    post:
+      operationId: GetDomainDetail
+      description: This operation returns detailed information about a specified domain that is associated with the current AWS account. Contact information for the domain is also returned as part of the output.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDomainDetailResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDomainDetailRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDomainSuggestions':
+    post:
+      operationId: GetDomainSuggestions
+      description: 'The GetDomainSuggestions operation returns a list of suggested domain names given a string, which can either be a domain name or simply a word or phrase (without spaces).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDomainSuggestionsResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDomainSuggestionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetOperationDetail':
+    post:
+      operationId: GetOperationDetail
+      description: This operation returns the current status of an operation that is not completed.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOperationDetailResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOperationDetailRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListDomains':
+    post:
+      operationId: ListDomains
+      description: This operation returns all the domain names registered with Amazon Route 53 for the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDomainsResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+      parameters:
+        - name: MaxItems
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDomainsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListOperations':
+    post:
+      operationId: ListOperations
+      description: This operation returns the operation IDs of operations that are not yet complete.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOperationsResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+      parameters:
+        - name: MaxItems
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOperationsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForDomain':
+    post:
+      operationId: ListTagsForDomain
+      description: <p>This operation returns all of the tags that are associated with the specified domain.</p> <p>All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForDomainResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+        '482':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RegisterDomain':
+    post:
+      operationId: RegisterDomain
+      description: '<p>This operation registers a domain. Domains are registered by the AWS registrar partner, Gandi. For some top-level domains (TLDs), this operation requires extra parameters.</p> <p>When you register a domain, Amazon Route 53 does the following:</p> <ul> <li> <p>Creates a Amazon Route 53 hosted zone that has the same name as the domain. Amazon Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.</p> </li> <li> <p>Enables autorenew, so your domain registration will renew automatically each year. We''ll notify you in advance of the renewal date so you can choose whether to renew the registration.</p> </li> <li> <p>Optionally enables privacy protection, so WHOIS queries return contact information for our registrar partner, Gandi, instead of the information you entered for registrant, admin, and tech contacts.</p> </li> <li> <p>If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.</p> </li> <li> <p>Charges your AWS account an amount based on the top-level domain. For more information, see <a href="http://aws.amazon.com/route53/pricing/">Amazon Route 53 Pricing</a>.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterDomainResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+        '482':
+          description: DuplicateRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRequest'
+        '483':
+          description: TLDRulesViolation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TLDRulesViolation'
+        '484':
+          description: DomainLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainLimitExceeded'
+        '485':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RenewDomain':
+    post:
+      operationId: RenewDomain
+      description: '<p>This operation renews a domain for the specified number of years. The cost of renewing your domain is billed to your AWS account.</p> <p>We recommend that you renew your domain several weeks before the expiration date. Some TLD registries delete domains before the expiration date if you haven''t renewed far enough in advance. For more information about renewing domain registration, see <a href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html">Renewing Registration for a Domain</a> in the Amazon Route 53 Developer Guide.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenewDomainResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+        '482':
+          description: DuplicateRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRequest'
+        '483':
+          description: TLDRulesViolation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TLDRulesViolation'
+        '484':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenewDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ResendContactReachabilityEmail':
+    post:
+      operationId: ResendContactReachabilityEmail
+      description: 'For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation resends the confirmation email to the current email address for the registrant contact.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResendContactReachabilityEmailResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+        '482':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResendContactReachabilityEmailRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RetrieveDomainAuthCode':
+    post:
+      operationId: RetrieveDomainAuthCode
+      description: 'This operation returns the AuthCode for the domain. To transfer a domain to another registrar, you provide this value to the new registrar.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveDomainAuthCodeResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrieveDomainAuthCodeRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TransferDomain':
+    post:
+      operationId: TransferDomain
+      description: '<p>This operation transfers a domain from another registrar to Amazon Route 53. When the transfer is complete, the domain is registered with the AWS registrar partner, Gandi.</p> <p>For transfer requirements, a detailed procedure, and information about viewing the status of a domain transfer, see <a href="http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html">Transferring Registration for a Domain to Amazon Route 53</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>If the registrar for your domain is also the DNS service provider for the domain, we highly recommend that you consider transferring your DNS service to Amazon Route 53 or to another DNS service provider before you transfer your registration. Some registrars provide free DNS service when you purchase a domain registration. When you transfer the registration, the previous registrar will not renew your domain registration and could end your DNS service at any time.</p> <important> <p>If the registrar for your domain is also the DNS service provider for the domain and you don''t transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable.</p> </important> <p>If the transfer is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the transfer doesn''t complete successfully, the domain registrant will be notified by email.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferDomainResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+        '482':
+          description: DuplicateRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRequest'
+        '483':
+          description: TLDRulesViolation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TLDRulesViolation'
+        '484':
+          description: DomainLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainLimitExceeded'
+        '485':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDomainContact':
+    post:
+      operationId: UpdateDomainContact
+      description: '<p>This operation updates the contact information for a particular domain. Information for at least one contact (registrant, administrator, or technical) must be supplied for update.</p> <p>If the update is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDomainContactResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: DuplicateRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRequest'
+        '482':
+          description: TLDRulesViolation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TLDRulesViolation'
+        '483':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+        '484':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDomainContactRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDomainContactPrivacy':
+    post:
+      operationId: UpdateDomainContactPrivacy
+      description: '<p>This operation updates the specified domain contact''s privacy setting. When the privacy option is enabled, personal information such as postal or email address is hidden from the results of a public WHOIS query. The privacy services are provided by the AWS registrar, Gandi. For more information, see the <a href="http://www.gandi.net/domain/whois/?currency=USD&amp;amp;lang=en">Gandi privacy features</a>.</p> <p>This operation only affects the privacy of the specified contact type (registrant, administrator, or tech). Successful acceptance returns an operation ID that you can use with <a>GetOperationDetail</a> to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDomainContactPrivacyResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: DuplicateRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRequest'
+        '482':
+          description: TLDRulesViolation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TLDRulesViolation'
+        '483':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+        '484':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDomainContactPrivacyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateDomainNameservers':
+    post:
+      operationId: UpdateDomainNameservers
+      description: '<p>This operation replaces the current set of name servers for the domain with the specified set of name servers. If you use Amazon Route 53 as your DNS service, specify the four name servers in the delegation set for the hosted zone for the domain.</p> <p>If successful, this operation returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDomainNameserversResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: DuplicateRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRequest'
+        '482':
+          description: TLDRulesViolation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TLDRulesViolation'
+        '483':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+        '484':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDomainNameserversRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTagsForDomain':
+    post:
+      operationId: UpdateTagsForDomain
+      description: <p>This operation adds or updates tags for a specified domain.</p> <p>All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTagsForDomainResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '481':
+          description: OperationLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationLimitExceeded'
+        '482':
+          description: UnsupportedTLD
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedTLD'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTagsForDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ViewBilling':
+    post:
+      operationId: ViewBilling
+      description: Returns all the domain-related billing records for the current AWS account for a specified period
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewBillingResponse'
+        '480':
+          description: InvalidInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ViewBillingRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AddressLine:
+      type: string
+      maxLength: 255
+    BillingRecord:
+      type: object
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        Operation:
+          $ref: '#/components/schemas/OperationType'
+        InvoiceId:
+          $ref: '#/components/schemas/InvoiceId'
+        BillDate:
+          $ref: '#/components/schemas/Timestamp'
+        Price:
+          $ref: '#/components/schemas/Price'
+      description: Information for one billing record.
+    BillingRecords:
+      type: array
+      items:
+        $ref: '#/components/schemas/BillingRecord'
+    Boolean:
+      type: boolean
+    CheckDomainAvailabilityRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        IdnLangCode:
+          $ref: '#/components/schemas/LangCode'
+      description: The CheckDomainAvailability request contains the following elements.
+    CheckDomainAvailabilityResponse:
+      type: object
+      required:
+        - Availability
+      properties:
+        Availability:
+          $ref: '#/components/schemas/DomainAvailability'
+      description: The CheckDomainAvailability response includes the following elements.
+    City:
+      type: string
+      maxLength: 255
+    ContactDetail:
+      type: object
+      properties:
+        FirstName:
+          $ref: '#/components/schemas/ContactName'
+        LastName:
+          $ref: '#/components/schemas/ContactName'
+        ContactType:
+          $ref: '#/components/schemas/ContactType'
+        OrganizationName:
+          $ref: '#/components/schemas/ContactName'
+        AddressLine1:
+          $ref: '#/components/schemas/AddressLine'
+        AddressLine2:
+          $ref: '#/components/schemas/AddressLine'
+        City:
+          $ref: '#/components/schemas/City'
+        State:
+          $ref: '#/components/schemas/State'
+        CountryCode:
+          $ref: '#/components/schemas/CountryCode'
+        ZipCode:
+          $ref: '#/components/schemas/ZipCode'
+        PhoneNumber:
+          $ref: '#/components/schemas/ContactNumber'
+        Email:
+          $ref: '#/components/schemas/Email'
+        Fax:
+          $ref: '#/components/schemas/ContactNumber'
+        ExtraParams:
+          $ref: '#/components/schemas/ExtraParamList'
+      description: ContactDetail includes the following elements.
+    ContactName:
+      type: string
+      maxLength: 255
+    ContactNumber:
+      type: string
+      maxLength: 30
+    ContactType:
+      type: string
+      enum:
+        - PERSON
+        - COMPANY
+        - ASSOCIATION
+        - PUBLIC_BODY
+        - RESELLER
+    CountryCode:
+      type: string
+      enum:
+        - AD
+        - AE
+        - AF
+        - AG
+        - AI
+        - AL
+        - AM
+        - AN
+        - AO
+        - AQ
+        - AR
+        - AS
+        - AT
+        - AU
+        - AW
+        - AZ
+        - BA
+        - BB
+        - BD
+        - BE
+        - BF
+        - BG
+        - BH
+        - BI
+        - BJ
+        - BL
+        - BM
+        - BN
+        - BO
+        - BR
+        - BS
+        - BT
+        - BW
+        - BY
+        - BZ
+        - CA
+        - CC
+        - CD
+        - CF
+        - CG
+        - CH
+        - CI
+        - CK
+        - CL
+        - CM
+        - CN
+        - CO
+        - CR
+        - CU
+        - CV
+        - CX
+        - CY
+        - CZ
+        - DE
+        - DJ
+        - DK
+        - DM
+        - DO
+        - DZ
+        - EC
+        - EE
+        - EG
+        - ER
+        - ES
+        - ET
+        - FI
+        - FJ
+        - FK
+        - FM
+        - FO
+        - FR
+        - GA
+        - GB
+        - GD
+        - GE
+        - GH
+        - GI
+        - GL
+        - GM
+        - GN
+        - GQ
+        - GR
+        - GT
+        - GU
+        - GW
+        - GY
+        - HK
+        - HN
+        - HR
+        - HT
+        - HU
+        - ID
+        - IE
+        - IL
+        - IM
+        - IN
+        - IQ
+        - IR
+        - IS
+        - IT
+        - JM
+        - JO
+        - JP
+        - KE
+        - KG
+        - KH
+        - KI
+        - KM
+        - KN
+        - KP
+        - KR
+        - KW
+        - KY
+        - KZ
+        - LA
+        - LB
+        - LC
+        - LI
+        - LK
+        - LR
+        - LS
+        - LT
+        - LU
+        - LV
+        - LY
+        - MA
+        - MC
+        - MD
+        - ME
+        - MF
+        - MG
+        - MH
+        - MK
+        - ML
+        - MM
+        - MN
+        - MO
+        - MP
+        - MR
+        - MS
+        - MT
+        - MU
+        - MV
+        - MW
+        - MX
+        - MY
+        - MZ
+        - NA
+        - NC
+        - NE
+        - NG
+        - NI
+        - NL
+        - 'NO'
+        - NP
+        - NR
+        - NU
+        - NZ
+        - OM
+        - PA
+        - PE
+        - PF
+        - PG
+        - PH
+        - PK
+        - PL
+        - PM
+        - PN
+        - PR
+        - PT
+        - PW
+        - PY
+        - QA
+        - RO
+        - RS
+        - RU
+        - RW
+        - SA
+        - SB
+        - SC
+        - SD
+        - SE
+        - SG
+        - SH
+        - SI
+        - SK
+        - SL
+        - SM
+        - SN
+        - SO
+        - SR
+        - ST
+        - SV
+        - SY
+        - SZ
+        - TC
+        - TD
+        - TG
+        - TH
+        - TJ
+        - TK
+        - TL
+        - TM
+        - TN
+        - TO
+        - TR
+        - TT
+        - TV
+        - TW
+        - TZ
+        - UA
+        - UG
+        - US
+        - UY
+        - UZ
+        - VA
+        - VC
+        - VE
+        - VG
+        - VI
+        - VN
+        - VU
+        - WF
+        - WS
+        - YE
+        - YT
+        - ZA
+        - ZM
+        - ZW
+    CurrentExpiryYear:
+      type: integer
+    DNSSec:
+      type: string
+    DeleteTagsForDomainRequest:
+      type: object
+      required:
+        - DomainName
+        - TagsToDelete
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        TagsToDelete:
+          $ref: '#/components/schemas/TagKeyList'
+      description: The DeleteTagsForDomainRequest includes the following elements.
+    DeleteTagsForDomainResponse:
+      type: object
+      properties: {}
+    DisableDomainAutoRenewRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+    DisableDomainAutoRenewResponse:
+      type: object
+      properties: {}
+    DisableDomainTransferLockRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+      description: The DisableDomainTransferLock request includes the following element.
+    DisableDomainTransferLockResponse:
+      type: object
+      required:
+        - OperationId
+      properties:
+        OperationId:
+          $ref: '#/components/schemas/OperationId'
+      description: The DisableDomainTransferLock response includes the following element.
+    DomainAuthCode:
+      type: string
+      maxLength: 1024
+      format: password
+    DomainAvailability:
+      type: string
+      enum:
+        - AVAILABLE
+        - AVAILABLE_RESERVED
+        - AVAILABLE_PREORDER
+        - UNAVAILABLE
+        - UNAVAILABLE_PREMIUM
+        - UNAVAILABLE_RESTRICTED
+        - RESERVED
+        - DONT_KNOW
+    DomainLimitExceeded:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The number of domains has exceeded the allowed threshold for the account.
+    DomainName:
+      type: string
+      pattern: '[a-zA-Z0-9_\-.]*'
+      maxLength: 255
+    DomainStatus:
+      type: string
+    DomainStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DomainStatus'
+    DomainSuggestion:
+      type: object
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        Availability:
+          $ref: '#/components/schemas/String'
+      description: Information about one suggested domain name.
+    DomainSuggestionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DomainSuggestion'
+    DomainSummary:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        AutoRenew:
+          $ref: '#/components/schemas/Boolean'
+        TransferLock:
+          $ref: '#/components/schemas/Boolean'
+        Expiry:
+          $ref: '#/components/schemas/Timestamp'
+      description: Summary information about one domain.
+    DomainSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DomainSummary'
+    DuplicateRequest:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The request is already in progress for the domain.
+    DurationInYears:
+      type: integer
+      minimum: 1
+      maximum: 10
+    Email:
+      type: string
+      maxLength: 254
+    EnableDomainAutoRenewRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+    EnableDomainAutoRenewResponse:
+      type: object
+      properties: {}
+    EnableDomainTransferLockRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+      description: A request to set the transfer lock for the specified domain.
+    EnableDomainTransferLockResponse:
+      type: object
+      required:
+        - OperationId
+      properties:
+        OperationId:
+          $ref: '#/components/schemas/OperationId'
+      description: The EnableDomainTransferLock response includes the following elements.
+    ErrorMessage:
+      type: string
+    ExtraParam:
+      type: object
+      required:
+        - Name
+        - Value
+      properties:
+        Name:
+          $ref: '#/components/schemas/ExtraParamName'
+        Value:
+          $ref: '#/components/schemas/ExtraParamValue'
+      description: ExtraParam includes the following elements.
+    ExtraParamList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExtraParam'
+    ExtraParamName:
+      type: string
+      enum:
+        - DUNS_NUMBER
+        - BRAND_NUMBER
+        - BIRTH_DEPARTMENT
+        - BIRTH_DATE_IN_YYYY_MM_DD
+        - BIRTH_COUNTRY
+        - BIRTH_CITY
+        - DOCUMENT_NUMBER
+        - AU_ID_NUMBER
+        - AU_ID_TYPE
+        - CA_LEGAL_TYPE
+        - CA_BUSINESS_ENTITY_TYPE
+        - ES_IDENTIFICATION
+        - ES_IDENTIFICATION_TYPE
+        - ES_LEGAL_FORM
+        - FI_BUSINESS_NUMBER
+        - FI_ID_NUMBER
+        - IT_PIN
+        - RU_PASSPORT_DATA
+        - SE_ID_NUMBER
+        - SG_ID_NUMBER
+        - VAT_NUMBER
+    ExtraParamValue:
+      type: string
+      maxLength: 2048
+    FIAuthKey:
+      type: string
+    GetContactReachabilityStatusRequest:
+      type: object
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+    GetContactReachabilityStatusResponse:
+      type: object
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+        status:
+          $ref: '#/components/schemas/ReachabilityStatus'
+    GetDomainDetailRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+      description: The GetDomainDetail request includes the following element.
+    GetDomainDetailResponse:
+      type: object
+      required:
+        - DomainName
+        - Nameservers
+        - AdminContact
+        - RegistrantContact
+        - TechContact
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        Nameservers:
+          $ref: '#/components/schemas/NameserverList'
+        AutoRenew:
+          $ref: '#/components/schemas/Boolean'
+        AdminContact:
+          $ref: '#/components/schemas/ContactDetail'
+        RegistrantContact:
+          $ref: '#/components/schemas/ContactDetail'
+        TechContact:
+          $ref: '#/components/schemas/ContactDetail'
+        AdminPrivacy:
+          $ref: '#/components/schemas/Boolean'
+        RegistrantPrivacy:
+          $ref: '#/components/schemas/Boolean'
+        TechPrivacy:
+          $ref: '#/components/schemas/Boolean'
+        RegistrarName:
+          $ref: '#/components/schemas/RegistrarName'
+        WhoIsServer:
+          $ref: '#/components/schemas/RegistrarWhoIsServer'
+        RegistrarUrl:
+          $ref: '#/components/schemas/RegistrarUrl'
+        AbuseContactEmail:
+          $ref: '#/components/schemas/Email'
+        AbuseContactPhone:
+          $ref: '#/components/schemas/ContactNumber'
+        RegistryDomainId:
+          $ref: '#/components/schemas/RegistryDomainId'
+        CreationDate:
+          $ref: '#/components/schemas/Timestamp'
+        UpdatedDate:
+          $ref: '#/components/schemas/Timestamp'
+        ExpirationDate:
+          $ref: '#/components/schemas/Timestamp'
+        Reseller:
+          $ref: '#/components/schemas/Reseller'
+        DnsSec:
+          $ref: '#/components/schemas/DNSSec'
+        StatusList:
+          $ref: '#/components/schemas/DomainStatusList'
+      description: The GetDomainDetail response includes the following elements.
+    GetDomainSuggestionsRequest:
+      type: object
+      required:
+        - DomainName
+        - SuggestionCount
+        - OnlyAvailable
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        SuggestionCount:
+          $ref: '#/components/schemas/Integer'
+        OnlyAvailable:
+          $ref: '#/components/schemas/Boolean'
+    GetDomainSuggestionsResponse:
+      type: object
+      properties:
+        SuggestionsList:
+          $ref: '#/components/schemas/DomainSuggestionsList'
+    GetOperationDetailRequest:
+      type: object
+      required:
+        - OperationId
+      properties:
+        OperationId:
+          $ref: '#/components/schemas/OperationId'
+      description: The <a>GetOperationDetail</a> request includes the following element.
+    GetOperationDetailResponse:
+      type: object
+      properties:
+        OperationId:
+          $ref: '#/components/schemas/OperationId'
+        Status:
+          $ref: '#/components/schemas/OperationStatus'
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        Type:
+          $ref: '#/components/schemas/OperationType'
+        SubmittedDate:
+          $ref: '#/components/schemas/Timestamp'
+      description: The GetOperationDetail response includes the following elements.
+    GlueIp:
+      type: string
+      maxLength: 45
+    GlueIpList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GlueIp'
+    HostName:
+      type: string
+      pattern: '[a-zA-Z0-9_\-.]*'
+      maxLength: 255
+    Integer:
+      type: integer
+    InvalidInput:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'The requested item is not acceptable. For example, for an OperationId it may refer to the ID of an operation that is already completed. For a domain name, it may not be a valid domain name or belong to the requester account.'
+    InvoiceId:
+      type: string
+    LangCode:
+      type: string
+      maxLength: 3
+    ListDomainsRequest:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/PageMarker'
+        MaxItems:
+          $ref: '#/components/schemas/PageMaxItems'
+      description: The ListDomains request includes the following elements.
+    ListDomainsResponse:
+      type: object
+      required:
+        - Domains
+      properties:
+        Domains:
+          $ref: '#/components/schemas/DomainSummaryList'
+        NextPageMarker:
+          $ref: '#/components/schemas/PageMarker'
+      description: The ListDomains response includes the following elements.
+    ListOperationsRequest:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/PageMarker'
+        MaxItems:
+          $ref: '#/components/schemas/PageMaxItems'
+      description: The ListOperations request includes the following elements.
+    ListOperationsResponse:
+      type: object
+      required:
+        - Operations
+      properties:
+        Operations:
+          $ref: '#/components/schemas/OperationSummaryList'
+        NextPageMarker:
+          $ref: '#/components/schemas/PageMarker'
+      description: The ListOperations response includes the following elements.
+    ListTagsForDomainRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+      description: The ListTagsForDomainRequest includes the following elements.
+    ListTagsForDomainResponse:
+      type: object
+      required:
+        - TagList
+      properties:
+        TagList:
+          $ref: '#/components/schemas/TagList'
+      description: The ListTagsForDomain response includes the following elements.
+    Nameserver:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/HostName'
+        GlueIps:
+          $ref: '#/components/schemas/GlueIpList'
+      description: Nameserver includes the following elements.
+    NameserverList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Nameserver'
+    OperationId:
+      type: string
+      maxLength: 255
+    OperationLimitExceeded:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The number of operations or jobs running exceeded the allowed threshold for the account.
+    OperationStatus:
+      type: string
+      enum:
+        - SUBMITTED
+        - IN_PROGRESS
+        - ERROR
+        - SUCCESSFUL
+        - FAILED
+    OperationSummary:
+      type: object
+      required:
+        - OperationId
+        - Status
+        - Type
+        - SubmittedDate
+      properties:
+        OperationId:
+          $ref: '#/components/schemas/OperationId'
+        Status:
+          $ref: '#/components/schemas/OperationStatus'
+        Type:
+          $ref: '#/components/schemas/OperationType'
+        SubmittedDate:
+          $ref: '#/components/schemas/Timestamp'
+      description: OperationSummary includes the following elements.
+    OperationSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OperationSummary'
+    OperationType:
+      type: string
+      enum:
+        - REGISTER_DOMAIN
+        - DELETE_DOMAIN
+        - TRANSFER_IN_DOMAIN
+        - UPDATE_DOMAIN_CONTACT
+        - UPDATE_NAMESERVER
+        - CHANGE_PRIVACY_PROTECTION
+        - DOMAIN_LOCK
+    PageMarker:
+      type: string
+      maxLength: 4096
+    PageMaxItems:
+      type: integer
+      maximum: 100
+    Price:
+      type: number
+      format: double
+    ReachabilityStatus:
+      type: string
+      enum:
+        - PENDING
+        - DONE
+        - EXPIRED
+    RegisterDomainRequest:
+      type: object
+      required:
+        - DomainName
+        - DurationInYears
+        - AdminContact
+        - RegistrantContact
+        - TechContact
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        IdnLangCode:
+          $ref: '#/components/schemas/LangCode'
+        DurationInYears:
+          $ref: '#/components/schemas/DurationInYears'
+        AutoRenew:
+          $ref: '#/components/schemas/Boolean'
+        AdminContact:
+          $ref: '#/components/schemas/ContactDetail'
+        RegistrantContact:
+          $ref: '#/components/schemas/ContactDetail'
+        TechContact:
+          $ref: '#/components/schemas/ContactDetail'
+        PrivacyProtectAdminContact:
+          $ref: '#/components/schemas/Boolean'
+        PrivacyProtectRegistrantContact:
+          $ref: '#/components/schemas/Boolean'
+        PrivacyProtectTechContact:
+          $ref: '#/components/schemas/Boolean'
+      description: The RegisterDomain request includes the following elements.
+    RegisterDomainResponse:
+      type: object
+      required:
+        - OperationId
+      properties:
+        OperationId:
+          $ref: '#/components/schemas/OperationId'
+      description: The RegisterDomain response includes the following element.
+    RegistrarName:
+      type: string
+    RegistrarUrl:
+      type: string
+    RegistrarWhoIsServer:
+      type: string
+    RegistryDomainId:
+      type: string
+    RenewDomainRequest:
+      type: object
+      required:
+        - DomainName
+        - CurrentExpiryYear
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        DurationInYears:
+          $ref: '#/components/schemas/DurationInYears'
+        CurrentExpiryYear:
+          $ref: '#/components/schemas/CurrentExpiryYear'
+      description: A <code>RenewDomain</code> request includes the number of years that you want to renew for and the current expiration year.
+    RenewDomainResponse:
+      type: object
+      required:
+        - OperationId
+      properties:
+        OperationId:
+          $ref: '#/components/schemas/OperationId'
+    Reseller:
+      type: string
+    ResendContactReachabilityEmailRequest:
+      type: object
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+    ResendContactReachabilityEmailResponse:
+      type: object
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+        emailAddress:
+          $ref: '#/components/schemas/Email'
+        isAlreadyVerified:
+          $ref: '#/components/schemas/Boolean'
+    RetrieveDomainAuthCodeRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+      description: 'A request for the authorization code for the specified domain. To transfer a domain to another registrar, you provide this value to the new registrar.'
+    RetrieveDomainAuthCodeResponse:
+      type: object
+      required:
+        - AuthCode
+      properties:
+        AuthCode:
+          $ref: '#/components/schemas/DomainAuthCode'
+      description: The RetrieveDomainAuthCode response includes the following element.
+    State:
+      type: string
+      maxLength: 255
+    String:
+      type: string
+    TLDRulesViolation:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The top-level domain does not support this operation.
+    Tag:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+      description: Each tag includes the following elements.
+    TagKey:
+      type: string
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TagValue:
+      type: string
+    Timestamp:
+      type: string
+      format: date-time
+    TransferDomainRequest:
+      type: object
+      required:
+        - DomainName
+        - DurationInYears
+        - AdminContact
+        - RegistrantContact
+        - TechContact
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        IdnLangCode:
+          $ref: '#/components/schemas/LangCode'
+        DurationInYears:
+          $ref: '#/components/schemas/DurationInYears'
+        Nameservers:
+          $ref: '#/components/schemas/NameserverList'
+        AuthCode:
+          $ref: '#/components/schemas/DomainAuthCode'
+        AutoRenew:
+          $ref: '#/components/schemas/Boolean'
+        AdminContact:
+          $ref: '#/components/schemas/ContactDetail'
+        RegistrantContact:
+          $ref: '#/components/schemas/ContactDetail'
+        TechContact:
+          $ref: '#/components/schemas/ContactDetail'
+        PrivacyProtectAdminContact:
+          $ref: '#/components/schemas/Boolean'
+        PrivacyProtectRegistrantContact:
+          $ref: '#/components/schemas/Boolean'
+        PrivacyProtectTechContact:
+          $ref: '#/components/schemas/Boolean'
+      description: The TransferDomain request includes the following elements.
+    TransferDomainResponse:
+      type: object
+      required:
+        - OperationId
+      properties:
+        OperationId:
+          $ref: '#/components/schemas/OperationId'
+      description: The TranserDomain response includes the following element.
+    UnsupportedTLD:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: Amazon Route 53 does not support this top-level domain.
+    UpdateDomainContactPrivacyRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        AdminPrivacy:
+          $ref: '#/components/schemas/Boolean'
+        RegistrantPrivacy:
+          $ref: '#/components/schemas/Boolean'
+        TechPrivacy:
+          $ref: '#/components/schemas/Boolean'
+      description: The UpdateDomainContactPrivacy request includes the following elements.
+    UpdateDomainContactPrivacyResponse:
+      type: object
+      required:
+        - OperationId
+      properties:
+        OperationId:
+          $ref: '#/components/schemas/OperationId'
+      description: The UpdateDomainContactPrivacy response includes the following element.
+    UpdateDomainContactRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        AdminContact:
+          $ref: '#/components/schemas/ContactDetail'
+        RegistrantContact:
+          $ref: '#/components/schemas/ContactDetail'
+        TechContact:
+          $ref: '#/components/schemas/ContactDetail'
+      description: The UpdateDomainContact request includes the following elements.
+    UpdateDomainContactResponse:
+      type: object
+      required:
+        - OperationId
+      properties:
+        OperationId:
+          $ref: '#/components/schemas/OperationId'
+      description: The UpdateDomainContact response includes the following element.
+    UpdateDomainNameserversRequest:
+      type: object
+      required:
+        - DomainName
+        - Nameservers
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        FIAuthKey:
+          $ref: '#/components/schemas/FIAuthKey'
+        Nameservers:
+          $ref: '#/components/schemas/NameserverList'
+      description: '<p>Replaces the current set of name servers for the domain with the specified set of name servers. If you use Amazon Route 53 as your DNS service, specify the four name servers in the delegation set for the hosted zone for the domain.</p> <p>If successful, this operation returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email. </p>'
+    UpdateDomainNameserversResponse:
+      type: object
+      required:
+        - OperationId
+      properties:
+        OperationId:
+          $ref: '#/components/schemas/OperationId'
+      description: The UpdateDomainNameservers response includes the following element.
+    UpdateTagsForDomainRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          $ref: '#/components/schemas/DomainName'
+        TagsToUpdate:
+          $ref: '#/components/schemas/TagList'
+      description: The UpdateTagsForDomainRequest includes the following elements.
+    UpdateTagsForDomainResponse:
+      type: object
+      properties: {}
+    ViewBillingRequest:
+      type: object
+      properties:
+        Start:
+          $ref: '#/components/schemas/Timestamp'
+        End:
+          $ref: '#/components/schemas/Timestamp'
+        Marker:
+          $ref: '#/components/schemas/PageMarker'
+        MaxItems:
+          $ref: '#/components/schemas/PageMaxItems'
+      description: The ViewBilling request includes the following elements.
+    ViewBillingResponse:
+      type: object
+      properties:
+        NextPageMarker:
+          $ref: '#/components/schemas/PageMarker'
+        BillingRecords:
+          $ref: '#/components/schemas/BillingRecords'
+      description: The ViewBilling response includes the following elements.
+    ZipCode:
+      type: string
+      maxLength: 255
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

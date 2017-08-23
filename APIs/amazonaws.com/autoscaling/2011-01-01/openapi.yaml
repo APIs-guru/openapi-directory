@@ -1,0 +1,3949 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://autoscaling.amazonaws.com/'
+info:
+  version: '2011-01-01'
+  x-release: v4
+  title: Auto Scaling
+  description: '<fullname>Auto Scaling</fullname> <p>Auto Scaling is designed to automatically launch or terminate EC2 instances based on user-defined policies, schedules, and health checks. Use this service in conjunction with the Amazon CloudWatch and Elastic Load Balancing services.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: autoscaling
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/autoscaling-2011-01-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: false
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/autoscaling/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AttachInstances
+      description: '<p>Attaches one or more EC2 instances to the specified Auto Scaling group.</p> <p>When you attach instances, Auto Scaling increases the desired capacity of the group by the number of instances being attached. If the number of instances being attached plus the desired capacity of the group exceeds the maximum size of the group, the operation fails.</p> <p>If there is a Classic Load Balancer attached to your Auto Scaling group, the instances are also registered with the load balancer. If there are target groups attached to your Auto Scaling group, the instances are also registered with the target groups.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-instance-asg.html">Attach EC2 Instances to Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachInstancesQuery'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AttachLoadBalancerTargetGroups':
+    post:
+      operationId: AttachLoadBalancerTargetGroups
+      description: '<p>Attaches one or more target groups to the specified Auto Scaling group.</p> <p>To describe the target groups for an Auto Scaling group, use <a>DescribeLoadBalancerTargetGroups</a>. To detach the target group from the Auto Scaling group, use <a>DetachLoadBalancerTargetGroups</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html">Attach a Load Balancer to Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AttachLoadBalancerTargetGroupsResultType'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachLoadBalancerTargetGroupsType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AttachLoadBalancers':
+    post:
+      operationId: AttachLoadBalancers
+      description: '<p>Attaches one or more Classic Load Balancers to the specified Auto Scaling group.</p> <p>To attach an Application Load Balancer instead, see <a>AttachLoadBalancerTargetGroups</a>.</p> <p>To describe the load balancers for an Auto Scaling group, use <a>DescribeLoadBalancers</a>. To detach the load balancer from the Auto Scaling group, use <a>DetachLoadBalancers</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html">Attach a Load Balancer to Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AttachLoadBalancersResultType'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachLoadBalancersType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CompleteLifecycleAction':
+    post:
+      operationId: CompleteLifecycleAction
+      description: '<p>Completes the lifecycle action for the specified token or instance with the specified result.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</p> </li> <li> <p> <b>If you finish before the timeout period ends, complete the lifecycle action.</b> </p> </li> </ol> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html">Auto Scaling Lifecycle</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CompleteLifecycleActionAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompleteLifecycleActionType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateAutoScalingGroup':
+    post:
+      operationId: CreateAutoScalingGroup
+      description: '<p>Creates an Auto Scaling group with the specified name and attributes.</p> <p>If you exceed your maximum limit of Auto Scaling groups, which by default is 20 per region, the call fails. For information about viewing and updating this limit, see <a>DescribeAccountLimits</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroup.html">Auto Scaling Groups</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: AlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsFault'
+        '481':
+          description: LimitExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '482':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAutoScalingGroupType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateLaunchConfiguration':
+    post:
+      operationId: CreateLaunchConfiguration
+      description: '<p>Creates a launch configuration.</p> <p>If you exceed your maximum limit of launch configurations, which by default is 100 per region, the call fails. For information about viewing and updating this limit, see <a>DescribeAccountLimits</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/LaunchConfiguration.html">Launch Configurations</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: AlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsFault'
+        '481':
+          description: LimitExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '482':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLaunchConfigurationType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateOrUpdateTags':
+    post:
+      operationId: CreateOrUpdateTags
+      description: '<p>Creates or updates tags for the specified Auto Scaling group.</p> <p>When you specify a tag with a key that already exists, the operation overwrites the previous tag definition, and you do not get an error message.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html">Tagging Auto Scaling Groups and Instances</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: LimitExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '481':
+          description: AlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsFault'
+        '482':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateTagsType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteAutoScalingGroup':
+    post:
+      operationId: DeleteAutoScalingGroup
+      description: '<p>Deletes the specified Auto Scaling group.</p> <p>If the group has instances or scaling activities in progress, you must specify the option to force the deletion in order for it to succeed.</p> <p>If the group has policies, deleting the group deletes the policies, the underlying alarm actions, and any alarm that no longer has an associated action.</p> <p>To remove instances from the Auto Scaling group before deleting it, call <a>DetachInstances</a> with the list of instances and the option to decrement the desired capacity so that Auto Scaling does not launch replacement instances.</p> <p>To terminate all instances before deleting the Auto Scaling group, call <a>UpdateAutoScalingGroup</a> and set the minimum size and desired capacity of the Auto Scaling group to zero.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ScalingActivityInProgressFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScalingActivityInProgressFault'
+        '481':
+          description: ResourceInUseFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceInUseFault'
+        '482':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAutoScalingGroupType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLaunchConfiguration':
+    post:
+      operationId: DeleteLaunchConfiguration
+      description: '<p>Deletes the specified launch configuration.</p> <p>The launch configuration must not be attached to an Auto Scaling group. When this call completes, the launch configuration is no longer available for use.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceInUseFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceInUseFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LaunchConfigurationNameType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteLifecycleHook':
+    post:
+      operationId: DeleteLifecycleHook
+      description: '<p>Deletes the specified lifecycle hook.</p> <p>If there are any outstanding lifecycle actions, they are completed first (<code>ABANDON</code> for launching instances, <code>CONTINUE</code> for terminating instances).</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteLifecycleHookAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteLifecycleHookType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteNotificationConfiguration':
+    post:
+      operationId: DeleteNotificationConfiguration
+      description: Deletes the specified notification.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteNotificationConfigurationType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeletePolicy':
+    post:
+      operationId: DeletePolicy
+      description: '<p>Deletes the specified Auto Scaling policy.</p> <p>Deleting a policy deletes the underlying alarm action, but does not delete the alarm, even if it no longer has an associated action.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePolicyType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteScheduledAction':
+    post:
+      operationId: DeleteScheduledAction
+      description: Deletes the specified scheduled action.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteScheduledActionType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteTags':
+    post:
+      operationId: DeleteTags
+      description: Deletes the specified tags.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTagsType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAccountLimits':
+    post:
+      operationId: DescribeAccountLimits
+      description: '<p>Describes the current Auto Scaling resource limits for your AWS account.</p> <p>For information about requesting an increase in these limits, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">AWS Service Limits</a> in the <i>Amazon Web Services General Reference</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeAccountLimitsAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAdjustmentTypes':
+    post:
+      operationId: DescribeAdjustmentTypes
+      description: Describes the policy adjustment types for use with <a>PutScalingPolicy</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeAdjustmentTypesAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAutoScalingGroups':
+    post:
+      operationId: DescribeAutoScalingGroups
+      description: Describes one or more Auto Scaling groups.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AutoScalingGroupsType'
+        '480':
+          description: InvalidNextToken
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutoScalingGroupNamesType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAutoScalingInstances':
+    post:
+      operationId: DescribeAutoScalingInstances
+      description: Describes one or more Auto Scaling instances.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AutoScalingInstancesType'
+        '480':
+          description: InvalidNextToken
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAutoScalingInstancesType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAutoScalingNotificationTypes':
+    post:
+      operationId: DescribeAutoScalingNotificationTypes
+      description: Describes the notification types that are supported by Auto Scaling.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeAutoScalingNotificationTypesAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLaunchConfigurations':
+    post:
+      operationId: DescribeLaunchConfigurations
+      description: Describes one or more launch configurations.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LaunchConfigurationsType'
+        '480':
+          description: InvalidNextToken
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LaunchConfigurationNamesType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLifecycleHookTypes':
+    post:
+      operationId: DescribeLifecycleHookTypes
+      description: Describes the available types of lifecycle hooks.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeLifecycleHookTypesAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLifecycleHooks':
+    post:
+      operationId: DescribeLifecycleHooks
+      description: Describes the lifecycle hooks for the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeLifecycleHooksAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLifecycleHooksType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLoadBalancerTargetGroups':
+    post:
+      operationId: DescribeLoadBalancerTargetGroups
+      description: Describes the target groups for the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeLoadBalancerTargetGroupsResponse'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLoadBalancerTargetGroupsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeLoadBalancers':
+    post:
+      operationId: DescribeLoadBalancers
+      description: '<p>Describes the load balancers for the specified Auto Scaling group.</p> <p>Note that this operation describes only Classic Load Balancers. If you have Application Load Balancers, use <a>DescribeLoadBalancerTargetGroups</a> instead.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeLoadBalancersResponse'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLoadBalancersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeMetricCollectionTypes':
+    post:
+      operationId: DescribeMetricCollectionTypes
+      description: <p>Describes the available CloudWatch metrics for Auto Scaling.</p> <p>Note that the <code>GroupStandbyInstances</code> metric is not returned by default. You must explicitly request this metric when calling <a>EnableMetricsCollection</a>.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeMetricCollectionTypesAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeNotificationConfigurations':
+    post:
+      operationId: DescribeNotificationConfigurations
+      description: Describes the notification actions associated with the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeNotificationConfigurationsAnswer'
+        '480':
+          description: InvalidNextToken
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeNotificationConfigurationsType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribePolicies':
+    post:
+      operationId: DescribePolicies
+      description: Describes the policies for the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PoliciesType'
+        '480':
+          description: InvalidNextToken
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribePoliciesType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScalingActivities':
+    post:
+      operationId: DescribeScalingActivities
+      description: Describes one or more scaling activities for the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ActivitiesType'
+        '480':
+          description: InvalidNextToken
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeScalingActivitiesType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScalingProcessTypes':
+    post:
+      operationId: DescribeScalingProcessTypes
+      description: Describes the scaling process types for use with <a>ResumeProcesses</a> and <a>SuspendProcesses</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProcessesType'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeScheduledActions':
+    post:
+      operationId: DescribeScheduledActions
+      description: 'Describes the actions scheduled for your Auto Scaling group that haven''t run. To describe the actions that have already run, use <a>DescribeScalingActivities</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScheduledActionsType'
+        '480':
+          description: InvalidNextToken
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeScheduledActionsType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTags':
+    post:
+      operationId: DescribeTags
+      description: '<p>Describes the specified tags.</p> <p>You can use filters to limit the results. For example, you can query for the tags for a specific Auto Scaling group. You can specify multiple values for a filter. A tag must match at least one of the specified values for it to be included in the results.</p> <p>You can also specify multiple filters. The result includes information for a particular tag only if it matches all the filters. If there''s no match, no special message is returned.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TagsType'
+        '480':
+          description: InvalidNextToken
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeTagsType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeTerminationPolicyTypes':
+    post:
+      operationId: DescribeTerminationPolicyTypes
+      description: Describes the termination policies supported by Auto Scaling.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeTerminationPolicyTypesAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DetachInstances':
+    post:
+      operationId: DetachInstances
+      description: '<p>Removes one or more instances from the specified Auto Scaling group.</p> <p>After the instances are detached, you can manage them independent of the Auto Scaling group.</p> <p>If you do not specify the option to decrement the desired capacity, Auto Scaling launches instances to replace the ones that are detached.</p> <p>If there is a Classic Load Balancer attached to the Auto Scaling group, the instances are deregistered from the load balancer. If there are target groups attached to the Auto Scaling group, the instances are deregistered from the target groups.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/detach-instance-asg.html">Detach EC2 Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetachInstancesAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachInstancesQuery'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DetachLoadBalancerTargetGroups':
+    post:
+      operationId: DetachLoadBalancerTargetGroups
+      description: Detaches one or more target groups from the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetachLoadBalancerTargetGroupsResultType'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachLoadBalancerTargetGroupsType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DetachLoadBalancers':
+    post:
+      operationId: DetachLoadBalancers
+      description: '<p>Detaches one or more Classic Load Balancers from the specified Auto Scaling group.</p> <p>Note that this operation detaches only Classic Load Balancers. If you have Application Load Balancers, use <a>DetachLoadBalancerTargetGroups</a> instead.</p> <p>When you detach a load balancer, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the load balancer using <a>DescribeLoadBalancers</a>. Note that the instances remain running.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetachLoadBalancersResultType'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachLoadBalancersType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisableMetricsCollection':
+    post:
+      operationId: DisableMetricsCollection
+      description: Disables group metrics for the specified Auto Scaling group.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableMetricsCollectionQuery'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EnableMetricsCollection':
+    post:
+      operationId: EnableMetricsCollection
+      description: 'Enables group metrics for the specified Auto Scaling group. For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html">Monitoring Your Auto Scaling Groups and Instances</a> in the <i>Auto Scaling User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableMetricsCollectionQuery'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EnterStandby':
+    post:
+      operationId: EnterStandby
+      description: '<p>Moves the specified instances into the standby state.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EnterStandbyAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnterStandbyQuery'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ExecutePolicy':
+    post:
+      operationId: ExecutePolicy
+      description: Executes the specified policy.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ScalingActivityInProgressFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScalingActivityInProgressFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecutePolicyType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ExitStandby':
+    post:
+      operationId: ExitStandby
+      description: '<p>Moves the specified instances out of the standby state.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html">Temporarily Removing Instances from Your Auto Scaling Group</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExitStandbyAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExitStandbyQuery'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutLifecycleHook':
+    post:
+      operationId: PutLifecycleHook
+      description: '<p>Creates or updates a lifecycle hook for the specified Auto Scaling Group.</p> <p>A lifecycle hook tells Auto Scaling that you want to perform an action on an instance that is not actively in service; for example, either when the instance launches or before the instance terminates.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p> <b>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</b> </p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action.</p> </li> </ol> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/lifecycle-hooks.html">Auto Scaling Lifecycle Hooks</a> in the <i>Auto Scaling User Guide</i>.</p> <p>If you exceed your maximum limit of lifecycle hooks, which by default is 50 per Auto Scaling group, the call fails. For information about updating this limit, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">AWS Service Limits</a> in the <i>Amazon Web Services General Reference</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PutLifecycleHookAnswer'
+        '480':
+          description: LimitExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutLifecycleHookType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutNotificationConfiguration':
+    post:
+      operationId: PutNotificationConfiguration
+      description: '<p>Configures an Auto Scaling group to send notifications when specified events take place. Subscribers to the specified topic can have messages delivered to an endpoint such as a web server or an email address.</p> <p>This configuration overwrites any existing configuration.</p> <p>For more information see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/ASGettingNotifications.html">Getting SNS Notifications When Your Auto Scaling Group Scales</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: LimitExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutNotificationConfigurationType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutScalingPolicy':
+    post:
+      operationId: PutScalingPolicy
+      description: '<p>Creates or updates a policy for an Auto Scaling group. To update an existing policy, use the existing policy name and set the parameters you want to change. Any existing parameter not changed in an update to an existing policy is not changed in this update request.</p> <p>If you exceed your maximum limit of step adjustments, which by default is 20 per region, the call fails. For information about updating this limit, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">AWS Service Limits</a> in the <i>Amazon Web Services General Reference</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PolicyARNType'
+        '480':
+          description: LimitExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutScalingPolicyType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutScheduledUpdateGroupAction':
+    post:
+      operationId: PutScheduledUpdateGroupAction
+      description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group. When updating a scheduled scaling action, if you leave a parameter unspecified, the corresponding value remains unchanged.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/schedule_time.html">Scheduled Scaling</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: AlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsFault'
+        '481':
+          description: LimitExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '482':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutScheduledUpdateGroupActionType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RecordLifecycleActionHeartbeat':
+    post:
+      operationId: RecordLifecycleActionHeartbeat
+      description: '<p>Records a heartbeat for the lifecycle action associated with the specified token or instance. This extends the timeout by the length of time defined using <a>PutLifecycleHook</a>.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p> <b>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</b> </p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action.</p> </li> </ol> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html">Auto Scaling Lifecycle</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RecordLifecycleActionHeartbeatAnswer'
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordLifecycleActionHeartbeatType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ResumeProcesses':
+    post:
+      operationId: ResumeProcesses
+      description: '<p>Resumes the specified suspended Auto Scaling processes, or all suspended process, for the specified Auto Scaling group.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html">Suspending and Resuming Auto Scaling Processes</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceInUseFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceInUseFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        $ref: '#/components/requestBodies/ScalingProcessQuery'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetDesiredCapacity':
+    post:
+      operationId: SetDesiredCapacity
+      description: '<p>Sets the size of the specified Auto Scaling group.</p> <p>For more information about desired capacity, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/WhatIsAutoScaling.html">What Is Auto Scaling?</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ScalingActivityInProgressFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScalingActivityInProgressFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetDesiredCapacityType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetInstanceHealth':
+    post:
+      operationId: SetInstanceHealth
+      description: '<p>Sets the health status of the specified instance.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html">Health Checks</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetInstanceHealthQuery'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetInstanceProtection':
+    post:
+      operationId: SetInstanceProtection
+      description: '<p>Updates the instance protection settings of the specified instances.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html#instance-protection">Instance Protection</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetInstanceProtectionAnswer'
+        '480':
+          description: LimitExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetInstanceProtectionQuery'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SuspendProcesses':
+    post:
+      operationId: SuspendProcesses
+      description: '<p>Suspends the specified Auto Scaling processes, or all processes, for the specified Auto Scaling group.</p> <p>Note that if you suspend either the <code>Launch</code> or <code>Terminate</code> process types, it can prevent other process types from functioning properly.</p> <p>To resume processes that have been suspended, use <a>ResumeProcesses</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html">Suspending and Resuming Auto Scaling Processes</a> in the <i>Auto Scaling User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceInUseFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceInUseFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        $ref: '#/components/requestBodies/ScalingProcessQuery'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TerminateInstanceInAutoScalingGroup':
+    post:
+      operationId: TerminateInstanceInAutoScalingGroup
+      description: <p>Terminates the specified instance and optionally adjusts the desired group size.</p> <p>This call simply makes a termination request. The instance is not terminated immediately.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ActivityType'
+        '480':
+          description: ScalingActivityInProgressFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScalingActivityInProgressFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminateInstanceInAutoScalingGroupType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateAutoScalingGroup':
+    post:
+      operationId: UpdateAutoScalingGroup
+      description: '<p>Updates the configuration for the specified Auto Scaling group.</p> <p>The new settings take effect on any scaling activities after this call returns. Scaling activities that are currently in progress aren''t affected.</p> <p>To update an Auto Scaling group with a launch configuration with <code>InstanceMonitoring</code> set to <code>false</code>, you must first disable the collection of group metrics. Otherwise, you will get an error. If you have previously enabled the collection of group metrics, you can disable it using <a>DisableMetricsCollection</a>.</p> <p>Note the following:</p> <ul> <li> <p>If you specify a new value for <code>MinSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MinSize</code>.</p> </li> <li> <p>If you specify a new value for <code>MaxSize</code> without specifying a value for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller than the current size of the group, we implicitly call <a>SetDesiredCapacity</a> to set the size of the group to the new value of <code>MaxSize</code>.</p> </li> <li> <p>All other optional parameters are left unchanged if not specified.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ScalingActivityInProgressFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ScalingActivityInProgressFault'
+        '481':
+          description: ResourceContentionFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceContentionFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAutoScalingGroupType'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    Activities:
+      type: array
+      items:
+        $ref: '#/components/schemas/Activity'
+    ActivitiesType:
+      type: object
+      required:
+        - Activities
+      example:
+        Activities:
+          - ActivityId: f9f2d65b-f1f2-43e7-b46d-d86756459699
+            AutoScalingGroupName: my-auto-scaling-group
+            Cause: 'At 2013-08-19T20:53:25Z a user request created an AutoScalingGroup changing the desired capacity from 0 to 1.  At 2013-08-19T20:53:29Z an instance was started in response to a difference between desired and actual capacity, increasing the capacity from 0 to 1.'
+            Description: 'Launching a new EC2 instance: i-4ba0837f'
+            Details: details
+            EndTime: '2013-08-19T20:54:02Z'
+            Progress: 100
+            StartTime: '2013-08-19T20:53:29.930Z'
+            StatusCode: Successful
+      properties:
+        Activities:
+          $ref: '#/components/schemas/Activities'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    Activity:
+      type: object
+      required:
+        - ActivityId
+        - AutoScalingGroupName
+        - Cause
+        - StartTime
+        - StatusCode
+      properties:
+        ActivityId:
+          $ref: '#/components/schemas/XmlString'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        Description:
+          $ref: '#/components/schemas/XmlString'
+        Cause:
+          $ref: '#/components/schemas/XmlStringMaxLen1023'
+        StartTime:
+          $ref: '#/components/schemas/TimestampType'
+        EndTime:
+          $ref: '#/components/schemas/TimestampType'
+        StatusCode:
+          $ref: '#/components/schemas/ScalingActivityStatusCode'
+        StatusMessage:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        Progress:
+          $ref: '#/components/schemas/Progress'
+        Details:
+          $ref: '#/components/schemas/XmlString'
+      description: 'Describes scaling activity, which is a long-running process that represents a change to your Auto Scaling group, such as changing its size or replacing an instance.'
+    ActivityIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlString'
+    ActivityType:
+      type: object
+      properties:
+        Activity:
+          $ref: '#/components/schemas/Activity'
+    AdjustmentType:
+      type: object
+      properties:
+        AdjustmentType:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: '<p>Describes a policy adjustment type.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-scale-based-on-demand.html">Dynamic Scaling</a> in the <i>Auto Scaling User Guide</i>.</p>'
+    AdjustmentTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/AdjustmentType'
+    Alarm:
+      type: object
+      properties:
+        AlarmName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        AlarmARN:
+          $ref: '#/components/schemas/ResourceName'
+      description: Describes an alarm.
+    Alarms:
+      type: array
+      items:
+        $ref: '#/components/schemas/Alarm'
+    AlreadyExistsFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: You already have an Auto Scaling group or launch configuration with this name.
+    AsciiStringMaxLen255:
+      type: string
+      pattern: '[A-Za-z0-9\-_\/]+'
+      minLength: 1
+      maxLength: 255
+    AssociatePublicIpAddress:
+      type: boolean
+    AttachInstancesQuery:
+      type: object
+      required:
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        InstanceIds:
+          - i-93633f9b
+      properties:
+        InstanceIds:
+          $ref: '#/components/schemas/InstanceIds'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+    AttachLoadBalancerTargetGroupsResultType:
+      type: object
+      properties: {}
+    AttachLoadBalancerTargetGroupsType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - TargetGroupARNs
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        TargetGroupARNs:
+          - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        TargetGroupARNs:
+          $ref: '#/components/schemas/TargetGroupARNs'
+    AttachLoadBalancersResultType:
+      type: object
+      properties: {}
+    AttachLoadBalancersType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - LoadBalancerNames
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        LoadBalancerNames:
+          - my-load-balancer
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        LoadBalancerNames:
+          $ref: '#/components/schemas/LoadBalancerNames'
+    AutoScalingGroup:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - MinSize
+        - MaxSize
+        - DesiredCapacity
+        - DefaultCooldown
+        - AvailabilityZones
+        - HealthCheckType
+        - CreatedTime
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        AutoScalingGroupARN:
+          $ref: '#/components/schemas/ResourceName'
+        LaunchConfigurationName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        MinSize:
+          $ref: '#/components/schemas/AutoScalingGroupMinSize'
+        MaxSize:
+          $ref: '#/components/schemas/AutoScalingGroupMaxSize'
+        DesiredCapacity:
+          $ref: '#/components/schemas/AutoScalingGroupDesiredCapacity'
+        DefaultCooldown:
+          $ref: '#/components/schemas/Cooldown'
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZones'
+        LoadBalancerNames:
+          $ref: '#/components/schemas/LoadBalancerNames'
+        TargetGroupARNs:
+          $ref: '#/components/schemas/TargetGroupARNs'
+        HealthCheckType:
+          $ref: '#/components/schemas/XmlStringMaxLen32'
+        HealthCheckGracePeriod:
+          $ref: '#/components/schemas/HealthCheckGracePeriod'
+        Instances:
+          $ref: '#/components/schemas/Instances'
+        CreatedTime:
+          $ref: '#/components/schemas/TimestampType'
+        SuspendedProcesses:
+          $ref: '#/components/schemas/SuspendedProcesses'
+        PlacementGroup:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        VPCZoneIdentifier:
+          $ref: '#/components/schemas/XmlStringMaxLen2047'
+        EnabledMetrics:
+          $ref: '#/components/schemas/EnabledMetrics'
+        Status:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        Tags:
+          $ref: '#/components/schemas/TagDescriptionList'
+        TerminationPolicies:
+          $ref: '#/components/schemas/TerminationPolicies'
+        NewInstancesProtectedFromScaleIn:
+          $ref: '#/components/schemas/InstanceProtected'
+      description: Describes an Auto Scaling group.
+    AutoScalingGroupDesiredCapacity:
+      type: integer
+    AutoScalingGroupMaxSize:
+      type: integer
+    AutoScalingGroupMinSize:
+      type: integer
+    AutoScalingGroupNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceName'
+    AutoScalingGroupNamesType:
+      type: object
+      example:
+        AutoScalingGroupNames:
+          - my-auto-scaling-group
+      properties:
+        AutoScalingGroupNames:
+          $ref: '#/components/schemas/AutoScalingGroupNames'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+    AutoScalingGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutoScalingGroup'
+    AutoScalingGroupsType:
+      type: object
+      required:
+        - AutoScalingGroups
+      example:
+        AutoScalingGroups:
+          - AutoScalingGroupARN: 'arn:aws:autoscaling:us-west-2:123456789012:autoScalingGroup:930d940e-891e-4781-a11a-7b0acd480f03:autoScalingGroupName/my-auto-scaling-group'
+            AutoScalingGroupName: my-auto-scaling-group
+            AvailabilityZones:
+              - us-west-2c
+            CreatedTime: '2013-08-19T20:53:25.584Z'
+            DefaultCooldown: 300
+            DesiredCapacity: 1
+            EnabledMetrics: []
+            HealthCheckGracePeriod: 300
+            HealthCheckType: EC2
+            Instances:
+              - AvailabilityZone: us-west-2c
+                HealthStatus: Healthy
+                InstanceId: i-4ba0837f
+                LaunchConfigurationName: my-launch-config
+                LifecycleState: InService
+                ProtectedFromScaleIn: false
+            LaunchConfigurationName: my-launch-config
+            LoadBalancerNames: []
+            MaxSize: 1
+            MinSize: 0
+            NewInstancesProtectedFromScaleIn: false
+            SuspendedProcesses: []
+            Tags: []
+            TerminationPolicies:
+              - Default
+            VPCZoneIdentifier: subnet-12345678
+      properties:
+        AutoScalingGroups:
+          $ref: '#/components/schemas/AutoScalingGroups'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    AutoScalingInstanceDetails:
+      type: object
+      required:
+        - InstanceId
+        - AutoScalingGroupName
+        - AvailabilityZone
+        - LifecycleState
+        - HealthStatus
+        - LaunchConfigurationName
+        - ProtectedFromScaleIn
+      properties:
+        InstanceId:
+          $ref: '#/components/schemas/XmlStringMaxLen19'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        AvailabilityZone:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        LifecycleState:
+          $ref: '#/components/schemas/XmlStringMaxLen32'
+        HealthStatus:
+          $ref: '#/components/schemas/XmlStringMaxLen32'
+        LaunchConfigurationName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        ProtectedFromScaleIn:
+          $ref: '#/components/schemas/InstanceProtected'
+      description: Describes an EC2 instance associated with an Auto Scaling group.
+    AutoScalingInstances:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutoScalingInstanceDetails'
+    AutoScalingInstancesType:
+      type: object
+      example:
+        AutoScalingInstances:
+          - AutoScalingGroupName: my-auto-scaling-group
+            AvailabilityZone: us-west-2c
+            HealthStatus: HEALTHY
+            InstanceId: i-4ba0837f
+            LaunchConfigurationName: my-launch-config
+            LifecycleState: InService
+            ProtectedFromScaleIn: false
+      properties:
+        AutoScalingInstances:
+          $ref: '#/components/schemas/AutoScalingInstances'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    AutoScalingNotificationTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen255'
+    AvailabilityZones:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen255'
+      minItems: 1
+    BlockDeviceEbsDeleteOnTermination:
+      type: boolean
+    BlockDeviceEbsEncrypted:
+      type: boolean
+    BlockDeviceEbsIops:
+      type: integer
+      minimum: 100
+      maximum: 20000
+    BlockDeviceEbsVolumeSize:
+      type: integer
+      minimum: 1
+      maximum: 16384
+    BlockDeviceEbsVolumeType:
+      type: string
+      minLength: 1
+      maxLength: 255
+    BlockDeviceMapping:
+      type: object
+      required:
+        - DeviceName
+      properties:
+        VirtualName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        DeviceName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        Ebs:
+          $ref: '#/components/schemas/Ebs'
+        NoDevice:
+          $ref: '#/components/schemas/NoDevice'
+      description: Describes a block device mapping.
+    BlockDeviceMappings:
+      type: array
+      items:
+        $ref: '#/components/schemas/BlockDeviceMapping'
+    ClassicLinkVPCSecurityGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen255'
+    CompleteLifecycleActionAnswer:
+      type: object
+      properties: {}
+    CompleteLifecycleActionType:
+      type: object
+      required:
+        - LifecycleHookName
+        - AutoScalingGroupName
+        - LifecycleActionResult
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        LifecycleActionResult: CONTINUE
+        LifecycleActionToken: bcd2f1b8-9a78-44d3-8a7a-4dd07d7cf635
+        LifecycleHookName: my-lifecycle-hook
+      properties:
+        LifecycleHookName:
+          $ref: '#/components/schemas/AsciiStringMaxLen255'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        LifecycleActionToken:
+          $ref: '#/components/schemas/LifecycleActionToken'
+        LifecycleActionResult:
+          $ref: '#/components/schemas/LifecycleActionResult'
+        InstanceId:
+          $ref: '#/components/schemas/XmlStringMaxLen19'
+    Cooldown:
+      type: integer
+    CreateAutoScalingGroupType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - MinSize
+        - MaxSize
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        HealthCheckGracePeriod: 120
+        HealthCheckType: ELB
+        LaunchConfigurationName: my-launch-config
+        MaxSize: 3
+        MinSize: 1
+        TargetGroupARNs:
+          - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+        VPCZoneIdentifier: 'subnet-4176792c, subnet-65ea5f08'
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        LaunchConfigurationName:
+          $ref: '#/components/schemas/ResourceName'
+        InstanceId:
+          $ref: '#/components/schemas/XmlStringMaxLen19'
+        MinSize:
+          $ref: '#/components/schemas/AutoScalingGroupMinSize'
+        MaxSize:
+          $ref: '#/components/schemas/AutoScalingGroupMaxSize'
+        DesiredCapacity:
+          $ref: '#/components/schemas/AutoScalingGroupDesiredCapacity'
+        DefaultCooldown:
+          $ref: '#/components/schemas/Cooldown'
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZones'
+        LoadBalancerNames:
+          $ref: '#/components/schemas/LoadBalancerNames'
+        TargetGroupARNs:
+          $ref: '#/components/schemas/TargetGroupARNs'
+        HealthCheckType:
+          $ref: '#/components/schemas/XmlStringMaxLen32'
+        HealthCheckGracePeriod:
+          $ref: '#/components/schemas/HealthCheckGracePeriod'
+        PlacementGroup:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        VPCZoneIdentifier:
+          $ref: '#/components/schemas/XmlStringMaxLen2047'
+        TerminationPolicies:
+          $ref: '#/components/schemas/TerminationPolicies'
+        NewInstancesProtectedFromScaleIn:
+          $ref: '#/components/schemas/InstanceProtected'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+    CreateLaunchConfigurationType:
+      type: object
+      required:
+        - LaunchConfigurationName
+      example:
+        IamInstanceProfile: my-iam-role
+        ImageId: ami-12345678
+        InstanceType: m3.medium
+        LaunchConfigurationName: my-launch-config
+        SecurityGroups:
+          - sg-eb2af88e
+      properties:
+        LaunchConfigurationName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        ImageId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        KeyName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        SecurityGroups:
+          $ref: '#/components/schemas/SecurityGroups'
+        ClassicLinkVPCId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        ClassicLinkVPCSecurityGroups:
+          $ref: '#/components/schemas/ClassicLinkVPCSecurityGroups'
+        UserData:
+          $ref: '#/components/schemas/XmlStringUserData'
+        InstanceId:
+          $ref: '#/components/schemas/XmlStringMaxLen19'
+        InstanceType:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        KernelId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        RamdiskId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        BlockDeviceMappings:
+          $ref: '#/components/schemas/BlockDeviceMappings'
+        InstanceMonitoring:
+          $ref: '#/components/schemas/InstanceMonitoring'
+        SpotPrice:
+          $ref: '#/components/schemas/SpotPrice'
+        IamInstanceProfile:
+          $ref: '#/components/schemas/XmlStringMaxLen1600'
+        EbsOptimized:
+          $ref: '#/components/schemas/EbsOptimized'
+        AssociatePublicIpAddress:
+          $ref: '#/components/schemas/AssociatePublicIpAddress'
+        PlacementTenancy:
+          $ref: '#/components/schemas/XmlStringMaxLen64'
+    CreateOrUpdateTagsType:
+      type: object
+      required:
+        - Tags
+      example:
+        Tags:
+          - Key: Role
+            PropagateAtLaunch: true
+            ResourceId: my-auto-scaling-group
+            ResourceType: auto-scaling-group
+            Value: WebServer
+          - Key: Dept
+            PropagateAtLaunch: true
+            ResourceId: my-auto-scaling-group
+            ResourceType: auto-scaling-group
+            Value: Research
+      properties:
+        Tags:
+          $ref: '#/components/schemas/Tags'
+    DeleteAutoScalingGroupType:
+      type: object
+      required:
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        ForceDelete: true
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        ForceDelete:
+          $ref: '#/components/schemas/ForceDelete'
+    DeleteLifecycleHookAnswer:
+      type: object
+      properties: {}
+    DeleteLifecycleHookType:
+      type: object
+      required:
+        - LifecycleHookName
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        LifecycleHookName: my-lifecycle-hook
+      properties:
+        LifecycleHookName:
+          $ref: '#/components/schemas/AsciiStringMaxLen255'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+    DeleteNotificationConfigurationType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - TopicARN
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        TopicARN: 'arn:aws:sns:us-west-2:123456789012:my-sns-topic'
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        TopicARN:
+          $ref: '#/components/schemas/ResourceName'
+    DeletePolicyType:
+      type: object
+      required:
+        - PolicyName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        PolicyName: ScaleIn
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        PolicyName:
+          $ref: '#/components/schemas/ResourceName'
+    DeleteScheduledActionType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - ScheduledActionName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        ScheduledActionName: my-scheduled-action
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        ScheduledActionName:
+          $ref: '#/components/schemas/ResourceName'
+    DeleteTagsType:
+      type: object
+      required:
+        - Tags
+      example:
+        Tags:
+          - Key: Dept
+            ResourceId: my-auto-scaling-group
+            ResourceType: auto-scaling-group
+            Value: Research
+      properties:
+        Tags:
+          $ref: '#/components/schemas/Tags'
+    DescribeAccountLimitsAnswer:
+      type: object
+      example:
+        MaxNumberOfAutoScalingGroups: 20
+        MaxNumberOfLaunchConfigurations: 100
+        NumberOfAutoScalingGroups: 3
+        NumberOfLaunchConfigurations: 5
+      properties:
+        MaxNumberOfAutoScalingGroups:
+          $ref: '#/components/schemas/MaxNumberOfAutoScalingGroups'
+        MaxNumberOfLaunchConfigurations:
+          $ref: '#/components/schemas/MaxNumberOfLaunchConfigurations'
+        NumberOfAutoScalingGroups:
+          $ref: '#/components/schemas/NumberOfAutoScalingGroups'
+        NumberOfLaunchConfigurations:
+          $ref: '#/components/schemas/NumberOfLaunchConfigurations'
+    DescribeAdjustmentTypesAnswer:
+      type: object
+      example:
+        AdjustmentTypes:
+          - AdjustmentType: ChangeInCapacity
+          - AdjustmentType: ExactCapcity
+          - AdjustmentType: PercentChangeInCapacity
+      properties:
+        AdjustmentTypes:
+          $ref: '#/components/schemas/AdjustmentTypes'
+    DescribeAutoScalingInstancesType:
+      type: object
+      example:
+        InstanceIds:
+          - i-4ba0837f
+      properties:
+        InstanceIds:
+          $ref: '#/components/schemas/InstanceIds'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    DescribeAutoScalingNotificationTypesAnswer:
+      type: object
+      example:
+        AutoScalingNotificationTypes:
+          - 'autoscaling:EC2_INSTANCE_LAUNCH'
+          - 'autoscaling:EC2_INSTANCE_LAUNCH_ERROR'
+          - 'autoscaling:EC2_INSTANCE_TERMINATE'
+          - 'autoscaling:EC2_INSTANCE_TERMINATE_ERROR'
+          - 'autoscaling:TEST_NOTIFICATION'
+      properties:
+        AutoScalingNotificationTypes:
+          $ref: '#/components/schemas/AutoScalingNotificationTypes'
+    DescribeLifecycleHookTypesAnswer:
+      type: object
+      example:
+        LifecycleHookTypes:
+          - 'autoscaling:EC2_INSTANCE_LAUNCHING'
+          - 'autoscaling:EC2_INSTANCE_TERMINATING'
+      properties:
+        LifecycleHookTypes:
+          $ref: '#/components/schemas/AutoScalingNotificationTypes'
+    DescribeLifecycleHooksAnswer:
+      type: object
+      example:
+        LifecycleHooks:
+          - AutoScalingGroupName: my-auto-scaling-group
+            DefaultResult: ABANDON
+            GlobalTimeout: 172800
+            HeartbeatTimeout: 3600
+            LifecycleHookName: my-lifecycle-hook
+            LifecycleTransition: 'autoscaling:EC2_INSTANCE_LAUNCHING'
+            NotificationTargetARN: 'arn:aws:sns:us-west-2:123456789012:my-sns-topic'
+            RoleARN: 'arn:aws:iam::123456789012:role/my-auto-scaling-role'
+      properties:
+        LifecycleHooks:
+          $ref: '#/components/schemas/LifecycleHooks'
+    DescribeLifecycleHooksType:
+      type: object
+      required:
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        LifecycleHookNames:
+          $ref: '#/components/schemas/LifecycleHookNames'
+    DescribeLoadBalancerTargetGroupsRequest:
+      type: object
+      required:
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+    DescribeLoadBalancerTargetGroupsResponse:
+      type: object
+      example:
+        LoadBalancerTargetGroups:
+          - LoadBalancerTargetGroupARN: 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+            State: Added
+      properties:
+        LoadBalancerTargetGroups:
+          $ref: '#/components/schemas/LoadBalancerTargetGroupStates'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    DescribeLoadBalancersRequest:
+      type: object
+      required:
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+    DescribeLoadBalancersResponse:
+      type: object
+      example:
+        LoadBalancers:
+          - LoadBalancerName: my-load-balancer
+            State: Added
+      properties:
+        LoadBalancers:
+          $ref: '#/components/schemas/LoadBalancerStates'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    DescribeMetricCollectionTypesAnswer:
+      type: object
+      example:
+        Granularities:
+          - Granularity: 1Minute
+        Metrics:
+          - Metric: GroupMinSize
+          - Metric: GroupMaxSize
+          - Metric: GroupDesiredCapacity
+          - Metric: GroupInServiceInstances
+          - Metric: GroupPendingInstances
+          - Metric: GroupTerminatingInstances
+          - Metric: GroupStandbyInstances
+          - Metric: GroupTotalInstances
+      properties:
+        Metrics:
+          $ref: '#/components/schemas/MetricCollectionTypes'
+        Granularities:
+          $ref: '#/components/schemas/MetricGranularityTypes'
+    DescribeNotificationConfigurationsAnswer:
+      type: object
+      required:
+        - NotificationConfigurations
+      example:
+        NotificationConfigurations:
+          - AutoScalingGroupName: my-auto-scaling-group
+            NotificationType: 'autoscaling:TEST_NOTIFICATION'
+            TopicARN: 'arn:aws:sns:us-west-2:123456789012:my-sns-topic-2'
+          - AutoScalingGroupName: my-auto-scaling-group
+            NotificationType: 'autoscaling:TEST_NOTIFICATION'
+            TopicARN: 'arn:aws:sns:us-west-2:123456789012:my-sns-topic'
+      properties:
+        NotificationConfigurations:
+          $ref: '#/components/schemas/NotificationConfigurations'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    DescribeNotificationConfigurationsType:
+      type: object
+      example:
+        AutoScalingGroupNames:
+          - my-auto-scaling-group
+      properties:
+        AutoScalingGroupNames:
+          $ref: '#/components/schemas/AutoScalingGroupNames'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+    DescribePoliciesType:
+      type: object
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        PolicyNames:
+          $ref: '#/components/schemas/PolicyNames'
+        PolicyTypes:
+          $ref: '#/components/schemas/PolicyTypes'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+    DescribeScalingActivitiesType:
+      type: object
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+      properties:
+        ActivityIds:
+          $ref: '#/components/schemas/ActivityIds'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    DescribeScheduledActionsType:
+      type: object
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        ScheduledActionNames:
+          $ref: '#/components/schemas/ScheduledActionNames'
+        StartTime:
+          $ref: '#/components/schemas/TimestampType'
+        EndTime:
+          $ref: '#/components/schemas/TimestampType'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+    DescribeTagsType:
+      type: object
+      example:
+        Filters:
+          - Name: auto-scaling-group
+            Values:
+              - my-auto-scaling-group
+      properties:
+        Filters:
+          $ref: '#/components/schemas/Filters'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+    DescribeTerminationPolicyTypesAnswer:
+      type: object
+      example:
+        TerminationPolicyTypes:
+          - ClosestToNextInstanceHour
+          - Default
+          - NewestInstance
+          - OldestInstance
+          - OldestLaunchConfiguration
+      properties:
+        TerminationPolicyTypes:
+          $ref: '#/components/schemas/TerminationPolicies'
+    DetachInstancesAnswer:
+      type: object
+      example:
+        Activities:
+          - ActivityId: 5091cb52-547a-47ce-a236-c9ccbc2cb2c9
+            AutoScalingGroupName: my-auto-scaling-group
+            Cause: 'At 2015-04-12T15:02:16Z instance i-93633f9b was detached in response to a user request, shrinking the capacity from 2 to 1.'
+            Description: 'Detaching EC2 instance: i-93633f9b'
+            Details: details
+            Progress: 50
+            StartTime: '2015-04-12T15:02:16.179Z'
+            StatusCode: InProgress
+      properties:
+        Activities:
+          $ref: '#/components/schemas/Activities'
+    DetachInstancesQuery:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - ShouldDecrementDesiredCapacity
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        InstanceIds:
+          - i-93633f9b
+        ShouldDecrementDesiredCapacity: true
+      properties:
+        InstanceIds:
+          $ref: '#/components/schemas/InstanceIds'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        ShouldDecrementDesiredCapacity:
+          $ref: '#/components/schemas/ShouldDecrementDesiredCapacity'
+    DetachLoadBalancerTargetGroupsResultType:
+      type: object
+      properties: {}
+    DetachLoadBalancerTargetGroupsType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - TargetGroupARNs
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        TargetGroupARNs:
+          - 'arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067'
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        TargetGroupARNs:
+          $ref: '#/components/schemas/TargetGroupARNs'
+    DetachLoadBalancersResultType:
+      type: object
+      properties: {}
+    DetachLoadBalancersType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - LoadBalancerNames
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        LoadBalancerNames:
+          - my-load-balancer
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        LoadBalancerNames:
+          $ref: '#/components/schemas/LoadBalancerNames'
+    DisableMetricsCollectionQuery:
+      type: object
+      required:
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        Metrics:
+          - GroupDesiredCapacity
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        Metrics:
+          $ref: '#/components/schemas/Metrics'
+    Ebs:
+      type: object
+      properties:
+        SnapshotId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        VolumeSize:
+          $ref: '#/components/schemas/BlockDeviceEbsVolumeSize'
+        VolumeType:
+          $ref: '#/components/schemas/BlockDeviceEbsVolumeType'
+        DeleteOnTermination:
+          $ref: '#/components/schemas/BlockDeviceEbsDeleteOnTermination'
+        Iops:
+          $ref: '#/components/schemas/BlockDeviceEbsIops'
+        Encrypted:
+          $ref: '#/components/schemas/BlockDeviceEbsEncrypted'
+      description: Describes an Amazon EBS volume.
+    EbsOptimized:
+      type: boolean
+    EnableMetricsCollectionQuery:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - Granularity
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        Granularity: 1Minute
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        Metrics:
+          $ref: '#/components/schemas/Metrics'
+        Granularity:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+    EnabledMetric:
+      type: object
+      properties:
+        Metric:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        Granularity:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: Describes an enabled metric.
+    EnabledMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnabledMetric'
+    EnterStandbyAnswer:
+      type: object
+      example:
+        Activities:
+          - ActivityId: ffa056b4-6ed3-41ba-ae7c-249dfae6eba1
+            AutoScalingGroupName: my-auto-scaling-group
+            Cause: 'At 2015-04-12T15:10:23Z instance i-93633f9b was moved to standby in response to a user request, shrinking the capacity from 2 to 1.'
+            Description: 'Moving EC2 instance to Standby: i-93633f9b'
+            Details: details
+            Progress: 50
+            StartTime: '2015-04-12T15:10:23.640Z'
+            StatusCode: InProgress
+      properties:
+        Activities:
+          $ref: '#/components/schemas/Activities'
+    EnterStandbyQuery:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - ShouldDecrementDesiredCapacity
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        InstanceIds:
+          - i-93633f9b
+        ShouldDecrementDesiredCapacity: true
+      properties:
+        InstanceIds:
+          $ref: '#/components/schemas/InstanceIds'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        ShouldDecrementDesiredCapacity:
+          $ref: '#/components/schemas/ShouldDecrementDesiredCapacity'
+    EstimatedInstanceWarmup:
+      type: integer
+    ExecutePolicyType:
+      type: object
+      required:
+        - PolicyName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        HonorCooldown: true
+        PolicyName: ScaleIn
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        PolicyName:
+          $ref: '#/components/schemas/ResourceName'
+        HonorCooldown:
+          $ref: '#/components/schemas/HonorCooldown'
+        MetricValue:
+          $ref: '#/components/schemas/MetricScale'
+        BreachThreshold:
+          $ref: '#/components/schemas/MetricScale'
+    ExitStandbyAnswer:
+      type: object
+      example:
+        Activities:
+          - ActivityId: 142928e1-a2dc-453a-9b24-b85ad6735928
+            AutoScalingGroupName: my-auto-scaling-group
+            Cause: 'At 2015-04-12T15:14:29Z instance i-93633f9b was moved out of standby in response to a user request, increasing the capacity from 1 to 2.'
+            Description: 'Moving EC2 instance out of Standby: i-93633f9b'
+            Details: details
+            Progress: 30
+            StartTime: '2015-04-12T15:14:29.886Z'
+            StatusCode: PreInService
+      properties:
+        Activities:
+          $ref: '#/components/schemas/Activities'
+    ExitStandbyQuery:
+      type: object
+      required:
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        InstanceIds:
+          - i-93633f9b
+      properties:
+        InstanceIds:
+          $ref: '#/components/schemas/InstanceIds'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+    Filter:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/XmlString'
+        Values:
+          $ref: '#/components/schemas/Values'
+      description: Describes a filter.
+    Filters:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+    ForceDelete:
+      type: boolean
+    GlobalTimeout:
+      type: integer
+    HealthCheckGracePeriod:
+      type: integer
+    HeartbeatTimeout:
+      type: integer
+    HonorCooldown:
+      type: boolean
+    Instance:
+      type: object
+      required:
+        - InstanceId
+        - AvailabilityZone
+        - LifecycleState
+        - HealthStatus
+        - LaunchConfigurationName
+        - ProtectedFromScaleIn
+      properties:
+        InstanceId:
+          $ref: '#/components/schemas/XmlStringMaxLen19'
+        AvailabilityZone:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        LifecycleState:
+          $ref: '#/components/schemas/LifecycleState'
+        HealthStatus:
+          $ref: '#/components/schemas/XmlStringMaxLen32'
+        LaunchConfigurationName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        ProtectedFromScaleIn:
+          $ref: '#/components/schemas/InstanceProtected'
+      description: Describes an EC2 instance.
+    InstanceIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen19'
+    InstanceMonitoring:
+      type: object
+      properties:
+        Enabled:
+          $ref: '#/components/schemas/MonitoringEnabled'
+      description: Describes whether detailed monitoring is enabled for the Auto Scaling instances.
+    InstanceProtected:
+      type: boolean
+    Instances:
+      type: array
+      items:
+        $ref: '#/components/schemas/Instance'
+    InvalidNextToken:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: The <code>NextToken</code> value is not valid.
+    LaunchConfiguration:
+      type: object
+      required:
+        - LaunchConfigurationName
+        - ImageId
+        - InstanceType
+        - CreatedTime
+      properties:
+        LaunchConfigurationName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        LaunchConfigurationARN:
+          $ref: '#/components/schemas/ResourceName'
+        ImageId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        KeyName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        SecurityGroups:
+          $ref: '#/components/schemas/SecurityGroups'
+        ClassicLinkVPCId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        ClassicLinkVPCSecurityGroups:
+          $ref: '#/components/schemas/ClassicLinkVPCSecurityGroups'
+        UserData:
+          $ref: '#/components/schemas/XmlStringUserData'
+        InstanceType:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        KernelId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        RamdiskId:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        BlockDeviceMappings:
+          $ref: '#/components/schemas/BlockDeviceMappings'
+        InstanceMonitoring:
+          $ref: '#/components/schemas/InstanceMonitoring'
+        SpotPrice:
+          $ref: '#/components/schemas/SpotPrice'
+        IamInstanceProfile:
+          $ref: '#/components/schemas/XmlStringMaxLen1600'
+        CreatedTime:
+          $ref: '#/components/schemas/TimestampType'
+        EbsOptimized:
+          $ref: '#/components/schemas/EbsOptimized'
+        AssociatePublicIpAddress:
+          $ref: '#/components/schemas/AssociatePublicIpAddress'
+        PlacementTenancy:
+          $ref: '#/components/schemas/XmlStringMaxLen64'
+      description: Describes a launch configuration.
+    LaunchConfigurationNameType:
+      type: object
+      required:
+        - LaunchConfigurationName
+      example:
+        LaunchConfigurationName: my-launch-config
+      properties:
+        LaunchConfigurationName:
+          $ref: '#/components/schemas/ResourceName'
+    LaunchConfigurationNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceName'
+    LaunchConfigurationNamesType:
+      type: object
+      example:
+        LaunchConfigurationNames:
+          - my-launch-config
+      properties:
+        LaunchConfigurationNames:
+          $ref: '#/components/schemas/LaunchConfigurationNames'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+    LaunchConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/LaunchConfiguration'
+    LaunchConfigurationsType:
+      type: object
+      required:
+        - LaunchConfigurations
+      example:
+        LaunchConfigurations:
+          - AssociatePublicIpAddress: true
+            BlockDeviceMappings: []
+            CreatedTime: '2014-05-07T17:39:28.599Z'
+            EbsOptimized: false
+            ImageId: ami-043a5034
+            InstanceMonitoring:
+              Enabled: true
+            InstanceType: t1.micro
+            LaunchConfigurationARN: 'arn:aws:autoscaling:us-west-2:123456789012:launchConfiguration:98d3b196-4cf9-4e88-8ca1-8547c24ced8b:launchConfigurationName/my-launch-config'
+            LaunchConfigurationName: my-launch-config
+            SecurityGroups:
+              - sg-67ef0308
+      properties:
+        LaunchConfigurations:
+          $ref: '#/components/schemas/LaunchConfigurations'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    LifecycleActionResult:
+      type: string
+    LifecycleActionToken:
+      type: string
+      minLength: 36
+      maxLength: 36
+    LifecycleHook:
+      type: object
+      properties:
+        LifecycleHookName:
+          $ref: '#/components/schemas/AsciiStringMaxLen255'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        LifecycleTransition:
+          $ref: '#/components/schemas/LifecycleTransition'
+        NotificationTargetARN:
+          $ref: '#/components/schemas/ResourceName'
+        RoleARN:
+          $ref: '#/components/schemas/ResourceName'
+        NotificationMetadata:
+          $ref: '#/components/schemas/XmlStringMaxLen1023'
+        HeartbeatTimeout:
+          $ref: '#/components/schemas/HeartbeatTimeout'
+        GlobalTimeout:
+          $ref: '#/components/schemas/GlobalTimeout'
+        DefaultResult:
+          $ref: '#/components/schemas/LifecycleActionResult'
+      description: '<p>Describes a lifecycle hook, which tells Auto Scaling that you want to perform an action when an instance launches or terminates. When you have a lifecycle hook in place, the Auto Scaling group will either:</p> <ul> <li> <p>Pause the instance after it launches, but before it is put into service</p> </li> <li> <p>Pause the instance as it terminates, but before it is fully terminated</p> </li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html">Auto Scaling Lifecycle</a> in the <i>Auto Scaling User Guide</i>.</p>'
+    LifecycleHookNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/AsciiStringMaxLen255'
+    LifecycleHooks:
+      type: array
+      items:
+        $ref: '#/components/schemas/LifecycleHook'
+    LifecycleState:
+      type: string
+      enum:
+        - Pending
+        - 'Pending:Wait'
+        - 'Pending:Proceed'
+        - Quarantined
+        - InService
+        - Terminating
+        - 'Terminating:Wait'
+        - 'Terminating:Proceed'
+        - Terminated
+        - Detaching
+        - Detached
+        - EnteringStandby
+        - Standby
+    LifecycleTransition:
+      type: string
+    LimitExceededFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: 'You have already reached a limit for your Auto Scaling resources (for example, groups, launch configurations, or lifecycle hooks). For more information, see <a>DescribeAccountLimits</a>.'
+    LoadBalancerNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen255'
+    LoadBalancerState:
+      type: object
+      properties:
+        LoadBalancerName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        State:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: '<p>Describes the state of a Classic Load Balancer.</p> <p>If you specify a load balancer when creating the Auto Scaling group, the state of the load balancer is <code>InService</code>.</p> <p>If you attach a load balancer to an existing Auto Scaling group, the initial state is <code>Adding</code>. The state transitions to <code>Added</code> after all instances in the group are registered with the load balancer. If ELB health checks are enabled for the load balancer, the state transitions to <code>InService</code> after at least one instance in the group passes the health check. If EC2 health checks are enabled instead, the load balancer remains in the <code>Added</code> state.</p>'
+    LoadBalancerStates:
+      type: array
+      items:
+        $ref: '#/components/schemas/LoadBalancerState'
+    LoadBalancerTargetGroupState:
+      type: object
+      properties:
+        LoadBalancerTargetGroupARN:
+          $ref: '#/components/schemas/XmlStringMaxLen511'
+        State:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: '<p>Describes the state of a target group.</p> <p>If you attach a target group to an existing Auto Scaling group, the initial state is <code>Adding</code>. The state transitions to <code>Added</code> after all Auto Scaling instances are registered with the target group. If ELB health checks are enabled, the state transitions to <code>InService</code> after at least one Auto Scaling instance passes the health check. If EC2 health checks are enabled instead, the target group remains in the <code>Added</code> state.</p>'
+    LoadBalancerTargetGroupStates:
+      type: array
+      items:
+        $ref: '#/components/schemas/LoadBalancerTargetGroupState'
+    MaxNumberOfAutoScalingGroups:
+      type: integer
+    MaxNumberOfLaunchConfigurations:
+      type: integer
+    MaxRecords:
+      type: integer
+    MetricCollectionType:
+      type: object
+      properties:
+        Metric:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: Describes a metric.
+    MetricCollectionTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricCollectionType'
+    MetricGranularityType:
+      type: object
+      properties:
+        Granularity:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: Describes a granularity of a metric.
+    MetricGranularityTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricGranularityType'
+    MetricScale:
+      type: number
+      format: double
+    Metrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen255'
+    MinAdjustmentMagnitude:
+      type: integer
+    MinAdjustmentStep:
+      type: integer
+    MonitoringEnabled:
+      type: boolean
+    NoDevice:
+      type: boolean
+    NotificationConfiguration:
+      type: object
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        TopicARN:
+          $ref: '#/components/schemas/ResourceName'
+        NotificationType:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: Describes a notification.
+    NotificationConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/NotificationConfiguration'
+    NotificationTargetResourceName:
+      type: string
+      minLength: 0
+      maxLength: 1600
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    NumberOfAutoScalingGroups:
+      type: integer
+    NumberOfLaunchConfigurations:
+      type: integer
+    PoliciesType:
+      type: object
+      example:
+        ScalingPolicies:
+          - AdjustmentType: ChangeInCapacity
+            Alarms: []
+            AutoScalingGroupName: my-auto-scaling-group
+            PolicyARN: 'arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn'
+            PolicyName: ScaleIn
+            ScalingAdjustment: -1
+          - AdjustmentType: PercentChangeInCapacity
+            Alarms: []
+            AutoScalingGroupName: my-auto-scaling-group
+            Cooldown: 60
+            MinAdjustmentStep: 2
+            PolicyARN: 'arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2b435159-cf77-4e89-8c0e-d63b497baad7:autoScalingGroupName/my-auto-scaling-group:policyName/ScalePercentChange'
+            PolicyName: ScalePercentChange
+            ScalingAdjustment: 25
+      properties:
+        ScalingPolicies:
+          $ref: '#/components/schemas/ScalingPolicies'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    PolicyARNType:
+      type: object
+      example:
+        PolicyARN: 'arn:aws:autoscaling:us-west-2:123456789012:scalingPolicy:2233f3d7-6290-403b-b632-93c553560106:autoScalingGroupName/my-auto-scaling-group:policyName/ScaleIn'
+      properties:
+        PolicyARN:
+          $ref: '#/components/schemas/ResourceName'
+    PolicyIncrement:
+      type: integer
+    PolicyNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceName'
+    PolicyTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen64'
+    ProcessNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen255'
+    ProcessType:
+      type: object
+      required:
+        - ProcessName
+      properties:
+        ProcessName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: '<p>Describes a process type.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html#process-types">Auto Scaling Processes</a> in the <i>Auto Scaling User Guide</i>.</p>'
+    Processes:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProcessType'
+    ProcessesType:
+      type: object
+      example:
+        Processes:
+          - ProcessName: AZRebalance
+          - ProcessName: AddToLoadBalancer
+          - ProcessName: AlarmNotification
+          - ProcessName: HealthCheck
+          - ProcessName: Launch
+          - ProcessName: ReplaceUnhealthy
+          - ProcessName: ScheduledActions
+          - ProcessName: Terminate
+      properties:
+        Processes:
+          $ref: '#/components/schemas/Processes'
+    Progress:
+      type: integer
+    PropagateAtLaunch:
+      type: boolean
+    ProtectedFromScaleIn:
+      type: boolean
+    PutLifecycleHookAnswer:
+      type: object
+      properties: {}
+    PutLifecycleHookType:
+      type: object
+      required:
+        - LifecycleHookName
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        LifecycleHookName: my-lifecycle-hook
+        LifecycleTransition: 'autoscaling:EC2_INSTANCE_LAUNCHING'
+        NotificationTargetARN: 'arn:aws:sns:us-west-2:123456789012:my-sns-topic --role-arn'
+        RoleARN: 'arn:aws:iam::123456789012:role/my-auto-scaling-role'
+      properties:
+        LifecycleHookName:
+          $ref: '#/components/schemas/AsciiStringMaxLen255'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        LifecycleTransition:
+          $ref: '#/components/schemas/LifecycleTransition'
+        RoleARN:
+          $ref: '#/components/schemas/ResourceName'
+        NotificationTargetARN:
+          $ref: '#/components/schemas/NotificationTargetResourceName'
+        NotificationMetadata:
+          $ref: '#/components/schemas/XmlStringMaxLen1023'
+        HeartbeatTimeout:
+          $ref: '#/components/schemas/HeartbeatTimeout'
+        DefaultResult:
+          $ref: '#/components/schemas/LifecycleActionResult'
+    PutNotificationConfigurationType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - TopicARN
+        - NotificationTypes
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        NotificationTypes:
+          - 'autoscaling:TEST_NOTIFICATION'
+        TopicARN: 'arn:aws:sns:us-west-2:123456789012:my-sns-topic'
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        TopicARN:
+          $ref: '#/components/schemas/ResourceName'
+        NotificationTypes:
+          $ref: '#/components/schemas/AutoScalingNotificationTypes'
+    PutScalingPolicyType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - PolicyName
+        - AdjustmentType
+      example:
+        AdjustmentType: ChangeInCapacity
+        AutoScalingGroupName: my-auto-scaling-group
+        PolicyName: ScaleIn
+        ScalingAdjustment: -1
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        PolicyName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        PolicyType:
+          $ref: '#/components/schemas/XmlStringMaxLen64'
+        AdjustmentType:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        MinAdjustmentStep:
+          $ref: '#/components/schemas/MinAdjustmentStep'
+        MinAdjustmentMagnitude:
+          $ref: '#/components/schemas/MinAdjustmentMagnitude'
+        ScalingAdjustment:
+          $ref: '#/components/schemas/PolicyIncrement'
+        Cooldown:
+          $ref: '#/components/schemas/Cooldown'
+        MetricAggregationType:
+          $ref: '#/components/schemas/XmlStringMaxLen32'
+        StepAdjustments:
+          $ref: '#/components/schemas/StepAdjustments'
+        EstimatedInstanceWarmup:
+          $ref: '#/components/schemas/EstimatedInstanceWarmup'
+    PutScheduledUpdateGroupActionType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - ScheduledActionName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        DesiredCapacity: 4
+        EndTime: '2014-05-12T08:00:00Z'
+        MaxSize: 6
+        MinSize: 2
+        ScheduledActionName: my-scheduled-action
+        StartTime: '2014-05-12T08:00:00Z'
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        ScheduledActionName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        Time:
+          $ref: '#/components/schemas/TimestampType'
+        StartTime:
+          $ref: '#/components/schemas/TimestampType'
+        EndTime:
+          $ref: '#/components/schemas/TimestampType'
+        Recurrence:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        MinSize:
+          $ref: '#/components/schemas/AutoScalingGroupMinSize'
+        MaxSize:
+          $ref: '#/components/schemas/AutoScalingGroupMaxSize'
+        DesiredCapacity:
+          $ref: '#/components/schemas/AutoScalingGroupDesiredCapacity'
+    RecordLifecycleActionHeartbeatAnswer:
+      type: object
+      properties: {}
+    RecordLifecycleActionHeartbeatType:
+      type: object
+      required:
+        - LifecycleHookName
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        LifecycleActionToken: bcd2f1b8-9a78-44d3-8a7a-4dd07d7cf635
+        LifecycleHookName: my-lifecycle-hook
+      properties:
+        LifecycleHookName:
+          $ref: '#/components/schemas/AsciiStringMaxLen255'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        LifecycleActionToken:
+          $ref: '#/components/schemas/LifecycleActionToken'
+        InstanceId:
+          $ref: '#/components/schemas/XmlStringMaxLen19'
+    ResourceContentionFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: 'You already have a pending update to an Auto Scaling resource (for example, a group, instance, or load balancer).'
+    ResourceInUseFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: The operation can't be performed because the resource is in use.
+    ResourceName:
+      type: string
+      minLength: 1
+      maxLength: 1600
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    ScalingActivityInProgressFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: The operation can't be performed because there are scaling activities in progress.
+    ScalingActivityStatusCode:
+      type: string
+      enum:
+        - PendingSpotBidPlacement
+        - WaitingForSpotInstanceRequestId
+        - WaitingForSpotInstanceId
+        - WaitingForInstanceId
+        - PreInService
+        - InProgress
+        - WaitingForELBConnectionDraining
+        - MidLifecycleAction
+        - WaitingForInstanceWarmup
+        - Successful
+        - Failed
+        - Cancelled
+    ScalingPolicies:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScalingPolicy'
+    ScalingPolicy:
+      type: object
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        PolicyName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        PolicyARN:
+          $ref: '#/components/schemas/ResourceName'
+        PolicyType:
+          $ref: '#/components/schemas/XmlStringMaxLen64'
+        AdjustmentType:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        MinAdjustmentStep:
+          $ref: '#/components/schemas/MinAdjustmentStep'
+        MinAdjustmentMagnitude:
+          $ref: '#/components/schemas/MinAdjustmentMagnitude'
+        ScalingAdjustment:
+          $ref: '#/components/schemas/PolicyIncrement'
+        Cooldown:
+          $ref: '#/components/schemas/Cooldown'
+        StepAdjustments:
+          $ref: '#/components/schemas/StepAdjustments'
+        MetricAggregationType:
+          $ref: '#/components/schemas/XmlStringMaxLen32'
+        EstimatedInstanceWarmup:
+          $ref: '#/components/schemas/EstimatedInstanceWarmup'
+        Alarms:
+          $ref: '#/components/schemas/Alarms'
+      description: Describes a scaling policy.
+    ScalingProcessQuery:
+      type: object
+      required:
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        ScalingProcesses:
+          - AlarmNotification
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        ScalingProcesses:
+          $ref: '#/components/schemas/ProcessNames'
+    ScheduledActionNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceName'
+    ScheduledActionsType:
+      type: object
+      example:
+        ScheduledUpdateGroupActions:
+          - AutoScalingGroupName: my-auto-scaling-group
+            DesiredCapacity: 4
+            MaxSize: 6
+            MinSize: 2
+            Recurrence: 30 0 1 12 0
+            ScheduledActionARN: 'arn:aws:autoscaling:us-west-2:123456789012:scheduledUpdateGroupAction:8e86b655-b2e6-4410-8f29-b4f094d6871c:autoScalingGroupName/my-auto-scaling-group:scheduledActionName/my-scheduled-action'
+            ScheduledActionName: my-scheduled-action
+            StartTime: '2016-12-01T00:30:00Z'
+            Time: '2016-12-01T00:30:00Z'
+      properties:
+        ScheduledUpdateGroupActions:
+          $ref: '#/components/schemas/ScheduledUpdateGroupActions'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    ScheduledUpdateGroupAction:
+      type: object
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        ScheduledActionName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        ScheduledActionARN:
+          $ref: '#/components/schemas/ResourceName'
+        Time:
+          $ref: '#/components/schemas/TimestampType'
+        StartTime:
+          $ref: '#/components/schemas/TimestampType'
+        EndTime:
+          $ref: '#/components/schemas/TimestampType'
+        Recurrence:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        MinSize:
+          $ref: '#/components/schemas/AutoScalingGroupMinSize'
+        MaxSize:
+          $ref: '#/components/schemas/AutoScalingGroupMaxSize'
+        DesiredCapacity:
+          $ref: '#/components/schemas/AutoScalingGroupDesiredCapacity'
+      description: Describes a scheduled update to an Auto Scaling group.
+    ScheduledUpdateGroupActions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScheduledUpdateGroupAction'
+    SecurityGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlString'
+    SetDesiredCapacityType:
+      type: object
+      required:
+        - AutoScalingGroupName
+        - DesiredCapacity
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        DesiredCapacity: 2
+        HonorCooldown: true
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        DesiredCapacity:
+          $ref: '#/components/schemas/AutoScalingGroupDesiredCapacity'
+        HonorCooldown:
+          $ref: '#/components/schemas/HonorCooldown'
+    SetInstanceHealthQuery:
+      type: object
+      required:
+        - InstanceId
+        - HealthStatus
+      example:
+        HealthStatus: Unhealthy
+        InstanceId: i-93633f9b
+      properties:
+        InstanceId:
+          $ref: '#/components/schemas/XmlStringMaxLen19'
+        HealthStatus:
+          $ref: '#/components/schemas/XmlStringMaxLen32'
+        ShouldRespectGracePeriod:
+          $ref: '#/components/schemas/ShouldRespectGracePeriod'
+    SetInstanceProtectionAnswer:
+      type: object
+      properties: {}
+    SetInstanceProtectionQuery:
+      type: object
+      required:
+        - InstanceIds
+        - AutoScalingGroupName
+        - ProtectedFromScaleIn
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        InstanceIds:
+          - i-93633f9b
+        ProtectedFromScaleIn: false
+      properties:
+        InstanceIds:
+          $ref: '#/components/schemas/InstanceIds'
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        ProtectedFromScaleIn:
+          $ref: '#/components/schemas/ProtectedFromScaleIn'
+    ShouldDecrementDesiredCapacity:
+      type: boolean
+    ShouldRespectGracePeriod:
+      type: boolean
+    SpotPrice:
+      type: string
+      minLength: 1
+      maxLength: 255
+    StepAdjustment:
+      type: object
+      required:
+        - ScalingAdjustment
+      properties:
+        MetricIntervalLowerBound:
+          $ref: '#/components/schemas/MetricScale'
+        MetricIntervalUpperBound:
+          $ref: '#/components/schemas/MetricScale'
+        ScalingAdjustment:
+          $ref: '#/components/schemas/PolicyIncrement'
+      description: '<p>Describes an adjustment based on the difference between the value of the aggregated CloudWatch metric and the breach threshold that you''ve defined for the alarm.</p> <p>For the following examples, suppose that you have an alarm with a breach threshold of 50:</p> <ul> <li> <p>If you want the adjustment to be triggered when the metric is greater than or equal to 50 and less than 60, specify a lower bound of 0 and an upper bound of 10.</p> </li> <li> <p>If you want the adjustment to be triggered when the metric is greater than 40 and less than or equal to 50, specify a lower bound of -10 and an upper bound of 0.</p> </li> </ul> <p>There are a few rules for the step adjustments for your step policy:</p> <ul> <li> <p>The ranges of your step adjustments can''t overlap or have a gap.</p> </li> <li> <p>At most one step adjustment can have a null lower bound. If one step adjustment has a negative lower bound, then there must be a step adjustment with a null lower bound.</p> </li> <li> <p>At most one step adjustment can have a null upper bound. If one step adjustment has a positive upper bound, then there must be a step adjustment with a null upper bound.</p> </li> <li> <p>The upper and lower bound can''t be null in the same step adjustment.</p> </li> </ul>'
+    StepAdjustments:
+      type: array
+      items:
+        $ref: '#/components/schemas/StepAdjustment'
+    SuspendedProcess:
+      type: object
+      properties:
+        ProcessName:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        SuspensionReason:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+      description: 'Describes an Auto Scaling process that has been suspended. For more information, see <a>ProcessType</a>.'
+    SuspendedProcesses:
+      type: array
+      items:
+        $ref: '#/components/schemas/SuspendedProcess'
+    Tag:
+      type: object
+      required:
+        - Key
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/XmlString'
+        ResourceType:
+          $ref: '#/components/schemas/XmlString'
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+        PropagateAtLaunch:
+          $ref: '#/components/schemas/PropagateAtLaunch'
+      description: Describes a tag for an Auto Scaling group.
+    TagDescription:
+      type: object
+      properties:
+        ResourceId:
+          $ref: '#/components/schemas/XmlString'
+        ResourceType:
+          $ref: '#/components/schemas/XmlString'
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+        PropagateAtLaunch:
+          $ref: '#/components/schemas/PropagateAtLaunch'
+      description: Describes a tag for an Auto Scaling group.
+    TagDescriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagDescription'
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TagsType:
+      type: object
+      example:
+        Tags:
+          - Key: Dept
+            PropagateAtLaunch: true
+            ResourceId: my-auto-scaling-group
+            ResourceType: auto-scaling-group
+            Value: Research
+          - Key: Role
+            PropagateAtLaunch: true
+            ResourceId: my-auto-scaling-group
+            ResourceType: auto-scaling-group
+            Value: WebServer
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagDescriptionList'
+        NextToken:
+          $ref: '#/components/schemas/XmlString'
+    TargetGroupARNs:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen511'
+    TerminateInstanceInAutoScalingGroupType:
+      type: object
+      required:
+        - InstanceId
+        - ShouldDecrementDesiredCapacity
+      example:
+        InstanceId: i-93633f9b
+        ShouldDecrementDesiredCapacity: false
+      properties:
+        InstanceId:
+          $ref: '#/components/schemas/XmlStringMaxLen19'
+        ShouldDecrementDesiredCapacity:
+          $ref: '#/components/schemas/ShouldDecrementDesiredCapacity'
+    TerminationPolicies:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlStringMaxLen1600'
+    TimestampType:
+      type: string
+      format: date-time
+    UpdateAutoScalingGroupType:
+      type: object
+      required:
+        - AutoScalingGroupName
+      example:
+        AutoScalingGroupName: my-auto-scaling-group
+        NewInstancesProtectedFromScaleIn: true
+      properties:
+        AutoScalingGroupName:
+          $ref: '#/components/schemas/ResourceName'
+        LaunchConfigurationName:
+          $ref: '#/components/schemas/ResourceName'
+        MinSize:
+          $ref: '#/components/schemas/AutoScalingGroupMinSize'
+        MaxSize:
+          $ref: '#/components/schemas/AutoScalingGroupMaxSize'
+        DesiredCapacity:
+          $ref: '#/components/schemas/AutoScalingGroupDesiredCapacity'
+        DefaultCooldown:
+          $ref: '#/components/schemas/Cooldown'
+        AvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZones'
+        HealthCheckType:
+          $ref: '#/components/schemas/XmlStringMaxLen32'
+        HealthCheckGracePeriod:
+          $ref: '#/components/schemas/HealthCheckGracePeriod'
+        PlacementGroup:
+          $ref: '#/components/schemas/XmlStringMaxLen255'
+        VPCZoneIdentifier:
+          $ref: '#/components/schemas/XmlStringMaxLen2047'
+        TerminationPolicies:
+          $ref: '#/components/schemas/TerminationPolicies'
+        NewInstancesProtectedFromScaleIn:
+          $ref: '#/components/schemas/InstanceProtected'
+    Values:
+      type: array
+      items:
+        $ref: '#/components/schemas/XmlString'
+    XmlString:
+      type: string
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    XmlStringMaxLen1023:
+      type: string
+      minLength: 1
+      maxLength: 1023
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    XmlStringMaxLen1600:
+      type: string
+      minLength: 1
+      maxLength: 1600
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    XmlStringMaxLen19:
+      type: string
+      minLength: 1
+      maxLength: 19
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    XmlStringMaxLen2047:
+      type: string
+      minLength: 1
+      maxLength: 2047
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    XmlStringMaxLen255:
+      type: string
+      minLength: 1
+      maxLength: 255
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    XmlStringMaxLen32:
+      type: string
+      minLength: 1
+      maxLength: 32
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    XmlStringMaxLen511:
+      type: string
+      minLength: 1
+      maxLength: 511
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    XmlStringMaxLen64:
+      type: string
+      minLength: 1
+      maxLength: 64
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    XmlStringUserData:
+      type: string
+      maxLength: 21847
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  requestBodies:
+    ScalingProcessQuery:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ScalingProcessQuery'
+      required: true
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

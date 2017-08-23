@@ -1,0 +1,3251 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.ritc.io/'
+info:
+  description: Rules in the Cloud
+  title: Ritc
+  version: 1.0.0
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://pbs.twimg.com/profile_images/664480221534552064/CwdeYGxs_400x400.jpg'
+  x-origin:
+    - format: swagger
+      url: 'http://www.ritc.io/openapi/ritc.swagger.json'
+      version: '2.0'
+  x-providerName: ritc.io
+paths:
+  /actions:
+    get:
+      description: List actions
+      operationId: listActions
+      responses:
+        '200':
+          description: A list of actions in an app
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ActionShortResponse'
+                type: array
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Actions
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Create a new action
+      operationId: addAction
+      responses:
+        '200':
+          description: An action was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionShortResponse'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Actions
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/Action59'
+  '/actions/{action_id}':
+    delete:
+      description: Delete an action
+      operationId: removeAction
+      parameters:
+        - description: Id of action
+          in: path
+          name: action_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The action was successfully removed
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Actions
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    get:
+      description: Get an action
+      operationId: getAction
+      parameters:
+        - description: Id of action_id
+          in: path
+          name: action_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about an action
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ActionFullResponse'
+                type: array
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Actions
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    patch:
+      description: Update information about a specific action
+      operationId: updateAction
+      parameters:
+        - description: Id of user
+          in: path
+          name: action_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the action was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionShortResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Actions
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/Action59'
+  /admin:
+    get:
+      description: Ping the server
+      operationId: admin
+      responses:
+        '200':
+          description: Ritc is up
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - admin
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  /admin/log:
+    post:
+      description: Log a message
+      operationId: logInRitc
+      responses:
+        '200':
+          description: Message logged
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - admin
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        description: Log message
+        required: true
+  /admin/ping:
+    get:
+      description: Ping the server
+      operationId: pingRitc
+      responses:
+        '200':
+          description: Ritc is up
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - admin
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  /apps:
+    get:
+      description: Get apps information
+      operationId: listApps
+      responses:
+        '200':
+          description: A list of apps in an org
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AppResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Create a new app
+      operationId: addApp
+      responses:
+        '200':
+          description: An app was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppResponse'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/App'
+  /apps/channels/users:
+    get:
+      description: Get app channels
+      operationId: listAppChannels
+      responses:
+        '200':
+          description: List of all channels in an app
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AppChannelResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  '/apps/channels/{channel_id}/users':
+    get:
+      description: Get users of a specified channel
+      operationId: listAppChannelUsers
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about users of a specified channel
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AppChannelResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  '/apps/channels/{channel_id}/users/{user_id}':
+    get:
+      description: Get user of a specified channel
+      operationId: getAppChannelUser
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+        - description: Id of User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about a specified user of a specified channel
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AppChannelResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Create user channel
+      operationId: addAppChannelUser
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+        - description: Id of User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User was assigned to a channel in in app
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppChannelResponse'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  /apps/ext/api/credentials:
+    get:
+      description: Get external credentials
+      operationId: listChannelExternalCredentials
+      responses:
+        '200':
+          description: Detailed information about external credentials
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AppExternalCredentialsResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Create new external credentials
+      operationId: addChannelExternalCredentials
+      responses:
+        '200':
+          description: External credentials created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppExternalCredentialsResponse'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/AppExternalCredentials'
+  '/apps/ext/api/credentials/{channel_id}':
+    delete:
+      description: Delete credentials for a channel
+      operationId: removeChannelExternalCredentials
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The credentials for a channel were successfully removed
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    get:
+      description: Get credentials for a channel in an app
+      operationId: getChannelExternalCredentials
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Credentials for a channel in an app
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AppExternalCredentialsResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    patch:
+      description: Update credentials for a channel
+      operationId: updateChannelExternalCredentials
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the channel credentials was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppExternalCredentialsResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/AppExternalCredentials'
+  '/apps/rulegroup/run/{rule_id_list}':
+    post:
+      description: Run specified rule group in the app
+      operationId: runRuleGroup
+      parameters:
+        - description: 'Ids of rules in the group, separated by commas, no spaces'
+          in: path
+          name: rule_id_list
+          required: true
+          schema:
+            type: string
+        - description: Do not continue with remaining rules after a rule fires
+          in: query
+          name: break_when_rule_fires
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: 'Execution of specified rules in the app (for user #1)'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RuleResults'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/runRuleGroupInitialData'
+  /apps/rules/run:
+    post:
+      description: Run active app rules
+      operationId: runApp
+      parameters:
+        - description: Do not continue with remaining rules after a rule fires
+          in: query
+          name: break_when_rule_fires
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: 'Execution of active rules in the app (for user #1)'
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RuleResults'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/runRuleGroupInitialData'
+  '/apps/{app_id}':
+    delete:
+      description: Delete an app
+      operationId: removeApp
+      parameters:
+        - description: Id of App
+          in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The app was successfully removed
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    get:
+      description: Get app information
+      operationId: getApp
+      parameters:
+        - description: Id of App
+          in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about an app
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AppResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    patch:
+      description: Update an app
+      operationId: updateApp
+      parameters:
+        - description: Id of app
+          in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the app was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Apps
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/App'
+  /channels:
+    get:
+      description: Retrieve Channels
+      operationId: listChannels
+      responses:
+        '200':
+          description: A list of channels available to a logged-in user
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChannelResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Channels
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Create a channel
+      operationId: addChannel
+      responses:
+        '200':
+          description: A private channel was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelResponse'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Channels
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Channel'
+        description: Channel information
+        required: true
+  /channels/anonymous:
+    get:
+      description: Retrieve Channels anonymously
+      operationId: listAnonymousChannels
+      responses:
+        '200':
+          description: A list of channels available to an anonymous user
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChannelResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Channels
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  '/channels/{channel_id}':
+    delete:
+      description: Delete a channel
+      operationId: removeChannel
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The channel was successfully removed
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Channels
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    get:
+      description: Get channel information
+      operationId: getChannel
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about a channel
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChannelResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Channels
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    patch:
+      description: Update a channel
+      operationId: updateChannel
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the channel was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Channels
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rule'
+        description: Channel information
+        required: true
+  '/channels/{channel_id}/functions':
+    get:
+      description: Retrieve Channel Functions
+      operationId: listChannelFunctions
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of functions available in a channel
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/FunctionResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Channels
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Create a channel function
+      operationId: addChannelFunction
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A private channel function  was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FunctionResponse'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Channels
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Function7'
+        description: Channel Function information
+        required: true
+  '/channels/{channel_id}/functions/{function_id}':
+    get:
+      description: Get channel function information
+      operationId: getChannelFunction
+      parameters:
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+        - description: Id of Channel Function
+          in: path
+          name: function_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about a channel function
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/FunctionResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Channels
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  /orgs:
+    post:
+      description: Create an org
+      operationId: addOrganization
+      responses:
+        '200':
+          description: An org was successfully created
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrgResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Orgs
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Org'
+        description: Org information
+        required: true
+  /orgs/me:
+    get:
+      description: Get org information
+      operationId: getMyOrganization
+      responses:
+        '200':
+          description: Detailed information about an org
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrgResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Orgs
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  /rules:
+    get:
+      description: List rules
+      operationId: listRules
+      responses:
+        '200':
+          description: A list of rules in an app
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RuleShortResponse'
+                type: array
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Rules
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Create a new rule
+      operationId: addRule
+      responses:
+        '200':
+          description: A rule was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleFullResponse'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Rules
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/Rule'
+  '/rules/{rule_id}':
+    delete:
+      description: Delete a rule
+      operationId: removeRule
+      parameters:
+        - description: Id of rule
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The rule was successfully removed
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Rules
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    get:
+      description: Get a rule
+      operationId: getRule
+      parameters:
+        - description: Id of rule
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about a rule
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RuleFullResponse'
+                type: array
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Rules
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    patch:
+      description: Update information about a specific rule
+      operationId: updateRule
+      parameters:
+        - description: Id of user
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the rule was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleFullResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Rules
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/Rule'
+  '/rules/{rule_id}/run':
+    post:
+      description: Run a rule
+      operationId: runRule
+      parameters:
+        - description: Id of rule
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A rule ran successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Rules
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/runRuleGroupInitialData'
+  /triggers:
+    get:
+      description: Triggers in an app
+      operationId: listTriggers
+      responses:
+        '200':
+          description: A list of triggers in an app
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TriggerShortResponse'
+                type: array
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Triggers
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Create a new trigger in an app
+      operationId: addTrigger
+      responses:
+        '200':
+          description: A trigger was successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerShortResponse'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Triggers
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trigger54'
+        description: Trigger parameters and configuration
+        required: true
+  '/triggers/{trigger_id}':
+    delete:
+      description: Delete a trigger
+      operationId: removeTrigger
+      parameters:
+        - description: Id of Trigger
+          in: path
+          name: trigger_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The trigger was successfully removed
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Triggers
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    get:
+      description: Get a trigger
+      operationId: getTrigger
+      parameters:
+        - description: Id of Trigger
+          in: path
+          name: trigger_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about a trigger
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TriggerFullResponse'
+                type: array
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Triggers
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    patch:
+      description: Update a trigger
+      operationId: updateTrigger
+      parameters:
+        - description: Id of user
+          in: path
+          name: trigger_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the trigger was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerShortResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Triggers
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trigger54'
+        description: Trigger information
+        required: true
+  /users:
+    get:
+      description: Users
+      operationId: listAppUsers
+      responses:
+        '200':
+          description: A list of App Users in an app
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AppUserResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Create a new App User
+      operationId: addAppUser
+      responses:
+        '200':
+          description: An App User was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserResponse'
+        '400':
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/AppUser'
+  /users/admin:
+    get:
+      description: Admin users
+      operationId: listAdminUsers
+      responses:
+        '200':
+          description: A list of admin users in an app
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AdminUserResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Create a new admin user
+      operationId: addAdminUser
+      responses:
+        '200':
+          description: An admin user was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminUserResponse'
+        '400':
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/AdminUser'
+  '/users/admin/{user_id}':
+    delete:
+      description: Remove an admin user
+      operationId: removeAdminUser
+      parameters:
+        - description: Id of Admin_User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The admin user was successfully removed
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    get:
+      description: Get an admin user
+      operationId: getAdminUser
+      parameters:
+        - description: Id of Admin_User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about an admin user
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AdminUserResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    patch:
+      description: Update information about an admin user
+      operationId: updateAdminUser
+      parameters:
+        - description: Id of user
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the admin user was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminUserResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/AdminUser'
+  '/users/authenticate/{user_id}/channel/{channel_id}':
+    post:
+      description: Authenticate a user for a channel
+      operationId: authenticateAppUserForChannel
+      parameters:
+        - description: Id of User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Authorize url to be sent an authorize request
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AuthorizeUrlResponse'
+                type: array
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  '/users/{user_id}':
+    delete:
+      description: Remove a user
+      operationId: removeAppUser
+      parameters:
+        - description: Id of user
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The user was successfully removed
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    get:
+      description: Get an App User
+      operationId: getAppUser
+      parameters:
+        - description: Id of App User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about an App User
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AppUserResponse'
+                type: array
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    patch:
+      description: Update information about an App User
+      operationId: updateAppUser
+      parameters:
+        - description: Id of user
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Information about the user was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppUserResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        $ref: '#/components/requestBodies/AppUser'
+  '/users/{user_id}/channels':
+    get:
+      description: Channels available to a User
+      operationId: listAppUserChannels
+      parameters:
+        - description: Id of user
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of channels available to a specific user
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserChannel'
+                type: array
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Assign a channel to a user
+      operationId: addAppUserToChannel
+      parameters:
+        - description: Id of user
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A channel was assigned to a user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserChannel'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: Id of Channel
+        required: true
+  '/users/{user_id}/channels/{channel_id}':
+    delete:
+      description: Remove a user channel assignment
+      operationId: removeAppUserFromChannel
+      parameters:
+        - description: Id of User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The channel was successfully removed from the user
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    get:
+      description: Get a user channel
+      operationId: getAppUserChannel
+      parameters:
+        - description: Id of User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - description: Id of Channel
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about a specific channel for a specific user
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserChannel'
+                type: array
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  '/users/{user_id}/rules':
+    get:
+      description: Rules for a User
+      operationId: listAppUserRules
+      parameters:
+        - description: Id of user
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of rules applying to a specific user
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RuleShortResponse'
+                type: array
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  '/users/{user_id}/rules/{rule_id}':
+    delete:
+      description: Remove a rule user
+      operationId: removeAppUserFromRule
+      parameters:
+        - description: Id of User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - description: Id of Rule
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The rule was successfully removed from the system
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    get:
+      description: Get a user
+      operationId: getAppUserRule
+      parameters:
+        - description: Id of User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - description: Id of Rule
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detailed information about a rule
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RuleFullResponse'
+                type: array
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+    post:
+      description: Assign a user to a rule
+      operationId: addAppUserToRule
+      parameters:
+        - description: Id of User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - description: Id of Rule
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A rule was assigned to the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleShortResponse'
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+  '/users/{user_id}/rules/{rule_id}/run':
+    post:
+      description: Run rule for a user
+      operationId: runRuleForAppUser
+      parameters:
+        - description: Id of User
+          in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - description: Id of Rule
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A rule ran successfully for a user
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid Input
+          content:
+            application/json:
+              schema: {}
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema: {}
+      security:
+        - Authorization: []
+      tags:
+        - Users
+      x-operation-settings:
+        AllowDynamicFormParameters: false
+        AllowDynamicQueryParameters: false
+        CollectParameters: false
+        IsMultiContentStreaming: false
+      x-unitTests: []
+components:
+  schemas:
+    Action:
+      properties:
+        channelId:
+          type: string
+        createdDate:
+          description: The date the rule was created
+          type: string
+        description:
+          type: string
+        functionId:
+          type: string
+        id:
+          type: string
+        modifiedDate:
+          description: The date the rule was modified
+          type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+      title: Action
+      type: object
+    Action59:
+      properties:
+        channelId:
+          description: Id of channel used by action
+          format: int32
+          type: integer
+        codes:
+          description: Object containing named Javascript code sets
+          type: object
+        desc:
+          description: Action description
+          type: string
+        functionId:
+          description: Hash id of channel function used by action
+          type: string
+        name:
+          description: Action name
+          type: string
+        parameters:
+          description: Object containing channel-defined action parameters
+          type: object
+      required:
+        - name
+        - channelId
+        - functionId
+      title: Action59
+      type: object
+    ActionFullResponse:
+      properties:
+        channelId:
+          format: int32
+          type: integer
+        codes:
+          type: object
+        createdDate:
+          description: The date the action was created
+          type: string
+        description:
+          description: Action description
+          type: string
+        functionId:
+          type: string
+        id:
+          format: int32
+          type: integer
+        modifiedDate:
+          description: The date the action was modified
+          type: string
+        name:
+          description: Action name
+          type: string
+        parameters:
+          type: object
+        status:
+          $ref: '#/components/schemas/Status'
+      title: Action_Full_Response
+      type: object
+    ActionShortResponse:
+      properties:
+        channelId:
+          type: string
+        createdDate:
+          description: The date the action was created
+          type: string
+        description:
+          description: Action description
+          type: string
+        functionId:
+          type: string
+        id:
+          type: string
+        modifiedDate:
+          description: The date the action was modified
+          type: string
+        name:
+          description: Action name
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+      title: Action_Short_Response
+      type: object
+    AdminUser:
+      properties:
+        email:
+          description: Admin User email address
+          type: string
+        password:
+          description: Admin User password
+          type: string
+        type:
+          $ref: '#/components/schemas/Type41'
+      title: Admin_User
+      type: object
+    AdminUserResponse:
+      properties:
+        createdDate:
+          description: The date the admin user was created
+          type: string
+        email:
+          description: Admin User email address
+          type: string
+        id:
+          format: int32
+          type: integer
+        modifiedDate:
+          description: The date the admin user was modified
+          type: string
+        name:
+          description: Admin User name
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+      title: Admin_User_Response
+      type: object
+    ApiType:
+      enum:
+        - Internal
+        - REST
+        - SDK
+      title: ApiType
+      type: string
+    App:
+      properties:
+        desc:
+          description: App description
+          type: string
+        name:
+          description: App name
+          type: string
+      title: App
+      type: object
+    AppChannelResponse:
+      properties:
+        channelId:
+          description: Channel Id
+          format: int32
+          type: integer
+        createdDate:
+          description: The date the user was created
+          type: string
+        id:
+          format: int32
+          type: integer
+        status:
+          $ref: '#/components/schemas/Status'
+        userId:
+          description: Id of App User assigned to Channel
+          format: int32
+          type: integer
+      title: App_Channel_Response
+      type: object
+    AppExternalCredentials:
+      properties:
+        authType:
+          $ref: '#/components/schemas/AuthType'
+        channel_id:
+          type: string
+        credentials:
+          type: object
+        name:
+          description: App external credentials api name
+          type: string
+      title: App_External_Credentials
+      type: object
+    AppExternalCredentialsResponse:
+      properties:
+        authType:
+          $ref: '#/components/schemas/AuthType'
+        channel_id:
+          type: string
+        credentials:
+          type: object
+        id:
+          type: string
+        name:
+          description: App external credentials api name
+          type: string
+      title: App_External_Credentials_Response
+      type: object
+    AppResponse:
+      properties:
+        apiKey:
+          description: App ApiKey
+          type: string
+        createdDate:
+          description: The date the app was created
+          type: string
+        description:
+          description: App description
+          type: string
+        id:
+          type: string
+        modifiedDate:
+          description: The date the app was modified
+          type: string
+        name:
+          description: App name
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+      title: App_Response
+      type: object
+    AppUser:
+      properties:
+        config:
+          description: Object containing user-defined app user configuration
+          type: object
+        name:
+          description: Display name of App User
+          type: string
+        password:
+          description: App User password
+          type: string
+      title: App_User
+      type: object
+    AppUserResponse:
+      properties:
+        createdDate:
+          description: The date the user was created
+          type: string
+        description:
+          description: Description of App User
+          type: string
+        id:
+          description: Id of App User
+          type: string
+        modifiedDate:
+          description: The date the user was modified
+          type: string
+        name:
+          description: Display name of App User
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+      title: App_User_Response
+      type: object
+    AuthType:
+      enum:
+        - apikey
+        - basic
+        - none
+        - oauth2
+      title: AuthType
+      type: string
+    AuthorizeUrlResponse:
+      properties:
+        url:
+          type: string
+      title: Authorize_Url_Response
+      type: object
+    Channel:
+      properties:
+        description:
+          description: Channel description
+          type: string
+        functions:
+          items:
+            $ref: '#/components/schemas/Function'
+          type: array
+        id:
+          description: Id of channel
+          type: string
+        name:
+          description: Channel name
+          type: string
+        type:
+          description: 'Type of channel. Choices are ''public'' or ''private''. Private channels are only viewable within an account, while public channels are viewable to everyone in the system'
+          type: object
+      title: Channel
+      type: object
+    ChannelResponse:
+      properties:
+        description:
+          description: Channel description
+          type: string
+        functions:
+          items:
+            $ref: '#/components/schemas/Function5'
+          type: array
+        id:
+          description: Id of channel
+          type: string
+        name:
+          description: Channel name
+          type: string
+        type:
+          description: 'Type of channel. Choices are ''public'' or ''private''. Private channels are only viewable within an account, while public channels are viewable to everyone'
+          type: object
+      title: Channel_Response
+      type: object
+    Error:
+      properties:
+        code:
+          format: int32
+          type: integer
+        fields:
+          type: string
+        message:
+          type: string
+      title: Error
+      type: object
+    Function:
+      properties:
+        id:
+          type: string
+        name:
+          description: Function name
+          type: string
+        parameters:
+          items:
+            $ref: '#/components/schemas/Parameter'
+          type: array
+        type:
+          $ref: '#/components/schemas/Type'
+      title: Function
+      type: object
+    Function5:
+      properties:
+        description:
+          description: Function description
+          type: string
+        id:
+          type: string
+        name:
+          description: Function name
+          type: string
+        type:
+          $ref: '#/components/schemas/Type'
+      title: Function5
+      type: object
+    Function7:
+      properties:
+        apiType:
+          $ref: '#/components/schemas/ApiType'
+        desc:
+          description: Function description
+          type: string
+        endpoint:
+          description: Function endpoint
+          type: string
+        httpMethod:
+          $ref: '#/components/schemas/HttpMethod'
+        name:
+          description: Function name
+          type: string
+        requestParameters:
+          items:
+            $ref: '#/components/schemas/RequestParameter'
+          type: array
+        responseFormat:
+          $ref: '#/components/schemas/ResponseFormat'
+        type:
+          $ref: '#/components/schemas/Type'
+      title: Function7
+      type: object
+    FunctionResponse:
+      properties:
+        apiType:
+          $ref: '#/components/schemas/ApiType'
+        description:
+          description: Function description
+          type: string
+        endpoint:
+          description: Function endpoint
+          type: string
+        httpMethod:
+          $ref: '#/components/schemas/HttpMethod'
+        id:
+          type: string
+        name:
+          description: Function name
+          type: string
+        requestParameters:
+          items:
+            $ref: '#/components/schemas/RequestParameter'
+          type: array
+        responseFormat:
+          $ref: '#/components/schemas/ResponseFormat'
+        type:
+          $ref: '#/components/schemas/Type'
+      title: Function_Response
+      type: object
+    HttpMethod:
+      enum:
+        - DELETE
+        - GET
+        - PATCH
+        - POST
+      title: HttpMethod
+      type: string
+    Org:
+      properties:
+        desc:
+          description: Org description
+          type: string
+        name:
+          description: Org name
+          type: string
+        type:
+          description: Org type
+          type: string
+      required:
+        - name
+      title: Org
+      type: object
+    OrgResponse:
+      properties:
+        createdDate:
+          description: The date the org was created
+          type: string
+        id:
+          type: string
+        modifiedDate:
+          description: The date the org was modified
+          type: string
+        name:
+          description: Org name
+          type: string
+        plan:
+          $ref: '#/components/schemas/Plan'
+        planCat:
+          type: object
+        status:
+          description: Org name
+          type: string
+        type:
+          type: object
+      title: Org_Response
+      type: object
+    Parameter:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+        - key
+        - value
+      title: Parameter
+      type: object
+    Plan:
+      enum:
+        - free
+        - basic
+      title: Plan
+      type: string
+    RequestParameter:
+      properties:
+        description:
+          type: string
+        fieldType:
+          type: string
+        label:
+          type: string
+        name:
+          type: string
+        schema:
+          $ref: '#/components/schemas/Schema'
+      title: RequestParameter
+      type: object
+    ResponseFormat:
+      enum:
+        - Html
+        - Json
+        - Text
+        - Xml
+      title: ResponseFormat
+      type: string
+    Rule:
+      properties:
+        actionIds:
+          description: Rule description
+          type: string
+        description:
+          description: Rule description
+          type: string
+        name:
+          description: Rule name
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+        triggerIds:
+          description: Rule description
+          type: string
+      title: Rule
+      type: object
+    RuleFullResponse:
+      properties:
+        actions:
+          items:
+            $ref: '#/components/schemas/Action'
+          type: array
+        createdDate:
+          description: The date the rule was created
+          type: string
+        description:
+          description: Rule description
+          type: string
+        id:
+          description: Rule Id
+          format: int32
+          type: integer
+        modifiedDate:
+          description: The date the rule was modified
+          type: string
+        name:
+          description: Rule name
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+        triggers:
+          items:
+            $ref: '#/components/schemas/Trigger'
+          type: array
+      title: Rule_Full_Response
+      type: object
+    RuleResults:
+      properties:
+        id:
+          type: string
+        name:
+          description: Name of rule results
+          type: string
+        type:
+          $ref: '#/components/schemas/Type'
+      title: Rule_Results
+      type: object
+    RuleShortResponse:
+      properties:
+        createdDate:
+          description: The date the rule was created
+          type: string
+        description:
+          description: Rule description
+          type: string
+        id:
+          description: Rule Id
+          format: int32
+          type: integer
+        modifiedDate:
+          description: The date the rule was modified
+          type: string
+        name:
+          description: Rule name
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+      title: Rule_Short_Response
+      type: object
+    Schema:
+      properties:
+        datatype:
+          type: object
+        default:
+          type: string
+        expose:
+          type: object
+        required:
+          type: object
+        style:
+          $ref: '#/components/schemas/Style'
+      title: Schema
+      type: object
+    Status:
+      enum:
+        - active
+        - inactive
+      title: Status
+      type: string
+    Style:
+      enum:
+        - postbody
+        - query
+        - template
+      title: Style
+      type: string
+    Trigger:
+      properties:
+        channelId:
+          type: string
+        createdDate:
+          description: The date the rule was created
+          type: string
+        description:
+          type: string
+        functionId:
+          type: string
+        id:
+          type: string
+        modifiedDate:
+          description: The date the rule was modified
+          type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+      title: Trigger
+      type: object
+    Trigger54:
+      properties:
+        channelId:
+          description: Id of channel used by trigger
+          format: int32
+          type: integer
+        codes:
+          description: Object containing named Javascript code sets
+          type: object
+        desc:
+          description: Trigger description
+          type: string
+        functionId:
+          description: Hash id of channel function used by trigger
+          type: string
+        name:
+          description: Trigger name
+          type: string
+        parameters:
+          description: Object containing channel-defined trigger parameters
+          type: object
+      required:
+        - name
+        - channelId
+        - functionId
+      title: Trigger54
+      type: object
+    TriggerFullResponse:
+      properties:
+        channelId:
+          format: int32
+          type: integer
+        codes:
+          type: object
+        createdDate:
+          description: The date the trigger was created
+          type: string
+        description:
+          description: Trigger description
+          type: string
+        functionId:
+          type: string
+        id:
+          format: int32
+          type: integer
+        modifiedDate:
+          description: The date the trigger was modified
+          type: string
+        name:
+          description: Trigger name
+          type: string
+        parameters:
+          type: object
+        status:
+          $ref: '#/components/schemas/Status'
+      title: Trigger_Full_Response
+      type: object
+    TriggerShortResponse:
+      properties:
+        channelId:
+          format: int32
+          type: integer
+        createdDate:
+          description: The date the trigger was created
+          type: string
+        description:
+          description: Trigger description
+          type: string
+        functionId:
+          type: string
+        id:
+          format: int32
+          type: integer
+        modifiedDate:
+          description: The date the trigger was modified
+          type: string
+        name:
+          description: Trigger name
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+      title: Trigger_Short_Response
+      type: object
+    Type:
+      enum:
+        - action
+        - trigger
+      title: Type
+      type: string
+    Type41:
+      enum:
+        - admin
+        - guest
+      title: Type41
+      type: string
+    UserChannel:
+      properties:
+        channelId:
+          format: int32
+          type: integer
+        userId:
+          format: int32
+          type: integer
+      title: User_Channel
+      type: object
+  requestBodies:
+    Action59:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Action59'
+      description: Action information
+      required: true
+    App:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/App'
+      description: App information
+      required: true
+    AppExternalCredentials:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AppExternalCredentials'
+      description: App_External_Credentials information
+      required: true
+    runRuleGroupInitialData:
+      content:
+        application/json:
+          schema:
+            type: object
+      description: Initial data
+    Rule:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Rule'
+      description: Rule information
+      required: true
+    AppUser:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AppUser'
+      description: App User information
+      required: true
+    AdminUser:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AdminUser'
+      description: Admin User information
+      required: true
+  securitySchemes:
+    Authorization:
+      description: 'HTTP Basic Authentication/API Key. Basic Auth requires a username and a password. For the username, use a valid API key. Ritc accepts the API key as both plaintext and base64 encoded. Remember that you must append a colon after the api key in order to avoid being prompted for a password. The format is Base64encode(api-key:)'
+      in: header
+      name: Authorization
+      type: apiKey
+      x-testValue: ''

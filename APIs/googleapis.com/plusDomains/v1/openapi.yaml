@@ -1,0 +1,2613 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://www.googleapis.com/plusDomains/v1'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Builds on top of the Google+ platform for Google Apps Domains.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Google+ Domains
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://developers.google.com/+/images/branding/g+128.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://www.googleapis.com/discovery/v1/apis/plusDomains/v1/rest'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: plusDomains
+externalDocs:
+  url: 'https://developers.google.com/+/domains/'
+tags:
+  - name: activities
+  - name: audiences
+  - name: circles
+  - name: comments
+  - name: media
+  - name: people
+paths:
+  '/activities/{activityId}':
+    get:
+      description: Get an activity.
+      operationId: plusDomains.activities.get
+      parameters:
+        - description: The ID of the activity to get.
+          in: path
+          name: activityId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Activity'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+      tags:
+        - activities
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/activities/{activityId}/comments':
+    get:
+      description: List all of the comments for an activity.
+      operationId: plusDomains.comments.list
+      parameters:
+        - description: The ID of the activity to get comments for.
+          in: path
+          name: activityId
+          required: true
+          schema:
+            type: string
+        - description: 'The maximum number of comments to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 500
+            default: 20
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: The order in which to sort the list of comments.
+          in: query
+          name: sortOrder
+          schema:
+            type: string
+            enum:
+              - ascending
+              - descending
+            default: ascending
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommentFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+      tags:
+        - comments
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Create a new comment in reply to an activity.
+      operationId: plusDomains.comments.insert
+      parameters:
+        - description: The ID of the activity to reply to.
+          in: path
+          name: activityId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Comment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.stream.write'
+      tags:
+        - comments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+  '/activities/{activityId}/people/{collection}':
+    get:
+      description: List all of the people in the specified collection for a particular activity.
+      operationId: plusDomains.people.listByActivity
+      parameters:
+        - description: The ID of the activity to get the list of people for.
+          in: path
+          name: activityId
+          required: true
+          schema:
+            type: string
+        - description: The collection of people to list.
+          in: path
+          name: collection
+          required: true
+          schema:
+            type: string
+            enum:
+              - plusoners
+              - resharers
+              - sharedto
+        - description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PeopleFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/circles/{circleId}':
+    delete:
+      description: Delete a circle.
+      operationId: plusDomains.circles.remove
+      parameters:
+        - description: The ID of the circle to delete.
+          in: path
+          name: circleId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+    get:
+      description: Get a circle.
+      operationId: plusDomains.circles.get
+      parameters:
+        - description: The ID of the circle to get.
+          in: path
+          name: circleId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Circle'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    patch:
+      description: Update a circle's description. This method supports patch semantics.
+      operationId: plusDomains.circles.patch
+      parameters:
+        - description: The ID of the circle to update.
+          in: path
+          name: circleId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Circle'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+      requestBody:
+        $ref: '#/components/requestBodies/Circle'
+    put:
+      description: Update a circle's description.
+      operationId: plusDomains.circles.update
+      parameters:
+        - description: The ID of the circle to update.
+          in: path
+          name: circleId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Circle'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+      requestBody:
+        $ref: '#/components/requestBodies/Circle'
+  '/circles/{circleId}/people':
+    delete:
+      description: Remove a person from a circle.
+      operationId: plusDomains.circles.removePeople
+      parameters:
+        - description: The ID of the circle to remove the person from.
+          in: path
+          name: circleId
+          required: true
+          schema:
+            type: string
+        - description: 'Email of the people to add to the circle. Optional, can be repeated.'
+          in: query
+          name: email
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'IDs of the people to remove from the circle. Optional, can be repeated.'
+          in: query
+          name: userId
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+    get:
+      description: List all of the people who are members of a circle.
+      operationId: plusDomains.people.listByCircle
+      parameters:
+        - description: The ID of the circle to get the members of.
+          in: path
+          name: circleId
+          required: true
+          schema:
+            type: string
+        - description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PeopleFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    put:
+      description: 'Add a person to a circle. Google+ limits certain circle operations, including the number of circle adds. Learn More.'
+      operationId: plusDomains.circles.addPeople
+      parameters:
+        - description: The ID of the circle to add the person to.
+          in: path
+          name: circleId
+          required: true
+          schema:
+            type: string
+        - description: 'Email of the people to add to the circle. Optional, can be repeated.'
+          in: query
+          name: email
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'IDs of the people to add to the circle. Optional, can be repeated.'
+          in: query
+          name: userId
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Circle'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+  '/comments/{commentId}':
+    get:
+      description: Get a comment.
+      operationId: plusDomains.comments.get
+      parameters:
+        - description: The ID of the comment to get.
+          in: path
+          name: commentId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Comment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+      tags:
+        - comments
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/people/{userId}':
+    get:
+      description: Get a person's profile.
+      operationId: plusDomains.people.get
+      parameters:
+        - description: The ID of the person to get the profile for. The special value "me" can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Person'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.profiles.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.profiles.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/people/{userId}/activities':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Create a new activity for the authenticated user.
+      operationId: plusDomains.activities.insert
+      parameters:
+        - description: 'The ID of the user to create the activity on behalf of. Its value should be "me", to indicate the authenticated user.'
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+        - description: 'If "true", extract the potential media attachments for a URL. The response will include all possible attachments for a URL, including video, photos, and articles based on the content of the page.'
+          in: query
+          name: preview
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Activity'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.stream.write'
+      tags:
+        - activities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Activity'
+  '/people/{userId}/activities/{collection}':
+    get:
+      description: List all of the activities in the specified collection for a particular user.
+      operationId: plusDomains.activities.list
+      parameters:
+        - description: The ID of the user to get activities for. The special value "me" can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+        - description: The collection of activities to list.
+          in: path
+          name: collection
+          required: true
+          schema:
+            type: string
+            enum:
+              - user
+        - description: 'The maximum number of activities to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ActivityFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+      tags:
+        - activities
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/people/{userId}/audiences':
+    get:
+      description: List all of the audiences to which a user can share.
+      operationId: plusDomains.audiences.list
+      parameters:
+        - description: The ID of the user to get audiences for. The special value "me" can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+        - description: 'The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AudiencesFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
+      tags:
+        - audiences
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/people/{userId}/circles':
+    get:
+      description: List all of the circles for a user.
+      operationId: plusDomains.circles.list
+      parameters:
+        - description: The ID of the user to get circles for. The special value "me" can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+        - description: 'The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CircleFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
+      tags:
+        - circles
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Create a new circle for the authenticated user.
+      operationId: plusDomains.circles.insert
+      parameters:
+        - description: The ID of the user to create the circle on behalf of. The value "me" can be used to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Circle'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
+      tags:
+        - circles
+      requestBody:
+        $ref: '#/components/requestBodies/Circle'
+  '/people/{userId}/media/{collection}':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Add a new media item to an album. The current upload size limitations are 36MB for a photo and 1GB for a video. Uploads do not count against quota if photos are less than 2048 pixels on their longest side or videos are less than 15 minutes in length.
+      operationId: plusDomains.media.insert
+      parameters:
+        - description: The ID of the user to create the activity on behalf of.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: collection
+          required: true
+          schema:
+            type: string
+            enum:
+              - cloud
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Media'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.media.upload'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.media.upload'
+      tags:
+        - media
+      requestBody:
+        content:
+          image/apng:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/bmp:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/cgm:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/dicom-rle:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/emf:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/fits:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/g3fax:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/gif:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/ief:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/jls:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/jp2:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/jpeg:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/jpm:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/jpx:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/ktx:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/naplps:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/pjpeg:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/png:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/prs.btif:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/prs.pti:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/pwg-raster:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/sgi:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/svg+xml:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/t38:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/tiff:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/tiff-fx:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.adobe.photoshop:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.airzip.accelerator.azv:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.cns.inf2:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.dece.graphic:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.djvu:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.dvb.subtitle:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.dwg:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.dxf:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.fastbidsheet:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.fpx:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.fst:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.fujixerox.edmics-mmr:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.fujixerox.edmics-rlc:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.globalgraphics.pgb:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.microsoft.icon:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.mix:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.mozilla.apng:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.ms-modi:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.ms-photo:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.net-fpx:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.radiance:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.sealed.png:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.sealedmedia.softseal.gif:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.sealedmedia.softseal.jpg:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.svf:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.tencent.tap:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.valve.source.texture:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.wap.wbmp:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.xiff:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/vnd.zbrush.pcx:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/webp:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/wmf:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-3ds:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-cmu-raster:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-cmx:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-freehand:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-icon:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-jng:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-mrsid-image:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-ms-bmp:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-pcx:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-pict:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-portable-anymap:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-portable-bitmap:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-portable-graymap:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-portable-pixmap:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-rgb:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-tga:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-xbitmap:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-xcf:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-xpixmap:
+            schema:
+              $ref: '#/components/schemas/Media'
+          image/x-xwindowdump:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/1d-interleaved-parityfec:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/3gpp:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/3gpp-tt:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/3gpp2:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/bmpeg:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/bt656:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/celb:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/dv:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/encaprtp:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/h261:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/h263:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/h263-1998:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/h263-2000:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/h264:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/h264-rcdo:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/h264-svc:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/h265:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/iso.segment:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/jpeg:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/jpeg2000:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/jpm:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/mj2:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/mp1s:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/mp2p:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/mp2t:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/mp4:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/mp4v-es:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/mpeg:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/mpeg4-generic:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/mpv:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/nv:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/ogg:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/parityfec:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/pointer:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/quicktime:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/raptorfec:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/raw:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/rtp-enc-aescm128:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/rtploopback:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/rtx:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/smpte292m:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/ulpfec:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vc1:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.cctv:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.dece.hd:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.dece.mobile:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.dece.mp4:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.dece.pd:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.dece.sd:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.dece.video:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.directv.mpeg:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.directv.mpeg-tts:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.dlna.mpeg-tts:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.dvb.file:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.fvt:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.hns.video:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.iptvforum.1dparityfec-1010:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.iptvforum.1dparityfec-2005:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.iptvforum.2dparityfec-1010:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.iptvforum.2dparityfec-2005:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.iptvforum.ttsavc:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.iptvforum.ttsmpeg2:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.motorola.video:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.motorola.videop:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.mpegurl:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.ms-playready.media.pyv:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.nokia.interleaved-multimedia:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.nokia.videovoip:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.objectvideo:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.radgamettools.bink:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.radgamettools.smacker:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.sealed.mpeg1:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.sealed.mpeg4:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.sealed.swf:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.sealedmedia.softseal.mov:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.uvvu.mp4:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vnd.vivo:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/vp8:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/webm:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-f4v:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-fli:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-flv:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-m4v:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-matroska:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-mng:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-ms-asf:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-ms-vob:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-ms-wm:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-ms-wmv:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-ms-wmx:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-ms-wvx:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-msvideo:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-sgi-movie:
+            schema:
+              $ref: '#/components/schemas/Media'
+          video/x-smv:
+            schema:
+              $ref: '#/components/schemas/Media'
+  '/people/{userId}/people/{collection}':
+    get:
+      description: List all of the people in the specified collection.
+      operationId: plusDomains.people.list
+      parameters:
+        - description: Get the collection of people for the person identified. Use "me" to indicate the authenticated user.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+        - description: The collection of people to list.
+          in: path
+          name: collection
+          required: true
+          schema:
+            type: string
+            enum:
+              - circled
+        - description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 100
+        - description: The order to return people in.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+            enum:
+              - alphabetical
+              - best
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PeopleFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.login'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.me'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/plus.me'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+components:
+  schemas:
+    Acl:
+      properties:
+        description:
+          description: 'Description of the access granted, suitable for display.'
+          type: string
+        domainRestricted:
+          description: Whether access is restricted to the domain.
+          type: boolean
+        items:
+          description: The list of access entries.
+          items:
+            $ref: '#/components/schemas/PlusDomainsAclentryResource'
+          type: array
+        kind:
+          default: 'plus#acl'
+          description: 'Identifies this resource as a collection of access controls. Value: "plus#acl".'
+          type: string
+      type: object
+    Activity:
+      properties:
+        access:
+          $ref: '#/components/schemas/Acl'
+        actor:
+          description: The person who performed this activity.
+          properties:
+            clientSpecificActorInfo:
+              description: Actor info specific to particular clients.
+              properties:
+                youtubeActorInfo:
+                  description: Actor info specific to YouTube clients.
+                  properties:
+                    channelId:
+                      description: ID of the YouTube channel owned by the Actor.
+                      type: string
+                  type: object
+              type: object
+            displayName:
+              description: 'The name of the actor, suitable for display.'
+              type: string
+            id:
+              description: The ID of the actor's Person resource.
+              type: string
+            image:
+              description: The image representation of the actor.
+              properties:
+                url:
+                  description: 'The URL of the actor''s profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.'
+                  type: string
+              type: object
+            name:
+              description: An object representation of the individual components of name.
+              properties:
+                familyName:
+                  description: The family name ("last name") of the actor.
+                  type: string
+                givenName:
+                  description: The given name ("first name") of the actor.
+                  type: string
+              type: object
+            url:
+              description: The link to the actor's Google profile.
+              type: string
+            verification:
+              description: Verification status of actor.
+              properties:
+                adHocVerified:
+                  description: Verification for one-time or manual processes.
+                  type: string
+              type: object
+          type: object
+        address:
+          description: Street address where this activity occurred.
+          type: string
+        annotation:
+          description: 'Additional content added by the person who shared this activity, applicable only when resharing an activity.'
+          type: string
+        crosspostSource:
+          description: 'If this activity is a crosspost from another system, this property specifies the ID of the original activity.'
+          type: string
+        etag:
+          description: ETag of this response for caching purposes.
+          type: string
+        geocode:
+          description: 'Latitude and longitude where this activity occurred. Format is latitude followed by longitude, space separated.'
+          type: string
+        id:
+          description: The ID of this activity.
+          type: string
+        kind:
+          default: 'plus#activity'
+          description: 'Identifies this resource as an activity. Value: "plus#activity".'
+          type: string
+        location:
+          $ref: '#/components/schemas/Place'
+        object:
+          description: The object of this activity.
+          properties:
+            actor:
+              description: 'If this activity''s object is itself another activity, such as when a person reshares an activity, this property specifies the original activity''s actor.'
+              properties:
+                clientSpecificActorInfo:
+                  description: Actor info specific to particular clients.
+                  properties:
+                    youtubeActorInfo:
+                      description: Actor info specific to YouTube clients.
+                      properties:
+                        channelId:
+                          description: ID of the YouTube channel owned by the Actor.
+                          type: string
+                      type: object
+                  type: object
+                displayName:
+                  description: 'The original actor''s name, which is suitable for display.'
+                  type: string
+                id:
+                  description: ID of the original actor.
+                  type: string
+                image:
+                  description: The image representation of the original actor.
+                  properties:
+                    url:
+                      description: A URL that points to a thumbnail photo of the original actor.
+                      type: string
+                  type: object
+                url:
+                  description: A link to the original actor's Google profile.
+                  type: string
+                verification:
+                  description: Verification status of actor.
+                  properties:
+                    adHocVerified:
+                      description: Verification for one-time or manual processes.
+                      type: string
+                  type: object
+              type: object
+            attachments:
+              description: The media objects attached to this activity.
+              items:
+                properties:
+                  content:
+                    description: 'If the attachment is an article, this property contains a snippet of text from the article. It can also include descriptions for other types.'
+                    type: string
+                  displayName:
+                    description: 'The title of the attachment, such as a photo caption or an article title.'
+                    type: string
+                  embed:
+                    description: 'If the attachment is a video, the embeddable link.'
+                    properties:
+                      type:
+                        description: Media type of the link.
+                        type: string
+                      url:
+                        description: URL of the link.
+                        type: string
+                    type: object
+                  fullImage:
+                    description: The full image URL for photo attachments.
+                    properties:
+                      height:
+                        description: 'The height, in pixels, of the linked resource.'
+                        format: uint32
+                        type: integer
+                      type:
+                        description: Media type of the link.
+                        type: string
+                      url:
+                        description: URL of the image.
+                        type: string
+                      width:
+                        description: 'The width, in pixels, of the linked resource.'
+                        format: uint32
+                        type: integer
+                    type: object
+                  id:
+                    description: The ID of the attachment.
+                    type: string
+                  image:
+                    description: The preview image for photos or videos.
+                    properties:
+                      height:
+                        description: 'The height, in pixels, of the linked resource.'
+                        format: uint32
+                        type: integer
+                      type:
+                        description: Media type of the link.
+                        type: string
+                      url:
+                        description: Image URL.
+                        type: string
+                      width:
+                        description: 'The width, in pixels, of the linked resource.'
+                        format: uint32
+                        type: integer
+                    type: object
+                  objectType:
+                    description: |-
+                      The type of media object. Possible values include, but are not limited to, the following values:  
+                      - "photo" - A photo. 
+                      - "album" - A photo album. 
+                      - "video" - A video. 
+                      - "article" - An article, specified by a link.
+                    type: string
+                  previewThumbnails:
+                    description: 'When previewing, these are the optional thumbnails for the post. When posting an article, choose one by setting the attachment.image.url property. If you don''t choose one, one will be chosen for you.'
+                    items:
+                      properties:
+                        url:
+                          description: URL of the thumbnail image.
+                          type: string
+                      type: object
+                    type: array
+                  thumbnails:
+                    description: 'If the attachment is an album, this property is a list of potential additional thumbnails from the album.'
+                    items:
+                      properties:
+                        description:
+                          description: Potential name of the thumbnail.
+                          type: string
+                        image:
+                          description: Image resource.
+                          properties:
+                            height:
+                              description: 'The height, in pixels, of the linked resource.'
+                              format: uint32
+                              type: integer
+                            type:
+                              description: Media type of the link.
+                              type: string
+                            url:
+                              description: Image url.
+                              type: string
+                            width:
+                              description: 'The width, in pixels, of the linked resource.'
+                              format: uint32
+                              type: integer
+                          type: object
+                        url:
+                          description: URL of the webpage containing the image.
+                          type: string
+                      type: object
+                    type: array
+                  url:
+                    description: 'The link to the attachment, which should be of type text/html.'
+                    type: string
+                type: object
+              type: array
+            content:
+              description: 'The HTML-formatted content, which is suitable for display.'
+              type: string
+            id:
+              description: 'The ID of the object. When resharing an activity, this is the ID of the activity that is being reshared.'
+              type: string
+            objectType:
+              description: |-
+                The type of the object. Possible values include, but are not limited to, the following values:  
+                - "note" - Textual content. 
+                - "activity" - A Google+ activity.
+              type: string
+            originalContent:
+              description: 'The content (text) as provided by the author, which is stored without any HTML formatting. When creating or updating an activity, this value must be supplied as plain text in the request.'
+              type: string
+            plusoners:
+              description: People who +1'd this activity.
+              properties:
+                selfLink:
+                  description: The URL for the collection of people who +1'd this activity.
+                  type: string
+                totalItems:
+                  description: Total number of people who +1'd this activity.
+                  format: uint32
+                  type: integer
+              type: object
+            replies:
+              description: Comments in reply to this activity.
+              properties:
+                selfLink:
+                  description: The URL for the collection of comments in reply to this activity.
+                  type: string
+                totalItems:
+                  description: Total number of comments on this activity.
+                  format: uint32
+                  type: integer
+              type: object
+            resharers:
+              description: People who reshared this activity.
+              properties:
+                selfLink:
+                  description: The URL for the collection of resharers.
+                  type: string
+                totalItems:
+                  description: Total number of people who reshared this activity.
+                  format: uint32
+                  type: integer
+              type: object
+            statusForViewer:
+              description: Status of the activity as seen by the viewer.
+              properties:
+                canComment:
+                  description: Whether the viewer can comment on the activity.
+                  type: boolean
+                canPlusone:
+                  description: Whether the viewer can +1 the activity.
+                  type: boolean
+                canUpdate:
+                  description: Whether the viewer can edit or delete the activity.
+                  type: boolean
+                isPlusOned:
+                  description: Whether the viewer has +1'd the activity.
+                  type: boolean
+                resharingDisabled:
+                  description: Whether reshares are disabled for the activity.
+                  type: boolean
+              type: object
+            url:
+              description: The URL that points to the linked resource.
+              type: string
+          type: object
+        placeId:
+          description: ID of the place where this activity occurred.
+          type: string
+        placeName:
+          description: Name of the place where this activity occurred.
+          type: string
+        provider:
+          description: The service provider that initially published this activity.
+          properties:
+            title:
+              description: Name of the service provider.
+              type: string
+          type: object
+        published:
+          description: The time at which this activity was initially published. Formatted as an RFC 3339 timestamp.
+          format: date-time
+          type: string
+        radius:
+          description: 'Radius, in meters, of the region where this activity occurred, centered at the latitude and longitude identified in geocode.'
+          type: string
+        title:
+          description: Title of this activity.
+          type: string
+        updated:
+          description: The time at which this activity was last updated. Formatted as an RFC 3339 timestamp.
+          format: date-time
+          type: string
+        url:
+          description: The link to this activity.
+          type: string
+        verb:
+          description: |-
+            This activity's verb, which indicates the action that was performed. Possible values include, but are not limited to, the following values:  
+            - "post" - Publish content to the stream. 
+            - "share" - Reshare an activity.
+          type: string
+      type: object
+    ActivityFeed:
+      properties:
+        etag:
+          description: ETag of this response for caching purposes.
+          type: string
+        id:
+          description: The ID of this collection of activities. Deprecated.
+          type: string
+        items:
+          description: The activities in this page of results.
+          items:
+            $ref: '#/components/schemas/Activity'
+          type: array
+        kind:
+          default: 'plus#activityFeed'
+          description: 'Identifies this resource as a collection of activities. Value: "plus#activityFeed".'
+          type: string
+        nextLink:
+          description: Link to the next page of activities.
+          type: string
+        nextPageToken:
+          description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          type: string
+        selfLink:
+          description: Link to this activity resource.
+          type: string
+        title:
+          description: 'The title of this collection of activities, which is a truncated portion of the content.'
+          type: string
+        updated:
+          description: The time at which this collection of activities was last updated. Formatted as an RFC 3339 timestamp.
+          format: date-time
+          type: string
+      type: object
+    Audience:
+      properties:
+        etag:
+          description: ETag of this response for caching purposes.
+          type: string
+        item:
+          $ref: '#/components/schemas/PlusDomainsAclentryResource'
+        kind:
+          default: 'plus#audience'
+          description: 'Identifies this resource as an audience. Value: "plus#audience".'
+          type: string
+        memberCount:
+          description: The number of people in this circle. This only applies if entity_type is CIRCLE.
+          format: uint32
+          type: integer
+        visibility:
+          description: |-
+            The circle members' visibility as chosen by the owner of the circle. This only applies for items with "item.type" equals "circle". Possible values are:  
+            - "public" - Members are visible to the public. 
+            - "limited" - Members are visible to a limited audience. 
+            - "private" - Members are visible to the owner only.
+          type: string
+      type: object
+    AudiencesFeed:
+      properties:
+        etag:
+          description: ETag of this response for caching purposes.
+          type: string
+        items:
+          description: The audiences in this result.
+          items:
+            $ref: '#/components/schemas/Audience'
+          type: array
+        kind:
+          default: 'plus#audiencesFeed'
+          description: 'Identifies this resource as a collection of audiences. Value: "plus#audienceFeed".'
+          type: string
+        nextPageToken:
+          description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          type: string
+        totalItems:
+          description: The total number of ACL entries. The number of entries in this response may be smaller due to paging.
+          format: int32
+          type: integer
+      type: object
+    Circle:
+      properties:
+        description:
+          description: The description of this circle.
+          type: string
+        displayName:
+          description: The circle name.
+          type: string
+        etag:
+          description: ETag of this response for caching purposes.
+          type: string
+        id:
+          description: The ID of the circle.
+          type: string
+        kind:
+          default: 'plus#circle'
+          description: 'Identifies this resource as a circle. Value: "plus#circle".'
+          type: string
+        people:
+          description: The people in this circle.
+          properties:
+            totalItems:
+              description: The total number of people in this circle.
+              format: uint32
+              type: integer
+          type: object
+        selfLink:
+          description: Link to this circle resource
+          type: string
+      type: object
+    CircleFeed:
+      properties:
+        etag:
+          description: ETag of this response for caching purposes.
+          type: string
+        items:
+          description: The circles in this page of results.
+          items:
+            $ref: '#/components/schemas/Circle'
+          type: array
+        kind:
+          default: 'plus#circleFeed'
+          description: 'Identifies this resource as a collection of circles. Value: "plus#circleFeed".'
+          type: string
+        nextLink:
+          description: Link to the next page of circles.
+          type: string
+        nextPageToken:
+          description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          type: string
+        selfLink:
+          description: Link to this page of circles.
+          type: string
+        title:
+          description: The title of this list of resources.
+          type: string
+        totalItems:
+          description: The total number of circles. The number of circles in this response may be smaller due to paging.
+          format: int32
+          type: integer
+      type: object
+    Comment:
+      properties:
+        actor:
+          description: The person who posted this comment.
+          properties:
+            clientSpecificActorInfo:
+              description: Actor info specific to particular clients.
+              properties:
+                youtubeActorInfo:
+                  description: Actor info specific to YouTube clients.
+                  properties:
+                    channelId:
+                      description: ID of the YouTube channel owned by the Actor.
+                      type: string
+                  type: object
+              type: object
+            displayName:
+              description: 'The name of this actor, suitable for display.'
+              type: string
+            id:
+              description: The ID of the actor.
+              type: string
+            image:
+              description: The image representation of this actor.
+              properties:
+                url:
+                  description: 'The URL of the actor''s profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.'
+                  type: string
+              type: object
+            url:
+              description: A link to the Person resource for this actor.
+              type: string
+            verification:
+              description: Verification status of actor.
+              properties:
+                adHocVerified:
+                  description: Verification for one-time or manual processes.
+                  type: string
+              type: object
+          type: object
+        etag:
+          description: ETag of this response for caching purposes.
+          type: string
+        id:
+          description: The ID of this comment.
+          type: string
+        inReplyTo:
+          description: The activity this comment replied to.
+          items:
+            properties:
+              id:
+                description: The ID of the activity.
+                type: string
+              url:
+                description: The URL of the activity.
+                type: string
+            type: object
+          type: array
+        kind:
+          default: 'plus#comment'
+          description: 'Identifies this resource as a comment. Value: "plus#comment".'
+          type: string
+        object:
+          description: The object of this comment.
+          properties:
+            content:
+              description: 'The HTML-formatted content, suitable for display.'
+              type: string
+            objectType:
+              default: comment
+              description: |-
+                The object type of this comment. Possible values are:  
+                - "comment" - A comment in reply to an activity.
+              type: string
+            originalContent:
+              description: 'The content (text) as provided by the author, stored without any HTML formatting. When creating or updating a comment, this value must be supplied as plain text in the request.'
+              type: string
+          type: object
+        plusoners:
+          description: People who +1'd this comment.
+          properties:
+            totalItems:
+              description: Total number of people who +1'd this comment.
+              format: uint32
+              type: integer
+          type: object
+        published:
+          description: The time at which this comment was initially published. Formatted as an RFC 3339 timestamp.
+          format: date-time
+          type: string
+        selfLink:
+          description: Link to this comment resource.
+          type: string
+        updated:
+          description: The time at which this comment was last updated. Formatted as an RFC 3339 timestamp.
+          format: date-time
+          type: string
+        verb:
+          default: post
+          description: |-
+            This comment's verb, indicating what action was performed. Possible values are:  
+            - "post" - Publish content to the stream.
+          type: string
+      type: object
+    CommentFeed:
+      properties:
+        etag:
+          description: ETag of this response for caching purposes.
+          type: string
+        id:
+          description: The ID of this collection of comments.
+          type: string
+        items:
+          description: The comments in this page of results.
+          items:
+            $ref: '#/components/schemas/Comment'
+          type: array
+        kind:
+          default: 'plus#commentFeed'
+          description: 'Identifies this resource as a collection of comments. Value: "plus#commentFeed".'
+          type: string
+        nextLink:
+          description: Link to the next page of activities.
+          type: string
+        nextPageToken:
+          description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          type: string
+        title:
+          description: The title of this collection of comments.
+          type: string
+        updated:
+          description: The time at which this collection of comments was last updated. Formatted as an RFC 3339 timestamp.
+          format: date-time
+          type: string
+      type: object
+    Media:
+      properties:
+        author:
+          description: The person who uploaded this media.
+          properties:
+            displayName:
+              description: The author's name.
+              type: string
+            id:
+              description: ID of the author.
+              type: string
+            image:
+              description: The author's Google profile image.
+              properties:
+                url:
+                  description: 'The URL of the author''s profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.'
+                  type: string
+              type: object
+            url:
+              description: A link to the author's Google profile.
+              type: string
+          type: object
+        displayName:
+          description: The display name for this media.
+          type: string
+        etag:
+          description: ETag of this response for caching purposes.
+          type: string
+        exif:
+          description: Exif information of the media item.
+          properties:
+            time:
+              description: The time the media was captured. Formatted as an RFC 3339 timestamp.
+              format: date-time
+              type: string
+          type: object
+        height:
+          description: The height in pixels of the original image.
+          format: uint32
+          type: integer
+        id:
+          description: 'ID of this media, which is generated by the API.'
+          type: string
+        kind:
+          default: 'plus#media'
+          description: The type of resource.
+          type: string
+        mediaCreatedTime:
+          description: 'The time at which this media was originally created in UTC. Formatted as an RFC 3339 timestamp that matches this example: 2010-11-25T14:30:27.655Z'
+          format: date-time
+          type: string
+        mediaUrl:
+          description: The URL of this photo or video's still image.
+          type: string
+        published:
+          description: The time at which this media was uploaded. Formatted as an RFC 3339 timestamp.
+          format: date-time
+          type: string
+        sizeBytes:
+          description: The size in bytes of this video.
+          format: int64
+          type: string
+        streams:
+          description: 'The list of video streams for this video. There might be several different streams available for a single video, either Flash or MPEG, of various sizes'
+          items:
+            $ref: '#/components/schemas/Videostream'
+          type: array
+        summary:
+          description: 'A description, or caption, for this media.'
+          type: string
+        updated:
+          description: The time at which this media was last updated. This includes changes to media metadata. Formatted as an RFC 3339 timestamp.
+          format: date-time
+          type: string
+        url:
+          description: The URL for the page that hosts this media.
+          type: string
+        videoDuration:
+          description: The duration in milliseconds of this video.
+          format: int64
+          type: string
+        videoStatus:
+          description: |-
+            The encoding status of this video. Possible values are:  
+            - "UPLOADING" - Not all the video bytes have been received. 
+            - "PENDING" - Video not yet processed. 
+            - "FAILED" - Video processing failed. 
+            - "READY" - A single video stream is playable. 
+            - "FINAL" - All video streams are playable.
+          type: string
+        width:
+          description: The width in pixels of the original image.
+          format: uint32
+          type: integer
+      type: object
+    PeopleFeed:
+      properties:
+        etag:
+          description: ETag of this response for caching purposes.
+          type: string
+        items:
+          description: 'The people in this page of results. Each item includes the id, displayName, image, and url for the person. To retrieve additional profile data, see the people.get method.'
+          items:
+            $ref: '#/components/schemas/Person'
+          type: array
+        kind:
+          default: 'plus#peopleFeed'
+          description: 'Identifies this resource as a collection of people. Value: "plus#peopleFeed".'
+          type: string
+        nextPageToken:
+          description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+          type: string
+        selfLink:
+          description: Link to this resource.
+          type: string
+        title:
+          description: The title of this collection of people.
+          type: string
+        totalItems:
+          description: The total number of people available in this list. The number of people in a response might be smaller due to paging. This might not be set for all collections.
+          format: int32
+          type: integer
+      type: object
+    Person:
+      properties:
+        aboutMe:
+          description: A short biography for this person.
+          type: string
+        birthday:
+          description: 'The person''s date of birth, represented as YYYY-MM-DD.'
+          type: string
+        braggingRights:
+          description: The "bragging rights" line of this person.
+          type: string
+        circledByCount:
+          description: 'For followers who are visible, the number of people who have added this person or page to a circle.'
+          format: int32
+          type: integer
+        cover:
+          description: The cover photo content.
+          properties:
+            coverInfo:
+              description: Extra information about the cover photo.
+              properties:
+                leftImageOffset:
+                  description: The difference between the left position of the cover image and the actual displayed cover image. Only valid for banner layout.
+                  format: int32
+                  type: integer
+                topImageOffset:
+                  description: The difference between the top position of the cover image and the actual displayed cover image. Only valid for banner layout.
+                  format: int32
+                  type: integer
+              type: object
+            coverPhoto:
+              description: The person's primary cover image.
+              properties:
+                height:
+                  description: The height of the image.
+                  format: int32
+                  type: integer
+                url:
+                  description: The URL of the image.
+                  type: string
+                width:
+                  description: The width of the image.
+                  format: int32
+                  type: integer
+              type: object
+            layout:
+              description: |-
+                The layout of the cover art. Possible values include, but are not limited to, the following values:  
+                - "banner" - One large image banner.
+              type: string
+          type: object
+        currentLocation:
+          description: (this field is not currently used)
+          type: string
+        displayName:
+          description: 'The name of this person, which is suitable for display.'
+          type: string
+        domain:
+          description: 'The hosted domain name for the user''s Google Apps account. For instance, example.com. The plus.profile.emails.read or email scope is needed to get this domain name.'
+          type: string
+        emails:
+          description: 'A list of email addresses that this person has, including their Google account email address, and the public verified email addresses on their Google+ profile. The plus.profile.emails.read scope is needed to retrieve these email addresses, or the email scope can be used to retrieve just the Google account email address.'
+          items:
+            properties:
+              type:
+                description: |-
+                  The type of address. Possible values include, but are not limited to, the following values:  
+                  - "account" - Google account email address. 
+                  - "home" - Home email address. 
+                  - "work" - Work email address. 
+                  - "other" - Other.
+                type: string
+              value:
+                description: The email address.
+                type: string
+            type: object
+          type: array
+        etag:
+          description: ETag of this response for caching purposes.
+          type: string
+        gender:
+          description: |-
+            The person's gender. Possible values include, but are not limited to, the following values:  
+            - "male" - Male gender. 
+            - "female" - Female gender. 
+            - "other" - Other.
+          type: string
+        id:
+          description: The ID of this person.
+          type: string
+        image:
+          description: The representation of the person's profile photo.
+          properties:
+            isDefault:
+              description: Whether the person's profile photo is the default one
+              type: boolean
+            url:
+              description: 'The URL of the person''s profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.'
+              type: string
+          type: object
+        isPlusUser:
+          description: Whether this user has signed up for Google+.
+          type: boolean
+        kind:
+          default: 'plus#person'
+          description: 'Identifies this resource as a person. Value: "plus#person".'
+          type: string
+        name:
+          description: An object representation of the individual components of a person's name.
+          properties:
+            familyName:
+              description: The family name (last name) of this person.
+              type: string
+            formatted:
+              description: 'The full name of this person, including middle names, suffixes, etc.'
+              type: string
+            givenName:
+              description: The given name (first name) of this person.
+              type: string
+            honorificPrefix:
+              description: The honorific prefixes (such as "Dr." or "Mrs.") for this person.
+              type: string
+            honorificSuffix:
+              description: The honorific suffixes (such as "Jr.") for this person.
+              type: string
+            middleName:
+              description: The middle name of this person.
+              type: string
+          type: object
+        nickname:
+          description: The nickname of this person.
+          type: string
+        objectType:
+          description: |-
+            Type of person within Google+. Possible values include, but are not limited to, the following values:  
+            - "person" - represents an actual person. 
+            - "page" - represents a page.
+          type: string
+        occupation:
+          description: The occupation of this person.
+          type: string
+        organizations:
+          description: A list of current or past organizations with which this person is associated.
+          items:
+            properties:
+              department:
+                description: The department within the organization. Deprecated.
+                type: string
+              description:
+                description: A short description of the person's role in this organization. Deprecated.
+                type: string
+              endDate:
+                description: The date that the person left this organization.
+                type: string
+              location:
+                description: The location of this organization. Deprecated.
+                type: string
+              name:
+                description: The name of the organization.
+                type: string
+              primary:
+                description: 'If "true", indicates this organization is the person''s primary one, which is typically interpreted as the current one.'
+                type: boolean
+              startDate:
+                description: The date that the person joined this organization.
+                type: string
+              title:
+                description: The person's job title or role within the organization.
+                type: string
+              type:
+                description: |-
+                  The type of organization. Possible values include, but are not limited to, the following values:  
+                  - "work" - Work. 
+                  - "school" - School.
+                type: string
+            type: object
+          type: array
+        placesLived:
+          description: A list of places where this person has lived.
+          items:
+            properties:
+              primary:
+                description: 'If "true", this place of residence is this person''s primary residence.'
+                type: boolean
+              value:
+                description: 'A place where this person has lived. For example: "Seattle, WA", "Near Toronto".'
+                type: string
+            type: object
+          type: array
+        plusOneCount:
+          description: 'If a Google+ Page, the number of people who have +1''d this page.'
+          format: int32
+          type: integer
+        relationshipStatus:
+          description: |-
+            The person's relationship status. Possible values include, but are not limited to, the following values:  
+            - "single" - Person is single. 
+            - "in_a_relationship" - Person is in a relationship. 
+            - "engaged" - Person is engaged. 
+            - "married" - Person is married. 
+            - "its_complicated" - The relationship is complicated. 
+            - "open_relationship" - Person is in an open relationship. 
+            - "widowed" - Person is widowed. 
+            - "in_domestic_partnership" - Person is in a domestic partnership. 
+            - "in_civil_union" - Person is in a civil union.
+          type: string
+        skills:
+          description: The person's skills.
+          type: string
+        tagline:
+          description: The brief description (tagline) of this person.
+          type: string
+        url:
+          description: The URL of this person's profile.
+          type: string
+        urls:
+          description: A list of URLs for this person.
+          items:
+            properties:
+              label:
+                description: The label of the URL.
+                type: string
+              type:
+                description: |-
+                  The type of URL. Possible values include, but are not limited to, the following values:  
+                  - "otherProfile" - URL for another profile. 
+                  - "contributor" - URL to a site for which this person is a contributor. 
+                  - "website" - URL for this Google+ Page's primary website. 
+                  - "other" - Other URL.
+                type: string
+              value:
+                description: The URL value.
+                type: string
+            type: object
+          type: array
+        verified:
+          description: Whether the person or Google+ Page has been verified.
+          type: boolean
+      type: object
+    Place:
+      properties:
+        address:
+          description: The physical address of the place.
+          properties:
+            formatted:
+              description: The formatted address for display.
+              type: string
+          type: object
+        displayName:
+          description: The display name of the place.
+          type: string
+        id:
+          description: The id of the place.
+          type: string
+        kind:
+          default: 'plus#place'
+          description: 'Identifies this resource as a place. Value: "plus#place".'
+          type: string
+        position:
+          description: The position of the place.
+          properties:
+            latitude:
+              description: The latitude of this position.
+              format: double
+              type: number
+            longitude:
+              description: The longitude of this position.
+              format: double
+              type: number
+          type: object
+      type: object
+    PlusDomainsAclentryResource:
+      properties:
+        displayName:
+          description: A descriptive name for this entry. Suitable for display.
+          type: string
+        id:
+          description: 'The ID of the entry. For entries of type "person" or "circle", this is the ID of the resource. For other types, this property is not set.'
+          type: string
+        type:
+          description: |-
+            The type of entry describing to whom access is granted. Possible values are:  
+            - "person" - Access to an individual. 
+            - "circle" - Access to members of a circle. 
+            - "myCircles" - Access to members of all the person's circles. 
+            - "extendedCircles" - Access to members of all the person's circles, plus all of the people in their circles. 
+            - "domain" - Access to members of the person's Google Apps domain. 
+            - "public" - Access to anyone on the web.
+          type: string
+      type: object
+    Videostream:
+      properties:
+        height:
+          description: 'The height, in pixels, of the video resource.'
+          format: int32
+          type: integer
+        type:
+          description: MIME type of the video stream.
+          type: string
+        url:
+          description: URL of the video stream.
+          type: string
+        width:
+          description: 'The width, in pixels, of the video resource.'
+          format: int32
+          type: integer
+      type: object
+  parameters:
+    alt:
+      description: Data format for the response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+        default: json
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    userIp:
+      description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      in: query
+      name: userIp
+      schema:
+        type: string
+  requestBodies:
+    Circle:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Circle'
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/plus.circles.read': View your circles and the people and pages in them
+            'https://www.googleapis.com/auth/plus.circles.write': Manage your circles and add people and pages. People and pages you add to your circles will be notified. Others may see this information publicly. People you add to circles can use Hangouts with you.
+            'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
+            'https://www.googleapis.com/auth/plus.me': Know who you are on Google
+            'https://www.googleapis.com/auth/plus.media.upload': Send your photos and videos to Google+
+            'https://www.googleapis.com/auth/plus.profiles.read': View your own Google+ profile and profiles visible to you
+            'https://www.googleapis.com/auth/plus.stream.read': 'View your Google+ posts, comments, and stream'
+            'https://www.googleapis.com/auth/plus.stream.write': 'Manage your Google+ posts, comments, and stream'
+            'https://www.googleapis.com/auth/userinfo.email': View your email address
+            'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/plus.circles.read': View your circles and the people and pages in them
+            'https://www.googleapis.com/auth/plus.circles.write': Manage your circles and add people and pages. People and pages you add to your circles will be notified. Others may see this information publicly. People you add to circles can use Hangouts with you.
+            'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
+            'https://www.googleapis.com/auth/plus.me': Know who you are on Google
+            'https://www.googleapis.com/auth/plus.media.upload': Send your photos and videos to Google+
+            'https://www.googleapis.com/auth/plus.profiles.read': View your own Google+ profile and profiles visible to you
+            'https://www.googleapis.com/auth/plus.stream.read': 'View your Google+ posts, comments, and stream'
+            'https://www.googleapis.com/auth/plus.stream.write': 'Manage your Google+ posts, comments, and stream'
+            'https://www.googleapis.com/auth/userinfo.email': View your email address
+            'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info

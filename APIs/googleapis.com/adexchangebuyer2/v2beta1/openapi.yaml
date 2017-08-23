@@ -1,0 +1,3422 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://adexchangebuyer.googleapis.com/'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'Accesses the latest features for managing Ad Exchange accounts, Real-Time Bidding configurations and auction metrics, and Marketplace programmatic deals.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Ad Exchange Buyer API II
+  version: v2beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://adexchangebuyer.googleapis.com/$discovery/rest?version=v2beta1'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: adexchangebuyer2
+externalDocs:
+  url: 'https://developers.google.com/ad-exchange/buyer-rest/guides/client-access/'
+tags:
+  - name: accounts
+paths:
+  '/v2beta1/accounts/{accountId}/clients':
+    get:
+      description: Lists all the clients for the current sponsor buyer.
+      operationId: adexchangebuyer2.accounts.clients.list
+      parameters:
+        - description: Unique numerical account ID of the sponsor buyer to list the clients for.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListClientsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.clients.list method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer clients than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListClientsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: Creates a new client buyer.
+      operationId: adexchangebuyer2.accounts.clients.create
+      parameters:
+        - description: |-
+            Unique numerical account ID for the buyer of which the client buyer
+            is a customer; the sponsor buyer to create a client for. (required)
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Client'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+      requestBody:
+        $ref: '#/components/requestBodies/Client'
+  '/v2beta1/accounts/{accountId}/clients/{clientAccountId}':
+    get:
+      description: Gets a client buyer with a given client account ID.
+      operationId: adexchangebuyer2.accounts.clients.get
+      parameters:
+        - description: Numerical account ID of the client's sponsor buyer. (required)
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: Numerical account ID of the client buyer to retrieve. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Client'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    put:
+      description: Updates an existing client buyer.
+      operationId: adexchangebuyer2.accounts.clients.update
+      parameters:
+        - description: |-
+            Unique numerical account ID for the buyer of which the client buyer
+            is a customer; the sponsor buyer to update a client for. (required)
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: Unique numerical account ID of the client to update. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Client'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+      requestBody:
+        $ref: '#/components/requestBodies/Client'
+  '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/invitations':
+    get:
+      description: |-
+        Lists all the client users invitations for a client
+        with a given account ID.
+      operationId: adexchangebuyer2.accounts.clients.invitations.list
+      parameters:
+        - description: Numerical account ID of the client's sponsor buyer. (required)
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Numerical account ID of the client buyer to list invitations for.
+            (required)
+            You must either specify a string representation of a
+            numerical account identifier or the `-` character
+            to list all the invitations for all the clients
+            of a given sponsor buyer.
+          in: path
+          name: clientAccountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListClientUserInvitationsResponse.nextPageToken
+            returned from the previous call to the
+            clients.invitations.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: |-
+            Requested page size. Server may return fewer clients than requested.
+            If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListClientUserInvitationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: |-
+        Creates and sends out an email invitation to access
+        an Ad Exchange client buyer account.
+      operationId: adexchangebuyer2.accounts.clients.invitations.create
+      parameters:
+        - description: Numerical account ID of the client's sponsor buyer. (required)
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Numerical account ID of the client buyer that the user
+            should be associated with. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ClientUserInvitation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientUserInvitation'
+  '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/invitations/{invitationId}':
+    get:
+      description: Retrieves an existing client user invitation.
+      operationId: adexchangebuyer2.accounts.clients.invitations.get
+      parameters:
+        - description: Numerical account ID of the client's sponsor buyer. (required)
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Numerical account ID of the client buyer that the user invitation
+            to be retrieved is associated with. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          schema:
+            type: string
+        - description: Numerical identifier of the user invitation to retrieve. (required)
+          in: path
+          name: invitationId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ClientUserInvitation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+  '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/users':
+    get:
+      description: |-
+        Lists all the known client users for a specified
+        sponsor buyer account ID.
+      operationId: adexchangebuyer2.accounts.clients.users.list
+      parameters:
+        - description: |-
+            Numerical account ID of the sponsor buyer of the client to list users for.
+            (required)
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The account ID of the client buyer to list users for. (required)
+            You must specify either a string representation of a
+            numerical account identifier or the `-` character
+            to list all the client users for all the clients
+            of a given sponsor buyer.
+          in: path
+          name: clientAccountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListClientUsersResponse.nextPageToken
+            returned from the previous call to the
+            accounts.clients.users.list method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer clients than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListClientUsersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+  '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/users/{userId}':
+    get:
+      description: Retrieves an existing client user.
+      operationId: adexchangebuyer2.accounts.clients.users.get
+      parameters:
+        - description: Numerical account ID of the client's sponsor buyer. (required)
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Numerical account ID of the client buyer
+            that the user to be retrieved is associated with. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          schema:
+            type: string
+        - description: Numerical identifier of the user to retrieve. (required)
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ClientUser'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    put:
+      description: |-
+        Updates an existing client user.
+        Only the user status can be changed on update.
+      operationId: adexchangebuyer2.accounts.clients.users.update
+      parameters:
+        - description: Numerical account ID of the client's sponsor buyer. (required)
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Numerical account ID of the client buyer that the user to be retrieved
+            is associated with. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          schema:
+            type: string
+        - description: Numerical identifier of the user to retrieve. (required)
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ClientUser'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientUser'
+  '/v2beta1/accounts/{accountId}/creatives':
+    get:
+      description: Lists creatives.
+      operationId: adexchangebuyer2.accounts.creatives.list
+      parameters:
+        - description: |-
+            The account to list the creatives from.
+            Specify "-" to list all creatives the current user has access to.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListCreativesResponse.next_page_token
+            returned from the previous call to 'ListCreatives' method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer creatives than requested
+            (due to timeout constraint) even if more are available via another call.
+            If unspecified, server will pick an appropriate default.
+            Acceptable values are 1 to 1000, inclusive.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            An optional query string to filter creatives. If no filter is specified,
+            all active creatives will be returned.
+            Supported queries are:
+            <ul>
+            <li>accountId=<i>account_id_string</i>
+            <li>creativeId=<i>creative_id_string</i>
+            <li>dealsStatus: {approved, conditionally_approved, disapproved,
+                               not_checked}
+            <li>openAuctionStatus: {approved, conditionally_approved, disapproved,
+                                      not_checked}
+            <li>attribute: {a numeric attribute from the list of attributes}
+            <li>disapprovalReason: {a reason from DisapprovalReason
+            </ul>
+            Example: 'accountId=12345 AND (dealsStatus:disapproved AND disapprovalReason:unacceptable_content) OR attribute:47'
+          in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListCreativesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: Creates a creative.
+      operationId: adexchangebuyer2.accounts.creatives.create
+      parameters:
+        - description: |-
+            The account that this creative belongs to.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Indicates if multiple creatives can share an ID or not. Default is
+            NO_DUPLICATES (one ID per creative).
+          in: query
+          name: duplicateIdMode
+          schema:
+            type: string
+            enum:
+              - NO_DUPLICATES
+              - FORCE_ENABLE_DUPLICATE_IDS
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Creative'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+      requestBody:
+        $ref: '#/components/requestBodies/Creative'
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}':
+    get:
+      description: Gets a creative.
+      operationId: adexchangebuyer2.accounts.creatives.get
+      parameters:
+        - description: The account the creative belongs to.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the creative to retrieve.
+          in: path
+          name: creativeId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Creative'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    put:
+      description: Updates a creative.
+      operationId: adexchangebuyer2.accounts.creatives.update
+      parameters:
+        - description: |-
+            The account that this creative belongs to.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The buyer-defined creative ID of this creative.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          in: path
+          name: creativeId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Creative'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+      requestBody:
+        $ref: '#/components/requestBodies/Creative'
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations':
+    get:
+      description: List all creative-deal associations.
+      operationId: adexchangebuyer2.accounts.creatives.dealAssociations.list
+      parameters:
+        - description: |-
+            The account to list the associations from.
+            Specify "-" to list all creatives the current user has access to.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The creative ID to list the associations from.
+            Specify "-" to list all creatives under the above account.
+          in: path
+          name: creativeId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListDealAssociationsResponse.next_page_token
+            returned from the previous call to 'ListDealAssociations' method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: |-
+            Requested page size. Server may return fewer associations than requested.
+            If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            An optional query string to filter deal associations. If no filter is
+            specified, all associations will be returned.
+            Supported queries are:
+            <ul>
+            <li>accountId=<i>account_id_string</i>
+            <li>creativeId=<i>creative_id_string</i>
+            <li>dealsId=<i>deals_id_string</i>
+            <li>dealsStatus:{approved, conditionally_approved, disapproved,
+                              not_checked}
+            <li>openAuctionStatus:{approved, conditionally_approved, disapproved,
+                                     not_checked}
+            </ul>
+            Example: 'dealsId=12345 AND dealsStatus:disapproved'
+          in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListDealAssociationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations:add':
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: Associate an existing deal with a creative.
+      operationId: adexchangebuyer2.accounts.creatives.dealAssociations.add
+      parameters:
+        - description: The account the creative belongs to.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the creative associated with the deal.
+          in: path
+          name: creativeId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddDealAssociationRequest'
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations:remove':
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: Remove the association between a deal and a creative.
+      operationId: adexchangebuyer2.accounts.creatives.dealAssociations.remove
+      parameters:
+        - description: The account the creative belongs to.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the creative associated with the deal.
+          in: path
+          name: creativeId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveDealAssociationRequest'
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}:stopWatching':
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: |-
+        Stops watching a creative. Will stop push notifications being sent to the
+        topics when the creative changes status.
+      operationId: adexchangebuyer2.accounts.creatives.stopWatching
+      parameters:
+        - description: The account of the creative to stop notifications for.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The creative ID of the creative to stop notifications for.
+            Specify "-" to specify stopping account level notifications.
+          in: path
+          name: creativeId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopWatchingCreativeRequest'
+  '/v2beta1/accounts/{accountId}/creatives/{creativeId}:watch':
+    parameters:
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+    post:
+      description: |-
+        Watches a creative. Will result in push notifications being sent to the
+        topic when the creative changes status.
+      operationId: adexchangebuyer2.accounts.creatives.watch
+      parameters:
+        - description: The account of the creative to watch.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The creative ID to watch for status changes.
+            Specify "-" to watch all creatives under the above account.
+            If both creative-level and account-level notifications are
+            sent, only a single notification will be sent to the
+            creative-level notification topic.
+          in: path
+          name: creativeId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WatchCreativeRequest'
+  '/v2beta1/accounts/{accountId}/filterSets':
+    get:
+      description: Lists all filter sets for the account with the given account ID.
+      operationId: adexchangebuyer2.accounts.filterSets.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListFilterSetsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListFilterSetsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+    post:
+      description: Creates the specified filter set for the account with the given account ID.
+      operationId: adexchangebuyer2.accounts.filterSets.create
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Whether the filter set is transient, or should be persisted indefinitely.
+            By default, filter sets are not transient.
+            If transient, it will be available for at least 1 hour after creation.
+          in: query
+          name: isTransient
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/FilterSet'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilterSet'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}':
+    delete:
+      description: |-
+        Deletes the requested filter set from the account with the given account
+        ID.
+      operationId: adexchangebuyer2.accounts.filterSets.delete
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the filter set to delete.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    get:
+      description: |-
+        Retrieves the requested filter set for the account with the given account
+        ID.
+      operationId: adexchangebuyer2.accounts.filterSets.get
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the filter set to get.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/FilterSet'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/bidMetrics':
+    get:
+      description: Lists all metrics that are measured in terms of number of bids.
+      operationId: adexchangebuyer2.accounts.filterSets.bidMetrics.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the filter set to apply.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListBidMetricsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.bidMetrics.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListBidMetricsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/bidResponseErrors':
+    get:
+      description: |-
+        List all errors that occurred in bid responses, with the number of bid
+        responses affected for each reason.
+      operationId: adexchangebuyer2.accounts.filterSets.bidResponseErrors.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the filter set to apply.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListBidResponseErrorsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.bidResponseErrors.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListBidResponseErrorsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/bidResponsesWithoutBids':
+    get:
+      description: |-
+        List all reasons for which bid responses were considered to have no
+        applicable bids, with the number of bid responses affected for each reason.
+      operationId: adexchangebuyer2.accounts.filterSets.bidResponsesWithoutBids.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the filter set to apply.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListBidResponsesWithoutBidsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.bidResponsesWithoutBids.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListBidResponsesWithoutBidsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/filteredBidRequests':
+    get:
+      description: |-
+        List all reasons that caused a bid request not to be sent for an
+        impression, with the number of bid requests not sent for each reason.
+      operationId: adexchangebuyer2.accounts.filterSets.filteredBidRequests.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the filter set to apply.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListFilteredBidRequestsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.filteredBidRequests.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListFilteredBidRequestsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/filteredBids':
+    get:
+      description: |-
+        List all reasons for which bids were filtered, with the number of bids
+        filtered for each reason.
+      operationId: adexchangebuyer2.accounts.filterSets.filteredBids.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the filter set to apply.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListFilteredBidsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.filteredBids.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListFilteredBidsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/filteredBids/{creativeStatusId}/creatives':
+    get:
+      description: |-
+        List all creatives associated with a specific reason for which bids were
+        filtered, with the number of bids filtered for each creative.
+      operationId: adexchangebuyer2.accounts.filterSets.filteredBids.creatives.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The ID of the creative status for which to retrieve a breakdown by
+            creative.
+            See
+            [creative-status-codes](https://developers.google.com/ad-exchange/rtb/downloads/creative-status-codes).
+          in: path
+          name: creativeStatusId
+          required: true
+          schema:
+            type: integer
+        - description: The ID of the filter set to apply.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListCreativeStatusBreakdownByCreativeResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.filteredBids.creatives.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListCreativeStatusBreakdownByCreativeResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/filteredBids/{creativeStatusId}/details':
+    get:
+      description: |-
+        List all details associated with a specific reason for which bids were
+        filtered, with the number of bids filtered for each detail.
+      operationId: adexchangebuyer2.accounts.filterSets.filteredBids.details.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            The ID of the creative status for which to retrieve a breakdown by detail.
+            See
+            [creative-status-codes](https://developers.google.com/ad-exchange/rtb/downloads/creative-status-codes).
+            Details are only available for statuses 14, 15, 17, 18, 19, 86, and 87.
+          in: path
+          name: creativeStatusId
+          required: true
+          schema:
+            type: integer
+        - description: The ID of the filter set to apply.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListCreativeStatusBreakdownByDetailResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.filteredBids.details.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListCreativeStatusBreakdownByDetailResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/impressionMetrics':
+    get:
+      description: Lists all metrics that are measured in terms of number of impressions.
+      operationId: adexchangebuyer2.accounts.filterSets.impressionMetrics.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the filter set to apply.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListImpressionMetricsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.impressionMetrics.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListImpressionMetricsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/losingBids':
+    get:
+      description: |-
+        List all reasons for which bids lost in the auction, with the number of
+        bids that lost for each reason.
+      operationId: adexchangebuyer2.accounts.filterSets.losingBids.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the filter set to apply.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListLosingBidsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.losingBids.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListLosingBidsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+  '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}/nonBillableWinningBids':
+    get:
+      description: |-
+        List all reasons for which winning bids were not billable, with the number
+        of bids not billed for each reason.
+      operationId: adexchangebuyer2.accounts.filterSets.nonBillableWinningBids.list
+      parameters:
+        - description: Account ID of the buyer.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the filter set to apply.
+          in: path
+          name: filterSetId
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Requested page size. The server may return fewer results than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListNonBillableWinningBidsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.filterSets.nonBillableWinningBids.list
+            method.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListNonBillableWinningBidsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/upload_protocol'
+components:
+  schemas:
+    AbsoluteDateRange:
+      description: |-
+        An absolute date range, specified by its start date and end date.
+        The supported range of dates begins 30 days before today and ends today.
+        Validity checked upon filter set creation. If a filter set with an absolute
+        date range is run at a later date more than 30 days after start_date, it will
+        fail.
+      properties:
+        endDate:
+          $ref: '#/components/schemas/Date'
+        startDate:
+          $ref: '#/components/schemas/Date'
+      type: object
+    AddDealAssociationRequest:
+      description: A request for associating a deal and a creative.
+      properties:
+        association:
+          $ref: '#/components/schemas/CreativeDealAssociation'
+      type: object
+    AppContext:
+      description: '@OutputOnly The app type the restriction applies to for mobile device.'
+      properties:
+        appTypes:
+          description: The app types this restriction applies to.
+          items:
+            enum:
+              - NATIVE
+              - WEB
+            type: string
+          type: array
+      type: object
+    AuctionContext:
+      description: '@OutputOnly The auction type the restriction applies to.'
+      properties:
+        auctionTypes:
+          description: The auction types this restriction applies to.
+          items:
+            enum:
+              - OPEN_AUCTION
+              - DIRECT_DEALS
+            type: string
+          type: array
+      type: object
+    BidMetricsRow:
+      description: |-
+        The set of metrics that are measured in numbers of bids, representing how
+        many bids with the specified dimension values were considered eligible at
+        each stage of the bidding funnel;
+      properties:
+        bids:
+          $ref: '#/components/schemas/MetricValue'
+        bidsInAuction:
+          $ref: '#/components/schemas/MetricValue'
+        billedImpressions:
+          $ref: '#/components/schemas/MetricValue'
+        impressionsWon:
+          $ref: '#/components/schemas/MetricValue'
+        measurableImpressions:
+          $ref: '#/components/schemas/MetricValue'
+        rowDimensions:
+          $ref: '#/components/schemas/RowDimensions'
+        viewableImpressions:
+          $ref: '#/components/schemas/MetricValue'
+      type: object
+    BidResponseWithoutBidsStatusRow:
+      description: |-
+        The number of impressions with the specified dimension values that were
+        considered to have no applicable bids, as described by the specified status.
+      properties:
+        impressionCount:
+          $ref: '#/components/schemas/MetricValue'
+        rowDimensions:
+          $ref: '#/components/schemas/RowDimensions'
+        status:
+          description: |-
+            The status specifying why the bid responses were considered to have no
+            applicable bids.
+          enum:
+            - STATUS_UNSPECIFIED
+            - RESPONSES_WITHOUT_BIDS
+            - RESPONSES_WITHOUT_BIDS_FOR_ACCOUNT
+            - RESPONSES_WITHOUT_BIDS_FOR_DEAL
+          type: string
+      type: object
+    CalloutStatusRow:
+      description: |-
+        The number of impressions with the specified dimension values where the
+        corresponding bid request or bid response was not successful, as described by
+        the specified callout status.
+      properties:
+        calloutStatusId:
+          description: |-
+            The ID of the callout status.
+            See [callout-status-codes](https://developers.google.com/ad-exchange/rtb/downloads/callout-status-codes).
+          format: int32
+          type: integer
+        impressionCount:
+          $ref: '#/components/schemas/MetricValue'
+        rowDimensions:
+          $ref: '#/components/schemas/RowDimensions'
+      type: object
+    Client:
+      description: |-
+        A client resource represents a client buyer&mdash;an agency,
+        a brand, or an advertiser customer of the sponsor buyer.
+        Users associated with the client buyer have restricted access to
+        the Ad Exchange Marketplace and certain other sections
+        of the Ad Exchange Buyer UI based on the role
+        granted to the client buyer.
+        All fields are required unless otherwise specified.
+      properties:
+        clientAccountId:
+          description: |-
+            The globally-unique numerical ID of the client.
+            The value of this field is ignored in create and update operations.
+          format: int64
+          type: string
+        clientName:
+          description: |-
+            Name used to represent this client to publishers.
+            You may have multiple clients that map to the same entity,
+            but for each client the combination of `clientName` and entity
+            must be unique.
+            You can specify this field as empty.
+          type: string
+        entityId:
+          description: |-
+            Numerical identifier of the client entity.
+            The entity can be an advertiser, a brand, or an agency.
+            This identifier is unique among all the entities with the same type.
+
+            A list of all known advertisers with their identifiers is available in the
+            [advertisers.txt](https://storage.googleapis.com/adx-rtb-dictionaries/advertisers.txt)
+            file.
+
+            A list of all known brands with their identifiers is available in the
+            [brands.txt](https://storage.googleapis.com/adx-rtb-dictionaries/brands.txt)
+            file.
+
+            A list of all known agencies with their identifiers is available in the
+            [agencies.txt](https://storage.googleapis.com/adx-rtb-dictionaries/agencies.txt)
+            file.
+          format: int64
+          type: string
+        entityName:
+          description: |-
+            The name of the entity. This field is automatically fetched based on
+            the type and ID.
+            The value of this field is ignored in create and update operations.
+          type: string
+        entityType:
+          description: 'The type of the client entity: `ADVERTISER`, `BRAND`, or `AGENCY`.'
+          enum:
+            - ENTITY_TYPE_UNSPECIFIED
+            - ADVERTISER
+            - BRAND
+            - AGENCY
+          type: string
+        role:
+          description: |-
+            The role which is assigned to the client buyer. Each role implies a set of
+            permissions granted to the client. Must be one of `CLIENT_DEAL_VIEWER`,
+            `CLIENT_DEAL_NEGOTIATOR` or `CLIENT_DEAL_APPROVER`.
+          enum:
+            - CLIENT_ROLE_UNSPECIFIED
+            - CLIENT_DEAL_VIEWER
+            - CLIENT_DEAL_NEGOTIATOR
+            - CLIENT_DEAL_APPROVER
+          type: string
+        status:
+          description: The status of the client buyer.
+          enum:
+            - CLIENT_STATUS_UNSPECIFIED
+            - DISABLED
+            - ACTIVE
+          type: string
+        visibleToSeller:
+          description: Whether the client buyer will be visible to sellers.
+          type: boolean
+      type: object
+    ClientUser:
+      description: |-
+        A client user is created under a client buyer and has restricted access to
+        the Ad Exchange Marketplace and certain other sections
+        of the Ad Exchange Buyer UI based on the role
+        granted to the associated client buyer.
+
+        The only way a new client user can be created is via accepting an
+        email invitation
+        (see the
+        accounts.clients.invitations.create
+        method).
+
+        All fields are required unless otherwise specified.
+      properties:
+        clientAccountId:
+          description: |-
+            Numerical account ID of the client buyer
+            with which the user is associated; the
+            buyer must be a client of the current sponsor buyer.
+            The value of this field is ignored in an update operation.
+          format: int64
+          type: string
+        email:
+          description: |-
+            User's email address. The value of this field
+            is ignored in an update operation.
+          type: string
+        status:
+          description: The status of the client user.
+          enum:
+            - USER_STATUS_UNSPECIFIED
+            - PENDING
+            - ACTIVE
+            - DISABLED
+          type: string
+        userId:
+          description: |-
+            The unique numerical ID of the client user
+            that has accepted an invitation.
+            The value of this field is ignored in an update operation.
+          format: int64
+          type: string
+      type: object
+    ClientUserInvitation:
+      description: |-
+        An invitation for a new client user to get access to the Ad Exchange
+        Buyer UI.
+        All fields are required unless otherwise specified.
+      properties:
+        clientAccountId:
+          description: |-
+            Numerical account ID of the client buyer
+            that the invited user is associated with.
+            The value of this field is ignored in create operations.
+          format: int64
+          type: string
+        email:
+          description: |-
+            The email address to which the invitation is sent. Email
+            addresses should be unique among all client users under each sponsor
+            buyer.
+          type: string
+        invitationId:
+          description: |-
+            The unique numerical ID of the invitation that is sent to the user.
+            The value of this field is ignored in create operations.
+          format: int64
+          type: string
+      type: object
+    Correction:
+      description: '@OutputOnly Shows any corrections that were applied to this creative.'
+      properties:
+        contexts:
+          description: The contexts for the correction.
+          items:
+            $ref: '#/components/schemas/ServingContext'
+          type: array
+        details:
+          description: Additional details about what was corrected.
+          items:
+            type: string
+          type: array
+        type:
+          description: The type of correction that was applied to the creative.
+          enum:
+            - CORRECTION_TYPE_UNSPECIFIED
+            - VENDOR_IDS_ADDED
+            - SSL_ATTRIBUTE_REMOVED
+            - FLASH_FREE_ATTRIBUTE_REMOVED
+            - FLASH_FREE_ATTRIBUTE_ADDED
+            - REQUIRED_ATTRIBUTE_ADDED
+            - REQUIRED_VENDOR_ADDED
+            - SSL_ATTRIBUTE_ADDED
+            - IN_BANNER_VIDEO_ATTRIBUTE_ADDED
+            - MRAID_ATTRIBUTE_ADDED
+            - FLASH_ATTRIBUTE_REMOVED
+            - VIDEO_IN_SNIPPET_ATTRIBUTE_ADDED
+          type: string
+      type: object
+    Creative:
+      description: A creative and its classification data.
+      properties:
+        accountId:
+          description: |-
+            The account that this creative belongs to.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          type: string
+        adChoicesDestinationUrl:
+          description: The link to AdChoices destination page.
+          type: string
+        advertiserName:
+          description: The name of the company being advertised in the creative.
+          type: string
+        agencyId:
+          description: The agency ID for this creative.
+          format: int64
+          type: string
+        apiUpdateTime:
+          description: '@OutputOnly The last update timestamp of the creative via API.'
+          format: google-datetime
+          type: string
+        attributes:
+          description: |-
+            All attributes for the ads that may be shown from this creative.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          items:
+            enum:
+              - ATTRIBUTE_UNSPECIFIED
+              - IS_TAGGED
+              - IS_COOKIE_TARGETED
+              - IS_USER_INTEREST_TARGETED
+              - EXPANDING_DIRECTION_NONE
+              - EXPANDING_DIRECTION_UP
+              - EXPANDING_DIRECTION_DOWN
+              - EXPANDING_DIRECTION_LEFT
+              - EXPANDING_DIRECTION_RIGHT
+              - EXPANDING_DIRECTION_UP_LEFT
+              - EXPANDING_DIRECTION_UP_RIGHT
+              - EXPANDING_DIRECTION_DOWN_LEFT
+              - EXPANDING_DIRECTION_DOWN_RIGHT
+              - EXPANDING_DIRECTION_UP_OR_DOWN
+              - EXPANDING_DIRECTION_LEFT_OR_RIGHT
+              - EXPANDING_DIRECTION_ANY_DIAGONAL
+              - EXPANDING_ACTION_ROLLOVER_TO_EXPAND
+              - INSTREAM_VAST_VIDEO_TYPE_VPAID_FLASH
+              - RICH_MEDIA_CAPABILITY_TYPE_MRAID
+              - RICH_MEDIA_CAPABILITY_TYPE_SSL
+              - RICH_MEDIA_CAPABILITY_TYPE_INTERSTITIAL
+              - NATIVE_ELIGIBILITY_ELIGIBLE
+              - NATIVE_ELIGIBILITY_NOT_ELIGIBLE
+              - RENDERING_SIZELESS_ADX
+            type: string
+          type: array
+        clickThroughUrls:
+          description: The set of destination URLs for the creative.
+          items:
+            type: string
+          type: array
+        corrections:
+          description: '@OutputOnly Shows any corrections that were applied to this creative.'
+          items:
+            $ref: '#/components/schemas/Correction'
+          type: array
+        creativeId:
+          description: |-
+            The buyer-defined creative ID of this creative.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          type: string
+        dealsStatus:
+          description: |-
+            @OutputOnly The top-level deals status of this creative.
+            If disapproved, an entry for 'auctionType=DIRECT_DEALS' (or 'ALL') in
+            serving_restrictions will also exist. Note
+            that this may be nuanced with other contextual restrictions, in which case,
+            it may be preferable to read from serving_restrictions directly.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          enum:
+            - STATUS_UNSPECIFIED
+            - NOT_CHECKED
+            - CONDITIONALLY_APPROVED
+            - APPROVED
+            - DISAPPROVED
+          type: string
+        detectedAdvertiserIds:
+          description: '@OutputOnly Detected advertiser IDs, if any.'
+          items:
+            format: int64
+            type: string
+          type: array
+        detectedDomains:
+          description: |-
+            @OutputOnly
+            The detected domains for this creative.
+          items:
+            type: string
+          type: array
+        detectedLanguages:
+          description: |-
+            @OutputOnly
+            The detected languages for this creative. The order is arbitrary. The codes
+            are 2 or 5 characters and are documented at
+            https://developers.google.com/adwords/api/docs/appendix/languagecodes.
+          items:
+            type: string
+          type: array
+        detectedProductCategories:
+          description: |-
+            @OutputOnly Detected product categories, if any.
+            See the ad-product-categories.txt file in the technical documentation
+            for a list of IDs.
+          items:
+            format: int32
+            type: integer
+          type: array
+        detectedSensitiveCategories:
+          description: |-
+            @OutputOnly Detected sensitive categories, if any.
+            See the ad-sensitive-categories.txt file in the technical documentation for
+            a list of IDs. You should use these IDs along with the
+            excluded-sensitive-category field in the bid request to filter your bids.
+          items:
+            format: int32
+            type: integer
+          type: array
+        filteringStats:
+          $ref: '#/components/schemas/FilteringStats'
+        html:
+          $ref: '#/components/schemas/HtmlContent'
+        impressionTrackingUrls:
+          description: The set of URLs to be called to record an impression.
+          items:
+            type: string
+          type: array
+        native:
+          $ref: '#/components/schemas/NativeContent'
+        openAuctionStatus:
+          description: |-
+            @OutputOnly The top-level open auction status of this creative.
+            If disapproved, an entry for 'auctionType = OPEN_AUCTION' (or 'ALL') in
+            serving_restrictions will also exist. Note
+            that this may be nuanced with other contextual restrictions, in which case,
+            it may be preferable to read from serving_restrictions directly.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          enum:
+            - STATUS_UNSPECIFIED
+            - NOT_CHECKED
+            - CONDITIONALLY_APPROVED
+            - APPROVED
+            - DISAPPROVED
+          type: string
+        restrictedCategories:
+          description: All restricted categories for the ads that may be shown from this creative.
+          items:
+            enum:
+              - NO_RESTRICTED_CATEGORIES
+              - ALCOHOL
+            type: string
+          type: array
+        servingRestrictions:
+          description: |-
+            @OutputOnly The granular status of this ad in specific contexts.
+            A context here relates to where something ultimately serves (for example,
+            a physical location, a platform, an HTTPS vs HTTP request, or the type
+            of auction).
+          items:
+            $ref: '#/components/schemas/ServingRestriction'
+          type: array
+        vendorIds:
+          description: |-
+            All vendor IDs for the ads that may be shown from this creative.
+            See https://storage.googleapis.com/adx-rtb-dictionaries/vendors.txt
+            for possible values.
+          items:
+            format: int32
+            type: integer
+          type: array
+        version:
+          description: '@OutputOnly The version of this creative.'
+          format: int32
+          type: integer
+        video:
+          $ref: '#/components/schemas/VideoContent'
+      type: object
+    CreativeDealAssociation:
+      description: The association between a creative and a deal.
+      properties:
+        accountId:
+          description: The account the creative belongs to.
+          type: string
+        creativeId:
+          description: The ID of the creative associated with the deal.
+          type: string
+        dealsId:
+          description: The externalDealId for the deal associated with the creative.
+          type: string
+      type: object
+    CreativeStatusRow:
+      description: |-
+        The number of bids with the specified dimension values that did not win the
+        auction (either were filtered pre-auction or lost the auction), as described
+        by the specified creative status.
+      properties:
+        bidCount:
+          $ref: '#/components/schemas/MetricValue'
+        creativeStatusId:
+          description: |-
+            The ID of the creative status.
+            See [creative-status-codes](https://developers.google.com/ad-exchange/rtb/downloads/creative-status-codes).
+          format: int32
+          type: integer
+        rowDimensions:
+          $ref: '#/components/schemas/RowDimensions'
+      type: object
+    Date:
+      description: |-
+        Represents a whole calendar date, e.g. date of birth. The time of day and
+        time zone are either specified elsewhere or are not significant. The date
+        is relative to the Proleptic Gregorian Calendar. The day may be 0 to
+        represent a year and month where the day is not significant, e.g. credit card
+        expiration date. The year may be 0 to represent a month and day independent
+        of year, e.g. anniversary date. Related types are google.type.TimeOfDay
+        and `google.protobuf.Timestamp`.
+      properties:
+        day:
+          description: |-
+            Day of month. Must be from 1 to 31 and valid for the year and month, or 0
+            if specifying a year/month where the day is not significant.
+          format: int32
+          type: integer
+        month:
+          description: Month of year. Must be from 1 to 12.
+          format: int32
+          type: integer
+        year:
+          description: |-
+            Year of date. Must be from 1 to 9999, or 0 if specifying a date without
+            a year.
+          format: int32
+          type: integer
+      type: object
+    Disapproval:
+      description: '@OutputOnly The reason and details for a disapproval.'
+      properties:
+        details:
+          description: Additional details about the reason for disapproval.
+          items:
+            type: string
+          type: array
+        reason:
+          description: The categorized reason for disapproval.
+          enum:
+            - LENGTH_OF_IMAGE_ANIMATION
+            - BROKEN_URL
+            - MEDIA_NOT_FUNCTIONAL
+            - INVALID_FOURTH_PARTY_CALL
+            - INCORRECT_REMARKETING_DECLARATION
+            - LANDING_PAGE_ERROR
+            - AD_SIZE_DOES_NOT_MATCH_AD_SLOT
+            - NO_BORDER
+            - FOURTH_PARTY_BROWSER_COOKIES
+            - LSO_OBJECTS
+            - BLANK_CREATIVE
+            - DESTINATION_URLS_UNDECLARED
+            - PROBLEM_WITH_CLICK_MACRO
+            - INCORRECT_AD_TECHNOLOGY_DECLARATION
+            - INCORRECT_DESTINATION_URL_DECLARATION
+            - EXPANDABLE_INCORRECT_DIRECTION
+            - EXPANDABLE_DIRECTION_NOT_SUPPORTED
+            - EXPANDABLE_INVALID_VENDOR
+            - EXPANDABLE_FUNCTIONALITY
+            - VIDEO_INVALID_VENDOR
+            - VIDEO_UNSUPPORTED_LENGTH
+            - VIDEO_UNSUPPORTED_FORMAT
+            - VIDEO_FUNCTIONALITY
+            - LANDING_PAGE_DISABLED
+            - MALWARE_SUSPECTED
+            - ADULT_IMAGE_OR_VIDEO
+            - INACCURATE_AD_TEXT
+            - COUNTERFEIT_DESIGNER_GOODS
+            - POP_UP
+            - INVALID_RTB_PROTOCOL_USAGE
+            - RAW_IP_ADDRESS_IN_SNIPPET
+            - UNACCEPTABLE_CONTENT_SOFTWARE
+            - UNAUTHORIZED_COOKIE_ON_GOOGLE_DOMAIN
+            - UNDECLARED_FLASH_OBJECTS
+            - INVALID_SSL_DECLARATION
+            - DIRECT_DOWNLOAD_IN_AD
+            - MAXIMUM_DOWNLOAD_SIZE_EXCEEDED
+            - DESTINATION_URL_SITE_NOT_CRAWLABLE
+            - BAD_URL_LEGAL_DISAPPROVAL
+            - PHARMA_GAMBLING_ALCOHOL_NOT_ALLOWED
+            - DYNAMIC_DNS_AT_DESTINATION_URL
+            - POOR_IMAGE_OR_VIDEO_QUALITY
+            - UNACCEPTABLE_IMAGE_CONTENT
+            - INCORRECT_IMAGE_LAYOUT
+            - IRRELEVANT_IMAGE_OR_VIDEO
+            - DESTINATION_SITE_DOES_NOT_ALLOW_GOING_BACK
+            - MISLEADING_CLAIMS_IN_AD
+            - RESTRICTED_PRODUCTS
+            - UNACCEPTABLE_CONTENT
+            - AUTOMATED_AD_CLICKING
+            - INVALID_URL_PROTOCOL
+            - UNDECLARED_RESTRICTED_CONTENT
+            - INVALID_REMARKETING_LIST_USAGE
+            - DESTINATION_SITE_NOT_CRAWLABLE_ROBOTS_TXT
+            - CLICK_TO_DOWNLOAD_NOT_AN_APP
+            - INACCURATE_REVIEW_EXTENSION
+            - SEXUALLY_EXPLICIT_CONTENT
+            - GAINING_AN_UNFAIR_ADVANTAGE
+            - GAMING_THE_GOOGLE_NETWORK
+            - DANGEROUS_PRODUCTS_KNIVES
+            - DANGEROUS_PRODUCTS_EXPLOSIVES
+            - DANGEROUS_PRODUCTS_GUNS
+            - DANGEROUS_PRODUCTS_DRUGS
+            - DANGEROUS_PRODUCTS_TOBACCO
+            - DANGEROUS_PRODUCTS_WEAPONS
+            - UNCLEAR_OR_IRRELEVANT_AD
+            - PROFESSIONAL_STANDARDS
+            - DYSFUNCTIONAL_PROMOTION
+            - INVALID_INTEREST_BASED_AD
+            - MISUSE_OF_PERSONAL_INFORMATION
+            - OMISSION_OF_RELEVANT_INFORMATION
+            - UNAVAILABLE_PROMOTIONS
+            - MISLEADING_PROMOTIONS
+            - INAPPROPRIATE_CONTENT
+            - SENSITIVE_EVENTS
+            - SHOCKING_CONTENT
+            - ENABLING_DISHONEST_BEHAVIOR
+            - TECHNICAL_REQUIREMENTS
+            - RESTRICTED_POLITICAL_CONTENT
+            - UNSUPPORTED_CONTENT
+            - INVALID_BIDDING_METHOD
+            - VIDEO_TOO_LONG
+            - VIOLATES_JAPANESE_PHARMACY_LAW
+            - UNACCREDITED_PET_PHARMACY
+            - ABORTION
+            - CONTRACEPTIVES
+            - NEED_CERTIFICATES_TO_ADVERTISE_IN_CHINA
+            - KCDSP_REGISTRATION
+            - NOT_FAMILY_SAFE
+            - CLINICAL_TRIAL_RECRUITMENT
+            - MAXIMUM_NUMBER_OF_HTTP_CALLS_EXCEEDED
+            - MAXIMUM_NUMBER_OF_COOKIES_EXCEEDED
+            - PERSONAL_LOANS
+            - UNSUPPORTED_FLASH_CONTENT
+          type: string
+      type: object
+    Empty:
+      description: |-
+        A generic empty message that you can re-use to avoid defining duplicated
+        empty messages in your APIs. A typical example is to use it as the request
+        or the response type of an API method. For instance:
+
+            service Foo {
+              rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+            }
+
+        The JSON representation for `Empty` is empty JSON object `{}`.
+      properties: {}
+      type: object
+    FilterSet:
+      description: |-
+        A set of filters that is applied to a request for data.
+        Within a filter set, an AND operation is performed across the filters
+        represented by each field. An OR operation is performed across the filters
+        represented by the multiple values of a repeated field. E.g.
+        "format=VIDEO AND deal_id=12 AND (seller_network_id=34 OR
+        seller_network_id=56)"
+      properties:
+        absoluteDateRange:
+          $ref: '#/components/schemas/AbsoluteDateRange'
+        buyerAccountId:
+          description: The ID of the buyer account on which to filter; optional.
+          format: int64
+          type: string
+        creativeId:
+          description: The ID of the creative on which to filter; optional.
+          type: string
+        dealId:
+          description: The ID of the deal on which to filter; optional.
+          format: int64
+          type: string
+        environment:
+          description: The environment on which to filter; optional.
+          enum:
+            - ENVIRONMENT_UNSPECIFIED
+            - WEB
+            - APP
+          type: string
+        filterSetId:
+          description: |-
+            The ID of the filter set; unique within the account of the filter set
+            owner.
+            The value of this field is ignored in create operations.
+          format: int64
+          type: string
+        format:
+          description: The format on which to filter; optional.
+          enum:
+            - FORMAT_UNSPECIFIED
+            - DISPLAY
+            - VIDEO
+          type: string
+        ownerAccountId:
+          description: |-
+            The account ID of the buyer who owns this filter set.
+            The value of this field is ignored in create operations.
+          format: int64
+          type: string
+        platforms:
+          description: |-
+            The list of platforms on which to filter; may be empty. The filters
+            represented by multiple platforms are ORed together (i.e. if non-empty,
+            results must match any one of the platforms).
+          items:
+            enum:
+              - PLATFORM_UNSPECIFIED
+              - DESKTOP
+              - TABLET
+              - MOBILE
+            type: string
+          type: array
+        realtimeTimeRange:
+          $ref: '#/components/schemas/RealtimeTimeRange'
+        relativeDateRange:
+          $ref: '#/components/schemas/RelativeDateRange'
+        sellerNetworkIds:
+          description: |-
+            The list of IDs of the seller (publisher) networks on which to filter;
+            may be empty. The filters represented by multiple seller network IDs are
+            ORed together (i.e. if non-empty, results must match any one of the
+            publisher networks).
+            See [seller-network-ids](https://developers.google.com/ad-exchange/rtb/downloads/seller-network-ids)
+            file for the set of existing seller network IDs.
+          items:
+            format: int32
+            type: integer
+          type: array
+        timeSeriesGranularity:
+          description: |-
+            The granularity of time intervals if a time series breakdown is desired;
+            optional.
+          enum:
+            - TIME_SERIES_GRANULARITY_UNSPECIFIED
+            - HOURLY
+            - DAILY
+          type: string
+      type: object
+    FilteredBidCreativeRow:
+      description: |-
+        The number of filtered bids with the specified dimension values that have the
+        specified creative.
+      properties:
+        bidCount:
+          $ref: '#/components/schemas/MetricValue'
+        creativeId:
+          description: The ID of the creative.
+          type: string
+        rowDimensions:
+          $ref: '#/components/schemas/RowDimensions'
+      type: object
+    FilteredBidDetailRow:
+      description: |-
+        The number of filtered bids with the specified dimension values, among those
+        filtered due to the requested filtering reason (i.e. creative status), that
+        have the specified detail.
+      properties:
+        bidCount:
+          $ref: '#/components/schemas/MetricValue'
+        detailId:
+          description: |-
+            The ID of the detail. The associated value can be looked up in the
+            dictionary file corresponding to the DetailType in the response message.
+          format: int32
+          type: integer
+        rowDimensions:
+          $ref: '#/components/schemas/RowDimensions'
+      type: object
+    FilteringStats:
+      description: |-
+        @OutputOnly Filtering reasons for this creative during a period of a single
+        day (from midnight to midnight Pacific).
+      properties:
+        date:
+          $ref: '#/components/schemas/Date'
+        reasons:
+          description: The set of filtering reasons for this date.
+          items:
+            $ref: '#/components/schemas/Reason'
+          type: array
+      type: object
+    HtmlContent:
+      description: HTML content for a creative.
+      properties:
+        height:
+          description: The height of the HTML snippet in pixels.
+          format: int32
+          type: integer
+        snippet:
+          description: The HTML snippet that displays the ad when inserted in the web page.
+          type: string
+        width:
+          description: The width of the HTML snippet in pixels.
+          format: int32
+          type: integer
+      type: object
+    Image:
+      description: |-
+        An image resource. You may provide a larger image than was requested,
+        so long as the aspect ratio is preserved.
+      properties:
+        height:
+          description: Image height in pixels.
+          format: int32
+          type: integer
+        url:
+          description: The URL of the image.
+          type: string
+        width:
+          description: Image width in pixels.
+          format: int32
+          type: integer
+      type: object
+    ImpressionMetricsRow:
+      description: |-
+        The set of metrics that are measured in numbers of impressions, representing
+        how many impressions with the specified dimension values were considered
+        eligible at each stage of the bidding funnel.
+      properties:
+        availableImpressions:
+          $ref: '#/components/schemas/MetricValue'
+        bidRequests:
+          $ref: '#/components/schemas/MetricValue'
+        inventoryMatches:
+          $ref: '#/components/schemas/MetricValue'
+        responsesWithBids:
+          $ref: '#/components/schemas/MetricValue'
+        rowDimensions:
+          $ref: '#/components/schemas/RowDimensions'
+        successfulResponses:
+          $ref: '#/components/schemas/MetricValue'
+      type: object
+    ListBidMetricsResponse:
+      description: Response message for listing the metrics that are measured in number of bids.
+      properties:
+        bidMetricsRows:
+          description: 'List of rows, each containing a set of bid metrics.'
+          items:
+            $ref: '#/components/schemas/BidMetricsRow'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListBidMetricsRequest.pageToken
+            field in the subsequent call to the
+            accounts.filterSets.bidMetrics.list
+            method to retrieve the next page of results.
+          type: string
+      type: object
+    ListBidResponseErrorsResponse:
+      description: |-
+        Response message for listing all reasons that bid responses resulted in an
+        error.
+      properties:
+        calloutStatusRows:
+          description: 'List of rows, with counts of bid responses aggregated by callout status.'
+          items:
+            $ref: '#/components/schemas/CalloutStatusRow'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListBidResponseErrorsRequest.pageToken
+            field in the subsequent call to the
+            accounts.filterSets.bidResponseErrors.list
+            method to retrieve the next page of results.
+          type: string
+      type: object
+    ListBidResponsesWithoutBidsResponse:
+      description: |-
+        Response message for listing all reasons that bid responses were considered
+        to have no applicable bids.
+      properties:
+        bidResponseWithoutBidsStatusRows:
+          description: |-
+            List of rows, with counts of bid responses without bids aggregated by
+            status.
+          items:
+            $ref: '#/components/schemas/BidResponseWithoutBidsStatusRow'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListBidResponsesWithoutBidsRequest.pageToken
+            field in the subsequent call to the
+            accounts.filterSets.bidResponsesWithoutBids.list
+            method to retrieve the next page of results.
+          type: string
+      type: object
+    ListClientUserInvitationsResponse:
+      properties:
+        invitations:
+          description: The returned list of client users.
+          items:
+            $ref: '#/components/schemas/ClientUserInvitation'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListClientUserInvitationsRequest.pageToken
+            field in the subsequent call to the
+            clients.invitations.list
+            method to retrieve the next
+            page of results.
+          type: string
+      type: object
+    ListClientUsersResponse:
+      properties:
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListClientUsersRequest.pageToken
+            field in the subsequent call to the
+            clients.invitations.list
+            method to retrieve the next
+            page of results.
+          type: string
+        users:
+          description: The returned list of client users.
+          items:
+            $ref: '#/components/schemas/ClientUser'
+          type: array
+      type: object
+    ListClientsResponse:
+      properties:
+        clients:
+          description: The returned list of clients.
+          items:
+            $ref: '#/components/schemas/Client'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListClientsRequest.pageToken
+            field in the subsequent call to the
+            accounts.clients.list method
+            to retrieve the next page of results.
+          type: string
+      type: object
+    ListCreativeStatusBreakdownByCreativeResponse:
+      description: |-
+        Response message for listing all creatives associated with a given filtered
+        bid reason.
+      properties:
+        filteredBidCreativeRows:
+          description: |-
+            List of rows, with counts of bids with a given creative status aggregated
+            by creative.
+          items:
+            $ref: '#/components/schemas/FilteredBidCreativeRow'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListCreativeStatusBreakdownByCreativeRequest.pageToken
+            field in the subsequent call to the
+            accounts.filterSets.filteredBids.creatives.list
+            method to retrieve the next page of results.
+          type: string
+      type: object
+    ListCreativeStatusBreakdownByDetailResponse:
+      description: |-
+        Response message for listing all details associated with a given filtered bid
+        reason.
+      properties:
+        detailType:
+          description: The type of detail that the detail IDs represent.
+          enum:
+            - DETAIL_TYPE_UNSPECIFIED
+            - CREATIVE_ATTRIBUTE
+            - VENDOR
+            - SENSITIVE_CATEGORY
+            - PRODUCT_CATEGORY
+          type: string
+        filteredBidDetailRows:
+          description: |-
+            List of rows, with counts of bids with a given creative status aggregated
+            by detail.
+          items:
+            $ref: '#/components/schemas/FilteredBidDetailRow'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListCreativeStatusBreakdownByDetailRequest.pageToken
+            field in the subsequent call to the
+            accounts.filterSets.filteredBids.details.list
+            method to retrieve the next page of results.
+          type: string
+      type: object
+    ListCreativesResponse:
+      description: A response for listing creatives.
+      properties:
+        creatives:
+          description: The list of creatives.
+          items:
+            $ref: '#/components/schemas/Creative'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListCreativesRequest.page_token
+            field in the subsequent call to `ListCreatives` method to retrieve the next
+            page of results.
+          type: string
+      type: object
+    ListDealAssociationsResponse:
+      description: A response for listing creative and deal associations
+      properties:
+        associations:
+          description: The list of associations.
+          items:
+            $ref: '#/components/schemas/CreativeDealAssociation'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListDealAssociationsRequest.page_token
+            field in the subsequent call to 'ListDealAssociation' method to retrieve
+            the next page of results.
+          type: string
+      type: object
+    ListFilterSetsResponse:
+      description: Response message for listing filter sets.
+      properties:
+        filterSets:
+          description: The filter sets belonging to the buyer.
+          items:
+            $ref: '#/components/schemas/FilterSet'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListFilterSetsRequest.pageToken
+            field in the subsequent call to the
+            accounts.filterSets.list
+            method to retrieve the next page of results.
+          type: string
+      type: object
+    ListFilteredBidRequestsResponse:
+      description: |-
+        Response message for listing all reasons that bid requests were filtered and
+        not sent to the buyer.
+      properties:
+        calloutStatusRows:
+          description: |-
+            List of rows, with counts of filtered bid requests aggregated by callout
+            status.
+          items:
+            $ref: '#/components/schemas/CalloutStatusRow'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListFilteredBidRequestsRequest.pageToken
+            field in the subsequent call to the
+            accounts.filterSets.filteredBidRequests.list
+            method to retrieve the next page of results.
+          type: string
+      type: object
+    ListFilteredBidsResponse:
+      description: |-
+        Response message for listing all reasons that bids were filtered from the
+        auction.
+      properties:
+        creativeStatusRows:
+          description: |-
+            List of rows, with counts of filtered bids aggregated by filtering reason
+            (i.e. creative status).
+          items:
+            $ref: '#/components/schemas/CreativeStatusRow'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListFilteredBidsRequest.pageToken
+            field in the subsequent call to the
+            accounts.filterSets.filteredBids.list
+            method to retrieve the next page of results.
+          type: string
+      type: object
+    ListImpressionMetricsResponse:
+      description: |-
+        Response message for listing the metrics that are measured in number of
+        impressions.
+      properties:
+        impressionMetricsRows:
+          description: 'List of rows, each containing a set of impression metrics.'
+          items:
+            $ref: '#/components/schemas/ImpressionMetricsRow'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListImpressionMetricsRequest.pageToken
+            field in the subsequent call to the
+            accounts.filterSets.impressionMetrics.list
+            method to retrieve the next page of results.
+          type: string
+      type: object
+    ListLosingBidsResponse:
+      description: Response message for listing all reasons that bids lost in the auction.
+      properties:
+        creativeStatusRows:
+          description: |-
+            List of rows, with counts of losing bids aggregated by loss reason (i.e.
+            creative status).
+          items:
+            $ref: '#/components/schemas/CreativeStatusRow'
+          type: array
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListLosingBidsRequest.pageToken
+            field in the subsequent call to the
+            accounts.filterSets.losingBids.list
+            method to retrieve the next page of results.
+          type: string
+      type: object
+    ListNonBillableWinningBidsResponse:
+      description: |-
+        Response message for listing all reasons for which a buyer was not billed for
+        a winning bid.
+      properties:
+        nextPageToken:
+          description: |-
+            A token to retrieve the next page of results.
+            Pass this value in the
+            ListNonBillableWinningBidsRequest.pageToken
+            field in the subsequent call to the
+            accounts.filterSets.nonBillableWinningBids.list
+            method to retrieve the next page of results.
+          type: string
+        nonBillableWinningBidStatusRows:
+          description: 'List of rows, with counts of bids not billed aggregated by reason.'
+          items:
+            $ref: '#/components/schemas/NonBillableWinningBidStatusRow'
+          type: array
+      type: object
+    LocationContext:
+      description: '@OutputOnly The Geo criteria the restriction applies to.'
+      properties:
+        geoCriteriaIds:
+          description: |-
+            IDs representing the geo location for this context.
+            Please refer to the
+            [geo-table.csv](https://storage.googleapis.com/adx-rtb-dictionaries/geo-table.csv)
+            file for different geo criteria IDs.
+          items:
+            format: int32
+            type: integer
+          type: array
+      type: object
+    MetricValue:
+      description: |-
+        A metric value, with an expected value and a variance; represents a count
+        that may be either exact or estimated (i.e. when sampled).
+      properties:
+        value:
+          description: The expected value of the metric.
+          format: int64
+          type: string
+        variance:
+          description: |-
+            The variance (i.e. square of the standard deviation) of the metric value.
+            If value is exact, variance is 0.
+            Can be used to calculate margin of error as a percentage of value, using
+            the following formula, where Z is the standard constant that depends on the
+            desired size of the confidence interval (e.g. for 90% confidence interval,
+            use Z = 1.645):
+
+              marginOfError = 100 * Z * sqrt(variance) / value
+          format: int64
+          type: string
+      type: object
+    NativeContent:
+      description: Native content for a creative.
+      properties:
+        advertiserName:
+          description: 'The name of the advertiser or sponsor, to be displayed in the ad creative.'
+          type: string
+        appIcon:
+          $ref: '#/components/schemas/Image'
+        body:
+          description: A long description of the ad.
+          type: string
+        callToAction:
+          description: A label for the button that the user is supposed to click.
+          type: string
+        clickLinkUrl:
+          description: The URL that the browser/SDK will load when the user clicks the ad.
+          type: string
+        clickTrackingUrl:
+          description: The URL to use for click tracking.
+          type: string
+        headline:
+          description: A short title for the ad.
+          type: string
+        image:
+          $ref: '#/components/schemas/Image'
+        logo:
+          $ref: '#/components/schemas/Image'
+        priceDisplayText:
+          description: The price of the promoted app including currency info.
+          type: string
+        starRating:
+          description: 'The app rating in the app store. Must be in the range [0-5].'
+          format: double
+          type: number
+        storeUrl:
+          description: The URL to the app store to purchase/download the promoted app.
+          type: string
+        videoUrl:
+          description: The URL to fetch a native video ad.
+          type: string
+      type: object
+    NonBillableWinningBidStatusRow:
+      description: |-
+        The number of winning bids with the specified dimension values for which the
+        buyer was not billed, as described by the specified status.
+      properties:
+        bidCount:
+          $ref: '#/components/schemas/MetricValue'
+        rowDimensions:
+          $ref: '#/components/schemas/RowDimensions'
+        status:
+          description: The status specifying why the winning bids were not billed.
+          enum:
+            - STATUS_UNSPECIFIED
+            - AD_NOT_RENDERED
+            - INVALID_IMPRESSION
+          type: string
+      type: object
+    PlatformContext:
+      description: '@OutputOnly The type of platform the restriction applies to.'
+      properties:
+        platforms:
+          description: The platforms this restriction applies to.
+          items:
+            enum:
+              - DESKTOP
+              - ANDROID
+              - IOS
+            type: string
+          type: array
+      type: object
+    RealtimeTimeRange:
+      description: |-
+        An open-ended realtime time range specified by the start timestamp.
+        For filter sets that specify a realtime time range RTB metrics continue to
+        be aggregated throughout the lifetime of the filter set.
+      properties:
+        startTimestamp:
+          description: The start timestamp of the real-time RTB metrics aggregation.
+          format: google-datetime
+          type: string
+      type: object
+    Reason:
+      description: A specific filtering status and how many times it occurred.
+      properties:
+        count:
+          description: |-
+            The number of times the creative was filtered for the status. The
+            count is aggregated across all publishers on the exchange.
+          format: int64
+          type: string
+        status:
+          description: |-
+            The filtering status code. Please refer to the
+            [creative-status-codes.txt](https://storage.googleapis.com/adx-rtb-dictionaries/creative-status-codes.txt)
+            file for different statuses.
+          format: int32
+          type: integer
+      type: object
+    RelativeDateRange:
+      description: |-
+        A relative date range, specified by an offset and a duration.
+        The supported range of dates begins 30 days before today and ends today.
+        I.e. the limits for these values are:
+        offset_days >= 0
+        duration_days >= 1
+        offset_days + duration_days <= 30
+      properties:
+        durationDays:
+          description: |-
+            The number of days in the requested date range. E.g. for a range spanning
+            today, 1. For a range spanning the last 7 days, 7.
+          format: int32
+          type: integer
+        offsetDays:
+          description: |-
+            The end date of the filter set, specified as the number of days before
+            today. E.g. for a range where the last date is today, 0.
+          format: int32
+          type: integer
+      type: object
+    RemoveDealAssociationRequest:
+      description: A request for removing the association between a deal and a creative.
+      properties:
+        association:
+          $ref: '#/components/schemas/CreativeDealAssociation'
+      type: object
+    RowDimensions:
+      description: |-
+        A response may include multiple rows, breaking down along various dimensions.
+        Encapsulates the values of all dimensions for a given row.
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+      type: object
+    SecurityContext:
+      description: '@OutputOnly A security context.'
+      properties:
+        securities:
+          description: The security types in this context.
+          items:
+            enum:
+              - INSECURE
+              - SSL
+            type: string
+          type: array
+      type: object
+    ServingContext:
+      description: The serving context for this restriction.
+      properties:
+        all:
+          description: Matches all contexts.
+          enum:
+            - SIMPLE_CONTEXT
+          type: string
+        appType:
+          $ref: '#/components/schemas/AppContext'
+        auctionType:
+          $ref: '#/components/schemas/AuctionContext'
+        location:
+          $ref: '#/components/schemas/LocationContext'
+        platform:
+          $ref: '#/components/schemas/PlatformContext'
+        securityType:
+          $ref: '#/components/schemas/SecurityContext'
+      type: object
+    ServingRestriction:
+      description: |-
+        @OutputOnly A representation of the status of an ad in a
+        specific context. A context here relates to where something ultimately serves
+        (for example, a user or publisher geo, a platform, an HTTPS vs HTTP request,
+        or the type of auction).
+      properties:
+        contexts:
+          description: The contexts for the restriction.
+          items:
+            $ref: '#/components/schemas/ServingContext'
+          type: array
+        disapprovalReasons:
+          description: |-
+            Any disapprovals bound to this restriction.
+            Only present if status=DISAPPROVED.
+            Can be used to filter the response of the
+            creatives.list
+            method.
+          items:
+            $ref: '#/components/schemas/Disapproval'
+          type: array
+        status:
+          description: |-
+            The status of the creative in this context (for example, it has been
+            explicitly disapproved or is pending review).
+          enum:
+            - STATUS_UNSPECIFIED
+            - DISAPPROVAL
+            - PENDING_REVIEW
+          type: string
+      type: object
+    StopWatchingCreativeRequest:
+      description: A request for stopping notifications for changes to creative Status.
+      properties: {}
+      type: object
+    TimeInterval:
+      description: |-
+        An interval of time, with an absolute start and end.
+        This is included in the response, for several reasons:
+        1) The request may have specified start or end times relative to the time the
+           request was sent; the response indicates the corresponding absolute time
+           interval.
+        2) The request may have specified an end time past the latest time for which
+           data was available (e.g. if requesting data for the today); the response
+           indicates the latest time for which data was actually returned.
+        3) The response data for a single request may be broken down into multiple
+           time intervals, if a time series was requested.
+      properties:
+        endTime:
+          description: |-
+            The timestamp marking the end of the range (exclusive) for which data is
+            included.
+          format: google-datetime
+          type: string
+        startTime:
+          description: |-
+            The timestamp marking the start of the range (inclusive) for which data is
+            included.
+          format: google-datetime
+          type: string
+      type: object
+    VideoContent:
+      description: Video content for a creative.
+      properties:
+        videoUrl:
+          description: The URL to fetch a video ad.
+          type: string
+      type: object
+    WatchCreativeRequest:
+      description: A request for watching changes to creative Status.
+      properties:
+        topic:
+          description: |-
+            The Pub/Sub topic to publish notifications to.
+            This topic must already exist and must give permission to
+            ad-exchange-buyside-reports@google.com to write to the topic.
+            This should be the full resource name in
+            "projects/{project_id}/topics/{topic_id}" format.
+          type: string
+      type: object
+  parameters:
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+          - media
+          - proto
+        default: json
+    bearer_token:
+      description: OAuth bearer token.
+      in: query
+      name: bearer_token
+      schema:
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    pp:
+      description: Pretty-print response.
+      in: query
+      name: pp
+      schema:
+        type: boolean
+        default: true
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        type: string
+        enum:
+          - '1'
+          - '2'
+  requestBodies:
+    Client:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Client'
+    Creative:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Creative'
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/adexchange.buyer': Manage your Ad Exchange buyer account configuration
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/adexchange.buyer': Manage your Ad Exchange buyer account configuration
