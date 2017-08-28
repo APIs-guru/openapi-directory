@@ -987,14 +987,18 @@ paths:
           schema:
             $ref: '#/definitions/AssociationDoesNotExist'
         '481':
+          description: InvalidAssociationVersion
+          schema:
+            $ref: '#/definitions/InvalidAssociationVersion'
+        '482':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
-        '482':
+        '483':
           description: InvalidDocument
           schema:
             $ref: '#/definitions/InvalidDocument'
-        '483':
+        '484':
           description: InvalidInstanceId
           schema:
             $ref: '#/definitions/InvalidInstanceId'
@@ -2437,6 +2441,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListAssociationVersions':
+    post:
+      operationId: ListAssociationVersions
+      description: Retrieves all versions of an association for a specific association ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListAssociationVersionsResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: InvalidNextToken
+          schema:
+            $ref: '#/definitions/InvalidNextToken'
+        '482':
+          description: AssociationDoesNotExist
+          schema:
+            $ref: '#/definitions/AssociationDoesNotExist'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListAssociationVersionsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListAssociations':
     post:
       operationId: ListAssociations
@@ -2593,7 +2634,7 @@ paths:
   '/#ListComplianceItems':
     post:
       operationId: ListComplianceItems
-      description: 'For a specified resource ID, this API returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter. '
+      description: 'For a specified resource ID, this API action returns a list of compliance statuses for different resource types. Currently, you can only specify one resource ID per call. List results depend on the criteria specified in the filter. '
       responses:
         '200':
           description: Success
@@ -2638,7 +2679,7 @@ paths:
   '/#ListComplianceSummaries':
     post:
       operationId: ListComplianceSummaries
-      description: 'Returns a summary count of compliant and non-compliant resources for a compliance type. For example, this call can return State Manager associations, patches, or custom compliance types according to the filter criteria you specify. '
+      description: 'Returns a summary count of compliant and non-compliant resources for a compliance type. For example, this call can return State Manager associations, patches, or custom compliance types according to the filter criteria that you specify. '
       responses:
         '200':
           description: Success
@@ -2956,7 +2997,7 @@ paths:
   '/#PutComplianceItems':
     post:
       operationId: PutComplianceItems
-      description: 'Registers a compliance type and other compliance details on a designated resource. This API lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time you send the request.'
+      description: 'Registers a compliance type and other compliance details on a designated resource. This action lets you register custom compliance details with a resource. This call overwrites existing compliance information on the resource, so you must provide a full list of compliance items each time that you send the request.'
       responses:
         '200':
           description: Success
@@ -3532,7 +3573,7 @@ paths:
   '/#UpdateAssociation':
     post:
       operationId: UpdateAssociation
-      description: 'Updates an association. You can only update the document version, schedule, parameters, and Amazon S3 output of an association.'
+      description: 'Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon S3 output.'
       responses:
         '200':
           description: Success
@@ -3578,6 +3619,14 @@ paths:
           description: InvalidTarget
           schema:
             $ref: '#/definitions/InvalidTarget'
+        '490':
+          description: InvalidAssociationVersion
+          schema:
+            $ref: '#/definitions/InvalidAssociationVersion'
+        '491':
+          description: AssociationVersionLimitExceeded
+          schema:
+            $ref: '#/definitions/AssociationVersionLimitExceeded'
       parameters:
         - name: body
           in: body
@@ -3777,7 +3826,7 @@ paths:
   '/#UpdateMaintenanceWindowTarget':
     post:
       operationId: UpdateMaintenanceWindowTarget
-      description: '<p>Modifies the target of an existing Maintenance Window. You can''t change the target type, but you can change the following:</p> <p>The target from being an ID target to a Tag target, or a Tag target to an ID target.</p> <p>The IDs of an ID target.</p> <p>The tags of a Tag target.</p> <p>The Owner.</p> <p>The Name.</p> <p>The Description.</p> <p>Also note that if a parameter is null, then the corresponding field is not modified.</p>'
+      description: '<p>Modifies the target of an existing Maintenance Window. You can''t change the target type, but you can change the following:</p> <p>The target from being an ID target to a Tag target, or a Tag target to an ID target.</p> <p>IDs for an ID target.</p> <p>Tags for a Tag target.</p> <p>Owner.</p> <p>Name.</p> <p>Description.</p> <p>If a parameter is null, then the corresponding field is not modified.</p>'
       responses:
         '200':
           description: Success
@@ -3810,7 +3859,7 @@ paths:
   '/#UpdateMaintenanceWindowTask':
     post:
       operationId: UpdateMaintenanceWindowTask
-      description: '<p>Modifies a task assigned to a Maintenance Window. You can''t change the task type, but you can change the following:</p> <p>The Task Arn. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.</p> <p>The service role ARN.</p> <p>The task parameters.</p> <p>The task priority.</p> <p>The task MaxConcurrency and MaxErrors.</p> <p>The log location.</p> <p>If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow operation are required for this request. Optional fields that aren''t specified are be set to null.</p>'
+      description: '<p>Modifies a task assigned to a Maintenance Window. You can''t change the task type, but you can change the following values:</p> <p>Task ARN. For example, you can change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.</p> <p>Service role ARN.</p> <p>Task parameters.</p> <p>Task priority.</p> <p>Task MaxConcurrency and MaxErrors.</p> <p>Log location.</p> <p>If a parameter is null, then the corresponding field is not modified. Also, if you set Replace to true, then all fields required by the RegisterTaskWithMaintenanceWindow action are required for this request. Optional fields that aren''t specified are set to null.</p>'
       responses:
         '200':
           description: Success
@@ -4013,6 +4062,9 @@ definitions:
       AssociationId:
         $ref: '#/definitions/AssociationId'
         description: The ID created by the system when you create an association. An association is a binding between a document and a set of targets with a schedule.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: The association version.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The version of the document used in the association.
@@ -4028,6 +4080,9 @@ definitions:
       ScheduleExpression:
         $ref: '#/definitions/ScheduleExpression'
         description: A cron expression that specifies a schedule when the association runs.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: The association name.
     description: Describes an association of a Systems Manager document and an instance.
   AssociationAlreadyExists:
     type: object
@@ -4042,6 +4097,9 @@ definitions:
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: The association version.
       Date:
         $ref: '#/definitions/DateTime'
         description: The date when the association was made.
@@ -4078,6 +4136,9 @@ definitions:
       LastSuccessfulExecutionDate:
         $ref: '#/definitions/DateTime'
         description: The last date on which the association was successfully run.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: The association name.
     description: Describes the parameters for a document.
   AssociationDescriptionList:
     type: array
@@ -4111,6 +4172,7 @@ definitions:
       - AssociationStatusName
       - LastExecutedBefore
       - LastExecutedAfter
+      - AssociationName
   AssociationFilterList:
     type: array
     items:
@@ -4130,6 +4192,9 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Association'
+  AssociationName:
+    type: string
+    pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
   AssociationOverview:
     type: object
     properties:
@@ -4178,6 +4243,54 @@ definitions:
       - Pending
       - Success
       - Failed
+  AssociationVersion:
+    type: string
+    pattern: '([$]LATEST)|([1-9][0-9]*)'
+  AssociationVersionInfo:
+    type: object
+    properties:
+      AssociationId:
+        $ref: '#/definitions/AssociationId'
+        description: The ID created by the system when the association was created.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: The association version.
+      CreatedDate:
+        $ref: '#/definitions/DateTime'
+        description: The date the association version was created.
+      Name:
+        $ref: '#/definitions/DocumentName'
+        description: The name specified when the association was created.
+      DocumentVersion:
+        $ref: '#/definitions/DocumentVersion'
+        description: The version of an SSM document used when the association version was created.
+      Parameters:
+        $ref: '#/definitions/Parameters'
+        description: Parameters specified when the association version was created.
+      Targets:
+        $ref: '#/definitions/Targets'
+        description: 'The targets specified for the association when the association version was created. '
+      ScheduleExpression:
+        $ref: '#/definitions/ScheduleExpression'
+        description: The cron or rate schedule specified for the association when the association version was created.
+      OutputLocation:
+        $ref: '#/definitions/InstanceAssociationOutputLocation'
+        description: The location in Amazon S3 specified for the association when the association version was created.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: The name specified for the association version when the association version was created.
+    description: Information about the association version.
+  AssociationVersionLimitExceeded:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: 'You have reached the maximum number versions allowed for an association. Each association has a limit of 1,000 versions. '
+  AssociationVersionList:
+    type: array
+    items:
+      $ref: '#/definitions/AssociationVersionInfo'
+    minItems: 1
   AttributeName:
     type: string
     minLength: 1
@@ -4661,7 +4774,7 @@ definitions:
     properties:
       ComplianceType:
         $ref: '#/definitions/ComplianceTypeName'
-        description: 'The compliance type. For example, Association (for a State Manager association), Patch, or Custom:<code>string</code> are all valide compliance types.'
+        description: 'The compliance type. For example, Association (for a State Manager association), Patch, or Custom:<code>string</code> are all valid compliance types.'
       ResourceType:
         $ref: '#/definitions/ComplianceResourceType'
         description: The type of resource. <code>ManagedInstance</code> is currently the only supported resource type.
@@ -4679,7 +4792,7 @@ definitions:
         description: The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
       Severity:
         $ref: '#/definitions/ComplianceSeverity'
-        description: 'The severity of the compliance status. Severity can be one of the following: Critical, HIGH, Medium, Low, Informational, Unspecified.'
+        description: 'The severity of the compliance status. Severity can be one of the following: Critical, High, Medium, Low, Informational, Unspecified.'
       ExecutionSummary:
         $ref: '#/definitions/ComplianceExecutionSummary'
         description: 'A summary for the compliance item. The summary includes an execution ID, the execution type (for example, command), and the execution time.'
@@ -4786,7 +4899,7 @@ definitions:
         description: The name of the filter.
       Values:
         $ref: '#/definitions/ComplianceStringFilterValueList'
-        description: The value you want to search for.
+        description: The value for which to search.
       Type:
         $ref: '#/definitions/ComplianceQueryOperatorType'
         description: 'The type of comparison that should be performed for the value: Equal, NotEqual, BeginWith, LessThan, or GreaterThan.'
@@ -4917,6 +5030,9 @@ definitions:
       OutputLocation:
         $ref: '#/definitions/InstanceAssociationOutputLocation'
         description: An Amazon S3 bucket where you want to store the results of this request.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: Specify a descriptive name for the association.
     description: Describes the association of a Systems Manager document and an instance.
   CreateAssociationBatchResult:
     type: object
@@ -4953,6 +5069,9 @@ definitions:
       OutputLocation:
         $ref: '#/definitions/InstanceAssociationOutputLocation'
         description: An Amazon S3 bucket where you want to store the output details of the request.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: Specify a descriptive name for the association.
   CreateAssociationResult:
     type: object
     properties:
@@ -4994,7 +5113,7 @@ definitions:
         description: The name of the Maintenance Window.
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
-        description: 'An optional description for the Maintenance Window. We recommend specifying a description to help your organize your Maintenance Windows. '
+        description: 'An optional description for the Maintenance Window. We recommend specifying a description to help you organize your Maintenance Windows. '
       Schedule:
         $ref: '#/definitions/MaintenanceWindowSchedule'
         description: The schedule of the Maintenance Window in the form of a cron or rate expression.
@@ -5006,7 +5125,7 @@ definitions:
         description: The number of hours before the end of the Maintenance Window that Systems Manager stops scheduling new tasks for execution.
       AllowUnassociatedTargets:
         $ref: '#/definitions/MaintenanceWindowAllowUnassociatedTargets'
-        description: Whether targets must be registered with the Maintenance Window before tasks can be defined for those targets.
+        description: '<p>Enables a Maintenance Window task to execute on managed instances, even if you have not registered those instances as targets. If enabled, then you must specify the unregistered instances (by instance ID) when you register a task with the Maintenance Window </p> <p>If you don''t enable this option, then you must specify previously-registered targets when you register a task with the Maintenance Window. </p>'
       ClientToken:
         $ref: '#/definitions/ClientToken'
         description: User-provided idempotency token.
@@ -5238,7 +5357,7 @@ definitions:
         description: The ID of the target definition to remove.
       Safe:
         $ref: '#/definitions/Boolean'
-        description: 'The system checks if the target is being referenced by a task. If the target is being referenced, the system returns and error and does not deregister the target from the Maintenance Window.'
+        description: 'The system checks if the target is being referenced by a task. If the target is being referenced, the system returns an error and does not deregister the target from the Maintenance Window.'
   DeregisterTargetFromMaintenanceWindowResult:
     type: object
     properties:
@@ -5322,6 +5441,9 @@ definitions:
       AssociationId:
         $ref: '#/definitions/AssociationId'
         description: The association ID for which you want information.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: 'Specify the association version to retrieve. To view the latest version, either specify <code>$LATEST</code> for this parameter, or omit this parameter. To view a list of all associations for an instance, use ListInstanceAssociations. To get a list of versions for a specific association, use ListAssociationVersions. '
   DescribeAssociationResult:
     type: object
     properties:
@@ -6141,7 +6263,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: 'You attempted to register a LAMBDA or STEP_FUNCTION task in a region where there corresponding service is not available. '
+    description: 'You attempted to register a LAMBDA or STEP_FUNCTION task in a region where the corresponding service is not available. '
   GetAutomationExecutionRequest:
     type: object
     required:
@@ -6377,7 +6499,7 @@ definitions:
     properties:
       WindowExecutionId:
         $ref: '#/definitions/MaintenanceWindowExecutionId'
-        description: The ID of the Maintenance Window execution the task is part of.
+        description: The ID of the Maintenance Window execution for which the task is a part.
       TaskId:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskId'
         description: 'The ID of the specific task in the Maintenance Window task that should be retrieved. '
@@ -6404,7 +6526,7 @@ definitions:
         description: 'Retrieves the task type for a Maintenance Window. Task types include the following: LAMBDA, STEP_FUNCTION, AUTOMATION, RUN_COMMAND.'
       Parameters:
         $ref: '#/definitions/MaintenanceWindowExecutionTaskInvocationParameters'
-        description: The parameters used at the time the task executed.
+        description: The parameters used at the time that the task executed.
       Status:
         $ref: '#/definitions/MaintenanceWindowExecutionStatus'
         description: The task status for an invocation.
@@ -6413,13 +6535,13 @@ definitions:
         description: The details explaining the status. Details are only available for certain status values.
       StartTime:
         $ref: '#/definitions/DateTime'
-        description: The time the task started executing on the target.
+        description: The time that the task started executing on the target.
       EndTime:
         $ref: '#/definitions/DateTime'
-        description: The time the task finished executing on the target.
+        description: The time that the task finished executing on the target.
       OwnerInformation:
         $ref: '#/definitions/OwnerInformation'
-        description: 'User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window. '
+        description: 'User-provided value to be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window. '
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTaskTargetId'
         description: The Maintenance Window target ID.
@@ -6544,7 +6666,7 @@ definitions:
         description: The targets where the task should execute.
       TaskArn:
         $ref: '#/definitions/MaintenanceWindowTaskArn'
-        description: 'TaskArn is the resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the SSM Document Name/ARN. For LAMBDA tasks, TaskArn is the Function Name/ARN. For STEP_FUNCTION tasks, the TaskArn is the State Machine ARN.'
+        description: 'The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the SSM Document name/ARN. For LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTION tasks, the value is the state machine ARN.'
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
         description: The IAM service role to assume during task execution.
@@ -6568,7 +6690,7 @@ definitions:
         description: The maximum number of errors allowed before the task stops being scheduled.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: The location in Amazon S3 where the task results will be logged.
+        description: The location in Amazon S3 where the task results are logged.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
         description: The retrieved task name.
@@ -6793,6 +6915,9 @@ definitions:
       Content:
         $ref: '#/definitions/DocumentContent'
         description: The content of the association document for the instance(s).
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: Version information for the association on the instance.
     description: 'One or more association documents on the instance. '
   InstanceAssociationExecutionSummary:
     type: string
@@ -6837,6 +6962,9 @@ definitions:
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The association document verions.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: The version of the association applied to the instance.
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The instance ID where the association was created.
@@ -6858,6 +6986,9 @@ definitions:
       OutputUrl:
         $ref: '#/definitions/InstanceAssociationOutputUrl'
         description: A URL for an Amazon S3 bucket where you want to store the results of this request.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: The name of the association applied to the instance.
     description: Status information about the instance association.
   InstanceAssociationStatusInfos:
     type: array
@@ -7130,6 +7261,12 @@ definitions:
         $ref: '#/definitions/String'
         description: The request does not meet the regular expression requirement.
     description: The request does not meet the regular expression requirement.
+  InvalidAssociationVersion:
+    type: object
+    properties:
+      Message:
+        $ref: '#/definitions/String'
+    description: 'The version you specified is not valid. Use ListAssociationVersions to view all versions of an association according to the association ID. Or, use the <code>$LATEST</code> parameter to view the latest version of the association.'
   InvalidAutomationExecutionParametersException:
     type: object
     properties:
@@ -7569,6 +7706,29 @@ definitions:
   LastSuccessfulResourceDataSyncTime:
     type: string
     format: date-time
+  ListAssociationVersionsRequest:
+    type: object
+    required:
+      - AssociationId
+    properties:
+      AssociationId:
+        $ref: '#/definitions/AssociationId'
+        description: The association ID for which you want to view all versions.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'A token to start the list. Use this token to get the next set of results. '
+  ListAssociationVersionsResult:
+    type: object
+    properties:
+      AssociationVersions:
+        $ref: '#/definitions/AssociationVersionList'
+        description: Information about all versions of the association for the specified association ID.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: The token for the next set of items to return. Use this token to get the next set of results.
   ListAssociationsRequest:
     type: object
     properties:
@@ -7655,10 +7815,10 @@ definitions:
         description: One or more compliance filters. Use a filter to return a more specific list of results.
       ResourceIds:
         $ref: '#/definitions/ComplianceResourceIdList'
-        description: 'The ID for the resources from which you want to get compliance information. Currently, you can only specify one resource ID.'
+        description: 'The ID for the resources from which to get compliance information. Currently, you can only specify one resource ID.'
       ResourceTypes:
         $ref: '#/definitions/ComplianceResourceTypeList'
-        description: 'The type of resource from which you want to get compliance information. Currently, the only supported resource type is <code>ManagedInstance</code>.'
+        description: 'The type of resource from which to get compliance information. Currently, the only supported resource type is <code>ManagedInstance</code>.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'A token to start the list. Use this token to get the next set of results. '
@@ -7691,7 +7851,7 @@ definitions:
     properties:
       ComplianceSummaryItems:
         $ref: '#/definitions/ComplianceSummaryItemList'
-        description: 'A list of compliant and non-compliant summary counts based on compliance types. For example, this call returns State Manager associations, patches, or custom compliance types according to the filter criteria you specified.'
+        description: 'A list of compliant and non-compliant summary counts based on compliance types. For example, this call returns State Manager associations, patches, or custom compliance types according to the filter criteria that you specified.'
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of items to return. Use this token to get the next set of results.
@@ -7798,7 +7958,7 @@ definitions:
     properties:
       ResourceComplianceSummaryItems:
         $ref: '#/definitions/ResourceComplianceSummaryItemList'
-        description: 'A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch statuses, or custom items according to the filter criteria you specify. '
+        description: 'A summary count for specified or targeted managed instances. Summary count includes information about compliant and non-compliant State Manager associations, patch status, or custom items according to the filter criteria that you specify. '
       NextToken:
         $ref: '#/definitions/NextToken'
         description: The token for the next set of items to return. Use this token to get the next set of results.
@@ -7861,11 +8021,11 @@ definitions:
     properties:
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
-        description: The version of an SSM Automation document to use during task execution.
+        description: The version of an Automation document to use during task execution.
       Parameters:
         $ref: '#/definitions/AutomationParameterMap'
-        description: Parameters for the AUTOMATION task.
-    description: Parameters for an AUTOMATION task type.
+        description: The parameters for the AUTOMATION task.
+    description: The parameters for an AUTOMATION task type.
   MaintenanceWindowCutoff:
     type: integer
     minimum: 0
@@ -8090,14 +8250,14 @@ definitions:
     properties:
       ClientContext:
         $ref: '#/definitions/MaintenanceWindowLambdaClientContext'
-        description: Using the ClientContext you can pass client-specific information to the Lambda function you are invoking. You can then process the client information in your Lambda function as you choose through the context variable.
+        description: Pass client-specific information to the Lambda function that you are invoking. You can then process the client information in your Lambda function as you choose through the context variable.
       Qualifier:
         $ref: '#/definitions/MaintenanceWindowLambdaQualifier'
-        description: 'You can use this optional parameter to specify a Lambda function version or alias name. If you specify a function version, the API uses the qualified function ARN to invoke a specific Lambda function. If you specify an alias name, the API uses the alias ARN to invoke the Lambda function version to which the alias points.'
+        description: '(Optional) Specify a Lambda function version or alias name. If you specify a function version, the action uses the qualified function ARN to invoke a specific Lambda function. If you specify an alias name, the action uses the alias ARN to invoke the Lambda function version to which the alias points.'
       Payload:
         $ref: '#/definitions/MaintenanceWindowLambdaPayload'
-        description: JSON that you want to provide to your Lambda function as input.
-    description: Parameters for a LAMBDA task type.
+        description: JSON to provide to your Lambda function as input.
+    description: The parameters for a LAMBDA task type.
   MaintenanceWindowLambdaPayload:
     type: string
     maxLength: 4096
@@ -8127,13 +8287,13 @@ definitions:
         description: Information about the command(s) to execute.
       DocumentHash:
         $ref: '#/definitions/DocumentHash'
-        description: The Sha256 or Sha1 hash created by the system when the document was created. Sha1 hashes have been deprecated.
+        description: The SHA-256 or SHA-1 hash created by the system when the document was created. SHA-1 hashes have been deprecated.
       DocumentHashType:
         $ref: '#/definitions/DocumentHashType'
-        description: Sha256 or Sha1. Sha1 hashes have been deprecated.
+        description: SHA-256 or SHA-1. SHA-1 hashes have been deprecated.
       NotificationConfig:
         $ref: '#/definitions/NotificationConfig'
-        description: Configurations for sending notifications about command status changes on a per instance basis.
+        description: Configurations for sending notifications about command status changes on a per-instance basis.
       OutputS3BucketName:
         $ref: '#/definitions/S3BucketName'
         description: The name of the Amazon S3 bucket.
@@ -8142,14 +8302,14 @@ definitions:
         description: The Amazon S3 bucket subfolder.
       Parameters:
         $ref: '#/definitions/Parameters'
-        description: Parameters for the RUN_COMMAND task execution.
+        description: The parameters for the RUN_COMMAND task execution.
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: The IAM service role that to assume during task execution.
+        description: The IAM service role to assume during task execution.
       TimeoutSeconds:
         $ref: '#/definitions/TimeoutSeconds'
-        description: 'If this time is reached and the command has not already started executing, it will not execute.'
-    description: Parameters for a RUN_COMMAND task type.
+        description: 'If this time is reached and the command has not already started executing, it doesn not execute.'
+    description: The parameters for a RUN_COMMAND task type.
   MaintenanceWindowSchedule:
     type: string
     minLength: 1
@@ -8171,7 +8331,7 @@ definitions:
       Name:
         $ref: '#/definitions/MaintenanceWindowStepFunctionsName'
         description: The name of the STEP_FUNCTION task.
-    description: Parameters for the STEP_FUNCTION execution.
+    description: The parameters for the STEP_FUNCTION execution.
   MaintenanceWindowTarget:
     type: object
     properties:
@@ -8217,7 +8377,7 @@ definitions:
         description: The task ID.
       TaskArn:
         $ref: '#/definitions/MaintenanceWindowTaskArn'
-        description: 'TaskArn is the resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the SSM Document Name/ARN. For LAMBDA tasks, it''s the Function Name/ARN. For STEP_FUNCTION tasks, it''s the State Machine ARN.'
+        description: 'The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, <code>TaskArn</code> is the SSM document name or ARN. For LAMBDA tasks, it''s the function name or ARN. For STEP_FUNCTION tasks, it''s the state machine ARN.'
       Type:
         $ref: '#/definitions/MaintenanceWindowTaskType'
         description: 'The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION, LAMBDA, or STEP_FUNCTION.'
@@ -8263,17 +8423,17 @@ definitions:
     properties:
       RunCommand:
         $ref: '#/definitions/MaintenanceWindowRunCommandParameters'
-        description: Parameters for a RUN_COMMAND task type.
+        description: The parameters for a RUN_COMMAND task type.
       Automation:
         $ref: '#/definitions/MaintenanceWindowAutomationParameters'
-        description: Parameters for a AUTOMATION task type.
+        description: The parameters for a AUTOMATION task type.
       StepFunctions:
         $ref: '#/definitions/MaintenanceWindowStepFunctionsParameters'
-        description: Parameters for a STEP_FUNCTION task type.
+        description: The parameters for a STEP_FUNCTION task type.
       Lambda:
         $ref: '#/definitions/MaintenanceWindowLambdaParameters'
-        description: Parameters for a LAMBDA task type.
-    description: Parameters for task execution.
+        description: The parameters for a LAMBDA task type.
+    description: The parameters for task execution.
   MaintenanceWindowTaskList:
     type: array
     items:
@@ -9028,7 +9188,7 @@ definitions:
         description: 'Information about the compliance as defined by the resource type. For example, for a patch compliance type, <code>Items</code> includes information about the PatchSeverity, Classification, etc.'
       ItemContentHash:
         $ref: '#/definitions/ComplianceItemContentHash'
-        description: 'MD5 or Sha256 content hash. The content hash is used to determine if existing information should be overwritten or ignored. If the content hashes match, ,the request to put compliance information is ignored.'
+        description: 'MD5 or SHA-256 content hash. The content hash is used to determine if existing information should be overwritten or ignored. If the content hashes match, the request to put compliance information is ignored.'
   PutComplianceItemsResult:
     type: object
     properties: {}
@@ -9178,7 +9338,7 @@ definitions:
         description: The parameters that should be passed to the task when it is executed.
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
-        description: 'Parameters the task should use during execution. Populate only the fields that match the task type. All other fields should be empty. '
+        description: 'The parameters that the task should use during execution. Populate only the fields that match the task type. All other fields should be empty. '
       Priority:
         $ref: '#/definitions/MaintenanceWindowTaskPriority'
         description: 'The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel.'
@@ -9749,7 +9909,7 @@ definitions:
         $ref: '#/definitions/InventoryItemTypeName'
       Message:
         $ref: '#/definitions/String'
-    description: 'The <code>Context</code> attribute you specified for the <code>InventoryItem</code> is not allowed for this inventory type. You can only use the <code>Context</code> attribute with inventory types like <code>AWS:ComplianceItem</code>.'
+    description: 'The <code>Context</code> attribute that you specified for the <code>InventoryItem</code> is not allowed for this inventory type. You can only use the <code>Context</code> attribute with inventory types like <code>AWS:ComplianceItem</code>.'
   UnsupportedInventorySchemaVersionException:
     type: object
     properties:
@@ -9800,6 +9960,12 @@ definitions:
       Targets:
         $ref: '#/definitions/Targets'
         description: The targets of the association.
+      AssociationName:
+        $ref: '#/definitions/AssociationName'
+        description: The name of the association that you want to update.
+      AssociationVersion:
+        $ref: '#/definitions/AssociationVersion'
+        description: 'This parameter is provided for concurrency control purposes. You must specify the latest association version in the service. If you want to ensure that this request succeeds, either specify <code>$LATEST</code>, or omit this parameter.'
   UpdateAssociationResult:
     type: object
     properties:
@@ -9898,7 +10064,7 @@ definitions:
         description: Whether the Maintenance Window is enabled.
       Replace:
         $ref: '#/definitions/Boolean'
-        description: 'If you specify True, then all fields that are required by the CreateMaintenanceWindow API are also required for this API request. Optional fields that are not specified will be set to null. '
+        description: 'If True, then all fields that are required by the CreateMaintenanceWindow action are also required for this API request. Optional fields that are not specified are set to null. '
   UpdateMaintenanceWindowResult:
     type: object
     properties:
@@ -9934,13 +10100,13 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID for which you want to modify the target.
+        description: The Maintenance Window ID with which to modify the target.
       WindowTargetId:
         $ref: '#/definitions/MaintenanceWindowTargetId'
-        description: The target ID that you want to modify.
+        description: The target ID to modify.
       Targets:
         $ref: '#/definitions/Targets'
-        description: The targets that you want to add or replace.
+        description: The targets to add or replace.
       OwnerInformation:
         $ref: '#/definitions/OwnerInformation'
         description: User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.
@@ -9952,7 +10118,7 @@ definitions:
         description: An optional description for the update.
       Replace:
         $ref: '#/definitions/Boolean'
-        description: 'If you specify True, then all fields that are required by the RegisterTargetWithMaintenanceWindow API are also required for this API request. Optional fields that are not specified will be set to null.'
+        description: 'If True, then all fields that are required by the RegisterTargetWithMaintenanceWindow action are also required for this API request. Optional fields that are not specified are set to null.'
   UpdateMaintenanceWindowTargetResult:
     type: object
     properties:
@@ -9982,55 +10148,55 @@ definitions:
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID that contains the task that you want to modify.
+        description: The Maintenance Window ID that contains the task to modify.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
-        description: The task ID that you want to modify.
+        description: The task ID to modify.
       Targets:
         $ref: '#/definitions/Targets'
-        description: 'The targets (either instances or tags) that you want to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value. '
+        description: 'The targets (either instances or tags) to modify. Instances are specified using Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using Key=tag_name,Values=tag_value. '
       TaskArn:
         $ref: '#/definitions/MaintenanceWindowTaskArn'
-        description: The task ARN that you want to modify.
+        description: The task ARN to modify.
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
-        description: 'The IAM service role ARN that you want to modify. The system assumes this role during task exectuion. '
+        description: 'The IAM service role ARN to modify. The system assumes this role during task execution. '
       TaskParameters:
         $ref: '#/definitions/MaintenanceWindowTaskParameters'
-        description: '<p>The parameters that you want to modify. The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
+        description: '<p>The parameters to modify. The map has the following format:</p> <p>Key: string, between 1 and 255 characters</p> <p>Value: an array of strings, each string is between 1 and 255 characters</p>'
       TaskInvocationParameters:
         $ref: '#/definitions/MaintenanceWindowTaskInvocationParameters'
-        description: Parameters the task should use during execution. Populate only the fields that match the task type. All other fields should be empty.
+        description: The parameters that the task should use during execution. Populate only the fields that match the task type. All other fields should be empty.
       Priority:
         $ref: '#/definitions/MaintenanceWindowTaskPriority'
-        description: 'The new task priority that you want to specify. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.'
+        description: 'The new task priority to specify. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.'
       MaxConcurrency:
         $ref: '#/definitions/MaxConcurrency'
         description: The new <code>MaxConcurrency</code> value you want to specify. <code>MaxConcurrency</code> is the number of targets that are allowed to run this task in parallel.
       MaxErrors:
         $ref: '#/definitions/MaxErrors'
-        description: The new <code>MaxErrors</code> value you want to specify. <code>MaxErrors</code> is the maximum number of errors that are allowed before the task stops being scheduled.
+        description: The new <code>MaxErrors</code> value to specify. <code>MaxErrors</code> is the maximum number of errors that are allowed before the task stops being scheduled.
       LoggingInfo:
         $ref: '#/definitions/LoggingInfo'
-        description: The new logging location in Amazon S3 that you want to specify.
+        description: The new logging location in Amazon S3 to specify.
       Name:
         $ref: '#/definitions/MaintenanceWindowName'
-        description: The new task name that you want to specify.
+        description: The new task name to specify.
       Description:
         $ref: '#/definitions/MaintenanceWindowDescription'
-        description: The new task description that you want to specify.
+        description: The new task description to specify.
       Replace:
         $ref: '#/definitions/Boolean'
-        description: 'If you specify True, then all fields that are required by the RegisterTaskWithMaintenanceWndow API are also required for this API request. Optional fields that are not specified will be set to null.'
+        description: 'If True, then all fields that are required by the RegisterTaskWithMaintenanceWndow action are also required for this API request. Optional fields that are not specified are set to null.'
   UpdateMaintenanceWindowTaskResult:
     type: object
     properties:
       WindowId:
         $ref: '#/definitions/MaintenanceWindowId'
-        description: The Maintenance Window ID that was updated.
+        description: The ID of the Maintenance Window that was updated.
       WindowTaskId:
         $ref: '#/definitions/MaintenanceWindowTaskId'
-        description: The Maintenance Window task ID that was updated.
+        description: The task ID of the Maintenance Window that was updated.
       Targets:
         $ref: '#/definitions/Targets'
         description: The updated target values.

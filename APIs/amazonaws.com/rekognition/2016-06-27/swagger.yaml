@@ -1171,19 +1171,19 @@ definitions:
             Width: 0.23999999463558197
           Confidence: 100
           Landmarks:
-            - Type: EYE_LEFT
+            - Type: eyeLeft
               X: 0.6394737362861633
               'Y': 0.40819624066352844
-            - Type: EYE_RIGHT
+            - Type: eyeRight
               X: 0.7266660928726196
               'Y': 0.41039225459098816
-            - Type: NOSE_LEFT
+            - Type: eyeRight
               X: 0.6912462115287781
               'Y': 0.44240960478782654
-            - Type: MOUTH_DOWN
+            - Type: mouthDown
               X: 0.6306198239326477
               'Y': 0.46700039505958557
-            - Type: MOUTH_UP
+            - Type: mouthUp
               X: 0.7215608954429626
               'Y': 0.47114261984825134
           Pose:
@@ -1433,8 +1433,8 @@ definitions:
   GenderType:
     type: string
     enum:
-      - MALE
-      - FEMALE
+      - Male
+      - Female
   GetCelebrityInfoRequest:
     type: object
     required:
@@ -1530,19 +1530,19 @@ definitions:
               Width: 0.25
             Confidence: 99.9991226196289
             Landmarks:
-              - Type: EYE_LEFT
+              - Type: eyeLeft
                 X: 0.3976764678955078
                 'Y': 0.6248345971107483
-              - Type: EYE_RIGHT
+              - Type: eyeRight
                 X: 0.4810936450958252
                 'Y': 0.6317117214202881
-              - Type: NOSE_LEFT
+              - Type: noseLeft
                 X: 0.41986238956451416
                 'Y': 0.7111940383911133
-              - Type: MOUTH_DOWN
+              - Type: mouthDown
                 X: 0.40525302290916443
                 'Y': 0.7497701048851013
-              - Type: MOUTH_UP
+              - Type: mouthUp
                 X: 0.4753248989582062
                 'Y': 0.7558549642562866
             Pose:
@@ -1569,19 +1569,19 @@ definitions:
               Width: 0.24444444477558136
             Confidence: 99.99950408935547
             Landmarks:
-              - Type: EYE_LEFT
+              - Type: eyeLeft
                 X: 0.6006892323493958
                 'Y': 0.290842205286026
-              - Type: EYE_RIGHT
+              - Type: eyeRight
                 X: 0.6808141469955444
                 'Y': 0.29609042406082153
-              - Type: NOSE_LEFT
+              - Type: noseLeft
                 X: 0.6395332217216492
                 'Y': 0.3522595763206482
-              - Type: MOUTH_DOWN
+              - Type: mouthDown
                 X: 0.5892083048820496
                 'Y': 0.38689887523651123
-              - Type: MOUTH_UP
+              - Type: mouthUp
                 X: 0.674560010433197
                 'Y': 0.394125759601593
             Pose:
@@ -1641,39 +1641,39 @@ definitions:
         description: Type of the landmark.
       X:
         $ref: '#/definitions/Float'
-        description: 'x-coordinate from the top left of the landmark expressed as the ration of the width of the image. For example, if the images is 700x200 and the x-coordinate of the landmark is at 350 pixels, this value is 0.5. '
+        description: 'x-coordinate from the top left of the landmark expressed as the ratio of the width of the image. For example, if the images is 700x200 and the x-coordinate of the landmark is at 350 pixels, this value is 0.5. '
       'Y':
         $ref: '#/definitions/Float'
-        description: 'y-coordinate from the top left of the landmark expressed as the ration of the height of the image. For example, if the images is 700x200 and the y-coordinate of the landmark is at 100 pixels, this value is 0.5.'
+        description: 'y-coordinate from the top left of the landmark expressed as the ratio of the height of the image. For example, if the images is 700x200 and the y-coordinate of the landmark is at 100 pixels, this value is 0.5.'
     description: Indicates the location of the landmark on the face.
   LandmarkType:
     type: string
     enum:
-      - EYE_LEFT
-      - EYE_RIGHT
-      - NOSE
-      - MOUTH_LEFT
-      - MOUTH_RIGHT
-      - LEFT_EYEBROW_LEFT
-      - LEFT_EYEBROW_RIGHT
-      - LEFT_EYEBROW_UP
-      - RIGHT_EYEBROW_LEFT
-      - RIGHT_EYEBROW_RIGHT
-      - RIGHT_EYEBROW_UP
-      - LEFT_EYE_LEFT
-      - LEFT_EYE_RIGHT
-      - LEFT_EYE_UP
-      - LEFT_EYE_DOWN
-      - RIGHT_EYE_LEFT
-      - RIGHT_EYE_RIGHT
-      - RIGHT_EYE_UP
-      - RIGHT_EYE_DOWN
-      - NOSE_LEFT
-      - NOSE_RIGHT
-      - MOUTH_UP
-      - MOUTH_DOWN
-      - LEFT_PUPIL
-      - RIGHT_PUPIL
+      - eyeLeft
+      - eyeRight
+      - nose
+      - mouthLeft
+      - mouthRight
+      - leftEyeBrowLeft
+      - leftEyeBrowRight
+      - leftEyeBrowUp
+      - rightEyeBrowLeft
+      - rightEyeBrowRight
+      - rightEyeBrowUp
+      - leftEyeLeft
+      - leftEyeRight
+      - leftEyeUp
+      - leftEyeDown
+      - rightEyeLeft
+      - rightEyeRight
+      - rightEyeUp
+      - rightEyeDown
+      - noseLeft
+      - noseRight
+      - mouthUp
+      - mouthDown
+      - leftPupil
+      - rightPupil
   Landmarks:
     type: array
     items:
