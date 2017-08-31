@@ -883,7 +883,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sends a test push notification to validate the EMM integration with the Google Cloud Pub/Sub service for this enterprise.
+      description: Sends a test notification to validate the EMM integration with the Google Cloud Pub/Sub service for this enterprise.
       operationId: androidenterprise.enterprises.sendTestPushNotification
       parameters:
         - description: The ID of the enterprise.
@@ -3453,6 +3453,9 @@ definitions:
       requiresContainerApp:
         description: Deprecated.
         type: boolean
+      signingCertificate:
+        $ref: '#/definitions/ProductSigningCertificate'
+        description: The certificate used to sign this product.
       smallIconUrl:
         description: A link to a smaller image that can be used as an icon for the product. This image is suitable for use at up to 128px x 128px.
         type: string
@@ -3526,6 +3529,15 @@ definitions:
         type: array
       productSetBehavior:
         description: 'The interpretation of this product set. "unknown" should never be sent and is ignored if received. "whitelist" means that the user is entitled to access the product set. "includeAll" means that all products are accessible, including products that are approved, products with revoked approval, and products that have never been approved. "allApproved" means that the user is entitled to access all products that are approved for the enterprise. If the value is "allApproved" or "includeAll", the productId field is ignored. If no value is provided, it is interpreted as "whitelist" for backwards compatibility. Further "allApproved" or "includeAll" does not enable automatic visibility of "alpha" or "beta" tracks for Android app. Use ProductVisibility to enable "alpha" or "beta" tracks per user.'
+        type: string
+    type: object
+  ProductSigningCertificate:
+    properties:
+      certificateHashSha1:
+        description: The base64 urlsafe encoded SHA1 hash of the certificate. (This field is deprecated in favor of SHA2-256. It should not be used and may be removed at any time.)
+        type: string
+      certificateHashSha256:
+        description: The base64 urlsafe encoded SHA2-256 hash of the certificate.
         type: string
     type: object
   ProductsApproveRequest:

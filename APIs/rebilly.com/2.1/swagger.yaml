@@ -342,7 +342,7 @@ tags:
       Payment tokens are used to reduce the scope of PCI DSS compliance.  A payment
       token can be made using a different authentication scheme (refer to the public key
       authentication scheme in the Authentication section), which allows you to
-      create a payment tokeng directly from the browser, bypassing the need to send
+      create a payment token directly from the browser, bypassing the need to send
       sensitive cardholder info to your servers.  We recommend using this with our
       Rebilly.js library, which helps you wire a form into this API resource and create
       payment tokens.
@@ -12588,6 +12588,18 @@ definitions:
         description: 'The id of a file upload with the policy materials (may include the cancellation policy, refund policy, and terms of use).'
         type: string
     type: object
+  DisputeLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - dispute
+        type: string
+    required:
+      - rel
+    type: object
   Email:
     properties:
       email:
@@ -12658,6 +12670,7 @@ definitions:
       - gateway-account-requested
       - transaction-processed
       - subscription-canceled
+      - subscription-created
       - subscription-renewed
       - payment-card-expired
       - payment-declined
@@ -12671,8 +12684,9 @@ definitions:
         description: The links related to resource
         items:
           - $ref: '#/definitions/SelfLink'
-        maxItems: 1
-        minItems: 1
+          - $ref: '#/definitions/PermalinkLink'
+        maxItems: 2
+        minItems: 2
         readOnly: true
         type: array
       createdTime:
@@ -14615,6 +14629,18 @@ definitions:
     required:
       - name
     type: object
+  PermalinkLink:
+    allOf:
+      - $ref: '#/definitions/NewLink'
+    properties:
+      rel:
+        description: The link type
+        enum:
+          - permalink
+        type: string
+    required:
+      - rel
+    type: object
   Plan:
     properties:
       _links:
@@ -16093,7 +16119,8 @@ definitions:
           - $ref: '#/definitions/ApprovalUrlLink'
           - $ref: '#/definitions/CancelUrlLink'
           - $ref: '#/definitions/RefundUrlLink'
-        maxItems: 12
+          - $ref: '#/definitions/DisputeLink'
+        maxItems: 13
         minItems: 1
         readOnly: true
         type: array
@@ -16250,6 +16277,10 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         readOnly: true
         type: array
+      isDisputed:
+        description: True if transaction is disputed
+        readOnly: true
+        type: boolean
       isRebill:
         readOnly: true
         type: boolean

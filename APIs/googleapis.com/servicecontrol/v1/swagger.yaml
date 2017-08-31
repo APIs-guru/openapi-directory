@@ -216,26 +216,28 @@ paths:
         60 seconds. In case of server errors, the client can rely on the cached
         results for longer time.
 
-        NOTE: the `CheckRequest` has the size limit of 64KB.
+        NOTE: the CheckRequest has the size limit of 64KB.
 
         This method requires the `servicemanagement.services.check` permission
         on the specified service. For more information, see
         [Google Cloud IAM](https://cloud.google.com/iam).
       operationId: servicecontrol.services.check
       parameters:
-        - description: |-
-            The service name as specified in its service configuration. For example,
-            `"pubsub.googleapis.com"`.
-
-            See google.api.Service for the definition of a service name.
-          in: path
-          name: serviceName
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/CheckRequest'
+        - description: |-
+            The service name as specified in its service configuration. For example,
+            `"pubsub.googleapis.com"`.
+
+            See
+            [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+            for the definition of a service name.
+          in: path
+          name: serviceName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -395,26 +397,28 @@ paths:
         the aggregation time window to avoid data loss risk more than 0.01%
         for business and compliance reasons.
 
-        NOTE: the `ReportRequest` has the size limit of 1MB.
+        NOTE: the ReportRequest has the size limit of 1MB.
 
         This method requires the `servicemanagement.services.report` permission
         on the specified service. For more information, see
         [Google Cloud IAM](https://cloud.google.com/iam).
       operationId: servicecontrol.services.report
       parameters:
-        - description: |-
-            The service name as specified in its service configuration. For example,
-            `"pubsub.googleapis.com"`.
-
-            See google.api.Service for the definition of a service name.
-          in: path
-          name: serviceName
-          required: true
-          type: string
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ReportRequest'
+        - description: |-
+            The service name as specified in its service configuration. For example,
+            `"pubsub.googleapis.com"`.
+
+            See
+            [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
+            for the definition of a service name.
+          in: path
+          name: serviceName
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -1023,8 +1027,8 @@ definitions:
           description: Properties of the object. Contains field @type with type URL.
         description: |-
           The log entry payload, represented as a protocol buffer that is
-          expressed as a JSON object. You can only pass `protoPayload`
-          values that belong to a set of approved types.
+          expressed as a JSON object. The only accepted type currently is
+          AuditLog.
         type: object
       severity:
         description: |-
@@ -1240,6 +1244,13 @@ definitions:
               - “folders/<folder-id>”
               - “organizations/<organization-id>”
         type: string
+      resourceContainers:
+        description: |-
+          DO NOT USE.
+          This field is not ready for use yet.
+        items:
+          type: string
+        type: array
       startTime:
         description: Required. Start time of the operation.
         format: google-datetime
@@ -1469,14 +1480,14 @@ definitions:
         type: string
     type: object
   ReportError:
-    description: Represents the processing error of one `Operation` in the request.
+    description: Represents the processing error of one Operation in the request.
     properties:
       operationId:
         description: The Operation.operation_id value from the request.
         type: string
       status:
         $ref: '#/definitions/Status'
-        description: Details of the error when processing the `Operation`.
+        description: Details of the error when processing the Operation.
     type: object
   ReportInfo:
     properties:

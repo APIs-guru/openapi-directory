@@ -502,6 +502,58 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{projectId}/histories/{historyId}/executions/{executionId}/clusters/{clusterId}':
+    get:
+      description: Retrieves a single screenshot cluster by its ID
+      operationId: toolresults.projects.histories.executions.clusters.get
+      parameters:
+        - description: |-
+            A Cluster id
+
+            Required.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            An Execution id.
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ScreenshotCluster'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{projectId}/histories/{historyId}/executions/{executionId}/steps':
     get:
       description: |-

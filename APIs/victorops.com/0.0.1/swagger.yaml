@@ -1680,6 +1680,8 @@ paths:
 
         The default offset is 0 and the default limit is 20. The maximum value allowed for limit is 100.
 
+        Unless specified otherwise with the parameter currentPhase, the response will only contain resolved incidents.
+
         On return, the total number of records available for that query will be returned in the payload as 'total'.
       parameters:
         - $ref: '#/parameters/apiId'
@@ -1717,7 +1719,7 @@ paths:
           name: service
           required: false
           type: string
-        - description: 'The current phase of the incident "resolved", "triggered" or "acknowledged". Multiple values can be separated with commas.'
+        - description: 'The current phase of the incident "resolved", "triggered" or "acknowledged". Multiple values can be separated with commas. By default, response contains only "resolved" incidents'
           in: query
           name: currentPhase
           required: false

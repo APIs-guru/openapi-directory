@@ -511,11 +511,6 @@ paths:
       description: Deletes a Merchant Center sub-account. This method can only be called for multi-client accounts.
       operationId: content.accounts.delete
       parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
         - description: The ID of the account.
           in: path
           name: accountId
@@ -525,6 +520,16 @@ paths:
           in: query
           name: dryRun
           type: boolean
+        - default: true
+          description: 'Flag to delete sub-accounts with products. The default value of false will become active on September 28, 2017.'
+          in: query
+          name: force
+          type: boolean
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
       responses:
         '200':
           description: Successful response
@@ -660,7 +665,7 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: Flag to remove any existing claim on the requested website by another account and replace it with a claim from this account.
+        - description: 'Only available to selected merchants. When set to True, this flag removes any existing claim on the requested website by another account and replaces it with a claim from this account.'
           in: query
           name: overwrite
           type: boolean
@@ -2406,6 +2411,9 @@ definitions:
         description: 'An entry ID, unique within the batch request.'
         format: uint32
         type: integer
+      force:
+        description: Whether the account should be deleted if the account has offers. Only applicable if the method is delete.
+        type: boolean
       merchantId:
         description: The ID of the managing account.
         format: uint64
@@ -4743,6 +4751,9 @@ definitions:
       deliveryTime:
         $ref: '#/definitions/DeliveryTime'
         description: Time spent in various aspects from order to the delivery of the product. Required.
+      minimumOrderValue:
+        $ref: '#/definitions/Price'
+        description: 'Minimum order value for this service. If set, indicates that customers will have to spend at least this amount. All prices within a service must have the same currency.'
       name:
         description: Free-form name of the service. Must be unique within target account. Required.
         type: string

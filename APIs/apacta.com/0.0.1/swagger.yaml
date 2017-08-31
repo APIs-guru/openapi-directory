@@ -260,7 +260,11 @@ paths:
           schema:
             properties:
               data:
-                $ref: '#/definitions/City'
+                items:
+                  $ref: '#/definitions/City'
+                type: array
+              pagination:
+                $ref: '#/definitions/PaginationDetails'
               success:
                 default: true
                 type: boolean

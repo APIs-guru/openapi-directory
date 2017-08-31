@@ -350,6 +350,35 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
+  /sendVerificationCode:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Send SMS verification code.
+      operationId: identitytoolkit.relyingparty.sendVerificationCode
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartySendVerificationCodeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartySendVerificationCodeResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - relyingparty
   /setAccountInfo:
     parameters:
       - $ref: '#/parameters/alt'
@@ -579,6 +608,35 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/VerifyPasswordResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - relyingparty
+  /verifyPhoneNumber:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Verifies ownership of a phone number and creates/updates the user account accordingly.
+      operationId: identitytoolkit.relyingparty.verifyPhoneNumber
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -876,6 +934,29 @@ definitions:
         description: The confirmation code.
         type: string
     type: object
+  IdentitytoolkitRelyingpartySendVerificationCodeRequest:
+    description: Request for Identitytoolkit-SendVerificationCode
+    properties:
+      iosReceipt:
+        description: Receipt of successful app token validation with APNS.
+        type: string
+      iosSecret:
+        description: Secret delivered to iOS app via APNS.
+        type: string
+      phoneNumber:
+        description: The phone number to send the verification code to in E.164 format.
+        type: string
+      recaptchaToken:
+        description: Recaptcha solution.
+        type: string
+    type: object
+  IdentitytoolkitRelyingpartySendVerificationCodeResponse:
+    description: Response for Identitytoolkit-SendVerificationCode
+    properties:
+      sessionInfo:
+        description: Encrypted session information
+        type: string
+    type: object
   IdentitytoolkitRelyingpartySetAccountInfoRequest:
     description: Request to set the account information.
     properties:
@@ -888,6 +969,9 @@ definitions:
       createdAt:
         description: The timestamp when the account is created.
         format: int64
+        type: string
+      customAttributes:
+        description: The custom attributes to be set in the user's id token.
         type: string
       delegatedProjectNumber:
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
@@ -1190,6 +1274,52 @@ definitions:
         description: Whether return sts id token and refresh token instead of gitkit token.
         type: boolean
     type: object
+  IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest:
+    description: Request for Identitytoolkit-VerifyPhoneNumber
+    properties:
+      code:
+        type: string
+      idToken:
+        type: string
+      operation:
+        type: string
+      phoneNumber:
+        type: string
+      sessionInfo:
+        description: The session info previously returned by IdentityToolkit-SendVerificationCode.
+        type: string
+      temporaryProof:
+        type: string
+      verificationProof:
+        type: string
+    type: object
+  IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse:
+    description: Response for Identitytoolkit-VerifyPhoneNumber
+    properties:
+      expiresIn:
+        format: int64
+        type: string
+      idToken:
+        type: string
+      isNewUser:
+        type: boolean
+      localId:
+        type: string
+      phoneNumber:
+        type: string
+      refreshToken:
+        type: string
+      temporaryProof:
+        type: string
+      temporaryProofExpiresIn:
+        format: int64
+        type: string
+      verificationProof:
+        type: string
+      verificationProofExpiresIn:
+        format: int64
+        type: string
+    type: object
   IdpConfig:
     description: Template for a single idp configuration.
     properties:
@@ -1394,6 +1524,9 @@ definitions:
       createdAt:
         description: User creation timestamp.
         format: int64
+        type: string
+      customAttributes:
+        description: The custom attributes to be set in the user's id token.
         type: string
       customAuth:
         description: Whether the user is authenticated by the developer.
@@ -1616,6 +1749,9 @@ definitions:
       idToken:
         description: The GITKit token for authenticated user.
         type: string
+      isNewUser:
+        description: 'True if it''s a new user sign-in, false if it''s a returning user.'
+        type: boolean
       kind:
         default: 'identitytoolkit#VerifyCustomTokenResponse'
         description: 'The fixed string "identitytoolkit#VerifyCustomTokenResponse".'

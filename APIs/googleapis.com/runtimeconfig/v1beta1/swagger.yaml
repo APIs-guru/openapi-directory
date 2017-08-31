@@ -129,13 +129,19 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: Deletes the waiter with the specified name.
-      operationId: runtimeconfig.projects.configs.waiters.delete
+      description: |-
+        Deletes a variable or multiple variables.
+
+        If you specify a variable name, then that variable is deleted. If you
+        specify a prefix and `recursive` is true, then all variables with that
+        prefix are deleted. You must set a `recursive` to true if you delete
+        variables by prefix.
+      operationId: runtimeconfig.projects.configs.variables.delete
       parameters:
         - description: |-
-            The Waiter resource to delete, in the format:
+            The name of the variable to delete, in the format:
 
-             `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/waiters/[WAITER_NAME]`
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIABLE_NAME]`
           in: path
           name: name
           required: true
@@ -164,13 +170,13 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: runtimeconfig.projects.configs.operations.get
+      description: Gets information about a single variable.
+      operationId: runtimeconfig.projects.configs.variables.get
       parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            The name of the variable to return, in the format:
+
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIBLE_NAME]`
           in: path
           name: name
           required: true
@@ -180,7 +186,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Variable'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -413,8 +419,27 @@ paths:
       operationId: runtimeconfig.projects.configs.variables.list
       parameters:
         - description: |-
+            Filters variables by matching the specified filter. For example:
+
+            `projects/example-project/config/[CONFIG_NAME]/variables/example-variable`.
+          in: query
+          name: filter
+          type: string
+        - description: |-
+            Specifies the number of results to return per page. If there are fewer
+            elements than the specified number, returns all elements.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            Specifies a page token to use. Set `pageToken` to a `nextPageToken`
+            returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
             The path to the RuntimeConfig resource for which you want to list variables.
-            The configuration must exist beforehand; the path must by in the format:
+            The configuration must exist beforehand; the path must be in the format:
 
             `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`
           in: path
@@ -423,31 +448,12 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: |-
-            Specifies a page token to use. Set `pageToken` to a `nextPageToken`
-            returned by a previous list request to get the next page of results.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
             The flag indicates whether the user wants to return values of variables.
             If true, then only those variables that user has IAM GetVariable permission
             will be returned along with their values.
           in: query
           name: returnValues
           type: boolean
-        - description: |-
-            Specifies the number of results to return per page. If there are fewer
-            elements than the specified number, returns all elements.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            Filters variables by matching the specified filter. For example:
-
-            `projects/example-project/config/[CONFIG_NAME]/variables/example-variable`.
-          in: query
-          name: filter
-          type: string
       responses:
         '200':
           description: Successful response
@@ -489,9 +495,13 @@ paths:
         documentation.
       operationId: runtimeconfig.projects.configs.variables.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Variable'
         - description: |-
             The path to the RutimeConfig resource that this variable should belong to.
-            The configuration must exist beforehand; the path must by in the format:
+            The configuration must exist beforehand; the path must be in the format:
 
             `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`
           in: path
@@ -513,10 +523,6 @@ paths:
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Variable'
       responses:
         '200':
           description: Successful response
@@ -539,15 +545,11 @@ paths:
       operationId: runtimeconfig.projects.configs.waiters.list
       parameters:
         - description: |-
-            The path to the configuration for which you want to get a list of waiters.
-            The configuration must exist beforehand; the path must by in the format:
-
-            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`
-          in: path
-          name: parent
-          required: true
-          type: string
-          x-reservedExpansion: true
+            Specifies the number of results to return per page. If there are fewer
+            elements than the specified number, returns all elements.
+          in: query
+          name: pageSize
+          type: integer
         - description: |-
             Specifies a page token to use. Set `pageToken` to a `nextPageToken`
             returned by a previous list request to get the next page of results.
@@ -555,11 +557,15 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Specifies the number of results to return per page. If there are fewer
-            elements than the specified number, returns all elements.
-          in: query
-          name: pageSize
-          type: integer
+            The path to the configuration for which you want to get a list of waiters.
+            The configuration must exist beforehand; the path must be in the format:
+
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -599,9 +605,13 @@ paths:
         still exist and must be deleted prior to subsequent creation attempts.
       operationId: runtimeconfig.projects.configs.waiters.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Waiter'
         - description: |-
             The path to the configuration that will own the waiter.
-            The configuration must exist beforehand; the path must by in the format:
+            The configuration must exist beforehand; the path must be in the format:
 
             `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`.
           in: path
@@ -623,10 +633,6 @@ paths:
           in: query
           name: requestId
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Waiter'
       responses:
         '200':
           description: Successful response
@@ -762,7 +768,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: runtimeconfig.projects.configs.operations.testIamPermissions
+      operationId: runtimeconfig.projects.configs.variables.testIamPermissions
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy detail is being requested.
@@ -945,7 +951,7 @@ definitions:
       done:
         description: |-
           If the value is `false`, it means the operation is still in progress.
-          If true, the operation is completed, and either `error` or `response` is
+          If `true`, the operation is completed, and either `error` or `response` is
           available.
         type: boolean
       error:

@@ -1639,8 +1639,9 @@ definitions:
         type: string
       deadline:
         description: |-
-          The number of seconds to wait for a response from a request.  The
-          default depends on the deployment context.
+          The number of seconds to wait for a response from a request.  The default
+          deadline for gRPC and HTTP requests is 5 seconds. For Stubby requests,
+          the default is no deadline.
         format: double
         type: number
       minDeadline:
@@ -1718,62 +1719,6 @@ definitions:
           Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
         items:
           $ref: '#/definitions/ConfigChange'
-        type: array
-    type: object
-  CloudAuditOptions:
-    description: Write a Cloud Audit log
-    properties:
-      logName:
-        description: The log_name to populate in the Cloud Audit Record.
-        enum:
-          - UNSPECIFIED_LOG_NAME
-          - ADMIN_ACTIVITY
-          - DATA_ACCESS
-        type: string
-    type: object
-  Condition:
-    description: A condition to be met.
-    properties:
-      iam:
-        description: Trusted attributes supplied by the IAM system.
-        enum:
-          - NO_ATTR
-          - AUTHORITY
-          - ATTRIBUTION
-          - APPROVER
-          - JUSTIFICATION_TYPE
-        type: string
-      op:
-        description: An operator to apply the subject with.
-        enum:
-          - NO_OP
-          - EQUALS
-          - NOT_EQUALS
-          - IN
-          - NOT_IN
-          - DISCHARGED
-        type: string
-      svc:
-        description: Trusted attributes discharged by the service.
-        type: string
-      sys:
-        description: |-
-          Trusted attributes supplied by any service that owns resources and uses
-          the IAM system for access control.
-        enum:
-          - NO_ATTR
-          - REGION
-          - SERVICE
-          - NAME
-          - IP
-        type: string
-      value:
-        description: DEPRECATED. Use 'values' instead.
-        type: string
-      values:
-        description: The objects of the condition. This is mutually exclusive with 'value'.
-        items:
-          type: string
         type: array
     type: object
   ConfigChange:
@@ -1934,38 +1879,6 @@ definitions:
           feature (like quota and billing) will be enabled.
         type: string
     type: object
-  CounterOptions:
-    description: |-
-      Increment a streamz counter with the specified metric and field names.
-
-      Metric names should start with a '/', generally be lowercase-only,
-      and end in "_count". Field names should not contain an initial slash.
-      The actual exported metric names will have "/iam/policy" prepended.
-
-      Field names correspond to IAM request parameters and field values are
-      their respective values.
-
-      At present the only supported field names are
-         - "iam_principal", corresponding to IAMContext.principal;
-         - "" (empty string), resulting in one aggretated counter with no field.
-
-      Examples:
-        counter { metric: "/debug_access_count"  field: "iam_principal" }
-        ==> increment counter /iam/policy/backend_debug_access_count
-                              {iam_principal=[value of IAMContext.principal]}
-
-      At this time we do not support:
-      * multiple field names (though this may be supported in the future)
-      * decrementing the counter
-      * incrementing it by anything other than 1
-    properties:
-      field:
-        description: The field value to attribute.
-        type: string
-      metric:
-        description: The metric to update.
-        type: string
-    type: object
   CustomAuthRequirements:
     description: Configuration for a custom authentication provider.
     properties:
@@ -2026,18 +1939,6 @@ definitions:
         type: string
       path:
         description: The path matched by this custom verb.
-        type: string
-    type: object
-  DataAccessOptions:
-    description: Write a Data Access (Gin) log
-    properties:
-      logMode:
-        description: |-
-          Whether Gin logging should happen in a fail-closed manner at the caller.
-          This is relevant only in the LocalIAM implementation, for now.
-        enum:
-          - LOG_MODE_UNSPECIFIED
-          - LOG_FAIL_CLOSED
         type: string
     type: object
   DeleteServiceStrategy:
@@ -2893,19 +2794,6 @@ definitions:
           $ref: '#/definitions/ManagedService'
         type: array
     type: object
-  LogConfig:
-    description: Specifies what kind of log the caller must write
-    properties:
-      cloudAudit:
-        $ref: '#/definitions/CloudAuditOptions'
-        description: Cloud audit options.
-      counter:
-        $ref: '#/definitions/CounterOptions'
-        description: Counter options.
-      dataAccess:
-        $ref: '#/definitions/DataAccessOptions'
-        description: Data access options.
-    type: object
   LogDescriptor:
     description: |-
       A description of a log type. Example in YAML format:
@@ -3555,7 +3443,7 @@ definitions:
       done:
         description: |-
           If the value is `false`, it means the operation is still in progress.
-          If true, the operation is completed, and either `error` or `response` is
+          If `true`, the operation is completed, and either `error` or `response` is
           available.
         type: boolean
       error:
@@ -3733,20 +3621,6 @@ definitions:
         type: string
       iamOwned:
         type: boolean
-      rules:
-        description: |-
-          If more than one rule is specified, the rules are applied in the following
-          manner:
-          - All matching LOG rules are always applied.
-          - If any DENY/DENY_WITH_LOG rule matches, permission is denied.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is
-            granted.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if no rule applies, permission is denied.
-        items:
-          $ref: '#/definitions/Rule'
-        type: array
       version:
         description: Version of the `Policy`. The default version is 0.
         format: int32
@@ -3989,59 +3863,6 @@ definitions:
         description: |-
           Google Service Control selects service configurations based on
           traffic percentage.
-    type: object
-  Rule:
-    description: A rule to be applied in a Policy.
-    properties:
-      action:
-        description: Required
-        enum:
-          - NO_ACTION
-          - ALLOW
-          - ALLOW_WITH_LOG
-          - DENY
-          - DENY_WITH_LOG
-          - LOG
-        type: string
-      conditions:
-        description: Additional restrictions that must be met
-        items:
-          $ref: '#/definitions/Condition'
-        type: array
-      description:
-        description: Human-readable description of the rule.
-        type: string
-      in:
-        description: |-
-          If one or more 'in' clauses are specified, the rule matches if
-          the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
-        items:
-          type: string
-        type: array
-      logConfig:
-        description: |-
-          The config returned to callers of tech.iam.IAM.CheckPolicy for any entries
-          that match the LOG action.
-        items:
-          $ref: '#/definitions/LogConfig'
-        type: array
-      notIn:
-        description: |-
-          If one or more 'not_in' clauses are specified, the rule matches
-          if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.
-          The format for in and not_in entries is the same as for members in a
-          Binding (see google/iam/v1/policy.proto).
-        items:
-          type: string
-        type: array
-      permissions:
-        description: |-
-          A permission is a string of form '<service>.<resource type>.<verb>'
-          (e.g., 'storage.buckets.list'). A value of '*' matches all permissions,
-          and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.
-        items:
-          type: string
-        type: array
     type: object
   Service:
     description: |-

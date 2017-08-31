@@ -283,7 +283,7 @@ paths:
   '/v2/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.billingAccounts.logs.delete
+      operationId: logging.projects.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -312,7 +312,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - projects
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -450,7 +450,7 @@ paths:
   '/v2/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.billingAccounts.logs.list
+      operationId: logging.projects.logs.list
       parameters:
         - description: |
             Required. The resource name that owns the logs:
@@ -494,7 +494,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - projects
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -608,7 +608,7 @@ paths:
   '/v2/{parent}/sinks':
     get:
       description: Lists sinks.
-      operationId: logging.billingAccounts.sinks.list
+      operationId: logging.projects.sinks.list
       parameters:
         - description: |
             Required. The parent resource whose sinks are to be listed:
@@ -652,7 +652,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - projects
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -669,7 +669,7 @@ paths:
       - $ref: '#/parameters/key'
     post:
       description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the current time is outside the sink''s start and end times or the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
-      operationId: logging.billingAccounts.sinks.create
+      operationId: logging.projects.sinks.create
       parameters:
         - description: |-
             Required. The resource in which to create the sink:
@@ -706,11 +706,11 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - projects
   '/v2/{sinkName}':
     delete:
       description: 'Deletes a sink. If the sink has a unique writer_identity, then that service account is also deleted.'
-      operationId: logging.billingAccounts.sinks.delete
+      operationId: logging.projects.sinks.delete
       parameters:
         - description: |-
             Required. The full resource name of the sink to delete, including the parent resource and the sink identifier:
@@ -739,10 +739,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - projects
     get:
       description: Gets a sink.
-      operationId: logging.billingAccounts.sinks.get
+      operationId: logging.projects.sinks.get
       parameters:
         - description: |-
             Required. The resource name of the sink:
@@ -779,7 +779,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - projects
     parameters:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/pp'
@@ -796,7 +796,7 @@ paths:
       - $ref: '#/parameters/key'
     patch:
       description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.billingAccounts.sinks.patch
+      operationId: logging.projects.sinks.patch
       parameters:
         - in: body
           name: body
@@ -837,10 +837,10 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - projects
     put:
       description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, filter, output_version_format, start_time, and end_time. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.billingAccounts.sinks.update
+      operationId: logging.projects.sinks.update
       parameters:
         - in: body
           name: body
@@ -881,7 +881,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - projects
 definitions:
   Empty:
     description: |-
@@ -1000,7 +1000,7 @@ definitions:
     description: Result returned from ListLogEntries.
     properties:
       entries:
-        description: A list of log entries.
+        description: 'A list of log entries. If entries is empty, nextPageToken may still be returned, indicating that more entries may exist. See nextPageToken for more information.'
         items:
           $ref: '#/definitions/LogEntry'
         type: array
@@ -1199,7 +1199,7 @@ definitions:
         description: 'Required. The client-assigned metric identifier. Examples: "error_count", "nginx/requests".Metric identifiers are limited to 100 characters and can include only the following characters: A-Z, a-z, 0-9, and the special characters _-.,+!*'',()%/. The forward-slash character (/) denotes a hierarchy of name pieces, and it cannot be the first character of the name.The metric identifier in this field must not be URL-encoded (https://en.wikipedia.org/wiki/Percent-encoding). However, when the metric identifier appears as the [METRIC_ID] part of a metric_name API parameter, then the metric identifier must be URL-encoded. Example: "projects/my-project/metrics/nginx%2Frequests".'
         type: string
       version:
-        description: Output only. The API version that created or updated this metric. This value is currently always set to V2.
+        description: Deprecated. The API version that created or updated this metric. The v2 format is used by default and cannot be changed.
         enum:
           - V2
           - V1

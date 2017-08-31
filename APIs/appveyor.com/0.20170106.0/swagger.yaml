@@ -2974,6 +2974,8 @@ definitions:
             type: boolean
           rollingBuildsDoNotCancelRunningBuilds:
             type: boolean
+          saveBuildCacheInPullRequests:
+            type: boolean
           securityDescriptor:
             $ref: '#/definitions/SecurityDescriptor'
             description: Not present in response from addProject. Not always present in response from getProjects (only after updateProject or startBuild?).

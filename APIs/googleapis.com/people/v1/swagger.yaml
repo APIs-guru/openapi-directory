@@ -460,46 +460,14 @@ paths:
         - contactGroups
     get:
       description: |-
-        Provides information about a person by specifying a resource name. Use
-        `people/me` to indicate the authenticated user.
-        <br>
-        The request throws a 400 error if 'personFields' is not specified.
-      operationId: people.people.get
+        Get a specific contact group owned by the authenticated user by specifying
+        a contact group resource name.
+      operationId: people.contactGroups.get
       parameters:
-        - description: |-
-            **Required.** A field mask to restrict which fields on the person are
-            returned. Valid values are:
-
-            * addresses
-            * ageRanges
-            * biographies
-            * birthdays
-            * braggingRights
-            * coverPhotos
-            * emailAddresses
-            * events
-            * genders
-            * imClients
-            * interests
-            * locales
-            * memberships
-            * metadata
-            * names
-            * nicknames
-            * occupations
-            * organizations
-            * phoneNumbers
-            * photos
-            * relations
-            * relationshipInterests
-            * relationshipStatuses
-            * residences
-            * skills
-            * taglines
-            * urls
+        - description: Specifies the maximum number of members to return.
           in: query
-          name: personFields
-          type: string
+          name: maxMembers
+          type: integer
         - description: |-
             **Required.** Comma-separated list of person fields to be included in the
             response. Each path should start with `person.`: for example,
@@ -507,15 +475,7 @@ paths:
           in: query
           name: requestMask.includeField
           type: string
-        - description: |-
-            The resource name of the person to provide information about.
-
-            - To get information about the authenticated user, specify `people/me`.
-            - To get information about a google account, specify
-             `people/`<var>account_id</var>.
-            - To get information about a contact, specify the resource name that
-              identifies the contact as returned by
-            [`people.connections.list`](/people/api/rest/v1/people.connections/list).
+        - description: The resource name of the contact group to get.
           in: path
           name: resourceName
           required: true
@@ -525,7 +485,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Person'
+            $ref: '#/definitions/ContactGroup'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/contacts'
@@ -564,7 +524,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
-        - people
+        - contactGroups
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -1724,6 +1684,11 @@ definitions:
         items:
           $ref: '#/definitions/Url'
         type: array
+      userDefined:
+        description: The person's user defined data.
+        items:
+          $ref: '#/definitions/UserDefined'
+        type: array
     type: object
   PersonMetadata:
     description: The read-only metadata about a person.
@@ -2136,5 +2101,18 @@ definitions:
         type: string
       value:
         description: The URL.
+        type: string
+    type: object
+  UserDefined:
+    description: Arbitrary user data that is populated by the end users.
+    properties:
+      key:
+        description: The end user specified key of the user defined data.
+        type: string
+      metadata:
+        $ref: '#/definitions/FieldMetadata'
+        description: Metadata about the user defined data.
+      value:
+        description: The end user specified value of the user defined data.
         type: string
     type: object

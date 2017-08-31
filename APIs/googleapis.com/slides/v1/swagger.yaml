@@ -600,6 +600,8 @@ definitions:
           display inside the presentation. Images must be less than 50MB in size,
           cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
           format.
+
+          The provided URL can be at maximum 2K bytes large.
         type: string
     type: object
   CreateImageResponse:
@@ -1817,7 +1819,7 @@ definitions:
         description: |-
           The background fill property state.
 
-          Updating the the fill on a page will implicitly update this field to
+          Updating the fill on a page will implicitly update this field to
           `RENDERED`, unless another value is specified in the same request. To
           have no fill on a page, set this field to `NOT_RENDERED`. In this case,
           any other fill fields set in the same request will be ignored.
@@ -1877,7 +1879,16 @@ definitions:
         type: string
       transform:
         $ref: '#/definitions/AffineTransform'
-        description: The transform of the page element.
+        description: |-
+          The transform of the page element.
+
+          The visual appearance of the page element is determined by its absolute
+          transform. To compute the absolute transform, preconcatenate a page
+          element's transform with the transforms of all of its parent groups. If the
+          page element is not in a group, its absolute transform is the same as the
+          value in this field.
+
+          The initial transform for the newly created Group is always the identity transform.
       video:
         $ref: '#/definitions/Video'
         description: A video page element.
@@ -2229,6 +2240,8 @@ definitions:
           display inside the presentation. Images must be less than 50MB in size,
           cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
           format.
+
+          The provided URL can be at maximum 2K bytes large.
         type: string
       pageObjectIds:
         description: |-
@@ -2886,6 +2899,8 @@ definitions:
           display inside the presentation. Pictures must be less than 50MB in size,
           cannot exceed 25 megapixels, and must be in either in PNG, JPEG, or GIF
           format.
+
+          The provided URL can be at maximum 2K bytes large.
         type: string
       size:
         $ref: '#/definitions/Size'
@@ -3354,7 +3369,12 @@ definitions:
         type: string
     type: object
   UpdatePageElementTransformRequest:
-    description: Updates the transform of a page element.
+    description: |-
+      Updates the transform of a page element.
+
+      Updating the transform of a group will change the absolute transform of the
+      page elements in that group, which can change their visual appearance. See
+      the documentation for PageElement.transform for more details.
     properties:
       applyMode:
         description: The apply mode of the transform update.

@@ -19436,7 +19436,7 @@ definitions:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       resources:
-        description: Serive resources (a.k.a service projects) attached to this project as their shared VPC host.
+        description: Service resources (a.k.a service projects) attached to this project as their shared VPC host.
         items:
           $ref: '#/definitions/XpnResourceId'
         type: array
@@ -19476,6 +19476,7 @@ definitions:
           - LOCAL_SSD_TOTAL_GB
           - NETWORKS
           - NVIDIA_K80_GPUS
+          - NVIDIA_P100_GPUS
           - PREEMPTIBLE_CPUS
           - PREEMPTIBLE_LOCAL_SSD_GB
           - REGIONAL_AUTOSCALERS
@@ -19494,6 +19495,7 @@ definitions:
           - TARGET_INSTANCES
           - TARGET_POOLS
           - TARGET_SSL_PROXIES
+          - TARGET_TCP_PROXIES
           - TARGET_VPN_GATEWAYS
           - URL_MAPS
           - VPN_TUNNELS

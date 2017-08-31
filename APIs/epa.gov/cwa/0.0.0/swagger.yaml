@@ -3858,16 +3858,28 @@ definitions:
       EjscreenFlagUs:
         type: string
       ElectrRptWaiverEffDate:
+        description: This is the effective date for a  waiver from electronic reporting in compliance with this part. This data element should always be populated for a waiver.
+        title: Electronic Reporting Waiver Effective Date
         type: string
       ElectrRptWaiverExpDate:
+        description: This is the expiration date for a temporary waiver from electronic reporting in compliance with this part. This data element should be left blank if the permittee has a permanent waiver from electronic reporting or if the permittee does not have a waiver from electronic reporting in compliance with this part.
+        title: Electronic Reporting Waiver Expiration Date
         type: string
       ElectrRptWaiverTypeCode:
+        description: 'The unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Reporting Waiver Type Code
         type: string
       ElectrRptWaiverTypeDesc:
+        description: 'Description of the unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Waiver Type Code Description
         type: string
       ElectrSubmissionTypeCode:
+        description: This is the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code
         type: string
       ElectrSubmissionTypeDesc:
+        description: This is the description of the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code Description
         type: string
       ExposedActivity:
         description: Description of onsite industrial activities exposed to stormwater and potential spill and leak areas.
@@ -4014,6 +4026,12 @@ definitions:
       MsgpVisualAssessmentSmmry:
         type: string
       NPDESDataGroups:
+        description: This is the code indicating the NPDES eReporting Rule Data Group that applies to the data.
+        title: NPDES Data Group Codes
+        type: string
+      NPDESDataGroupsDescs:
+        description: Description for each NPDES Data Group eReporting rule code related to the current NPDES permit.
+        title: NPDES Data Group Codes Descriptions
         type: string
       NPDESIDs:
         description: Clean Water Act ID from the ICIS-NPDES (Integrated Compliance Information System - National Pollutant Discharge Elimination System)
@@ -4094,6 +4112,8 @@ definitions:
         example: POTW
         type: string
       PermittingAgency:
+        description: This is the type of organization issuing or granting a permit.
+        title: Permitting Agency
         type: string
       PollInViolation:
         description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
@@ -4412,7 +4432,7 @@ definitions:
       - BioReportDate
       - BioTotalVolumeAmt
       - BioCommentText
-      - BioFacTypes
+      - BioReportingObligations
       - BioTrtmntProcesses
       - BioAnalyMethodCatgrys
       - BioAnalyMethods
@@ -4472,6 +4492,7 @@ definitions:
       - ElectrRptWaiverExpDate
       - ElectrSubmissionTypeCode
       - ElectrSubmissionTypeDesc
+      - NPDESDataGroupsDescs
       - Score
     type: object
   cwa1_MapData:
@@ -5338,16 +5359,28 @@ definitions:
       EjscreenFlagUs:
         type: string
       ElectrRptWaiverEffDate:
+        description: This is the effective date for a  waiver from electronic reporting in compliance with this part. This data element should always be populated for a waiver.
+        title: Electronic Reporting Waiver Effective Date
         type: string
       ElectrRptWaiverExpDate:
+        description: This is the expiration date for a temporary waiver from electronic reporting in compliance with this part. This data element should be left blank if the permittee has a permanent waiver from electronic reporting or if the permittee does not have a waiver from electronic reporting in compliance with this part.
+        title: Electronic Reporting Waiver Expiration Date
         type: string
       ElectrRptWaiverTypeCode:
+        description: 'The unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Reporting Waiver Type Code
         type: string
       ElectrRptWaiverTypeDesc:
+        description: 'Description of the unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Waiver Type Code Description
         type: string
       ElectrSubmissionTypeCode:
+        description: This is the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code
         type: string
       ElectrSubmissionTypeDesc:
+        description: This is the description of the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code Description
         type: string
       ExposedActivity:
         description: Description of onsite industrial activities exposed to stormwater and potential spill and leak areas.
@@ -5494,6 +5527,12 @@ definitions:
       MsgpVisualAssessmentSmmry:
         type: string
       NPDESDataGroups:
+        description: This is the code indicating the NPDES eReporting Rule Data Group that applies to the data.
+        title: NPDES Data Group Codes
+        type: string
+      NPDESDataGroupsDescs:
+        description: Description for each NPDES Data Group eReporting rule code related to the current NPDES permit.
+        title: NPDES Data Group Codes Descriptions
         type: string
       NPDESIDs:
         description: Clean Water Act ID from the ICIS-NPDES (Integrated Compliance Information System - National Pollutant Discharge Elimination System)
@@ -5579,6 +5618,8 @@ definitions:
         example: POTW
         type: string
       PermittingAgency:
+        description: This is the type of organization issuing or granting a permit.
+        title: Permitting Agency
         type: string
       PollInViolation:
         description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
@@ -5898,6 +5939,7 @@ definitions:
       - BioReportDate
       - BioTotalVolumeAmt
       - BioCommentText
+      - BioReportingObligations
       - BioTrtmntProcesses
       - BioAnalyMethodCatgrys
       - BioAnalyMethods
@@ -5957,6 +5999,7 @@ definitions:
       - ElectrRptWaiverExpDate
       - ElectrSubmissionTypeCode
       - ElectrSubmissionTypeDesc
+      - NPDESDataGroupsDescs
       - Score
     type: object
   cwa2_Results:
@@ -6787,16 +6830,28 @@ definitions:
       EjscreenFlagUs:
         type: string
       ElectrRptWaiverEffDate:
+        description: This is the effective date for a  waiver from electronic reporting in compliance with this part. This data element should always be populated for a waiver.
+        title: Electronic Reporting Waiver Effective Date
         type: string
       ElectrRptWaiverExpDate:
+        description: This is the expiration date for a temporary waiver from electronic reporting in compliance with this part. This data element should be left blank if the permittee has a permanent waiver from electronic reporting or if the permittee does not have a waiver from electronic reporting in compliance with this part.
+        title: Electronic Reporting Waiver Expiration Date
         type: string
       ElectrRptWaiverTypeCode:
+        description: 'The unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Reporting Waiver Type Code
         type: string
       ElectrRptWaiverTypeDesc:
+        description: 'Description of the unique code that identifies whether the authorized NPDES program has granted the permittee a waiver from electronic reporting in compliance with this part (e.g,  temporary waiver, permanent waiver). This data element should be left blank if the permittee does not have a waiver from electronic reporting in compliance with this part.'
+        title: Electronic Waiver Type Code Description
         type: string
       ElectrSubmissionTypeCode:
+        description: This is the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code
         type: string
       ElectrSubmissionTypeDesc:
+        description: This is the description of the code indicating the means by which the data were submitted electronically.
+        title: Electronic Submission Type Code Description
         type: string
       ExposedActivity:
         description: Description of onsite industrial activities exposed to stormwater and potential spill and leak areas.
@@ -6935,6 +6990,12 @@ definitions:
       MsgpVisualAssessmentSmmry:
         type: string
       NPDESDataGroups:
+        description: This is the code indicating the NPDES eReporting Rule Data Group that applies to the data.
+        title: NPDES Data Group Codes
+        type: string
+      NPDESDataGroupsDescs:
+        description: Description for each NPDES Data Group eReporting rule code related to the current NPDES permit.
+        title: NPDES Data Group Codes Descriptions
         type: string
       NPDESIDs:
         description: Clean Water Act ID from the ICIS-NPDES (Integrated Compliance Information System - National Pollutant Discharge Elimination System)
@@ -7015,6 +7076,8 @@ definitions:
         example: POTW
         type: string
       PermittingAgency:
+        description: This is the type of organization issuing or granting a permit.
+        title: Permitting Agency
         type: string
       PollInViolation:
         description: 'The names of pollutants with reporting violations (i.e., violation codes D80 and D90) or effluent exceedances (i.e., violation code E90) in the past three years in ICIS-NPDES.'
@@ -7331,7 +7394,7 @@ definitions:
       - BioReportDate
       - BioTotalVolumeAmt
       - BioCommentText
-      - BioFacTypes
+      - BioReportingObligations
       - BioTrtmntProcesses
       - BioAnalyMethodCatgrys
       - BioAnalyMethods
@@ -7391,6 +7454,7 @@ definitions:
       - ElectrRptWaiverExpDate
       - ElectrSubmissionTypeCode
       - ElectrSubmissionTypeDesc
+      - NPDESDataGroupsDescs
       - Score
     type: object
   met_Results:

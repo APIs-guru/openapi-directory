@@ -114,6 +114,35 @@ paths:
       summary: Retrieves the channel data for the partner. This data can be used to populate the channel_id parameter in the Put Asset Changes query.
       tags:
         - AssetChanges
+  /v3/asset-registrations:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      operationId: AssetRegistration_Register
+      parameters:
+        - description: Specify JSON containing an array of asset ids to register.  Limited to 500 asset ids per call.
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterAssetsRequest'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Success - The assets were successfully registered.
+          schema:
+            $ref: '#/definitions/Object'
+        '401':
+          description: AuthorizationTokenRequired - Authorization token was missing or not valid.
+        '500':
+          description: AssetRegistrationFailed - There was a failure when registering assets.
+      summary: Register a list of customer assets.
+      tags:
+        - AssetRegistration
   /v3/boards:
     get:
       consumes: []
@@ -1692,7 +1721,7 @@ paths:
           name: fields
           required: false
           type: array
-        - description: Request results starting at a page number (default is 1).
+        - description: 'Request results starting at a page number (default is 1, maximum is 50).'
           format: int32
           in: query
           name: page
@@ -4191,6 +4220,47 @@ paths:
       summary: Search for editorial videos
       tags:
         - Search
+  '/v3/usage-batches/{id}':
+    put:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      operationId: Usage_Put
+      parameters:
+        - description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r\n            The date format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/report_usage_batch_request'
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Specifies a unique batch transaction id to identify the report.
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Success - All usages reported were successfully recorded.
+          schema:
+            $ref: '#/definitions/report_usage_batch_response'
+        '400':
+          description: 'InvalidRequest - The content of the request was invalid. Most commonly this is due to either too many assets specified, no assets or invalid JSON.'
+        '401':
+          description: AuthorizationTokenRequired - Authorization token was missing or not valid.
+        '409':
+          description: TransactionIdDuplicated - The id parameter supplied was already used in a previous usage report.
+      summary: Report usage of assets via a batch format.
+      tags:
+        - Usage
   /v3/videos:
     get:
       consumes: []
@@ -5291,6 +5361,16 @@ definitions:
       uri:
         type: string
     type: object
+  GettyImages.Models.Search.CreativeImageSearchLightResults:
+    properties:
+      images:
+        items:
+          $ref: '#/definitions/GettyImages.Models.Search.ImageSearchLightItemCreative'
+        type: array
+      result_count:
+        format: int32
+        type: integer
+    type: object
   GettyImages.Models.Search.CreativeImageSearchResults:
     properties:
       images:
@@ -5605,6 +5685,17 @@ definitions:
       uri_oembed:
         type: string
     type: object
+  GettyImages.Models.Search.ImageSearchLightItemCreative:
+    properties:
+      display_sizes:
+        items:
+          $ref: '#/definitions/GettyImages.Models.Search.ImageSearchItemDisplaySize'
+        type: array
+      id:
+        type: string
+      title:
+        type: string
+    type: object
   'GettyImages.Models.Search.SearchResults[GettyImages.Models.Search.ImageSearchItem]':
     properties:
       images:
@@ -5896,6 +5987,52 @@ definitions:
           $ref: '#/definitions/PartnerChannel'
         type: array
     type: object
+  RegisterAssetsRequest:
+    description: Specify request containing the list of asset ids you want to register.
+    properties:
+      asset_ids:
+        description: Specifies the list of asset ids you want to register.
+        items:
+          type: string
+        type: array
+    type: object
   System.Object:
     properties: {}
+    type: object
+  asset_usage:
+    description: 'Specifies the id, usage quantity, and date of when an asset was used.'
+    properties:
+      asset_id:
+        description: Specifies the Id of the asset that was used.
+        type: string
+      quantity:
+        description: Specifies the number of times the asset was used.
+        format: int32
+        type: integer
+      usage_date:
+        description: 'Identifies the date the asset was used, in ISO 8601 format (e.g., YYYY-MM-DD), time is not needed.'
+        format: date-time
+        type: string
+    type: object
+  report_usage_batch_request:
+    description: Specifies the request information for the Batch Usages endpoint.
+    properties:
+      asset_usages:
+        description: 'Identifies the list of asset id, usage count and date of usage combinations to record.'
+        items:
+          $ref: '#/definitions/asset_usage'
+        type: array
+    type: object
+  report_usage_batch_response:
+    description: Specifies the response from the Batch Usages endpoint.
+    properties:
+      invalid_assets:
+        description: Identifies a list of asset ids submitted that did not match known Getty asset ids.
+        items:
+          type: string
+        type: array
+      total_asset_usages_processed:
+        description: Specifies the number of asset usage records that were successfully recorded.
+        format: int32
+        type: integer
     type: object

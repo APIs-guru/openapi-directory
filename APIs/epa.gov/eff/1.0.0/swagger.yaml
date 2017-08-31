@@ -364,6 +364,10 @@ definitions:
         example: '3400204974'
         title: Limit Set Schedule ID
         type: string
+      LimitTypeCode:
+        example: C1
+        title: Limit Type Code
+        type: string
       LimitUnitCode:
         description: The code representing the unit of measure applicable to quantity or concentration limits and measurements as entered by the user
         example: '12'
@@ -490,6 +494,7 @@ definitions:
       - LimitSetScheduleId
       - NmbrOfSubmission
       - LimitId
+      - LimitTypeCode
       - LimitBeginDate
       - LimitEndDate
       - LimitValueId

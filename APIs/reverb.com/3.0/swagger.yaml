@@ -517,34 +517,6 @@ paths:
       summary: View reviews of a comparison shopping page
       tags:
         - comparison_shopping_pages
-  '/comparison_shopping_pages/{slug}/also_purchased':
-    get:
-      description: 'DEPRICATED: Returns a set of comparison shopping pages that have also been purchased by similar users'
-      parameters:
-        - in: path
-          name: slug
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: 'DEPRICATED: Returns a set of comparison shopping pages that have also been purchased by similar users'
-      tags:
-        - comparison_shopping_pages
-  '/comparison_shopping_pages/{slug}/similar':
-    get:
-      description: 'DEPRECATED: Returns a set of comparison shopping pages related to another one'
-      parameters:
-        - in: path
-          name: slug
-          required: true
-          type: string
-      responses:
-        default:
-          description: Unexpected error
-      summary: 'DEPRECATED: Returns a set of comparison shopping pages related to another one'
-      tags:
-        - comparison_shopping_pages
   '/conversations/{id}/offer':
     post:
       description: Make an offer to the other participant in the conversation

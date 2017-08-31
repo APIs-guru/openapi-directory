@@ -578,6 +578,9 @@ definitions:
                Handle a write to the Firebase Realtime Database
                `providers/firebase.database/eventTypes/data.write`
         type: string
+      failurePolicy:
+        $ref: '#/definitions/FailurePolicy'
+        description: Specifies policy for failed executions.
       resource:
         description: |-
           Which instance of the source's service should send events. E.g. for Pub/Sub
@@ -586,6 +589,15 @@ definitions:
           that only supports one instance per-project, this should be the name of the
           project (`projects/*`)
         type: string
+    type: object
+  FailurePolicy:
+    description: |-
+      Describes the policy in case of function's execution failure.
+      If empty, then defaults to ignoring failures (i.e. not retrying them).
+    properties:
+      retry:
+        $ref: '#/definitions/Retry'
+        description: 'If specified, then the function will be retried in case of a failure.'
     type: object
   HTTPSTrigger:
     description: 'Describes HTTPSTrigger, could be used to connect web hooks to function.'
@@ -725,6 +737,15 @@ definitions:
           - UPDATE_FUNCTION
           - DELETE_FUNCTION
         type: string
+    type: object
+  Retry:
+    description: |-
+      Describes the retry policy in case of function's execution failure.
+      A function execution will be retried on any failure.
+      A failed execution will be retried up to 7 days with an exponential backoff
+      (capped at 10 seconds).
+      Retried execution is charged as any other execution.
+    properties: {}
     type: object
   SourceRepository:
     description: Describes the location of the function source in a remote repository.

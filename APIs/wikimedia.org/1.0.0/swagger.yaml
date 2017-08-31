@@ -6,19 +6,27 @@ basePath: /api/rest_v1
 info:
   contact:
     name: the Wikimedia Services team
-    url: 'http://mediawiki.org/wiki/RESTBase'
+    url: 'http://mediawiki.org/wiki/REST_API'
   description: |
-    This API provides cacheable and straightforward access to Wikimedia content and data, in machine-readable formats. Each entry point has explicit stability markers to inform you about development status and change policy, according to [our API version policy](https://www.mediawiki.org/wiki/API_versioning).
-    See https://www.mediawiki.org/wiki/REST_API for background and details.
-    ### High-volume access
-      - Limit your clients to no more than 200 requests/s to this API.
-      - Set a unique `User-Agent` or `Api-User-Agent` header that
-        allows us to contact you quickly. Email addresses or URLs
-        of contact pages work well.
+    This API provides cacheable and straightforward access to Wikimedia content and data, in machine-readable formats.
+    ### Global Rules
+    - Limit your clients to no more than 200 requests/s to this API.
+      Each API endpoint's documentation may detail more specific usage limits.
+    - Set a unique `User-Agent` or `Api-User-Agent` header that
+      allows us to contact you quickly. Email addresses or URLs
+      of contact pages work well.
 
-    By using this API, you agree to Wikimedia's  [Terms of Use](https://wikimediafoundation.org/wiki/Terms_of_Use) and [Privacy Policy](https://wikimediafoundation.org/wiki/Privacy_policy), and you irrevocably agree to release modifications or additions made through this API under the  [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)  License and the [GFDL](https://www.gnu.org/copyleft/fdl.html).
+    By using this API, you agree to Wikimedia's  [Terms of Use](https://wikimediafoundation.org/wiki/Terms_of_Use) and [Privacy Policy](https://wikimediafoundation.org/wiki/Privacy_policy). Unless otherwise specified in the endpoint documentation below, content accessed via this API is licensed under the [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)  and [GFDL](https://www.gnu.org/copyleft/fdl.html) licenses, and you irrevocably agree to release modifications or additions made through this API under these licenses.  See https://www.mediawiki.org/wiki/REST_API for background and details.
+    ### Endpoint documentation
+    Please consult each endpoint's documentation for details on:
+    - Licensing information for the specific type of content
+      and data served via the endpoint.
+    - Stability markers to inform you about development status and
+      change policy, according to
+      [our API version policy](https://www.mediawiki.org/wiki/API_versioning).
+    - Endpoint specific usage limits.
   license:
-    name: Apache2
+    name: Software available under the Apache 2 license
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
   termsOfService: 'https://wikimediafoundation.org/wiki/Terms_of_Use'
   title: Wikimedia
@@ -188,6 +196,8 @@ paths:
 
         - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
         - Rate limit: 100 req/s
+        - License: Data accessible via this endpoint is available under the
+          [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       produces:
         - application/json
       responses:
@@ -210,6 +220,8 @@ paths:
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
         - Rate limit: 100 req/s
+        - License: Data accessible via this endpoint is available under the
+          [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
         - description: 'The name of any Wikimedia project formatted like {language code}.{project name}, for example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped off. For projects like commons without language codes, use commons.wikimedia.'
           in: path
@@ -265,6 +277,8 @@ paths:
 
         - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
         - Rate limit: 100 req/s
+        - License: Data accessible via this endpoint is available under the
+          [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       produces:
         - application/json
       responses:
@@ -287,6 +301,8 @@ paths:
 
         - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
         - Rate limit: 100 req/s
+        - License: Data accessible via this endpoint is available under the
+          [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
         - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''. If you are interested in all pageviews regardless of project, use all-projects.'
           in: path
@@ -376,6 +392,8 @@ paths:
 
         - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
         - Rate limit: 100 req/s
+        - License: Data accessible via this endpoint is available under the
+          [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
         - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''.'
           in: path
@@ -447,6 +465,8 @@ paths:
 
         - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
         - Rate limit: 100 req/s
+        - License: Data accessible via this endpoint is available under the
+          [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
         - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''.'
           in: path
@@ -500,6 +520,8 @@ paths:
 
         - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
         - Rate limit: 100 req/s
+        - License: Data accessible via this endpoint is available under the
+          [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
       parameters:
         - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''.'
           in: path
@@ -548,7 +570,318 @@ paths:
       tags:
         - Unique devices data
       x-monitor: false
+  '/transform/html/from/{from_lang}/to/{to_lang}':
+    parameters: []
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: |
+        Fetches the machine translation for the posted content from the source
+        to the destination language.
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+      parameters:
+        - description: The source language code
+          in: path
+          name: from_lang
+          required: true
+          type: string
+        - description: The target language code
+          in: path
+          name: to_lang
+          required: true
+          type: string
+        - description: The HTML content to translate
+          in: formData
+          name: html
+          required: true
+          type: string
+          x-textarea: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The translated content
+          schema:
+            $ref: '#/definitions/cx_mt'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Machine-translate content
+      tags:
+        - Transform
+      x-monitor: false
+  '/transform/html/from/{from_lang}/to/{to_lang}/{provider}':
+    parameters: []
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: |
+        Fetches the machine translation for the posted content from the source
+        to the destination language.
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+      parameters:
+        - description: The source language code
+          in: path
+          name: from_lang
+          required: true
+          type: string
+        - description: The target language code
+          in: path
+          name: to_lang
+          required: true
+          type: string
+        - description: The machine translation provider id
+          enum:
+            - Apertium
+            - Yandex
+            - Youdao
+          in: path
+          name: provider
+          required: true
+          type: string
+        - description: The HTML content to translate
+          in: formData
+          name: html
+          required: true
+          type: string
+          x-textarea: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The translated content
+          schema:
+            $ref: '#/definitions/cx_mt'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Machine-translate content
+      tags:
+        - Transform
+      x-monitor: false
+  /transform/list/languagepairs/:
+    get:
+      description: |
+        Fetches the list of language pairs the back-end service can translate
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: the list of source and target languages supported by the API
+          schema:
+            $ref: '#/definitions/cx_languagepairs'
+      summary: Lists the language pairs supported by the back-end
+      tags:
+        - Transform
+      x-monitor: false
+  '/transform/list/pair/{from}/{to}/':
+    get:
+      description: |
+        Fetches the list of tools that are available for the given pair of languages.
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+      parameters:
+        - description: The source language code
+          in: path
+          name: from
+          required: true
+          type: string
+        - description: The target language code
+          in: path
+          name: to
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: the list of tools available for the language pair
+          schema:
+            $ref: '#/definitions/cx_list_tools'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Lists the tools available for a language pair
+      tags:
+        - Transform
+      x-monitor: false
+  '/transform/list/tool/{tool}/':
+    get:
+      description: |
+        Fetches the list of tools and all of the language pairs it can translate
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+      parameters:
+        - description: The tool category to list tools and language pairs for
+          enum:
+            - mt
+            - dictionary
+          in: path
+          name: tool
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: the list of language pairs available for a given translation tool
+          schema:
+            $ref: '#/definitions/cx_list_pairs_for_tool'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Lists the tools and language pairs available for the given tool category
+      tags:
+        - Transform
+      x-monitor: false
+  '/transform/word/from/{from_lang}/to/{to_lang}/{word}':
+    get:
+      description: |
+        Fetches the dictionary meaning of a word from a language and displays
+        it in the target language.
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+      parameters:
+        - description: The source language code
+          in: path
+          name: from_lang
+          required: true
+          type: string
+        - description: The target language code
+          in: path
+          name: to_lang
+          required: true
+          type: string
+        - description: The word to lookup
+          in: path
+          name: word
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: the dictionary translation for the given word
+          schema:
+            $ref: '#/definitions/cx_dict'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Fetch the dictionary meaning of a word
+      tags:
+        - Transform
+      x-monitor: false
+    parameters: []
+  '/transform/word/from/{from_lang}/to/{to_lang}/{word}/{provider}':
+    get:
+      description: |
+        Fetches the dictionary meaning of a word from a language and displays
+        it in the target language.
+
+        Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
+      parameters:
+        - description: The source language code
+          in: path
+          name: from_lang
+          required: true
+          type: string
+        - description: The target language code
+          in: path
+          name: to_lang
+          required: true
+          type: string
+        - description: The word to lookup
+          in: path
+          name: word
+          required: true
+          type: string
+        - description: The dictionary provider id
+          enum:
+            - JsonDict
+            - Dictd
+          in: path
+          name: provider
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: the dictionary translation for the given word
+          schema:
+            $ref: '#/definitions/cx_dict'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Fetch the dictionary meaning of a word
+      tags:
+        - Transform
+      x-monitor: false
+    parameters: []
 definitions:
+  cx_dict:
+    properties:
+      source:
+        description: the original word to look up
+        type: string
+      translations:
+        description: the translations found
+        items:
+          properties:
+            info:
+              description: extra information about the phrase
+              type: string
+            phrase:
+              description: the translated phrase
+              type: string
+            sources:
+              description: the source dictionary used for the translation
+              type: string
+          type: object
+        type: array
+    type: object
+  cx_languagepairs:
+    properties:
+      source:
+        description: the list of available source languages
+        items:
+          description: one source language
+          type: string
+        type: array
+      target:
+        description: the list of available destination languages
+        items:
+          description: one destination language
+          type: string
+        type: array
+    type: object
+  cx_list_pairs_for_tool:
+    type: object
+  cx_list_tools:
+    properties:
+      tools:
+        description: the list of tools available for the given language pair
+        items:
+          description: the tool available
+          type: string
+        type: array
+    type: object
+  cx_mt:
+    properties:
+      contents:
+        description: the translated content
+        type: string
+    type: object
   listing:
     description: The result format for listings
     properties:

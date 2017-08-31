@@ -736,15 +736,11 @@ paths:
       summary: Gets lines that match the specified line ids.
       tags:
         - Line
-  '/Line/{ids}/Arrivals':
+  '/Line/{ids}/Arrivals/{stopPointId}':
     get:
       deprecated: false
+      operationId: Line_Arrivals
       parameters:
-        - description: 'Id of stop to get arrival predictions for (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
-          in: query
-          name: stopPointId
-          required: true
-          type: string
         - description: 'A comma-separated list of line ids e.g. victoria,circle,N133. Max. approx. 20 ids.'
           in: path
           items:
@@ -752,6 +748,25 @@ paths:
           name: ids
           required: true
           type: array
+        - description: 'Optional. Id of stop to get arrival predictions for (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
+          in: path
+          name: stopPointId
+          required: true
+          type: string
+        - description: 'Optional. The direction of travel. Can be inbound or outbound or all. If left blank, and destinationStopId is set, will default to all'
+          enum:
+            - inbound
+            - outbound
+            - all
+          in: query
+          name: direction
+          required: false
+          type: string
+        - description: Optional. Id of destination stop
+          in: query
+          name: destinationStationId
+          required: false
+          type: string
       produces:
         - application/json
         - text/json
@@ -765,46 +780,6 @@ paths:
               $ref: '#/definitions/Prediction'
             type: array
       summary: Get the list of arrival predictions for given line ids based at the given stop
-      tags:
-        - Line
-  '/Line/{ids}/Arrivals/{stopPointId}':
-    get:
-      deprecated: false
-      parameters:
-        - description: 'Id of stop to get arrival predictions for (station naptan code e.g. 940GZZLUASL, you can use /StopPoint/Search/{query} endpoint to find a stop point id from a station name)'
-          in: path
-          name: stopPointId
-          required: true
-          type: string
-        - description: 'A comma-separated list of line ids e.g. victoria,circle,N133. Max. approx. 20 ids.'
-          in: path
-          items:
-            type: string
-          name: ids
-          required: true
-          type: array
-        - description: The direction of travel. Can be inbound or outbound
-          enum:
-            - inbound
-            - outbound
-            - all
-          in: query
-          name: direction
-          required: true
-          type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/Prediction'
-            type: array
-      summary: Get the list of arrival predictions for given line ids based at the given stop going in the procided direction
       tags:
         - Line
   '/Line/{ids}/Disruption':
@@ -1211,6 +1186,51 @@ paths:
           schema:
             $ref: '#/definitions/CarParkOccupancy'
       summary: Gets the occupancy for a car park with a given id
+      tags:
+        - Occupancy
+  /Occupancy/ChargeConnector:
+    get:
+      deprecated: false
+      operationId: Occupancy_GetAllChargeConnectorStatus
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ChargeConnectorOccupancy'
+            type: array
+      summary: Gets the occupancy for all charge connectors
+      tags:
+        - Occupancy
+  '/Occupancy/ChargeConnector/{ids}':
+    get:
+      deprecated: false
+      operationId: Occupancy_GetChargeConnectorStatus
+      parameters:
+        - in: path
+          items:
+            type: string
+          name: ids
+          required: true
+          type: array
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ChargeConnectorOccupancy'
+            type: array
+      summary: Gets the occupancy for a charge connectors with a given id (sourceSystemPlaceId)
       tags:
         - Occupancy
   /Place:
@@ -2996,6 +3016,20 @@ definitions:
       mode:
         type: string
       severity:
+        type: string
+    type: object
+  ChargeConnectorOccupancy:
+    description: ''
+    properties:
+      id:
+        description: ''
+        format: int32
+        type: integer
+      sourceSystemPlaceId:
+        description: ''
+        type: string
+      status:
+        description: ''
         type: string
     type: object
   Coordinate:

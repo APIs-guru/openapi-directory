@@ -5925,7 +5925,10 @@ paths:
           required: true
           type: string
         - collectionFormat: multi
-          description: Tag formats to generate for these placements.
+          description: |-
+            Tag formats to generate for these placements.
+
+            Note: PLACEMENT_TAG_STANDARD can only be generated for 1x1 placements.
           in: query
           items:
             enum:
@@ -10132,7 +10135,7 @@ definitions:
         $ref: '#/definitions/FsCommand'
         description: 'OpenWindow FSCommand of this creative. This lets the SWF file communicate with either Flash Player or the program hosting Flash Player, such as a web browser. This is only triggered if allowScriptAccess field is true. Applicable to the following creative types: FLASH_INPAGE.'
       htmlCode:
-        description: 'HTML code for the creative. This is a required field when applicable. This field is ignored if htmlCodeLocked is false. Applicable to the following creative types: all CUSTOM, FLASH_INPAGE, and HTML5_BANNER, and all RICH_MEDIA.'
+        description: 'HTML code for the creative. This is a required field when applicable. This field is ignored if htmlCodeLocked is true. Applicable to the following creative types: all CUSTOM, FLASH_INPAGE, and HTML5_BANNER, and all RICH_MEDIA.'
         type: string
       htmlCodeLocked:
         description: 'Whether HTML code is DCM-generated or manually entered. Set to true to ignore changes to htmlCode. Applicable to the following creative types: FLASH_INPAGE and HTML5_BANNER.'
@@ -11698,7 +11701,7 @@ definitions:
         description: Whether this directory site has disabled generation of Verification ins tags.
         type: boolean
       videoActiveViewOptOut:
-        description: Whether this directory site has disabled active view for in-stream video creatives.
+        description: Whether this directory site has disabled active view for in-stream video creatives. This is a read-only field.
         type: boolean
     type: object
   DirectorySitesListResponse:
@@ -12118,28 +12121,8 @@ definitions:
         type: string
       userDefinedVariableTypes:
         description: |-
-          List of the user-defined variables used by this conversion tag. These map to the "u[1-20]=" in the tags. Each of these can have a user defined type.
-          Acceptable values are:
-          - "U1"
-          - "U2"
-          - "U3"
-          - "U4"
-          - "U5"
-          - "U6"
-          - "U7"
-          - "U8"
-          - "U9"
-          - "U10"
-          - "U11"
-          - "U12"
-          - "U13"
-          - "U14"
-          - "U15"
-          - "U16"
-          - "U17"
-          - "U18"
-          - "U19"
-          - "U20"
+          List of the user-defined variables used by this conversion tag. These map to the "u[1-100]=" in the tags. Each of these can have a user defined type.
+          Acceptable values are U1 to U100, inclusive.
         items:
           enum:
             - U1
@@ -13452,7 +13435,10 @@ definitions:
         $ref: '#/definitions/VideoSettings'
         description: A collection of settings which affect video creatives served through this placement. Applicable to placements with IN_STREAM_VIDEO compatibility.
       vpaidAdapterChoice:
-        description: VPAID adapter setting for this placement. Controls which VPAID format the measurement adapter will use for in-stream video creatives assigned to this placement.
+        description: |-
+          VPAID adapter setting for this placement. Controls which VPAID format the measurement adapter will use for in-stream video creatives assigned to this placement.
+
+          Note: Flash is no longer supported. This field now defaults to HTML5 when the following values are provided: FLASH, BOTH.
         enum:
           - BOTH
           - DEFAULT
@@ -14737,7 +14723,10 @@ definitions:
         description: 'Whether Verification and ActiveView for in-stream video creatives are disabled by default for new placements created under this site. This value will be used to populate the placement.videoActiveViewOptOut field, when no value is specified for the new placement.'
         type: boolean
       vpaidAdapterChoiceTemplate:
-        description: 'Default VPAID adapter setting for new placements created under this site. This value will be used to populate the placements.vpaidAdapterChoice field, when no value is specified for the new placement. Controls which VPAID format the measurement adapter will use for in-stream video creatives assigned to the placement. The publisher''s specifications will typically determine this setting. For VPAID creatives, the adapter format will match the VPAID format (HTML5 VPAID creatives use the HTML5 adapter, and Flash VPAID creatives use the Flash adapter).'
+        description: |-
+          Default VPAID adapter setting for new placements created under this site. This value will be used to populate the placements.vpaidAdapterChoice field, when no value is specified for the new placement. Controls which VPAID format the measurement adapter will use for in-stream video creatives assigned to the placement. The publisher's specifications will typically determine this setting. For VPAID creatives, the adapter format will match the VPAID format (HTML5 VPAID creatives use the HTML5 adapter).
+
+          Note: Flash is no longer supported. This field now defaults to HTML5 when the following values are provided: FLASH, BOTH.
         enum:
           - BOTH
           - DEFAULT

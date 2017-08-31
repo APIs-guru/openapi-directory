@@ -132,7 +132,7 @@ paths:
   '/v1/{name}':
     delete:
       description: Deletes the specified transfer run.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.delete
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.delete
       parameters:
         - description: |-
             The field will contain name of the resource requested, for example:
@@ -162,7 +162,7 @@ paths:
       description: |-
         Retrieves a supported data source and returns its settings,
         which can be used for UI rendering.
-      operationId: bigquerydatatransfer.projects.locations.dataSources.get
+      operationId: bigquerydatatransfer.projects.dataSources.get
       parameters:
         - description: |-
             The field will contain name of the resource requested, for example:
@@ -210,7 +210,7 @@ paths:
       description: |-
         Updates a data transfer configuration.
         All fields must be set, even if they are not updated.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.patch
+      operationId: bigquerydatatransfer.projects.transferConfigs.patch
       parameters:
         - description: |-
             Optional OAuth2 authorization code to use with this transfer configuration.
@@ -343,7 +343,7 @@ paths:
       description: |-
         Returns true if valid credentials exist for the given data source and
         requesting user.
-      operationId: bigquerydatatransfer.projects.locations.dataSources.checkValidCreds
+      operationId: bigquerydatatransfer.projects.dataSources.checkValidCreds
       parameters:
         - in: body
           name: body
@@ -480,7 +480,7 @@ paths:
       description: |-
         Lists supported data sources and returns their settings,
         which can be used for UI rendering.
-      operationId: bigquerydatatransfer.projects.locations.dataSources.list
+      operationId: bigquerydatatransfer.projects.dataSources.list
       parameters:
         - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
@@ -540,7 +540,7 @@ paths:
   '/v1/{parent}/runs':
     get:
       description: Returns information about running and completed jobs.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.list
       parameters:
         - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
@@ -552,9 +552,6 @@ paths:
             results, `ListTransferRunsResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
-          enum:
-            - RUN_ATTEMPT_UNSPECIFIED
-            - LATEST
           in: query
           name: pageToken
           type: string
@@ -567,22 +564,11 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - collectionFormat: multi
-          description: Indicates how run attempts are to be pulled.
+        - description: Indicates how run attempts are to be pulled.
           enum:
             - RUN_ATTEMPT_UNSPECIFIED
             - LATEST
           in: query
-          items:
-            enum:
-              - TRANSFER_STATUS_UNSPECIFIED
-              - INACTIVE
-              - PENDING
-              - RUNNING
-              - SUCCEEDED
-              - FAILED
-              - CANCELLED
-            type: string
           name: runAttempt
           type: string
         - collectionFormat: multi
@@ -637,7 +623,7 @@ paths:
   '/v1/{parent}/transferConfigs':
     get:
       description: Returns information about all data transfers in the project.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.list
       parameters:
         - collectionFormat: multi
           description: 'When specified, only configurations of requested data sources are returned.'
@@ -703,7 +689,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new data transfer configuration.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.create
+      operationId: bigquerydatatransfer.projects.transferConfigs.create
       parameters:
         - description: |-
             Optional OAuth2 authorization code to use with this transfer configuration.
@@ -760,7 +746,7 @@ paths:
   '/v1/{parent}/transferLogs':
     get:
       description: Returns user facing log messages for the data transfer run.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.runs.transferLogs.list
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.transferLogs.list
       parameters:
         - collectionFormat: multi
           description: |-
@@ -852,7 +838,7 @@ paths:
         For each date - or whatever granularity the data source supports - in the
         range, one transfer run is created.
         Note that runs are created per UTC time in the time range.
-      operationId: bigquerydatatransfer.projects.locations.transferConfigs.scheduleRuns
+      operationId: bigquerydatatransfer.projects.transferConfigs.scheduleRuns
       parameters:
         - in: body
           name: body

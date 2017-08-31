@@ -1141,9 +1141,7 @@ definitions:
     properties:
       dimensions:
         $ref: '#/definitions/DimensionRange'
-        description: |-
-          The dimensions to automatically resize.
-          Only COLUMNS are supported.
+        description: The dimensions to automatically resize.
     type: object
   BandedRange:
     description: A banded (alternating colors) range in a sheet.

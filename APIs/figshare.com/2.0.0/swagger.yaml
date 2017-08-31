@@ -4290,6 +4290,10 @@ definitions:
         default: ''
         description: Grant number or funding authority
         type: string
+      group_id:
+        description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+        format: int64
+        type: integer
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead
@@ -4475,6 +4479,10 @@ definitions:
         default: ''
         description: Grant number or funding authority
         type: string
+      group_id:
+        description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+        format: int64
+        type: integer
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead
@@ -4829,6 +4837,10 @@ definitions:
         example: Test description of article
         maxLength: 10000
         type: string
+      group_id:
+        description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+        format: int64
+        type: integer
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead
@@ -4951,6 +4963,10 @@ definitions:
         example: Test description of article
         maxLength: 10000
         type: string
+      group_id:
+        description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
+        format: int64
+        type: integer
       keywords:
         default: []
         description: List of tags to be associated with the article. Tags can be used instead

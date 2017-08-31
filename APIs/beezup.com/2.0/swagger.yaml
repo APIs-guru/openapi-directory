@@ -176,6 +176,7 @@ parameters:
     required: true
     type: string
   exportFormatInQueryGeneralParameter:
+    description: The file type of the exportation
     enum:
       - xlsx
       - csv
@@ -2846,13 +2847,13 @@ paths:
       tags:
         - Channel Catalogs - Global
     post:
-      operationId: CreateChannelCatalog
+      operationId: AddChannelCatalog
       parameters:
         - in: body
           name: request
           required: true
           schema:
-            $ref: '#/definitions/createChannelCatalogRequest'
+            $ref: '#/definitions/addChannelCatalogRequest'
       responses:
         '201':
           description: When the channel has been successfully added for this store
@@ -2868,15 +2869,12 @@ paths:
               type: integer
               x-example: 5
           schema:
-            description: Link to the new channel catalog
-            items:
-              $ref: '#/definitions/BeezUP.Common.Link2'
-            type: array
+            $ref: '#/definitions/links.GetChannelCatalogLink'
         default:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Create a new channel catalog
+      summary: Add a new channel catalog
       tags:
         - Channel Catalogs - Global
   /user/channelCatalogs/exclusionFilterOperators:
@@ -2965,6 +2963,21 @@ paths:
       summary: Get channel catalog categories
       tags:
         - Channel Catalogs - Category Mappings
+  '/user/channelCatalogs/{channelCatalogId}/categoryMappings/disable':
+    post:
+      operationId: DisableChannelCatalogCategoryMapping
+      parameters:
+        - $ref: '#/parameters/channelCatalogIdParameter'
+      responses:
+        '204':
+          description: Channel catalog category mapping disabled
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Disable a channel catalog category mapping
+      tags:
+        - Channel Catalogs - Category Mappings
   '/user/channelCatalogs/{channelCatalogId}/categoryMappings/map':
     post:
       operationId: MapChannelCatalogCategory
@@ -2983,6 +2996,21 @@ paths:
       security:
         - api_key: []
       summary: Map channel catalog category
+      tags:
+        - Channel Catalogs - Category Mappings
+  '/user/channelCatalogs/{channelCatalogId}/categoryMappings/reenable':
+    post:
+      operationId: ReenableChannelCatalogCategoryMapping
+      parameters:
+        - $ref: '#/parameters/channelCatalogIdParameter'
+      responses:
+        '204':
+          description: Channel catalog category mapping reenabled
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Reenable a channel catalog category mapping
       tags:
         - Channel Catalogs - Category Mappings
   '/user/channelCatalogs/{channelCatalogId}/categoryMappings/unmap':
@@ -3007,14 +3035,14 @@ paths:
         - Channel Catalogs - Category Mappings
   '/user/channelCatalogs/{channelCatalogId}/columnMappings':
     put:
-      operationId: MapChannelCatalogColumns
+      operationId: ConfigureChannelCatalogColumnMappings
       parameters:
         - $ref: '#/parameters/channelCatalogIdParameter'
         - in: body
           name: request
           required: true
           schema:
-            $ref: '#/definitions/columnMappingList'
+            $ref: '#/definitions/channelCatalogColumnMappingList'
       responses:
         '204':
           description: Channel catalog column mappings configured
@@ -3060,6 +3088,22 @@ paths:
       tags:
         - Channel Catalogs - Settings
   '/user/channelCatalogs/{channelCatalogId}/exclusionFilters':
+    get:
+      operationId: GetChannelCatalogExclusionFilters
+      parameters:
+        - $ref: '#/parameters/channelCatalogIdParameter'
+      responses:
+        '200':
+          description: Channel catalog exclusion filter list
+          schema:
+            $ref: '#/definitions/exclusionFiltersResponse'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Get channel catalog exclusion filters
+      tags:
+        - Channel Catalogs - Exclusion Filters
     put:
       operationId: ConfigureChannelCatalogExclusionFilters
       parameters:
@@ -3138,6 +3182,7 @@ paths:
         - description: The channel catalog product list filter
           in: body
           name: request
+          required: true
           schema:
             $ref: '#/definitions/getChannelCatalogProductInfoListRequest'
       responses:
@@ -3150,6 +3195,57 @@ paths:
       security:
         - api_key: []
       summary: Get channel catalog product information list
+      tags:
+        - Channel Catalogs - Products
+  '/user/channelCatalogs/{channelCatalogId}/products/counters':
+    get:
+      operationId: GetChannelCatalogProductsCounters
+      parameters:
+        - $ref: '#/parameters/channelCatalogIdParameter'
+      responses:
+        '200':
+          description: Channel catalog products' counters
+          schema:
+            $ref: '#/definitions/channelCatalogProductsCounters'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Get channel catalog products' counters
+      tags:
+        - Channel Catalogs - Products
+  '/user/channelCatalogs/{channelCatalogId}/products/export':
+    post:
+      operationId: ExportChannelCatalogProductInfoList
+      parameters:
+        - $ref: '#/parameters/channelCatalogIdParameter'
+        - $ref: '#/parameters/exportFormatInQueryGeneralParameter'
+        - description: The channel catalog product list filter
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/getChannelCatalogProductInfoListRequest'
+      responses:
+        '200':
+          description: Channel catalog product information list exported
+          examples:
+            application/json:
+              href: 'https://beezupchannel.blob.core.windows.net/reports/exports/Excel_Products.xslx'
+              method: GET
+          headers:
+            Location:
+              description: |
+                To indicate the url of the export file
+                Example: https://beezupchannel.blob.core.windows.net/reports/exports/Excel_Products.xslx
+              type: string
+          schema:
+            $ref: '#/definitions/BeezUP.Common.Link3'
+        default:
+          $ref: '#/responses/GeneralError'
+      security:
+        - api_key: []
+      summary: Export channel catalog product information list
       tags:
         - Channel Catalogs - Products
   '/user/channelCatalogs/{channelCatalogId}/products/{productId}':
@@ -3192,7 +3288,7 @@ paths:
         - Channel Catalogs - Products Optimisation
   '/user/channelCatalogs/{channelCatalogId}/products/{productId}/overrides':
     put:
-      operationId: OverrideChannelCatalogProductOverrides
+      operationId: OverrideChannelCatalogProductValues
       parameters:
         - $ref: '#/parameters/channelCatalogIdParameter'
         - $ref: '#/parameters/productIdParameter'
@@ -3255,7 +3351,7 @@ paths:
       tags:
         - Channel Catalogs - Products Optimisation
   '/user/channelCatalogs/{channelCatalogId}/settings/cost':
-    post:
+    put:
       operationId: ConfigureChannelCatalogCostSettings
       parameters:
         - $ref: '#/parameters/channelCatalogIdParameter'
@@ -3271,11 +3367,11 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Disable a channel catalog
+      summary: Configure channel catalog cost settings
       tags:
         - Channel Catalogs - Settings
   '/user/channelCatalogs/{channelCatalogId}/settings/general':
-    post:
+    put:
       operationId: ConfigureChannelCatalogGeneralSettings
       parameters:
         - $ref: '#/parameters/channelCatalogIdParameter'
@@ -3291,7 +3387,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Disable a channel catalog
+      summary: Configure channel catalog general settings
       tags:
         - Channel Catalogs - Settings
   /user/channels/:
@@ -6022,6 +6118,16 @@ definitions:
     items:
       $ref: '#/definitions/BeezUP.Common.Email'
     type: array
+  addChannelCatalogRequest:
+    properties:
+      channelId:
+        $ref: '#/definitions/BeezUP.Common.ChannelId'
+      storeId:
+        $ref: '#/definitions/BeezUP.Common.StoreId'
+    required:
+      - channelId
+      - storeId
+    type: object
   address:
     description: Your address
     example: 21 jump street
@@ -6687,14 +6793,20 @@ definitions:
       - $ref: '#/definitions/BeezUP.Common.ChannelBasicInfo'
       - description: The channel catalog
         properties:
+          categoryMappingSettings:
+            $ref: '#/definitions/channelCatalogCategoryMappingSettings'
           channelCatalogId:
             $ref: '#/definitions/BeezUP.Common.ChannelCatalogId'
+          channelCategorySettings:
+            $ref: '#/definitions/channelCategorySettings'
+          channelCostSettings:
+            $ref: '#/definitions/channelCostSettings'
           columnMappings:
-            $ref: '#/definitions/columnMappingWithNameList'
+            $ref: '#/definitions/channelCatalogColumnMappingListWithName'
           costSettings:
             $ref: '#/definitions/costSettings'
           enabled:
-            description: Indicates if the channel catalog is active
+            description: Indicates if the channel catalog is enable
             example: true
             type: boolean
           exclusionFilters:
@@ -6708,63 +6820,10 @@ definitions:
             example: true
             type: boolean
           links:
-            description: Indicates the actions you can do on a channel catalog
-            example:
-              - href: '/v2/user/channelCatalogs/{channelCatalogId}/categoryMappings'
-                method: GET
-                operationId: GetChannelCatalogCategoyMappings
-                parameters:
-                  - in: path
-                    name: channelCatalogId
-                    required: true
-                    type: string
-                    value: 6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
-                rel: categoryMappings
-              - href: '/v2/user/channelCatalogs/{channelCatalogId}'
-                method: DELETE
-                operationId: DeleteChannelCatalog
-                parameters:
-                  - in: path
-                    name: channelCatalogId
-                    required: true
-                    type: string
-                    value: 6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
-                rel: delete
-              - href: '/v2/user/channelCatalogs/{channelCatalogId}/disable'
-                method: POST
-                operationId: DisableChannelCatalog
-                parameters:
-                  - in: path
-                    name: channelCatalogId
-                    required: true
-                    type: string
-                    value: 6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
-                rel: disable
-              - href: '/v2/user/channelCatalogs/{channelCatalogId}/exportations/cache'
-                method: GET
-                operationId: GetChannelCatalogExportationCacheInfo
-                parameters:
-                  - in: path
-                    name: channelCatalogId
-                    required: true
-                    type: string
-                    value: 6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
-                rel: exportation
-              - href: '/v2/user/channelCatalogs/{channelCatalogId}/exportations/history'
-                method: GET
-                operationId: GetChannelCatalogExportationHistory
-                parameters:
-                  - in: path
-                    name: channelCatalogId
-                    required: true
-                    type: string
-                    value: 6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
-                rel: exportationHistory
-            items:
-              $ref: '#/definitions/BeezUP.Common.Link2'
-            type: array
+            $ref: '#/definitions/channelCatalogLinks'
           productCount:
             description: The product count exported considering category mapping. Not all filters have been applied.
+            example: 101
             format: int32
             type: integer
           state:
@@ -6786,10 +6845,16 @@ definitions:
           - state
           - links
           - generalSettings
-          - costSettings
+          - channelCostSettings
+          - channelCategorySettings
           - isMarketplace
           - productCount
         type: object
+  channelCatalogCategoryCostValue:
+    description: 'In case of CPC_ByCategory or CPA_ByCategory cost type, you have to indicate the cost value.'
+    example: 10.21
+    format: decimal
+    type: number
   channelCatalogCategoryMapping:
     description: |
       Represent a mapping between a catalog category path and a channel category path. 
@@ -6800,44 +6865,40 @@ definitions:
       channelCategoryPath:
         $ref: '#/definitions/BeezUP.Common.ChannelCategoryPath'
       costValue:
-        description: 'In case of CPC_ByCategory or CPA_ByCategory cost type, you have to indicate the cost value.'
-        example: 10.21
-        format: decimal
-        type: number
+        $ref: '#/definitions/channelCatalogCategoryCostValue'
     required:
       - catalogCategoryPath
       - channelCategoryPath
     type: object
   channelCatalogCategoryMappingInfo:
-    allOf:
-      - $ref: '#/definitions/channelCatalogCategoryMapping'
-      - properties:
-          links:
-            example:
-              - href: '/v2/user/channelCatalogs/{channelCatalogId}/categoryMappings/unmap'
-                operationId: MapChannelCatalogCategory
-                parameters:
-                  - in: path
-                    name: channelCatalogId
-                    required: true
-                    type: string
-                    value: 6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
-                  - in: path
-                    name: request
-                    required: true
-                    type: object
-                    value:
-                      catalogCategoryPath:
-                        - VÃªtements
-                        - Femmes
-                        - Chaussures
-                rel: unmapCategory
-            items:
-              $ref: '#/definitions/BeezUP.Common.Link2'
-            type: array
-        required:
-          - links
-        type: object
+    description: For all catalog categories the current mapping applied
+    properties:
+      catalogCategoryPath:
+        $ref: '#/definitions/BeezUP.Common.CatalogCategoryPath'
+      channelCategoryPath:
+        $ref: '#/definitions/BeezUP.Common.ChannelCategoryPath'
+      costValue:
+        $ref: '#/definitions/channelCatalogCategoryCostValue'
+      links:
+        $ref: '#/definitions/channelCatalogCategoryMappingInfoLinks'
+    required:
+      - catalogCategoryPath
+      - links
+    type: object
+  channelCatalogCategoryMappingInfoLinks:
+    properties:
+      mapCategory:
+        $ref: '#/definitions/links.MapChannelCatalogCategoryLink'
+      unmapCategory:
+        $ref: '#/definitions/links.UnmapChannelCatalogCategoryLink'
+    type: object
+  channelCatalogCategoryMappingSettings:
+    properties:
+      categoryMappingDisabledByMerchant:
+        description: Optional parameter. Indicates that you have decided to do not map your categories with the channel's categories.
+        example: false
+        type: boolean
+    type: object
   channelCatalogCategoryMappings:
     properties:
       channelCatalogCategoryMappings:
@@ -6845,23 +6906,60 @@ definitions:
           $ref: '#/definitions/channelCatalogCategoryMappingInfo'
         type: array
       links:
-        example:
-          - href: '/v2/user/channelCatalogs/{channelCatalogId}/categoryMappings/map'
-            operationId: MapChannelCatalogCategory
-            parameters:
-              - in: path
-                name: channelCatalogId
-                required: true
-                type: string
-                value: 6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
-            rel: mapCategory
-        items:
-          $ref: '#/definitions/BeezUP.Common.Link2'
-        type: array
+        $ref: '#/definitions/channelCatalogCategoryMappingsLinks'
     required:
       - links
       - channelCatalogCategoryMappings
     type: object
+  channelCatalogCategoryMappingsLinks:
+    description: The action you can do on the category mappings
+    properties:
+      disable:
+        $ref: '#/definitions/links.DisableChannelCatalogCategoryMappingLink'
+      reenable:
+        $ref: '#/definitions/links.ReenableChannelCatalogCategoryMappingLink'
+      self:
+        $ref: '#/definitions/links.GetChannelCatalogCategoriesLink'
+    required:
+      - self
+    type: object
+  channelCatalogColumnMapping:
+    description: Represent a mapping between a channel column (considering channel category mapping) and a catalog column
+    properties:
+      catalogColumnId:
+        $ref: '#/definitions/BeezUP.Common.CatalogColumnId'
+      channelCategoryPath:
+        $ref: '#/definitions/BeezUP.Common.ChannelCategoryPath'
+      channelColumnId:
+        $ref: '#/definitions/BeezUP.Common.ChannelColumnId'
+    required:
+      - channelColumnId
+    type: object
+  channelCatalogColumnMappingList:
+    description: The column mapping list between a channel and a catalog
+    items:
+      $ref: '#/definitions/channelCatalogColumnMapping'
+    type: array
+  channelCatalogColumnMappingListWithName:
+    description: The column mapping list between a channel and a catalog
+    items:
+      $ref: '#/definitions/channelCatalogColumnMappingWithName'
+    type: array
+  channelCatalogColumnMappingWithName:
+    allOf:
+      - $ref: '#/definitions/channelCatalogColumnMapping'
+      - properties:
+          catalogBeezUPColumnName:
+            $ref: '#/definitions/BeezUP.Common.BeezUPColumnName'
+          catalogColumnName:
+            $ref: '#/definitions/BeezUP.Common.CatalogColumnUserName'
+          channelBeezUPColumnName:
+            $ref: '#/definitions/BeezUP.Common.BeezUPColumnName'
+          channelColumnName:
+            $ref: '#/definitions/BeezUP.Common.ChannelColumnName'
+        required:
+          - channelColumnName
+        type: object
   channelCatalogExportCacheInfo:
     properties:
       cacheStatus:
@@ -6969,17 +7067,72 @@ definitions:
       - clientIpAddress
       - clientUserAgent
     type: object
+  channelCatalogLinks:
+    description: Indicates the actions you can do on a channel catalog
+    properties:
+      categoryMappings:
+        $ref: '#/definitions/links.GetChannelCatalogCategoriesLink'
+      configureColumnMappings:
+        $ref: '#/definitions/links.ConfigureChannelCatalogColumnMappingsLink'
+      configureCostSettings:
+        $ref: '#/definitions/links.ConfigureChannelCatalogCostSettingsLink'
+      configureGeneralSettings:
+        $ref: '#/definitions/links.ConfigureChannelCatalogGeneralSettingsLink'
+      delete:
+        $ref: '#/definitions/links.DeleteChannelCatalogLink'
+      disable:
+        $ref: '#/definitions/links.DisableChannelCatalogLink'
+      disableCategoryMappings:
+        $ref: '#/definitions/links.DisableChannelCatalogCategoryMappingLink'
+      enable:
+        $ref: '#/definitions/links.EnableChannelCatalogLink'
+      exclusionFilters:
+        $ref: '#/definitions/links.GetChannelCatalogExclusionFiltersLink'
+      exportationCacheInfo:
+        $ref: '#/definitions/links.GetChannelCatalogExportationCacheInfoLink'
+      marketplaceSettings:
+        $ref: '#/definitions/externalLinks.GetChannelCatalogMarketplaceSettingsLink'
+      products:
+        $ref: '#/definitions/links.GetChannelCatalogProductInfoListLink'
+      reenableCategoryMappings:
+        $ref: '#/definitions/links.ReenableChannelCatalogCategoryMappingLink'
+      self:
+        $ref: '#/definitions/links.GetChannelCatalogLink'
+    required:
+      - self
+    type: object
   channelCatalogList:
+    description: This is the index of the channel catalog API
     properties:
       channelCatalogs:
-        items:
+        additionalProperties:
           $ref: '#/definitions/channelCatalog'
-        type: array
+        description: The channel catalog list. The key is the channel catalog identifier
+        type: object
       links:
-        description: Indicates how to create a channel catalog and how to get the channel catalog list
-        items:
-          $ref: '#/definitions/BeezUP.Common.Link2'
-        type: array
+        $ref: '#/definitions/channelCatalogListLinks'
+      lovLinks:
+        $ref: '#/definitions/channelCatalogListLovLinks'
+    type: object
+  channelCatalogListLinks:
+    description: |
+      Indicates how global actions you can do like how to create a channel catalog, exclusion filter operators, etc...
+    properties:
+      add:
+        $ref: '#/definitions/links.AddChannelCatalogLink'
+      beezUPColumns:
+        $ref: '#/definitions/externalLinks.Catalog_GetBeezUPColumnsLink'
+      exclusionFilterOperators:
+        $ref: '#/definitions/links.GetChannelCatalogExclusionFilterOperatorsLink'
+      self:
+        $ref: '#/definitions/links.GetChannelCatalogsLink'
+    type: object
+  channelCatalogListLovLinks:
+    properties:
+      channelCatalogExclusionFilterOperatorLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      channelCatalogExportCacheStatusLov:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
     type: object
   channelCatalogMarketplaceProperties:
     properties:
@@ -7358,10 +7511,6 @@ definitions:
       - $ref: '#/definitions/BeezUP.Common.ProductBasicInfo'
       - description: The channel catalog product information
         properties:
-          categoryMapped:
-            description: Indicates if the product's category has been mapped to a channel category
-            example: true
-            type: boolean
           disabled:
             default: false
             description: Indicates if the product has been disabled or not
@@ -7382,10 +7531,14 @@ definitions:
             $ref: '#/definitions/channelCatalogProductInfoLinks'
           overrides:
             $ref: '#/definitions/productOverridesWithCatalogValues'
+          uncategorized:
+            description: Indicates if the product's category has been NOT mapped to a channel category
+            example: true
+            type: boolean
         required:
           - overrides
           - disabled
-          - categoryMapped
+          - uncategorized
           - excluded
           - links
         type: object
@@ -7393,26 +7546,75 @@ definitions:
     description: Indicates the differents actions you can do on a channel product
     properties:
       disable:
-        $ref: '#/definitions/BeezUP.Common.Link2'
+        $ref: '#/definitions/links.DisableChannelCatalogProductLink'
       override:
-        $ref: '#/definitions/BeezUP.Common.Link2'
+        $ref: '#/definitions/links.OverrideChannelCatalogProductValuesLink'
       reenable:
-        $ref: '#/definitions/BeezUP.Common.Link2'
+        $ref: '#/definitions/links.ReenableChannelCatalogProductLink'
+      self:
+        $ref: '#/definitions/links.GetChannelCatalogProductInfoLink'
     required:
+      - self
       - override
     type: object
   channelCatalogProductInfoList:
     description: The channel catalog product info list
     properties:
       links:
-        properties:
-          self:
-            $ref: '#/definitions/links.GetChannelCatalogProductInfoLink'
-        type: object
+        $ref: '#/definitions/channelCatalogProductInfoListLinks'
+      paginationResult:
+        $ref: '#/definitions/BeezUP.Common.PaginationResult'
       productInfos:
         items:
           $ref: '#/definitions/channelCatalogProductInfo'
         type: array
+    required:
+      - paginationResult
+      - links
+      - productInfos
+    type: object
+  channelCatalogProductInfoListLinks:
+    properties:
+      export:
+        $ref: '#/definitions/links.ExportChannelCatalogProductInfoListLink'
+      self:
+        $ref: '#/definitions/links.GetChannelCatalogProductInfoListLink'
+    required:
+      - self
+    type: object
+  channelCatalogProductsCounters:
+    description: The channel catalog products counters. For each counter you will have a count.
+    properties:
+      disabledProductCountExcludingUncategorizedAndExcluded:
+        description: Disabled product count EXCLUDING uncategorized products AND excluded products on existing products.
+        example: 50
+        format: int32
+        type: integer
+      disabledProductCountIncludingUncategorizedAndExcluded:
+        description: Disabled product count INCLUDING uncategorized products AND excluded products on existing products.
+        example: 66
+        format: int32
+        type: integer
+      excludedProductCountExcludingUncategorized:
+        description: Excluded product count EXCLUDING uncategorized products on existing products.
+        example: 150
+        format: int32
+        type: integer
+      excludedProductCountIncludingUncategorized:
+        description: Excluded product count INCLUDING uncategorized products on existing products.
+        example: 169
+        format: int32
+        type: integer
+      existingProductCount:
+        description: Imported product count currently in your catalog.
+        example: 1000
+        format: int32
+        type: integer
+      uncategorizedProductCount:
+        description: Product count WITHOUT category mapped on existing products.
+        example: 250
+        format: int32
+        type: integer
     type: object
   channelCatalogState:
     description: Channel Catalog State
@@ -7494,6 +7696,17 @@ definitions:
     maximum: 9
     minimum: 1
     type: integer
+  channelCategorySettings:
+    properties:
+      mappingLeafRequired:
+        description: Indicates if the category mapping is required on category path leaf or not
+        example: true
+        type: boolean
+      mappingRequired:
+        description: 'Indicates if the category mapping is required, otherwise you can map the categories but it will not block the publication of your catalog'
+        example: true
+        type: boolean
+    type: object
   channelColumn:
     description: The channel column
     properties:
@@ -7547,6 +7760,19 @@ definitions:
     description: Indicates if this column must shown in the mapping page or not
     example: true
     type: boolean
+  channelCostSettings:
+    description: Indicate the default configuration of the cost on this channel.
+    properties:
+      costType:
+        $ref: '#/definitions/costType'
+      globalCostValue:
+        description: 'In case of global cost type, you have to indicate the cost value.'
+        example: 10.21
+        format: decimal
+        type: number
+    required:
+      - costType
+    type: object
   channelFirstLevelCategory:
     description: The first level category with his sub categories
     properties:
@@ -7606,7 +7832,7 @@ definitions:
     description: The links related to an available channel
     properties:
       self:
-        $ref: '#/definitions/BeezUP.Common.Link2'
+        $ref: '#/definitions/BeezUP.Common.Link3'
     required:
       - self
     type: object
@@ -7752,21 +7978,6 @@ definitions:
     example: 8f6671d6-a9bc-4de0-a0c4-4643b0c3f871
     format: guid
     type: string
-  columnMapping:
-    description: Represent a mapping between a channel column considering channel category mapping and a catalog column
-    properties:
-      catalogColumnId:
-        $ref: '#/definitions/BeezUP.Common.CatalogColumnId'
-      channelCategoryPath:
-        $ref: '#/definitions/BeezUP.Common.ChannelCategoryPath'
-      channelColumnId:
-        $ref: '#/definitions/BeezUP.Common.ChannelColumnId'
-    type: object
-  columnMappingList:
-    description: The column mapping list between a channel and a catalog
-    items:
-      $ref: '#/definitions/columnMapping'
-    type: array
   columnMappingStatus:
     enum:
       - warning
@@ -7774,24 +7985,6 @@ definitions:
       - failed
     example: success
     type: string
-  columnMappingWithName:
-    allOf:
-      - $ref: '#/definitions/columnMapping'
-      - properties:
-          catalogBeezUPColumnName:
-            $ref: '#/definitions/BeezUP.Common.BeezUPColumnName'
-          catalogColumnName:
-            $ref: '#/definitions/BeezUP.Common.CatalogColumnUserName'
-          channelBeezUPColumnName:
-            $ref: '#/definitions/BeezUP.Common.BeezUPColumnName'
-          channelColumnName:
-            $ref: '#/definitions/BeezUP.Common.ChannelColumnName'
-        type: object
-  columnMappingWithNameList:
-    description: The column mapping list between a channel and a catalog
-    items:
-      $ref: '#/definitions/columnMappingWithName'
-    type: array
   company:
     description: Your company name
     example: My super company
@@ -8249,7 +8442,9 @@ definitions:
         $ref: '#/definitions/links.getContractsLink'
     type: object
   costSettings:
-    description: Depending to the cost type you will have to define a cost value.
+    description: |
+      If this property is not indicated please force the user to configure the cost settings.
+      Defines the cost type you have on this channel with the cost value.
     properties:
       costType:
         $ref: '#/definitions/costType'
@@ -8285,16 +8480,6 @@ definitions:
     example: 04efc310-bc25-4710-a83a-faf200284fe5
     format: guid
     type: string
-  createChannelCatalogRequest:
-    properties:
-      channelId:
-        $ref: '#/definitions/BeezUP.Common.ChannelId'
-      storeId:
-        $ref: '#/definitions/BeezUP.Common.StoreId'
-    required:
-      - channelId
-      - storeId
-    type: object
   createContract:
     allOf:
       - $ref: '#/definitions/offerRequest'
@@ -8717,7 +8902,7 @@ definitions:
       channelColumnId:
         $ref: '#/definitions/BeezUP.Common.ChannelColumnId'
       enabled:
-        description: indicates if the filter is currently active.
+        description: indicates if the filter is currently enable.
         example: true
         type: boolean
       groupId:
@@ -8790,6 +8975,24 @@ definitions:
     items:
       $ref: '#/definitions/exclusionFilter'
     type: array
+  exclusionFiltersResponse:
+    properties:
+      exclusionFilters:
+        $ref: '#/definitions/exclusionFilters'
+      links:
+        $ref: '#/definitions/exclusionFiltersResponseLinks'
+    required:
+      - links
+    type: object
+  exclusionFiltersResponseLinks:
+    properties:
+      configure:
+        $ref: '#/definitions/links.ConfigureChannelCatalogExclusionFiltersLink'
+      self:
+        $ref: '#/definitions/links.GetChannelCatalogExclusionFiltersLink'
+    required:
+      - self
+    type: object
   executionId:
     description: The execution identifier of the catalog importation
     example: bf3bc288-604c-4267-925e-66b1a15dca75
@@ -8845,6 +9048,18 @@ definitions:
       - storeId
       - orderListRequestWithoutPagination
     type: object
+  externalLinks.Catalog_GetBeezUPColumnsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/catalogs/beezUPColumns
+          method: GET
+  externalLinks.GetChannelCatalogMarketplaceSettingsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/marketplaces/channelcatatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/settings
+          method: GET
   externalLinks.GetExternalConfigurationPageLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -8950,10 +9165,6 @@ definitions:
           Do not export "out of stock" products. Note: this option is not taken into account by the counter.
         example: true
         type: boolean
-      noCategoryMapping:
-        description: Indicates that the channel authorize you to do not map your categories with their categories
-        example: false
-        type: boolean
       useBid:
         description: Activate bidding for this channel
         example: false
@@ -8961,40 +9172,37 @@ definitions:
     required:
       - acceptToPublishInfo
       - useBid
-      - noCategoryMapping
       - doNotExportOutOfStockProducts
       - activeBeezUPTracking
     type: object
   getChannelCatalogProductInfoListRequest:
     properties:
-      active:
-        description: 'If false, search for product absent from the current catalog. If null the filter will not be taken in account.'
+      catalogCategoryFilter:
+        $ref: '#/definitions/BeezUP.Common.CatalogCategoryFilter'
+      channelCategoryFilter:
+        $ref: '#/definitions/BeezUP.Common.ChannelCategoryFilter'
+      criteria:
+        $ref: '#/definitions/productSetVisibilityCriteria'
+      overridden:
+        description: Search overridden products. If null the filter will not be taken in account.
         example: true
         type: boolean
-      categoryMapped:
-        description: Search product with category mapped with the channel. If null the filter will not be taken in account.
-        example: false
-        type: boolean
-      disabled:
-        description: Search disabled products. If null the filter will not be taken in account.
-        example: false
-        type: boolean
-      excluded:
-        description: Search excluded products by at least an exclusion filter. If null the filter will not be taken in account.
-        example: false
-        type: boolean
-      overrided:
-        description: Search overrided products. If null the filter will not be taken in account.
-        example: true
-        type: boolean
-      sku:
-        description: Search by product sku. If null the filter will not be taken in account.
-        example: M123
-        type: string
-      title:
-        description: Search by product title. If null the filter will not be taken in account.
-        example: RÃ©frigÃ©rateur
-        type: string
+      pageNumber:
+        example: 1
+        format: int32
+        minimum: 1
+        type: integer
+      pageSize:
+        example: 100
+        format: int32
+        minimum: 100
+        type: integer
+      productFilters:
+        $ref: '#/definitions/BeezUP.Common.ProductFilters'
+    required:
+      - pageNumber
+      - pageSize
+      - criteria
     type: object
   getProductsRequest:
     description: The request message to get products based on these filters
@@ -9577,6 +9785,12 @@ definitions:
       - OnClickDate
     example: OnClickDate
     type: string
+  links.AddChannelCatalogLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs
+          method: POST
   links.Auto_ConfigureAutoImportIntervalLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9828,6 +10042,30 @@ definitions:
               in: body
               request: true
               schema: configureAutomaticTransitionRequest
+  links.ConfigureChannelCatalogColumnMappingsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/columnMappings
+          method: PUT
+  links.ConfigureChannelCatalogCostSettingsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/settings/cost
+          method: POST
+  links.ConfigureChannelCatalogExclusionFiltersLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/exclusionFilters
+          method: PUT
+  links.ConfigureChannelCatalogGeneralSettingsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/settings/general
+          method: POST
   links.CreateRuleLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9845,6 +10083,12 @@ definitions:
                 reportFilterId: fb19c53c-2f63-4262-9d94-2d7faa500acd
                 ruleName: My rule
                 startUtcDate: '2016-08-29T09:12:33.001Z'
+  links.DeleteChannelCatalogLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
+          method: DELETE
   links.DeleteReportFilterLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9857,11 +10101,35 @@ definitions:
       - example:
           href: /v2/user/analytics/10af9486-e28e-47ab-b045-e13e4acd55c3/rules/c38006b4-29d0-4b8a-978b-701a0b12d5a8
           method: DELETE
+  links.DisableChannelCatalogCategoryMappingLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categoryMappings/disable
+          method: POST
+  links.DisableChannelCatalogLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/disable
+          method: POST
+  links.DisableChannelCatalogProductLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/products/578419df-1bbf-41a6-96fa-862e42182b67/disable
+          method: POST
   links.DisableRuleLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
           href: /v2/user/analytics/10af9486-e28e-47ab-b045-e13e4acd55c3/rules/c38006b4-29d0-4b8a-978b-701a0b12d5a8/disable
+          method: POST
+  links.EnableChannelCatalogLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/enable
           method: POST
   links.EnableRuleLink:
     allOf:
@@ -9869,6 +10137,18 @@ definitions:
       - example:
           href: /v2/user/analytics/10af9486-e28e-47ab-b045-e13e4acd55c3/rules/c38006b4-29d0-4b8a-978b-701a0b12d5a8/enable
           method: POST
+  links.ExportChannelCatalogProductInfoListLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/products/export
+          method: POST
+          parameters:
+            format:
+              in: query
+              required: true
+              type: string
+              value: csv
   links.ExportOrdersLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9887,6 +10167,25 @@ definitions:
       - example:
           href: /v2/user/marketplaces/orders/autoTransitions
           method: GET
+  links.GetChannelCatalogCategoriesLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - description: If you did not configure the cost settings this link will not be displayed.
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categoryMappings
+          method: GET
+  links.GetChannelCatalogExclusionFilterOperatorsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/exclusionFilterOperators
+          method: GET
+  links.GetChannelCatalogExclusionFiltersLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/exclusionFilters
+          method: GET
   links.GetChannelCatalogExportationCacheInfoLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -9898,6 +10197,12 @@ definitions:
       - $ref: '#/definitions/BeezUP.Common.Link3'
       - example:
           href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/exportations/history
+          method: GET
+  links.GetChannelCatalogLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0
           method: GET
   links.GetChannelCatalogMarketplacePropertiesLink:
     allOf:
@@ -9912,6 +10217,21 @@ definitions:
   links.GetChannelCatalogProductInfoLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/products/578419df-1bbf-41a6-96fa-862e42182b67
+          method: GET
+  links.GetChannelCatalogProductInfoListLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/products
+          method: POST
+  links.GetChannelCatalogsLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs
+          method: GET
   links.GetChannelsIndexLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -10253,6 +10573,12 @@ definitions:
       - example:
           href: /v2/user/catalogs/a42b780d-4585-4566-800e-4d77a4d6f8a3/importations/222ef571-bdb7-436d-a01a-e5a0e9161c0c/customColumns/5b56bb78-bc0b-485e-abd8-8db7eed995cb/map
           method: POST
+  links.MapChannelCatalogCategoryLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categoryMappings/map
+          method: POST
   links.MoveDownRuleLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -10341,6 +10667,24 @@ definitions:
                   sku: M1234
                   title: RefrigÃ©rateur
                 productState: All
+  links.OverrideChannelCatalogProductValuesLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/products/578419df-1bbf-41a6-96fa-862e42182b67/overrides
+          method: POST
+  links.ReenableChannelCatalogCategoryMappingLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categoryMappings/reenable
+          method: POST
+  links.ReenableChannelCatalogProductLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/products/578419df-1bbf-41a6-96fa-862e42182b67/reenable
+          method: POST
   links.RunRuleLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -10398,6 +10742,22 @@ definitions:
               required: true
               schema: setMerchantOrderInfoRequest
               type: object
+  links.UnmapChannelCatalogCategoryLink:
+    allOf:
+      - $ref: '#/definitions/BeezUP.Common.Link3'
+      - example:
+          href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/categoryMappings/unmap
+          method: POST
+          parameters:
+            - in: body
+              name: request
+              required: true
+              type: object
+              value:
+                catalogCategoryPath:
+                  - VÃªtements
+                  - Femmes
+                  - Chaussures
   links.UpdateRuleLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
@@ -11955,7 +12315,7 @@ definitions:
         example: Sony
         type: string
       override:
-        description: The overrided product value
+        description: The overridden product value
         example: Sony bravia
         type: string
     required:
@@ -12003,6 +12363,41 @@ definitions:
       productValues:
         $ref: '#/definitions/productValues'
     type: object
+  productSetVisibilityCriteria:
+    properties:
+      disabled:
+        description: Search disabled products. If null the filter will not be taken in account.
+        example: false
+        type: boolean
+      excluded:
+        description: Search excluded products by at least an exclusion filter. If null the filter will not be taken in account.
+        example: false
+        type: boolean
+      exist:
+        description: 'If false, search for products absent from the current catalog. If true, search for products currently in the catalog. If null the filter will not be taken in account.'
+        example: true
+        type: boolean
+      logic:
+        $ref: '#/definitions/productSetVisibilityCriteriaLogicType'
+      uncategorized:
+        description: Search product WITHOUT category mapped with the channel. If null the filter will not be taken in account.
+        example: false
+        type: boolean
+    required:
+      - logic
+    type: object
+  productSetVisibilityCriteriaLogicType:
+    description: |
+      Indicate how you want to combine the filters:
+      * funnel: You will get the products which meet at least one of the product set criterion. The criteria are applied in the following order: 
+        - categorization
+        - exclusion filters
+        - deactivations
+      * cumulative: You will get the products which have all the product set criteria
+    enum:
+      - funnel
+      - cumulative
+    type: string
   productStateFilter:
     default: All
     description: You can filter on the product state.

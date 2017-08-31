@@ -294,14 +294,18 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a Role definition.
-      operationId: iam.roles.get
+      description: |-
+        Gets the ServiceAccountKey
+        by key id.
+      operationId: iam.projects.serviceAccounts.keys.get
       parameters:
         - description: |-
-            The resource name of the role in one of the following formats:
-            `roles/{ROLE_NAME}`
-            `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
-            `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
+            The resource name of the service account key in the following format:
+            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}/keys/{key}`.
+
+            Using `-` as a wildcard for the project will infer the project from
+            the account. The `account` value can be the `email` address or the
+            `unique_id` of the service account.
           in: path
           name: name
           required: true
@@ -321,14 +325,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Role'
+            $ref: '#/definitions/ServiceAccountKey'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - roles
+        - projects
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -737,13 +741,13 @@ paths:
       operationId: iam.projects.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
+          enum:
+            - BASIC
+            - FULL
           in: query
           name: pageSize
           type: integer
         - description: Optional pagination token returned in an earlier ListRolesResponse.
-          enum:
-            - BASIC
-            - FULL
           in: query
           name: pageToken
           type: string

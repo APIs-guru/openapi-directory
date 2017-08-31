@@ -125,6 +125,7 @@ parameters:
 tags:
   - name: content
   - name: inspect
+  - name: riskAnalysis
   - name: rootCategories
 paths:
   '/v2beta1/content:inspect':
@@ -323,7 +324,7 @@ paths:
   '/v2beta1/{name}':
     delete:
       description: This method is not supported and the server returns `UNIMPLEMENTED`.
-      operationId: dlp.inspect.operations.delete
+      operationId: dlp.riskAnalysis.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -342,41 +343,32 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
     get:
-      description: Fetch the list of long running operations.
-      operationId: dlp.inspect.operations.list
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: dlp.riskAnalysis.operations.get
       parameters:
-        - description: 'This parameter supports filtering by done, ie done=true or done=false.'
-          in: query
-          name: filter
-          type: string
-        - description: The name of the operation's parent resource.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The list page size. The max allowed value is 256 and default is 100.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleLongrunningListOperationsResponse'
+            $ref: '#/definitions/GoogleLongrunningOperation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -472,7 +464,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Cancels an operation. Use the get method to check whether the cancellation succeeded or whether the operation completed despite cancellation.
-      operationId: dlp.inspect.operations.cancel
+      operationId: dlp.riskAnalysis.operations.cancel
       parameters:
         - in: body
           name: body
@@ -495,7 +487,7 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
 definitions:
   GoogleLongrunningCancelOperationRequest:
     description: The request message for Operations.CancelOperation.
@@ -521,7 +513,7 @@ definitions:
       done:
         description: |-
           If the value is `false`, it means the operation is still in progress.
-          If true, the operation is completed, and either `error` or `response` is
+          If `true`, the operation is completed, and either `error` or `response` is
           available.
         type: boolean
       error:
@@ -826,7 +818,7 @@ definitions:
           info_type, the DLP API applies the limit against all info_types that are
           found but not specified in another InfoTypeLimit.
       maxFindings:
-        description: Max findings limit for the given info type.
+        description: Max findings limit for the given infoType.
         format: int32
         type: integer
     type: object
@@ -1061,7 +1053,7 @@ definitions:
     description: Additional configuration for inspect long running operations.
     properties:
       maxItemFindings:
-        description: 'Max number of findings per file, Datastore entity or database row.'
+        description: 'Max number of findings per file, Datastore entity, or database row.'
         format: int64
         type: string
     type: object

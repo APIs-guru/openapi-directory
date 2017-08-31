@@ -691,7 +691,7 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: 'A comma-separated list of sort keys. Valid keys are ''createdDate'', ''folder'', ''lastViewedByMeDate'', ''modifiedByMeDate'', ''modifiedDate'', ''quotaBytesUsed'', ''recency'', ''sharedWithMeDate'', ''starred'', and ''title''. Each key sorts ascending by default, but may be reversed with the ''desc'' modifier. Example usage: ?orderBy=folder,modifiedDate desc,title. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.'
+        - description: 'A comma-separated list of sort keys. Valid keys are ''createdDate'', ''folder'', ''lastViewedByMeDate'', ''modifiedByMeDate'', ''modifiedDate'', ''quotaBytesUsed'', ''recency'', ''sharedWithMeDate'', ''starred'', ''title'', and ''title_natural''. Each key sorts ascending by default, but may be reversed with the ''desc'' modifier. Example usage: ?orderBy=folder,modifiedDate desc,title. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.'
           in: query
           name: orderBy
           type: string
@@ -4493,6 +4493,11 @@ definitions:
           Setting this field will put the file in all of the provided folders. On insert, if no folders are provided, the file will be placed in the default root folder.
         items:
           $ref: '#/definitions/ParentReference'
+        type: array
+      permissionIds:
+        description: List of permission IDs for users with access to this file.
+        items:
+          type: string
         type: array
       permissions:
         description: The list of permissions for users with access to this file. Not populated for Team Drive files.

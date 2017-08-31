@@ -30,7 +30,7 @@ info:
     * [Changelog](https://flat.io/developers/docs/api/changelog.html)
   termsOfService: 'https://flat.io/legal'
   title: Flat
-  version: 2.2.0
+  version: 2.3.0
   x-apisguru-categories:
     - media
     - collaboration
@@ -82,20 +82,34 @@ parameters:
     required: true
     type: string
   limit:
-    default: 100
+    default: 50
     description: This is the maximum number of objects that may be returned
     in: query
     maximum: 1000
     minimum: 1
     name: limit
     type: integer
-  offset:
-    default: 0
-    description: This offsets the start of each page by the number specified
+  next:
+    description: |
+      An opaque string cursor to fetch the next page of data.
+      The paginated API URLs are returned in the `Link` header when requesting the API. These URLs will contain a `next` and `previous` cursor based on the available data.
     in: query
-    minimum: 0
-    name: offset
-    type: integer
+    name: next
+    type: string
+  organizationUser:
+    description: |
+      Unique identifier of the Flat account
+    in: path
+    name: user
+    required: true
+    type: string
+  previous:
+    description: |
+      An opaque string cursor to fetch the previous page of data.
+      The paginated API URLs are returned in the `Link` header when requesting the API. These URLs will contain a `next` and `previous` cursor based on the available data.
+    in: query
+    name: previous
+    type: string
   score:
     description: |
       Unique identifier of the score document. This can be a Flat Score unique identifier (i.e. `ScoreDetails.id`) or, if the score is also a Google Drive file, the Drive file unique identifier prefixed with `drive-` (e.g. `drive-0B000000000`).
@@ -170,6 +184,7 @@ paths:
           description: Filter the classes by state
           enum:
             - active
+            - inactive
             - archived
           in: query
           name: state
@@ -309,6 +324,32 @@ paths:
         - OAuth2:
             - edu.classes
       summary: Update the class
+      tags:
+        - Class
+  '/classes/{class}/activate':
+    post:
+      description: |
+        Mark the class as `active`. This is mainly used for classes synchronized from Clever that are initially with an `inactive` state and hidden in the UI.
+      operationId: activateClass
+      parameters:
+        - description: Unique identifier of the class
+          in: path
+          name: class
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The class details
+          schema:
+            $ref: '#/definitions/ClassDetails'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.classes
+      summary: Activate the class
       tags:
         - Class
   '/classes/{class}/archive':
@@ -828,7 +869,8 @@ paths:
           name: role
           type: string
         - $ref: '#/parameters/limit'
-        - $ref: '#/parameters/offset'
+        - $ref: '#/parameters/next'
+        - $ref: '#/parameters/previous'
       responses:
         '200':
           description: List of invitations
@@ -1001,7 +1043,8 @@ paths:
           name: role
           type: string
         - $ref: '#/parameters/limit'
-        - $ref: '#/parameters/offset'
+        - $ref: '#/parameters/next'
+        - $ref: '#/parameters/previous'
       responses:
         '200':
           description: List of users
@@ -1042,6 +1085,61 @@ paths:
             - edu.admin
             - edu.admin.users
       summary: Create a new user account
+      tags:
+        - Organization
+  '/organizations/users/{user}':
+    delete:
+      description: |
+        This operation removes an account from Flat and its data, including:
+        * The music scores created by this user (documents, history, comments, collaboration information)
+        * Education related data (assignments and classroom information)
+      operationId: removeOrganizationUser
+      parameters:
+        - $ref: '#/parameters/organizationUser'
+        - description: |
+            If `true`, the account will be only removed from the organization and converted into an individual account on our public website, https://flat.io.
+            This operation will remove the education-related data from the account.
+            Before realizing this operation, you need to be sure that the user is at least 13 years old and that this one has read and agreed to the Individual Terms of Services of Flat available on https://flat.io/legal.
+          in: query
+          name: convertToIndividual
+          type: boolean
+      responses:
+        '204':
+          description: User deleted
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.users
+      summary: Remove an account from Flat
+      tags:
+        - Organization
+    put:
+      operationId: updateOrganizationUser
+      parameters:
+        - $ref: '#/parameters/organizationUser'
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserAdminUpdate'
+      responses:
+        '200':
+          description: User updated
+          schema:
+            $ref: '#/definitions/UserDetailsAdmin'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/FlatErrorResponse'
+      security:
+        - OAuth2:
+            - edu.admin
+            - edu.admin.users
+      summary: Update account information
       tags:
         - Organization
   /scores:
@@ -1956,6 +2054,7 @@ definitions:
       state:
         description: State of the assignment
         enum:
+          - draft
           - active
           - archived
         type: string
@@ -2115,6 +2214,7 @@ definitions:
         enum:
           - flat
           - link
+          - exercise
         type: string
       url:
         description: The URL of the attachment.
@@ -2173,8 +2273,52 @@ definitions:
       canvas:
         description: Meta information provided by Canvs LMS
         properties:
+          domain:
+            description: Canvas instance domain (e.g. "canvas.instructure.com")
+            type: string
           id:
             description: Unique identifier of the course on Canvas
+            type: string
+        type: object
+      clever:
+        description: Clever.com section-related information
+        properties:
+          creationDate:
+            description: The creation date of the section on clever
+            format: date-time
+            type: string
+          id:
+            description: Clever section unique identifier
+            type: string
+          modificationDate:
+            description: The last modification date of the section on clever
+            format: date-time
+            type: string
+          subject:
+            description: Normalized subject of the course
+            enum:
+              - english/language arts
+              - math
+              - science
+              - social studies
+              - language
+              - homeroom/advisory
+              - interventions/online learning
+              - technology and engineering
+              - PE and health
+              - arts and music
+              - other
+            type: string
+          termEndDate:
+            description: End date of the term
+            format: date-time
+            type: string
+          termName:
+            description: Name of the term when this course happens
+            type: string
+          termStartDate:
+            description: Beginning date of the term
+            format: date-time
             type: string
         type: object
       creationDate:
@@ -2264,6 +2408,7 @@ definitions:
     description: The state of a classroom
     enum:
       - active
+      - inactive
       - archived
     type: string
   ClassUpdate:
@@ -2540,6 +2685,9 @@ definitions:
       authorUrl:
         description: The resolved author url of the attachment
         type: string
+      correct:
+        description: 'If the attachment is an exercise question, this state will describe if it is correct or not.For exercise assignments only.'
+        type: boolean
       description:
         description: The resolved description of the attachment
         type: string
@@ -2589,6 +2737,7 @@ definitions:
           - video
           - link
           - flat
+          - exercise
         type: string
       url:
         description: The url of the attachment
@@ -3344,6 +3493,17 @@ definitions:
       weekly:
         description: The weekly number of views of the score
         type: number
+    type: object
+  UserAdminUpdate:
+    description: User update as an organization admin
+    properties:
+      organizationRole:
+        $ref: '#/definitions/OrganizationRoles'
+      password:
+        description: Password of the new account
+        format: password
+        minLength: 6
+        type: string
     type: object
   UserBasics:
     discriminator: userType

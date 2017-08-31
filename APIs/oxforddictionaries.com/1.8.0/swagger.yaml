@@ -111,7 +111,7 @@ paths:
   '/domains/{source_domains_language}/{target_domains_language}':
     get:
       description: |
-        Returns a list of the available [domains](/glossary?tag=#domains&expand) for a given bilingual language dataset.
+        Returns a list of the available [domains](documentation/glossary?term=domain) for a given bilingual language dataset.
       parameters:
         - description: IANA language code
           enum:
@@ -159,7 +159,7 @@ paths:
   '/domains/{source_language}':
     get:
       description: |
-        Returns a list of the available [domains](/glossary?tag=#domains&expand) for a given monolingual language dataset.
+        Returns a list of the available [domains](documentation/glossary?term=domain) for a given monolingual language dataset.
       parameters:
         - description: IANA language code
           enum:
@@ -231,7 +231,7 @@ paths:
     get:
       description: |
 
-        Use this to retrieve definitions, pronunciations, example sentences, grammatical information and word origins. It only works for dictionary headwords, so you may need to use the Lemmatron first if your input is likely to be an inflected form (e.g., 'swimming'). This would return the linked headword (e.g., 'swim') which you can then use in teh Entries endpoint.Unless epcified using a region filter, the default lookup will be the Oxford Dictioanry of English (GB). 
+        Use this to retrieve definitions, pronunciations, example sentences, grammatical information and word origins. It only works for dictionary headwords, so you may need to use the Lemmatron first if your input is likely to be an inflected form (e.g., 'swimming'). This would return the linked headword (e.g., 'swim') which you can then use in the Entries endpoint. Unless specified using a region filter, the default lookup will be the Oxford Dictionary of English (GB). 
           <div id="dictionary_entries"></div>
       externalDocs:
         description: find more info here
@@ -363,7 +363,7 @@ paths:
     get:
       description: |
 
-        Retrieve available [synonyms and antonyms](/glossary?tag=#thesaurus&expand) for a given word and language. 
+        Retrieve available [synonyms](documentation/glossary?term=thesaurus) and [antonyms](documentation/glossary?term=thesaurus) for a given word and language. 
 
           <div id="synonyms_and_antonyms"></div>
       externalDocs:
@@ -422,7 +422,7 @@ paths:
     get:
       description: |
 
-        Use this to return translations for a given word. In the event that a word in the dataset does not have a direct translation, the response will be a [definition](/glossary?tag=#entry&expand) in the target language.
+        Use this to return translations for a given word. In the event that a word in the dataset does not have a direct translation, the response will be a [definition](documentation/glossary?term=entry) in the target language.
 
           <div id="translation"></div>
       parameters:
@@ -533,7 +533,7 @@ paths:
   '/grammaticalFeatures/{source_language}':
     get:
       description: |
-        Returns a list of the available [grammatical features](/glossary?tag=#grammaticalfeatures&expand) for a given language dataset.
+        Returns a list of the available [grammatical features](documentation/glossary?term=grammaticalfeatures) for a given language dataset.
       parameters:
         - description: IANA language code. If provided output will be filtered by sourceLanguage.
           enum:
@@ -572,7 +572,7 @@ paths:
     get:
       description: |
 
-        Use this to check if a word exists in the dictionary, or what 'root' form it links to (e.g., swimming > swim). The response tells you the possible [lemmas](/glossary?tag=#lemma&expand) for a given [inflected](/glossary?tag=#inflection&expand) word. This can then be combined with other endpoints to retrieve more information.
+        Use this to check if a word exists in the dictionary, or what 'root' form it links to (e.g., swimming > swim). The response tells you the possible [lemmas](documentation/glossary?term=lemma) for a given [inflected](documentation/glossary?term=inflection) word. This can then be combined with other endpoints to retrieve more information.
 
           <div id="lemmatron"></div>
       parameters:
@@ -601,7 +601,7 @@ paths:
     get:
       description: |
 
-        Retrieve available [lemmas](/glossary?tag=#lemma&expand) for a given [inflected](/glossary?tag=#inflection&expand) wordform. Filter results by categories.  
+        Retrieve available [lemmas](documentation/glossary?term=lemma) for a given [inflected](documentation/glossary?term=inflection) wordform. Filter results by categories.  
 
           <div id="lemmatron_filters"></div>
       parameters:
@@ -690,7 +690,7 @@ paths:
   '/lexicalcategories/{language}':
     get:
       description: |
-        Returns a list of available [lexical categories](/glossary?tag=#lexicalcategory&expand) for a given language dataset.
+        Returns a list of available [lexical categories](documentation/glossary?term=lexicalcategory) for a given language dataset.
       parameters:
         - description: IANA language code
           enum:
@@ -732,7 +732,7 @@ paths:
   '/regions/{source_language}':
     get:
       description: |
-        Returns a list of the available [regions](/glossary?tag=#regions&expand) for a given monolingual language dataset.
+        Returns a list of the available [regions](documentation/glossary?term=regions) for a given monolingual language dataset.
       parameters:
         - description: IANA language code
           enum:
@@ -757,7 +757,7 @@ paths:
   '/registers/{source_language}':
     get:
       description: |
-        Returns a list of the available [registers](/glossary?tag=#registers&expand) for a given monolingual language dataset.
+        Returns a list of the available [registers](documentation/glossary?term=registers) for a given monolingual language dataset.
       parameters:
         - description: IANA language code
           enum:
@@ -795,7 +795,7 @@ paths:
   '/registers/{source_register_language}/{target_register_language}':
     get:
       description: |
-        Returns a list of the available [registers](/glossary?tag=#registers&expand) for a given bilingual language dataset.
+        Returns a list of the available [registers](documentation/glossary?term=registers) for a given bilingual language dataset.
       parameters:
         - description: IANA language code
           enum:
@@ -1083,7 +1083,7 @@ paths:
     get:
       description: |
 
-        Use this to retrieve a list of words for particular [domain](/glossary?tag=#domain&expand), [lexical category](/glossary?tag=#lexicalcategory&expand), [register](/glossary?tag=#register&expand) and/or [region](/glossary?tag=#region&expand). View the full list of possible filters using the filters Utility endpoint.  The response only includes headwords, not all their possible inflections. If you require a full wordlist including inflected forms, contact us and we can help.
+        Use this to retrieve a list of words for particular [domain](documentation/glossary?term=domain), [lexical category](documentation/glossary?term=lexicalcategory), [register](documentation/glossary?term=registers) and/or [region](documentation/glossary?term=regions). View the full list of possible filters using the filters Utility endpoint.  The response only includes headwords, not all their possible inflections. If you require a full wordlist including inflected forms, contact us and we can help.
 
           <div id="wordlist"></div>
       parameters:

@@ -1343,7 +1343,8 @@ definitions:
       place:
         $ref: '#/definitions/NAPlace'
       plug_connected_boiler:
-        type: boolean
+        format: int32
+        type: integer
       station_name:
         type: string
       syncing:
