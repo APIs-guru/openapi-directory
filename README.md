@@ -86,6 +86,7 @@ Some definitions are taken from Open Source projects:
  - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI(aka Swagger) description for Instagram API
  - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI(aka Swagger) definition for BBC Nitro and iBL APIs
  - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - OpenAPI (aka Swagger 2.0) description for Medium API
+ - [faragorn/open-api-specs](https://github.com/faragorn/open-api-specs) - OpenAPI definition for Giphy API
 
 [banner]: https://apis.guru/branding/banner.svg "APIs.guru"
 [twitter-image]: https://img.shields.io/twitter/url/http/APIs.guru.svg?style=social
