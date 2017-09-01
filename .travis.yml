@@ -4,6 +4,8 @@ node_js:
 env:
   global:
     - GH_REF: "github.com/APIs-guru/api-models.git"
+script:
+  - travis_wait npm test
 deploy:
   skip_cleanup: true
   provider: script
