@@ -1,0 +1,824 @@
+swagger: '2.0'
+info:
+  version: '2017-07-01'
+  x-release: v4
+  title: AWS Mobile
+  description: ' AWS Mobile Service provides mobile app and website developers with capabilities required to configure AWS resources and bootstrap their developer desktop projects with the necessary SDKs, constants, tools and samples to make use of those resources. '
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: mobile
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mobile-2017-07-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/mobile/'
+host: mobile.amazonaws.com
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: header
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: header
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /projects:
+    get:
+      operationId: ListProjects
+      description: ' Lists projects in AWS Mobile Hub. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListProjectsResult'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListProjectsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/projects/{projectId}':
+    delete:
+      operationId: DeleteProject
+      description: ' Delets a project in AWS Mobile Hub. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteProjectResult'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteProjectRequest'
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: projectId
+          in: query
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/bundles/{bundleId}':
+    post:
+      operationId: ExportBundle
+      description: ' Generates customized software development kit (SDK) and or tool packages used to integrate mobile web or mobile app clients with backend AWS resources. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExportBundleResult'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExportBundleRequest'
+        - name: bundleId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /project:
+    get:
+      operationId: DescribeProject
+      description: ' Gets details about a project in AWS Mobile Hub. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeProjectResult'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeProjectRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/exports/{projectId}':
+    post:
+      operationId: ExportProject
+      description: ' Exports project configuration to a snapshot which can be downloaded and shared. Note that mobile app push credentials are encrypted in exported projects, so they can only be shared successfully within the same AWS account. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ExportProjectResult'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ExportProjectRequest'
+        - name: projectId
+          in: path
+          type: string
+          required: true
+        - name: projectId
+          in: query
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /bundles:
+    get:
+      operationId: ListBundles
+      description: ' List all available bundles. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListBundlesResult'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListBundlesRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /update:
+    post:
+      operationId: UpdateProject
+      description: ' Update an existing project. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateProjectResult'
+        '480':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '481':
+          description: ServiceUnavailableException
+          schema:
+            $ref: '#/definitions/ServiceUnavailableException'
+        '482':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '484':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '485':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '486':
+          description: AccountActionRequiredException
+          schema:
+            $ref: '#/definitions/AccountActionRequiredException'
+        '487':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateProjectRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AccountActionRequiredException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' Account Action is required in order to continue the request. '
+  AttributeKey:
+    type: string
+    description: ' Key part of key-value attribute pairs. '
+  AttributeValue:
+    type: string
+    description: ' Value part of key-value attribute pairs. '
+  Attributes:
+    type: array
+    description: ' Key-value attribute pairs. '
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/AttributeKey'
+        value:
+          $ref: '#/definitions/AttributeValue'
+  BadRequestException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' The request cannot be processed because some parameter is not valid or the project state prevents the operation from being performed. '
+  Boolean:
+    type: boolean
+  BundleDescription:
+    type: string
+    description: ' Description of the download bundle. '
+  BundleDetails:
+    type: object
+    properties:
+      bundleId:
+        $ref: '#/definitions/BundleId'
+      title:
+        $ref: '#/definitions/BundleTitle'
+      version:
+        $ref: '#/definitions/BundleVersion'
+      description:
+        $ref: '#/definitions/BundleDescription'
+      iconUrl:
+        $ref: '#/definitions/IconUrl'
+      availablePlatforms:
+        $ref: '#/definitions/Platforms'
+    description: ' The details of the bundle. '
+  BundleId:
+    type: string
+    description: ' Unique bundle identifier. '
+  BundleList:
+    type: array
+    description: ' A list of bundles. '
+    items:
+      $ref: '#/definitions/BundleDetails'
+  BundleTitle:
+    type: string
+    description: ' Title of the download bundle. '
+  BundleVersion:
+    type: string
+    description: ' Version of the download bundle. '
+  ConsoleUrl:
+    type: string
+  Contents:
+    type: string
+    description: ' Binary file data. '
+  CreateProjectRequest:
+    type: object
+    properties:
+      contents:
+        $ref: '#/definitions/Contents'
+        description: ' ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation. '
+    description: ' Request structure used to request a project be created. '
+  CreateProjectResult:
+    type: object
+    properties:
+      details:
+        $ref: '#/definitions/ProjectDetails'
+        description: ' Detailed information about the created AWS Mobile Hub project. '
+    description: ' Result structure used in response to a request to create a project. '
+  Date:
+    type: string
+    format: date-time
+  DeleteProjectRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request a project be deleted. '
+  DeleteProjectResult:
+    type: object
+    properties:
+      deletedResources:
+        $ref: '#/definitions/Resources'
+        description: ' Resources which were deleted. '
+      orphanedResources:
+        $ref: '#/definitions/Resources'
+        description: ' Resources which were not deleted, due to a risk of losing potentially important data or files. '
+    description: ' Result structure used in response to request to delete a project. '
+  DescribeBundleRequest:
+    type: object
+    properties: {}
+    description: ' Request structure to request the details of a specific bundle. '
+  DescribeBundleResult:
+    type: object
+    properties:
+      details:
+        $ref: '#/definitions/BundleDetails'
+        description: ' The details of the bundle. '
+    description: ' Result structure contains the details of the bundle. '
+  DescribeProjectRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request details about a project. '
+  DescribeProjectResult:
+    type: object
+    properties:
+      details:
+        $ref: '#/definitions/ProjectDetails'
+    description: ' Result structure used for requests of project details. '
+  DownloadUrl:
+    type: string
+    description: ' The download Url. '
+  ErrorMessage:
+    type: string
+    description: ' The Exception Error Message. '
+  ExportBundleRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request generation of custom SDK and tool packages required to integrate mobile web or app clients with backed AWS resources. '
+  ExportBundleResult:
+    type: object
+    properties:
+      downloadUrl:
+        $ref: '#/definitions/DownloadUrl'
+        description: ' URL which contains the custom-generated SDK and tool packages used to integrate the client mobile app or web app with the AWS resources created by the AWS Mobile Hub project. '
+    description: ' Result structure which contains link to download custom-generated SDK and tool packages used to integrate mobile web or app clients with backed AWS resources. '
+  ExportProjectRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used in requests to export project configuration details. '
+  ExportProjectResult:
+    type: object
+    properties:
+      downloadUrl:
+        $ref: '#/definitions/DownloadUrl'
+        description: ' URL which can be used to download the exported project configuation file(s). '
+      shareUrl:
+        $ref: '#/definitions/ShareUrl'
+        description: ' URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. '
+      snapshotId:
+        $ref: '#/definitions/SnapshotId'
+        description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
+    description: ' Result structure used for requests to export project configuration details. '
+  Feature:
+    type: string
+    description: ' Identifies which feature in AWS Mobile Hub is associated with this AWS resource. '
+  IconUrl:
+    type: string
+    description: ' Icon for the download bundle. '
+  InternalFailureException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' The service has encountered an unexpected error condition which prevents it from servicing the request. '
+  LimitExceededException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' There are too many AWS Mobile Hub projects in the account or the account has exceeded the maximum number of resources in some AWS service. You should create another sub-account using AWS Organizations or remove some resources and retry your request. '
+  ListBundlesRequest:
+    type: object
+    properties: {}
+    description: ' Request structure to request all available bundles. '
+  ListBundlesResult:
+    type: object
+    properties:
+      bundleList:
+        $ref: '#/definitions/BundleList'
+        description: ' A list of bundles. '
+      nextToken:
+        $ref: '#/definitions/NextToken'
+        description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
+    description: ' Result structure contains a list of all available bundles with details. '
+  ListProjectsRequest:
+    type: object
+    properties: {}
+    description: ' Request structure used to request projects list in AWS Mobile Hub. '
+  ListProjectsResult:
+    type: object
+    properties:
+      projects:
+        $ref: '#/definitions/ProjectSummaries'
+      nextToken:
+        $ref: '#/definitions/NextToken'
+    description: ' Result structure used for requests to list projects in AWS Mobile Hub. '
+  MaxResults:
+    type: integer
+    description: ' Maximum number of records to list in a single response. '
+  NextToken:
+    type: string
+    description: ' Pagination token. Set to null to start listing records from start. If non-null pagination token is returned in a result, then pass its value in here in another request to list more entries. '
+  NotFoundException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' No entity can be found with the specified identifier. '
+  Platform:
+    type: string
+    enum:
+      - OSX
+      - WINDOWS
+      - LINUX
+      - OBJC
+      - SWIFT
+      - ANDROID
+      - JAVASCRIPT
+    description: ' Developer desktop or target mobile app or website platform. '
+  Platforms:
+    type: array
+    description: ' Developer desktop or mobile app or website platforms. '
+    items:
+      $ref: '#/definitions/Platform'
+  ProjectDetails:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ProjectName'
+      projectId:
+        $ref: '#/definitions/ProjectId'
+      region:
+        $ref: '#/definitions/ProjectRegion'
+      state:
+        $ref: '#/definitions/ProjectState'
+      createdDate:
+        $ref: '#/definitions/Date'
+        description: ' Date the project was created. '
+      lastUpdatedDate:
+        $ref: '#/definitions/Date'
+        description: ' Date of the last modification of the project. '
+      consoleUrl:
+        $ref: '#/definitions/ConsoleUrl'
+        description: ' Website URL for this project in the AWS Mobile Hub console. '
+      resources:
+        $ref: '#/definitions/Resources'
+    description: ' Detailed information about an AWS Mobile Hub project. '
+  ProjectId:
+    type: string
+    description: ' Unique project identifier. '
+  ProjectName:
+    type: string
+    description: ' Name of the project. '
+  ProjectRegion:
+    type: string
+    description: ' Default region to use for AWS resource creation in the AWS Mobile Hub project. '
+  ProjectState:
+    type: string
+    enum:
+      - NORMAL
+      - SYNCING
+      - IMPORTING
+    description: ' Synchronization state for a project. '
+  ProjectSummaries:
+    type: array
+    description: ' List of projects. '
+    items:
+      $ref: '#/definitions/ProjectSummary'
+  ProjectSummary:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/ProjectName'
+        description: ' Name of the project. '
+      projectId:
+        $ref: '#/definitions/ProjectId'
+        description: ' Unique project identifier. '
+    description: ' Summary information about an AWS Mobile Hub project. '
+  Resource:
+    type: object
+    properties:
+      type:
+        $ref: '#/definitions/ResourceType'
+      name:
+        $ref: '#/definitions/ResourceName'
+      arn:
+        $ref: '#/definitions/ResourceArn'
+      feature:
+        $ref: '#/definitions/Feature'
+      attributes:
+        $ref: '#/definitions/Attributes'
+    description: ' Information about an instance of an AWS resource associated with a project. '
+  ResourceArn:
+    type: string
+    description: ' AWS resource name which uniquely identifies the resource in AWS systems. '
+  ResourceName:
+    type: string
+    description: ' Name of the AWS resource (e.g., for an Amazon S3 bucket this is the name of the bucket). '
+  ResourceType:
+    type: string
+    description: ' Simplified name for type of AWS resource (e.g., bucket is an Amazon S3 bucket). '
+  Resources:
+    type: array
+    description: ' List of AWS resources associated with a project. '
+    items:
+      $ref: '#/definitions/Resource'
+  ServiceUnavailableException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' The service is temporarily unavailable. The request should be retried after some time delay. '
+  ShareUrl:
+    type: string
+    description: ' URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. '
+  SnapshotId:
+    type: string
+    description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
+  TooManyRequestsException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' Too many requests have been received for this AWS account in too short a time. The request should be retried after some time delay. '
+  UnauthorizedException:
+    type: object
+    properties:
+      message:
+        $ref: '#/definitions/ErrorMessage'
+    description: ' Credentials of the caller are insufficient to authorize the request. '
+  UpdateProjectRequest:
+    type: object
+    properties:
+      contents:
+        $ref: '#/definitions/Contents'
+        description: ' ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation. '
+    description: ' Request structure used for requests to update project configuration. '
+  UpdateProjectResult:
+    type: object
+    properties:
+      details:
+        $ref: '#/definitions/ProjectDetails'
+        description: ' Detailed information about the updated AWS Mobile Hub project. '
+    description: ' Result structure used for requests to updated project configuration. '

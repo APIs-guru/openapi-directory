@@ -724,7 +724,7 @@ paths:
   '/bots/{name}/versions/{versionoralias}':
     get:
       operationId: GetBot
-      description: '<p>Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias. </p> <p> The GetBot operation requires permissions for the <code>lex:GetBot</code> action. </p>'
+      description: '<p>Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias. </p> <p> This operation requires permissions for the <code>lex:GetBot</code> action. </p>'
       responses:
         '200':
           description: Success
@@ -1917,6 +1917,9 @@ definitions:
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the <code>$LATEST</code> version of the slot type.
+      valueSelectionStrategy:
+        $ref: '#/definitions/SlotValueSelectionStrategy'
+        description: 'The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.'
   CustomOrBuiltinSlotTypeName:
     type: string
     pattern: '^([a-zA-Z]|AMAZON.)+((_[a-zA-Z]+)*|([a-zA-Z]+_)*|_)'
@@ -1961,6 +1964,9 @@ definitions:
       value:
         $ref: '#/definitions/Value'
         description: The value of the slot type.
+      synonyms:
+        $ref: '#/definitions/SynonymList'
+        description: Additional values related to the slot type value.
     description: '<p>Each slot type can have a set of values. Each enumeration value represents a value the slot type can take. </p> <p>For example, a pizza ordering bot could have a slot type that specifies the type of crust that the pizza should have. The slot type could include the values </p> <ul> <li> <p>thick</p> </li> <li> <p>thin</p> </li> <li> <p>stuffed</p> </li> </ul>'
   EnumerationValues:
     type: array
@@ -2443,6 +2449,9 @@ definitions:
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the <code>$LATEST</code> version of the slot type.
+      valueSelectionStrategy:
+        $ref: '#/definitions/SlotValueSelectionStrategy'
+        description: 'The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.'
   GetSlotTypeVersionsRequest:
     type: object
     properties: {}
@@ -2925,7 +2934,7 @@ definitions:
         description: A description of the intent.
       slots:
         $ref: '#/definitions/SlotList'
-        description: 'An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see &lt;xref linkend="how-it-works"/&gt;. '
+        description: 'An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see <a>how-it-works</a>. '
       sampleUtterances:
         $ref: '#/definitions/IntentUtteranceList'
         description: '<p>An array of utterances (strings) that a user might say to signal the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas". </p> <p>In each utterance, a slot name is enclosed in curly braces. </p>'
@@ -2946,7 +2955,7 @@ definitions:
         description: '<p> Specifies a Lambda function to invoke for each user input. You can invoke this Lambda function to personalize user interaction. </p> <p>For example, suppose your bot determines that the user is John. Your Lambda function might retrieve John''s information from a backend database and prepopulate some of the values. For example, if you find that John is gluten intolerant, you might set the corresponding intent slot, <code>GlutenIntolerant</code>, to true. You might find John''s phone number and set the corresponding session attribute. </p>'
       fulfillmentActivity:
         $ref: '#/definitions/FulfillmentActivity'
-        description: '<p> Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, <code>fulfillmentActivity</code> defines how the bot places an order with a local pizza store. </p> <p> You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). </p>'
+        description: '<p>Required. Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, <code>fulfillmentActivity</code> defines how the bot places an order with a local pizza store. </p> <p> You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). </p>'
       parentIntentSignature:
         $ref: '#/definitions/BuiltinIntentSignature'
         description: 'A unique identifier for the built-in intent to base this intent on. To find the signature for an intent, see <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents">Standard Built-in Intents</a> in the <i>Alexa Skills Kit</i>.'
@@ -3099,10 +3108,13 @@ definitions:
         description: A description of the slot type.
       enumerationValues:
         $ref: '#/definitions/EnumerationValues'
-        description: A list of <code>EnumerationValue</code> objects that defines the values that the slot type can take.
+        description: '<p>A list of <code>EnumerationValue</code> objects that defines the values that the slot type can take. Each value can have a list of <code>synonyms</code>, which are additional values that help train the machine learning model about the values that it resolves for a slot. </p> <p>When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The <code>valueSelectionStrategy</code> field indicates the option to use. </p>'
       checksum:
         $ref: '#/definitions/String'
         description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new slot type, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a slot type, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
+      valueSelectionStrategy:
+        $ref: '#/definitions/SlotValueSelectionStrategy'
+        description: '<p>Determines the strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don''t specify the <code>valueSelectionStrategy</code> is not provided, the default is <code>ORIGINAL_VALUE</code>.</p>'
   PutSlotTypeResponse:
     type: object
     example:
@@ -3137,6 +3149,9 @@ definitions:
       checksum:
         $ref: '#/definitions/String'
         description: Checksum of the <code>$LATEST</code> version of the slot type.
+      valueSelectionStrategy:
+        $ref: '#/definitions/SlotValueSelectionStrategy'
+        description: 'The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.'
   ReferenceType:
     type: string
     enum:
@@ -3254,6 +3269,11 @@ definitions:
       $ref: '#/definitions/Utterance'
     minItems: 0
     maxItems: 10
+  SlotValueSelectionStrategy:
+    type: string
+    enum:
+      - ORIGINAL_VALUE
+      - TOP_RESOLUTION
   Statement:
     type: object
     required:
@@ -3280,6 +3300,10 @@ definitions:
       - Missed
   String:
     type: string
+  SynonymList:
+    type: array
+    items:
+      $ref: '#/definitions/Value'
   Timestamp:
     type: string
     format: date-time

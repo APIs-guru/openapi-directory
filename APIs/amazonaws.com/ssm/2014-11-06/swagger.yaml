@@ -3518,6 +3518,10 @@ paths:
           schema:
             $ref: '#/definitions/AutomationDefinitionVersionNotFoundException'
         '484':
+          description: IdempotentParameterMismatch
+          schema:
+            $ref: '#/definitions/IdempotentParameterMismatch'
+        '485':
           description: InternalServerError
           schema:
             $ref: '#/definitions/InternalServerError'
@@ -6887,6 +6891,11 @@ definitions:
   IamRole:
     type: string
     maxLength: 64
+  IdempotencyToken:
+    type: string
+    pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
+    minLength: 36
+    maxLength: 36
   IdempotentParameterMismatch:
     type: object
     properties:
@@ -9425,6 +9434,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ResourceComplianceSummaryItem'
+  ResourceDataSyncAWSKMSKeyARN:
+    type: string
+    pattern: 'arn:.*'
+    minLength: 1
+    maxLength: 512
   ResourceDataSyncAlreadyExistsException:
     type: object
     properties:
@@ -9505,6 +9519,9 @@ definitions:
       Region:
         $ref: '#/definitions/ResourceDataSyncS3Region'
         description: The AWS Region with the Amazon S3 bucket targeted by the Resource Data Sync.
+      AWSKMSKeyARN:
+        $ref: '#/definitions/ResourceDataSyncAWSKMSKeyARN'
+        description: The ARN of an encryption key for a destination in Amazon S3. Must belong to the same region as the destination Amazon S3 bucket.
     description: Information about the target Amazon S3 bucket for the Resource Data Sync.
   ResourceDataSyncS3Format:
     type: string
@@ -9726,6 +9743,9 @@ definitions:
       Parameters:
         $ref: '#/definitions/AutomationParameterMap'
         description: 'A key-value map of execution parameters, which match the declared parameters in the Automation document.'
+      ClientToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: 'User-provided idempotency token. The token must be unique, is case insensitive, enforces the UUID format, and can''t be reused.'
   StartAutomationExecutionResult:
     type: object
     properties:
