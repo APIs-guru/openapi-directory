@@ -1,0 +1,1037 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.ritekit.com
+basePath: /
+info:
+  description: |-
+    RiteKit API is based on REST principles.
+
+    Authentication uses standard OAuth 2.0 process
+
+    ##Getting started
+
+    1. Sign up for [RiteKit](https://ritekit.com/)
+
+    1. Go to [developer dashboard](https://ritekit.com/developer/dashboard/)
+
+    1. Click "Create a token" button to get your **Client ID** and **Client secret**
+
+    1. Study the documentation below (for more info on oAuth go to http://oauth.net/)
+
+    1. When you reach your free limit of calls per month, [upgrade to paid tiers](https://ritekit.com/developer/)
+
+    ## Options for authorizing API Calls
+
+    #### A) Using Client ID directly
+
+    You can directly connect to our API using your **client ID** by sending it as a GET query parameter. This option is simple (no need for oAuth) but it should be used only in case the Client ID is not exposed publicly.
+
+    GET  https://api.ritekit.com/v1/stats/basic/php?client_id=292c6912e7710c838347ae178b4a
+
+    #### B) Using Access token (oAuth 2.0)
+
+    Once you have valid Access token, you can access our API by sending the token in the Authorization header bearer or as a query Access token. See the oAuth 2.0 section to learn how to get Access token and keep refreshing it.
+
+    Authorization: Bearer xxxx
+
+    Or
+
+    GET  https://api.ritekit.com/v1/stats/basic/php?access_token=292c6912e7710c838347ae178b4a
+
+    ## oAuth 2.0
+
+    ![oauthschema](https://cdn.ritekit.com/assets/media/1/oauth-simple.png)
+
+    ### Get Access Token
+
+    Use your Client Credentials to get the token.
+
+    POST   https://ritekit.com/oauth/token
+
+               grant_type=client_credentials
+               &client_id=CLIENT_ID
+               &client_secret=CLIENT_SECRET
+               &scope=data
+
+    - [required] grant_type - client_credentials
+
+    - [required] client_id (CLIENT ID)
+
+    - [required] client_secret (CLIENT SECRET)
+
+    - [required] (always use scope=data)
+
+    #### Response
+
+    {
+            "access_token":292c6912e7710c838347ae178b4a,
+            "token_type":"bearer",
+            "expires_in": 3600,
+            "refresh_token":292c6912e7710c838347ae178b4a,
+        }
+
+    ### Refresh token
+
+    Every Access token has a lifetime. You can use Refresh token to request a new Access Token.
+
+    POST   https://ritekit.com/oauth/token
+
+               grant_type=refresh_token
+               &refresh_token=REFRESH_TOKEN
+               &client_id=CLIENT_ID
+               &scope=data
+
+    - [required] grant_type - refresh_token
+
+    - [required] refresh_token - (REFRESH TOKEN) the refresh token you got from the expired token
+
+    - [required] client_id (CLIENT ID)
+
+    - [required] client_secret (CLIENT SECRET)
+
+    - [required] scope (always use scope=data)
+
+    #### Response
+
+    {
+            "access_token":292c6912e7710c838347ae178b4a,
+            "token_type":"bearer",
+            "expires_in": 3600,
+            "refresh_token":292c6912e7710c838347ae178b4a,
+        }
+  title: RiteKit
+  version: 1.0.0
+  x-apisguru-categories:
+    - social
+  x-logo:
+    url: 'https://pbs.twimg.com/profile_images/781729376161366016/qdUFUsCN_400x400.jpg'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: apiBlueprint
+      url: 'https://raw.githubusercontent.com/RiteKit/api-docs/master/apiary.apib'
+      version: 1A
+  x-providerName: ritekit.com
+paths:
+  /v1/emoji/auto-emojify:
+    get:
+      description: Returns text of the post with emoji added
+      parameters:
+        - description: Text of the post
+          in: query
+          name: text
+          required: true
+          type: string
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              code: 200
+              message: OK
+              result: true
+              text: "Why robots may soon steal all manufacturing jobs – but it’s not all bad news \uD83E\uDD16\uD83D\uDDDE❓"
+          headers: {}
+      summary: Auto-Emojify
+      tags: []
+  /v1/emoji/suggestions:
+    get:
+      description: Returns list of emoji suggestions for a given text of the post
+      parameters:
+        - description: Text of the post
+          in: query
+          name: text
+          required: true
+          type: string
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              code: 200
+              emojis:
+                - "\uD83E\uDD16"
+                - "\uD83D\uDDDE"
+                - ❓
+              message: OK
+              result: true
+          headers: {}
+      summary: Emoji Suggestions
+      tags: []
+  /v1/images/logo:
+    get:
+      description: Returns a company logo based on website domain.
+      parameters:
+        - description: URL of the company
+          in: query
+          name: domain
+          required: true
+          type: string
+      produces:
+        - image/png
+      responses:
+        '200':
+          description: OK
+          examples:
+            image/png: ''
+          headers: {}
+      summary: Company Logo
+      tags: []
+  /v1/images/quote:
+    get:
+      description: Returns URL of an image created from text according to given style parameters
+      parameters:
+        - description: Text of the quote
+          in: query
+          name: quote
+          required: true
+          type: string
+        - description: Name of the author/source
+          in: query
+          name: author
+          required: true
+          type: string
+        - description: Font size for the quote (author font size is calculated automatically)
+          in: query
+          name: fontSize
+          required: true
+          type: integer
+        - description: Font-family used for quote text
+          in: query
+          name: quoteFont
+          required: true
+          type: string
+        - description: Font color of the quote text
+          in: query
+          name: quoteFontColor
+          required: true
+          type: string
+        - description: Font-family used for author name
+          in: query
+          name: authorFont
+          required: true
+          type: string
+        - description: Font color of the author
+          in: query
+          name: authorFontColor
+          required: true
+          type: string
+        - description: Enable highlight on quote text
+          in: query
+          name: enableHighlight
+          required: true
+          type: integer
+        - description: Color used for highlight
+          in: query
+          name: highlightColor
+          required: true
+          type: string
+        - description: Background type (gradient/solid)
+          in: query
+          name: bgType
+          required: true
+          type: string
+        - description: Background color for solid background type
+          in: query
+          name: backgroundColor
+          required: true
+          type: string
+        - description: Type of gradient background (linear/radial)
+          in: query
+          name: gradientType
+          required: true
+          type: string
+        - description: First color for gradient background type
+          in: query
+          name: gradientColor1
+          required: true
+          type: string
+        - description: Second color for gradient background type
+          in: query
+          name: gradientColor2
+          required: true
+          type: string
+        - description: URL of the brand logo
+          in: query
+          name: brandLogo
+          required: true
+          type: string
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              result: true
+              url: 'https://media.ritekit.com/media/images/bf2509a8-4419-46d0-b630-91488249c873.jpeg'
+          headers: {}
+      summary: Text to Image
+      tags: []
+  '/v1/influencers/hashtag/{hashtag}':
+    get:
+      description: Returns list of Twitter influencers for a given hashtag
+      parameters:
+        - description: 'Hashtag without # mark'
+          in: path
+          name: hashtag
+          required: true
+          type: string
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              code: 200
+              hashtag: SocialMedia
+              influencers:
+                - followers: 8820
+                  photo: 'https://pbs.twimg.com/profile_images/577832064130527233/dswb_ru9.png'
+                  username: ExploreWeb2dot0
+                - followers: 7257
+                  photo: 'https://pbs.twimg.com/profile_images/575758047663947776/e_-Fjs_0.png'
+                  username: elainebeare
+                - followers: 4981
+                  photo: 'https://pbs.twimg.com/profile_images/786249994437292032/GzTZPfg4.jpg'
+                  username: postoff25
+                - followers: 3318
+                  photo: 'https://pbs.twimg.com/profile_images/378800000729732456/5e3a3f1fffa77cd245d4c0eeaccb8a44.png'
+                  username: GaryKnox
+                - followers: 2747
+                  photo: 'https://pbs.twimg.com/profile_images/713840111046291456/Wt1_5w1N.jpg'
+                  username: robertoalire
+                - followers: 752
+                  photo: 'https://pbs.twimg.com/profile_images/793979651861475329/uvU5aJjk.jpg'
+                  username: _SEO_Simple_
+                - followers: 636
+                  photo: 'https://pbs.twimg.com/profile_images/868434989175668737/5lPmTmAc.jpg'
+                  username: doublemacc
+                - followers: 355
+                  photo: 'https://pbs.twimg.com/profile_images/538969297859538945/PH_ogi5q.png'
+                  username: BloggerAu
+                - followers: 330
+                  photo: 'https://pbs.twimg.com/profile_images/1124965553/M_PRvHarsdorf_Logo_RGB_frei_klein.jpg'
+                  username: PRvonHarsdorf
+                - followers: 312
+                  photo: 'https://pbs.twimg.com/profile_images/378800000184644934/12b755ce0eabd5b222428da63347028c.jpeg'
+                  username: YIE_RA
+              message: OK
+              result: true
+          headers: {}
+      summary: Influencers for a Hashtag
+      tags: []
+  /v1/link/cta:
+    get:
+      description: Returns list of available CTA for current user. Requires each user to authenticate with RiteKit
+      parameters: []
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              list:
+                - code: Bit.ly
+                  default: 0
+                  id: bit.ly
+                  name: Bit.ly
+                - code: DFLT
+                  default: 1
+                  id: 1
+                  name: Default
+              result: true
+          headers: {}
+      summary: List of CTAs
+      tags: []
+  /v1/link/short-link:
+    get:
+      description: Returns a shorten link with a given CTA.
+      parameters:
+        - description: URL
+          in: query
+          name: url
+          required: true
+          type: string
+        - description: cta id
+          in: query
+          name: cta
+          required: true
+          type: integer
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              ctaId: '1'
+              limit:
+                remaining: 5000
+              original: 'https://ritekit.com'
+              result: true
+              service: rite.ly
+              url: rite.ly/Xe4o
+          headers: {}
+      summary: Shorten Link
+      tags: []
+  /v1/search/trending:
+    get:
+      description: Returns list of hashtags currently trending on Twitter
+      parameters:
+        - description: Restrict results only to green hashtags. Hides overused (red) hashtags.
+          in: query
+          name: green
+          required: false
+          type: boolean
+        - description: Restrict results only to hashtags with latin characters
+          in: query
+          name: latin
+          required: false
+          type: boolean
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              code: 200
+              message: OK
+              result: true
+              tags:
+                - color: 3
+                  exposure: 1631062
+                  links: 0.06777
+                  mentions: 0.95132
+                  photos: 0.03759
+                  retweets: 1359
+                  tag: rayito
+                  tweets: 6758
+                - color: 3
+                  exposure: 1829783
+                  links: 0.0014
+                  mentions: 0.00366
+                  photos: 0.0014
+                  retweets: 450
+                  tag: caelitrendy
+                  tweets: 5733
+                - color: 3
+                  exposure: 1770112
+                  links: 0.00218
+                  mentions: 0.00218
+                  photos: 0.00528
+                  retweets: 216
+                  tag: isabellacastillo
+                  tweets: 5492
+                - color: 3
+                  exposure: 1517079
+                  links: 0.00319
+                  mentions: 0.00226
+                  photos: 0.00075
+                  retweets: 437
+                  tag: dannapaola
+                  tweets: 5321
+                - color: 3
+                  exposure: 1573025
+                  links: 0.00395
+                  mentions: 0.00075
+                  photos: 0.00151
+                  retweets: 434
+                  tag: losrules
+                  tweets: 5312
+                - color: 3
+                  exposure: 7774871
+                  links: 0.99772
+                  mentions: 0.01103
+                  photos: 0.0348
+                  retweets: 188
+                  tag: job
+                  tweets: 5258
+                - color: 3
+                  exposure: 1385283
+                  links: 0.0016
+                  mentions: 0.0016
+                  photos: 0.0008
+                  retweets: 429
+                  tag: durodedomar
+                  tweets: 4992
+                - color: 3
+                  exposure: 97225
+                  links: 1
+                  mentions: 0
+                  photos: 0.99918
+                  retweets: 9
+                  tag: trecru
+                  tweets: 4879
+                - color: 3
+                  exposure: 4558750
+                  links: 0
+                  mentions: 0
+                  photos: 0
+                  retweets: 54
+                  tag: hadith
+                  tweets: 4754
+                - color: 3
+                  exposure: 1793150
+                  links: 0.00368
+                  mentions: 0.00173
+                  photos: 0.00454
+                  retweets: 554
+                  tag: sofiareyes
+                  tweets: 4625
+                - color: 3
+                  exposure: 6187642
+                  links: 0.0026
+                  mentions: 0.01906
+                  photos: 0.99718
+                  retweets: 2012
+                  tag: newprofilepic
+                  tweets: 4617
+                - color: 3
+                  exposure: 1722192
+                  links: 0.00385
+                  mentions: 0.00181
+                  photos: 0.00385
+                  retweets: 534
+                  tag: llegastetu
+                  tweets: 4412
+                - color: 3
+                  exposure: 3473008
+                  links: 0.33108
+                  mentions: 0.2281
+                  photos: 0.06407
+                  retweets: 4875
+                  tag: kcacolombia
+                  tweets: 4292
+                - color: 3
+                  exposure: 820775
+                  links: 0.09422
+                  mentions: 0.14762
+                  photos: 0.08745
+                  retweets: 8950
+                  tag: army
+                  tweets: 4288
+                - color: 3
+                  exposure: 27098858
+                  links: 0.9404
+                  mentions: 0.0596
+                  photos: 0.16917
+                  retweets: 1171
+                  tag: news
+                  tweets: 4262
+                - color: 3
+                  exposure: 3763296
+                  links: 0.98574
+                  mentions: 0.39077
+                  photos: 0.02827
+                  retweets: 1870
+                  tag: giveaway
+                  tweets: 4138
+                - color: 3
+                  exposure: 6513488
+                  links: 0.05231
+                  mentions: 0.00103
+                  photos: 0
+                  retweets: 192
+                  tag: quran
+                  tweets: 3900
+                - color: 3
+                  exposure: 2650117
+                  links: 1
+                  mentions: 0.0021
+                  photos: 0.00445
+                  retweets: 125
+                  tag: hiring
+                  tweets: 3817
+                - color: 3
+                  exposure: 1489250
+                  links: 0.00677
+                  mentions: 0.00325
+                  photos: 0.00569
+                  retweets: 762
+                  tag: michaelronda
+                  tweets: 3692
+          headers: {}
+      summary: Trending Hashtags
+      tags: []
+  '/v1/stats/auto-hashtag?post={post}':
+    get:
+      description: Returns auto-hashtagged text of the post.
+      parameters:
+        - description: Text of the post
+          in: path
+          name: post
+          required: true
+          type: string
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              code: 200
+              message: OK
+              post: 'Is artificial intelligence the #future of #CustomerService?'
+              result: true
+          headers: {}
+      summary: Auto-Hashtag
+      tags: []
+  '/v1/stats/hashtag-suggestions/{topic}':
+    get:
+      description: Returns list of hashtag suggestions and their real-time stats for a given topic
+      parameters:
+        - description: Topic
+          in: path
+          name: topic
+          required: true
+          type: string
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              code: 200
+              data:
+                - color: 3
+                  exposure: 6463321
+                  frequency: 9.986
+                  hashtag: seo
+                  images: 60.5929146
+                  links: 93.420105
+                  mentions: 6.3629789
+                  retweets: 750
+                  tag: seo
+                  tweets: 1383
+                - color: 3
+                  exposure: 17566846
+                  frequency: 0.956
+                  hashtag: marketing
+                  images: 39.5582314
+                  links: 90.1606445
+                  mentions: 19.026104
+                  retweets: 620
+                  tag: marketing
+                  tweets: 1992
+                - color: 3
+                  exposure: 1783683
+                  frequency: 0.908
+                  hashtag: google
+                  images: 51.5999985
+                  links: 92.4000015
+                  mentions: 8.3999996
+                  retweets: 212
+                  tag: google
+                  tweets: 500
+                - color: 3
+                  exposure: 1750575
+                  frequency: 0.812
+                  hashtag: website
+                  images: 62.4624634
+                  links: 96.3963928
+                  mentions: 7.5075073
+                  retweets: 67
+                  tag: website
+                  tweets: 333
+                - color: 3
+                  exposure: 4129362
+                  frequency: 0.717
+                  hashtag: blog
+                  images: 35.9516602
+                  links: 96.9788513
+                  mentions: 10.7250757
+                  retweets: 121
+                  tag: blog
+                  tweets: 662
+                - color: 3
+                  exposure: 1271008
+                  frequency: 0.478
+                  hashtag: wordpress
+                  images: 63.1221733
+                  links: 99.0950241
+                  mentions: 6.5610862
+                  retweets: 87
+                  tag: wordpress
+                  tweets: 442
+                - color: 3
+                  exposure: 485904
+                  frequency: 0.43
+                  hashtag: web
+                  images: 52.3985252
+                  links: 98.5239868
+                  mentions: 4.4280443
+                  retweets: 67
+                  tag: web
+                  tweets: 271
+                - color: 3
+                  exposure: 2246708
+                  frequency: 0.43
+                  hashtag: digitalmarketing
+                  images: 27.7456646
+                  links: 84.3930664
+                  mentions: 14.4508667
+                  retweets: 375
+                  tag: digitalmarketing
+                  tweets: 346
+                - color: 3
+                  exposure: 2333346
+                  frequency: 0.382
+                  hashtag: webdesign
+                  images: 32.9787216
+                  links: 95.2127686
+                  mentions: 13.2978725
+                  retweets: 45
+                  tag: webdesign
+                  tweets: 188
+                - color: 3
+                  exposure: 11278025
+                  frequency: 0.382
+                  hashtag: socialmedia
+                  images: 26.4800854
+                  links: 88.3745956
+                  mentions: 23.3584499
+                  retweets: 571
+                  tag: socialmedia
+                  tweets: 929
+              hashtag: seo
+              message: OK
+              result: true
+          headers: {}
+      summary: Hashtag Suggestions
+      tags: []
+  '/v1/stats/history/{hashtag}':
+    get:
+      description: Returns historical stats for a given hashtag from the last 30 days
+      parameters:
+        - description: 'Hashtag without # mark'
+          in: path
+          name: hashtag
+          required: true
+          type: string
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              code: 200
+              color:
+                - Unused
+                - Overused
+                - Good
+                - Great
+              data:
+                - color: 3
+                  date: '2017-07-02'
+                  exposure: 91003500
+                  images: 0.02
+                  links: 1
+                  mentions: 0
+                  retweets: 2400
+                  tweets: 122100
+                - color: 3
+                  date: '2017-07-03'
+                  exposure: 161241400
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 2600
+                  tweets: 154800
+                - color: 3
+                  date: '2017-07-04'
+                  exposure: 126351800
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 3600
+                  tweets: 146200
+                - color: 3
+                  date: '2017-07-05'
+                  exposure: 126678900
+                  images: 0.03
+                  links: 0.99
+                  mentions: 0.01
+                  retweets: 4900
+                  tweets: 155000
+                - color: 3
+                  date: '2017-07-06'
+                  exposure: 115540500
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 7000
+                  tweets: 157400
+                - color: 3
+                  date: '2017-07-07'
+                  exposure: 148924500
+                  images: 0.02
+                  links: 1
+                  mentions: 0.01
+                  retweets: 3400
+                  tweets: 163800
+                - color: 3
+                  date: '2017-07-08'
+                  exposure: 119823700
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 3300
+                  tweets: 143300
+                - color: 3
+                  date: '2017-07-09'
+                  exposure: 133067200
+                  images: 0.02
+                  links: 1
+                  mentions: 0
+                  retweets: 3100
+                  tweets: 130900
+                - color: 3
+                  date: '2017-07-10'
+                  exposure: 129101400
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 5300
+                  tweets: 140200
+                - color: 3
+                  date: '2017-07-11'
+                  exposure: 132328100
+                  images: 0.04
+                  links: 1
+                  mentions: 0.01
+                  retweets: 4900
+                  tweets: 153500
+                - color: 3
+                  date: '2017-07-12'
+                  exposure: 135728800
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 4200
+                  tweets: 154800
+                - color: 3
+                  date: '2017-07-13'
+                  exposure: 117356400
+                  images: 0.02
+                  links: 1
+                  mentions: 0.01
+                  retweets: 4200
+                  tweets: 150100
+                - color: 3
+                  date: '2017-07-14'
+                  exposure: 127917200
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 3700
+                  tweets: 149900
+                - color: 3
+                  date: '2017-07-15'
+                  exposure: 123001600
+                  images: 0.02
+                  links: 1
+                  mentions: 0.01
+                  retweets: 3300
+                  tweets: 140000
+                - color: 3
+                  date: '2017-07-16'
+                  exposure: 98735200
+                  images: 0.02
+                  links: 1
+                  mentions: 0.01
+                  retweets: 3700
+                  tweets: 140400
+                - color: 3
+                  date: '2017-07-17'
+                  exposure: 178846200
+                  images: 0.04
+                  links: 1
+                  mentions: 0.01
+                  retweets: 2900
+                  tweets: 132900
+                - color: 3
+                  date: '2017-07-18'
+                  exposure: 207485900
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 4900
+                  tweets: 144400
+                - color: 3
+                  date: '2017-07-19'
+                  exposure: 144647600
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 5400
+                  tweets: 147700
+                - color: 3
+                  date: '2017-07-20'
+                  exposure: 146297300
+                  images: 0.02
+                  links: 1
+                  mentions: 0.01
+                  retweets: 4000
+                  tweets: 153700
+                - color: 3
+                  date: '2017-07-21'
+                  exposure: 151610900
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 4700
+                  tweets: 159300
+                - color: 3
+                  date: '2017-07-22'
+                  exposure: 201673600
+                  images: 0.01
+                  links: 1
+                  mentions: 0
+                  retweets: 3200
+                  tweets: 142100
+                - color: 3
+                  date: '2017-07-23'
+                  exposure: 124774800
+                  images: 0.01
+                  links: 1
+                  mentions: 0
+                  retweets: 3900
+                  tweets: 137500
+                - color: 3
+                  date: '2017-07-24'
+                  exposure: 138430200
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 4600
+                  tweets: 137500
+                - color: 3
+                  date: '2017-07-25'
+                  exposure: 151774000
+                  images: 0.02
+                  links: 1
+                  mentions: 0.01
+                  retweets: 4200
+                  tweets: 150800
+                - color: 3
+                  date: '2017-07-26'
+                  exposure: 127296100
+                  images: 0.02
+                  links: 1
+                  mentions: 0.01
+                  retweets: 3800
+                  tweets: 147100
+                - color: 3
+                  date: '2017-07-27'
+                  exposure: 133474400
+                  images: 0.02
+                  links: 1
+                  mentions: 0.01
+                  retweets: 5500
+                  tweets: 149300
+                - color: 3
+                  date: '2017-07-28'
+                  exposure: 143891400
+                  images: 0.02
+                  links: 1
+                  mentions: 0.01
+                  retweets: 4400
+                  tweets: 151000
+                - color: 3
+                  date: '2017-07-29'
+                  exposure: 46194500
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 2700
+                  tweets: 71800
+                - color: 3
+                  date: '2017-07-30'
+                  exposure: 100722500
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 2000
+                  tweets: 128400
+                - color: 3
+                  date: '2017-07-31'
+                  exposure: 192526400
+                  images: 0.03
+                  links: 1
+                  mentions: 0.01
+                  retweets: 4700
+                  tweets: 136700
+              hashtag: job
+              message: OK
+              result: true
+          headers: {}
+      summary: Hashtag History
+      tags: []
+  /v1/stats/multiple-hashtags:
+    get:
+      description: Returns real-time stats for up to 100 hashtags (updated hourly).
+      parameters:
+        - description: 'Hashtag(s) without # mark'
+          in: query
+          items: {}
+          name: tags
+          required: true
+          type: array
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json; charset=utf-8:
+              code: 200
+              color:
+                - Unused
+                - Overused
+                - Good
+                - Great
+              hashtags:
+                - jobs
+                - hello
+              message: OK
+              result: true
+              stats:
+                - color: 3
+                  exposure: 6251488
+                  hashtag: jobs
+                  images: 0.032390511000000004
+                  links: 0.994069366
+                  mentions: 0.028284671
+                  retweets: 179
+                  tag: jobs
+                  tweets: 2192
+                - color: 2
+                  exposure: 33075
+                  hashtag: hello
+                  images: 0.369565201
+                  links: 0.717391281
+                  mentions: 0.08695652000000001
+                  retweets: 100
+                  tag: hello
+                  tweets: 46
+          headers: {}
+      summary: Hashtag Stats
+      tags: []
+definitions:
+  Emojis: {}
+  Hashtags: {}
+  Images: {}
+  Influencers: {}
+  Link_shortening: {}
