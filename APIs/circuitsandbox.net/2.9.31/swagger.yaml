@@ -1,0 +1,2216 @@
+swagger: '2.0'
+schemes:
+  - https
+host: circuitsandbox.net
+basePath: /rest/v2
+info:
+  description: |-
+    Circuit REST API to interact with the Circuit system.
+
+    [Learn more about the Circuit Development Community](https://www.circuit.com/web/developers/home)
+  title: REST API Version 2
+  version: 2.9.31
+  x-apisguru-categories:
+    - messaging
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://pbs.twimg.com/profile_images/463690034235731970/0fImzk_g_400x400.png'
+  x-origin:
+    - format: swagger
+      url: 'https://circuitsandbox.net/rest/v2/swagger'
+      version: '2.0'
+  x-providerName: circuitsandbox.net
+securityDefinitions:
+  oauth:
+    authorizationUrl: 'https://circuitsandbox.net/oauth/authorize'
+    flow: implicit
+    scopes:
+      ALL: allows full access to all functionalities of the REST API
+      CALLS: allows to start or join real time collaboration session
+      READ_CONVERSATIONS: allows to read conversations of the authenticated user
+      READ_USER: allows to read user information for all users that belong to the tenant of the authenticated user
+      READ_USER_PROFILE: allows to read the user profile of the authenticated user
+      WRITE_CONVERSATIONS: allows to create and update conversations of the authenticated user or to post messages
+      WRITE_USER_PROFILE: allows to update the user profile of the authenticated user
+    type: oauth2
+paths:
+  /conversations:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Gets a list of conversations and communities the authenticated user participates in.
+      operationId: getConversations
+      parameters:
+        - description: 'The modification time of the conversation in UTC format. During the query the conversations before (<i>default</i>) or after this timestamp are returned. In case no timestamp is specified the current server time in UTC is used, i.e. the last 25 modified conversations are returned'
+          format: date-time
+          in: query
+          name: modTime
+          required: false
+          type: string
+        - default: BEFORE
+          description: The direction of the search based on the modification time. Valid values are either BEFORE (default) or AFTER
+          enum:
+            - BEFORE
+            - AFTER
+          in: query
+          maxLength: 255
+          name: direction
+          required: false
+          type: string
+        - default: 25
+          description: The maximum number of returned results (default 25). The maximum allowed value is 100.
+          format: int32
+          in: query
+          maximum: 100
+          minimum: 1
+          name: results
+          required: false
+          type: number
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The matching conversations
+          schema:
+            items:
+              $ref: '#/definitions/Conversation'
+            type: array
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+      summary: Gets a list of conversations
+      tags:
+        - Conversation Queries
+  /conversations/community:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Gets a list of communities. This endpoint can be used to explore the communities the authenticated user could join.
+      operationId: getCommunityConversations
+      parameters:
+        - default: ALPHABETICALLY
+          description: Defines the type of sorting for the community conversations (default is alphabetical)
+          enum:
+            - ALPHABETICALLY
+            - RECENT_ACTIVITY
+            - POPULARITY
+          in: query
+          maxLength: 255
+          name: sort
+          required: false
+          type: string
+        - default: ASCENDING
+          description: Defines the ordering of the conversations (default is ascending)
+          enum:
+            - ASCENDING
+            - DESCENDING
+          in: query
+          maxLength: 255
+          name: order
+          required: false
+          type: string
+        - default: false
+          description: 'If set to false only conversations are returned where the user is no member of, otherwise all community conversations are returned'
+          in: query
+          name: includeOwn
+          required: false
+          type: boolean
+        - default: 0
+          description: The index of the conversation that is the first one that has to be returned. E.g. if a request starts with startIndex 40 and results 20 the conversations 40 to 60 are returned
+          format: int32
+          in: query
+          maximum: 255
+          minimum: 0
+          name: startIndex
+          required: false
+          type: number
+        - default: 25
+          description: The maximum number of returned results (default 25). The maximum allowed value is 100.
+          format: int32
+          in: query
+          maximum: 100
+          minimum: 1
+          name: results
+          required: false
+          type: number
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The matching conversations
+          schema:
+            items:
+              $ref: '#/definitions/Conversation'
+            type: array
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul>a field constraint is violated</ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+      summary: Gets a list of communities
+      tags:
+        - Conversation Queries
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Creates a community. Communities are open conversations that anyone in a Circuit domain (tenant) can join without having to be added by another user.
+      operationId: createCommunityConversation
+      parameters:
+        - collectionFormat: multi
+          description: 'list of participants that will be part of this conversation, specified by the Circuit user ID or the unique email address. At least one participant needs to be added'
+          in: formData
+          items:
+            maxLength: 255
+            type: string
+          name: participants
+          required: false
+          type: array
+        - description: An optional description for the community conversation
+          in: formData
+          maxLength: 255
+          name: description
+          required: false
+          type: string
+        - description: An optional topic of the conversation. If not set the Circuit client will render the names of the participants as topic of the conversation (the first 4 names will be used)
+          in: formData
+          maxLength: 255
+          name: topic
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The conversation was created successfully and can be accessed via the conversation ID
+          schema:
+            $ref: '#/definitions/Conversation'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Creates a community conversation
+      tags:
+        - Conversation Creation
+  '/conversations/community/{convId}':
+    put:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Updates the information of the given community.
+      operationId: updateConversationCommunity
+      parameters:
+        - description: The ID of the conversation which should be updated
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: An optional description for the community conversation
+          in: formData
+          maxLength: 255
+          name: description
+          required: false
+          type: string
+        - description: An optional topic of the conversation. If not set the Circuit client will render the names of the participants as topic of the conversation (the first 4 names will be used)
+          in: formData
+          maxLength: 255
+          name: topic
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the updated conversation object with the new topic / description
+          schema:
+            $ref: '#/definitions/Conversation'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Updates the information of a community
+      tags:
+        - Conversation Management
+  '/conversations/community/{convId}/join':
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'Adds the authenticated user to the given community (i.e., allows the user to join this community). Contrary to the operation of adding a new participant, this operation can only be performed by a user who is not yet a member of the community.'
+      operationId: joinCommunityConversation
+      parameters:
+        - description: The ID of the conversation which the user will join
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the conversation object to which the participants was added
+          schema:
+            $ref: '#/definitions/Conversation'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Adds the authenticated user to a community
+      tags:
+        - Conversation Management
+  '/conversations/community/{convId}/participants':
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Removes one or more participants from the given community. The last participant of a community cannot be removed. This operation can only be performed by a user who is already a member of the community.
+      operationId: removeParticipantCommunity
+      parameters:
+        - description: The ID of the conversation from which the participant have to be removed
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: The IDs or the unique email addresses of the Circuit users that have to be removed
+          in: query
+          items:
+            maxLength: 6500
+            type: string
+          name: participants
+          required: true
+          type: array
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the conversation object from which the participants were removed.
+          schema:
+            $ref: '#/definitions/Conversation'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul></li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Removes participants from a community
+      tags:
+        - Conversation Management
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Adds one or more participants to the given community. This operation can only be performed by a user who is already a member of the community.
+      operationId: addParticipantCommunity
+      parameters:
+        - description: The ID of the conversation to which the participant has to be added.
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: The IDs or the unique email addresses of the Circuit users that should to be added.
+          in: formData
+          items:
+            maxLength: 6500
+            type: string
+          name: participants
+          required: true
+          type: array
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the conversation object to which the participants were added.
+          schema:
+            $ref: '#/definitions/Conversation'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Adds participants to a community
+      tags:
+        - Conversation Management
+  /conversations/direct:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'Creates a 1-to-1 conversation between the authenticated user and the user with the provided userId. In case there is already an existing 1-to-1 conversation between these users, the endpoint returns the existing conversation.'
+      operationId: createDirectConversation
+      parameters:
+        - description: 'The participant that will be part of this conversation together with the creator, specified by the Circuit user ID or the unique email address'
+          in: formData
+          maxLength: 255
+          name: participant
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The conversation was created successfully and can be accessed via the conversation ID
+          schema:
+            $ref: '#/definitions/Conversation'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or an valid email address</li><li>or the user does not exist</li><li>or the user is the same who initiates the request</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '409':
+          description: A conversation already exists. The response contains this conversation.
+          schema:
+            $ref: '#/definitions/Conversation'
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Creates a 1-to-1 conversation
+      tags:
+        - Conversation Creation
+  /conversations/favorite:
+    get:
+      description: Gets the conversationIds which are marked as favorites.
+      operationId: getFavoriteConversations
+      responses:
+        '200':
+          description: A list of marked conversations or an empty response.
+          schema:
+            items:
+              $ref: '#/definitions/String'
+            type: array
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+      summary: Gets favorite conversations
+      tags:
+        - Conversation Queries
+  /conversations/group:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Creates a group conversation between three or more users. The authenticated user is directly added to this conversation.
+      operationId: createGroupConversation
+      parameters:
+        - collectionFormat: multi
+          description: 'A list of participants that will be part of this conversation, specified by the Circuit user ID or the unique email address. At least one participant needs to be added'
+          in: formData
+          items:
+            maxLength: 255
+            type: string
+          name: participants
+          required: true
+          type: array
+        - description: An optional topic of the conversation. If not set the Circuit client will render the names of the participants as topic of the conversation (the first 4 names will be used)
+          in: formData
+          maxLength: 255
+          name: topic
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The conversation was created successfully and can be accessed via the conversation ID
+          schema:
+            $ref: '#/definitions/Conversation'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Creates a group conversation
+      tags:
+        - Conversation Creation
+  '/conversations/group/{convId}':
+    put:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Updates the information of the given group conversation.
+      operationId: updateConversationGroup
+      parameters:
+        - description: The ID of the conversation which should be updated
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: An optional topic of the conversation. If not set the Circuit client will render the names of the participants as topic of the conversation (the first 4 names will be used)
+          in: formData
+          maxLength: 255
+          name: topic
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the updated conversation object with the new topic
+          schema:
+            $ref: '#/definitions/Conversation'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Updates the information of a group conversation
+      tags:
+        - Conversation Management
+  '/conversations/group/{convId}/participants':
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Removes one or more participants from the given group conversation. The last participant of a group conversation cannot be removed. This operation can only be performed on behalf of a user who is already a member of the conversation.
+      operationId: removeParticipantGroup
+      parameters:
+        - description: The ID of the conversation from which the participant have to be removed
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: The IDs or the unique email addresses of the Circuit users that have to be removed
+          in: query
+          items:
+            maxLength: 6500
+            type: string
+          name: participants
+          required: true
+          type: array
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the conversation object from which the participants were removed.
+          schema:
+            $ref: '#/definitions/Conversation'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Removes participants from a group conversation
+      tags:
+        - Conversation Management
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Adds one or more participants to the given group conversation. This operation can only be performed by a user who is already a member of the conversation.
+      operationId: addParticipantGroup
+      parameters:
+        - description: The ID of the conversation to which the participant has to be added.
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: The IDs or the unique email addresses of the Circuit users that should to be added.
+          in: formData
+          items:
+            maxLength: 6500
+            type: string
+          name: participants
+          required: true
+          type: array
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the conversation object to which the participants were added.
+          schema:
+            $ref: '#/definitions/Conversation'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Adds participants to a group conversation
+      tags:
+        - Conversation Management
+  /conversations/messages/flag:
+    get:
+      description: Gets a list of all the messages the authenticated user has flagged. This endpoint should be used carefully in case where the authenticated user has a lot of flagged messages.
+      operationId: getFlagItemConv
+      responses:
+        '200':
+          description: Gets the list of flagged items
+          schema:
+            items:
+              $ref: '#/definitions/ConversationItem'
+            type: array
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+      summary: Gets a list of the flagged messages
+      tags:
+        - Messaging (Advanced)
+  /conversations/search:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Performs a search for conversation content. A maximum of 100 conversations is returned. If you hit this limit you should refine the search term.
+      operationId: searchConversations
+      parameters:
+        - description: The search term
+          in: query
+          maxLength: 255
+          name: term
+          required: true
+          type: string
+        - default: false
+          description: not available
+          in: query
+          name: includeItemIds
+          required: false
+          type: boolean
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: A list of conversations and items that match the term
+          schema:
+            $ref: '#/definitions/ConversationSearchResult'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Performs a conversation search
+      tags:
+        - Conversation Queries
+  '/conversations/{convId}':
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Gets a conversation based on the given ID.
+      operationId: getConversationbyId
+      parameters:
+        - description: The ID of the conversation which should be updated
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the conversation object
+          schema:
+            $ref: '#/definitions/Conversation'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+      summary: Gets a conversation
+      tags:
+        - Conversation Queries
+  '/conversations/{convId}/conversationdetails':
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'Gets the conference details of the given conversation. Conference details include the URL, which is used to join the conference through a web or mobile application, as well as the dial-in phone numbers and conference PIN, which are used to join the conference by phone.'
+      operationId: getJoinDetails
+      parameters:
+        - description: The ID of the conversation for which the join details should be returned
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The join details.
+          schema:
+            $ref: '#/definitions/ConversationDetails'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+      summary: Gets the conference details of a conversation
+      tags:
+        - Conversation Management
+  '/conversations/{convId}/favorite':
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Removes a conversation from favorites. Favorites can be displayed in a separate side tab inside of the Circuit client to have a better overview of important conversations.
+      operationId: deleteFavorite
+      parameters:
+        - description: The ID of the conversation which will be unmarked as favorite
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The conversation was successfully unmarked
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li><li>the conversation was not marked before</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Removes a conversation from favorites
+      tags:
+        - Messaging (Advanced)
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Adds a conversation to the favorites. Favorites can be displayed in a separate side tab inside of the Circuit client to have a better overview of important conversations.
+      operationId: addFavorite
+      parameters:
+        - description: The ID of the conversation which will be marked as favorite
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The conversation was successfully marked
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Adds a conversation to the favorites
+      tags:
+        - Messaging (Advanced)
+  '/conversations/{convId}/items':
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Gets a list of conversation items.
+      operationId: getConversationItems
+      parameters:
+        - description: The ID of the conversation to which the items belong
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: 'The modification time of the item in UTC format. During the query the items before (default) or after this timestamps are returned. In case no timestamp is specified the current server time in UTC is used, i.e. the last 25 modified items are returned'
+          format: date-time
+          in: query
+          name: modTime
+          required: false
+          type: string
+        - default: BEFORE
+          description: The direction of the search based on the modification time. Valid values are either BEFORE (default) or AFTER
+          enum:
+            - BEFORE
+            - AFTER
+          in: query
+          maxLength: 255
+          name: direction
+          required: false
+          type: string
+        - default: 25
+          description: The maximum number of returned results (default 25). The maximum allowed value is 100.
+          format: int32
+          in: query
+          maximum: 100
+          minimum: 1
+          name: results
+          required: false
+          type: number
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The matching conversation items
+          schema:
+            items:
+              $ref: '#/definitions/ConversationItem'
+            type: array
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Gets a list of conversation items
+      tags:
+        - Messaging (Basic)
+  '/conversations/{convId}/label':
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'Adds a label to a conversation, you can search and organize your conversations based on these labels'
+      operationId: assignLabel
+      parameters:
+        - description: The ID of the conversation to which the label is added
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: 'The actual label '
+          in: formData
+          maxLength: 255
+          name: label
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The label was successfully added
+          schema:
+            $ref: '#/definitions/Label'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>you reached the maximum of 250 labels</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Adds a label to a conversation
+      tags:
+        - Conversation Management
+  '/conversations/{convId}/label/{labelId}':
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'Removes a label from a conversation, you can search and organize your conversations based on these labels'
+      operationId: unassignLabel
+      parameters:
+        - description: The ID of the conversation from which the label is removed
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: not available
+          in: path
+          maxLength: 255
+          name: labelId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The label was successfully removed
+          schema:
+            $ref: '#/definitions/Label'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>the label was not assigned to the conversation</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Removes a label from a conversation
+      tags:
+        - Conversation Management
+  '/conversations/{convId}/messages':
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Adds a message to the given conversation. This operation can be only performed on behalf of a user who is already a member of the conversation.
+      operationId: addTextItem
+      parameters:
+        - description: The ID of the conversation to which the new item has to be added
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: 'The actual content of the item, is mandatory unless an attachment is added'
+          in: formData
+          maxLength: 2048
+          name: content
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: A comma separated list of attachment IDs from the file API.
+          in: formData
+          items:
+            maxLength: 4096
+            type: string
+          name: attachments
+          required: false
+          type: array
+        - description: The subject (headline) of the new text item
+          in: formData
+          maxLength: 255
+          name: subject
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the new text item object
+          schema:
+            $ref: '#/definitions/ConversationItem'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Adds a message to a conversation
+      tags:
+        - Messaging (Basic)
+  '/conversations/{convId}/messages/flag':
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Gets a list of all the flagged messages in the given conversation.
+      operationId: getFlagItem
+      parameters:
+        - description: The ID of the conversation to which the item belongs
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the list of flagged items
+          schema:
+            items:
+              $ref: '#/definitions/ConversationItem'
+            type: array
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+      summary: Gets a list of the flagged messages of a conversation
+      tags:
+        - Messaging (Advanced)
+  '/conversations/{convId}/messages/{itemId}':
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'Marks a message in the given conversation as deleted. Deleted messages are still part of the conversation, but their content is no more visible. This operation can only be performed on behalf of the message''s creator.'
+      operationId: deleteTextItem
+      parameters:
+        - description: The ID of the conversation to which the item belongs
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: The ID of the item that will be deleted
+          in: path
+          maxLength: 255
+          name: itemId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the deleted text item object
+          schema:
+            $ref: '#/definitions/ConversationItem'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Deletes a message from a conversation
+      tags:
+        - Messaging (Basic)
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Adds a message to the existing item. The added message will be a child item of the message with the given itemId.
+      operationId: addTextItemWithParent
+      parameters:
+        - description: The ID of the conversation to which the new item has to be added
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: The ID of the item to which the new one has to be added as child
+          in: path
+          maxLength: 255
+          name: itemId
+          required: true
+          type: string
+        - description: The actual content of the item
+          in: formData
+          maxLength: 2048
+          name: content
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: not available
+          in: formData
+          items:
+            maxLength: 4096
+            type: string
+          name: attachments
+          required: false
+          type: array
+        - description: The subject (headline) of the new text item
+          in: formData
+          maxLength: 255
+          name: subject
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the new text item object
+          schema:
+            $ref: '#/definitions/ConversationItem'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the parent item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Adds a message to an item
+      tags:
+        - Messaging (Basic)
+    put:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Updates the content or subject of the existing message. Only the creator of the message is allowed to perform this operation.
+      operationId: updateTextItem
+      parameters:
+        - description: The ID of the conversation to which the item belongs
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: The ID of the item to update
+          in: path
+          maxLength: 255
+          name: itemId
+          required: true
+          type: string
+        - description: The actual content of the item
+          in: formData
+          maxLength: 2048
+          name: content
+          required: false
+          type: string
+        - description: The subject (headline) of the new text item
+          in: formData
+          maxLength: 255
+          name: subject
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the modified text item object
+          schema:
+            $ref: '#/definitions/ConversationItem'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Updates a message
+      tags:
+        - Messaging (Basic)
+  '/conversations/{convId}/messages/{itemId}/flag':
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Removes the flag from a given message that is posted to the given conversation.
+      operationId: unFlagItem
+      parameters:
+        - description: The ID of the conversation to which the item belongs
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: The ID of the item that will be flagged
+          in: path
+          maxLength: 255
+          name: itemId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The flagged state of item was successfully removed
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Removes the flag from a message
+      tags:
+        - Messaging (Advanced)
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Adds a flag to the given message in the given conversation.
+      operationId: flagItem
+      parameters:
+        - description: The ID of the conversation to which the item belongs
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: The ID of the item that will be flagged
+          in: path
+          maxLength: 255
+          name: itemId
+          required: true
+          type: string
+        - description: The time when the item was created
+          in: formData
+          maxLength: 255
+          name: itemCreationTime
+          required: false
+          type: string
+        - description: The ID of the item's parent
+          in: formData
+          maxLength: 255
+          name: parentId
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The item was successful flagged
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Adds a flag to a message in a conversation
+      tags:
+        - Messaging (Advanced)
+  '/conversations/{convId}/messages/{itemId}/like':
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Removes a "like" from the given message in the given conversation
+      operationId: unlikeItem
+      parameters:
+        - description: The ID of the conversation to which the item belongs
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: The ID of the item that will be unliked
+          in: path
+          maxLength: 255
+          name: itemId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The item was successful unliked
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Removes a "like" from a message
+      tags:
+        - Messaging (Advanced)
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Adds a "like" to the given message in the given conversation
+      operationId: likeItem
+      parameters:
+        - description: The ID of the conversation to which the item belongs
+          in: path
+          maxLength: 255
+          name: convId
+          required: true
+          type: string
+        - description: The ID of the item that will be liked
+          in: path
+          maxLength: 255
+          name: itemId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The item was successful liked
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_CONVERSATIONS
+      summary: Adds a "like" to a message
+      tags:
+        - Messaging (Advanced)
+  /oauth/clientId:
+    get:
+      description: Gets a list of the client IDs (applications) that were created for this user.
+      operationId: oAuthGetClientIds
+      responses:
+        '200':
+          description: Gets the client IDs that allow to request for OAuth access
+          schema:
+            items:
+              $ref: '#/definitions/OAuthClientId'
+            type: array
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+      summary: Gets a list of client IDs
+      tags:
+        - OAuth 2.0
+  '/oauth/token/{tokenId}':
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Gets the access token for the given token ID.
+      operationId: oAuthValidateAccessToken
+      parameters:
+        - description: The unique id of the token to get the data for.
+          in: path
+          maxLength: 255
+          name: tokenId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Gets the access token
+          schema:
+            $ref: '#/definitions/ValidateAccessToken'
+        '401':
+          description: The authentication was not successful
+        '404':
+          description: In case the token was not found or the requester has no permission to access the token
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_USER_PROFILE
+      summary: Gets an access token
+      tags:
+        - OAuth 2.0
+  /users:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'Gets a user based on an email address or username. If both parameters are defined, the email address will be used.'
+      operationId: searchUser
+      parameters:
+        - description: Search for a user by name
+          in: query
+          maxLength: 255
+          name: name
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The users which match the search criteria
+          schema:
+            items:
+              $ref: '#/definitions/User'
+            type: array
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '404':
+          description: The search term did not much any results
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_USER
+      summary: Gets a user
+      tags:
+        - User Management
+  /users/labels:
+    get:
+      description: Returns all labels of the user that were defined either explicit or implicit via assignment to conversations.
+      operationId: getLabel
+      responses:
+        '200':
+          description: List of labels
+          schema:
+            items:
+              $ref: '#/definitions/Label'
+            type: array
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_USER_PROFILE
+      summary: Returns all user labels
+      tags:
+        - User Management
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Add a label to the list of user labels
+      operationId: addLabel
+      parameters:
+        - description: The label value to add
+          in: formData
+          maxLength: 255
+          name: label
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The label was successfully added
+          schema:
+            $ref: '#/definitions/Label'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_USER_PROFILE
+      summary: Add a user label
+      tags:
+        - User Management
+  '/users/labels/{labelId}':
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Remove a label from the list of user labels
+      operationId: removeLabel
+      parameters:
+        - description: not available
+          in: path
+          maxLength: 255
+          name: labelId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The label was successfully removed
+          schema:
+            $ref: '#/definitions/Label'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>the label does not exist</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_USER_PROFILE
+      summary: Remove a user label
+      tags:
+        - User Management
+  /users/presence:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Gets the presence status of the users whose IDs or email addresses are given.
+      operationId: getPresence
+      parameters:
+        - collectionFormat: multi
+          description: A list of unique user IDs or email addresses of the users you want to query the presence state for
+          in: query
+          items:
+            maxLength: 6500
+            type: string
+          name: userIds
+          required: true
+          type: array
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The presence states
+          schema:
+            items:
+              $ref: '#/definitions/Presence'
+            type: array
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or a valid email address</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '404':
+          description: One or more of the users do not exist
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_USER
+      summary: Gets the presence status
+      tags:
+        - User Management
+    put:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Updates the presence status of the authenticated user.
+      operationId: setUserPresence
+      parameters:
+        - description: The user's presence.
+          in: formData
+          maxLength: 255
+          name: state
+          required: true
+          type: string
+        - description: Timestamp until the DND state of the user is active. This field is mandatory when the state is set to DND.
+          format: date-time
+          in: formData
+          name: dndUntil
+          required: false
+          type: string
+        - description: An optional status message that is displayed instead of the location
+          in: formData
+          maxLength: 255
+          name: statusMessage
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The presence states
+          schema:
+            $ref: '#/definitions/Presence'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the presence state is DND and the data format of the passed dndUntil is missing </li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_USER_PROFILE
+      summary: Updates the presence status
+      tags:
+        - User Management
+  /users/profile:
+    get:
+      description: Gets the authenticated user's profile information.
+      operationId: getProfile
+      responses:
+        '200':
+          description: Gets the authenticated user's profile information
+          schema:
+            $ref: '#/definitions/User'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_USER_PROFILE
+      summary: Gets the authenticated user's profile information
+      tags:
+        - User Management
+    put:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Updates the user profile of the authenticated user
+      operationId: updateProfile
+      parameters:
+        - description: The new firstname of the user
+          in: formData
+          maxLength: 128
+          name: firstname
+          required: false
+          type: string
+        - description: The new lastname of the user
+          in: formData
+          maxLength: 128
+          name: lastname
+          required: false
+          type: string
+        - description: The new job title of the user
+          in: formData
+          maxLength: 128
+          name: jobTitle
+          required: false
+          type: string
+        - description: 'The new locale of the user. One of EN_US, DE_DE, EN_GB, ES_ES, FR_FR, IT_IT, RU_RU, ZH_HANS_CN.'
+          enum:
+            - EN_US
+            - DE_DE
+            - EN_GB
+            - ES_ES
+            - FR_FR
+            - IT_IT
+            - RU_RU
+            - ZH_HANS_CN
+          in: formData
+          maxLength: 5
+          name: locale
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The modified user object.
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the user does not exist</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - WRITE_USER_PROFILE
+      summary: Updates the user profile
+      tags:
+        - User Management
+  '/users/{id}':
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Gets the profile information of the user with the given ID.
+      operationId: getUserById
+      parameters:
+        - description: The unique ID or the email address of the user to fetch
+          in: path
+          maxLength: 255
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: 'The operation was successful, the user profile is returned'
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or an valid email address</li><li>or a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '404':
+          description: The user does not exist
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_USER
+      summary: Gets the user's profile information
+      tags:
+        - User Management
+  '/users/{id}/presence':
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Gets the presence status of the users whose ID or email address is given.
+      operationId: getUserPresence
+      parameters:
+        - description: The unique ID or the email address of the user to fetch.
+          in: path
+          maxLength: 255
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The presence state
+          schema:
+            $ref: '#/definitions/Presence'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or a valid email address</li><li>or a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '404':
+          description: The user does not exist
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_USER
+      summary: Gets the presence status
+      tags:
+        - User Management
+definitions:
+  Attachment:
+    properties:
+      creationTime:
+        description: not available
+        format: int64
+        type: number
+      creatorId:
+        description: not available
+        type: string
+      deleteUrl:
+        description: not available
+        type: string
+      fileId:
+        description: not available
+        type: string
+      fileName:
+        description: not available
+        type: string
+      itemId:
+        description: not available
+        type: string
+      mimeType:
+        description: not available
+        type: string
+      modificationTime:
+        description: not available
+        format: int64
+        type: number
+      size:
+        description: not available
+        format: int64
+        type: number
+      url:
+        description: not available
+        type: string
+  BridgeNumber:
+    properties:
+      bridgeNumber:
+        description: The number that has to be called to join the real time session of a conversation
+        type: string
+      country:
+        description: The country where the bridge is hosted
+        type: string
+      locale:
+        description: The locale of the bridge
+        type: string
+      name:
+        description: The name / identifier of the bridge
+        type: string
+      type:
+        description: 'Information of the billing for the call, i.e. if the caller has to pay or not for the call'
+        type: string
+  Conversation:
+    properties:
+      avatar:
+        description: The URL of the small avatar image of the conversation
+        type: string
+      avatarLarge:
+        description: The URL of the large avatar image of the conversation
+        type: string
+      convId:
+        description: The ID of the conversation
+        type: string
+      creationTime:
+        description: UTC timestamp when the conversation was created
+        format: int64
+        type: number
+      creatorId:
+        description: The ID of the user who created the conversation
+        type: string
+      creatorTenantId:
+        description: The ID of the Circuit domain (tenant) where the creator of the conversation belongs to
+        type: string
+      description:
+        description: The description of the conversation. This field is available only for conversations with type COMMUNITY
+        type: string
+      isGuestAccessDisabled:
+        description: Indicates whether guest access to the conversation is disabled or not
+        type: boolean
+      isModerated:
+        description: Indicates whether the conversation is moderated or not. In a moderated conversation only participants who have been assigned the role of a moderator are allowed to add or remove participants into the conversation
+        type: boolean
+      modificationTime:
+        description: UTC timestamp when the conversation was modified. A conversation is modified when any of the conversation object fields change but not when conversation items are added or edited
+        format: int64
+        type: number
+      participants:
+        description: Array of active participants
+        items:
+          type: string
+        type: array
+      topic:
+        description: The title of the conversation. Conversations of type DIRECT cannot have a title
+        type: string
+      type:
+        description: 'The type of the conversation. It can be one of the following: DIRECT, GROUP, COMMUNITY or LARGE'
+        type: string
+  ConversationDetails:
+    properties:
+      bridgeNumbers:
+        description: A list of bridge numbers which can be used to dial in to the real time session via phone
+        items:
+          $ref: '#/definitions/BridgeNumber'
+        type: array
+      conversationCreatorId:
+        description: The user ID of the conversation creator
+        type: string
+      isModerationAllowed:
+        description: Indicates if the conversation is allowed to be moderated
+        type: boolean
+      isRecordingAllowed:
+        description: Indicates if the conversation is allowed to be recorded
+        type: boolean
+      link:
+        description: A link that can be used in a browser to join the session
+        type: string
+      pin:
+        description: The PIN to join a real time session via phone
+        type: string
+  ConversationItem:
+    properties:
+      attachments:
+        description: Array of files attached to the item
+        items:
+          $ref: '#/definitions/Attachment'
+        type: array
+      convId:
+        description: The ID of the conversation the item belongs to
+        type: string
+      creationTime:
+        description: UTC timestamp when the item was created
+        format: int64
+        type: number
+      creatorId:
+        description: The ID of the user who created the conversation item
+        type: string
+      includeInUnreadCount:
+        description: Indicates whether the item is included in the unread message count
+        type: boolean
+      itemId:
+        description: The ID of the item
+        type: string
+      modificationTime:
+        description: UTC timestamp when the conversation was modified
+        format: int64
+        type: number
+      rtc:
+        $ref: '#/definitions/RtcItem'
+      system:
+        $ref: '#/definitions/SystemItem'
+      text:
+        $ref: '#/definitions/ConversationTextItem'
+      type:
+        description: 'The type of the conversation item. It can be one of the following TEXT, SYSTEM or RTC'
+        type: string
+  ConversationSearchResult:
+    properties:
+      matchingConversations:
+        description: A list of result items for conversations that match the search term.
+        items:
+          $ref: '#/definitions/ConversationSearchResultItem'
+        type: array
+  ConversationSearchResultItem:
+    properties:
+      convId:
+        description: The ID of the conversation to which the matching items belong.
+        type: string
+      itemIds:
+        description: The conversation items which contain the search result. The list maybe empty in case a hit was found for the conversation related data like topic or participants.
+        items:
+          type: string
+        type: array
+  ConversationTextItem:
+    properties:
+      content:
+        description: The content of the text item
+        type: string
+      contentType:
+        description: 'The type of the text item. It can be one of the following: RICH (with HTML content) or PLAIN (only text)'
+        type: string
+      likedUserIds:
+        description: Array of IDs of the users who liked the item
+        items:
+          type: string
+        type: array
+      parentId:
+        description: The ID of the parent item of the text item. This field is optional and can be used for thread views
+        type: string
+      preview:
+        $ref: '#/definitions/Preview'
+      state:
+        description: 'The state of the text item. It can be one of the following: CREATED (which denotes that it was not modified since its creation), EDITED (which denotes that the creator of this item modified the item) or DELETED (which denotes that the item itself exists but its content was removed)'
+        type: string
+      subject:
+        description: TThe subject of the text item. This field is optional and maybe filled when creating the text item
+        type: string
+  Label:
+    properties:
+      labelId:
+        description: not available
+        type: string
+      value:
+        description: The clear text value
+        type: string
+  OAuthClientId:
+    properties:
+      accessTokenURL:
+        description: The URL to fetch the access token for an authorization code
+        type: string
+      applicationName:
+        description: A free text identifier of the application that uses the client ID
+        type: string
+      authorizationURL:
+        description: The URL to redirect a user for Circuit authentication
+        type: string
+      clientId:
+        description: The client ID
+        type: string
+      domains:
+        description: The valid domains for the client ID
+        items:
+          type: string
+        type: array
+      grantTypes:
+        description: A list of grant types which are supported by this client ID
+        items:
+          type: string
+        type: array
+      scopes:
+        description: The available scopes for OAUTH 2.0 access
+        items:
+          type: string
+        type: array
+      ttl:
+        description: The TTL for a token generated with this client ID
+        type: string
+      userId:
+        description: The ID of the user who owns a token
+        type: string
+  Presence:
+    properties:
+      dndUntil:
+        description: Timestamp until the DND state of the user is active
+        format: int64
+        type: number
+      isOptedOut:
+        description: Indicates whether the user has opted out of their presence
+        type: boolean
+      latitude:
+        description: The latitude of the geo location of the user
+        format: float
+        type: number
+      locationText:
+        description: The geo location of the user in clear text
+        type: string
+      longitude:
+        description: The longitude of the geo location of the user
+        format: float
+        type: number
+      mobile:
+        description: Identifies whether the presence state is based on the state information of a mobile device or not
+        type: boolean
+      poor:
+        description: n/a
+        type: boolean
+      state:
+        description: 'The presence state of the user. It can be one of the following: AVAILABLE, OFFLINE, AWAY, BUSY, or DND (Do-Not-Disturb)'
+        type: string
+      statusMessage:
+        description: A free formed status message of the user
+        type: string
+      timeZoneOffset:
+        description: The timezone offset of the user compared to UTC
+        format: int32
+        type: number
+      userId:
+        description: The ID of the user
+        type: string
+  Preview:
+    properties:
+      imageURI:
+        description: n/a
+        type: string
+      srcURL:
+        description: n/a
+        type: string
+      title:
+        description: n/a
+        type: string
+      type:
+        description: n/a
+        type: string
+  RtcItem:
+    properties:
+      missed:
+        description: Indicates a missed call
+        type: string
+      type:
+        description: The type of the RTC item
+        type: string
+  String:
+    properties:
+      CASE_INSENSITIVE_ORDER: {}
+  SystemItem:
+    properties:
+      affectedParticipants:
+        description: not available
+        items:
+          type: string
+        type: array
+      newTopic:
+        description: not available
+        type: string
+      oldTopic:
+        description: not available
+        type: string
+      type:
+        description: The type of the system item
+        type: string
+  User:
+    properties:
+      company:
+        description: The name of the user's company
+        type: string
+      displayName:
+        description: The user's display name
+        type: string
+      emailAddress:
+        description: The primary email address of the user
+        type: string
+      firstName:
+        description: The first name of the user
+        type: string
+      jobTitle:
+        description: The job title of the user
+        type: string
+      lastName:
+        description: The last name of the user
+        type: string
+      locale:
+        description: 'The locale of the user. (E.g. en-US, de-DE)'
+        type: string
+      userId:
+        description: The ID of the user
+        type: string
+      userPresenceState:
+        $ref: '#/definitions/Presence'
+  ValidateAccessToken:
+    properties:
+      accessToken:
+        description: The access token issued by the authorization server
+        type: string
+      clientId:
+        description: The client ID used to generate the access token
+        type: string
+      expirationTime:
+        description: The date when the token expires
+        format: int64
+        type: number
+      scopes:
+        description: Array of the scopes of the access token
+        items:
+          type: string
+        type: array
