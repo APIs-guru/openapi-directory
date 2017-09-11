@@ -3,7 +3,7 @@ info:
   version: '2017-04-19'
   x-release: v4
   title: AWS CodeStar
-  description: '<fullname>AWS CodeStar</fullname> <p>This is the API reference for AWS CodeStar. This reference provides descriptions of the operations and data types for the AWS CodeStar API along with usage examples.</p> <p>You can use the AWS CodeStar API to work with:</p> <p>Projects and their resources, by calling the following:</p> <ul> <li> <p> <a>DeleteProject</a>, which deletes a project in AWS CodeStar.</p> </li> <li> <p> <a>DescribeProject</a>, which lists the attributes of a project.</p> </li> <li> <p> <a>ListProjects</a>, which lists all AWS CodeStar projects associated with your AWS account.</p> </li> <li> <p> <a>ListResources</a>, which lists the resources associated with an AWS CodeStar project.</p> </li> <li> <p> <a>UpdateProject</a>, which updates the attributes of an AWS CodeStar project.</p> </li> </ul> <p>Teams and team members, by calling the following:</p> <ul> <li> <p> <a>AssociateTeamMember</a>, which adds an IAM user to the team for an AWS CodeStar project.</p> </li> <li> <p> <a>DisassociateTeamMember</a>, which removes an IAM user from the team for an AWS CodeStar project.</p> </li> <li> <p> <a>ListTeamMembers</a>, which lists all the IAM users in the team for an AWS CodeStar project, including their roles and attributes.</p> </li> </ul> <p>Users, by calling the following:</p> <ul> <li> <p> <a>CreateUserProfile</a>, which creates a user profile that contains data associated with the user across all AWS CodeStar projects.</p> </li> <li> <p> <a>DeleteUserProfile</a>, which deletes all user profile information across all AWS CodeStar projects.</p> </li> <li> <p> <a>DescribeUserProfile</a>, which describes the profile of a user.</p> </li> <li> <p> <a>ListUserProfiles</a>, which lists all AWS CodeStar user profiles.</p> </li> <li> <p> <a>UpdateUserProfile</a>, which updates the profile for an AWS CodeStar user. </p> </li> </ul>'
+  description: '<fullname>AWS CodeStar</fullname> <p>This is the API reference for AWS CodeStar. This reference provides descriptions of the operations and data types for the AWS CodeStar API along with usage examples.</p> <p>You can use the AWS CodeStar API to work with:</p> <p>Projects and their resources, by calling the following:</p> <ul> <li> <p> <code>DeleteProject</code>, which deletes a project.</p> </li> <li> <p> <code>DescribeProject</code>, which lists the attributes of a project.</p> </li> <li> <p> <code>ListProjects</code>, which lists all projects associated with your AWS account.</p> </li> <li> <p> <code>ListResources</code>, which lists the resources associated with a project.</p> </li> <li> <p> <code>ListTagsForProject</code>, which lists the tags associated with a project.</p> </li> <li> <p> <code>TagProject</code>, which adds tags to a project.</p> </li> <li> <p> <code>UntagProject</code>, which removes tags from a project.</p> </li> <li> <p> <code>UpdateProject</code>, which updates the attributes of a project.</p> </li> </ul> <p>Teams and team members, by calling the following:</p> <ul> <li> <p> <code>AssociateTeamMember</code>, which adds an IAM user to the team for a project.</p> </li> <li> <p> <code>DisassociateTeamMember</code>, which removes an IAM user from the team for a project.</p> </li> <li> <p> <code>ListTeamMembers</code>, which lists all the IAM users in the team for a project, including their roles and attributes.</p> </li> <li> <p> <code>UpdateTeamMember</code>, which updates a team member''s attributes in a project.</p> </li> </ul> <p>Users, by calling the following:</p> <ul> <li> <p> <code>CreateUserProfile</code>, which creates a user profile that contains data associated with the user across all projects.</p> </li> <li> <p> <code>DeleteUserProfile</code>, which deletes all user profile information across all projects.</p> </li> <li> <p> <code>DescribeUserProfile</code>, which describes the profile of a user.</p> </li> <li> <p> <code>ListUserProfiles</code>, which lists all user profiles.</p> </li> <li> <p> <code>UpdateUserProfile</code>, which updates the profile for a user.</p> </li> </ul>'
   x-logo:
     url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
     backgroundColor: '#FFFFFF'
@@ -491,6 +491,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForProject':
+    post:
+      operationId: ListTagsForProject
+      description: Gets the tags for a project.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForProjectResult'
+        '480':
+          description: ProjectNotFoundException
+          schema:
+            $ref: '#/definitions/ProjectNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForProjectRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListTeamMembers':
     post:
       operationId: ListTeamMembers
@@ -551,6 +588,88 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListUserProfilesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TagProject':
+    post:
+      operationId: TagProject
+      description: Adds tags to a project.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagProjectResult'
+        '480':
+          description: ProjectNotFoundException
+          schema:
+            $ref: '#/definitions/ProjectNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagProjectRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UntagProject':
+    post:
+      operationId: UntagProject
+      description: Removes tags from a project.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagProjectResult'
+        '480':
+          description: ProjectNotFoundException
+          schema:
+            $ref: '#/definitions/ProjectNotFoundException'
+        '481':
+          description: ValidationException
+          schema:
+            $ref: '#/definitions/ValidationException'
+        '482':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagProjectRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -693,7 +812,7 @@ definitions:
         description: The ID of the project to which you will add the IAM user.
       clientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
-        description: 'A user- or system-generated token that identifies the entity that requested the team member association to the project. This token can be used to repeat the request. '
+        description: A user- or system-generated token that identifies the entity that requested the team member association to the project. This token can be used to repeat the request.
       userArn:
         $ref: '#/definitions/UserArn'
         description: The Amazon Resource Name (ARN) for the IAM user you want to add to the AWS CodeStar project.
@@ -708,7 +827,7 @@ definitions:
     properties:
       clientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
-        description: 'The user- or system-generated token from the initial request that can be used to repeat the request. '
+        description: The user- or system-generated token from the initial request that can be used to repeat the request.
   ClientRequestToken:
     type: string
     pattern: '^[\w:/-]+$'
@@ -977,7 +1096,7 @@ definitions:
         description: 'The continuation token for the next set of results, if the results cannot be returned in one response.'
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: he maximum amount of data that can be contained in a single set of results.
+        description: The maximum amount of data that can be contained in a single set of results.
   ListResourcesResult:
     type: object
     properties:
@@ -987,6 +1106,29 @@ definitions:
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: 'The continuation token to use when requesting the next set of results, if there are more results to be returned.'
+  ListTagsForProjectRequest:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        $ref: '#/definitions/ProjectId'
+        description: The ID of the project to get tags for.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: Reserved for future use.
+      maxResults:
+        $ref: '#/definitions/MaxResults'
+        description: Reserved for future use.
+  ListTagsForProjectResult:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/Tags'
+        description: The tags for the project.
+      nextToken:
+        $ref: '#/definitions/PaginationToken'
+        description: Reserved for future use.
   ListTeamMembersRequest:
     type: object
     required:
@@ -1123,6 +1265,46 @@ definitions:
   StackId:
     type: string
     pattern: '^arn:aws[^:\s]*:cloudformation:[^:\s]+:[0-9]{12}:stack\/[^:\s]+\/[^:\s]+$'
+  TagKey:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    minLength: 1
+    maxLength: 128
+  TagKeys:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  TagProjectRequest:
+    type: object
+    required:
+      - id
+      - tags
+    properties:
+      id:
+        $ref: '#/definitions/ProjectId'
+        description: The ID of the project you want to add a tag to.
+      tags:
+        $ref: '#/definitions/Tags'
+        description: The tags you want to add to the project.
+  TagProjectResult:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/Tags'
+        description: The tags for the project.
+  TagValue:
+    type: string
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+    maxLength: 256
+  Tags:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
   TeamMember:
     type: object
     required:
@@ -1134,7 +1316,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the user in IAM.
       projectRole:
         $ref: '#/definitions/Role'
-        description: 'The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href="http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html">Working with Teams</a> in the AWS CodeStar User Guide. '
+        description: 'The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href="http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html">Working with Teams</a> in the <i>AWS CodeStar User Guide</i>. '
       remoteAccessAllowed:
         $ref: '#/definitions/RemoteAccessAllowed'
         description: Whether the user is allowed to remotely access project resources using an SSH public/private key pair.
@@ -1151,6 +1333,21 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TeamMember'
+  UntagProjectRequest:
+    type: object
+    required:
+      - id
+      - tags
+    properties:
+      id:
+        $ref: '#/definitions/ProjectId'
+        description: The ID of the project to remove tags from.
+      tags:
+        $ref: '#/definitions/TagKeys'
+        description: The tags to remove from the project.
+  UntagProjectResult:
+    type: object
+    properties: {}
   UpdateProjectRequest:
     type: object
     required:
@@ -1182,7 +1379,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the user for whom you want to change team membership attributes.
       projectRole:
         $ref: '#/definitions/Role'
-        description: 'The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href="http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html">Working with Teams</a> in the AWS CodeStar User Guide.'
+        description: 'The role assigned to the user in the project. Project roles have different levels of access. For more information, see <a href="http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html">Working with Teams</a> in the <i>AWS CodeStar User Guide</i>.'
       remoteAccessAllowed:
         $ref: '#/definitions/RemoteAccessAllowed'
         description: 'Whether a team member is allowed to remotely access project resources using the SSH public key associated with the user''s profile. Even if this is set to True, the user must associate a public key with their profile before the user can access resources.'

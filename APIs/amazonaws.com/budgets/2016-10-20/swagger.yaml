@@ -681,7 +681,7 @@ definitions:
         $ref: '#/definitions/Spend'
       ForecastedSpend:
         $ref: '#/definitions/Spend'
-    description: A structure holds the actual and forecasted spend for a budget.
+    description: A structure that holds the actual and forecasted spend for a budget.
   ComparisonOperator:
     type: string
     enum:
@@ -691,7 +691,7 @@ definitions:
     description: 'The comparison operator of a notification. Currently we support less than, equal to and greater than.'
   CostFilters:
     type: array
-    description: A map represents the cost filters applied to the budget.
+    description: A map that represents the cost filters applied to the budget.
     items:
       type: object
       properties:
@@ -964,7 +964,7 @@ definitions:
     description: 'This exception is thrown if any request is given an invalid parameter. E.g., if a required Date field is null.'
   MaxResults:
     type: integer
-    description: An integer to represent how many entries should a pagianted response contains. Maxium is set to 100.
+    description: An integer to represent how many entries a paginated response contains. Maximum is set to 100.
     minimum: 1
     maximum: 100
   NotFoundException:
@@ -986,13 +986,15 @@ definitions:
         $ref: '#/definitions/ComparisonOperator'
       Threshold:
         $ref: '#/definitions/NotificationThreshold'
+      ThresholdType:
+        $ref: '#/definitions/ThresholdType'
     description: Notification model. Each budget may contain multiple notifications with different settings.
   NotificationThreshold:
     type: number
-    description: The threshold of the a notification. It should be a number between 0 and 100.
+    description: 'The threshold of a notification. It should be a number between 0 and 1,000,000,000.'
     format: double
     minimum: 0.1
-    maximum: 300
+    maximum: 1000000000
   NotificationType:
     type: string
     enum:
@@ -1035,7 +1037,7 @@ definitions:
         $ref: '#/definitions/NumericValue'
       Unit:
         $ref: '#/definitions/UnitValue'
-    description: A structure represent either a cost spend or usage spend. Contains an amount and a unit.
+    description: A structure that represents either a cost spend or usage spend. Contains an amount and a unit.
   Subscriber:
     type: object
     required:
@@ -1060,6 +1062,12 @@ definitions:
       - SNS
       - EMAIL
     description: The subscription type of the subscriber. It can be SMS or EMAIL.
+  ThresholdType:
+    type: string
+    enum:
+      - PERCENTAGE
+      - ABSOLUTE_VALUE
+    description: The type of threshold for a notification. It can be PERCENTAGE or ABSOLUTE_VALUE.
   TimePeriod:
     type: object
     required:
@@ -1070,7 +1078,7 @@ definitions:
         $ref: '#/definitions/GenericTimestamp'
       End:
         $ref: '#/definitions/GenericTimestamp'
-    description: A time period indicated the start date and end date of a budget.
+    description: A time period indicating the start date and end date of a budget.
   TimeUnit:
     type: string
     enum:

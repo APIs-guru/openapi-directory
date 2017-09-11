@@ -140,6 +140,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -191,6 +195,10 @@ paths:
             $ref: '#/definitions/CreateIntentVersionRequest'
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -246,6 +254,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -295,6 +307,10 @@ paths:
             $ref: '#/definitions/DeleteBotRequest'
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -350,6 +366,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -401,6 +421,10 @@ paths:
           required: true
         - name: aliasName
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -458,6 +482,14 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
+        - name: version
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -509,6 +541,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -556,6 +592,14 @@ paths:
           required: true
         - name: version
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
+          type: string
+          required: true
+        - name: version
+          in: query
           type: string
           required: true
     parameters:
@@ -607,6 +651,10 @@ paths:
             $ref: '#/definitions/DeleteSlotTypeRequest'
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -662,6 +710,14 @@ paths:
           required: true
         - name: version
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
+          type: string
+          required: true
+        - name: version
+          in: query
           type: string
           required: true
     parameters:
@@ -758,6 +814,10 @@ paths:
           required: true
         - name: versionoralias
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -919,6 +979,10 @@ paths:
           required: false
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -1121,6 +1185,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /exports/:
+    get:
+      operationId: GetExport
+      description: 'Exports the contents of a Amazon Lex resource in a specified format. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetExportResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '483':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetExportRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/intents/{name}/versions/':
     get:
       operationId: GetIntentVersions
@@ -1164,6 +1269,10 @@ paths:
           required: false
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -1266,6 +1375,14 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
+        - name: version
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1319,6 +1436,10 @@ paths:
           required: false
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -1462,6 +1583,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1511,6 +1636,10 @@ paths:
           in: path
           type: string
           required: true
+        - name: name
+          in: query
+          type: string
+          required: true
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1558,6 +1687,10 @@ paths:
             $ref: '#/definitions/PutSlotTypeRequest'
         - name: name
           in: path
+          type: string
+          required: true
+        - name: name
+          in: query
           type: string
           required: true
     parameters:
@@ -1974,6 +2107,16 @@ definitions:
       $ref: '#/definitions/EnumerationValue'
     minItems: 1
     maxItems: 10000
+  ExportStatus:
+    type: string
+    enum:
+      - IN_PROGRESS
+      - READY
+      - FAILED
+  ExportType:
+    type: string
+    enum:
+      - ALEXA_SKILLS_KIT
   FollowUpPrompt:
     type: object
     required:
@@ -2237,6 +2380,33 @@ definitions:
       nextToken:
         $ref: '#/definitions/NextToken'
         description: 'If the response is truncated, the response includes a pagination token that you can use in your next request to fetch the next page of slot types.'
+  GetExportRequest:
+    type: object
+    properties: {}
+  GetExportResponse:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/Name'
+        description: The name of the bot being exported.
+      version:
+        $ref: '#/definitions/NumericalVersion'
+        description: The version of the bot being exported.
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The type of the exported resource.
+      exportType:
+        $ref: '#/definitions/ExportType'
+        description: The format of the exported data.
+      exportStatus:
+        $ref: '#/definitions/ExportStatus'
+        description: <p>The status of the export. </p> <ul> <li> <p> <code>IN_PROGRESS</code> - The export is in progress.</p> </li> <li> <p> <code>READY</code> - The export is complete.</p> </li> <li> <p> <code>FAILED</code> - The export could not be completed.</p> </li> </ul>
+      failureReason:
+        $ref: '#/definitions/String'
+        description: 'If <code>status</code> is <code>FAILED</code>, Amazon Lex provides the reason that it failed to export the resource.'
+      url:
+        $ref: '#/definitions/String'
+        description: An S3 pre-signed URL that provides the location of the exported resource. The exported resource is a ZIP archive that contains the exported resource in JSON format. The structure of the archive may change. Your code should not rely on the archive structure.
   GetIntentRequest:
     type: object
     example:
@@ -2525,8 +2695,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Intent'
-    minItems: 1
-    maxItems: 100
   IntentMetadata:
     type: object
     properties:
@@ -2623,7 +2791,7 @@ definitions:
     maxLength: 5
   Name:
     type: string
-    pattern: '[a-zA-Z]+'
+    pattern: '[a-zA-Z_]+'
     minLength: 1
     maxLength: 64
   NextToken:
@@ -3114,7 +3282,7 @@ definitions:
         description: '<p>Identifies a specific revision of the <code>$LATEST</code> version.</p> <p>When you create a new slot type, leave the <code>checksum</code> field blank. If you specify a checksum you get a <code>BadRequestException</code> exception.</p> <p>When you want to update a slot type, set the <code>checksum</code> field to the checksum of the most recent revision of the <code>$LATEST</code> version. If you don''t specify the <code> checksum</code> field, or if the checksum does not match the <code>$LATEST</code> version, you get a <code>PreconditionFailedException</code> exception.</p>'
       valueSelectionStrategy:
         $ref: '#/definitions/SlotValueSelectionStrategy'
-        description: '<p>Determines the strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don''t specify the <code>valueSelectionStrategy</code> is not provided, the default is <code>ORIGINAL_VALUE</code>.</p>'
+        description: '<p>Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don''t specify the <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>'
   PutSlotTypeResponse:
     type: object
     example:
@@ -3151,7 +3319,7 @@ definitions:
         description: Checksum of the <code>$LATEST</code> version of the slot type.
       valueSelectionStrategy:
         $ref: '#/definitions/SlotValueSelectionStrategy'
-        description: 'The strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.'
+        description: 'The slot resolution strategy that Amazon Lex uses to determine the value of the slot. For more information, see <a>PutSlotType</a>.'
   ReferenceType:
     type: string
     enum:
@@ -3177,6 +3345,10 @@ definitions:
         $ref: '#/definitions/Version'
         description: The version of the resource that is using the resource that you are trying to delete.
     description: 'Describes the resource that refers to the resource that you are attempting to delete. This object is returned as part of the <code>ResourceInUseException</code> exception. '
+  ResourceType:
+    type: string
+    enum:
+      - BOT
   ResponseCard:
     type: string
     minLength: 1
