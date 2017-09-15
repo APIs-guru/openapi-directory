@@ -257,6 +257,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CopyProduct':
+    post:
+      operationId: CopyProduct
+      description: '<p>Copies the specified source product to the specified target product or a new product.</p> <p>You can copy the product to the same account or another account. You can copy the product to the same region or another region.</p> <p>This operation is performed asynchronously. To track the progress of the operation, use <a>DescribeCopyProductStatus</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CopyProductOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          schema:
+            $ref: '#/definitions/InvalidParametersException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CopyProductInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateConstraint':
     post:
       operationId: CreateConstraint
@@ -412,7 +445,7 @@ paths:
   '/#CreateProvisioningArtifact':
     post:
       operationId: CreateProvisioningArtifact
-      description: <p>Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you.</p> <p>See the bottom of this topic for an example JSON request.</p>
+      description: Create a new provisioning artifact for the specified product. This operation does not work with a product that has been shared with you.
       responses:
         '200':
           description: Success
@@ -683,6 +716,35 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeConstraintInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeCopyProductStatus':
+    post:
+      operationId: DescribeCopyProductStatus
+      description: Describes the status of the specified copy product operation.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeCopyProductStatusOutput'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeCopyProductStatusInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1092,6 +1154,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListAcceptedPortfolioSharesInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1125,6 +1197,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListConstraintsForPortfolioInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1158,6 +1240,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListLaunchPathsInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1216,6 +1308,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListPortfoliosInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1249,6 +1351,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListPortfoliosForProductInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1282,6 +1394,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListPrincipalsForPortfolioInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1558,6 +1680,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SearchProductsInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1591,6 +1723,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SearchProductsAsAdminInput'
+        - name: PageSize
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1858,7 +2000,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
@@ -1912,7 +2054,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
@@ -1933,7 +2075,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
@@ -2006,6 +2148,53 @@ definitions:
     type: string
     minLength: 1
     maxLength: 1024
+  CopyOption:
+    type: string
+    enum:
+      - CopyTags
+  CopyOptions:
+    type: array
+    items:
+      $ref: '#/definitions/CopyOption'
+  CopyProductInput:
+    type: object
+    required:
+      - SourceProductArn
+      - IdempotencyToken
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      SourceProductArn:
+        $ref: '#/definitions/ProductArn'
+        description: The Amazon Resource Name (ARN) of the source product.
+      TargetProductId:
+        $ref: '#/definitions/Id'
+        description: 'The ID of the target product. By default, a new product is created.'
+      TargetProductName:
+        $ref: '#/definitions/ProductViewName'
+        description: A name for the target product. The default is the name of the source product.
+      SourceProvisioningArtifactIdentifiers:
+        $ref: '#/definitions/SourceProvisioningArtifactProperties'
+        description: 'The IDs of the product versions to copy. By default, all provisioning artifacts are copied.'
+      CopyOptions:
+        $ref: '#/definitions/CopyOptions'
+        description: 'The copy options. If the value is <code>CopyTags</code>, the tags from the source product are copied to the target product.'
+      IdempotencyToken:
+        $ref: '#/definitions/IdempotencyToken'
+        description: ' A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request. '
+  CopyProductOutput:
+    type: object
+    properties:
+      CopyProductToken:
+        $ref: '#/definitions/Id'
+        description: A unique token to pass to <code>DescribeCopyProductStatus</code> to track the progress of the operation.
+  CopyProductStatus:
+    type: string
+    enum:
+      - SUCCEEDED
+      - IN_PROGRESS
+      - FAILED
   CreateConstraintInput:
     type: object
     required:
@@ -2017,7 +2206,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
@@ -2026,7 +2215,7 @@ definitions:
         description: The product identifier.
       Parameters:
         $ref: '#/definitions/ConstraintParameters'
-        description: '<p>The constraint parameters. Expected values vary depending on which <b>Type</b> is specified. For examples, see the bottom of this topic.</p> <p>For Type <code>LAUNCH</code>, the <code>RoleArn</code> property is required. </p> <p>For Type <code>NOTIFICATION</code>, the <code>NotificationArns</code> property is required.</p> <p>For Type <code>TEMPLATE</code>, the <code>Rules</code> property is required.</p>'
+        description: '<p>The constraint parameters. Expected values vary depending on which <b>Type</b> is specified. For more information, see the Examples section.</p> <p>For Type <code>LAUNCH</code>, the <code>RoleArn</code> property is required. </p> <p>For Type <code>NOTIFICATION</code>, the <code>NotificationArns</code> property is required.</p> <p>For Type <code>TEMPLATE</code>, the <code>Rules</code> property is required.</p>'
       Type:
         $ref: '#/definitions/ConstraintType'
         description: 'The type of the constraint. Case-sensitive valid values are: <code>LAUNCH</code>, <code>NOTIFICATION</code>, or <code>TEMPLATE</code>. '
@@ -2035,7 +2224,7 @@ definitions:
         description: The text description of the constraint.
       IdempotencyToken:
         $ref: '#/definitions/IdempotencyToken'
-        description: 'A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.'
+        description: 'A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.'
   CreateConstraintOutput:
     type: object
     properties:
@@ -2057,7 +2246,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       DisplayName:
         $ref: '#/definitions/PortfolioDisplayName'
         description: The name to use for display purposes.
@@ -2072,7 +2261,7 @@ definitions:
         description: Tags to associate with the new portfolio.
       IdempotencyToken:
         $ref: '#/definitions/IdempotencyToken'
-        description: 'A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.'
+        description: 'A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.'
   CreatePortfolioOutput:
     type: object
     properties:
@@ -2090,7 +2279,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
@@ -2111,7 +2300,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Name:
         $ref: '#/definitions/ProductViewName'
         description: The name of the product.
@@ -2144,7 +2333,7 @@ definitions:
         description: Parameters for the provisioning artifact.
       IdempotencyToken:
         $ref: '#/definitions/IdempotencyToken'
-        description: 'A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.'
+        description: 'A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.'
   CreateProductOutput:
     type: object
     properties:
@@ -2166,7 +2355,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
@@ -2175,7 +2364,7 @@ definitions:
         description: The parameters to use when creating the new provisioning artifact.
       IdempotencyToken:
         $ref: '#/definitions/IdempotencyToken'
-        description: 'A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.'
+        description: 'A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.'
   CreateProvisioningArtifactOutput:
     type: object
     properties:
@@ -2221,7 +2410,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The identifier of the constraint to delete.
@@ -2235,7 +2424,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The identifier of the portfolio for the delete request.
@@ -2250,7 +2439,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
@@ -2267,7 +2456,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The identifier of the product for the delete request.
@@ -2282,7 +2471,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
@@ -2299,7 +2488,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The identifier of the constraint.
@@ -2315,6 +2504,29 @@ definitions:
       Status:
         $ref: '#/definitions/Status'
         description: The status of the current request.
+  DescribeCopyProductStatusInput:
+    type: object
+    required:
+      - CopyProductToken
+    properties:
+      AcceptLanguage:
+        $ref: '#/definitions/AcceptLanguage'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+      CopyProductToken:
+        $ref: '#/definitions/Id'
+        description: The token returned from the call to <code>CopyProduct</code> that initiated the operation.
+  DescribeCopyProductStatusOutput:
+    type: object
+    properties:
+      CopyProductStatus:
+        $ref: '#/definitions/CopyProductStatus'
+        description: The status of the copy product operation.
+      TargetProductId:
+        $ref: '#/definitions/Id'
+        description: The ID of the copied product.
+      StatusDetail:
+        $ref: '#/definitions/StatusDetail'
+        description: The status message.
   DescribePortfolioInput:
     type: object
     required:
@@ -2322,7 +2534,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The identifier of the portfolio for which to retrieve information.
@@ -2345,7 +2557,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The identifier of the product for which to retrieve information.
@@ -2371,7 +2583,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The <code>ProductId</code> of the product to describe.
@@ -2391,7 +2603,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The <code>ProductViewId</code> of the product to describe.
@@ -2411,7 +2623,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The provisioned product identifier.
@@ -2429,7 +2641,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProvisioningArtifactId:
         $ref: '#/definitions/Id'
         description: The identifier of the provisioning artifact. This is sometimes referred to as the product version.
@@ -2459,7 +2671,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
@@ -2491,7 +2703,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The record identifier of the ProvisionedProduct object for which to retrieve output information. This is the <code>RecordDetail.RecordId</code> obtained from the request operation's response.
@@ -2537,7 +2749,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
@@ -2555,7 +2767,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
@@ -2644,7 +2856,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.'
@@ -2667,7 +2879,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
@@ -2696,7 +2908,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier. Identifies the product for which to retrieve <code>LaunchPathSummaries</code> information.
@@ -2722,7 +2934,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
@@ -2742,7 +2954,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
@@ -2766,7 +2978,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PageToken:
         $ref: '#/definitions/PageToken'
         description: 'The page token of the first page retrieved. If null, this retrieves the first page of size <code>PageSize</code>.'
@@ -2789,7 +3001,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
@@ -2815,7 +3027,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
@@ -2833,7 +3045,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       AccessLevelFilter:
         $ref: '#/definitions/AccessLevelFilter'
         description: 'The access level for obtaining results. If left unspecified, <code>User</code> level access is used.'
@@ -3021,6 +3233,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Principal'
+  ProductArn:
+    type: string
+    pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+    minLength: 1
+    maxLength: 1224
   ProductSource:
     type: string
     enum:
@@ -3166,7 +3383,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
@@ -3223,7 +3440,7 @@ definitions:
         description: The UTC timestamp of the creation time.
       IdempotencyToken:
         $ref: '#/definitions/IdempotencyToken'
-        description: 'A token to disambiguate duplicate requests. You can create multiple resources using the same input in multiple requests, provided that you also specify a different idempotency token for each request.'
+        description: 'A token to disambiguate duplicate requests. You can use the same input in multiple requests, provided that you also specify a different idempotency token for each request.'
       LastRecordId:
         $ref: '#/definitions/LastRequestId'
         description: The record identifier of the last request performed on this ProvisionedProduct object.
@@ -3360,6 +3577,12 @@ definitions:
         $ref: '#/definitions/ProvisioningArtifactType'
         description: '<p>The type of the provisioning artifact properties. The following provisioning artifact property types are used by AWS Marketplace products:</p> <p> <code>MARKETPLACE_AMI</code> - AMI products.</p> <p> <code>MARKETPLACE_CAR</code> - CAR (Cluster and AWS Resources) products.</p>'
     description: 'Provisioning artifact properties. For example request JSON, see <a>CreateProvisioningArtifact</a>.'
+  ProvisioningArtifactPropertyName:
+    type: string
+    enum:
+      - Id
+  ProvisioningArtifactPropertyValue:
+    type: string
   ProvisioningArtifactSummaries:
     type: array
     items:
@@ -3527,7 +3750,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
@@ -3589,7 +3812,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       AccessLevelFilter:
         $ref: '#/definitions/AccessLevelFilter'
         description: 'The access level for obtaining results. If left unspecified, <code>User</code> level access is used.'
@@ -3617,7 +3840,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       PortfolioId:
         $ref: '#/definitions/Id'
         description: The portfolio identifier.
@@ -3653,7 +3876,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Filters:
         $ref: '#/definitions/ProductViewFilters'
         description: 'The list of filters with which to limit search results. If no search filters are specified, the output is all the products to which the calling user has access. '
@@ -3686,12 +3909,27 @@ definitions:
     enum:
       - ASCENDING
       - DESCENDING
+  SourceProvisioningArtifactProperties:
+    type: array
+    items:
+      $ref: '#/definitions/SourceProvisioningArtifactPropertiesMap'
+  SourceProvisioningArtifactPropertiesMap:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/ProvisioningArtifactPropertyName'
+        value:
+          $ref: '#/definitions/ProvisioningArtifactPropertyValue'
   Status:
     type: string
     enum:
       - AVAILABLE
       - CREATING
       - FAILED
+  StatusDetail:
+    type: string
   SupportDescription:
     type: string
   SupportEmail:
@@ -3807,7 +4045,7 @@ definitions:
         description: 'If set to true, AWS Service Catalog stops managing the specified ProvisionedProduct object even if it cannot delete the underlying resources.'
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
   TerminateProvisionedProductOutput:
     type: object
     properties:
@@ -3821,7 +4059,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The identifier of the constraint to update.
@@ -3847,7 +4085,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The identifier of the portfolio for the update request.
@@ -3882,7 +4120,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       Id:
         $ref: '#/definitions/Id'
         description: The identifier of the product for the update request.
@@ -3929,7 +4167,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProvisionedProductName:
         $ref: '#/definitions/ProvisionedProductNameOrArn'
         description: 'The updated name of the ProvisionedProduct object. Specify either <code>ProvisionedProductName</code> or <code>ProvisionedProductId</code>, but not both.'
@@ -3965,7 +4203,7 @@ definitions:
     properties:
       AcceptLanguage:
         $ref: '#/definitions/AcceptLanguage'
-        description: '<p>The language code to use for this operation. Supported language codes are as follows:</p> <p>"en" (English)</p> <p>"jp" (Japanese)</p> <p>"zh" (Chinese)</p> <p>If no code is specified, "en" is used as the default.</p>'
+        description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
       ProductId:
         $ref: '#/definitions/Id'
         description: The product identifier.
