@@ -2661,35 +2661,36 @@ definitions:
         description: '[Required] The name of the authorizer.'
       type:
         $ref: '#/definitions/AuthorizerType'
-        description: '[Required] The type of the authorizer. Currently, the valid type is <code>TOKEN</code> for a Lambda function or <code>COGNITO_USER_POOLS</code> for an Amazon Cognito user pool.'
+        description: '[Required] The authorizer type. Valid values are <code>TOKEN</code> for a Lambda function using a single authorization token submitted in a custom header, <code>REQUEST</code> for a Lambda function using incoming request parameters, and <code>COGNITO_USER_POOLS</code> for using an Amazon Cognito user pool.'
       providerARNs:
         $ref: '#/definitions/ListOfARNs'
-        description: 'A list of the provider ARNs of the authorizer. For an <code>TOKEN</code> authorizer, this is not defined. For authorizers of the <code>COGNITO_USER_POOLS</code> type, each element corresponds to a user pool ARN of this format: <code>arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}</code>. '
+        description: 'A list of the Amazon Cognito user pool ARNs for the <code>COGNITO_USER_POOLS</code> authorizer. Each element is of this format: <code>arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}</code>. For a <code>TOKEN</code> or <code>REQUEST</code> authorizer, this is not defined. '
       authType:
         $ref: '#/definitions/String'
-        description: 'Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.'
+        description: 'Optional customer-defined field, used in Swagger imports and exports without functional impact.'
       authorizerUri:
         $ref: '#/definitions/String'
-        description: '[Required] Specifies the authorizer''s Uniform Resource Identifier (URI). For <code>TOKEN</code> authorizers, this must be a well-formed Lambda function URI, for example, <code>arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations</code>. In general, the URI has this form <code>arn:aws:apigateway:{region}:lambda:path/{service_api}</code>, where <code>{region}</code> is the same as the region hosting the Lambda function, <code>path</code> indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial <code>/</code>. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.'
+        description: 'Specifies the authorizer''s Uniform Resource Identifier (URI). For <code>TOKEN</code> or <code>REQUEST</code> authorizers, this must be a well-formed Lambda function URI, for example, <code>arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations</code>. In general, the URI has this form <code>arn:aws:apigateway:{region}:lambda:path/{service_api}</code>, where <code>{region}</code> is the same as the region hosting the Lambda function, <code>path</code> indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial <code>/</code>. For Lambda functions, this is usually of the form <code>/2015-03-31/functions/[FunctionARN]/invocations</code>.'
       authorizerCredentials:
         $ref: '#/definitions/String'
-        description: 'Specifies the credentials required for the authorizer, if any. Two options are available. To specify an IAM role for Amazon API Gateway to assume, use the role''s Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.'
+        description: 'Specifies the required credentials as an IAM role for Amazon API Gateway to invoke the authorizer. To specify an IAM role for Amazon API Gateway to assume, use the role''s Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.'
       identitySource:
         $ref: '#/definitions/String'
-        description: '[Required] The source of the identity in an incoming request. For a <code>TOKEN</code> authorizer, this value is a mapping expression with the same syntax as integration parameter mappings. The only valid source for tokens is ''header'', so the expression should match ''method.request.header.[headerName]''. The value of the header ''[headerName]'' will be interpreted as the incoming token. For <code>COGNITO_USER_POOLS</code> authorizers, this property is used.'
+        description: 'The identity source for which authorization is requested. <ul><li>For a <code>TOKEN</code> authorizer, this is required and specifies the request header mapping expression for the custom header holding the authorization token submitted by the client. For example, if the token header name is <code>Auth</code>, the header mapping expression is <code>method.request.header.Auth</code>.</li><li>For the <code>REQUEST</code> authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an <code>Auth</code> header, a <code>Name</code> query string parameter are defined as identity sources, this value is <code>method.request.header.Auth, method.request.querystring.Name</code>. These parameters will be used to derive the authorization caching key and to perform runtime validation of the <code>REQUEST</code> authorizer by verifying all of the identity-related request parameters are present, not null and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.</li><li>For a <code>COGNITO_USER_POOLS</code> authorizer, this property is not used.</li></ul>'
       identityValidationExpression:
         $ref: '#/definitions/String'
-        description: 'A validation expression for the incoming identity. For <code>TOKEN</code> authorizers, this value should be a regular expression. The incoming token from the client is matched against this expression, and will proceed if the token matches. If the token doesn''t match, the client receives a 401 Unauthorized response.'
+        description: 'A validation expression for the incoming identity token. For <code>TOKEN</code> authorizers, this value is a regular expression. Amazon API Gateway will match the incoming token from the client against the specified regular expression. It will invoke the authorizer''s Lambda function there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the <code>REQUEST</code> authorizer.'
       authorizerResultTtlInSeconds:
         $ref: '#/definitions/NullableInteger'
-        description: 'The TTL in seconds of cached authorizer results. If greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.'
+        description: 'The TTL in seconds of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.'
     description: '<p>Represents an authorization layer for methods. If enabled on a method, API Gateway will activate the authorizer when a client calls the method.</p> <div class="seeAlso"> <a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html">Enable custom authorization</a> </div>'
   AuthorizerType:
     type: string
     enum:
       - TOKEN
+      - REQUEST
       - COGNITO_USER_POOLS
-    description: The authorizer type. the current value is <code>TOKEN</code> for a Lambda function or <code>COGNITO_USER_POOLS</code> for an Amazon Cognito Your User Pool.
+    description: '[Required] The authorizer type. Valid values are <code>TOKEN</code> for a Lambda function using a single authorization token submitted in a custom header, <code>REQUEST</code> for a Lambda function using incoming request parameters, and <code>COGNITO_USER_POOLS</code> for using an Amazon Cognito user pool.'
   Authorizers:
     type: object
     properties:
@@ -2704,6 +2705,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/String'
+    description: 'The submitted request is not valid, for example, the input is incomplete or incorrect. See the accompanying error message for details.'
   BasePathMapping:
     type: object
     properties:
@@ -2769,7 +2771,7 @@ definitions:
       expirationDate:
         $ref: '#/definitions/Timestamp'
         description: The timestamp when the client certificate will expire.
-    description: '<p>Represents a client certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p> <div class="remarks">Client certificates are used authenticate an API by the back-end server. To authenticate an API client (or user), use a custom <a>Authorizer</a>.</div> <div class="seeAlso"> <a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html">Use Client-Side Certificate</a> </div>'
+    description: '<p>Represents a client certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p> <div class="remarks">Client certificates are used to authenticate an API by the backend server. To authenticate an API client (or user), use IAM roles and policies, a custom <a>Authorizer</a> or an Amazon Cognito user pool.</div> <div class="seeAlso"> <a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html">Use Client-Side Certificate</a> </div>'
   ClientCertificates:
     type: object
     properties:
@@ -2784,6 +2786,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/String'
+    description: 'The request configuration has conflicts. For details, see the accompanying error message.'
   ContentHandlingStrategy:
     type: string
     enum:
@@ -2819,35 +2822,34 @@ definitions:
     required:
       - name
       - type
-      - identitySource
     properties:
       name:
         $ref: '#/definitions/String'
         description: '[Required] The name of the authorizer.'
       type:
         $ref: '#/definitions/AuthorizerType'
-        description: '[Required] The type of the authorizer.'
+        description: '[Required] The authorizer type. Valid values are <code>TOKEN</code> for a Lambda function using a single authorization token submitted in a custom header, <code>REQUEST</code> for a Lambda function using incoming request parameters, and <code>COGNITO_USER_POOLS</code> for using an Amazon Cognito user pool.'
       providerARNs:
         $ref: '#/definitions/ListOfARNs'
-        description: A list of the Cognito Your User Pool authorizer's provider ARNs.
+        description: 'A list of the Amazon Cognito user pool ARNs for the <code>COGNITO_USER_POOLS</code> authorizer. Each element is of this format: <code>arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}</code>. For a <code>TOKEN</code> or <code>REQUEST</code> authorizer, this is not defined. '
       authType:
         $ref: '#/definitions/String'
-        description: 'Optional customer-defined field, used in Swagger imports/exports. Has no functional impact.'
+        description: 'Optional customer-defined field, used in Swagger imports and exports without functional impact.'
       authorizerUri:
         $ref: '#/definitions/String'
-        description: '[Required] Specifies the authorizer''s Uniform Resource Identifier (URI).'
+        description: 'Specifies the authorizer''s Uniform Resource Identifier (URI). For <code>TOKEN</code> or <code>REQUEST</code> authorizers, this must be a well-formed Lambda function URI, for example, <code>arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations</code>. In general, the URI has this form <code>arn:aws:apigateway:{region}:lambda:path/{service_api}</code>, where <code>{region}</code> is the same as the region hosting the Lambda function, <code>path</code> indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial <code>/</code>. For Lambda functions, this is usually of the form <code>/2015-03-31/functions/[FunctionARN]/invocations</code>.'
       authorizerCredentials:
         $ref: '#/definitions/String'
-        description: 'Specifies the credentials required for the authorizer, if any.'
+        description: 'Specifies the required credentials as an IAM role for Amazon API Gateway to invoke the authorizer. To specify an IAM role for Amazon API Gateway to assume, use the role''s Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.'
       identitySource:
         $ref: '#/definitions/String'
-        description: '[Required] The source of the identity in an incoming request.'
+        description: 'The identity source for which authorization is requested. <ul><li>For a <code>TOKEN</code> authorizer, this is required and specifies the request header mapping expression for the custom header holding the authorization token submitted by the client. For example, if the token header name is <code>Auth</code>, the header mapping expression is <code>method.request.header.Auth</code>.</li><li>For the <code>REQUEST</code> authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an <code>Auth</code> header, a <code>Name</code> query string parameter are defined as identity sources, this value is <code>method.request.header.Auth, method.request.querystring.Name</code>. These parameters will be used to derive the authorization caching key and to perform runtime validation of the <code>REQUEST</code> authorizer by verifying all of the identity-related request parameters are present, not null and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.</li><li>For a <code>COGNITO_USER_POOLS</code> authorizer, this property is not used.</li></ul>'
       identityValidationExpression:
         $ref: '#/definitions/String'
-        description: A validation expression for the incoming identity.
+        description: 'A validation expression for the incoming identity token. For <code>TOKEN</code> authorizers, this value is a regular expression. Amazon API Gateway will match the incoming token from the client against the specified regular expression. It will invoke the authorizer''s Lambda function there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the <code>REQUEST</code> authorizer.'
       authorizerResultTtlInSeconds:
         $ref: '#/definitions/NullableInteger'
-        description: The TTL of cached authorizer results.
+        description: 'The TTL in seconds of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.'
     description: Request to add a new <a>Authorizer</a> to an existing <a>RestApi</a> resource.
   CreateBasePathMappingRequest:
     type: object
@@ -2946,7 +2948,7 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/String'
-        description: The name of the model.
+        description: The name of the model. Must be alphanumeric.
       description:
         $ref: '#/definitions/String'
         description: The description of the model.
@@ -3197,7 +3199,7 @@ definitions:
     properties:
       type:
         $ref: '#/definitions/DocumentationPartType'
-        description: 'The type of API entity to which the documentation content applies. It is a valid and required field for API entity types of <code>API</code>, <code>AUTHORIZER</code>, <code>MODEL</code>, <code>RESOURCE</code>, <code>METHOD</code>, <code>PATH_PARAMETER</code>, <code>QUERY_PARAMETER</code>, <code>REQUEST_HEADER</code>, <code>REQUEST_BODY</code>, <code>RESPONSE</code>, <code>RESPONSE_HEADER</code>, and <code>RESPONSE_BODY</code>. Content inheritance does not apply to any entity of the <code>API</code>, <code>AUTHROZER</code>, <code>METHOD</code>, <code>MODEL</code>, <code>REQUEST_BODY</code>, or <code>RESOURCE</code> type.'
+        description: 'The type of API entity to which the documentation content applies. It is a valid and required field for API entity types of <code>API</code>, <code>AUTHORIZER</code>, <code>MODEL</code>, <code>RESOURCE</code>, <code>METHOD</code>, <code>PATH_PARAMETER</code>, <code>QUERY_PARAMETER</code>, <code>REQUEST_HEADER</code>, <code>REQUEST_BODY</code>, <code>RESPONSE</code>, <code>RESPONSE_HEADER</code>, and <code>RESPONSE_BODY</code>. Content inheritance does not apply to any entity of the <code>API</code>, <code>AUTHORIZER</code>, <code>METHOD</code>, <code>MODEL</code>, <code>REQUEST_BODY</code>, or <code>RESOURCE</code> type.'
       path:
         $ref: '#/definitions/String'
         description: 'The URL path of the target. It is a valid field for the API entity types of <code>RESOURCE</code>, <code>METHOD</code>, <code>PATH_PARAMETER</code>, <code>QUERY_PARAMETER</code>, <code>REQUEST_HEADER</code>, <code>REQUEST_BODY</code>, <code>RESPONSE</code>, <code>RESPONSE_HEADER</code>, and <code>RESPONSE_BODY</code>. The default value is <code>/</code> for the root resource. When an applicable child entity inherits the content of another entity of the same type with more general specifications of the other <code>location</code> attributes, the child entity''s <code>path</code> attribute must match that of the parent entity as a prefix.'
@@ -3635,6 +3637,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/String'
+    description: The request exceeded the rate limit. Retry after the specified time period.
   ListOfARNs:
     type: array
     items:
@@ -3927,7 +3930,7 @@ definitions:
         description: The identifier for the model resource.
       name:
         $ref: '#/definitions/String'
-        description: The name of the model.
+        description: The name of the model. Must be an alphanumeric string.
       description:
         $ref: '#/definitions/String'
         description: The description of the model.
@@ -3952,6 +3955,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/String'
+    description: The requested resource is not found. Make sure that the request URI is correct.
   NullableBoolean:
     type: boolean
   NullableInteger:
@@ -4270,6 +4274,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/String'
+    description: The requested service is not available. For details see the accompanying error message. Retry after the specified time period.
   Stage:
     type: object
     properties:
@@ -4439,6 +4444,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/String'
+    description: The request has reached its throttling limit. Retry after the specified time period.
   UnauthorizedCacheControlHeaderStrategy:
     type: string
     enum:
@@ -4450,6 +4456,7 @@ definitions:
     properties:
       message:
         $ref: '#/definitions/String'
+    description: The request is denied because the caller has insufficient permissions.
   UpdateAccountRequest:
     type: object
     properties:
