@@ -13411,6 +13411,11 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  InstanceInterruptionBehavior:
+    type: string
+    enum:
+      - stop
+      - terminate
   InstanceIpv6Address:
     type: object
     properties:
@@ -15875,6 +15880,9 @@ definitions:
       ValidUntil:
         $ref: '#/definitions/DateTime'
         description: '<p>The end date of the request. If this is a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date and time is reached.</p> <p>Default: The request is effective indefinitely.</p>'
+      InstanceInterruptionBehavior:
+        $ref: '#/definitions/InstanceInterruptionBehavior'
+        description: Indicates whether a Spot instance stops or terminates when it is interrupted.
     description: Contains the parameters for RequestSpotInstances.
   RequestSpotInstancesResult:
     type: object
@@ -17459,6 +17467,9 @@ definitions:
       ReplaceUnhealthyInstances:
         $ref: '#/definitions/Boolean'
         description: Indicates whether Spot fleet should replace unhealthy instances.
+      InstanceInterruptionBehavior:
+        $ref: '#/definitions/InstanceInterruptionBehavior'
+        description: Indicates whether a Spot instance stops or terminates when it is interrupted.
     description: Describes the configuration of a Spot fleet request.
   SpotFleetRequestConfigSet:
     type: array
@@ -17535,6 +17546,9 @@ definitions:
       ValidUntil:
         $ref: '#/definitions/DateTime'
         description: 'The end date of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). If this is a one-time request, it remains active until all instances launch, the request is canceled, or this date is reached. If the request is persistent, it remains active until it is canceled or this date is reached.'
+      InstanceInterruptionBehavior:
+        $ref: '#/definitions/InstanceInterruptionBehavior'
+        description: Indicates whether a Spot instance stops or terminates when it is interrupted.
     description: Describes a Spot instance request.
   SpotInstanceRequestIdList:
     type: array
