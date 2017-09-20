@@ -11,7 +11,7 @@ String.prototype.toCamelCase = function camelize() {
 }
 
 module.exports = function () {
-  var listing = JSON.parse(util.exec('wget https://api.apitore.com/json/0 -O -'));
+  var listing = JSON.parse(util.exec('wget https://api.apitore.com/json/0 --no-check-certificate -O -'));
   var result = [];
   for (var api in listing) {
 	var components = api.split('/');
