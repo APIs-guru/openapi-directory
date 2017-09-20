@@ -71,7 +71,7 @@ converter.ResourceReaders.url = function (url) {
     headers: {
       'Accept': 'application/json,*/*',
     },
-	retries : 10
+  retries : 10
   };
   var cacheEntry = getCacheEntry(url);
   if (cacheEntry && cacheEntry.etag && resolverContext.etag && resolverContext.format !== 'swagger_1') {
@@ -80,7 +80,7 @@ converter.ResourceReaders.url = function (url) {
   return makeRequest('get', url, options)
     .then(function(result){
       if (result[0].statusCode === 304) {
-		throw new Error('Warning: 304 Not Modified');
+    throw new Error('Warning: 304 Not Modified');
         result[1] = {}; //util.exec('git show '+cacheEntry.gitHash.trim());
       }
       else {
@@ -210,26 +210,25 @@ function fixupSwagger(swaggerPath) {
 function updateCollection(dir, command) {
   specSources.getLeads(util.getSpecs(dir))
     .then(leads => _.toPairs(leads))
-	.then(leadPairs => {
-		if (command.resume) {
-			_.remove(leadPairs, function(lp){
-				console.log(lp[0],command.resume);
-				return (lp[0] < command.resume);
-			});
-		}
-		return leadPairs;
-	})
+  .then(leadPairs => {
+    if (command.resume) {
+      _.remove(leadPairs, function(lp){
+        return (lp[0] < command.resume);
+      });
+    }
+    return leadPairs;
+  })
     .each(([filename, lead]) => {
       if (lead) {
         var origin = _.cloneDeep(util.getOrigin(lead));
         if (Array.isArray(origin))
-	      origin = origin.pop();
+        origin = origin.pop();
         var source = origin.url;
         var cacheEntry = getCacheEntry(source);
-	    if ((cacheEntry.skip && !command.force) || (origin['x-apisguru-direct'])) {
+      if ((cacheEntry.skip && !command.force) || (origin['x-apisguru-direct'])) {
           console.log('SKIP '+source);
-	      return null;
-	    }
+        return null;
+      }
         return writeSpecFromLead(lead, command)
           .then(swagger => {
             if (swagger) {
@@ -295,7 +294,7 @@ function validatePreferred(specs) {
     var id = util.getApiId(swagger);
     preferred[id] = preferred[id] || {};
     preferred[id][swagger.info.version] = swagger.info['x-preferred'];
-	assert(Object.keys(swagger.paths).length>0, `"${id}" has no paths`);
+  assert(Object.keys(swagger.paths).length>0, `"${id}" has no paths`);
   });
 
   _.each(preferred, function (versions, id) {
@@ -323,11 +322,11 @@ function addToCollection(format, url, command) {
     exPatch.info['x-serviceName'] = command.service;
   if (command.logo) {
     exPatch.info['x-logo'] = {
-	  url: command.logo
-	};
-	if ((command.logo && command.logo.indexOf('.jpg')<0) || command.background){
-	  exPatch.info['x-logo'].backgroundColor = command.background||'#FFFFFF';
-	}
+    url: command.logo
+  };
+  if ((command.logo && command.logo.indexOf('.jpg')<0) || command.background){
+    exPatch.info['x-logo'].backgroundColor = command.background||'#FFFFFF';
+  }
   }
   if (command.unofficial) {
     exPatch.info['x-unofficialSpec'] = true;
@@ -428,8 +427,8 @@ function writeSpec(source, format, exPatch, command) {
     anyDiff: false,
     called: false,
     source: source,
-	format: format,
-	etag: !command.slow
+  format: format,
+  etag: !command.slow
   };
 
   return converter.getSpec(source, format)
@@ -446,7 +445,7 @@ function writeSpec(source, format, exPatch, command) {
       context.swagger = swagger;
 
       delete exPatch.info.version; // testing
-	  patchSwagger(swagger, exPatch);
+    patchSwagger(swagger, exPatch);
 
       expandPathTemplates(swagger);
       replaceSpacesInSchemaNames(swagger);
@@ -480,10 +479,10 @@ function writeSpec(source, format, exPatch, command) {
       if (!context.swagger.info.description)
         warnings.push(`Definition has no info.description "${filename}"`);
 
-	  delete exPatch.info['x-providerName'];
-	  delete exPatch.info['x-serviceName'];
-	  delete exPatch.info['x-preferred'];
-	  delete exPatch.info['x-origin'];
+    delete exPatch.info['x-providerName'];
+    delete exPatch.info['x-serviceName'];
+    delete exPatch.info['x-preferred'];
+    delete exPatch.info['x-origin'];
 
       if (Object.keys(exPatch.info).length) {
         var patchFilename = pathLib.join(util.getPathComponents(context.swagger, true).join('/'),'patch.yaml');
@@ -498,7 +497,7 @@ function writeSpec(source, format, exPatch, command) {
     })
     .catch(e => {
       if (e.message.indexOf('Can not')>=0)
-	    e.message = 'Warning: '+e.message;
+      e.message = 'Warning: '+e.message;
       if (resolverContext.anyDiff || (!e.message.startsWith('Warning')))
         throw new SpecError(e, context);
       console.log(e.message);
@@ -767,15 +766,15 @@ function fixSpec(swagger, errors) {
         break;
       case 'DUPLICATE_OPERATIONID':
         //FIXME: find better solution than to strip all duplicate 'operationId'
-		var operationIds = jsonPath.query(swagger, '$.paths[*][*].operationId');
+    var operationIds = jsonPath.query(swagger, '$.paths[*][*].operationId');
         operationIds = _.filter(operationIds, function (value, index, iteratee) {
           return _.includes(iteratee, value, index + 1);
         });
         jsonPath.apply(swagger, '$.paths[*][*].operationId', function (value) {
           if (_.find(operationIds,function(e){
-		    return e === value;
-		  })) return undefined
-		  else return value;
+        return e === value;
+      })) return undefined
+      else return value;
         });
         fixed = true;
         break;
@@ -889,10 +888,10 @@ function validateSwagger(swagger, source) {
       relativeBase.pop();
       relativeBase = relativeBase.join('/');
       spec.jsonRefs = {relativeBase: relativeBase, loaderOptions: {processContent: 
-	    function (res, cb) {
-	      cb(undefined, YAML.safeLoad(res.text,{json:true}));
+      function (res, cb) {
+        cb(undefined, YAML.safeLoad(res.text,{json:true}));
         }
-	  }};
+    }};
       return spec;
     })
     .then(spec => spec.validate())
@@ -1012,9 +1011,9 @@ function convertToSwagger(spec) {
       _.merge(swagger.spec.info, {
         'x-providerName': parseHost(swagger.spec, spec.source)
       });
-	  if (typeof swagger.spec.info['x-origin'] == 'undefined')
+    if (typeof swagger.spec.info['x-origin'] == 'undefined')
         swagger.spec.info['x-origin'] = [];
-	  if (!Array.isArray(swagger.spec.info['x-origin']))
+    if (!Array.isArray(swagger.spec.info['x-origin']))
         swagger.spec.info['x-origin'] = [swagger.spec.info['x-origin']];
       var newOrigin = {
         format: spec.formatName,
@@ -1027,7 +1026,7 @@ function convertToSwagger(spec) {
             version: converterVersion
         };
       }
-	  if (!_.isEqual(_.last(swagger.spec.info['x-origin']),newOrigin))
+    if (!_.isEqual(_.last(swagger.spec.info['x-origin']),newOrigin))
         swagger.spec.info['x-origin'].push(newOrigin);
       return swagger.spec;
     });
@@ -1073,12 +1072,12 @@ function applyMergePatch(target, patch) {
       return applyMergePatch(target[key], value);
 
     if ((_.isArray(target[key])) && (_.isArray(value)))
-	  return target[key].concat(value);
+    return target[key].concat(value);
 
     if ((typeof target[key] !== 'undefined') && (target[key] === value))
       return value;
 
-	if (key === 'x-providerName')
+    if (key === 'x-providerName')
       return value;
 
     assert(_.isUndefined(target[key]), 'Patch tried to override property: ' + key + ' ' + target[key] + ' ' + value);
@@ -1097,9 +1096,9 @@ process.on('exit', function() {
     }
   }
   if (specSources.deletions.length) {
-  	for (var d of specSources.deletions) {
-	  console.log('Deleted? '+d);
-	}
+    for (var d of specSources.deletions) {
+    console.log('Deleted? '+d);
+  }
   }
 });
 
