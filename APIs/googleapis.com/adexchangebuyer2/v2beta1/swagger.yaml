@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Accesses the latest features for managing Ad Exchange accounts, Real-Time Bidding configurations and auction metrics, and Marketplace programmatic deals.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Ad Exchange Buyer API II
   version: v2beta1
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://adexchangebuyer.googleapis.com/$discovery/rest?version=v2beta1'
       version: v1
@@ -33,18 +29,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/adexchange.buyer': Manage your Ad Exchange buyer account configuration
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/adexchange.buyer': Manage your Ad Exchange buyer account configuration
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -158,8 +146,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     parameters:
@@ -199,8 +185,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
   '/v2beta1/accounts/{accountId}/clients/{clientAccountId}':
@@ -225,8 +209,6 @@ paths:
             $ref: '#/definitions/Client'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -271,8 +253,6 @@ paths:
             $ref: '#/definitions/Client'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -323,8 +303,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     parameters:
@@ -371,8 +349,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
   '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/invitations/{invitationId}':
@@ -404,8 +380,6 @@ paths:
             $ref: '#/definitions/ClientUserInvitation'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -470,8 +444,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     parameters:
@@ -517,8 +489,6 @@ paths:
             $ref: '#/definitions/ClientUser'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -571,8 +541,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
   '/v2beta1/accounts/{accountId}/creatives':
@@ -588,14 +556,6 @@ paths:
           required: true
           type: string
         - description: |-
-            A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListCreativesResponse.next_page_token
-            returned from the previous call to 'ListCreatives' method.
-          in: query
-          name: pageToken
-          type: string
-        - description: |-
             Requested page size. The server may return fewer creatives than requested
             (due to timeout constraint) even if more are available via another call.
             If unspecified, server will pick an appropriate default.
@@ -603,6 +563,14 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListCreativesResponse.next_page_token
+            returned from the previous call to 'ListCreatives' method.
+          in: query
+          name: pageToken
+          type: string
         - description: |-
             An optional query string to filter creatives. If no filter is specified,
             all active creatives will be returned.
@@ -615,9 +583,11 @@ paths:
             <li>openAuctionStatus: {approved, conditionally_approved, disapproved,
                                       not_checked}
             <li>attribute: {a numeric attribute from the list of attributes}
-            <li>disapprovalReason: {a reason from DisapprovalReason
+            <li>disapprovalReason: {a reason from
+            DisapprovalReason
             </ul>
-            Example: 'accountId=12345 AND (dealsStatus:disapproved AND disapprovalReason:unacceptable_content) OR attribute:47'
+            Example: 'accountId=12345 AND (dealsStatus:disapproved AND
+            disapprovalReason:unacceptable_content) OR attribute:47'
           in: query
           name: query
           type: string
@@ -628,8 +598,6 @@ paths:
             $ref: '#/definitions/ListCreativesResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -681,8 +649,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
   '/v2beta1/accounts/{accountId}/creatives/{creativeId}':
@@ -707,8 +673,6 @@ paths:
             $ref: '#/definitions/Creative'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -759,8 +723,6 @@ paths:
             $ref: '#/definitions/Creative'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -822,8 +784,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     parameters:
@@ -881,8 +841,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
   '/v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations:remove':
@@ -925,8 +883,6 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -974,8 +930,6 @@ paths:
             $ref: '#/definitions/Empty'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -1027,8 +981,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
   '/v2beta1/accounts/{accountId}/filterSets':
@@ -1064,8 +1016,6 @@ paths:
             $ref: '#/definitions/ListFilterSetsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -1111,8 +1061,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
   '/v2beta1/accounts/{accountId}/filterSets/{filterSetId}':
@@ -1140,8 +1088,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     get:
@@ -1167,8 +1113,6 @@ paths:
             $ref: '#/definitions/FilterSet'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -1224,8 +1168,6 @@ paths:
             $ref: '#/definitions/ListBidMetricsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -1284,8 +1226,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     parameters:
@@ -1342,8 +1282,6 @@ paths:
             $ref: '#/definitions/ListBidResponsesWithoutBidsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -1402,8 +1340,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     parameters:
@@ -1460,8 +1396,6 @@ paths:
             $ref: '#/definitions/ListFilteredBidsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -1529,8 +1463,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     parameters:
@@ -1597,8 +1529,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     parameters:
@@ -1653,8 +1583,6 @@ paths:
             $ref: '#/definitions/ListImpressionMetricsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
@@ -1713,8 +1641,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts
     parameters:
@@ -1771,8 +1697,6 @@ paths:
             $ref: '#/definitions/ListNonBillableWinningBidsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - accounts

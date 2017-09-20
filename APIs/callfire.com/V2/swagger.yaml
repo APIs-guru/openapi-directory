@@ -5097,15 +5097,14 @@ definitions:
         type: string
     type: object
   CallList:
-    allOf:
-      - $ref: '#/definitions/ItemList'
-      - properties:
-          items:
-            items:
-              $ref: '#/definitions/Call'
-            type: array
-        type: object
     description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/Call'
+        type: array
+    type: object
   CallPage:
     description: '~'
     properties:
@@ -5375,15 +5374,14 @@ definitions:
         type: string
     type: object
   CallerIdList:
-    allOf:
-      - $ref: '#/definitions/ItemList'
-      - properties:
-          items:
-            items:
-              $ref: '#/definitions/CallerId'
-            type: array
-        type: object
     description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/CallerId'
+        type: array
+    type: object
   CallerIdVerificationRequest:
     description: Request which is used to verify a new caller id number
     properties:
@@ -6103,15 +6101,14 @@ definitions:
         type: integer
     type: object
   NumberList:
-    allOf:
-      - $ref: '#/definitions/ItemList'
-      - properties:
-          items:
-            items:
-              $ref: '#/definitions/Number'
-            type: array
-        type: object
     description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/Number'
+        type: array
+    type: object
   NumberOrder:
     description: Represents an order created on the CallFire platform
     properties:
@@ -6671,15 +6668,14 @@ definitions:
         type: integer
     type: object
   TextList:
-    allOf:
-      - $ref: '#/definitions/ItemList'
-      - properties:
-          items:
-            items:
-              $ref: '#/definitions/Text'
-            type: array
-        type: object
     description: '~'
+    properties:
+      items:
+        description: '~'
+        items:
+          $ref: '#/definitions/Text'
+        type: array
+    type: object
   TextPage:
     description: '~'
     properties:
@@ -6913,3 +6909,4 @@ definitions:
         description: A user's timezone
         type: string
     type: object
+x-sample-basepath: 'https://raw.githubusercontent.com/CallFire/callfire-api-samples/master/2.0'

@@ -25,6 +25,164 @@ securityDefinitions:
 security:
   - Api-Key: []
 paths:
+  /v3/artists/images:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Artists_GetImagesByArtist
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          type: string
+        - description: Name of artist for desired images
+          in: query
+          name: artist_name
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: 'Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.'
+          enum:
+            - id
+            - alternative_ids
+            - asset_family
+            - asset_type
+            - collection_code
+            - collection_name
+            - comp
+            - date_submitted
+            - keywords
+          in: query
+          items:
+            enum:
+              - id
+              - alternative_ids
+              - asset_family
+              - asset_type
+              - collection_code
+              - collection_name
+              - comp
+              - date_submitted
+              - keywords
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: Identifies page to return. Default page is 1.
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: 'Specifies page size. Default page_size is 10, maximum page_size is 100.'
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/System.Object'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+      summary: '***BETA*** Search for images by a photographer'
+      tags:
+        - Artists
+  /v3/artists/videos:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Artists_GetVideosByArtist
+      parameters:
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: false
+          type: string
+        - description: Name of artist for desired images
+          in: query
+          name: artist_name
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: 'Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.'
+          enum:
+            - id
+            - alternative_ids
+            - asset_family
+            - asset_type
+            - caption
+            - collection_code
+            - collection_name
+            - comp
+            - date_submitted
+            - keywords
+            - license_model
+            - title
+          in: query
+          items:
+            enum:
+              - id
+              - alternative_ids
+              - asset_family
+              - asset_type
+              - caption
+              - collection_code
+              - collection_name
+              - comp
+              - date_submitted
+              - keywords
+              - license_model
+              - title
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: Identifies page to return. Default page is 1.
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: 'Specifies page size. Default page_size is 10, maximum page_size is 100.'
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/System.Object'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+      summary: '***BETA*** Search for videos by a photographer'
+      tags:
+        - Artists
   /v3/asset-changes/change-sets:
     put:
       consumes: []
@@ -2251,82 +2409,6 @@ paths:
       summary: Search for both creative and editorial images
       tags:
         - Search
-  /v3/search/images/artists:
-    get:
-      consumes: []
-      deprecated: false
-      operationId: Artists_GetArtistImages
-      parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
-          name: Accept-Language
-          required: false
-          type: string
-        - description: 'Provide access token in the format of ''Bearer {token}''.'
-          in: header
-          name: Authorization
-          required: false
-          type: string
-        - description: Name of artist for desired images
-          in: query
-          name: name
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: 'Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.'
-          enum:
-            - id
-            - alternative_ids
-            - asset_family
-            - asset_type
-            - collection_code
-            - collection_name
-            - comp
-            - date_submitted
-            - keywords
-          in: query
-          items:
-            enum:
-              - id
-              - alternative_ids
-              - asset_family
-              - asset_type
-              - collection_code
-              - collection_name
-              - comp
-              - date_submitted
-              - keywords
-            type: string
-          name: fields
-          required: false
-          type: array
-        - description: Identifies page to return. Default page is 1.
-          format: int32
-          in: query
-          name: page
-          required: false
-          type: integer
-        - description: 'Specifies page size. Default page_size is 3, maximum page_size is 100.'
-          format: int32
-          in: query
-          name: page_size
-          required: false
-          type: integer
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/GettyImages.Models.Artists.ImageSearchResults'
-        '400':
-          description: InvalidParameterValue
-        '401':
-          description: Unauthorized
-      summary: '***BETA*** Search for images by a photographer'
-      tags:
-        - Artists
   /v3/search/images/creative:
     get:
       consumes: []
@@ -3610,7 +3692,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/GettyImages.Models.Search.VideoSearchResults[GettyImages.Models.Search.VideoSearchItem]'
+            $ref: '#/definitions/GettyImages.Models.Search.VideoSearchResults[GettyImages.Models.Artists.VideoSearchItem]'
         '400':
           description: InvalidParameterValue
         '401':
@@ -4723,6 +4805,8 @@ definitions:
     type: object
   GettyImages.Models.Artists.DisplaySize:
     properties:
+      aspect_ratio:
+        type: string
       is_watermarked:
         type: boolean
       name:
@@ -4778,6 +4862,43 @@ definitions:
       text:
         type: string
       type:
+        type: string
+    type: object
+  GettyImages.Models.Artists.VideoSearchItem:
+    properties:
+      alternative_ids:
+        additionalProperties:
+          type: string
+        type: object
+      asset_family:
+        type: string
+      asset_type:
+        enum:
+          - Image
+          - Film
+        type: string
+      caption:
+        type: string
+      collection_code:
+        type: string
+      collection_name:
+        type: string
+      date_submitted:
+        format: date-time
+        type: string
+      display_sizes:
+        items:
+          $ref: '#/definitions/GettyImages.Models.Artists.DisplaySize'
+        type: array
+      id:
+        type: string
+      keywords:
+        items:
+          $ref: '#/definitions/GettyImages.Models.Artists.Keyword'
+        type: array
+      license_model:
+        type: string
+      title:
         type: string
     type: object
   GettyImages.Models.Collections.Collection:
@@ -4888,6 +5009,8 @@ definitions:
       id:
         type: string
       product_type:
+        type: string
+      size_name:
         type: string
       thumb_uri:
         type: string
@@ -5316,6 +5439,8 @@ definitions:
       license_model:
         type: string
       order_id:
+        type: string
+      size_name:
         type: string
       thumb_uri:
         type: string
@@ -5773,14 +5898,14 @@ definitions:
       title:
         type: string
     type: object
-  'GettyImages.Models.Search.VideoSearchResults[GettyImages.Models.Search.VideoSearchItem]':
+  'GettyImages.Models.Search.VideoSearchResults[GettyImages.Models.Artists.VideoSearchItem]':
     properties:
       result_count:
         format: int32
         type: integer
       videos:
         items:
-          $ref: '#/definitions/GettyImages.Models.Search.VideoSearchItem'
+          $ref: '#/definitions/GettyImages.Models.Artists.VideoSearchItem'
         type: array
     type: object
   GettyImages.Models.Videos.VideoDetail:

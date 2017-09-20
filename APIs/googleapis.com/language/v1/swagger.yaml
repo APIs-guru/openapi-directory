@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Provides natural language understanding technologies to developers. Examples include sentiment analysis, entity recognition, entity sentiment analysis, and text annotations.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Natural Language
   version: v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://language.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -35,20 +31,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-language': Apply machine learning models to reveal the structure and meaning of text
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-language': Apply machine learning models to reveal the structure and meaning of text
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -163,11 +150,44 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-language'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
+      tags:
+        - documents
+  '/v1/documents:analyzeEntitySentiment':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Finds entities, similar to AnalyzeEntities in the text and analyzes
+        sentiment associated with each entity and its mentions.
+      operationId: language.documents.analyzeEntitySentiment
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AnalyzeEntitySentimentRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnalyzeEntitySentimentResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-language'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - documents
@@ -202,11 +222,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-language'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - documents
@@ -244,11 +260,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-language'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - documents
@@ -285,11 +297,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-language'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-language'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - documents
@@ -314,6 +322,36 @@ definitions:
     properties:
       entities:
         description: The recognized entities in the input document.
+        items:
+          $ref: '#/definitions/Entity'
+        type: array
+      language:
+        description: |-
+          The language of the text, which will be the same as the language specified
+          in the request or, if not specified, the automatically-detected language.
+          See Document.language field for more details.
+        type: string
+    type: object
+  AnalyzeEntitySentimentRequest:
+    description: The entity-level sentiment analysis request message.
+    properties:
+      document:
+        $ref: '#/definitions/Document'
+        description: Input document.
+      encodingType:
+        description: The encoding type used by the API to calculate offsets.
+        enum:
+          - NONE
+          - UTF8
+          - UTF16
+          - UTF32
+        type: string
+    type: object
+  AnalyzeEntitySentimentResponse:
+    description: The entity-level sentiment analysis response message.
+    properties:
+      entities:
+        description: The recognized entities in the input document with associated sentiments.
         items:
           $ref: '#/definitions/Entity'
         type: array
@@ -545,6 +583,12 @@ definitions:
           - NUMC
           - COP
           - DISLOCATED
+          - ASP
+          - GMOD
+          - GOBJ
+          - INFMOD
+          - MES
+          - NCOMP
         type: string
     type: object
   Document:
@@ -619,6 +663,13 @@ definitions:
           salient.
         format: float
         type: number
+      sentiment:
+        $ref: '#/definitions/Sentiment'
+        description: |-
+          For calls to AnalyzeEntitySentiment or if
+          AnnotateTextRequest.Features.extract_entity_sentiment is set to
+          true, this field will contain the aggregate sentiment expressed for this
+          entity in the provided document.
       type:
         description: The entity type.
         enum:
@@ -637,6 +688,13 @@ definitions:
       Represents a mention for an entity in the text. Currently, proper noun
       mentions are supported.
     properties:
+      sentiment:
+        $ref: '#/definitions/Sentiment'
+        description: |-
+          For calls to AnalyzeEntitySentiment or if
+          AnnotateTextRequest.Features.extract_entity_sentiment is set to
+          true, this field will contain the sentiment expressed for this mention of
+          the entity in the provided document.
       text:
         $ref: '#/definitions/TextSpan'
         description: The mention text.
@@ -658,6 +716,9 @@ definitions:
         type: boolean
       extractEntities:
         description: Extract entities.
+        type: boolean
+      extractEntitySentiment:
+        description: Extract entities and their associated sentiment.
         type: boolean
       extractSyntax:
         description: Extract syntax information.

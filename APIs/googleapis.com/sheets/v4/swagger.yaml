@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Reads and writes Google Sheets.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Sheets
   version: v4
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://sheets.googleapis.com/$discovery/rest?version=v4'
       version: v1
@@ -33,7 +29,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
@@ -41,18 +37,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
       'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
       'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
-      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
-      'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
-      'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
-      'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -164,15 +148,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -228,23 +206,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets.readonly'
       tags:
         - spreadsheets
@@ -262,6 +230,99 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+  '/v4/spreadsheets/{spreadsheetId}/developerMetadata/{metadataId}':
+    get:
+      description: |-
+        Returns the developer metadata with the specified id.
+        The caller must specify the spreadsheet ID and the developer metadata's
+        unique metadataId.
+      operationId: sheets.spreadsheets.developerMetadata.get
+      parameters:
+        - description: The ID of the developer metadata to retrieve.
+          in: path
+          name: metadataId
+          required: true
+          type: integer
+        - description: The ID of the spreadsheet to retrieve metadata from.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DeveloperMetadata'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v4/spreadsheets/{spreadsheetId}/developerMetadata:search':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns all developer metadata matching the specified DataFilter.
+        If the provided DataFilter represents a DeveloperMetadataLookup object,
+        this will return all DeveloperMetadata entries selected by it. If the
+        DataFilter represents a location in a spreadsheet, this will return all
+        developer metadata associated with locations intersecting that region.
+      operationId: sheets.spreadsheets.developerMetadata.search
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SearchDeveloperMetadataRequest'
+        - description: The ID of the spreadsheet to retrieve metadata from.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SearchDeveloperMetadataResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo':
     parameters:
       - $ref: '#/parameters/prettyPrint'
@@ -305,15 +366,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -378,23 +433,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets.readonly'
       tags:
         - spreadsheets
@@ -480,15 +525,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -592,15 +631,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -649,15 +682,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -701,15 +728,56 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
+      tags:
+        - spreadsheets
+  '/v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Clears one or more ranges of values from a spreadsheet.
+        The caller must specify the spreadsheet ID and one or more
+        DataFilters. Ranges matching any of the specified data
+        filters will be cleared.  Only values are cleared -- all other properties
+        of the cell (such as formatting, data validation, etc..) are kept.
+      operationId: sheets.spreadsheets.values.batchClearByDataFilter
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchClearValuesByDataFilterRequest'
+        - description: The ID of the spreadsheet to update.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchClearValuesByDataFilterResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -776,23 +844,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets.readonly'
       tags:
         - spreadsheets
@@ -810,6 +868,52 @@ paths:
       - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+  '/v4/spreadsheets/{spreadsheetId}/values:batchGetByDataFilter':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns one or more ranges of values from a spreadsheet that match the
+        specified data filters.  The caller must specify the spreadsheet ID and
+        one or more DataFilters.  Ranges that match any of the data
+        filters in the request will be returned.
+      operationId: sheets.spreadsheets.values.batchGetByDataFilter
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchGetValuesByDataFilterRequest'
+        - description: The ID of the spreadsheet to retrieve data from.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchGetValuesByDataFilterResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchUpdate':
     parameters:
       - $ref: '#/parameters/prettyPrint'
@@ -850,15 +954,55 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
+      tags:
+        - spreadsheets
+  '/v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Sets values in one or more ranges of a spreadsheet.
+        The caller must specify the spreadsheet ID,
+        a valueInputOption, and one or more
+        DataFilterValueRanges.
+      operationId: sheets.spreadsheets.values.batchUpdateByDataFilter
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchUpdateValuesByDataFilterRequest'
+        - description: The ID of the spreadsheet to update.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchUpdateValuesByDataFilterResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -917,15 +1061,73 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
-          Oauth2c:
+      tags:
+        - spreadsheets
+  '/v4/spreadsheets/{spreadsheetId}:getByDataFilter':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns the spreadsheet at the given ID.
+        The caller must specify the spreadsheet ID.
+
+        This method differs from GetSpreadsheet in that it allows selecting
+        which subsets of spreadsheet data to return by specifying a
+        dataFilters parameter.
+        Multiple DataFilters can be specified.  Specifying one or
+        more data filters will return the portions of the spreadsheet that
+        intersect ranges matched by any of the filters.
+
+        By default, data within grids will not be returned.
+        You can include grid data one of two ways:
+
+        * Specify a field mask listing your desired fields using the `fields` URL
+        parameter in HTTP
+
+        * Set the includeGridData
+        parameter to true.  If a field mask is set, the `includeGridData`
+        parameter is ignored
+
+        For large spreadsheets, it is recommended to retrieve only the specific
+        fields of the spreadsheet that you want.
+      operationId: sheets.spreadsheets.getByDataFilter
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetSpreadsheetByDataFilterRequest'
+        - description: The spreadsheet to request.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Spreadsheet'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -1391,6 +1593,35 @@ definitions:
           $ref: '#/definitions/SortSpec'
         type: array
     type: object
+  BatchClearValuesByDataFilterRequest:
+    description: |-
+      The request for clearing more than one range selected by a
+      DataFilter in a spreadsheet.
+    properties:
+      dataFilters:
+        description: The DataFilters used to determine which ranges to clear.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+    type: object
+  BatchClearValuesByDataFilterResponse:
+    description: |-
+      The response when clearing a range of values selected with
+      DataFilters in a spreadsheet.
+    properties:
+      clearedRanges:
+        description: |-
+          The ranges that were cleared, in A1 notation.
+          (If the requests were for an unbounded range or a ranger larger
+           than the bounds of the sheet, this will be the actual ranges
+           that were cleared, bounded to the sheet's limits.)
+        items:
+          type: string
+        type: array
+      spreadsheetId:
+        description: The spreadsheet the updates were applied to.
+        type: string
+    type: object
   BatchClearValuesRequest:
     description: The request for clearing more than one range of values in a spreadsheet.
     properties:
@@ -1415,6 +1646,67 @@ definitions:
       spreadsheetId:
         description: The spreadsheet the updates were applied to.
         type: string
+    type: object
+  BatchGetValuesByDataFilterRequest:
+    description: |-
+      The request for retrieving a range of values in a spreadsheet selected by a
+      set of DataFilters.
+    properties:
+      dataFilters:
+        description: |-
+          The data filters used to match the ranges of values to retrieve.  Ranges
+          that match any of the specified data filters will be included in the
+          response.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+      dateTimeRenderOption:
+        description: |-
+          How dates, times, and durations should be represented in the output.
+          This is ignored if value_render_option is
+          FORMATTED_VALUE.
+          The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+        enum:
+          - SERIAL_NUMBER
+          - FORMATTED_STRING
+        type: string
+      majorDimension:
+        description: |-
+          The major dimension that results should use.
+
+          For example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`,
+          then a request that selects that range and sets `majorDimension=ROWS` will
+          return `[[1,2],[3,4]]`,
+          whereas a request that sets `majorDimension=COLUMNS` will return
+          `[[1,3],[2,4]]`.
+        enum:
+          - DIMENSION_UNSPECIFIED
+          - ROWS
+          - COLUMNS
+        type: string
+      valueRenderOption:
+        description: |-
+          How values should be represented in the output.
+          The default render option is ValueRenderOption.FORMATTED_VALUE.
+        enum:
+          - FORMATTED_VALUE
+          - UNFORMATTED_VALUE
+          - FORMULA
+        type: string
+    type: object
+  BatchGetValuesByDataFilterResponse:
+    description: |-
+      The response when retrieving more than one range of values in a spreadsheet
+      selected by DataFilters.
+    properties:
+      spreadsheetId:
+        description: The ID of the spreadsheet the data was retrieved from.
+        type: string
+      valueRanges:
+        description: The requested values with the list of data filters that matched them.
+        items:
+          $ref: '#/definitions/MatchedValueRange'
+        type: array
     type: object
   BatchGetValuesResponse:
     description: The response when retrieving more than one range of values in a spreadsheet.
@@ -1478,6 +1770,87 @@ definitions:
         description: |-
           The spreadsheet after updates were applied. This is only set if
           [BatchUpdateSpreadsheetRequest.include_spreadsheet_in_response] is `true`.
+    type: object
+  BatchUpdateValuesByDataFilterRequest:
+    description: The request for updating more than one range of values in a spreadsheet.
+    properties:
+      data:
+        description: |-
+          The new values to apply to the spreadsheet.  If more than one range is
+          matched by the specified DataFilter the specified values will be
+          applied to all of of those ranges.
+        items:
+          $ref: '#/definitions/DataFilterValueRange'
+        type: array
+      includeValuesInResponse:
+        description: |-
+          Determines if the update response should include the values
+          of the cells that were updated. By default, responses
+          do not include the updated values. The `updatedData` field within
+          each of the BatchUpdateValuesResponse.responses will contain
+          the updated values. If the range to write was larger than than the range
+          actually written, the response will include all values in the requested
+          range (excluding trailing empty rows and columns).
+        type: boolean
+      responseDateTimeRenderOption:
+        description: |-
+          Determines how dates, times, and durations in the response should be
+          rendered. This is ignored if response_value_render_option is
+          FORMATTED_VALUE.
+          The default dateTime render option is
+          DateTimeRenderOption.SERIAL_NUMBER.
+        enum:
+          - SERIAL_NUMBER
+          - FORMATTED_STRING
+        type: string
+      responseValueRenderOption:
+        description: |-
+          Determines how values in the response should be rendered.
+          The default render option is ValueRenderOption.FORMATTED_VALUE.
+        enum:
+          - FORMATTED_VALUE
+          - UNFORMATTED_VALUE
+          - FORMULA
+        type: string
+      valueInputOption:
+        description: How the input data should be interpreted.
+        enum:
+          - INPUT_VALUE_OPTION_UNSPECIFIED
+          - RAW
+          - USER_ENTERED
+        type: string
+    type: object
+  BatchUpdateValuesByDataFilterResponse:
+    description: The response when updating a range of values in a spreadsheet.
+    properties:
+      responses:
+        description: The response for each range updated.
+        items:
+          $ref: '#/definitions/UpdateValuesByDataFilterResponse'
+        type: array
+      spreadsheetId:
+        description: The spreadsheet the updates were applied to.
+        type: string
+      totalUpdatedCells:
+        description: The total number of cells updated.
+        format: int32
+        type: integer
+      totalUpdatedColumns:
+        description: |-
+          The total number of columns where at least one cell in the column was
+          updated.
+        format: int32
+        type: integer
+      totalUpdatedRows:
+        description: The total number of rows where at least one cell in the row was updated.
+        format: int32
+        type: integer
+      totalUpdatedSheets:
+        description: |-
+          The total number of sheets where at least one cell in the sheet was
+          updated.
+        format: int32
+        type: integer
     type: object
   BatchUpdateValuesRequest:
     description: The request for updating more than one range of values in a spreadsheet.
@@ -2289,6 +2662,20 @@ definitions:
         description: The ID of the spreadsheet to copy the sheet to.
         type: string
     type: object
+  CreateDeveloperMetadataRequest:
+    description: A request to create developer metadata.
+    properties:
+      developerMetadata:
+        $ref: '#/definitions/DeveloperMetadata'
+        description: The developer metadata to create.
+    type: object
+  CreateDeveloperMetadataResponse:
+    description: The response from creating developer metadata.
+    properties:
+      developerMetadata:
+        $ref: '#/definitions/DeveloperMetadata'
+        description: The developer metadata that was created.
+    type: object
   CutPasteRequest:
     description: Moves data from the source to the destination.
     properties:
@@ -2311,6 +2698,47 @@ definitions:
       source:
         $ref: '#/definitions/GridRange'
         description: The source data to cut.
+    type: object
+  DataFilter:
+    description: |-
+      Filter that describes what data should be selected or returned from a
+      request.
+    properties:
+      a1Range:
+        description: Selects data that matches the specified A1 range.
+        type: string
+      developerMetadataLookup:
+        $ref: '#/definitions/DeveloperMetadataLookup'
+        description: |-
+          Selects data associated with the developer metadata matching the criteria
+          described by this DeveloperMetadataLookup.
+      gridRange:
+        $ref: '#/definitions/GridRange'
+        description: Selects data that matches the range described by the GridRange.
+    type: object
+  DataFilterValueRange:
+    description: A range of values whose location is specified by a DataFilter.
+    properties:
+      dataFilter:
+        $ref: '#/definitions/DataFilter'
+        description: The data filter describing the location of the values in the spreadsheet.
+      majorDimension:
+        description: The major dimension of the values.
+        enum:
+          - DIMENSION_UNSPECIFIED
+          - ROWS
+          - COLUMNS
+        type: string
+      values:
+        description: |-
+          The data to be written.  If the provided values exceed any of the ranges
+          matched by the data filter then the request will fail.  If the provided
+          values are less than the matched ranges only the specified values will be
+          written, existing values in the matched ranges will remain unaffected.
+        items:
+          items: {}
+          type: array
+        type: array
     type: object
   DataValidationRule:
     description: A data validation rule.
@@ -2358,6 +2786,24 @@ definitions:
       rule:
         $ref: '#/definitions/ConditionalFormatRule'
         description: The rule that was deleted.
+    type: object
+  DeleteDeveloperMetadataRequest:
+    description: A request to delete developer metadata.
+    properties:
+      dataFilter:
+        $ref: '#/definitions/DataFilter'
+        description: |-
+          The data filter describing the criteria used to select which developer
+          metadata entry to delete.
+    type: object
+  DeleteDeveloperMetadataResponse:
+    description: The response from deleting developer metadata.
+    properties:
+      deletedDeveloperMetadata:
+        description: The metadata that was deleted.
+        items:
+          $ref: '#/definitions/DeveloperMetadata'
+        type: array
     type: object
   DeleteDimensionRequest:
     description: Deletes the dimensions from the sheet.
@@ -2423,9 +2869,162 @@ definitions:
         format: int32
         type: integer
     type: object
+  DeveloperMetadata:
+    description: |-
+      Developer metadata associated with a location or object in a spreadsheet.
+      Developer metadata may be used to associate arbitrary data with various
+      parts of a spreadsheet and will remain associated at those locations as they
+      move around and the spreadsheet is edited.  For example, if developer
+      metadata is associated with row 5 and another row is then subsequently
+      inserted above row 5, that original metadata will still be associated with
+      the row it was first associated with (what is now row 6). If the associated
+      object is deleted its metadata will be deleted too.
+    properties:
+      location:
+        $ref: '#/definitions/DeveloperMetadataLocation'
+        description: The location where the metadata is associated.
+      metadataId:
+        description: |-
+          The spreadsheet-scoped unique ID that identifies the metadata. IDs may be
+          specified when metadata is created, otherwise one will be randomly
+          generated and assigned. Must be positive.
+        format: int32
+        type: integer
+      metadataKey:
+        description: |-
+          The metadata key. There may be multiple metadata in a spreadsheet with the
+          same key.  Developer metadata must always have a key specified.
+        type: string
+      metadataValue:
+        description: Data associated with the metadata's key.
+        type: string
+      visibility:
+        description: |-
+          The metadata visibility.  Developer metadata must always have a visibility
+          specified.
+        enum:
+          - DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED
+          - DOCUMENT
+          - PROJECT
+        type: string
+    type: object
+  DeveloperMetadataLocation:
+    description: A location where metadata may be associated in a spreadsheet.
+    properties:
+      dimensionRange:
+        $ref: '#/definitions/DimensionRange'
+        description: |-
+          Represents the row or column when metadata is associated with
+          a dimension. The specified DimensionRange must represent a single row
+          or column; it cannot be unbounded or span multiple rows or columns.
+      locationType:
+        description: The type of location this object represents.  This field is read-only.
+        enum:
+          - DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED
+          - ROW
+          - COLUMN
+          - SHEET
+          - SPREADSHEET
+        type: string
+      sheetId:
+        description: The ID of the sheet when metadata is associated with an entire sheet.
+        format: int32
+        type: integer
+      spreadsheet:
+        description: True when metadata is associated with an entire spreadsheet.
+        type: boolean
+    type: object
+  DeveloperMetadataLookup:
+    description: |-
+      Selects DeveloperMetadata that matches all of the specified fields.  For
+      example, if only a metadata ID is specified this will consider the
+      DeveloperMetadata with that particular unique ID. If a metadata key is
+      specified, all developer metadata with that key will be considered.  If a
+      key, visibility, and location type are all specified, then all
+      developer metadata with that key, visibility, and associated with a
+      location of that type will be considered.  In general, this
+      selects all DeveloperMetadata that matches the intersection of all the
+      specified fields; any field or combination of fields may be specified.
+    properties:
+      locationMatchingStrategy:
+        description: |-
+          Determines how this lookup matches the location.  If this field is
+          specified as EXACT, only developer metadata associated on the exact
+          location specified will be matched.  If this field is specified to INTERSECTING,
+          developer metadata associated on intersecting locations will also be
+          matched.  If left unspecified, this field will assume a default value of
+          INTERSECTING.
+          If this field is specified, a metadataLocation
+          must also be specified.
+        enum:
+          - DEVELOPER_METADATA_LOCATION_MATCHING_STRATEGY_UNSPECIFIED
+          - EXACT_LOCATION
+          - INTERSECTING_LOCATION
+        type: string
+      locationType:
+        description: |-
+          Limits the selected developer metadata to those entries which are
+          associated with locations of the specified type.  For example, specifying
+          this as ROW will only consider
+          developer metadata associated on rows.  If left unspecified, all location
+          types will be considered.  This field cannot be specified as
+          SPREADSHEET when the
+          locationMatchingStrategy is
+          specified as INTERSECTING or when the
+          metadataLocation is specified as a
+          non-spreadsheet location: spreadsheet metadata cannot intersect any other
+          developer metadata location.  This field also must be left unspecified when the
+          locationMatchingStrategy is
+          specified as EXACT.
+        enum:
+          - DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED
+          - ROW
+          - COLUMN
+          - SHEET
+          - SPREADSHEET
+        type: string
+      metadataId:
+        description: |-
+          Limits the selected developer metadata to that which has a matching
+          DeveloperMetadata.metadata_id.
+        format: int32
+        type: integer
+      metadataKey:
+        description: |-
+          Limits the selected developer metadata to that which has a matching
+          DeveloperMetadata.metadata_key.
+        type: string
+      metadataLocation:
+        $ref: '#/definitions/DeveloperMetadataLocation'
+        description: |-
+          Limits the selected developer metadata to those entries associated with
+          the specified location.  This field either matches exact locations or all
+          intersecting locations according the specified
+          locationMatchingStrategy.
+      metadataValue:
+        description: |-
+          Limits the selected developer metadata to that which has a matching
+          DeveloperMetadata.metadata_value.
+        type: string
+      visibility:
+        description: |-
+          Limits the selected developer metadata to that which has a matching
+          DeveloperMetadata.visibility.  If left unspecified, all developer
+          metadata visibile to the requesting project will be considered.
+        enum:
+          - DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED
+          - DOCUMENT
+          - PROJECT
+        type: string
+    type: object
   DimensionProperties:
     description: Properties about a dimension.
     properties:
+      developerMetadata:
+        description: The developer metadata associated with a single row or column.
+        items:
+          $ref: '#/definitions/DeveloperMetadata'
+        type: array
       hiddenByFilter:
         description: |-
           True if this dimension is being filtered.
@@ -2740,6 +3339,22 @@ definitions:
         format: int32
         type: integer
     type: object
+  GetSpreadsheetByDataFilterRequest:
+    description: The request for retrieving a Spreadsheet.
+    properties:
+      dataFilters:
+        description: |-
+          The DataFilters used to select which ranges to retrieve from
+          the spreadsheet.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+      includeGridData:
+        description: |-
+          True if grid data should be returned.
+          This parameter is ignored if a field mask was set in the request.
+        type: boolean
+    type: object
   GradientRule:
     description: |-
       A rule that applies a gradient color scale format, based on
@@ -3033,6 +3648,34 @@ definitions:
           rounds to perform.
         format: int32
         type: integer
+    type: object
+  MatchedDeveloperMetadata:
+    description: |-
+      A developer metadata entry and the data filters specified in the original
+      request that matched it.
+    properties:
+      dataFilters:
+        description: All filters matching the returned developer metadata.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+      developerMetadata:
+        $ref: '#/definitions/DeveloperMetadata'
+        description: The developer metadata matching the specified filters.
+    type: object
+  MatchedValueRange:
+    description: A value range that was matched by one or more data filers.
+    properties:
+      dataFilters:
+        description: |-
+          The DataFilters from the request that matched the range of
+          values.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+      valueRange:
+        $ref: '#/definitions/ValueRange'
+        description: The values matched by the DataFilter.
     type: object
   MergeCellsRequest:
     description: Merges all cells in the range.
@@ -3573,6 +4216,9 @@ definitions:
       copyPaste:
         $ref: '#/definitions/CopyPasteRequest'
         description: Copies data from one area and pastes it to another.
+      createDeveloperMetadata:
+        $ref: '#/definitions/CreateDeveloperMetadataRequest'
+        description: Creates new developer metadata
       cutPaste:
         $ref: '#/definitions/CutPasteRequest'
         description: Cuts data from one area and pastes it to another.
@@ -3582,6 +4228,9 @@ definitions:
       deleteConditionalFormatRule:
         $ref: '#/definitions/DeleteConditionalFormatRuleRequest'
         description: Deletes an existing conditional format rule.
+      deleteDeveloperMetadata:
+        $ref: '#/definitions/DeleteDeveloperMetadataRequest'
+        description: Deletes developer metadata
       deleteDimension:
         $ref: '#/definitions/DeleteDimensionRequest'
         description: Deletes rows or columns in a sheet.
@@ -3663,6 +4312,9 @@ definitions:
       updateConditionalFormatRule:
         $ref: '#/definitions/UpdateConditionalFormatRuleRequest'
         description: Updates an existing conditional format rule.
+      updateDeveloperMetadata:
+        $ref: '#/definitions/UpdateDeveloperMetadataRequest'
+        description: Updates an existing developer metadata entry
       updateDimensionProperties:
         $ref: '#/definitions/UpdateDimensionPropertiesRequest'
         description: Updates dimensions' properties.
@@ -3706,9 +4358,15 @@ definitions:
       addSheet:
         $ref: '#/definitions/AddSheetResponse'
         description: A reply from adding a sheet.
+      createDeveloperMetadata:
+        $ref: '#/definitions/CreateDeveloperMetadataResponse'
+        description: A reply from creating a developer metadata entry.
       deleteConditionalFormatRule:
         $ref: '#/definitions/DeleteConditionalFormatRuleResponse'
         description: A reply from deleting a conditional format rule.
+      deleteDeveloperMetadata:
+        $ref: '#/definitions/DeleteDeveloperMetadataResponse'
+        description: A reply from deleting a developer metadata entry.
       duplicateFilterView:
         $ref: '#/definitions/DuplicateFilterViewResponse'
         description: A reply from duplicating a filter view.
@@ -3721,6 +4379,9 @@ definitions:
       updateConditionalFormatRule:
         $ref: '#/definitions/UpdateConditionalFormatRuleResponse'
         description: A reply from updating a conditional format rule.
+      updateDeveloperMetadata:
+        $ref: '#/definitions/UpdateDeveloperMetadataResponse'
+        description: A reply from updating a developer metadata entry.
       updateEmbeddedObjectPosition:
         $ref: '#/definitions/UpdateEmbeddedObjectPositionResponse'
         description: A reply from updating an embedded object's position.
@@ -3732,6 +4393,29 @@ definitions:
         description: 'The values in the row, one per column.'
         items:
           $ref: '#/definitions/CellData'
+        type: array
+    type: object
+  SearchDeveloperMetadataRequest:
+    description: |-
+      A request to retrieve all developer metadata matching the set of specified
+      criteria.
+    properties:
+      dataFilters:
+        description: |-
+          The data filters describing the criteria used to determine which
+          DeveloperMetadata entries to return.  DeveloperMetadata matching any of the
+          specified filters will be included in the response.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+    type: object
+  SearchDeveloperMetadataResponse:
+    description: A reply to a developer metadata search request.
+    properties:
+      matchedDeveloperMetadata:
+        description: The metadata matching the criteria of the search request.
+        items:
+          $ref: '#/definitions/MatchedDeveloperMetadata'
         type: array
     type: object
   SetBasicFilterRequest:
@@ -3788,6 +4472,11 @@ definitions:
           and `startColumn 3` (zero-based column D).
         items:
           $ref: '#/definitions/GridData'
+        type: array
+      developerMetadata:
+        description: The developer metadata associated with a sheet.
+        items:
+          $ref: '#/definitions/DeveloperMetadata'
         type: array
       filterViews:
         description: The filter views in this sheet.
@@ -3914,6 +4603,11 @@ definitions:
   Spreadsheet:
     description: Resource that represents a spreadsheet.
     properties:
+      developerMetadata:
+        description: The developer metadata associated with a spreadsheet.
+        items:
+          $ref: '#/definitions/DeveloperMetadata'
+        type: array
       namedRanges:
         description: The named ranges defined in a spreadsheet.
         items:
@@ -4230,6 +4924,40 @@ definitions:
           The old (deleted) rule. Not set if a rule was moved
           (because it is the same as new_rule).
     type: object
+  UpdateDeveloperMetadataRequest:
+    description: |-
+      A request to update properties of developer metadata.
+      Updates the properties of the developer metadata selected by the filters to
+      the values provided in the DeveloperMetadata resource.  Callers must
+      specify the properties they wish to update in the fields parameter, as well
+      as specify at least one DataFilter matching the metadata they wish to
+      update.
+    properties:
+      dataFilters:
+        description: The filters matching the developer metadata entries to update.
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+      developerMetadata:
+        $ref: '#/definitions/DeveloperMetadata'
+        description: The value that all metadata matched by the data filters will be updated to.
+      fields:
+        description: |-
+          The fields that should be updated.  At least one field must be specified.
+          The root `developerMetadata` is implied and should not be specified.
+          A single `"*"` can be used as short-hand for listing every field.
+        format: google-fieldmask
+        type: string
+    type: object
+  UpdateDeveloperMetadataResponse:
+    description: The response from updating developer metadata.
+    properties:
+      developerMetadata:
+        description: The updated developer metadata.
+        items:
+          $ref: '#/definitions/DeveloperMetadata'
+        type: array
+    type: object
   UpdateDimensionPropertiesRequest:
     description: Updates properties of dimensions within the specified range.
     properties:
@@ -4358,6 +5086,36 @@ definitions:
       properties:
         $ref: '#/definitions/SpreadsheetProperties'
         description: The properties to update.
+    type: object
+  UpdateValuesByDataFilterResponse:
+    description: |-
+      The response when updating a range of values by a data filter in a
+      spreadsheet.
+    properties:
+      dataFilter:
+        $ref: '#/definitions/DataFilter'
+        description: The data filter that selected the range that was updated.
+      updatedCells:
+        description: The number of cells updated.
+        format: int32
+        type: integer
+      updatedColumns:
+        description: The number of columns where at least one cell in the column was updated.
+        format: int32
+        type: integer
+      updatedData:
+        $ref: '#/definitions/ValueRange'
+        description: |-
+          The values of the cells in the range matched by the dataFilter after all
+          updates were applied. This is only included if the request's
+          `includeValuesInResponse` field was `true`.
+      updatedRange:
+        description: The range (in A1 notation) that updates were applied to.
+        type: string
+      updatedRows:
+        description: The number of rows where at least one cell in the row was updated.
+        format: int32
+        type: integer
     type: object
   UpdateValuesResponse:
     description: The response when updating a range of values in a spreadsheet.

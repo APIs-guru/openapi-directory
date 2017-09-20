@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Builds on top of the Google+ platform for Google Apps Domains.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google+ Domains
   version: v1
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/plusDomains/v1/rest'
       version: v1
@@ -33,7 +29,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/plus.circles.read': View your circles and the people and pages in them
@@ -46,23 +42,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/plus.stream.write': 'Manage your Google+ posts, comments, and stream'
       'https://www.googleapis.com/auth/userinfo.email': View your email address
       'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/plus.circles.read': View your circles and the people and pages in them
-      'https://www.googleapis.com/auth/plus.circles.write': Manage your circles and add people and pages. People and pages you add to your circles will be notified. Others may see this information publicly. People you add to circles can use Hangouts with you.
-      'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
-      'https://www.googleapis.com/auth/plus.me': Know who you are on Google
-      'https://www.googleapis.com/auth/plus.media.upload': Send your photos and videos to Google+
-      'https://www.googleapis.com/auth/plus.profiles.read': View your own Google+ profile and profiles visible to you
-      'https://www.googleapis.com/auth/plus.stream.read': 'View your Google+ posts, comments, and stream'
-      'https://www.googleapis.com/auth/plus.stream.write': 'Manage your Google+ posts, comments, and stream'
-      'https://www.googleapis.com/auth/userinfo.email': View your email address
-      'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -130,15 +109,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.me'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.stream.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.read'
       tags:
         - activities
@@ -187,11 +160,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.stream.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.read'
       tags:
         - comments
@@ -224,11 +193,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.stream.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.write'
       tags:
         - comments
@@ -270,11 +235,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.stream.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.read'
       tags:
         - people
@@ -302,11 +263,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.write'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - circles
@@ -327,11 +284,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - circles
@@ -364,11 +317,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.write'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - circles
@@ -393,11 +342,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.write'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - circles
@@ -431,11 +376,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.write'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - circles
@@ -467,11 +408,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - people
@@ -514,11 +451,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.write'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - circles
@@ -540,11 +473,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.stream.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.read'
       tags:
         - comments
@@ -574,23 +503,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.profiles.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.profiles.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/userinfo.email'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.profile'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
         - people
@@ -636,15 +555,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.me'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.stream.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.write'
       tags:
         - activities
@@ -684,15 +597,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.me'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.stream.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.stream.read'
       tags:
         - activities
@@ -733,15 +640,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - audiences
@@ -782,15 +683,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - circles
@@ -823,15 +718,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.write'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - circles
@@ -1044,15 +933,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.me'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.media.upload'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.media.upload'
       tags:
         - media
@@ -1099,15 +982,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.circles.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/plus.login'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/plus.login'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.me'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/plus.me'
       tags:
         - people

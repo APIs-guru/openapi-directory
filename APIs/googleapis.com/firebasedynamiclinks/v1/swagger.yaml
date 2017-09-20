@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Programmatically creates and manages Firebase Dynamic Links.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Firebase Dynamic Links
   version: v1
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://firebasedynamiclinks.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -33,18 +29,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -126,6 +114,39 @@ tags:
   - name: shortLinks
   - name: v1
 paths:
+  /v1/installAttribution:
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Get iOS strong/weak-match info for post-install attribution.
+      operationId: firebasedynamiclinks.installAttribution
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetIosPostInstallAttributionRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetIosPostInstallAttributionResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+      tags:
+        - v1
   /v1/shortLinks:
     parameters:
       - $ref: '#/parameters/upload_protocol'
@@ -166,8 +187,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/firebase'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/firebase'
       tags:
         - shortLinks
   '/v1/{dynamicLink}/linkStats':
@@ -194,8 +213,6 @@ paths:
             $ref: '#/definitions/DynamicLinkStats'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - v1
@@ -275,6 +292,27 @@ definitions:
         items:
           $ref: '#/definitions/DynamicLinkWarning'
         type: array
+    type: object
+  DeviceInfo:
+    description: Signals associated with the device making the request.
+    properties:
+      deviceModelName:
+        description: Device model name.
+        type: string
+      languageCode:
+        description: Device language code setting.
+        type: string
+      screenResolutionHeight:
+        description: Device display resolution height.
+        format: int64
+        type: string
+      screenResolutionWidth:
+        description: Device display resolution width.
+        format: int64
+        type: string
+      timezone:
+        description: Device timezone setting.
+        type: string
     type: object
   DynamicLinkEventStat:
     description: Dynamic Link event stat.
@@ -396,6 +434,135 @@ definitions:
         type: string
       warningMessage:
         description: The warning message to help developers improve their requests.
+        type: string
+    type: object
+  GetIosPostInstallAttributionRequest:
+    description: |-
+      Request for iSDK to execute strong match flow for post-install attribution.
+      This is meant for iOS requests only. Requests from other platforms will
+      not be honored.
+    properties:
+      appInstallationTime:
+        description: |-
+          App installation epoch time (https://en.wikipedia.org/wiki/Unix_time).
+          This is a client signal for a more accurate weak match.
+        format: int64
+        type: string
+      bundleId:
+        description: APP bundle ID.
+        type: string
+      device:
+        $ref: '#/definitions/DeviceInfo'
+        description: Device information.
+      iosVersion:
+        description: |-
+          iOS version, ie: 9.3.5.
+          Consider adding "build".
+        type: string
+      retrievalMethod:
+        description: |-
+          App post install attribution retrieval information. Disambiguates
+          mechanism (iSDK or developer invoked) to retrieve payload from
+          clicked link.
+        enum:
+          - UNKNOWN_PAYLOAD_RETRIEVAL_METHOD
+          - IMPLICIT_WEAK_MATCH
+          - EXPLICIT_WEAK_MATCH
+          - EXPLICIT_STRONG_AFTER_WEAK_MATCH
+        type: string
+      sdkVersion:
+        description: Google SDK version.
+        type: string
+      uniqueMatchLinkToCheck:
+        description: |-
+          Possible unique matched link that server need to check before performing
+          fingerprint match. If passed link is short server need to expand the link.
+          If link is long server need to vslidate the link.
+        type: string
+      visualStyle:
+        description: |-
+          Strong match page information. Disambiguates between default UI and
+          custom page to present when strong match succeeds/fails to find cookie.
+        enum:
+          - UNKNOWN_VISUAL_STYLE
+          - DEFAULT_STYLE
+          - CUSTOM_STYLE
+        type: string
+    type: object
+  GetIosPostInstallAttributionResponse:
+    description: Response for iSDK to execute strong match flow for post-install attribution.
+    properties:
+      appMinimumVersion:
+        description: |-
+          The minimum version for app, specified by dev through ?imv= parameter.
+          Return to iSDK to allow app to evaluate if current version meets this.
+        type: string
+      attributionConfidence:
+        description: The confidence of the returned attribution.
+        enum:
+          - UNKNOWN_ATTRIBUTION_CONFIDENCE
+          - WEAK
+          - DEFAULT
+          - UNIQUE
+        type: string
+      deepLink:
+        description: |-
+          The deep-link attributed post-install via one of several techniques
+          (fingerprint, copy unique).
+        type: string
+      externalBrowserDestinationLink:
+        description: |-
+          User-agent specific custom-scheme URIs for iSDK to open. This will be set
+          according to the user-agent tha the click was originally made in. There is
+          no Safari-equivalent custom-scheme open URLs.
+          ie: googlechrome://www.example.com
+          ie: firefox://open-url?url=http://www.example.com
+          ie: opera-http://example.com
+        type: string
+      fallbackLink:
+        description: |-
+          The link to navigate to update the app if min version is not met.
+          This is either (in order): 1) fallback link (from ?ifl= parameter, if
+          specified by developer) or 2) AppStore URL (from ?isi= parameter, if
+          specified), or 3) the payload link (from required link= parameter).
+        type: string
+      invitationId:
+        description: |-
+          Invitation ID attributed post-install via one of several techniques
+          (fingerprint, copy unique).
+        type: string
+      isStrongMatchExecutable:
+        description: |-
+          Instruction for iSDK to attemmpt to perform strong match. For instance,
+          if browser does not support/allow cookie or outside of support browsers,
+          this will be false.
+        type: boolean
+      matchMessage:
+        description: |-
+          Describes why match failed, ie: "discarded due to low confidence".
+          This message will be publicly visible.
+        type: string
+      requestedLink:
+        description: |-
+          Entire FDL (short or long) attributed post-install via one of several
+          techniques (fingerprint, copy unique).
+        type: string
+      resolvedLink:
+        description: |-
+          The entire FDL, expanded from a short link. It is the same as the
+          requested_link, if it is long. Parameters from this should not be
+          used directly (ie: server can default utm_[campaign|medium|source]
+          to a value when requested_link lack them, server determine the best
+          fallback_link when requested_link specifies >1 fallback links).
+        type: string
+      utmCampaign:
+        description: Scion campaign value to be propagated by iSDK to Scion at post-install.
+        type: string
+      utmMedium:
+        description: Scion medium value to be propagated by iSDK to Scion at post-install.
+        type: string
+      utmSource:
+        description: Scion source value to be propagated by iSDK to Scion at post-install.
         type: string
     type: object
   GooglePlayAnalytics:

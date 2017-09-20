@@ -25,6 +25,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       esi-assets.read_assets.v1: EVE SSO scope esi-assets.read_assets.v1
+      esi-assets.read_corporation_assets.v1: EVE SSO scope esi-assets.read_corporation_assets.v1
       esi-bookmarks.read_character_bookmarks.v1: EVE SSO scope esi-bookmarks.read_character_bookmarks.v1
       esi-calendar.read_calendar_events.v1: EVE SSO scope esi-calendar.read_calendar_events.v1
       esi-calendar.respond_calendar_events.v1: EVE SSO scope esi-calendar.respond_calendar_events.v1
@@ -43,7 +44,9 @@ securityDefinitions:
       esi-clones.read_clones.v1: EVE SSO scope esi-clones.read_clones.v1
       esi-clones.read_implants.v1: EVE SSO scope esi-clones.read_implants.v1
       esi-contracts.read_character_contracts.v1: EVE SSO scope esi-contracts.read_character_contracts.v1
+      esi-corporations.read_contacts.v1: EVE SSO scope esi-corporations.read_contacts.v1
       esi-corporations.read_corporation_membership.v1: EVE SSO scope esi-corporations.read_corporation_membership.v1
+      esi-corporations.read_divisions.v1: EVE SSO scope esi-corporations.read_divisions.v1
       esi-corporations.read_structures.v1: EVE SSO scope esi-corporations.read_structures.v1
       esi-corporations.track_members.v1: EVE SSO scope esi-corporations.track_members.v1
       esi-corporations.write_structures.v1: EVE SSO scope esi-corporations.write_structures.v1
@@ -969,6 +972,7 @@ paths:
       parameters:
         - $ref: '#/parameters/character_id'
         - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
         - $ref: '#/parameters/token'
         - $ref: '#/parameters/user_agent'
         - $ref: '#/parameters/X-User-Agent'
@@ -993,6 +997,11 @@ paths:
             Last-Modified:
               description: RFC7231 formatted datetime string
               type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
           schema:
             description: 200 ok array
             items:
@@ -1010,31 +1019,21 @@ paths:
                 location_flag:
                   description: location_flag string
                   enum:
+                    - AssetSafety
                     - AutoFit
                     - Cargo
                     - CorpseBay
-                    - DroneBay
-                    - FleetHangar
                     - Deliveries
-                    - HiddenModifiers
+                    - DroneBay
+                    - FighterBay
+                    - FighterTube0
+                    - FighterTube1
+                    - FighterTube2
+                    - FighterTube3
+                    - FighterTube4
+                    - FleetHangar
                     - Hangar
                     - HangarAll
-                    - LoSlot0
-                    - LoSlot1
-                    - LoSlot2
-                    - LoSlot3
-                    - LoSlot4
-                    - LoSlot5
-                    - LoSlot6
-                    - LoSlot7
-                    - MedSlot0
-                    - MedSlot1
-                    - MedSlot2
-                    - MedSlot3
-                    - MedSlot4
-                    - MedSlot5
-                    - MedSlot6
-                    - MedSlot7
                     - HiSlot0
                     - HiSlot1
                     - HiSlot2
@@ -1043,10 +1042,26 @@ paths:
                     - HiSlot5
                     - HiSlot6
                     - HiSlot7
-                    - AssetSafety
-                    - Locked
-                    - Unlocked
+                    - HiddenModifiers
                     - Implant
+                    - LoSlot0
+                    - LoSlot1
+                    - LoSlot2
+                    - LoSlot3
+                    - LoSlot4
+                    - LoSlot5
+                    - LoSlot6
+                    - LoSlot7
+                    - Locked
+                    - MedSlot0
+                    - MedSlot1
+                    - MedSlot2
+                    - MedSlot3
+                    - MedSlot4
+                    - MedSlot5
+                    - MedSlot6
+                    - MedSlot7
+                    - Module
                     - QuafeBay
                     - RigSlot0
                     - RigSlot1
@@ -1057,20 +1072,20 @@ paths:
                     - RigSlot6
                     - RigSlot7
                     - ShipHangar
+                    - SpecializedAmmoHold
+                    - SpecializedCommandCenterHold
                     - SpecializedFuelBay
-                    - SpecializedOreHold
                     - SpecializedGasHold
+                    - SpecializedIndustrialShipHold
+                    - SpecializedLargeShipHold
+                    - SpecializedMaterialBay
+                    - SpecializedMediumShipHold
                     - SpecializedMineralHold
+                    - SpecializedOreHold
+                    - SpecializedPlanetaryCommoditiesHold
                     - SpecializedSalvageHold
                     - SpecializedShipHold
                     - SpecializedSmallShipHold
-                    - SpecializedMediumShipHold
-                    - SpecializedLargeShipHold
-                    - SpecializedIndustrialShipHold
-                    - SpecializedAmmoHold
-                    - SpecializedCommandCenterHold
-                    - SpecializedPlanetaryCommoditiesHold
-                    - SpecializedMaterialBay
                     - SubSystemBay
                     - SubSystemSlot0
                     - SubSystemSlot1
@@ -1080,13 +1095,7 @@ paths:
                     - SubSystemSlot5
                     - SubSystemSlot6
                     - SubSystemSlot7
-                    - FighterBay
-                    - FighterTube0
-                    - FighterTube1
-                    - FighterTube2
-                    - FighterTube3
-                    - FighterTube4
-                    - Module
+                    - Unlocked
                     - Wardrobe
                   title: get_characters_character_id_assets_location_flag
                   type: string
@@ -1122,7 +1131,7 @@ paths:
                 - is_singleton
               title: get_characters_character_id_assets_200_ok
               type: object
-            maxItems: 100000
+            maxItems: 5000
             title: get_characters_character_id_assets_ok
             type: array
         '403':
@@ -1737,7 +1746,7 @@ paths:
   '/characters/{character_id}/calendar/':
     get:
       description: |-
-        Get 50 event summaries from the calendar. If no event ID is given, the resource will return the next 50 chronological event summaries from now. If an event ID is specified, it will return the next 50 chronological event summaries from after that event.
+        Get 50 event summaries from the calendar. If no from_event ID is given, the resource will return the next 50 chronological event summaries from now. If a from_event ID is specified, it will return the next 50 chronological event summaries from after that event.
 
         ---
         Alternate route: `/v1/characters/{character_id}/calendar/`
@@ -2050,6 +2059,101 @@ paths:
       x-alternate-versions:
         - dev
         - v3
+  '/characters/{character_id}/calendar/{event_id}/attendees/':
+    get:
+      description: |-
+        Get all invited attendees for a given event
+
+        ---
+        Alternate route: `/v1/characters/{character_id}/calendar/{event_id}/attendees/`
+
+        Alternate route: `/dev/characters/{character_id}/calendar/{event_id}/attendees/`
+
+        Alternate route: `/legacy/characters/{character_id}/calendar/{event_id}/attendees/`
+
+        ---
+        This route is cached for up to 600 seconds
+      operationId: get_characters_character_id_calendar_event_id_attendees
+      parameters:
+        - $ref: '#/parameters/character_id'
+        - $ref: '#/parameters/datasource'
+        - description: The id of the event requested
+          format: int32
+          in: path
+          name: event_id
+          required: true
+          type: integer
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of attendees
+          examples:
+            application/json:
+              - character_id: 2112625428
+                event_response: accepted
+              - character_id: 95465499
+                event_response: tentative
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: List of attendees for a given event
+            items:
+              description: character_id and response of an attendee
+              properties:
+                character_id:
+                  description: character_id integer
+                  format: int32
+                  title: get_characters_character_id_calendar_event_id_attendees_character_id
+                  type: integer
+                event_response:
+                  description: event_response string
+                  enum:
+                    - declined
+                    - not_responded
+                    - accepted
+                    - tentative
+                  title: get_characters_character_id_calendar_event_id_attendees_event_response
+                  type: string
+              title: get_characters_character_id_calendar_event_id_attendees_200_ok
+              type: object
+            maxItems: 100
+            title: get_characters_character_id_calendar_event_id_attendees_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-calendar.read_calendar_events.v1
+      summary: Get attendees
+      tags:
+        - Calendar
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 600
   '/characters/{character_id}/chat_channels/':
     get:
       description: |-
@@ -3107,7 +3211,7 @@ paths:
         - $ref: '#/parameters/X-User-Agent'
       responses:
         '200':
-          description: A list of contracts
+          description: A list of bids
           examples:
             application/json:
               - amount: 1.23
@@ -3213,7 +3317,7 @@ paths:
         - $ref: '#/parameters/X-User-Agent'
       responses:
         '200':
-          description: A list of contracts
+          description: A list of items
           examples:
             application/json:
               - is_included: true
@@ -4340,7 +4444,7 @@ paths:
       x-cached-seconds: 5
   '/characters/{character_id}/loyalty/points/':
     get:
-      description: |
+      description: |-
         Return a list of loyalty points for all corporations the character has worked for
 
         ---
@@ -4349,6 +4453,9 @@ paths:
         Alternate route: `/legacy/characters/{character_id}/loyalty/points/`
 
         Alternate route: `/dev/characters/{character_id}/loyalty/points/`
+
+        ---
+        This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_loyalty_points
       parameters:
         - $ref: '#/parameters/character_id'
@@ -4363,6 +4470,16 @@ paths:
             application/json:
               - corporation_id: 123
                 loyalty_points: 100
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
           schema:
             description: 200 ok array
             items:
@@ -4410,6 +4527,7 @@ paths:
         - dev
         - legacy
         - v1
+      x-cached-seconds: 3600
   '/characters/{character_id}/mail/':
     get:
       description: |-
@@ -5529,6 +5647,301 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+  '/characters/{character_id}/notifications/':
+    get:
+      description: |-
+        Return character notifications
+
+        ---
+        Alternate route: `/v1/characters/{character_id}/notifications/`
+
+        Alternate route: `/legacy/characters/{character_id}/notifications/`
+
+        Alternate route: `/dev/characters/{character_id}/notifications/`
+
+        ---
+        This route is cached for up to 1800 seconds
+      operationId: get_characters_character_id_notifications
+      parameters:
+        - $ref: '#/parameters/character_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: Returns your recent notifications
+          examples:
+            application/json:
+              - is_read: true
+                notification_id: 1
+                sender_id: 1000132
+                sender_type: corporation
+                text: |
+                  amount: 3731016.4000000004
+                  itemID: 1024881021663
+                  payout: 1
+                timestamp: '2017-08-16T10:08:00Z'
+                type: InsurancePayoutMsg
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                is_read:
+                  description: is_read boolean
+                  title: get_characters_character_id_notifications_is_read
+                  type: boolean
+                notification_id:
+                  description: notification_id integer
+                  format: int64
+                  title: get_characters_character_id_notifications_notification_id
+                  type: integer
+                sender_id:
+                  description: sender_id integer
+                  format: int32
+                  title: get_characters_character_id_notifications_sender_id
+                  type: integer
+                sender_type:
+                  description: sender_type string
+                  enum:
+                    - character
+                    - corporation
+                    - alliance
+                    - faction
+                  title: get_characters_character_id_notifications_sender_type
+                  type: string
+                text:
+                  description: text string
+                  title: get_characters_character_id_notifications_text
+                  type: string
+                timestamp:
+                  description: timestamp string
+                  format: date-time
+                  title: get_characters_character_id_notifications_timestamp
+                  type: string
+                type:
+                  description: type string
+                  enum:
+                    - AcceptedAlly
+                    - AcceptedSurrender
+                    - AllAnchoringMsg
+                    - AllMaintenanceBillMsg
+                    - AllStrucInvulnerableMsg
+                    - AllStructVulnerableMsg
+                    - AllWarCorpJoinedAllianceMsg
+                    - AllWarDeclaredMsg
+                    - AllWarInvalidatedMsg
+                    - AllWarRetractedMsg
+                    - AllWarSurrenderMsg
+                    - AllianceCapitalChanged
+                    - AllyContractCancelled
+                    - AllyJoinedWarAggressorMsg
+                    - AllyJoinedWarAllyMsg
+                    - AllyJoinedWarDefenderMsg
+                    - BattlePunishFriendlyFire
+                    - BillOutOfMoneyMsg
+                    - BillPaidCorpAllMsg
+                    - BountyClaimMsg
+                    - BountyESSShared
+                    - BountyESSTaken
+                    - BountyPlacedAlliance
+                    - BountyPlacedChar
+                    - BountyPlacedCorp
+                    - BountyYourBountyClaimed
+                    - BuddyConnectContactAdd
+                    - CharAppAcceptMsg
+                    - CharAppRejectMsg
+                    - CharAppWithdrawMsg
+                    - CharLeftCorpMsg
+                    - CharMedalMsg
+                    - CharTerminationMsg
+                    - CloneActivationMsg
+                    - CloneActivationMsg2
+                    - CloneMovedMsg
+                    - CloneRevokedMsg1
+                    - CloneRevokedMsg2
+                    - ContactAdd
+                    - ContactEdit
+                    - ContainerPasswordMsg
+                    - CorpAllBillMsg
+                    - CorpAppAcceptMsg
+                    - CorpAppInvitedMsg
+                    - CorpAppNewMsg
+                    - CorpAppRejectCustomMsg
+                    - CorpAppRejectMsg
+                    - CorpDividendMsg
+                    - CorpFriendlyFireDisableTimerCompleted
+                    - CorpFriendlyFireDisableTimerStarted
+                    - CorpFriendlyFireEnableTimerCompleted
+                    - CorpFriendlyFireEnableTimerStarted
+                    - CorpKicked
+                    - CorpLiquidationMsg
+                    - CorpNewCEOMsg
+                    - CorpNewsMsg
+                    - CorpOfficeExpirationMsg
+                    - CorpStructLostMsg
+                    - CorpTaxChangeMsg
+                    - CorpVoteCEORevokedMsg
+                    - CorpVoteMsg
+                    - CorpWarDeclaredMsg
+                    - CorpWarFightingLegalMsg
+                    - CorpWarInvalidatedMsg
+                    - CorpWarRetractedMsg
+                    - CorpWarSurrenderMsg
+                    - CustomsMsg
+                    - DeclareWar
+                    - DistrictAttacked
+                    - DustAppAcceptedMsg
+                    - EntosisCaptureStarted
+                    - FWAllianceKickMsg
+                    - FWAllianceWarningMsg
+                    - FWCharKickMsg
+                    - FWCharRankGainMsg
+                    - FWCharRankLossMsg
+                    - FWCharWarningMsg
+                    - FWCorpJoinMsg
+                    - FWCorpKickMsg
+                    - FWCorpLeaveMsg
+                    - FWCorpWarningMsg
+                    - FacWarCorpJoinRequestMsg
+                    - FacWarCorpJoinWithdrawMsg
+                    - FacWarCorpLeaveRequestMsg
+                    - FacWarCorpLeaveWithdrawMsg
+                    - FacWarLPDisqualifiedEvent
+                    - FacWarLPDisqualifiedKill
+                    - FacWarLPPayoutEvent
+                    - FacWarLPPayoutKill
+                    - GameTimeAdded
+                    - GameTimeReceived
+                    - GameTimeSent
+                    - GiftReceived
+                    - IHubDestroyedByBillFailure
+                    - IncursionCompletedMsg
+                    - IndustryTeamAuctionLost
+                    - IndustryTeamAuctionWon
+                    - InfrastructureHubBillAboutToExpire
+                    - InsuranceExpirationMsg
+                    - InsuranceFirstShipMsg
+                    - InsuranceInvalidatedMsg
+                    - InsuranceIssuedMsg
+                    - InsurancePayoutMsg
+                    - JumpCloneDeletedMsg1
+                    - JumpCloneDeletedMsg2
+                    - KillReportFinalBlow
+                    - KillReportVictim
+                    - KillRightAvailable
+                    - KillRightAvailableOpen
+                    - KillRightEarned
+                    - KillRightUnavailable
+                    - KillRightUnavailableOpen
+                    - KillRightUsed
+                    - LocateCharMsg
+                    - MadeWarMutual
+                    - MercOfferedNegotiationMsg
+                    - MissionOfferExpirationMsg
+                    - MissionTimeoutMsg
+                    - NPCStandingsGained
+                    - NPCStandingsLost
+                    - OfferedSurrender
+                    - OfferedToAlly
+                    - OldLscMessages
+                    - OperationFinished
+                    - OrbitalAttacked
+                    - OrbitalReinforced
+                    - OwnershipTransferred
+                    - ReimbursementMsg
+                    - ResearchMissionAvailableMsg
+                    - RetractsWar
+                    - SeasonalChallengeCompleted
+                    - SovAllClaimAquiredMsg
+                    - SovAllClaimLostMsg
+                    - SovCommandNodeEventStarted
+                    - SovCorpBillLateMsg
+                    - SovCorpClaimFailMsg
+                    - SovDisruptorMsg
+                    - SovStationEnteredFreeport
+                    - SovStructureDestroyed
+                    - SovStructureReinforced
+                    - SovStructureSelfDestructCancel
+                    - SovStructureSelfDestructFinished
+                    - SovStructureSelfDestructRequested
+                    - SovereigntyIHDamageMsg
+                    - SovereigntySBUDamageMsg
+                    - SovereigntyTCUDamageMsg
+                    - StationAggressionMsg1
+                    - StationAggressionMsg2
+                    - StationConquerMsg
+                    - StationServiceDisabled
+                    - StationServiceEnabled
+                    - StationStateChangeMsg
+                    - StoryLineMissionAvailableMsg
+                    - StructureAnchoring
+                    - StructureCourierContractChanged
+                    - StructureDestroyed
+                    - StructureFuelAlert
+                    - StructureItemsDelivered
+                    - StructureLostArmor
+                    - StructureLostShields
+                    - StructureOnline
+                    - StructureServicesOffline
+                    - StructureUnanchoring
+                    - StructureUnderAttack
+                    - TowerAlertMsg
+                    - TowerResourceAlertMsg
+                    - TransactionReversalMsg
+                    - TutorialMsg
+                    - WarAllyOfferDeclinedMsg
+                    - WarSurrenderDeclinedMsg
+                    - WarSurrenderOfferMsg
+                  title: get_characters_character_id_notifications_type
+                  type: string
+              required:
+                - notification_id
+                - type
+                - sender_id
+                - sender_type
+                - timestamp
+              title: get_characters_character_id_notifications_200_ok
+              type: object
+            maxItems: 500
+            title: get_characters_character_id_notifications_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-characters.read_notifications.v1
+      summary: Get character notifications
+      tags:
+        - Character
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 1800
   '/characters/{character_id}/notifications/contacts/':
     get:
       description: |-
@@ -6737,6 +7150,16 @@ paths:
           headers:
             Cache-Control:
               description: The caching mechanism used
+              type: string
+            Content-Language:
+              description: The language used in the response
+              enum:
+                - de
+                - en-us
+                - fr
+                - ja
+                - ru
+                - zh
               type: string
             Expires:
               description: RFC7231 formatted datetime string
@@ -8131,6 +8554,477 @@ paths:
         - dev
         - v2
       x-cached-seconds: 3600
+  '/corporations/{corporation_id}/assets/':
+    get:
+      description: |-
+        Return a list of the corporation assets
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/assets/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/assets/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/assets/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_assets
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of assets
+          examples:
+            application/json:
+              - is_singleton: true
+                item_id: 1000000016835
+                location_flag: Hangar
+                location_id: 60002959
+                location_type: station
+                type_id: 3516
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                is_singleton:
+                  description: is_singleton boolean
+                  title: get_corporations_corporation_id_assets_is_singleton
+                  type: boolean
+                item_id:
+                  description: item_id integer
+                  format: int64
+                  title: get_corporations_corporation_id_assets_item_id
+                  type: integer
+                location_flag:
+                  description: location_flag string
+                  enum:
+                    - AssetSafety
+                    - AutoFit
+                    - Bonus
+                    - Booster
+                    - BoosterBay
+                    - Capsule
+                    - Cargo
+                    - CorpDeliveries
+                    - CorpSAG1
+                    - CorpSAG2
+                    - CorpSAG3
+                    - CorpSAG4
+                    - CorpSAG5
+                    - CorpSAG6
+                    - CorpSAG7
+                    - CrateLoot
+                    - Deliveries
+                    - DroneBay
+                    - DustBattle
+                    - DustDatabank
+                    - FighterBay
+                    - FighterTube0
+                    - FighterTube1
+                    - FighterTube2
+                    - FighterTube3
+                    - FighterTube4
+                    - FleetHangar
+                    - Hangar
+                    - HangarAll
+                    - HiSlot0
+                    - HiSlot1
+                    - HiSlot2
+                    - HiSlot3
+                    - HiSlot4
+                    - HiSlot5
+                    - HiSlot6
+                    - HiSlot7
+                    - HiddenModifers
+                    - Implant
+                    - Impounded
+                    - JunkyardReprocessed
+                    - JunkyardTrashed
+                    - LoSlot0
+                    - LoSlot1
+                    - LoSlot2
+                    - LoSlot3
+                    - LoSlot4
+                    - LoSlot5
+                    - LoSlot6
+                    - LoSlot7
+                    - Locked
+                    - MedSlot0
+                    - MedSlot1
+                    - MedSlot2
+                    - MedSlot3
+                    - MedSlot4
+                    - MedSlot5
+                    - MedSlot6
+                    - MedSlot7
+                    - OfficeFolder
+                    - Pilot
+                    - PlanetSurface
+                    - QuafeBay
+                    - Reward
+                    - RigSlot0
+                    - RigSlot1
+                    - RigSlot2
+                    - RigSlot3
+                    - RigSlot4
+                    - RigSlot5
+                    - RigSlot6
+                    - RigSlot7
+                    - SecondaryStorage
+                    - ServiceSlot0
+                    - ServiceSlot1
+                    - ServiceSlot2
+                    - ServiceSlot3
+                    - ServiceSlot4
+                    - ServiceSlot5
+                    - ServiceSlot6
+                    - ServiceSlot7
+                    - ShipHangar
+                    - ShipOffline
+                    - Skill
+                    - SkillInTraining
+                    - SpecializedAmmoHold
+                    - SpecializedCommandCenterHold
+                    - SpecializedFuelBay
+                    - SpecializedGasHold
+                    - SpecializedIndustrialShipHold
+                    - SpecializedLargeShipHold
+                    - SpecializedMaterialBay
+                    - SpecializedMediumShipHold
+                    - SpecializedMineralHold
+                    - SpecializedOreHold
+                    - SpecializedPlanetaryCommoditiesHold
+                    - SpecializedSalvageHold
+                    - SpecializedShipHold
+                    - SpecializedSmallShipHold
+                    - StructureActive
+                    - StructureFuel
+                    - StructureInactive
+                    - StructureOffline
+                    - SubSystemSlot0
+                    - SubSystemSlot1
+                    - SubSystemSlot2
+                    - SubSystemSlot3
+                    - SubSystemSlot4
+                    - SubSystemSlot5
+                    - SubSystemSlot6
+                    - SubSystemSlot7
+                    - SubsystemBay
+                    - Unlocked
+                    - Wallet
+                    - Wardrobe
+                  title: get_corporations_corporation_id_assets_location_flag
+                  type: string
+                location_id:
+                  description: location_id integer
+                  format: int64
+                  title: get_corporations_corporation_id_assets_location_id
+                  type: integer
+                location_type:
+                  description: location_type string
+                  enum:
+                    - station
+                    - solar_system
+                    - other
+                  title: get_corporations_corporation_id_assets_location_type
+                  type: string
+                quantity:
+                  description: quantity integer
+                  format: int32
+                  title: get_corporations_corporation_id_assets_quantity
+                  type: integer
+                type_id:
+                  description: type_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_assets_type_id
+                  type: integer
+              required:
+                - type_id
+                - location_id
+                - location_type
+                - item_id
+                - location_flag
+                - is_singleton
+              title: get_corporations_corporation_id_assets_200_ok
+              type: object
+            maxItems: 5000
+            title: get_corporations_corporation_id_assets_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-assets.read_corporation_assets.v1
+      summary: Get corporation assets
+      tags:
+        - Assets
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
+  '/corporations/{corporation_id}/contacts/':
+    get:
+      description: |-
+        Return contacts of a corporation
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/contacts/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/contacts/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/contacts/`
+
+        ---
+        This route is cached for up to 300 seconds
+      operationId: get_corporations_corporation_id_contacts
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of contacts
+          examples:
+            application/json:
+              - contact_id: 123
+                contact_type: character
+                is_watched: true
+                standing: 10
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                contact_id:
+                  description: contact_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_contacts_contact_id
+                  type: integer
+                contact_type:
+                  description: contact_type string
+                  enum:
+                    - character
+                    - corporation
+                    - alliance
+                    - faction
+                  title: get_corporations_corporation_id_contacts_contact_type
+                  type: string
+                is_watched:
+                  description: Whether this contact is being watched
+                  title: get_corporations_corporation_id_contacts_is_watched
+                  type: boolean
+                label_id:
+                  description: Custom label of the contact
+                  format: int64
+                  title: get_corporations_corporation_id_contacts_label_id
+                  type: integer
+                standing:
+                  description: Standing of the contact
+                  format: float
+                  title: get_corporations_corporation_id_contacts_standing
+                  type: number
+              required:
+                - standing
+                - contact_type
+                - contact_id
+              title: get_corporations_corporation_id_contacts_200_ok
+              type: object
+            maxItems: 200
+            title: get_corporations_corporation_id_contacts_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_contacts.v1
+      summary: Get corporation contacts
+      tags:
+        - Contacts
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 300
+      x-required-roles: []
+  '/corporations/{corporation_id}/divisions/':
+    get:
+      description: |-
+        Return corporation hangar and wallet division names, only show if a division is not using the default name
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/divisions/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/divisions/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/divisions/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_divisions
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of corporation division names
+          examples:
+            application/json:
+              hangar:
+                - division: 1
+                  name: Awesome Hangar 1
+              wallet:
+                - division: 1
+                  name: Rich Wallet 1
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok object
+            properties:
+              hangar:
+                description: hangar array
+                items:
+                  description: hangar object
+                  properties:
+                    division:
+                      description: division integer
+                      format: int32
+                      maximum: 7
+                      minimum: 1
+                      title: get_corporations_corporation_id_divisions_division
+                      type: integer
+                    name:
+                      description: name string
+                      maxLength: 50
+                      title: get_corporations_corporation_id_divisions_name
+                      type: string
+                  title: get_corporations_corporation_id_divisions_hangar
+                  type: object
+                maxItems: 7
+                title: get_corporations_corporation_id_divisions_hangar
+                type: array
+              wallet:
+                description: wallet array
+                items:
+                  description: wallet object
+                  properties:
+                    division:
+                      description: division integer
+                      format: int32
+                      maximum: 7
+                      minimum: 1
+                      title: get_corporations_corporation_id_divisions_division
+                      type: integer
+                    name:
+                      description: name string
+                      maxLength: 50
+                      title: get_corporations_corporation_id_divisions_name
+                      type: string
+                  title: get_corporations_corporation_id_divisions_wallet
+                  type: object
+                maxItems: 7
+                title: get_corporations_corporation_id_divisions_wallet
+                type: array
+            title: get_corporations_corporation_id_divisions_ok
+            type: object
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_divisions.v1
+      summary: Get corporation divisions
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/icons/':
     get:
       description: |-
@@ -8308,6 +9202,8 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 3600
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/members/':
     get:
       description: |-
@@ -8385,6 +9281,74 @@ paths:
         - legacy
         - v2
       x-cached-seconds: 3600
+  '/corporations/{corporation_id}/members/limit/':
+    get:
+      description: |-
+        Return a corporation's member limit, not including CEO himself
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/members/limit/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/members/limit/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/members/limit/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_members_limit
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: The corporation's member limit
+          examples:
+            application/json: 40
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: 200 ok integer
+            format: int32
+            title: get_corporations_corporation_id_members_limit_ok
+            type: integer
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.track_members.v1
+      summary: Get corporation member limit
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/membertracking/':
     get:
       description: |-
@@ -9491,7 +10455,7 @@ paths:
         Alternate route: `/dev/corporations/{corporation_id}/wallets/{division}/journal/`
 
         ---
-        This route is cached for up to 300 seconds
+        This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id_wallets_division_journal
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -9812,7 +10776,155 @@ paths:
         - dev
         - legacy
         - v1
-      x-cached-seconds: 300
+      x-cached-seconds: 3600
+  '/corporations/{corporation_id}/wallets/{division}/transactions/':
+    get:
+      description: |-
+        Get wallet transactions of a corporation
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/wallets/{division}/transactions/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/wallets/{division}/transactions/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/wallets/{division}/transactions/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_wallets_division_transactions
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - description: Wallet key of the division to fetch journals from
+          format: int32
+          in: path
+          maximum: 7
+          minimum: 1
+          name: division
+          required: true
+          type: integer
+        - description: Only show journal entries happened before the transaction referenced by this id
+          format: int64
+          in: query
+          name: from_id
+          required: false
+          type: integer
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: Wallet transactions
+          examples:
+            application/json:
+              - client_id: 54321
+                date: '2016-10-24T09:00:00Z'
+                is_buy: true
+                journal_ref_id: 67890
+                location_id: 60014719
+                quantity: 1
+                transaction_id: 1234567890
+                type_id: 587
+                unit_price: 1
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+          schema:
+            description: Wallet transactions
+            items:
+              description: wallet transaction
+              properties:
+                client_id:
+                  description: client_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_wallets_division_transactions_client_id
+                  type: integer
+                date:
+                  description: Date and time of transaction
+                  format: date-time
+                  title: get_corporations_corporation_id_wallets_division_transactions_date
+                  type: string
+                is_buy:
+                  description: is_buy boolean
+                  title: get_corporations_corporation_id_wallets_division_transactions_is_buy
+                  type: boolean
+                journal_ref_id:
+                  description: journal_ref_id integer
+                  format: int64
+                  title: get_corporations_corporation_id_wallets_division_transactions_journal_ref_id
+                  type: integer
+                location_id:
+                  description: location_id integer
+                  format: int64
+                  title: get_corporations_corporation_id_wallets_division_transactions_location_id
+                  type: integer
+                quantity:
+                  description: quantity integer
+                  format: int32
+                  title: get_corporations_corporation_id_wallets_division_transactions_quantity
+                  type: integer
+                transaction_id:
+                  description: Unique transaction ID
+                  format: int64
+                  title: get_corporations_corporation_id_wallets_division_transactions_transaction_id
+                  type: integer
+                type_id:
+                  description: type_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_wallets_division_transactions_type_id
+                  type: integer
+                unit_price:
+                  description: Amount paid per unit
+                  format: float
+                  title: get_corporations_corporation_id_wallets_division_transactions_unit_price
+                  type: integer
+              required:
+                - transaction_id
+                - date
+                - location_id
+                - type_id
+                - unit_price
+                - quantity
+                - client_id
+                - is_buy
+                - journal_ref_id
+              title: get_corporations_corporation_id_wallets_division_transactions_200_ok
+              type: object
+            maxItems: 2500
+            title: get_corporations_corporation_id_wallets_division_transactions_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-wallet.read_corporation_wallets.v1
+      summary: Get corporation wallet transactions
+      tags:
+        - Wallet
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
   /dogma/attributes/:
     get:
       description: |-
@@ -14225,6 +15337,80 @@ paths:
         - legacy
         - v1
       x-cached-seconds: 300
+  '/markets/{region_id}/types/':
+    get:
+      description: |-
+        Return a list of type IDs that have active orders in the region, for efficient market indexing.
+
+        ---
+        Alternate route: `/v1/markets/{region_id}/types/`
+
+        Alternate route: `/legacy/markets/{region_id}/types/`
+
+        Alternate route: `/dev/markets/{region_id}/types/`
+
+        ---
+        This route is cached for up to 600 seconds
+      operationId: get_markets_region_id_types
+      parameters:
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - description: Return statistics in this region
+          format: int32
+          in: path
+          name: region_id
+          required: true
+          type: integer
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: A list of type IDs
+          examples:
+            application/json:
+              - 587
+              - 593
+              - 597
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok integer
+              format: int32
+              title: get_markets_region_id_types_200_ok
+              type: integer
+            maxItems: 1000
+            title: get_markets_region_id_types_ok
+            type: array
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      summary: List type IDs relevant to a market
+      tags:
+        - Market
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 600
   /opportunities/groups/:
     get:
       description: |-
@@ -14747,6 +15933,16 @@ paths:
           headers:
             Cache-Control:
               description: The caching mechanism used
+              type: string
+            Content-Language:
+              description: The language used in the response
+              enum:
+                - de
+                - en-us
+                - fr
+                - ja
+                - ru
+                - zh
               type: string
             Expires:
               description: RFC7231 formatted datetime string

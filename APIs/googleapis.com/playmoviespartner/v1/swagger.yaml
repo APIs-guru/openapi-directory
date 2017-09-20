@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Gets the delivery status of titles for Google Play Movies Partners.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Play Movies Partner
   version: v1
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://playmoviespartner.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -33,18 +29,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/playmovies_partner.readonly': View the digital assets you publish on Google Play Movies and TV
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/playmovies_partner.readonly': View the digital assets you publish on Google Play Movies and TV
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -207,8 +195,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
       tags:
         - accounts
     parameters:
@@ -247,8 +233,6 @@ paths:
             $ref: '#/definitions/Avail'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
       tags:
         - accounts
@@ -341,8 +325,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
       tags:
         - accounts
     parameters:
@@ -385,8 +367,6 @@ paths:
             $ref: '#/definitions/Order'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
       tags:
         - accounts
@@ -491,8 +471,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
       tags:
         - accounts
     parameters:
@@ -540,8 +518,6 @@ paths:
             $ref: '#/definitions/StoreInfo'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
       tags:
         - accounts

@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: The Publishing API for Google Play Game Services.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Play Game Services Publishing
   version: v1configuration
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/gamesConfiguration/v1configuration/rest'
       version: v1
@@ -33,18 +29,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -107,8 +95,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - achievementConfigurations
     get:
@@ -127,8 +113,6 @@ paths:
             $ref: '#/definitions/AchievementConfiguration'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - achievementConfigurations
@@ -161,8 +145,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - achievementConfigurations
     put:
@@ -185,8 +167,6 @@ paths:
             $ref: '#/definitions/AchievementConfiguration'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - achievementConfigurations
@@ -217,8 +197,6 @@ paths:
             $ref: '#/definitions/AchievementConfigurationListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - achievementConfigurations
@@ -251,8 +229,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - achievementConfigurations
   '/applications/{applicationId}/leaderboards':
@@ -282,8 +258,6 @@ paths:
             $ref: '#/definitions/LeaderboardConfigurationListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - leaderboardConfigurations
@@ -315,8 +289,6 @@ paths:
             $ref: '#/definitions/LeaderboardConfiguration'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - leaderboardConfigurations
@@ -433,8 +405,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - imageConfigurations
   '/leaderboards/{leaderboardId}':
@@ -452,8 +422,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - leaderboardConfigurations
@@ -473,8 +441,6 @@ paths:
             $ref: '#/definitions/LeaderboardConfiguration'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - leaderboardConfigurations
@@ -507,8 +473,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - leaderboardConfigurations
     put:
@@ -531,8 +495,6 @@ paths:
             $ref: '#/definitions/LeaderboardConfiguration'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/androidpublisher'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - leaderboardConfigurations

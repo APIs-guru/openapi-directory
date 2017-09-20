@@ -9,10 +9,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Access source code repositories hosted by Google.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Source Repositories
   version: v1
   x-apiClientRegistration:
@@ -22,7 +18,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://sourcerepo.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -34,22 +30,13 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/source.full_control': Manage your source code repositories
       'https://www.googleapis.com/auth/source.read_only': View the contents of your source code repositories
       'https://www.googleapis.com/auth/source.read_write': Manage the contents of your source code repositories
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/source.read_only': View the contents of your source code repositories
-      'https://www.googleapis.com/auth/source.read_write': Manage the contents of your source code repositories
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -151,15 +138,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -183,15 +166,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -245,15 +224,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -314,15 +289,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -350,15 +321,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -417,15 +384,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -471,15 +434,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/source.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/source.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/source.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/source.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/source.read_write'
       tags:
         - projects
@@ -598,6 +557,14 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
+          This field is GOOGLE_INTERNAL.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -633,76 +600,6 @@ definitions:
           Required
         type: string
     type: object
-  CloudAuditOptions:
-    description: Write a Cloud Audit log
-    properties:
-      logName:
-        description: The log_name to populate in the Cloud Audit Record.
-        enum:
-          - UNSPECIFIED_LOG_NAME
-          - ADMIN_ACTIVITY
-          - DATA_ACCESS
-        type: string
-    type: object
-  Condition:
-    description: A condition to be met.
-    properties:
-      iam:
-        description: Trusted attributes supplied by the IAM system.
-        enum:
-          - NO_ATTR
-          - AUTHORITY
-          - ATTRIBUTION
-          - APPROVER
-          - JUSTIFICATION_TYPE
-        type: string
-      op:
-        description: An operator to apply the subject with.
-        enum:
-          - NO_OP
-          - EQUALS
-          - NOT_EQUALS
-          - IN
-          - NOT_IN
-          - DISCHARGED
-        type: string
-      svc:
-        description: Trusted attributes discharged by the service.
-        type: string
-      sys:
-        description: |-
-          Trusted attributes supplied by any service that owns resources and uses
-          the IAM system for access control.
-        enum:
-          - NO_ATTR
-          - REGION
-          - SERVICE
-          - NAME
-          - IP
-        type: string
-      value:
-        description: DEPRECATED. Use 'values' instead.
-        type: string
-      values:
-        description: The objects of the condition. This is mutually exclusive with 'value'.
-        items:
-          type: string
-        type: array
-    type: object
-  CounterOptions:
-    description: Options for counters
-    properties:
-      field:
-        description: The field value to attribute.
-        type: string
-      metric:
-        description: The metric to update.
-        type: string
-    type: object
-  DataAccessOptions:
-    description: Write a Data Access (Gin) log
-    properties: {}
-    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -715,6 +612,39 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
     type: object
   ListReposResponse:
     description: Response for ListRepos.  The size is not set in the returned repositories.
@@ -730,19 +660,6 @@ definitions:
         items:
           $ref: '#/definitions/Repo'
         type: array
-    type: object
-  LogConfig:
-    description: Specifies what kind of log the caller must write
-    properties:
-      cloudAudit:
-        $ref: '#/definitions/CloudAuditOptions'
-        description: Cloud audit options.
-      counter:
-        $ref: '#/definitions/CounterOptions'
-        description: Counter options.
-      dataAccess:
-        $ref: '#/definitions/DataAccessOptions'
-        description: Data access options.
     type: object
   MirrorConfig:
     description: |-
@@ -808,7 +725,6 @@ definitions:
       bindings:
         description: |-
           Associates a list of `members` to a `role`.
-          Multiple `bindings` must not be specified for the same `role`.
           `bindings` with no members will result in an error.
         items:
           $ref: '#/definitions/Binding'
@@ -829,20 +745,6 @@ definitions:
         type: string
       iamOwned:
         type: boolean
-      rules:
-        description: |-
-          If more than one rule is specified, the rules are applied in the following
-          manner:
-          - All matching LOG rules are always applied.
-          - If any DENY/DENY_WITH_LOG rule matches, permission is denied.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is
-            granted.
-            Logging will be applied if one or more matching rule requires logging.
-          - Otherwise, if no rule applies, permission is denied.
-        items:
-          $ref: '#/definitions/Rule'
-        type: array
       version:
         description: Version of the `Policy`. The default version is 0.
         format: int32
@@ -869,59 +771,6 @@ definitions:
       url:
         description: URL to clone the repository from Google Cloud Source Repositories.
         type: string
-    type: object
-  Rule:
-    description: A rule to be applied in a Policy.
-    properties:
-      action:
-        description: Required
-        enum:
-          - NO_ACTION
-          - ALLOW
-          - ALLOW_WITH_LOG
-          - DENY
-          - DENY_WITH_LOG
-          - LOG
-        type: string
-      conditions:
-        description: Additional restrictions that must be met
-        items:
-          $ref: '#/definitions/Condition'
-        type: array
-      description:
-        description: Human-readable description of the rule.
-        type: string
-      in:
-        description: |-
-          If one or more 'in' clauses are specified, the rule matches if
-          the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
-        items:
-          type: string
-        type: array
-      logConfig:
-        description: |-
-          The config returned to callers of tech.iam.IAM.CheckPolicy for any entries
-          that match the LOG action.
-        items:
-          $ref: '#/definitions/LogConfig'
-        type: array
-      notIn:
-        description: |-
-          If one or more 'not_in' clauses are specified, the rule matches
-          if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries.
-          The format for in and not_in entries is the same as for members in a
-          Binding (see google/iam/v1/policy.proto).
-        items:
-          type: string
-        type: array
-      permissions:
-        description: |-
-          A permission is a string of form '<service>.<resource type>.<verb>'
-          (e.g., 'storage.buckets.list'). A value of '*' matches all permissions,
-          and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.
-        items:
-          type: string
-        type: array
     type: object
   SetIamPolicyRequest:
     description: Request message for `SetIamPolicy` method.

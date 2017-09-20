@@ -106,39 +106,7 @@ paths:
         - RecoverableDatabases
       x-ms-examples:
         Get list of restorable dropped databases:
-          parameters:
-            api-version: '2014-04-01'
-            resourceGroupName: recoverabledatabasetest-1234
-            serverName: recoverabledatabasetest-7177
-            subscriptionId: 00000000-1111-2222-3333-444444444444
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/recoverabledatabasetest-1234/providers/Microsoft.Sql/servers/recoverabledatabasetest-7177/recoverabledatabases/recoverabledatabasetest-1235
-                    name: recoverabledatabasetest-1235
-                    properties:
-                      edition: Standard
-                      elasticPoolName: null
-                      lastAvailableBackupDate: '2017-05-26T01:06:29.78Z'
-                      serviceLevelObjective: S0
-                    type: Microsoft.Sql/servers/recoverabledatabases
-                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/recoverabledatabasetest-1234/providers/Microsoft.Sql/servers/recoverabledatabasetest-7177/recoverabledatabases/recoverabledatabasetest-9231
-                    name: recoverabledatabasetest-9231
-                    properties:
-                      edition: Premium
-                      elasticPoolName: null
-                      lastAvailableBackupDate: '2017-05-26T03:20:31.78Z'
-                      serviceLevelObjective: P1
-                    type: Microsoft.Sql/servers/recoverabledatabases
-                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/recoverabledatabasetest-1234/providers/Microsoft.Sql/servers/recoverabledatabasetest-7177/recoverabledatabases/recoverabledatabasetest-0342
-                    name: recoverabledatabasetest-0342
-                    properties:
-                      edition: Basic
-                      elasticPoolName: null
-                      lastAvailableBackupDate: '2017-05-24T02:06:18.78Z'
-                      serviceLevelObjective: Basic
-                    type: Microsoft.Sql/servers/recoverabledatabases
+          $ref: ../examples/RecoverableDatabaseList.json
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}':
     get:
@@ -163,23 +131,7 @@ paths:
         - RecoverableDatabases
       x-ms-examples:
         Get a recoverable database:
-          parameters:
-            api-version: '2014-04-01'
-            databaseName: recoverabledatabasetest-9187
-            resourceGroupName: recoverabledatabasetest-6852
-            serverName: recoverabledatabasetest-2080
-            subscriptionId: 00000000-1111-2222-3333-444444444444
-          responses:
-            '200':
-              body:
-                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/recoverabledatabasetest-6852/providers/Microsoft.Sql/servers/recoverabledatabasetest-2080/recoverabledatabases/recoverabledatabasetest-9187
-                name: recoverabledatabasetest-9187
-                properties:
-                  edition: Basic
-                  elasticPoolName: null
-                  lastAvailableBackupDate: '2017-05-26T01:06:29.78Z'
-                  serviceLevelObjective: Basic
-                type: Microsoft.Sql/servers/recoverabledatabases
+          $ref: ../examples/RecoverableDatabaseGet.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases':
     get:
       description: Gets a list of deleted databases that can be restored
@@ -198,41 +150,7 @@ paths:
         - RestorableDroppedDatabases
       x-ms-examples:
         Get list of restorable dropped databases:
-          parameters:
-            api-version: '2014-04-01'
-            resourceGroupName: restorabledroppeddatabasetest-1349
-            serverName: restorabledroppeddatabasetest-1840
-            subscriptionId: 00000000-1111-2222-3333-444444444444
-          responses:
-            '200':
-              body:
-                value:
-                  - id: '/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/restorabledroppeddatabasetest-1349/providers/Microsoft.Sql/servers/restorabledroppeddatabasetest-1840/restorableDroppedDatabases/restorabledroppeddatabasetest-1345,131403269876900000'
-                    location: Japan East
-                    name: 'restorabledroppeddatabasetest-1345,131403269876900000'
-                    properties:
-                      creationDate: '2017-02-10T00:56:19.2Z'
-                      databaseName: restorabledroppeddatabasetest-1345
-                      deletionDate: '2017-05-27T02:49:47.69Z'
-                      earliestRestoreDate: '2017-05-20T02:49:47.69Z'
-                      edition: Basic
-                      elasticPoolName: null
-                      maxSizeBytes: '2147483648'
-                      serviceLevelObjective: Basic
-                    type: Microsoft.Sql/servers/restorableDroppedDatabases
-                  - id: '/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/restorabledroppeddatabasetest-1349/providers/Microsoft.Sql/servers/restorabledroppeddatabasetest-1840/restorableDroppedDatabases/restorabledroppeddatabasetest-2764,131403249684030000'
-                    location: Japan East
-                    name: 'restorabledroppeddatabasetest-2764,131403249684030000'
-                    properties:
-                      creationDate: '2016-05-10T00:56:19.2Z'
-                      databaseName: restorabledroppeddatabasetest-2764
-                      deletionDate: '2017-05-27T02:16:08.403Z'
-                      earliestRestoreDate: '2017-04-21T02:49:47.69Z'
-                      edition: Standard
-                      elasticPoolName: null
-                      maxSizeBytes: '268435456000'
-                      serviceLevelObjective: S0
-                    type: Microsoft.Sql/servers/restorableDroppedDatabases
+          $ref: ../examples/RestorableDroppedDatabaseList.json
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases/{restorableDroppededDatabaseId}':
     get:
@@ -257,28 +175,7 @@ paths:
         - RestorableDroppedDatabases
       x-ms-examples:
         Get a restorable dropped database:
-          parameters:
-            api-version: '2014-04-01'
-            resourceGroupName: restorabledroppeddatabasetest-1257
-            restorableDroppededDatabaseId: 'restorabledroppeddatabasetest-7654,131403269876900000'
-            serverName: restorabledroppeddatabasetest-2389
-            subscriptionId: 00000000-1111-2222-3333-444444444444
-          responses:
-            '200':
-              body:
-                id: '/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/restorabledroppeddatabasetest-1257/providers/Microsoft.Sql/servers/restorabledroppeddatabasetest-2389/restorableDroppedDatabases/restorabledroppeddatabasetest-7654,131403269876900000'
-                location: Japan East
-                name: 'restorabledroppeddatabasetest-7654,131403269876900000'
-                properties:
-                  creationDate: '2017-02-10T00:56:19.2Z'
-                  databaseName: restorabledroppeddatabasetest-7654
-                  deletionDate: '2017-05-27T02:49:47.69Z'
-                  earliestRestoreDate: '2017-05-20T02:49:47.69Z'
-                  edition: Basic
-                  elasticPoolName: null
-                  maxSizeBytes: '2147483648'
-                  serviceLevelObjective: Basic
-                type: Microsoft.Sql/servers/restorableDroppedDatabases
+          $ref: ../examples/RestorableDroppedDatabaseGet.json
 definitions:
   ProxyResource:
     allOf:

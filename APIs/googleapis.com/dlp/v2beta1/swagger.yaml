@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'The Google Data Loss Prevention API provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: DLP
   version: v2beta1
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://dlp.googleapis.com/$discovery/rest?version=v2beta1'
       version: v1
@@ -33,18 +29,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -124,10 +112,46 @@ parameters:
     type: string
 tags:
   - name: content
+  - name: dataSource
   - name: inspect
   - name: riskAnalysis
   - name: rootCategories
 paths:
+  '/v2beta1/content:deidentify':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        De-identifies potentially sensitive info from a list of strings.
+        This method has limits on input size and output size.
+      operationId: dlp.content.deidentify
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GooglePrivacyDlpV2beta1DeidentifyContentRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GooglePrivacyDlpV2beta1DeidentifyContentResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - content
   '/v2beta1/content:inspect':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -160,8 +184,6 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectContentResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - content
@@ -198,10 +220,43 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - content
+  '/v2beta1/dataSource:analyze':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Schedules a job to compute risk analysis metrics over content in a Google
+        Cloud Platform repository.
+      operationId: dlp.dataSource.analyze
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GooglePrivacyDlpV2beta1AnalyzeDataSourceRiskRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleLongrunningOperation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - dataSource
   /v2beta1/inspect/operations:
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -235,8 +290,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - inspect
   /v2beta1/rootCategories:
@@ -258,8 +311,6 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2beta1ListRootCategoriesResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - rootCategories
@@ -303,8 +354,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - rootCategories
     parameters:
@@ -324,7 +373,7 @@ paths:
   '/v2beta1/{name}':
     delete:
       description: This method is not supported and the server returns `UNIMPLEMENTED`.
-      operationId: dlp.riskAnalysis.operations.delete
+      operationId: dlp.inspect.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -340,16 +389,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: dlp.riskAnalysis.operations.get
+      operationId: dlp.inspect.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -365,10 +412,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -390,18 +435,20 @@ paths:
       parameters:
         - description: |-
             Restricts findings to items that match. Supports info_type and likelihood.
-            <p>Examples:<br/>
-            <li>info_type=EMAIL_ADDRESS
-            <li>info_type=PHONE_NUMBER,EMAIL_ADDRESS
-            <li>likelihood=VERY_LIKELY
-            <li>likelihood=VERY_LIKELY,LIKELY
-            <li>info_type=EMAIL_ADDRESS,likelihood=VERY_LIKELY,LIKELY
+
+            Examples:
+
+            - info_type=EMAIL_ADDRESS
+            - info_type=PHONE_NUMBER,EMAIL_ADDRESS
+            - likelihood=VERY_LIKELY
+            - likelihood=VERY_LIKELY,LIKELY
+            - info_type=EMAIL_ADDRESS,likelihood=VERY_LIKELY,LIKELY
           in: query
           name: filter
           type: string
         - description: |-
             Identifier of the results set returned as metadata of
-            the longrunning operation created by a call to CreateInspectOperation.
+            the longrunning operation created by a call to InspectDataSource.
             Should be in the format of `inspect/results/{id}`.
           in: path
           name: name
@@ -428,8 +475,6 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2beta1ListInspectFindingsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - inspect
@@ -464,7 +509,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Cancels an operation. Use the get method to check whether the cancellation succeeded or whether the operation completed despite cancellation.
-      operationId: dlp.riskAnalysis.operations.cancel
+      operationId: dlp.inspect.operations.cancel
       parameters:
         - in: body
           name: body
@@ -484,10 +529,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
 definitions:
   GoogleLongrunningCancelOperationRequest:
     description: The request message for Operations.CancelOperation.
@@ -533,6 +576,16 @@ definitions:
         description: This field will contain an InspectOperationResult object.
         type: object
     type: object
+  GooglePrivacyDlpV2beta1AnalyzeDataSourceRiskRequest:
+    description: Request for creating a risk analysis operation.
+    properties:
+      privacyMetric:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1PrivacyMetric'
+        description: Privacy metric to compute.
+      sourceTable:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1BigQueryTable'
+        description: Input dataset to compute metrics over.
+    type: object
   GooglePrivacyDlpV2beta1BigQueryOptions:
     description: Options defining BigQuery table and row identifiers.
     properties:
@@ -567,6 +620,85 @@ definitions:
         description: Name of the table.
         type: string
     type: object
+  GooglePrivacyDlpV2beta1Bucket:
+    description: |-
+      Buckets represented as ranges, along with replacement values. Ranges must
+      be non-overlapping.
+    properties:
+      max:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        description: 'Upper bound of the range, exclusive; type must match min.'
+      min:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        description: |-
+          Lower bound of the range, inclusive. Type should be the same as max if
+          used.
+      replacementValue:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        description: |-
+          Replacement value for this bucket. If not provided
+          the default behavior will be to hyphenate the min-max range.
+    type: object
+  GooglePrivacyDlpV2beta1BucketingConfig:
+    description: |-
+      Generalization function that buckets values based on ranges. The ranges and
+      replacement values are dynamically provided by the user for custom behavior,
+      such as 1-30 -> LOW 31-65 -> MEDIUM 66-100 -> HIGH
+      This can be used on
+      data of type: number, long, string, timestamp.
+      If the bound `Value` type differs from the type of data being transformed, we
+      will first attempt converting the type of the data to be transformed to match
+      the type of the bound before comparing.
+    properties:
+      buckets:
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1Bucket'
+        type: array
+    type: object
+  GooglePrivacyDlpV2beta1CategoricalStatsConfig:
+    description: |-
+      Compute numerical stats over an individual column, including
+      number of distinct values and value count distribution.
+    properties:
+      field:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        description: |-
+          Field to compute categorical stats on. All column types are
+          supported except for arrays and structs. However, it may be more
+          informative to use NumericalStats when the field type is supported,
+          depending on the data.
+    type: object
+  GooglePrivacyDlpV2beta1CategoricalStatsHistogramBucket:
+    properties:
+      bucketSize:
+        description: Total number of records in this bucket.
+        format: int64
+        type: string
+      bucketValues:
+        description: |-
+          Sample of value frequencies in this bucket. The total number of
+          values returned per bucket is capped at 20.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1ValueFrequency'
+        type: array
+      valueFrequencyLowerBound:
+        description: Lower bound on the value frequency of the values in this bucket.
+        format: int64
+        type: string
+      valueFrequencyUpperBound:
+        description: Upper bound on the value frequency of the values in this bucket.
+        format: int64
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1CategoricalStatsResult:
+    description: Result of the categorical stats computation.
+    properties:
+      valueFrequencyHistogramBuckets:
+        description: Histogram of value frequencies in the column.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1CategoricalStatsHistogramBucket'
+        type: array
+    type: object
   GooglePrivacyDlpV2beta1CategoryDescription:
     description: Info Type Category description.
     properties:
@@ -575,6 +707,62 @@ definitions:
         type: string
       name:
         description: Internal name of the category.
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1CharacterMaskConfig:
+    description: |-
+      Partially mask a string by replacing a given number of characters with a
+      fixed character. Masking can start from the beginning or end of the string.
+      This can be used on data of any type (numbers, longs, and so on) and when
+      de-identifying structured data we'll attempt to preserve the original data's
+      type. (This allows you to take a long like 123 and modify it to a string like
+      **3.
+    properties:
+      charactersToIgnore:
+        description: |-
+          When masking a string, items in this list will be skipped when replacing.
+          For example, if your string is 555-555-5555 and you ask us to skip `-` and
+          mask 5 chars with * we would produce ***-*55-5555.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1CharsToIgnore'
+        type: array
+      maskingCharacter:
+        description: |-
+          Character to mask the sensitive values&mdash;for example, "*" for an
+          alphabetic string such as name, or "0" for a numeric string such as ZIP
+          code or credit card number. String must have length 1. If not supplied, we
+          will default to "*" for strings, 0 for digits.
+        type: string
+      numberToMask:
+        description: |-
+          Number of characters to mask. If not set, all matching chars will be
+          masked. Skipped characters do not count towards this tally.
+        format: int32
+        type: integer
+      reverseOrder:
+        description: |-
+          Mask characters in reverse order. For example, if `masking_character` is
+          '0', number_to_mask is 14, and `reverse_order` is false, then
+          1234-5678-9012-3456 -> 00000000000000-3456
+          If `masking_character` is '*', `number_to_mask` is 3, and `reverse_order`
+          is true, then 12345 -> 12***
+        type: boolean
+    type: object
+  GooglePrivacyDlpV2beta1CharsToIgnore:
+    description: |-
+      Characters to skip when doing deidentification of a value. These will be left
+      alone and skipped.
+    properties:
+      charactersToSkip:
+        type: string
+      commonCharactersToIgnore:
+        enum:
+          - CHARACTER_GROUP_UNSPECIFIED
+          - NUMERIC
+          - ALPHA_UPPER_CASE
+          - ALPHA_LOWER_CASE
+          - PUNCTUATION
+          - WHITESPACE
         type: string
     type: object
   GooglePrivacyDlpV2beta1CloudStorageKey:
@@ -619,6 +807,53 @@ definitions:
         format: float
         type: number
     type: object
+  GooglePrivacyDlpV2beta1Condition:
+    description: |-
+      The field type of `value` and `field` do not need to match to be
+      considered equal, but not all comparisons are possible.
+
+      A `value` of type:
+
+      - `string` can be compared against all other types
+      - `boolean` can only be compared against other booleans
+      - `integer` can be compared against doubles or a string if the string value
+      can be parsed as an integer.
+      - `double` can be compared against integers or a string if the string can
+      be parsed as a double.
+      - `Timestamp` can be compared against strings in RFC 3339 date string
+      format.
+      - `TimeOfDay` can be compared against timestamps and strings in the format
+      of 'HH:mm:ss'.
+
+      If we fail to compare do to type mismatch, a warning will be given and
+      the condition will evaluate to false.
+    properties:
+      field:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        description: 'Field within the record this condition is evaluated against. [required]'
+      operator:
+        description: 'Operator used to compare the field or info type to the value. [required]'
+        enum:
+          - RELATIONAL_OPERATOR_UNSPECIFIED
+          - EQUAL_TO
+          - NOT_EQUAL_TO
+          - GREATER_THAN
+          - LESS_THAN
+          - GREATER_THAN_OR_EQUALS
+          - LESS_THAN_OR_EQUALS
+          - EXISTS
+        type: string
+      value:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        description: 'Value to compare against. [Required, except for `EXISTS` tests.]'
+    type: object
+  GooglePrivacyDlpV2beta1Conditions:
+    properties:
+      conditions:
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1Condition'
+        type: array
+    type: object
   GooglePrivacyDlpV2beta1ContentItem:
     description: Container structure for the content to inspect.
     properties:
@@ -656,22 +891,130 @@ definitions:
           Optional location to store findings. The bucket must already exist and
           the Google APIs service account for DLP must have write permission to
           write to the given bucket.
-          <p>Results are split over multiple csv files with each file name matching
+          Results are split over multiple csv files with each file name matching
           the pattern "[operation_id]_[count].csv", for example
           `3094877188788974909_1.csv`. The `operation_id` matches the
           identifier for the Operation, and the `count` is a counter used for
-          tracking the number of files written. <p>The CSV file(s) contain the
-          following columns regardless of storage type scanned: <li>id <li>info_type
-          <li>likelihood <li>byte size of finding <li>quote <li>timestamp<br/>
-          <p>For Cloud Storage the next columns are: <li>file_path
-          <li>start_offset<br/>
-          <p>For Cloud Datastore the next columns are: <li>project_id
-          <li>namespace_id <li>path <li>column_name <li>offset<br/>
-          <p>For BigQuery the next columns are: <li>row_number <li>project_id
-          <li>dataset_id <li>table_id
+          tracking the number of files written.
+
+          The CSV file(s) contain the following columns regardless of storage type
+          scanned:
+          - id
+          - info_type
+          - likelihood
+          - byte size of finding
+          - quote
+          - timestamp
+
+          For Cloud Storage the next columns are:
+
+          - file_path
+          - start_offset
+
+          For Cloud Datastore the next columns are:
+
+          - project_id
+          - namespace_id
+          - path
+          - column_name
+          - offset
+
+          For BigQuery the next columns are:
+
+          - row_number
+          - project_id
+          - dataset_id
+          - table_id
       storageConfig:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1StorageConfig'
         description: Specification of the data set to process.
+    type: object
+  GooglePrivacyDlpV2beta1CryptoHashConfig:
+    description: |-
+      Pseudonymization method that generates surrogates via cryptographic hashing.
+      Uses SHA-256.
+      The key size must be either 32 or 64 bytes.
+      Outputs a 32 byte digest as an uppercase hex string
+      (for example, 41D1567F7F99F1DC2A5FAB886DEE5BEE).
+      Currently, only string and integer values can be hashed.
+    properties:
+      cryptoKey:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1CryptoKey'
+        description: The key used by the hash function.
+    type: object
+  GooglePrivacyDlpV2beta1CryptoKey:
+    description: |-
+      This is a data encryption key (DEK) (as opposed to
+      a key encryption key (KEK) stored by KMS).
+      When using KMS to wrap/unwrap DEKs, be sure to set an appropriate
+      IAM policy on the KMS CryptoKey (KEK) to ensure an attacker cannot
+      unwrap the data crypto key.
+    properties:
+      kmsWrapped:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1KmsWrappedCryptoKey'
+      transient:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1TransientCryptoKey'
+      unwrapped:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1UnwrappedCryptoKey'
+    type: object
+  GooglePrivacyDlpV2beta1CryptoReplaceFfxFpeConfig:
+    description: |-
+      Replaces an identifier with an surrogate using FPE with the FFX
+      mode of operation.
+      The identifier must be encoded as ASCII.
+      For a given crypto key and context, the same identifier will be
+      replaced with the same surrogate.
+      Note that a given identifier must be either the empty string or be at
+      least two characters long.
+    properties:
+      commonAlphabet:
+        enum:
+          - FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED
+          - NUMERIC
+          - HEXADECIMAL
+          - UPPER_CASE_ALPHA_NUMERIC
+          - ALPHA_NUMERIC
+        type: string
+      context:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        description: |-
+          The 'tweak', a context may be used for higher security since the same
+          identifier in two different contexts won't be given the same surrogate. If
+          the context is not set, a default tweak will be used.
+
+          If the context is set but:
+
+          1. there is no record present when transforming a given value or
+          1. the field is not present when transforming a given value,
+
+          a default tweak will be used.
+
+          Note that case (1) is expected when an `InfoTypeTransformation` is
+          applied to both structured and non-structured `ContentItem`s.
+          Currently, the referenced field may be of value type integer or string.
+
+          The tweak is constructed as a sequence of bytes in big endian byte order
+          such that:
+
+          - a 64 bit integer is encoded followed by a single byte of value 1
+          - a string is encoded in UTF-8 format followed by a single byte of value 2
+      cryptoKey:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1CryptoKey'
+        description: 'The key used by the encryption algorithm. [required]'
+      customAlphabet:
+        description: |-
+          This is supported by mapping these to the alphanumeric characters
+          that the FFX mode natively supports. This happens before/after
+          encryption/decryption.
+          Each character listed must appear only once.
+          Number of characters must be in the range [2, 62].
+          This must be encoded as ASCII.
+          The order of characters does not matter.
+        type: string
+      radix:
+        description: 'The native way to select the alphabet. Must be in the range [2, 62].'
+        format: int32
+        type: integer
     type: object
   GooglePrivacyDlpV2beta1DatastoreKey:
     description: Record key for a finding in Cloud Datastore.
@@ -699,12 +1042,125 @@ definitions:
           $ref: '#/definitions/GooglePrivacyDlpV2beta1Projection'
         type: array
     type: object
+  GooglePrivacyDlpV2beta1DeidentificationSummary:
+    description: High level summary of deidentification.
+    properties:
+      transformationSummaries:
+        description: Transformations applied to the dataset.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1TransformationSummary'
+        type: array
+      transformedBytes:
+        description: Total size in bytes that were transformed in some way.
+        format: int64
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1DeidentifyConfig:
+    description: The configuration that controls how the data will change.
+    properties:
+      infoTypeTransformations:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoTypeTransformations'
+        description: |-
+          Treat the dataset as free-form text and apply the same free text
+          transformation everywhere.
+      recordTransformations:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1RecordTransformations'
+        description: |-
+          Treat the dataset as structured. Transformations can be applied to
+          specific locations within structured datasets, such as transforming
+          a column within a table.
+    type: object
+  GooglePrivacyDlpV2beta1DeidentifyContentRequest:
+    description: Request to de-identify a list of items.
+    properties:
+      deidentifyConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1DeidentifyConfig'
+        description: Configuration for the de-identification of the list of content items.
+      inspectConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectConfig'
+        description: Configuration for the inspector.
+      items:
+        description: |-
+          The list of items to inspect. Up to 100 are allowed per request.
+          All items will be treated as text/*.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1ContentItem'
+        type: array
+    type: object
+  GooglePrivacyDlpV2beta1DeidentifyContentResponse:
+    description: Results of de-identifying a list of items.
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1ContentItem'
+        type: array
+      summaries:
+        description: A review of the transformations that took place for each item.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1DeidentificationSummary'
+        type: array
+    type: object
+  GooglePrivacyDlpV2beta1EntityId:
+    description: |-
+      An entity in a dataset is a field or set of fields that correspond to a
+      single person. For example, in medical records the `EntityId` might be
+      a patient identifier, or for financial records it might be an account
+      identifier. This message is used when generalizations or analysis must be
+      consistent across multiple rows pertaining to the same entity.
+    properties:
+      field:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        description: Composite key indicating which field contains the entity identifier.
+    type: object
+  GooglePrivacyDlpV2beta1Expressions:
+    description: A collection of expressions
+    properties:
+      conditions:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Conditions'
+      logicalOperator:
+        description: |-
+          The operator to apply to the result of conditions. Default and currently
+          only supported value is `AND`.
+        enum:
+          - LOGICAL_OPERATOR_UNSPECIFIED
+          - AND
+        type: string
+    type: object
   GooglePrivacyDlpV2beta1FieldId:
     description: General identifier of a data field in a storage service.
     properties:
       columnName:
         description: Name describing the field.
         type: string
+    type: object
+  GooglePrivacyDlpV2beta1FieldTransformation:
+    description: The transformation to apply to the field.
+    properties:
+      condition:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1RecordCondition'
+        description: |-
+          Only apply the transformation if the condition evaluates to true for the
+          given `RecordCondition`. The conditions are allowed to reference fields
+          that are not used in the actual transformation. [optional]
+
+          Example Use Cases:
+
+          - Apply a different bucket transformation to an age column if the zip code
+          column for the same record is within a specific range.
+          - Redact a field if the date of birth field is greater than 85.
+      fields:
+        description: 'Input field(s) to apply the transformation to. [required]'
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        type: array
+      infoTypeTransformations:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoTypeTransformations'
+        description: |-
+          Treat the contents of the field as free text, and selectively
+          transform content that matches an `InfoType`.
+      primitiveTransformation:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1PrimitiveTransformation'
+        description: Apply the transformation to the entire field.
     type: object
   GooglePrivacyDlpV2beta1FileSet:
     description: Set of files to scan.
@@ -741,6 +1197,41 @@ definitions:
       quote:
         description: The specific string that may be potentially sensitive info.
         type: string
+    type: object
+  GooglePrivacyDlpV2beta1FixedSizeBucketingConfig:
+    description: |-
+      Buckets values based on fixed size ranges. The
+      Bucketing transformation can provide all of this functionality,
+      but requires more configuration. This message is provided as a convenience to
+      the user for simple bucketing strategies.
+      The resulting value will be a hyphenated string of
+      lower_bound-upper_bound.
+      This can be used on data of type: double, long.
+      If the bound Value type differs from the type of data
+      being transformed, we will first attempt converting the type of the data to
+      be transformed to match the type of the bound before comparing.
+    properties:
+      bucketSize:
+        description: |-
+          Size of each bucket (except for minimum and maximum buckets). So if
+          `lower_bound` = 10, `upper_bound` = 89, and `bucket_size` = 10, then the
+          following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
+          60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works. [Required].
+        format: double
+        type: number
+      lowerBound:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        description: |-
+          Lower bound value of buckets. All values less than `lower_bound` are
+          grouped together into a single bucket; for example if `lower_bound` = 10,
+          then all values less than 10 are replaced with the value “-10”. [Required].
+      upperBound:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        description: |-
+          Upper bound value of buckets. All values greater than upper_bound are
+          grouped together into a single bucket; for example if `upper_bound` = 89,
+          then all values greater than 89 are replaced with the value “89+”.
+          [Required].
     type: object
   GooglePrivacyDlpV2beta1ImageLocation:
     description: Bounding box encompassing detected text within an image.
@@ -832,6 +1323,37 @@ definitions:
       infoType:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
         description: The type of finding this stat is for.
+    type: object
+  GooglePrivacyDlpV2beta1InfoTypeTransformation:
+    description: |-
+      A transformation to apply to text that is identified as a specific
+      info_type.
+    properties:
+      infoTypes:
+        description: |-
+          Info types to apply the transformation to. Empty list will match all
+          available info types for this transformation.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
+        type: array
+      primitiveTransformation:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1PrimitiveTransformation'
+        description: 'Primitive transformation to apply to the info type. [required]'
+    type: object
+  GooglePrivacyDlpV2beta1InfoTypeTransformations:
+    description: |-
+      A type of transformation that will scan unstructured text and
+      apply various `PrimitiveTransformation`s to each finding, where the
+      transformation is applied to only values that were identified as a specific
+      info_type.
+    properties:
+      transformations:
+        description: |-
+          Transformation for each info type. Cannot specify more than one
+          for a given info type. [required]
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoTypeTransformation'
+        type: array
     type: object
   GooglePrivacyDlpV2beta1InspectConfig:
     description: |-
@@ -958,6 +1480,74 @@ definitions:
           smaller batches.
         type: boolean
     type: object
+  GooglePrivacyDlpV2beta1KAnonymityConfig:
+    description: 'k-anonymity metric, used for analysis of reidentification risk.'
+    properties:
+      entityId:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1EntityId'
+        description: |-
+          Optional message indicating that each distinct `EntityId` should not
+          contribute to the k-anonymity count more than once per equivalence class.
+      quasiIds:
+        description: |-
+          Set of fields to compute k-anonymity over. When multiple fields are
+          specified, they are considered a single composite key. Structs and
+          repeated data types are not supported; however, nested fields are
+          supported so long as they are not structs themselves or nested within
+          a repeated field.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        type: array
+    type: object
+  GooglePrivacyDlpV2beta1KAnonymityEquivalenceClass:
+    description: The set of columns' values that share the same ldiversity value
+    properties:
+      equivalenceClassSize:
+        description: |-
+          Size of the equivalence class, for example number of rows with the
+          above set of values.
+        format: int64
+        type: string
+      quasiIdsValues:
+        description: |-
+          Set of values defining the equivalence class. One value per
+          quasi-identifier column in the original KAnonymity metric message.
+          The order is always the same as the original request.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        type: array
+    type: object
+  GooglePrivacyDlpV2beta1KAnonymityHistogramBucket:
+    properties:
+      bucketSize:
+        description: Total number of records in this bucket.
+        format: int64
+        type: string
+      bucketValues:
+        description: |-
+          Sample of equivalence classes in this bucket. The total number of
+          classes returned per bucket is capped at 20.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1KAnonymityEquivalenceClass'
+        type: array
+      equivalenceClassSizeLowerBound:
+        description: Lower bound on the size of the equivalence classes in this bucket.
+        format: int64
+        type: string
+      equivalenceClassSizeUpperBound:
+        description: Upper bound on the size of the equivalence classes in this bucket.
+        format: int64
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1KAnonymityResult:
+    description: Result of the k-anonymity computation.
+    properties:
+      equivalenceClassHistogramBuckets:
+        description: Histogram of k-anonymity equivalence classes.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1KAnonymityHistogramBucket'
+        type: array
+    type: object
   GooglePrivacyDlpV2beta1Key:
     description: |-
       A unique identifier for a Datastore entity.
@@ -992,6 +1582,95 @@ definitions:
       name:
         description: The name of the kind.
         type: string
+    type: object
+  GooglePrivacyDlpV2beta1KmsWrappedCryptoKey:
+    description: |-
+      Include to use an existing data crypto key wrapped by KMS.
+      Authorization requires the following IAM permissions when sending a request
+      to perform a crypto transformation using a kms-wrapped crypto key:
+      dlp.kms.encrypt
+    properties:
+      cryptoKeyName:
+        description: 'The resource name of the KMS CryptoKey to use for unwrapping. [required]'
+        type: string
+      wrappedKey:
+        description: 'The wrapped data crypto key. [required]'
+        format: byte
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1LDiversityConfig:
+    description: 'l-diversity metric, used for analysis of reidentification risk.'
+    properties:
+      quasiIds:
+        description: |-
+          Set of quasi-identifiers indicating how equivalence classes are
+          defined for the l-diversity computation. When multiple fields are
+          specified, they are considered a single composite key.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        type: array
+      sensitiveAttribute:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        description: Sensitive field for computing the l-value.
+    type: object
+  GooglePrivacyDlpV2beta1LDiversityEquivalenceClass:
+    description: The set of columns' values that share the same ldiversity value.
+    properties:
+      equivalenceClassSize:
+        description: Size of the k-anonymity equivalence class.
+        format: int64
+        type: string
+      numDistinctSensitiveValues:
+        description: Number of distinct sensitive values in this equivalence class.
+        format: int64
+        type: string
+      quasiIdsValues:
+        description: |-
+          Quasi-identifier values defining the k-anonymity equivalence
+          class. The order is always the same as the original request.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        type: array
+      topSensitiveValues:
+        description: Estimated frequencies of top sensitive values.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1ValueFrequency'
+        type: array
+    type: object
+  GooglePrivacyDlpV2beta1LDiversityHistogramBucket:
+    properties:
+      bucketSize:
+        description: Total number of records in this bucket.
+        format: int64
+        type: string
+      bucketValues:
+        description: |-
+          Sample of equivalence classes in this bucket. The total number of
+          classes returned per bucket is capped at 20.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1LDiversityEquivalenceClass'
+        type: array
+      sensitiveValueFrequencyLowerBound:
+        description: |-
+          Lower bound on the sensitive value frequencies of the equivalence
+          classes in this bucket.
+        format: int64
+        type: string
+      sensitiveValueFrequencyUpperBound:
+        description: |-
+          Upper bound on the sensitive value frequencies of the equivalence
+          classes in this bucket.
+        format: int64
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1LDiversityResult:
+    description: Result of the l-diversity computation.
+    properties:
+      sensitiveValueFrequencyHistogramBuckets:
+        description: Histogram of l-diversity equivalence class sensitive value frequencies.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1LDiversityHistogramBucket'
+        type: array
     type: object
   GooglePrivacyDlpV2beta1ListInfoTypesResponse:
     description: Response to the ListInfoTypes request.
@@ -1048,6 +1727,34 @@ definitions:
       tableLocation:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1TableLocation'
         description: Location within a `ContentItem.Table`.
+    type: object
+  GooglePrivacyDlpV2beta1NumericalStatsConfig:
+    description: |-
+      Compute numerical stats over an individual column, including
+      min, max, and quantiles.
+    properties:
+      field:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        description: |-
+          Field to compute numerical stats on. Supported types are
+          integer, float, date, datetime, timestamp, time.
+    type: object
+  GooglePrivacyDlpV2beta1NumericalStatsResult:
+    description: Result of the numerical stats computation.
+    properties:
+      maxValue:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        description: Maximum value appearing in the column.
+      minValue:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        description: Minimum value appearing in the column.
+      quantileValues:
+        description: |-
+          List of 99 values that partition the set of field values into 100 equal
+          sized buckets.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        type: array
     type: object
   GooglePrivacyDlpV2beta1OperationConfig:
     description: Additional configuration for inspect long running operations.
@@ -1112,6 +1819,40 @@ definitions:
           Cannot be `""`.
         type: string
     type: object
+  GooglePrivacyDlpV2beta1PrimitiveTransformation:
+    description: A rule for transforming a value.
+    properties:
+      bucketingConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1BucketingConfig'
+      characterMaskConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1CharacterMaskConfig'
+      cryptoHashConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1CryptoHashConfig'
+      cryptoReplaceFfxFpeConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1CryptoReplaceFfxFpeConfig'
+      fixedSizeBucketingConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FixedSizeBucketingConfig'
+      redactConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1RedactConfig'
+      replaceConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1ReplaceValueConfig'
+      replaceWithInfoTypeConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1ReplaceWithInfoTypeConfig'
+      timePartConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1TimePartConfig'
+    type: object
+  GooglePrivacyDlpV2beta1PrivacyMetric:
+    description: Privacy metric to compute for reidentification risk analysis.
+    properties:
+      categoricalStatsConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1CategoricalStatsConfig'
+      kAnonymityConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1KAnonymityConfig'
+      lDiversityConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1LDiversityConfig'
+      numericalStatsConfig:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1NumericalStatsConfig'
+    type: object
   GooglePrivacyDlpV2beta1Projection:
     description: A representation of a Datastore property in a projection.
     properties:
@@ -1140,6 +1881,14 @@ definitions:
         format: int64
         type: string
     type: object
+  GooglePrivacyDlpV2beta1RecordCondition:
+    description: |-
+      A condition for determing whether a transformation should be applied to
+      a field.
+    properties:
+      expressions:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Expressions'
+    type: object
   GooglePrivacyDlpV2beta1RecordKey:
     description: Message for a unique key indicating a record that contains a finding.
     properties:
@@ -1147,6 +1896,39 @@ definitions:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1CloudStorageKey'
       datastoreKey:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1DatastoreKey'
+    type: object
+  GooglePrivacyDlpV2beta1RecordSuppression:
+    description: |-
+      Configuration to suppress records whose suppression conditions evaluate to
+      true.
+    properties:
+      condition:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1RecordCondition'
+    type: object
+  GooglePrivacyDlpV2beta1RecordTransformations:
+    description: |-
+      A type of transformation that is applied over structured data such as a
+      table.
+    properties:
+      fieldTransformations:
+        description: Transform the record by applying various field transformations.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldTransformation'
+        type: array
+      recordSuppressions:
+        description: |-
+          Configuration defining which records get suppressed entirely. Records that
+          match any suppression rule are omitted from the output [optional].
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1RecordSuppression'
+        type: array
+    type: object
+  GooglePrivacyDlpV2beta1RedactConfig:
+    description: |-
+      Redact a given value. For example, if used with an `InfoTypeTransformation`
+      transforming PHONE_NUMBER, and input 'My phone number is 206-555-0123', the
+      output would be 'My phone number is '.
+    properties: {}
     type: object
   GooglePrivacyDlpV2beta1RedactContentRequest:
     description: |-
@@ -1196,6 +1978,43 @@ definitions:
         description: Content replacing sensitive information of given type. Max 256 chars.
         type: string
     type: object
+  GooglePrivacyDlpV2beta1ReplaceValueConfig:
+    description: Replace each input value with a given `Value`.
+    properties:
+      newValue:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        description: Value to replace it with.
+    type: object
+  GooglePrivacyDlpV2beta1ReplaceWithInfoTypeConfig:
+    description: Replace each matching finding with the name of the info_type.
+    properties: {}
+    type: object
+  GooglePrivacyDlpV2beta1RiskAnalysisOperationMetadata:
+    description: Metadata returned within GetOperation for risk analysis.
+    properties:
+      createTime:
+        description: The time which this request was started.
+        format: google-datetime
+        type: string
+      requestedPrivacyMetric:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1PrivacyMetric'
+        description: Privacy metric to compute.
+      requestedSourceTable:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1BigQueryTable'
+        description: Input dataset to compute metrics over.
+    type: object
+  GooglePrivacyDlpV2beta1RiskAnalysisOperationResult:
+    description: Result of a risk analysis operation request.
+    properties:
+      categoricalStatsResult:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1CategoricalStatsResult'
+      kAnonymityResult:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1KAnonymityResult'
+      lDiversityResult:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1LDiversityResult'
+      numericalStatsResult:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1NumericalStatsResult'
+    type: object
   GooglePrivacyDlpV2beta1Row:
     properties:
       values:
@@ -1216,6 +2035,26 @@ definitions:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1DatastoreOptions'
         description: Google Cloud Datastore options specification.
     type: object
+  GooglePrivacyDlpV2beta1SummaryResult:
+    description: |-
+      A collection that informs the user the number of times a particular
+      `TransformationResultCode` and error details occurred.
+    properties:
+      code:
+        enum:
+          - TRANSFORMATION_RESULT_CODE_UNSPECIFIED
+          - SUCCESS
+          - ERROR
+        type: string
+      count:
+        format: int64
+        type: string
+      details:
+        description: |-
+          A place for warnings or errors to show up if a transformation didn't
+          work as expected.
+        type: string
+    type: object
   GooglePrivacyDlpV2beta1Table:
     description: 'Structured content to inspect. Up to 50,000 `Value`s per request allowed.'
     properties:
@@ -1234,6 +2073,74 @@ definitions:
       rowIndex:
         description: The zero-based index of the row where the finding is located.
         format: int64
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1TimePartConfig:
+    description: |-
+      For use with `Date`, `Timestamp`, and `TimeOfDay`, extract or preserve a
+      portion of the value.
+    properties:
+      partToExtract:
+        enum:
+          - TIME_PART_UNSPECIFIED
+          - YEAR
+          - MONTH
+          - DAY_OF_MONTH
+          - DAY_OF_WEEK
+          - WEEK_OF_YEAR
+          - HOUR_OF_DAY
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1TransformationSummary:
+    description: Summary of a single tranformation.
+    properties:
+      field:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
+        description: Set if the transformation was limited to a specific FieldId.
+      fieldTransformations:
+        description: |-
+          The field transformation that was applied. This list will contain
+          multiple only in the case of errors.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldTransformation'
+        type: array
+      infoType:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
+        description: Set if the transformation was limited to a specific info_type.
+      recordSuppress:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1RecordSuppression'
+        description: The specific suppression option these stats apply to.
+      results:
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1SummaryResult'
+        type: array
+      transformation:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1PrimitiveTransformation'
+        description: The specific transformation these stats apply to.
+    type: object
+  GooglePrivacyDlpV2beta1TransientCryptoKey:
+    description: |-
+      Use this to have a random data crypto key generated.
+      It will be discarded after the operation/request finishes.
+    properties:
+      name:
+        description: |-
+          Name of the key. [required]
+          This is an arbitrary string used to differentiate different keys.
+          A unique key is generated per name: two separate `TransientCryptoKey`
+          protos share the same generated key if their names are the same.
+          When the data crypto key is generated, this name is not used in any way
+          (repeating the api call will result in a different key being generated).
+        type: string
+    type: object
+  GooglePrivacyDlpV2beta1UnwrappedCryptoKey:
+    description: |-
+      Using raw keys is prone to security risks due to accidentally
+      leaking the key. Choose another type of key if possible.
+    properties:
+      key:
+        description: 'The AES 128/192/256 bit key. [required]'
+        format: byte
         type: string
     type: object
   GooglePrivacyDlpV2beta1Value:
@@ -1256,6 +2163,17 @@ definitions:
       timestampValue:
         format: google-datetime
         type: string
+    type: object
+  GooglePrivacyDlpV2beta1ValueFrequency:
+    description: 'A value of a field, including its frequency.'
+    properties:
+      count:
+        description: How many times the value is contained in the field.
+        format: int64
+        type: string
+      value:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
+        description: A value contained in the field in question.
     type: object
   GoogleProtobufEmpty:
     description: |-

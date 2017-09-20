@@ -6,7 +6,7 @@ basePath: /api
 info:
   description: Open Source GPS Tracking Platform
   title: traccar
-  version: '3.13'
+  version: '3.14'
   x-apisguru-categories:
     - location
   x-logo:
@@ -33,18 +33,18 @@ parameters:
     required: true
     schema:
       $ref: '#/definitions/Attribute'
-  AttributeAlias:
-    in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/AttributeAlias'
   Calendar:
     in: body
     name: body
     required: true
     schema:
       $ref: '#/definitions/Calendar'
+  Command:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/Command'
   Device:
     in: body
     name: body
@@ -69,6 +69,12 @@ parameters:
     required: true
     schema:
       $ref: '#/definitions/Group'
+  Notification:
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/Notification'
   Permission:
     in: body
     name: body
@@ -140,46 +146,6 @@ parameters:
     name: userId
     type: integer
 paths:
-  /attributes/aliases:
-    get:
-      description: 'Without params, it returns a list of AttributeAlias from all the user''s Devices'
-      parameters:
-        - $ref: '#/parameters/deviceId'
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/AttributeAlias'
-            type: array
-      summary: Fetch a list of AttributeAlias
-    post:
-      parameters:
-        - $ref: '#/parameters/AttributeAlias'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/AttributeAlias'
-      summary: Set an AttributeAlias
-  '/attributes/aliases/{id}':
-    delete:
-      parameters:
-        - $ref: '#/parameters/entityId'
-      responses:
-        '204':
-          description: No Content
-      summary: Delete an AttributeAlias
-    put:
-      parameters:
-        - $ref: '#/parameters/entityId'
-        - $ref: '#/parameters/AttributeAlias'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/AttributeAlias'
-      summary: Update an AttributeAlias
   /attributes/computed:
     get:
       description: 'Without params, it returns a list of Attributes the user has access to'
@@ -266,7 +232,48 @@ paths:
             $ref: '#/definitions/Calendar'
       summary: Update a Calendar
   /commands:
+    get:
+      description: 'Without params, it returns a list of Drivers the user has access to'
+      parameters:
+        - $ref: '#/parameters/all'
+        - $ref: '#/parameters/userId'
+        - $ref: '#/parameters/deviceId'
+        - $ref: '#/parameters/groupId'
+        - $ref: '#/parameters/refresh'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Command'
+            type: array
+      summary: Fetch a list of Saved Commands
     post:
+      parameters:
+        - $ref: '#/parameters/Command'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Command'
+      summary: Create a Saved Command
+  /commands/send:
+    get:
+      description: 'Return a list of saved commands linked to Device and its groups, filtered by current Device state and protocol support'
+      parameters:
+        - $ref: '#/parameters/deviceId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Command'
+            type: array
+        '400':
+          description: Could happen when the user doesn't have permission for the device
+      summary: Fetch a list of Saved Commands supported by Device at the moment
+    post:
+      description: Dispatch a new command or Saved Command if _body.id_ set
       parameters:
         - in: body
           name: body
@@ -281,13 +288,33 @@ paths:
         '400':
           description: 'Could happen when dispatching to a device that is offline, the user doesn''t have permission or an incorrect command _type_ for the device'
       summary: Dispatch commands to device
+  '/commands/{id}':
+    delete:
+      parameters:
+        - $ref: '#/parameters/entityId'
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a Saved Command
+    put:
+      parameters:
+        - $ref: '#/parameters/entityId'
+        - $ref: '#/parameters/Command'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Command'
+      summary: Update a Saved Command
   /commandtypes:
     get:
       parameters:
         - in: query
           name: deviceId
-          required: true
           type: integer
+        - in: query
+          name: textChannel
+          type: boolean
       responses:
         '200':
           description: OK
@@ -296,8 +323,8 @@ paths:
               $ref: '#/definitions/CommandType'
             type: array
         '400':
-          description: Could happen when trying to fetch from an offline device or the user does not have permission
-      summary: Fetch a list of available Commands for the Device
+          description: Could happen when trying to fetch from a device the user does not have permission
+      summary: Fetch a list of available Commands for the Device or all possible Commands if Device ommited
   /devices:
     get:
       description: 'Without any params, returns a list of the user''s devices'
@@ -506,6 +533,70 @@ paths:
           schema:
             $ref: '#/definitions/Group'
       summary: Update a Group
+  /notifications:
+    get:
+      description: 'Without params, it returns a list of Notifications the user has access to'
+      parameters:
+        - $ref: '#/parameters/all'
+        - $ref: '#/parameters/userId'
+        - $ref: '#/parameters/deviceId'
+        - $ref: '#/parameters/groupId'
+        - $ref: '#/parameters/refresh'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Notification'
+            type: array
+      summary: Fetch a list of Notifications
+    post:
+      parameters:
+        - $ref: '#/parameters/Notification'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Notification'
+      summary: Create a Notification
+  /notifications/test:
+    post:
+      parameters: []
+      responses:
+        '204':
+          description: Successful sending
+        '400':
+          description: Could happen if sending has failed
+      summary: Send test notification to current user via Email and SMS
+  /notifications/types:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/NotificationType'
+            type: array
+      summary: Fetch a list of available Notification types
+  '/notifications/{id}':
+    delete:
+      parameters:
+        - $ref: '#/parameters/entityId'
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a Notification
+    put:
+      parameters:
+        - $ref: '#/parameters/entityId'
+        - $ref: '#/parameters/Notification'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Notification'
+      summary: Update a Notification
   /permissions:
     delete:
       parameters:
@@ -618,6 +709,28 @@ paths:
               $ref: '#/definitions/Position'
             type: array
       summary: Fetch a list of Positions within the time period for the Devices or Groups
+  /reports/stops:
+    get:
+      consumes:
+        - application/json
+        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+      description: At least one _deviceId_ or one _groupId_ must be passed
+      parameters:
+        - $ref: '#/parameters/deviceIdArray'
+        - $ref: '#/parameters/groupIdArray'
+        - $ref: '#/parameters/fromTime'
+        - $ref: '#/parameters/toTime'
+      produces:
+        - application/json
+        - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ReportStops'
+            type: array
+      summary: Fetch a list of ReportStops within the time period for the Devices or Groups
   /reports/summary:
     get:
       consumes:
@@ -769,36 +882,6 @@ paths:
           schema:
             $ref: '#/definitions/User'
       summary: Create a User
-  /users/notifications:
-    get:
-      description: 'Without params, it returns a list of the user''s enabled Notifications'
-      parameters:
-        - description: To fetch a list of all available Notifications
-          in: query
-          name: all
-          type: boolean
-        - $ref: '#/parameters/userId'
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/Notification'
-            type: array
-      summary: Fetch a list of Notification types
-    post:
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Notification'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Notification'
-      summary: Set or unset a Notification
   '/users/{id}':
     delete:
       parameters:
@@ -831,16 +914,6 @@ definitions:
       type:
         description: String|Number|Boolean
         type: string
-  AttributeAlias:
-    properties:
-      alias:
-        type: string
-      attribute:
-        type: string
-      deviceId:
-        type: integer
-      id:
-        type: integer
   Calendar:
     properties:
       atributes: {}
@@ -854,7 +927,11 @@ definitions:
   Command:
     properties:
       attributes: {}
+      description:
+        type: string
       deviceId:
+        type: integer
+      id:
         type: integer
       type:
         type: string
@@ -950,17 +1027,23 @@ definitions:
         type: string
   Notification:
     properties:
+      always:
+        type: boolean
       attributes: {}
       id:
         type: integer
       mail:
         type: boolean
+      sms:
+        type: boolean
       type:
         type: string
-      userId:
-        type: integer
       web:
         type: boolean
+  NotificationType:
+    properties:
+      type:
+        type: string
   Permission:
     description: 'This is a permission map that contain two object indexes. It is used to link/unlink objects. Order is important. Example: { deviceId:8, geofenceId: 16 }'
     properties:
@@ -1128,14 +1211,16 @@ definitions:
         type: string
       coordinateFormat:
         type: string
-      distanceUnit:
-        type: string
+      deviceReadonly:
+        type: boolean
       forceSettings:
         type: boolean
       id:
         type: integer
       latitude:
         type: number
+      limitCommands:
+        type: boolean
       longitude:
         type: number
       map:
@@ -1146,8 +1231,6 @@ definitions:
         type: boolean
       registration:
         type: boolean
-      speedUnit:
-        type: string
       twelveHourFormat:
         type: boolean
       version:
@@ -1183,8 +1266,6 @@ definitions:
         type: boolean
       disabled:
         type: boolean
-      distanceUnit:
-        type: string
       email:
         type: string
       expirationTime:
@@ -1195,6 +1276,8 @@ definitions:
         type: integer
       latitude:
         type: number
+      limitCommands:
+        type: boolean
       longitude:
         type: number
       map:
@@ -1205,8 +1288,6 @@ definitions:
         type: string
       readonly:
         type: boolean
-      speedUnit:
-        type: string
       token:
         type: string
       twelveHourFormat:

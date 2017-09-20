@@ -115,6 +115,11 @@ paths:
           name: query
           required: false
           type: string
+        - description: Number of featured articles to exclude
+          in: query
+          name: exclude_featured
+          required: false
+          type: integer
       responses:
         default:
           description: Unexpected error
@@ -243,6 +248,14 @@ paths:
         - oauth2:
             - write_listings
       summary: Remove bump for new bids
+      tags:
+        - bump
+    get:
+      description: See available tiers for bump bids
+      responses:
+        default:
+          description: Unexpected error
+      summary: See available tiers for bump bids
       tags:
         - bump
     put:
@@ -441,6 +454,15 @@ paths:
         default:
           description: Unexpected error
       summary: Returns a set of comparison shopping pages that have also been purchased by similar users
+      tags:
+        - comparison_shopping_pages
+  /comparison_shopping_pages/also_viewed:
+    get:
+      description: Returns a set of comparison shopping pages that have also been viewed by similar users
+      responses:
+        default:
+          description: Unexpected error
+      summary: Returns a set of comparison shopping pages that have also been viewed by similar users
       tags:
         - comparison_shopping_pages
   /comparison_shopping_pages/find:
@@ -932,6 +954,9 @@ paths:
               inventory:
                 description: Number of items available for sale. Reverb will increment and decrement automatically.
                 type: integer
+              item_location:
+                description: Internal note used by sellers to back reference their catalog system when entering a listing
+                type: string
               location:
                 properties:
                   country_code:
@@ -1518,6 +1543,9 @@ paths:
               inventory:
                 description: Number of items available for sale. Reverb will increment and decrement automatically.
                 type: integer
+              item_location:
+                description: Internal note used by sellers to back reference their catalog system when entering a listing
+                type: string
               location:
                 properties:
                   country_code:
@@ -2779,6 +2807,11 @@ paths:
           name: state
           required: false
           type: string
+        - description: Find a listing by sku
+          in: query
+          name: sku
+          required: false
+          type: string
       responses:
         default:
           description: Unexpected error
@@ -3986,6 +4019,260 @@ paths:
                 type: string
               description:
                 type: string
+              legal_country_code:
+                enum:
+                  - AD
+                  - AE
+                  - AF
+                  - AG
+                  - AI
+                  - AL
+                  - AM
+                  - AO
+                  - AR
+                  - AS
+                  - AT
+                  - AU
+                  - AW
+                  - AX
+                  - AZ
+                  - BA
+                  - BB
+                  - BD
+                  - BE
+                  - BF
+                  - BG
+                  - BH
+                  - BI
+                  - BJ
+                  - BL
+                  - BM
+                  - BN
+                  - BO
+                  - BQ
+                  - BR
+                  - BS
+                  - BT
+                  - BV
+                  - BW
+                  - BY
+                  - BZ
+                  - CA
+                  - CC
+                  - CD
+                  - CF
+                  - CG
+                  - CH
+                  - CI
+                  - CK
+                  - CL
+                  - CM
+                  - CN
+                  - CO
+                  - CR
+                  - CU
+                  - CV
+                  - CW
+                  - CX
+                  - CY
+                  - CZ
+                  - DE
+                  - DJ
+                  - DK
+                  - DM
+                  - DO
+                  - DZ
+                  - EC
+                  - EE
+                  - EG
+                  - EH
+                  - ER
+                  - ES
+                  - ET
+                  - FI
+                  - FJ
+                  - FK
+                  - FM
+                  - FO
+                  - FR
+                  - GA
+                  - GB
+                  - GD
+                  - GE
+                  - GF
+                  - GG
+                  - GH
+                  - GI
+                  - GL
+                  - GM
+                  - GN
+                  - GP
+                  - GQ
+                  - GR
+                  - GS
+                  - GT
+                  - GU
+                  - GW
+                  - GY
+                  - HK
+                  - HM
+                  - HN
+                  - HR
+                  - HT
+                  - HU
+                  - ID
+                  - IE
+                  - IL
+                  - IM
+                  - IN
+                  - IO
+                  - IQ
+                  - IR
+                  - IS
+                  - IT
+                  - JE
+                  - JM
+                  - JO
+                  - JP
+                  - KE
+                  - KG
+                  - KH
+                  - KI
+                  - KM
+                  - KN
+                  - KP
+                  - KR
+                  - KW
+                  - KY
+                  - KZ
+                  - LA
+                  - LB
+                  - LC
+                  - LI
+                  - LK
+                  - LR
+                  - LS
+                  - LT
+                  - LU
+                  - LV
+                  - LY
+                  - MA
+                  - MC
+                  - MD
+                  - ME
+                  - MF
+                  - MG
+                  - MH
+                  - MK
+                  - ML
+                  - MM
+                  - MN
+                  - MO
+                  - MP
+                  - MQ
+                  - MR
+                  - MS
+                  - MT
+                  - MU
+                  - MV
+                  - MW
+                  - MX
+                  - MY
+                  - MZ
+                  - NA
+                  - NC
+                  - NE
+                  - NF
+                  - NG
+                  - NI
+                  - NL
+                  - 'NO'
+                  - NP
+                  - NR
+                  - NU
+                  - NZ
+                  - OM
+                  - PA
+                  - PE
+                  - PF
+                  - PG
+                  - PH
+                  - PK
+                  - PL
+                  - PM
+                  - PN
+                  - PS
+                  - PT
+                  - PW
+                  - PY
+                  - QA
+                  - RE
+                  - RO
+                  - RS
+                  - RU
+                  - RW
+                  - SA
+                  - SB
+                  - SC
+                  - SD
+                  - SE
+                  - SG
+                  - SH
+                  - SI
+                  - SJ
+                  - SK
+                  - SL
+                  - SM
+                  - SN
+                  - SO
+                  - SR
+                  - SS
+                  - ST
+                  - SV
+                  - SX
+                  - SY
+                  - SZ
+                  - TC
+                  - TD
+                  - TF
+                  - TG
+                  - TH
+                  - TJ
+                  - TK
+                  - TL
+                  - TM
+                  - TN
+                  - TO
+                  - TR
+                  - TT
+                  - TV
+                  - TW
+                  - TZ
+                  - UA
+                  - UG
+                  - UM
+                  - US
+                  - UY
+                  - UZ
+                  - VA
+                  - VC
+                  - VE
+                  - VG
+                  - VI
+                  - VN
+                  - VU
+                  - WF
+                  - WS
+                  - YE
+                  - YT
+                  - ZA
+                  - ZM
+                  - ZW
+                type: string
+              legal_country_code_confirmed:
+                enum:
+                  - true
+                type: boolean
               name:
                 type: string
               payment_policy:
@@ -3996,6 +4283,8 @@ paths:
                 type: string
               website:
                 type: string
+            required:
+              - legal_country_code_confirmed
             type: object
       responses:
         default:

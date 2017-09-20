@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Stackdriver Monitoring
   version: v3
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://monitoring.googleapis.com/$discovery/rest?version=v3'
       version: v1
@@ -33,24 +29,13 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
       'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
       'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
-      'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
-      'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -133,10 +118,10 @@ tags:
 paths:
   '/v3/{name}':
     delete:
-      description: Deletes an existing group.
-      operationId: monitoring.projects.groups.delete
+      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
+      operationId: monitoring.projects.metricDescriptors.delete
       parameters:
-        - description: 'The group to delete. The format is "projects/{project_id_or_number}/groups/{group_id}".'
+        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
           in: path
           name: name
           required: true
@@ -150,19 +135,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
     get:
-      description: Gets a single group.
-      operationId: monitoring.projects.groups.get
+      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
+      operationId: monitoring.projects.metricDescriptors.get
       parameters:
-        - description: 'The group to retrieve. The format is "projects/{project_id_or_number}/groups/{group_id}".'
+        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example value of {metric_id} is "compute.googleapis.com/instance/disk/read_bytes_count".'
           in: path
           name: name
           required: true
@@ -172,23 +153,15 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Group'
+            $ref: '#/definitions/MetricDescriptor'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -232,11 +205,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -273,19 +242,13 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: '#/definitions/CreateCollectdTimeSeriesResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -328,15 +291,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -380,11 +337,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
       tags:
         - projects
@@ -429,15 +382,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -488,19 +435,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -540,15 +479,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -585,19 +518,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring.read'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -719,15 +644,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.read'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.read'
       tags:
         - projects
@@ -767,15 +686,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/monitoring'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/monitoring'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/monitoring.write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/monitoring.write'
       tags:
         - projects
@@ -827,6 +740,22 @@ definitions:
           $ref: '#/definitions/CollectdValue'
         type: array
     type: object
+  CollectdPayloadError:
+    description: Describes the error status for payloads that were not written.
+    properties:
+      error:
+        $ref: '#/definitions/Status'
+        description: 'Records the error status for the payload. If this field is present, the partial errors for nested values won''t be populated.'
+      index:
+        description: The zero-based index in CreateCollectdTimeSeriesRequest.collectd_payloads.
+        format: int32
+        type: integer
+      valueErrors:
+        description: Records the error status for values that were not written due to an error.Failed payloads for which nothing is written will not include partial value errors.
+        items:
+          $ref: '#/definitions/CollectdValueError'
+        type: array
+    type: object
   CollectdValue:
     description: A single data point from a collectd-based plugin.
     properties:
@@ -846,6 +775,17 @@ definitions:
         $ref: '#/definitions/TypedValue'
         description: The measurement value.
     type: object
+  CollectdValueError:
+    description: Describes the error status for values that were not written.
+    properties:
+      error:
+        $ref: '#/definitions/Status'
+        description: Records the error status for the value.
+      index:
+        description: The zero-based index in CollectdPayload.values within the parent CreateCollectdTimeSeriesRequest.collectd_payloads.
+        format: int32
+        type: integer
+    type: object
   CreateCollectdTimeSeriesRequest:
     description: The CreateCollectdTimeSeries request.
     properties:
@@ -860,6 +800,15 @@ definitions:
       resource:
         $ref: '#/definitions/MonitoredResource'
         description: The monitored resource associated with the time series.
+    type: object
+  CreateCollectdTimeSeriesResponse:
+    description: The CreateCollectdTimeSeries response.
+    properties:
+      payloadErrors:
+        description: Records the error status for points that were not written due to an error.Failed requests for which nothing is written will return an error response instead.
+        items:
+          $ref: '#/definitions/CollectdPayloadError'
+        type: array
     type: object
   CreateTimeSeriesRequest:
     description: The CreateTimeSeries request.
@@ -1291,6 +1240,32 @@ definitions:
     properties:
       fileName:
         description: 'The path-qualified name of the .proto file that contained the associated protobuf element. For example: "google/protobuf/source_context.proto".'
+        type: string
+    type: object
+  Status:
+    description: |-
+      The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). The error model is designed to be:
+      Simple to use and understand for most users
+      Flexible enough to meet unexpected needsOverviewThe Status message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers understand and resolve the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package google.rpc that can be used for common error conditions.Language mappingThe Status message is the logical representation of the error model, but it is not necessarily the actual wire format. When the Status message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.Other usesThe error model and the Status message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.Example uses of this error model include:
+      Partial errors. If a service needs to return partial errors to the client, it may embed the Status in the normal response to indicate the partial errors.
+      Workflow errors. A typical workflow has multiple steps. Each step may have a Status message for error reporting.
+      Batch operations. If a client uses batch request and batch response, the Status message should be used directly inside batch response, one for each error sub-response.
+      Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the Status message.
+      Logging. If some API errors are stored in logs, the message Status could be used directly after any stripping needed for security/privacy reasons.
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
+      message:
+        description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
         type: string
     type: object
   TimeInterval:

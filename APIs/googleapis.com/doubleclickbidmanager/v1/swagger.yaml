@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: API for viewing and managing your reports in DoubleClick Bid Manager.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: DoubleClick Bid Manager
   version: v1
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/doubleclickbidmanager/v1/rest'
       version: v1
@@ -33,18 +29,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/doubleclickbidmanager': View and manage your reports in DoubleClick Bid Manager
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/doubleclickbidmanager': View and manage your reports in DoubleClick Bid Manager
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -117,8 +105,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - lineitems
   /lineitems/uploadlineitems:
@@ -146,8 +132,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - lineitems
   /queries:
@@ -161,8 +145,6 @@ paths:
             $ref: '#/definitions/ListQueriesResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
@@ -191,8 +173,6 @@ paths:
             $ref: '#/definitions/ListReportsResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - reports
@@ -229,8 +209,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
   '/query/{queryId}':
@@ -248,8 +226,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
@@ -269,8 +245,6 @@ paths:
             $ref: '#/definitions/Query'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
@@ -301,8 +275,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - queries
   /sdf/download:
@@ -329,8 +301,6 @@ paths:
             $ref: '#/definitions/DownloadResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/doubleclickbidmanager'
       tags:
         - sdf

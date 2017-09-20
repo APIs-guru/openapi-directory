@@ -118,228 +118,7 @@ paths:
         - Operations
       x-ms-examples:
         OperationsList:
-          parameters:
-            api-version: '2016-07-01'
-          responses:
-            '200':
-              body:
-                value:
-                  - display:
-                      description: Checks availability of namespace under given subscription.
-                      operation: Get namespace availability.
-                      provider: Microsoft Azure ServiceBus
-                      resource: Non Resource Operation
-                    name: Microsoft.ServiceBus/checkNameAvailability/action
-                  - display:
-                      description: Registers the subscription for the ServiceBus resource provider and enables the creation of ServiceBus resources
-                      operation: Registers the ServiceBus Resource Provider
-                      provider: Microsoft Azure ServiceBus
-                      resource: ServiceBus Resource Provider
-                    name: Microsoft.ServiceBus/register/action
-                  - display:
-                      description: Create a Namespace Resource and Update its properties. Tags and status of the Namespace are the properties which can be updated.
-                      operation: 'Create Or Update Namespace '
-                      provider: Microsoft Azure ServiceBus
-                      resource: Namespace
-                    name: Microsoft.ServiceBus/namespaces/write
-                  - display:
-                      description: Get the list of Namespace Resource Description
-                      operation: Get Namespace Resource
-                      provider: Microsoft Azure ServiceBus
-                      resource: Namespace
-                    name: Microsoft.ServiceBus/namespaces/read
-                  - display:
-                      description: Delete Namespace Resource
-                      operation: Delete Namespace
-                      provider: Microsoft Azure ServiceBus
-                      resource: Namespace
-                    name: Microsoft.ServiceBus/namespaces/Delete
-                  - display:
-                      description: 'Create a Namespace level Authorization Rules and update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
-                      operation: Create or Update Namespace Authorization Rules
-                      provider: Microsoft Azure ServiceBus
-                      resource: AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/authorizationRules/write
-                  - display:
-                      description: Get the list of Namespaces Authorization Rules description.
-                      operation: Get Namespace Authorization Rules
-                      provider: Microsoft Azure ServiceBus
-                      resource: AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/authorizationRules/read
-                  - display:
-                      description: 'Delete Namespace Authorization Rule. The Default Namespace Authorization Rule cannot be deleted. '
-                      operation: Delete Namespace Authorization Rule
-                      provider: Microsoft Azure ServiceBus
-                      resource: AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/authorizationRules/delete
-                  - display:
-                      description: Get the Connection String to the Namespace
-                      operation: Get Namespace Listkeys
-                      provider: Microsoft Azure ServiceBus
-                      resource: AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/authorizationRules/listkeys/action
-                  - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
-                      operation: Resource Regeneratekeys
-                      provider: Microsoft Azure ServiceBus
-                      resource: AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/authorizationRules/regenerateKeys/action
-                  - display:
-                      description: Create or Update Queue properties.
-                      operation: Create or Update Queue
-                      provider: Microsoft Azure ServiceBus
-                      resource: Queue
-                    name: Microsoft.ServiceBus/namespaces/queues/write
-                  - display:
-                      description: Get list of Queue Resource Descriptions
-                      operation: Get Queue
-                      provider: Microsoft Azure ServiceBus
-                      resource: Queue
-                    name: Microsoft.ServiceBus/namespaces/queues/read
-                  - display:
-                      description: Operation to delete Queue Resource
-                      operation: Delete Queue
-                      provider: Microsoft Azure ServiceBus
-                      resource: Queue
-                    name: Microsoft.ServiceBus/namespaces/queues/Delete
-                  - display:
-                      description: 'Create Queue Authorization Rules and Update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
-                      operation: Create or Update Queue Authorization Rule
-                      provider: Microsoft Azure ServiceBus
-                      resource: Queue AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/write
-                  - display:
-                      description: ' Get the list of Queue Authorization Rules'
-                      operation: ' Get Queue Authorization Rules'
-                      provider: Microsoft Azure ServiceBus
-                      resource: Queue AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/read
-                  - display:
-                      description: Operation to delete Queue Authorization Rules
-                      operation: Delete Queue Authorization Rules
-                      provider: Microsoft Azure ServiceBus
-                      resource: Queue AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/delete
-                  - display:
-                      description: Get the Connection String to Queue
-                      operation: List Queue keys
-                      provider: Microsoft Azure ServiceBus
-                      resource: Queue AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/listkeys/action
-                  - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
-                      operation: Resource Regeneratekeys
-                      provider: Microsoft Azure ServiceBus
-                      resource: Queue AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/regenerateKeys/action
-                  - display:
-                      description: Create or Update Topic properties.
-                      operation: Create or Update Topic
-                      provider: Microsoft Azure ServiceBus
-                      resource: Topic
-                    name: Microsoft.ServiceBus/namespaces/topics/write
-                  - display:
-                      description: Get list of Topic Resource Descriptions
-                      operation: Get Topic
-                      provider: Microsoft Azure ServiceBus
-                      resource: Topic
-                    name: Microsoft.ServiceBus/namespaces/topics/read
-                  - display:
-                      description: Operation to delete Topic Resource
-                      operation: Delete Topic
-                      provider: Microsoft Azure ServiceBus
-                      resource: Topic
-                    name: Microsoft.ServiceBus/namespaces/topics/Delete
-                  - display:
-                      description: 'Create Topic Authorization Rules and Update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
-                      operation: Create or Update Topic Authorization Rule
-                      provider: Microsoft Azure ServiceBus
-                      resource: Topic AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/write
-                  - display:
-                      description: ' Get the list of Topic Authorization Rules'
-                      operation: ' Get Topic Authorization Rules'
-                      provider: Microsoft Azure ServiceBus
-                      resource: Topic AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/read
-                  - display:
-                      description: Operation to delete Topic Authorization Rules
-                      operation: Delete Topic Authorization Rules
-                      provider: Microsoft Azure ServiceBus
-                      resource: Topic AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/delete
-                  - display:
-                      description: Get the Connection String to Topic
-                      operation: List Topic keys
-                      provider: Microsoft Azure ServiceBus
-                      resource: Topic AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/listkeys/action
-                  - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
-                      operation: Resource Regeneratekeys
-                      provider: Microsoft Azure ServiceBus
-                      resource: Topic AuthorizationRules
-                    name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/regenerateKeys/action
-                  - display:
-                      description: Create or Update TopicSubscription properties.
-                      operation: Create or Update TopicSubscription
-                      provider: Microsoft Azure ServiceBus
-                      resource: TopicSubscription
-                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/write
-                  - display:
-                      description: Get list of TopicSubscription Resource Descriptions
-                      operation: Get TopicSubscription
-                      provider: Microsoft Azure ServiceBus
-                      resource: TopicSubscription
-                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/read
-                  - display:
-                      description: Operation to delete TopicSubscription Resource
-                      operation: Delete TopicSubscription
-                      provider: Microsoft Azure ServiceBus
-                      resource: TopicSubscription
-                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/Delete
-                  - display:
-                      description: Create or Update Rule properties.
-                      operation: Create or Update Rule
-                      provider: Microsoft Azure ServiceBus
-                      resource: Rule
-                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/rules/write
-                  - display:
-                      description: Get list of Rule Resource Descriptions
-                      operation: Get Rule
-                      provider: Microsoft Azure ServiceBus
-                      resource: Rule
-                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/rules/read
-                  - display:
-                      description: Operation to delete Rule Resource
-                      operation: Delete Rule
-                      provider: Microsoft Azure ServiceBus
-                      resource: Rule
-                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/rules/Delete
-                  - display:
-                      description: Get list of Namespace metrics Resource Descriptions
-                      operation: Get Namespace metrics
-                      provider: Microsoft Azure ServiceBus
-                      resource: Namespace metrics
-                    name: Microsoft.ServiceBus/namespaces/metricDefinitions/read
-                  - display:
-                      description: Get list of Namespace diagnostic settings Resource Descriptions
-                      operation: Get Namespace diagnostic settings
-                      provider: Microsoft Azure ServiceBus
-                      resource: Namespace diagnostic settings
-                    name: Microsoft.ServiceBus/namespaces/diagnosticSettings/read
-                  - display:
-                      description: Get list of Namespace diagnostic settings Resource Descriptions
-                      operation: Create or Update Namespace diagnostic settings
-                      provider: Microsoft Azure ServiceBus
-                      resource: Namespace diagnostic settings
-                    name: Microsoft.ServiceBus/namespaces/diagnosticSettings/write
-                  - display:
-                      description: Get list of Namespace logs Resource Descriptions
-                      operation: Get Namespace logs
-                      provider: Microsoft Azure ServiceBus
-                      resource: Namespace logs
-                    name: Microsoft.ServiceBus/namespaces/logDefinitions/read
+          $ref: ../examples/SBOperations_List.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/CheckNameAvailability':
@@ -364,17 +143,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceCheckNameAvailability:
-          parameters:
-            api-version: '2015-08-01'
-            parameters:
-              name: sdk-Namespace1321
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                message: ''
-                nameAvailable: true
-                reason: None
+          $ref: ../examples/NameSpaces/SBNameSpaceCheckNameAvailability.json
   '/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces':
     get:
       description: 'Gets all the available namespaces within the subscription, irrespective of the resource groups.'
@@ -393,41 +162,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceList:
-          parameters:
-            api-version: '2015-08-01'
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-5018
-                    location: Australia East
-                    name: sdk-Namespace-5018
-                    properties:
-                      createdAt: '2017-02-15T19:09:40.8Z'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://sdk-Namespace-5018.servicebus.windows.net:443/'
-                      updatedAt: '2017-02-15T19:10:05.193Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.ServiceBus/namespaces
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-3458
-                    location: West US
-                    name: sdk-Namespace-3458
-                    properties:
-                      createdAt: '2017-02-01T00:07:07.54Z'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://sdk-Namespace-3458.servicebus.windows.net:443/'
-                      updatedAt: '2017-02-01T00:07:31.14Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.ServiceBus/namespaces
+          $ref: ../examples/NameSpaces/SBNameSpaceList.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces':
@@ -449,42 +184,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceListByResourceGroup:
-          parameters:
-            api-version: '2015-08-01'
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-5018
-                    location: Australia East
-                    name: sdk-Namespace-5018
-                    properties:
-                      createdAt: '2017-02-15T19:09:40.8Z'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://sdk-Namespace-5018.servicebus.windows.net:443/'
-                      updatedAt: '2017-02-15T19:10:05.193Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.ServiceBus/namespaces
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-3458
-                    location: West US
-                    name: sdk-Namespace-3458
-                    properties:
-                      createdAt: '2017-02-01T00:07:07.54Z'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://sdk-Namespace-3458.servicebus.windows.net:443/'
-                      updatedAt: '2017-02-01T00:07:31.14Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.ServiceBus/namespaces
+          $ref: ../examples/NameSpaces/SBNameSpaceListByResourceGroup.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}':
@@ -509,15 +209,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceDelete:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace1471
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200': {}
-            '202': {}
-            '204': {}
+          $ref: ../examples/NameSpaces/SBNameSpaceDelete.json
       x-ms-long-running-operation: true
     get:
       description: Gets a description for the specified namespace.
@@ -538,30 +230,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceGet:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace1471
-            resourceGroupName: RG-eg
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace1471
-                location: West US
-                name: sdk-Namespace1471
-                properties:
-                  createdAt: '2017-03-12T07:39:13.31Z'
-                  provisioningState: Succeeded
-                  serviceBusEndpoint: 'https://sdk-Namespace1471.servicebus.windows.net:443/'
-                  updatedAt: '2017-03-12T07:39:35.443Z'
-                sku:
-                  capacity: 1
-                  name: Standard
-                  tier: Standard
-                tags:
-                  tag1: value1
-                  tag2: value2
-                type: Microsoft.ServiceBus/namespaces
+          $ref: ../examples/NameSpaces/SBNameSpaceGet.json
     patch:
       description: 'Updates a service namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
       operationId: Namespaces_Update
@@ -591,46 +260,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceUpdate:
-          parameters:
-            api-version: '2015-08-01'
-            location: West US
-            namespaceName: sdk-Namespace1471
-            parameters:
-              tags:
-                tag3: value3
-                tag4: value4
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: 8c246e6a-cbc6-4a87-aff1-d6a886f376ef
-          responses:
-            '200':
-              body:
-                id: ''
-                location: ''
-                name: ''
-                properties:
-                  createdAt: '2017-03-12T07:39:13.31Z'
-                  provisioningState: ''
-                  serviceBusEndpoint: 'https://sdk-Namespace1471.servicebus.windows.net:443/'
-                  updatedAt: '2017-03-12T07:39:35.443Z'
-                tags:
-                  tag3: value3
-                  tag4: value4
-                type: ''
-            '201':
-              body:
-                id: ''
-                location: ''
-                name: ''
-                properties:
-                  createdAt: '2017-03-12T07:39:13.31Z'
-                  provisioningState: ''
-                  serviceBusEndpoint: 'https://sdk-Namespace1471.servicebus.windows.net:443/'
-                  updatedAt: '2017-03-12T07:39:35.443Z'
-                tags:
-                  tag3: value3
-                  tag4: value4
-                type: ''
-            '202': {}
+          $ref: ../examples/NameSpaces/SBNameSpaceUpdate.json
     put:
       description: 'Creates or updates a service namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
       externalDocs:
@@ -666,49 +296,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceCreate:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace7816
-            parameters:
-              location: West US
-              sku:
-                name: Standard
-                tier: Standard
-              tags:
-                tag1: value1
-                tag2: value2
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace7816
-                location: West US
-                name: sdk-Namespace7816
-                properties:
-                  provisioningState: Unknown
-                sku:
-                  name: Standard
-                  tier: Standard
-                tags:
-                  tag1: value1
-                  tag2: value2
-                type: Microsoft.ServiceBus/namespaces
-            '201':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace7816
-                location: West US
-                name: sdk-Namespace7816
-                properties:
-                  provisioningState: Unknown
-                sku:
-                  name: Standard
-                  tier: Standard
-                tags:
-                  tag1: value1
-                  tag2: value2
-                type: Microsoft.ServiceBus/namespaces
-            '202': {}
+          $ref: ../examples/NameSpaces/SBNameSpaceCreate.json
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules':
     get:
@@ -730,31 +318,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceAutorizationRuleListAll:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace8341
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                nextLink: ''
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace8341/AuthorizationRules/RootManageSharedAccessKey
-                    name: RootManageSharedAccessKey
-                    properties:
-                      rights:
-                        - Listen
-                        - Manage
-                        - Send
-                    type: Microsoft.ServiceBus/AuthorizationRules
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace8341/AuthorizationRules/sdk-Authrules9875
-                    name: sdk-Authrules9875
-                    properties:
-                      rights:
-                        - Listen
-                        - Send
-                    type: Microsoft.ServiceBus/AuthorizationRules
+          $ref: ../examples/NameSpaces/SBNameSpaceAutorizationRuleListAll.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}':
@@ -778,15 +342,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceAutorizationRuleDelete:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-RelayAuthRules-01
-            namespaceName: sdk-Namespace8341
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200': {}
-            '204': {}
+          $ref: ../examples/NameSpaces/SBNameSpaceAutorizationRuleDelete.json
     get:
       description: Gets an authorization rule for a namespace by rule name.
       externalDocs:
@@ -807,22 +363,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceAutorizationRuleGet:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules9875
-            namespaceName: sdk-Namespace8341
-            resourceGroupName: sdk-Namespace8341
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace8341/AuthorizationRules/sdk-Authrules9875
-                name: sdk-Authrules9875
-                properties:
-                  rights:
-                    - Listen
-                    - Send
-                type: Microsoft.ServiceBus/AuthorizationRules
+          $ref: ../examples/NameSpaces/SBNameSpaceAutorizationRuleGet.json
     put:
       description: Creates or updates an authorization rule for a namespace.
       externalDocs:
@@ -849,28 +390,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceAuthorizationRuleCreate:
-          parameters:
-            api-version: '2016-07-01'
-            authorizationRuleName: sdk-Authrules9875
-            namespaceName: sdk-Namespace8341
-            parameters:
-              location: West US
-              properties:
-                rights:
-                  - Listen
-                  - Send
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace8341/AuthorizationRules/sdk-Authrules9875
-                name: sdk-Authrules9875
-                properties:
-                  rights:
-                    - Listen
-                    - Send
-                type: Microsoft.ServiceBus/AuthorizationRules
+          $ref: ../examples/NameSpaces/SBNameSpaceAuthorizationRuleCreate.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/listKeys':
     post:
       description: Gets the primary and secondary connection strings for the namespace.
@@ -892,20 +412,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceAuthorizationRuleListKey:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-RelayAuthRules-01
-            namespaceName: sdk-Namespace8341
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                keyName: sdk-Authrules9875
-                primaryConnectionString: 'Endpoint=sb://sdk-namespace8341.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules9875;SharedAccessKey=############################################'
-                primaryKey: '############################################'
-                secondaryConnectionString: 'Endpoint=sb://sdk-namespace8341.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules9875;SharedAccessKey=############################################'
-                secondaryKey: '############################################'
+          $ref: ../examples/NameSpaces/SBNameSpaceAuthorizationRuleListKey.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys':
     post:
       description: Regenerates the primary or secondary connection strings for the namespace.
@@ -933,22 +440,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceAuthorizationRuleRegenrateKey:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-RelayAuthRules-01
-            namespaceName: sdk-Namespace8341
-            parameters:
-              Policykey: PrimaryKey
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                keyName: sdk-Authrules9875
-                primaryConnectionString: 'Endpoint=sb://sdk-namespace8341.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules9875;SharedAccessKey=############################################'
-                primaryKey: '############################################'
-                secondaryConnectionString: 'Endpoint=sb://sdk-namespace8341.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules9875;SharedAccessKey=############################################'
-                secondaryKey: '############################################'
+          $ref: ../examples/NameSpaces/SBNameSpaceAuthorizationRuleRegenrateKey.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues':
     get:
       description: Gets the queues within a namespace.
@@ -969,44 +461,7 @@ paths:
         - Queues
       x-ms-examples:
         QueueListByNameSpace:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace7626
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace7626/queues/sdk-queues7173
-                    name: sdk-queues7173
-                    properties:
-                      accessedAt: '0001-01-01T00:00:00Z'
-                      autoDeleteOnIdle: '10675199.02:48:05.4775807'
-                      countDetails:
-                        activeMessageCount: 0
-                        deadLetterMessageCount: 0
-                        scheduledMessageCount: 0
-                        transferDeadLetterMessageCount: 0
-                        transferMessageCount: 0
-                      createdAt: '2017-03-12T10:11:38.87Z'
-                      deadLetteringOnMessageExpiration: false
-                      defaultMessageTimeToLive: '10675199.02:48:05.4775807'
-                      duplicateDetectionHistoryTimeWindow: '00:10:00'
-                      enableBatchedOperations: true
-                      enableExpress: false
-                      enablePartitioning: false
-                      lockDuration: '00:01:00'
-                      maxDeliveryCount: 10
-                      maxSizeInMegabytes: 1024
-                      messageCount: 0
-                      requiresDuplicateDetection: false
-                      requiresSession: false
-                      sizeInBytes: 0
-                      status: Active
-                      supportOrdering: true
-                      updatedAt: '2017-03-12T10:11:38.917Z'
-                    type: Microsoft.ServiceBus/Queues
+          $ref: ../examples/Queues/SBQueueListByNameSpace.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}':
@@ -1030,15 +485,7 @@ paths:
         - Queues
       x-ms-examples:
         QueueDelete:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace3082
-            queueName: sdk-Queues8544
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200': {}
-            '204': {}
+          $ref: ../examples/Queues/SBQueueDelete.json
     get:
       description: Returns a description for the specified queue.
       externalDocs:
@@ -1059,44 +506,7 @@ paths:
         - Queues
       x-ms-examples:
         QueueGet:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace3082
-            queueName: sdk-Queues8544
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace3082/queues/sdk-Queues8544
-                name: sdk-Queues8544
-                properties:
-                  accessedAt: '0001-01-01T00:00:00Z'
-                  autoDeleteOnIdle: '10675199.02:48:05.4775807'
-                  countDetails:
-                    activeMessageCount: 0
-                    deadLetterMessageCount: 0
-                    scheduledMessageCount: 0
-                    transferDeadLetterMessageCount: 0
-                    transferMessageCount: 0
-                  createdAt: '2017-03-12T09:16:03.577Z'
-                  deadLetteringOnMessageExpiration: false
-                  defaultMessageTimeToLive: '10675199.02:48:05.4775807'
-                  duplicateDetectionHistoryTimeWindow: '00:10:00'
-                  enableBatchedOperations: true
-                  enableExpress: false
-                  enablePartitioning: false
-                  lockDuration: '00:01:00'
-                  maxDeliveryCount: 10
-                  maxSizeInMegabytes: 1024
-                  messageCount: 0
-                  requiresDuplicateDetection: false
-                  requiresSession: false
-                  sizeInBytes: 0
-                  status: Active
-                  supportOrdering: true
-                  updatedAt: '2017-03-12T09:16:03.623Z'
-                type: Microsoft.ServiceBus/Queues
+          $ref: ../examples/Queues/SBQueueGet.json
     put:
       description: Creates or updates a Service Bus queue. This operation is idempotent.
       externalDocs:
@@ -1123,42 +533,7 @@ paths:
         - Queues
       x-ms-examples:
         QueueCreate:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace3082
-            parameters:
-              location: West US
-              properties:
-                enableExpress: false
-                enablePartitioning: false
-            queueName: sdk-Queues8544
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace3082/queues/sdk-Queues8544
-                name: sdk-Queues8544
-                properties:
-                  autoDeleteOnIdle: '10675199.02:48:05.4775807'
-                  createdAt: '2017-03-12T09:16:03.577Z'
-                  deadLetteringOnMessageExpiration: false
-                  defaultMessageTimeToLive: '10675199.02:48:05.4775807'
-                  duplicateDetectionHistoryTimeWindow: '00:10:00'
-                  enableBatchedOperations: true
-                  enableExpress: false
-                  enablePartitioning: false
-                  lockDuration: '00:01:00'
-                  maxDeliveryCount: 10
-                  maxSizeInMegabytes: 1024
-                  messageCount: 0
-                  requiresDuplicateDetection: false
-                  requiresSession: false
-                  sizeInBytes: 0
-                  status: Active
-                  supportOrdering: true
-                  updatedAt: '2017-03-12T09:16:03.623Z'
-                type: Microsoft.ServiceBus/Queues
+          $ref: ../examples/Queues/SBQueueCreate.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules':
     get:
       description: Gets all authorization rules for a queue.
@@ -1180,23 +555,7 @@ paths:
         - Queues
       x-ms-examples:
         QueueAutorizationRuleListAll:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace6556
-            queueName: sdk-Queues3136
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace6556/queues/sdk-Queues3136/authorizationRules/sdk-Authrules7319
-                    name: sdk-Authrules7319
-                    properties:
-                      rights:
-                        - Listen
-                        - Send
-                    type: Microsoft.ServiceBus/AuthorizationRules
+          $ref: ../examples/Queues/SBQueueAutorizationRuleListAll.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}':
@@ -1221,16 +580,7 @@ paths:
         - Queues
       x-ms-examples:
         QueueAutorizationRuleDelete:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules7319
-            namespaceName: sdk-Namespace6556
-            queueName: sdk-Queues3136
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200': {}
-            '204': {}
+          $ref: ../examples/Queues/SBQueueAutorizationRuleDelete.json
     get:
       description: Gets an authorization rule for a queue by rule name.
       externalDocs:
@@ -1252,23 +602,7 @@ paths:
         - Queues
       x-ms-examples:
         QueueAutorizationRuleGet:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules7319
-            namespaceName: sdk-Namespace6556
-            queueName: sdk-Queues3136
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace6556/queues/sdk-Queues3136/authorizationRules/sdk-Authrules7319
-                name: sdk-Authrules7319
-                properties:
-                  rights:
-                    - Listen
-                    - Send
-                type: Microsoft.ServiceBus/AuthorizationRules
+          $ref: ../examples/Queues/SBQueueAutorizationRuleGet.json
     put:
       description: Creates an authorization rule for a queue.
       operationId: Queues_CreateOrUpdateAuthorizationRule
@@ -1294,28 +628,7 @@ paths:
         - Queues
       x-ms-examples:
         QueueAuthorizationRuleCreate:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules7319
-            namespaceName: sdk-Namespace6556
-            parameters:
-              properties:
-                rights:
-                  - Listen
-                  - Send
-            queueName: sdk-Queues3136
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace6556/queues/sdk-Queues3136/authorizationRules/sdk-Authrules7319
-                name: sdk-Authrules7319
-                properties:
-                  rights:
-                    - Listen
-                    - Send
-                type: Microsoft.ServiceBus/AuthorizationRules
+          $ref: ../examples/Queues/SBQueueAuthorizationRuleCreate.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}/ListKeys':
     post:
       description: Primary and secondary connection strings to the queue.
@@ -1338,21 +651,7 @@ paths:
         - Queues
       x-ms-examples:
         QueueAuthorizationRuleListKey:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules7319
-            namespaceName: sdk-Namespace6556
-            queueName: sdk-Queues3136
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                keyName: sdk-Authrules7319
-                primaryConnectionString: 'Endpoint=sb://sdk-namespace6556.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules7319;SharedAccessKey=###########################################;EntityPath=sdk-Queues3136'
-                primaryKey: '###########################################'
-                secondaryConnectionString: 'Endpoint=sb://sdk-namespace6556.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules7319;SharedAccessKey=###########################################;EntityPath=sdk-Queues3136'
-                secondaryKey: '###########################################'
+          $ref: ../examples/Queues/SBQueueAuthorizationRuleListKey.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}/regenerateKeys':
     post:
       description: Regenerates the primary or secondary connection strings to the queue.
@@ -1381,23 +680,7 @@ paths:
         - Queues
       x-ms-examples:
         QueueAuthorizationRuleRegenrateKey:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules7319
-            namespaceName: sdk-Namespace6556
-            parameters:
-              Policykey: PrimaryKey
-            queueName: sdk-Queues3136
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                keyName: sdk-Authrules7319
-                primaryConnectionString: 'Endpoint=sb://sdk-namespace6556.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules7319;SharedAccessKey=###########################################;EntityPath=sdk-Queues3136'
-                primaryKey: '###########################################'
-                secondaryConnectionString: 'Endpoint=sb://sdk-namespace6556.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules7319;SharedAccessKey=###########################################;EntityPath=sdk-Queues3136'
-                secondaryKey: '###########################################'
+          $ref: ../examples/Queues/SBQueueAuthorizationRuleRegenrateKey.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics':
     get:
       description: Gets all the topics in a namespace.
@@ -1418,40 +701,7 @@ paths:
         - Topics
       x-ms-examples:
         TopicGet:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace4191
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace4191/topics/sdk-topics1377
-                    name: sdk-topics1377
-                    properties:
-                      accessedAt: '0001-01-01T00:00:00Z'
-                      autoDeleteOnIdle: '10675199.02:48:05.4775807'
-                      countDetails:
-                        activeMessageCount: 0
-                        deadLetterMessageCount: 0
-                        scheduledMessageCount: 0
-                        transferDeadLetterMessageCount: 0
-                        transferMessageCount: 0
-                      createdAt: '2017-03-12T16:54:30.4Z'
-                      defaultMessageTimeToLive: '10675199.02:48:05.4775807'
-                      duplicateDetectionHistoryTimeWindow: '00:10:00'
-                      enableBatchedOperations: true
-                      enableExpress: false
-                      enablePartitioning: false
-                      maxSizeInMegabytes: 1024
-                      requiresDuplicateDetection: false
-                      sizeInBytes: 0
-                      status: Active
-                      subscriptionCount: 0
-                      supportOrdering: true
-                      updatedAt: '2017-03-12T16:54:30.45Z'
-                    type: Microsoft.ServiceBus/Topic
+          $ref: ../examples/Topics/SBTopicListByNameSpace.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}':
@@ -1475,15 +725,7 @@ paths:
         - Topics
       x-ms-examples:
         TopicDelete:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace3082
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            topicName: sdk-Topics1377
-          responses:
-            '200': {}
-            '204': {}
+          $ref: ../examples/Topics/SBTopicDelete.json
     get:
       description: Returns a description for the specified topic.
       externalDocs:
@@ -1504,40 +746,7 @@ paths:
         - Topics
       x-ms-examples:
         TopicGet:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace4191
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            topicName: sdk-Topics1377
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace4191/topics/sdk-Topics1377
-                name: sdk-Topics1377
-                properties:
-                  accessedAt: '0001-01-01T00:00:00Z'
-                  autoDeleteOnIdle: '10675199.02:48:05.4775807'
-                  countDetails:
-                    activeMessageCount: 0
-                    deadLetterMessageCount: 0
-                    scheduledMessageCount: 0
-                    transferDeadLetterMessageCount: 0
-                    transferMessageCount: 0
-                  createdAt: '2017-03-12T16:54:30.4Z'
-                  defaultMessageTimeToLive: '10675199.02:48:05.4775807'
-                  duplicateDetectionHistoryTimeWindow: '00:10:00'
-                  enableBatchedOperations: true
-                  enableExpress: false
-                  enablePartitioning: false
-                  maxSizeInMegabytes: 1024
-                  requiresDuplicateDetection: false
-                  sizeInBytes: 0
-                  status: Active
-                  subscriptionCount: 0
-                  supportOrdering: true
-                  updatedAt: '2017-03-12T16:54:30.45Z'
-                type: Microsoft.ServiceBus/Topic
+          $ref: ../examples/Topics/SBTopicGet.json
     put:
       description: Creates a topic in the specified namespace.
       externalDocs:
@@ -1564,34 +773,7 @@ paths:
         - Topics
       x-ms-examples:
         TopicCreate:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace4191
-            parameters:
-              location: West US
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            topicName: sdk-Topics1377
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace4191/topics/sdk-Topics1377
-                name: sdk-Topics1377
-                properties:
-                  autoDeleteOnIdle: '10675199.02:48:05.4775807'
-                  createdAt: '2017-03-12T16:54:30.4Z'
-                  defaultMessageTimeToLive: '10675199.02:48:05.4775807'
-                  duplicateDetectionHistoryTimeWindow: '00:10:00'
-                  enableBatchedOperations: true
-                  enableExpress: false
-                  enablePartitioning: false
-                  maxSizeInMegabytes: 1024
-                  requiresDuplicateDetection: false
-                  sizeInBytes: 0
-                  status: Active
-                  supportOrdering: true
-                  updatedAt: '2017-03-12T16:54:30.45Z'
-                type: Microsoft.ServiceBus/Topic
+          $ref: ../examples/Topics/SBTopicCreate.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules':
     get:
       description: Gets authorization rules for a topic.
@@ -1613,23 +795,7 @@ paths:
         - Topics
       x-ms-examples:
         TopicAutorizationRuleListAll:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace8408
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            topicName: sdk-Topics2075
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace8408/topics/sdk-Topics2075/authorizationRules/sdk-Authrules5067
-                    name: sdk-Authrules5067
-                    properties:
-                      rights:
-                        - Listen
-                        - Send
-                    type: Microsoft.ServiceBus/AuthorizationRules
+          $ref: ../examples/Topics/SBTopicAutorizationRuleListAll.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}':
@@ -1654,16 +820,7 @@ paths:
         - Topics
       x-ms-examples:
         TopicAutorizationRuleDelete:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules5067
-            namespaceName: sdk-Namespace8408
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            topicName: sdk-Topics2075
-          responses:
-            '200': {}
-            '204': {}
+          $ref: ../examples/Topics/SBTopicAutorizationRuleDelete.json
     get:
       description: Returns the specified authorization rule.
       externalDocs:
@@ -1685,23 +842,7 @@ paths:
         - Topics
       x-ms-examples:
         TopicAutorizationRuleGet:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules5067
-            namespaceName: sdk-Namespace8408
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            topicName: sdk-Topics2075
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace8408/topics/sdk-Topics2075/authorizationRules/sdk-Authrules5067
-                name: sdk-Authrules5067
-                properties:
-                  rights:
-                    - Listen
-                    - Send
-                type: Microsoft.ServiceBus/AuthorizationRules
+          $ref: ../examples/Topics/SBTopicAutorizationRuleGet.json
     put:
       description: Creates an authorizatio rule for the specified topic.
       externalDocs:
@@ -1729,28 +870,7 @@ paths:
         - Topics
       x-ms-examples:
         TopicAuthorizationRuleCreate:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules5067
-            namespaceName: sdk-Namespace8408
-            parameters:
-              properties:
-                rights:
-                  - Listen
-                  - Send
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            topicName: sdk-Topics2075
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace8408/topics/sdk-Topics2075/authorizationRules/sdk-Authrules5067
-                name: sdk-Authrules5067
-                properties:
-                  rights:
-                    - Listen
-                    - Send
-                type: Microsoft.ServiceBus/AuthorizationRules
+          $ref: ../examples/Topics/SBTopicAuthorizationRuleCreate.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}/ListKeys':
     post:
       description: Gets the primary and secondary connection strings for the topic.
@@ -1773,21 +893,7 @@ paths:
         - Topics
       x-ms-examples:
         TopicAuthorizationRuleListKey:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules5067
-            namespaceName: sdk-Namespace8408
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            topicName: sdk-Topics2075
-          responses:
-            '200':
-              body:
-                keyName: sdk-Authrules5067
-                primaryConnectionString: 'Endpoint=sb://sdk-namespace8408.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules5067;SharedAccessKey=###########################################;EntityPath=sdk-Topics2075'
-                primaryKey: '###########################################'
-                secondaryConnectionString: 'Endpoint=sb://sdk-namespace8408.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules5067;SharedAccessKey=###########################################;EntityPath=sdk-Topics2075'
-                secondaryKey: '###########################################'
+          $ref: ../examples/Topics/SBTopicAuthorizationRuleListKey.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}/regenerateKeys':
     post:
       description: Regenerates primary or secondary connection strings for the topic.
@@ -1816,23 +922,7 @@ paths:
         - Topics
       x-ms-examples:
         TopicAuthorizationRuleRegenrateKey:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules5067
-            namespaceName: sdk-Namespace8408
-            parameters:
-              Policykey: PrimaryKey
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            topicName: sdk-Topics2075
-          responses:
-            '200':
-              body:
-                keyName: sdk-Authrules5067
-                primaryConnectionString: 'Endpoint=sb://sdk-namespace8408.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules5067;SharedAccessKey=###########################################;EntityPath=sdk-Topics2075'
-                primaryKey: '###########################################'
-                secondaryConnectionString: 'Endpoint=sb://sdk-namespace8408.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules5067;SharedAccessKey=###########################################;EntityPath=sdk-Topics2075'
-                secondaryKey: '###########################################'
+          $ref: ../examples/Topics/SBTopicAuthorizationRuleRegenrateKey.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/subscriptions':
     get:
       description: List all the subscriptions under a specified topic.
@@ -1854,39 +944,7 @@ paths:
         - Subscriptions
       x-ms-examples:
         SubscriptionListByTopic:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace2500
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            topicName: sdk-Topics2565
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace2500/topics/sdk-Topics2565/subscriptions/sdk-Subscriptions3374
-                    name: sdk-Subscriptions3374
-                    properties:
-                      accessedAt: '2017-03-12T17:38:55.97Z'
-                      autoDeleteOnIdle: '10675199.02:48:05.4775807'
-                      countDetails:
-                        activeMessageCount: 0
-                        deadLetterMessageCount: 0
-                        scheduledMessageCount: 0
-                        transferDeadLetterMessageCount: 0
-                        transferMessageCount: 0
-                      createdAt: '2017-03-12T17:38:55.969348Z'
-                      deadLetteringOnFilterEvaluationExceptions: true
-                      deadLetteringOnMessageExpiration: false
-                      defaultMessageTimeToLive: '10675199.02:48:05.4775807'
-                      enableBatchedOperations: true
-                      lockDuration: '00:01:00'
-                      maxDeliveryCount: 10
-                      messageCount: 0
-                      requiresSession: false
-                      status: Active
-                      updatedAt: '2017-03-12T17:38:55.969348Z'
-                    type: Microsoft.ServiceBus/TopicSubscriptions
+          $ref: ../examples/Subscriptions/SBSubscriptionListByTopic.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/subscriptions/{subscriptionName}':
@@ -1911,16 +969,7 @@ paths:
         - Subscriptions
       x-ms-examples:
         SubscriptionDelete:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace4191
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            subscriptionName: sdk-Subscriptions3374
-            topicName: sdk-Topics1377
-          responses:
-            '200': {}
-            '204': {}
+          $ref: ../examples/Subscriptions/SBSubscriptionDelete.json
     get:
       description: Returns a subscription description for the specified topic.
       externalDocs:
@@ -1942,39 +991,7 @@ paths:
         - Subscriptions
       x-ms-examples:
         SubscriptionGet:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace2500
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            subscriptionName: sdk-Subscriptions3374
-            topicName: sdk-Topics2565
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace2500/topics/sdk-Topics2565/subscriptions/sdk-Subscriptions3374
-                name: sdk-Subscriptions3374
-                properties:
-                  accessedAt: '2017-03-12T17:38:55.97Z'
-                  autoDeleteOnIdle: '10675199.02:48:05.4775807'
-                  countDetails:
-                    activeMessageCount: 0
-                    deadLetterMessageCount: 0
-                    scheduledMessageCount: 0
-                    transferDeadLetterMessageCount: 0
-                    transferMessageCount: 0
-                  createdAt: '2017-03-12T17:38:55.969348Z'
-                  deadLetteringOnFilterEvaluationExceptions: true
-                  deadLetteringOnMessageExpiration: false
-                  defaultMessageTimeToLive: '10675199.02:48:05.4775807'
-                  enableBatchedOperations: true
-                  lockDuration: '00:01:00'
-                  maxDeliveryCount: 10
-                  messageCount: 0
-                  requiresSession: false
-                  status: Active
-                  updatedAt: '2017-03-12T17:38:55.969348Z'
-                type: Microsoft.ServiceBus/TopicSubscriptions
+          $ref: ../examples/Subscriptions/SBSubscriptionGet.json
     put:
       description: Creates a topic subscription.
       externalDocs:
@@ -2002,35 +1019,7 @@ paths:
         - Subscriptions
       x-ms-examples:
         SubscriptionCreate:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace2500
-            parameters:
-              location: West US
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-            subscriptionName: sdk-Subscriptions3374
-            topicName: sdk-Topics2565
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace2500/topics/sdk-Topics2565/subscriptions/sdk-Subscriptions3374
-                name: sdk-Subscriptions3374
-                properties:
-                  accessedAt: '2017-03-12T16:54:30.45Z'
-                  autoDeleteOnIdle: '10675199.02:48:05.4775807'
-                  createdAt: '2017-03-12T16:54:30.4Z'
-                  deadLetteringOnFilterEvaluationExceptions: true
-                  deadLetteringOnMessageExpiration: false
-                  defaultMessageTimeToLive: '10675199.02:48:05.4775807'
-                  enableBatchedOperations: true
-                  lockDuration: '00:01:00'
-                  maxDeliveryCount: 10
-                  messageCount: 0
-                  requiresSession: false
-                  status: Active
-                  updatedAt: '2017-03-12T16:54:30.45Z'
-                type: Microsoft.ServiceBus/TopicSubscriptions
+          $ref: ../examples/Subscriptions/SBSubscriptionCreate.json
 definitions:
   CheckNameAvailability:
     description: Description of a Check Name availability request properties.

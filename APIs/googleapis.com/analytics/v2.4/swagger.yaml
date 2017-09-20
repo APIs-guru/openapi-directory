@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Views and manages your Google Analytics data.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Analytics
   version: v2.4
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/analytics/v2.4/rest'
       version: v1
@@ -35,20 +31,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
       'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
-      'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -150,11 +137,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - data
@@ -186,11 +169,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -227,11 +206,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -273,11 +248,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -324,11 +295,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management
@@ -360,11 +327,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/analytics'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/analytics'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/analytics.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - management

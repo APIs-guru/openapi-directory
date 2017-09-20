@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Access Gmail mailboxes including sending user email.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Gmail
   version: v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'
       version: v1
@@ -35,7 +31,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://mail.google.com/': 'Read, send, delete, and manage your email'
@@ -48,23 +44,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/gmail.send': Send email on your behalf
       'https://www.googleapis.com/auth/gmail.settings.basic': Manage your basic mail settings
       'https://www.googleapis.com/auth/gmail.settings.sharing': 'Manage your sensitive mail settings, including who can manage your mail'
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://mail.google.com/': 'Read, send, delete, and manage your email'
-      'https://www.googleapis.com/auth/gmail.compose': Manage drafts and send emails
-      'https://www.googleapis.com/auth/gmail.insert': Insert mail into your mailbox
-      'https://www.googleapis.com/auth/gmail.labels': Manage mailbox labels
-      'https://www.googleapis.com/auth/gmail.metadata': 'View your email message metadata such as labels and headers, but not the email body'
-      'https://www.googleapis.com/auth/gmail.modify': View and modify but not delete your email
-      'https://www.googleapis.com/auth/gmail.readonly': View your emails messages and settings
-      'https://www.googleapis.com/auth/gmail.send': Send email on your behalf
-      'https://www.googleapis.com/auth/gmail.settings.basic': Manage your basic mail settings
-      'https://www.googleapis.com/auth/gmail.settings.sharing': 'Manage your sensitive mail settings, including who can manage your mail'
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -146,19 +125,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.compose'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.compose'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -194,15 +165,9 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.compose'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.compose'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -239,15 +204,9 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.compose'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.compose'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -273,15 +232,9 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.compose'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.compose'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -318,19 +271,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.compose'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.compose'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -371,15 +316,9 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.compose'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.compose'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -431,19 +370,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -474,23 +405,13 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.labels'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.labels'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -524,15 +445,9 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.labels'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.labels'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -558,15 +473,9 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.labels'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.labels'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -593,23 +502,13 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.labels'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.labels'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -648,15 +547,9 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.labels'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.labels'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -687,15 +580,9 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.labels'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.labels'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -743,19 +630,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -804,15 +683,9 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.insert'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.insert'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -845,8 +718,6 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
       tags:
         - users
   '/{userId}/messages/batchModify':
@@ -878,11 +749,7 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -942,15 +809,9 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.insert'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.insert'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -987,19 +848,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.compose'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.compose'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.send'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.send'
       tags:
         - users
@@ -1024,8 +877,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://mail.google.com/'
-          Oauth2c:
             - 'https://mail.google.com/'
       tags:
         - users
@@ -1069,19 +920,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -1129,11 +972,7 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -1169,11 +1008,7 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -1209,11 +1044,7 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -1246,15 +1077,9 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -1285,23 +1110,13 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.compose'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.compose'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -1332,19 +1147,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
@@ -1381,8 +1188,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
   '/{userId}/settings/filters':
@@ -1404,19 +1209,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
@@ -1450,8 +1247,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
   '/{userId}/settings/filters/{id}':
@@ -1475,8 +1270,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
@@ -1503,19 +1296,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
@@ -1546,19 +1331,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
@@ -1595,8 +1372,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
   '/{userId}/settings/forwardingAddresses/{forwardingEmail}':
@@ -1624,8 +1399,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
     get:
@@ -1651,19 +1424,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
@@ -1694,19 +1459,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
@@ -1740,8 +1497,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
   '/{userId}/settings/pop':
@@ -1763,19 +1518,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
@@ -1809,8 +1556,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
   '/{userId}/settings/sendAs':
@@ -1832,19 +1577,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
@@ -1881,8 +1618,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
   '/{userId}/settings/sendAs/{sendAsEmail}':
@@ -1910,8 +1645,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
     get:
@@ -1937,19 +1670,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
@@ -1991,11 +1716,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
@@ -2029,11 +1750,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
@@ -2061,23 +1778,13 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
@@ -2116,11 +1823,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
@@ -2151,11 +1854,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
@@ -2187,23 +1886,13 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
@@ -2250,11 +1939,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
@@ -2291,8 +1976,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.sharing'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.sharing'
       tags:
         - users
   '/{userId}/settings/vacation':
@@ -2314,19 +1997,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
@@ -2360,8 +2035,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.settings.basic'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.settings.basic'
       tags:
         - users
   '/{userId}/stop':
@@ -2389,19 +2062,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -2449,19 +2114,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -2494,8 +2151,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://mail.google.com/'
-          Oauth2c:
             - 'https://mail.google.com/'
       tags:
         - users
@@ -2538,19 +2193,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
@@ -2598,11 +2245,7 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -2638,11 +2281,7 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -2678,11 +2317,7 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.modify'
       tags:
         - users
@@ -2717,19 +2352,11 @@ paths:
       security:
         - Oauth2:
             - 'https://mail.google.com/'
-          Oauth2c:
-            - 'https://mail.google.com/'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/gmail.modify'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/gmail.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users

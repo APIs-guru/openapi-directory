@@ -1063,6 +1063,44 @@ paths:
         name: url_export_id
         required: true
         type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/html/{url}':
+    get:
+      description: Gets the HTML of an URL for an analysis
+      operationId: getUrlHTML
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/UrlHTML'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Gets the HTML of an URL for an analysis
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
+      - description: (Urlencoded) Searched URL
+        in: path
+        name: url
+        required: true
+        type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls/suggested_filters':
     parameters:
       - description: User's identifier
@@ -1433,6 +1471,9 @@ definitions:
       config:
         readOnly: true
         type: string
+      crawl_launch_type:
+        readOnly: true
+        type: string
       date_created:
         format: date-time
         type: string
@@ -1445,6 +1486,9 @@ definitions:
         type: string
       date_launched:
         format: date-time
+        type: string
+      failures:
+        readOnly: true
         type: string
       features:
         readOnly: true
@@ -1461,6 +1505,11 @@ definitions:
         type: string
       name:
         readOnly: true
+        type: string
+      owner:
+        readOnly: true
+        type: string
+      red_button_domain:
         type: string
       slug:
         readOnly: true
@@ -1490,6 +1539,12 @@ definitions:
       config:
         readOnly: true
         type: string
+      crawl_launch_type:
+        readOnly: true
+        type: string
+      date_created:
+        format: date-time
+        type: string
       date_finished:
         format: date-time
         type: string
@@ -1517,6 +1572,9 @@ definitions:
         readOnly: true
         type: string
       name:
+        readOnly: true
+        type: string
+      owner:
         readOnly: true
         type: string
       red_button_domain:
@@ -1584,6 +1642,8 @@ definitions:
     type: object
   CrawlStatistics:
     properties:
+      crawler_ip:
+        type: string
       depth_current:
         format: int64
         type: integer
@@ -1786,6 +1846,8 @@ definitions:
         type: boolean
       name:
         type: string
+      optional:
+        type: boolean
       permissions:
         items:
           type: string
@@ -1802,6 +1864,7 @@ definitions:
       - type
       - id
       - permissions
+      - optional
     type: object
   DatamodelGroup:
     properties:
@@ -2211,6 +2274,9 @@ definitions:
       - rules
     type: object
   UrlDetail:
+    properties: {}
+    type: object
+  UrlHTML:
     properties: {}
     type: object
   UrlsAggsQueries:

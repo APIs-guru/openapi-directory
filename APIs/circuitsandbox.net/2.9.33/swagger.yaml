@@ -9,7 +9,7 @@ info:
 
     [Learn more about the Circuit Development Community](https://www.circuit.com/web/developers/home)
   title: REST API Version 2
-  version: 2.9.31
+  version: 2.9.33
   x-apisguru-categories:
     - messaging
   x-logo:
@@ -1849,6 +1849,342 @@ paths:
       summary: Gets the presence status
       tags:
         - User Management
+  /webhooks:
+    delete:
+      description: Unregisters all webHooks of the authenticated user
+      operationId: removeWebHooks
+      responses:
+        '204':
+          description: The operation was successful
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+            - READ_USER
+      summary: Removes all webHooks
+      tags:
+        - Webhooks
+    get:
+      description: Gets the list of webHooks registered for this user or API.
+      operationId: getWebHook
+      responses:
+        '200':
+          description: The list of registered webHooks
+          schema:
+            items:
+              $ref: '#/definitions/WebHook'
+            type: array
+        '401':
+          description: The authentication was not successful
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+            - READ_USER
+      summary: Gets a list of webHooks
+      tags:
+        - Webhooks
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Registers the webHook with the given filter and callback URL.
+      operationId: addWebHook
+      parameters:
+        - description: WebHook callback URL. Currently only HTTP is supported
+          in: formData
+          maxLength: 255
+          name: url
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: 'A filter for WebHooks that checks for a list of configured events. This filter will use a regular expression to determine if it is interested in the events or not. The event itself is converted into a string of format AREA.EVENT. Examples: CONVERSATION.CREATE / USER.UPDATE'
+          in: formData
+          items:
+            enum:
+              - CONVERSATION.CREATE
+              - CONVERSATION.UPDATE
+              - CONVERSATION.ADD_ITEM
+              - CONVERSATION.UPDATE_ITEM
+              - USER.USER_UPDATED
+              - USER.USER_SETTING_UPDATED
+            maxLength: 255
+            type: string
+          name: filter
+          required: true
+          type: array
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '201':
+          description: The webHook was successfully registered
+          schema:
+            $ref: '#/definitions/WebHook'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>an invalid event filter</li><li>an unsupported event filter</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '403':
+          description: The maximum number of allowed webHook is reached
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+            - READ_USER
+      summary: Registers a WebHook
+      tags:
+        - Webhooks
+  /webhooks/presence:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Registers a webHook that has a presence filter with the given URL and userIds. There is a maximum number of userIds allowed
+      operationId: addPresenceWebHook
+      parameters:
+        - description: WebHook callback URL. Currently only HTTP is supported
+          in: formData
+          maxLength: 255
+          name: url
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: not available
+          in: formData
+          items:
+            maxLength: 6500
+            type: string
+          name: userIds
+          required: true
+          type: array
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '201':
+          description: The webHook was successfully registered
+          schema:
+            $ref: '#/definitions/WebHook'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>one or more invalid userIds</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '403':
+          description: The maximum number of allowed userIds is reached or the maximum number of allowed webHook is reached
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_USER
+      summary: Registers Presence WebHook registration
+      tags:
+        - Webhooks
+  '/webhooks/presence/{id}':
+    put:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: 'Updates a registration of a webHook that has a presence filter. The update can be performed either on the URL and/or the userIds. The new userIds, if any, will override any existing userIds.'
+      operationId: updatePresenceWebHook
+      parameters:
+        - description: The unique ID of the webHook to update
+          in: path
+          maxLength: 255
+          name: id
+          required: true
+          type: string
+        - description: WebHook callback URL. Currently only HTTP is supported
+          in: formData
+          maxLength: 255
+          name: url
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: not available
+          in: formData
+          items:
+            maxLength: 6500
+            type: string
+          name: userIds
+          required: false
+          type: array
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The webHook registration was successfully updated
+          schema:
+            $ref: '#/definitions/WebHook'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>one or more invalid userIds</li><li>no input parameter is provided</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '403':
+          description: The maximum number of allowed userIds is reached
+        '404':
+          description: The webHook does not exist
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_USER
+      summary: Updates a Presence WebHook registration
+      tags:
+        - Webhooks
+  '/webhooks/{id}':
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Unregisters the webHook with the given ID.
+      operationId: removeWebHook
+      parameters:
+        - description: The unique ID of the webHook to remove
+          in: path
+          maxLength: 255
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '204':
+          description: The operation was successful
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the given id does not match a UUID</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '404':
+          description: The webHook does not exist
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+            - READ_USER
+      summary: Removes a registered webHook
+      tags:
+        - Webhooks
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Gets the registered webHook with the given ID.
+      operationId: getWebHookById
+      parameters:
+        - description: The unique ID of the webHook to fetch
+          in: path
+          maxLength: 255
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The registered webHook with the given ID
+          schema:
+            $ref: '#/definitions/WebHook'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the given id does not match a UUID</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '404':
+          description: The webHook does not exist
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+            - READ_USER
+      summary: Gets a webHook
+      tags:
+        - Webhooks
+    put:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Updates a webHook registration with the given filter and callback URL.
+      operationId: updateWebHook
+      parameters:
+        - description: The unique ID of the webHook to update
+          in: path
+          maxLength: 255
+          name: id
+          required: true
+          type: string
+        - description: WebHook callback URL. Currently only HTTP is supported
+          in: formData
+          maxLength: 255
+          name: url
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: 'A filter for WebHooks that checks for a list of configured events. This filter will use a regular expression to determine if it is interested in the events or not. The event itself is converted into a string of format AREA.EVENT. Examples: CONVERSATION.CREATE / USER.UPDATE'
+          in: formData
+          items:
+            enum:
+              - CONVERSATION.CREATE
+              - CONVERSATION.UPDATE
+              - CONVERSATION.ADD_ITEM
+              - CONVERSATION.UPDATE_ITEM
+              - USER.USER_UPDATED
+              - USER.USER_SETTING_UPDATED
+            maxLength: 255
+            type: string
+          name: filter
+          required: false
+          type: array
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: The webHook registration was successfully updated
+          schema:
+            $ref: '#/definitions/WebHook'
+        '400':
+          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>an invalid event filter</li><li>an unsupported event filter</li><li>no input parameter is provided</li><li>a field constraint is violated</li></ul>'
+        '401':
+          description: The authentication was not successful
+        '404':
+          description: The webHook does not exist
+        '500':
+          description: The server encountered an internal error and the operation could not be completed.
+        '503':
+          description: The server is currently unable to receive requests.
+      security:
+        - oauth:
+            - ALL
+            - READ_CONVERSATIONS
+            - READ_USER
+      summary: Updates a WebHook registration
+      tags:
+        - Webhooks
 definitions:
   Attachment:
     properties:
@@ -2214,3 +2550,31 @@ definitions:
         items:
           type: string
         type: array
+  WebHook:
+    properties:
+      creationTime:
+        description: The time when this WebHook was created. This does not necessary mean the time when an manifest file was created.
+        format: int64
+        type: number
+      filter:
+        description: An optional list of filter parameters for this webhook.
+        items:
+          type: string
+        type: array
+      id:
+        description: The unique identifier for this webhook. Can be used later to unregister the webhook.
+        type: string
+      subscriptionIds:
+        description: 'The optional list of userids for which this webhook is subscribed, i.e. presence events for the user are forwarded to the WebHook callback URL.'
+        items:
+          type: string
+        type: array
+      type:
+        description: 'The type of a WebHook. This can either be MANUAL or EXTENSION. While manual WebHooks are only temporary and for development only use, permanent ones (EXTENSION) will bemanaged by the system.'
+        type: string
+      url:
+        description: The callback URL of this webhook.
+        type: string
+      userId:
+        description: 'The user ID for which this webhook is subscribed, i.e. events for this user are forwarded to the WebHook callback URL.'
+        type: string

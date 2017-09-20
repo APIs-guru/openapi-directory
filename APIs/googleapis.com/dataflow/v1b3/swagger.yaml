@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manages Google Cloud Dataflow projects on Google Cloud Platform.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Dataflow
   version: v1b3
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://dataflow.googleapis.com/$discovery/rest?version=v1b3'
       version: v1
@@ -33,24 +29,13 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
       'https://www.googleapis.com/auth/compute.readonly': View your Google Compute Engine resources
       'https://www.googleapis.com/auth/userinfo.email': View your email address
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
-      'https://www.googleapis.com/auth/compute.readonly': View your Google Compute Engine resources
-      'https://www.googleapis.com/auth/userinfo.email': View your email address
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -167,19 +152,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -236,19 +213,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -304,19 +273,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -356,19 +317,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -416,19 +369,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -473,19 +418,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -530,19 +467,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -610,19 +539,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -673,19 +594,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -744,19 +657,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -801,19 +706,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -870,19 +767,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -941,19 +830,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1011,19 +892,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1080,19 +953,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1133,19 +998,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1194,19 +1051,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1256,19 +1105,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1318,19 +1159,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1399,19 +1232,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1463,19 +1288,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1539,19 +1356,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1601,19 +1410,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1658,19 +1459,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1710,19 +1503,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1794,19 +1579,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1846,19 +1623,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1897,19 +1666,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -1980,19 +1741,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/compute.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/userinfo.email'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
@@ -2282,6 +2035,9 @@ definitions:
       originNamespace:
         description: A string containing a more specific namespace of the counter's origin.
         type: string
+      originalShuffleStepName:
+        description: The GroupByKey step name from the original graph.
+        type: string
       originalStepName:
         description: |-
           System generated name of the original step in the user's graph, before
@@ -2294,6 +2050,13 @@ definitions:
           - KEY
           - VALUE
         type: string
+      sideInput:
+        $ref: '#/definitions/SideInputId'
+        description: |-
+          ID of a side input being read from/written to. Side inputs are identified
+          by a pair of (reader, input_index). The reader is usually equal to the
+          original name, but it may be different, if a ParDo emits it's Iterator /
+          Map side input object.
       workerId:
         description: ID of a particular worker.
         type: string
@@ -2529,13 +2292,6 @@ definitions:
       count:
         $ref: '#/definitions/SplitInt64'
         description: The count of the number of elements present in the distribution.
-      logBuckets:
-        description: |-
-          (Optional) Logarithmic histogram of values.
-          Each log may be in no more than one bucket. Order does not matter.
-        items:
-          $ref: '#/definitions/LogBucket'
-        type: array
       max:
         $ref: '#/definitions/SplitInt64'
         description: The maximum value present in the distribution.
@@ -3264,26 +3020,6 @@ definitions:
         description: Set if there may be more results than fit in this response.
         type: string
     type: object
-  LogBucket:
-    description: Bucket of values for Distribution's logarithmic histogram.
-    properties:
-      count:
-        description: Number of values in this bucket.
-        format: int64
-        type: string
-      log:
-        description: |-
-          floor(log2(value)); defined to be zero for nonpositive values.
-            log(-1) = 0
-            log(0) = 0
-            log(1) = 0
-            log(2) = 1
-            log(3) = 1
-            log(4) = 2
-            log(5) = 2
-        format: int32
-        type: integer
-    type: object
   MapTask:
     description: |-
       MapTask consists of an ordered set of instructions, each of which
@@ -3902,6 +3638,17 @@ definitions:
         type: string
       exitCode:
         description: Exit code for the task.
+        format: int32
+        type: integer
+    type: object
+  SideInputId:
+    description: Uniquely identifies a side input.
+    properties:
+      declaringStepName:
+        description: The step that receives and usually consumes this side input.
+        type: string
+      inputIndex:
+        description: 'The index of the side input, from the list of non_parallel_inputs.'
         format: int32
         type: integer
     type: object
@@ -4881,6 +4628,10 @@ definitions:
           progress and proposed_stop_position should be interpreted relative
           to P, and in a potential subsequent dynamic_source_split into {P', R'},
           P' and R' must be together equivalent to P, etc.
+      totalThrottlerWaitTimeSeconds:
+        description: Total time the worker spent being throttled by external systems.
+        format: double
+        type: number
       workItemId:
         description: Identifies the WorkItem.
         type: string
@@ -4965,6 +4716,9 @@ definitions:
       workerMetrics:
         $ref: '#/definitions/ResourceUtilizationReport'
         description: Resource metrics reported by workers.
+      workerShutdownNotice:
+        $ref: '#/definitions/WorkerShutdownNotice'
+        description: Shutdown notice by workers.
     type: object
   WorkerMessageCode:
     description: |-
@@ -5028,6 +4782,9 @@ definitions:
       workerMetricsResponse:
         $ref: '#/definitions/ResourceUtilizationReportResponse'
         description: Service's response to reporting worker metrics (currently empty).
+      workerShutdownNoticeResponse:
+        $ref: '#/definitions/WorkerShutdownNoticeResponse'
+        description: Service's response to shutdown notice (currently empty).
     type: object
   WorkerPool:
     description: |-
@@ -5215,6 +4972,23 @@ definitions:
       workerId:
         description: The ID of the worker running this pipeline.
         type: string
+    type: object
+  WorkerShutdownNotice:
+    description: |-
+      Shutdown notification from workers. This is to be sent by the shutdown
+      script of the worker VM so that the backend knows that the VM is being
+      shut down.
+    properties:
+      reason:
+        description: |-
+          Optional reason to be attached for the shutdown notice.
+          For example: "PREEMPTION" would indicate the VM is being shut down because
+          of preemption. Other possible reasons may be added in the future.
+        type: string
+    type: object
+  WorkerShutdownNoticeResponse:
+    description: Service-side response to WorkerMessage issuing shutdown notice.
+    properties: {}
     type: object
   WriteInstruction:
     description: |-

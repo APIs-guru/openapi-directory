@@ -342,6 +342,133 @@ paths:
       summary: "POST: /image/avatar\r\n             \r\n            Testing with Postman (validated 11/20/2015):\r\n            1) Remove the Content-Type header; add authentication information\r\n            2) On the request, click Body and choose \"form-data\", then add a line item with \"key\" column set to \"file\" and on the right,\r\n            change the type of the input from Text to File.  Browse and choose a JPG."
       tags:
         - Images
+  /me:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Me_Index
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      tags:
+        - Me
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      parameters:
+        - in: body
+          name: req
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      tags:
+        - Me
+  /me/personal:
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Me_PutMePersonal
+      parameters:
+        - in: body
+          name: req
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Models.Personal'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      tags:
+        - Me
+  /me/preferences:
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Me_PutMePreferences
+      parameters:
+        - in: body
+          name: req
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Models.Preference'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      tags:
+        - Me
+  /me/preferences/options:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Me_GetOptions
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/API2.Controllers.MeController.KeyOption'
+            type: array
+      tags:
+        - Me
+  /me/profile:
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      parameters:
+        - in: body
+          name: req
+          required: true
+          schema:
+            $ref: '#/definitions/API2.Models.Profile'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      tags:
+        - Me
+  /me/skinny:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Me_Skinny
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Models.BigOvenUser'
+      tags:
+        - Me
   /recipe:
     post:
       consumes:
@@ -665,6 +792,24 @@ paths:
           schema:
             $ref: '#/definitions/BigOven.Model.API2.Recipe'
       summary: Return full Recipe detail. Returns 403 if the recipe is owned by someone else.
+      tags:
+        - Recipe
+  '/recipe/{id}/zap':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Recipe_ZapRecipe
+      parameters:
+        - format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/System.Object'
       tags:
         - Recipe
   '/recipe/{recipeId}/feedback':
@@ -1515,6 +1660,15 @@ definitions:
           $ref: '#/definitions/BigOven.Model.API2.Photo'
         type: array
     type: object
+  API2.Controllers.MeController.KeyOption:
+    properties:
+      Key:
+        type: string
+      Options:
+        items:
+          $ref: '#/definitions/API2.Models.Option'
+        type: array
+    type: object
   API2.Controllers.NoteController.NoteRequest:
     properties:
       CreationDate:
@@ -1606,6 +1760,107 @@ definitions:
       dept:
         type: string
       item:
+        type: string
+    type: object
+  API2.Models.Accounting:
+    properties:
+      CreditBalance:
+        format: int32
+        type: integer
+      MemberSince:
+        format: date-time
+        type: string
+      PremiumExpiryDate:
+        format: date-time
+        type: string
+      UserLevel:
+        type: string
+    type: object
+  API2.Models.BigOvenUser:
+    properties:
+      Accounting:
+        $ref: '#/definitions/API2.Models.Accounting'
+      BOAuthToken:
+        type: string
+      LastChangeLogID:
+        type: string
+      Personal:
+        $ref: '#/definitions/API2.Models.Personal'
+      Preferences:
+        $ref: '#/definitions/API2.Models.Preference'
+      Profile:
+        $ref: '#/definitions/API2.Models.Profile'
+    type: object
+  API2.Models.Counts:
+    properties:
+      AddedCount:
+        format: int64
+        type: integer
+      FollowersCount:
+        format: int64
+        type: integer
+      FollowingCount:
+        format: int64
+        type: integer
+      PrivateRecipeCount:
+        format: int64
+        type: integer
+      PublicRecipeCount:
+        format: int64
+        type: integer
+      TotalRecipes:
+        format: int64
+        type: integer
+    type: object
+  API2.Models.Location:
+    properties:
+      City:
+        type: string
+      Country:
+        type: string
+      DMA:
+        format: int32
+        type: integer
+    type: object
+  API2.Models.Option:
+    properties:
+      Description:
+        type: string
+      Key:
+        type: string
+    type: object
+  API2.Models.Personal:
+    properties:
+      Email:
+        type: string
+      Location:
+        $ref: '#/definitions/API2.Models.Location'
+    type: object
+  API2.Models.Preference:
+    properties:
+      EatingStyle:
+        type: string
+    type: object
+  API2.Models.Profile:
+    properties:
+      AboutMe:
+        type: string
+      Counts:
+        $ref: '#/definitions/API2.Models.Counts'
+      FirstName:
+        type: string
+      FullName:
+        type: string
+      HomeUrl:
+        type: string
+      LastName:
+        type: string
+      PhotoUrl:
+        type: string
+      UserID:
+        format: int64
+        type: integer
+      UserName:
         type: string
     type: object
   BigOven.Model.API.GlossaryEntry:

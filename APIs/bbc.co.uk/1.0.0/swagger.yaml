@@ -149,7 +149,6 @@ paths:
     get:
       description: |
         Retrieve Categories
-      operationId: getCategories
       parameters:
         - description: API_KEY
           in: header
@@ -162,6 +161,35 @@ paths:
           in: query
           name: kind
           required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CategoriesResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/CategoryErrorResponse'
+      schemes:
+        - http
+      summary: Categories
+      tags:
+        - Categories
+  '/categories/{id}':
+    get:
+      description: |
+        Retrieve Categories by ID
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Retrieve information about the category. E.g. 'sport-football-europeanchampionship'
+          in: path
+          name: id
+          required: true
           type: string
       responses:
         '200':
@@ -221,6 +249,31 @@ paths:
       summary: Collection Members
       tags:
         - Collections
+  /experience/homepage:
+    get:
+      description: |
+        Homepage Experience
+      operationId: getExperienceHomepage
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ExperienceResponse'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Homepage Experience
+      tags:
+        - Experience
   /music/popular/artists:
     get:
       description: |
@@ -2127,6 +2180,75 @@ paths:
       summary: Write Play Event
       tags:
         - Personalised Plays
+  /my/playspace/containers/suggested:
+    get:
+      description: |
+        Suggested Playspace Container
+      operationId: suggestContainer
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Clip or Episode PID of the previous or first content item in the Playspace stream.
+          in: query
+          name: previous_pid
+          required: true
+          type: string
+        - description: Container ID of the previous container in the Playspace stream.
+          in: query
+          name: previous_container
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PlayspaceContainer'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Suggested Playspace Container
+      tags:
+        - Playspace
+  '/my/playspace/containers/{id}':
+    get:
+      description: |
+        Playspace Container by ID
+      operationId: getContainer
+      parameters:
+        - description: API_KEY
+          in: header
+          name: X-API-Key
+          required: true
+          type: string
+        - description: Playspace Container ID
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PlayspaceContainer'
+        '401':
+          description: There was an error with the supplied `Authorization` header.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: No Playspace container with given ID could be found.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      schemes:
+        - https
+      summary: Playspace Container by ID
+      tags:
+        - Playspace
   /my/programmes/recommendations.json:
     get:
       description: |
@@ -4152,6 +4274,17 @@ definitions:
       - end
       - start
     type: object
+  DisplayModule:
+    properties:
+      description:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+      uri:
+        type: string
+    type: object
   Empty:
     type: object
     x-nullable: true
@@ -4224,6 +4357,18 @@ definitions:
     required:
       - $schema
       - errors
+    type: object
+  ExperienceResponse:
+    properties:
+      $schema:
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/DisplayModule'
+        type: array
+    required:
+      - $schema
+      - data
     type: object
   ExternalPartner:
     properties:
@@ -5272,6 +5417,34 @@ definitions:
       - $schema
       - method
       - replied_at
+    type: object
+  PlayableItem:
+    properties:
+      description:
+        type: string
+      image_url:
+        type: string
+      pid:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+      version_pid:
+        type: string
+    type: object
+  PlayspaceContainer:
+    properties:
+      id:
+        type: string
+      members:
+        items:
+          $ref: '#/definitions/PlayableItem'
+        type: array
+      title:
+        type: string
+      type:
+        type: string
     type: object
   Podcast:
     properties:

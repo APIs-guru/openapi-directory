@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'A data platform for customers to create, manage, share and query data.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: BigQuery
   version: v2
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/bigquery/v2/rest'
       version: v1
@@ -35,7 +31,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
@@ -45,20 +41,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
-      'https://www.googleapis.com/auth/bigquery.insertdata': Insert data into Google BigQuery
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -128,15 +110,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
@@ -182,15 +158,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - datasets
@@ -223,11 +193,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - datasets
@@ -256,11 +222,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - datasets
@@ -286,15 +248,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - datasets
@@ -332,11 +288,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - datasets
@@ -366,11 +318,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - datasets
@@ -405,15 +353,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - tables
@@ -451,11 +393,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - tables
@@ -485,11 +423,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - tables
@@ -524,15 +458,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - tables
@@ -575,11 +503,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - tables
@@ -614,11 +538,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - tables
@@ -666,15 +586,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - tabledata
@@ -726,15 +640,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery.insertdata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery.insertdata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - tabledata
@@ -786,15 +694,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - jobs
@@ -829,23 +731,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - jobs
@@ -872,15 +764,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - jobs
@@ -923,11 +809,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - jobs
@@ -961,15 +843,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - jobs
@@ -1012,18 +888,44 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - jobs
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/projects/{projectId}/serviceAccount':
+    get:
+      description: Returns the email address of the service account for your project used for interactions with Google Cloud KMS.
+      operationId: bigquery.projects.getServiceAccount
+      parameters:
+        - description: Project ID for which the service account is requested.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetServiceAccountResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - projects
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -1225,6 +1127,12 @@ definitions:
         type: string
       projectId:
         description: '[Optional] The ID of the project containing this dataset.'
+        type: string
+    type: object
+  EncryptionConfiguration:
+    properties:
+      kmsKeyName:
+        description: '[Optional] Describes the Cloud KMS encryption key that will be used to protect destination BigQuery table. The BigQuery Service Account associated with your project requires access to this encryption key.'
         type: string
     type: object
   ErrorProto:
@@ -1434,6 +1342,16 @@ definitions:
         format: uint64
         type: string
     type: object
+  GetServiceAccountResponse:
+    properties:
+      email:
+        description: The service account email address.
+        type: string
+      kind:
+        default: 'bigquery#getServiceAccountResponse'
+        description: The resource type of the response.
+        type: string
+    type: object
   GoogleSheetsOptions:
     properties:
       skipLeadingRows:
@@ -1546,6 +1464,9 @@ definitions:
       createDisposition:
         description: '[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a ''notFound'' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.'
         type: string
+      destinationEncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: '[Experimental] Custom encryption configuration (e.g., Cloud KMS keys).'
       destinationTable:
         $ref: '#/definitions/TableReference'
         description: '[Required] The destination table to load the data into.'
@@ -1620,6 +1541,9 @@ definitions:
       defaultDataset:
         $ref: '#/definitions/DatasetReference'
         description: '[Optional] Specifies the default dataset to use for unqualified table names in the query.'
+      destinationEncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: '[Experimental] Custom encryption configuration (e.g., Cloud KMS keys).'
       destinationTable:
         $ref: '#/definitions/TableReference'
         description: '[Optional] Describes the table where the query results should be stored. If not present, a new table will be created to store the results. This property must be set for large results that exceed the maximum response size.'
@@ -1687,6 +1611,9 @@ definitions:
       createDisposition:
         description: '[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a ''notFound'' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.'
         type: string
+      destinationEncryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: '[Experimental] Custom encryption configuration (e.g., Cloud KMS keys).'
       destinationTable:
         $ref: '#/definitions/TableReference'
         description: '[Required] The destination table'
@@ -1821,6 +1748,10 @@ definitions:
         type: string
       totalBytesProcessed:
         description: '[Output-only] Total bytes processed for the job.'
+        format: int64
+        type: string
+      totalSlotMs:
+        description: '[Output-only] Slot-milliseconds for the job.'
         format: int64
         type: string
       undeclaredQueryParameters:
@@ -2090,6 +2021,9 @@ definitions:
       description:
         description: '[Optional] A user-friendly description of this table.'
         type: string
+      encryptionConfiguration:
+        $ref: '#/definitions/EncryptionConfiguration'
+        description: '[Experimental] Custom encryption configuration (e.g., Cloud KMS keys).'
       etag:
         description: '[Output-only] A hash of this resource.'
         type: string
@@ -2340,8 +2274,11 @@ definitions:
         description: '[Optional] Number of milliseconds for which to keep the storage for a partition.'
         format: int64
         type: string
+      field:
+        description: '[Experimental] [Optional] If not set, the table is partitioned by pseudo column ''_PARTITIONTIME''; if set, the table is partitioned by this field. The field must be a top-level TIMESTAMP or DATE field. Its mode must be NULLABLE or REQUIRED.'
+        type: string
       type:
-        description: '[Required] The only type supported is DAY, which will generate one partition per day based on data loading time.'
+        description: '[Required] The only type supported is DAY, which will generate one partition per day.'
         type: string
     type: object
   UserDefinedFunctionResource:

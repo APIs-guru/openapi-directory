@@ -109,7 +109,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: apiBlueprint
       url: 'https://raw.githubusercontent.com/RiteKit/api-docs/master/apiary.apib'
       version: 1A
@@ -134,7 +134,7 @@ paths:
               code: 200
               message: OK
               result: true
-              text: "Why robots may soon steal all manufacturing jobs – but it’s not all bad news \uD83E\uDD16\uD83D\uDDDE❓"
+              text: "Why robots may soon steal all manufacturing jobs – but it’s not all bad news \U0001F916\U0001F5DE❓"
           headers: {}
       summary: Auto-Emojify
       tags: []
@@ -156,8 +156,8 @@ paths:
             application/json; charset=utf-8:
               code: 200
               emojis:
-                - "\uD83E\uDD16"
-                - "\uD83D\uDDDE"
+                - "\U0001F916"
+                - "\U0001F5DE"
                 - ❓
               message: OK
               result: true

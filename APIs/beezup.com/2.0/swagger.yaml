@@ -4597,7 +4597,7 @@ paths:
         '200':
           description: Successfully fetched list of configured automatic Order status transitions
           schema:
-            $ref: '#/definitions/automaticTransitionInfos'
+            $ref: '#/definitions/automaticTransitionInfoList'
         '304':
           $ref: '#/responses/304_NotModified'
         default:
@@ -4684,7 +4684,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Send a batch of operations to clear an Order's merchant information
+      summary: Send a batch of operations to clear an Order's merchant information (max 100 items per call)
       tags:
         - Marketplaces - Orders - Batches
   /user/marketplaces/orders/batches/setMerchantOrderInfos:
@@ -4711,7 +4711,7 @@ paths:
           $ref: '#/responses/GeneralError'
       security:
         - api_key: []
-      summary: Send a batch of operations to set an Order's merchant information
+      summary: Send a batch of operations to set an Order's merchant information  (max 100 items per call)
       tags:
         - Marketplaces - Orders - Batches
   /user/marketplaces/orders/exportations:
@@ -5094,7 +5094,7 @@ paths:
         - $ref: '#/parameters/testModeInQueryParameter'
         - in: body
           name: request
-          required: true
+          required: false
           schema:
             $ref: '#/definitions/changeOrderRequest'
         - $ref: '#/parameters/ifMatchParameter'
@@ -6298,18 +6298,18 @@ definitions:
     required:
       - configure
     type: object
-  automaticTransitionInfos:
+  automaticTransitionInfoList:
     properties:
       automaticTransitionInfos:
         items:
           $ref: '#/definitions/automaticTransitionInfo'
         type: array
       links:
-        $ref: '#/definitions/automaticTransitionInfosLinks'
+        $ref: '#/definitions/automaticTransitionInfoListLinks'
     required:
       - links
     type: object
-  automaticTransitionInfosLinks:
+  automaticTransitionInfoListLinks:
     properties:
       configure:
         $ref: '#/definitions/links.ConfigureAutomaticTransitionsLink'
@@ -6708,7 +6708,6 @@ definitions:
         $ref: '#/definitions/orderIdentifierWithETag'
     required:
       - order
-      - changeOrderRequest
     type: object
   changeOrderReporting:
     description: The reporting related to a change order operation
@@ -9972,8 +9971,14 @@ definitions:
   links.ChangeOrderLink:
     allOf:
       - $ref: '#/definitions/BeezUP.Common.Link3'
+      - properties:
+          rel:
+            description: Indicate the relation name related to the link
+            example: self
+            type: string
+        type: object
       - example:
-          href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/shipOrder
+          href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/ShipOrder
           method: POST
           parameters:
             If-Match:
@@ -10012,6 +10017,7 @@ definitions:
               in: query
               required: true
               type: string
+          rel: ShipOrder
           templated: true
   links.ClearChannelCatalogExportationCacheLink:
     allOf:
@@ -11118,6 +11124,8 @@ definitions:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
       carrierCodeLOV:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
+      marketplaceStorePropertyLOV:
+        $ref: '#/definitions/BeezUP.Common.LOVLink3'
       refundReasonCodeLOV:
         $ref: '#/definitions/BeezUP.Common.LOVLink3'
       shippingMethodLOV:
@@ -12019,38 +12027,9 @@ definitions:
       - status
     type: object
   orderTransitionLinks:
-    additionalProperties:
-      $ref: '#/definitions/links.ChangeOrderLink'
     description: Contains the authorized change actions for an order
     example:
-      cancelOrder:
-        href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/cancelOrder
-        method: POST
-        parameters:
-          If-Match:
-            in: header
-            required: true
-            value: '"ca071a4580129f932a03971968ffef69"'
-          request:
-            in: body
-            properties:
-              order_Cancel_Reason:
-                required: true
-                type: string
-            schema: changeOrderRequest
-            type: object
-          testMode:
-            in: query
-            required: false
-            type: boolean
-            value: false
-          userName:
-            in: query
-            required: true
-            type: string
-        templated: true
-      shipOrder:
-        href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/shipOrder
+      - href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/ShipOrder
         method: POST
         parameters:
           If-Match:
@@ -12089,8 +12068,37 @@ definitions:
             in: query
             required: true
             type: string
+        rel: ShipOrder
         templated: true
-    type: object
+      - href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/CancelOrder
+        method: POST
+        parameters:
+          If-Match:
+            in: header
+            required: true
+            value: '"ca071a4580129f932a03971968ffef69"'
+          request:
+            in: body
+            properties:
+              order_Cancel_Reason:
+                required: true
+                type: string
+            schema: changeOrderRequest
+            type: object
+          testMode:
+            in: query
+            required: false
+            type: boolean
+            value: false
+          userName:
+            in: query
+            required: true
+            type: string
+        rel: CancelOrder
+        templated: true
+    items:
+      $ref: '#/definitions/links.ChangeOrderLink'
+    type: array
   order_Buyer_Name:
     description: Buyer full name
     example: Monroe

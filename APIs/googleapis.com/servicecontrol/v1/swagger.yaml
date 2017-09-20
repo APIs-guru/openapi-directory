@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Google Service Control provides control plane functionality to managed services, such as logging, monitoring, and status checks.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Service Control
   version: v1
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://servicecontrol.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -33,20 +29,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/servicecontrol': Manage your Google Service Control data
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/servicecontrol': Manage your Google Service Control data
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -183,11 +170,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/servicecontrol'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/servicecontrol'
       tags:
         - services
@@ -246,11 +229,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/servicecontrol'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/servicecontrol'
       tags:
         - services
@@ -300,11 +279,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/servicecontrol'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/servicecontrol'
       tags:
         - services
@@ -363,11 +338,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/servicecontrol'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/servicecontrol'
       tags:
         - services
@@ -427,11 +398,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/servicecontrol'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/servicecontrol'
       tags:
         - services
@@ -500,11 +467,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/servicecontrol'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/servicecontrol'
       tags:
         - services
@@ -663,10 +626,20 @@ definitions:
         type: string
       principalEmail:
         description: |-
-          The email address of the authenticated user making the request.
-          For privacy reasons, the principal email address is redacted for all
-          read-only operations that fail with a "permission denied" error.
+          The email address of the authenticated user (or service account on behalf
+          of third party principal) making the request. For privacy reasons, the
+          principal email address is redacted for all read-only operations that fail
+          with a "permission denied" error.
         type: string
+      thirdPartyPrincipal:
+        additionalProperties:
+          description: Properties of the object.
+        description: |-
+          The third party identification (if any) of the authenticated user making
+          the request.
+          When the JSON object represented here has a proto equivalent, the proto
+          name will be indicated in the `@type` property.
+        type: object
     type: object
   AuthorizationInfo:
     description: Authorization information for the operation.
@@ -1244,12 +1217,9 @@ definitions:
               - “folders/<folder-id>”
               - “organizations/<organization-id>”
         type: string
-      resourceContainers:
-        description: |-
-          DO NOT USE.
-          This field is not ready for use yet.
+      resources:
         items:
-          type: string
+          $ref: '#/definitions/ResourceInfo'
         type: array
       startTime:
         description: Required. Start time of the operation.
@@ -1591,6 +1561,23 @@ definitions:
           +   `AppEngine-Google; (+http://code.google.com/appengine; appid: s~my-project`:
               The request was made from the `my-project` App Engine app.
           NOLINT
+        type: string
+    type: object
+  ResourceInfo:
+    description: |-
+      DO NOT USE.
+      This definition is not ready for use yet.
+    properties:
+      resourceContainer:
+        description: |-
+          The identifier of the parent of this resource instance.
+          Must be in one of the following formats:
+              - “projects/<project-id or project-number>”
+              - “folders/<folder-id>”
+              - “organizations/<organization-id>”
+        type: string
+      resourceName:
+        description: Name of the resource. This is used for auditing purposes.
         type: string
     type: object
   StartReconciliationRequest:

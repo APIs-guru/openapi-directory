@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Drive
   version: v2
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/drive/v2/rest'
       version: v1
@@ -35,7 +31,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
@@ -47,22 +43,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/drive.photos.readonly': 'View the photos, videos and albums in your Google Photos'
       'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
       'https://www.googleapis.com/auth/drive.scripts': Modify your Google Apps Script scripts' behavior
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
-      'https://www.googleapis.com/auth/drive.appdata': View and manage its own configuration data in your Google Drive
-      'https://www.googleapis.com/auth/drive.apps.readonly': View your Google Drive apps
-      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
-      'https://www.googleapis.com/auth/drive.metadata': View and manage metadata of files in your Google Drive
-      'https://www.googleapis.com/auth/drive.metadata.readonly': View metadata for files in your Google Drive
-      'https://www.googleapis.com/auth/drive.photos.readonly': 'View the photos, videos and albums in your Google Photos'
-      'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
-      'https://www.googleapis.com/auth/drive.scripts': Modify your Google Apps Script scripts' behavior
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -147,31 +127,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - about
@@ -210,8 +176,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
       tags:
         - apps
     parameters:
@@ -240,31 +204,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - apps
@@ -336,35 +286,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - changes
@@ -398,35 +332,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - changes
@@ -510,35 +428,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - changes
@@ -569,35 +471,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - changes
@@ -632,35 +518,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - channels
@@ -731,35 +601,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - files
@@ -834,19 +688,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - files
@@ -875,15 +721,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - files
@@ -904,8 +744,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
       tags:
         - files
@@ -938,15 +776,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - files
@@ -993,31 +825,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - files
@@ -1121,27 +939,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.scripts'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.scripts'
       tags:
         - files
@@ -1239,27 +1045,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.scripts'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.scripts'
       tags:
         - files
@@ -1301,15 +1095,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - comments
@@ -1342,11 +1130,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - comments
@@ -1371,11 +1155,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - comments
@@ -1406,15 +1186,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - comments
@@ -1452,11 +1226,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - comments
@@ -1486,11 +1256,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - comments
@@ -1533,15 +1299,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - replies
@@ -1579,11 +1339,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - replies
@@ -1613,11 +1369,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - replies
@@ -1653,15 +1405,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - replies
@@ -1704,11 +1450,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - replies
@@ -1743,11 +1485,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - replies
@@ -1821,23 +1559,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
       tags:
         - files
@@ -1862,15 +1590,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - files
@@ -1900,31 +1622,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - parents
@@ -1962,15 +1670,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - parents
@@ -1995,11 +1697,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - parents
@@ -2025,31 +1723,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - parents
@@ -2094,27 +1778,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - permissions
@@ -2161,11 +1833,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - permissions
@@ -2195,11 +1863,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - permissions
@@ -2230,27 +1894,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - permissions
@@ -2303,11 +1955,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - permissions
@@ -2352,11 +2000,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - permissions
@@ -2378,31 +2022,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - properties
@@ -2435,19 +2065,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
       tags:
         - properties
@@ -2477,19 +2099,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
       tags:
         - properties
@@ -2520,31 +2134,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - properties
@@ -2587,19 +2187,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
       tags:
         - properties
@@ -2634,19 +2226,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
       tags:
         - properties
@@ -2671,15 +2255,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - realtime
@@ -2712,11 +2290,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - realtime
@@ -2749,31 +2323,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - revisions
@@ -2806,15 +2366,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - revisions
@@ -2840,31 +2394,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - revisions
@@ -2902,15 +2442,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - revisions
@@ -2940,15 +2474,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - revisions
@@ -2983,23 +2511,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
       tags:
         - files
@@ -3034,19 +2552,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - files
@@ -3081,19 +2591,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - files
@@ -3153,31 +2655,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - files
@@ -3217,31 +2705,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - children
@@ -3279,15 +2753,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - children
@@ -3312,11 +2780,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - children
@@ -3342,31 +2806,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - children
@@ -3396,35 +2846,19 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.apps.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.apps.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.file'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.metadata'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.metadata'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.metadata.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.metadata.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive.photos.readonly'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - permissions
@@ -3460,11 +2894,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - teamdrives
@@ -3497,8 +2927,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
       tags:
         - teamdrives
   '/teamdrives/{teamDriveId}':
@@ -3516,8 +2944,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
       tags:
         - teamdrives
@@ -3538,11 +2964,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.readonly'
       tags:
         - teamdrives
@@ -3574,8 +2996,6 @@ paths:
             $ref: '#/definitions/TeamDrive'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/drive'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/drive'
       tags:
         - teamdrives

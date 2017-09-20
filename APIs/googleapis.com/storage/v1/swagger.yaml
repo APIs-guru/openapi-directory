@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Stores and retrieves potentially large, immutable data objects.'
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Cloud Storage
   version: v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/storage/v1/rest'
       version: v1
@@ -35,7 +31,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
@@ -43,18 +39,6 @@ securityDefinitions:
       'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -111,11 +95,6 @@ paths:
       description: Retrieves a list of buckets for a given project.
       operationId: storage.buckets.list
       parameters:
-        - description: A valid API project identifier.
-          in: query
-          name: project
-          required: true
-          type: string
         - default: 1000
           description: 'Maximum number of buckets to return in a single response. The service will use this parameter or 1,000 items, whichever is smaller.'
           in: query
@@ -130,12 +109,21 @@ paths:
           in: query
           name: prefix
           type: string
+        - description: A valid API project identifier.
+          in: query
+          name: project
+          required: true
+          type: string
         - description: Set of properties to return. Defaults to noAcl.
           enum:
             - full
             - noAcl
           in: query
           name: projection
+          type: string
+        - description: 'The project to be billed for this request, for Requester Pays buckets.'
+          in: query
+          name: userProject
           type: string
       responses:
         '200':
@@ -145,23 +133,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -177,11 +155,10 @@ paths:
       description: Creates a new bucket.
       operationId: storage.buckets.insert
       parameters:
-        - description: A valid API project identifier.
-          in: query
-          name: project
-          required: true
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Bucket'
         - description: Apply a predefined set of access controls to this bucket.
           enum:
             - authenticatedRead
@@ -203,6 +180,11 @@ paths:
           in: query
           name: predefinedDefaultObjectAcl
           type: string
+        - description: A valid API project identifier.
+          in: query
+          name: project
+          required: true
+          type: string
         - description: 'Set of properties to return. Defaults to noAcl, unless the bucket resource specifies acl or defaultObjectAcl properties, when it defaults to full.'
           enum:
             - full
@@ -210,10 +192,10 @@ paths:
           in: query
           name: projection
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Bucket'
+        - description: 'The project to be billed for this request, for Requester Pays buckets.'
+          in: query
+          name: userProject
+          type: string
       responses:
         '200':
           description: Successful response
@@ -222,15 +204,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -262,15 +238,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -310,23 +280,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -399,11 +359,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - buckets
@@ -468,11 +424,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - buckets
@@ -498,11 +450,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -539,11 +487,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -572,11 +516,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -606,11 +546,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -652,11 +588,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -690,11 +622,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -728,11 +656,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -769,11 +693,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -802,11 +722,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -836,11 +752,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -882,11 +794,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -920,11 +828,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -950,23 +854,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -1003,15 +897,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -1045,23 +933,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
@@ -1095,23 +973,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - notifications
@@ -1148,15 +1016,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - notifications
@@ -1185,15 +1047,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - notifications
@@ -1223,23 +1079,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - notifications
@@ -1302,23 +1148,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -1403,15 +1239,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -1478,23 +1308,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -1543,15 +1363,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -1608,23 +1422,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -1704,11 +1508,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objects
@@ -1780,11 +1580,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objects
@@ -1819,11 +1615,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1869,11 +1661,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1911,11 +1699,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1954,11 +1738,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -2009,11 +1789,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -2056,11 +1832,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -2095,23 +1867,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -2157,15 +1919,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -2208,23 +1964,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -2298,15 +2044,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -2413,15 +2153,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -2540,15 +2274,9 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
@@ -2575,23 +2303,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - channels
@@ -2605,6 +2323,10 @@ paths:
           name: projectId
           required: true
           type: string
+        - description: 'The project to be billed for this request, for Requester Pays buckets.'
+          in: query
+          name: userProject
+          type: string
       responses:
         '200':
           description: Successful response
@@ -2613,23 +2335,13 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - projects
@@ -3247,6 +2959,7 @@ definitions:
         description: 'An association between a role, which comes with a set of permissions, and members who may assume that role.'
         items:
           properties:
+            condition: {}
             members:
               description: |-
                 A collection of identifiers for members who may assume the provided role. Recognized identifiers are as follows:  

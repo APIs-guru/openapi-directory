@@ -1373,10 +1373,42 @@ paths:
           source: |
             $bankAccountForm = new Rebilly\Entities\BankAccount();
             $bankAccountForm->setCustomerId('customerId');
-            $bankAccountForm->setContactId('contactId');
             $bankAccountForm->setRoutingNumber('0123456');
             $bankAccountForm->setAccountNumber('0123456');
             $bankAccountForm->setAccountType('checking');
+            $bankAccountForm->setBillingAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
 
             try {
                 $bankAccount = $client->bankAccounts()->create($bankAccountForm);
@@ -1476,10 +1508,42 @@ paths:
           source: |
             $bankAccountForm = new Rebilly\Entities\BankAccount();
             $bankAccountForm->setCustomerId('customerId');
-            $bankAccountForm->setContactId('contactId');
             $bankAccountForm->setRoutingNumber('0123456');
             $bankAccountForm->setAccountNumber('0123456');
             $bankAccountForm->setAccountType('checking');
+            $bankAccountForm->setBillingAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
 
             try {
                 $bankAccount = $client->customers()->create($bankAccountForm, 'bankAccountId');
@@ -2033,6 +2097,32 @@ paths:
             $contactForm->setFirstName('Sherlock');
             $contactForm->setLastName('Holmes');
             $contactForm->setOrganization('TestOrganization');
+            $contactForm->setEmails(
+                [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ]
+            );
+            $contactForm->setPhoneNumbers(
+                [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ]
+            );
 
             try {
                 $contact = $client->contacts()->create($contactForm);
@@ -2145,6 +2235,32 @@ paths:
             $contactForm->setFirstName('Sherlock');
             $contactForm->setLastName('Holmes');
             $contactForm->setOrganization('TestOrganization');
+            $contactForm->setEmails(
+                [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ]
+            );
+            $contactForm->setPhoneNumbers(
+                [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ]
+            );
 
             try {
                 $contact = $client->contacts()->update('contactId', $contactForm);
@@ -2534,6 +2650,55 @@ paths:
             } catch (UnprocessableEntityException $e) {
                 echo $e->getMessage();
             }
+  '/coupons/{redemptionCode}/expiration':
+    parameters:
+      - description: The Coupon's redemption code
+        in: path
+        name: redemptionCode
+        required: true
+        type: string
+    post:
+      description: |
+        Set a coupon's expiry time with the specified redemption code.
+        The expiredTime of a coupon must be greater than its issuedTime.
+        This cannot be performed on expired coupons.
+      parameters:
+        - description: Coupon resource
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CouponExpiration'
+      responses:
+        '201':
+          description: Coupon expiration was successfully set
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Coupon'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+        '409':
+          $ref: '#/responses/Conflict'
+          description: 'The coupon is already expired and has been redeemed, unable to reschedule expiration'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Set a coupon's expiration time.
+      tags:
+        - Coupons
   /credential-hashes/emails:
     post:
       description: |
@@ -3580,9 +3745,39 @@ paths:
         - lang: PHP
           source: |
             $customerForm = new Rebilly\Entities\Customer();
-            $customerForm->setFirstName('Sherlock');
-            $customerForm->setLastName('Holmes');
-            $customerForm->setEmail('sherlock.holmes@gmail.com');
+            $customerForm->setPrimaryAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
 
             try {
                 $customer = $client->customers()->create($customerForm);
@@ -3677,9 +3872,39 @@ paths:
         - lang: PHP
           source: |
             $customerForm = new Rebilly\Entities\Customer();
-            $customerForm->setFirstName('Sherlock');
-            $customerForm->setLastName('Holmes');
-            $customerForm->setEmail('sherlock.holmes@gmail.com');
+            $customerForm->setPrimaryAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
 
             try {
                 $customer = $client->customers()->update('myCustomerId', $customerForm);
@@ -5014,10 +5239,44 @@ paths:
       x-code-samples:
         - lang: PHP
           source: |
+            <?
             $invoiceForm = new Rebilly\Entities\Invoice();
             $invoiceForm->setCustomerId('customerId');
             $invoiceForm->setWebsiteId('websiteId');
             $invoiceForm->setCurrency('USD');
+            $invoiceForm->setBillingAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
 
             try {
                 $invoice = $client->invoices()->create($invoiceForm);
@@ -5127,10 +5386,44 @@ paths:
       x-code-samples:
         - lang: PHP
           source: |
+            <?
             $invoiceForm = new Rebilly\Entities\Invoice();
             $invoiceForm->setCustomerId('customerId');
             $invoiceForm->setWebsiteId('websiteId');
             $invoiceForm->setCurrency('USD');
+            $invoiceForm->setBillingAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
 
             try {
                 $invoice = $client->invoices()->update('invoiceId', $invoiceForm);
@@ -6575,7 +6868,39 @@ paths:
             $paymentCardForm->setPan('4111111111111111');
             $paymentCardForm->setExpYear(2025);
             $paymentCardForm->setExpMonth(8);
-            $paymentCardForm->setBillingContactId('contactId');
+            $paymentCardForm->setBillingAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
 
             try {
                 $paymentCard = $client->paymentCards()->create($paymentCardForm);
@@ -6792,7 +7117,39 @@ paths:
             $paymentCardForm->setPan('4111111111111111');
             $paymentCardForm->setExpYear(2025);
             $paymentCardForm->setExpMonth(8);
-            $paymentCardForm->setBillingContactId('contactId');
+            $paymentCardForm->setBillingAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
 
             try {
                 $paymentCard = $client->paymentCards()->create($paymentCardForm, 'paymentCardId');
@@ -7251,8 +7608,16 @@ paths:
           required: true
           schema:
             properties:
+              amount:
+                default: 1
+                description: The amount to authorize
+                format: double
+                type: number
               currency:
                 description: Currency (three letter code)
+                type: string
+              gatewayAccountId:
+                description: The Gateway Account ID which use to send transactions
                 type: string
               redirectURLs:
                 description: Redirect URLs
@@ -8889,6 +9254,39 @@ paths:
             $subscriptionForm->setCustomerId('customerId');
             $subscriptionForm->setWebsiteId('websiteId');
             $subscriptionForm->setPlanId('planId');
+            $subscriptionForm->setBillingAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
 
             try {
                 $subscription = $client->subscriptions()->create($subscriptionForm);
@@ -8990,6 +9388,39 @@ paths:
             $subscriptionForm->setCustomerId('customerId');
             $subscriptionForm->setWebsiteId('websiteId');
             $subscriptionForm->setPlanId('planId');
+            $subscriptionForm->setBillingAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
 
             try {
                 $subscription = $client->subscriptions()->update('subscriptionId', $subscriptionForm);
@@ -9352,13 +9783,39 @@ paths:
         - lang: PHP
           source: |
             $paymentCardTokenForm = new Rebilly\Entities\PaymentCardToken();
-            $paymentCardTokenForm->setFirstName('John');
-            $paymentCardTokenForm->setLastName('Doe');
-            $paymentCardTokenForm->setAddress('1313 Main Street');
-            $paymentCardTokenForm->setCity('Gotham');
-            $paymentCardTokenForm->setPostalCode('12345');
-            $paymentCardTokenForm->setRegion('NY');
-            $paymentCardTokenForm->setCountry('US');
+            $paymentCardTokenForm->setBillingAddress([
+                'firstName' => 'John',
+                'lastName' => 'Doe',
+                'organization' => 'Test LTD',
+                'address' => 'Test street 5',
+                'address2' => 'Test house 5',
+                'city' => 'New York',
+                'region' => 'Long Island',
+                'country' => 'US',
+                'postalCode' => '123456',
+                'emails' => [
+                    [
+                        'label' => 'main',
+                        'value' => 'johndoe@testemail.com',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'secondary',
+                        'value' => 'otheremail@testemail.com',
+                    ],
+                ],
+                'phoneNumbers' => [
+                    [
+                        'label' => 'work',
+                        'value' => '+123456789',
+                        'primary' => true,
+                    ],
+                    [
+                        'label' => 'home',
+                        'value' => '+9874654321',
+                    ],
+                ],
+            ]);
 
             $paymentInstrumentForm = new Entities\PaymentInstruments\PaymentCardPaymentInstrument();
             $paymentInstrumentForm->setPan('4111111111111111');
@@ -9636,6 +10093,63 @@ paths:
         '404':
           $ref: '#/responses/NotFound'
       summary: Retrieve a tracking subscription log with specified identifier string
+      tags:
+        - Tracking
+    parameters:
+      - $ref: '#/parameters/resourceId'
+  /tracking/webhooks:
+    get:
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+        - $ref: '#/parameters/collectionSort'
+        - $ref: '#/parameters/collectionFilter'
+        - $ref: '#/parameters/collectionCriteria'
+      responses:
+        '200':
+          description: Tracking webhook notifications was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/WebhookTracking'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of tracking webhook notifications
+      tags:
+        - Tracking
+  '/tracking/webhooks/{id}':
+    get:
+      responses:
+        '200':
+          description: Tracking webhook notification was retrieved successfully
+          schema:
+            $ref: '#/definitions/WebhookTracking'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a tracking webhook notification with specified identifier string
       tags:
         - Tracking
     parameters:
@@ -11948,6 +12462,15 @@ definitions:
       - discount
       - issuedTime
     type: object
+  CouponExpiration:
+    properties:
+      expiredTime:
+        description: 'The coupon''s expiry time, must be greater than the issued time. Null or empty string will immediately expire the coupon.'
+        format: date-time
+        type: string
+    required:
+      - expiredTime
+    type: object
   CouponRedemption:
     description: Coupons redemption log
     properties:
@@ -13389,6 +13912,10 @@ definitions:
             - $ref: '#/definitions/InvoiceTax'
         readOnly: true
         type: array
+      updatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Invoice updated time
       voidedTime:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
@@ -16833,6 +17360,59 @@ definitions:
     required:
       - name
       - value
+    type: object
+  WebhookTracking:
+    description: Webhook Tracking Requests.
+    properties:
+      _links:
+        description: The links related to resource
+        items:
+          - $ref: '#/definitions/SelfLink'
+        maxItems: 1
+        minItems: 1
+        readOnly: true
+        type: array
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: The log created time
+      eventType:
+        $ref: '#/definitions/EventType'
+      headers:
+        additionalProperties:
+          type: string
+        description: HTTP headers which were used to send webhook
+        example:
+          My-Header: Cool-Value
+        type: object
+      id:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+      initiatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Initiated time
+      method:
+        description: HTTP method which was used to send webhook
+        example: POST
+        type: string
+      payload:
+        description: Event's data information
+        type: object
+      responseBody:
+        description: Response body received
+        type: string
+      responseCode:
+        description: HTTP code response
+        type: integer
+      sentTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Sent time
+      url:
+        description: Url where webhook was sent
+        type: string
+    readOnly: true
     type: object
   Website:
     properties:

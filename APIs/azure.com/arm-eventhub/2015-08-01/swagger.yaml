@@ -109,162 +109,7 @@ paths:
         - Operations
       x-ms-examples:
         EHOperations_List:
-          parameters:
-            api-version: '2016-07-01'
-          responses:
-            '200':
-              body:
-                value:
-                  - display:
-                      description: Checks availability of namespace under given subscription.
-                      operation: Get namespace availability.
-                      provider: Microsoft Azure EventHub
-                      resource: Non Resource Operation
-                    name: Microsoft.EventHub/checkNameAvailability/action
-                  - display:
-                      description: Registers the subscription for the EventHub resource provider and enables the creation of EventHub resources
-                      operation: Registers the EventHub Resource Provider
-                      provider: Microsoft Azure EventHub
-                      resource: EventHub Resource Provider
-                    name: Microsoft.EventHub/register/action
-                  - display:
-                      description: Create a Namespace Resource and Update its properties. Tags and status of the Namespace are the properties which can be updated.
-                      operation: 'Create Or Update Namespace '
-                      provider: Microsoft Azure EventHub
-                      resource: Namespace
-                    name: Microsoft.EventHub/namespaces/write
-                  - display:
-                      description: Get the list of Namespace Resource Description
-                      operation: Get Namespace Resource
-                      provider: Microsoft Azure EventHub
-                      resource: Namespace
-                    name: Microsoft.EventHub/namespaces/read
-                  - display:
-                      description: Delete Namespace Resource
-                      operation: Delete Namespace
-                      provider: Microsoft Azure EventHub
-                      resource: Namespace
-                    name: Microsoft.EventHub/namespaces/Delete
-                  - display:
-                      description: Get the list of Namespaces Authorization Rules description.
-                      operation: Get Namespace Authorization Rules
-                      provider: Microsoft Azure EventHub
-                      resource: AuthorizationRules
-                    name: Microsoft.EventHub/namespaces/authorizationRules/read
-                  - display:
-                      description: 'Create a Namespace level Authorization Rules and update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
-                      operation: Create or Update Namespace Authorization Rules
-                      provider: Microsoft Azure EventHub
-                      resource: AuthorizationRules
-                    name: Microsoft.EventHub/namespaces/authorizationRules/write
-                  - display:
-                      description: 'Delete Namespace Authorization Rule. The Default Namespace Authorization Rule cannot be deleted. '
-                      operation: Delete Namespace Authorization Rule
-                      provider: Microsoft Azure EventHub
-                      resource: AuthorizationRules
-                    name: Microsoft.EventHub/namespaces/authorizationRules/delete
-                  - display:
-                      description: Get the Connection String to the Namespace
-                      operation: Get Namespace Listkeys
-                      provider: Microsoft Azure EventHub
-                      resource: AuthorizationRules
-                    name: Microsoft.EventHub/namespaces/authorizationRules/listkeys/action
-                  - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
-                      operation: Resource Regeneratekeys
-                      provider: Microsoft Azure EventHub
-                      resource: AuthorizationRules
-                    name: Microsoft.EventHub/namespaces/authorizationRules/regenerateKeys/action
-                  - display:
-                      description: Create or Update EventHub properties.
-                      operation: Create or Update EventHub
-                      provider: Microsoft Azure EventHub
-                      resource: EventHub
-                    name: Microsoft.EventHub/namespaces/eventhubs/write
-                  - display:
-                      description: Get list of EventHub Resource Descriptions
-                      operation: Get EventHub
-                      provider: Microsoft Azure EventHub
-                      resource: EventHub
-                    name: Microsoft.EventHub/namespaces/eventhubs/read
-                  - display:
-                      description: Operation to delete EventHub Resource
-                      operation: Delete EventHub
-                      provider: Microsoft Azure EventHub
-                      resource: EventHub
-                    name: Microsoft.EventHub/namespaces/eventhubs/Delete
-                  - display:
-                      description: ' Get the list of EventHub Authorization Rules'
-                      operation: ' Get EventHub Authorization Rules'
-                      provider: Microsoft Azure EventHub
-                      resource: EventHub AuthorizationRules
-                    name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/read
-                  - display:
-                      description: 'Create EventHub Authorization Rules and Update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
-                      operation: Create or Update EventHub Authorization Rule
-                      provider: Microsoft Azure EventHub
-                      resource: EventHub AuthorizationRules
-                    name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/write
-                  - display:
-                      description: Operation to delete EventHub Authorization Rules
-                      operation: Delete EventHub Authorization Rules
-                      provider: Microsoft Azure EventHub
-                      resource: EventHub AuthorizationRules
-                    name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/delete
-                  - display:
-                      description: Get the Connection String to EventHub
-                      operation: List EventHub keys
-                      provider: Microsoft Azure EventHub
-                      resource: EventHub AuthorizationRules
-                    name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/listkeys/action
-                  - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
-                      operation: Resource Regeneratekeys
-                      provider: Microsoft Azure EventHub
-                      resource: EventHub AuthorizationRules
-                    name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/regenerateKeys/action
-                  - display:
-                      description: Create or Update ConsumerGroup properties.
-                      operation: Create or Update ConsumerGroup
-                      provider: Microsoft Azure EventHub
-                      resource: ConsumerGroup
-                    name: Microsoft.EventHub/namespaces/eventHubs/consumergroups/write
-                  - display:
-                      description: Get list of ConsumerGroup Resource Descriptions
-                      operation: Get ConsumerGroup
-                      provider: Microsoft Azure EventHub
-                      resource: ConsumerGroup
-                    name: Microsoft.EventHub/namespaces/eventHubs/consumergroups/read
-                  - display:
-                      description: Operation to delete ConsumerGroup Resource
-                      operation: Delete ConsumerGroup
-                      provider: Microsoft Azure EventHub
-                      resource: ConsumerGroup
-                    name: Microsoft.EventHub/namespaces/eventHubs/consumergroups/Delete
-                  - display:
-                      description: Get list of Namespace metrics Resource Descriptions
-                      operation: Get Namespace metrics
-                      provider: Microsoft Azure EventHub
-                      resource: Namespace metrics
-                    name: Microsoft.EventHub/namespaces/metricDefinitions/read
-                  - display:
-                      description: Get list of Namespace diagnostic settings Resource Descriptions
-                      operation: Get Namespace diagnostic settings
-                      provider: Microsoft Azure EventHub
-                      resource: Namespace diagnostic settings
-                    name: Microsoft.EventHub/namespaces/diagnosticSettings/read
-                  - display:
-                      description: Get list of Namespace diagnostic settings Resource Descriptions
-                      operation: Create or Update Namespace diagnostic settings
-                      provider: Microsoft Azure EventHub
-                      resource: Namespace diagnostic settings
-                    name: Microsoft.EventHub/namespaces/diagnosticSettings/write
-                  - display:
-                      description: Get list of Namespace logs Resource Descriptions
-                      operation: Get Namespace logs
-                      provider: Microsoft Azure EventHub
-                      resource: Namespace logs
-                    name: Microsoft.EventHub/namespaces/logDefinitions/read
+          $ref: ../examples/EHOperations_List.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/CheckNameAvailability':
@@ -289,17 +134,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NamespacesCheckNameAvailability:
-          parameters:
-            api-version: '2015-08-01'
-            parameters:
-              name: sdk-Namespace8107
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                message: ' '
-                nameAvailable: true
-                reason: None
+          $ref: ../examples/NameSpaces/EHNameSpaceCheckNameAvailability.json
   '/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/namespaces':
     get:
       description: 'Lists all the available Namespaces within a subscription, irrespective of the resource groups.'
@@ -316,81 +151,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NamespacesListBySubscription:
-          parameters:
-            api-version: '2015-08-01'
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace-5166
-                    location: Australia East
-                    name: sdk-Namespace-5166
-                    properties:
-                      createdAt: '2017-02-24T06:45:29.38Z'
-                      enabled: true
-                      metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:sdk-namespace-5166'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://sdk-Namespace-5166.servicebus.windows.net:443/'
-                      status: Active
-                      updatedAt: '2017-02-24T06:45:54.807Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.EventHub/namespaces
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/Eventhub-Namespace-onesdk2423
-                    location: West US
-                    name: Eventhub-Namespace-onesdk2423
-                    properties:
-                      createdAt: '2017-02-08T00:45:03.127Z'
-                      enabled: true
-                      metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:eventhub-namespace-onesdk2423'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://Eventhub-Namespace-onesdk2423.servicebus.windows.net:443/'
-                      status: Active
-                      updatedAt: '2017-02-08T00:45:24.713Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.EventHub/namespaces
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace7810
-                    location: South Central US
-                    name: sdk-Namespace7810
-                    properties:
-                      createdAt: '2017-02-23T05:42:25.597Z'
-                      enabled: true
-                      metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:sdk-namespace7810'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://sdk-Namespace7810.servicebus.windows.net:443/'
-                      status: Active
-                      updatedAt: '2017-02-23T05:42:47.16Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.EventHub/namespaces
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9769
-                    location: Australia East
-                    name: sdk-Namespace-9769
-                    properties:
-                      createdAt: '2017-03-07T23:29:55.917Z'
-                      enabled: true
-                      metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:sdk-namespace-9769'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://sdk-Namespace-9769.servicebus.windows.net:443/'
-                      status: Active
-                      updatedAt: '2017-03-07T23:30:21.6Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.EventHub/namespaces
+          $ref: ../examples/NameSpaces/EHNameSpaceList.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces':
@@ -410,82 +171,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NamespaceListByResourceGroup:
-          parameters:
-            api-version: '2015-08-01'
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace-5166
-                    location: Australia East
-                    name: sdk-Namespace-5166
-                    properties:
-                      createdAt: '2017-02-24T06:45:29.38Z'
-                      enabled: true
-                      metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:sdk-namespace-5166'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://sdk-Namespace-5166.servicebus.windows.net:443/'
-                      status: Active
-                      updatedAt: '2017-02-24T06:45:54.807Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.EventHub/namespaces
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/Eventhub-Namespace-onesdk2423
-                    location: West US
-                    name: Eventhub-Namespace-onesdk2423
-                    properties:
-                      createdAt: '2017-02-08T00:45:03.127Z'
-                      enabled: true
-                      metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:eventhub-namespace-onesdk2423'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://Eventhub-Namespace-onesdk2423.servicebus.windows.net:443/'
-                      status: Active
-                      updatedAt: '2017-02-08T00:45:24.713Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.EventHub/namespaces
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/Eventhub-Namespace-onesdk6253
-                    location: West US
-                    name: Eventhub-Namespace-onesdk6253
-                    properties:
-                      createdAt: '2017-02-08T01:50:05.17Z'
-                      enabled: true
-                      metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:eventhub-namespace-onesdk6253'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://Eventhub-Namespace-onesdk6253.servicebus.windows.net:443/'
-                      status: Active
-                      updatedAt: '2017-02-08T01:50:27.94Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.EventHub/namespaces
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace-4772
-                    location: Australia East
-                    name: sdk-Namespace-4772
-                    properties:
-                      createdAt: '2017-03-07T23:43:36.89Z'
-                      enabled: true
-                      metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:sdk-namespace-4772'
-                      provisioningState: Succeeded
-                      serviceBusEndpoint: 'https://sdk-Namespace-4772.servicebus.windows.net:443/'
-                      status: Active
-                      updatedAt: '2017-03-07T23:44:05.807Z'
-                    sku:
-                      capacity: 1
-                      name: Standard
-                      tier: Standard
-                    tags: {}
-                    type: Microsoft.EventHub/namespaces
+          $ref: ../examples/NameSpaces/EHNameSpaceListByResourceGroup.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}':
@@ -508,15 +194,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceDelete:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace8107
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200': {}
-            '202': {}
-            '204': {}
+          $ref: ../examples/NameSpaces/EHNameSpaceDelete.json
       x-ms-long-running-operation: true
     get:
       description: Gets the description of the specified namespace.
@@ -539,54 +217,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceGet:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace8107
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace8107
-                location: South Central US
-                name: sdk-Namespace8107
-                properties:
-                  createdAt: '2017-03-12T19:15:11.25Z'
-                  enabled: true
-                  metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:sdk-namespace8107'
-                  provisioningState: Succeeded
-                  serviceBusEndpoint: 'https://sdk-Namespace8107.servicebus.windows.net:443/'
-                  status: Active
-                  updatedAt: '2017-03-12T19:15:30.347Z'
-                sku:
-                  capacity: 1
-                  name: Standard
-                  tier: Standard
-                tags:
-                  tag1: value1
-                  tag2: value2
-                type: Microsoft.EventHub/namespaces
-            '201':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace8107
-                location: South Central US
-                name: sdk-Namespace8107
-                properties:
-                  createdAt: '2017-03-12T19:15:11.25Z'
-                  enabled: true
-                  metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:sdk-namespace8107'
-                  provisioningState: Succeeded
-                  serviceBusEndpoint: 'https://sdk-Namespace8107.servicebus.windows.net:443/'
-                  status: Active
-                  updatedAt: '2017-03-12T19:15:30.347Z'
-                sku:
-                  capacity: 1
-                  name: Standard
-                  tier: Standard
-                tags:
-                  tag1: value1
-                  tag2: value2
-                type: Microsoft.EventHub/namespaces
+          $ref: ../examples/NameSpaces/EHNameSpaceGet.json
     patch:
       description: 'Creates or updates a namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
       operationId: Namespaces_Update
@@ -616,46 +247,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NamespacesUpdate:
-          parameters:
-            api-version: '2015-08-01'
-            location: West US
-            namespaceName: sdk-Namespace8107
-            parameters:
-              tags:
-                tag3: value3
-                tag4: value4
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: 8c246e6a-cbc6-4a87-aff1-d6a886f376ef
-          responses:
-            '200':
-              body:
-                id: ''
-                location: ''
-                name: ''
-                properties:
-                  metricId: ''
-                  provisioningState: ''
-                  serviceBusEndpoint: 'https://sdk-Namespace4638.servicebus.windows.net:443/'
-                  updatedAt: '2017-03-12T20:34:10.25Z'
-                tags:
-                  tag3: value3
-                  tag4: value4
-                type: ''
-            '201':
-              body:
-                id: ''
-                location: ''
-                name: ''
-                properties:
-                  metricId: ''
-                  provisioningState: ''
-                  serviceBusEndpoint: 'https://sdk-Namespace4638.servicebus.windows.net:443/'
-                  updatedAt: '2017-03-12T20:34:10.25Z'
-                tags:
-                  tag3: value3
-                  tag4: value4
-                type: ''
-            '202': {}
+          $ref: ../examples/NameSpaces/EHNameSpaceUpdate.json
     put:
       description: 'Creates or updates a namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
       operationId: Namespaces_CreateOrUpdate
@@ -685,53 +277,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NamespaceCreate:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace8107
-            parameters:
-              location: South Central US
-              sku:
-                name: Standard
-                tier: Standard
-              tags:
-                tag1: value1
-                tag2: value2
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace8107
-                location: South Central US
-                name: sdk-Namespace8107
-                properties:
-                  enabled: false
-                  metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:sdk-namespace8107'
-                  provisioningState: Unknown
-                sku:
-                  name: Standard
-                  tier: Standard
-                tags:
-                  tag1: value1
-                  tag2: value2
-                type: Microsoft.EventHub/namespaces
-            '201':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace8107
-                location: South Central US
-                name: sdk-Namespace8107
-                properties:
-                  enabled: false
-                  metricId: 'e2f361f0-3b27-4503-a9cc-21cfba380093:sdk-namespace8107'
-                  provisioningState: Unknown
-                sku:
-                  name: Standard
-                  tier: Standard
-                tags:
-                  tag1: value1
-                  tag2: value2
-                type: Microsoft.EventHub/namespaces
-            '202': {}
+          $ref: ../examples/NameSpaces/EHNameSpaceCreate.json
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules':
     get:
@@ -751,26 +297,7 @@ paths:
         - Namespaces
       x-ms-examples:
         ListAuthorizationRules:
-          parameters:
-            api-version: '2015-08-01'
-            namespaceName: sdk-Namespace743
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                value:
-                  - name: RootManageSharedAccessKey
-                    properties:
-                      rights:
-                        - Listen
-                        - Manage
-                        - Send
-                  - name: sdk-Authrules4867
-                    properties:
-                      rights:
-                        - Listen
-                        - Send
+          $ref: ../examples/NameSpaces/EHNameSpaceAutorizationRuleListAll.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}':
@@ -792,15 +319,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceAutorizationRuleDelete:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules4867
-            namespaceName: sdk-Namespace743
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200': {}
-            '204': {}
+          $ref: ../examples/NameSpaces/EHNameSpaceAutorizationRuleDelete.json
     get:
       description: Gets an AuthorizationRule for a Namespace by rule name.
       operationId: Namespaces_GetAuthorizationRule
@@ -819,23 +338,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceAutorizationRuleGet:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules4867
-            namespaceName: sdk-Namespace743
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace743/AuthorizationRules/RootManageSharedAccessKey
-                name: RootManageSharedAccessKey
-                properties:
-                  rights:
-                    - Listen
-                    - Manage
-                    - Send
-                type: Microsoft.EventHub/AuthorizationRules
+          $ref: ../examples/NameSpaces/EHNameSpaceAutorizationRuleGet.json
     put:
       description: Creates or updates an AuthorizationRule for a Namespace.
       operationId: Namespaces_CreateOrUpdateAuthorizationRule
@@ -860,28 +363,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceAuthorizationRuleCreate:
-          parameters:
-            api-version: '2016-07-01'
-            authorizationRuleName: sdk-Authrules4867
-            namespaceName: sdk-Namespace743
-            parameters:
-              location: West US
-              properties:
-                rights:
-                  - Listen
-                  - Send
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace743/AuthorizationRules/sdk-Authrules4867
-                name: sdk-Authrules4867
-                properties:
-                  rights:
-                    - Listen
-                    - Send
-                type: Microsoft.EventHub/AuthorizationRules
+          $ref: ../examples/NameSpaces/EHNameSpaceAuthorizationRuleCreate.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/listKeys':
     post:
       description: Gets the primary and secondary connection strings for the Namespace.
@@ -901,20 +383,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceAuthorizationRuleListKey:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules4867
-            namespaceName: sdk-namespace743
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                keyName: sdk-Authrules4867
-                primaryConnectionString: 'Endpoint=sb://sdk-namespace743.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules4867;SharedAccessKey=############################'
-                primaryKey: '############################'
-                secondaryConnectionString: 'Endpoint=sb://sdk-namespace743.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules4867;SharedAccessKey=############################'
-                secondaryKey: '############################'
+          $ref: ../examples/NameSpaces/EHNameSpaceAuthorizationRuleListKey.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys':
     post:
       description: Regenerates the primary or secondary connection strings for the specified Namespace.
@@ -940,22 +409,7 @@ paths:
         - Namespaces
       x-ms-examples:
         NameSpaceAuthorizationRuleRegenrateKey:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules5448
-            namespaceName: sdk-namespace2364
-            parameters:
-              policykey: PrimaryKey
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                keyName: sdk-Authrules5448
-                primaryConnectionString: 'Endpoint=sb://sdk-namespace2364.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules5448;SharedAccessKey=############################'
-                primaryKey: '############################'
-                secondaryConnectionString: 'Endpoint=sb://sdk-namespace2364.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules5448;SharedAccessKey=############################'
-                secondaryKey: '############################'
+          $ref: ../examples/NameSpaces/EHNameSpaceAuthorizationRuleRegenrateKey.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs':
     get:
       description: Gets all the Event Hubs in a Namespace.
@@ -976,30 +430,7 @@ paths:
         - EventHubs
       x-ms-examples:
         EventHubsListAll:
-          parameters:
-            api-version: '2015-08-01'
-            eventHubName: sdk-eventhub4839
-            namespaceName: sdk-Namespace4919
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace4919/eventhubs/sdk-eventhub4839
-                    name: sdk-eventhub4839
-                    properties:
-                      createdAt: '2017-03-12T07:39:13.31Z'
-                      messageRetentionInDays: 7
-                      partitionCount: 4
-                      partitionIds:
-                        - '0'
-                        - '1'
-                        - '2'
-                        - '3'
-                      status: Active
-                      updatedAt: '2017-03-12T07:39:15.41Z'
-                    type: Microsoft.EventHub/EventHubs
+          $ref: ../examples/EventHubs/EHEventHubListByNameSpace.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}':
@@ -1023,15 +454,7 @@ paths:
         - EventHubs
       x-ms-examples:
         EventHubDelete:
-          parameters:
-            api-version: '2015-08-01'
-            eventHubName: sdk-EventHub4839
-            namespaceName: sdk-sdk-Namespace4919
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200': {}
-            '204': {}
+          $ref: ../examples/EventHubs/EHEventHubDelete.json
     get:
       description: Gets an Event Hubs description for the specified Event Hub.
       externalDocs:
@@ -1052,29 +475,7 @@ paths:
         - EventHubs
       x-ms-examples:
         EventHubGet:
-          parameters:
-            api-version: '2015-08-01'
-            eventHubName: sdk-EventHub6448
-            namespaceName: sdk-Namespace7834
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace7834/eventhubs/sdk-EventHub6448
-                name: sdk-EventHub6448
-                properties:
-                  createdAt: '2017-03-12T09:19:03.577Z'
-                  messageRetentionInDays: 7
-                  partitionCount: 4
-                  partitionIds:
-                    - '0'
-                    - '1'
-                    - '2'
-                    - '3'
-                  status: Active
-                  updatedAt: '2017-03-12T09:19:05.577Z'
-                type: Microsoft.EventHub/EventHubs
+          $ref: ../examples/EventHubs/EHEventHubGet.json
     put:
       description: Creates or updates a new Event Hub as a nested resource within a Namespace.
       externalDocs:
@@ -1101,35 +502,7 @@ paths:
         - EventHubs
       x-ms-examples:
         EventHubCreate:
-          parameters:
-            api-version: '2015-08-01'
-            eventHubName: sdk-EventHub6448
-            namespaceName: sdk-Namespace7834
-            parameters:
-              location: West US
-              properties:
-                messageRetentionInDays: 7
-                partitionCount: 4
-                status: Active
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace7834/eventhubs/sdk-EventHub6448
-                name: sdk-EventHub6448
-                properties:
-                  createdAt: '2017-03-12T20:37:09.28Z'
-                  messageRetentionInDays: 7
-                  partitionCount: 4
-                  partitionIds:
-                    - '0'
-                    - '1'
-                    - '2'
-                    - '3'
-                  status: Active
-                  updatedAt: '2017-03-12T20:37:18.64Z'
-                type: Microsoft.EventHub/EventHubs
+          $ref: ../examples/EventHubs/EHEventHubCreate.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules':
     get:
       description: Gets the authorization rules for an Event Hub.
@@ -1149,21 +522,7 @@ paths:
         - EventHubs
       x-ms-examples:
         EventHubAutorizationRuleListAll:
-          parameters:
-            api-version: '2015-08-01'
-            eventHubName: sdk-EventHub8887
-            namespaceName: sdk-Namespace2290
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                value:
-                  - name: sdk-Authrules9261
-                    properties:
-                      rights:
-                        - Listen
-                        - Send
+          $ref: ../examples/EventHubs/EHEventHubAutorizationRuleListAll.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules/{authorizationRuleName}':
@@ -1188,16 +547,7 @@ paths:
         - EventHubs
       x-ms-examples:
         EventHubAutorizationRuleDelete:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules9261
-            eventHubName: sdk-EventHub8887
-            namespaceName: sdk-Namespace2290
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200': {}
-            '204': {}
+          $ref: ../examples/EventHubs/EHEventHubAutorizationRuleDelete.json
     get:
       description: Gets an AuthorizationRule for an Event Hub by rule name.
       externalDocs:
@@ -1219,23 +569,7 @@ paths:
         - EventHubs
       x-ms-examples:
         EventHubAutorizationRuleGet:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules9261
-            eventHubName: sdk-EventHub8887
-            namespaceName: sdk-Namespace2290
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace2290/eventhubs/sdk-EventHub8887/authorizationRules/sdk-Authrules9261
-                name: sdk-Authrules9261
-                properties:
-                  rights:
-                    - Listen
-                    - Send
-                type: Microsoft.EventHub/AuthorizationRules
+          $ref: ../examples/EventHubs/EHEventHubAutorizationRuleGet.json
     put:
       description: Creates or updates an AuthorizationRule for the specified Event Hub.
       externalDocs:
@@ -1263,28 +597,7 @@ paths:
         - EventHubs
       x-ms-examples:
         EventHubAuthorizationRuleCreate:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules9261
-            eventHubName: sdk-EventHub8887
-            namespaceName: sdk-Namespace2290
-            parameters:
-              properties:
-                rights:
-                  - Listen
-                  - Send
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace2290/eventhubs/sdk-EventHub8887/authorizationRules/sdk-Authrules9261
-                name: sdk-Authrules9261
-                properties:
-                  rights:
-                    - Listen
-                    - Send
-                type: Microsoft.EventHub/AuthorizationRules
+          $ref: ../examples/EventHubs/EHEventHubAuthorizationRuleCreate.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules/{authorizationRuleName}/ListKeys':
     post:
       description: Gets the ACS and SAS connection strings for the Event Hub.
@@ -1307,21 +620,7 @@ paths:
         - EventHubs
       x-ms-examples:
         EventHubAuthorizationRuleListKey:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules9261
-            eventHubName: sdk-EventHub8887
-            namespaceName: sdk-namespace2290.
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                keyName: sdk-Authrules9261
-                primaryConnectionString: 'Endpoint=sb://sdk-namespace2290.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules9261;SharedAccessKey=############################;EntityPath=sdk-EventHub8887'
-                primaryKey: '############################'
-                secondaryConnectionString: 'Endpoint=sb://sdk-namespace2290.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules9261;SharedAccessKey=############################;EntityPath=sdk-EventHub8887'
-                secondaryKey: '############################'
+          $ref: ../examples/EventHubs/EHEventHubAuthorizationRuleListKey.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules/{authorizationRuleName}/regenerateKeys':
     post:
       description: Regenerates the ACS and SAS connection strings for the Event Hub.
@@ -1350,23 +649,7 @@ paths:
         - EventHubs
       x-ms-examples:
         EventHubAuthorizationRuleRegenrateKey:
-          parameters:
-            api-version: '2015-08-01'
-            authorizationRuleName: sdk-Authrules9261
-            eventHubName: sdk-EventHub8887
-            namespaceName: sdk-namespace2290.
-            parameters:
-              policykey: PrimaryKey
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                keyName: sdk-Authrules9261
-                primaryConnectionString: 'Endpoint=sb://sdk-namespace2290.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules9261;SharedAccessKey=############################;EntityPath=sdk-EventHub8887'
-                primaryKey: '############################'
-                secondaryConnectionString: 'Endpoint=sb://sdk-namespace2290.servicebus.windows.net/;SharedAccessKeyName=sdk-Authrules9261;SharedAccessKey=############################;EntityPath=sdk-EventHub8887'
-                secondaryKey: '############################'
+          $ref: ../examples/EventHubs/EHEventHubAuthorizationRuleRegenrateKey.json
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/consumergroups':
     get:
       description: Gets all the consumer groups in a Namespace. An empty feed is returned if no consumer group exists in the Namespace.
@@ -1388,28 +671,7 @@ paths:
         - ConsumerGroups
       x-ms-examples:
         ConsumerGroupsListAll:
-          parameters:
-            api-version: '2015-08-01'
-            eventHubName: sdk-EventHub5290
-            namespaceName: sdk-Namespace736
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                value:
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace736/eventhubs/sdk-EventHub5290/consumergroups/$Default
-                    name: $Default
-                    properties:
-                      createdAt: '2017-03-12T09:19:03.577Z'
-                      updatedAt: '2017-03-12T09:19:05.577Z'
-                    type: Microsoft.EventHub/ConsumerGroups
-                  - id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace736/eventhubs/sdk-EventHub5290/consumergroups/sdk-consumergroup115
-                    name: sdk-consumergroup115
-                    properties:
-                      createdAt: '2017-03-12T09:19:07.577Z'
-                      updatedAt: '2017-03-12T09:19:09.577Z'
-                    type: Microsoft.EventHub/ConsumerGroups
+          $ref: ../examples/ConsumerGroup/EHConsumerGroupListByEventHub.json
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/consumergroups/{consumerGroupName}':
@@ -1434,16 +696,7 @@ paths:
         - ConsumerGroups
       x-ms-examples:
         ConsumerGroupDelete:
-          parameters:
-            api-version: '2015-08-01'
-            consumerGroupName: sdk-ConsumerGroup115
-            eventHubName: sdk-EventHub5290
-            namespaceName: sdk-Namespace736
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200': {}
-            '204': {}
+          $ref: ../examples/ConsumerGroup/EHConsumerGroupDelete.json
     get:
       description: Gets a description for the specified consumer group.
       externalDocs:
@@ -1465,22 +718,7 @@ paths:
         - ConsumerGroups
       x-ms-examples:
         ConsumerGroupGet:
-          parameters:
-            api-version: '2015-08-01'
-            consumerGroupName: sdk-ConsumerGroup115
-            eventHubName: sdk-EventHub5290
-            namespaceName: sdk-Namespace736
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace736/eventhubs/sdk-EventHub5290/consumergroups/sdk-ConsumerGroup115
-                name: sdk-ConsumerGroup115
-                properties:
-                  createdAt: '2017-03-12T09:19:03.577Z'
-                  updatedAt: '2017-03-12T09:19:05.577Z'
-                type: Microsoft.EventHub/ConsumerGroups
+          $ref: ../examples/ConsumerGroup/EHConsumerGroupGet.json
     put:
       description: Creates or updates an Event Hubs consumer group as a nested resource within a Namespace.
       externalDocs:
@@ -1508,24 +746,7 @@ paths:
         - ConsumerGroups
       x-ms-examples:
         ConsumerGroupCreate:
-          parameters:
-            api-version: '2015-08-01'
-            consumerGroupName: sdk-ConsumerGroup115
-            eventHubName: sdk-EventHub5290
-            namespaceName: sdk-Namespace736
-            parameters:
-              location: West US
-            resourceGroupName: Default-ServiceBus-WestUS
-            subscriptionId: e2f361f0-3b27-4503-a9cc-21cfba380093
-          responses:
-            '200':
-              body:
-                id: /subscriptions/e2f361f0-3b27-4503-a9cc-21cfba380093/resourceGroups/Default-ServiceBus-WestUS/providers/Microsoft.EventHub/namespaces/sdk-Namespace736/eventhubs/sdk-EventHub5290/consumergroups/sdk-ConsumerGroup115
-                name: sdk-ConsumerGroup115
-                properties:
-                  createdAt: '2017-03-12T21:11:46.308019Z'
-                  updatedAt: '2017-03-12T21:11:46.308019Z'
-                type: Microsoft.EventHub/ConsumerGroups
+          $ref: ../examples/ConsumerGroup/EHConsumerGroupCreate.json
 definitions:
   CheckNameAvailabilityParameter:
     description: 'Parameter supplied to check Namespace name availability operation '

@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Help the third party sites to implement federated login.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Identity Toolkit
   version: v3
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/identitytoolkit/v3/rest'
       version: v1
@@ -33,20 +29,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -116,8 +103,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /deleteAccount:
@@ -144,8 +129,6 @@ paths:
             $ref: '#/definitions/DeleteAccountResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -174,11 +157,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - relyingparty
@@ -207,8 +186,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /getOobConfirmationCode:
@@ -236,8 +213,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /getProjectConfig:
@@ -261,8 +236,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
     parameters:
@@ -285,8 +258,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
     parameters:
@@ -308,8 +279,6 @@ paths:
             $ref: '#/definitions/IdentitytoolkitRelyingpartyGetPublicKeysResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -346,8 +315,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /sendVerificationCode:
@@ -374,8 +341,6 @@ paths:
             $ref: '#/definitions/IdentitytoolkitRelyingpartySendVerificationCodeResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -404,8 +369,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /setProjectConfig:
@@ -432,8 +395,6 @@ paths:
             $ref: '#/definitions/IdentitytoolkitRelyingpartySetProjectConfigResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -462,8 +423,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /signupNewUser:
@@ -490,8 +449,6 @@ paths:
             $ref: '#/definitions/SignupNewUserResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -520,11 +477,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/firebase'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - relyingparty
@@ -553,8 +506,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /verifyCustomToken:
@@ -581,8 +532,6 @@ paths:
             $ref: '#/definitions/VerifyCustomTokenResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -611,8 +560,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /verifyPhoneNumber:
@@ -639,8 +586,6 @@ paths:
             $ref: '#/definitions/IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
@@ -1152,15 +1097,28 @@ definitions:
       allowOverwrite:
         description: Whether allow overwrite existing account when user local_id exists.
         type: boolean
+      blockSize:
+        format: int32
+        type: integer
+      cpuMemCost:
+        description: The following 4 fields are for standard scrypt algorithm.
+        format: int32
+        type: integer
       delegatedProjectNumber:
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
         format: int64
         type: string
+      dkLen:
+        format: int32
+        type: integer
       hashAlgorithm:
         description: The password hash algorithm.
         type: string
       memoryCost:
         description: Memory cost for hash calculation. Used by scrypt similar algorithms.
+        format: int32
+        type: integer
+      parallelization:
         format: int32
         type: integer
       rounds:

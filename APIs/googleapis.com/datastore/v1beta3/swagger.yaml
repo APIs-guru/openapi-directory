@@ -9,10 +9,6 @@ info:
     url: 'https://google.com'
   description: |
     Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Datastore
   version: v1beta3
   x-apiClientRegistration:
@@ -24,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.5.0
       format: google
       url: 'https://datastore.googleapis.com/$discovery/rest?version=v1beta3'
       version: v1
@@ -36,20 +32,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/datastore': View and manage your Google Cloud Datastore data
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/datastore': View and manage your Google Cloud Datastore data
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -168,11 +155,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/datastore'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -212,11 +195,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/datastore'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -258,11 +237,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/datastore'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -302,11 +277,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/datastore'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -346,11 +317,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/datastore'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -390,11 +357,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/datastore'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -595,18 +558,16 @@ definitions:
           type: string
         description: |-
           The client-assigned labels which were provided when the operation was
-          created.  May also include additional labels.
+          created. May also include additional labels.
         type: object
       operationType:
         description: |-
-          The type of the operation.  Can be used as a filter in
+          The type of the operation. Can be used as a filter in
           ListOperationsRequest.
         enum:
           - OPERATION_TYPE_UNSPECIFIED
           - EXPORT_ENTITIES
           - IMPORT_ENTITIES
-          - BUILD_INDEX
-          - CLEAR_INDEX
         type: string
       startTime:
         description: The time that work began on the operation.
@@ -627,8 +588,8 @@ definitions:
     type: object
   GoogleDatastoreAdminV1beta1EntityFilter:
     description: |-
-      Identifies a subset of entities in a project.  This is specified as
-      combinations of kind + namespace (either or both of which may be all, as
+      Identifies a subset of entities in a project. This is specified as
+      combinations of kinds and namespaces (either or both of which may be all, as
       described in the following examples).
       Example usage:
 
@@ -654,10 +615,10 @@ definitions:
         type: array
       namespaceIds:
         description: |-
-          An empty list represents all namespaces.  This is the preferred
+          An empty list represents all namespaces. This is the preferred
           usage for projects that don't use namespaces.
 
-          An empty string element represents the default namespace.  This should be
+          An empty string element represents the default namespace. This should be
           used if the project has data in non-default namespaces, but doesn't want to
           include them.
           Each namespace in this list must be unique.
@@ -728,12 +689,14 @@ definitions:
     description: Measures the progress of a particular metric.
     properties:
       workCompleted:
-        description: Note that this may be greater than work_estimated.
+        description: |-
+          The amount of work that has been completed. Note that this may be greater
+          than work_estimated.
         format: int64
         type: string
       workEstimated:
         description: |-
-          An estimate of how much work needs to be performed.  May be zero if the
+          An estimate of how much work needs to be performed. May be zero if the
           work estimate is unavailable.
         format: int64
         type: string
