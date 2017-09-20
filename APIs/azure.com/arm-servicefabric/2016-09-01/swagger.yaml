@@ -121,7 +121,178 @@ paths:
         - ClusterListOperation
       x-ms-examples:
         List clusters:
-          $ref: ../examples/ClusterListOperation_example.json
+          parameters:
+            api-version: '2016-09-01'
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/bmwdemo/providers/Microsoft.ServiceFabric/clusters/bmwdemo
+                    location: westus
+                    name: bmwdemo
+                    properties:
+                      availableClusterVersions:
+                        - codeVersion: 5.4.164.9494
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                      clientCertificateCommonNames: []
+                      clientCertificateThumbprints: []
+                      clusterCodeVersion: 5.4.164.9494
+                      clusterEndpoint: 'https://westus.servicefabric.azure.com/runtime/clusters/a4e23572-8443-470e-adcb-3b7ebe6d582b'
+                      clusterId: a4e23572-8443-470e-adcb-3b7ebe6d582b
+                      clusterState: Ready
+                      diagnosticsStorageAccountConfig:
+                        blobEndpoint: 'https://sflogsbmwdemo4564.blob.core.windows.net/'
+                        protectedAccountKeyName: StorageAccountKey1
+                        queueEndpoint: 'https://sflogsbmwdemo4564.queue.core.windows.net/'
+                        storageAccountName: sflogsbmwdemo4564
+                        tableEndpoint: 'https://sflogsbmwdemo4564.table.core.windows.net/'
+                      fabricSettings: []
+                      managementEndpoint: 'http://bmwdemo.westus.cloudapp.azure.com:19080'
+                      nodeTypes:
+                        - applicationPorts:
+                            endPort: 30000
+                            startPort: 20000
+                          clientConnectionEndpointPort: 19000
+                          durabilityLevel: Bronze
+                          ephemeralPorts:
+                            endPort: 65534
+                            startPort: 49152
+                          httpGatewayEndpointPort: 19080
+                          isPrimary: true
+                          name: Demo
+                          vmInstanceCount: 5
+                      provisioningState: Succeeded
+                      reliabilityLevel: Silver
+                      upgradeDescription:
+                        deltaHealthPolicy:
+                          maxPercentDeltaUnhealthyApplications: 0
+                          maxPercentDeltaUnhealthyNodes: 0
+                          maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
+                        forceRestart: true
+                        healthCheckRetryTimeout: '00:45:00'
+                        healthCheckStableDuration: '00:05:00'
+                        healthCheckWaitDuration: '00:05:00'
+                        healthPolicy:
+                          maxPercentUnhealthyApplications: 100
+                          maxPercentUnhealthyNodes: 100
+                        overrideUserUpgradePolicy: false
+                        upgradeDomainTimeout: '02:00:00'
+                        upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
+                        upgradeTimeout: '12:00:00'
+                      upgradeMode: Automatic
+                      vmImage: Windows
+                    tags:
+                      clusterName: bmwdemo
+                      resourceType: Service Fabric
+                    type: Microsoft.ServiceFabric/clusters
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/psdeployrg4/providers/Microsoft.ServiceFabric/clusters/sfclust4
+                    location: southcentralus
+                    name: sfclust4
+                    properties:
+                      availableClusterVersions:
+                        - codeVersion: 5.1.158.9590
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.2.0.100
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.2.207.9590
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.3.121.9494
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.3.311.9590
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.4.30.100
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.4.35.100
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.4.38.100
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.4.118.9494
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.4.132.9494
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.4.145.9494
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.4.164.9494
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.5.67.9494
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.5.149.9494
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                      certificate:
+                        thumbprint: 68A89C30F20B2A198B0A26DF3744079D0F5AC2FC
+                        x509StoreName: My
+                      clientCertificateCommonNames: []
+                      clientCertificateThumbprints: []
+                      clusterCodeVersion: 5.5.149.9494
+                      clusterEndpoint: 'https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/029c03b7-d94e-4c64-9dd4-b1c3bb0914c1'
+                      clusterId: 029c03b7-d94e-4c64-9dd4-b1c3bb0914c1
+                      clusterState: Ready
+                      diagnosticsStorageAccountConfig:
+                        blobEndpoint: 'https://t2vgl3f2bk6qw2.blob.core.windows.net/'
+                        protectedAccountKeyName: StorageAccountKey1
+                        queueEndpoint: 'https://t2vgl3f2bk6qw2.queue.core.windows.net/'
+                        storageAccountName: t2vgl3f2bk6qw2
+                        tableEndpoint: 'https://t2vgl3f2bk6qw2.table.core.windows.net/'
+                      fabricSettings:
+                        - name: Security
+                          parameters:
+                            - name: ClusterProtectionLevel
+                              value: EncryptAndSign
+                      managementEndpoint: 'https://sfclust4.southcentralus.cloudapp.azure.com:19080'
+                      nodeTypes:
+                        - applicationPorts:
+                            endPort: 30000
+                            startPort: 20000
+                          clientConnectionEndpointPort: 19000
+                          durabilityLevel: Bronze
+                          ephemeralPorts:
+                            endPort: 65534
+                            startPort: 49152
+                          httpGatewayEndpointPort: 19080
+                          isPrimary: true
+                          name: nt1vm
+                          vmInstanceCount: 5
+                      provisioningState: Succeeded
+                      reliabilityLevel: Silver
+                      upgradeDescription:
+                        deltaHealthPolicy:
+                          maxPercentDeltaUnhealthyApplications: 0
+                          maxPercentDeltaUnhealthyNodes: 0
+                          maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
+                        forceRestart: true
+                        healthCheckRetryTimeout: '00:45:00'
+                        healthCheckStableDuration: '00:05:00'
+                        healthCheckWaitDuration: '00:05:00'
+                        healthPolicy:
+                          maxPercentUnhealthyApplications: 100
+                          maxPercentUnhealthyNodes: 100
+                        overrideUserUpgradePolicy: false
+                        upgradeDomainTimeout: '02:00:00'
+                        upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
+                        upgradeTimeout: '12:00:00'
+                      upgradeMode: Automatic
+                      vmImage: Windows
+                    tags:
+                      clusterName: sfclust4
+                      resourceType: Service Fabric
+                    type: Microsoft.ServiceFabric/clusters
+              headers: {}
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions':
@@ -142,7 +313,44 @@ paths:
         - ClusterVersionsListOperation
       x-ms-examples:
         List clusters:
-          $ref: ../examples/ClusterVersionsList_example.json
+          parameters:
+            api-version: '2016-09-01'
+            environment: Windows
+            location: westus
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                value:
+                  - id: subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/5.4.145.9494
+                    name: 5.4.145.9494
+                    properties:
+                      codeVersion: 5.4.145.9494
+                      environment: Windows
+                      supportExpiryUtc: '2017-05-10T00:00:00'
+                    type: Microsoft.ServiceFabric/environments/clusterVersions
+                  - id: subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/5.4.164.9494
+                    name: 5.4.164.9494
+                    properties:
+                      codeVersion: 5.4.164.9494
+                      environment: Windows
+                      supportExpiryUtc: '2017-05-10T00:00:00'
+                    type: Microsoft.ServiceFabric/environments/clusterVersions
+                  - id: subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/5.5.216.0
+                    name: 5.5.216.0
+                    properties:
+                      codeVersion: 5.5.216.0
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    type: Microsoft.ServiceFabric/environments/clusterVersions
+                  - id: subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/environments/Windows/clusterVersions/5.5.219.0
+                    name: 5.5.219.0
+                    properties:
+                      codeVersion: 5.5.219.0
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    type: Microsoft.ServiceFabric/environments/clusterVersions
+              headers: {}
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}':
@@ -167,7 +375,14 @@ paths:
         - ClusterDeleteOperation
       x-ms-examples:
         Delete a cluster:
-          $ref: ../examples/ClusterDeleteOperation_example.json
+          parameters:
+            api-version: '2016-09-01'
+            clusterName: myCluster
+            resourceGroupName: resRg
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200': {}
+            '204': {}
     get:
       description: Get cluster resource
       operationId: Clusters_Get
@@ -189,7 +404,120 @@ paths:
         - ClusterGetOperation
       x-ms-examples:
         Get a cluster:
-          $ref: ../examples/ClusterGetOperation_example.json
+          parameters:
+            api-version: '2016-09-01'
+            clusterName: myCluster
+            resourceGroupName: resRg
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
+                location: southcentralus
+                name: myCluster
+                properties:
+                  availableClusterVersions:
+                    - codeVersion: 5.1.158.9590
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.2.0.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.2.207.9590
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.3.121.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.3.311.9590
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.30.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.35.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.38.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.118.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.132.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.145.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.164.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.5.67.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.5.149.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                  certificate:
+                    thumbprint: 1901CF0F76AF711BEE53DF39941092BDAC8D9050
+                    x509StoreName: My
+                  clientCertificateCommonNames: []
+                  clientCertificateThumbprints: []
+                  clusterCodeVersion: 5.5.149.9494
+                  clusterEndpoint: 'https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/1a1acec2-8d75-424a-81af-2fb83dd1cac8'
+                  clusterId: 1a1acec2-8d75-424a-81af-2fb83dd1cac8
+                  clusterState: Ready
+                  diagnosticsStorageAccountConfig:
+                    blobEndpoint: 'https://3nrb4ixoj6ogq2.blob.core.windows.net/'
+                    protectedAccountKeyName: StorageAccountKey1
+                    queueEndpoint: 'https://3nrb4ixoj6ogq2.queue.core.windows.net/'
+                    storageAccountName: 3nrb4ixoj6ogq2
+                    tableEndpoint: 'https://3nrb4ixoj6ogq2.table.core.windows.net/'
+                  fabricSettings:
+                    - name: Security
+                      parameters:
+                        - name: ClusterProtectionLevel
+                          value: EncryptAndSign
+                  managementEndpoint: 'https://myCluster.southcentralus.cloudapp.azure.com:19080'
+                  nodeTypes:
+                    - applicationPorts:
+                        endPort: 30000
+                        startPort: 20000
+                      clientConnectionEndpointPort: 19000
+                      durabilityLevel: Bronze
+                      ephemeralPorts:
+                        endPort: 65534
+                        startPort: 49152
+                      httpGatewayEndpointPort: 19080
+                      isPrimary: true
+                      name: nt1vm
+                      vmInstanceCount: 5
+                  provisioningState: Succeeded
+                  reliabilityLevel: Silver
+                  upgradeDescription:
+                    deltaHealthPolicy:
+                      maxPercentDeltaUnhealthyApplications: 0
+                      maxPercentDeltaUnhealthyNodes: 0
+                      maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
+                    forceRestart: true
+                    healthCheckRetryTimeout: '00:45:00'
+                    healthCheckStableDuration: '00:05:00'
+                    healthCheckWaitDuration: '00:05:00'
+                    healthPolicy:
+                      maxPercentUnhealthyApplications: 100
+                      maxPercentUnhealthyNodes: 100
+                    overrideUserUpgradePolicy: false
+                    upgradeDomainTimeout: '02:00:00'
+                    upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
+                    upgradeTimeout: '12:00:00'
+                  upgradeMode: Automatic
+                  vmImage: Windows
+                tags:
+                  clusterName: myCluster
+                  resourceType: Service Fabric
+                type: Microsoft.ServiceFabric/clusters
+              headers: {}
     patch:
       description: Update cluster configuration
       operationId: Clusters_Update
@@ -219,7 +547,96 @@ paths:
         - ClusterPatchOperation
       x-ms-examples:
         Patch a cluster:
-          $ref: ../examples/ClusterPatchOperation_exmaple.json
+          parameters:
+            api-version: '2016-09-01'
+            clusterName: myCluster
+            parameters:
+              properties:
+                nodeTypes:
+                  - applicationPorts:
+                      endPort: 30000
+                      startPort: 20000
+                    clientConnectionEndpointPort: 19000
+                    durabilityLevel: Silver
+                    ephemeralPorts:
+                      endPort: 65534
+                      startPort: 49152
+                    httpGatewayEndpointPort: 19080
+                    isPrimary: true
+                    name: n1
+                    reverseProxyEndpointPort: 9998
+                    vmInstanceCount: 5
+            resourceGroupName: resRg
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
+                location: southcentralus
+                name: myCluster
+                properties:
+                  availableClusterVersions:
+                    - codeVersion: 5.4.145.9494
+                      environment: Windows
+                      supportExpiryUtc: '2017-05-10T00:00:00'
+                    - codeVersion: 5.4.164.9494
+                      environment: Windows
+                      supportExpiryUtc: '2017-05-10T00:00:00'
+                    - codeVersion: 5.5.216.0
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                  clientCertificateCommonNames: []
+                  clientCertificateThumbprints: []
+                  clusterCodeVersion: 5.5.216.0
+                  clusterEndpoint: 'https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/8d566293-3508-4d62-ba7b-056fa710c3c9'
+                  clusterId: 8d566293-3508-4d62-ba7b-056fa710c3c9
+                  clusterState: Ready
+                  diagnosticsStorageAccountConfig:
+                    blobEndpoint: 'https://sflogssdktest5486.blob.core.windows.net/'
+                    protectedAccountKeyName: StorageAccountKey1
+                    queueEndpoint: 'https://sflogssdktest5486.queue.core.windows.net/'
+                    storageAccountName: sflogssdktest5486
+                    tableEndpoint: 'https://sflogssdktest5486.table.core.windows.net/'
+                  fabricSettings: []
+                  managementEndpoint: 'http://myCluster.southcentralus.cloudapp.azure.com:19080'
+                  nodeTypes:
+                    - applicationPorts:
+                        endPort: 30000
+                        startPort: 20000
+                      clientConnectionEndpointPort: 19000
+                      durabilityLevel: Silver
+                      ephemeralPorts:
+                        endPort: 65534
+                        startPort: 49152
+                      httpGatewayEndpointPort: 19080
+                      isPrimary: true
+                      name: n1
+                      reverseProxyEndpointPort: 9998
+                      vmInstanceCount: 5
+                  provisioningState: Succeeded
+                  reliabilityLevel: Bronze
+                  upgradeDescription:
+                    deltaHealthPolicy:
+                      maxPercentDeltaUnhealthyApplications: 0
+                      maxPercentDeltaUnhealthyNodes: 0
+                      maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
+                    forceRestart: true
+                    healthCheckRetryTimeout: '00:00:01'
+                    healthCheckStableDuration: '00:00:01'
+                    healthCheckWaitDuration: '00:00:01'
+                    healthPolicy:
+                      maxPercentUnhealthyApplications: 100
+                      maxPercentUnhealthyNodes: 100
+                    overrideUserUpgradePolicy: false
+                    upgradeDomainTimeout: '02:00:00'
+                    upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
+                    upgradeTimeout: '12:00:00'
+                  upgradeMode: Automatic
+                  vmImage: Windows
+                tags: {}
+                type: Microsoft.ServiceFabric/clusters
+              headers: {}
+            '202': {}
       x-ms-long-running-operation: true
     put:
       description: Create cluster resource
@@ -250,9 +667,338 @@ paths:
         - ClusterCreateOperation
       x-ms-examples:
         Put a cluster with max parameter:
-          $ref: ../examples/ClusterPutOperation_exmaple_max.json
+          parameters:
+            api-version: '2016-09-01'
+            clusterName: myCluster
+            parameters:
+              location: southcentralus
+              properties:
+                azureActiveDirectory:
+                  clientApplication: 00000000-0000-0000-0000-000000000000
+                  clusterApplication: 00000000-0000-0000-0000-000000000000
+                  tenantId: 00000000-0000-0000-0000-000000000000
+                certificate:
+                  thumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
+                  thumbprintSecondary: 361A93445450CC8F2FF747F74500E8044942DAFD
+                  x509StoreName: My
+                clientCertificateCommonNames:
+                  - certificateCommonName: abc.com
+                    certificateIssuerThumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
+                    isAdmin: true
+                clientCertificateThumbprints:
+                  - 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
+                clusterCodeVersion: 5.5.149.9494
+                diagnosticsStorageAccountConfig:
+                  blobEndpoint: 'https://7623qfhwmnstw2.blob.core.windows.net/'
+                  protectedAccountKeyName: StorageAccountKey1
+                  queueEndpoint: 'https://7623qfhwmnstw2.queue.core.windows.net/'
+                  storageAccountName: 7623qfhwmnstw2
+                  tableEndpoint: 'https://7623qfhwmnstw2.table.core.windows.net/'
+                fabricSettings:
+                  - name: Security
+                    parameters:
+                      - name: ClusterProtectionLevel
+                        value: EncryptAndSign
+                managementEndpoint: 'https://sfclust2.southcentralus.cloudapp.azure.com:19080'
+                nodeTypes:
+                  - applicationPorts:
+                      endPort: 30000
+                      startPort: 20000
+                    clientConnectionEndpointPort: 19000
+                    durabilityLevel: Bronze
+                    ephemeralPorts:
+                      endPort: 65534
+                      startPort: 49152
+                    httpGatewayEndpointPort: 19080
+                    isPrimary: true
+                    name: nt1vm
+                    vmInstanceCount: 5
+                provisioningState: Succeeded
+                reliabilityLevel: Silver
+                upgradeDescription:
+                  deltaHealthPolicy:
+                    maxPercentDeltaUnhealthyApplications: 0
+                    maxPercentDeltaUnhealthyNodes: 0
+                    maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
+                  forceRestart: true
+                  healthCheckRetryTimeout: '00:45:00'
+                  healthCheckStableDuration: '00:05:00'
+                  healthCheckWaitDuration: '00:05:00'
+                  healthPolicy:
+                    maxPercentUnhealthyApplications: 100
+                    maxPercentUnhealthyNodes: 100
+                  overrideUserUpgradePolicy: false
+                  upgradeDomainTimeout: '02:00:00'
+                  upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
+                  upgradeTimeout: '12:00:00'
+                upgradeMode: Automatic
+                vmImage: Windows
+              tags:
+                clusterName: myCluster
+                resourceType: Service Fabric
+            resourceGroupName: resRg
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
+                location: southcentralus
+                name: myCluster
+                properties:
+                  availableClusterVersions:
+                    - codeVersion: 5.1.158.9590
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.2.0.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.2.207.9590
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.3.121.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.3.311.9590
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.30.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.35.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.38.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.118.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.132.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.145.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.164.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.5.67.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.5.149.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                  azureActiveDirectory:
+                    clientApplication: 00000000-0000-0000-0000-000000000000
+                    clusterApplication: 00000000-0000-0000-0000-000000000000
+                    tenantId: 00000000-0000-0000-0000-000000000000
+                  certificate:
+                    thumbprint: 483B5DE52ECA35147B94C5E116FA7B2E34BB68F9
+                    x509StoreName: My
+                  clientCertificateCommonNames:
+                    - certificateCommonName: abc.com
+                      certificateIssuerThumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
+                      isAdmin: true
+                  clientCertificateThumbprints:
+                    - 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
+                  clusterCodeVersion: 5.5.149.9494
+                  clusterEndpoint: 'https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/466e7604-b8ae-4696-a91d-d7b5fcc63628'
+                  clusterId: 466e7604-b8ae-4696-a91d-d7b5fcc63628
+                  clusterState: UpdatingUserConfiguration
+                  diagnosticsStorageAccountConfig:
+                    blobEndpoint: 'https://ba3wzulspn67w2.blob.core.windows.net/'
+                    protectedAccountKeyName: StorageAccountKey1
+                    queueEndpoint: 'https://ba3wzulspn67w2.queue.core.windows.net/'
+                    storageAccountName: ba3wzulspn67w2
+                    tableEndpoint: 'https://ba3wzulspn67w2.table.core.windows.net/'
+                  fabricSettings:
+                    - name: Hosting
+                      parameters:
+                        - name: ActivationMaxRetryInterval
+                          value: '10000'
+                  managementEndpoint: 'https://myCluster.southcentralus.cloudapp.azure.com:19080'
+                  nodeTypes:
+                    - applicationPorts:
+                        endPort: 30000
+                        startPort: 20000
+                      clientConnectionEndpointPort: 19000
+                      durabilityLevel: Bronze
+                      ephemeralPorts:
+                        endPort: 65534
+                        startPort: 49152
+                      httpGatewayEndpointPort: 19080
+                      isPrimary: true
+                      name: nt1vm
+                      vmInstanceCount: 5
+                  provisioningState: Updating
+                  reliabilityLevel: Silver
+                  upgradeDescription:
+                    deltaHealthPolicy:
+                      maxPercentDeltaUnhealthyApplications: 0
+                      maxPercentDeltaUnhealthyNodes: 0
+                      maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
+                    forceRestart: true
+                    healthCheckRetryTimeout: '00:45:00'
+                    healthCheckStableDuration: '00:05:00'
+                    healthCheckWaitDuration: '00:05:00'
+                    healthPolicy:
+                      maxPercentUnhealthyApplications: 100
+                      maxPercentUnhealthyNodes: 100
+                    overrideUserUpgradePolicy: false
+                    upgradeDomainTimeout: '02:00:00'
+                    upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
+                    upgradeTimeout: '12:00:00'
+                  upgradeMode: Automatic
+                  vmImage: Windows
+                tags:
+                  clusterName: myCluster
+                  resourceType: Service Fabric
+                type: Microsoft.ServiceFabric/clusters
+              headers: {}
+            '202': {}
         Put a cluster with min parameter:
-          $ref: ../examples/ClusterPutOperation_exmaple_min.json
+          parameters:
+            api-version: '2016-09-01'
+            clusterName: myCluster
+            parameters:
+              location: southcentralus
+              properties:
+                clusterCodeVersion: 5.5.149.9494
+                diagnosticsStorageAccountConfig:
+                  blobEndpoint: 'https://7623qfhwmnstw2.blob.core.windows.net/'
+                  protectedAccountKeyName: StorageAccountKey1
+                  queueEndpoint: 'https://7623qfhwmnstw2.queue.core.windows.net/'
+                  storageAccountName: 7623qfhwmnstw2
+                  tableEndpoint: 'https://7623qfhwmnstw2.table.core.windows.net/'
+                managementEndpoint: 'https://myCluster.southcentralus.cloudapp.azure.com:19080'
+                nodeTypes:
+                  - applicationPorts:
+                      endPort: 30000
+                      startPort: 20000
+                    clientConnectionEndpointPort: 19000
+                    durabilityLevel: Bronze
+                    ephemeralPorts:
+                      endPort: 65534
+                      startPort: 49152
+                    httpGatewayEndpointPort: 19080
+                    isPrimary: true
+                    name: nt1vm
+                    vmInstanceCount: 5
+                provisioningState: Succeeded
+                reliabilityLevel: Silver
+                upgradeMode: Automatic
+                vmImage: Windows
+              tags:
+                clusterName: myCluster
+                resourceType: Service Fabric
+            resourceGroupName: resRg
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster
+                location: southcentralus
+                name: myCluster
+                properties:
+                  availableClusterVersions:
+                    - codeVersion: 5.1.158.9590
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.2.0.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.2.207.9590
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.3.121.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.3.311.9590
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.30.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.35.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.38.100
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.118.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.132.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.145.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.4.164.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.5.67.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                    - codeVersion: 5.5.149.9494
+                      environment: Windows
+                      supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                  certificate:
+                    thumbprint: 483B5DE52ECA35147B94C5E116FA7B2E34BB68F9
+                    x509StoreName: My
+                  clientCertificateCommonNames: []
+                  clientCertificateThumbprints: []
+                  clusterCodeVersion: 5.5.149.9494
+                  clusterEndpoint: 'https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/466e7604-b8ae-4696-a91d-d7b5fcc63628'
+                  clusterId: 466e7604-b8ae-4696-a91d-d7b5fcc63628
+                  clusterState: UpdatingUserConfiguration
+                  diagnosticsStorageAccountConfig:
+                    blobEndpoint: 'https://ba3wzulspn67w2.blob.core.windows.net/'
+                    protectedAccountKeyName: StorageAccountKey1
+                    queueEndpoint: 'https://ba3wzulspn67w2.queue.core.windows.net/'
+                    storageAccountName: ba3wzulspn67w2
+                    tableEndpoint: 'https://ba3wzulspn67w2.table.core.windows.net/'
+                  fabricSettings: []
+                  managementEndpoint: 'https://myCluster.southcentralus.cloudapp.azure.com:19080'
+                  nodeTypes:
+                    - applicationPorts:
+                        endPort: 30000
+                        startPort: 20000
+                      clientConnectionEndpointPort: 19000
+                      durabilityLevel: Bronze
+                      ephemeralPorts:
+                        endPort: 65534
+                        startPort: 49152
+                      httpGatewayEndpointPort: 19080
+                      isPrimary: true
+                      name: nt1vm
+                      vmInstanceCount: 5
+                  provisioningState: Updating
+                  reliabilityLevel: Silver
+                  upgradeDescription:
+                    deltaHealthPolicy:
+                      maxPercentDeltaUnhealthyApplications: 0
+                      maxPercentDeltaUnhealthyNodes: 0
+                      maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
+                    forceRestart: true
+                    healthCheckRetryTimeout: '00:45:00'
+                    healthCheckStableDuration: '00:05:00'
+                    healthCheckWaitDuration: '00:05:00'
+                    healthPolicy:
+                      maxPercentUnhealthyApplications: 100
+                      maxPercentUnhealthyNodes: 100
+                    overrideUserUpgradePolicy: false
+                    upgradeDomainTimeout: '02:00:00'
+                    upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
+                    upgradeTimeout: '12:00:00'
+                  upgradeMode: Automatic
+                  vmImage: Windows
+                tags:
+                  clusterName: myCluster
+                  resourceType: Service Fabric
+                type: Microsoft.ServiceFabric/clusters
+              headers: {}
+            '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters':
     get:
@@ -271,7 +1017,90 @@ paths:
         - ClusterListByResourceGroupOperation
       x-ms-examples:
         List cluster by resource group:
-          $ref: ../examples/ClusterListByResourceGroupOperation_exmaple.json
+          parameters:
+            api-version: '2016-09-01'
+            resourceGroupName: resRg
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/psrg1/providers/Microsoft.ServiceFabric/clusters/testcluster
+                    location: southcentralus
+                    name: testcluster
+                    properties:
+                      availableClusterVersions:
+                        - codeVersion: 5.4.145.9494
+                          environment: Windows
+                          supportExpiryUtc: '2017-05-10T00:00:00'
+                        - codeVersion: 5.4.164.9494
+                          environment: Windows
+                          supportExpiryUtc: '2017-05-10T00:00:00'
+                        - codeVersion: 5.5.216.0
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                        - codeVersion: 5.5.219.0
+                          environment: Windows
+                          supportExpiryUtc: '9999-12-31T23:59:59.9999999'
+                      certificate:
+                        thumbprint: 5F3660C715EBBDA31DB1FFDCF508302348DE8E7A
+                        x509StoreName: My
+                      clientCertificateCommonNames: []
+                      clientCertificateThumbprints: []
+                      clusterCodeVersion: 5.5.216.0
+                      clusterEndpoint: 'https://warp-test-winfabrp-southcentralus.trafficmanager.net/runtime/clusters/29cfe945-7ff1-4234-b567-09871226d4f6'
+                      clusterId: 29cfe945-7ff1-4234-b567-09871226d4f6
+                      clusterState: Ready
+                      diagnosticsStorageAccountConfig:
+                        blobEndpoint: 'https://sflogppe231337596.blob.core.windows.net/'
+                        protectedAccountKeyName: StorageAccountKey1
+                        queueEndpoint: 'https://sflogppe231337596.queue.core.windows.net/'
+                        storageAccountName: sflogppe231337596
+                        tableEndpoint: 'https://sflogppe231337596.table.core.windows.net/'
+                      fabricSettings:
+                        - name: Security
+                          parameters:
+                            - name: ClusterProtectionLevel
+                              value: EncryptAndSign
+                      managementEndpoint: 'https://testcluster.southcentralus.cloudapp.azure.com:19080'
+                      nodeTypes:
+                        - applicationPorts:
+                            endPort: 30000
+                            startPort: 20000
+                          clientConnectionEndpointPort: 19000
+                          durabilityLevel: Silver
+                          ephemeralPorts:
+                            endPort: 65534
+                            startPort: 49152
+                          httpGatewayEndpointPort: 19080
+                          isPrimary: true
+                          name: n1
+                          vmInstanceCount: 5
+                      provisioningState: Succeeded
+                      reliabilityLevel: Silver
+                      upgradeDescription:
+                        deltaHealthPolicy:
+                          maxPercentDeltaUnhealthyApplications: 0
+                          maxPercentDeltaUnhealthyNodes: 0
+                          maxPercentUpgradeDomainDeltaUnhealthyNodes: 0
+                        forceRestart: false
+                        healthCheckRetryTimeout: '00:45:00'
+                        healthCheckStableDuration: '00:05:00'
+                        healthCheckWaitDuration: '00:05:00'
+                        healthPolicy:
+                          maxPercentUnhealthyApplications: 100
+                          maxPercentUnhealthyNodes: 100
+                        overrideUserUpgradePolicy: false
+                        upgradeDomainTimeout: '02:00:00'
+                        upgradeReplicaSetCheckTimeout: '10675199.02:48:05.4775807'
+                        upgradeTimeout: '12:00:00'
+                      upgradeMode: Automatic
+                      vmImage: Windows
+                    tags:
+                      clusterName: testcluster
+                      resourceType: Service Fabric
+                    type: Microsoft.ServiceFabric/clusters
+              headers: {}
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:

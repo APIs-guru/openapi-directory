@@ -90,7 +90,22 @@ paths:
             $ref: '#/definitions/SkuEnumerationForNewResourceResult'
       x-ms-examples:
         List eligible SKUs for a new server:
-          $ref: ../examples/listSkusForNew.json
+          parameters:
+            api-version: '2016-05-16'
+            subscriptionId: 613192d7-503f-477a-9cfe-4efc3ee2bd60
+          responses:
+            '200':
+              body:
+                value:
+                  - name: B1
+                  - name: B2
+                  - name: D1
+                  - name: S0
+                  - name: S1
+                  - name: S2
+                  - name: S3
+                  - name: S4
+              headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers':
     get:
       description: Gets all the Analysis Services servers for the given resource group.
@@ -270,7 +285,37 @@ paths:
         - Servers
       x-ms-examples:
         List eligible SKUs for an existing server:
-          $ref: ../examples/listSkusForExisting.json
+          parameters:
+            api-version: '2016-05-16'
+            resourceGroupName: TestRG
+            serverName: azsdktest
+            subscriptionId: 613192d7-503f-477a-9cfe-4efc3ee2bd60
+          responses:
+            '200':
+              body:
+                value:
+                  - sku:
+                      name: B1
+                      tier: Basic
+                  - sku:
+                      name: B2
+                      tier: Basic
+                  - sku:
+                      name: S0
+                      tier: Standard
+                  - sku:
+                      name: S1
+                      tier: Standard
+                  - sku:
+                      name: S2
+                      tier: Standard
+                  - sku:
+                      name: S3
+                      tier: Standard
+                  - sku:
+                      name: S4
+                      tier: Standard
+              headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend':
     post:
       description: Supends operation of the specified Analysis Services server instance.

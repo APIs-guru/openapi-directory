@@ -116,13 +116,129 @@ paths:
         - UsageDetails
       x-ms-examples:
         UsageDetailsExpand:
-          $ref: ../examples/UsageDetailsExpand.json
+          parameters:
+            $expand: 'meterDetails,additionalProperties'
+            $filter: 'usageEnd le 2017-02-14T00:00:00Z'
+            $top: '1'
+            api-version: 2017-04-24-preview
+            scope: subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201702-1
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201702-1/providers/Microsoft.Consumption/usageDetails/usageDetailsId1
+                    name: usageDetailsId1
+                    properties:
+                      additionalProperties:
+                        AppServicePlanUri: /subscriptions/subid/resourceGroups/Default-Web-eastasia/providers/Microsoft.Web/serverfarms/DefaultServerFarm
+                      billableQuantity: 0.00328
+                      billingPeriodId: /subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201702-1
+                      currency: USD
+                      instanceId: /subscriptions/subid/resourceGroups/Default-Web-eastasia/providers/Microsoft.Web/sites/shared1
+                      instanceLocation: eastasia
+                      instanceName: shared1
+                      invoiceId: /subscriptions/subid/providers/Microsoft.Billing/invoices/201703-123456789
+                      isEstimated: false
+                      meterDetails:
+                        meterCategory: Networking
+                        meterLocation: Zone 2
+                        meterName: Data Transfer Out (GB)
+                        pretaxStandardRate: 0.138
+                        totalIncludedQuantity: 0
+                        unit: GB
+                      meterId: fe167397-a38d-43c3-9bb3-8e2907e56a41
+                      pretaxCost: 0.67
+                      usageEnd: '2017-02-13T23:59:59Z'
+                      usageQuantity: 0.00328
+                      usageStart: '2017-02-13T00:00:00Z'
+                    tags:
+                      dev: tools
+                      env: newcrp
+                    type: Microsoft.Consumption/usageDetails
         UsageDetailsList:
-          $ref: ../examples/UsageDetailsList.json
+          parameters:
+            api-version: 2017-04-24-preview
+            scope: subscriptions/subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/providers/Microsoft.Consumption/usageDetails/usageDetailsId1
+                    name: usageDetailsId1
+                    properties:
+                      billableQuantity: 0.00328
+                      billingPeriodId: /subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201702-1
+                      currency: USD
+                      instanceId: /subscriptions/subid/resourceGroups/Default-Web-eastasia/providers/Microsoft.Web/sites/shared1
+                      instanceLocation: eastasia
+                      instanceName: shared1
+                      invoiceId: /subscriptions/subid/providers/Microsoft.Billing/invoices/201703-123456789
+                      isEstimated: false
+                      meterId: fe167397-a38d-43c3-9bb3-8e2907e56a41
+                      pretaxCost: 0.67
+                      usageEnd: '2017-02-13T23:59:59Z'
+                      usageQuantity: 0.00328
+                      usageStart: '2017-02-13T00:00:00Z'
+                    tags:
+                      dev: tools
+                      env: newcrp
+                    type: Microsoft.Consumption/usageDetails
         UsageDetailsListForBillingPeriod:
-          $ref: ../examples/UsageDetailsListForBillingPeriod.json
+          parameters:
+            api-version: 2017-04-24-preview
+            scope: subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201702-1
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201702-1/providers/Microsoft.Consumption/usageDetails/usageDetailsId1
+                    name: usageDetailsId1
+                    properties:
+                      billableQuantity: 0.00328
+                      billingPeriodId: /subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201702-1
+                      currency: USD
+                      instanceId: /subscriptions/subid/resourceGroups/Default-Web-eastasia/providers/Microsoft.Web/sites/shared1
+                      instanceLocation: eastasia
+                      instanceName: shared1
+                      invoiceId: /subscriptions/subid/providers/Microsoft.Billing/invoices/201703-123456789
+                      isEstimated: false
+                      meterId: fe167397-a38d-43c3-9bb3-8e2907e56a41
+                      pretaxCost: 0.67
+                      usageEnd: '2017-02-13T23:59:59Z'
+                      usageQuantity: 0.00328
+                      usageStart: '2017-02-13T00:00:00Z'
+                    tags:
+                      dev: tools
+                      env: newcrp
+                    type: Microsoft.Consumption/usageDetails
         UsageDetailsListForInvoice:
-          $ref: ../examples/UsageDetailsListForInvoice.json
+          parameters:
+            api-version: 2017-04-24-preview
+            scope: subscriptions/subid/providers/Microsoft.Billing/invoices/2017-03-05-123456789
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/providers/Microsoft.Billing/invoices/2017-03-05-123456789/providers/Microsoft.Consumption/usageDetails/usageDetailsId1
+                    name: usageDetailsId1
+                    properties:
+                      billableQuantity: 0.00328
+                      billingPeriodId: /subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201702-1
+                      currency: USD
+                      instanceId: /subscriptions/subid/resourceGroups/Default-Web-eastasia/providers/Microsoft.Web/sites/shared1
+                      instanceLocation: eastasia
+                      instanceName: shared1
+                      invoiceId: /subscriptions/subid/providers/Microsoft.Billing/invoices/201703-123456789
+                      isEstimated: false
+                      meterId: fe167397-a38d-43c3-9bb3-8e2907e56a41
+                      pretaxCost: 0.67
+                      usageEnd: '2017-02-13T23:59:59Z'
+                      usageQuantity: 0.00328
+                      usageStart: '2017-02-13T00:00:00Z'
+                    tags:
+                      dev: tools
+                      env: newcrp
+                    type: Microsoft.Consumption/usageDetails
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:

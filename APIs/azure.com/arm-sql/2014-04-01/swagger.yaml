@@ -3,8 +3,8 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: Provides read functionality for Azure SQL Database Backups
-  title: Azure SQL Database Backup
+  description: 'The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.'
+  title: SqlManagementClient
   version: '2014-04-01'
   x-apisguru-categories:
     - enterprise
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-sql/2014-04-01/swagger/backups.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-sql/2014-04-01/swagger/advisors.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: arm-sql
@@ -32,17 +32,25 @@ securityDefinitions:
       user_impersonation: impersonate your user account
     type: oauth2
 parameters:
+  AdvisorNameParameter:
+    description: The name of the Database Advisor.
+    in: path
+    name: advisorName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ApiVersionParameter:
     description: The API version to use for the request.
     in: query
     name: api-version
     required: true
     type: string
-  DatabaseExpandParameter:
-    description: 'A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.'
-    in: query
-    name: $expand
-    required: false
+    x-ms-parameter-location: client
+  DatabaseNameParameter:
+    description: The name of the database.
+    in: path
+    name: databaseName
+    required: true
     type: string
     x-ms-parameter-location: method
   ResourceGroupParameter:
@@ -65,161 +73,231 @@ parameters:
     name: subscriptionId
     required: true
     type: string
+    x-ms-parameter-location: client
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors':
     get:
-      description: Gets a list of database restore points.
-      operationId: Databases_ListRestorePoints
+      description: Returns a list of database advisors.
+      operationId: Databases_ListAdvisors
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the database to get available restore points.
-          in: path
-          name: databaseName
+        - $ref: '#/parameters/DatabaseNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the list of database advisors.
+          schema:
+            $ref: '#/definitions/AdvisorListResult'
+      tags:
+        - DatabaseAdvisors
+      x-ms-examples:
+        List of database advisors:
+          parameters:
+            api-version: '2014-04-01'
+            databaseName: IndexAdvisor_test_3
+            resourceGroupName: workloadinsight-demos
+            serverName: misosisvr
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex
+                    name: CreateIndex
+                    properties:
+                      advisorStatus: GA
+                      autoExecuteValue: Enabled
+                      lastChecked: '2017-07-04T13:17:13Z'
+                      recommendationsStatus: LowActivity
+                    type: Microsoft.Sql/servers/databases/advisors
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DropIndex
+                    name: DropIndex
+                    properties:
+                      advisorStatus: GA
+                      autoExecuteValue: Enabled
+                      lastChecked: '2017-07-03T16:26:28Z'
+                      recommendationsStatus: DbSeemsTuned
+                    type: Microsoft.Sql/servers/databases/advisors
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/DbParameterization
+                    name: DbParameterization
+                    properties:
+                      advisorStatus: GA
+                      autoExecuteValue: Disabled
+                      lastChecked: '2017-07-03T15:31:27Z'
+                      recommendationsStatus: NoDbParameterizationIssue
+                    type: Microsoft.Sql/servers/databases/advisors
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/SchemaIssue
+                    name: SchemaIssue
+                    properties:
+                      advisorStatus: PublicPreview
+                      autoExecuteValue: Disabled
+                      lastChecked: '2017-07-04T17:45:37Z'
+                      recommendationsStatus: SchemaIsConsistent
+                    type: Microsoft.Sql/servers/databases/advisors
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/ForceLastGoodPlan
+                    name: ForceLastGoodPlan
+                    properties:
+                      advisorStatus: PrivatePreview
+                      autoExecuteValue: Disabled
+                      lastChecked: null
+                      recommendationsStatus: null
+                    type: Microsoft.Sql/servers/databases/advisors
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/advisors/{advisorName}':
+    get:
+      description: Returns details of a Database Advisor.
+      operationId: Databases_GetAdvisor
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/DatabaseNameParameter'
+        - $ref: '#/parameters/AdvisorNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved details of specified database advisor.
+          schema:
+            $ref: '#/definitions/Advisor'
+      tags:
+        - DatabaseAdvisors
+      x-ms-examples:
+        Get database advisor:
+          parameters:
+            advisorName: CreateIndex
+            api-version: '2014-04-01'
+            databaseName: IndexAdvisor_test_3
+            resourceGroupName: workloadinsight-demos
+            serverName: misosisvr
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex
+                name: CreateIndex
+                properties:
+                  advisorStatus: GA
+                  autoExecuteValue: Enabled
+                  lastChecked: '2017-07-04T13:17:13Z'
+                  recommendationsStatus: LowActivity
+                type: Microsoft.Sql/servers/databases/advisors
+    put:
+      description: Creates or updates a database advisor.
+      operationId: Databases_CreateOrUpdateAdvisor
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/DatabaseNameParameter'
+        - $ref: '#/parameters/AdvisorNameParameter'
+        - description: The requested advisor resource state.
+          in: body
+          name: parameters
           required: true
-          type: string
-      responses:
-        '200':
-          description: OK
           schema:
-            $ref: '#/definitions/RestorePointListResult'
-      tags:
-        - DatabaseBackup
-      x-ms-pageable: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases':
-    get:
-      description: Gets a list of recoverable databases
-      operationId: RecoverableDatabases_ListByServer
-      parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
+            $ref: '#/definitions/Advisor'
         - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
-        - $ref: '#/parameters/ServerNameParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/RecoverableDatabaseListResult'
-      tags:
-        - RecoverableDatabases
-      x-ms-examples:
-        Get list of restorable dropped databases:
-          $ref: ../examples/RecoverableDatabaseList.json
-      x-ms-pageable: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}':
-    get:
-      description: 'Gets a recoverable database, which is a resource representing a database''s geo backup'
-      operationId: RecoverableDatabases_Get
-      parameters:
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
-        - $ref: '#/parameters/ServerNameParameter'
-        - description: The name of the database
-          in: path
-          name: databaseName
-          required: true
-          type: string
       responses:
         '200':
-          description: OK
+          description: Successfully updated the specified database advisor.
           schema:
-            $ref: '#/definitions/RecoverableDatabase'
+            $ref: '#/definitions/Advisor'
       tags:
-        - RecoverableDatabases
+        - DatabaseAdvisors
       x-ms-examples:
-        Get a recoverable database:
-          $ref: ../examples/RecoverableDatabaseGet.json
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases':
-    get:
-      description: Gets a list of deleted databases that can be restored
-      operationId: RestorableDroppedDatabases_ListByServer
-      parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
-        - $ref: '#/parameters/ServerNameParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/RestorableDroppedDatabaseListResult'
-      tags:
-        - RestorableDroppedDatabases
-      x-ms-examples:
-        Get list of restorable dropped databases:
-          $ref: ../examples/RestorableDroppedDatabaseList.json
-      x-ms-pageable: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases/{restorableDroppededDatabaseId}':
-    get:
-      description: Gets a deleted database that can be restored
-      operationId: RestorableDroppedDatabases_Get
-      parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
-        - $ref: '#/parameters/ServerNameParameter'
-        - description: 'The id of the deleted database in the form of databaseName,deletionTimeInFileTimeFormat'
-          in: path
-          name: restorableDroppededDatabaseId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/RestorableDroppedDatabase'
-      tags:
-        - RestorableDroppedDatabases
-      x-ms-examples:
-        Get a restorable dropped database:
-          $ref: ../examples/RestorableDroppedDatabaseGet.json
+        Update database advisor:
+          parameters:
+            advisorName: CreateIndex
+            api-version: '2014-04-01'
+            databaseName: IndexAdvisor_test_3
+            parameters:
+              properties:
+                autoExecuteValue: Disabled
+            resourceGroupName: workloadinsight-demos
+            serverName: misosisvr
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workloadinsight-demos/providers/Microsoft.Sql/servers/misosisvr/databases/IndexAdvisor_test_3/advisors/CreateIndex
+                name: CreateIndex
+                properties:
+                  advisorStatus: GA
+                  autoExecuteValue: Disabled
+                  lastChecked: '2017-06-20T00:24:39Z'
+                  recommendationsStatus: Ok
+                type: Microsoft.Sql/servers/databases/advisors
 definitions:
+  Advisor:
+    allOf:
+      - $ref: '#/definitions/ProxyResource'
+    description: Database Advisor.
+    properties:
+      kind:
+        description: Resource kind.
+        readOnly: true
+        type: string
+      location:
+        description: Resource location.
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/AdvisorProperties'
+        description: Resource properties.
+        x-ms-client-flatten: true
+    type: object
+  AdvisorListResult:
+    description: Represents the response to a list advisors request.
+    properties:
+      value:
+        description: The list of advisors.
+        items:
+          $ref: '#/definitions/Advisor'
+        type: array
+  AdvisorProperties:
+    description: 'Properties for a Database, Server or Elastic Pool Advisor.'
+    properties:
+      advisorStatus:
+        description: 'Gets the status of availability of this advisor to customers. Possible values are ''GA'', ''PublicPreview'', ''LimitedPublicPreview'' and ''PrivatePreview''.'
+        enum:
+          - GA
+          - PublicPreview
+          - LimitedPublicPreview
+          - PrivatePreview
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AdvisorStatus
+      autoExecuteValue:
+        description: Gets the auto-execute status (whether to let the system execute the recommendations) of this advisor. Possible values are 'Enabled' and 'Disabled'
+        enum:
+          - Enabled
+          - Disabled
+          - Default
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AutoExecuteStatus
+      lastChecked:
+        description: Gets the time when the current resource was analyzed for recommendations by this advisor.
+        format: date-time
+        readOnly: true
+        type: string
+      recommendationsStatus:
+        description: 'Gets that status of recommendations for this advisor and reason for not having any recommendations. Possible values include, but are not limited to, ''Ok'' (Recommendations available), LowActivity (not enough workload to analyze), ''DbSeemsTuned'' (Database is doing well), etc.'
+        readOnly: true
+        type: string
+    required:
+      - autoExecuteValue
+    type: object
   ProxyResource:
     allOf:
       - $ref: '#/definitions/Resource'
     description: ARM proxy resource.
-  RecoverableDatabase:
-    allOf:
-      - $ref: '#/definitions/ProxyResource'
-    description: A recoverable database
-    properties:
-      properties:
-        $ref: '#/definitions/RecoverableDatabaseProperties'
-        description: The properties of a recoverable database
-        x-ms-client-flatten: true
-  RecoverableDatabaseListResult:
-    description: The response to a list recoverable databases request
-    properties:
-      value:
-        description: A list of recoverable databases
-        items:
-          $ref: '#/definitions/RecoverableDatabase'
-        type: array
-    required:
-      - value
-  RecoverableDatabaseProperties:
-    description: The properties of a recoverable database
-    properties:
-      edition:
-        description: The edition of the database
-        readOnly: true
-        type: string
-      elasticPoolName:
-        description: The elastic pool name of the database
-        readOnly: true
-        type: string
-      lastAvailableBackupDate:
-        description: The last available backup date of the database (ISO8601 format)
-        format: date-time
-        readOnly: true
-        type: string
-      serviceLevelObjective:
-        description: The service level objective name of the database
-        readOnly: true
-        type: string
+    properties: {}
+    type: object
   Resource:
     description: ARM resource.
     properties:
@@ -235,128 +313,5 @@ definitions:
         description: Resource type.
         readOnly: true
         type: string
+    type: object
     x-ms-azure-resource: true
-  RestorableDroppedDatabase:
-    allOf:
-      - $ref: '#/definitions/ProxyResource'
-    description: A restorable dropped database
-    properties:
-      location:
-        description: The geo-location where the resource lives
-        readOnly: true
-        type: string
-      properties:
-        $ref: '#/definitions/RestorableDroppedDatabaseProperties'
-        description: The properties of a restorable dropped database
-        x-ms-client-flatten: true
-  RestorableDroppedDatabaseListResult:
-    description: The response to a list restorable dropped databases request
-    properties:
-      value:
-        description: A list of restorable dropped databases
-        items:
-          $ref: '#/definitions/RestorableDroppedDatabase'
-        type: array
-    required:
-      - value
-  RestorableDroppedDatabaseProperties:
-    description: The properties of a restorable dropped database
-    properties:
-      creationDate:
-        description: The creation date of the database (ISO8601 format)
-        format: date-time
-        readOnly: true
-        type: string
-      databaseName:
-        description: The name of the database
-        readOnly: true
-        type: string
-      deletionDate:
-        description: The deletion date of the database (ISO8601 format)
-        format: date-time
-        readOnly: true
-        type: string
-      earliestRestoreDate:
-        description: The earliest restore date of the database (ISO8601 format)
-        format: date-time
-        readOnly: true
-        type: string
-      edition:
-        description: The edition of the database
-        readOnly: true
-        type: string
-      elasticPoolName:
-        description: The elastic pool name of the database
-        readOnly: true
-        type: string
-      maxSizeBytes:
-        description: The max size in bytes of the database
-        readOnly: true
-        type: string
-      serviceLevelObjective:
-        description: The service level objective name of the database
-        readOnly: true
-        type: string
-  RestorePoint:
-    allOf:
-      - $ref: '#/definitions/ProxyResource'
-    description: A database restore point.
-    properties:
-      properties:
-        $ref: '#/definitions/RestorePointProperties'
-        description: The properties of the restore point.
-        x-ms-client-flatten: true
-  RestorePointListResult:
-    description: The response to a list database restore points request.
-    properties:
-      value:
-        description: The list of database restore points.
-        items:
-          $ref: '#/definitions/RestorePoint'
-        type: array
-    required:
-      - value
-  RestorePointProperties:
-    description: Represents the properties of a database restore point.
-    properties:
-      earliestRestoreDate:
-        description: Earliest restore time (ISO8601 format). Populated when restorePointType = DISCRETE. Null otherwise.
-        format: date-time
-        readOnly: true
-        type: string
-      restorePointCreationDate:
-        description: Restore point creation time (ISO8601 format). Populated when restorePointType = CONTINUOUS. Null otherwise.
-        format: date-time
-        readOnly: true
-        type: string
-      restorePointType:
-        description: The restore point type of the database restore point.
-        enum:
-          - DISCRETE
-          - CONTINUOUS
-        readOnly: true
-        type: string
-        x-ms-enum:
-          name: RestorePointType
-  TrackedResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: ARM tracked top level resource.
-    properties:
-      location:
-        description: Resource location.
-        type: string
-        x-ms-mutability:
-          - read
-          - create
-      tags:
-        additionalProperties:
-          type: string
-        description: Resource tags.
-        type: object
-        x-ms-mutability:
-          - read
-          - create
-          - update
-    required:
-      - location

@@ -112,7 +112,56 @@ paths:
         - AvailabilityStatuses
       x-ms-examples:
         ListHealthBySubscriptionId:
-          $ref: ../examples/AvailabilityStatuses_ListBySubscriptionId.json
+          parameters:
+            $expand: recommendedactions
+            api-version: '2015-01-01'
+            subscriptionId: subscriptionId
+          responses:
+            '200':
+              body:
+                nextLink: '{originalRequestUrl}?$skipToken={OpaquePageNumber}'
+                value:
+                  - id: <resourceId>/providers/Microsoft.ResourceHealth/AvailabilityStatueses/current
+                    location: eastus
+                    name: current
+                    properties:
+                      RecentlyResolved:
+                        ResolvedTime: '2017-02-28T00:49:00Z'
+                        UnavailableOccuredTime: '2017-02-28T00:48:00Z'
+                        UnavailableSummary: We are sorry your SQL database is unavailable
+                      RecommendedActions:
+                        - Action: 'To start this virtualmachine, open the resource blade and click Start'
+                          ActionUrl: '<#ResourceBlade>'
+                          ActionUrlText: resourceblade
+                      availabilityState: Available
+                      detailedStatus: We have not seen any issues with your virtual machine
+                      occuredTime: '2016-03-29T09:12:00Z'
+                      reasonChronicity: Persistent
+                      reasonType: Unplanned
+                      reportedTime: '2016-05-04T14:11:29.7598931Z'
+                      summary: Vm is available
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+                  - id: <resourceId>/providers/Microsoft.ResourceHealth/AvailabilityStatueses/current
+                    location: eastus
+                    name: current
+                    properties:
+                      RecommendedActions:
+                        - Action: 'To start this virtualmachine, open the resource blade'
+                          ActionUrl: '<#ResourceBlade>'
+                          ActionUrlText: resourceblade
+                        - Action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                          ActionUrl: '<#SupportCase>'
+                          ActionUrlText: contactsupport
+                      availabilityState: Unavailable
+                      detailedStatus: Diskproblemsarepreventingusfromautomaticallyrecoveringyourvirtualmachine
+                      occuredTime: '2016-03-29T09:12:00Z'
+                      reasonChronicity: Persistent
+                      reasonType: Unplanned
+                      reportedTime: '2016-05-04T14:11:29.7598931Z'
+                      resolutionETA: '2016-03-29T09:37:00Z'
+                      rootCauseAttributionTime: '2016-03-29T09:13:00Z'
+                      summary: 'We are sorry, we couldn''t automatically recovery our virtualmachine'
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceHealth/availabilityStatuses':
@@ -138,7 +187,57 @@ paths:
         - AvailabilityStatuses
       x-ms-examples:
         ListByResourceGroup:
-          $ref: ../examples/AvailabilityStatuses_ListByResourceGroup.json
+          parameters:
+            $expand: recommendedactions
+            api-version: '2015-01-01'
+            resourceGroupName: resourceGroupName
+            subscriptionId: subscriptionId
+          responses:
+            '200':
+              body:
+                nextLink: '{originalRequestUrl}?$skipToken={OpaquePageNumber}'
+                value:
+                  - id: <resourceId>/providers/Microsoft.ResourceHealth/AvailabilityStatueses/current
+                    location: eastus
+                    name: current
+                    properties:
+                      RecentlyResolved:
+                        ResolvedTime: '2017-02-28T00:49:00Z'
+                        UnavailableOccuredTime: '2017-02-28T00:48:00Z'
+                        UnavailableSummary: We are sorry your SQL database is unavailable
+                      RecommendedActions:
+                        - Action: 'To start this virtualmachine, open the resource blade and click Start'
+                          ActionUrl: '<#ResourceBlade>'
+                          ActionUrlText: resourceblade
+                      availabilityState: Available
+                      detailedStatus: We have not seen any issues with your virtual machine
+                      occuredTime: '2016-03-29T09:12:00Z'
+                      reasonChronicity: Persistent
+                      reasonType: Unplanned
+                      reportedTime: '2016-05-04T14:11:29.7598931Z'
+                      summary: Vm is available
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+                  - id: <resourceId>/providers/Microsoft.ResourceHealth/AvailabilityStatueses/current
+                    location: eastus
+                    name: current
+                    properties:
+                      RecommendedActions:
+                        - Action: 'To start this virtualmachine, open the resource blade'
+                          ActionUrl: '<#ResourceBlade>'
+                          ActionUrlText: resourceblade
+                        - Action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                          ActionUrl: '<#SupportCase>'
+                          ActionUrlText: contactsupport
+                      availabilityState: Unavailable
+                      detailedStatus: Diskproblemsarepreventingusfromautomaticallyrecoveringyourvirtualmachine
+                      occuredTime: '2016-03-29T09:12:00Z'
+                      reasonChronicity: Persistent
+                      reasonType: Unplanned
+                      reportedTime: '2016-05-04T14:11:29.7598931Z'
+                      resolutionETA: '2016-03-29T09:37:00Z'
+                      rootCauseAttributionTime: '2016-03-29T09:13:00Z'
+                      summary: 'We are sorry, we couldn''t automatically recovery our virtualmachine'
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
       x-ms-pageable:
         nextLinkName: nextLink
   '/{resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses':
@@ -168,7 +267,48 @@ paths:
         - AvailabilityStatuses
       x-ms-examples:
         GetHealthHistoryByResource:
-          $ref: ../examples/Availabilitystatuses_List.json
+          parameters:
+            api-version: '2015-01-01'
+            resourceUri: resourceUri
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines/rhctes tenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/current
+                    location: eastus
+                    name: current
+                    properties:
+                      availabilityState: Unavailable
+                      detailedStatus: Disk problems are preventing us from automatically recovering your virtual machine
+                      occuredTime: '2016-03-29T09:12:00Z'
+                      reasonChronicity: Persistent
+                      reasonType: Unplanned
+                      reportedTime: '2016-05-04T14:11:29.7598931Z'
+                      resolutionETA: '2016-03-29T09:37:00Z'
+                      rootCauseAttributionTime: '2016-03-29T09:13:00Z'
+                      serviceImpactingEvents:
+                        - correlationId: b56d0180-2d6c-4f7b-b750-c1eca681874c
+                          eventStartTime: '2016-05-02T19:23:13.7115125Z'
+                          eventStatusLastModifiedTime: '2016-05-02T19:27:04.9543491Z'
+                          incidentProperties:
+                            incidentType: outage
+                            region: East US
+                            service: Virtual Machines
+                            title: 'Virtual Machines - West Europe [West Europe]'
+                          status:
+                            value: Resolved
+                      summary: 'We''re sorry, we couldn''t automatically recover your virtual machine'
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+                  - id: /subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines/rhctes tenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/2016-03-28+16%3a23%3a00Z
+                    location: eastus
+                    name: 2016-03-28+16%3a23%3a00Z
+                    properties:
+                      availabilityState: Available
+                      detailedStatus: There aren’t any known Azure platform problems affecting this virtual machine
+                      occuredTime: '2016-03-28T16:23:00Z'
+                      reasonChronicity: Persistent
+                      summary: This virtual machine is running normally
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
       x-ms-pageable:
         nextLinkName: nextLink
   '/{resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses/current':
@@ -198,7 +338,34 @@ paths:
         - AvailabilityStatuses
       x-ms-examples:
         GetCurrentHealthByResource:
-          $ref: ../examples/AvailabilityStatus_GetByResource.json
+          parameters:
+            $expand: recommendedactions
+            api-version: '2015-01-01'
+            resourceUri: resourceUri
+          responses:
+            '200':
+              body:
+                id: /subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.ClassicCompute/virtualMachines /rhctestenvV1PI/providers/Microsoft.ResourceHealth/availabilityStatuses/current
+                location: eastus
+                name: current
+                properties:
+                  RecommendedActions:
+                    - Action: 'To start this virtual machine, open the resource blade and click Start'
+                      ActionUrl: '<#ResourceBlade>'
+                      ActionUrlText: resource blade
+                    - Action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                      ActionUrl: '<#SupportCase>'
+                      ActionUrlText: contact support
+                  availabilityState: Unavailable
+                  detailedStatus: Disk problems are preventing us from automatically recovering your virtual machine
+                  occuredTime: '2016-03-29T09:12:00Z'
+                  reasonChronicity: Persistent
+                  reasonType: Unplanned
+                  reportedTime: '2016-05-04T14:11:29.7598931Z'
+                  resolutionETA: '2016-03-29T09:37:00Z'
+                  rootCauseAttributionTime: '2016-03-29T09:13:00Z'
+                  summary: 'We''re sorry, we couldn''t automatically recover your virtual machine'
+                type: Microsoft.ResourceHealth/AvailabilityStatuses
 definitions:
   ErrorResponse:
     description: Error details.
