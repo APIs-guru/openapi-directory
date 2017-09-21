@@ -427,8 +427,8 @@ function writeSpec(source, format, exPatch, command) {
     anyDiff: false,
     called: false,
     source: source,
-  format: format,
-  etag: !command.slow
+    format: format,
+    etag: !command.slow
   };
 
   return converter.getSpec(source, format)
@@ -445,7 +445,7 @@ function writeSpec(source, format, exPatch, command) {
       context.swagger = swagger;
 
       delete exPatch.info.version; // testing
-    patchSwagger(swagger, exPatch);
+      patchSwagger(swagger, exPatch);
 
       expandPathTemplates(swagger);
       replaceSpacesInSchemaNames(swagger);
@@ -479,10 +479,10 @@ function writeSpec(source, format, exPatch, command) {
       if (!context.swagger.info.description)
         warnings.push(`Definition has no info.description "${filename}"`);
 
-    delete exPatch.info['x-providerName'];
-    delete exPatch.info['x-serviceName'];
-    delete exPatch.info['x-preferred'];
-    delete exPatch.info['x-origin'];
+      delete exPatch.info['x-providerName'];
+      delete exPatch.info['x-serviceName'];
+      delete exPatch.info['x-preferred'];
+      delete exPatch.info['x-origin'];
 
       if (Object.keys(exPatch.info).length) {
         var patchFilename = pathLib.join(util.getPathComponents(context.swagger, true).join('/'),'patch.yaml');
@@ -692,7 +692,7 @@ function expandPathTemplates(swagger) {
 
 function replaceSpacesInSchemaNames(swagger) {
   if (_.isUndefined(swagger.definitions))
-      return;
+    return;
 
   swagger.definitions = _.mapKeys(swagger.definitions, function (value, key) {
     return replaceSpaces(key);
@@ -766,15 +766,15 @@ function fixSpec(swagger, errors) {
         break;
       case 'DUPLICATE_OPERATIONID':
         //FIXME: find better solution than to strip all duplicate 'operationId'
-    var operationIds = jsonPath.query(swagger, '$.paths[*][*].operationId');
+        var operationIds = jsonPath.query(swagger, '$.paths[*][*].operationId');
         operationIds = _.filter(operationIds, function (value, index, iteratee) {
           return _.includes(iteratee, value, index + 1);
         });
         jsonPath.apply(swagger, '$.paths[*][*].operationId', function (value) {
           if (_.find(operationIds,function(e){
-        return e === value;
-      })) return undefined
-      else return value;
+            return e === value;
+          })) return undefined
+          else return value;
         });
         fixed = true;
         break;
@@ -887,10 +887,10 @@ function validateSwagger(swagger, source) {
       var relativeBase = source.split('/');
       relativeBase.pop();
       relativeBase = relativeBase.join('/');
-      spec.jsonRefs = {relativeBase: relativeBase, loaderOptions: {processContent: 
+      spec.jsonRefs = {relativeBase: relativeBase, loaderOptions: {processContent:
       function (res, cb) {
         cb(undefined, YAML.safeLoad(res.text,{json:true}));
-        }
+      }
     }};
       return spec;
     })
@@ -1022,8 +1022,8 @@ function convertToSwagger(spec) {
       };
       if ((newOrigin.format !== 'swagger') || (newOrigin.version !== '2.0')) {
         newOrigin.converter = {
-            url: 'https://github.com/lucybot/api-spec-converter',
-            version: converterVersion
+          url: 'https://github.com/lucybot/api-spec-converter',
+          version: converterVersion
         };
       }
     if (!_.isEqual(_.last(swagger.spec.info['x-origin']),newOrigin))
@@ -1097,8 +1097,8 @@ process.on('exit', function() {
   }
   if (specSources.deletions.length) {
     for (var d of specSources.deletions) {
-    console.log('Deleted? '+d);
-  }
+      console.log('Deleted? '+d);
+    }
   }
 });
 
