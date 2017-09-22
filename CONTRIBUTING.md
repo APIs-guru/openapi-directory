@@ -19,6 +19,32 @@ The API should meet the following critera:
 
 The easiest way to request an API to be added is to use the [web form](https://apis.guru/add-api/).
 
+### Adding an API via a Pull-Request
+
+Clone the repo locally, if you haven't already done so, and run the following
+
+* create a new branch for the PR
+* change into the APIs directory
+* run `../scripts/collection add -c {category} -l {logo-path} {format} {url-to-definition}`
+
+Where `{category}` is one of the values from [/resources/categories.yaml](/resources/categories.yaml), and `{format}` is one of:
+
+  * `swagger_2`
+  * `swagger_1`
+  * `api_blueprint`
+  * `raml`
+  * `io_docs`
+  * `google`
+  * `wadl`
+
+If your API definition is unofficial, also specify the `--unofficial` flag.
+
+If there are no validation errors:
+
+* commit your change
+* push your change
+* create a Pull Request
+
 ## Amending an API definition
 
 ### Adding information
