@@ -1153,6 +1153,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/greengrass/groups/{GroupId}/deployments/$reset':
+    post:
+      operationId: ResetDeployments
+      description: Resets a group's deployments.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResetDeploymentsResponse'
+        '480':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ResetDeploymentsRequest'
+        - name: GroupId
+          in: path
+          type: string
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
 definitions:
   AssociateRoleToGroupRequest:
     type: object
@@ -1186,7 +1219,7 @@ definitions:
         description: Error Details
       Message:
         $ref: '#/definitions/__string'
-        description: Message
+        description: Message containing information about the error
     description: General Error
   ConnectivityInfo:
     type: object
@@ -1290,7 +1323,7 @@ definitions:
         description: Id of the deployment if you wish to redeploy a previous deployment.
       DeploymentType:
         $ref: '#/definitions/DeploymentType'
-        description: Type of deployment
+        description: 'Type of deployment. When used in CreateDeployment, only NewDeployment and Redeployment are valid. '
       GroupVersionId:
         $ref: '#/definitions/__string'
         description: Group Version you wish to deploy.
@@ -1299,10 +1332,10 @@ definitions:
     properties:
       DeploymentArn:
         $ref: '#/definitions/__string'
-        description: Arn of the deployment.
+        description: The arn of the deployment.
       DeploymentId:
         $ref: '#/definitions/__string'
-        description: Id of the deployment.
+        description: The id of the deployment.
   CreateDeviceDefinitionRequest:
     type: object
     properties:
@@ -1668,6 +1701,9 @@ definitions:
       DeploymentId:
         $ref: '#/definitions/__string'
         description: Id of the deployment.
+      DeploymentType:
+        $ref: '#/definitions/DeploymentType'
+        description: The type of deployment.
       GroupArn:
         $ref: '#/definitions/__string'
         description: Arn of the group for this deployment.
@@ -1677,6 +1713,8 @@ definitions:
     enum:
       - NewDeployment
       - Redeployment
+      - ResetDeployment
+      - ForceResetDeployment
   Deployments:
     type: array
     items:
@@ -1798,7 +1836,7 @@ definitions:
         description: Error Details
       Message:
         $ref: '#/definitions/__string'
-        description: Message
+        description: Message containing information about the error
     description: General Error
   GetAssociatedRoleRequest:
     type: object
@@ -1820,7 +1858,7 @@ definitions:
     properties:
       ConnectivityInfo:
         $ref: '#/definitions/ListOfConnectivityInfo'
-        description: Connectivity info array
+        description: Connectivity info list
       Message:
         $ref: '#/definitions/__string'
         description: Response Text
@@ -1881,6 +1919,12 @@ definitions:
       DeploymentStatus:
         $ref: '#/definitions/__string'
         description: Status of the deployment.
+      DeploymentType:
+        $ref: '#/definitions/DeploymentType'
+        description: The type of the deployment.
+      ErrorDetails:
+        $ref: '#/definitions/ErrorDetails'
+        description: The error Details
       ErrorMessage:
         $ref: '#/definitions/__string'
         description: Error Message
@@ -1976,6 +2020,7 @@ definitions:
         description: Timestamp when the funtion definition version was created.
       Definition:
         $ref: '#/definitions/FunctionDefinitionVersion'
+        description: Information on the definition.
       Id:
         $ref: '#/definitions/__string'
         description: Id of the function definition the version belongs to.
@@ -2215,7 +2260,7 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: Name of a group.
-    description: Information of a group
+    description: Information on the group
   GroupVersion:
     type: object
     properties:
@@ -2243,7 +2288,7 @@ definitions:
         description: Error Details
       Message:
         $ref: '#/definitions/__string'
-        description: Message
+        description: Message containing information about the error
     description: General Error
   ListCoreDefinitionVersionsRequest:
     type: object
@@ -2278,7 +2323,7 @@ definitions:
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
-    description: List of definition response
+    description: List of definition responses
   ListDeploymentsRequest:
     type: object
     properties: {}
@@ -2287,7 +2332,7 @@ definitions:
     properties:
       Deployments:
         $ref: '#/definitions/Deployments'
-        description: Information on deployments
+        description: List of deployments for the requested groups
       NextToken:
         $ref: '#/definitions/__string'
         description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
@@ -2523,6 +2568,22 @@ definitions:
           $ref: '#/definitions/__string'
         value:
           $ref: '#/definitions/__string'
+  ResetDeploymentsRequest:
+    type: object
+    properties:
+      Force:
+        $ref: '#/definitions/__boolean'
+        description: 'When set to true, perform a best-effort only core reset.'
+    description: Information needed to perform a reset of a group's deployments.
+  ResetDeploymentsResponse:
+    type: object
+    properties:
+      DeploymentArn:
+        $ref: '#/definitions/__string'
+        description: The arn of the reset deployment.
+      DeploymentId:
+        $ref: '#/definitions/__string'
+        description: The id of the reset deployment.
   Subscription:
     type: object
     properties:
@@ -2551,7 +2612,7 @@ definitions:
     properties:
       ConnectivityInfo:
         $ref: '#/definitions/ListOfConnectivityInfo'
-        description: Connectivity info array
+        description: Connectivity info list
     description: connectivity info request
   UpdateConnectivityInfoResponse:
     type: object

@@ -781,6 +781,31 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CopyFpgaImage':
+    post:
+      operationId: CopyFpgaImage
+      description: Copies the specified Amazon FPGA Image (AFI) to the current region.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CopyFpgaImageResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CopyFpgaImageRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CopyImage':
     post:
       operationId: CopyImage
@@ -1684,6 +1709,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteFlowLogsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteFpgaImage':
+    post:
+      operationId: DeleteFpgaImage
+      description: Deletes the specified Amazon FPGA Image (AFI).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteFpgaImageResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFpgaImageRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2601,6 +2651,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeFlowLogsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeFpgaImageAttribute':
+    post:
+      operationId: DescribeFpgaImageAttribute
+      description: Describes the specified attribute of the specified Amazon FPGA Image (AFI).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeFpgaImageAttributeResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeFpgaImageAttributeRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4964,7 +5039,7 @@ paths:
   '/#GetPasswordData':
     post:
       operationId: GetPasswordData
-      description: '<p>Retrieves the encrypted administrator password for an instance running Windows.</p> <p>The Windows password is generated at boot if the <code>EC2Config</code> service plugin, <code>Ec2SetPassword</code>, is enabled. This usually only happens the first time an AMI is launched, and then <code>Ec2SetPassword</code> is automatically disabled. The password is not generated for rebundled AMIs unless <code>Ec2SetPassword</code> is enabled before bundling.</p> <p>The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file.</p> <p>Password generation and encryption takes a few moments. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.</p>'
+      description: '<p>Retrieves the encrypted administrator password for a running Windows instance.</p> <p>The Windows password is generated at boot by the <code>EC2Config</code> service or <code>EC2Launch</code> scripts (Windows Server 2016 and later). This usually only happens the first time an instance is launched. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/UsingConfig_WinAMI.html">EC2Config</a> and <a href="http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html">EC2Launch</a> in the Amazon Elastic Compute Cloud User Guide.</p> <p>For the <code>EC2Config</code> service, the password is not generated for rebundled AMIs unless <code>Ec2SetPassword</code> is enabled before bundling.</p> <p>The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file.</p> <p>When you launch an instance, password generation and encryption may take a few minutes. If you try to retrieve the password before it''s available, the output returns an empty string. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.</p>'
       responses:
         '200':
           description: Success
@@ -5135,6 +5210,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ImportVolumeRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyFpgaImageAttribute':
+    post:
+      operationId: ModifyFpgaImageAttribute
+      description: Modifies the specified attribute of the specified Amazon FPGA Image (AFI).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyFpgaImageAttributeResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyFpgaImageAttributeRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5957,6 +6057,31 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RequestSpotInstancesRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ResetFpgaImageAttribute':
+    post:
+      operationId: ResetFpgaImageAttribute
+      description: Resets the specified attribute of the specified Amazon FPGA Image (AFI) to its default value. You can only reset the load permission attribute.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResetFpgaImageAttributeResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ResetFpgaImageAttributeRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -7554,6 +7679,36 @@ definitions:
       - cancelling
       - cancelled
       - completed
+  CopyFpgaImageRequest:
+    type: object
+    required:
+      - SourceFpgaImageId
+      - SourceRegion
+    properties:
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      SourceFpgaImageId:
+        $ref: '#/definitions/String'
+        description: The ID of the source AFI.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description for the new AFI.
+      Name:
+        $ref: '#/definitions/String'
+        description: The name for the new AFI. The default is the name of the source AFI.
+      SourceRegion:
+        $ref: '#/definitions/String'
+        description: The region that contains the source AFI.
+      ClientToken:
+        $ref: '#/definitions/String'
+        description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.'
+  CopyFpgaImageResult:
+    type: object
+    properties:
+      FpgaImageId:
+        $ref: '#/definitions/String'
+        description: The ID of the new AFI.
   CopyImageRequest:
     type: object
     required:
@@ -8716,6 +8871,23 @@ definitions:
         $ref: '#/definitions/UnsuccessfulItemSet'
         description: Information about the flow logs that could not be deleted successfully.
     description: Contains the output of DeleteFlowLogs.
+  DeleteFpgaImageRequest:
+    type: object
+    required:
+      - FpgaImageId
+    properties:
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      FpgaImageId:
+        $ref: '#/definitions/String'
+        description: The ID of the AFI.
+  DeleteFpgaImageResult:
+    type: object
+    properties:
+      Return:
+        $ref: '#/definitions/Boolean'
+        description: 'Is <code>true</code> if the request succeeds, and an error otherwise.'
   DeleteInternetGatewayRequest:
     type: object
     required:
@@ -9408,6 +9580,27 @@ definitions:
         $ref: '#/definitions/String'
         description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     description: Contains the output of DescribeFlowLogs.
+  DescribeFpgaImageAttributeRequest:
+    type: object
+    required:
+      - FpgaImageId
+      - Attribute
+    properties:
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      FpgaImageId:
+        $ref: '#/definitions/String'
+        description: The ID of the AFI.
+      Attribute:
+        $ref: '#/definitions/FpgaImageAttributeName'
+        description: The AFI attribute.
+  DescribeFpgaImageAttributeResult:
+    type: object
+    properties:
+      FpgaImageAttribute:
+        $ref: '#/definitions/FpgaImageAttribute'
+        description: Information about the attribute.
   DescribeFpgaImagesRequest:
     type: object
     properties:
@@ -12138,7 +12331,36 @@ definitions:
       Tags:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the AFI.
+      Public:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether the AFI is public.
     description: Describes an Amazon FPGA image (AFI).
+  FpgaImageAttribute:
+    type: object
+    properties:
+      FpgaImageId:
+        $ref: '#/definitions/String'
+        description: The ID of the AFI.
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the AFI.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description of the AFI.
+      LoadPermissions:
+        $ref: '#/definitions/LoadPermissionList'
+        description: One or more load permissions.
+      ProductCodes:
+        $ref: '#/definitions/ProductCodeList'
+        description: One or more product codes.
+    description: Describes an Amazon FPGA image (AFI) attribute.
+  FpgaImageAttributeName:
+    type: string
+    enum:
+      - description
+      - name
+      - loadPermission
+      - productCodes
   FpgaImageIdList:
     type: array
     items:
@@ -12265,7 +12487,7 @@ definitions:
         description: The ID of the Windows instance.
       PasswordData:
         $ref: '#/definitions/String'
-        description: The password of the instance.
+        description: The password of the instance. Returns an empty string if the password is not available.
       Timestamp:
         $ref: '#/definitions/DateTime'
         description: The time the data was last updated.
@@ -14034,12 +14256,91 @@ definitions:
       - pending
       - cancelled
       - closed
+  LoadPermission:
+    type: object
+    properties:
+      UserId:
+        $ref: '#/definitions/String'
+        description: The AWS account ID.
+      Group:
+        $ref: '#/definitions/PermissionGroup'
+        description: The name of the group.
+    description: Describes a load permission.
+  LoadPermissionList:
+    type: array
+    items:
+      $ref: '#/definitions/LoadPermission'
+  LoadPermissionListRequest:
+    type: array
+    items:
+      $ref: '#/definitions/LoadPermissionRequest'
+  LoadPermissionModifications:
+    type: object
+    properties:
+      Add:
+        $ref: '#/definitions/LoadPermissionListRequest'
+        description: The load permissions to add.
+      Remove:
+        $ref: '#/definitions/LoadPermissionListRequest'
+        description: The load permissions to remove.
+    description: Describes modifications to the load permissions of an Amazon FPGA image (AFI).
+  LoadPermissionRequest:
+    type: object
+    properties:
+      Group:
+        $ref: '#/definitions/PermissionGroup'
+        description: The name of the group.
+      UserId:
+        $ref: '#/definitions/String'
+        description: The AWS account ID.
+    description: Describes a load permission.
   Long:
     type: integer
   MaxResults:
     type: integer
     minimum: 5
     maximum: 255
+  ModifyFpgaImageAttributeRequest:
+    type: object
+    required:
+      - FpgaImageId
+    properties:
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      FpgaImageId:
+        $ref: '#/definitions/String'
+        description: The ID of the AFI.
+      Attribute:
+        $ref: '#/definitions/FpgaImageAttributeName'
+        description: The name of the attribute.
+      OperationType:
+        $ref: '#/definitions/OperationType'
+        description: The operation type.
+      UserIds:
+        $ref: '#/definitions/UserIdStringList'
+        description: One or more AWS account IDs. This parameter is valid only when modifying the <code>loadPermission</code> attribute.
+      UserGroups:
+        $ref: '#/definitions/UserGroupStringList'
+        description: One or more user groups. This parameter is valid only when modifying the <code>loadPermission</code> attribute.
+      ProductCodes:
+        $ref: '#/definitions/ProductCodeStringList'
+        description: 'One or more product codes. After you add a product code to an AFI, it can''t be removed. This parameter is valid only when modifying the <code>productCodes</code> attribute.'
+      LoadPermission:
+        $ref: '#/definitions/LoadPermissionModifications'
+        description: The load permission for the AFI.
+      Description:
+        $ref: '#/definitions/String'
+        description: A description for the AFI.
+      Name:
+        $ref: '#/definitions/String'
+        description: A name for the AFI.
+  ModifyFpgaImageAttributeResult:
+    type: object
+    properties:
+      FpgaImageAttribute:
+        $ref: '#/definitions/FpgaImageAttribute'
+        description: Information about the attribute.
   ModifyHostsRequest:
     type: object
     required:
@@ -16269,6 +16570,30 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ReservedInstancesId'
+  ResetFpgaImageAttributeName:
+    type: string
+    enum:
+      - loadPermission
+  ResetFpgaImageAttributeRequest:
+    type: object
+    required:
+      - FpgaImageId
+    properties:
+      DryRun:
+        $ref: '#/definitions/Boolean'
+        description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      FpgaImageId:
+        $ref: '#/definitions/String'
+        description: The ID of the AFI.
+      Attribute:
+        $ref: '#/definitions/ResetFpgaImageAttributeName'
+        description: The attribute.
+  ResetFpgaImageAttributeResult:
+    type: object
+    properties:
+      Return:
+        $ref: '#/definitions/Boolean'
+        description: 'Is <code>true</code> if the request succeeds, and an error otherwise.'
   ResetImageAttributeName:
     type: string
     enum:

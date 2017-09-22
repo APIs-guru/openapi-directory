@@ -569,6 +569,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '483':
+          description: DuplicateRecordException
+          schema:
+            $ref: '#/definitions/DuplicateRecordException'
       parameters:
         - name: body
           in: body
@@ -606,6 +610,10 @@ paths:
           description: NotFoundException
           schema:
             $ref: '#/definitions/NotFoundException'
+        '483':
+          description: DuplicateRecordException
+          schema:
+            $ref: '#/definitions/DuplicateRecordException'
       parameters:
         - name: body
           in: body
