@@ -13196,6 +13196,7 @@ definitions:
       - subscription-created
       - subscription-renewed
       - payment-card-expired
+      - invoice-past-due
       - payment-declined
       - transaction-process-requested
       - risk-score-changed
@@ -14077,8 +14078,6 @@ definitions:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
         description: Layout created time
-      customFields:
-        $ref: '#/definitions/ResourceCustomFields'
       id:
         allOf:
           - $ref: '#/definitions/ResourceId'

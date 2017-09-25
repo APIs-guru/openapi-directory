@@ -288,25 +288,7 @@ paths:
         '400':
           description: 'Could happen when dispatching to a device that is offline, the user doesn''t have permission or an incorrect command _type_ for the device'
       summary: Dispatch commands to device
-  '/commands/{id}':
-    delete:
-      parameters:
-        - $ref: '#/parameters/entityId'
-      responses:
-        '204':
-          description: No Content
-      summary: Delete a Saved Command
-    put:
-      parameters:
-        - $ref: '#/parameters/entityId'
-        - $ref: '#/parameters/Command'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Command'
-      summary: Update a Saved Command
-  /commandtypes:
+  /commands/types:
     get:
       parameters:
         - in: query
@@ -325,6 +307,24 @@ paths:
         '400':
           description: Could happen when trying to fetch from a device the user does not have permission
       summary: Fetch a list of available Commands for the Device or all possible Commands if Device ommited
+  '/commands/{id}':
+    delete:
+      parameters:
+        - $ref: '#/parameters/entityId'
+      responses:
+        '204':
+          description: No Content
+      summary: Delete a Saved Command
+    put:
+      parameters:
+        - $ref: '#/parameters/entityId'
+        - $ref: '#/parameters/Command'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Command'
+      summary: Update a Saved Command
   /devices:
     get:
       description: 'Without any params, returns a list of the user''s devices'

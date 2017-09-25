@@ -501,8 +501,11 @@ paths:
             type: string
           name: dataSourceIds
           type: array
-        - description: Page size. The default page size is the maximum value of 1000 results.
+        - collectionFormat: multi
+          description: Page size. The default page size is the maximum value of 1000 results.
           in: query
+          items:
+            type: string
           name: pageSize
           type: integer
         - description: |-

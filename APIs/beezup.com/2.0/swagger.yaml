@@ -4186,19 +4186,10 @@ paths:
       tags:
         - Customer - Alerts
   '/user/customer/stores/{storeId}/rights':
-    post:
-      deprecated: true
+    get:
       operationId: GetRights
       parameters:
         - $ref: '#/parameters/storeIdOnlyGeneralParameters'
-        - description: The functionality code list you want to check
-          in: body
-          name: functionalityCodeList
-          required: true
-          schema:
-            items:
-              type: string
-            type: array
       responses:
         '200':
           description: The store's rights
@@ -4206,10 +4197,6 @@ paths:
             items:
               $ref: '#/definitions/functionalityRightInfo'
             type: array
-        '403':
-          description: Functionality not found
-          schema:
-            $ref: '#/definitions/BeezUP.Common.ErrorResponseMessage'
         '404':
           description: Store not found or not authorized
           schema:

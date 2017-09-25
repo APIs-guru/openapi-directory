@@ -44,6 +44,7 @@ securityDefinitions:
       esi-clones.read_clones.v1: EVE SSO scope esi-clones.read_clones.v1
       esi-clones.read_implants.v1: EVE SSO scope esi-clones.read_implants.v1
       esi-contracts.read_character_contracts.v1: EVE SSO scope esi-contracts.read_character_contracts.v1
+      esi-corporations.read_blueprints.v1: EVE SSO scope esi-corporations.read_blueprints.v1
       esi-corporations.read_contacts.v1: EVE SSO scope esi-corporations.read_contacts.v1
       esi-corporations.read_corporation_membership.v1: EVE SSO scope esi-corporations.read_corporation_membership.v1
       esi-corporations.read_divisions.v1: EVE SSO scope esi-corporations.read_divisions.v1
@@ -7000,27 +7001,6 @@ paths:
             items:
               description: 200 ok string
               enum:
-                - Director
-                - Personnel_Manager
-                - Accountant
-                - Security_Officer
-                - Factory_Manager
-                - Station_Manager
-                - Auditor
-                - Hangar_Take_1
-                - Hangar_Take_2
-                - Hangar_Take_3
-                - Hangar_Take_4
-                - Hangar_Take_5
-                - Hangar_Take_6
-                - Hangar_Take_7
-                - Hangar_Query_1
-                - Hangar_Query_2
-                - Hangar_Query_3
-                - Hangar_Query_4
-                - Hangar_Query_5
-                - Hangar_Query_6
-                - Hangar_Query_7
                 - Account_Take_1
                 - Account_Take_2
                 - Account_Take_3
@@ -7028,8 +7008,11 @@ paths:
                 - Account_Take_5
                 - Account_Take_6
                 - Account_Take_7
-                - Diplomat
+                - Accountant
+                - Auditor
+                - Communications_Officer
                 - Config_Equipment
+                - Config_Starbase_Equipment
                 - Container_Take_1
                 - Container_Take_2
                 - Container_Take_3
@@ -7037,19 +7020,37 @@ paths:
                 - Container_Take_5
                 - Container_Take_6
                 - Container_Take_7
-                - Rent_Office
-                - Rent_Factory_Facility
-                - Rent_Research_Facility
-                - Junior_Accountant
-                - Config_Starbase_Equipment
-                - Trader
-                - Communications_Officer
                 - Contract_Manager
+                - Diplomat
+                - Director
+                - Factory_Manager
+                - Fitting_Manager
+                - Hangar_Query_1
+                - Hangar_Query_2
+                - Hangar_Query_3
+                - Hangar_Query_4
+                - Hangar_Query_5
+                - Hangar_Query_6
+                - Hangar_Query_7
+                - Hangar_Take_1
+                - Hangar_Take_2
+                - Hangar_Take_3
+                - Hangar_Take_4
+                - Hangar_Take_5
+                - Hangar_Take_6
+                - Hangar_Take_7
+                - Junior_Accountant
+                - Personnel_Manager
+                - Rent_Factory_Facility
+                - Rent_Office
+                - Rent_Research_Facility
+                - Security_Officer
                 - Starbase_Defense_Operator
                 - Starbase_Fuel_Technician
-                - Fitting_Manager
+                - Station_Manager
                 - Terrestrial_Combat_Officer
                 - Terrestrial_Logistics_Officer
+                - Trader
               title: get_characters_character_id_roles_200_ok
               type: string
             maxItems: 50
@@ -8798,6 +8799,263 @@ paths:
       x-cached-seconds: 3600
       x-required-roles:
         - Director
+  '/corporations/{corporation_id}/blueprints/':
+    get:
+      description: |-
+        Returns a list of blueprints the corporation owns
+
+        ---
+        Alternate route: `/v1/corporations/{corporation_id}/blueprints/`
+
+        Alternate route: `/legacy/corporations/{corporation_id}/blueprints/`
+
+        Alternate route: `/dev/corporations/{corporation_id}/blueprints/`
+
+        ---
+        This route is cached for up to 3600 seconds
+      operationId: get_corporations_corporation_id_blueprints
+      parameters:
+        - $ref: '#/parameters/corporation_id'
+        - $ref: '#/parameters/datasource'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/token'
+        - $ref: '#/parameters/user_agent'
+        - $ref: '#/parameters/X-User-Agent'
+      responses:
+        '200':
+          description: List of corporation blueprints
+          examples:
+            application/json:
+              - item_id: 1000000010495
+                location_flag: CorpSAG1
+                location_id: 60014719
+                material_efficiency: 0
+                quantity: 1
+                runs: -1
+                time_efficiency: 0
+                type_id: 691
+          headers:
+            Cache-Control:
+              description: The caching mechanism used
+              type: string
+            Expires:
+              description: RFC7231 formatted datetime string
+              type: string
+            Last-Modified:
+              description: RFC7231 formatted datetime string
+              type: string
+            X-Pages:
+              default: 1
+              description: Maximum page number
+              format: int32
+              type: integer
+          schema:
+            description: 200 ok array
+            items:
+              description: 200 ok object
+              properties:
+                item_id:
+                  description: Unique ID for this item.
+                  format: int64
+                  title: get_corporations_corporation_id_blueprints_item_id
+                  type: integer
+                location_flag:
+                  description: Type of the location_id
+                  enum:
+                    - AssetSafety
+                    - AutoFit
+                    - Bonus
+                    - Booster
+                    - BoosterBay
+                    - Capsule
+                    - Cargo
+                    - CorpDeliveries
+                    - CorpSAG1
+                    - CorpSAG2
+                    - CorpSAG3
+                    - CorpSAG4
+                    - CorpSAG5
+                    - CorpSAG6
+                    - CorpSAG7
+                    - CrateLoot
+                    - Deliveries
+                    - DroneBay
+                    - DustBattle
+                    - DustDatabank
+                    - FighterBay
+                    - FighterTube0
+                    - FighterTube1
+                    - FighterTube2
+                    - FighterTube3
+                    - FighterTube4
+                    - FleetHangar
+                    - Hangar
+                    - HangarAll
+                    - HiSlot0
+                    - HiSlot1
+                    - HiSlot2
+                    - HiSlot3
+                    - HiSlot4
+                    - HiSlot5
+                    - HiSlot6
+                    - HiSlot7
+                    - HiddenModifers
+                    - Implant
+                    - Impounded
+                    - JunkyardReprocessed
+                    - JunkyardTrashed
+                    - LoSlot0
+                    - LoSlot1
+                    - LoSlot2
+                    - LoSlot3
+                    - LoSlot4
+                    - LoSlot5
+                    - LoSlot6
+                    - LoSlot7
+                    - Locked
+                    - MedSlot0
+                    - MedSlot1
+                    - MedSlot2
+                    - MedSlot3
+                    - MedSlot4
+                    - MedSlot5
+                    - MedSlot6
+                    - MedSlot7
+                    - OfficeFolder
+                    - Pilot
+                    - PlanetSurface
+                    - QuafeBay
+                    - Reward
+                    - RigSlot0
+                    - RigSlot1
+                    - RigSlot2
+                    - RigSlot3
+                    - RigSlot4
+                    - RigSlot5
+                    - RigSlot6
+                    - RigSlot7
+                    - SecondaryStorage
+                    - ServiceSlot0
+                    - ServiceSlot1
+                    - ServiceSlot2
+                    - ServiceSlot3
+                    - ServiceSlot4
+                    - ServiceSlot5
+                    - ServiceSlot6
+                    - ServiceSlot7
+                    - ShipHangar
+                    - ShipOffline
+                    - Skill
+                    - SkillInTraining
+                    - SpecializedAmmoHold
+                    - SpecializedCommandCenterHold
+                    - SpecializedFuelBay
+                    - SpecializedGasHold
+                    - SpecializedIndustrialShipHold
+                    - SpecializedLargeShipHold
+                    - SpecializedMaterialBay
+                    - SpecializedMediumShipHold
+                    - SpecializedMineralHold
+                    - SpecializedOreHold
+                    - SpecializedPlanetaryCommoditiesHold
+                    - SpecializedSalvageHold
+                    - SpecializedShipHold
+                    - SpecializedSmallShipHold
+                    - StructureActive
+                    - StructureFuel
+                    - StructureInactive
+                    - StructureOffline
+                    - SubSystemSlot0
+                    - SubSystemSlot1
+                    - SubSystemSlot2
+                    - SubSystemSlot3
+                    - SubSystemSlot4
+                    - SubSystemSlot5
+                    - SubSystemSlot6
+                    - SubSystemSlot7
+                    - SubsystemBay
+                    - Unlocked
+                    - Wallet
+                    - Wardrobe
+                  title: get_corporations_corporation_id_blueprints_location_flag
+                  type: string
+                location_id:
+                  description: 'References a solar system, station or item_id if this blueprint is located within a container.'
+                  format: int64
+                  title: get_corporations_corporation_id_blueprints_location_id
+                  type: integer
+                material_efficiency:
+                  description: Material Efficiency Level of the blueprint.
+                  format: int32
+                  maximum: 10
+                  minimum: 0
+                  title: get_corporations_corporation_id_blueprints_material_efficiency
+                  type: integer
+                quantity:
+                  description: A range of numbers with a minimum of -2 and no maximum value where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (e.g. no activities performed on them yet).
+                  format: int32
+                  minimum: -2
+                  title: get_corporations_corporation_id_blueprints_quantity
+                  type: integer
+                runs:
+                  description: 'Number of runs remaining if the blueprint is a copy, -1 if it is an original.'
+                  format: int32
+                  minimum: -1
+                  title: get_corporations_corporation_id_blueprints_runs
+                  type: integer
+                time_efficiency:
+                  description: Time Efficiency Level of the blueprint.
+                  format: int32
+                  maximum: 20
+                  minimum: 0
+                  title: get_corporations_corporation_id_blueprints_time_efficiency
+                  type: integer
+                type_id:
+                  description: type_id integer
+                  format: int32
+                  title: get_corporations_corporation_id_blueprints_type_id
+                  type: integer
+              required:
+                - item_id
+                - type_id
+                - location_id
+                - location_flag
+                - quantity
+                - time_efficiency
+                - material_efficiency
+                - runs
+              title: get_corporations_corporation_id_blueprints_200_ok
+              type: object
+            maxItems: 1000
+            title: get_corporations_corporation_id_blueprints_ok
+            type: array
+        '403':
+          description: Forbidden
+          examples:
+            application/json:
+              error: Forbidden message
+          schema:
+            $ref: '#/definitions/forbidden'
+        '500':
+          description: Internal server error
+          examples:
+            application/json:
+              error: Internal server error message
+          schema:
+            $ref: '#/definitions/internal_server_error'
+      security:
+        - evesso:
+            - esi-corporations.read_blueprints.v1
+      summary: Get corporation blueprints
+      tags:
+        - Corporation
+      x-alternate-versions:
+        - dev
+        - legacy
+        - v1
+      x-cached-seconds: 3600
+      x-required-roles:
+        - Director
   '/corporations/{corporation_id}/contacts/':
     get:
       description: |-
@@ -9526,27 +9784,6 @@ paths:
                   items:
                     description: grantable_role string
                     enum:
-                      - Director
-                      - Personnel_Manager
-                      - Accountant
-                      - Security_Officer
-                      - Factory_Manager
-                      - Station_Manager
-                      - Auditor
-                      - Hangar_Take_1
-                      - Hangar_Take_2
-                      - Hangar_Take_3
-                      - Hangar_Take_4
-                      - Hangar_Take_5
-                      - Hangar_Take_6
-                      - Hangar_Take_7
-                      - Hangar_Query_1
-                      - Hangar_Query_2
-                      - Hangar_Query_3
-                      - Hangar_Query_4
-                      - Hangar_Query_5
-                      - Hangar_Query_6
-                      - Hangar_Query_7
                       - Account_Take_1
                       - Account_Take_2
                       - Account_Take_3
@@ -9554,8 +9791,11 @@ paths:
                       - Account_Take_5
                       - Account_Take_6
                       - Account_Take_7
-                      - Diplomat
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
                       - Config_Equipment
+                      - Config_Starbase_Equipment
                       - Container_Take_1
                       - Container_Take_2
                       - Container_Take_3
@@ -9563,19 +9803,37 @@ paths:
                       - Container_Take_5
                       - Container_Take_6
                       - Container_Take_7
-                      - Rent_Office
-                      - Rent_Factory_Facility
-                      - Rent_Research_Facility
-                      - Junior_Accountant
-                      - Config_Starbase_Equipment
-                      - Trader
-                      - Communications_Officer
                       - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
                       - Starbase_Defense_Operator
                       - Starbase_Fuel_Technician
-                      - Fitting_Manager
+                      - Station_Manager
                       - Terrestrial_Combat_Officer
                       - Terrestrial_Logistics_Officer
+                      - Trader
                     title: get_corporations_corporation_id_roles_grantable_role
                     type: string
                     uniqueItems: true
@@ -9587,27 +9845,6 @@ paths:
                   items:
                     description: grantable_roles_at_base string
                     enum:
-                      - Director
-                      - Personnel_Manager
-                      - Accountant
-                      - Security_Officer
-                      - Factory_Manager
-                      - Station_Manager
-                      - Auditor
-                      - Hangar_Take_1
-                      - Hangar_Take_2
-                      - Hangar_Take_3
-                      - Hangar_Take_4
-                      - Hangar_Take_5
-                      - Hangar_Take_6
-                      - Hangar_Take_7
-                      - Hangar_Query_1
-                      - Hangar_Query_2
-                      - Hangar_Query_3
-                      - Hangar_Query_4
-                      - Hangar_Query_5
-                      - Hangar_Query_6
-                      - Hangar_Query_7
                       - Account_Take_1
                       - Account_Take_2
                       - Account_Take_3
@@ -9615,8 +9852,11 @@ paths:
                       - Account_Take_5
                       - Account_Take_6
                       - Account_Take_7
-                      - Diplomat
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
                       - Config_Equipment
+                      - Config_Starbase_Equipment
                       - Container_Take_1
                       - Container_Take_2
                       - Container_Take_3
@@ -9624,19 +9864,37 @@ paths:
                       - Container_Take_5
                       - Container_Take_6
                       - Container_Take_7
-                      - Rent_Office
-                      - Rent_Factory_Facility
-                      - Rent_Research_Facility
-                      - Junior_Accountant
-                      - Config_Starbase_Equipment
-                      - Trader
-                      - Communications_Officer
                       - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
                       - Starbase_Defense_Operator
                       - Starbase_Fuel_Technician
-                      - Fitting_Manager
+                      - Station_Manager
                       - Terrestrial_Combat_Officer
                       - Terrestrial_Logistics_Officer
+                      - Trader
                     title: get_corporations_corporation_id_roles_grantable_roles_at_base
                     type: string
                     uniqueItems: true
@@ -9648,27 +9906,6 @@ paths:
                   items:
                     description: grantable_roles_at_hq string
                     enum:
-                      - Director
-                      - Personnel_Manager
-                      - Accountant
-                      - Security_Officer
-                      - Factory_Manager
-                      - Station_Manager
-                      - Auditor
-                      - Hangar_Take_1
-                      - Hangar_Take_2
-                      - Hangar_Take_3
-                      - Hangar_Take_4
-                      - Hangar_Take_5
-                      - Hangar_Take_6
-                      - Hangar_Take_7
-                      - Hangar_Query_1
-                      - Hangar_Query_2
-                      - Hangar_Query_3
-                      - Hangar_Query_4
-                      - Hangar_Query_5
-                      - Hangar_Query_6
-                      - Hangar_Query_7
                       - Account_Take_1
                       - Account_Take_2
                       - Account_Take_3
@@ -9676,8 +9913,11 @@ paths:
                       - Account_Take_5
                       - Account_Take_6
                       - Account_Take_7
-                      - Diplomat
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
                       - Config_Equipment
+                      - Config_Starbase_Equipment
                       - Container_Take_1
                       - Container_Take_2
                       - Container_Take_3
@@ -9685,19 +9925,37 @@ paths:
                       - Container_Take_5
                       - Container_Take_6
                       - Container_Take_7
-                      - Rent_Office
-                      - Rent_Factory_Facility
-                      - Rent_Research_Facility
-                      - Junior_Accountant
-                      - Config_Starbase_Equipment
-                      - Trader
-                      - Communications_Officer
                       - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
                       - Starbase_Defense_Operator
                       - Starbase_Fuel_Technician
-                      - Fitting_Manager
+                      - Station_Manager
                       - Terrestrial_Combat_Officer
                       - Terrestrial_Logistics_Officer
+                      - Trader
                     title: get_corporations_corporation_id_roles_grantable_roles_at_hq
                     type: string
                     uniqueItems: true
@@ -9709,27 +9967,6 @@ paths:
                   items:
                     description: grantable_roles_at_other string
                     enum:
-                      - Director
-                      - Personnel_Manager
-                      - Accountant
-                      - Security_Officer
-                      - Factory_Manager
-                      - Station_Manager
-                      - Auditor
-                      - Hangar_Take_1
-                      - Hangar_Take_2
-                      - Hangar_Take_3
-                      - Hangar_Take_4
-                      - Hangar_Take_5
-                      - Hangar_Take_6
-                      - Hangar_Take_7
-                      - Hangar_Query_1
-                      - Hangar_Query_2
-                      - Hangar_Query_3
-                      - Hangar_Query_4
-                      - Hangar_Query_5
-                      - Hangar_Query_6
-                      - Hangar_Query_7
                       - Account_Take_1
                       - Account_Take_2
                       - Account_Take_3
@@ -9737,8 +9974,11 @@ paths:
                       - Account_Take_5
                       - Account_Take_6
                       - Account_Take_7
-                      - Diplomat
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
                       - Config_Equipment
+                      - Config_Starbase_Equipment
                       - Container_Take_1
                       - Container_Take_2
                       - Container_Take_3
@@ -9746,19 +9986,37 @@ paths:
                       - Container_Take_5
                       - Container_Take_6
                       - Container_Take_7
-                      - Rent_Office
-                      - Rent_Factory_Facility
-                      - Rent_Research_Facility
-                      - Junior_Accountant
-                      - Config_Starbase_Equipment
-                      - Trader
-                      - Communications_Officer
                       - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
                       - Starbase_Defense_Operator
                       - Starbase_Fuel_Technician
-                      - Fitting_Manager
+                      - Station_Manager
                       - Terrestrial_Combat_Officer
                       - Terrestrial_Logistics_Officer
+                      - Trader
                     title: get_corporations_corporation_id_roles_grantable_roles_at_other
                     type: string
                     uniqueItems: true
@@ -9770,27 +10028,6 @@ paths:
                   items:
                     description: role string
                     enum:
-                      - Director
-                      - Personnel_Manager
-                      - Accountant
-                      - Security_Officer
-                      - Factory_Manager
-                      - Station_Manager
-                      - Auditor
-                      - Hangar_Take_1
-                      - Hangar_Take_2
-                      - Hangar_Take_3
-                      - Hangar_Take_4
-                      - Hangar_Take_5
-                      - Hangar_Take_6
-                      - Hangar_Take_7
-                      - Hangar_Query_1
-                      - Hangar_Query_2
-                      - Hangar_Query_3
-                      - Hangar_Query_4
-                      - Hangar_Query_5
-                      - Hangar_Query_6
-                      - Hangar_Query_7
                       - Account_Take_1
                       - Account_Take_2
                       - Account_Take_3
@@ -9798,8 +10035,11 @@ paths:
                       - Account_Take_5
                       - Account_Take_6
                       - Account_Take_7
-                      - Diplomat
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
                       - Config_Equipment
+                      - Config_Starbase_Equipment
                       - Container_Take_1
                       - Container_Take_2
                       - Container_Take_3
@@ -9807,19 +10047,37 @@ paths:
                       - Container_Take_5
                       - Container_Take_6
                       - Container_Take_7
-                      - Rent_Office
-                      - Rent_Factory_Facility
-                      - Rent_Research_Facility
-                      - Junior_Accountant
-                      - Config_Starbase_Equipment
-                      - Trader
-                      - Communications_Officer
                       - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
                       - Starbase_Defense_Operator
                       - Starbase_Fuel_Technician
-                      - Fitting_Manager
+                      - Station_Manager
                       - Terrestrial_Combat_Officer
                       - Terrestrial_Logistics_Officer
+                      - Trader
                     title: get_corporations_corporation_id_roles_role
                     type: string
                     uniqueItems: true
@@ -9831,27 +10089,6 @@ paths:
                   items:
                     description: roles_at_base string
                     enum:
-                      - Director
-                      - Personnel_Manager
-                      - Accountant
-                      - Security_Officer
-                      - Factory_Manager
-                      - Station_Manager
-                      - Auditor
-                      - Hangar_Take_1
-                      - Hangar_Take_2
-                      - Hangar_Take_3
-                      - Hangar_Take_4
-                      - Hangar_Take_5
-                      - Hangar_Take_6
-                      - Hangar_Take_7
-                      - Hangar_Query_1
-                      - Hangar_Query_2
-                      - Hangar_Query_3
-                      - Hangar_Query_4
-                      - Hangar_Query_5
-                      - Hangar_Query_6
-                      - Hangar_Query_7
                       - Account_Take_1
                       - Account_Take_2
                       - Account_Take_3
@@ -9859,8 +10096,11 @@ paths:
                       - Account_Take_5
                       - Account_Take_6
                       - Account_Take_7
-                      - Diplomat
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
                       - Config_Equipment
+                      - Config_Starbase_Equipment
                       - Container_Take_1
                       - Container_Take_2
                       - Container_Take_3
@@ -9868,19 +10108,37 @@ paths:
                       - Container_Take_5
                       - Container_Take_6
                       - Container_Take_7
-                      - Rent_Office
-                      - Rent_Factory_Facility
-                      - Rent_Research_Facility
-                      - Junior_Accountant
-                      - Config_Starbase_Equipment
-                      - Trader
-                      - Communications_Officer
                       - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
                       - Starbase_Defense_Operator
                       - Starbase_Fuel_Technician
-                      - Fitting_Manager
+                      - Station_Manager
                       - Terrestrial_Combat_Officer
                       - Terrestrial_Logistics_Officer
+                      - Trader
                     title: get_corporations_corporation_id_roles_roles_at_base
                     type: string
                     uniqueItems: true
@@ -9892,27 +10150,6 @@ paths:
                   items:
                     description: roles_at_hq string
                     enum:
-                      - Director
-                      - Personnel_Manager
-                      - Accountant
-                      - Security_Officer
-                      - Factory_Manager
-                      - Station_Manager
-                      - Auditor
-                      - Hangar_Take_1
-                      - Hangar_Take_2
-                      - Hangar_Take_3
-                      - Hangar_Take_4
-                      - Hangar_Take_5
-                      - Hangar_Take_6
-                      - Hangar_Take_7
-                      - Hangar_Query_1
-                      - Hangar_Query_2
-                      - Hangar_Query_3
-                      - Hangar_Query_4
-                      - Hangar_Query_5
-                      - Hangar_Query_6
-                      - Hangar_Query_7
                       - Account_Take_1
                       - Account_Take_2
                       - Account_Take_3
@@ -9920,8 +10157,11 @@ paths:
                       - Account_Take_5
                       - Account_Take_6
                       - Account_Take_7
-                      - Diplomat
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
                       - Config_Equipment
+                      - Config_Starbase_Equipment
                       - Container_Take_1
                       - Container_Take_2
                       - Container_Take_3
@@ -9929,19 +10169,37 @@ paths:
                       - Container_Take_5
                       - Container_Take_6
                       - Container_Take_7
-                      - Rent_Office
-                      - Rent_Factory_Facility
-                      - Rent_Research_Facility
-                      - Junior_Accountant
-                      - Config_Starbase_Equipment
-                      - Trader
-                      - Communications_Officer
                       - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
                       - Starbase_Defense_Operator
                       - Starbase_Fuel_Technician
-                      - Fitting_Manager
+                      - Station_Manager
                       - Terrestrial_Combat_Officer
                       - Terrestrial_Logistics_Officer
+                      - Trader
                     title: get_corporations_corporation_id_roles_roles_at_hq
                     type: string
                     uniqueItems: true
@@ -9953,27 +10211,6 @@ paths:
                   items:
                     description: roles_at_other string
                     enum:
-                      - Director
-                      - Personnel_Manager
-                      - Accountant
-                      - Security_Officer
-                      - Factory_Manager
-                      - Station_Manager
-                      - Auditor
-                      - Hangar_Take_1
-                      - Hangar_Take_2
-                      - Hangar_Take_3
-                      - Hangar_Take_4
-                      - Hangar_Take_5
-                      - Hangar_Take_6
-                      - Hangar_Take_7
-                      - Hangar_Query_1
-                      - Hangar_Query_2
-                      - Hangar_Query_3
-                      - Hangar_Query_4
-                      - Hangar_Query_5
-                      - Hangar_Query_6
-                      - Hangar_Query_7
                       - Account_Take_1
                       - Account_Take_2
                       - Account_Take_3
@@ -9981,8 +10218,11 @@ paths:
                       - Account_Take_5
                       - Account_Take_6
                       - Account_Take_7
-                      - Diplomat
+                      - Accountant
+                      - Auditor
+                      - Communications_Officer
                       - Config_Equipment
+                      - Config_Starbase_Equipment
                       - Container_Take_1
                       - Container_Take_2
                       - Container_Take_3
@@ -9990,19 +10230,37 @@ paths:
                       - Container_Take_5
                       - Container_Take_6
                       - Container_Take_7
-                      - Rent_Office
-                      - Rent_Factory_Facility
-                      - Rent_Research_Facility
-                      - Junior_Accountant
-                      - Config_Starbase_Equipment
-                      - Trader
-                      - Communications_Officer
                       - Contract_Manager
+                      - Diplomat
+                      - Director
+                      - Factory_Manager
+                      - Fitting_Manager
+                      - Hangar_Query_1
+                      - Hangar_Query_2
+                      - Hangar_Query_3
+                      - Hangar_Query_4
+                      - Hangar_Query_5
+                      - Hangar_Query_6
+                      - Hangar_Query_7
+                      - Hangar_Take_1
+                      - Hangar_Take_2
+                      - Hangar_Take_3
+                      - Hangar_Take_4
+                      - Hangar_Take_5
+                      - Hangar_Take_6
+                      - Hangar_Take_7
+                      - Junior_Accountant
+                      - Personnel_Manager
+                      - Rent_Factory_Facility
+                      - Rent_Office
+                      - Rent_Research_Facility
+                      - Security_Officer
                       - Starbase_Defense_Operator
                       - Starbase_Fuel_Technician
-                      - Fitting_Manager
+                      - Station_Manager
                       - Terrestrial_Combat_Officer
                       - Terrestrial_Logistics_Officer
+                      - Trader
                     title: get_corporations_corporation_id_roles_roles_at_other
                     type: string
                     uniqueItems: true

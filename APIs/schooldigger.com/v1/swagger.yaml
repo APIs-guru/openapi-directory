@@ -19,6 +19,8 @@ info:
       version: '2.0'
   x-providerName: schooldigger.com
 consumes: []
+produces:
+  - application/json
 paths:
   /v1/districts:
     get:
@@ -126,11 +128,6 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -161,9 +158,6 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -210,11 +204,6 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -266,9 +255,6 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK
@@ -418,11 +404,6 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
       responses:
         '200':
           description: OK
@@ -453,9 +434,6 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-      produces:
-        - application/json
-        - text/json
       responses:
         '200':
           description: OK

@@ -337,10 +337,14 @@ paths:
         - projects
   '/v1/{name}':
     delete:
-      description: 'Ends a session, releasing server resources associated with it.'
-      operationId: spanner.projects.instances.databases.sessions.delete
+      description: |-
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: spanner.projects.instances.operations.delete
       parameters:
-        - description: Required. The name of the session to delete.
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -355,17 +359,17 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.data'
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     get:
       description: |-
-        Gets a session. Returns `NOT_FOUND` if the session does not exist.
-        This is mainly useful for determining whether a session is still
-        alive.
-      operationId: spanner.projects.instances.databases.sessions.get
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: spanner.projects.instances.operations.get
       parameters:
-        - description: Required. The name of the session to retrieve.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -375,12 +379,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Session'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.data'
+            - 'https://www.googleapis.com/auth/spanner.admin'
       tags:
         - projects
     parameters:
@@ -494,7 +498,7 @@ paths:
         the operation is not deleted; instead, it becomes an operation with
         an Operation.error value with a google.rpc.Status.code of 1,
         corresponding to `Code.CANCELLED`.
-      operationId: spanner.projects.instances.databases.operations.cancel
+      operationId: spanner.projects.instances.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path

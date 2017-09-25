@@ -437,10 +437,13 @@ paths:
         - partners
   '/v1/{name}':
     get:
-      description: Get a device.
-      operationId: androiddeviceprovisioning.partners.devices.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: androiddeviceprovisioning.operations.get
       parameters:
-        - description: 'Resource name in `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.'
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -450,9 +453,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Device'
+            $ref: '#/definitions/Operation'
       tags:
-        - partners
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
