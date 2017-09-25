@@ -227,6 +227,55 @@ paths:
       tags:
         - projects
   '/v1/{database}/sessions':
+    get:
+      description: Lists all sessions in a given database.
+      operationId: spanner.projects.instances.databases.sessions.list
+      parameters:
+        - description: Required. The database in which to list sessions.
+          in: path
+          name: database
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            An expression for filtering the results of the request. Filter rules are
+            case insensitive. The fields eligible for filtering are:
+
+              * labels.key where key is the name of a label
+
+            Some examples of using filters are:
+
+              * labels.env:* --> The session has the label "env".
+              * labels.env:dev --> The session has the label "env" and the value of
+                                   the label contains the string "dev".
+          in: query
+          name: filter
+          type: string
+        - description: |-
+            Number of sessions to be returned in the response. If 0 or less, defaults
+            to the server's maximum allowed page size.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            If non-empty, `page_token` should contain a
+            next_page_token from a previous
+            ListSessionsResponse.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListSessionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spanner.data'
+      tags:
+        - projects
     parameters:
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
@@ -264,6 +313,10 @@ paths:
         periodically, e.g., `"SELECT 1"`.
       operationId: spanner.projects.instances.databases.sessions.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateSessionRequest'
         - description: Required. The database in which the new session is created.
           in: path
           name: database
@@ -284,14 +337,10 @@ paths:
         - projects
   '/v1/{name}':
     delete:
-      description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: spanner.projects.instances.operations.delete
+      description: 'Ends a session, releasing server resources associated with it.'
+      operationId: spanner.projects.instances.databases.sessions.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Required. The name of the session to delete.
           in: path
           name: name
           required: true
@@ -306,43 +355,32 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.admin'
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
     get:
-      description: Gets information about a particular instance configuration.
-      operationId: spanner.projects.instanceConfigs.get
+      description: |-
+        Gets a session. Returns `NOT_FOUND` if the session does not exist.
+        This is mainly useful for determining whether a session is still
+        alive.
+      operationId: spanner.projects.instances.databases.sessions.get
       parameters:
-        - description: The standard list filter.
-          in: query
-          name: filter
-          type: string
-        - description: |-
-            Required. The name of the requested instance configuration. Values are of
-            the form `projects/<project>/instanceConfigs/<config>`.
+        - description: Required. The name of the session to retrieve.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/InstanceConfig'
+            $ref: '#/definitions/Session'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.admin'
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
     parameters:
@@ -456,7 +494,7 @@ paths:
         the operation is not deleted; instead, it becomes an operation with
         an Operation.error value with a google.rpc.Status.code of 1,
         corresponding to `Code.CANCELLED`.
-      operationId: spanner.projects.instances.operations.cancel
+      operationId: spanner.projects.instances.databases.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path
@@ -1416,6 +1454,13 @@ definitions:
           length.
         type: string
     type: object
+  CreateSessionRequest:
+    description: The request for CreateSession.
+    properties:
+      session:
+        $ref: '#/definitions/Session'
+        description: The session to create.
+    type: object
   Database:
     description: A Cloud Spanner database.
     properties:
@@ -1856,6 +1901,21 @@ definitions:
           $ref: '#/definitions/Operation'
         type: array
     type: object
+  ListSessionsResponse:
+    description: The response for ListSessions.
+    properties:
+      nextPageToken:
+        description: |-
+          `next_page_token` can be sent in a subsequent
+          ListSessions call to fetch more of the matching
+          sessions.
+        type: string
+      sessions:
+        description: The list of requested sessions.
+        items:
+          $ref: '#/definitions/Session'
+        type: array
+    type: object
   Mutation:
     description: |-
       A modification to one or more Cloud Spanner rows.  Mutations can be
@@ -1899,7 +1959,7 @@ definitions:
       done:
         description: |-
           If the value is `false`, it means the operation is still in progress.
-          If true, the operation is completed, and either `error` or `response` is
+          If `true`, the operation is completed, and either `error` or `response` is
           available.
         type: boolean
       error:
@@ -2275,6 +2335,7 @@ definitions:
         description: |-
           If greater than zero, only the first `limit` rows are yielded. If `limit`
           is zero, the default is no limit.
+          A limit cannot be specified if partition_token is set.
         format: int64
         type: string
       resumeToken:
@@ -2381,8 +2442,30 @@ definitions:
   Session:
     description: A session in the Cloud Spanner API.
     properties:
+      approximateLastUseTime:
+        description: |-
+          Output only. The approximate timestamp when the session is last used. It is
+          typically earlier than the actual last use time.
+        format: google-datetime
+        type: string
+      createTime:
+        description: Output only. The timestamp when the session is created.
+        format: google-datetime
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          The labels for the session.
+
+           * Label keys must be between 1 and 63 characters long and must conform to
+             the following regular expression: `[a-z]([-a-z0-9]*[a-z0-9])?`.
+           * Label values must be between 0 and 63 characters long and must conform
+             to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
+           * No more than 20 labels can be associated with a given session.
+        type: object
       name:
-        description: Required. The name of the session.
+        description: The name of the session.
         type: string
     type: object
   SetIamPolicyRequest:

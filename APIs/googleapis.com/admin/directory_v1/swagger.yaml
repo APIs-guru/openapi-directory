@@ -3287,6 +3287,9 @@ definitions:
       etags:
         description: ETag of the resource.
         type: string
+      generatedResourceName:
+        description: 'The auto-generated name of the calendar resource which includes metadata about the resource such as building name, floor, capacity, etc. For example, NYC-2-Training Room 1A (16)'
+        type: string
       kind:
         default: 'admin#directory#resources#calendars#CalendarResource'
         description: 'The type of the resource. For calendar resources, the value is admin#directory#resources#calendars#CalendarResource.'
@@ -4358,6 +4361,7 @@ definitions:
         readOnly: true
         type: string
       externalIds: {}
+      gender: {}
       hashFunction:
         description: 'Hash function name for password. Supported are MD5, SHA-1 and crypt'
         type: string
@@ -4529,6 +4533,18 @@ definitions:
         type: string
       value:
         description: The value of the id.
+        type: string
+    type: object
+  UserGender:
+    properties:
+      addressMeAs:
+        description: 'AddressMeAs. A human-readable string containing the proper way to refer to the profile owner by humans, for example "he/him/his" or "they/them/their".'
+        type: string
+      customGender:
+        description: Custom gender.
+        type: string
+      type:
+        description: Gender.
         type: string
     type: object
   UserIm:
@@ -4718,8 +4734,8 @@ definitions:
         type: string
       gid:
         description: The default group ID.
-        format: int32
-        type: integer
+        format: uint64
+        type: string
       homeDirectory:
         description: The path to the home directory for this account.
         type: string
@@ -4734,8 +4750,8 @@ definitions:
         type: string
       uid:
         description: The POSIX compliant user ID.
-        format: int32
-        type: integer
+        format: uint64
+        type: string
       username:
         description: The username of the account.
         type: string

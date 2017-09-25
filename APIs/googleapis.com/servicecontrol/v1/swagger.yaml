@@ -136,17 +136,12 @@ paths:
 
         This method requires the `servicemanagement.services.quota`
         permission on the specified service. For more information, see
-        [Google Cloud IAM](https://cloud.google.com/iam).
+        [Cloud IAM](https://cloud.google.com/iam).
 
-        **NOTE:** the client code **must** fail-open if the server returns one
-        of the following quota errors:
-        -   `PROJECT_STATUS_UNAVAILABLE`
-        -   `SERVICE_STATUS_UNAVAILABLE`
-        -   `BILLING_STATUS_UNAVAILABLE`
-        -   `QUOTA_SYSTEM_UNAVAILABLE`
-
-        The server may inject above errors to prohibit any hard dependency
-        on the quota system.
+        **NOTE:** The client **must** fail-open on server errors `INTERNAL`,
+        `UNKNOWN`, `DEADLINE_EXCEEDED`, and `UNAVAILABLE`. To ensure system
+        reliability, the server may inject these errors to prohibit any hard
+        dependency on the quota functionality.
       operationId: servicecontrol.services.allocateQuota
       parameters:
         - description: |-
@@ -304,17 +299,13 @@ paths:
 
         This method requires the `servicemanagement.services.quota`
         permission on the specified service. For more information, see
-        [Google Cloud IAM](https://cloud.google.com/iam).
+        [Cloud IAM](https://cloud.google.com/iam).
 
-        **NOTE:** the client code **must** fail-open if the server returns one
-        of the following quota errors:
-        -   `PROJECT_STATUS_UNAVAILABLE`
-        -   `SERVICE_STATUS_UNAVAILABLE`
-        -   `BILLING_STATUS_UNAVAILABLE`
-        -   `QUOTA_SYSTEM_UNAVAILABLE`
 
-        The server may inject above errors to prohibit any hard dependency
-        on the quota system.
+        **NOTE:** The client **must** fail-open on server errors `INTERNAL`,
+        `UNKNOWN`, `DEADLINE_EXCEEDED`, and `UNAVAILABLE`. To ensure system
+        reliability, the server may inject these errors to prohibit any hard
+        dependency on the quota functionality.
       operationId: servicecontrol.services.releaseQuota
       parameters:
         - description: |-
@@ -472,22 +463,24 @@ paths:
       tags:
         - services
 definitions:
+  AllocateInfo:
+    properties:
+      unusedArguments:
+        description: |-
+          A list of label keys that were unused by the server in processing the
+          request. Thus, for similar requests repeated in a certain future time
+          window, the caller can choose to ignore these labels in the requests
+          to achieve better client-side cache hits and quota aggregation.
+        items:
+          type: string
+        type: array
+    type: object
   AllocateQuotaRequest:
     description: Request message for the AllocateQuota method.
     properties:
       allocateOperation:
         $ref: '#/definitions/QuotaOperation'
         description: Operation that describes the quota allocation.
-      allocationMode:
-        description: |-
-          Allocation mode for this operation.
-          Deprecated: use QuotaMode inside the QuotaOperation.
-        enum:
-          - UNSPECIFIED
-          - NORMAL
-          - BEST_EFFORT
-          - CHECK_ONLY
-        type: string
       serviceConfigId:
         description: |-
           Specifies which version of service configuration should be used to process
@@ -503,6 +496,9 @@ definitions:
         items:
           $ref: '#/definitions/QuotaError'
         type: array
+      allocateInfo:
+        $ref: '#/definitions/AllocateInfo'
+        description: 'WARNING: DO NOT use this field until this warning message is removed.'
       operationId:
         description: |-
           The same operation_id value used in the AllocateQuotaRequest. Used for
@@ -550,6 +546,15 @@ definitions:
           one AuthorizationInfo element for each {resource, permission} tuple.
         items:
           $ref: '#/definitions/AuthorizationInfo'
+        type: array
+      metadata:
+        description: |-
+          Other service-specific data about the request, response, and other
+          information associated with the current audited event.
+        items:
+          additionalProperties:
+            description: Properties of the object.
+          type: object
         type: array
       methodName:
         description: |-
@@ -604,6 +609,7 @@ definitions:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.
         description: |-
+          Deprecated, use `metadata` field instead.
           Other service-specific data about the request, response, and other
           activities.
         type: object
@@ -705,6 +711,7 @@ definitions:
         type: string
     type: object
   CheckInfo:
+    description: Contains additional information about the check operation.
     properties:
       consumerInfo:
         $ref: '#/definitions/ConsumerInfo'
@@ -845,6 +852,7 @@ definitions:
         type: number
     type: object
   EndReconciliationRequest:
+    description: Request message for QuotaController.EndReconciliation.
     properties:
       reconciliationOperation:
         $ref: '#/definitions/QuotaOperation'
@@ -857,6 +865,7 @@ definitions:
         type: string
     type: object
   EndReconciliationResponse:
+    description: Response message for QuotaController.EndReconciliation.
     properties:
       operationId:
         description: |-
@@ -1218,6 +1227,7 @@ definitions:
               - “organizations/<organization-id>”
         type: string
       resources:
+        description: The resources that are involved in the operation.
         items:
           $ref: '#/definitions/ResourceInfo'
         type: array
@@ -1230,10 +1240,12 @@ definitions:
           type: string
         description: |-
           User defined labels for the resource that this operation is associated
-          with.
+          with. Only a combination of 1000 user labels per consumer project are
+          allowed.
         type: object
     type: object
   QuotaError:
+    description: Represents error information for QuotaOperation.
     properties:
       code:
         description: Error code.
@@ -1460,6 +1472,7 @@ definitions:
         description: Details of the error when processing the Operation.
     type: object
   ReportInfo:
+    description: Contains additional info about the report operation.
     properties:
       operationId:
         description: The Operation.operation_id value from the request.
@@ -1581,6 +1594,7 @@ definitions:
         type: string
     type: object
   StartReconciliationRequest:
+    description: Request message for QuotaController.StartReconciliation.
     properties:
       reconciliationOperation:
         $ref: '#/definitions/QuotaOperation'
@@ -1593,6 +1607,7 @@ definitions:
         type: string
     type: object
   StartReconciliationResponse:
+    description: Response message for QuotaController.StartReconciliation.
     properties:
       operationId:
         description: |-

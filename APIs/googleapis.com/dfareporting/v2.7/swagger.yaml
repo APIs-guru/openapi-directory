@@ -8181,54 +8181,54 @@ definitions:
       currencyId:
         description: |-
           ID of currency associated with this account. This is a required field.
-          Acceptable values are: 
-          - "1" for USD 
-          - "2" for GBP 
-          - "3" for ESP 
-          - "4" for SEK 
-          - "5" for CAD 
-          - "6" for JPY 
-          - "7" for DEM 
-          - "8" for AUD 
-          - "9" for FRF 
-          - "10" for ITL 
-          - "11" for DKK 
-          - "12" for NOK 
-          - "13" for FIM 
-          - "14" for ZAR 
-          - "15" for IEP 
-          - "16" for NLG 
-          - "17" for EUR 
-          - "18" for KRW 
-          - "19" for TWD 
-          - "20" for SGD 
-          - "21" for CNY 
-          - "22" for HKD 
-          - "23" for NZD 
-          - "24" for MYR 
-          - "25" for BRL 
-          - "26" for PTE 
-          - "27" for MXP 
-          - "28" for CLP 
-          - "29" for TRY 
-          - "30" for ARS 
-          - "31" for PEN 
-          - "32" for ILS 
-          - "33" for CHF 
-          - "34" for VEF 
-          - "35" for COP 
-          - "36" for GTQ 
-          - "37" for PLN 
-          - "39" for INR 
-          - "40" for THB 
-          - "41" for IDR 
-          - "42" for CZK 
-          - "43" for RON 
-          - "44" for HUF 
-          - "45" for RUB 
-          - "46" for AED 
-          - "47" for BGN 
-          - "48" for HRK 
+          Acceptable values are:
+          - "1" for USD
+          - "2" for GBP
+          - "3" for ESP
+          - "4" for SEK
+          - "5" for CAD
+          - "6" for JPY
+          - "7" for DEM
+          - "8" for AUD
+          - "9" for FRF
+          - "10" for ITL
+          - "11" for DKK
+          - "12" for NOK
+          - "13" for FIM
+          - "14" for ZAR
+          - "15" for IEP
+          - "16" for NLG
+          - "17" for EUR
+          - "18" for KRW
+          - "19" for TWD
+          - "20" for SGD
+          - "21" for CNY
+          - "22" for HKD
+          - "23" for NZD
+          - "24" for MYR
+          - "25" for BRL
+          - "26" for PTE
+          - "27" for MXP
+          - "28" for CLP
+          - "29" for TRY
+          - "30" for ARS
+          - "31" for PEN
+          - "32" for ILS
+          - "33" for CHF
+          - "34" for VEF
+          - "35" for COP
+          - "36" for GTQ
+          - "37" for PLN
+          - "39" for INR
+          - "40" for THB
+          - "41" for IDR
+          - "42" for CZK
+          - "43" for RON
+          - "44" for HUF
+          - "45" for RUB
+          - "46" for AED
+          - "47" for BGN
+          - "48" for HRK
           - "49" for MXN
         format: int64
         type: string
@@ -8250,22 +8250,22 @@ definitions:
       locale:
         description: |-
           Locale of this account.
-          Acceptable values are: 
-          - "cs" (Czech) 
-          - "de" (German) 
-          - "en" (English) 
-          - "en-GB" (English United Kingdom) 
-          - "es" (Spanish) 
-          - "fr" (French) 
-          - "it" (Italian) 
-          - "ja" (Japanese) 
-          - "ko" (Korean) 
-          - "pl" (Polish) 
-          - "pt-BR" (Portuguese Brazil) 
-          - "ru" (Russian) 
-          - "sv" (Swedish) 
-          - "tr" (Turkish) 
-          - "zh-CN" (Chinese Simplified) 
+          Acceptable values are:
+          - "cs" (Czech)
+          - "de" (German)
+          - "en" (English)
+          - "en-GB" (English United Kingdom)
+          - "es" (Spanish)
+          - "fr" (French)
+          - "it" (Italian)
+          - "ja" (Japanese)
+          - "ko" (Korean)
+          - "pl" (Polish)
+          - "pt-BR" (Portuguese Brazil)
+          - "ru" (Russian)
+          - "sv" (Swedish)
+          - "tr" (Turkish)
+          - "zh-CN" (Chinese Simplified)
           - "zh-TW" (Chinese Traditional)
         type: string
       maximumImageSize:
@@ -8433,22 +8433,22 @@ definitions:
       locale:
         description: |-
           Locale of the user profile. This is a required field.
-          Acceptable values are:  
-          - "cs" (Czech) 
-          - "de" (German) 
-          - "en" (English) 
-          - "en-GB" (English United Kingdom) 
-          - "es" (Spanish) 
-          - "fr" (French) 
-          - "it" (Italian) 
-          - "ja" (Japanese) 
-          - "ko" (Korean) 
-          - "pl" (Polish) 
+          Acceptable values are:
+          - "cs" (Czech)
+          - "de" (German)
+          - "en" (English)
+          - "en-GB" (English United Kingdom)
+          - "es" (Spanish)
+          - "fr" (French)
+          - "it" (Italian)
+          - "ja" (Japanese)
+          - "ko" (Korean)
+          - "pl" (Polish)
           - "pt-BR" (Portuguese Brazil)
-          - "ru" (Russian) 
-          - "sv" (Swedish) 
-          - "tr" (Turkish) 
-          - "zh-CN" (Chinese Simplified) 
+          - "ru" (Russian)
+          - "sv" (Swedish)
+          - "tr" (Turkish)
+          - "zh-CN" (Chinese Simplified)
           - "zh-TW" (Chinese Traditional)
         type: string
       name:
@@ -8761,8 +8761,8 @@ definitions:
         type: string
       floodlightConfigurationId:
         description: |-
-          Floodlight configuration ID of this advertiser. The floodlight configuration ID will be created automatically, so on insert this field should be left blank. This field can be set to another advertiser's floodlight configuration ID in order to share that advertiser's floodlight configuration with this advertiser, so long as: 
-          - This advertiser's original floodlight configuration is not already associated with floodlight activities or floodlight activity groups. 
+          Floodlight configuration ID of this advertiser. The floodlight configuration ID will be created automatically, so on insert this field should be left blank. This field can be set to another advertiser's floodlight configuration ID in order to share that advertiser's floodlight configuration with this advertiser, so long as:
+          - This advertiser's original floodlight configuration is not already associated with floodlight activities or floodlight activity groups.
           - This advertiser's original floodlight configuration is not already shared with another advertiser.
         format: int64
         type: string
@@ -9206,7 +9206,7 @@ definitions:
     properties:
       computedClickThroughUrl:
         description: |-
-          Read-only convenience field representing the actual URL that will be used for this click-through. The URL is computed as follows: 
+          Read-only convenience field representing the actual URL that will be used for this click-through. The URL is computed as follows:
           - If defaultLandingPage is enabled then the campaign's default landing page URL is assigned to this field.
           - If defaultLandingPage is not enabled and a landingPageId is specified then that landing page's URL is assigned to this field.
           - If neither of the above cases apply, then the customClickThroughUrl is assigned to this field.
@@ -10349,7 +10349,7 @@ definitions:
       richMediaExitOverrides:
         description: |-
           Rich media exit overrides for this creative assignment.
-          Applicable when the creative type is any of the following: 
+          Applicable when the creative type is any of the following:
           - DISPLAY
           - RICH_MEDIA_INPAGE
           - RICH_MEDIA_INPAGE_FLOATING
@@ -11067,54 +11067,54 @@ definitions:
       currencyId:
         description: |-
           Currency ID of this directory site. This is a read-only field.
-          Possible values are: 
-          - "1" for USD 
-          - "2" for GBP 
-          - "3" for ESP 
-          - "4" for SEK 
-          - "5" for CAD 
-          - "6" for JPY 
-          - "7" for DEM 
-          - "8" for AUD 
-          - "9" for FRF 
-          - "10" for ITL 
-          - "11" for DKK 
-          - "12" for NOK 
-          - "13" for FIM 
-          - "14" for ZAR 
-          - "15" for IEP 
-          - "16" for NLG 
-          - "17" for EUR 
-          - "18" for KRW 
-          - "19" for TWD 
-          - "20" for SGD 
-          - "21" for CNY 
-          - "22" for HKD 
-          - "23" for NZD 
-          - "24" for MYR 
-          - "25" for BRL 
-          - "26" for PTE 
-          - "27" for MXP 
-          - "28" for CLP 
-          - "29" for TRY 
-          - "30" for ARS 
-          - "31" for PEN 
-          - "32" for ILS 
-          - "33" for CHF 
-          - "34" for VEF 
-          - "35" for COP 
-          - "36" for GTQ 
-          - "37" for PLN 
-          - "39" for INR 
-          - "40" for THB 
-          - "41" for IDR 
-          - "42" for CZK 
-          - "43" for RON 
-          - "44" for HUF 
-          - "45" for RUB 
-          - "46" for AED 
-          - "47" for BGN 
-          - "48" for HRK 
+          Possible values are:
+          - "1" for USD
+          - "2" for GBP
+          - "3" for ESP
+          - "4" for SEK
+          - "5" for CAD
+          - "6" for JPY
+          - "7" for DEM
+          - "8" for AUD
+          - "9" for FRF
+          - "10" for ITL
+          - "11" for DKK
+          - "12" for NOK
+          - "13" for FIM
+          - "14" for ZAR
+          - "15" for IEP
+          - "16" for NLG
+          - "17" for EUR
+          - "18" for KRW
+          - "19" for TWD
+          - "20" for SGD
+          - "21" for CNY
+          - "22" for HKD
+          - "23" for NZD
+          - "24" for MYR
+          - "25" for BRL
+          - "26" for PTE
+          - "27" for MXP
+          - "28" for CLP
+          - "29" for TRY
+          - "30" for ARS
+          - "31" for PEN
+          - "32" for ILS
+          - "33" for CHF
+          - "34" for VEF
+          - "35" for COP
+          - "36" for GTQ
+          - "37" for PLN
+          - "39" for INR
+          - "40" for THB
+          - "41" for IDR
+          - "42" for CZK
+          - "43" for RON
+          - "44" for HUF
+          - "45" for RUB
+          - "46" for AED
+          - "47" for BGN
+          - "48" for HRK
           - "49" for MXN
         format: int64
         type: string
@@ -14042,9 +14042,9 @@ definitions:
             type: string
           repeats:
             description: |-
-              The interval for which the report is repeated. Note:  
-              - "DAILY" also requires field "every" to be set. 
-              - "WEEKLY" also requires fields "every" and "repeatsOnWeekDays" to be set. 
+              The interval for which the report is repeated. Note:
+              - "DAILY" also requires field "every" to be set.
+              - "WEEKLY" also requires fields "every" and "repeatsOnWeekDays" to be set.
               - "MONTHLY" also requires fields "every" and "runsOnDayOfMonth" to be set.
             type: string
           repeatsOnWeekDays:
@@ -14148,18 +14148,18 @@ definitions:
           Report generation time zone ID of this account. This is a required field that can only be changed by a superuser.
           Acceptable values are:
 
-          - "1" for "America/New_York" 
-          - "2" for "Europe/London" 
-          - "3" for "Europe/Paris" 
-          - "4" for "Africa/Johannesburg" 
-          - "5" for "Asia/Jerusalem" 
-          - "6" for "Asia/Shanghai" 
-          - "7" for "Asia/Hong_Kong" 
-          - "8" for "Asia/Tokyo" 
-          - "9" for "Australia/Sydney" 
-          - "10" for "Asia/Dubai" 
-          - "11" for "America/Los_Angeles" 
-          - "12" for "Pacific/Auckland" 
+          - "1" for "America/New_York"
+          - "2" for "Europe/London"
+          - "3" for "Europe/Paris"
+          - "4" for "Africa/Johannesburg"
+          - "5" for "Asia/Jerusalem"
+          - "6" for "Asia/Shanghai"
+          - "7" for "Asia/Hong_Kong"
+          - "8" for "Asia/Tokyo"
+          - "9" for "Australia/Sydney"
+          - "10" for "Asia/Dubai"
+          - "11" for "America/Los_Angeles"
+          - "12" for "Pacific/Auckland"
           - "13" for "America/Sao_Paulo"
         format: int64
         type: string

@@ -5806,6 +5806,123 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/licenseCodes/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.licenseCodes.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - licenseCodes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/licenseCodes/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.licenseCodes.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - licenseCodes
+  '/{project}/global/licenseCodes/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.licenseCodes.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - licenseCodes
   '/{project}/global/licenses':
     get:
       description: 'Retrieves the list of licenses available in the specified project. This method does not get any licenses that belong to other projects, including licenses attached to publicly-available images, like Debian 8. If you want to get a list of publicly-available licenses, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
@@ -21861,7 +21978,7 @@ definitions:
     description: A reserved address resource.
     properties:
       address:
-        description: The static external IP address represented by this resource.
+        description: The static IP address represented by this resource.
         type: string
       addressType:
         description: 'The type of address to reserve. If unspecified, defaults to EXTERNAL.'
@@ -22923,6 +23040,9 @@ definitions:
           When the load balancing scheme is INTERNAL, this field is not used.
         format: int32
         type: integer
+      appEngineBackend:
+        $ref: '#/definitions/BackendServiceAppEngineBackend'
+        description: 'Directs request to an App Engine app. cloudFunctionBackend and backends[] must be empty if this is set.'
       backends:
         description: The list of backends that serve this BackendService.
         items:
@@ -22931,6 +23051,9 @@ definitions:
       cdnPolicy:
         $ref: '#/definitions/BackendServiceCdnPolicy'
         description: Cloud CDN configuration for this BackendService.
+      cloudFunctionBackend:
+        $ref: '#/definitions/BackendServiceCloudFunctionBackend'
+        description: 'Directs request to a cloud function. appEngineBackend and backends[] must be empty if this is set.'
       connectionDraining:
         $ref: '#/definitions/ConnectionDraining'
       creationTimestamp:
@@ -23108,6 +23231,19 @@ definitions:
             type: string
         type: object
     type: object
+  BackendServiceAppEngineBackend:
+    description: Configuration of a App Engine backend.
+    properties:
+      appEngineService:
+        description: Optional. App Engine app service name.
+        type: string
+      targetProject:
+        description: Required. Project ID of the project hosting the app. This is the project ID of this project. Reference to another project is not allowed.
+        type: string
+      version:
+        description: 'Optional. Version of App Engine app service. When empty, App Engine will do its normal traffic split.'
+        type: string
+    type: object
   BackendServiceCdnPolicy:
     description: Message containing Cloud CDN configuration for a backend service.
     properties:
@@ -23123,6 +23259,16 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  BackendServiceCloudFunctionBackend:
+    description: Configuration of a Cloud Function backend.
+    properties:
+      functionName:
+        description: Required. A cloud function name. Special value ?*? represents all cloud functions in the project.
+        type: string
+      targetProject:
+        description: Required. Project ID of the project hosting the cloud function.
+        type: string
     type: object
   BackendServiceFailoverPolicy:
     properties:
@@ -24869,7 +25015,7 @@ definitions:
     description: Guest OS features.
     properties:
       type:
-        description: 'The type of supported feature. Currently only VIRTIO_SCSI_MULTIQUEUE is supported. For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image. This value is purely informational and does not enable or disable any features.'
+        description: 'The type of supported feature. Currently only VIRTIO_SCSI_MULTIQUEUE is supported. For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image.'
         enum:
           - FEATURE_TYPE_UNSPECIFIED
           - MULTI_IP_SUBNET
@@ -25930,7 +26076,7 @@ definitions:
         description: |-
           A list of features to enable on the guest OS. Applicable for bootable images only. Currently, only one feature can be enabled, VIRTIO_SCSI_MULTIQUEUE, which allows each virtual CPU to have its own queue. For Windows images, you can only enable VIRTIO_SCSI_MULTIQUEUE on images with driver version 1.2.0.1621 or higher. Linux images with kernel versions 3.17 and higher will support VIRTIO_SCSI_MULTIQUEUE.
 
-          For new Windows images, the server might also populate this field with the value WINDOWS, to indicate that this is a Windows image. This value is purely informational and does not enable or disable any features.
+          For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image.
         items:
           $ref: '#/definitions/GuestOsFeature'
         type: array
@@ -31791,7 +31937,7 @@ definitions:
           - UPLOADING
         type: string
       storageBytes:
-        description: '[Output Only] A size of the the storage used by the snapshot. As snapshots share storage, this number is expected to change with snapshot creation/deletion.'
+        description: '[Output Only] A size of the storage used by the snapshot. As snapshots share storage, this number is expected to change with snapshot creation/deletion.'
         format: int64
         type: string
       storageBytesStatus:

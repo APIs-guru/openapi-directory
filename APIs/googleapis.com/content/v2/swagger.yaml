@@ -1053,12 +1053,20 @@ paths:
       description: Retrieves the status of a datafeed from your Merchant Center account. This method can only be called for non-multi-client accounts.
       operationId: content.datafeedstatuses.get
       parameters:
-        - in: path
-          name: merchantId
-          required: true
+        - description: 'The country for which to get the datafeed status. If this parameter is provided then language must also be provided. Note that this parameter is required for feeds targeting multiple countries and languages, since a feed may have a different status for each target.'
+          in: query
+          name: country
           type: string
         - in: path
           name: datafeedId
+          required: true
+          type: string
+        - description: 'The language for which to get the datafeed status. If this parameter is provided then country must also be provided. Note that this parameter is required for feeds targeting multiple countries and languages, since a feed may have a different status for each target.'
+          in: query
+          name: language
+          type: string
+        - in: path
+          name: merchantId
           required: true
           type: string
       responses:
@@ -2073,6 +2081,11 @@ definitions:
       websiteUrl:
         description: The merchant's website.
         type: string
+      youtubeChannelLinks:
+        description: 'List of linked YouTube channels that are active or pending approval. To create a new link request, add a new link with status active to the list. It will remain in a pending state until approved or rejected in the YT Creator Studio interface. To delete an active link, or to cancel a link request, remove it from the list.'
+        items:
+          $ref: '#/definitions/AccountYouTubeChannelLink'
+        type: array
     type: object
   AccountAdwordsLink:
     properties:
@@ -2236,6 +2249,15 @@ definitions:
         type: boolean
       emailAddress:
         description: User's email address.
+        type: string
+    type: object
+  AccountYouTubeChannelLink:
+    properties:
+      channelId:
+        description: Channel ID.
+        type: string
+      status:
+        description: 'Status of the link between this Merchant Center account and the YouTube channel. Upon retrieval, it represents the actual status of the link and can be either active if it was approved in YT Creator Studio or pending if it''s pending approval. Upon insertion, it represents the intended status of the link. Re-uploading a link with status active when it''s still pending or with status pending when it''s already active will have no effect: the status will remain unchanged. Re-uploading a link with deprecated status inactive is equivalent to not submitting the link at all and will delete the link if it was active or cancel the link request if it was pending.'
         type: string
     type: object
   AccountsAuthInfoResponse:
@@ -2522,7 +2544,7 @@ definitions:
         description: The two-letter ISO 639-1 language in which the attributes are defined in the data feed.
         type: string
       contentLanguage:
-        description: The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targetCountry.
+        description: '[DEPRECATED] Please use target.language instead. The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targetCountry.'
         type: string
       contentType:
         description: 'The type of data feed. For product inventory feeds, only feeds for local stores, not online stores, are supported.'
@@ -2541,7 +2563,7 @@ definitions:
         format: int64
         type: string
       intendedDestinations:
-        description: The list of intended destinations (corresponds to checked check boxes in Merchant Center).
+        description: '[DEPRECATED] Please use target.includedDestination instead. The list of intended destinations (corresponds to checked check boxes in Merchant Center).'
         items:
           type: string
         type: array
@@ -2553,8 +2575,13 @@ definitions:
         description: A descriptive name of the data feed.
         type: string
       targetCountry:
-        description: 'The country where the items in the feed will be included in the search index, represented as a CLDR territory code.'
+        description: '[DEPRECATED] Please use target.country instead. The country where the items in the feed will be included in the search index, represented as a CLDR territory code.'
         type: string
+      targets:
+        description: 'The targets this feed should apply to (country, language, destinations).'
+        items:
+          $ref: '#/definitions/DatafeedTarget'
+        type: array
     type: object
   DatafeedFetchSchedule:
     description: 'The required fields vary based on the frequency of fetching. For a monthly fetch schedule, day_of_month and hour are required. For a weekly fetch schedule, weekday and hour are required. For a daily fetch schedule, only hour is required.'
@@ -2605,6 +2632,9 @@ definitions:
   DatafeedStatus:
     description: 'The status of a datafeed, i.e., the result of the last retrieval of the datafeed computed asynchronously when the feed processing is finished.'
     properties:
+      country:
+        description: 'The country for which the status is reported, represented as a  CLDR territory code.'
+        type: string
       datafeedId:
         description: The ID of the feed for which the status is reported.
         format: uint64
@@ -2625,6 +2655,9 @@ definitions:
       kind:
         default: 'content#datafeedStatus'
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#datafeedStatus".'
+        type: string
+      language:
+        description: The two-letter ISO 639-1 language for which the status is reported.
         type: string
       lastUploadDate:
         description: The last date at which the feed was uploaded.
@@ -2669,6 +2702,25 @@ definitions:
         type: string
       value:
         description: The problematic value.
+        type: string
+    type: object
+  DatafeedTarget:
+    properties:
+      country:
+        description: 'The country where the items in the feed will be included in the search index, represented as a  CLDR territory code.'
+        type: string
+      excludedDestinations:
+        description: The list of destinations to exclude for this target (corresponds to unchecked check boxes in Merchant Center).
+        items:
+          type: string
+        type: array
+      includedDestinations:
+        description: The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in the excluded_destination field.
+        items:
+          type: string
+        type: array
+      language:
+        description: The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targetCountryLanguage.country.
         type: string
     type: object
   DatafeedsCustomBatchRequest:
@@ -2755,9 +2807,15 @@ definitions:
         description: 'An entry ID, unique within the batch request.'
         format: uint32
         type: integer
+      country:
+        description: The country for which to get the datafeed status. If this parameter is provided then language must also be provided. Note that for multi-target datafeeds this parameter is required.
+        type: string
       datafeedId:
-        description: The ID of the data feed to get or delete.
+        description: The ID of the data feed to get.
         format: uint64
+        type: string
+      language:
+        description: The language for which to get the datafeed status. If this parameter is provided then country must also be provided. Note that for multi-target datafeeds this parameter is required.
         type: string
       merchantId:
         description: The ID of the managing account.
@@ -3371,7 +3429,17 @@ definitions:
         description: The billing phone number.
         type: string
       type:
-        description: 'The type of instrument (VISA, Mastercard, etc).'
+        description: |-
+          The type of instrument.
+
+          Acceptable values are:  
+          - "AMEX" 
+          - "DISCOVER" 
+          - "JCB" 
+          - "MASTERCARD" 
+          - "UNIONPAY" 
+          - "VISA" 
+          - ""
         type: string
     type: object
   OrderPromotion:

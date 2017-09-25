@@ -1231,6 +1231,59 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMaintenancePolicy':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Sets the maintenance policy for a cluster.
+      operationId: container.projects.zones.clusters.setMaintenancePolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetMaintenancePolicyRequest'
+        - description: The name of the cluster to update.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: |-
+            The Google Developers Console [project ID or project
+            number](https://support.google.com/cloud/answer/6158840).
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            The name of the Google Compute Engine
+            [zone](/compute/docs/zones#available) in which the cluster
+            resides.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMasterAuth':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1762,6 +1815,9 @@ definitions:
           * `none` - no logs will be exported from the cluster.
           * if left as an empty string,`logging.googleapis.com` will be used.
         type: string
+      maintenancePolicy:
+        $ref: '#/definitions/MaintenancePolicy'
+        description: Configure the maintenance policy for this cluster.
       masterAuth:
         $ref: '#/definitions/MasterAuth'
         description: The authentication information for accessing the master endpoint.
@@ -1957,6 +2013,23 @@ definitions:
       nodePool:
         $ref: '#/definitions/NodePool'
         description: The node pool to create.
+    type: object
+  DailyMaintenanceWindow:
+    description: Time window specified for daily maintenance operations.
+    properties:
+      duration:
+        description: |-
+          [Output only] Duration of the time window, automatically chosen to be
+          smallest possible in the given scenario.
+          Duration will be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
+          format "PTnHnMnS".
+        type: string
+      startTime:
+        description: |-
+          Time within the maintenance window to start the maintenance operations.
+          Time format should be in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt)
+          format "HH:MM”, where HH : [00-23] and MM : [00-59] GMT.
+        type: string
     type: object
   Empty:
     description: |-
@@ -2159,6 +2232,20 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
+    type: object
+  MaintenancePolicy:
+    description: MaintenancePolicy defines the maintenance policy to be used for the cluster.
+    properties:
+      window:
+        $ref: '#/definitions/MaintenanceWindow'
+        description: Specifies the maintenance window in which maintenance may be performed.
+    type: object
+  MaintenanceWindow:
+    description: MaintenanceWindow defines the maintenance window to be used for the cluster.
+    properties:
+      dailyMaintenanceWindow:
+        $ref: '#/definitions/DailyMaintenanceWindow'
+        description: DailyMaintenanceWindow specifies a daily maintenance operation window.
     type: object
   MasterAuth:
     description: |-
@@ -2626,6 +2713,15 @@ definitions:
           * "logging.googleapis.com" - the Google Cloud Logging service
           * "none" - no metrics will be exported from the cluster
         type: string
+    type: object
+  SetMaintenancePolicyRequest:
+    description: SetMaintenancePolicyRequest sets the maintenance policy for a cluster.
+    properties:
+      maintenancePolicy:
+        $ref: '#/definitions/MaintenancePolicy'
+        description: |-
+          The maintenance policy to be set for the cluster. An empty field
+          clears the existing maintenance policy.
     type: object
   SetMasterAuthRequest:
     description: SetMasterAuthRequest updates the admin password of a cluster.

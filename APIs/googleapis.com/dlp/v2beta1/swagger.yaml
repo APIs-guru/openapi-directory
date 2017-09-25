@@ -373,7 +373,7 @@ paths:
   '/v2beta1/{name}':
     delete:
       description: This method is not supported and the server returns `UNIMPLEMENTED`.
-      operationId: dlp.inspect.operations.delete
+      operationId: dlp.riskAnalysis.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -390,13 +390,13 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: dlp.inspect.operations.get
+      operationId: dlp.riskAnalysis.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -413,7 +413,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -508,8 +508,8 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Cancels an operation. Use the get method to check whether the cancellation succeeded or whether the operation completed despite cancellation.
-      operationId: dlp.inspect.operations.cancel
+      description: Cancels an operation. Use the `inspect.operations.get` to check whether the cancellation succeeded or the operation completed despite cancellation.
+      operationId: dlp.riskAnalysis.operations.cancel
       parameters:
         - in: body
           name: body
@@ -530,7 +530,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - inspect
+        - riskAnalysis
 definitions:
   GoogleLongrunningCancelOperationRequest:
     description: The request message for Operations.CancelOperation.
@@ -565,15 +565,15 @@ definitions:
       metadata:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.
-        description: This field will contain an InspectOperationMetadata object. This will always be returned with the Operation.
+        description: This field will contain an InspectOperationMetadata object for `inspect.operations.create` or a RiskAnalysisOperationMetadata object for `dataSource.analyze`.  This will always be returned with the Operation.
         type: object
       name:
-        description: 'The server-assigned name, The `name` should have the format of `inspect/operations/<identifier>`.'
+        description: The server-assigned name. The `name` should have the format of `inspect/operations/<identifier>`.
         type: string
       response:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.
-        description: This field will contain an InspectOperationResult object.
+        description: This field will contain an InspectOperationResult object for `inspect.operations.create` or a RiskAnalysisOperationResult object for `dataSource.analyze`.
         type: object
     type: object
   GooglePrivacyDlpV2beta1AnalyzeDataSourceRiskRequest:
@@ -669,6 +669,7 @@ definitions:
           depending on the data.
     type: object
   GooglePrivacyDlpV2beta1CategoricalStatsHistogramBucket:
+    description: Histogram bucket of value frequencies in the column.
     properties:
       bucketSize:
         description: Total number of records in this bucket.
@@ -933,7 +934,6 @@ definitions:
     description: |-
       Pseudonymization method that generates surrogates via cryptographic hashing.
       Uses SHA-256.
-      The key size must be either 32 or 64 bytes.
       Outputs a 32 byte digest as an uppercase hex string
       (for example, 41D1567F7F99F1DC2A5FAB886DEE5BEE).
       Currently, only string and integer values can be hashed.
@@ -978,10 +978,14 @@ definitions:
       context:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1FieldId'
         description: |-
-          The 'tweak', a context may be used for higher security since the same
-          identifier in two different contexts won't be given the same surrogate. If
-          the context is not set, a default tweak will be used.
+          A context may be used for higher security since the same
+          identifier in two different contexts likely will be given a distinct
+          surrogate. The principle is that the likeliness is inversely related
+          to the ratio of the number of distinct identifiers per context over the
+          number of possible surrogates: As long as this ratio is small, the
+          likehood is large.
 
+          If the context is not set, a default tweak will be used.
           If the context is set but:
 
           1. there is no record present when transforming a given value or
@@ -998,6 +1002,8 @@ definitions:
 
           - a 64 bit integer is encoded followed by a single byte of value 1
           - a string is encoded in UTF-8 format followed by a single byte of value 2
+
+          This is also known as the 'tweak', as in tweakable encryption.
       cryptoKey:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1CryptoKey'
         description: 'The key used by the encryption algorithm. [required]'
@@ -1282,18 +1288,18 @@ definitions:
         type: string
     type: object
   GooglePrivacyDlpV2beta1InfoTypeDescription:
-    description: Info type description.
+    description: Description of the information type (infoType).
     properties:
       categories:
-        description: List of categories this info type belongs to.
+        description: List of categories this infoType belongs to.
         items:
           $ref: '#/definitions/GooglePrivacyDlpV2beta1CategoryDescription'
         type: array
       displayName:
-        description: Human readable form of the info type name.
+        description: Human readable form of the infoType name.
         type: string
       name:
-        description: Internal name of the info type.
+        description: Internal name of the infoType.
         type: string
     type: object
   GooglePrivacyDlpV2beta1InfoTypeLimit:
@@ -1500,7 +1506,7 @@ definitions:
         type: array
     type: object
   GooglePrivacyDlpV2beta1KAnonymityEquivalenceClass:
-    description: The set of columns' values that share the same ldiversity value
+    description: The set of columns' values that share the same k-anonymity value.
     properties:
       equivalenceClassSize:
         description: |-
@@ -1518,6 +1524,7 @@ definitions:
         type: array
     type: object
   GooglePrivacyDlpV2beta1KAnonymityHistogramBucket:
+    description: Histogram bucket of equivalence class sizes in the table.
     properties:
       bucketSize:
         description: Total number of records in this bucket.
@@ -1614,7 +1621,7 @@ definitions:
         description: Sensitive field for computing the l-value.
     type: object
   GooglePrivacyDlpV2beta1LDiversityEquivalenceClass:
-    description: The set of columns' values that share the same ldiversity value.
+    description: The set of columns' values that share the same l-diversity value.
     properties:
       equivalenceClassSize:
         description: Size of the k-anonymity equivalence class.
@@ -1638,6 +1645,7 @@ definitions:
         type: array
     type: object
   GooglePrivacyDlpV2beta1LDiversityHistogramBucket:
+    description: Histogram bucket of sensitive value frequencies in the table.
     properties:
       bucketSize:
         description: Total number of records in this bucket.
@@ -1990,7 +1998,10 @@ definitions:
     properties: {}
     type: object
   GooglePrivacyDlpV2beta1RiskAnalysisOperationMetadata:
-    description: Metadata returned within GetOperation for risk analysis.
+    description: |-
+      Metadata returned within the
+      [`riskAnalysis.operations.get`](/dlp/docs/reference/rest/v2beta1/riskAnalysis.operations/get)
+      for risk analysis.
     properties:
       createTime:
         description: The time which this request was started.
@@ -2004,7 +2015,10 @@ definitions:
         description: Input dataset to compute metrics over.
     type: object
   GooglePrivacyDlpV2beta1RiskAnalysisOperationResult:
-    description: Result of a risk analysis operation request.
+    description: |-
+      Result of a risk analysis
+      [`Operation`](/dlp/docs/reference/rest/v2beta1/inspect.operations)
+      request.
     properties:
       categoricalStatsResult:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1CategoricalStatsResult'

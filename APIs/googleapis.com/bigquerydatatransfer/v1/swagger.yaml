@@ -413,6 +413,9 @@ paths:
             results, `ListTransferRunsResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
+          enum:
+            - RUN_ATTEMPT_UNSPECIFIED
+            - LATEST
           in: query
           name: pageToken
           type: string
@@ -425,11 +428,22 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: Indicates how run attempts are to be pulled.
+        - collectionFormat: multi
+          description: Indicates how run attempts are to be pulled.
           enum:
             - RUN_ATTEMPT_UNSPECIFIED
             - LATEST
           in: query
+          items:
+            enum:
+              - TRANSFER_STATE_UNSPECIFIED
+              - INACTIVE
+              - PENDING
+              - RUNNING
+              - SUCCEEDED
+              - FAILED
+              - CANCELLED
+            type: string
           name: runAttempt
           type: string
         - collectionFormat: multi
@@ -487,11 +501,8 @@ paths:
             type: string
           name: dataSourceIds
           type: array
-        - collectionFormat: multi
-          description: Page size. The default page size is the maximum value of 1000 results.
+        - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
-          items:
-            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -610,8 +621,16 @@ paths:
             type: string
           name: messageTypes
           type: array
-        - description: Page size. The default page size is the maximum value of 1000 results.
+        - collectionFormat: multi
+          description: Page size. The default page size is the maximum value of 1000 results.
           in: query
+          items:
+            enum:
+              - MESSAGE_SEVERITY_UNSPECIFIED
+              - INFO
+              - WARNING
+              - ERROR
+            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -1035,11 +1054,15 @@ definitions:
     description: A request to schedule transfer runs for a time range.
     properties:
       endTime:
-        description: End time of the range of transfer runs.
+        description: |-
+          End time of the range of transfer runs. For example,
+          `"2017-05-30T00:00:00+00:00"`.
         format: google-datetime
         type: string
       startTime:
-        description: Start time of the range of transfer runs.
+        description: |-
+          Start time of the range of transfer runs. For example,
+          `"2017-05-25T00:00:00+00:00"`.
         format: google-datetime
         type: string
     type: object

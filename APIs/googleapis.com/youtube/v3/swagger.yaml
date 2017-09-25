@@ -5930,6 +5930,13 @@ definitions:
       enableLowLatency:
         description: Indicates whether this broadcast has low latency enabled.
         type: boolean
+      latencyPreference:
+        description: 'If both this and enable_low_latency are set, they must match. LATENCY_NORMAL should match enable_low_latency=false LATENCY_LOW should match enable_low_latency=true LATENCY_ULTRA_LOW should have enable_low_latency omitted.'
+        enum:
+          - low
+          - normal
+          - ultraLow
+        type: string
       mesh:
         format: byte
         type: string

@@ -14095,7 +14095,7 @@ definitions:
     description: A reserved address resource.
     properties:
       address:
-        description: The static external IP address represented by this resource.
+        description: The static IP address represented by this resource.
         type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -15936,7 +15936,7 @@ definitions:
     description: Guest OS features.
     properties:
       type:
-        description: 'The type of supported feature. Currently only VIRTIO_SCSI_MULTIQUEUE is supported. For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image. This value is purely informational and does not enable or disable any features.'
+        description: 'The type of supported feature. Currently only VIRTIO_SCSI_MULTIQUEUE is supported. For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image.'
         enum:
           - FEATURE_TYPE_UNSPECIFIED
           - VIRTIO_SCSI_MULTIQUEUE
@@ -16284,7 +16284,7 @@ definitions:
         description: |-
           A list of features to enable on the guest OS. Applicable for bootable images only. Currently, only one feature can be enabled, VIRTIO_SCSI_MULTIQUEUE, which allows each virtual CPU to have its own queue. For Windows images, you can only enable VIRTIO_SCSI_MULTIQUEUE on images with driver version 1.2.0.1621 or higher. Linux images with kernel versions 3.17 and higher will support VIRTIO_SCSI_MULTIQUEUE.
 
-          For new Windows images, the server might also populate this field with the value WINDOWS, to indicate that this is a Windows image. This value is purely informational and does not enable or disable any features.
+          For newer Windows images, the server might also populate this property with the value WINDOWS to indicate that this is a Windows image.
         items:
           $ref: '#/definitions/GuestOsFeature'
         type: array
@@ -16358,6 +16358,19 @@ definitions:
         description: The customer-supplied encryption key of the source disk. Required if the source disk is protected by a customer-supplied encryption key.
       sourceDiskId:
         description: The ID value of the disk used to create this image. This value may be used to determine whether the image was taken from the current or a previous instance of a given disk name.
+        type: string
+      sourceImage:
+        description: |-
+          URL of the source image used to create this image. This can be a full or valid partial URL. You must provide exactly one of:  
+          - this property, or  
+          - the rawDisk.source property, or  
+          - the sourceDisk property   in order to create an image.
+        type: string
+      sourceImageEncryptionKey:
+        $ref: '#/definitions/CustomerEncryptionKey'
+        description: The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key.
+      sourceImageId:
+        description: '[Output Only] The ID value of the image used to create this image. This value may be used to determine whether the image was taken from the current or a previous instance of a given image name.'
         type: string
       sourceType:
         default: RAW
@@ -18866,7 +18879,7 @@ definitions:
           - UPLOADING
         type: string
       storageBytes:
-        description: '[Output Only] A size of the the storage used by the snapshot. As snapshots share storage, this number is expected to change with snapshot creation/deletion.'
+        description: '[Output Only] A size of the storage used by the snapshot. As snapshots share storage, this number is expected to change with snapshot creation/deletion.'
         format: int64
         type: string
       storageBytesStatus:

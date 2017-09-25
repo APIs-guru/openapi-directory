@@ -1003,7 +1003,17 @@ definitions:
         description: The billing phone number.
         type: string
       type:
-        description: 'The type of instrument (VISA, Mastercard, etc).'
+        description: |-
+          The type of instrument.
+
+          Acceptable values are:  
+          - "AMEX" 
+          - "DISCOVER" 
+          - "JCB" 
+          - "MASTERCARD" 
+          - "UNIONPAY" 
+          - "VISA" 
+          - ""
         type: string
     type: object
   OrderPromotion:
