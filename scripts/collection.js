@@ -264,6 +264,10 @@ function validateCollection(dir, command) {
   Promise.mapSeries(_.toPairs(specs), ([filename, swagger]) => {
     console.error('======================== ' + filename + ' ================');
     assert(!_.isEmpty(swagger.paths), 'Definition should have operations');
+    //FIXME: we can't do this check yet because of Amazon AWS and some others
+    //_.each(swagger.paths, function (path, key) {
+    //  assert(key.indexOf('?') === -1, 'Path contains hard-coded query parameters');
+    //});
     //FIXME: check location
     //assert(util.getSwaggerPath(swagger) === filename, 'Incorect location');
 
@@ -294,7 +298,7 @@ function validatePreferred(specs) {
     var id = util.getApiId(swagger);
     preferred[id] = preferred[id] || {};
     preferred[id][swagger.info.version] = swagger.info['x-preferred'];
-  assert(Object.keys(swagger.paths).length>0, `"${id}" has no paths`);
+    assert(Object.keys(swagger.paths).length>0, `"${id}" has no paths`);
   });
 
   _.each(preferred, function (versions, id) {
