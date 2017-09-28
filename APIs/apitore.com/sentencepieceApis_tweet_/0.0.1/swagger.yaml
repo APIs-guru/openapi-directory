@@ -1,0 +1,93 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.apitore.com
+basePath: /api/38
+info:
+  description: 'SentencePiece tokenizer (tweet).<BR />[Endpoint] https://api.apitore.com/api/38'
+  title: SentencePiece APIs (tweet)
+  version: 0.0.1
+  x-logo:
+    url: 'https://apitore.com/img/apis/38.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/38'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: sentencepieceApis_tweet_
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - description: Sentence Piece Bpe Tweet Controller
+    name: sentence-piece-bpe-tweet-controller
+paths:
+  /sentencepiece-bpe-tweet/get:
+    get:
+      description: 'SentencePiece (bpe).<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/sentencepiece-response">sentencepiece-response</a><BR />&nbsp; Class: com.apitore.banana.response.com.atilika.sentencepiece.SentencePieceTokenResponseEntity<BR />'
+      operationId: getUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: 'Text [up to 400 characters]'
+          in: query
+          name: text
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SentencePieceTokenResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: SentencePiece (bpe)
+      tags:
+        - sentence-piece-bpe-tweet-controller
+definitions:
+  SPTokenEntity:
+    properties:
+      token:
+        description: Token
+        type: string
+      wid:
+        description: Word ID
+        format: int64
+        type: integer
+    required:
+      - token
+      - wid
+    type: object
+  SentencePieceTokenResponseEntity:
+    properties:
+      endTime:
+        description: End date
+        type: string
+      log:
+        description: Log message
+        type: string
+      processTime:
+        description: 'Process time [millisecond]'
+        type: string
+      startTime:
+        description: Start date
+        type: string
+      tokens:
+        description: SentencePiece Tokens
+        items:
+          $ref: '#/definitions/SPTokenEntity'
+        type: array
+    required:
+      - endTime
+      - log
+      - processTime
+      - startTime
+    type: object

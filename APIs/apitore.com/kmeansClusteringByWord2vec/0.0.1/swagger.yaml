@@ -1,0 +1,135 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.apitore.com
+basePath: /api/48
+info:
+  description: 'Kmeans clustering by word2vec.<BR />[Endpoint] https://api.apitore.com/api/48'
+  title: Kmeans clustering by word2vec
+  version: 0.0.1
+  x-logo:
+    url: 'https://apitore.com/img/apis/48.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/48'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: kmeansClusteringByWord2vec
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - description: Kmeans By Word 2 Vec Controller
+    name: kmeans-by-word-2-vec-controller
+paths:
+  /kmeans-wordvector/cluster:
+    post:
+      description: 'kmeans clustering by word2vec.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/clustering-response">clustering-response</a><BR />&nbsp; Class: com.apitore.banana.response.clustering.ClusterResponseEntity<BR />'
+      operationId: clusterUsingPOST
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          type: string
+        - description: Clustering request entity
+          in: body
+          name: req
+          required: true
+          schema:
+            $ref: '#/definitions/ClusteringRequestEntity'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ClusterResponseEntity'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Words clustering by word2vec
+      tags:
+        - kmeans-by-word-2-vec-controller
+definitions:
+  ClusterEntity:
+    properties:
+      center:
+        description: center
+        items:
+          format: double
+          type: number
+        type: array
+      words:
+        description: words
+        items:
+          $ref: '#/definitions/FactorEntity'
+        type: array
+    required:
+      - center
+      - words
+    type: object
+  ClusterResponseEntity:
+    properties:
+      clusters:
+        description: Clusters
+        items:
+          $ref: '#/definitions/ClusterEntity'
+        type: array
+      endTime:
+        description: End date
+        type: string
+      log:
+        description: Log message
+        type: string
+      num:
+        description: Cluster num
+        type: string
+      processTime:
+        description: 'Process time [millisecond]'
+        type: string
+      startTime:
+        description: Start date
+        type: string
+    required:
+      - endTime
+      - log
+      - num
+      - processTime
+      - startTime
+    type: object
+  ClusteringRequestEntity:
+    properties:
+      iter:
+        description: 'iter [max 100, default 10]'
+        format: int32
+        type: integer
+      num:
+        description: 'num [max 100, default 10]'
+        format: int32
+        type: integer
+      words:
+        description: 'words [max 1000 words]'
+        items:
+          type: string
+        type: array
+    required:
+      - words
+    type: object
+  FactorEntity:
+    properties:
+      similarity:
+        description: similarity
+        format: double
+        type: number
+      word:
+        description: word
+        type: string
+    required:
+      - similarity
+      - word
+    type: object
