@@ -1,0 +1,1121 @@
+swagger: '2.0'
+schemes:
+  - https
+host: app.launchdarkly.com
+basePath: /api/v2
+info:
+  contact:
+    email: support@launchdarkly.com
+    name: LaunchDarkly Support
+    url: 'https://support.launchdarkly.com'
+  description: Build custom integrations with the LaunchDarkly REST API
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  termsOfService: 'https://launchdarkly.com/terms'
+  title: LaunchDarkly
+  version: 2.0.0
+  x-apisguru-categories:
+    - developer_tools
+  x-logo:
+    url: 'https://pbs.twimg.com/profile_images/895331003236892673/d0bCtJhv_400x400.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://launchdarkly.github.io/ld-openapi/swagger.json'
+      version: '2.0'
+  x-providerName: launchdarkly.com
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  Token:
+    description: 'https://app.launchdarkly.com/settings#/tokens'
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - Token: []
+parameters:
+  After:
+    description: A unix epoch time in milliseconds specifying the maximum last time a user requested a feature flag
+    in: query
+    name: after
+    required: false
+    type: number
+  EnvironmentKey:
+    description: The environment key
+    in: path
+    name: environmentKey
+    required: true
+    type: string
+  EnvironmentKeyQuery:
+    description: The environment key
+    in: query
+    name: environmentKeyQuery
+    required: false
+    type: string
+  EnvironmentPostRequest:
+    description: New environment
+    in: body
+    name: environmentBody
+    required: true
+    schema:
+      properties:
+        color:
+          description: 'A color swatch (as an RGB hex value with no leading ''#'', e.g. C8C8C8)'
+          type: string
+        defaultTtl:
+          type: number
+        key:
+          type: string
+        name:
+          type: string
+      required:
+        - name
+        - key
+        - color
+      type: object
+  FeatureFlagKey:
+    description: The feature flag's key
+    in: path
+    name: featureFlagKey
+    required: true
+    type: string
+  FeatureFlagPostRequest:
+    description: Create a new feature flag
+    in: body
+    name: featureFlagBody
+    required: true
+    schema:
+      properties:
+        includeInSnippet:
+          description: Whether or not this flag should be made available to the client-side JavaScript SDK
+          type: boolean
+        key:
+          description: A unique key that will be used to reference the flag in your code
+          type: string
+        name:
+          description: A human-friendly name for the feature flag. Remember to note if this flag is intended to be temporary or permanent.
+          type: string
+        tags:
+          description: Tags for the feature flag
+          items:
+            type: string
+          type: array
+        temporary:
+          description: Whether or not the flag is a temporary flag
+          type: boolean
+        variations:
+          description: An array of possible variations for the flag.
+          items:
+            $ref: '#/definitions/Variation'
+          type: array
+      required:
+        - name
+        - key
+        - variations
+      type: object
+  Limit:
+    description: Pagination limit
+    in: query
+    name: limit
+    required: false
+    type: number
+  Offset:
+    description: Specifies the first item to return in the collection
+    in: query
+    name: offset
+    required: false
+    type: number
+  PatchRequest:
+    description: 'http://jsonpatch.com/'
+    in: body
+    name: patchDelta
+    required: true
+    schema:
+      items:
+        properties:
+          op:
+            type: string
+          path:
+            type: string
+          value:
+            type: object
+        required:
+          - op
+          - path
+          - value
+        type: object
+      type: array
+  ProjectKey:
+    description: The project key
+    in: path
+    name: projectKey
+    required: true
+    type: string
+  ProjectPostRequest:
+    description: New project
+    in: body
+    name: projectBody
+    required: true
+    schema:
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+      required:
+        - name
+        - key
+      type: object
+  Query:
+    description: Search query
+    in: query
+    name: q
+    required: false
+    type: string
+  ResourceId:
+    description: The resource ID
+    in: path
+    name: resourceId
+    required: true
+    type: string
+  Tag:
+    description: Filter by tag
+    in: query
+    name: tag
+    required: false
+    type: string
+  UserKey:
+    description: The user's key
+    in: path
+    name: userKey
+    required: true
+    type: string
+  UserSettingsPutRequest:
+    in: body
+    name: userSettingsBody
+    required: true
+    schema:
+      properties:
+        setting:
+          description: The variation value to set for the user. Must match the variation type of the flag.
+          type: boolean
+      type: object
+  WebhookPostRequest:
+    description: New webhook
+    in: body
+    name: webhookBody
+    required: true
+    schema:
+      properties:
+        'on':
+          type: boolean
+        secret:
+          type: string
+        sign:
+          type: boolean
+        url:
+          type: string
+      required:
+        - url
+        - sign
+        - 'on'
+      type: object
+responses:
+  FeatureFlags200:
+    description: Feature flag response
+    schema:
+      $ref: '#/definitions/FeatureFlag'
+  Projects200:
+    description: Project response
+    schema:
+      $ref: '#/definitions/Project'
+  Root200:
+    description: A list of links to available resources in the API
+    schema:
+      $ref: '#/definitions/Links'
+  Standard201:
+    description: Resource created
+  Standard204:
+    description: Action completed successfully
+  Standard400:
+    description: Invalid request body
+  Standard401:
+    description: Invalid access token
+  Standard404:
+    description: Invalid resource specifier
+  Standard409:
+    description: Status conflict
+  Webhooks200:
+    description: Webhook response
+    schema:
+      $ref: '#/definitions/Webhook'
+paths:
+  /:
+    get:
+      operationId: getRoot
+      responses:
+        '200':
+          $ref: '#/responses/Root200'
+        '401':
+          $ref: '#/responses/Standard401'
+      summary: Get the root resource
+      tags:
+        - root
+  /auditlog:
+    get:
+      operationId: getAuditLogEntries
+      responses:
+        '200':
+          description: Audit log entries response
+          schema:
+            $ref: '#/definitions/AuditLogEntries'
+        '400':
+          $ref: '#/responses/Standard400'
+        '401':
+          $ref: '#/responses/Standard401'
+      summary: Fetch a list of all webhooks
+      tags:
+        - audit log
+  '/auditlog/{resourceId}':
+    get:
+      operationId: getAuditLogEntry
+      parameters:
+        - $ref: '#/parameters/ResourceId'
+      responses:
+        '200':
+          description: Audit log entry response
+          schema:
+            $ref: '#/definitions/AuditLogEntry'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Get a webhook by ID
+      tags:
+        - audit log
+  '/environments/{projectKey}':
+    post:
+      operationId: postEnvironment
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentPostRequest'
+      responses:
+        '201':
+          $ref: '#/responses/Standard201'
+        '400':
+          $ref: '#/responses/Standard400'
+        '401':
+          $ref: '#/responses/Standard401'
+        '409':
+          $ref: '#/responses/Standard409'
+      summary: Create an environment
+      tags:
+        - environments
+  '/environments/{projectKey}/{environmentKey}':
+    delete:
+      operationId: deleteEnvironment
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+      responses:
+        '204':
+          $ref: '#/responses/Standard204'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Delete an environment by ID
+      tags:
+        - environments
+    get:
+      operationId: getEnvironment
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+      responses:
+        '200':
+          description: Environment response
+          schema:
+            $ref: '#/definitions/Environment'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Get an environment by key.
+      tags:
+        - environments
+    patch:
+      operationId: patchEnvironment
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+        - $ref: '#/parameters/PatchRequest'
+      responses:
+        '400':
+          $ref: '#/responses/Standard400'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+        '409':
+          $ref: '#/responses/Standard409'
+      summary: Modify an environment by ID
+      tags:
+        - environments
+  '/flag-statuses/{projectKey}/{environmentKey}':
+    get:
+      operationId: getFeatureFlagStatus
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+      responses:
+        '200':
+          description: List of feature flag statuses
+          schema:
+            $ref: '#/definitions/FeatureFlagStatuses'
+        '401':
+          $ref: '#/responses/Standard401'
+      summary: Get a list of statuses for all feature flags
+      tags:
+        - flags
+  '/flag-statuses/{projectKey}/{environmentKey}/{featureFlagKey}':
+    get:
+      operationId: getFeatureFlagStatuses
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+        - $ref: '#/parameters/FeatureFlagKey'
+      responses:
+        '200':
+          description: Feature flag status by flag key
+          schema:
+            $ref: '#/definitions/FeatureFlagStatus'
+        '401':
+          $ref: '#/responses/Standard401'
+      summary: Get a list of statuses for all feature flags
+      tags:
+        - flags
+  '/flags/{projectKey}':
+    get:
+      operationId: getFeatureFlags
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKeyQuery'
+        - $ref: '#/parameters/Tag'
+      responses:
+        '200':
+          description: Flags response
+          schema:
+            $ref: '#/definitions/FeatureFlags'
+        '401':
+          $ref: '#/responses/Standard401'
+      summary: Get a list of all features in the given project.
+      tags:
+        - flags
+    post:
+      operationId: postFeatureFlag
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/FeatureFlagPostRequest'
+      responses:
+        '201':
+          $ref: '#/responses/Standard201'
+        '400':
+          $ref: '#/responses/Standard400'
+        '401':
+          $ref: '#/responses/Standard401'
+        '409':
+          $ref: '#/responses/Standard409'
+      summary: Create a feature flag
+      tags:
+        - flags
+  '/flags/{projectKey}/{featureFlagKey}':
+    delete:
+      operationId: deleteFeatureFlag
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/FeatureFlagKey'
+      responses:
+        '204':
+          $ref: '#/responses/Standard204'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Delete a feature flag by ID
+      tags:
+        - flags
+    get:
+      operationId: getFeatureFlag
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/FeatureFlagKey'
+        - $ref: '#/parameters/EnvironmentKeyQuery'
+      responses:
+        '200':
+          description: Flag response
+          schema:
+            $ref: '#/definitions/FeatureFlag'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Get a single feature flag by key.
+      tags:
+        - flags
+    patch:
+      operationId: patchFeatureFlag
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/FeatureFlagKey'
+        - $ref: '#/parameters/PatchRequest'
+      responses:
+        '200':
+          $ref: '#/responses/FeatureFlags200'
+        '400':
+          $ref: '#/responses/Standard400'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+        '409':
+          $ref: '#/responses/Standard409'
+      summary: Modify a feature flag by ID
+      tags:
+        - flags
+  /projects:
+    get:
+      operationId: getProjects
+      responses:
+        '200':
+          description: Projects response
+          schema:
+            $ref: '#/definitions/Projects'
+        '401':
+          $ref: '#/responses/Standard401'
+      summary: Returns a list of all projects in the account.
+      tags:
+        - projects
+    post:
+      operationId: postProject
+      parameters:
+        - $ref: '#/parameters/ProjectPostRequest'
+      responses:
+        '201':
+          $ref: '#/responses/Standard201'
+        '400':
+          $ref: '#/responses/Standard400'
+        '401':
+          $ref: '#/responses/Standard401'
+        '409':
+          $ref: '#/responses/Standard409'
+      summary: Create a project
+      tags:
+        - projects
+  '/projects/{projectKey}':
+    delete:
+      operationId: deleteProject
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+      responses:
+        '204':
+          $ref: '#/responses/Standard204'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Delete a project by ID
+      tags:
+        - projects
+    get:
+      operationId: getProject
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+      responses:
+        '200':
+          $ref: '#/responses/Projects200'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Get a project by key.
+      tags:
+        - projects
+    patch:
+      operationId: patchProject
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/PatchRequest'
+      responses:
+        '400':
+          $ref: '#/responses/Standard400'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+        '409':
+          $ref: '#/responses/Standard409'
+      summary: Modify a project by ID
+      tags:
+        - projects
+  '/user-search/{projectKey}/{environmentKey}':
+    get:
+      operationId: getSearchUsers
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+        - $ref: '#/parameters/Query'
+        - $ref: '#/parameters/Limit'
+        - $ref: '#/parameters/Offset'
+        - $ref: '#/parameters/After'
+      responses:
+        '200':
+          description: Users response
+          schema:
+            $ref: '#/definitions/Users'
+        '401':
+          $ref: '#/responses/Standard401'
+      summary: 'Search users in LaunchDarkly based on their last active date, or a search query.'
+      tags:
+        - users
+  '/users/{projectKey}/{environmentKey}':
+    get:
+      operationId: getUsers
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+        - $ref: '#/parameters/Limit'
+      responses:
+        '200':
+          description: Users response
+          schema:
+            $ref: '#/definitions/Users'
+        '401':
+          $ref: '#/responses/Standard401'
+      summary: List all users in the environment.
+      tags:
+        - users
+  '/users/{projectKey}/{environmentKey}/{userKey}':
+    delete:
+      operationId: deleteUser
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+        - $ref: '#/parameters/UserKey'
+      responses:
+        '204':
+          $ref: '#/responses/Standard204'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Delete a user by ID
+      tags:
+        - users
+    get:
+      operationId: getUser
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+        - $ref: '#/parameters/UserKey'
+      responses:
+        '200':
+          description: User response
+          schema:
+            $ref: '#/definitions/User'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Get a user by key.
+      tags:
+        - users
+  '/users/{projectKey}/{environmentKey}/{userKey}/flags':
+    get:
+      operationId: getUserFlagSettings
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+        - $ref: '#/parameters/UserKey'
+      responses:
+        '200':
+          description: User flags settings response
+          schema:
+            $ref: '#/definitions/UserFlagSettings'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Lists the current flag settings for a given user.
+      tags:
+        - user settings
+  '/users/{projectKey}/{environmentKey}/{userKey}/flags/{featureFlagKey}':
+    get:
+      operationId: getUserFlagSetting
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+        - $ref: '#/parameters/UserKey'
+        - $ref: '#/parameters/FeatureFlagKey'
+      responses:
+        '200':
+          description: User flag setting response
+          schema:
+            $ref: '#/definitions/UserFlagSetting'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Get a user by key.
+      tags:
+        - user settings
+    put:
+      operationId: putFlagSetting
+      parameters:
+        - $ref: '#/parameters/ProjectKey'
+        - $ref: '#/parameters/EnvironmentKey'
+        - $ref: '#/parameters/UserKey'
+        - $ref: '#/parameters/FeatureFlagKey'
+        - $ref: '#/parameters/UserSettingsPutRequest'
+      responses:
+        '204':
+          $ref: '#/responses/Standard204'
+        '400':
+          $ref: '#/responses/Standard400'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Specifically enable or disable a feature flag for a user based on their key.
+      tags:
+        - user settings
+  /webhooks:
+    get:
+      operationId: getWebhooks
+      responses:
+        '200':
+          description: Webhooks response
+          schema:
+            $ref: '#/definitions/Webhooks'
+        '401':
+          $ref: '#/responses/Standard401'
+      summary: Fetch a list of all webhooks
+      tags:
+        - webhooks
+    post:
+      operationId: postWebhook
+      parameters:
+        - $ref: '#/parameters/WebhookPostRequest'
+      responses:
+        '201':
+          $ref: '#/responses/Standard201'
+        '400':
+          $ref: '#/responses/Standard400'
+        '401':
+          $ref: '#/responses/Standard401'
+      summary: Create a webhook
+      tags:
+        - webhooks
+  '/webhooks/{resourceId}':
+    delete:
+      operationId: deleteWebhook
+      parameters:
+        - $ref: '#/parameters/ResourceId'
+      responses:
+        '204':
+          $ref: '#/responses/Standard204'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Delete a webhook by ID
+      tags:
+        - webhooks
+    get:
+      operationId: getWebhook
+      parameters:
+        - $ref: '#/parameters/ResourceId'
+      responses:
+        '200':
+          $ref: '#/responses/Webhooks200'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+      summary: Get a webhook by ID
+      tags:
+        - webhooks
+    patch:
+      operationId: patchWebhook
+      parameters:
+        - $ref: '#/parameters/ResourceId'
+        - $ref: '#/parameters/PatchRequest'
+      responses:
+        '200':
+          $ref: '#/responses/Webhooks200'
+        '400':
+          $ref: '#/responses/Standard400'
+        '401':
+          $ref: '#/responses/Standard401'
+        '404':
+          $ref: '#/responses/Standard404'
+        '409':
+          $ref: '#/responses/Standard409'
+      summary: Modify a webhook by ID
+      tags:
+        - webhooks
+definitions:
+  AuditLogEntries:
+    properties:
+      _links:
+        $ref: '#/definitions/Links'
+      items:
+        items:
+          $ref: '#/definitions/AuditLogEntry'
+        type: array
+    type: object
+  AuditLogEntry:
+    properties:
+      _id:
+        type: string
+      _links:
+        $ref: '#/definitions/Links'
+      date:
+        type: number
+      description:
+        type: string
+      kind:
+        type: string
+      member:
+        $ref: '#/definitions/Member'
+      name:
+        type: string
+      target:
+        properties:
+          _links:
+            $ref: '#/definitions/Links'
+          name:
+            type: string
+          resources:
+            items:
+              type: string
+            type: array
+        type: object
+      title:
+        type: string
+      titleVerb:
+        type: string
+    type: object
+  Clause:
+    properties:
+      attribute:
+        type: string
+      negate:
+        type: boolean
+      op:
+        type: string
+      values:
+        items:
+          type: string
+        type: array
+    type: object
+  Environment:
+    properties:
+      _id:
+        type: string
+      _links:
+        $ref: '#/definitions/Links'
+      apiKey:
+        type: string
+      color:
+        type: string
+      defaultTtl:
+        type: number
+      key:
+        type: string
+      mobileKey:
+        type: string
+      name:
+        type: string
+      secureMode:
+        type: boolean
+    type: object
+  FeatureFlag:
+    properties:
+      _links:
+        $ref: '#/definitions/Links'
+      _maintainer:
+        $ref: '#/definitions/Member'
+      creationDate:
+        type: number
+      environments:
+        additionalProperties:
+          $ref: '#/definitions/FeatureFlagConfig'
+        type: object
+      includeInSnippet:
+        type: boolean
+      key:
+        type: string
+      kind:
+        type: string
+      maintainerId:
+        type: string
+      name:
+        type: string
+      tags:
+        items:
+          type: string
+        type: array
+      temporary:
+        type: boolean
+      variations:
+        items:
+          $ref: '#/definitions/Variation'
+        type: array
+    type: object
+  FeatureFlagConfig:
+    properties:
+      archived:
+        type: boolean
+      fallthrough:
+        properties:
+          rollout:
+            $ref: '#/definitions/Rollout'
+          variation:
+            type: integer
+        type: object
+      lastModified:
+        type: integer
+      'on':
+        type: boolean
+      rules:
+        items:
+          $ref: '#/definitions/Rule'
+        type: array
+      salt:
+        type: string
+      sel:
+        type: string
+      targets:
+        items:
+          $ref: '#/definitions/Target'
+        type: array
+      version:
+        type: integer
+    type: object
+  FeatureFlagStatus:
+    properties:
+      _links:
+        $ref: '#/definitions/Links'
+      default:
+        type: boolean
+      lastRequested:
+        type: string
+      name:
+        type: string
+    type: object
+  FeatureFlagStatuses:
+    properties:
+      _links:
+        $ref: '#/definitions/Links'
+      items:
+        items:
+          $ref: '#/definitions/FeatureFlagStatus'
+        type: array
+    type: object
+  FeatureFlags:
+    properties:
+      _links:
+        $ref: '#/definitions/Links'
+      items:
+        items:
+          $ref: '#/definitions/FeatureFlag'
+        type: array
+    type: object
+  Link:
+    properties:
+      href:
+        type: string
+      type:
+        type: string
+    type: object
+  Links:
+    properties:
+      self:
+        $ref: '#/definitions/Link'
+    type: object
+  Member:
+    properties:
+      _id:
+        type: string
+      _links:
+        $ref: '#/definitions/Links'
+      _pendingInvite:
+        type: boolean
+      customRoles:
+        items:
+          type: string
+        type: array
+      email:
+        type: string
+      isBeta:
+        type: boolean
+      role:
+        type: string
+    type: object
+  Project:
+    properties:
+      _links:
+        $ref: '#/definitions/Links'
+      items:
+        items:
+          $ref: '#/definitions/Environment'
+        type: array
+    type: object
+  Projects:
+    properties:
+      _id:
+        type: string
+      _links:
+        $ref: '#/definitions/Links'
+      items:
+        items:
+          $ref: '#/definitions/Project'
+        type: array
+      key:
+        type: string
+      name:
+        type: string
+    type: object
+  Rollout:
+    properties:
+      variations:
+        items:
+          $ref: '#/definitions/WeightedVariation'
+        type: array
+    type: object
+  Rule:
+    properties:
+      clauses:
+        items:
+          $ref: '#/definitions/Clause'
+        type: array
+      rollout:
+        $ref: '#/definitions/Rollout'
+      variation:
+        type: integer
+    type: object
+  Target:
+    properties:
+      values:
+        items:
+          type: string
+        type: array
+      variation:
+        type: integer
+    type: object
+  User:
+    properties:
+      avatar:
+        type: string
+      environmentId:
+        type: string
+      lastPing:
+        type: string
+      ownerId:
+        type: string
+      user:
+        example:
+          custom:
+            company: example.com
+          key: a00bea
+          name: Bob Loblaw
+        type: object
+    type: object
+  UserFlagSetting:
+    properties:
+      _links:
+        $ref: '#/definitions/Links'
+      _value:
+        type: boolean
+      setting:
+        type: boolean
+    type: object
+  UserFlagSettings:
+    properties:
+      _links:
+        $ref: '#/definitions/Links'
+      items:
+        example:
+          alternate.page:
+            _links:
+              self:
+                href: /api/v2/users/lacuna/production/Abbie_Braun/flags/alternate.page
+                type: application/json
+            _value: 'false,'
+          sort.order:
+            _links:
+              _value: true
+              self:
+                href: /api/v2/users/lacuna/production/Abbie_Braun/flags/sort.order
+                type: application/json
+        type: object
+    type: object
+  Users:
+    properties:
+      _links:
+        $ref: '#/definitions/Links'
+      items:
+        items:
+          $ref: '#/definitions/User'
+        type: array
+      totalCount:
+        type: number
+    type: object
+  Variation:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+      value:
+        type: object
+    required:
+      - value
+    type: object
+  Webhook:
+    properties:
+      _id:
+        type: string
+      _links:
+        $ref: '#/definitions/Links'
+      'on':
+        type: boolean
+      secret:
+        type: string
+      tags:
+        items:
+          type: string
+        type: array
+      url:
+        type: string
+    type: object
+  Webhooks:
+    properties:
+      _links:
+        $ref: '#/definitions/Links'
+      items:
+        items:
+          $ref: '#/definitions/Webhook'
+        type: array
+    type: object
+  WeightedVariation:
+    properties:
+      variation:
+        type: integer
+      weight:
+        type: integer
+    type: object
