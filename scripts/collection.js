@@ -210,25 +210,25 @@ function fixupSwagger(swaggerPath) {
 function updateCollection(dir, command) {
   specSources.getLeads(util.getSpecs(dir))
     .then(leads => _.toPairs(leads))
-  .then(leadPairs => {
-    if (command.resume) {
-      _.remove(leadPairs, function(lp){
-        return (lp[0] < command.resume);
-      });
-    }
-    return leadPairs;
-  })
+    .then(leadPairs => {
+      if (command.resume) {
+        _.remove(leadPairs, function(lp){
+          return (lp[0] < command.resume);
+        });
+      }
+      return leadPairs;
+    })
     .each(([filename, lead]) => {
       if (lead) {
         var origin = _.cloneDeep(util.getOrigin(lead));
         if (Array.isArray(origin))
-        origin = origin.pop();
+          origin = origin.pop();
         var source = origin.url;
         var cacheEntry = getCacheEntry(source);
-      if ((cacheEntry.skip && !command.force) || (origin['x-apisguru-direct'])) {
+        if ((cacheEntry.skip && !command.force) || (origin['x-apisguru-direct'])) {
           console.log('SKIP '+source);
-        return null;
-      }
+          return null;
+        }
         return writeSpecFromLead(lead, command)
           .then(swagger => {
             if (swagger) {
