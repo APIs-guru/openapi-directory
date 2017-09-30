@@ -3,7 +3,7 @@ info:
   version: '2016-12-01'
   x-release: v4
   title: Amazon AppStream
-  description: <fullname>Amazon AppStream 2.0</fullname> <p>API documentation for Amazon AppStream 2.0.</p>
+  description: '<fullname>Amazon AppStream 2.0</fullname> <p>You can use Amazon AppStream 2.0 to stream desktop applications to any device running a web browser, without rewriting them.</p>'
   x-logo:
     url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
     backgroundColor: '#FFFFFF'
@@ -100,7 +100,7 @@ paths:
   /:
     post:
       operationId: AssociateFleet
-      description: Associate a fleet to a stack.
+      description: Associates the specified fleet with the specified stack.
       responses:
         '200':
           description: Success
@@ -145,7 +145,7 @@ paths:
   '/#CreateDirectoryConfig':
     post:
       operationId: CreateDirectoryConfig
-      description: Creates a directory configuration with the given parameters.
+      description: Creates a directory configuration.
       responses:
         '200':
           description: Success
@@ -178,7 +178,7 @@ paths:
   '/#CreateFleet':
     post:
       operationId: CreateFleet
-      description: Creates a new fleet.
+      description: Creates a fleet.
       responses:
         '200':
           description: Success
@@ -232,10 +232,100 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateImageBuilder':
+    post:
+      operationId: CreateImageBuilder
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateImageBuilderResult'
+        '480':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '481':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceNotAvailableException
+          schema:
+            $ref: '#/definitions/ResourceNotAvailableException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: InvalidRoleException
+          schema:
+            $ref: '#/definitions/InvalidRoleException'
+        '485':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+        '486':
+          description: InvalidParameterCombinationException
+          schema:
+            $ref: '#/definitions/InvalidParameterCombinationException'
+        '487':
+          description: IncompatibleImageException
+          schema:
+            $ref: '#/definitions/IncompatibleImageException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateImageBuilderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateImageBuilderStreamingURL':
+    post:
+      operationId: CreateImageBuilderStreamingURL
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateImageBuilderStreamingURLResult'
+        '480':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateImageBuilderStreamingURLRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateStack':
     post:
       operationId: CreateStack
-      description: Create a new stack.
+      description: Creates a stack.
       responses:
         '200':
           description: Success
@@ -284,7 +374,7 @@ paths:
   '/#CreateStreamingURL':
     post:
       operationId: CreateStreamingURL
-      description: 'Creates a URL to start an AppStream 2.0 streaming session for a user. By default, the URL is valid only for 1 minute from the time that it is generated.'
+      description: '<p>Creates a URL to start a streaming session for the specified user.</p> <p>By default, the URL is valid only for one minute from the time that it is generated.</p>'
       responses:
         '200':
           description: Success
@@ -325,7 +415,7 @@ paths:
   '/#DeleteDirectoryConfig':
     post:
       operationId: DeleteDirectoryConfig
-      description: Deletes the directory configuration with the given parameters.
+      description: Deletes the specified directory configuration.
       responses:
         '200':
           description: Success
@@ -358,7 +448,7 @@ paths:
   '/#DeleteFleet':
     post:
       operationId: DeleteFleet
-      description: Deletes a fleet.
+      description: Deletes the specified fleet.
       responses:
         '200':
           description: Success
@@ -392,10 +482,88 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteImage':
+    post:
+      operationId: DeleteImage
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteImageResult'
+        '480':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteImageRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteImageBuilder':
+    post:
+      operationId: DeleteImageBuilder
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteImageBuilderResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteImageBuilderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteStack':
     post:
       operationId: DeleteStack
-      description: 'Deletes the stack. After this operation completes, the environment can no longer be activated, and any reservations made for the stack are released.'
+      description: 'Deletes the specified stack. After this operation completes, the environment can no longer be activated and any reservations made for the stack are released.'
       responses:
         '200':
           description: Success
@@ -432,7 +600,7 @@ paths:
   '/#DescribeDirectoryConfigs':
     post:
       operationId: DescribeDirectoryConfigs
-      description: Returns a list describing the specified directory configurations.
+      description: Describes the specified directory configurations.
       responses:
         '200':
           description: Success
@@ -461,7 +629,7 @@ paths:
   '/#DescribeFleets':
     post:
       operationId: DescribeFleets
-      description: 'If fleet names are provided, this operation describes the specified fleets; otherwise, all the fleets in the account are described.'
+      description: Describes the specified fleets or all fleets in the account.
       responses:
         '200':
           description: Success
@@ -520,10 +688,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeImageBuilders':
+    post:
+      operationId: DescribeImageBuilders
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeImageBuildersResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeImageBuildersRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DescribeImages':
     post:
       operationId: DescribeImages
-      description: 'Describes the images. If a list of names is not provided, all images in your account are returned. This operation does not return a paginated result.'
+      description: Describes the specified images or all images in the account.
       responses:
         '200':
           description: Success
@@ -552,7 +749,7 @@ paths:
   '/#DescribeSessions':
     post:
       operationId: DescribeSessions
-      description: 'Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. To retrieve the next set of items, pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.'
+      description: 'Describes the streaming sessions for the specified stack and fleet. If a user ID is provided, only the streaming sessions for only that user are returned. If an authentication type is not provided, the default is to authenticate users using a streaming URL.'
       responses:
         '200':
           description: Success
@@ -581,7 +778,7 @@ paths:
   '/#DescribeStacks':
     post:
       operationId: DescribeStacks
-      description: 'If stack names are not provided, this operation describes the specified stacks; otherwise, all stacks in the account are described. To retrieve the next set of items, pass the <code>nextToken</code> value in a subsequent call to this operation.'
+      description: Describes the specified stacks or all stacks in the account.
       responses:
         '200':
           description: Success
@@ -610,7 +807,7 @@ paths:
   '/#DisassociateFleet':
     post:
       operationId: DisassociateFleet
-      description: Disassociates a fleet from a stack.
+      description: Disassociates the specified fleet from the specified stack.
       responses:
         '200':
           description: Success
@@ -647,7 +844,7 @@ paths:
   '/#ExpireSession':
     post:
       operationId: ExpireSession
-      description: This operation immediately stops a streaming session.
+      description: Stops the specified streaming session.
       responses:
         '200':
           description: Success
@@ -672,7 +869,7 @@ paths:
   '/#ListAssociatedFleets':
     post:
       operationId: ListAssociatedFleets
-      description: Lists all fleets associated with the stack.
+      description: Lists the fleets associated with the specified stack.
       responses:
         '200':
           description: Success
@@ -697,7 +894,7 @@ paths:
   '/#ListAssociatedStacks':
     post:
       operationId: ListAssociatedStacks
-      description: Lists all stacks to which the specified fleet is associated.
+      description: Lists the stacks associated with the specified fleet.
       responses:
         '200':
           description: Success
@@ -722,7 +919,7 @@ paths:
   '/#StartFleet':
     post:
       operationId: StartFleet
-      description: Starts a fleet.
+      description: Starts the specified fleet.
       responses:
         '200':
           description: Success
@@ -760,10 +957,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartImageBuilder':
+    post:
+      operationId: StartImageBuilder
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartImageBuilderResult'
+        '480':
+          description: ResourceNotAvailableException
+          schema:
+            $ref: '#/definitions/ResourceNotAvailableException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartImageBuilderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#StopFleet':
     post:
       operationId: StopFleet
-      description: Stops a fleet.
+      description: Stops the specified fleet.
       responses:
         '200':
           description: Success
@@ -793,10 +1027,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopImageBuilder':
+    post:
+      operationId: StopImageBuilder
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopImageBuilderResult'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+        '482':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopImageBuilderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#UpdateDirectoryConfig':
     post:
       operationId: UpdateDirectoryConfig
-      description: Updates the directory configuration with the given parameters.
+      description: Updates the specified directory configuration.
       responses:
         '200':
           description: Success
@@ -833,7 +1104,7 @@ paths:
   '/#UpdateFleet':
     post:
       operationId: UpdateFleet
-      description: 'Updates an existing fleet. All the attributes except the fleet name can be updated in the <b>STOPPED</b> state. When a fleet is in the <b>RUNNING</b> state, only <code>DisplayName</code> and <code>ComputeCapacity</code> can be updated. A fleet cannot be updated in a status of <b>STARTING</b> or <b>STOPPING</b>.'
+      description: '<p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code> and <code>ComputeCapacity</code> attributes. If the fleet is in the <code>STARTING</code> or <code>STOPPING</code> state, you can''t update it.</p>'
       responses:
         '200':
           description: Success
@@ -894,7 +1165,7 @@ paths:
   '/#UpdateStack':
     post:
       operationId: UpdateStack
-      description: Updates the specified fields in the stack with the specified name.
+      description: Updates the specified stack.
       responses:
         '200':
           description: Success
@@ -955,26 +1226,26 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/String'
-        description: The unique identifier for the application.
+        description: The name of the application.
       DisplayName:
         $ref: '#/definitions/String'
-        description: The name of the application shown to the end users.
+        description: The application name displayed to end users.
       IconURL:
         $ref: '#/definitions/String'
-        description: The URL for the application icon. This URL may be time-limited.
+        description: The URL for the application icon. This URL might be time-limited.
       LaunchPath:
         $ref: '#/definitions/String'
         description: The path to the application executable in the instance.
       LaunchParameters:
         $ref: '#/definitions/String'
-        description: A list of arguments that are passed to the application at launch.
+        description: The arguments that are passed to the application at launch.
       Enabled:
         $ref: '#/definitions/Boolean'
-        description: 'If there is a problem, an application can be disabled after image creation.'
+        description: 'If there is a problem, the application can be disabled after image creation.'
       Metadata:
         $ref: '#/definitions/Metadata'
         description: Additional attributes that describe the application.
-    description: An entry for a single application in the application catalog.
+    description: Describes an application in the application catalog.
   Applications:
     type: array
     items:
@@ -990,10 +1261,10 @@ definitions:
     properties:
       FleetName:
         $ref: '#/definitions/String'
-        description: The name of the fleet to associate.
+        description: The name of the fleet.
       StackName:
         $ref: '#/definitions/String'
-        description: The name of the stack to which the fleet is associated.
+        description: The name of the stack.
   AssociateFleetResult:
     type: object
     properties: {}
@@ -1015,7 +1286,7 @@ definitions:
       DesiredInstances:
         $ref: '#/definitions/Integer'
         description: The desired number of streaming instances.
-    description: The capacity configuration for the fleet.
+    description: Describes the capacity for a fleet.
   ComputeCapacityStatus:
     type: object
     required:
@@ -1029,11 +1300,11 @@ definitions:
         description: The total number of simultaneous streaming instances that are running.
       InUse:
         $ref: '#/definitions/Integer'
-        description: The number of instances that are being used for streaming.
+        description: The number of instances in use for streaming.
       Available:
         $ref: '#/definitions/Integer'
         description: The number of currently available instances that can be used to stream sessions.
-    description: The capacity information for the fleet.
+    description: Describes the capacity status for a fleet.
   ConcurrentModificationException:
     type: object
     properties:
@@ -1049,19 +1320,19 @@ definitions:
     properties:
       DirectoryName:
         $ref: '#/definitions/DirectoryName'
-        description: 'The fully qualified name of the directory, such as corp.example.com'
+        description: 'The fully qualified name of the directory (for example, corp.example.com).'
       OrganizationalUnitDistinguishedNames:
         $ref: '#/definitions/OrganizationalUnitDistinguishedNamesList'
-        description: The list of the distinguished names of organizational units to place computer accounts in.
+        description: The distinguished names of the organizational units for computer accounts.
       ServiceAccountCredentials:
         $ref: '#/definitions/ServiceAccountCredentials'
-        description: 'The <i>AccountName</i> and <i>AccountPassword</i> values for the service account, which are used by the streaming instance to connect to the directory.'
+        description: The credentials for the service account used by the streaming instance to connect to the directory.
   CreateDirectoryConfigResult:
     type: object
     properties:
       DirectoryConfig:
         $ref: '#/definitions/DirectoryConfig'
-        description: Directory configuration details.
+        description: Information about the directory configuration.
   CreateFleetRequest:
     type: object
     required:
@@ -1072,10 +1343,10 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/Name'
-        description: A unique identifier for the fleet.
+        description: A unique name for the fleet.
       ImageName:
         $ref: '#/definitions/String'
-        description: Unique name of the image used by the fleet.
+        description: The name of the image used by the fleet.
       InstanceType:
         $ref: '#/definitions/String'
         description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
@@ -1083,35 +1354,78 @@ definitions:
         $ref: '#/definitions/FleetType'
       ComputeCapacity:
         $ref: '#/definitions/ComputeCapacity'
-        description: The parameters for the capacity allocated to the fleet.
+        description: The desired capacity for the fleet.
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
         description: The VPC configuration for the fleet.
       MaxUserDurationInSeconds:
         $ref: '#/definitions/Integer'
-        description: The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.
+        description: 'The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.'
       DisconnectTimeoutInSeconds:
         $ref: '#/definitions/Integer'
-        description: 'The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600. '
+        description: 'The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.'
       Description:
         $ref: '#/definitions/Description'
-        description: The description of the fleet.
+        description: The description displayed to end users.
       DisplayName:
         $ref: '#/definitions/DisplayName'
-        description: The display name of the fleet.
+        description: The fleet name displayed to end users.
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
         description: Enables or disables default internet access for the fleet.
       DomainJoinInfo:
         $ref: '#/definitions/DomainJoinInfo'
-        description: 'The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.'
-    description: Contains the parameters for the new fleet to create.
+        description: The information needed for streaming instances to join a domain.
   CreateFleetResult:
     type: object
     properties:
       Fleet:
         $ref: '#/definitions/Fleet'
-        description: The details for the created fleet.
+        description: Information about the fleet.
+  CreateImageBuilderRequest:
+    type: object
+    required:
+      - Name
+      - ImageName
+      - InstanceType
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+      ImageName:
+        $ref: '#/definitions/String'
+      InstanceType:
+        $ref: '#/definitions/String'
+      Description:
+        $ref: '#/definitions/Description'
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+      EnableDefaultInternetAccess:
+        $ref: '#/definitions/BooleanObject'
+      DomainJoinInfo:
+        $ref: '#/definitions/DomainJoinInfo'
+  CreateImageBuilderResult:
+    type: object
+    properties:
+      ImageBuilder:
+        $ref: '#/definitions/ImageBuilder'
+  CreateImageBuilderStreamingURLRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+      Validity:
+        $ref: '#/definitions/Long'
+  CreateImageBuilderStreamingURLResult:
+    type: object
+    properties:
+      StreamingURL:
+        $ref: '#/definitions/String'
+      Expires:
+        $ref: '#/definitions/Timestamp'
   CreateStackRequest:
     type: object
     required:
@@ -1119,22 +1433,22 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/String'
-        description: The unique identifier for this stack.
+        description: The name of the stack.
       Description:
         $ref: '#/definitions/Description'
-        description: The description displayed to end users on the AppStream 2.0 portal.
+        description: The description displayed to end users.
       DisplayName:
         $ref: '#/definitions/DisplayName'
-        description: The name displayed to end users on the AppStream 2.0 portal.
+        description: The stack name displayed to end users.
       StorageConnectors:
         $ref: '#/definitions/StorageConnectorList'
-        description: The storage connectors to be enabled for the stack.
+        description: The storage connectors to enable.
   CreateStackResult:
     type: object
     properties:
       Stack:
         $ref: '#/definitions/Stack'
-        description: The details for the created stack.
+        description: Information about the stack.
   CreateStreamingURLRequest:
     type: object
     required:
@@ -1144,22 +1458,22 @@ definitions:
     properties:
       StackName:
         $ref: '#/definitions/String'
-        description: The stack for which the URL is generated.
+        description: The name of the stack.
       FleetName:
         $ref: '#/definitions/String'
-        description: The fleet for which the URL is generated.
+        description: The name of the fleet.
       UserId:
         $ref: '#/definitions/StreamingUrlUserId'
-        description: A unique user ID for whom the URL is generated.
+        description: The ID of the user.
       ApplicationId:
         $ref: '#/definitions/String'
         description: The ID of the application that must be launched after the session starts.
       Validity:
         $ref: '#/definitions/Long'
-        description: The duration up to which the URL returned by this action is valid. The input can be any numeric value in seconds between 1 and 604800 seconds.
+        description: 'The time that the streaming URL will be valid, in seconds. Specify a value between 1 and 604800 seconds.'
       SessionContext:
         $ref: '#/definitions/String'
-        description: The sessionContext of the streaming URL.
+        description: The session context of the streaming URL.
   CreateStreamingURLResult:
     type: object
     properties:
@@ -1168,7 +1482,7 @@ definitions:
         description: The URL to start the AppStream 2.0 streaming session.
       Expires:
         $ref: '#/definitions/Timestamp'
-        description: 'Elapsed seconds after the Unix epoch, when this URL expires.'
+        description: 'The elapsed time, in seconds after the Unix epoch, when this URL expires.'
   DeleteDirectoryConfigRequest:
     type: object
     required:
@@ -1176,7 +1490,7 @@ definitions:
     properties:
       DirectoryName:
         $ref: '#/definitions/DirectoryName'
-        description: The name of the directory configuration to be deleted.
+        description: The name of the directory configuration.
   DeleteDirectoryConfigResult:
     type: object
     properties: {}
@@ -1187,10 +1501,34 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/String'
-        description: The name of the fleet to be deleted.
+        description: The name of the fleet.
   DeleteFleetResult:
     type: object
     properties: {}
+  DeleteImageBuilderRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+  DeleteImageBuilderResult:
+    type: object
+    properties:
+      ImageBuilder:
+        $ref: '#/definitions/ImageBuilder'
+  DeleteImageRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/Name'
+  DeleteImageResult:
+    type: object
+    properties:
+      Image:
+        $ref: '#/definitions/Image'
   DeleteStackRequest:
     type: object
     required:
@@ -1198,7 +1536,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/String'
-        description: The name of the stack to delete.
+        description: The name of the stack.
   DeleteStackResult:
     type: object
     properties: {}
@@ -1207,28 +1545,28 @@ definitions:
     properties:
       DirectoryNames:
         $ref: '#/definitions/DirectoryNameList'
-        description: A specific list of directory names.
+        description: The directory names.
       MaxResults:
         $ref: '#/definitions/Integer'
-        description: The size of each page of results.
+        description: The maximum size of each page of results.
       NextToken:
         $ref: '#/definitions/String'
-        description: 'The DescribeDirectoryConfigsResult.NextToken from a previous call to DescribeDirectoryConfigs. If this is the first call, pass null.'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
   DescribeDirectoryConfigsResult:
     type: object
     properties:
       DirectoryConfigs:
         $ref: '#/definitions/DirectoryConfigList'
-        description: The list of directory configurations.
+        description: Information about the directory configurations.
       NextToken:
         $ref: '#/definitions/String'
-        description: 'If not null, more results are available. To retrieve the next set of items, pass this value for the NextToken parameter in a subsequent call to DescribeDirectoryConfigs.'
+        description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
   DescribeFleetsRequest:
     type: object
     properties:
       Names:
         $ref: '#/definitions/StringList'
-        description: The fleet names to describe. Use null to describe all the fleets for the AWS account.
+        description: The names of the fleets to describe.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
@@ -1237,22 +1575,38 @@ definitions:
     properties:
       Fleets:
         $ref: '#/definitions/FleetList'
-        description: The list of fleet details.
+        description: Information about the fleets.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  DescribeImageBuildersRequest:
+    type: object
+    properties:
+      Names:
+        $ref: '#/definitions/StringList'
+      MaxResults:
+        $ref: '#/definitions/Integer'
+      NextToken:
+        $ref: '#/definitions/String'
+  DescribeImageBuildersResult:
+    type: object
+    properties:
+      ImageBuilders:
+        $ref: '#/definitions/ImageBuilderList'
+      NextToken:
+        $ref: '#/definitions/String'
   DescribeImagesRequest:
     type: object
     properties:
       Names:
         $ref: '#/definitions/StringList'
-        description: A specific list of images to describe.
+        description: The names of the images to describe.
   DescribeImagesResult:
     type: object
     properties:
       Images:
         $ref: '#/definitions/ImageList'
-        description: The list of images.
+        description: Information about the images.
   DescribeSessionsRequest:
     type: object
     required:
@@ -1261,28 +1615,28 @@ definitions:
     properties:
       StackName:
         $ref: '#/definitions/String'
-        description: The name of the stack for which to list sessions.
+        description: The name of the stack.
       FleetName:
         $ref: '#/definitions/String'
-        description: The name of the fleet for which to list sessions.
+        description: The name of the fleet.
       UserId:
         $ref: '#/definitions/UserId'
-        description: The user for whom to list sessions. Use null to describe all the sessions for the stack and fleet.
+        description: The user ID.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
       Limit:
         $ref: '#/definitions/Integer'
-        description: The size of each page of results. The default value is 20 and the maximum supported value is 50.
+        description: The size of each page of results. The default value is 20 and the maximum value is 50.
       AuthenticationType:
         $ref: '#/definitions/AuthenticationType'
-        description: 'The authentication method of the user. It can be <code>API</code> for a user authenticated using a streaming URL, or <code>SAML</code> for a SAML federated user. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.'
+        description: The authentication method. Specify <code>API</code> for a user authenticated using a streaming URL or <code>SAML</code> for a SAML federated user. The default is to authenticate users using a streaming URL.
   DescribeSessionsResult:
     type: object
     properties:
       Sessions:
         $ref: '#/definitions/SessionList'
-        description: The list of streaming sessions.
+        description: Information about the streaming sessions.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
@@ -1291,7 +1645,7 @@ definitions:
     properties:
       Names:
         $ref: '#/definitions/StringList'
-        description: The stack names to describe. Use null to describe all the stacks for the AWS account.
+        description: The names of the stacks to describe.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
@@ -1300,7 +1654,7 @@ definitions:
     properties:
       Stacks:
         $ref: '#/definitions/StackList'
-        description: The list of stack details.
+        description: Information about the stacks.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
@@ -1314,17 +1668,17 @@ definitions:
     properties:
       DirectoryName:
         $ref: '#/definitions/DirectoryName'
-        description: 'The fully qualified name of the directory, such as corp.example.com'
+        description: 'The fully qualified name of the directory (for example, corp.example.com).'
       OrganizationalUnitDistinguishedNames:
         $ref: '#/definitions/OrganizationalUnitDistinguishedNamesList'
-        description: The list of the distinguished names of organizational units in which to place computer accounts.
+        description: The distinguished names of the organizational units for computer accounts.
       ServiceAccountCredentials:
         $ref: '#/definitions/ServiceAccountCredentials'
-        description: 'The <i>AccountName</i> and <i>AccountPassword</i> of the service account, to be used by the streaming instance to connect to the directory.'
+        description: The credentials for the service account used by the streaming instance to connect to the directory.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time stamp when the directory configuration was created within AppStream 2.0.
-    description: 'Full directory configuration details, which are used to join domains for the AppStream 2.0 streaming instances.'
+        description: The time the directory configuration was created.
+    description: Configuration information for the directory used to join domains.
   DirectoryConfigList:
     type: array
     items:
@@ -1343,10 +1697,10 @@ definitions:
     properties:
       FleetName:
         $ref: '#/definitions/String'
-        description: The name of the fleet to disassociate.
+        description: The name of the fleet.
       StackName:
         $ref: '#/definitions/String'
-        description: The name of the stack with which the fleet is associated.
+        description: The name of the stack.
   DisassociateFleetResult:
     type: object
     properties: {}
@@ -1358,11 +1712,11 @@ definitions:
     properties:
       DirectoryName:
         $ref: '#/definitions/DirectoryName'
-        description: 'The fully qualified name of the directory, such as corp.example.com'
+        description: 'The fully qualified name of the directory (for example, corp.example.com).'
       OrganizationalUnitDistinguishedName:
         $ref: '#/definitions/OrganizationalUnitDistinguishedName'
-        description: The distinguished name of the organizational unit to place the computer account in.
-    description: 'The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.'
+        description: The distinguished name of the organizational unit for computer accounts.
+    description: Contains the information needed for streaming instances to join a domain.
   ErrorMessage:
     type: string
     description: The error message in the exception.
@@ -1373,7 +1727,7 @@ definitions:
     properties:
       SessionId:
         $ref: '#/definitions/String'
-        description: The unique identifier of the streaming session to be stopped.
+        description: The ID of the streaming session.
   ExpireSessionResult:
     type: object
     properties: {}
@@ -1395,10 +1749,10 @@ definitions:
         description: The name of the fleet.
       DisplayName:
         $ref: '#/definitions/String'
-        description: The name displayed to end users on the AppStream 2.0 portal.
+        description: The fleet name displayed to end users.
       Description:
         $ref: '#/definitions/String'
-        description: The description displayed to end users on the AppStream 2.0 portal.
+        description: The description displayed to end users.
       ImageName:
         $ref: '#/definitions/String'
         description: The image used by the fleet.
@@ -1409,13 +1763,13 @@ definitions:
         $ref: '#/definitions/FleetType'
       ComputeCapacityStatus:
         $ref: '#/definitions/ComputeCapacityStatus'
-        description: The capacity information for the fleet.
+        description: The capacity status for the fleet.
       MaxUserDurationInSeconds:
         $ref: '#/definitions/Integer'
-        description: The maximum time for which a streaming session can run. The value can be any numeric value in seconds between 600 and 57600.
+        description: 'The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.'
       DisconnectTimeoutInSeconds:
         $ref: '#/definitions/Integer'
-        description: 'The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.'
+        description: 'The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.'
       State:
         $ref: '#/definitions/FleetState'
         description: The current state for the fleet.
@@ -1424,16 +1778,16 @@ definitions:
         description: The VPC configuration for the fleet.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time at which the fleet was created.
+        description: The time the fleet was created.
       FleetErrors:
         $ref: '#/definitions/FleetErrors'
-        description: The list of fleet errors is appended to this list.
+        description: The fleet errors.
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
-        description: 'Whether default internet access is enabled for the fleet. '
+        description: Indicates whether default internet access is enabled for the fleet.
       DomainJoinInfo:
         $ref: '#/definitions/DomainJoinInfo'
-        description: 'The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.'
+        description: The information needed for streaming instances to join a domain.
     description: Contains the parameters for a fleet.
   FleetAttribute:
     type: string
@@ -1441,10 +1795,10 @@ definitions:
       - VPC_CONFIGURATION
       - VPC_CONFIGURATION_SECURITY_GROUP_IDS
       - DOMAIN_JOIN_INFO
-    description: Fleet attribute.
+    description: The fleet attribute.
   FleetAttributes:
     type: array
-    description: A list of fleet attributes.
+    description: The fleet attributes.
     items:
       $ref: '#/definitions/FleetAttribute'
   FleetError:
@@ -1452,11 +1806,11 @@ definitions:
     properties:
       ErrorCode:
         $ref: '#/definitions/FleetErrorCode'
-        description: The error code for the fleet error.
+        description: The error code.
       ErrorMessage:
         $ref: '#/definitions/String'
-        description: The error message generated when the fleet has errors.
-    description: The details of the fleet error.
+        description: The error message.
+    description: Describes a fleet error.
   FleetErrorCode:
     type: string
     enum:
@@ -1492,7 +1846,7 @@ definitions:
       $ref: '#/definitions/FleetError'
   FleetList:
     type: array
-    description: A list of fleets.
+    description: The fleets.
     items:
       $ref: '#/definitions/Fleet'
   FleetState:
@@ -1514,44 +1868,104 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/String'
-        description: The unique identifier for the image.
+        description: The name of the image.
       Arn:
         $ref: '#/definitions/Arn'
-        description: The ARN for the image.
+        description: The ARN of the image.
       BaseImageArn:
         $ref: '#/definitions/Arn'
-        description: The source image ARN from which this image was created.
+        description: The ARN of the image from which this image was created.
       DisplayName:
         $ref: '#/definitions/String'
-        description: The display name for the image.
+        description: The image name displayed to end users.
       State:
         $ref: '#/definitions/ImageState'
-        description: 'The image starts in the <b>PENDING</b> state. If image creation succeeds, it moves to <b>AVAILABLE</b>. If image creation fails, it moves to <b>FAILED</b>.'
+        description: 'The image starts in the <code>PENDING</code> state. If image creation succeeds, the state is <code>AVAILABLE</code>. If image creation fails, the state is <code>FAILED</code>.'
       Visibility:
         $ref: '#/definitions/VisibilityType'
-        description: The visibility of an image to the user; images can be public or private.
+        description: Indicates whether the image is public or private.
       ImageBuilderSupported:
         $ref: '#/definitions/Boolean'
-        description: Whether an image builder can be launched from this image.
+        description: Indicates whether an image builder can be launched from this image.
       Platform:
         $ref: '#/definitions/PlatformType'
         description: The operating system platform of the image.
       Description:
         $ref: '#/definitions/String'
-        description: A meaningful description for the image.
+        description: The description displayed to end users.
       StateChangeReason:
         $ref: '#/definitions/ImageStateChangeReason'
         description: The reason why the last state change occurred.
       Applications:
         $ref: '#/definitions/Applications'
-        description: The applications associated with an image.
+        description: The applications associated with the image.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time stamp when the image was created.
+        description: The time the image was created.
       PublicBaseImageReleasedDate:
         $ref: '#/definitions/Timestamp'
-        description: 'The AWS release date of the public base image. For private images, this date is the release date of the base image from which the image was created.'
-    description: New streaming instances are booted from images. The image stores the application catalog and is connected to fleets.
+        description: 'The release date of the public base image. For private images, this date is the release date of the base image from which the image was created.'
+    description: Describes an image.
+  ImageBuilder:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+      Arn:
+        $ref: '#/definitions/Arn'
+      ImageArn:
+        $ref: '#/definitions/Arn'
+      Description:
+        $ref: '#/definitions/String'
+      DisplayName:
+        $ref: '#/definitions/String'
+      VpcConfig:
+        $ref: '#/definitions/VpcConfig'
+      InstanceType:
+        $ref: '#/definitions/String'
+      Platform:
+        $ref: '#/definitions/PlatformType'
+      State:
+        $ref: '#/definitions/ImageBuilderState'
+      StateChangeReason:
+        $ref: '#/definitions/ImageBuilderStateChangeReason'
+      CreatedTime:
+        $ref: '#/definitions/Timestamp'
+      EnableDefaultInternetAccess:
+        $ref: '#/definitions/BooleanObject'
+      DomainJoinInfo:
+        $ref: '#/definitions/DomainJoinInfo'
+      ImageBuilderErrors:
+        $ref: '#/definitions/ResourceErrors'
+  ImageBuilderList:
+    type: array
+    items:
+      $ref: '#/definitions/ImageBuilder'
+  ImageBuilderState:
+    type: string
+    enum:
+      - PENDING
+      - RUNNING
+      - STOPPING
+      - STOPPED
+      - REBOOTING
+      - SNAPSHOTTING
+      - DELETING
+      - FAILED
+  ImageBuilderStateChangeReason:
+    type: object
+    properties:
+      Code:
+        $ref: '#/definitions/ImageBuilderStateChangeReasonCode'
+      Message:
+        $ref: '#/definitions/String'
+  ImageBuilderStateChangeReasonCode:
+    type: string
+    enum:
+      - INTERNAL_ERROR
+      - IMAGE_UNAVAILABLE
   ImageList:
     type: array
     items:
@@ -1568,11 +1982,11 @@ definitions:
     properties:
       Code:
         $ref: '#/definitions/ImageStateChangeReasonCode'
-        description: The state change reason code of the image.
+        description: The state change reason code.
       Message:
         $ref: '#/definitions/String'
-        description: The state change reason message to the end user.
-    description: The reason why the last state change occurred.
+        description: The state change reason message.
+    description: Describes the reason why the last state change occurred.
   ImageStateChangeReasonCode:
     type: string
     enum:
@@ -1611,7 +2025,7 @@ definitions:
     properties:
       StackName:
         $ref: '#/definitions/String'
-        description: The name of the stack whose associated fleets are listed.
+        description: The name of the stack.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
@@ -1620,11 +2034,10 @@ definitions:
     properties:
       Names:
         $ref: '#/definitions/StringList'
-        description: The names of associated fleets.
+        description: The names of the fleets.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
-    description: The response from a successful operation.
   ListAssociatedStacksRequest:
     type: object
     required:
@@ -1632,7 +2045,7 @@ definitions:
     properties:
       FleetName:
         $ref: '#/definitions/String'
-        description: The name of the fleet whose associated stacks are listed.
+        description: The name of the fleet.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
@@ -1641,11 +2054,10 @@ definitions:
     properties:
       Names:
         $ref: '#/definitions/StringList'
-        description: The names of associated stacks.
+        description: The names of the stacks.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
-    description: The response from a successful operation.
   Long:
     type: integer
   Metadata:
@@ -1683,6 +2095,19 @@ definitions:
       Message:
         $ref: '#/definitions/ErrorMessage'
     description: The specified resource already exists.
+  ResourceError:
+    type: object
+    properties:
+      ErrorCode:
+        $ref: '#/definitions/FleetErrorCode'
+      ErrorMessage:
+        $ref: '#/definitions/String'
+      ErrorTimestamp:
+        $ref: '#/definitions/Timestamp'
+  ResourceErrors:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceError'
   ResourceIdentifier:
     type: string
     description: The ARN of the resource.
@@ -1707,7 +2132,7 @@ definitions:
     description: The specified resource was not found.
   SecurityGroupIdList:
     type: array
-    description: A list of security groups.
+    description: The security group IDs.
     items:
       $ref: '#/definitions/String'
     maxItems: 5
@@ -1719,11 +2144,11 @@ definitions:
     properties:
       AccountName:
         $ref: '#/definitions/AccountName'
-        description: 'The user name of an account in the directory that is used by AppStream 2.0 streaming instances to connect to the directory. This account must have the following privileges: create computer objects, join computers to the domain, change/reset the password on descendant computer objects for the organizational units specified.'
+        description: 'The user name of the account. This account must have the following privileges: create computer objects, join computers to the domain, and change/reset the password on descendant computer objects for the organizational units specified.'
       AccountPassword:
         $ref: '#/definitions/AccountPassword'
-        description: The password for the user account for directory actions.
-    description: 'The <i>AccountName</i> and <i>AccountPassword</i> of the service account, to be used by the streaming instance to connect to the directory.'
+        description: The password for the account.
+    description: Describes the credentials for the service account used by the streaming instance to connect to the directory.
   Session:
     type: object
     required:
@@ -1735,23 +2160,23 @@ definitions:
     properties:
       Id:
         $ref: '#/definitions/String'
-        description: The unique ID for a streaming session.
+        description: The ID of the streaming session.
       UserId:
         $ref: '#/definitions/UserId'
         description: The identifier of the user for whom the session was created.
       StackName:
         $ref: '#/definitions/String'
-        description: The name of the stack for which the streaming session was created.
+        description: The name of the stack for the streaming session.
       FleetName:
         $ref: '#/definitions/String'
-        description: The name of the fleet for which the streaming session was created.
+        description: The name of the fleet for the streaming session.
       State:
         $ref: '#/definitions/SessionState'
         description: The current state of the streaming session.
       AuthenticationType:
         $ref: '#/definitions/AuthenticationType'
-        description: The authentication method of the user for whom the session was created. It can be <code>API</code> for a user authenticated using a streaming URL or <code>SAML</code> for a SAML federated user.
-    description: Contains the parameters for a streaming session.
+        description: The authentication method. The user is authenticated using a streaming URL (<code>API</code>) or SAML federation (<code>SAML</code>).
+    description: Describes a streaming session.
   SessionList:
     type: array
     description: List of sessions.
@@ -1774,33 +2199,33 @@ definitions:
         description: The ARN of the stack.
       Name:
         $ref: '#/definitions/String'
-        description: The unique identifier of the stack.
+        description: The name of the stack.
       Description:
         $ref: '#/definitions/String'
-        description: A meaningful description for the stack.
+        description: The description displayed to end users.
       DisplayName:
         $ref: '#/definitions/String'
-        description: A display name for the stack.
+        description: The stack name displayed to end users.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
-        description: The time stamp when the stack was created.
+        description: The time the stack was created.
       StorageConnectors:
         $ref: '#/definitions/StorageConnectorList'
-        description: The storage connectors to be enabled for the stack.
+        description: The storage connectors to enable.
       StackErrors:
         $ref: '#/definitions/StackErrors'
-        description: The list of errors associated with the stack.
-    description: Details about a stack.
+        description: The errors for the stack.
+    description: Describes a stack.
   StackError:
     type: object
     properties:
       ErrorCode:
         $ref: '#/definitions/StackErrorCode'
-        description: The error code of a stack error.
+        description: The error code.
       ErrorMessage:
         $ref: '#/definitions/String'
-        description: The error message of a stack error.
-    description: Contains the parameters for a stack error.
+        description: The error message.
+    description: Describes a stack error.
   StackErrorCode:
     type: string
     enum:
@@ -1808,12 +2233,12 @@ definitions:
       - INTERNAL_SERVICE_ERROR
   StackErrors:
     type: array
-    description: A list of stack errors.
+    description: The stack errors.
     items:
       $ref: '#/definitions/StackError'
   StackList:
     type: array
-    description: A list of stacks.
+    description: The stacks.
     items:
       $ref: '#/definitions/Stack'
   StartFleetRequest:
@@ -1823,10 +2248,22 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/String'
-        description: The name of the fleet to start.
+        description: The name of the fleet.
   StartFleetResult:
     type: object
     properties: {}
+  StartImageBuilderRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+  StartImageBuilderResult:
+    type: object
+    properties:
+      ImageBuilder:
+        $ref: '#/definitions/ImageBuilder'
   StopFleetRequest:
     type: object
     required:
@@ -1834,10 +2271,22 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/String'
-        description: The name of the fleet to stop.
+        description: The name of the fleet.
   StopFleetResult:
     type: object
     properties: {}
+  StopImageBuilderRequest:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+  StopImageBuilderResult:
+    type: object
+    properties:
+      ImageBuilder:
+        $ref: '#/definitions/ImageBuilder'
   StorageConnector:
     type: object
     required:
@@ -1845,21 +2294,21 @@ definitions:
     properties:
       ConnectorType:
         $ref: '#/definitions/StorageConnectorType'
-        description: 'The type of storage connector. The possible values include: HOMEFOLDERS.'
+        description: The type of storage connector.
       ResourceIdentifier:
         $ref: '#/definitions/ResourceIdentifier'
-        description: The ARN associated with the storage connector.
-    description: Contains the parameters for a storage connector.
+        description: The ARN of the storage connector.
+    description: Describes a storage connector.
   StorageConnectorList:
     type: array
-    description: A list of storage connectors.
+    description: The storage connectors.
     items:
       $ref: '#/definitions/StorageConnector'
   StorageConnectorType:
     type: string
     enum:
       - HOMEFOLDERS
-    description: 'The type of storage connector. The possible values include: HOMEFOLDERS.'
+    description: The type of storage connector.
   StreamingUrlUserId:
     type: string
     pattern: '[\w+=,.@-]*'
@@ -1874,7 +2323,7 @@ definitions:
       $ref: '#/definitions/String'
   SubnetIdList:
     type: array
-    description: A list of subnet IDs.
+    description: The subnet IDs.
     items:
       $ref: '#/definitions/String'
   Timestamp:
@@ -1887,19 +2336,19 @@ definitions:
     properties:
       DirectoryName:
         $ref: '#/definitions/DirectoryName'
-        description: The name of the existing directory configuration to be updated.
+        description: The name of the directory configuration.
       OrganizationalUnitDistinguishedNames:
         $ref: '#/definitions/OrganizationalUnitDistinguishedNamesList'
-        description: The list of the distinguished names of organizational units to place computer accounts in.
+        description: The distinguished names of the organizational units for computer accounts.
       ServiceAccountCredentials:
         $ref: '#/definitions/ServiceAccountCredentials'
-        description: 'The <i>AccountName</i> and <i>AccountPassword</i> values for the service account, which are used by the streaming instance to connect to the directory'
+        description: The credentials for the service account used by the streaming instance to connect to the directory.
   UpdateDirectoryConfigResult:
     type: object
     properties:
       DirectoryConfig:
         $ref: '#/definitions/DirectoryConfig'
-        description: The updated directory configuration details.
+        description: Information about the directory configuration.
   UpdateFleetRequest:
     type: object
     required:
@@ -1907,49 +2356,49 @@ definitions:
     properties:
       ImageName:
         $ref: '#/definitions/String'
-        description: The image name from which a fleet is created.
+        description: The name of the image used by the fleet.
       Name:
         $ref: '#/definitions/String'
-        description: The name of the fleet.
+        description: A unique name for the fleet.
       InstanceType:
         $ref: '#/definitions/String'
         description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
       ComputeCapacity:
         $ref: '#/definitions/ComputeCapacity'
-        description: 'The parameters for the capacity allocated to the fleet. '
+        description: The desired capacity for the fleet.
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
         description: The VPC configuration for the fleet.
       MaxUserDurationInSeconds:
         $ref: '#/definitions/Integer'
-        description: The maximum time for which a streaming session can run. The input can be any numeric value in seconds between 600 and 57600.
+        description: 'The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.'
       DisconnectTimeoutInSeconds:
         $ref: '#/definitions/Integer'
-        description: 'The time after disconnection when a session is considered to have ended. If a user who got disconnected reconnects within this timeout interval, the user is connected back to their previous session. The input can be any numeric value in seconds between 60 and 57600.'
+        description: 'The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.'
       DeleteVpcConfig:
         $ref: '#/definitions/Boolean'
-        description: Delete the VPC association for the specified fleet.
+        description: Deletes the VPC association for the specified fleet.
       Description:
         $ref: '#/definitions/Description'
-        description: The description displayed to end users on the AppStream 2.0 portal.
+        description: The description displayed to end users.
       DisplayName:
         $ref: '#/definitions/DisplayName'
-        description: The name displayed to end users on the AppStream 2.0 portal.
+        description: The fleet name displayed to end users.
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
         description: Enables or disables default internet access for the fleet.
       DomainJoinInfo:
         $ref: '#/definitions/DomainJoinInfo'
-        description: 'The <i>DirectoryName</i> and <i>OrganizationalUnitDistinguishedName</i> values, which are used to join domains for the AppStream 2.0 streaming instances.'
+        description: The information needed for streaming instances to join a domain.
       AttributesToDelete:
         $ref: '#/definitions/FleetAttributes'
-        description: Fleet attributes to be deleted.
+        description: The fleet attributes to delete.
   UpdateFleetResult:
     type: object
     properties:
       Fleet:
         $ref: '#/definitions/Fleet'
-        description: A list of fleet details.
+        description: Information about the fleet.
   UpdateStackRequest:
     type: object
     required:
@@ -1957,25 +2406,25 @@ definitions:
     properties:
       DisplayName:
         $ref: '#/definitions/DisplayName'
-        description: The name displayed to end users on the AppStream 2.0 portal.
+        description: The stack name displayed to end users.
       Description:
         $ref: '#/definitions/Description'
-        description: The description displayed to end users on the AppStream 2.0 portal.
+        description: The description displayed to end users.
       Name:
         $ref: '#/definitions/String'
-        description: The name of the stack to update.
+        description: The name of the stack.
       StorageConnectors:
         $ref: '#/definitions/StorageConnectorList'
-        description: The storage connectors to be enabled for the stack.
+        description: The storage connectors to enable.
       DeleteStorageConnectors:
         $ref: '#/definitions/Boolean'
-        description: Remove all the storage connectors currently enabled for the stack.
+        description: Deletes the storage connectors currently enabled for the stack.
   UpdateStackResult:
     type: object
     properties:
       Stack:
         $ref: '#/definitions/Stack'
-        description: A list of stack details.
+        description: Information about the stack.
   UserId:
     type: string
     minLength: 2
@@ -1990,8 +2439,8 @@ definitions:
     properties:
       SubnetIds:
         $ref: '#/definitions/SubnetIdList'
-        description: The list of subnets to which a network interface is established from the fleet instance.
+        description: The subnets to which a network interface is established from the fleet instance.
       SecurityGroupIds:
         $ref: '#/definitions/SecurityGroupIdList'
-        description: Security groups associated with the fleet.
-    description: VPC configuration information.
+        description: The security groups for the fleet.
+    description: Describes VPC configuration information.

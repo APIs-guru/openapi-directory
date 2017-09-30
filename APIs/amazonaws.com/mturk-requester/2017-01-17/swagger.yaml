@@ -1598,7 +1598,7 @@ definitions:
         $ref: '#/definitions/CustomerId'
         description: The ID of the Worker to whom the bonus was paid.
       BonusAmount:
-        $ref: '#/definitions/NumericValue'
+        $ref: '#/definitions/CurrencyAmount'
       AssignmentId:
         $ref: '#/definitions/EntityId'
         description: The ID of the assignment associated with this bonus payment.
@@ -1636,6 +1636,7 @@ definitions:
     type: object
     required:
       - HITId
+      - NumberOfAdditionalAssignments
     properties:
       HITId:
         $ref: '#/definitions/EntityId'
@@ -1671,7 +1672,7 @@ definitions:
         $ref: '#/definitions/Long'
         description: ' The amount of time, in seconds, that a Worker has to complete the HIT after accepting it. If a Worker does not complete the assignment within the specified duration, the assignment is considered abandoned. If the HIT is still active (that is, its lifetime has not elapsed), the assignment becomes available for other users to find and accept. '
       Reward:
-        $ref: '#/definitions/NumericValue'
+        $ref: '#/definitions/CurrencyAmount'
         description: ' The amount of money the Requester will pay a Worker for successfully completing the HIT. '
       Title:
         $ref: '#/definitions/String'
@@ -1727,7 +1728,7 @@ definitions:
         $ref: '#/definitions/Long'
         description: ' The amount of time, in seconds, that a Worker has to complete the HIT after accepting it. If a Worker does not complete the assignment within the specified duration, the assignment is considered abandoned. If the HIT is still active (that is, its lifetime has not elapsed), the assignment becomes available for other users to find and accept. '
       Reward:
-        $ref: '#/definitions/NumericValue'
+        $ref: '#/definitions/CurrencyAmount'
         description: ' The amount of money the Requester will pay a Worker for successfully completing the HIT. '
       Title:
         $ref: '#/definitions/String'
@@ -1847,6 +1848,10 @@ definitions:
   CreateWorkerBlockResponse:
     type: object
     properties: {}
+  CurrencyAmount:
+    type: string
+    pattern: '^[0-9]+(\.)?[0-9]{0,2}$'
+    description: A string representing a currency amount.
   CustomerId:
     type: string
     pattern: '^A[A-Z0-9]+$'
@@ -1943,9 +1948,9 @@ definitions:
     type: object
     properties:
       AvailableBalance:
-        $ref: '#/definitions/NumericValue'
+        $ref: '#/definitions/CurrencyAmount'
       OnHoldBalance:
-        $ref: '#/definitions/NumericValue'
+        $ref: '#/definitions/CurrencyAmount'
   GetAssignmentRequest:
     type: object
     required:
@@ -2064,7 +2069,7 @@ definitions:
         $ref: '#/definitions/Integer'
         description: 'The number of times the HIT can be accepted and completed before the HIT becomes unavailable. '
       Reward:
-        $ref: '#/definitions/NumericValue'
+        $ref: '#/definitions/CurrencyAmount'
       AutoApprovalDelayInSeconds:
         $ref: '#/definitions/Long'
         description: 'The amount of time, in seconds, after the Worker submits an assignment for the HIT that the results are automatically approved by Amazon Mechanical Turk. This is the amount of time the Requester has to reject an assignment submitted by a Worker before the assignment is auto-approved and the Worker is paid. '
@@ -2095,6 +2100,9 @@ definitions:
     description: ' The HIT data structure represents a single HIT, including all the information necessary for a Worker to accept and complete the HIT.'
   HITLayoutParameter:
     type: object
+    required:
+      - Name
+      - Value
     properties:
       Name:
         $ref: '#/definitions/String'
@@ -2423,13 +2431,15 @@ definitions:
     required:
       - Destination
       - Transport
+      - Version
+      - EventTypes
     properties:
       Destination:
         $ref: '#/definitions/String'
-        description: ' The destination for notification messages. or email notifications (if Transport is Email), this is an email address. For Amazon Simple Queue Service (Amazon SQS) notifications (if Transport is SQS), this is the URL for your Amazon SQS queue. '
+        description: '<p> The target for notification messages. The Destination’s format is determined by the specified Transport: </p> <ul> <li> <p>When Transport is Email, the Destination is your email address.</p> </li> <li> <p>When Transport is SQS, the Destination is your queue URL.</p> </li> <li> <p>When Transport is SNS, the Destination is the ARN of your topic.</p> </li> </ul>'
       Transport:
         $ref: '#/definitions/NotificationTransport'
-        description: ' The method Amazon Mechanical Turk uses to send the notification. Valid Values: Email | SQS. '
+        description: ' The method Amazon Mechanical Turk uses to send the notification. Valid Values: Email | SQS | SNS. '
       Version:
         $ref: '#/definitions/String'
         description: The version of the Notification API to use. Valid value is 2006-05-05.
@@ -2442,6 +2452,7 @@ definitions:
     enum:
       - Email
       - SQS
+      - SNS
   NotifyWorkersFailureCode:
     type: string
     enum:
@@ -2486,10 +2497,6 @@ definitions:
       NotifyWorkersFailureStatuses:
         $ref: '#/definitions/NotifyWorkersFailureStatusList'
         description: ' When MTurk sends notifications to the list of Workers, it returns back any failures it encounters in this list of NotifyWorkersFailureStatus objects. '
-  NumericValue:
-    type: string
-    pattern: '^[0-9]+(\.)?[0-9]*$'
-    description: A string representing a numeric value.
   PaginationToken:
     type: string
     description: 'If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. '
@@ -2664,6 +2671,7 @@ definitions:
     type: object
     required:
       - AssignmentId
+      - RequesterFeedback
     properties:
       AssignmentId:
         $ref: '#/definitions/EntityId'
@@ -2741,6 +2749,8 @@ definitions:
       - Cancelled
   ReviewPolicy:
     type: object
+    required:
+      - PolicyName
     properties:
       PolicyName:
         $ref: '#/definitions/String'
@@ -2805,12 +2815,13 @@ definitions:
       - WorkerId
       - BonusAmount
       - AssignmentId
+      - Reason
     properties:
       WorkerId:
         $ref: '#/definitions/CustomerId'
         description: The ID of the Worker being paid the bonus.
       BonusAmount:
-        $ref: '#/definitions/NumericValue'
+        $ref: '#/definitions/CurrencyAmount'
         description: ' The Bonus amount is a US Dollar amount specified using a string (for example, "5" represents $5.00 USD and "101.42" represents $101.42 USD). Do not include currency symbols or currency codes. '
       AssignmentId:
         $ref: '#/definitions/EntityId'
@@ -2862,6 +2873,7 @@ definitions:
     type: object
     required:
       - HITId
+      - ExpireAt
     properties:
       HITId:
         $ref: '#/definitions/EntityId'
