@@ -7,12 +7,14 @@ info:
   description: A developer friendly API to help your business achieve VAT compliance
   title: VAT API
   version: '1'
+  x-apisguru-categories:
+    - financial
   x-logo:
     url: 'https://vatapi.com/images/logo-invoice.jpg'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: swagger
       url: 'https://vatapi.com/api-docs.json'
       version: '1.2'
@@ -188,6 +190,22 @@ paths:
       summary: Retrieve a countries VAT rates from an IP address
       tags:
         - api
+  /usage-check:
+    get:
+      operationId: api_usage
+      parameters:
+        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+          in: header
+          name: Response-Type
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Api_Usage'
+      summary: Check api requests remaining on current subscription plan
+      tags:
+        - api
   /vat-number-check:
     get:
       description: '<p>We highly recommend if you are able, to check a VAT number on your end first to save wasted API lookups. It maybe that your customer has simply entered the wrong format. <a href=''http://www.braemoor.co.uk/software/vat.shtml'' target=''_blank''>Heres a client side way to check the format using Javascript</a></p>'
@@ -261,6 +279,21 @@ paths:
       tags:
         - api
 definitions:
+  Api_Usage:
+    properties:
+      requests_remaining:
+        description: The number of api requests remaining in the current billing period
+        type: integer
+      requests_used:
+        description: The number of api requests consumed within the last 30 days
+        type: integer
+      status:
+        description: Response code
+        type: integer
+    required:
+      - requests_remaining
+      - requests_used
+      - status
   Convert_Price:
     properties:
       country_code:
