@@ -212,6 +212,9 @@ info:
     ```
   title: Apacta
   version: 0.0.1
+  x-apisguru-categories:
+    - time_management
+    - project_management
   x-logo:
     backgroundColor: '#FFFFFF'
     url: 'https://apacta.com/wp-content/uploads/2016/01/apactalogo.png'
@@ -256,7 +259,7 @@ paths:
           type: string
       responses:
         '200':
-          description: City object
+          description: OK
           schema:
             properties:
               data:
@@ -288,7 +291,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Details of city
+          description: OK
           schema:
             properties:
               data:
@@ -317,7 +320,7 @@ paths:
           type: boolean
       responses:
         '200':
-          description: List of clocking records
+          description: OK
           schema:
             properties:
               data:
@@ -434,7 +437,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Clocking record object
+          description: OK
           schema:
             properties:
               data:
@@ -477,6 +480,117 @@ paths:
       summary: Edit a clocking record
       tags:
         - ClockingRecords
+  /companies:
+    get:
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/Company'
+                type: array
+              pagination:
+                $ref: '#/definitions/PaginationDetails'
+              success:
+                default: true
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Get a list of companies
+      tags:
+        - Companies
+  '/companies/{company_id}':
+    get:
+      parameters:
+        - in: path
+          name: company_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Company object
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/Company'
+              success:
+                default: true
+                type: boolean
+            type: object
+        '404':
+          description: Company not found
+          schema:
+            $ref: '#/definitions/ErrorNotFound'
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Details of 1 company
+      tags:
+        - Companies
+  '/companies/{company_id}/integration_feature_settings':
+    get:
+      parameters:
+        - in: path
+          name: company_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/IntegrationFeatureSetting'
+                type: array
+              pagination:
+                $ref: '#/definitions/PaginationDetails'
+              success:
+                default: true
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Get a list of integration feature settings
+      tags:
+        - Companies
+  '/companies/{company_id}/integration_feature_settings/{integration_feature_setting_id}':
+    get:
+      parameters:
+        - in: path
+          name: company_id
+          required: true
+          type: string
+        - in: path
+          name: integration_feature_setting_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/IntegrationFeatureSetting'
+              success:
+                default: true
+                type: boolean
+            type: object
+        '404':
+          description: IntegrationFeatureSetting not found
+          schema:
+            $ref: '#/definitions/ErrorNotFound'
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Show details of 1 integration feature setting
+      tags:
+        - Companies
   /contact_types:
     get:
       parameters:
@@ -486,7 +600,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Contact object with city embedded
+          description: OK
           schema:
             properties:
               data:
@@ -518,7 +632,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Details of contact type
+          description: OK
           schema:
             properties:
               data:
@@ -568,7 +682,7 @@ paths:
           type: string
       responses:
         '200':
-          description: List of contacts with city embedded
+          description: OK
           schema:
             properties:
               data:
@@ -689,7 +803,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Contact object with city embedded
+          description: OK
           schema:
             properties:
               data:
@@ -810,7 +924,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Details of currency
+          description: OK
           schema:
             properties:
               data:
@@ -844,7 +958,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Successfull retrieve hours
+          description: OK
           schema:
             properties:
               data:
@@ -895,7 +1009,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Success
+          description: OK
           schema:
             properties:
               data:
@@ -1384,7 +1498,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Success
+          description: OK
           schema:
             properties:
               data:
@@ -1412,7 +1526,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Details of `FormFieldType`
+          description: OK
           schema:
             properties:
               data:
@@ -1493,7 +1607,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Details of `FormField`
+          description: OK
           schema:
             properties:
               data:
@@ -2415,7 +2529,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Success
+          description: OK
           schema:
             properties:
               data:
@@ -2688,6 +2802,108 @@ paths:
       summary: Edit material rental
       tags:
         - MaterialRentals
+  /payment_term_types:
+    get:
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/PaymentTermType'
+                type: array
+              pagination:
+                $ref: '#/definitions/PaginationDetails'
+              success:
+                default: true
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Get a list of payment term types
+      tags:
+        - PaymentTermTypes
+  '/payment_term_types/{payment_term_type_id}':
+    get:
+      parameters:
+        - in: path
+          name: payment_term_type_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/PaymentTermType'
+              success:
+                default: true
+                type: boolean
+            type: object
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/ErrorNotFound'
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Details of 1 payment term type
+      tags:
+        - PaymentTermTypes
+  /payment_terms:
+    get:
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/PaymentTerm'
+                type: array
+              pagination:
+                $ref: '#/definitions/PaginationDetails'
+              success:
+                default: true
+                type: boolean
+            type: object
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Get a list of payment terms
+      tags:
+        - PaymentTerms
+  '/payment_terms/{payment_term_id}':
+    get:
+      parameters:
+        - in: path
+          name: payment_term_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/PaymentTerm'
+              success:
+                default: true
+                type: boolean
+            type: object
+        '404':
+          description: PaymentTerm not found
+          schema:
+            $ref: '#/definitions/ErrorNotFound'
+      security:
+        - X-Auth-Token: []
+        - api_key: []
+      summary: Details of 1 payment term
+      tags:
+        - PaymentTerms
   /ping:
     get:
       responses:
@@ -3154,7 +3370,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Success
+          description: OK
           schema:
             properties:
               data:
@@ -3276,7 +3492,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Success
+          description: OK
           schema:
             properties:
               data:
@@ -4594,6 +4810,73 @@ definitions:
         format: uuid
         type: string
     type: object
+  Company:
+    properties:
+      city_id:
+        format: uuid
+        type: string
+      contact_person_id:
+        format: uuid
+        type: string
+      created:
+        $ref: '#/definitions/created'
+      created_by_id:
+        description: Read-only
+        format: uuid
+        type: string
+      cvr:
+        maxLength: 255
+        type: string
+      deleted:
+        $ref: '#/definitions/deleted'
+      expired:
+        format: date-time
+        type: string
+      file_id:
+        format: uuid
+        type: string
+      id:
+        format: uuid
+        type: string
+      invoice_email:
+        format: email
+        maxLength: 255
+        type: string
+      language_id:
+        format: uuid
+        type: string
+      modified:
+        $ref: '#/definitions/modified'
+      name:
+        maxLength: 255
+        type: string
+      next_invoice_number:
+        format: int32
+        maxLength: 8
+        type: integer
+      phone:
+        description: Format like eg. `28680133` or `046158971404`
+        maxLength: 32
+        type: string
+      phone_countrycode:
+        description: Format like eg. `45` or `49`
+        maxLength: 3
+        type: string
+      receive_form_mails:
+        format: email
+        maxLength: 255
+        type: string
+      street_name:
+        maxLength: 255
+        type: string
+      vat_percent:
+        format: int32
+        maxLength: 12
+        type: integer
+      website:
+        maxLength: 255
+        type: string
+    type: object
   Contact:
     properties:
       address:
@@ -5009,6 +5292,38 @@ definitions:
         maxLength: 255
         type: string
     type: object
+  IntegrationFeatureSetting:
+    properties:
+      created:
+        $ref: '#/definitions/created'
+      created_by_id:
+        format: uuid
+        type: string
+      default_value:
+        maxLength: 255
+        type: string
+      deleted:
+        $ref: '#/definitions/deleted'
+      description:
+        maxLength: 8192
+        type: string
+      id:
+        format: uuid
+        type: string
+      identifier:
+        maxLength: 255
+        type: string
+      integration_feature_id:
+        format: uuid
+        type: string
+      is_custom_setting:
+        type: boolean
+      modified:
+        $ref: '#/definitions/modified'
+      name:
+        maxLength: 255
+        type: string
+    type: object
   Invoice:
     properties:
       company_id:
@@ -5278,6 +5593,52 @@ definitions:
       limit:
         type: integer
       page_count:
+        type: string
+    type: object
+  PaymentTerm:
+    properties:
+      created:
+        $ref: '#/definitions/created'
+      created_by_id:
+        format: uuid
+        type: string
+      days_of_credit:
+        format: int32
+        maxLength: 11
+        type: integer
+      deleted:
+        $ref: '#/definitions/deleted'
+      id:
+        format: uuid
+        type: string
+      modified:
+        $ref: '#/definitions/modified'
+      payment_term_type_id:
+        format: uuid
+        type: string
+    type: object
+  PaymentTermType:
+    properties:
+      created:
+        $ref: '#/definitions/created'
+      created_by_id:
+        format: uuid
+        type: string
+      deleted:
+        $ref: '#/definitions/deleted'
+      description:
+        maxLength: 8192
+        type: string
+      id:
+        format: uuid
+        type: string
+      identifier:
+        maxLength: 255
+        type: string
+      modified:
+        $ref: '#/definitions/modified'
+      name:
+        maxLength: 255
         type: string
     type: object
   Product:
