@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://dataflow.googleapis.com/$discovery/rest?version=v1b3'
       version: v1
@@ -2292,6 +2292,9 @@ definitions:
       count:
         $ref: '#/definitions/SplitInt64'
         description: The count of the number of elements present in the distribution.
+      histogram:
+        $ref: '#/definitions/Histogram'
+        description: (Optional) Histogram of value counts for the distribution.
       max:
         $ref: '#/definitions/SplitInt64'
         description: The maximum value present in the distribution.
@@ -2548,6 +2551,34 @@ definitions:
         description: |-
           The status of the get template request. Any problems with the
           request will be indicated in the error_details.
+    type: object
+  Histogram:
+    description: |-
+      Histogram of value counts for a distribution.
+
+      Buckets have an inclusive lower bound and exclusive upper bound and use
+      "1,2,5 bucketing": The first bucket range is from [0,1) and all subsequent
+      bucket boundaries are powers of ten multiplied by 1, 2, or 5. Thus, bucket
+      boundaries are 0, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, ...
+      Negative values are not supported.
+    properties:
+      bucketCounts:
+        description: |-
+          Counts of values in each bucket. For efficiency, prefix and trailing
+          buckets with count = 0 are elided. Buckets can store the full range of
+          values of an unsigned long, with ULLONG_MAX falling into the 59th bucket
+          with range [1e19, 2e19).
+        items:
+          format: int64
+          type: string
+        type: array
+      firstBucketOffset:
+        description: |-
+          Starting index of first stored bucket. The non-inclusive upper-bound of
+          the ith bucket is given by:
+            pow(10,(i-first_bucket_offset)/3) * (1,2,5)[(i-first_bucket_offset)%3]
+        format: int32
+        type: integer
     type: object
   InstructionInput:
     description: |-
@@ -4981,9 +5012,11 @@ definitions:
     properties:
       reason:
         description: |-
-          Optional reason to be attached for the shutdown notice.
-          For example: "PREEMPTION" would indicate the VM is being shut down because
-          of preemption. Other possible reasons may be added in the future.
+          The reason for the worker shutdown.
+          Current possible values are:
+            "UNKNOWN": shutdown reason is unknown.
+            "PREEMPTION": shutdown reason is preemption.
+          Other possible reasons may be added in the future.
         type: string
     type: object
   WorkerShutdownNoticeResponse:

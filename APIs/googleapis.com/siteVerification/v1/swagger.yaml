@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Verifies ownership of websites or domains with Google.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Google Site Verification
   version: v1
   x-apiClientRegistration:
@@ -21,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/siteVerification/v1/rest'
       version: v1
@@ -33,20 +29,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/siteverification': Manage the list of sites and domains you control
       'https://www.googleapis.com/auth/siteverification.verify_only': Manage your new site verifications with Google
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/siteverification': Manage the list of sites and domains you control
-      'https://www.googleapis.com/auth/siteverification.verify_only': Manage your new site verifications with Google
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -116,11 +103,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/siteverification'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/siteverification'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/siteverification.verify_only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/siteverification.verify_only'
       tags:
         - webResource
@@ -135,8 +118,6 @@ paths:
             $ref: '#/definitions/SiteVerificationWebResourceListResponse'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/siteverification'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/siteverification'
       tags:
         - webResource
@@ -169,11 +150,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/siteverification'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/siteverification'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/siteverification.verify_only'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/siteverification.verify_only'
       tags:
         - webResource
@@ -193,8 +170,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/siteverification'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/siteverification'
       tags:
         - webResource
     get:
@@ -213,8 +188,6 @@ paths:
             $ref: '#/definitions/SiteVerificationWebResourceResource'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/siteverification'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/siteverification'
       tags:
         - webResource
@@ -247,8 +220,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/siteverification'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/siteverification'
       tags:
         - webResource
     put:
@@ -271,8 +242,6 @@ paths:
             $ref: '#/definitions/SiteVerificationWebResourceResource'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/siteverification'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/siteverification'
       tags:
         - webResource

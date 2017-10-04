@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/fitness/v1/rest'
       version: v1
@@ -405,7 +405,7 @@ paths:
         - users
   '/{userId}/dataSources/{dataSourceId}/dataPointChanges':
     get:
-      description: results ordered by descending end_time
+      description: Queries for user's data point changes for a particular data source.
       operationId: fitness.users.dataSources.dataPointChanges.list
       parameters:
         - description: The data stream ID of the data source that created the dataset.
@@ -413,7 +413,7 @@ paths:
           name: dataSourceId
           required: true
           type: string
-        - description: 'If specified, no more than this many data point changes will be included in the response. The default is 500 data point changes.'
+        - description: 'If specified, no more than this many data point changes will be included in the response.'
           in: query
           name: limit
           type: integer
@@ -421,7 +421,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: List data points for the person identified. Use "me" to indicate the authenticated user. Only "me" is supported at this time.
+        - description: List data points for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
           in: path
           name: userId
           required: true
@@ -1231,12 +1231,12 @@ definitions:
         description: The data stream ID of the data source with data point changes.
         type: string
       deletedDataPoint:
-        description: Data points that have been removed and will not be included in any other request for dataset contents.
+        description: 'Deleted data points for the user. Note, for modifications this should be parsed before handling insertions.'
         items:
           $ref: '#/definitions/DataPoint'
         type: array
       insertedDataPoint:
-        description: Data points listed.
+        description: Inserted data points for the user.
         items:
           $ref: '#/definitions/DataPoint'
         type: array

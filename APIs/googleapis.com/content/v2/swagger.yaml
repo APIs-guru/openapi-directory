@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/content/v2/rest'
       version: v1
@@ -482,8 +482,8 @@ paths:
           in: query
           name: dryRun
           type: boolean
-        - default: true
-          description: 'Flag to delete sub-accounts with products. The default value of false will become active on September 28, 2017.'
+        - default: false
+          description: Flag to delete sub-accounts with products. The default value is false.
           in: query
           name: force
           type: boolean
@@ -2720,7 +2720,7 @@ definitions:
           type: string
         type: array
       language:
-        description: The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targetCountryLanguage.country.
+        description: 'The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targets[].country.'
         type: string
     type: object
   DatafeedsCustomBatchRequest:
@@ -3260,6 +3260,9 @@ definitions:
         items:
           $ref: '#/definitions/OrderCancellation'
         type: array
+      channelType:
+        description: 'The channel type of the order: "purchaseOnGoogle" or "googleExpress".'
+        type: string
       id:
         description: The id of the line item.
         type: string
@@ -3395,7 +3398,7 @@ definitions:
   OrderLineItemShippingDetailsMethod:
     properties:
       carrier:
-        description: The carrier for the shipping. Optional.
+        description: 'The carrier for the shipping. Optional. See shipments[].carrier for a list of acceptable values.'
         type: string
       maxDaysInTransit:
         description: Maximum transit time.
@@ -3529,7 +3532,32 @@ definitions:
   OrderShipment:
     properties:
       carrier:
-        description: The carrier handling the shipment.
+        description: |-
+          The carrier handling the shipment.
+
+          Acceptable values are:  
+          - "gsx" 
+          - "ups" 
+          - "united parcel service" 
+          - "usps" 
+          - "united states postal service" 
+          - "fedex" 
+          - "dhl" 
+          - "ecourier" 
+          - "cxt" 
+          - "google" 
+          - "on trac" 
+          - "ontrac" 
+          - "on-trac" 
+          - "on_trac" 
+          - "delvic" 
+          - "dynamex" 
+          - "lasership" 
+          - "smartpost" 
+          - "fedex smartpost" 
+          - "mpx" 
+          - "uds" 
+          - "united delivery service"
         type: string
       creationDate:
         description: 'Date on which the shipment has been created, in ISO 8601 format.'
@@ -3766,13 +3794,30 @@ definitions:
   OrdersCustomBatchRequestEntryShipLineItems:
     properties:
       carrier:
-        description: The carrier handling the shipment.
+        description: 'Deprecated. Please use shipmentInfo instead. The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       lineItems:
         description: Line items to ship.
         items:
           $ref: '#/definitions/OrderShipmentLineItemShipment'
         type: array
+      shipmentId:
+        description: Deprecated. Please use shipmentInfo instead. The ID of the shipment.
+        type: string
+      shipmentInfos:
+        description: Shipment information. This field is repeated because a single line item can be shipped in several packages (and have several tracking IDs).
+        items:
+          $ref: '#/definitions/OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'
+        type: array
+      trackingId:
+        description: Deprecated. Please use shipmentInfo instead. The tracking id for the shipment.
+        type: string
+    type: object
+  OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo:
+    properties:
+      carrier:
+        description: 'The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
+        type: string
       shipmentId:
         description: The ID of the shipment.
         type: string
@@ -3783,7 +3828,7 @@ definitions:
   OrdersCustomBatchRequestEntryUpdateShipment:
     properties:
       carrier:
-        description: The carrier handling the shipment. Not updated if missing.
+        description: 'The carrier handling the shipment. Not updated if missing. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       shipmentId:
         description: The ID of the shipment.
@@ -3918,7 +3963,7 @@ definitions:
   OrdersShipLineItemsRequest:
     properties:
       carrier:
-        description: The carrier handling the shipment.
+        description: 'Deprecated. Please use shipmentInfo instead. The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       lineItems:
         description: Line items to ship.
@@ -3929,10 +3974,15 @@ definitions:
         description: The ID of the operation. Unique across all operations for a given order.
         type: string
       shipmentId:
-        description: The ID of the shipment.
+        description: Deprecated. Please use shipmentInfo instead. The ID of the shipment.
         type: string
+      shipmentInfos:
+        description: Shipment information. This field is repeated because a single line item can be shipped in several packages (and have several tracking IDs).
+        items:
+          $ref: '#/definitions/OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'
+        type: array
       trackingId:
-        description: The tracking id for the shipment.
+        description: Deprecated. Please use shipmentInfo instead. The tracking id for the shipment.
         type: string
     type: object
   OrdersShipLineItemsResponse:
@@ -3967,7 +4017,7 @@ definitions:
   OrdersUpdateShipmentRequest:
     properties:
       carrier:
-        description: The carrier handling the shipment. Not updated if missing.
+        description: 'The carrier handling the shipment. Not updated if missing. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.

@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://classroom.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -34,6 +34,8 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
+      'https://www.googleapis.com/auth/classroom.announcements': View and manage announcements in Google Classroom
+      'https://www.googleapis.com/auth/classroom.announcements.readonly': View announcements in Google Classroom
       'https://www.googleapis.com/auth/classroom.courses': Manage your Google Classroom classes
       'https://www.googleapis.com/auth/classroom.courses.readonly': View your Google Classroom classes
       'https://www.googleapis.com/auth/classroom.coursework.me': Manage your course work and view your grades in Google Classroom
@@ -129,6 +131,7 @@ parameters:
 tags:
   - name: courses
   - name: invitations
+  - name: registrations
   - name: userProfiles
 paths:
   /v1/courses:
@@ -415,6 +418,345 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+  '/v1/courses/{courseId}/announcements':
+    get:
+      description: |-
+        Returns a list of announcements that the requester is permitted to view.
+
+        Course students may only view `PUBLISHED` announcements. Course teachers
+        and domain administrators may view all announcements.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting user is not permitted to access
+        the requested course or for access errors.
+        * `INVALID_ARGUMENT` if the request is malformed.
+        * `NOT_FOUND` if the requested course does not exist.
+      operationId: classroom.courses.announcements.list
+      parameters:
+        - collectionFormat: multi
+          description: |-
+            Restriction on the `state` of announcements returned.
+            If this argument is left unspecified, the default value is `PUBLISHED`.
+          in: query
+          items:
+            enum:
+              - ANNOUNCEMENT_STATE_UNSPECIFIED
+              - PUBLISHED
+              - DRAFT
+              - DELETED
+            type: string
+          name: announcementStates
+          type: array
+        - description: |-
+            Identifier of the course.
+            This identifier can be either the Classroom-assigned identifier or an
+            alias.
+          in: path
+          name: courseId
+          required: true
+          type: string
+        - description: |-
+            Optional sort ordering for results. A comma-separated list of fields with
+            an optional sort direction keyword. Supported field is `updateTime`.
+            Supported direction keywords are `asc` and `desc`.
+            If not specified, `updateTime desc` is the default behavior.
+            Examples: `updateTime asc`, `updateTime`
+          in: query
+          name: orderBy
+          type: string
+        - description: |-
+            Maximum number of items to return. Zero or unspecified indicates that the
+            server may assign a maximum.
+
+            The server may return fewer than the specified number of results.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            nextPageToken
+            value returned from a previous
+            list call,
+            indicating that the subsequent page of results should be returned.
+
+            The list request
+            must be otherwise identical to the one that resulted in this token.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListAnnouncementsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.announcements.readonly'
+      tags:
+        - courses
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates an announcement.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting user is not permitted to access the
+        requested course, create announcements in the requested course, share a
+        Drive attachment, or for access errors.
+        * `INVALID_ARGUMENT` if the request is malformed.
+        * `NOT_FOUND` if the requested course does not exist.
+        * `FAILED_PRECONDITION` for the following request error:
+            * AttachmentNotVisible
+      operationId: classroom.courses.announcements.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Announcement'
+        - description: |-
+            Identifier of the course.
+            This identifier can be either the Classroom-assigned identifier or an
+            alias.
+          in: path
+          name: courseId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Announcement'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
+      tags:
+        - courses
+  '/v1/courses/{courseId}/announcements/{id}':
+    delete:
+      description: |-
+        Deletes an announcement.
+
+        This request must be made by the Developer Console project of the
+        [OAuth client ID](https://support.google.com/cloud/answer/6158849) used to
+        create the corresponding announcement item.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting developer project did not create
+        the corresponding announcement, if the requesting user is not permitted
+        to delete the requested course or for access errors.
+        * `FAILED_PRECONDITION` if the requested announcement has already been
+        deleted.
+        * `NOT_FOUND` if no course exists with the requested ID.
+      operationId: classroom.courses.announcements.delete
+      parameters:
+        - description: |-
+            Identifier of the course.
+            This identifier can be either the Classroom-assigned identifier or an
+            alias.
+          in: path
+          name: courseId
+          required: true
+          type: string
+        - description: |-
+            Identifier of the announcement to delete.
+            This identifier is a Classroom-assigned identifier.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
+      tags:
+        - courses
+    get:
+      description: |-
+        Returns an announcement.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting user is not permitted to access the
+        requested course or announcement, or for access errors.
+        * `INVALID_ARGUMENT` if the request is malformed.
+        * `NOT_FOUND` if the requested course or announcement does not exist.
+      operationId: classroom.courses.announcements.get
+      parameters:
+        - description: |-
+            Identifier of the course.
+            This identifier can be either the Classroom-assigned identifier or an
+            alias.
+          in: path
+          name: courseId
+          required: true
+          type: string
+        - description: Identifier of the announcement.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Announcement'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.announcements.readonly'
+      tags:
+        - courses
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: |-
+        Updates one or more fields of an announcement.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting developer project did not create
+        the corresponding announcement or for access errors.
+        * `INVALID_ARGUMENT` if the request is malformed.
+        * `FAILED_PRECONDITION` if the requested announcement has already been
+        deleted.
+        * `NOT_FOUND` if the requested course or announcement does not exist
+      operationId: classroom.courses.announcements.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Announcement'
+        - description: |-
+            Identifier of the course.
+            This identifier can be either the Classroom-assigned identifier or an
+            alias.
+          in: path
+          name: courseId
+          required: true
+          type: string
+        - description: Identifier of the announcement.
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: |-
+            Mask that identifies which fields on the announcement to update.
+            This field is required to do an update. The update fails if invalid
+            fields are specified. If a field supports empty values, it can be cleared
+            by specifying it in the update mask and not in the Announcement object. If
+            a field that does not support empty values is included in the update mask
+            and not set in the Announcement object, an `INVALID_ARGUMENT` error will be
+            returned.
+
+            The following fields may be specified by teachers:
+
+            * `text`
+            * `state`
+            * `scheduled_time`
+          in: query
+          name: updateMask
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Announcement'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
+      tags:
+        - courses
+  '/v1/courses/{courseId}/announcements/{id}:modifyAssignees':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Modifies assignee mode and options of an announcement.
+
+        Only a teacher of the course that contains the announcement may
+        call this method.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting user is not permitted to access the
+        requested course or course work or for access errors.
+        * `INVALID_ARGUMENT` if the request is malformed.
+        * `NOT_FOUND` if the requested course or course work does not exist.
+      operationId: classroom.courses.announcements.modifyAssignees
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ModifyAnnouncementAssigneesRequest'
+        - description: |-
+            Identifier of the course.
+            This identifier can be either the Classroom-assigned identifier or an
+            alias.
+          in: path
+          name: courseId
+          required: true
+          type: string
+        - description: Identifier of the announcement.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Announcement'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.announcements'
+      tags:
+        - courses
   '/v1/courses/{courseId}/courseWork':
     get:
       description: |-
@@ -769,6 +1111,10 @@ paths:
         does not exist.
       operationId: classroom.courses.courseWork.studentSubmissions.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StudentSubmission'
         - description: |-
             Identifier of the course.
             This identifier can be either the Classroom-assigned identifier or an
@@ -793,15 +1139,12 @@ paths:
             fields are specified.
 
             The following fields may be specified by teachers:
+
             * `draft_grade`
             * `assigned_grade`
           in: query
           name: updateMask
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StudentSubmission'
       responses:
         '200':
           description: Successful response
@@ -1251,6 +1594,7 @@ paths:
             returned.
 
             The following fields may be specified by teachers:
+
             * `title`
             * `description`
             * `state`
@@ -1261,6 +1605,63 @@ paths:
             * `submission_modification_mode`
           in: query
           name: updateMask
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CourseWork'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.coursework.students'
+      tags:
+        - courses
+  '/v1/courses/{courseId}/courseWork/{id}:modifyAssignees':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Modifies assignee mode and options of a coursework.
+
+        Only a teacher of the course that contains the coursework may
+        call this method.
+
+        This method returns the following error codes:
+
+        * `PERMISSION_DENIED` if the requesting user is not permitted to access the
+        requested course or course work or for access errors.
+        * `INVALID_ARGUMENT` if the request is malformed.
+        * `NOT_FOUND` if the requested course or course work does not exist.
+      operationId: classroom.courses.courseWork.modifyAssignees
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ModifyCourseWorkAssigneesRequest'
+        - description: |-
+            Identifier of the course.
+            This identifier can be either the Classroom-assigned identifier or an
+            alias.
+          in: path
+          name: courseId
+          required: true
+          type: string
+        - description: Identifier of the coursework.
+          in: path
+          name: id
+          required: true
           type: string
       responses:
         '200':
@@ -2104,6 +2505,110 @@ paths:
             - 'https://www.googleapis.com/auth/classroom.rosters'
       tags:
         - invitations
+  /v1/registrations:
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a `Registration`, causing Classroom to start sending notifications
+        from the provided `feed` to the provided `destination`.
+
+        Returns the created `Registration`. Currently, this will be the same as
+        the argument, but with server-assigned fields such as `expiry_time` and
+        `id` filled in.
+
+        Note that any value specified for the `expiry_time` or `id` fields will be
+        ignored.
+
+        While Classroom may validate the `destination` and return errors on a best
+        effort basis, it is the caller's responsibility to ensure that it exists
+        and that Classroom has permission to publish to it.
+
+        This method may return the following error codes:
+
+        * `PERMISSION_DENIED` if:
+          * the authenticated user does not have permission to receive
+            notifications from the requested field; or
+          * the credential provided does not include the appropriate scope for the
+            requested feed.
+          * another access error is encountered.
+        * `INVALID_ARGUMENT` if:
+          * no `destination` is specified, or the specified `destination` is not
+            valid; or
+          * no `feed` is specified, or the specified `feed` is not valid.
+        * `NOT_FOUND` if:
+          * the specified `feed` cannot be located, or the requesting user does not
+            have permission to determine whether or not it exists; or
+          * the specified `destination` cannot be located, or Classroom has not
+            been granted permission to publish to it.
+      operationId: classroom.registrations.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Registration'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Registration'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
+      tags:
+        - registrations
+  '/v1/registrations/{registrationId}':
+    delete:
+      description: |-
+        Deletes a `Registration`, causing Classroom to stop sending notifications
+        for that `Registration`.
+      operationId: classroom.registrations.delete
+      parameters:
+        - description: The `registration_id` of the `Registration` to be deleted.
+          in: path
+          name: registrationId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/classroom.rosters.readonly'
+      tags:
+        - registrations
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/userProfiles/{studentId}/guardianInvitations':
     get:
       description: |-
@@ -2626,6 +3131,93 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
 definitions:
+  Announcement:
+    description: Announcement created by a teacher for students of the course
+    properties:
+      alternateLink:
+        description: |-
+          Absolute link to this announcement in the Classroom web UI.
+          This is only populated if `state` is `PUBLISHED`.
+
+          Read-only.
+        type: string
+      assigneeMode:
+        description: |-
+          Assignee mode of the announcement.
+          If unspecified, the default value is `ALL_STUDENTS`.
+        enum:
+          - ASSIGNEE_MODE_UNSPECIFIED
+          - ALL_STUDENTS
+          - INDIVIDUAL_STUDENTS
+        type: string
+      courseId:
+        description: |-
+          Identifier of the course.
+
+          Read-only.
+        type: string
+      creationTime:
+        description: |-
+          Timestamp when this announcement was created.
+
+          Read-only.
+        format: google-datetime
+        type: string
+      creatorUserId:
+        description: |-
+          Identifier for the user that created the announcement.
+
+          Read-only.
+        type: string
+      id:
+        description: |-
+          Classroom-assigned identifier of this announcement, unique per course.
+
+          Read-only.
+        type: string
+      individualStudentsOptions:
+        $ref: '#/definitions/IndividualStudentsOptions'
+        description: |-
+          Identifiers of students with access to the announcement.
+          This field is set only if `assigneeMode` is `INDIVIDUAL_STUDENTS`.
+          If the `assigneeMode` is `INDIVIDUAL_STUDENTS`, then only students specified in this
+          field will be able to see the announcement.
+      materials:
+        description: |-
+          Additional materials.
+
+          Announcements must have no more than 20 material items.
+        items:
+          $ref: '#/definitions/Material'
+        type: array
+      scheduledTime:
+        description: Optional timestamp when this announcement is scheduled to be published.
+        format: google-datetime
+        type: string
+      state:
+        description: |-
+          Status of this announcement.
+          If unspecified, the default state is `DRAFT`.
+        enum:
+          - ANNOUNCEMENT_STATE_UNSPECIFIED
+          - PUBLISHED
+          - DRAFT
+          - DELETED
+        type: string
+      text:
+        description: |-
+          Description of this announcement.
+          The text must be a valid UTF-8 string containing no more
+          than 30,000 characters.
+        type: string
+      updateTime:
+        description: |-
+          Timestamp of the most recent change to this announcement.
+
+          Read-only.
+        format: google-datetime
+        type: string
+    type: object
   Assignment:
     description: Additional details for assignments.
     properties:
@@ -2670,6 +3262,20 @@ definitions:
       youTubeVideo:
         $ref: '#/definitions/YouTubeVideo'
         description: Youtube video attachment.
+    type: object
+  CloudPubsubTopic:
+    description: |-
+      A reference to a Cloud Pub/Sub topic.
+
+      To register for notifications, the owner of the topic must grant
+      `classroom-notifications@system.gserviceaccount.com` the
+       `projects.topics.publish` permission.
+    properties:
+      topicName:
+        description: |-
+          The `name` field of a Cloud Pub/Sub
+          [Topic](https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics#Topic).
+        type: string
     type: object
   Course:
     description: A Course in Classroom.
@@ -2888,6 +3494,13 @@ definitions:
         description: Title for this set.
         type: string
     type: object
+  CourseRosterChangesInfo:
+    description: Information about a `Feed` with a `feed_type` of `COURSE_ROSTER_CHANGES`.
+    properties:
+      courseId:
+        description: The `course_id` of the course to subscribe to roster changes for.
+        type: string
+    type: object
   CourseWork:
     description: Course work created by a teacher for students of the course.
     properties:
@@ -2897,6 +3510,15 @@ definitions:
           This is only populated if `state` is `PUBLISHED`.
 
           Read-only.
+        type: string
+      assigneeMode:
+        description: |-
+          Assignee mode of the coursework.
+          If unspecified, the default value is `ALL_STUDENTS`.
+        enum:
+          - ASSIGNEE_MODE_UNSPECIFIED
+          - ALL_STUDENTS
+          - INDIVIDUAL_STUDENTS
         type: string
       assignment:
         $ref: '#/definitions/Assignment'
@@ -2928,6 +3550,12 @@ definitions:
           Read-only.
         format: google-datetime
         type: string
+      creatorUserId:
+        description: |-
+          Identifier for the user that created the coursework.
+
+          Read-only.
+        type: string
       description:
         description: |-
           Optional description of this course work.
@@ -2951,6 +3579,13 @@ definitions:
 
           Read-only.
         type: string
+      individualStudentsOptions:
+        $ref: '#/definitions/IndividualStudentsOptions'
+        description: |-
+          Identifiers of students with access to the coursework.
+          This field is set only if `assigneeMode` is `INDIVIDUAL_STUDENTS`.
+          If the `assigneeMode` is `INDIVIDUAL_STUDENTS`, then only students
+          specified in this field will be assigned the coursework.
       materials:
         description: |-
           Additional materials.
@@ -3107,6 +3742,24 @@ definitions:
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
     type: object
+  Feed:
+    description: |-
+      A class of notifications that an application can register to receive.
+      For example: "all roster changes for a domain".
+    properties:
+      courseRosterChangesInfo:
+        $ref: '#/definitions/CourseRosterChangesInfo'
+        description: |-
+          Information about a `Feed` with a `feed_type` of `COURSE_ROSTER_CHANGES`.
+          This field must be specified if `feed_type` is `COURSE_ROSTER_CHANGES`.
+      feedType:
+        description: The type of feed.
+        enum:
+          - FEED_TYPE_UNSPECIFIED
+          - DOMAIN_ROSTER_CHANGES
+          - COURSE_ROSTER_CHANGES
+        type: string
+    type: object
   Form:
     description: Google Forms item.
     properties:
@@ -3227,6 +3880,19 @@ definitions:
         description: ID of the student (in standard format)
         type: string
     type: object
+  IndividualStudentsOptions:
+    description: |-
+      Assignee details about a coursework/announcement.
+      This field is set if and only if `assigneeMode` is `INDIVIDUAL_STUDENTS`.
+    properties:
+      studentIds:
+        description: |-
+          Identifiers for the students that have access to the
+          coursework/announcement.
+        items:
+          type: string
+        type: array
+    type: object
   Invitation:
     description: An invitation to join a course.
     properties:
@@ -3280,6 +3946,20 @@ definitions:
         description: |-
           URL to link to.
           This must be a valid UTF-8 string containing between 1 and 2024 characters.
+        type: string
+    type: object
+  ListAnnouncementsResponse:
+    description: Response when listing course work.
+    properties:
+      announcements:
+        description: Announcement items that match the request.
+        items:
+          $ref: '#/definitions/Announcement'
+        type: array
+      nextPageToken:
+        description: |-
+          Token identifying the next page of results to return. If empty, no further
+          results are available.
         type: string
     type: object
   ListCourseAliasesResponse:
@@ -3431,6 +4111,24 @@ definitions:
         $ref: '#/definitions/YouTubeVideo'
         description: YouTube video material.
     type: object
+  ModifyAnnouncementAssigneesRequest:
+    description: Request to modify assignee mode and options of an announcement.
+    properties:
+      assigneeMode:
+        description: |-
+          Mode of the announcement describing whether it will be accessible by all
+          students or specified individual students.
+        enum:
+          - ASSIGNEE_MODE_UNSPECIFIED
+          - ALL_STUDENTS
+          - INDIVIDUAL_STUDENTS
+        type: string
+      modifyIndividualStudentsOptions:
+        $ref: '#/definitions/ModifyIndividualStudentsOptions'
+        description: |-
+          Set which students can view or cannot view the announcement.
+          Must be specified only when `assigneeMode` is `INDIVIDUAL_STUDENTS`.
+    type: object
   ModifyAttachmentsRequest:
     description: Request to modify the attachments of a student submission.
     properties:
@@ -3442,6 +4140,44 @@ definitions:
           Form attachments are not supported.
         items:
           $ref: '#/definitions/Attachment'
+        type: array
+    type: object
+  ModifyCourseWorkAssigneesRequest:
+    description: Request to modify assignee mode and options of a coursework.
+    properties:
+      assigneeMode:
+        description: |-
+          Mode of the coursework describing whether it will be assigned to all
+          students or specified individual students.
+        enum:
+          - ASSIGNEE_MODE_UNSPECIFIED
+          - ALL_STUDENTS
+          - INDIVIDUAL_STUDENTS
+        type: string
+      modifyIndividualStudentsOptions:
+        $ref: '#/definitions/ModifyIndividualStudentsOptions'
+        description: |-
+          Set which students are assigned or not assigned to the coursework.
+          Must be specified only when `assigneeMode` is `INDIVIDUAL_STUDENTS`.
+    type: object
+  ModifyIndividualStudentsOptions:
+    description: |-
+      Contains fields to add or remove students from a course work or announcement
+      where the `assigneeMode` is set to `INDIVIDUAL_STUDENTS`.
+    properties:
+      addStudentIds:
+        description: |-
+          Ids of students to be added as having access to this
+          coursework/announcement.
+        items:
+          type: string
+        type: array
+      removeStudentIds:
+        description: |-
+          Ids of students to be removed from having access to this
+          coursework/announcement.
+        items:
+          type: string
         type: array
     type: object
   MultipleChoiceQuestion:
@@ -3486,6 +4222,33 @@ definitions:
   ReclaimStudentSubmissionRequest:
     description: Request to reclaim a student submission.
     properties: {}
+    type: object
+  Registration:
+    description: |-
+      An instruction to Classroom to send notifications from the `feed` to the
+      provided `destination`.
+    properties:
+      cloudPubsubTopic:
+        $ref: '#/definitions/CloudPubsubTopic'
+        description: The Cloud Pub/Sub topic that notifications are to be sent to.
+      expiryTime:
+        description: |-
+          The time until which the `Registration` is effective.
+
+          This is a read-only field assigned by the server.
+        format: google-datetime
+        type: string
+      feed:
+        $ref: '#/definitions/Feed'
+        description: |-
+          Specification for the class of notifications that Classroom should deliver
+          to the `destination`.
+      registrationId:
+        description: |-
+          A server-generated unique identifier for this `Registration`.
+
+          Read-only.
+        type: string
     type: object
   ReturnStudentSubmissionRequest:
     description: Request to return a student submission.
@@ -3594,7 +4357,11 @@ definitions:
         type: number
       assignmentSubmission:
         $ref: '#/definitions/AssignmentSubmission'
-        description: Submission content when course_work_type is ASSIGNMENT .
+        description: |-
+          Submission content when course_work_type is ASSIGNMENT.
+
+          Students can modify this content using
+          google.classroom.Work.ModifyAttachments.
       associatedWithDeveloper:
         description: |-
           Whether this student submission is associated with the Developer Console

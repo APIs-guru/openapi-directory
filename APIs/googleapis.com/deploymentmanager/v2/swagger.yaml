@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/deploymentmanager/v2/rest'
       version: v1
@@ -1626,7 +1626,7 @@ definitions:
         description: Required
         type: string
       conditions:
-        description: Additional restrictions that must be met
+        description: Additional restrictions that must be met. All conditions must pass for the rule to match.
         items:
           $ref: '#/definitions/Condition'
         type: array

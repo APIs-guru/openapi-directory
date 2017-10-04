@@ -18,7 +18,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://firebaserules.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -480,6 +480,58 @@ paths:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - projects
+  '/v1/{name}:getExecutable':
+    get:
+      description: Get the `Release` executable to use when enforcing rules.
+      operationId: firebaserules.projects.releases.getExecutable
+      parameters:
+        - description: |-
+            The requested runtime executable version.
+            Defaults to FIREBASE_RULES_EXECUTABLE_V1
+          enum:
+            - RELEASE_EXECUTABLE_VERSION_UNSPECIFIED
+            - FIREBASE_RULES_EXECUTABLE_V1
+            - FIREBASE_RULES_EXECUTABLE_V2
+          in: query
+          name: executableVersion
+          type: string
+        - description: |-
+            Resource name of the `Release`.
+
+            Format: `projects/{project_id}/releases/{release_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetReleaseExecutableResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{name}:test':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -632,6 +684,35 @@ definitions:
       result:
         $ref: '#/definitions/Result'
         description: The mock result of the function call.
+    type: object
+  GetReleaseExecutableResponse:
+    description: The response for FirebaseRulesService.GetReleaseExecutable
+    properties:
+      executable:
+        description: Executable view of the `Ruleset` referenced by the `Release`.
+        format: byte
+        type: string
+      executableVersion:
+        description: The Rules runtime version of the executable.
+        enum:
+          - RELEASE_EXECUTABLE_VERSION_UNSPECIFIED
+          - FIREBASE_RULES_EXECUTABLE_V1
+          - FIREBASE_RULES_EXECUTABLE_V2
+        type: string
+      language:
+        description: '`Language` used to generate the executable bytes.'
+        enum:
+          - LANGUAGE_UNSPECIFIED
+          - FIREBASE_RULES
+          - EVENT_FLOW_TRIGGERS
+        type: string
+      rulesetName:
+        description: '`Ruleset` name associated with the `Release` executable.'
+        type: string
+      updateTime:
+        description: Timestamp for the most recent `Release.update_time`.
+        format: google-datetime
+        type: string
     type: object
   Issue:
     description: 'Issues include warnings, errors, and deprecation notices.'

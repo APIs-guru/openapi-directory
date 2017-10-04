@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://serviceuser.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -561,43 +561,6 @@ definitions:
           firebaserules.googleapis.com.
         type: string
     type: object
-  AuthorizationRule:
-    description: |-
-      Authorization rule for API services.
-
-      It specifies the permission(s) required for an API element for the overall
-      API request to succeed. It is typically used to mark request message fields
-      that contain the name of the resource and indicates the permissions that
-      will be checked on that resource.
-
-      For example:
-
-          package google.storage.v1;
-
-          message CopyObjectRequest {
-            string source = 1 [
-              (google.api.authz).permissions = "storage.objects.get"];
-
-            string destination = 2 [
-              (google.api.authz).permissions =
-                  "storage.objects.create,storage.objects.update"];
-          }
-    properties:
-      permissions:
-        description: |-
-          The required permissions. The acceptable values vary depend on the
-          authorization system used. For Google APIs, it should be a comma-separated
-          Google IAM permission values. When multiple permissions are listed, the
-          semantics is not defined by the system. Additional documentation must
-          be provided manually.
-        type: string
-      selector:
-        description: |-
-          Selects the API elements to which this rule applies.
-
-          Refer to selector for syntax details.
-        type: string
-    type: object
   Backend:
     description: '`Backend` defines the backend configuration for a service.'
     properties:
@@ -633,6 +596,57 @@ definitions:
           Selects the methods to which this rule applies.
 
           Refer to selector for syntax details.
+        type: string
+    type: object
+  Billing:
+    description: |-
+      Billing related configuration of the service.
+
+      The following example shows how to configure monitored resources and metrics
+      for billing:
+          monitored_resources:
+          - type: library.googleapis.com/branch
+            labels:
+            - key: /city
+              description: The city where the library branch is located in.
+            - key: /name
+              description: The name of the branch.
+          metrics:
+          - name: library.googleapis.com/book/borrowed_count
+            metric_kind: DELTA
+            value_type: INT64
+          billing:
+            consumer_destinations:
+            - monitored_resource: library.googleapis.com/branch
+              metrics:
+              - library.googleapis.com/book/borrowed_count
+    properties:
+      consumerDestinations:
+        description: |-
+          Billing configurations for sending metrics to the consumer project.
+          There can be multiple consumer destinations per service, each one must have
+          a different monitored resource type. A metric can be used in at most
+          one consumer destination.
+        items:
+          $ref: '#/definitions/BillingDestination'
+        type: array
+    type: object
+  BillingDestination:
+    description: |-
+      Configuration of a specific billing destination (Currently only support
+      bill against consumer project).
+    properties:
+      metrics:
+        description: |-
+          Names of the metrics to report to this billing destination.
+          Each name must be defined in Service.metrics section.
+        items:
+          type: string
+        type: array
+      monitoredResource:
+        description: |-
+          The monitored resource type. The type must be defined in
+          Service.monitored_resources section.
         type: string
     type: object
   Context:
@@ -1320,15 +1334,6 @@ definitions:
         items:
           $ref: '#/definitions/HttpRule'
         type: array
-      authorizations:
-        description: |-
-          Specifies the permission(s) required for an API element for the overall
-          API request to succeed. It is typically used to mark request message fields
-          that contain the name of the resource and indicates the permissions that
-          will be checked on that resource.
-        items:
-          $ref: '#/definitions/AuthorizationRule'
-        type: array
       body:
         description: |-
           The name of the request field whose value is mapped to the HTTP body, or
@@ -1378,48 +1383,6 @@ definitions:
           not set, the response message will be used as HTTP body of response.
           NOTE: the referred field must be not a repeated field and must be present
           at the top-level of response message type.
-        type: string
-      restCollection:
-        description: |-
-          DO NOT USE. This is an experimental field.
-
-          Optional. The REST collection name is by default derived from the URL
-          pattern. If specified, this field overrides the default collection name.
-          Example:
-
-              rpc AddressesAggregatedList(AddressesAggregatedListRequest)
-                  returns (AddressesAggregatedListResponse) {
-                option (google.api.http) = {
-                  get: "/v1/projects/{project_id}/aggregated/addresses"
-                  rest_collection: "projects.addresses"
-                };
-              }
-
-          This method has the automatically derived collection name
-          "projects.aggregated". Because, semantically, this rpc is actually an
-          operation on the "projects.addresses" collection, the `rest_collection`
-          field is configured to override the derived collection name.
-        type: string
-      restMethodName:
-        description: |-
-          DO NOT USE. This is an experimental field.
-
-          Optional. The rest method name is by default derived from the URL
-          pattern. If specified, this field overrides the default method name.
-          Example:
-
-              rpc CreateResource(CreateResourceRequest)
-                  returns (CreateResourceResponse) {
-                option (google.api.http) = {
-                  post: "/v1/resources",
-                  body: "resource",
-                  rest_method_name: "insert"
-                };
-              }
-
-          This method has the automatically derived rest method name
-          "create", but for backwards compatibility with apiary, it is specified as
-          insert.
         type: string
       selector:
         description: |-
@@ -2468,6 +2431,9 @@ definitions:
       backend:
         $ref: '#/definitions/Backend'
         description: API backend configuration.
+      billing:
+        $ref: '#/definitions/Billing'
+        description: Billing configuration.
       configVersion:
         description: |-
           The semantic version of the service configuration. The config version

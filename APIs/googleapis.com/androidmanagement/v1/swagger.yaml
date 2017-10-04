@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://androidmanagement.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -627,6 +627,7 @@ definitions:
             - RESET_PASSWORD_FLAG_UNSPECIFIED
             - REQUIRE_ENTRY
             - DO_NOT_ASK_CREDENTIALS_ON_BOOT
+            - LOCK_NOW
           type: string
         type: array
       type:
@@ -1132,7 +1133,7 @@ definitions:
         description: 'For settings with nested fields, if a particular nested field is out of compliance, this specifies the full path to the offending field. The path is formatted in the same way the policy JSON field would be referenced in JavaScript, that is: 1) For object-typed fields, the field name is followed by a dot then by a  subfield name. 2) For array-typed fields, the field name is followed by the array index  enclosed in brackets. For example, to indicate a problem with the url field in the externalData field in the 3rd application, the path would be applications[2].externalData.url'
         type: string
       installationFailureReason:
-        description: 'If package_name is set and the non-compliance reason is APP_NOT_INSTALLED, the detailed reason the app cannot be installed.'
+        description: 'If package_name is set and the non-compliance reason is APP_NOT_INSTALLED or APP_NOT_UPDATED, the detailed reason the app cannot be installed or updated.'
         enum:
           - INSTALLATION_FAILURE_REASON_UNSPECIFIED
           - INSTALLATION_FAILURE_REASON_UNKNOWN

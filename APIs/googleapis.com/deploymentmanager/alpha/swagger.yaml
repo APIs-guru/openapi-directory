@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/deploymentmanager/alpha/rest'
       version: v1
@@ -1863,6 +1863,9 @@ definitions:
   Deployment:
     description: ''
     properties:
+      credential:
+        $ref: '#/definitions/Credential'
+        description: User provided default credential for the deployment.
       description:
         description: An optional user-provided description of the deployment.
         type: string
@@ -1926,6 +1929,9 @@ definitions:
   DeploymentUpdate:
     description: ''
     properties:
+      credential:
+        $ref: '#/definitions/Credential'
+        description: Output only. The user-provided default credential to use when deploying this preview.
       description:
         description: Output only. An optional user-provided description of the deployment after the current update has been applied.
         type: string
@@ -2328,6 +2334,9 @@ definitions:
       insertTime:
         description: 'Output only. Timestamp when the resource was created or acquired, in RFC3339 text format .'
         type: string
+      lastUsedCredential:
+        $ref: '#/definitions/Credential'
+        description: Output only. The last used credential that successfully created/updated the resource.
       manifest:
         description: Output only. URL of the manifest representing the current configuration of this resource.
         type: string
@@ -2389,6 +2398,9 @@ definitions:
       accessControl:
         $ref: '#/definitions/ResourceAccessControl'
         description: The Access Control Policy to set on this resource after updating the resource itself.
+      credential:
+        $ref: '#/definitions/Credential'
+        description: Output only. The credential that will be used creating/updating this resource.
       error:
         description: 'Output only. If errors are generated during update of the resource, this field will be populated.'
         properties:
@@ -2469,7 +2481,7 @@ definitions:
         description: Required
         type: string
       conditions:
-        description: Additional restrictions that must be met
+        description: Additional restrictions that must be met. All conditions must pass for the rule to match.
         items:
           $ref: '#/definitions/Condition'
         type: array

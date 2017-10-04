@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://servicecontrol.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -1216,9 +1216,11 @@ definitions:
         $ref: '#/definitions/QuotaProperties'
         description: |-
           Represents the properties needed for quota check. Applicable only if this
-          operation is for a quota check request.
+          operation is for a quota check request. If this is not specified, no quota
+          check will be performed.
       resourceContainer:
         description: |-
+          DO NOT USE. This field is deprecated, use "resources" field instead.
           The resource name of the parent of a resource in the resource hierarchy.
 
           This can be in one of the following formats:
@@ -1387,22 +1389,6 @@ definitions:
   QuotaProperties:
     description: Represents the properties needed for quota operations.
     properties:
-      limitByIds:
-        additionalProperties:
-          type: string
-        description: |-
-          LimitType IDs that should be used for checking quota. Key in this map
-          should be a valid LimitType string, and the value is the ID to be used. For
-          example, an entry <USER, 123> will cause all user quota limits to use 123
-          as the user ID. See google/api/quota.proto for the definition of LimitType.
-          CLIENT_PROJECT: Not supported.
-          USER: Value of this entry will be used for enforcing user-level quota
-                limits. If none specified, caller IP passed in the
-                servicecontrol.googleapis.com/caller_ip label will be used instead.
-                If the server cannot resolve a value for this LimitType, an error
-                will be thrown. No validation will be performed on this ID.
-          Deprecated: use servicecontrol.googleapis.com/user label to send user ID.
-        type: object
       quotaMode:
         description: Quota mode for this operation.
         enum:
@@ -1554,12 +1540,23 @@ definitions:
         description: |-
           The IP address of the caller.
           For caller from internet, this will be public IPv4 or IPv6 address.
-          For caller from GCE VM with external IP address, this will be the VM's
-          external IP address. For caller from GCE VM without external IP address, if
-          the VM is in the same GCP organization (or project) as the accessed
-          resource, `caller_ip` will be the GCE VM's internal IPv4 address, otherwise
-          it will be redacted to "gce-internal-ip".
+          For caller from a Compute Engine VM with external IP address, this
+          will be the VM's external IP address. For caller from a Compute
+          Engine VM without external IP address, if the VM is in the same
+          organization (or project) as the accessed resource, `caller_ip` will
+          be the VM's internal IPv4 address, otherwise the `caller_ip` will be
+          redacted to "gce-internal-ip".
           See https://cloud.google.com/compute/docs/vpc/ for more information.
+        type: string
+      callerNetwork:
+        description: |-
+          The network of the caller.
+          Set only if the network host project is part of the same GCP organization
+          (or project) as the accessed resource.
+          See https://cloud.google.com/compute/docs/vpc/ for more information.
+          This is a scheme-less URI full resource name. For example:
+
+              "//compute.googleapis.com/projects/PROJECT_ID/global/networks/NETWORK_ID"
         type: string
       callerSuppliedUserAgent:
         description: |-
@@ -1577,9 +1574,7 @@ definitions:
         type: string
     type: object
   ResourceInfo:
-    description: |-
-      DO NOT USE.
-      This definition is not ready for use yet.
+    description: Describes a resource associated with this operation.
     properties:
       resourceContainer:
         description: |-

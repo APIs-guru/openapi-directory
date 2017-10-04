@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://servicemanagement.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -1521,6 +1521,57 @@ definitions:
           Refer to selector for syntax details.
         type: string
     type: object
+  Billing:
+    description: |-
+      Billing related configuration of the service.
+
+      The following example shows how to configure monitored resources and metrics
+      for billing:
+          monitored_resources:
+          - type: library.googleapis.com/branch
+            labels:
+            - key: /city
+              description: The city where the library branch is located in.
+            - key: /name
+              description: The name of the branch.
+          metrics:
+          - name: library.googleapis.com/book/borrowed_count
+            metric_kind: DELTA
+            value_type: INT64
+          billing:
+            consumer_destinations:
+            - monitored_resource: library.googleapis.com/branch
+              metrics:
+              - library.googleapis.com/book/borrowed_count
+    properties:
+      consumerDestinations:
+        description: |-
+          Billing configurations for sending metrics to the consumer project.
+          There can be multiple consumer destinations per service, each one must have
+          a different monitored resource type. A metric can be used in at most
+          one consumer destination.
+        items:
+          $ref: '#/definitions/BillingDestination'
+        type: array
+    type: object
+  BillingDestination:
+    description: |-
+      Configuration of a specific billing destination (Currently only support
+      bill against consumer project).
+    properties:
+      metrics:
+        description: |-
+          Names of the metrics to report to this billing destination.
+          Each name must be defined in Service.metrics section.
+        items:
+          type: string
+        type: array
+      monitoredResource:
+        description: |-
+          The monitored resource type. The type must be defined in
+          Service.monitored_resources section.
+        type: string
+    type: object
   Binding:
     description: Associates `members` with a `role`.
     properties:
@@ -2222,6 +2273,13 @@ definitions:
           The name of the top-level flow corresponding to this operation.
           Must be equal to the "name" field for a FlowName enum.
         type: string
+      operationType:
+        description: |-
+          Operation type which is a flow type and subtype info as that is missing in
+          our datastore otherwise. This maps to the ordinal value of the enum:
+          jcg/api/tenant/operations/OperationNamespace.java
+        format: int32
+        type: integer
       resourceNames:
         description: The full name of the resources that this flow is directly associated with.
         items:
@@ -2230,6 +2288,13 @@ definitions:
       startTime:
         description: The start time of the operation.
         format: google-datetime
+        type: string
+      surface:
+        enum:
+          - UNSPECIFIED_OP_SERVICE
+          - SERVICE_MANAGEMENT
+          - SERVICE_USAGE
+          - SERVICE_CONSUMER_MANAGEMENT
         type: string
     type: object
   GenerateConfigReportRequest:
@@ -3771,6 +3836,9 @@ definitions:
       backend:
         $ref: '#/definitions/Backend'
         description: API backend configuration.
+      billing:
+        $ref: '#/definitions/Billing'
+        description: Billing configuration.
       configVersion:
         description: |-
           The semantic version of the service configuration. The config version

@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/toolresults/v1beta3/rest'
       version: v1
@@ -1663,13 +1663,13 @@ definitions:
   FailureDetail:
     properties:
       crashed:
-        description: If the failure was severe because the system under test crashed.
+        description: If the failure was severe because the system (app) under test crashed.
         type: boolean
       notInstalled:
         description: If an app is not installed and thus no test can be run with the app. This might be caused by trying to run a test on an unsupported platform.
         type: boolean
       otherNativeCrash:
-        description: If a native process other than the app crashed.
+        description: If a native process (including any other than the app) crashed.
         type: boolean
       timedOut:
         description: 'If the test overran some time limit, and that is why it failed.'

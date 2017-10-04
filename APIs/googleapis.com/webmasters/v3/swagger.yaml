@@ -8,20 +8,18 @@ info:
     name: Google
     url: 'https://google.com'
   description: View Google Search Console data for your verified sites.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Search Console
   version: v3
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - search
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/webmasters/v3/rest'
       version: v1
@@ -33,20 +31,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/webmasters': View and manage Search Console data for your verified sites
       'https://www.googleapis.com/auth/webmasters.readonly': View Search Console data for your verified sites
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/webmasters': View and manage Search Console data for your verified sites
-      'https://www.googleapis.com/auth/webmasters.readonly': View Search Console data for your verified sites
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -107,11 +96,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - sites
@@ -139,8 +124,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
       tags:
         - sites
     get:
@@ -160,11 +143,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - sites
@@ -190,8 +169,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters'
       tags:
         - sites
@@ -228,11 +205,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - searchanalytics
@@ -258,11 +231,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - sitemaps
@@ -295,8 +264,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
       tags:
         - sitemaps
     get:
@@ -321,11 +288,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - sitemaps
@@ -356,8 +319,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters'
       tags:
         - sitemaps
@@ -406,11 +367,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - urlcrawlerrorscounts
@@ -464,11 +421,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - urlcrawlerrorssamples
@@ -525,8 +478,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
       tags:
         - urlcrawlerrorssamples
     get:
@@ -575,11 +526,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/webmasters'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/webmasters'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/webmasters.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/webmasters.readonly'
       tags:
         - urlcrawlerrorssamples

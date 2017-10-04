@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://sheets.googleapis.com/$discovery/rest?version=v4'
       version: v1
@@ -233,7 +233,7 @@ paths:
   '/v4/spreadsheets/{spreadsheetId}/developerMetadata/{metadataId}':
     get:
       description: |-
-        Returns the developer metadata with the specified id.
+        Returns the developer metadata with the specified ID.
         The caller must specify the spreadsheet ID and the developer metadata's
         unique metadataId.
       operationId: sheets.spreadsheets.developerMetadata.get
@@ -885,10 +885,10 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Returns one or more ranges of values from a spreadsheet that match the
-        specified data filters.  The caller must specify the spreadsheet ID and
-        one or more DataFilters.  Ranges that match any of the data
-        filters in the request will be returned.
+        Returns one or more ranges of values that match the specified data filters.
+        The caller must specify the spreadsheet ID and one or more
+        DataFilters.  Ranges that match any of the data filters in
+        the request will be returned.
       operationId: sheets.spreadsheets.values.batchGetByDataFilter
       parameters:
         - in: body
@@ -1431,6 +1431,9 @@ definitions:
           The title of this axis. If set, this overrides any title inferred
           from headers of the data.
         type: string
+      titleTextPosition:
+        $ref: '#/definitions/TextPosition'
+        description: The axis title text position.
     type: object
   BasicChartDomain:
     description: |-
@@ -1510,6 +1513,15 @@ definitions:
           - SCATTER
           - COMBO
           - STEPPED_AREA
+        type: string
+      compareMode:
+        description: |-
+          The behavior of tooltips and data highlighting when hovering on data and
+          chart area.
+        enum:
+          - BASIC_CHART_COMPARE_MODE_UNSPECIFIED
+          - DATUM
+          - CATEGORY
         type: string
       domains:
         description: |-
@@ -1778,7 +1790,7 @@ definitions:
         description: |-
           The new values to apply to the spreadsheet.  If more than one range is
           matched by the specified DataFilter the specified values will be
-          applied to all of of those ranges.
+          applied to all of those ranges.
         items:
           $ref: '#/definitions/DataFilterValueRange'
         type: array
@@ -2395,6 +2407,19 @@ definitions:
       pieChart:
         $ref: '#/definitions/PieChartSpec'
         description: A pie chart specification.
+      subtitle:
+        description: The subtitle of the chart.
+        type: string
+      subtitleTextFormat:
+        $ref: '#/definitions/TextFormat'
+        description: |-
+          The subtitle text format.
+          Strikethrough and underline are not supported.
+      subtitleTextPosition:
+        $ref: '#/definitions/TextPosition'
+        description: |-
+          The subtitle text position.
+          This field is optional.
       title:
         description: The title of the chart.
         type: string
@@ -2403,6 +2428,11 @@ definitions:
         description: |-
           The title text format.
           Strikethrough and underline are not supported.
+      titleTextPosition:
+        $ref: '#/definitions/TextPosition'
+        description: |-
+          The title text position.
+          This field is optional.
     type: object
   ClearBasicFilterRequest:
     description: 'Clears the basic filter, if any exists on the sheet.'
@@ -2937,12 +2967,12 @@ definitions:
   DeveloperMetadataLookup:
     description: |-
       Selects DeveloperMetadata that matches all of the specified fields.  For
-      example, if only a metadata ID is specified this will consider the
+      example, if only a metadata ID is specified this considers the
       DeveloperMetadata with that particular unique ID. If a metadata key is
-      specified, all developer metadata with that key will be considered.  If a
-      key, visibility, and location type are all specified, then all
-      developer metadata with that key, visibility, and associated with a
-      location of that type will be considered.  In general, this
+      specified, this considers all developer metadata with that key.  If a
+      key, visibility, and location type are all specified, this considers all
+      developer metadata with that key and visibility that are associated with a
+      location of that type.  In general, this
       selects all DeveloperMetadata that matches the intersection of all the
       specified fields; any field or combination of fields may be specified.
     properties:
@@ -2950,9 +2980,9 @@ definitions:
         description: |-
           Determines how this lookup matches the location.  If this field is
           specified as EXACT, only developer metadata associated on the exact
-          location specified will be matched.  If this field is specified to INTERSECTING,
-          developer metadata associated on intersecting locations will also be
-          matched.  If left unspecified, this field will assume a default value of
+          location specified is matched.  If this field is specified to INTERSECTING,
+          developer metadata associated on intersecting locations is also
+          matched.  If left unspecified, this field assumes a default value of
           INTERSECTING.
           If this field is specified, a metadataLocation
           must also be specified.
@@ -2964,18 +2994,18 @@ definitions:
       locationType:
         description: |-
           Limits the selected developer metadata to those entries which are
-          associated with locations of the specified type.  For example, specifying
-          this as ROW will only consider
-          developer metadata associated on rows.  If left unspecified, all location
-          types will be considered.  This field cannot be specified as
-          SPREADSHEET when the
-          locationMatchingStrategy is
-          specified as INTERSECTING or when the
+          associated with locations of the specified type.  For example, when this
+          field is specified as ROW this lookup
+          only considers developer metadata associated on rows.  If the field is left
+          unspecified, all location types are considered.  This field cannot be
+          specified as SPREADSHEET when
+          the locationMatchingStrategy
+          is specified as INTERSECTING or when the
           metadataLocation is specified as a
           non-spreadsheet location: spreadsheet metadata cannot intersect any other
-          developer metadata location.  This field also must be left unspecified when the
-          locationMatchingStrategy is
-          specified as EXACT.
+          developer metadata location.  This field also must be left unspecified when
+          the locationMatchingStrategy
+          is specified as EXACT.
         enum:
           - DEVELOPER_METADATA_LOCATION_TYPE_UNSPECIFIED
           - ROW
@@ -3010,7 +3040,7 @@ definitions:
         description: |-
           Limits the selected developer metadata to that which has a matching
           DeveloperMetadata.visibility.  If left unspecified, all developer
-          metadata visibile to the requesting project will be considered.
+          metadata visibile to the requesting project is considered.
         enum:
           - DEVELOPER_METADATA_VISIBILITY_UNSPECIFIED
           - DOCUMENT
@@ -4719,6 +4749,18 @@ definitions:
         description: The character index where this run starts.
         format: int32
         type: integer
+    type: object
+  TextPosition:
+    description: Position settings for text.
+    properties:
+      horizontalAlignment:
+        description: Horizontal alignment setting for the piece of text.
+        enum:
+          - HORIZONTAL_ALIGN_UNSPECIFIED
+          - LEFT
+          - CENTER
+          - RIGHT
+        type: string
     type: object
   TextRotation:
     description: The rotation applied to text in a cell.

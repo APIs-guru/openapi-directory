@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://iam.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -254,9 +254,9 @@ paths:
           type: string
         - description: |-
             The resource name of the service account key in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}/keys/{key}`.
-            Using `-` as a wildcard for the project will infer the project from
-            the account. The `account` value can be the `email` address or the
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`.
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
             `unique_id` of the service account.
           in: path
           name: name
@@ -274,18 +274,14 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the ServiceAccountKey
-        by key id.
-      operationId: iam.projects.serviceAccounts.keys.get
+      description: Gets a Role definition.
+      operationId: iam.roles.get
       parameters:
         - description: |-
-            The resource name of the service account key in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}/keys/{key}`.
-
-            Using `-` as a wildcard for the project will infer the project from
-            the account. The `account` value can be the `email` address or the
-            `unique_id` of the service account.
+            The resource name of the role in one of the following formats:
+            `roles/{ROLE_NAME}`
+            `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
+            `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
           in: path
           name: name
           required: true
@@ -305,12 +301,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ServiceAccountKey'
+            $ref: '#/definitions/Role'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - roles
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -366,25 +362,25 @@ paths:
         The `etag` is mandatory.
       operationId: iam.projects.serviceAccounts.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ServiceAccount'
         - description: |-
             The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
 
-            Requests using `-` as a wildcard for the project will infer the project
-            from the `account` and the `account` value can be the `email` address or
-            the `unique_id` of the service account.
+            Requests using `-` as a wildcard for the `PROJECT_ID` will infer the
+            project from the `account` and the `ACCOUNT` value can be the `email`
+            address or the `unique_id` of the service account.
 
             In responses the resource name will always be in the format
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ServiceAccount'
       responses:
         '200':
           description: Successful response
@@ -400,18 +396,6 @@ paths:
       description: Lists ServiceAccountKeys.
       operationId: iam.projects.serviceAccounts.keys.list
       parameters:
-        - description: |-
-            The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
-
-            Using `-` as a wildcard for the project, will infer the project from
-            the account. The `account` value can be the `email` address or the
-            `unique_id` of the service account.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
         - collectionFormat: multi
           description: |-
             Filters the types of keys the user wants to include in the list
@@ -426,6 +410,18 @@ paths:
             type: string
           name: keyTypes
           type: array
+        - description: |-
+            The resource name of the service account in the following format:
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+
+            Using `-` as a wildcard for the `PROJECT_ID`, will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
+            `unique_id` of the service account.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -456,21 +452,21 @@ paths:
         and returns it.
       operationId: iam.projects.serviceAccounts.keys.create
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateServiceAccountKeyRequest'
         - description: |-
             The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
-            Using `-` as a wildcard for the project will infer the project from
-            the account. The `account` value can be the `email` address or the
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateServiceAccountKeyRequest'
       responses:
         '200':
           description: Successful response
@@ -579,21 +575,21 @@ paths:
       description: Signs a blob using a service account's system-managed private key.
       operationId: iam.projects.serviceAccounts.signBlob
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SignBlobRequest'
         - description: |-
             The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
-            Using `-` as a wildcard for the project will infer the project from
-            the account. The `account` value can be the `email` address or the
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SignBlobRequest'
       responses:
         '200':
           description: Successful response
@@ -628,21 +624,21 @@ paths:
         more than one hour, the request will fail.
       operationId: iam.projects.serviceAccounts.signJwt
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SignJwtRequest'
         - description: |-
             The resource name of the service account in the following format:
-            `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
-            Using `-` as a wildcard for the project will infer the project from
-            the account. The `account` value can be the `email` address or the
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
             `unique_id` of the service account.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SignJwtRequest'
       responses:
         '200':
           description: Successful response
@@ -701,6 +697,9 @@ paths:
       operationId: iam.projects.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
+          enum:
+            - BASIC
+            - FULL
           in: query
           name: pageSize
           type: integer
@@ -1355,13 +1354,13 @@ definitions:
 
       If the account already exists, the account's resource name is returned
       in util::Status's ResourceInfo.resource_name in the format of
-      projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}. The caller can
+      projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}. The caller can
       use the name in other methods to access the account.
 
       All other methods can identify the service account using the format
-      `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
-      Using `-` as a wildcard for the project will infer the project from
-      the account. The `account` value can be the `email` address or the
+      `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
+      Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+      the account. The `ACCOUNT` value can be the `email` address or the
       `unique_id` of the service account.
     properties:
       displayName:
@@ -1379,14 +1378,14 @@ definitions:
       name:
         description: |-
           The resource name of the service account in the following format:
-          `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
+          `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
 
-          Requests using `-` as a wildcard for the project will infer the project
-          from the `account` and the `account` value can be the `email` address or
-          the `unique_id` of the service account.
+          Requests using `-` as a wildcard for the `PROJECT_ID` will infer the
+          project from the `account` and the `ACCOUNT` value can be the `email`
+          address or the `unique_id` of the service account.
 
           In responses the resource name will always be in the format
-          `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}`.
+          `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`.
         type: string
       oauth2ClientId:
         description: |-
@@ -1430,7 +1429,7 @@ definitions:
       name:
         description: |-
           The resource name of the service account key in the following format
-          `projects/{PROJECT_ID}/serviceAccounts/{SERVICE_ACCOUNT_EMAIL}/keys/{key}`.
+          `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`.
         type: string
       privateKeyData:
         description: |-

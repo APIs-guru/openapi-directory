@@ -18,7 +18,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://proximitybeacon.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -1267,6 +1267,27 @@ definitions:
           Required.
         format: byte
         type: string
+      maxDistanceMeters:
+        description: |-
+          The distance away from the beacon at which this attachment should be
+          delivered to a mobile app.
+
+          Setting this to a value greater than zero indicates that the app should
+          behave as if the beacon is "seen" when the mobile device is less than this
+          distance away from the beacon.
+
+          Different attachments on the same beacon can have different max distances.
+
+          Note that even though this value is expressed with fractional meter
+          precision, real-world behavior is likley to be much less precise than one
+          meter, due to the nature of current Bluetooth radio technology.
+
+          Optional. When not set or zero, the attachment should be delivered at the
+          beacon's outer limit of detection.
+
+          Negative values are invalid and return an error.
+        format: double
+        type: number
       namespacedType:
         description: |-
           Specifies what kind of attachment this is. Tells a client how to

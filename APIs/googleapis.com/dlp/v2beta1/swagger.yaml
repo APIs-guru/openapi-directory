@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://dlp.googleapis.com/$discovery/rest?version=v2beta1'
       version: v1
@@ -373,7 +373,7 @@ paths:
   '/v2beta1/{name}':
     delete:
       description: This method is not supported and the server returns `UNIMPLEMENTED`.
-      operationId: dlp.riskAnalysis.operations.delete
+      operationId: dlp.inspect.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -390,13 +390,13 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: dlp.riskAnalysis.operations.get
+      operationId: dlp.inspect.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -413,7 +413,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -509,7 +509,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Cancels an operation. Use the `inspect.operations.get` to check whether the cancellation succeeded or the operation completed despite cancellation.
-      operationId: dlp.riskAnalysis.operations.cancel
+      operationId: dlp.inspect.operations.cancel
       parameters:
         - in: body
           name: body
@@ -530,7 +530,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - riskAnalysis
+        - inspect
 definitions:
   GoogleLongrunningCancelOperationRequest:
     description: The request message for Operations.CancelOperation.
@@ -888,44 +888,7 @@ definitions:
         description: Additional configuration settings for long running operations.
       outputConfig:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1OutputStorageConfig'
-        description: |-
-          Optional location to store findings. The bucket must already exist and
-          the Google APIs service account for DLP must have write permission to
-          write to the given bucket.
-          Results are split over multiple csv files with each file name matching
-          the pattern "[operation_id]_[count].csv", for example
-          `3094877188788974909_1.csv`. The `operation_id` matches the
-          identifier for the Operation, and the `count` is a counter used for
-          tracking the number of files written.
-
-          The CSV file(s) contain the following columns regardless of storage type
-          scanned:
-          - id
-          - info_type
-          - likelihood
-          - byte size of finding
-          - quote
-          - timestamp
-
-          For Cloud Storage the next columns are:
-
-          - file_path
-          - start_offset
-
-          For Cloud Datastore the next columns are:
-
-          - project_id
-          - namespace_id
-          - path
-          - column_name
-          - offset
-
-          For BigQuery the next columns are:
-
-          - row_number
-          - project_id
-          - dataset_id
-          - table_id
+        description: Optional location to store findings.
       storageConfig:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1StorageConfig'
         description: Specification of the data set to process.
@@ -961,7 +924,7 @@ definitions:
     description: |-
       Replaces an identifier with an surrogate using FPE with the FFX
       mode of operation.
-      The identifier must be encoded as ASCII.
+      The identifier must be representable by the US-ASCII character set.
       For a given crypto key and context, the same identifier will be
       replaced with the same surrogate.
       Note that a given identifier must be either the empty string or be at
@@ -1777,7 +1740,45 @@ definitions:
     properties:
       storagePath:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1CloudStoragePath'
-        description: The path to a Google Cloud Storage location to store output.
+        description: |-
+          The path to a Google Cloud Storage location to store output.
+          The bucket must already exist and
+          the Google APIs service account for DLP must have write permission to
+          write to the given bucket.
+          Results are split over multiple csv files with each file name matching
+          the pattern "[operation_id]_[count].csv", for example
+          `3094877188788974909_1.csv`. The `operation_id` matches the
+          identifier for the Operation, and the `count` is a counter used for
+          tracking the number of files written.
+
+          The CSV file(s) contain the following columns regardless of storage type
+          scanned:
+          - id
+          - info_type
+          - likelihood
+          - byte size of finding
+          - quote
+          - timestamp
+
+          For Cloud Storage the next columns are:
+
+          - file_path
+          - start_offset
+
+          For Cloud Datastore the next columns are:
+
+          - project_id
+          - namespace_id
+          - path
+          - column_name
+          - offset
+
+          For BigQuery the next columns are:
+
+          - row_number
+          - project_id
+          - dataset_id
+          - table_id
       table:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1BigQueryTable'
         description: Store findings in a new table in the dataset.

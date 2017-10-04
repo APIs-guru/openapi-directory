@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://bigquerydatatransfer.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -413,9 +413,6 @@ paths:
             results, `ListTransferRunsResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
-          enum:
-            - RUN_ATTEMPT_UNSPECIFIED
-            - LATEST
           in: query
           name: pageToken
           type: string
@@ -428,22 +425,11 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - collectionFormat: multi
-          description: Indicates how run attempts are to be pulled.
+        - description: Indicates how run attempts are to be pulled.
           enum:
             - RUN_ATTEMPT_UNSPECIFIED
             - LATEST
           in: query
-          items:
-            enum:
-              - TRANSFER_STATE_UNSPECIFIED
-              - INACTIVE
-              - PENDING
-              - RUNNING
-              - SUCCEEDED
-              - FAILED
-              - CANCELLED
-            type: string
           name: runAttempt
           type: string
         - collectionFormat: multi
@@ -501,11 +487,8 @@ paths:
             type: string
           name: dataSourceIds
           type: array
-        - collectionFormat: multi
-          description: Page size. The default page size is the maximum value of 1000 results.
+        - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
-          items:
-            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -624,16 +607,8 @@ paths:
             type: string
           name: messageTypes
           type: array
-        - collectionFormat: multi
-          description: Page size. The default page size is the maximum value of 1000 results.
+        - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
-          items:
-            enum:
-              - MESSAGE_SEVERITY_UNSPECIFIED
-              - INFO
-              - WARNING
-              - ERROR
-            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -950,11 +925,10 @@ definitions:
         type: array
       nextPageToken:
         description: |-
-          The next-pagination token. For multiple-page list results,
+          Output only. The next-pagination token. For multiple-page list results,
           this token can be used as the
           `ListDataSourcesRequest.page_token`
           to request the next page of list results.
-          Output only.
         type: string
     type: object
   ListLocationsResponse:
@@ -974,16 +948,13 @@ definitions:
     properties:
       nextPageToken:
         description: |-
-          The next-pagination token. For multiple-page list results,
+          Output only. The next-pagination token. For multiple-page list results,
           this token can be used as the
           `ListTransferConfigsRequest.page_token`
           to request the next page of list results.
-          Output only.
         type: string
       transferConfigs:
-        description: |-
-          The stored pipeline transfer configurations.
-          Output only.
+        description: Output only. The stored pipeline transfer configurations.
         items:
           $ref: '#/definitions/TransferConfig'
         type: array
@@ -993,16 +964,13 @@ definitions:
     properties:
       nextPageToken:
         description: |-
-          The next-pagination token. For multiple-page list results,
+          Output only. The next-pagination token. For multiple-page list results,
           this token can be used as the
           `GetTransferRunLogRequest.page_token`
           to request the next page of list results.
-          Output only.
         type: string
       transferMessages:
-        description: |-
-          The stored pipeline transfer messages.
-          Output only.
+        description: Output only. The stored pipeline transfer messages.
         items:
           $ref: '#/definitions/TransferMessage'
         type: array
@@ -1012,16 +980,13 @@ definitions:
     properties:
       nextPageToken:
         description: |-
-          The next-pagination token. For multiple-page list results,
+          Output only. The next-pagination token. For multiple-page list results,
           this token can be used as the
           `ListTransferRunsRequest.page_token`
           to request the next page of list results.
-          Output only.
         type: string
       transferRuns:
-        description: |-
-          The stored pipeline transfer runs.
-          Output only.
+        description: Output only. The stored pipeline transfer runs.
         items:
           $ref: '#/definitions/TransferRun'
         type: array
@@ -1101,10 +1066,7 @@ definitions:
         description: Data source id. Cannot be changed once data transfer is created.
         type: string
       datasetRegion:
-        description: |-
-          Region in which BigQuery dataset is located. Currently possible values are:
-          "US" and "EU".
-          Output only.
+        description: Output only. Region in which BigQuery dataset is located.
         type: string
       destinationDatasetId:
         description: The BigQuery target dataset id.
@@ -1127,9 +1089,7 @@ definitions:
           config.
         type: string
       nextRunTime:
-        description: |-
-          Next time when data transfer will run.
-          Output only.
+        description: Output only. Next time when data transfer will run.
         format: google-datetime
         type: string
       params:
@@ -1153,9 +1113,7 @@ definitions:
           NOTE: the granularity should be at least 8 hours, or less frequent.
         type: string
       state:
-        description: |-
-          State of the most recently updated transfer run.
-          Output only.
+        description: Output only. State of the most recently updated transfer run.
         enum:
           - TRANSFER_STATE_UNSPECIFIED
           - INACTIVE
@@ -1166,17 +1124,14 @@ definitions:
           - CANCELLED
         type: string
       updateTime:
-        description: |-
-          Data transfer modification time. Ignored by server on input.
-          Output only.
+        description: Output only. Data transfer modification time. Ignored by server on input.
         format: google-datetime
         type: string
       userId:
         description: |-
-          Unique ID of the user on whose behalf transfer is done. Applicable only
-          to data sources that do not support service accounts. When set to 0,
-          the data source service account credentials are used.
-          Output only.
+          Output only. Unique ID of the user on whose behalf transfer is done.
+          Applicable only to data sources that do not support service accounts.
+          When set to 0, the data source service account credentials are used.
         format: int64
         type: string
     type: object
@@ -1203,24 +1158,18 @@ definitions:
     description: Represents a data transfer run.
     properties:
       dataSourceId:
-        description: |-
-          Data source id.
-          Output only.
+        description: Output only. Data source id.
         type: string
       datasetRegion:
-        description: |-
-          Region in which BigQuery dataset is located. Currently possible values are:
-          "US" and "EU".
-          Output only.
+        description: Output only. Region in which BigQuery dataset is located.
         type: string
       destinationDatasetId:
         description: The BigQuery target dataset id.
         type: string
       endTime:
         description: |-
-          Time when transfer run ended. Parameter ignored by server for input
-          requests.
-          Output only.
+          Output only. Time when transfer run ended.
+          Parameter ignored by server for input requests.
         format: google-datetime
         type: string
       name:
@@ -1243,12 +1192,11 @@ definitions:
         type: string
       schedule:
         description: |-
-          Describes the schedule of this transfer run if it was created as part of
-          a regular schedule. For batch transfer runs that are directly created,
-          this is empty.
+          Output only. Describes the schedule of this transfer run if it was
+          created as part of a regular schedule. For batch transfer runs that are
+          scheduled manually, this is empty.
           NOTE: the system might choose to delay the schedule depending on the
           current load, so `schedule_time` doesn't always matches this.
-          Output only.
         type: string
       scheduleTime:
         description: Minimum time after which a transfer run can be started.
@@ -1256,15 +1204,12 @@ definitions:
         type: string
       startTime:
         description: |-
-          Time when transfer run was started. Parameter ignored by server for input
-          requests.
-          Output only.
+          Output only. Time when transfer run was started.
+          Parameter ignored by server for input requests.
         format: google-datetime
         type: string
       state:
-        description: |-
-          Data transfer run state. Ignored for input requests.
-          Output only.
+        description: Output only. Data transfer run state. Ignored for input requests.
         enum:
           - TRANSFER_STATE_UNSPECIFIED
           - INACTIVE
@@ -1275,17 +1220,14 @@ definitions:
           - CANCELLED
         type: string
       updateTime:
-        description: |-
-          Last time the data transfer run state was updated.
-          Output only.
+        description: Output only. Last time the data transfer run state was updated.
         format: google-datetime
         type: string
       userId:
         description: |-
-          Unique ID of the user on whose behalf transfer is done. Applicable only
-          to data sources that do not support service accounts. When set to 0,
-          the data source service account credentials are used.
-          Output only.
+          Output only. Unique ID of the user on whose behalf transfer is done.
+          Applicable only to data sources that do not support service accounts.
+          When set to 0, the data source service account credentials are used.
         format: int64
         type: string
     type: object

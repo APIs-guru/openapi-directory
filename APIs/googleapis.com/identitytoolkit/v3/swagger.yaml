@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/identitytoolkit/v3/rest'
       version: v1
@@ -159,6 +159,33 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/firebase'
+      tags:
+        - relyingparty
+  /emailLinkSignin:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Reset password for a user.
+      operationId: identitytoolkit.relyingparty.emailLinkSignin
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyEmailLinkSigninRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/EmailLinkSigninResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - relyingparty
   /getAccountInfo:
@@ -620,6 +647,11 @@ definitions:
       sessionId:
         description: Session ID which should be passed in the following verifyAssertion request.
         type: string
+      signinMethods:
+        description: All sign-in methods this user has used.
+        items:
+          type: string
+        type: array
     type: object
   DeleteAccountResponse:
     description: Respone of deleting account.
@@ -644,6 +676,33 @@ definitions:
         items:
           $ref: '#/definitions/UserInfo'
         type: array
+    type: object
+  EmailLinkSigninResponse:
+    description: Response of email signIn.
+    properties:
+      email:
+        description: The user's email.
+        type: string
+      expiresIn:
+        description: Expiration time of STS id token in seconds.
+        format: int64
+        type: string
+      idToken:
+        description: The STS id token to login the newly signed in user.
+        type: string
+      isNewUser:
+        description: Whether the user is new.
+        type: boolean
+      kind:
+        default: 'identitytoolkit#EmailLinkSigninResponse'
+        description: 'The fixed string "identitytoolkit#EmailLinkSigninResponse".'
+        type: string
+      localId:
+        description: The RP local ID of the user.
+        type: string
+      refreshToken:
+        description: The refresh token for the signed in user.
+        type: string
     type: object
   EmailTemplate:
     description: Template for an email template.
@@ -787,6 +846,19 @@ definitions:
         type: string
       targetProjectId:
         description: Specify which project (field value is actually project id) to operate. Only used when provided credential.
+        type: string
+    type: object
+  IdentitytoolkitRelyingpartyEmailLinkSigninRequest:
+    description: Request to sign in with email.
+    properties:
+      email:
+        description: The email address of the user.
+        type: string
+      idToken:
+        description: Token for linking flow.
+        type: string
+      oobCode:
+        description: The confirmation code.
         type: string
     type: object
   IdentitytoolkitRelyingpartyGetAccountInfoRequest:

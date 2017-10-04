@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://streetviewpublish.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -138,6 +138,13 @@ paths:
         CreatePhoto
         publishes the uploaded Photo to
         Street View on Google Maps.
+
+        Currently, the only way to set heading, pitch, and roll in CreatePhoto is
+        through the [Photo Sphere XMP
+        metadata](https://developers.google.com/streetview/spherical-metadata) in
+        the photo bytes. The `pose.heading`, `pose.pitch`, `pose.roll`,
+        `pose.altitude`, and `pose.level` fields in Pose are ignored for
+        CreatePhoto.
 
         This method returns the following error codes:
 
@@ -386,7 +393,10 @@ paths:
         the user.
       operationId: streetviewpublish.photos.list
       parameters:
-        - description: 'The filter expression. For example: `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.'
+        - description: |-
+            The filter expression. For example: `placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw`.
+
+            The only filter supported at the moment is `placeId`.
           in: query
           name: filter
           type: string
@@ -786,6 +796,49 @@ definitions:
         items:
           $ref: '#/definitions/Photo'
         type: array
+    type: object
+  Operation:
+    description: |-
+      This resource represents a long-running operation that is the result of a
+      network API call.
+    properties:
+      done:
+        description: |-
+          If the value is `false`, it means the operation is still in progress.
+          If `true`, the operation is completed, and either `error` or `response` is
+          available.
+        type: boolean
+      error:
+        $ref: '#/definitions/Status'
+        description: The error result of the operation in case of failure or cancellation.
+      metadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          Service-specific metadata associated with the operation.  It typically
+          contains progress information and common metadata such as create time.
+          Some services might not provide such metadata.  Any method that returns a
+          long-running operation should document the metadata type, if any.
+        type: object
+      name:
+        description: |-
+          The server-assigned name, which is only unique within the same service that
+          originally returns it. If you use the default HTTP mapping, the
+          `name` should have the format of `operations/some/unique/name`.
+        type: string
+      response:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: |-
+          The normal response of the operation in case of success.  If the original
+          method returns no data on success, such as `Delete`, the response is
+          `google.protobuf.Empty`.  If the original method is standard
+          `Get`/`Create`/`Update`, the response should be the resource.  For other
+          methods, the response should have the type `XxxResponse`, where `Xxx`
+          is the original method name.  For example, if the original method name
+          is `TakeSnapshot()`, the inferred response type is
+          `TakeSnapshotResponse`.
+        type: object
     type: object
   Photo:
     description: Photo is used to store 360 photos along with photo metadata.

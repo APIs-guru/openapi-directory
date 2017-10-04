@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Lets you manage your tasks and task lists.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Tasks
   version: v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/tasks/v1/rest'
       version: v1
@@ -35,20 +31,11 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/tasks': Manage your tasks
       'https://www.googleapis.com/auth/tasks.readonly': View your tasks
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/tasks': Manage your tasks
-      'https://www.googleapis.com/auth/tasks.readonly': View your tasks
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -118,8 +105,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
   '/lists/{tasklist}/tasks':
@@ -180,11 +165,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/tasks'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tasks.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks.readonly'
       tags:
         - tasks
@@ -225,8 +206,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
   '/lists/{tasklist}/tasks/{task}':
@@ -249,8 +228,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
@@ -276,11 +253,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/tasks'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tasks.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks.readonly'
       tags:
         - tasks
@@ -318,8 +291,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
     put:
@@ -347,8 +318,6 @@ paths:
             $ref: '#/definitions/Task'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
@@ -391,8 +360,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasks
   /users/@me/lists:
@@ -416,11 +383,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/tasks'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tasks.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks.readonly'
       tags:
         - tasklists
@@ -448,8 +411,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasklists
   '/users/@me/lists/{tasklist}':
@@ -467,8 +428,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasklists
@@ -489,11 +448,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/tasks'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tasks.readonly'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks.readonly'
       tags:
         - tasklists
@@ -526,8 +481,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasklists
     put:
@@ -550,8 +503,6 @@ paths:
             $ref: '#/definitions/TaskList'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tasks'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasklists

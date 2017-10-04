@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: google
       url: 'https://cloudtasks.googleapis.com/$discovery/rest?version=v2beta2'
       version: v1
@@ -1013,7 +1013,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: |-
+      description: |
         Gets the access control policy for a Queue.
         Returns an empty policy if the resource exists and does not have a policy
         set.
@@ -1062,7 +1062,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: |-
+      description: |
         Sets the access control policy for a Queue. Replaces any existing
         policy.
 
@@ -1110,7 +1110,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: |-
+      description: |
         Returns permissions that a caller has on a Queue.
         If the resource does not exist, this will return an empty set of
         permissions, not a google.rpc.Code.NOT_FOUND error.
@@ -1169,7 +1169,7 @@ definitions:
       This proto can only be used for tasks in a queue which has
       Queue.app_engine_http_target set.
 
-      Using this type of target requires
+      Using AppEngineHttpRequest requires
       [`appengine.applications.get`](/appengine/docs/admin-api/access-control)
       Google IAM permission for the project
       and the following scope:
@@ -1302,7 +1302,7 @@ definitions:
       The documentation for AppEngineHttpRequest explains how the
       task's host URL is constructed.
 
-      Using this type of queue configuration requires
+      Using AppEngineHttpTarget requires
       [`appengine.applications.get`](/appengine/docs/admin-api/access-control)
       Google IAM permission for the project
       and the following scope:

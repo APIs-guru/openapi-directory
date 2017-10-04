@@ -8,10 +8,6 @@ info:
     name: Google
     url: 'https://google.com'
   description: Views and manages licenses for your domain.
-  license:
-    name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
   title: Enterprise License Manager
   version: v1
   x-apiClientRegistration:
@@ -23,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.0.1
+        version: 2.6.0
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/licensing/v1/rest'
       version: v1
@@ -35,18 +31,10 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 implicit authentication
+    description: Oauth 2.0 authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/apps.licensing': View and manage G Suite licenses for your domain
-    type: oauth2
-  Oauth2c:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 accessCode authentication
-    flow: accessCode
-    scopes:
-      'https://www.googleapis.com/auth/apps.licensing': View and manage G Suite licenses for your domain
-    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -126,8 +114,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.licensing'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.licensing'
       tags:
         - licenseAssignments
   '/{productId}/sku/{skuId}/user/{userId}':
@@ -155,8 +141,6 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.licensing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.licensing'
       tags:
         - licenseAssignments
@@ -186,8 +170,6 @@ paths:
             $ref: '#/definitions/LicenseAssignment'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.licensing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.licensing'
       tags:
         - licenseAssignments
@@ -230,8 +212,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/apps.licensing'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/apps.licensing'
       tags:
         - licenseAssignments
     put:
@@ -264,8 +244,6 @@ paths:
             $ref: '#/definitions/LicenseAssignment'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.licensing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.licensing'
       tags:
         - licenseAssignments
@@ -308,8 +286,6 @@ paths:
             $ref: '#/definitions/LicenseAssignmentList'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.licensing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.licensing'
       tags:
         - licenseAssignments
@@ -355,8 +331,6 @@ paths:
             $ref: '#/definitions/LicenseAssignmentList'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/apps.licensing'
-          Oauth2c:
             - 'https://www.googleapis.com/auth/apps.licensing'
       tags:
         - licenseAssignments
