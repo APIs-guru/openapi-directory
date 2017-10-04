@@ -15,6 +15,7 @@ info:
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: arm-web
+  x-preferred: false
   x-tags:
     - Azure
     - Microsoft
@@ -462,7 +463,7 @@ definitions:
     type: object
   Contact:
     description: |-
-      Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois 
+      Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois
        directories as per ICANN requirements.
     properties:
       addressMailing:
@@ -607,7 +608,7 @@ definitions:
               name: ProvisioningState
           readyForDnsRecordManagement:
             description: |-
-              <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and 
+              <code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and
                it is hosted on name servers Azure has programmatic access to.
             readOnly: true
             type: boolean
