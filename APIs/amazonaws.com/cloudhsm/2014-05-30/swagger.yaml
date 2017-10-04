@@ -3,7 +3,7 @@ info:
   version: '2014-05-30'
   x-release: v4
   title: Amazon CloudHSM
-  description: <fullname>AWS CloudHSM Service</fullname>
+  description: '<fullname>AWS CloudHSM Service</fullname> <p>This is the reference for AWS CloudHSM Classic. For more information, see <a href="http://aws.amazon.com/cloudhsm/faqs-classic/">AWS CloudHSM Classic FAQs</a> and the <a href="http://docs.aws.amazon.com/cloudhsm/classic/userguide/">AWS CloudHSM Classic User Guide</a>.</p> <p>For more information about AWS CloudHSM, see <a href="http://aws.amazon.com/cloudhsm/">AWS CloudHSM</a> and the <a href="http://docs.aws.amazon.com/cloudhsm/latest/userguide/">AWS CloudHSM User Guide</a>.</p>'
   x-logo:
     url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
     backgroundColor: '#FFFFFF'
@@ -174,7 +174,7 @@ paths:
   '/#CreateHsm':
     post:
       operationId: CreateHsm
-      description: '<p>Creates an uninitialized HSM instance.</p> <p>There is an upfront fee charged for each HSM instance that you create with the <a>CreateHsm</a> operation. If you accidentally provision an HSM and want to request a refund, delete the instance using the <a>DeleteHsm</a> operation, go to the <a href="https://console.aws.amazon.com/support/home#/">AWS Support Center</a>, create a new case, and select <b>Account and Billing Support</b>.</p> <important> <p>It can take up to 20 minutes to create and provision an HSM. You can monitor the status of the HSM with the <a>DescribeHsm</a> operation. The HSM is ready to be initialized when the status changes to <code>RUNNING</code>.</p> </important>'
+      description: '<p>Creates an uninitialized HSM instance.</p> <p>There is an upfront fee charged for each HSM instance that you create with the <code>CreateHsm</code> operation. If you accidentally provision an HSM and want to request a refund, delete the instance using the <a>DeleteHsm</a> operation, go to the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a>, create a new case, and select <b>Account and Billing Support</b>.</p> <important> <p>It can take up to 20 minutes to create and provision an HSM. You can monitor the status of the HSM with the <a>DescribeHsm</a> operation. The HSM is ready to be initialized when the status changes to <code>RUNNING</code>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -544,7 +544,7 @@ paths:
   '/#ListHapgs':
     post:
       operationId: ListHapgs
-      description: '<p>Lists the high-availability partition groups for the account.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> member. If more results are available, the <i>NextToken</i> member of the response contains a token that you pass in the next call to <a>ListHapgs</a> to retrieve the next set of items.</p>'
+      description: '<p>Lists the high-availability partition groups for the account.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> member. If more results are available, the <code>NextToken</code> member of the response contains a token that you pass in the next call to <code>ListHapgs</code> to retrieve the next set of items.</p>'
       responses:
         '200':
           description: Success
@@ -581,7 +581,7 @@ paths:
   '/#ListHsms':
     post:
       operationId: ListHsms
-      description: '<p>Retrieves the identifiers of all of the HSMs provisioned for the current customer.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> member. If more results are available, the <i>NextToken</i> member of the response contains a token that you pass in the next call to <a>ListHsms</a> to retrieve the next set of items.</p>'
+      description: '<p>Retrieves the identifiers of all of the HSMs provisioned for the current customer.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> member. If more results are available, the <code>NextToken</code> member of the response contains a token that you pass in the next call to <code>ListHsms</code> to retrieve the next set of items.</p>'
       responses:
         '200':
           description: Success
@@ -618,7 +618,7 @@ paths:
   '/#ListLunaClients':
     post:
       operationId: ListLunaClients
-      description: '<p>Lists all of the clients.</p> <p>This operation supports pagination with the use of the <i>NextToken</i> member. If more results are available, the <i>NextToken</i> member of the response contains a token that you pass in the next call to <a>ListLunaClients</a> to retrieve the next set of items.</p>'
+      description: '<p>Lists all of the clients.</p> <p>This operation supports pagination with the use of the <code>NextToken</code> member. If more results are available, the <code>NextToken</code> member of the response contains a token that you pass in the next call to <code>ListLunaClients</code> to retrieve the next set of items.</p>'
       responses:
         '200':
           description: Success
@@ -943,7 +943,7 @@ definitions:
         description: The ARN of an IAM role to enable the AWS CloudHSM service to allocate an ENI on your behalf.
       ExternalId:
         $ref: '#/definitions/ExternalId'
-        description: 'The external ID from <b>IamRoleArn</b>, if present.'
+        description: 'The external ID from <code>IamRoleArn</code>, if present.'
       SubscriptionType:
         $ref: '#/definitions/SubscriptionType'
       ClientToken:
@@ -952,14 +952,14 @@ definitions:
       SyslogIp:
         $ref: '#/definitions/IpAddress'
         description: The IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
-    description: Contains the inputs for the <a>CreateHsm</a> operation.
+    description: Contains the inputs for the <code>CreateHsm</code> operation.
   CreateHsmResponse:
     type: object
     properties:
       HsmArn:
         $ref: '#/definitions/HsmArn'
         description: The ARN of the HSM.
-    description: Contains the output of the <a>CreateHsm</a> operation.
+    description: Contains the output of the <code>CreateHsm</code> operation.
   CreateLunaClientRequest:
     type: object
     required:
@@ -1051,10 +1051,13 @@ definitions:
         description: The serial number of the high-availability partition group.
       HsmsLastActionFailed:
         $ref: '#/definitions/HsmList'
+        description: <p/>
       HsmsPendingDeletion:
         $ref: '#/definitions/HsmList'
+        description: <p/>
       HsmsPendingRegistration:
         $ref: '#/definitions/HsmList'
+        description: <p/>
       Label:
         $ref: '#/definitions/Label'
         description: The label for the high-availability partition group.
@@ -1073,11 +1076,11 @@ definitions:
     properties:
       HsmArn:
         $ref: '#/definitions/HsmArn'
-        description: The ARN of the HSM. Either the <i>HsmArn</i> or the <i>SerialNumber</i> parameter must be specified.
+        description: The ARN of the HSM. Either the <code>HsmArn</code> or the <code>SerialNumber</code> parameter must be specified.
       HsmSerialNumber:
         $ref: '#/definitions/HsmSerialNumber'
-        description: The serial number of the HSM. Either the <i>HsmArn</i> or the <i>HsmSerialNumber</i> parameter must be specified.
-    description: 'Contains the inputs for the <a>DescribeHsm</a> operation. '
+        description: The serial number of the HSM. Either the <code>HsmArn</code> or the <code>HsmSerialNumber</code> parameter must be specified.
+    description: Contains the inputs for the <a>DescribeHsm</a> operation.
   DescribeHsmResponse:
     type: object
     properties:
@@ -1262,7 +1265,7 @@ definitions:
     properties:
       NextToken:
         $ref: '#/definitions/PaginationToken'
-        description: The <i>NextToken</i> value from a previous call to <a>ListHapgs</a>. Pass null if this is the first call.
+        description: The <code>NextToken</code> value from a previous call to <code>ListHapgs</code>. Pass null if this is the first call.
   ListHapgsResponse:
     type: object
     required:
@@ -1273,13 +1276,13 @@ definitions:
         description: The list of high-availability partition groups.
       NextToken:
         $ref: '#/definitions/PaginationToken'
-        description: 'If not null, more results are available. Pass this value to <a>ListHapgs</a> to retrieve the next set of items.'
+        description: 'If not null, more results are available. Pass this value to <code>ListHapgs</code> to retrieve the next set of items.'
   ListHsmsRequest:
     type: object
     properties:
       NextToken:
         $ref: '#/definitions/PaginationToken'
-        description: The <i>NextToken</i> value from a previous call to <a>ListHsms</a>. Pass null if this is the first call.
+        description: The <code>NextToken</code> value from a previous call to <code>ListHsms</code>. Pass null if this is the first call.
   ListHsmsResponse:
     type: object
     properties:
@@ -1288,14 +1291,14 @@ definitions:
         description: The list of ARNs that identify the HSMs.
       NextToken:
         $ref: '#/definitions/PaginationToken'
-        description: 'If not null, more results are available. Pass this value to <a>ListHsms</a> to retrieve the next set of items.'
-    description: Contains the output of the <a>ListHsms</a> operation.
+        description: 'If not null, more results are available. Pass this value to <code>ListHsms</code> to retrieve the next set of items.'
+    description: Contains the output of the <code>ListHsms</code> operation.
   ListLunaClientsRequest:
     type: object
     properties:
       NextToken:
         $ref: '#/definitions/PaginationToken'
-        description: The <i>NextToken</i> value from a previous call to <a>ListLunaClients</a>. Pass null if this is the first call.
+        description: The <code>NextToken</code> value from a previous call to <code>ListLunaClients</code>. Pass null if this is the first call.
   ListLunaClientsResponse:
     type: object
     required:
@@ -1306,7 +1309,7 @@ definitions:
         description: The list of clients.
       NextToken:
         $ref: '#/definitions/PaginationToken'
-        description: 'If not null, more results are available. Pass this to <a>ListLunaClients</a> to retrieve the next set of items.'
+        description: 'If not null, more results are available. Pass this to <code>ListLunaClients</code> to retrieve the next set of items.'
   ListTagsForResourceRequest:
     type: object
     required:
@@ -1442,7 +1445,7 @@ definitions:
     type: string
     enum:
       - PRODUCTION
-    description: <p>Specifies the type of subscription for the HSM.</p> <ul> <li><b>PRODUCTION</b> - The HSM is being used in a production environment.</li> <li><b>TRIAL</b> - The HSM is being used in a product trial.</li> </ul>
+    description: <p>Specifies the type of subscription for the HSM.</p> <ul> <li> <p> <b>PRODUCTION</b> - The HSM is being used in a production environment.</p> </li> <li> <p> <b>TRIAL</b> - The HSM is being used in a product trial.</p> </li> </ul>
   Tag:
     type: object
     required:

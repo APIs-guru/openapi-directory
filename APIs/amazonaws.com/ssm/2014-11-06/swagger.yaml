@@ -3,7 +3,7 @@ info:
   version: '2014-11-06'
   x-release: v4
   title: Amazon Simple Systems Manager (SSM)
-  description: '<fullname>Amazon EC2 Systems Manager</fullname> <p>Amazon EC2 Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/">Amazon EC2 Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Systems Manager Prerequisites</a>.</p>'
+  description: '<fullname>Amazon EC2 Systems Manager</fullname> <p>Amazon EC2 Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon EC2 instance or on-premises machine in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/">Amazon EC2 Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html">Systems Manager Prerequisites</a>.</p> <p>For information about other API actions you can perform on Amazon EC2 instances, see the <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/">Amazon EC2 API Reference</a>. For information about how to use a Query API, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html">Making API Requests</a>. </p>'
   x-logo:
     url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
     backgroundColor: '#FFFFFF'
@@ -100,7 +100,7 @@ paths:
   /:
     post:
       operationId: AddTagsToResource
-      description: '<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you assign to your managed instances, Maintenance Windows, or Parameter Store parameters. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account''s managed instances that helps you track each instance''s owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.</p> <p>Each resource can have a maximum of 10 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don''t have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters. </p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon EC2 User Guide</i>.</p>'
+      description: '<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, Maintenance Windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account''s managed instances that helps you track each instance''s owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.</p> <p>Each resource can have a maximum of 10 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don''t have any semantic meaning to Amazon EC2 and are interpreted strictly as a string of characters. </p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon EC2 User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1083,7 +1083,7 @@ paths:
   '/#DescribeDocument':
     post:
       operationId: DescribeDocument
-      description: Describes the specified SSM document.
+      description: Describes the specified Systems Manager document.
       responses:
         '200':
           description: Success
@@ -1914,7 +1914,7 @@ paths:
   '/#GetDocument':
     post:
       operationId: GetDocument
-      description: Gets the contents of the specified SSM document.
+      description: Gets the contents of the specified Systems Manager document.
       responses:
         '200':
           description: Success
@@ -2753,7 +2753,7 @@ paths:
   '/#ListDocuments':
     post:
       operationId: ListDocuments
-      description: Describes one or more of your SSM documents.
+      description: Describes one or more of your Systems Manager documents.
       responses:
         '200':
           description: Success
@@ -4059,7 +4059,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentName'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
@@ -4097,7 +4097,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentName'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
@@ -4267,7 +4267,7 @@ definitions:
         description: The name specified when the association was created.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
-        description: The version of an SSM document used when the association version was created.
+        description: The version of a Systems Manager document used when the association version was created.
       Parameters:
         $ref: '#/definitions/Parameters'
         description: Parameters specified when the association version was created.
@@ -5438,7 +5438,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentName'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The instance ID.
@@ -5521,7 +5521,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentARN'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version for which you want information. Can be a specific version or the default version.
@@ -5530,7 +5530,7 @@ definitions:
     properties:
       Document:
         $ref: '#/definitions/DocumentDescription'
-        description: Information about the SSM document.
+        description: Information about the Systems Manager document.
   DescribeEffectiveInstanceAssociationsRequest:
     type: object
     required:
@@ -5978,7 +5978,7 @@ definitions:
     properties:
       Sha1:
         $ref: '#/definitions/DocumentSha1'
-        description: 'The SHA1 hash of the document, which you can use for verification purposes.'
+        description: 'The SHA1 hash of the document, which you can use for verification.'
       Hash:
         $ref: '#/definitions/DocumentHash'
         description: <p>The Sha256 or Sha1 hash created by the system when the document was created. </p> <note> <p>Sha1 hashes have been deprecated.</p> </note>
@@ -5987,16 +5987,16 @@ definitions:
         description: <p>Sha256 or Sha1.</p> <note> <p>Sha1 hashes have been deprecated.</p> </note>
       Name:
         $ref: '#/definitions/DocumentARN'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       Owner:
         $ref: '#/definitions/DocumentOwner'
-        description: The AWS user account of the person who created the document.
+        description: The AWS user account that created the document.
       CreatedDate:
         $ref: '#/definitions/DateTime'
         description: The date when the document was created.
       Status:
         $ref: '#/definitions/DocumentStatus'
-        description: The status of the SSM document.
+        description: The status of the Systems Manager document.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version.
@@ -6008,7 +6008,7 @@ definitions:
         description: A description of the parameters for a document.
       PlatformTypes:
         $ref: '#/definitions/PlatformTypeList'
-        description: 'The list of OS platforms compatible with this SSM document. '
+        description: 'The list of OS platforms compatible with this Systems Manager document. '
       DocumentType:
         $ref: '#/definitions/DocumentType'
         description: 'The type of document. '
@@ -6021,7 +6021,10 @@ definitions:
       DefaultVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The default version.
-    description: 'Describes an SSM document. '
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tags, or metadata, that have been applied to the document.'
+    description: 'Describes a Systems Manager document. '
   DocumentFilter:
     type: object
     required:
@@ -6063,10 +6066,10 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentARN'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       Owner:
         $ref: '#/definitions/DocumentOwner'
-        description: The AWS user account of the person who created the document.
+        description: The AWS user account that created the document.
       PlatformTypes:
         $ref: '#/definitions/PlatformTypeList'
         description: 'The operating system platform. '
@@ -6079,17 +6082,48 @@ definitions:
       SchemaVersion:
         $ref: '#/definitions/DocumentSchemaVersion'
         description: The schema version.
-    description: Describes the name of an SSM document.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tags, or metadata, that have been applied to the document.'
+    description: Describes the name of a Systems Manager document.
   DocumentIdentifierList:
     type: array
     items:
       $ref: '#/definitions/DocumentIdentifier'
+  DocumentKeyValuesFilter:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/DocumentKeyValuesFilterKey'
+        description: The name of the filter key.
+      Values:
+        $ref: '#/definitions/DocumentKeyValuesFilterValues'
+        description: The value for the filter key.
+    description: '<p>One or more filters. Use a filter to return a more specific list of documents.</p> <p>For keys, you can specify one or more tags that have been applied to a document. </p> <p>Other valid values include Owner, Name, PlatformTypes, and DocumentType.</p> <p>Note that only one Owner can be specified in a request. For example: <code>Key=Owner,Values=Self</code>.</p> <p>If you use Name as a key, you can use a name prefix to return a list of documents. For example, in the AWS CLI, to return a list of all documents that begin with <code>Te</code>, run the following command:</p> <p> <code>aws ssm list-documents --filters Key=Name,Values=Te</code> </p> <p>If you specify more than two keys, only documents that are identified by all the tags are returned in the results. If you specify more than two values for a key, documents that are identified by any of the values are returned in the results.</p> <p>To specify a custom key and value pair, use the format <code>Key=tag:[tagName],Values=[valueName]</code>.</p> <p>For example, if you created a Key called region and are using the AWS CLI to call the <code>list-documents</code> command: </p> <p> <code>aws ssm list-documents --filters Key=tag:region,Values=east,west Key=Owner,Values=Self</code> </p>'
+  DocumentKeyValuesFilterKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  DocumentKeyValuesFilterList:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentKeyValuesFilter'
+    minItems: 0
+    maxItems: 5
+  DocumentKeyValuesFilterValue:
+    type: string
+    minLength: 1
+    maxLength: 256
+  DocumentKeyValuesFilterValues:
+    type: array
+    items:
+      $ref: '#/definitions/DocumentKeyValuesFilterValue'
   DocumentLimitExceeded:
     type: object
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: You can have at most 200 active SSM documents.
+    description: You can have at most 200 active Systems Manager documents.
   DocumentName:
     type: string
     pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
@@ -6394,7 +6428,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentARN'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version for which you want information.
@@ -6403,13 +6437,13 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentARN'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version.
       Content:
         $ref: '#/definitions/DocumentContent'
-        description: The contents of the SSM document.
+        description: The contents of the Systems Manager document.
       DocumentType:
         $ref: '#/definitions/DocumentType'
         description: The document type.
@@ -6670,7 +6704,7 @@ definitions:
         description: The targets where the task should execute.
       TaskArn:
         $ref: '#/definitions/MaintenanceWindowTaskArn'
-        description: 'The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the SSM Document name/ARN. For LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTION tasks, the value is the state machine ARN.'
+        description: 'The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types, the TaskArn is the Systems Manager Document name/ARN. For LAMBDA tasks, the value is the function name/ARN. For STEP_FUNCTION tasks, the value is the state machine ARN.'
       ServiceRoleArn:
         $ref: '#/definitions/ServiceRole'
         description: The IAM service role to assume during task execution.
@@ -7403,7 +7437,7 @@ definitions:
     properties:
       Message:
         $ref: '#/definitions/String'
-    description: You must specify values for all required parameters in the SSM document. You can only supply values to parameters defined in the SSM document.
+    description: You must specify values for all required parameters in the Systems Manager document. You can only supply values to parameters defined in the Systems Manager document.
   InvalidPermissionType:
     type: object
     properties:
@@ -7421,7 +7455,7 @@ definitions:
   InvalidResourceType:
     type: object
     properties: {}
-    description: 'The resource type is not valid. If you are attempting to tag an instance, the instance must be a registered, managed instance.'
+    description: 'The resource type is not valid. For example, if you are attempting to tag an instance, the instance must be a registered, managed instance.'
   InvalidResultAttributeException:
     type: object
     properties:
@@ -7893,6 +7927,9 @@ definitions:
       DocumentFilterList:
         $ref: '#/definitions/DocumentFilterList'
         description: One or more filters. Use a filter to return a more specific list of results.
+      Filters:
+        $ref: '#/definitions/DocumentKeyValuesFilterList'
+        description: One or more filters. Use a filter to return a more specific list of results.
       MaxResults:
         $ref: '#/definitions/MaxResults'
         description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -7904,7 +7941,7 @@ definitions:
     properties:
       DocumentIdentifiers:
         $ref: '#/definitions/DocumentIdentifierList'
-        description: The names of the SSM documents.
+        description: The names of the Systems Manager documents.
       NextToken:
         $ref: '#/definitions/NextToken'
         description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
@@ -8386,7 +8423,7 @@ definitions:
         description: The task ID.
       TaskArn:
         $ref: '#/definitions/MaintenanceWindowTaskArn'
-        description: 'The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, <code>TaskArn</code> is the SSM document name or ARN. For LAMBDA tasks, it''s the function name or ARN. For STEP_FUNCTION tasks, it''s the state machine ARN.'
+        description: 'The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types, <code>TaskArn</code> is the Systems Manager document name or ARN. For LAMBDA tasks, it''s the function name or ARN. For STEP_FUNCTION tasks, it''s the state machine ARN.'
       Type:
         $ref: '#/definitions/MaintenanceWindowTaskType'
         description: 'The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION, LAMBDA, or STEP_FUNCTION.'
@@ -9558,9 +9595,11 @@ definitions:
   ResourceTypeForTagging:
     type: string
     enum:
+      - Document
       - ManagedInstance
       - MaintenanceWindow
       - Parameter
+      - PatchBaseline
   ResponseCode:
     type: integer
   ResultAttribute:
@@ -9850,7 +9889,7 @@ definitions:
       Value:
         $ref: '#/definitions/TagValue'
         description: The value of the tag.
-    description: 'Metadata that you assign to your managed instances. Tags enable you to categorize your managed instances in different ways, for example, by purpose, owner, or environment.'
+    description: 'Metadata that you assign to your AWS resources. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. In Systems Manager, you can apply tags to documents, managed instances, Maintenance Windows, Parameter Store parameters, and patch baselines.'
   TagKey:
     type: string
     pattern: '^\(\?!^\(\?i\)aws:\)\(\?=^[\p\{L\}\p\{Z\}\p\{N\}_.:/=\+\-@]*$\).*$'
@@ -10001,7 +10040,7 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/DocumentName'
-        description: The name of the SSM document.
+        description: The name of the Systems Manager document.
       InstanceId:
         $ref: '#/definitions/InstanceId'
         description: The ID of the instance.
