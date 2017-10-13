@@ -3,7 +3,7 @@ info:
   version: '2015-04-13'
   x-release: v4
   title: AWS CodeCommit
-  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference)</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
+  description: '<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository</p> </li> <li> <p> <a>DeleteBranch</a>, which deletes the specified branch in a repository unless it is the default branch</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference)</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href="http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html">AWS CodeCommit User Guide</a>.</p>'
   x-logo:
     url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
     backgroundColor: '#FFFFFF'
@@ -299,10 +299,79 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteBranch':
+    post:
+      operationId: DeleteBranch
+      description: 'Deletes a branch from a repository, unless that branch is the default branch for the repository. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteBranchOutput'
+        '480':
+          description: RepositoryNameRequiredException
+          schema:
+            $ref: '#/definitions/RepositoryNameRequiredException'
+        '481':
+          description: RepositoryDoesNotExistException
+          schema:
+            $ref: '#/definitions/RepositoryDoesNotExistException'
+        '482':
+          description: InvalidRepositoryNameException
+          schema:
+            $ref: '#/definitions/InvalidRepositoryNameException'
+        '483':
+          description: BranchNameRequiredException
+          schema:
+            $ref: '#/definitions/BranchNameRequiredException'
+        '484':
+          description: InvalidBranchNameException
+          schema:
+            $ref: '#/definitions/InvalidBranchNameException'
+        '485':
+          description: DefaultBranchCannotBeDeletedException
+          schema:
+            $ref: '#/definitions/DefaultBranchCannotBeDeletedException'
+        '486':
+          description: EncryptionIntegrityChecksFailedException
+          schema:
+            $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
+        '487':
+          description: EncryptionKeyAccessDeniedException
+          schema:
+            $ref: '#/definitions/EncryptionKeyAccessDeniedException'
+        '488':
+          description: EncryptionKeyDisabledException
+          schema:
+            $ref: '#/definitions/EncryptionKeyDisabledException'
+        '489':
+          description: EncryptionKeyNotFoundException
+          schema:
+            $ref: '#/definitions/EncryptionKeyNotFoundException'
+        '490':
+          description: EncryptionKeyUnavailableException
+          schema:
+            $ref: '#/definitions/EncryptionKeyUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteBranchInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteRepository':
     post:
       operationId: DeleteRepository
-      description: '<p>Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.</p> <important><p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.</p> </important>'
+      description: '<p>Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.</p> <important> <p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1357,6 +1426,9 @@ definitions:
   Commit:
     type: object
     properties:
+      commitId:
+        $ref: '#/definitions/ObjectId'
+        description: 'The full SHA of the specified commit. '
       treeId:
         $ref: '#/definitions/ObjectId'
         description: Tree information for the specified commit.
@@ -1437,6 +1509,30 @@ definitions:
     format: date-time
   Date:
     type: string
+  DefaultBranchCannotBeDeletedException:
+    type: object
+    properties: {}
+    description: 'The specified branch is the default branch for the repository, and cannot be deleted. To delete this branch, you must first set another branch as the default branch.'
+  DeleteBranchInput:
+    type: object
+    required:
+      - repositoryName
+      - branchName
+    properties:
+      repositoryName:
+        $ref: '#/definitions/RepositoryName'
+        description: The name of the repository that contains the branch to be deleted.
+      branchName:
+        $ref: '#/definitions/BranchName'
+        description: The name of the branch to delete.
+    description: Represents the input of a delete branch operation.
+  DeleteBranchOutput:
+    type: object
+    properties:
+      deletedBranch:
+        $ref: '#/definitions/BranchInfo'
+        description: 'Information about the branch deleted by the operation, including the branch name and the commit ID that was the tip of the branch.'
+    description: Represents the output of a delete branch operation.
   DeleteRepositoryInput:
     type: object
     required:
@@ -1546,7 +1642,7 @@ definitions:
         description: The name of the repository to which the commit was made.
       commitId:
         $ref: '#/definitions/ObjectId'
-        description: The commit ID.
+        description: The commit ID. Commit IDs are the full SHA of the commit.
     description: Represents the input of a get commit operation.
   GetCommitOutput:
     type: object
@@ -1911,7 +2007,7 @@ definitions:
         description: Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
       branches:
         $ref: '#/definitions/BranchNameList'
-        description: 'The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches.'
+        description: '<p>The branches that will be included in the trigger configuration. If you specify an empty array, the trigger will apply to all branches.</p> <note> <p>While no content is required in the array, you must include the array itself.</p> </note>'
       events:
         $ref: '#/definitions/RepositoryTriggerEventList'
         description: '<p>The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). </p> <note> <p>The valid value "all" cannot be used with any other values.</p> </note>'

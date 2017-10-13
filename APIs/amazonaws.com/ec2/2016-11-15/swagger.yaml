@@ -493,7 +493,7 @@ paths:
   '/#AttachVpnGateway':
     post:
       operationId: AttachVpnGateway
-      description: '<p>Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">Adding a Hardware Virtual Private Gateway to Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -860,7 +860,7 @@ paths:
   '/#CreateCustomerGateway':
     post:
       operationId: CreateCustomerGateway
-      description: '<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway''s external interface. The IP address must be static and may be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device''s BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don''t have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> region, and 9059, which is reserved in the <code>eu-west-1</code> region.</p> </note> <p>For more information about VPN customer gateways, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">Adding a Hardware Virtual Private Gateway to Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <important> <p>You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources.</p> </important>'
+      description: '<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway''s external interface. The IP address must be static and may be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device''s BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don''t have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> region, and 9059, which is reserved in the <code>eu-west-1</code> region.</p> </note> <p>For more information about VPN customer gateways, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <important> <p>You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1579,7 +1579,7 @@ paths:
   '/#CreateVpnConnectionRoute':
     post:
       operationId: CreateVpnConnectionRoute
-      description: '<p>Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.</p> <p>For more information about VPN connections, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">Adding a Hardware Virtual Private Gateway to Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.</p> <p>For more information about VPN connections, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1602,7 +1602,7 @@ paths:
   '/#CreateVpnGateway':
     post:
       operationId: CreateVpnGateway
-      description: '<p>Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself.</p> <p>For more information about virtual private gateways, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">Adding a Hardware Virtual Private Gateway to Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself.</p> <p>For more information about virtual private gateways, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2481,7 +2481,7 @@ paths:
   '/#DescribeCustomerGateways':
     post:
       operationId: DescribeCustomerGateways
-      description: '<p>Describes one or more of your VPN customer gateways.</p> <p>For more information about VPN customer gateways, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">Adding a Hardware Virtual Private Gateway to Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Describes one or more of your VPN customer gateways.</p> <p>For more information about VPN customer gateways, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -4481,7 +4481,7 @@ paths:
   '/#DescribeVpnConnections':
     post:
       operationId: DescribeVpnConnections
-      description: '<p>Describes one or more of your VPN connections.</p> <p>For more information about VPN connections, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">Adding a Hardware Virtual Private Gateway to Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Describes one or more of your VPN connections.</p> <p>For more information about VPN connections, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -4535,7 +4535,7 @@ paths:
   '/#DescribeVpnGateways':
     post:
       operationId: DescribeVpnGateways
-      description: '<p>Describes one or more of your virtual private gateways.</p> <p>For more information about virtual private gateways, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">Adding an IPsec Hardware VPN to Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Describes one or more of your virtual private gateways.</p> <p>For more information about virtual private gateways, see <a href="http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -5324,7 +5324,7 @@ paths:
   '/#ModifyImageAttribute':
     post:
       operationId: ModifyImageAttribute
-      description: '<p>Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time.</p> <note> <p>AWS Marketplace product codes cannot be modified. Images with an AWS Marketplace product code cannot be made public.</p> </note> <note> <p>The SriovNetSupport enhanced networking attribute cannot be changed using this command. Instead, enable SriovNetSupport on an instance and create an AMI from the instance. This will result in an image with SriovNetSupport enabled.</p> </note>'
+      description: '<p>Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. You can use the <code>Attribute</code> parameter to specify the attribute or one of the following parameters: <code>Description</code>, <code>LaunchPermission</code>, or <code>ProductCode</code>.</p> <p>AWS Marketplace product codes cannot be modified. Images with an AWS Marketplace product code cannot be made public.</p> <p>To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.</p>'
       responses:
         '200':
           description: Success
@@ -7086,25 +7086,25 @@ definitions:
         description: The ID of the security group.
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
-        description: A set of IP permissions. You can't specify a destination security group and a CIDR IP address range.
+        description: One or more sets of IP permissions. You can't specify a destination security group and a CIDR IP address range in the same set of permissions.
       CidrIp:
         $ref: '#/definitions/String'
-        description: The CIDR IPv4 address range. We recommend that you specify the CIDR range in a set of IP permissions instead.
+        description: Not supported. Use a set of IP permissions to specify the CIDR.
       FromPort:
         $ref: '#/definitions/Integer'
-        description: 'The start of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.'
+        description: Not supported. Use a set of IP permissions to specify the port.
       IpProtocol:
         $ref: '#/definitions/String'
-        description: The IP protocol name or number. We recommend that you specify the protocol in a set of IP permissions instead.
+        description: Not supported. Use a set of IP permissions to specify the protocol name or number.
       ToPort:
         $ref: '#/definitions/Integer'
-        description: 'The end of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.'
+        description: Not supported. Use a set of IP permissions to specify the port.
       SourceSecurityGroupName:
         $ref: '#/definitions/String'
-        description: 'The name of a destination security group. To authorize outbound access to a destination security group, we recommend that you use a set of IP permissions instead.'
+        description: Not supported. Use a set of IP permissions to specify a destination security group.
       SourceSecurityGroupOwnerId:
         $ref: '#/definitions/String'
-        description: 'The AWS account number for a destination security group. To authorize outbound access to a destination security group, we recommend that you use a set of IP permissions instead.'
+        description: Not supported. Use a set of IP permissions to specify a destination security group.
     description: Contains the parameters for AuthorizeSecurityGroupEgress.
   AuthorizeSecurityGroupIngressRequest:
     type: object
@@ -7123,7 +7123,7 @@ definitions:
         description: '[EC2-Classic, default VPC] The name of the security group. You must specify either the security group ID or the security group name in the request.'
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
-        description: A set of IP permissions. Can be used to specify multiple rules in a single command.
+        description: One or more sets of IP permissions. Can be used to specify multiple rules in a single command.
       IpProtocol:
         $ref: '#/definitions/String'
         description: 'The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>) or number (see <a href="http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">Protocol Numbers</a>). (VPC only) Use <code>-1</code> to specify all protocols. If you specify <code>-1</code>, or a protocol number other than <code>tcp</code>, <code>udp</code>, <code>icmp</code>, or <code>58</code> (ICMPv6), traffic on all ports is allowed, regardless of any ports you specify. For <code>tcp</code>, <code>udp</code>, and <code>icmp</code>, you must specify a port range. For protocol <code>58</code> (ICMPv6), you can optionally specify a port range; if you don''t, traffic for all types and codes is allowed.'
@@ -7132,7 +7132,7 @@ definitions:
         description: '[EC2-Classic, default VPC] The name of the source security group. You can''t specify this parameter in combination with the following parameters: the CIDR IP address range, the start of the port range, the IP protocol, and the end of the port range. Creates rules that grant full ICMP, UDP, and TCP access. To create a rule with a specific IP protocol and port range, use a set of IP permissions instead. For EC2-VPC, the source security group must be in the same VPC.'
       SourceSecurityGroupOwnerId:
         $ref: '#/definitions/String'
-        description: '[EC2-Classic] The AWS account number for the source security group, if the source security group is in a different account. You can''t specify this parameter in combination with the following parameters: the CIDR IP address range, the IP protocol, the start of the port range, and the end of the port range. Creates rules that grant full ICMP, UDP, and TCP access. To create a rule with a specific IP protocol and port range, use a set of IP permissions instead.'
+        description: '[EC2-Classic] The AWS account ID for the source security group, if the source security group is in a different account. You can''t specify this parameter in combination with the following parameters: the CIDR IP address range, the IP protocol, the start of the port range, and the end of the port range. Creates rules that grant full ICMP, UDP, and TCP access. To create a rule with a specific IP protocol and port range, use a set of IP permissions instead.'
       ToPort:
         $ref: '#/definitions/Integer'
         description: 'The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code number. For the ICMP/ICMPv6 code number, use <code>-1</code> to specify all codes. If you specify all ICMP/ICMPv6 types, you must specify all codes.'
@@ -8762,6 +8762,9 @@ definitions:
       Type:
         $ref: '#/definitions/GatewayType'
         description: The type of VPN connection this virtual private gateway supports.
+      AmazonSideAsn:
+        $ref: '#/definitions/Long'
+        description: '<p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session. If you''re using a 16-bit ASN, it must be in the 64512 to 65534 range. If you''re using a 32-bit ASN, it must be in the 4200000000 to 4294967294 range.</p> <p>Default: 64512</p>'
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -11544,7 +11547,7 @@ definitions:
     properties:
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>attachment.state</code> - The current state of the attachment between the gateway and the VPC (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>attachment.vpc-id</code> - The ID of an attached VPC.</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone for the virtual private gateway (if applicable).</p> </li> <li> <p> <code>state</code> - The state of the virtual private gateway (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify <code>tag:Purpose</code> for the filter name and <code>X</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag''s value is), and the tag value X (regardless of what the tag''s key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>type</code> - The type of virtual private gateway. Currently the only supported type is <code>ipsec.1</code>.</p> </li> <li> <p> <code>vpn-gateway-id</code> - The ID of the virtual private gateway.</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>amazon-side-asn</code> - The Autonomous System Number (ASN) for the Amazon side of the gateway.</p> </li> <li> <p> <code>attachment.state</code> - The current state of the attachment between the gateway and the VPC (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p> </li> <li> <p> <code>attachment.vpc-id</code> - The ID of an attached VPC.</p> </li> <li> <p> <code>availability-zone</code> - The Availability Zone for the virtual private gateway (if applicable).</p> </li> <li> <p> <code>state</code> - The state of the virtual private gateway (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> <li> <p> <code>tag</code>:<i>key</i>=<i>value</i> - The key/value combination of a tag assigned to the resource. Specify the key of the tag in the filter name and the value of the tag in the filter value. For example, for the tag Purpose=X, specify <code>tag:Purpose</code> for the filter name and <code>X</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. This filter is independent of the <code>tag-value</code> filter. For example, if you use both the filter "tag-key=Purpose" and the filter "tag-value=X", you get any resources assigned both the tag key Purpose (regardless of what the tag''s value is), and the tag value X (regardless of what the tag''s key is). If you want to list only resources where Purpose is X, see the <code>tag</code>:<i>key</i>=<i>value</i> filter.</p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the resource. This filter is independent of the <code>tag-key</code> filter.</p> </li> <li> <p> <code>type</code> - The type of virtual private gateway. Currently the only supported type is <code>ipsec.1</code>.</p> </li> <li> <p> <code>vpn-gateway-id</code> - The ID of the virtual private gateway.</p> </li> </ul>'
       VpnGatewayIds:
         $ref: '#/definitions/VpnGatewayIdStringList'
         description: '<p>One or more virtual private gateway IDs.</p> <p>Default: Describes all your virtual private gateways.</p>'
@@ -14085,7 +14088,7 @@ definitions:
       UserIdGroupPairs:
         $ref: '#/definitions/UserIdGroupPairList'
         description: One or more security group and AWS account ID pairs.
-    description: Describes a security group rule.
+    description: Describes a set of permissions for a security group rule.
   IpPermissionList:
     type: array
     items:
@@ -14095,7 +14098,7 @@ definitions:
     properties:
       CidrIp:
         $ref: '#/definitions/String'
-        description: 'The IPv4 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv4 address, use the /32 prefix.'
+        description: 'The IPv4 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv4 address, use the /32 prefix length.'
       Description:
         $ref: '#/definitions/String'
         description: '<p>A description for the security group rule that references this IPv4 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>'
@@ -14130,7 +14133,7 @@ definitions:
     properties:
       CidrIpv6:
         $ref: '#/definitions/String'
-        description: 'The IPv6 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv6 address, use the /128 prefix.'
+        description: 'The IPv6 CIDR range. You can either specify a CIDR range or a source security group, not both. To specify a single IPv6 address, use the /128 prefix length.'
       Description:
         $ref: '#/definitions/String'
         description: '<p>A description for the security group rule that references this IPv6 address range.</p> <p>Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*</p>'
@@ -14406,31 +14409,31 @@ definitions:
     properties:
       Attribute:
         $ref: '#/definitions/String'
-        description: The name of the attribute to modify.
+        description: 'The name of the attribute to modify. The valid values are <code>description</code>, <code>launchPermission</code>, and <code>productCodes</code>.'
       Description:
         $ref: '#/definitions/AttributeValue'
-        description: A description for the AMI.
+        description: A new description for the AMI.
       ImageId:
         $ref: '#/definitions/String'
         description: The ID of the AMI.
       LaunchPermission:
         $ref: '#/definitions/LaunchPermissionModifications'
-        description: A launch permission modification.
+        description: A new launch permission for the AMI.
       OperationType:
         $ref: '#/definitions/OperationType'
-        description: The operation type.
+        description: The operation type. This parameter can be used only when the <code>Attribute</code> parameter is <code>launchPermission</code>.
       ProductCodes:
         $ref: '#/definitions/ProductCodeStringList'
-        description: 'One or more product codes. After you add a product code to an AMI, it can''t be removed. This is only valid when modifying the <code>productCodes</code> attribute.'
+        description: 'One or more DevPay product codes. After you add a product code to an AMI, it can''t be removed.'
       UserGroups:
         $ref: '#/definitions/UserGroupStringList'
-        description: One or more user groups. This is only valid when modifying the <code>launchPermission</code> attribute.
+        description: One or more user groups. This parameter can be used only when the <code>Attribute</code> parameter is <code>launchPermission</code>.
       UserIds:
         $ref: '#/definitions/UserIdStringList'
-        description: One or more AWS account IDs. This is only valid when modifying the <code>launchPermission</code> attribute.
+        description: One or more AWS account IDs. This parameter can be used only when the <code>Attribute</code> parameter is <code>launchPermission</code>.
       Value:
         $ref: '#/definitions/String'
-        description: The value of the attribute being modified. This is only valid when modifying the <code>description</code> attribute.
+        description: The value of the attribute being modified. This parameter can be used only when the <code>Attribute</code> parameter is <code>description</code> or <code>productCodes</code>.
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
@@ -16745,25 +16748,25 @@ definitions:
         description: The ID of the security group.
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
-        description: A set of IP permissions. You can't specify a destination security group and a CIDR IP address range.
+        description: One or more sets of IP permissions. You can't specify a destination security group and a CIDR IP address range in the same set of permissions.
       CidrIp:
         $ref: '#/definitions/String'
-        description: The CIDR IP address range. We recommend that you specify the CIDR range in a set of IP permissions instead.
+        description: Not supported. Use a set of IP permissions to specify the CIDR.
       FromPort:
         $ref: '#/definitions/Integer'
-        description: 'The start of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.'
+        description: Not supported. Use a set of IP permissions to specify the port.
       IpProtocol:
         $ref: '#/definitions/String'
-        description: The IP protocol name or number. We recommend that you specify the protocol in a set of IP permissions instead.
+        description: Not supported. Use a set of IP permissions to specify the protocol name or number.
       ToPort:
         $ref: '#/definitions/Integer'
-        description: 'The end of port range for the TCP and UDP protocols, or an ICMP type number. We recommend that you specify the port range in a set of IP permissions instead.'
+        description: Not supported. Use a set of IP permissions to specify the port.
       SourceSecurityGroupName:
         $ref: '#/definitions/String'
-        description: 'The name of a destination security group. To revoke outbound access to a destination security group, we recommend that you use a set of IP permissions instead.'
+        description: Not supported. Use a set of IP permissions to specify a destination security group.
       SourceSecurityGroupOwnerId:
         $ref: '#/definitions/String'
-        description: 'The AWS account number for a destination security group. To revoke outbound access to a destination security group, we recommend that you use a set of IP permissions instead.'
+        description: Not supported. Use a set of IP permissions to specify a destination security group.
     description: Contains the parameters for RevokeSecurityGroupEgress.
   RevokeSecurityGroupIngressRequest:
     type: object
@@ -16776,13 +16779,13 @@ definitions:
         description: 'The start of port range for the TCP and UDP protocols, or an ICMP type number. For the ICMP type number, use <code>-1</code> to specify all ICMP types.'
       GroupId:
         $ref: '#/definitions/String'
-        description: The ID of the security group. Required for a security group in a nondefault VPC.
+        description: 'The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.'
       GroupName:
         $ref: '#/definitions/String'
-        description: '[EC2-Classic, default VPC] The name of the security group.'
+        description: '[EC2-Classic, default VPC] The name of the security group. You must specify either the security group ID or the security group name in the request.'
       IpPermissions:
         $ref: '#/definitions/IpPermissionList'
-        description: A set of IP permissions. You can't specify a source security group and a CIDR IP address range.
+        description: One or more sets of IP permissions. You can't specify a source security group and a CIDR IP address range in the same set of permissions.
       IpProtocol:
         $ref: '#/definitions/String'
         description: 'The IP protocol name (<code>tcp</code>, <code>udp</code>, <code>icmp</code>) or number (see <a href="http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">Protocol Numbers</a>). Use <code>-1</code> to specify all.'
@@ -19183,6 +19186,9 @@ definitions:
       VpnGatewayId:
         $ref: '#/definitions/String'
         description: The ID of the virtual private gateway.
+      AmazonSideAsn:
+        $ref: '#/definitions/Long'
+        description: The private Autonomous System Number (ASN) for the Amazon side of a BGP session.
       Tags:
         $ref: '#/definitions/TagList'
         description: Any tags assigned to the virtual private gateway.

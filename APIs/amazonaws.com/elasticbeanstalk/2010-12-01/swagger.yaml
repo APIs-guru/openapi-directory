@@ -989,6 +989,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: '<p>Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs.</p> <p>Currently, Elastic Beanstalk only supports tagging Elastic Beanstalk environments.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResourceTagsDescriptionMessage'
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: ResourceTypeNotSupportedException
+          schema:
+            $ref: '#/definitions/ResourceTypeNotSupportedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#RebuildEnvironment':
     post:
       operationId: RebuildEnvironment
@@ -1274,6 +1311,49 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdateEnvironmentMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTagsForResource':
+    post:
+      operationId: UpdateTagsForResource
+      description: '<p>Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: <code>TagsToAdd</code> for tags to add or update, and <code>TagsToRemove</code>.</p> <p>Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InsufficientPrivilegesException
+          schema:
+            $ref: '#/definitions/InsufficientPrivilegesException'
+        '481':
+          description: OperationInProgressException
+          schema:
+            $ref: '#/definitions/OperationInProgressException'
+        '482':
+          description: TooManyTagsException
+          schema:
+            $ref: '#/definitions/TooManyTagsException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ResourceTypeNotSupportedException
+          schema:
+            $ref: '#/definitions/ResourceTypeNotSupportedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTagsForResourceMessage'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3205,6 +3285,14 @@ definitions:
       NextToken:
         $ref: '#/definitions/Token'
         description: 'The starting index into the remaining list of platforms. if this value is not <code>null</code>, you can use it in a subsequent <code>ListPlatformVersion</code> call. '
+  ListTagsForResourceMessage:
+    type: object
+    required:
+      - ResourceArn
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: <p>The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.</p> <p>Must be the ARN of an Elastic Beanstalk environment.</p>
   Listener:
     type: object
     properties:
@@ -3633,12 +3721,31 @@ definitions:
     description: Request to retrieve logs from an environment and store them in your Elastic Beanstalk storage bucket.
   RequestId:
     type: string
+  ResourceArn:
+    type: string
   ResourceId:
     type: string
   ResourceName:
     type: string
     minLength: 1
     maxLength: 256
+  ResourceNotFoundException:
+    type: object
+    properties: {}
+    description: A resource doesn't exist for the specified Amazon Resource Name (ARN).
+  ResourceTagsDescriptionMessage:
+    type: object
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: The Amazon Resource Name (ARN) of the resouce for which a tag list was requested.
+      ResourceTags:
+        $ref: '#/definitions/TagList'
+        description: A list of tag key-value pairs.
+  ResourceTypeNotSupportedException:
+    type: object
+    properties: {}
+    description: The type of the specified Amazon Resource Name (ARN) isn't supported for this operation.
   RestartAppServerMessage:
     type: object
     example:
@@ -3878,6 +3985,14 @@ definitions:
     type: string
     minLength: 1
     maxLength: 128
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   TagValue:
     type: string
     minLength: 1
@@ -3943,6 +4058,10 @@ definitions:
     type: object
     properties: {}
     description: You have exceeded the maximum number of allowed platforms associated with the account.
+  TooManyTagsException:
+    type: object
+    properties: {}
+    description: '<p>The number of tags in the resource would exceed the number of tags that each resource can have.</p> <p>To calculate this, the operation considers both the number of tags the resource already has and the tags this operation would add if it succeeded.</p>'
   Trigger:
     type: object
     properties:
@@ -4087,6 +4206,20 @@ definitions:
         $ref: '#/definitions/OptionsSpecifierList'
         description: A list of custom user-defined configuration options to remove from the configuration set for this environment.
     description: Request to update an environment.
+  UpdateTagsForResourceMessage:
+    type: object
+    required:
+      - ResourceArn
+    properties:
+      ResourceArn:
+        $ref: '#/definitions/ResourceArn'
+        description: <p>The Amazon Resource Name (ARN) of the resouce to be updated.</p> <p>Must be the ARN of an Elastic Beanstalk environment.</p>
+      TagsToAdd:
+        $ref: '#/definitions/TagList'
+        description: '<p>A list of tags to add or update.</p> <p>If a key of an existing tag is added, the tag''s value is updated.</p>'
+      TagsToRemove:
+        $ref: '#/definitions/TagKeyList'
+        description: '<p>A list of tag keys to remove.</p> <p>If a tag key doesn''t exist, it is silently ignored.</p>'
   UserDefinedOption:
     type: boolean
   ValidateConfigurationSettingsMessage:

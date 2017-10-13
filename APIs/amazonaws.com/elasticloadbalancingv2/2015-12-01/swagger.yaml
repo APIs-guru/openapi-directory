@@ -98,6 +98,43 @@ security:
 paths:
   /:
     post:
+      operationId: AddListenerCertificates
+      description: '<p>Adds the specified certificate to the specified secure listener.</p> <p>If the certificate was already added, the call is successful but the certificate is not added again.</p> <p>To list the certificates for your listener, use <a>DescribeListenerCertificates</a>. To remove certificates from your listener, use <a>RemoveListenerCertificates</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AddListenerCertificatesOutput'
+        '480':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+        '481':
+          description: TooManyCertificatesException
+          schema:
+            $ref: '#/definitions/TooManyCertificatesException'
+        '482':
+          description: CertificateNotFoundException
+          schema:
+            $ref: '#/definitions/CertificateNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddListenerCertificatesInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AddTags':
+    post:
       operationId: AddTags
       description: '<p>Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, and your target groups.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, <code>AddTags</code> updates its value.</p> <p>To list the current tags for your resources, use <a>DescribeTags</a>. To remove tags from your resources, use <a>RemoveTags</a>.</p>'
       responses:
@@ -561,6 +598,35 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeAccountLimitsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeListenerCertificates':
+    post:
+      operationId: DescribeListenerCertificates
+      description: Describes the certificates for the specified secure listener.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeListenerCertificatesOutput'
+        '480':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeListenerCertificatesInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1171,7 +1237,7 @@ paths:
   '/#RegisterTargets':
     post:
       operationId: RegisterTargets
-      description: '<p>Registers the specified targets with the specified target group.</p> <p>By default, the load balancer routes requests to registered targets using the protocol and port number for the target group. Alternatively, you can override the port for a target when you register it.</p> <p>The target must be in the virtual private cloud (VPC) that you specified for the target group. If the target is an EC2 instance, it must be in the <code>running</code> state when you register it.</p> <p>Network Load Balancers do not support the following instance types as targets: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1.</p> <p>To remove a target from a target group, use <a>DeregisterTargets</a>.</p>'
+      description: '<p>Registers the specified targets with the specified target group.</p> <p>You can register targets by instance ID or by IP address. If the target is an EC2 instance, it must be in the <code>running</code> state when you register it.</p> <p>By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports.</p> <p>With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address.</p> <p>To remove a target from a target group, use <a>DeregisterTargets</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1199,6 +1265,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RegisterTargetsInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RemoveListenerCertificates':
+    post:
+      operationId: RemoveListenerCertificates
+      description: '<p>Removes the specified certificate from the specified secure listener.</p> <p>You can''t remove the default certificate for a listener. To replace the default certificate, call <a>ModifyListener</a>.</p> <p>To list the certificates for your listener, use <a>DescribeListenerCertificates</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RemoveListenerCertificatesOutput'
+        '480':
+          description: ListenerNotFoundException
+          schema:
+            $ref: '#/definitions/ListenerNotFoundException'
+        '481':
+          description: OperationNotPermittedException
+          schema:
+            $ref: '#/definitions/OperationNotPermittedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemoveListenerCertificatesInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1436,6 +1535,24 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Action'
+  AddListenerCertificatesInput:
+    type: object
+    required:
+      - ListenerArn
+      - Certificates
+    properties:
+      ListenerArn:
+        $ref: '#/definitions/ListenerArn'
+        description: The Amazon Resource Name (ARN) of the listener.
+      Certificates:
+        $ref: '#/definitions/CertificateList'
+        description: The certificate to add. You can specify one certificate per call.
+  AddListenerCertificatesOutput:
+    type: object
+    properties:
+      Certificates:
+        $ref: '#/definitions/CertificateList'
+        description: Information about the certificates.
   AddTagsInput:
     type: object
     required:
@@ -1494,7 +1611,10 @@ definitions:
       CertificateArn:
         $ref: '#/definitions/CertificateArn'
         description: The Amazon Resource Name (ARN) of the certificate.
-    description: Information about an SSL server certificate deployed on a load balancer.
+      IsDefault:
+        $ref: '#/definitions/Default'
+        description: Indicates whether the certificate is the default certificate.
+    description: Information about an SSL server certificate.
   CertificateArn:
     type: string
   CertificateList:
@@ -1768,6 +1888,8 @@ definitions:
     format: date-time
   DNSName:
     type: string
+  Default:
+    type: boolean
   DeleteListenerInput:
     type: object
     required:
@@ -1854,6 +1976,29 @@ definitions:
       Limits:
         $ref: '#/definitions/Limits'
         description: Information about the limits.
+      NextMarker:
+        $ref: '#/definitions/Marker'
+        description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+  DescribeListenerCertificatesInput:
+    type: object
+    required:
+      - ListenerArn
+    properties:
+      ListenerArn:
+        $ref: '#/definitions/ListenerArn'
+        description: The Amazon Resource Names (ARN) of the listener.
+      Marker:
+        $ref: '#/definitions/Marker'
+        description: The marker for the next set of results. (You received this marker from a previous call.)
+      PageSize:
+        $ref: '#/definitions/PageSize'
+        description: The maximum number of results to return with this call.
+  DescribeListenerCertificatesOutput:
+    type: object
+    properties:
+      Certificates:
+        $ref: '#/definitions/CertificateList'
+        description: Information about the certificates.
       NextMarker:
         $ref: '#/definitions/Marker'
         description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
@@ -2492,7 +2637,7 @@ definitions:
         description: 'The security policy that defines which protocols and ciphers are supported. For more information, see <a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies">Security Policies</a> in the <i>Application Load Balancers Guide</i>.'
       Certificates:
         $ref: '#/definitions/CertificateList'
-        description: The SSL server certificate.
+        description: The default SSL server certificate.
       DefaultActions:
         $ref: '#/definitions/Actions'
         description: 'The default action. For Application Load Balancers, the protocol of the specified target group must be HTTP or HTTPS. For Network Load Balancers, the protocol of the specified target group must be TCP.'
@@ -2729,8 +2874,23 @@ definitions:
         description: The Amazon Resource Name (ARN) of the target group.
       Targets:
         $ref: '#/definitions/TargetDescriptions'
-        description: 'The targets. The default port for a target is the port for the target group. You can specify a port override. If a target is already registered, you can register it again using a different port.'
+        description: The targets.
   RegisterTargetsOutput:
+    type: object
+    properties: {}
+  RemoveListenerCertificatesInput:
+    type: object
+    required:
+      - ListenerArn
+      - Certificates
+    properties:
+      ListenerArn:
+        $ref: '#/definitions/ListenerArn'
+        description: The Amazon Resource Name (ARN) of the listener.
+      Certificates:
+        $ref: '#/definitions/CertificateList'
+        description: The certificate to remove. You can specify one certificate per call.
+  RemoveListenerCertificatesOutput:
     type: object
     properties: {}
   RemoveTagsInput:
@@ -3061,7 +3221,7 @@ definitions:
         description: The port on which the target is listening.
       AvailabilityZone:
         $ref: '#/definitions/ZoneName'
-        description: '<p>The Availability Zone where the IP address is to be registered. Specify <code>all</code> to register an IP address outside the target group VPC with all Availability Zones that are enabled for the load balancer.</p> <p>If the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional.</p> <p>This parameter is not supported if the target type of the target group is <code>instance</code>.</p>'
+        description: '<p>An Availability Zone or <code>all</code>. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer.</p> <p>This parameter is not supported if the target type of the target group is <code>instance</code>. If the IP address is in a subnet of the VPC for the target group, the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside the VPC, this parameter is required.</p> <p>With an Application Load Balancer, if the IP address is outside the VPC for the target group, the only supported value is <code>all</code>.</p>'
     description: Information about a target.
   TargetDescriptions:
     type: array
@@ -3223,7 +3383,7 @@ definitions:
   TooManyCertificatesException:
     type: object
     properties: {}
-    description: You've reached the limit on the number of certificates per listener.
+    description: You've reached the limit on the number of certificates per load balancer.
   TooManyListenersException:
     type: object
     properties: {}

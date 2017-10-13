@@ -183,6 +183,47 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AddApplicationInputProcessingConfiguration':
+    post:
+      operationId: AddApplicationInputProcessingConfiguration
+      description: 'Adds an <a>InputProcessingConfiguration</a> to an application. An input processor preprocesses records on the input stream before the application''s SQL code executes. Currently, the only input processor available is <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AddApplicationInputProcessingConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddApplicationInputProcessingConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#AddApplicationOutput':
     post:
       operationId: AddApplicationOutput
@@ -374,6 +415,47 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteApplicationCloudWatchLoggingOptionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteApplicationInputProcessingConfiguration':
+    post:
+      operationId: DeleteApplicationInputProcessingConfiguration
+      description: Deletes an <a>InputProcessingConfiguration</a> from an input.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteApplicationInputProcessingConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          schema:
+            $ref: '#/definitions/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          schema:
+            $ref: '#/definitions/InvalidArgumentException'
+        '483':
+          description: ConcurrentModificationException
+          schema:
+            $ref: '#/definitions/ConcurrentModificationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteApplicationInputProcessingConfigurationRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -700,6 +782,29 @@ definitions:
   AddApplicationCloudWatchLoggingOptionResponse:
     type: object
     properties: {}
+  AddApplicationInputProcessingConfigurationRequest:
+    type: object
+    required:
+      - ApplicationName
+      - CurrentApplicationVersionId
+      - InputId
+      - InputProcessingConfiguration
+    properties:
+      ApplicationName:
+        $ref: '#/definitions/ApplicationName'
+        description: Name of the application to which you want to add the input processing configuration.
+      CurrentApplicationVersionId:
+        $ref: '#/definitions/ApplicationVersionId'
+        description: 'Version of the application to which you want to add the input processing configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
+      InputId:
+        $ref: '#/definitions/Id'
+        description: The ID of the input configuration to which to add the input configuration. You can get a list of the input IDs for an application using the <a>DescribeApplication</a> operation.
+      InputProcessingConfiguration:
+        $ref: '#/definitions/InputProcessingConfiguration'
+        description: The <a>InputProcessingConfiguration</a> to add to the application.
+  AddApplicationInputProcessingConfigurationResponse:
+    type: object
+    properties: {}
   AddApplicationInputRequest:
     type: object
     required:
@@ -715,7 +820,7 @@ definitions:
         description: Current version of your Amazon Kinesis Analytics application. You can use the <a>DescribeApplication</a> operation to find the current application version.
       Input:
         $ref: '#/definitions/Input'
-        description: <p/>
+        description: The <a>Input</a> to add.
     description: <p/>
   AddApplicationInputResponse:
     type: object
@@ -1016,6 +1121,25 @@ definitions:
   DeleteApplicationCloudWatchLoggingOptionResponse:
     type: object
     properties: {}
+  DeleteApplicationInputProcessingConfigurationRequest:
+    type: object
+    required:
+      - ApplicationName
+      - CurrentApplicationVersionId
+      - InputId
+    properties:
+      ApplicationName:
+        $ref: '#/definitions/ApplicationName'
+        description: The Kinesis Analytics application name.
+      CurrentApplicationVersionId:
+        $ref: '#/definitions/ApplicationVersionId'
+        description: The version ID of the Kinesis Analytics application.
+      InputId:
+        $ref: '#/definitions/Id'
+        description: The ID of the input configuration from which to delete the input configuration. You can get a list of the input IDs for an application using the <a>DescribeApplication</a> operation.
+  DeleteApplicationInputProcessingConfigurationResponse:
+    type: object
+    properties: {}
   DeleteApplicationOutputRequest:
     type: object
     required:
@@ -1100,10 +1224,6 @@ definitions:
     description: 'Describes the data format when records are written to the destination. For more information, see <a href="http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>. '
   DiscoverInputSchemaRequest:
     type: object
-    required:
-      - ResourceARN
-      - RoleARN
-      - InputStartingPositionConfiguration
     properties:
       ResourceARN:
         $ref: '#/definitions/ResourceARN'
@@ -1114,7 +1234,11 @@ definitions:
       InputStartingPositionConfiguration:
         $ref: '#/definitions/InputStartingPositionConfiguration'
         description: Point at which you want Amazon Kinesis Analytics to start reading records from the specified streaming source discovery purposes.
-    description: <p/>
+      S3Configuration:
+        $ref: '#/definitions/S3Configuration'
+      InputProcessingConfiguration:
+        $ref: '#/definitions/InputProcessingConfiguration'
+        description: The <a>InputProcessingConfiguration</a> to use to preprocess the records before discovering the schema of the records.
   DiscoverInputSchemaResponse:
     type: object
     properties:
@@ -1124,6 +1248,9 @@ definitions:
       ParsedInputRecords:
         $ref: '#/definitions/ParsedInputRecords'
         description: 'An array of elements, where each element corresponds to a row in a stream record (a stream record can have more than one row).'
+      ProcessedInputRecords:
+        $ref: '#/definitions/ProcessedInputRecords'
+        description: Stream data that was modified by the processor specified in the <code>InputProcessingConfiguration</code> parameter.
       RawInputRecords:
         $ref: '#/definitions/RawInputRecords'
         description: Raw stream data that was sampled to infer the schema.
@@ -1132,6 +1259,8 @@ definitions:
     type: string
   FileKey:
     type: string
+    minLength: 1
+    maxLength: 1024
   Id:
     type: string
     pattern: '[a-zA-Z0-9_.-]+'
@@ -1160,6 +1289,9 @@ definitions:
       NamePrefix:
         $ref: '#/definitions/InAppStreamName'
         description: 'Name prefix to use when creating in-application stream. Suppose you specify a prefix "MyInApplicationStream". Amazon Kinesis Analytics will then create one or more (as per the <code>InputParallelism</code> count you specified) in-application streams with names "MyInApplicationStream_001", "MyInApplicationStream_002" and so on. '
+      InputProcessingConfiguration:
+        $ref: '#/definitions/InputProcessingConfiguration'
+        description: 'The <a>InputProcessingConfiguration</a> for the Input. An input processor transforms records as they are received from the stream, before the application''s SQL code executes. Currently, the only input processing configuration available is <a>InputLambdaProcessor</a>.'
       KinesisStreamsInput:
         $ref: '#/definitions/KinesisStreamsInput'
         description: '<p>If the streaming source is an Amazon Kinesis stream, identifies the stream''s Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p> <p>Note: Either <code>KinesisStreamsInput</code> or <code>KinesisFirehoseInput</code> is required.</p>'
@@ -1202,6 +1334,9 @@ definitions:
       InAppStreamNames:
         $ref: '#/definitions/InAppStreamNames'
         description: Returns the in-application stream names that are mapped to the stream source.
+      InputProcessingConfigurationDescription:
+        $ref: '#/definitions/InputProcessingConfigurationDescription'
+        description: The description of the preprocessor that executes on records in this input before the application's code is run.
       KinesisStreamsInputDescription:
         $ref: '#/definitions/KinesisStreamsInputDescription'
         description: 'If an Amazon Kinesis stream is configured as streaming source, provides Amazon Kinesis stream''s ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.'
@@ -1210,6 +1345,7 @@ definitions:
         description: 'If an Amazon Kinesis Firehose delivery stream is configured as a streaming source, provides the Firehose delivery stream''s Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.'
       InputSchema:
         $ref: '#/definitions/SourceSchema'
+        description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created. '
       InputParallelism:
         $ref: '#/definitions/InputParallelism'
         description: Describes the configured parallelism (number of in-application streams mapped to the streaming source).
@@ -1221,6 +1357,39 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/InputDescription'
+  InputLambdaProcessor:
+    type: object
+    required:
+      - ResourceARN
+      - RoleARN
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: 'The ARN of the <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a> function that operates on records in the stream.'
+      RoleARN:
+        $ref: '#/definitions/RoleARN'
+        description: The ARN of the IAM role used to access the AWS Lambda function.
+    description: 'An object that contains the ARN of the <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a> function that is used to preprocess records in the stream, and the ARN of the IAM role used to access the AWS Lambda function. '
+  InputLambdaProcessorDescription:
+    type: object
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/ResourceARN'
+        description: 'The ARN of the <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a> function that is used to preprocess the records in the stream.'
+      RoleARN:
+        $ref: '#/definitions/RoleARN'
+        description: The ARN of the IAM role used to access the AWS Lambda function.
+    description: 'An object that contains the ARN of the <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a> function that is used to preprocess records in the stream, and the ARN of the IAM role used to access the AWS Lambda expression.'
+  InputLambdaProcessorUpdate:
+    type: object
+    properties:
+      ResourceARNUpdate:
+        $ref: '#/definitions/ResourceARN'
+        description: 'The ARN of the new <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a> function that is used to preprocess the records in the stream.'
+      RoleARNUpdate:
+        $ref: '#/definitions/RoleARN'
+        description: The ARN of the new IAM role used to access the AWS Lambda function.
+    description: Represents an update to the <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream.
   InputParallelism:
     type: object
     properties:
@@ -1239,6 +1408,31 @@ definitions:
         $ref: '#/definitions/InputParallelismCount'
         description: Number of in-application streams to create for the specified streaming source.
     description: Provides updates to the parallelism count.
+  InputProcessingConfiguration:
+    type: object
+    required:
+      - InputLambdaProcessor
+    properties:
+      InputLambdaProcessor:
+        $ref: '#/definitions/InputLambdaProcessor'
+        description: The <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream prior to being processed by your application code.
+    description: 'Provides a description of a processor that is used to preprocess the records in the stream prior to being processed by your application code. Currently, the only input processor available is <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a>.'
+  InputProcessingConfigurationDescription:
+    type: object
+    properties:
+      InputLambdaProcessorDescription:
+        $ref: '#/definitions/InputLambdaProcessorDescription'
+        description: Provides configuration information about the associated <a>InputLambdaProcessorDescription</a>.
+    description: 'Provides configuration information about an input processor. Currently, the only input processor available is <a href="https://aws.amazon.com/documentation/lambda/">AWS Lambda</a>.'
+  InputProcessingConfigurationUpdate:
+    type: object
+    required:
+      - InputLambdaProcessorUpdate
+    properties:
+      InputLambdaProcessorUpdate:
+        $ref: '#/definitions/InputLambdaProcessorUpdate'
+        description: Provides update information for an <a>InputLambdaProcessor</a>.
+    description: 'Describes updates to an <a>InputProcessingConfiguration</a>. '
   InputSchemaUpdate:
     type: object
     properties:
@@ -1251,7 +1445,7 @@ definitions:
       RecordColumnUpdates:
         $ref: '#/definitions/RecordColumns'
         description: 'A list of <code>RecordColumn</code> objects. Each object describes the mapping of the streaming source element to the corresponding column in the in-application stream. '
-    description: ' Describes updates for the application''s input schema. '
+    description: Describes updates for the application's input schema.
   InputStartingPosition:
     type: string
     enum:
@@ -1276,6 +1470,9 @@ definitions:
       NamePrefixUpdate:
         $ref: '#/definitions/InAppStreamName'
         description: Name prefix for in-application streams that Amazon Kinesis Analytics creates for the specific streaming source.
+      InputProcessingConfigurationUpdate:
+        $ref: '#/definitions/InputProcessingConfigurationUpdate'
+        description: Describes updates for an input processing configuration.
       KinesisStreamsInputUpdate:
         $ref: '#/definitions/KinesisStreamsInputUpdate'
         description: 'If a Amazon Kinesis stream is the streaming source to be updated, provides an updated stream ARN and IAM role ARN.'
@@ -1580,6 +1777,12 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ParsedInputRecord'
+  ProcessedInputRecord:
+    type: string
+  ProcessedInputRecords:
+    type: array
+    items:
+      $ref: '#/definitions/ProcessedInputRecord'
   RawInputRecord:
     type: string
   RawInputRecords:
@@ -1612,6 +1815,7 @@ definitions:
     pattern: '[a-zA-Z_][a-zA-Z0-9_]*'
   RecordColumnSqlType:
     type: string
+    minLength: 1
   RecordColumns:
     type: array
     items:
@@ -1642,6 +1846,7 @@ definitions:
     minLength: 1
   RecordRowPath:
     type: string
+    minLength: 1
   ReferenceDataSource:
     type: object
     required:
@@ -1702,7 +1907,7 @@ definitions:
       $ref: '#/definitions/ReferenceDataSourceUpdate'
   ResourceARN:
     type: string
-    pattern: 'arn:[a-zA-Z0-9\-]+:[a-zA-Z0-9\-]+:[a-zA-Z0-9\-]*:\d{12}:[a-zA-Z_0-9+=,.@\-_/:]+'
+    pattern: 'arn:.*'
     minLength: 1
     maxLength: 2048
   ResourceInUseException:
@@ -1730,6 +1935,19 @@ definitions:
     pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
     minLength: 1
     maxLength: 2048
+  S3Configuration:
+    type: object
+    required:
+      - RoleARN
+      - BucketARN
+      - FileKey
+    properties:
+      RoleARN:
+        $ref: '#/definitions/RoleARN'
+      BucketARN:
+        $ref: '#/definitions/BucketARN'
+      FileKey:
+        $ref: '#/definitions/FileKey'
   S3ReferenceDataSource:
     type: object
     required:
@@ -1839,6 +2057,8 @@ definitions:
         $ref: '#/definitions/ErrorMessage'
       RawInputRecords:
         $ref: '#/definitions/RawInputRecords'
+      ProcessedInputRecords:
+        $ref: '#/definitions/ProcessedInputRecords'
     description: 'Data format is not valid, Amazon Kinesis Analytics is not able to detect schema for the given streaming source.'
   UpdateApplicationRequest:
     type: object
