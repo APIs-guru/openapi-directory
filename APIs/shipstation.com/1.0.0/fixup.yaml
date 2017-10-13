@@ -1,0 +1,68 @@
+definitions:
+  Get/Delete_Order:
+    - {}
+    - 0
+    - 0
+  Get/Delete_OrderModel:
+    - {}
+    - 0
+    - 0
+  Get/Update_Store:
+    - {}
+    - 0
+    - 0
+  Get/Update_StoreModel:
+    - {}
+    - 0
+    - 0
+  Get/Update_Warehouse:
+    - {}
+    - 0
+    - 0
+  Get/Update_WarehouseModel:
+    - {}
+    - 0
+    - 0
+  Get/Update_a_Product:
+    - {}
+    - 0
+    - 0
+  Get/Update_a_ProductModel:
+    - {}
+    - 0
+    - 0
+  Get_Delete_Order:
+    - {}
+  Get_Delete_OrderModel:
+    - {}
+  Get_Update_Store:
+    - {}
+  Get_Update_StoreModel:
+    - {}
+  Get_Update_Warehouse:
+    - {}
+  Get_Update_WarehouseModel:
+    - {}
+  Get_Update_a_Product:
+    - {}
+  Get_Update_a_ProductModel:
+    - {}
+paths:
+  '/stores/{storeId}':
+    put:
+      parameters:
+        '1':
+          schema:
+            $ref:
+              - '#/definitions/Get~1Update_StoreModel'
+              - '#/definitions/Get_Update_StoreModel'
+        _t: a
+  '/warehouses/{warehouseId}':
+    put:
+      parameters:
+        '1':
+          schema:
+            $ref:
+              - '#/definitions/Get~1Update_WarehouseModel'
+              - '#/definitions/Get_Update_WarehouseModel'
+        _t: a

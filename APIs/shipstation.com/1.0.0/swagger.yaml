@@ -157,7 +157,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.5.0
+        version: 2.6.0
       format: apiBlueprint
       url: 'http://docs.shipstation.apiary.io/api-description-document'
       version: 1A
@@ -3119,7 +3119,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Get~1Update_StoreModel'
+            $ref: '#/definitions/Get_Update_StoreModel'
       produces:
         - application/json
       responses:
@@ -3409,7 +3409,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Get~1Update_WarehouseModel'
+            $ref: '#/definitions/Get_Update_WarehouseModel'
       produces:
         - application/json
       responses:
@@ -3549,8 +3549,16 @@ definitions:
   Get/Update_a_ProductModel: {}
   Get_Carrier: {}
   Get_CarrierModel: {}
+  Get_Delete_Order: {}
+  Get_Delete_OrderModel: {}
   Get_Rates: {}
   Get_Store_Refresh_Status: {}
+  Get_Update_Store: {}
+  Get_Update_StoreModel: {}
+  Get_Update_Warehouse: {}
+  Get_Update_WarehouseModel: {}
+  Get_Update_a_Product: {}
+  Get_Update_a_ProductModel: {}
   Hold_Order_Until: {}
   List_Carriers: {}
   List_CarriersModel: {}
