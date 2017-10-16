@@ -12,6 +12,8 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - backend
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
@@ -293,6 +295,13 @@ definitions:
           $ref: '#/definitions/DynamicLinkWarning'
         type: array
     type: object
+  DesktopInfo:
+    description: Desktop related attributes to the Dynamic Link.
+    properties:
+      desktopFallbackLink:
+        description: Link to open on desktop.
+        type: string
+    type: object
   DeviceInfo:
     description: Signals associated with the device making the request.
     properties:
@@ -352,6 +361,11 @@ definitions:
         $ref: '#/definitions/AndroidInfo'
         description: |-
           Android related information. See Android related parameters in the
+          [documentation](https://firebase.google.com/docs/dynamic-links/create-manually).
+      desktopInfo:
+        $ref: '#/definitions/DesktopInfo'
+        description: |-
+          Desktop related information. See desktop related parameters in the
           [documentation](https://firebase.google.com/docs/dynamic-links/create-manually).
       dynamicLinkDomain:
         description: |-

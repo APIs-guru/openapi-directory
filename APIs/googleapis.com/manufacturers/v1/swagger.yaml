@@ -12,6 +12,8 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - marketing
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
@@ -443,7 +445,7 @@ definitions:
         type: string
       productType:
         description: |-
-          The category of the product. For more information, see
+          The type or category of the product. For more information, see
           https://support.google.com/manufacturers/answer/6124116#producttype.
         items:
           type: string
@@ -478,11 +480,10 @@ definitions:
         description: |-
           The suggested retail price (MSRP) of the product. For more information,
           see https://support.google.com/manufacturers/answer/6124116#price.
-      targetAccountId:
+      targetClientId:
         description: |-
-          The target account id. Should only be used in the accounts of the data
+          The target client id. Should only be used in the accounts of the data
           partners.
-        format: int64
         type: string
       theme:
         description: |-
@@ -581,6 +582,8 @@ definitions:
           - DECODING_ERROR
           - TOO_BIG
           - CRAWL_SKIPPED
+          - HOSTLOADED
+          - HTTP_404
         type: string
       type:
         description: |-

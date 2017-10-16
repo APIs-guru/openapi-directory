@@ -260,15 +260,19 @@ paths:
       description: Creates an access control rule.
       operationId: calendar.acl.insert
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AclRule'
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AclRule'
+        - description: Whether to send notifications about the calendar sharing change. Optional. The default is True.
+          in: query
+          name: sendNotifications
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -393,6 +397,10 @@ paths:
       description: Updates an access control rule. This method supports patch semantics.
       operationId: calendar.acl.patch
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AclRule'
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
@@ -403,10 +411,10 @@ paths:
           name: ruleId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AclRule'
+        - description: Whether to send notifications about the calendar sharing change. Note that there are no notifications on access removal. Optional. The default is True.
+          in: query
+          name: sendNotifications
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -421,6 +429,10 @@ paths:
       description: Updates an access control rule.
       operationId: calendar.acl.update
       parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AclRule'
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
           in: path
           name: calendarId
@@ -431,10 +443,10 @@ paths:
           name: ruleId
           required: true
           type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AclRule'
+        - description: Whether to send notifications about the calendar sharing change. Note that there are no notifications on access removal. Optional. The default is True.
+          in: query
+          name: sendNotifications
+          type: boolean
       responses:
         '200':
           description: Successful response

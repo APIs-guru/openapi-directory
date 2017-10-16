@@ -15516,6 +15516,16 @@ paths:
           in: query
           name: requestId
           type: string
+        - description: |-
+            Specifies instance template to create the instance.
+
+            This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to an instance template:  
+            - https://www.googleapis.com/compute/v1/projects/project/global/global/instanceTemplates/instanceTemplate 
+            - projects/project/global/global/instanceTemplates/instanceTemplate 
+            - global/instancesTemplates/instanceTemplate
+          in: query
+          name: sourceInstanceTemplate
+          type: string
         - description: The name of the zone for this request.
           in: path
           name: zone
@@ -17375,8 +17385,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -17387,7 +17399,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -17439,8 +17453,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -17451,7 +17467,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -17489,8 +17507,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -17501,7 +17521,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -17606,7 +17628,7 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       status:
-        description: '[Output Only] The status of the address, which can be either IN_USE or RESERVED. An address that is RESERVED is currently reserved and available to use. An IN_USE address is currently being used by another resource and is not available.'
+        description: '[Output Only] The status of the address, which can be one of RESERVING, RESERVED, or IN_USE. An address that is RESERVING is currently in the process of being reserved. A RESERVED address is currently reserved and available to use. An IN_USE address is currently being used by another resource and is not available.'
         enum:
           - IN_USE
           - RESERVED
@@ -17653,8 +17675,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -17665,7 +17689,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -17717,8 +17743,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -17729,7 +17757,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -17767,8 +17797,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -17779,7 +17811,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -18087,8 +18121,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -18099,7 +18135,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -18151,8 +18189,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -18163,7 +18203,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -18226,8 +18268,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -18238,7 +18282,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -18487,8 +18533,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -18499,7 +18547,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -18674,8 +18724,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -18686,7 +18738,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -18769,8 +18823,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -18781,7 +18837,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -18819,8 +18877,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -18831,7 +18891,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19006,8 +19068,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19018,7 +19082,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19070,8 +19136,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19082,7 +19150,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19120,8 +19190,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19132,7 +19204,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19419,8 +19493,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19431,7 +19507,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19483,8 +19561,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19495,7 +19575,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19602,8 +19684,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19614,7 +19698,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19666,8 +19752,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19678,7 +19766,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19716,8 +19806,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19728,7 +19820,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19773,8 +19867,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19785,7 +19881,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19980,8 +20078,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19992,7 +20092,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -20018,15 +20120,20 @@ definitions:
     description: Encapsulates numeric value that can be either absolute or relative.
     properties:
       calculated:
-        description: '[Output Only] Absolute value calculated based on mode: mode = fixed -> calculated = fixed = percent -> calculated = ceiling(percent/100 * base_value)'
+        description: |-
+          [Output Only] Absolute value of VM instances calculated based on the specific mode.
+
+           
+          - If the value is fixed, then the caculated value is equal to the fixed value. 
+          - If the value is a percent, then the calculated value is percent/100 * targetSize. For example, the calculated value of a 80% of a managed instance group with 150 instances would be (80/100 * 150) = 120 VM instances. If there is a remainder, the number is rounded up.
         format: int32
         type: integer
       fixed:
-        description: fixed must be non-negative.
+        description: Specifies a fixed number of VM instances. This must be a positive integer.
         format: int32
         type: integer
       percent:
-        description: 'percent must belong to [0, 100].'
+        description: 'Specifies a percentage of instances between 0 to 100%, inclusive. For example, specify 80 for 80%.'
         format: int32
         type: integer
     type: object
@@ -20200,8 +20307,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -20212,7 +20321,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -20264,8 +20375,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -20276,7 +20389,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -20314,8 +20429,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -20326,7 +20443,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -20393,6 +20512,9 @@ definitions:
       requestPath:
         description: The request path of the HTTP health check request. The default value is /.
         type: string
+      response:
+        description: 'The string to match anywhere in the first 1024 bytes of the response body. If left empty (the default value), the status code determines health. The response data can only be ASCII.'
+        type: string
     type: object
   HTTPSHealthCheck:
     properties:
@@ -20414,6 +20536,9 @@ definitions:
         type: string
       requestPath:
         description: The request path of the HTTPS health check request. The default value is /.
+        type: string
+      response:
+        description: 'The string to match anywhere in the first 1024 bytes of the response body. If left empty (the default value), the status code determines health. The response data can only be ASCII.'
         type: string
     type: object
   HealthCheck:
@@ -20507,8 +20632,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -20519,7 +20646,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -20666,8 +20795,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -20678,7 +20809,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -20781,8 +20914,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -20793,7 +20928,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -20974,8 +21111,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -20986,7 +21125,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -21151,8 +21292,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -21163,7 +21306,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -21269,8 +21414,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -21281,7 +21428,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -21333,8 +21482,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -21345,7 +21496,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -21449,7 +21602,10 @@ definitions:
         $ref: '#/definitions/InstanceGroupManagerUpdatePolicy'
         description: The update policy for this managed instance group.
       versions:
-        description: 'Versions supported by this IGM. User should set this field if they need fine-grained control over how many instances in each version are run by this IGM. Versions are keyed by instanceTemplate. Every instanceTemplate can appear at most once. This field overrides instanceTemplate field. If both instanceTemplate and versions are set, the user receives a warning. "instanceTemplate: X" is semantically equivalent to "versions [ { instanceTemplate: X } ]". Exactly one version must have targetSize field left unset. Size of such a version will be calculated automatically.'
+        description: |-
+          Specifies the instance templates used by this managed instance group to create instances.
+
+          Each version is defined by an instanceTemplate. Every template can appear at most once per instance group. This field overrides the top-level instanceTemplate field. Read more about the relationships between these fields. Exactly one version must leave the targetSize field unset. That version will be applied to all remaining instances. For more information, read about canary updates.
         items:
           $ref: '#/definitions/InstanceGroupManagerVersion'
         type: array
@@ -21529,8 +21685,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -21541,7 +21699,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -21603,8 +21763,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -21615,7 +21777,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -21660,16 +21824,26 @@ definitions:
     properties:
       maxSurge:
         $ref: '#/definitions/FixedOrPercent'
-        description: 'Maximum number of instances that can be created above the InstanceGroupManager.targetSize during the update process. By default, a fixed value of 1 is used. Using maxSurge > 0 will cause instance names to change during the update process. At least one of { maxSurge, maxUnavailable } must be greater than 0.'
+        description: |-
+          The maximum number of instances that can be created above the specified targetSize during the update process. By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
+
+          At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxSurge.
       maxUnavailable:
         $ref: '#/definitions/FixedOrPercent'
-        description: 'Maximum number of instances that can be unavailable during the update process. The instance is considered available if all of the following conditions are satisfied: 1. Instance''s status is RUNNING. 2. Instance''s liveness health check result was observed to be HEALTHY at least once. By default, a fixed value of 1 is used. At least one of { maxSurge, maxUnavailable } must be greater than 0.'
+        description: |-
+          The maximum number of instances that can be unavailable during the update process. An instance is considered available if all of the following conditions are satisfied:
+
+           
+          - The instance's status is RUNNING. 
+          - If there is a health check on the instance grourp, the instance's liveness health check result must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
+
+          At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxUnavailable.
       minReadySec:
         description: 'Minimum number of seconds to wait for after a newly created instance becomes available. This value must be from range [0, 3600].'
         format: int32
         type: integer
       minimalAction:
-        description: 'Minimal action to be taken on an instance. The order of action types is: RESTART < REPLACE.'
+        description: 'Minimal action to be taken on an instance. You can specify either RESTART to restart existing instances or REPLACE to delete and create new instances from the target template. If you specify a code>RESTART, the Updater will attempt to perform that action only. However, if the Updater determines that the minimal action you specify is not enough to perform the update, it might perform a more disruptive action.'
         enum:
           - REPLACE
           - RESTART
@@ -21689,7 +21863,10 @@ definitions:
         type: string
       targetSize:
         $ref: '#/definitions/FixedOrPercent'
-        description: 'Intended number of instances that are created from instanceTemplate. The final number of instances created from instanceTemplate will be equal to: * if expressed as fixed number: min(targetSize.fixed, instanceGroupManager.targetSize), * if expressed as percent: ceiling(targetSize.percent * InstanceGroupManager.targetSize). If unset, this version will handle all the remaining instances.'
+        description: |-
+          Specifies the intended number of instances to be created from the instanceTemplate. The final number of instances created from the template will be equal to:  
+          - If expressed as a fixed number, the minimum of either targetSize.fixed or instanceGroupManager.targetSize is used. 
+          - if expressed as a percent, the targetSize would be (targetSize.percent/100 * InstanceGroupManager.targetSize) If there is a remainder, the number is rounded up.  If unset, this version will update any remaining instances not updated by another version. Read Starting a canary update for more information.
     type: object
   InstanceGroupManagersAbandonInstancesRequest:
     properties:
@@ -21759,8 +21936,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -21771,7 +21950,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -21855,8 +22036,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -21867,7 +22050,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -21922,8 +22107,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -21934,7 +22121,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -21998,8 +22187,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -22010,7 +22201,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -22062,8 +22255,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -22074,7 +22269,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -22227,8 +22424,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -22239,7 +22438,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -22300,8 +22501,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -22312,7 +22515,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -22557,8 +22762,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -22569,7 +22776,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -22621,8 +22830,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -22633,7 +22844,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -22679,8 +22892,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -22691,7 +22906,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -22756,8 +22973,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -22768,7 +22987,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -22876,8 +23097,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -22888,7 +23111,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -23122,8 +23347,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -23134,7 +23361,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -23186,8 +23415,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -23198,7 +23429,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -23236,8 +23469,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -23248,7 +23483,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -23514,8 +23751,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -23526,7 +23765,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -23699,8 +23940,10 @@ definitions:
                 - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
                 - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -23711,7 +23954,9 @@ definitions:
                 - REQUIRED_TOS_AGREEMENT
                 - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
                 - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
                 - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
                 - UNREACHABLE
               type: string
             data:
@@ -23767,8 +24012,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -23779,7 +24026,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -23831,8 +24080,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -23843,7 +24094,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -23881,8 +24134,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -23893,7 +24148,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -24226,8 +24483,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -24238,7 +24497,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -24290,8 +24551,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -24302,7 +24565,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -24354,8 +24619,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -24366,7 +24633,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -24477,8 +24746,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -24489,7 +24760,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -24566,8 +24839,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -24578,7 +24853,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -24707,8 +24984,10 @@ definitions:
                 - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
                 - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -24719,7 +24998,9 @@ definitions:
                 - REQUIRED_TOS_AGREEMENT
                 - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
                 - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
                 - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
                 - UNREACHABLE
               type: string
             data:
@@ -24772,8 +25053,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -24784,7 +25067,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -24881,8 +25166,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -24893,7 +25180,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -24992,8 +25281,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -25004,7 +25295,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -25117,8 +25410,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -25129,7 +25424,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -25165,7 +25462,7 @@ definitions:
           - NO_ACTION
         type: string
       conditions:
-        description: Additional restrictions that must be met
+        description: Additional restrictions that must be met. All conditions must pass for the rule to match.
         items:
           $ref: '#/definitions/Condition'
         type: array
@@ -25297,8 +25594,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -25309,7 +25608,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -25517,8 +25818,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -25529,7 +25832,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -25612,8 +25917,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -25624,7 +25931,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -25735,8 +26044,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -25747,7 +26058,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -25799,8 +26112,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -25811,7 +26126,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -25865,8 +26182,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -25877,7 +26196,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -26000,8 +26321,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -26012,7 +26335,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -26109,8 +26434,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -26121,7 +26448,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -26213,8 +26542,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -26225,7 +26556,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -26277,8 +26610,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -26289,7 +26624,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -26327,8 +26664,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -26339,7 +26678,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -26459,8 +26800,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -26471,7 +26814,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -26534,8 +26879,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -26546,7 +26893,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -26624,8 +26973,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -26636,7 +26987,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -26755,8 +27108,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -26767,7 +27122,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -26868,8 +27225,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -26880,7 +27239,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -26981,8 +27342,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -26993,7 +27356,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -27045,8 +27410,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -27057,7 +27424,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -27095,8 +27464,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -27107,7 +27478,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -27249,8 +27622,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -27261,7 +27636,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -27448,8 +27825,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -27460,7 +27839,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -27512,8 +27893,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -27524,7 +27907,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -27562,8 +27947,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -27574,7 +27961,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -27625,8 +28014,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -27637,7 +28028,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -27743,8 +28136,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -27755,7 +28150,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:

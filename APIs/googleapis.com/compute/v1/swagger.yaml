@@ -4214,6 +4214,45 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+    patch:
+      description: Patches the specified network with the data included in the request.
+      operationId: compute.networks.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Network'
+        - description: Name of the network to update.
+          in: path
+          name: network
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - networks
   '/{project}/global/networks/{network}/addPeering':
     parameters:
       - $ref: '#/parameters/alt'
@@ -13179,6 +13218,59 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - instances
+  '/{project}/zones/{zone}/instances/{instance}/setMinCpuPlatform':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Changes the minimum CPU platform that this instance should use. This method can only be called on a stopped instance. For more information, read Specifying a Minimum CPU Platform.'
+      operationId: compute.instances.setMinCpuPlatform
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesSetMinCpuPlatformRequest'
+        - description: Name of the instance scoping this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
   '/{project}/zones/{zone}/instances/{instance}/setScheduling':
     parameters:
       - $ref: '#/parameters/alt'
@@ -13998,6 +14090,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   AcceleratorTypeList:
     description: Contains a list of accelerator types.
@@ -14020,6 +14158,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   AcceleratorTypesScopedList:
     properties:
@@ -14037,8 +14221,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -14049,7 +14235,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -14097,6 +14285,13 @@ definitions:
       address:
         description: The static IP address represented by this resource.
         type: string
+      addressType:
+        description: 'The type of address to reserve. If unspecified, defaults to EXTERNAL.'
+        enum:
+          - EXTERNAL
+          - INTERNAL
+          - UNSPECIFIED_TYPE
+        type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -14129,10 +14324,16 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       status:
-        description: '[Output Only] The status of the address, which can be either IN_USE or RESERVED. An address that is RESERVED is currently reserved and available to use. An IN_USE address is currently being used by another resource and is not available.'
+        description: '[Output Only] The status of the address, which can be one of RESERVING, RESERVED, or IN_USE. An address that is RESERVING is currently in the process of being reserved. A RESERVED address is currently reserved and available to use. An IN_USE address is currently being used by another resource and is not available.'
         enum:
           - IN_USE
           - RESERVED
+        type: string
+      subnetwork:
+        description: |-
+          For external addresses, this field should not be used.
+
+          The URL of the subnetwork in which to reserve the address. If an IP address is specified, it must be within the subnetwork's IP range.
         type: string
       users:
         description: '[Output Only] The URLs of the resources that are using this address.'
@@ -14161,6 +14362,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   AddressList:
     description: Contains a list of addresses.
@@ -14183,6 +14430,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   AddressesScopedList:
     properties:
@@ -14200,8 +14493,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -14212,7 +14507,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -14444,6 +14741,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   AutoscalerList:
     description: Contains a list of Autoscaler resources.
@@ -14466,6 +14809,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   AutoscalerStatusDetails:
     properties:
@@ -14508,8 +14897,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -14520,7 +14911,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -14736,6 +15129,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   BackendService:
     description: A BackendService resource. This resource defines a group of backend virtual machines and their serving capacity.
@@ -14878,6 +15317,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   BackendServiceCdnPolicy:
     description: Message containing Cloud CDN configuration for a backend service.
@@ -14931,6 +15416,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   BackendServicesScopedList:
     properties:
@@ -14948,8 +15479,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -14960,7 +15493,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -15094,6 +15629,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   CommitmentList:
     description: Contains a list of Commitment resources.
@@ -15116,6 +15697,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   CommitmentsScopedList:
     properties:
@@ -15133,8 +15760,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -15145,7 +15774,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -15364,6 +15995,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   DiskList:
     description: A list of Disk resources.
@@ -15386,6 +16063,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   DiskMoveRequest:
     properties:
@@ -15463,6 +16186,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   DiskTypeList:
     description: Contains a list of disk types.
@@ -15485,6 +16254,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   DiskTypesScopedList:
     properties:
@@ -15502,8 +16317,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -15514,7 +16331,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -15559,8 +16378,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -15571,7 +16392,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -15712,6 +16535,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   ForwardingRule:
     description: 'A ForwardingRule resource. A ForwardingRule resource specifies which pool of target virtual machines to forward a packet to if it matches the given [IPAddress, IPProtocol, ports] tuple.'
@@ -15847,6 +16716,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   ForwardingRuleList:
     description: Contains a list of ForwardingRule resources.
@@ -15869,6 +16784,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   ForwardingRulesScopedList:
     properties:
@@ -15886,8 +16847,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -15898,7 +16861,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -16066,6 +17031,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   HealthCheckReference:
     description: |-
@@ -16183,6 +17194,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   HttpsHealthCheck:
     description: 'An HttpsHealthCheck resource. This resource defines a template for how individual instances should be checked for health, via HTTPS.'
@@ -16256,6 +17313,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   Image:
     description: An Image resource.
@@ -16407,6 +17510,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   Instance:
     description: An Instance resource.
@@ -16470,6 +17619,9 @@ definitions:
       metadata:
         $ref: '#/definitions/Metadata'
         description: The metadata key/value pairs assigned to this instance. This includes custom metadata and predefined keys.
+      minCpuPlatform:
+        description: 'Specifies a minimum CPU platform for the VM instance. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: "Intel Haswell" or minCpuPlatform: "Intel Sandy Bridge".'
+        type: string
       name:
         description: 'The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
@@ -16539,6 +17691,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   InstanceGroup:
     properties:
@@ -16615,6 +17813,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   InstanceGroupList:
     description: A list of InstanceGroup resources.
@@ -16637,6 +17881,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   InstanceGroupManager:
     description: An Instance Group Manager resource.
@@ -16759,6 +18049,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   InstanceGroupManagerList:
     description: '[Output Only] A list of managed instance groups.'
@@ -16781,6 +18117,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   InstanceGroupManagersAbandonInstancesRequest:
     properties:
@@ -16830,8 +18212,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -16842,7 +18226,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -16910,6 +18296,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   InstanceGroupsListInstancesRequest:
     properties:
@@ -16944,8 +18376,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -16956,7 +18390,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -17011,6 +18447,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   InstanceMoveRequest:
     properties:
@@ -17059,6 +18541,9 @@ definitions:
       metadata:
         $ref: '#/definitions/Metadata'
         description: The metadata key/value pairs to assign to instances that are created from this template. These pairs can consist of custom metadata or predefined keys. See Project and instance metadata for more information.
+      minCpuPlatform:
+        description: 'Minimum cpu/platform to be used by this instance. The instance may be scheduled on the specified or newer cpu/platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: "Intel Haswell" or minCpuPlatform: "Intel Sandy Bridge". For more information, read Specifying a Minimum CPU Platform.'
+        type: string
       networkInterfaces:
         description: An array of network access configurations for this interface.
         items:
@@ -17131,6 +18616,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   InstanceWithNamedPorts:
     properties:
@@ -17171,8 +18702,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -17183,7 +18716,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -17228,6 +18763,12 @@ definitions:
     properties:
       machineType:
         description: 'Full or partial URL of the machine type resource. See Machine Types for a full list of machine types. For example: zones/us-central1-f/machineTypes/n1-standard-1'
+        type: string
+    type: object
+  InstancesSetMinCpuPlatformRequest:
+    properties:
+      minCpuPlatform:
+        description: Minimum cpu/platform this instance should be started at.
         type: string
     type: object
   InstancesSetServiceAccountRequest:
@@ -17357,6 +18898,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   MachineTypeList:
     description: Contains a list of machine types.
@@ -17379,6 +18966,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   MachineTypesScopedList:
     properties:
@@ -17396,8 +19029,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -17408,7 +19043,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -17574,6 +19211,9 @@ definitions:
         items:
           $ref: '#/definitions/NetworkPeering'
         type: array
+      routingConfig:
+        $ref: '#/definitions/NetworkRoutingConfig'
+        description: The network-level routing configuration for this network. Used by Cloud Router to determine what type of network-wide routing behavior to enforce.
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
@@ -17645,6 +19285,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   NetworkPeering:
     description: 'A network peering attached to a network resource. The message includes the peering name, peer network, peering state, and a flag indicating whether Google Compute Engine should automatically create routes for the peering.'
@@ -17666,6 +19352,16 @@ definitions:
         type: string
       stateDetails:
         description: '[Output Only] Details about the current state of the peering.'
+        type: string
+    type: object
+  NetworkRoutingConfig:
+    description: 'A routing configuration attached to a network resource. The message includes the list of routers associated with the network, and a flag indicating the type of routing behavior to enforce network-wide.'
+    properties:
+      routingMode:
+        description: 'The network-wide routing mode to use. If set to REGIONAL, this network''s cloud routers will only advertise routes with subnetworks of this network in the same region as the router. If set to GLOBAL, this network''s cloud routers will advertise routes with all subnetworks of this network, across regions.'
+        enum:
+          - GLOBAL
+          - REGIONAL
         type: string
     type: object
   NetworksAddPeeringRequest:
@@ -17787,8 +19483,10 @@ definitions:
                 - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
                 - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -17799,7 +19497,9 @@ definitions:
                 - REQUIRED_TOS_AGREEMENT
                 - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
                 - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
                 - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
                 - UNREACHABLE
               type: string
             data:
@@ -17846,6 +19546,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   OperationList:
     description: Contains a list of Operation resources.
@@ -17868,6 +19614,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   OperationsScopedList:
     properties:
@@ -17885,8 +19677,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -17897,7 +19691,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -18157,6 +19953,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   RegionInstanceGroupList:
     description: Contains a list of InstanceGroup resources.
@@ -18179,6 +20021,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   RegionInstanceGroupManagerList:
     description: Contains a list of managed instance groups.
@@ -18201,6 +20089,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   RegionInstanceGroupManagersAbandonInstancesRequest:
     properties:
@@ -18272,6 +20206,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   RegionInstanceGroupsListInstancesRequest:
     properties:
@@ -18319,6 +20299,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   ResourceCommitment:
     description: Commitment for a particular resource (a Commitment is composed of one or more of these).
@@ -18415,8 +20441,10 @@ definitions:
                 - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
                 - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -18427,7 +20455,9 @@ definitions:
                 - REQUIRED_TOS_AGREEMENT
                 - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
                 - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
                 - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
                 - UNREACHABLE
               type: string
             data:
@@ -18471,6 +20501,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   Router:
     description: Router resource.
@@ -18538,6 +20614,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   RouterBgp:
     properties:
@@ -18604,6 +20726,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   RouterStatus:
     properties:
@@ -18696,8 +20864,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -18708,7 +20878,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -18910,6 +21082,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   SslCertificate:
     description: An SslCertificate resource. This resource provides a mechanism to upload an SSL key and certificate to the load balancer to serve secure connections from the user.
@@ -18963,6 +21181,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   Subnetwork:
     description: A Subnetwork resource.
@@ -19030,6 +21294,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   SubnetworkList:
     description: Contains a list of Subnetwork resources.
@@ -19052,6 +21362,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   SubnetworkSecondaryRange:
     description: Represents a secondary IP range of a subnetwork.
@@ -19085,8 +21441,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19097,7 +21455,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19211,6 +21571,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   TargetHttpsProxiesSetSslCertificatesRequest:
     properties:
@@ -19278,6 +21684,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   TargetInstance:
     description: A TargetInstance resource. This resource defines an endpoint instance that terminates traffic of certain protocols.
@@ -19340,6 +21792,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   TargetInstanceList:
     description: Contains a list of TargetInstance resources.
@@ -19362,6 +21860,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   TargetInstancesScopedList:
     properties:
@@ -19379,8 +21923,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19391,7 +21937,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19502,6 +22050,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   TargetPoolInstanceHealth:
     properties:
@@ -19535,6 +22129,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   TargetPoolsAddHealthCheckRequest:
     properties:
@@ -19592,8 +22232,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19604,7 +22246,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -19714,6 +22358,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   TargetTcpProxiesSetBackendServiceRequest:
     properties:
@@ -19785,6 +22475,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   TargetVpnGateway:
     description: Represents a Target VPN gateway resource.
@@ -19856,6 +22592,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   TargetVpnGatewayList:
     description: Contains a list of TargetVpnGateway resources.
@@ -19878,6 +22660,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   TargetVpnGatewaysScopedList:
     properties:
@@ -19895,8 +22723,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -19907,7 +22737,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -20008,6 +22840,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   UrlMapReference:
     properties:
@@ -20165,6 +23043,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   VpnTunnelList:
     description: Contains a list of VpnTunnel resources.
@@ -20187,6 +23111,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   VpnTunnelsScopedList:
     properties:
@@ -20204,8 +23174,10 @@ definitions:
               - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
               - FIELD_VALUE_OVERRIDEN
               - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
               - NEXT_HOP_ADDRESS_NOT_ASSIGNED
               - NEXT_HOP_CANNOT_IP_FORWARD
               - NEXT_HOP_INSTANCE_NOT_FOUND
@@ -20216,7 +23188,9 @@ definitions:
               - REQUIRED_TOS_AGREEMENT
               - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
               - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
               - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
               - UNREACHABLE
             type: string
           data:
@@ -20258,6 +23232,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   XpnResourceId:
     description: Service resource (a.k.a service project) ID.
@@ -20275,6 +23295,11 @@ definitions:
   Zone:
     description: A Zone resource.
     properties:
+      availableCpuPlatforms:
+        description: '[Output Only] Available cpu/platform selections for the zone.'
+        items:
+          type: string
+        type: array
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -20329,6 +23354,52 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
     type: object
   ZoneSetLabelsRequest:
     properties:

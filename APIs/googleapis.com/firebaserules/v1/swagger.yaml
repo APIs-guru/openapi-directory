@@ -13,6 +13,8 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - backend
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
@@ -118,13 +120,16 @@ tags:
 paths:
   '/v1/{name}':
     delete:
-      description: Delete a `Release` by resource name.
-      operationId: firebaserules.projects.releases.delete
+      description: |-
+        Delete a `Ruleset` by resource name.
+
+        If the `Ruleset` is referenced by a `Release` the operation will fail.
+      operationId: firebaserules.projects.rulesets.delete
       parameters:
         - description: |-
-            Resource name for the `Release` to delete.
+            Resource name for the ruleset to delete.
 
-            Format: `projects/{project_id}/releases/{release_id}`
+            Format: `projects/{project_id}/rulesets/{ruleset_id}`
           in: path
           name: name
           required: true
@@ -143,13 +148,13 @@ paths:
       tags:
         - projects
     get:
-      description: Get a `Release` by name.
-      operationId: firebaserules.projects.releases.get
+      description: Get a `Ruleset` by name including the full `Source` contents.
+      operationId: firebaserules.projects.rulesets.get
       parameters:
         - description: |-
-            Resource name of the `Release`.
+            Resource name for the ruleset to get.
 
-            Format: `projects/{project_id}/releases/{release_id}`
+            Format: `projects/{project_id}/rulesets/{ruleset_id}`
           in: path
           name: name
           required: true
@@ -159,7 +164,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Release'
+            $ref: '#/definitions/Ruleset'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

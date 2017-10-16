@@ -2544,7 +2544,7 @@ definitions:
         description: The two-letter ISO 639-1 language in which the attributes are defined in the data feed.
         type: string
       contentLanguage:
-        description: '[DEPRECATED] Please use target.language instead. The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targetCountry.'
+        description: '[DEPRECATED] Please use targets[].language instead. The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targetCountry.'
         type: string
       contentType:
         description: 'The type of data feed. For product inventory feeds, only feeds for local stores, not online stores, are supported.'
@@ -2563,7 +2563,7 @@ definitions:
         format: int64
         type: string
       intendedDestinations:
-        description: '[DEPRECATED] Please use target.includedDestination instead. The list of intended destinations (corresponds to checked check boxes in Merchant Center).'
+        description: '[DEPRECATED] Please use targets[].includedDestinations instead. The list of intended destinations (corresponds to checked check boxes in Merchant Center).'
         items:
           type: string
         type: array
@@ -2575,7 +2575,7 @@ definitions:
         description: A descriptive name of the data feed.
         type: string
       targetCountry:
-        description: '[DEPRECATED] Please use target.country instead. The country where the items in the feed will be included in the search index, represented as a CLDR territory code.'
+        description: '[DEPRECATED] Please use targets[].country instead. The country where the items in the feed will be included in the search index, represented as a CLDR territory code.'
         type: string
       targets:
         description: 'The targets this feed should apply to (country, language, destinations).'
@@ -2923,12 +2923,12 @@ definitions:
           type: string
         type: array
       prices:
-        description: 'be "infinity". For example [{"value": "10", "currency": "USD"}, {"value": "500", "currency": "USD"}, {"value": "infinity", "currency": "USD"}] represents the headers "<= $10", " $500". All prices within a service must have the same currency. Must be non-empty. Can only be set if all other fields are not set.'
+        description: 'A list of inclusive order price upper bounds. The last price''s value can be "infinity". For example [{"value": "10", "currency": "USD"}, {"value": "500", "currency": "USD"}, {"value": "infinity", "currency": "USD"}] represents the headers "<= $10", " $500". All prices within a service must have the same currency. Must be non-empty. Can only be set if all other fields are not set.'
         items:
           $ref: '#/definitions/Price'
         type: array
       weights:
-        description: 'be "infinity". For example [{"value": "10", "unit": "kg"}, {"value": "50", "unit": "kg"}, {"value": "infinity", "unit": "kg"}] represents the headers "<= 10kg", " 50kg". All weights within a service must have the same unit. Must be non-empty. Can only be set if all other fields are not set.'
+        description: 'A list of inclusive order weight upper bounds. The last weight''s value can be "infinity". For example [{"value": "10", "unit": "kg"}, {"value": "50", "unit": "kg"}, {"value": "infinity", "unit": "kg"}] represents the headers "<= 10kg", " 50kg". All weights within a service must have the same unit. Must be non-empty. Can only be set if all other fields are not set.'
         items:
           $ref: '#/definitions/Weight'
         type: array

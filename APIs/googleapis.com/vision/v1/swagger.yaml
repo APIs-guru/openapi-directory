@@ -1034,7 +1034,10 @@ definitions:
       violence).
     properties:
       adult:
-        description: Represents the adult content likelihood for the image.
+        description: |-
+          Represents the adult content likelihood for the image. Adult content may
+          contain elements such as nudity, pornographic images or cartoons, or
+          sexual activities.
         enum:
           - UNKNOWN
           - VERY_UNLIKELY
@@ -1067,7 +1070,7 @@ definitions:
           - VERY_LIKELY
         type: string
       violence:
-        description: Violence likelihood.
+        description: Likelihood that this image contains violent content.
         enum:
           - UNKNOWN
           - VERY_UNLIKELY

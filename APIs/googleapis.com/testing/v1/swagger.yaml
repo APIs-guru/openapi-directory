@@ -12,6 +12,8 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - developer_tools
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
@@ -1247,9 +1249,15 @@ definitions:
           Optional
       directoriesToPull:
         description: |-
-          The directories on the device to upload to GCS at the end of the test;
-          they must be absolute, whitelisted paths.
-          Refer to RegularFile for whitelisted paths.
+          List of directories on the device to upload to GCS at the end of the test;
+          they must be absolute paths under /sdcard or /data/local/tmp.
+          Path names are restricted to characters a-z A-Z 0-9 _ - . + and /
+
+          Note: The paths /sdcard and /data will be made available and treated as
+          implicit path substitutions. E.g. if /sdcard on a particular device does
+          not map to external storage, the system will replace it with the external
+          storage path prefix for that device.
+
           Optional
         items:
           type: string
@@ -1262,7 +1270,10 @@ definitions:
           $ref: '#/definitions/EnvironmentVariable'
         type: array
       filesToPush:
-        description: Optional
+        description: |-
+          List of files to push to the device before starting the test.
+
+          Optional
         items:
           $ref: '#/definitions/DeviceFile'
         type: array

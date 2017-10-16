@@ -12,6 +12,8 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - security
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
@@ -274,14 +276,18 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a Role definition.
-      operationId: iam.roles.get
+      description: |-
+        Gets the ServiceAccountKey
+        by key id.
+      operationId: iam.projects.serviceAccounts.keys.get
       parameters:
         - description: |-
-            The resource name of the role in one of the following formats:
-            `roles/{ROLE_NAME}`
-            `organizations/{ORGANIZATION_ID}/roles/{ROLE_NAME}`
-            `projects/{PROJECT_ID}/roles/{ROLE_NAME}`
+            The resource name of the service account key in the following format:
+            `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`.
+
+            Using `-` as a wildcard for the `PROJECT_ID` will infer the project from
+            the account. The `ACCOUNT` value can be the `email` address or the
+            `unique_id` of the service account.
           in: path
           name: name
           required: true
@@ -301,12 +307,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Role'
+            $ref: '#/definitions/ServiceAccountKey'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - roles
+        - projects
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/key'
@@ -697,9 +703,6 @@ paths:
       operationId: iam.projects.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
-          enum:
-            - BASIC
-            - FULL
           in: query
           name: pageSize
           type: integer
@@ -718,6 +721,9 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: Include Roles that have been deleted.
+          enum:
+            - BASIC
+            - FULL
           in: query
           name: showDeleted
           type: boolean

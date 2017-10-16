@@ -12,6 +12,8 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - machine_learning
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
@@ -579,7 +581,8 @@ definitions:
           indicates an estimated greater likelihood that the recognized words are
           correct. This field is typically provided only for the top hypothesis, and
           only for `is_final=true` results. Clients should not rely on the
-          `confidence` field as it is not guaranteed to be accurate or consistent.
+          `confidence` field as it is not guaranteed to be accurate, or even set, in
+          any of the results.
           The default of 0.0 is a sentinel value indicating `confidence` was not set.
         format: float
         type: number

@@ -12,6 +12,8 @@ info:
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - cloud
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
@@ -509,21 +511,13 @@ definitions:
           Quota metrics to indicate the result of allocation. Depending on the
           request, one or more of the following metrics will be included:
 
-          1. For rate quota, per quota group or per quota metric incremental usage
-          will be specified using the following delta metric:
+          1. Per quota group or per quota metric incremental usage will be specified
+          using the following delta metric :
             "serviceruntime.googleapis.com/api/consumer/quota_used_count"
 
-          2. For allocation quota, per quota metric total usage will be specified
-          using the following gauge metric:
-            "serviceruntime.googleapis.com/allocation/consumer/quota_used_count"
-
-          3. For both rate quota and allocation quota, the quota limit reached
-          condition will be specified using the following boolean metric:
+          2. The quota limit reached condition will be specified using the following
+          boolean metric :
             "serviceruntime.googleapis.com/quota/exceeded"
-
-          4. For allocation quota, value for each quota limit associated with
-          the metrics will be specified using the following gauge metric:
-            "serviceruntime.googleapis.com/quota/limit"
         items:
           $ref: '#/definitions/MetricValueSet'
         type: array
@@ -548,14 +542,12 @@ definitions:
           $ref: '#/definitions/AuthorizationInfo'
         type: array
       metadata:
+        additionalProperties:
+          description: Properties of the object.
         description: |-
           Other service-specific data about the request, response, and other
           information associated with the current audited event.
-        items:
-          additionalProperties:
-            description: Properties of the object.
-          type: object
-        type: array
+        type: object
       methodName:
         description: |-
           The name of the service method or operation.
@@ -1345,8 +1337,11 @@ definitions:
         description: |-
           Fully qualified name of the API method for which this quota operation is
           requested. This name is used for matching quota rules or metric rules and
-          billing status rules defined in service configuration. This field is not
-          required if the quota operation is performed on non-API resources.
+          billing status rules defined in service configuration.
+
+          This field should not be set if any of the following is true:
+          (1) the quota operation is performed on non-API resources.
+          (2) quota_metrics is set because the caller is doing quota override.
 
           Example of an RPC method name:
               google.example.library.v1.LibraryService.CreateShelf
@@ -1374,6 +1369,8 @@ definitions:
           label value combinations. If a request has such duplicated MetricValue
           instances, the entire request is rejected with
           an invalid argument error.
+
+          This field is mutually exclusive with method_name.
         items:
           $ref: '#/definitions/MetricValueSet'
         type: array

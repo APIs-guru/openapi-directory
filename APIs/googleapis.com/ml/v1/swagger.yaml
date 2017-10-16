@@ -174,6 +174,53 @@ paths:
       - $ref: '#/parameters/pp'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
+    patch:
+      description: |-
+        Updates the specified Version resource.
+
+        Currently the only supported field to update is `description`.
+      operationId: ml.projects.models.versions.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GoogleCloudMlV1__Version'
+        - description: Required. The name of the model.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Required. Specifies the path, relative to `Version`, of the field to
+            update. Must be present and non-empty.
+
+            For example, to change the description of a version to "foo", the
+            `update_mask` parameter would be specified as `description`, and the
+            `PATCH` request body would specify the new value, as follows:
+                {
+                  "description": "foo"
+                }
+            In this example, the version is blindly overwritten since no etag is given.
+
+            To adopt etag mechanism, include `etag` field in the mask, and include the
+            `etag` value in your version resource.
+
+            Currently the only supported update masks are `description`, `labels`, and
+            `etag`.
+          in: query
+          name: updateMask
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GoogleLongrunning__Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1/{name}/operations':
     get:
       description: |-

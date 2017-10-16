@@ -2446,6 +2446,16 @@ definitions:
           - DISPLAY
           - VIDEO
         type: string
+      name:
+        description: |-
+          A user-defined name of the filter set. Filter set names must be unique
+          globally and match one of the patterns:
+
+          - `bidders/*/filterSets/*` (for accessing bidder-level troubleshooting
+          data)
+          - `bidders/*/accounts/*/filterSets/*` (for accessing buyer-level
+          troubleshooting data)
+        type: string
       ownerAccountId:
         description: |-
           The account ID of the buyer who owns this filter set.

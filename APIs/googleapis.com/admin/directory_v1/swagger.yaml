@@ -115,6 +115,7 @@ tags:
   - name: notifications
   - name: orgunits
   - name: privileges
+  - name: resolvedAppAccessSettings
   - name: resources
   - name: roleAssignments
   - name: roles
@@ -1427,7 +1428,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a calendar resource. This method supports patch semantics.
+      description: |-
+        Updates a calendar resource.
+
+        This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved. This method supports patch semantics.
       operationId: directory.resources.calendars.patch
       parameters:
         - in: body
@@ -1455,7 +1459,10 @@ paths:
       tags:
         - resources
     put:
-      description: Updates a calendar resource.
+      description: |-
+        Updates a calendar resource.
+
+        This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved.
       operationId: directory.resources.calendars.update
       parameters:
         - in: body
@@ -2328,6 +2335,44 @@ paths:
             - 'https://www.googleapis.com/auth/admin.directory.group.member'
       tags:
         - members
+  /resolvedappaccesssettings:
+    get:
+      description: Retrieves resolved app access settings of the logged in user.
+      operationId: directory.resolvedAppAccessSettings.GetSettings
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AppAccessCollections'
+      tags:
+        - resolvedAppAccessSettings
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /trustedapps:
+    get:
+      description: Retrieves the list of apps trusted by the admin of the logged in user.
+      operationId: directory.resolvedAppAccessSettings.ListTrustedApps
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TrustedApps'
+      tags:
+        - resolvedAppAccessSettings
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   /users:
     get:
       description: Retrieve either deleted users or all users in a domain (paginated)
@@ -3236,6 +3281,38 @@ definitions:
         default: 'admin#directory#aliases'
         description: Kind of resource this is.
         type: string
+    type: object
+  AppAccessCollections:
+    description: JSON template for App Access Collections Resource object in Directory API.
+    properties:
+      blockedApiAccessBuckets:
+        description: List of blocked api access buckets.
+        items:
+          type: string
+        type: array
+      enforceSettingsForAndroidDrive:
+        description: Boolean to indicate whether to enforce app access settings on Android Drive or not.
+        type: boolean
+      errorMessage:
+        description: Error message provided by the Admin that will be shown to the user when an app is blocked.
+        type: string
+      etag:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#directory#appaccesscollection'
+        description: 'Identifies the resource as an app access collection. Value: admin#directory#appaccesscollection'
+        type: string
+      resourceId:
+        description: Unique ID of app access collection. (Readonly)
+        format: int64
+        type: string
+      resourceName:
+        description: Resource name given by the customer while creating/updating. Should be unique under given customer.
+        type: string
+      trustDomainOwnedApps:
+        description: Boolean that indicates whether to trust domain owned apps.
+        type: boolean
     type: object
   Asp:
     description: The template that returns individual ASP (Access Code) data.
@@ -4319,6 +4396,43 @@ definitions:
         default: 'admin#directory#tokenList'
         description: 'The type of the API resource. This is always admin#directory#tokenList.'
         type: string
+    type: object
+  TrustedAppId:
+    description: JSON template for Trusted App Ids Resource object in Directory API.
+    properties:
+      androidPackageName:
+        description: Android package name.
+        type: string
+      certificateHashSHA1:
+        description: SHA1 signature of the app certificate.
+        type: string
+      certificateHashSHA256:
+        description: SHA256 signature of the app certificate.
+        type: string
+      etag:
+        type: string
+      kind:
+        default: 'admin#directory#trustedappid'
+        description: Identifies the resource as a trusted AppId.
+        type: string
+    type: object
+  TrustedApps:
+    description: JSON template for Trusted Apps response object of a user in Directory API.
+    properties:
+      etag:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#directory#trustedapplist'
+        description: Identifies the resource as trusted apps response.
+        type: string
+      nextPageToken:
+        type: string
+      trustedApps:
+        description: Trusted Apps list.
+        items:
+          $ref: '#/definitions/TrustedAppId'
+        type: array
     type: object
   User:
     description: JSON template for User object in Directory API.

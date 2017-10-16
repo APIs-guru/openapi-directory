@@ -12,6 +12,8 @@ info:
   version: v2beta1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - cloud
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
@@ -985,6 +987,20 @@ definitions:
         format: int32
         type: integer
     type: object
+  GooglePrivacyDlpV2beta1CustomInfoType:
+    description: |-
+      Custom information type provided by the user. Used to find domain-specific
+      sensitive information configurable to the data in question.
+    properties:
+      dictionary:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1Dictionary'
+        description: Dictionary-based custom info type.
+      infoType:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
+        description: |-
+          Info type configuration. All custom info types must have configurations
+          that do not conflict with built-in info types or other custom info types.
+    type: object
   GooglePrivacyDlpV2beta1DatastoreKey:
     description: Record key for a finding in Cloud Datastore.
     properties:
@@ -1068,6 +1084,16 @@ definitions:
         items:
           $ref: '#/definitions/GooglePrivacyDlpV2beta1DeidentificationSummary'
         type: array
+    type: object
+  GooglePrivacyDlpV2beta1Dictionary:
+    description: |-
+      Custom information type based on a dictionary of words or phrases. This can
+      be used to match sensitive information specific to the data, such as a list
+      of employee IDs or job titles.
+    properties:
+      wordList:
+        $ref: '#/definitions/GooglePrivacyDlpV2beta1WordList'
+        description: List of words or phrases to search for.
     type: object
   GooglePrivacyDlpV2beta1EntityId:
     description: |-
@@ -1330,6 +1356,11 @@ definitions:
       When used with redactContent only info_types and min_likelihood are currently
       used.
     properties:
+      customInfoTypes:
+        description: Custom info types provided by the user.
+        items:
+          $ref: '#/definitions/GooglePrivacyDlpV2beta1CustomInfoType'
+        type: array
       excludeTypes:
         description: 'When true, excludes type information of the findings.'
         type: boolean
@@ -2189,6 +2220,18 @@ definitions:
       value:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1Value'
         description: A value contained in the field in question.
+    type: object
+  GooglePrivacyDlpV2beta1WordList:
+    description: Message defining a list of words or phrases to search for in the data.
+    properties:
+      words:
+        description: |-
+          Words or phrases defining the dictionary. No word can be shorter than 3
+          characters in length. To match, there must be whitespace or punctuation
+          around the targeted string. [required]
+        items:
+          type: string
+        type: array
     type: object
   GoogleProtobufEmpty:
     description: |-

@@ -12,6 +12,8 @@ info:
   version: v1beta3
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - developer_tools
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
@@ -1692,6 +1694,70 @@ definitions:
           - In response: always set - In create/update request: always set
         type: string
     type: object
+  GraphicsStats:
+    description: 'Graphics statistics for the App. The information is collected from ''adb shell dumpsys graphicsstats''. For more info see: https://developer.android.com/training/testing/performance.html Statistics will only be present for API 23+.'
+    properties:
+      buckets:
+        description: 'Histogram of frame render times. There should be 154 buckets ranging from [5ms, 6ms) to [4950ms, infinity)'
+        items:
+          $ref: '#/definitions/GraphicsStatsBucket'
+        type: array
+      highInputLatencyCount:
+        description: Total "high input latency" events.
+        format: int64
+        type: string
+      jankyFrames:
+        description: Total frames with slow render time. Should be <= total_frames.
+        format: int64
+        type: string
+      missedVsyncCount:
+        description: Total "missed vsync" events.
+        format: int64
+        type: string
+      p50Millis:
+        description: 50th percentile frame render time in milliseconds.
+        format: int64
+        type: string
+      p90Millis:
+        description: 90th percentile frame render time in milliseconds.
+        format: int64
+        type: string
+      p95Millis:
+        description: 95th percentile frame render time in milliseconds.
+        format: int64
+        type: string
+      p99Millis:
+        description: 99th percentile frame render time in milliseconds.
+        format: int64
+        type: string
+      slowBitmapUploadCount:
+        description: Total "slow bitmap upload" events.
+        format: int64
+        type: string
+      slowDrawCount:
+        description: Total "slow draw" events.
+        format: int64
+        type: string
+      slowUiThreadCount:
+        description: Total "slow UI thread" events.
+        format: int64
+        type: string
+      totalFrames:
+        description: Total frames rendered by package.
+        format: int64
+        type: string
+    type: object
+  GraphicsStatsBucket:
+    properties:
+      frameCount:
+        description: Number of frames in the bucket.
+        format: int64
+        type: string
+      renderMillis:
+        description: Lower bound of render time in milliseconds.
+        format: int64
+        type: string
+    type: object
   History:
     description: |-
       A History represents a sorted list of Executions ordered by the start_timestamp_millis field (descending). It can be used to group all the Executions of a continuous build.
@@ -1925,6 +1991,9 @@ definitions:
       executionId:
         description: A tool results execution ID.
         type: string
+      graphicsStats:
+        $ref: '#/definitions/GraphicsStats'
+        description: Graphics statistics for the entire run. Statistics are reset at the beginning of the run and collected at the end of the run.
       historyId:
         description: A tool results history ID.
         type: string

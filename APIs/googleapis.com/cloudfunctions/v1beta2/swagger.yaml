@@ -419,6 +419,99 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1beta2/{name}:generateDownloadUrl':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns a signed URL for downloading deployed function source code.
+        The URL is only valid for a limited period and should be used within
+        minutes after generation.
+        For more information about the signed URL usage see:
+        https://cloud.google.com/storage/docs/access-control/signed-urls
+      operationId: cloudfunctions.projects.locations.functions.generateDownloadUrl
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GenerateDownloadUrlRequest'
+        - description: |-
+            The name of function for which source code Google Cloud Storage signed
+            URL should be generated.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GenerateDownloadUrlResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta2/{parent}/functions:generateUploadUrl':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns a signed URL for uploading a function source code.
+        For more information about the signed URL usage see:
+        https://cloud.google.com/storage/docs/access-control/signed-urls
+        Once the function source code upload is complete, the used signed
+        URL should be provided in CreateFunction or UpdateFunction request
+        as a reference to the function source code.
+      operationId: cloudfunctions.projects.locations.functions.generateUploadUrl
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GenerateUploadUrlRequest'
+        - description: |-
+            The project and location in which the Google Cloud Storage signed URL
+            should be generated, specified in the format `projects/*/locations/*
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GenerateUploadUrlResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
 definitions:
   CallFunctionRequest:
     description: Request for the `CallFunction` method.
@@ -513,6 +606,11 @@ definitions:
 
           You may omit `paths/*` if you want to use the main directory.
         type: string
+      sourceUploadUrl:
+        description: |-
+          The Google Cloud Storage signed URL used for source uploading, generated
+          by google.cloud.functions.v1beta2.GenerateUploadUrl
+        type: string
       status:
         description: Output only. Status of the function deployment.
         enum:
@@ -587,6 +685,37 @@ definitions:
       retry:
         $ref: '#/definitions/Retry'
         description: 'If specified, then the function will be retried in case of a failure.'
+    type: object
+  GenerateDownloadUrlRequest:
+    description: Request of `GenerateDownloadUrl` method.
+    properties:
+      versionId:
+        description: The optional version of function.
+        format: uint64
+        type: string
+    type: object
+  GenerateDownloadUrlResponse:
+    description: Response of `GenerateDownloadUrl` method.
+    properties:
+      downloadUrl:
+        description: |-
+          The generated Google Cloud Storage signed URL that should be used for
+          function source code download.
+        type: string
+    type: object
+  GenerateUploadUrlRequest:
+    description: Request of `GenerateUploadUrl` method.
+    properties: {}
+    type: object
+  GenerateUploadUrlResponse:
+    description: Response of `GenerateUploadUrl` method.
+    properties:
+      uploadUrl:
+        description: |-
+          The generated Google Cloud Storage signed URL that should be used for a
+          function source code upload. The uploaded file should be a zip archive
+          which contains a function.
+        type: string
     type: object
   HTTPSTrigger:
     description: 'Describes HTTPSTrigger, could be used to connect web hooks to function.'
