@@ -1,0 +1,1436 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://monitoring.amazonaws.com/'
+info:
+  version: '2010-08-01'
+  x-release: v4
+  title: Amazon CloudWatch
+  description: '<p>Amazon CloudWatch monitors your Amazon Web Services (AWS) resources and the applications you run on AWS in real time. You can use CloudWatch to collect and track metrics, which are the variables you want to measure for your resources and applications.</p> <p>CloudWatch alarms send notifications or automatically change the resources you are monitoring based on rules that you define. For example, you can monitor the CPU usage and disk reads and writes of your Amazon EC2 instances. Then, use this data to determine whether you should launch additional instances to handle increased load. You can also use this data to stop under-used instances to save money.</p> <p>In addition to monitoring the built-in metrics that come with AWS, you can monitor your own custom metrics. With CloudWatch, you gain system-wide visibility into resource utilization, application performance, and operational health.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: monitoring
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/monitoring-2010-08-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/monitoring/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: DeleteAlarms
+      description: 'Deletes the specified alarms. In the event of an error, no alarms are deleted.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAlarmsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDashboards':
+    post:
+      operationId: DeleteDashboards
+      description: 'Deletes all dashboards that you specify. You may specify up to 100 dashboards to delete. If there is an error during this call, no dashboards are deleted.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteDashboardsOutput'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: DashboardNotFoundError
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DashboardNotFoundError'
+        '482':
+          description: InternalServiceFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDashboardsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAlarmHistory':
+    post:
+      operationId: DescribeAlarmHistory
+      description: '<p>Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for all alarms are returned.</p> <p>CloudWatch retains the history of an alarm even if you delete the alarm.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeAlarmHistoryOutput'
+        '480':
+          description: InvalidNextToken
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAlarmHistoryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAlarms':
+    post:
+      operationId: DescribeAlarms
+      description: 'Retrieves the specified alarms. If no alarms are specified, all alarms are returned. Alarms can be retrieved by using only a prefix for the alarm name, the alarm state, or a prefix for any action.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeAlarmsOutput'
+        '480':
+          description: InvalidNextToken
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      x-waiters:
+        - delay: 5
+          maxAttempts: 40
+          operation: DescribeAlarms
+          acceptors:
+            - matcher: path
+              expected: true
+              argument: 'length(MetricAlarms[]) > `0`'
+              state: success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAlarmsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAlarmsForMetric':
+    post:
+      operationId: DescribeAlarmsForMetric
+      description: 'Retrieves the alarms for the specified metric. To filter the results, specify a statistic, period, or unit.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeAlarmsForMetricOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAlarmsForMetricInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisableAlarmActions':
+    post:
+      operationId: DisableAlarmActions
+      description: 'Disables the actions for the specified alarms. When an alarm''s actions are disabled, the alarm actions do not execute when the alarm state changes.'
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableAlarmActionsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EnableAlarmActions':
+    post:
+      operationId: EnableAlarmActions
+      description: Enables the actions for the specified alarms.
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableAlarmActionsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDashboard':
+    post:
+      operationId: GetDashboard
+      description: '<p>Displays the details of the dashboard that you specify.</p> <p>To copy an existing dashboard, use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code> to create the copy.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetDashboardOutput'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: DashboardNotFoundError
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DashboardNotFoundError'
+        '482':
+          description: InternalServiceFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDashboardInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetMetricStatistics':
+    post:
+      operationId: GetMetricStatistics
+      description: '<p>Gets statistics for the specified metric.</p> <p>Amazon CloudWatch retains metric data as follows:</p> <ul> <li> <p>Data points with a period of 60 seconds (1-minute) are available for 15 days</p> </li> <li> <p>Data points with a period of 300 seconds (5-minute) are available for 63 days</p> </li> <li> <p>Data points with a period of 3600 seconds (1 hour) are available for 455 days (15 months)</p> </li> </ul> <p>CloudWatch started retaining 5-minute and 1-hour metric data as of July 9, 2016.</p> <p>The maximum number of data points returned from a single call is 1,440. If you request more than 1,440 data points, CloudWatch returns an error. To reduce the number of data points, you can narrow the specified time range and make multiple requests across adjacent time ranges, or you can increase the specified period. A period can be as short as one minute (60 seconds). Data points are not returned in chronological order.</p> <p>CloudWatch aggregates data points based on the length of the period that you specify. For example, if you request statistics with a one-hour period, CloudWatch aggregates all data points with time stamps that fall within each one-hour period. Therefore, the number of values aggregated by CloudWatch is larger than the number of data points returned.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The SampleCount value of the statistic set is 1.</p> </li> <li> <p>The Min and the Max values of the statistic set are equal.</p> </li> </ul> <p>For a list of metrics and dimensions supported by AWS services, see the <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html">Amazon CloudWatch Metrics and Dimensions Reference</a> in the <i>Amazon CloudWatch User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetMetricStatisticsOutput'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: MissingRequiredParameterException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '483':
+          description: InternalServiceFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetMetricStatisticsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListDashboards':
+    post:
+      operationId: ListDashboards
+      description: 'Returns a list of the dashboards for your account. If you include <code>DashboardNamePrefix</code>, only those dashboards with names starting with the prefix are listed. Otherwise, all dashboards in your account are listed. '
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListDashboardsOutput'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: InternalServiceFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDashboardsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListMetrics':
+    post:
+      operationId: ListMetrics
+      description: '<p>List the specified metrics. You can use the returned metrics with <a>GetMetricStatistics</a> to obtain statistical data.</p> <p>Up to 500 results are returned for any one call. To retrieve additional results, use the returned token with subsequent calls.</p> <p>After you create a metric, allow up to fifteen minutes before the metric appears. Statistics about the metric, however, are available sooner using <a>GetMetricStatistics</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListMetricsOutput'
+        '480':
+          description: InternalServiceFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      parameters:
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMetricsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutDashboard':
+    post:
+      operationId: PutDashboard
+      description: '<p>Creates a dashboard if it does not already exist, or updates an existing dashboard. If you update a dashboard, the entire contents are replaced with what you specify here.</p> <p>You can have up to 500 dashboards per account. All dashboards in your account are global, not region-specific.</p> <p>To copy an existing dashboard, use <code>GetDashboard</code>, and then use the data returned within <code>DashboardBody</code> as the template for the new dashboard when you call <code>PutDashboard</code> to create the copy.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PutDashboardOutput'
+        '480':
+          description: DashboardInvalidInputError
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DashboardInvalidInputError'
+        '481':
+          description: InternalServiceFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutDashboardInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutMetricAlarm':
+    post:
+      operationId: PutMetricAlarm
+      description: '<p>Creates or updates an alarm and associates it with the specified metric. Optionally, this operation can associate one or more Amazon SNS resources with the alarm.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is evaluated and its state is set appropriately. Any actions associated with the state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some operations:</p> <ul> <li> <p> <code>ec2:DescribeInstanceStatus</code> and <code>ec2:DescribeInstances</code> for all alarms on EC2 instance status metrics</p> </li> <li> <p> <code>ec2:StopInstances</code> for alarms with stop actions</p> </li> <li> <p> <code>ec2:TerminateInstances</code> for alarms with terminate actions</p> </li> <li> <p> <code>ec2:DescribeInstanceRecoveryAttribute</code> and <code>ec2:RecoverInstances</code> for alarms with recover actions</p> </li> </ul> <p>If you have read/write permissions for Amazon CloudWatch but not for Amazon EC2, you can still create an alarm, but the stop or terminate actions are not performed. However, if you are later granted the required permissions, the alarm actions that you created earlier are performed.</p> <p>If you are using an IAM role (for example, an EC2 instance profile), you cannot stop or terminate the instance using alarm actions. However, you can still see the alarm state and perform any other actions such as Amazon SNS notifications or Auto Scaling policies.</p> <p>If you are using temporary security credentials granted using AWS STS, you cannot stop or terminate an EC2 instance using alarm actions.</p> <p>You must create at least one stop, terminate, or reboot alarm using either the Amazon EC2 or CloudWatch consoles to create the <b>EC2ActionsAccess</b> IAM role. After this IAM role is created, you can create stop, terminate, or reboot alarms using a command-line interface or API.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: LimitExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutMetricAlarmInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutMetricData':
+    post:
+      operationId: PutMetricData
+      description: '<p>Publishes metric data points to Amazon CloudWatch. CloudWatch associates the data points with the specified metric. If the specified metric does not exist, CloudWatch creates the metric. When CloudWatch creates a metric, it can take up to fifteen minutes for the metric to appear in calls to <a>ListMetrics</a>.</p> <p>Each <code>PutMetricData</code> request is limited to 40 KB in size for HTTP POST requests.</p> <p>Although the <code>Value</code> parameter accepts numbers of type <code>Double</code>, CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for example, NaN, +Infinity, -Infinity) are not supported.</p> <p>You can use up to 10 dimensions per metric to further clarify what data the metric collects. For more information about specifying dimensions, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html">Publishing Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p> <p>Data points with time stamps from 24 hours ago or longer can take at least 48 hours to become available for <a>GetMetricStatistics</a> from the time they are submitted.</p> <p>CloudWatch needs raw data points to calculate percentile statistics. If you publish data using a statistic set instead, you can only retrieve percentile statistics for this data if one of the following conditions is true:</p> <ul> <li> <p>The SampleCount value of the statistic set is 1</p> </li> <li> <p>The Min and the Max values of the statistic set are equal</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: MissingRequiredParameterException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '483':
+          description: InternalServiceFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutMetricDataInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetAlarmState':
+    post:
+      operationId: SetAlarmState
+      description: 'Temporarily sets the state of an alarm for testing purposes. When the updated state differs from the previous value, the action configured for the appropriate state is invoked. For example, if your alarm is configured to send an Amazon SNS message when an alarm is triggered, temporarily changing the alarm state to <code>ALARM</code> sends an SNS message. The alarm returns to its actual state (often within seconds). Because the alarm state change happens quickly, it is typically only visible in the alarm''s <b>History</b> tab in the Amazon CloudWatch console or through <a>DescribeAlarmHistory</a>.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+        '481':
+          description: InvalidFormatFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidFormatFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetAlarmStateInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    ActionPrefix:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ActionsEnabled:
+      type: boolean
+    AlarmArn:
+      type: string
+      minLength: 1
+      maxLength: 1600
+    AlarmDescription:
+      type: string
+      minLength: 0
+      maxLength: 1024
+    AlarmHistoryItem:
+      type: object
+      properties:
+        AlarmName:
+          $ref: '#/components/schemas/AlarmName'
+        Timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        HistoryItemType:
+          $ref: '#/components/schemas/HistoryItemType'
+        HistorySummary:
+          $ref: '#/components/schemas/HistorySummary'
+        HistoryData:
+          $ref: '#/components/schemas/HistoryData'
+      description: Represents the history of a specific alarm.
+    AlarmHistoryItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/AlarmHistoryItem'
+    AlarmName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    AlarmNamePrefix:
+      type: string
+      minLength: 1
+      maxLength: 255
+    AlarmNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/AlarmName'
+      maxItems: 100
+    AwsQueryErrorMessage:
+      type: string
+    ComparisonOperator:
+      type: string
+      enum:
+        - GreaterThanOrEqualToThreshold
+        - GreaterThanThreshold
+        - LessThanThreshold
+        - LessThanOrEqualToThreshold
+    DashboardArn:
+      type: string
+    DashboardBody:
+      type: string
+    DashboardEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/DashboardEntry'
+    DashboardEntry:
+      type: object
+      properties:
+        DashboardName:
+          $ref: '#/components/schemas/DashboardName'
+        DashboardArn:
+          $ref: '#/components/schemas/DashboardArn'
+        LastModified:
+          $ref: '#/components/schemas/LastModified'
+        Size:
+          $ref: '#/components/schemas/Size'
+      description: Represents a specific dashboard.
+    DashboardErrorMessage:
+      type: string
+    DashboardInvalidInputError:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/DashboardErrorMessage'
+        dashboardValidationMessages:
+          $ref: '#/components/schemas/DashboardValidationMessages'
+      description: Some part of the dashboard data is invalid.
+    DashboardName:
+      type: string
+    DashboardNamePrefix:
+      type: string
+    DashboardNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/DashboardName'
+    DashboardNotFoundError:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/DashboardErrorMessage'
+      description: The specified dashboard does not exist.
+    DashboardValidationMessage:
+      type: object
+      properties:
+        DataPath:
+          $ref: '#/components/schemas/DataPath'
+        Message:
+          $ref: '#/components/schemas/Message'
+      description: An error or warning for the operation.
+    DashboardValidationMessages:
+      type: array
+      items:
+        $ref: '#/components/schemas/DashboardValidationMessage'
+    DataPath:
+      type: string
+    Datapoint:
+      type: object
+      properties:
+        Timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        SampleCount:
+          $ref: '#/components/schemas/DatapointValue'
+        Average:
+          $ref: '#/components/schemas/DatapointValue'
+        Sum:
+          $ref: '#/components/schemas/DatapointValue'
+        Minimum:
+          $ref: '#/components/schemas/DatapointValue'
+        Maximum:
+          $ref: '#/components/schemas/DatapointValue'
+        Unit:
+          $ref: '#/components/schemas/StandardUnit'
+        ExtendedStatistics:
+          $ref: '#/components/schemas/DatapointValueMap'
+      description: Encapsulates the statistical data that CloudWatch computes from metric data.
+    DatapointValue:
+      type: number
+      format: double
+    DatapointValueMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/ExtendedStatistic'
+          value:
+            $ref: '#/components/schemas/DatapointValue'
+    Datapoints:
+      type: array
+      items:
+        $ref: '#/components/schemas/Datapoint'
+    DeleteAlarmsInput:
+      type: object
+      required:
+        - AlarmNames
+      properties:
+        AlarmNames:
+          $ref: '#/components/schemas/AlarmNames'
+    DeleteDashboardsInput:
+      type: object
+      properties:
+        DashboardNames:
+          $ref: '#/components/schemas/DashboardNames'
+    DeleteDashboardsOutput:
+      type: object
+      properties: {}
+    DescribeAlarmHistoryInput:
+      type: object
+      properties:
+        AlarmName:
+          $ref: '#/components/schemas/AlarmName'
+        HistoryItemType:
+          $ref: '#/components/schemas/HistoryItemType'
+        StartDate:
+          $ref: '#/components/schemas/Timestamp'
+        EndDate:
+          $ref: '#/components/schemas/Timestamp'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeAlarmHistoryOutput:
+      type: object
+      properties:
+        AlarmHistoryItems:
+          $ref: '#/components/schemas/AlarmHistoryItems'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeAlarmsForMetricInput:
+      type: object
+      required:
+        - MetricName
+        - Namespace
+      properties:
+        MetricName:
+          $ref: '#/components/schemas/MetricName'
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+        Statistic:
+          $ref: '#/components/schemas/Statistic'
+        ExtendedStatistic:
+          $ref: '#/components/schemas/ExtendedStatistic'
+        Dimensions:
+          $ref: '#/components/schemas/Dimensions'
+        Period:
+          $ref: '#/components/schemas/Period'
+        Unit:
+          $ref: '#/components/schemas/StandardUnit'
+    DescribeAlarmsForMetricOutput:
+      type: object
+      properties:
+        MetricAlarms:
+          $ref: '#/components/schemas/MetricAlarms'
+    DescribeAlarmsInput:
+      type: object
+      properties:
+        AlarmNames:
+          $ref: '#/components/schemas/AlarmNames'
+        AlarmNamePrefix:
+          $ref: '#/components/schemas/AlarmNamePrefix'
+        StateValue:
+          $ref: '#/components/schemas/StateValue'
+        ActionPrefix:
+          $ref: '#/components/schemas/ActionPrefix'
+        MaxRecords:
+          $ref: '#/components/schemas/MaxRecords'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeAlarmsOutput:
+      type: object
+      properties:
+        MetricAlarms:
+          $ref: '#/components/schemas/MetricAlarms'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    Dimension:
+      type: object
+      required:
+        - Name
+        - Value
+      properties:
+        Name:
+          $ref: '#/components/schemas/DimensionName'
+        Value:
+          $ref: '#/components/schemas/DimensionValue'
+      description: Expands the identity of a metric.
+    DimensionFilter:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/DimensionName'
+        Value:
+          $ref: '#/components/schemas/DimensionValue'
+      description: Represents filters for a dimension.
+    DimensionFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/DimensionFilter'
+      maxItems: 10
+    DimensionName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    DimensionValue:
+      type: string
+      minLength: 1
+      maxLength: 255
+    Dimensions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Dimension'
+      maxItems: 10
+    DisableAlarmActionsInput:
+      type: object
+      required:
+        - AlarmNames
+      properties:
+        AlarmNames:
+          $ref: '#/components/schemas/AlarmNames'
+    EnableAlarmActionsInput:
+      type: object
+      required:
+        - AlarmNames
+      properties:
+        AlarmNames:
+          $ref: '#/components/schemas/AlarmNames'
+    ErrorMessage:
+      type: string
+      minLength: 1
+      maxLength: 255
+    EvaluateLowSampleCountPercentile:
+      type: string
+      minLength: 1
+      maxLength: 255
+    EvaluationPeriods:
+      type: integer
+      minimum: 1
+    ExtendedStatistic:
+      type: string
+      pattern: 'p(\d{1,2}(\.\d{0,2})?|100)'
+    ExtendedStatistics:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExtendedStatistic'
+      minItems: 1
+      maxItems: 10
+    FaultDescription:
+      type: string
+    GetDashboardInput:
+      type: object
+      properties:
+        DashboardName:
+          $ref: '#/components/schemas/DashboardName'
+    GetDashboardOutput:
+      type: object
+      properties:
+        DashboardArn:
+          $ref: '#/components/schemas/DashboardArn'
+        DashboardBody:
+          $ref: '#/components/schemas/DashboardBody'
+        DashboardName:
+          $ref: '#/components/schemas/DashboardName'
+    GetMetricStatisticsInput:
+      type: object
+      required:
+        - Namespace
+        - MetricName
+        - StartTime
+        - EndTime
+        - Period
+      properties:
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+        MetricName:
+          $ref: '#/components/schemas/MetricName'
+        Dimensions:
+          $ref: '#/components/schemas/Dimensions'
+        StartTime:
+          $ref: '#/components/schemas/Timestamp'
+        EndTime:
+          $ref: '#/components/schemas/Timestamp'
+        Period:
+          $ref: '#/components/schemas/Period'
+        Statistics:
+          $ref: '#/components/schemas/Statistics'
+        ExtendedStatistics:
+          $ref: '#/components/schemas/ExtendedStatistics'
+        Unit:
+          $ref: '#/components/schemas/StandardUnit'
+    GetMetricStatisticsOutput:
+      type: object
+      properties:
+        Label:
+          $ref: '#/components/schemas/MetricLabel'
+        Datapoints:
+          $ref: '#/components/schemas/Datapoints'
+    HistoryData:
+      type: string
+      minLength: 1
+      maxLength: 4095
+    HistoryItemType:
+      type: string
+      enum:
+        - ConfigurationUpdate
+        - StateUpdate
+        - Action
+    HistorySummary:
+      type: string
+      minLength: 1
+      maxLength: 255
+    InternalServiceFault:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/FaultDescription'
+      description: 'Request processing has failed due to some unknown error, exception, or failure.'
+    InvalidFormatFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: Data was not syntactically valid JSON.
+    InvalidNextToken:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The next token specified is invalid.
+    InvalidParameterCombinationException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/AwsQueryErrorMessage'
+      description: Parameters were used together that cannot be used together.
+    InvalidParameterValueException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/AwsQueryErrorMessage'
+      description: The value of an input parameter is bad or out-of-range.
+    LastModified:
+      type: string
+      format: date-time
+    LimitExceededFault:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The quota for alarms for this customer has already been reached.
+    ListDashboardsInput:
+      type: object
+      properties:
+        DashboardNamePrefix:
+          $ref: '#/components/schemas/DashboardNamePrefix'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListDashboardsOutput:
+      type: object
+      properties:
+        DashboardEntries:
+          $ref: '#/components/schemas/DashboardEntries'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListMetricsInput:
+      type: object
+      properties:
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+        MetricName:
+          $ref: '#/components/schemas/MetricName'
+        Dimensions:
+          $ref: '#/components/schemas/DimensionFilters'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListMetricsOutput:
+      type: object
+      properties:
+        Metrics:
+          $ref: '#/components/schemas/Metrics'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    MaxRecords:
+      type: integer
+      minimum: 1
+      maximum: 100
+    Message:
+      type: string
+    Metric:
+      type: object
+      properties:
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+        MetricName:
+          $ref: '#/components/schemas/MetricName'
+        Dimensions:
+          $ref: '#/components/schemas/Dimensions'
+      description: Represents a specific metric.
+    MetricAlarm:
+      type: object
+      properties:
+        AlarmName:
+          $ref: '#/components/schemas/AlarmName'
+        AlarmArn:
+          $ref: '#/components/schemas/AlarmArn'
+        AlarmDescription:
+          $ref: '#/components/schemas/AlarmDescription'
+        AlarmConfigurationUpdatedTimestamp:
+          $ref: '#/components/schemas/Timestamp'
+        ActionsEnabled:
+          $ref: '#/components/schemas/ActionsEnabled'
+        OKActions:
+          $ref: '#/components/schemas/ResourceList'
+        AlarmActions:
+          $ref: '#/components/schemas/ResourceList'
+        InsufficientDataActions:
+          $ref: '#/components/schemas/ResourceList'
+        StateValue:
+          $ref: '#/components/schemas/StateValue'
+        StateReason:
+          $ref: '#/components/schemas/StateReason'
+        StateReasonData:
+          $ref: '#/components/schemas/StateReasonData'
+        StateUpdatedTimestamp:
+          $ref: '#/components/schemas/Timestamp'
+        MetricName:
+          $ref: '#/components/schemas/MetricName'
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+        Statistic:
+          $ref: '#/components/schemas/Statistic'
+        ExtendedStatistic:
+          $ref: '#/components/schemas/ExtendedStatistic'
+        Dimensions:
+          $ref: '#/components/schemas/Dimensions'
+        Period:
+          $ref: '#/components/schemas/Period'
+        Unit:
+          $ref: '#/components/schemas/StandardUnit'
+        EvaluationPeriods:
+          $ref: '#/components/schemas/EvaluationPeriods'
+        Threshold:
+          $ref: '#/components/schemas/Threshold'
+        ComparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperator'
+        TreatMissingData:
+          $ref: '#/components/schemas/TreatMissingData'
+        EvaluateLowSampleCountPercentile:
+          $ref: '#/components/schemas/EvaluateLowSampleCountPercentile'
+      description: Represents an alarm.
+    MetricAlarms:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricAlarm'
+    MetricData:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricDatum'
+    MetricDatum:
+      type: object
+      required:
+        - MetricName
+      properties:
+        MetricName:
+          $ref: '#/components/schemas/MetricName'
+        Dimensions:
+          $ref: '#/components/schemas/Dimensions'
+        Timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        Value:
+          $ref: '#/components/schemas/DatapointValue'
+        StatisticValues:
+          $ref: '#/components/schemas/StatisticSet'
+        Unit:
+          $ref: '#/components/schemas/StandardUnit'
+        StorageResolution:
+          $ref: '#/components/schemas/StorageResolution'
+      description: Encapsulates the information sent to either create a metric or add new values to be aggregated into an existing metric.
+    MetricLabel:
+      type: string
+    MetricName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    Metrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/Metric'
+    MissingRequiredParameterException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/AwsQueryErrorMessage'
+      description: An input parameter that is required is missing.
+    Namespace:
+      type: string
+      pattern: '[^:].*'
+      minLength: 1
+      maxLength: 255
+    NextToken:
+      type: string
+      minLength: 0
+      maxLength: 1024
+    Period:
+      type: integer
+      minimum: 1
+    PutDashboardInput:
+      type: object
+      properties:
+        DashboardName:
+          $ref: '#/components/schemas/DashboardName'
+        DashboardBody:
+          $ref: '#/components/schemas/DashboardBody'
+    PutDashboardOutput:
+      type: object
+      properties:
+        DashboardValidationMessages:
+          $ref: '#/components/schemas/DashboardValidationMessages'
+    PutMetricAlarmInput:
+      type: object
+      required:
+        - AlarmName
+        - MetricName
+        - Namespace
+        - Period
+        - EvaluationPeriods
+        - Threshold
+        - ComparisonOperator
+      properties:
+        AlarmName:
+          $ref: '#/components/schemas/AlarmName'
+        AlarmDescription:
+          $ref: '#/components/schemas/AlarmDescription'
+        ActionsEnabled:
+          $ref: '#/components/schemas/ActionsEnabled'
+        OKActions:
+          $ref: '#/components/schemas/ResourceList'
+        AlarmActions:
+          $ref: '#/components/schemas/ResourceList'
+        InsufficientDataActions:
+          $ref: '#/components/schemas/ResourceList'
+        MetricName:
+          $ref: '#/components/schemas/MetricName'
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+        Statistic:
+          $ref: '#/components/schemas/Statistic'
+        ExtendedStatistic:
+          $ref: '#/components/schemas/ExtendedStatistic'
+        Dimensions:
+          $ref: '#/components/schemas/Dimensions'
+        Period:
+          $ref: '#/components/schemas/Period'
+        Unit:
+          $ref: '#/components/schemas/StandardUnit'
+        EvaluationPeriods:
+          $ref: '#/components/schemas/EvaluationPeriods'
+        Threshold:
+          $ref: '#/components/schemas/Threshold'
+        ComparisonOperator:
+          $ref: '#/components/schemas/ComparisonOperator'
+        TreatMissingData:
+          $ref: '#/components/schemas/TreatMissingData'
+        EvaluateLowSampleCountPercentile:
+          $ref: '#/components/schemas/EvaluateLowSampleCountPercentile'
+    PutMetricDataInput:
+      type: object
+      required:
+        - Namespace
+        - MetricData
+      properties:
+        Namespace:
+          $ref: '#/components/schemas/Namespace'
+        MetricData:
+          $ref: '#/components/schemas/MetricData'
+    ResourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceName'
+      maxItems: 5
+    ResourceName:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ResourceNotFound:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The named resource does not exist.
+    SetAlarmStateInput:
+      type: object
+      required:
+        - AlarmName
+        - StateValue
+        - StateReason
+      properties:
+        AlarmName:
+          $ref: '#/components/schemas/AlarmName'
+        StateValue:
+          $ref: '#/components/schemas/StateValue'
+        StateReason:
+          $ref: '#/components/schemas/StateReason'
+        StateReasonData:
+          $ref: '#/components/schemas/StateReasonData'
+    Size:
+      type: integer
+    StandardUnit:
+      type: string
+      enum:
+        - Seconds
+        - Microseconds
+        - Milliseconds
+        - Bytes
+        - Kilobytes
+        - Megabytes
+        - Gigabytes
+        - Terabytes
+        - Bits
+        - Kilobits
+        - Megabits
+        - Gigabits
+        - Terabits
+        - Percent
+        - Count
+        - Bytes/Second
+        - Kilobytes/Second
+        - Megabytes/Second
+        - Gigabytes/Second
+        - Terabytes/Second
+        - Bits/Second
+        - Kilobits/Second
+        - Megabits/Second
+        - Gigabits/Second
+        - Terabits/Second
+        - Count/Second
+        - None
+    StateReason:
+      type: string
+      minLength: 0
+      maxLength: 1023
+    StateReasonData:
+      type: string
+      minLength: 0
+      maxLength: 4000
+    StateValue:
+      type: string
+      enum:
+        - OK
+        - ALARM
+        - INSUFFICIENT_DATA
+    Statistic:
+      type: string
+      enum:
+        - SampleCount
+        - Average
+        - Sum
+        - Minimum
+        - Maximum
+    StatisticSet:
+      type: object
+      required:
+        - SampleCount
+        - Sum
+        - Minimum
+        - Maximum
+      properties:
+        SampleCount:
+          $ref: '#/components/schemas/DatapointValue'
+        Sum:
+          $ref: '#/components/schemas/DatapointValue'
+        Minimum:
+          $ref: '#/components/schemas/DatapointValue'
+        Maximum:
+          $ref: '#/components/schemas/DatapointValue'
+      description: 'Represents a set of statistics that describes a specific metric. '
+    Statistics:
+      type: array
+      items:
+        $ref: '#/components/schemas/Statistic'
+      minItems: 1
+      maxItems: 5
+    StorageResolution:
+      type: integer
+      minimum: 1
+    Threshold:
+      type: number
+      format: double
+    Timestamp:
+      type: string
+      format: date-time
+    TreatMissingData:
+      type: string
+      minLength: 1
+      maxLength: 255
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

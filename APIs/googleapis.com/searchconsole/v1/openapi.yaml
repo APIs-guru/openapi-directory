@@ -1,0 +1,251 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://searchconsole.googleapis.com/'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Provides tools for running validation tests against single URLs
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Google Search Console URL Testing Tools
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - search
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://searchconsole.googleapis.com/$discovery/rest?version=v1'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: searchconsole
+externalDocs:
+  url: 'https://developers.google.com/webmaster-tools/search-console-api/'
+tags:
+  - name: urlTestingTools
+paths:
+  '/v1/urlTestingTools/mobileFriendlyTest:run':
+    parameters:
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+    post:
+      description: Runs Mobile-Friendly Test for a given URL.
+      operationId: searchconsole.urlTestingTools.mobileFriendlyTest.run
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RunMobileFriendlyTestResponse'
+      tags:
+        - urlTestingTools
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunMobileFriendlyTestRequest'
+components:
+  schemas:
+    BlockedResource:
+      description: Blocked resource.
+      properties:
+        url:
+          description: URL of the blocked resource.
+          type: string
+      type: object
+    Image:
+      description: Describe image data.
+      properties:
+        data:
+          description: |-
+            Image data in format determined by the mime type. Currently, the format
+            will always be "image/png", but this might change in the future.
+          format: byte
+          type: string
+        mimeType:
+          description: The mime-type of the image data.
+          type: string
+      type: object
+    MobileFriendlyIssue:
+      description: Mobile-friendly issue.
+      properties:
+        rule:
+          description: Rule violated.
+          enum:
+            - MOBILE_FRIENDLY_RULE_UNSPECIFIED
+            - USES_INCOMPATIBLE_PLUGINS
+            - CONFIGURE_VIEWPORT
+            - FIXED_WIDTH_VIEWPORT
+            - SIZE_CONTENT_TO_VIEWPORT
+            - USE_LEGIBLE_FONT_SIZES
+            - TAP_TARGETS_TOO_CLOSE
+          type: string
+      type: object
+    ResourceIssue:
+      description: Information about a resource with issue.
+      properties:
+        blockedResource:
+          $ref: '#/components/schemas/BlockedResource'
+      type: object
+    RunMobileFriendlyTestRequest:
+      description: Mobile-friendly test request.
+      properties:
+        requestScreenshot:
+          description: Whether or not screenshot is requested. Default is false.
+          type: boolean
+        url:
+          description: URL for inspection.
+          type: string
+      type: object
+    RunMobileFriendlyTestResponse:
+      description: |-
+        Mobile-friendly test response, including mobile-friendly issues and resource
+        issues.
+      properties:
+        mobileFriendliness:
+          description: 'Test verdict, whether the page is mobile friendly or not.'
+          enum:
+            - MOBILE_FRIENDLY_TEST_RESULT_UNSPECIFIED
+            - MOBILE_FRIENDLY
+            - NOT_MOBILE_FRIENDLY
+          type: string
+        mobileFriendlyIssues:
+          description: List of mobile-usability issues.
+          items:
+            $ref: '#/components/schemas/MobileFriendlyIssue'
+          type: array
+        resourceIssues:
+          description: Information about embedded resources issues.
+          items:
+            $ref: '#/components/schemas/ResourceIssue'
+          type: array
+        screenshot:
+          $ref: '#/components/schemas/Image'
+        testStatus:
+          $ref: '#/components/schemas/TestStatus'
+      type: object
+    TestStatus:
+      description: 'Final state of the test, including error details if necessary.'
+      properties:
+        details:
+          description: Error details if applicable.
+          type: string
+        status:
+          description: Status of the test.
+          enum:
+            - TEST_STATUS_UNSPECIFIED
+            - COMPLETE
+            - INTERNAL_ERROR
+            - PAGE_UNREACHABLE
+          type: string
+      type: object
+  parameters:
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+          - media
+          - proto
+        default: json
+    bearer_token:
+      description: OAuth bearer token.
+      in: query
+      name: bearer_token
+      schema:
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    pp:
+      description: Pretty-print response.
+      in: query
+      name: pp
+      schema:
+        type: boolean
+        default: true
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        type: string
+        enum:
+          - '1'
+          - '2'

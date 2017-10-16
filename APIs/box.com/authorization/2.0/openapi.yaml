@@ -1,0 +1,80 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://account.box.com/api/oauth2'
+info:
+  description: The Box Authorization API gives you access to authenticate and authorize an application to work with the Box APIs
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+  title: Box 2.0 Authorization
+  version: '2.0'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://pbs.twimg.com/profile_images/852979584169410562/etZ6V0rx_400x400.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/box/box-openapi/master/v2.0/authorization.openapi-v2.json'
+      version: '2.0'
+  x-providerName: box.com
+  x-serviceName: authorization
+paths:
+  /authorize:
+    get:
+      description: The host for this api is account.box.com. This is the URL of the Box login endpoint. To begin the process of authenticating and authorizing an application to work with the Box APIs.
+      externalDocs:
+        url: 'https://docs.box.com/reference#authorize'
+      operationId: authorize
+      parameters:
+        - in: query
+          name: response_type
+          required: true
+          schema:
+            type: string
+            enum:
+              - code
+        - in: query
+          name: client_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: redirect_uri
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: state
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: scope
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Opens up the login page for authentication. Upon successful authentication process, it will be redirected to <MY_REDIRECT_URI>?code=<MY_AUTHORIZATION_CODE>'
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OAuthError'
+      summary: Authorize
+      tags:
+        - Authorization
+components:
+  schemas:
+    OAuthError:
+      properties:
+        error:
+          type: string
+        error_description:
+          type: string
+        error_uri:
+          type: string
+        state:
+          type: string
+      type: object

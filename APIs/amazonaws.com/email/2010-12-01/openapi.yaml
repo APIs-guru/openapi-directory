@@ -1,0 +1,3586 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://email.amazonaws.com/'
+info:
+  version: '2010-12-01'
+  x-release: v4
+  title: Amazon Simple Email Service
+  description: '<fullname>Amazon Simple Email Service</fullname> <p> This is the API Reference for Amazon Simple Email Service (Amazon SES). This documentation is intended to be used in conjunction with the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html">Amazon SES Developer Guide</a>. </p> <note> <p> For a list of Amazon SES endpoints to use in service requests, see <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/regions.html">Regions and Amazon SES</a> in the Amazon SES Developer Guide. </p> </note>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: email
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/email-2010-12-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/email/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CloneReceiptRuleSet
+      description: '<p>Creates a receipt rule set by cloning an existing one. All receipt rules and configurations are copied to the new receipt rule set and are completely independent of the source rule set.</p> <p>For information about setting up rule sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CloneReceiptRuleSetResponse'
+        '480':
+          description: RuleSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleSetDoesNotExistException'
+        '481':
+          description: AlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloneReceiptRuleSetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateConfigurationSet':
+    post:
+      operationId: CreateConfigurationSet
+      description: '<p>Creates a configuration set.</p> <p>Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateConfigurationSetResponse'
+        '480':
+          description: ConfigurationSetAlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSetAlreadyExistsException'
+        '481':
+          description: InvalidConfigurationSetException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationSetException'
+        '482':
+          description: LimitExceededException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConfigurationSetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateConfigurationSetEventDestination':
+    post:
+      operationId: CreateConfigurationSetEventDestination
+      description: '<p>Creates a configuration set event destination.</p> <note> <p>When you create or update an event destination, you must provide one, and only one, destination. The destination can be either Amazon CloudWatch or Amazon Kinesis Firehose.</p> </note> <p>An event destination is the AWS service to which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateConfigurationSetEventDestinationResponse'
+        '480':
+          description: ConfigurationSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSetDoesNotExistException'
+        '481':
+          description: EventDestinationAlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventDestinationAlreadyExistsException'
+        '482':
+          description: InvalidCloudWatchDestinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCloudWatchDestinationException'
+        '483':
+          description: InvalidFirehoseDestinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidFirehoseDestinationException'
+        '484':
+          description: LimitExceededException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConfigurationSetEventDestinationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateReceiptFilter':
+    post:
+      operationId: CreateReceiptFilter
+      description: '<p>Creates a new IP address filter.</p> <p>For information about setting up IP address filters, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateReceiptFilterResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: AlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReceiptFilterRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateReceiptRule':
+    post:
+      operationId: CreateReceiptRule
+      description: '<p>Creates a receipt rule.</p> <p>For information about setting up receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateReceiptRuleResponse'
+        '480':
+          description: InvalidSnsTopicException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSnsTopicException'
+        '481':
+          description: InvalidS3ConfigurationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidS3ConfigurationException'
+        '482':
+          description: InvalidLambdaFunctionException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidLambdaFunctionException'
+        '483':
+          description: AlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '484':
+          description: RuleDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleDoesNotExistException'
+        '485':
+          description: RuleSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleSetDoesNotExistException'
+        '486':
+          description: LimitExceededException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReceiptRuleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateReceiptRuleSet':
+    post:
+      operationId: CreateReceiptRuleSet
+      description: '<p>Creates an empty receipt rule set.</p> <p>For information about setting up receipt rule sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateReceiptRuleSetResponse'
+        '480':
+          description: AlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '481':
+          description: LimitExceededException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReceiptRuleSetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteConfigurationSet':
+    post:
+      operationId: DeleteConfigurationSet
+      description: '<p>Deletes a configuration set.</p> <p>Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteConfigurationSetResponse'
+        '480':
+          description: ConfigurationSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSetDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteConfigurationSetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteConfigurationSetEventDestination':
+    post:
+      operationId: DeleteConfigurationSetEventDestination
+      description: '<p>Deletes a configuration set event destination.</p> <p>Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteConfigurationSetEventDestinationResponse'
+        '480':
+          description: ConfigurationSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSetDoesNotExistException'
+        '481':
+          description: EventDestinationDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventDestinationDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteConfigurationSetEventDestinationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteIdentity':
+    post:
+      operationId: DeleteIdentity
+      description: <p>Deletes the specified identity (an email address or a domain) from the list of verified identities.</p> <p>This action is throttled at one request per second.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteIdentityResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteIdentityRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteIdentityPolicy':
+    post:
+      operationId: DeleteIdentityPolicy
+      description: '<p>Deletes the specified sending authorization policy for the given identity (an email address or a domain). This API returns successfully even if a policy with the specified name does not exist.</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteIdentityPolicyResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteIdentityPolicyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteReceiptFilter':
+    post:
+      operationId: DeleteReceiptFilter
+      description: '<p>Deletes the specified IP address filter.</p> <p>For information about managing IP address filters, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteReceiptFilterResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteReceiptFilterRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteReceiptRule':
+    post:
+      operationId: DeleteReceiptRule
+      description: '<p>Deletes the specified receipt rule.</p> <p>For information about managing receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteReceiptRuleResponse'
+        '480':
+          description: RuleSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleSetDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteReceiptRuleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteReceiptRuleSet':
+    post:
+      operationId: DeleteReceiptRuleSet
+      description: '<p>Deletes the specified receipt rule set and all of the receipt rules it contains.</p> <note> <p>The currently active rule set cannot be deleted.</p> </note> <p>For information about managing receipt rule sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteReceiptRuleSetResponse'
+        '480':
+          description: CannotDeleteException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CannotDeleteException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteReceiptRuleSetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteVerifiedEmailAddress':
+    post:
+      operationId: DeleteVerifiedEmailAddress
+      description: '<p>Deletes the specified email address from the list of verified addresses.</p> <important> <p>The DeleteVerifiedEmailAddress action is deprecated as of the May 15, 2012 release of Domain Verification. The DeleteIdentity action is now preferred.</p> </important> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteVerifiedEmailAddressRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeActiveReceiptRuleSet':
+    post:
+      operationId: DescribeActiveReceiptRuleSet
+      description: '<p>Returns the metadata and receipt rules for the receipt rule set that is currently active.</p> <p>For information about setting up receipt rule sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeActiveReceiptRuleSetResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeActiveReceiptRuleSetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeConfigurationSet':
+    post:
+      operationId: DescribeConfigurationSet
+      description: '<p>Returns the details of the specified configuration set.</p> <p>Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeConfigurationSetResponse'
+        '480':
+          description: ConfigurationSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSetDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConfigurationSetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReceiptRule':
+    post:
+      operationId: DescribeReceiptRule
+      description: '<p>Returns the details of the specified receipt rule.</p> <p>For information about setting up receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeReceiptRuleResponse'
+        '480':
+          description: RuleDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleDoesNotExistException'
+        '481':
+          description: RuleSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleSetDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReceiptRuleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReceiptRuleSet':
+    post:
+      operationId: DescribeReceiptRuleSet
+      description: '<p>Returns the details of the specified receipt rule set.</p> <p>For information about managing receipt rule sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeReceiptRuleSetResponse'
+        '480':
+          description: RuleSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleSetDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReceiptRuleSetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetIdentityDkimAttributes':
+    post:
+      operationId: GetIdentityDkimAttributes
+      description: '<p>Returns the current status of Easy DKIM signing for an entity. For domain name identities, this action also returns the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES has successfully verified that these tokens have been published.</p> <p>This action takes a list of identities as input and returns the following information for each:</p> <ul> <li> <p>Whether Easy DKIM signing is enabled or disabled.</p> </li> <li> <p>A set of DKIM tokens that represent the identity. If the identity is an email address, the tokens represent the domain of that address.</p> </li> <li> <p>Whether Amazon SES has successfully verified the DKIM tokens published in the domain''s DNS. This information is only returned for domain name identities, not for email addresses.</p> </li> </ul> <p>This action is throttled at one request per second and can only get DKIM attributes for up to 100 identities at a time.</p> <p>For more information about creating DNS records using DKIM tokens, go to the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html">Amazon SES Developer Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetIdentityDkimAttributesResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetIdentityDkimAttributesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetIdentityMailFromDomainAttributes':
+    post:
+      operationId: GetIdentityMailFromDomainAttributes
+      description: <p>Returns the custom MAIL FROM attributes for a list of identities (email addresses and/or domains).</p> <p>This action is throttled at one request per second and can only get custom MAIL FROM attributes for up to 100 identities at a time.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetIdentityMailFromDomainAttributesResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetIdentityMailFromDomainAttributesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetIdentityNotificationAttributes':
+    post:
+      operationId: GetIdentityNotificationAttributes
+      description: '<p>Given a list of verified identities (email addresses and/or domains), returns a structure describing identity notification attributes.</p> <p>This action is throttled at one request per second and can only get notification attributes for up to 100 identities at a time.</p> <p>For more information about using notifications with Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html">Amazon SES Developer Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetIdentityNotificationAttributesResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetIdentityNotificationAttributesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetIdentityPolicies':
+    post:
+      operationId: GetIdentityPolicies
+      description: '<p>Returns the requested sending authorization policies for the given identity (an email address or a domain). The policies are returned as a map of policy names to policy contents. You can retrieve a maximum of 20 policies at a time.</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetIdentityPoliciesResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetIdentityPoliciesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetIdentityVerificationAttributes':
+    post:
+      operationId: GetIdentityVerificationAttributes
+      description: '<p>Given a list of identities (email addresses and/or domains), returns the verification status and (for domain identities) the verification token for each identity.</p> <p>This action is throttled at one request per second and can only get verification attributes for up to 100 identities at a time.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetIdentityVerificationAttributesResponse'
+      x-waiters:
+        - delay: 3
+          operation: GetIdentityVerificationAttributes
+          maxAttempts: 20
+          acceptors:
+            - expected: Success
+              matcher: pathAll
+              state: success
+              argument: VerificationAttributes.*.VerificationStatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetIdentityVerificationAttributesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetSendQuota':
+    post:
+      operationId: GetSendQuota
+      description: <p>Returns the user's current sending limits.</p> <p>This action is throttled at one request per second.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetSendQuotaResponse'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetSendStatistics':
+    post:
+      operationId: GetSendStatistics
+      description: '<p>Returns the user''s sending statistics. The result is a list of data points, representing the last two weeks of sending activity.</p> <p>Each data point in the list contains statistics for a 15-minute interval.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetSendStatisticsResponse'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListConfigurationSets':
+    post:
+      operationId: ListConfigurationSets
+      description: '<p>Lists the configuration sets associated with your AWS account.</p> <p>Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second and can return up to 50 configuration sets at a time.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListConfigurationSetsResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListConfigurationSetsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListIdentities':
+    post:
+      operationId: ListIdentities
+      description: '<p>Returns a list containing all of the identities (email addresses and domains) for your AWS account, regardless of verification status.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListIdentitiesResponse'
+      parameters:
+        - name: MaxItems
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListIdentitiesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListIdentityPolicies':
+    post:
+      operationId: ListIdentityPolicies
+      description: '<p>Returns a list of sending authorization policies that are attached to the given identity (an email address or a domain). This API returns only a list. If you want the actual policy content, you can use <code>GetIdentityPolicies</code>.</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListIdentityPoliciesResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListIdentityPoliciesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListReceiptFilters':
+    post:
+      operationId: ListReceiptFilters
+      description: '<p>Lists the IP address filters associated with your AWS account.</p> <p>For information about managing IP address filters, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListReceiptFiltersResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListReceiptFiltersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListReceiptRuleSets':
+    post:
+      operationId: ListReceiptRuleSets
+      description: '<p>Lists the receipt rule sets that exist under your AWS account. If there are additional receipt rule sets to be retrieved, you will receive a <code>NextToken</code> that you can provide to the next call to <code>ListReceiptRuleSets</code> to retrieve the additional entries.</p> <p>For information about managing receipt rule sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListReceiptRuleSetsResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListReceiptRuleSetsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListVerifiedEmailAddresses':
+    post:
+      operationId: ListVerifiedEmailAddresses
+      description: '<p>Returns a list containing all of the email addresses that have been verified.</p> <important> <p>The ListVerifiedEmailAddresses action is deprecated as of the May 15, 2012 release of Domain Verification. The ListIdentities action is now preferred.</p> </important> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListVerifiedEmailAddressesResponse'
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutIdentityPolicy':
+    post:
+      operationId: PutIdentityPolicy
+      description: '<p>Adds or updates a sending authorization policy for the specified identity (an email address or a domain).</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PutIdentityPolicyResponse'
+        '480':
+          description: InvalidPolicyException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidPolicyException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutIdentityPolicyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ReorderReceiptRuleSet':
+    post:
+      operationId: ReorderReceiptRuleSet
+      description: '<p>Reorders the receipt rules within a receipt rule set.</p> <note> <p>All of the rules in the rule set must be represented in this request. That is, this API will return an error if the reorder request doesn''t explicitly position all of the rules.</p> </note> <p>For information about managing receipt rule sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReorderReceiptRuleSetResponse'
+        '480':
+          description: RuleSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleSetDoesNotExistException'
+        '481':
+          description: RuleDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReorderReceiptRuleSetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SendBounce':
+    post:
+      operationId: SendBounce
+      description: '<p>Generates and sends a bounce message to the sender of an email you received through Amazon SES. You can only use this API on an email up to 24 hours after you receive it.</p> <note> <p>You cannot use this API to send generic bounces for mail that was not received by Amazon SES.</p> </note> <p>For information about receiving email through Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SendBounceResponse'
+        '480':
+          description: MessageRejected
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MessageRejected'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendBounceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SendEmail':
+    post:
+      operationId: SendEmail
+      description: '<p>Composes an email message based on input data, and then immediately queues the message for sending.</p> <p>There are several important points to know about <code>SendEmail</code>:</p> <ul> <li> <p>You can only send email from verified email addresses and domains; otherwise, you will get an "Email address not verified" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html">Amazon SES Developer Guide</a>.</p> </li> <li> <p>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</p> </li> <li> <p>Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.</p> </li> <li> <p>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html">Amazon SES Developer Guide</a>.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SendEmailResponse'
+        '480':
+          description: MessageRejected
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MessageRejected'
+        '481':
+          description: MailFromDomainNotVerifiedException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MailFromDomainNotVerifiedException'
+        '482':
+          description: ConfigurationSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSetDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SendRawEmail':
+    post:
+      operationId: SendRawEmail
+      description: '<p>Sends an email message, with header and content specified by the client. The <code>SendRawEmail</code> action is useful for sending multipart MIME emails. The raw text of the message must comply with Internet email standards; otherwise, the message cannot be sent. </p> <p>There are several important points to know about <code>SendRawEmail</code>:</p> <ul> <li> <p>You can only send email from verified email addresses and domains; otherwise, you will get an "Email address not verified" error. If your account is still in the Amazon SES sandbox, you must also verify every recipient email address except for the recipients provided by the Amazon SES mailbox simulator. For more information, go to the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html">Amazon SES Developer Guide</a>.</p> </li> <li> <p>The total size of the message cannot exceed 10 MB. This includes any attachments that are part of the message.</p> </li> <li> <p>Amazon SES has a limit on the total number of recipients per message. The combined number of To:, CC: and BCC: email addresses cannot exceed 50. If you need to send an email message to a larger audience, you can divide your recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly to send the message to each group.</p> </li> <li> <p>The To:, CC:, and BCC: headers in the raw message can contain a group list. Note that each recipient in a group list counts towards the 50-recipient limit.</p> </li> <li> <p>Amazon SES overrides any Message-ID and Date headers you provide.</p> </li> <li> <p>For every message that you send, the total number of recipients (To:, CC: and BCC:) is counted against your sending quota - the maximum number of emails you can send in a 24-hour period. For information about your sending quota, go to the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html">Amazon SES Developer Guide</a>.</p> </li> <li> <p>If you are using sending authorization to send on behalf of another user, <code>SendRawEmail</code> enables you to specify the cross-account identity for the email''s "Source," "From," and "Return-Path" parameters in one of two ways: you can pass optional parameters <code>SourceArn</code>, <code>FromArn</code>, and/or <code>ReturnPathArn</code> to the API, or you can include the following X-headers in the header of your raw email:</p> <ul> <li> <p> <code>X-SES-SOURCE-ARN</code> </p> </li> <li> <p> <code>X-SES-FROM-ARN</code> </p> </li> <li> <p> <code>X-SES-RETURN-PATH-ARN</code> </p> </li> </ul> <important> <p>Do not include these X-headers in the DKIM signature, because they are removed by Amazon SES before sending the email.</p> </important> <p>For the most common sending authorization use case, we recommend that you specify the <code>SourceIdentityArn</code> and do not specify either the <code>FromIdentityArn</code> or <code>ReturnPathIdentityArn</code>. (The same note applies to the corresponding X-headers.) If you only specify the <code>SourceIdentityArn</code>, Amazon SES will simply set the "From" address and the "Return Path" address to the identity specified in <code>SourceIdentityArn</code>. For more information about sending authorization, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SendRawEmailResponse'
+        '480':
+          description: MessageRejected
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MessageRejected'
+        '481':
+          description: MailFromDomainNotVerifiedException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MailFromDomainNotVerifiedException'
+        '482':
+          description: ConfigurationSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSetDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendRawEmailRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetActiveReceiptRuleSet':
+    post:
+      operationId: SetActiveReceiptRuleSet
+      description: '<p>Sets the specified receipt rule set as the active receipt rule set.</p> <note> <p>To disable your email-receiving through Amazon SES completely, you can call this API with RuleSetName set to null.</p> </note> <p>For information about managing receipt rule sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetActiveReceiptRuleSetResponse'
+        '480':
+          description: RuleSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleSetDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetActiveReceiptRuleSetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetIdentityDkimEnabled':
+    post:
+      operationId: SetIdentityDkimEnabled
+      description: '<p>Enables or disables Easy DKIM signing of email sent from an identity:</p> <ul> <li> <p>If Easy DKIM signing is enabled for a domain name identity (e.g., <code>example.com</code>), then Amazon SES will DKIM-sign all email sent by addresses under that domain name (e.g., <code>user@example.com</code>).</p> </li> <li> <p>If Easy DKIM signing is enabled for an email address, then Amazon SES will DKIM-sign all email sent by that email address.</p> </li> </ul> <p>For email addresses (e.g., <code>user@example.com</code>), you can only enable Easy DKIM signing if the corresponding domain (e.g., <code>example.com</code>) has been set up for Easy DKIM using the AWS Console or the <code>VerifyDomainDkim</code> action.</p> <p>This action is throttled at one request per second.</p> <p>For more information about Easy DKIM signing, go to the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html">Amazon SES Developer Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetIdentityDkimEnabledResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetIdentityDkimEnabledRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetIdentityFeedbackForwardingEnabled':
+    post:
+      operationId: SetIdentityFeedbackForwardingEnabled
+      description: '<p>Given an identity (an email address or a domain), enables or disables whether Amazon SES forwards bounce and complaint notifications as email. Feedback forwarding can only be disabled when Amazon Simple Notification Service (Amazon SNS) topics are specified for both bounces and complaints.</p> <note> <p>Feedback forwarding does not apply to delivery notifications. Delivery notifications are only available through Amazon SNS.</p> </note> <p>This action is throttled at one request per second.</p> <p>For more information about using notifications with Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html">Amazon SES Developer Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetIdentityFeedbackForwardingEnabledResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetIdentityFeedbackForwardingEnabledRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetIdentityHeadersInNotificationsEnabled':
+    post:
+      operationId: SetIdentityHeadersInNotificationsEnabled
+      description: '<p>Given an identity (an email address or a domain), sets whether Amazon SES includes the original email headers in the Amazon Simple Notification Service (Amazon SNS) notifications of a specified type.</p> <p>This action is throttled at one request per second.</p> <p>For more information about using notifications with Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html">Amazon SES Developer Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetIdentityHeadersInNotificationsEnabledResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetIdentityHeadersInNotificationsEnabledRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetIdentityMailFromDomain':
+    post:
+      operationId: SetIdentityMailFromDomain
+      description: '<p>Enables or disables the custom MAIL FROM domain setup for a verified identity (an email address or a domain).</p> <important> <p>To send emails using the specified MAIL FROM domain, you must add an MX record to your MAIL FROM domain''s DNS settings. If you want your emails to pass Sender Policy Framework (SPF) checks, you must also add or update an SPF record. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-set.html">Amazon SES Developer Guide</a>.</p> </important> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetIdentityMailFromDomainResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetIdentityMailFromDomainRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetIdentityNotificationTopic':
+    post:
+      operationId: SetIdentityNotificationTopic
+      description: '<p>Given an identity (an email address or a domain), sets the Amazon Simple Notification Service (Amazon SNS) topic to which Amazon SES will publish bounce, complaint, and/or delivery notifications for emails sent with that identity as the <code>Source</code>.</p> <note> <p>Unless feedback forwarding is enabled, you must specify Amazon SNS topics for bounce and complaint notifications. For more information, see <code>SetIdentityFeedbackForwardingEnabled</code>.</p> </note> <p>This action is throttled at one request per second.</p> <p>For more information about feedback notification, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html">Amazon SES Developer Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetIdentityNotificationTopicResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetIdentityNotificationTopicRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetReceiptRulePosition':
+    post:
+      operationId: SetReceiptRulePosition
+      description: '<p>Sets the position of the specified receipt rule in the receipt rule set.</p> <p>For information about managing receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SetReceiptRulePositionResponse'
+        '480':
+          description: RuleSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleSetDoesNotExistException'
+        '481':
+          description: RuleDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleDoesNotExistException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetReceiptRulePositionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateConfigurationSetEventDestination':
+    post:
+      operationId: UpdateConfigurationSetEventDestination
+      description: '<p>Updates the event destination of a configuration set.</p> <note> <p>When you create or update an event destination, you must provide one, and only one, destination. The destination can be either Amazon CloudWatch or Amazon Kinesis Firehose.</p> </note> <p>Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch or Amazon Kinesis Firehose. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UpdateConfigurationSetEventDestinationResponse'
+        '480':
+          description: ConfigurationSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ConfigurationSetDoesNotExistException'
+        '481':
+          description: EventDestinationDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventDestinationDoesNotExistException'
+        '482':
+          description: InvalidCloudWatchDestinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCloudWatchDestinationException'
+        '483':
+          description: InvalidFirehoseDestinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidFirehoseDestinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConfigurationSetEventDestinationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateReceiptRule':
+    post:
+      operationId: UpdateReceiptRule
+      description: '<p>Updates a receipt rule.</p> <p>For information about managing receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html">Amazon SES Developer Guide</a>.</p> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UpdateReceiptRuleResponse'
+        '480':
+          description: InvalidSnsTopicException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSnsTopicException'
+        '481':
+          description: InvalidS3ConfigurationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidS3ConfigurationException'
+        '482':
+          description: InvalidLambdaFunctionException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidLambdaFunctionException'
+        '483':
+          description: RuleSetDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleSetDoesNotExistException'
+        '484':
+          description: RuleDoesNotExistException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RuleDoesNotExistException'
+        '485':
+          description: LimitExceededException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateReceiptRuleRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#VerifyDomainDkim':
+    post:
+      operationId: VerifyDomainDkim
+      description: '<p>Returns a set of DKIM tokens for a domain. DKIM <i>tokens</i> are character strings that represent your domain''s identity. Using these tokens, you will need to create DNS CNAME records that point to DKIM public keys hosted by Amazon SES. Amazon Web Services will eventually detect that you have updated your DNS records; this detection process may take up to 72 hours. Upon successful detection, Amazon SES will be able to DKIM-sign email originating from that domain.</p> <p>This action is throttled at one request per second.</p> <p>To enable or disable Easy DKIM signing for a domain, use the <code>SetIdentityDkimEnabled</code> action.</p> <p>For more information about creating DNS records using DKIM tokens, go to the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html">Amazon SES Developer Guide</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VerifyDomainDkimResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyDomainDkimRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#VerifyDomainIdentity':
+    post:
+      operationId: VerifyDomainIdentity
+      description: <p>Verifies a domain.</p> <p>This action is throttled at one request per second.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VerifyDomainIdentityResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyDomainIdentityRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#VerifyEmailAddress':
+    post:
+      operationId: VerifyEmailAddress
+      description: '<p>Verifies an email address. This action causes a confirmation email message to be sent to the specified address.</p> <important> <p>The VerifyEmailAddress action is deprecated as of the May 15, 2012 release of Domain Verification. The VerifyEmailIdentity action is now preferred.</p> </important> <p>This action is throttled at one request per second.</p>'
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmailAddressRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#VerifyEmailIdentity':
+    post:
+      operationId: VerifyEmailIdentity
+      description: <p>Verifies an email address. This action causes a confirmation email message to be sent to the specified address.</p> <p>This action is throttled at one request per second.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VerifyEmailIdentityResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmailIdentityRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AddHeaderAction:
+      type: object
+      required:
+        - HeaderName
+        - HeaderValue
+      properties:
+        HeaderName:
+          $ref: '#/components/schemas/HeaderName'
+        HeaderValue:
+          $ref: '#/components/schemas/HeaderValue'
+      description: '<p>When included in a receipt rule, this action adds a header to the received email.</p> <p>For information about adding a header using a receipt rule, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-add-header.html">Amazon SES Developer Guide</a>.</p>'
+    Address:
+      type: string
+    AddressList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Address'
+    AlreadyExistsException:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/RuleOrRuleSetName'
+      description: Indicates that a resource could not be created because of a naming conflict.
+    AmazonResourceName:
+      type: string
+    ArrivalDate:
+      type: string
+      format: date-time
+    BehaviorOnMXFailure:
+      type: string
+      enum:
+        - UseDefaultValue
+        - RejectMessage
+    Body:
+      type: object
+      properties:
+        Text:
+          $ref: '#/components/schemas/Content'
+        Html:
+          $ref: '#/components/schemas/Content'
+      description: 'Represents the body of the message. You can specify text, HTML, or both. If you use both, then the message should display correctly in the widest variety of email clients.'
+    BounceAction:
+      type: object
+      required:
+        - SmtpReplyCode
+        - Message
+        - Sender
+      properties:
+        TopicArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        SmtpReplyCode:
+          $ref: '#/components/schemas/BounceSmtpReplyCode'
+        StatusCode:
+          $ref: '#/components/schemas/BounceStatusCode'
+        Message:
+          $ref: '#/components/schemas/BounceMessage'
+        Sender:
+          $ref: '#/components/schemas/Address'
+      description: '<p>When included in a receipt rule, this action rejects the received email by returning a bounce response to the sender and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS).</p> <p>For information about sending a bounce message in response to a received email, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-bounce.html">Amazon SES Developer Guide</a>.</p>'
+    BounceMessage:
+      type: string
+    BounceSmtpReplyCode:
+      type: string
+    BounceStatusCode:
+      type: string
+    BounceType:
+      type: string
+      enum:
+        - DoesNotExist
+        - MessageTooLarge
+        - ExceededQuota
+        - ContentRejected
+        - Undefined
+        - TemporaryFailure
+    BouncedRecipientInfo:
+      type: object
+      required:
+        - Recipient
+      properties:
+        Recipient:
+          $ref: '#/components/schemas/Address'
+        RecipientArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        BounceType:
+          $ref: '#/components/schemas/BounceType'
+        RecipientDsnFields:
+          $ref: '#/components/schemas/RecipientDsnFields'
+      description: '<p>Recipient-related information to include in the Delivery Status Notification (DSN) when an email that Amazon SES receives on your behalf bounces.</p> <p>For information about receiving email through Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html">Amazon SES Developer Guide</a>.</p>'
+    BouncedRecipientInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BouncedRecipientInfo'
+    CannotDeleteException:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/RuleOrRuleSetName'
+      description: Indicates that the delete operation could not be completed.
+    Charset:
+      type: string
+    Cidr:
+      type: string
+    CloneReceiptRuleSetRequest:
+      type: object
+      required:
+        - RuleSetName
+        - OriginalRuleSetName
+      example:
+        OriginalRuleSetName: RuleSetToClone
+        RuleSetName: RuleSetToCreate
+      properties:
+        RuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+        OriginalRuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+      description: 'Represents a request to create a receipt rule set by cloning an existing one. You use receipt rule sets to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    CloneReceiptRuleSetResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    CloudWatchDestination:
+      type: object
+      required:
+        - DimensionConfigurations
+      properties:
+        DimensionConfigurations:
+          $ref: '#/components/schemas/CloudWatchDimensionConfigurations'
+      description: '<p>Contains information associated with an Amazon CloudWatch event destination to which email sending events are published.</p> <p>Event destinations, such as Amazon CloudWatch, are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
+    CloudWatchDimensionConfiguration:
+      type: object
+      required:
+        - DimensionName
+        - DimensionValueSource
+        - DefaultDimensionValue
+      properties:
+        DimensionName:
+          $ref: '#/components/schemas/DimensionName'
+        DimensionValueSource:
+          $ref: '#/components/schemas/DimensionValueSource'
+        DefaultDimensionValue:
+          $ref: '#/components/schemas/DefaultDimensionValue'
+      description: '<p>Contains the dimension configuration to use when you publish email sending events to Amazon CloudWatch.</p> <p>For information about publishing email sending events to Amazon CloudWatch, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
+    CloudWatchDimensionConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/CloudWatchDimensionConfiguration'
+    ConfigurationSet:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/ConfigurationSetName'
+      description: '<p>The name of the configuration set.</p> <p>Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
+    ConfigurationSetAlreadyExistsException:
+      type: object
+      properties:
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+      description: Indicates that the configuration set could not be created because of a naming conflict.
+    ConfigurationSetAttribute:
+      type: string
+      enum:
+        - eventDestinations
+    ConfigurationSetAttributeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationSetAttribute'
+    ConfigurationSetDoesNotExistException:
+      type: object
+      properties:
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+      description: Indicates that the configuration set does not exist.
+    ConfigurationSetName:
+      type: string
+    ConfigurationSets:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConfigurationSet'
+    Content:
+      type: object
+      required:
+        - Data
+      properties:
+        Data:
+          $ref: '#/components/schemas/MessageData'
+        Charset:
+          $ref: '#/components/schemas/Charset'
+      description: '<p>Represents textual data, plus an optional character set specification.</p> <p>By default, the text must be 7-bit ASCII, due to the constraints of the SMTP protocol. If the text must contain any other characters, then you must also specify a character set. Examples include UTF-8, ISO-8859-1, and Shift_JIS.</p>'
+    Counter:
+      type: integer
+    CreateConfigurationSetEventDestinationRequest:
+      type: object
+      required:
+        - ConfigurationSetName
+        - EventDestination
+      properties:
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+        EventDestination:
+          $ref: '#/components/schemas/EventDestination'
+      description: 'Represents a request to create a configuration set event destination. A configuration set event destination, which can be either Amazon CloudWatch or Amazon Kinesis Firehose, describes an AWS service in which Amazon SES publishes the email sending events associated with a configuration set. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.'
+    CreateConfigurationSetEventDestinationResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    CreateConfigurationSetRequest:
+      type: object
+      required:
+        - ConfigurationSet
+      properties:
+        ConfigurationSet:
+          $ref: '#/components/schemas/ConfigurationSet'
+      description: 'Represents a request to create a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.'
+    CreateConfigurationSetResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    CreateReceiptFilterRequest:
+      type: object
+      required:
+        - Filter
+      example:
+        Filter:
+          IpFilter:
+            Cidr: 1.2.3.4/24
+            Policy: Allow
+          Name: MyFilter
+      properties:
+        Filter:
+          $ref: '#/components/schemas/ReceiptFilter'
+      description: 'Represents a request to create a new IP address filter. You use IP address filters when you receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    CreateReceiptFilterResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    CreateReceiptRuleRequest:
+      type: object
+      required:
+        - RuleSetName
+        - Rule
+      example:
+        After: ''
+        Rule:
+          Actions:
+            - S3Action:
+                BucketName: MyBucket
+                ObjectKeyPrefix: email
+          Enabled: true
+          Name: MyRule
+          ScanEnabled: true
+          TlsPolicy: Optional
+        RuleSetName: MyRuleSet
+      properties:
+        RuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+        After:
+          $ref: '#/components/schemas/ReceiptRuleName'
+        Rule:
+          $ref: '#/components/schemas/ReceiptRule'
+      description: 'Represents a request to create a receipt rule. You use receipt rules to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    CreateReceiptRuleResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    CreateReceiptRuleSetRequest:
+      type: object
+      required:
+        - RuleSetName
+      example:
+        RuleSetName: MyRuleSet
+      properties:
+        RuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+      description: 'Represents a request to create an empty receipt rule set. You use receipt rule sets to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    CreateReceiptRuleSetResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    CustomMailFromStatus:
+      type: string
+      enum:
+        - Pending
+        - Success
+        - Failed
+        - TemporaryFailure
+    DefaultDimensionValue:
+      type: string
+    DeleteConfigurationSetEventDestinationRequest:
+      type: object
+      required:
+        - ConfigurationSetName
+        - EventDestinationName
+      properties:
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+        EventDestinationName:
+          $ref: '#/components/schemas/EventDestinationName'
+      description: 'Represents a request to delete a configuration set event destination. Configuration set event destinations are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.'
+    DeleteConfigurationSetEventDestinationResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    DeleteConfigurationSetRequest:
+      type: object
+      required:
+        - ConfigurationSetName
+      properties:
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+      description: 'Represents a request to delete a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.'
+    DeleteConfigurationSetResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    DeleteIdentityPolicyRequest:
+      type: object
+      required:
+        - Identity
+        - PolicyName
+      example:
+        Identity: user@example.com
+        PolicyName: MyPolicy
+      properties:
+        Identity:
+          $ref: '#/components/schemas/Identity'
+        PolicyName:
+          $ref: '#/components/schemas/PolicyName'
+      description: 'Represents a request to delete a sending authorization policy for an identity. Sending authorization is an Amazon SES feature that enables you to authorize other senders to use your identities. For information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.'
+    DeleteIdentityPolicyResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    DeleteIdentityRequest:
+      type: object
+      required:
+        - Identity
+      example:
+        Identity: user@example.com
+      properties:
+        Identity:
+          $ref: '#/components/schemas/Identity'
+      description: Represents a request to delete one of your Amazon SES identities (an email address or domain).
+    DeleteIdentityResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    DeleteReceiptFilterRequest:
+      type: object
+      required:
+        - FilterName
+      example:
+        FilterName: MyFilter
+      properties:
+        FilterName:
+          $ref: '#/components/schemas/ReceiptFilterName'
+      description: 'Represents a request to delete an IP address filter. You use IP address filters when you receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    DeleteReceiptFilterResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    DeleteReceiptRuleRequest:
+      type: object
+      required:
+        - RuleSetName
+        - RuleName
+      example:
+        RuleName: MyRule
+        RuleSetName: MyRuleSet
+      properties:
+        RuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+        RuleName:
+          $ref: '#/components/schemas/ReceiptRuleName'
+      description: 'Represents a request to delete a receipt rule. You use receipt rules to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    DeleteReceiptRuleResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    DeleteReceiptRuleSetRequest:
+      type: object
+      required:
+        - RuleSetName
+      example:
+        RuleSetName: MyRuleSet
+      properties:
+        RuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+      description: 'Represents a request to delete a receipt rule set and all of the receipt rules it contains. You use receipt rule sets to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    DeleteReceiptRuleSetResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    DeleteVerifiedEmailAddressRequest:
+      type: object
+      required:
+        - EmailAddress
+      example:
+        EmailAddress: user@example.com
+      properties:
+        EmailAddress:
+          $ref: '#/components/schemas/Address'
+      description: Represents a request to delete an email address from the list of email addresses you have attempted to verify under your AWS account.
+    DescribeActiveReceiptRuleSetRequest:
+      type: object
+      example: {}
+      properties: {}
+      description: 'Represents a request to return the metadata and receipt rules for the receipt rule set that is currently active. You use receipt rule sets to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    DescribeActiveReceiptRuleSetResponse:
+      type: object
+      example:
+        Metadata:
+          CreatedTimestamp: '2016-07-15T16:25:59.607Z'
+          Name: default-rule-set
+        Rules:
+          - Actions:
+              - S3Action:
+                  BucketName: MyBucket
+                  ObjectKeyPrefix: email
+            Enabled: true
+            Name: MyRule
+            ScanEnabled: true
+            TlsPolicy: Optional
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/ReceiptRuleSetMetadata'
+        Rules:
+          $ref: '#/components/schemas/ReceiptRulesList'
+      description: Represents the metadata and receipt rules for the receipt rule set that is currently active.
+    DescribeConfigurationSetRequest:
+      type: object
+      required:
+        - ConfigurationSetName
+      properties:
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+        ConfigurationSetAttributeNames:
+          $ref: '#/components/schemas/ConfigurationSetAttributeList'
+      description: 'Represents a request to return the details of a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.'
+    DescribeConfigurationSetResponse:
+      type: object
+      properties:
+        ConfigurationSet:
+          $ref: '#/components/schemas/ConfigurationSet'
+        EventDestinations:
+          $ref: '#/components/schemas/EventDestinations'
+      description: 'Represents the details of a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.'
+    DescribeReceiptRuleRequest:
+      type: object
+      required:
+        - RuleSetName
+        - RuleName
+      example:
+        RuleName: MyRule
+        RuleSetName: MyRuleSet
+      properties:
+        RuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+        RuleName:
+          $ref: '#/components/schemas/ReceiptRuleName'
+      description: 'Represents a request to return the details of a receipt rule. You use receipt rules to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    DescribeReceiptRuleResponse:
+      type: object
+      example:
+        Rule:
+          Actions:
+            - S3Action:
+                BucketName: MyBucket
+                ObjectKeyPrefix: email
+          Enabled: true
+          Name: MyRule
+          ScanEnabled: true
+          TlsPolicy: Optional
+      properties:
+        Rule:
+          $ref: '#/components/schemas/ReceiptRule'
+      description: Represents the details of a receipt rule.
+    DescribeReceiptRuleSetRequest:
+      type: object
+      required:
+        - RuleSetName
+      example:
+        RuleSetName: MyRuleSet
+      properties:
+        RuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+      description: 'Represents a request to return the details of a receipt rule set. You use receipt rule sets to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    DescribeReceiptRuleSetResponse:
+      type: object
+      example:
+        Metadata:
+          CreatedTimestamp: '2016-07-15T16:25:59.607Z'
+          Name: MyRuleSet
+        Rules:
+          - Actions:
+              - S3Action:
+                  BucketName: MyBucket
+                  ObjectKeyPrefix: email
+            Enabled: true
+            Name: MyRule
+            ScanEnabled: true
+            TlsPolicy: Optional
+      properties:
+        Metadata:
+          $ref: '#/components/schemas/ReceiptRuleSetMetadata'
+        Rules:
+          $ref: '#/components/schemas/ReceiptRulesList'
+      description: Represents the details of the specified receipt rule set.
+    Destination:
+      type: object
+      properties:
+        ToAddresses:
+          $ref: '#/components/schemas/AddressList'
+        CcAddresses:
+          $ref: '#/components/schemas/AddressList'
+        BccAddresses:
+          $ref: '#/components/schemas/AddressList'
+      description: '<p>Represents the destination of the message, consisting of To:, CC:, and BCC: fields.</p> <p> By default, the string must be 7-bit ASCII. If the text must contain any other characters, then you must use MIME encoded-word syntax (RFC 2047) instead of a literal string. MIME encoded-word syntax uses the following form: <code>=?charset?encoding?encoded-text?=</code>. For more information, see <a href="http://tools.ietf.org/html/rfc2047">RFC 2047</a>. </p>'
+    DiagnosticCode:
+      type: string
+    DimensionName:
+      type: string
+    DimensionValueSource:
+      type: string
+      enum:
+        - messageTag
+        - emailHeader
+    DkimAttributes:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/Identity'
+          value:
+            $ref: '#/components/schemas/IdentityDkimAttributes'
+    Domain:
+      type: string
+    DsnAction:
+      type: string
+      enum:
+        - failed
+        - delayed
+        - delivered
+        - relayed
+        - expanded
+    DsnStatus:
+      type: string
+    Enabled:
+      type: boolean
+    EventDestination:
+      type: object
+      required:
+        - Name
+        - MatchingEventTypes
+      properties:
+        Name:
+          $ref: '#/components/schemas/EventDestinationName'
+        Enabled:
+          $ref: '#/components/schemas/Enabled'
+        MatchingEventTypes:
+          $ref: '#/components/schemas/EventTypes'
+        KinesisFirehoseDestination:
+          $ref: '#/components/schemas/KinesisFirehoseDestination'
+        CloudWatchDestination:
+          $ref: '#/components/schemas/CloudWatchDestination'
+      description: '<p>Contains information about the event destination to which the specified email sending events are published.</p> <note> <p>When you create or update an event destination, you must provide one, and only one, destination. The destination can be either Amazon CloudWatch or Amazon Kinesis Firehose.</p> </note> <p>Event destinations are associated with configuration sets, which enable you to publish email sending events to Amazon CloudWatch or Amazon Kinesis Firehose. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
+    EventDestinationAlreadyExistsException:
+      type: object
+      properties:
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+        EventDestinationName:
+          $ref: '#/components/schemas/EventDestinationName'
+      description: Indicates that the event destination could not be created because of a naming conflict.
+    EventDestinationDoesNotExistException:
+      type: object
+      properties:
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+        EventDestinationName:
+          $ref: '#/components/schemas/EventDestinationName'
+      description: Indicates that the event destination does not exist.
+    EventDestinationName:
+      type: string
+    EventDestinations:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventDestination'
+    EventType:
+      type: string
+      enum:
+        - send
+        - reject
+        - bounce
+        - complaint
+        - delivery
+    EventTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventType'
+    Explanation:
+      type: string
+    ExtensionField:
+      type: object
+      required:
+        - Name
+        - Value
+      properties:
+        Name:
+          $ref: '#/components/schemas/ExtensionFieldName'
+        Value:
+          $ref: '#/components/schemas/ExtensionFieldValue'
+      description: '<p>Additional X-headers to include in the Delivery Status Notification (DSN) when an email that Amazon SES receives on your behalf bounces.</p> <p>For information about receiving email through Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html">Amazon SES Developer Guide</a>.</p>'
+    ExtensionFieldList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExtensionField'
+    ExtensionFieldName:
+      type: string
+    ExtensionFieldValue:
+      type: string
+    GetIdentityDkimAttributesRequest:
+      type: object
+      required:
+        - Identities
+      example:
+        Identities:
+          - example.com
+          - user@example.com
+      properties:
+        Identities:
+          $ref: '#/components/schemas/IdentityList'
+      description: 'Represents a request for the status of Amazon SES Easy DKIM signing for an identity. For domain identities, this request also returns the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES successfully verified that these tokens were published. For more information about Easy DKIM, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html">Amazon SES Developer Guide</a>.'
+    GetIdentityDkimAttributesResponse:
+      type: object
+      required:
+        - DkimAttributes
+      example:
+        DkimAttributes:
+          example.com:
+            DkimEnabled: true
+            DkimTokens:
+              - EXAMPLEjcs5xoyqytjsotsijas7236gr
+              - EXAMPLEjr76cvoc6mysspnioorxsn6ep
+              - EXAMPLEkbmkqkhlm2lyz77ppkulerm4k
+            DkimVerificationStatus: Success
+          user@example.com:
+            DkimEnabled: false
+            DkimVerificationStatus: NotStarted
+      properties:
+        DkimAttributes:
+          $ref: '#/components/schemas/DkimAttributes'
+      description: 'Represents the status of Amazon SES Easy DKIM signing for an identity. For domain identities, this response also contains the DKIM tokens that are required for Easy DKIM signing, and whether Amazon SES successfully verified that these tokens were published.'
+    GetIdentityMailFromDomainAttributesRequest:
+      type: object
+      required:
+        - Identities
+      example:
+        Identities:
+          - example.com
+      properties:
+        Identities:
+          $ref: '#/components/schemas/IdentityList'
+      description: 'Represents a request to return the Amazon SES custom MAIL FROM attributes for a list of identities. For information about using a custom MAIL FROM domain, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html">Amazon SES Developer Guide</a>.'
+    GetIdentityMailFromDomainAttributesResponse:
+      type: object
+      required:
+        - MailFromDomainAttributes
+      example:
+        MailFromDomainAttributes:
+          example.com:
+            BehaviorOnMXFailure: UseDefaultValue
+            MailFromDomain: bounces.example.com
+            MailFromDomainStatus: Success
+      properties:
+        MailFromDomainAttributes:
+          $ref: '#/components/schemas/MailFromDomainAttributes'
+      description: Represents the custom MAIL FROM attributes for a list of identities.
+    GetIdentityNotificationAttributesRequest:
+      type: object
+      required:
+        - Identities
+      example:
+        Identities:
+          - example.com
+      properties:
+        Identities:
+          $ref: '#/components/schemas/IdentityList'
+      description: 'Represents a request to return the notification attributes for a list of identities you verified with Amazon SES. For information about Amazon SES notifications, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html">Amazon SES Developer Guide</a>.'
+    GetIdentityNotificationAttributesResponse:
+      type: object
+      required:
+        - NotificationAttributes
+      example:
+        NotificationAttributes:
+          example.com:
+            BounceTopic: 'arn:aws:sns:us-east-1:EXAMPLE65304:ExampleTopic'
+            ForwardingEnabled: true
+            HeadersInBounceNotificationsEnabled: false
+            HeadersInComplaintNotificationsEnabled: false
+            HeadersInDeliveryNotificationsEnabled: false
+      properties:
+        NotificationAttributes:
+          $ref: '#/components/schemas/NotificationAttributes'
+      description: Represents the notification attributes for a list of identities.
+    GetIdentityPoliciesRequest:
+      type: object
+      required:
+        - Identity
+        - PolicyNames
+      example:
+        Identity: example.com
+        PolicyNames:
+          - MyPolicy
+      properties:
+        Identity:
+          $ref: '#/components/schemas/Identity'
+        PolicyNames:
+          $ref: '#/components/schemas/PolicyNameList'
+      description: 'Represents a request to return the requested sending authorization policies for an identity. Sending authorization is an Amazon SES feature that enables you to authorize other senders to use your identities. For information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.'
+    GetIdentityPoliciesResponse:
+      type: object
+      required:
+        - Policies
+      example:
+        Policies:
+          MyPolicy: '{"Version":"2008-10-17","Statement":[{"Sid":"stmt1469123904194","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::123456789012:root"},"Action":["ses:SendEmail","ses:SendRawEmail"],"Resource":"arn:aws:ses:us-east-1:EXAMPLE65304:identity/example.com"}]}'
+      properties:
+        Policies:
+          $ref: '#/components/schemas/PolicyMap'
+      description: Represents the requested sending authorization policies.
+    GetIdentityVerificationAttributesRequest:
+      type: object
+      required:
+        - Identities
+      example:
+        Identities:
+          - example.com
+      properties:
+        Identities:
+          $ref: '#/components/schemas/IdentityList'
+      description: 'Represents a request to return the Amazon SES verification status of a list of identities. For domain identities, this request also returns the verification token. For information about verifying identities with Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html">Amazon SES Developer Guide</a>.'
+    GetIdentityVerificationAttributesResponse:
+      type: object
+      required:
+        - VerificationAttributes
+      example:
+        VerificationAttributes:
+          example.com:
+            VerificationStatus: Success
+            VerificationToken: EXAMPLE3VYb9EDI2nTOQRi/Tf6MI/6bD6THIGiP1MVY=
+      properties:
+        VerificationAttributes:
+          $ref: '#/components/schemas/VerificationAttributes'
+      description: 'The Amazon SES verification status of a list of identities. For domain identities, this response also contains the verification token.'
+    GetSendQuotaResponse:
+      type: object
+      example:
+        Max24HourSend: 200
+        MaxSendRate: 1
+        SentLast24Hours: 1
+      properties:
+        Max24HourSend:
+          $ref: '#/components/schemas/Max24HourSend'
+        MaxSendRate:
+          $ref: '#/components/schemas/MaxSendRate'
+        SentLast24Hours:
+          $ref: '#/components/schemas/SentLast24Hours'
+      description: 'Represents your Amazon SES daily sending quota, maximum send rate, and the number of emails you have sent in the last 24 hours.'
+    GetSendStatisticsResponse:
+      type: object
+      example:
+        SendDataPoints:
+          - Bounces: 0
+            Complaints: 0
+            DeliveryAttempts: 5
+            Rejects: 0
+            Timestamp: '2016-07-13T22:43:00Z'
+          - Bounces: 0
+            Complaints: 0
+            DeliveryAttempts: 3
+            Rejects: 0
+            Timestamp: '2016-07-13T23:13:00Z'
+          - Bounces: 0
+            Complaints: 0
+            DeliveryAttempts: 1
+            Rejects: 0
+            Timestamp: '2016-07-13T21:13:00Z'
+      properties:
+        SendDataPoints:
+          $ref: '#/components/schemas/SendDataPointList'
+      description: Represents a list of data points. This list contains aggregated data from the previous two weeks of your sending activity with Amazon SES.
+    HeaderName:
+      type: string
+    HeaderValue:
+      type: string
+    Identity:
+      type: string
+    IdentityDkimAttributes:
+      type: object
+      required:
+        - DkimEnabled
+        - DkimVerificationStatus
+      properties:
+        DkimEnabled:
+          $ref: '#/components/schemas/Enabled'
+        DkimVerificationStatus:
+          $ref: '#/components/schemas/VerificationStatus'
+        DkimTokens:
+          $ref: '#/components/schemas/VerificationTokenList'
+      description: Represents the DKIM attributes of a verified email address or a domain.
+    IdentityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Identity'
+    IdentityMailFromDomainAttributes:
+      type: object
+      required:
+        - MailFromDomain
+        - MailFromDomainStatus
+        - BehaviorOnMXFailure
+      properties:
+        MailFromDomain:
+          $ref: '#/components/schemas/MailFromDomainName'
+        MailFromDomainStatus:
+          $ref: '#/components/schemas/CustomMailFromStatus'
+        BehaviorOnMXFailure:
+          $ref: '#/components/schemas/BehaviorOnMXFailure'
+      description: Represents the custom MAIL FROM domain attributes of a verified identity (email address or domain).
+    IdentityNotificationAttributes:
+      type: object
+      required:
+        - BounceTopic
+        - ComplaintTopic
+        - DeliveryTopic
+        - ForwardingEnabled
+      properties:
+        BounceTopic:
+          $ref: '#/components/schemas/NotificationTopic'
+        ComplaintTopic:
+          $ref: '#/components/schemas/NotificationTopic'
+        DeliveryTopic:
+          $ref: '#/components/schemas/NotificationTopic'
+        ForwardingEnabled:
+          $ref: '#/components/schemas/Enabled'
+        HeadersInBounceNotificationsEnabled:
+          $ref: '#/components/schemas/Enabled'
+        HeadersInComplaintNotificationsEnabled:
+          $ref: '#/components/schemas/Enabled'
+        HeadersInDeliveryNotificationsEnabled:
+          $ref: '#/components/schemas/Enabled'
+      description: 'Represents the notification attributes of an identity, including whether an identity has Amazon Simple Notification Service (Amazon SNS) topics set for bounce, complaint, and/or delivery notifications, and whether feedback forwarding is enabled for bounce and complaint notifications.'
+    IdentityType:
+      type: string
+      enum:
+        - EmailAddress
+        - Domain
+    IdentityVerificationAttributes:
+      type: object
+      required:
+        - VerificationStatus
+      properties:
+        VerificationStatus:
+          $ref: '#/components/schemas/VerificationStatus'
+        VerificationToken:
+          $ref: '#/components/schemas/VerificationToken'
+      description: Represents the verification attributes of a single identity.
+    InvalidCloudWatchDestinationException:
+      type: object
+      properties:
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+        EventDestinationName:
+          $ref: '#/components/schemas/EventDestinationName'
+      description: Indicates that the Amazon CloudWatch destination is invalid. See the error message for details.
+    InvalidConfigurationSetException:
+      type: object
+      properties: {}
+      description: Indicates that the configuration set is invalid. See the error message for details.
+    InvalidFirehoseDestinationException:
+      type: object
+      properties:
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+        EventDestinationName:
+          $ref: '#/components/schemas/EventDestinationName'
+      description: Indicates that the Amazon Kinesis Firehose destination is invalid. See the error message for details.
+    InvalidLambdaFunctionException:
+      type: object
+      properties:
+        FunctionArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: 'Indicates that the provided AWS Lambda function is invalid, or that Amazon SES could not execute the provided function, possibly due to permissions issues. For information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.'
+    InvalidPolicyException:
+      type: object
+      properties: {}
+      description: Indicates that the provided policy is invalid. Check the error stack for more information about what caused the error.
+    InvalidS3ConfigurationException:
+      type: object
+      properties:
+        Bucket:
+          $ref: '#/components/schemas/S3BucketName'
+      description: 'Indicates that the provided Amazon S3 bucket or AWS KMS encryption key is invalid, or that Amazon SES could not publish to the bucket, possibly due to permissions issues. For information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.'
+    InvalidSnsTopicException:
+      type: object
+      properties:
+        Topic:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: 'Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES could not publish to the topic, possibly due to permissions issues. For information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.'
+    InvocationType:
+      type: string
+      enum:
+        - Event
+        - RequestResponse
+    KinesisFirehoseDestination:
+      type: object
+      required:
+        - IAMRoleARN
+        - DeliveryStreamARN
+      properties:
+        IAMRoleARN:
+          $ref: '#/components/schemas/AmazonResourceName'
+        DeliveryStreamARN:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: '<p>Contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination.</p> <p>Event destinations, such as Amazon Kinesis Firehose, are associated with configuration sets, which enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
+    LambdaAction:
+      type: object
+      required:
+        - FunctionArn
+      properties:
+        TopicArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        FunctionArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        InvocationType:
+          $ref: '#/components/schemas/InvocationType'
+      description: '<p>When included in a receipt rule, this action calls an AWS Lambda function and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS).</p> <p>To enable Amazon SES to call your AWS Lambda function or to publish to an Amazon SNS topic of another account, Amazon SES must have permission to access those resources. For information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.</p> <p>For information about using AWS Lambda actions in receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-lambda.html">Amazon SES Developer Guide</a>.</p>'
+    LastAttemptDate:
+      type: string
+      format: date-time
+    LimitExceededException:
+      type: object
+      properties: {}
+      description: 'Indicates that a resource could not be created because of service limits. For a list of Amazon SES limits, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html">Amazon SES Developer Guide</a>.'
+    ListConfigurationSetsRequest:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        MaxItems:
+          $ref: '#/components/schemas/MaxItems'
+      description: 'Represents a request to list the configuration sets associated with your AWS account. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.'
+    ListConfigurationSetsResponse:
+      type: object
+      properties:
+        ConfigurationSets:
+          $ref: '#/components/schemas/ConfigurationSets'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: 'A list of configuration sets associated with your AWS account. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.'
+    ListIdentitiesRequest:
+      type: object
+      example:
+        IdentityType: EmailAddress
+        MaxItems: 123
+        NextToken: ''
+      properties:
+        IdentityType:
+          $ref: '#/components/schemas/IdentityType'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        MaxItems:
+          $ref: '#/components/schemas/MaxItems'
+      description: 'Represents a request to return a list of all identities (email addresses and domains) that you have attempted to verify under your AWS account, regardless of verification status.'
+    ListIdentitiesResponse:
+      type: object
+      required:
+        - Identities
+      example:
+        Identities:
+          - user@example.com
+        NextToken: ''
+      properties:
+        Identities:
+          $ref: '#/components/schemas/IdentityList'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: 'A list of all identities that you have attempted to verify under your AWS account, regardless of verification status.'
+    ListIdentityPoliciesRequest:
+      type: object
+      required:
+        - Identity
+      example:
+        Identity: example.com
+      properties:
+        Identity:
+          $ref: '#/components/schemas/Identity'
+      description: 'Represents a request to return a list of sending authorization policies that are attached to an identity. Sending authorization is an Amazon SES feature that enables you to authorize other senders to use your identities. For information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.'
+    ListIdentityPoliciesResponse:
+      type: object
+      required:
+        - PolicyNames
+      example:
+        PolicyNames:
+          - MyPolicy
+      properties:
+        PolicyNames:
+          $ref: '#/components/schemas/PolicyNameList'
+      description: A list of names of sending authorization policies that apply to an identity.
+    ListReceiptFiltersRequest:
+      type: object
+      properties: {}
+      description: 'Represents a request to list the IP address filters that exist under your AWS account. You use IP address filters when you receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    ListReceiptFiltersResponse:
+      type: object
+      example:
+        Filters:
+          - IpFilter:
+              Cidr: 1.2.3.4/24
+              Policy: Block
+            Name: MyFilter
+      properties:
+        Filters:
+          $ref: '#/components/schemas/ReceiptFilterList'
+      description: A list of IP address filters that exist under your AWS account.
+    ListReceiptRuleSetsRequest:
+      type: object
+      example:
+        NextToken: ''
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: 'Represents a request to list the receipt rule sets that exist under your AWS account. You use receipt rule sets to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    ListReceiptRuleSetsResponse:
+      type: object
+      example:
+        NextToken: ''
+        RuleSets:
+          - CreatedTimestamp: '2016-07-15T16:25:59.607Z'
+            Name: MyRuleSet
+      properties:
+        RuleSets:
+          $ref: '#/components/schemas/ReceiptRuleSetsLists'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: A list of receipt rule sets that exist under your AWS account.
+    ListVerifiedEmailAddressesResponse:
+      type: object
+      example:
+        VerifiedEmailAddresses:
+          - user1@example.com
+          - user2@example.com
+      properties:
+        VerifiedEmailAddresses:
+          $ref: '#/components/schemas/AddressList'
+      description: A list of email addresses that you have verified with Amazon SES under your AWS account.
+    MailFromDomainAttributes:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/Identity'
+          value:
+            $ref: '#/components/schemas/IdentityMailFromDomainAttributes'
+    MailFromDomainName:
+      type: string
+    MailFromDomainNotVerifiedException:
+      type: object
+      properties: {}
+      description: ' Indicates that the message could not be sent because Amazon SES could not read the MX record required to use the specified MAIL FROM domain. For information about editing the custom MAIL FROM domain settings for an identity, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-edit.html">Amazon SES Developer Guide</a>.'
+    Max24HourSend:
+      type: number
+      format: double
+    MaxItems:
+      type: integer
+    MaxSendRate:
+      type: number
+      format: double
+    Message:
+      type: object
+      required:
+        - Subject
+        - Body
+      properties:
+        Subject:
+          $ref: '#/components/schemas/Content'
+        Body:
+          $ref: '#/components/schemas/Body'
+      description: 'Represents the message to be sent, composed of a subject and a body.'
+    MessageData:
+      type: string
+    MessageDsn:
+      type: object
+      required:
+        - ReportingMta
+      properties:
+        ReportingMta:
+          $ref: '#/components/schemas/ReportingMta'
+        ArrivalDate:
+          $ref: '#/components/schemas/ArrivalDate'
+        ExtensionFields:
+          $ref: '#/components/schemas/ExtensionFieldList'
+      description: '<p>Message-related information to include in the Delivery Status Notification (DSN) when an email that Amazon SES receives on your behalf bounces.</p> <p>For information about receiving email through Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html">Amazon SES Developer Guide</a>.</p>'
+    MessageId:
+      type: string
+    MessageRejected:
+      type: object
+      properties: {}
+      description: 'Indicates that the action failed, and the message could not be sent. Check the error stack for more information about what caused the error.'
+    MessageTag:
+      type: object
+      required:
+        - Name
+        - Value
+      properties:
+        Name:
+          $ref: '#/components/schemas/MessageTagName'
+        Value:
+          $ref: '#/components/schemas/MessageTagValue'
+      description: '<p>Contains the name and value of a tag that you can provide to <code>SendEmail</code> or <code>SendRawEmail</code> to apply to an email.</p> <p>Message tags, which you use with configuration sets, enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.</p>'
+    MessageTagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MessageTag'
+    MessageTagName:
+      type: string
+    MessageTagValue:
+      type: string
+    NextToken:
+      type: string
+    NotificationAttributes:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/Identity'
+          value:
+            $ref: '#/components/schemas/IdentityNotificationAttributes'
+    NotificationTopic:
+      type: string
+    NotificationType:
+      type: string
+      enum:
+        - Bounce
+        - Complaint
+        - Delivery
+    Policy:
+      type: string
+      minLength: 1
+    PolicyMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/PolicyName'
+          value:
+            $ref: '#/components/schemas/Policy'
+    PolicyName:
+      type: string
+      minLength: 1
+      maxLength: 64
+    PolicyNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyName'
+    PutIdentityPolicyRequest:
+      type: object
+      required:
+        - Identity
+        - PolicyName
+        - Policy
+      example:
+        Identity: example.com
+        Policy: '{"Version":"2008-10-17","Statement":[{"Sid":"stmt1469123904194","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::123456789012:root"},"Action":["ses:SendEmail","ses:SendRawEmail"],"Resource":"arn:aws:ses:us-east-1:EXAMPLE65304:identity/example.com"}]}'
+        PolicyName: MyPolicy
+      properties:
+        Identity:
+          $ref: '#/components/schemas/Identity'
+        PolicyName:
+          $ref: '#/components/schemas/PolicyName'
+        Policy:
+          $ref: '#/components/schemas/Policy'
+      description: 'Represents a request to add or update a sending authorization policy for an identity. Sending authorization is an Amazon SES feature that enables you to authorize other senders to use your identities. For information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html">Amazon SES Developer Guide</a>.'
+    PutIdentityPolicyResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    RawMessage:
+      type: object
+      required:
+        - Data
+      properties:
+        Data:
+          $ref: '#/components/schemas/RawMessageData'
+      description: Represents the raw data of the message.
+    RawMessageData:
+      type: string
+    ReceiptAction:
+      type: object
+      properties:
+        S3Action:
+          $ref: '#/components/schemas/S3Action'
+        BounceAction:
+          $ref: '#/components/schemas/BounceAction'
+        WorkmailAction:
+          $ref: '#/components/schemas/WorkmailAction'
+        LambdaAction:
+          $ref: '#/components/schemas/LambdaAction'
+        StopAction:
+          $ref: '#/components/schemas/StopAction'
+        AddHeaderAction:
+          $ref: '#/components/schemas/AddHeaderAction'
+        SNSAction:
+          $ref: '#/components/schemas/SNSAction'
+      description: '<p>An action that Amazon SES can take when it receives an email on behalf of one or more email addresses or domains that you own. An instance of this data type can represent only one action.</p> <p>For information about setting up receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html">Amazon SES Developer Guide</a>.</p>'
+    ReceiptActionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReceiptAction'
+    ReceiptFilter:
+      type: object
+      required:
+        - Name
+        - IpFilter
+      properties:
+        Name:
+          $ref: '#/components/schemas/ReceiptFilterName'
+        IpFilter:
+          $ref: '#/components/schemas/ReceiptIpFilter'
+      description: '<p>A receipt IP address filter enables you to specify whether to accept or reject mail originating from an IP address or range of IP addresses.</p> <p>For information about setting up IP address filters, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html">Amazon SES Developer Guide</a>.</p>'
+    ReceiptFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReceiptFilter'
+    ReceiptFilterName:
+      type: string
+    ReceiptFilterPolicy:
+      type: string
+      enum:
+        - Block
+        - Allow
+    ReceiptIpFilter:
+      type: object
+      required:
+        - Policy
+        - Cidr
+      properties:
+        Policy:
+          $ref: '#/components/schemas/ReceiptFilterPolicy'
+        Cidr:
+          $ref: '#/components/schemas/Cidr'
+      description: '<p>A receipt IP address filter enables you to specify whether to accept or reject mail originating from an IP address or range of IP addresses.</p> <p>For information about setting up IP address filters, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html">Amazon SES Developer Guide</a>.</p>'
+    ReceiptRule:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/ReceiptRuleName'
+        Enabled:
+          $ref: '#/components/schemas/Enabled'
+        TlsPolicy:
+          $ref: '#/components/schemas/TlsPolicy'
+        Recipients:
+          $ref: '#/components/schemas/RecipientsList'
+        Actions:
+          $ref: '#/components/schemas/ReceiptActionsList'
+        ScanEnabled:
+          $ref: '#/components/schemas/Enabled'
+      description: '<p>Receipt rules enable you to specify which actions Amazon SES should take when it receives mail on behalf of one or more email addresses or domains that you own.</p> <p>Each receipt rule defines a set of email addresses or domains to which it applies. If the email addresses or domains match at least one recipient address of the message, Amazon SES executes all of the receipt rule''s actions on the message.</p> <p>For information about setting up receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html">Amazon SES Developer Guide</a>.</p>'
+    ReceiptRuleName:
+      type: string
+    ReceiptRuleNamesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReceiptRuleName'
+    ReceiptRuleSetMetadata:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+        CreatedTimestamp:
+          $ref: '#/components/schemas/Timestamp'
+      description: '<p>Information about a receipt rule set.</p> <p>A receipt rule set is a collection of rules that specify what Amazon SES should do with mail it receives on behalf of your account''s verified domains.</p> <p>For information about setting up receipt rule sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html">Amazon SES Developer Guide</a>.</p>'
+    ReceiptRuleSetName:
+      type: string
+    ReceiptRuleSetsLists:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReceiptRuleSetMetadata'
+    ReceiptRulesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReceiptRule'
+    Recipient:
+      type: string
+    RecipientDsnFields:
+      type: object
+      required:
+        - Action
+        - Status
+      properties:
+        FinalRecipient:
+          $ref: '#/components/schemas/Address'
+        Action:
+          $ref: '#/components/schemas/DsnAction'
+        RemoteMta:
+          $ref: '#/components/schemas/RemoteMta'
+        Status:
+          $ref: '#/components/schemas/DsnStatus'
+        DiagnosticCode:
+          $ref: '#/components/schemas/DiagnosticCode'
+        LastAttemptDate:
+          $ref: '#/components/schemas/LastAttemptDate'
+        ExtensionFields:
+          $ref: '#/components/schemas/ExtensionFieldList'
+      description: '<p>Recipient-related information to include in the Delivery Status Notification (DSN) when an email that Amazon SES receives on your behalf bounces.</p> <p>For information about receiving email through Amazon SES, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html">Amazon SES Developer Guide</a>.</p>'
+    RecipientsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Recipient'
+    RemoteMta:
+      type: string
+    ReorderReceiptRuleSetRequest:
+      type: object
+      required:
+        - RuleSetName
+        - RuleNames
+      example:
+        RuleNames:
+          - MyRule
+          - MyOtherRule
+        RuleSetName: MyRuleSet
+      properties:
+        RuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+        RuleNames:
+          $ref: '#/components/schemas/ReceiptRuleNamesList'
+      description: 'Represents a request to reorder the receipt rules within a receipt rule set. You use receipt rule sets to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    ReorderReceiptRuleSetResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    ReportingMta:
+      type: string
+    RuleDoesNotExistException:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/RuleOrRuleSetName'
+      description: Indicates that the provided receipt rule does not exist.
+    RuleOrRuleSetName:
+      type: string
+    RuleSetDoesNotExistException:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/RuleOrRuleSetName'
+      description: Indicates that the provided receipt rule set does not exist.
+    S3Action:
+      type: object
+      required:
+        - BucketName
+      properties:
+        TopicArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        BucketName:
+          $ref: '#/components/schemas/S3BucketName'
+        ObjectKeyPrefix:
+          $ref: '#/components/schemas/S3KeyPrefix'
+        KmsKeyArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: '<p>When included in a receipt rule, this action saves the received message to an Amazon Simple Storage Service (Amazon S3) bucket and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS).</p> <p>To enable Amazon SES to write emails to your Amazon S3 bucket, use an AWS KMS key to encrypt your emails, or publish to an Amazon SNS topic of another account, Amazon SES must have permission to access those resources. For information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.</p> <note> <p>When you save your emails to an Amazon S3 bucket, the maximum email size (including headers) is 30 MB. Emails larger than that will bounce.</p> </note> <p>For information about specifying Amazon S3 actions in receipt rules, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-s3.html">Amazon SES Developer Guide</a>.</p>'
+    S3BucketName:
+      type: string
+    S3KeyPrefix:
+      type: string
+    SNSAction:
+      type: object
+      required:
+        - TopicArn
+      properties:
+        TopicArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        Encoding:
+          $ref: '#/components/schemas/SNSActionEncoding'
+      description: '<p>When included in a receipt rule, this action publishes a notification to Amazon Simple Notification Service (Amazon SNS). This action includes a complete copy of the email content in the Amazon SNS notifications. Amazon SNS notifications for all other actions simply provide information about the email. They do not include the email content itself.</p> <p>If you own the Amazon SNS topic, you don''t need to do anything to give Amazon SES permission to publish emails to it. However, if you don''t own the Amazon SNS topic, you need to attach a policy to the topic to give Amazon SES permissions to access it. For information about giving permissions, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html">Amazon SES Developer Guide</a>.</p> <important> <p>You can only publish emails that are 150 KB or less (including the header) to Amazon SNS. Larger emails will bounce. If you anticipate emails larger than 150 KB, use the S3 action instead.</p> </important> <p>For information about using a receipt rule to publish an Amazon SNS notification, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-sns.html">Amazon SES Developer Guide</a>.</p>'
+    SNSActionEncoding:
+      type: string
+      enum:
+        - UTF-8
+        - Base64
+    SendBounceRequest:
+      type: object
+      required:
+        - OriginalMessageId
+        - BounceSender
+        - BouncedRecipientInfoList
+      properties:
+        OriginalMessageId:
+          $ref: '#/components/schemas/MessageId'
+        BounceSender:
+          $ref: '#/components/schemas/Address'
+        Explanation:
+          $ref: '#/components/schemas/Explanation'
+        MessageDsn:
+          $ref: '#/components/schemas/MessageDsn'
+        BouncedRecipientInfoList:
+          $ref: '#/components/schemas/BouncedRecipientInfoList'
+        BounceSenderArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: Represents a request to send a bounce message to the sender of an email you received through Amazon SES.
+    SendBounceResponse:
+      type: object
+      properties:
+        MessageId:
+          $ref: '#/components/schemas/MessageId'
+      description: Represents a unique message ID.
+    SendDataPoint:
+      type: object
+      properties:
+        Timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        DeliveryAttempts:
+          $ref: '#/components/schemas/Counter'
+        Bounces:
+          $ref: '#/components/schemas/Counter'
+        Complaints:
+          $ref: '#/components/schemas/Counter'
+        Rejects:
+          $ref: '#/components/schemas/Counter'
+      description: 'Represents sending statistics data. Each <code>SendDataPoint</code> contains statistics for a 15-minute period of sending activity. '
+    SendDataPointList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SendDataPoint'
+    SendEmailRequest:
+      type: object
+      required:
+        - Source
+        - Destination
+        - Message
+      example:
+        Destination:
+          BccAddresses: []
+          CcAddresses:
+            - recipient3@example.com
+          ToAddresses:
+            - recipient1@example.com
+            - recipient2@example.com
+        Message:
+          Body:
+            Html:
+              Charset: UTF-8
+              Data: 'This message body contains HTML formatting. It can, for example, contain links like this one: <a class="ulink" href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide" target="_blank">Amazon SES Developer Guide</a>.'
+            Text:
+              Charset: UTF-8
+              Data: This is the message body in text format.
+          Subject:
+            Charset: UTF-8
+            Data: Test email
+        ReplyToAddresses: []
+        ReturnPath: ''
+        ReturnPathArn: ''
+        Source: sender@example.com
+        SourceArn: ''
+      properties:
+        Source:
+          $ref: '#/components/schemas/Address'
+        Destination:
+          $ref: '#/components/schemas/Destination'
+        Message:
+          $ref: '#/components/schemas/Message'
+        ReplyToAddresses:
+          $ref: '#/components/schemas/AddressList'
+        ReturnPath:
+          $ref: '#/components/schemas/Address'
+        SourceArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        ReturnPathArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        Tags:
+          $ref: '#/components/schemas/MessageTagList'
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+      description: 'Represents a request to send a single formatted email using Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html">Amazon SES Developer Guide</a>.'
+    SendEmailResponse:
+      type: object
+      required:
+        - MessageId
+      example:
+        MessageId: EXAMPLE78603177f-7a5433e7-8edb-42ae-af10-f0181f34d6ee-000000
+      properties:
+        MessageId:
+          $ref: '#/components/schemas/MessageId'
+      description: Represents a unique message ID.
+    SendRawEmailRequest:
+      type: object
+      required:
+        - RawMessage
+      example:
+        Destinations: []
+        FromArn: ''
+        RawMessage:
+          Data: 'From: sender@example.com\nTo: recipient@example.com\nSubject: Test email (contains an attachment)\nMIME-Version: 1.0\nContent-type: Multipart/Mixed; boundary="NextPart"\n\n--NextPart\nContent-Type: text/plain\n\nThis is the message body.\n\n--NextPart\nContent-Type: text/plain;\nContent-Disposition: attachment; filename="attachment.txt"\n\nThis is the text in the attachment.\n\n--NextPart--'
+        ReturnPathArn: ''
+        Source: ''
+        SourceArn: ''
+      properties:
+        Source:
+          $ref: '#/components/schemas/Address'
+        Destinations:
+          $ref: '#/components/schemas/AddressList'
+        RawMessage:
+          $ref: '#/components/schemas/RawMessage'
+        FromArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        SourceArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        ReturnPathArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        Tags:
+          $ref: '#/components/schemas/MessageTagList'
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+      description: 'Represents a request to send a single raw email using Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html">Amazon SES Developer Guide</a>.'
+    SendRawEmailResponse:
+      type: object
+      required:
+        - MessageId
+      example:
+        MessageId: EXAMPLEf3f73d99b-c63fb06f-d263-41f8-a0fb-d0dc67d56c07-000000
+      properties:
+        MessageId:
+          $ref: '#/components/schemas/MessageId'
+      description: Represents a unique message ID.
+    SentLast24Hours:
+      type: number
+      format: double
+    SetActiveReceiptRuleSetRequest:
+      type: object
+      example:
+        RuleSetName: RuleSetToActivate
+      properties:
+        RuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+      description: 'Represents a request to set a receipt rule set as the active receipt rule set. You use receipt rule sets to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    SetActiveReceiptRuleSetResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    SetIdentityDkimEnabledRequest:
+      type: object
+      required:
+        - Identity
+        - DkimEnabled
+      example:
+        DkimEnabled: true
+        Identity: user@example.com
+      properties:
+        Identity:
+          $ref: '#/components/schemas/Identity'
+        DkimEnabled:
+          $ref: '#/components/schemas/Enabled'
+      description: 'Represents a request to enable or disable Amazon SES Easy DKIM signing for an identity. For more information about setting up Easy DKIM, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html">Amazon SES Developer Guide</a>.'
+    SetIdentityDkimEnabledResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    SetIdentityFeedbackForwardingEnabledRequest:
+      type: object
+      required:
+        - Identity
+        - ForwardingEnabled
+      example:
+        ForwardingEnabled: true
+        Identity: user@example.com
+      properties:
+        Identity:
+          $ref: '#/components/schemas/Identity'
+        ForwardingEnabled:
+          $ref: '#/components/schemas/Enabled'
+      description: 'Represents a request to enable or disable whether Amazon SES forwards you bounce and complaint notifications through email. For information about email feedback forwarding, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html">Amazon SES Developer Guide</a>.'
+    SetIdentityFeedbackForwardingEnabledResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    SetIdentityHeadersInNotificationsEnabledRequest:
+      type: object
+      required:
+        - Identity
+        - NotificationType
+        - Enabled
+      example:
+        Enabled: true
+        Identity: user@example.com
+        NotificationType: Bounce
+      properties:
+        Identity:
+          $ref: '#/components/schemas/Identity'
+        NotificationType:
+          $ref: '#/components/schemas/NotificationType'
+        Enabled:
+          $ref: '#/components/schemas/Enabled'
+      description: 'Represents a request to set whether Amazon SES includes the original email headers in the Amazon SNS notifications of a specified type. For information about notifications, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html">Amazon SES Developer Guide</a>.'
+    SetIdentityHeadersInNotificationsEnabledResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    SetIdentityMailFromDomainRequest:
+      type: object
+      required:
+        - Identity
+      example:
+        BehaviorOnMXFailure: UseDefaultValue
+        Identity: user@example.com
+        MailFromDomain: bounces.example.com
+      properties:
+        Identity:
+          $ref: '#/components/schemas/Identity'
+        MailFromDomain:
+          $ref: '#/components/schemas/MailFromDomainName'
+        BehaviorOnMXFailure:
+          $ref: '#/components/schemas/BehaviorOnMXFailure'
+      description: 'Represents a request to enable or disable the Amazon SES custom MAIL FROM domain setup for a verified identity. For information about using a custom MAIL FROM domain, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html">Amazon SES Developer Guide</a>.'
+    SetIdentityMailFromDomainResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    SetIdentityNotificationTopicRequest:
+      type: object
+      required:
+        - Identity
+        - NotificationType
+      example:
+        Identity: user@example.com
+        NotificationType: Bounce
+        SnsTopic: 'arn:aws:sns:us-west-2:111122223333:MyTopic'
+      properties:
+        Identity:
+          $ref: '#/components/schemas/Identity'
+        NotificationType:
+          $ref: '#/components/schemas/NotificationType'
+        SnsTopic:
+          $ref: '#/components/schemas/NotificationTopic'
+      description: 'Represents a request to specify the Amazon SNS topic to which Amazon SES will publish bounce, complaint, or delivery notifications for emails sent with that identity as the Source. For information about Amazon SES notifications, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-sns.html">Amazon SES Developer Guide</a>.'
+    SetIdentityNotificationTopicResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    SetReceiptRulePositionRequest:
+      type: object
+      required:
+        - RuleSetName
+        - RuleName
+      example:
+        After: PutRuleAfterThisRule
+        RuleName: RuleToReposition
+        RuleSetName: MyRuleSet
+      properties:
+        RuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+        RuleName:
+          $ref: '#/components/schemas/ReceiptRuleName'
+        After:
+          $ref: '#/components/schemas/ReceiptRuleName'
+      description: 'Represents a request to set the position of a receipt rule in a receipt rule set. You use receipt rule sets to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    SetReceiptRulePositionResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    StopAction:
+      type: object
+      required:
+        - Scope
+      properties:
+        Scope:
+          $ref: '#/components/schemas/StopScope'
+        TopicArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: '<p>When included in a receipt rule, this action terminates the evaluation of the receipt rule set and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS).</p> <p>For information about setting a stop action in a receipt rule, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-stop.html">Amazon SES Developer Guide</a>.</p>'
+    StopScope:
+      type: string
+      enum:
+        - RuleSet
+    Timestamp:
+      type: string
+      format: date-time
+    TlsPolicy:
+      type: string
+      enum:
+        - Require
+        - Optional
+    UpdateConfigurationSetEventDestinationRequest:
+      type: object
+      required:
+        - ConfigurationSetName
+        - EventDestination
+      properties:
+        ConfigurationSetName:
+          $ref: '#/components/schemas/ConfigurationSetName'
+        EventDestination:
+          $ref: '#/components/schemas/EventDestination'
+      description: 'Represents a request to update the event destination of a configuration set. Configuration sets enable you to publish email sending events. For information about using configuration sets, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html">Amazon SES Developer Guide</a>.'
+    UpdateConfigurationSetEventDestinationResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    UpdateReceiptRuleRequest:
+      type: object
+      required:
+        - RuleSetName
+        - Rule
+      example:
+        Rule:
+          Actions:
+            - S3Action:
+                BucketName: MyBucket
+                ObjectKeyPrefix: email
+          Enabled: true
+          Name: MyRule
+          ScanEnabled: true
+          TlsPolicy: Optional
+        RuleSetName: MyRuleSet
+      properties:
+        RuleSetName:
+          $ref: '#/components/schemas/ReceiptRuleSetName'
+        Rule:
+          $ref: '#/components/schemas/ReceiptRule'
+      description: 'Represents a request to update a receipt rule. You use receipt rules to receive email with Amazon SES. For more information, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html">Amazon SES Developer Guide</a>.'
+    UpdateReceiptRuleResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    VerificationAttributes:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/Identity'
+          value:
+            $ref: '#/components/schemas/IdentityVerificationAttributes'
+    VerificationStatus:
+      type: string
+      enum:
+        - Pending
+        - Success
+        - Failed
+        - TemporaryFailure
+        - NotStarted
+    VerificationToken:
+      type: string
+    VerificationTokenList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VerificationToken'
+    VerifyDomainDkimRequest:
+      type: object
+      required:
+        - Domain
+      example:
+        Domain: example.com
+      properties:
+        Domain:
+          $ref: '#/components/schemas/Domain'
+      description: 'Represents a request to generate the CNAME records needed to set up Easy DKIM with Amazon SES. For more information about setting up Easy DKIM, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html">Amazon SES Developer Guide</a>.'
+    VerifyDomainDkimResponse:
+      type: object
+      required:
+        - DkimTokens
+      example:
+        DkimTokens:
+          - EXAMPLEq76owjnks3lnluwg65scbemvw
+          - EXAMPLEi3dnsj67hstzaj673klariwx2
+          - EXAMPLEwfbtcukvimehexktmdtaz6naj
+      properties:
+        DkimTokens:
+          $ref: '#/components/schemas/VerificationTokenList'
+      description: Returns CNAME records that you must publish to the DNS server of your domain to set up Easy DKIM with Amazon SES.
+    VerifyDomainIdentityRequest:
+      type: object
+      required:
+        - Domain
+      example:
+        Domain: example.com
+      properties:
+        Domain:
+          $ref: '#/components/schemas/Domain'
+      description: 'Represents a request to begin Amazon SES domain verification and to generate the TXT records that you must publish to the DNS server of your domain to complete the verification. For information about domain verification, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-domains.html">Amazon SES Developer Guide</a>.'
+    VerifyDomainIdentityResponse:
+      type: object
+      required:
+        - VerificationToken
+      example:
+        VerificationToken: eoEmxw+YaYhb3h3iVJHuXMJXqeu1q1/wwmvjuEXAMPLE
+      properties:
+        VerificationToken:
+          $ref: '#/components/schemas/VerificationToken'
+      description: Returns a TXT record that you must publish to the DNS server of your domain to complete domain verification with Amazon SES.
+    VerifyEmailAddressRequest:
+      type: object
+      required:
+        - EmailAddress
+      example:
+        EmailAddress: user@example.com
+      properties:
+        EmailAddress:
+          $ref: '#/components/schemas/Address'
+      description: 'Represents a request to begin email address verification with Amazon SES. For information about email address verification, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html">Amazon SES Developer Guide</a>.'
+    VerifyEmailIdentityRequest:
+      type: object
+      required:
+        - EmailAddress
+      example:
+        EmailAddress: user@example.com
+      properties:
+        EmailAddress:
+          $ref: '#/components/schemas/Address'
+      description: 'Represents a request to begin email address verification with Amazon SES. For information about email address verification, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html">Amazon SES Developer Guide</a>.'
+    VerifyEmailIdentityResponse:
+      type: object
+      properties: {}
+      description: An empty element returned on a successful request.
+    WorkmailAction:
+      type: object
+      required:
+        - OrganizationArn
+      properties:
+        TopicArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+        OrganizationArn:
+          $ref: '#/components/schemas/AmazonResourceName'
+      description: '<p>When included in a receipt rule, this action calls Amazon WorkMail and, optionally, publishes a notification to Amazon Simple Notification Service (Amazon SNS). You will typically not use this action directly because Amazon WorkMail adds the rule automatically during its setup procedure.</p> <p>For information using a receipt rule to call Amazon WorkMail, see the <a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-action-workmail.html">Amazon SES Developer Guide</a>.</p>'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

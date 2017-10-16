@@ -1,0 +1,2800 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.digitalmedia.hhs.gov/api/v2'
+info:
+  contact:
+    email: syndicationadmin@hhs.gov
+  description: |
+
+    <div class="swagger-ui-wrap extraFooter"><h3>Common Features / Behaviors</h3>
+        <div class="features">
+            <ul>
+                <li><strong>* "sort" param:</strong> supports multi column sorting through the use of commas as delimiters, and a hyphen to denote descending order.
+                    <br/>
+                    <strong><span>Examples:</span></strong>
+                    <ul>
+                        <li><span class="example">name</span><span class="description">sort results by name ascending</span></li>
+                        <li><span class="example">-name</span><span class="description">sort results by name descending</span></li>
+                        <li><span class="example">-name,id</span><span class="description">sort results by name descending and then by id ascending</span></li>
+                        <li><span class="example">id,-dateContentAuthored</span><span class="description">sort results by id ascending and then date descending</span></li>
+                    </ul>
+                </li>
+                <li><strong>Date formats:</strong> Date input format is expected to be based on <a href="http://www.ietf.org/rfc/rfc3339.txt">RFC 3339</a>. <br/>
+                    <span><strong>Example:</strong></span>
+                    <ul><li>2013-11-18T18:43:01Z</li></ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+  license:
+    name: GNU GENERAL PUBLIC LICENSE
+    url: 'http://www.gnu.org/licenses/gpl.html'
+  termsOfService: 'http://www.hhs.gov/web/socialmedia/policies/tos.html#ready'
+  title: HHS Media Services
+  version: '2'
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    backgroundColor: '#185394'
+    url: 'http://www.hhs.gov/sites/all/themes/project_h/css/images/hhs_logo.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
+      url: 'https://api.digitalmedia.hhs.gov/swagger/api'
+      version: '1.2'
+  x-providerName: hhs.gov
+tags:
+  - description: Information about campaigns
+    name: campaigns
+  - description: Information about languages
+    name: languages
+  - description: Information about media
+    name: media
+  - description: Information about media types
+    name: mediaTypes
+  - description: Global Search
+    name: resources
+  - description: Information about sources.
+    name: sources
+  - description: Information about tags
+    name: tags
+  - description: Get media from user generated lists.
+    name: userMediaLists
+paths:
+  /resources.json:
+    get:
+      description: 'Returns the list of Resources matching the search query ''q''.<p>The search query ''q'' is a Lucene query.<br>The syntax for a Lucene query can be found <a href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html">here</a>.'
+      operationId: getResources
+      parameters:
+        - description: The search query supplied by the user
+          in: query
+          name: q
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resources'
+        '400':
+          description: Invalid search query
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get Resources by search query
+      tags:
+        - resources
+  /resources/campaigns.json:
+    get:
+      description: Returns the list of Campaigns.
+      operationId: getCampaigns
+      parameters:
+        - description: The maximum number of records to return
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The offset of the records set to return for pagination
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: '* Set of fields to sort the records by.'
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaigns'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get Campaigns
+      tags:
+        - campaigns
+  '/resources/campaigns/{id}.json':
+    get:
+      description: Returns the Campaign identified by the 'id'.
+      operationId: getCampaignById
+      parameters:
+        - description: The id of the record to look up
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaigns'
+        '400':
+          description: Invalid ID
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get Campaign by ID
+      tags:
+        - campaigns
+  '/resources/campaigns/{id}/media.json':
+    get:
+      description: Returns the list of MediaItems for the Campaign identified by the 'id'.
+      operationId: getMediaByCampaignId
+      parameters:
+        - description: The id of the campaign to find media items for
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The maximum number of records to return
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The offset of the records set to return for pagination
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The name of the property to which sorting will be applied
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get MediaItems by Campaign ID
+      tags:
+        - campaigns
+  '/resources/campaigns/{id}/syndicate.json':
+    get:
+      description: Renders the list of MediaItems associated with the Campaign identified by the 'id'.
+      parameters:
+        - description: The id of the record to look up
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: 'Method used to render an html request. Accepts one: [mv, list, feed]'
+          in: query
+          name: displayMethod
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get MediaItems for Campaign
+      tags:
+        - campaigns
+  /resources/languages.json:
+    get:
+      description: Returns the list Languages.
+      operationId: getLanguages
+      parameters:
+        - description: The maximum number of records to return
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The offset of the records set to return for pagination
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: '* Set of fields to sort the records by.'
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Languages'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get Languages
+      tags:
+        - languages
+  '/resources/languages/{id}.json':
+    get:
+      description: Returns the Language identified by the 'id'.
+      operationId: getLanguageById
+      parameters:
+        - description: The id of the language to look up
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Languages'
+        '400':
+          description: Invalid ID
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get Language by ID
+      tags:
+        - languages
+  /resources/media.json:
+    get:
+      description: Returns the list of MediaItems matching the specified query parameters.
+      operationId: getMedia
+      parameters:
+        - description: The maximum number of records to return
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The offset of the records set to return for pagination.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: '* Set of fields to sort the records by.'
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+        - description: '* The ascending or descending order.'
+          in: query
+          name: order
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items belonging to the specified media type[s].'
+          in: query
+          name: mediaTypes
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items containing the provided name, case insensitive.'
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: Restrict filtering to media items in a specific collection.
+          in: query
+          name: collectionId
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Find all media items containing the partial name, case insensitive.'
+          in: query
+          name: nameContains
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items containing the provided partial description, case insensitive.'
+          in: query
+          name: descriptionContains
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items which have the provided sourceUrl, case insensitive.'
+          in: query
+          name: sourceUrl
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items which contain the provided partial sourceUrl, case insensitive.'
+          in: query
+          name: sourceUrlContains
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items which have the provided customThumbnailUrl, case insensitive.'
+          in: query
+          name: customThumbnailUrl
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items which contain the provided partial customThumbnailUrl, case insensitive.'
+          in: query
+          name: customThumbnailUrlContains
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items authored on the provided day (RFC 3339, time ignored).'
+          in: query
+          name: dateContentAuthored
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items updated on the provided day (RFC 3339, time ignored).'
+          in: query
+          name: dateContentUpdated
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items published on the provided day (RFC 3339, time ignored).'
+          in: query
+          name: dateContentPublished
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items reviewed on the provided day (RFC 3339, time ignored).'
+          in: query
+          name: dateContentReviewed
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items authored on the provided day (RFC 3339, time ignored).'
+          in: query
+          name: dateSyndicationCaptured
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items updated on the provided day, (RFC 3339, time ignored).'
+          in: query
+          name: dateSyndicationUpdated
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items authored since the provided day (RFC 3339, time ignored).'
+          in: query
+          name: contentAuthoredSinceDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items authored before the provided day (RFC 3339, time ignored).'
+          in: query
+          name: contentAuthoredBeforeDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items authored between the provided start and end days (RFC 3339, comma separated, time ignored).'
+          in: query
+          name: contentAuthoredInRange
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items updated since the provided day (RFC 3339, time ignored).'
+          in: query
+          name: contentUpdatedSinceDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items updated before the provided day (RFC 3339, time ignored).'
+          in: query
+          name: contentUpdatedBeforeDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items updated between the provided start and end days (RFC 3339, comma separated, time ignored).'
+          in: query
+          name: contentUpdatedInRange
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items published since the provided day (RFC 3339, time ignored).'
+          in: query
+          name: contentPublishedSinceDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items published before the provided day (RFC 3339, time ignored).'
+          in: query
+          name: contentPublishedBeforeDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items published between the provided start and end days (RFC 3339, comma separated, time ignored).'
+          in: query
+          name: contentPublishedInRange
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items reviewed since the provided day (RFC 3339, time ignored).'
+          in: query
+          name: contentReviewedSinceDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items reviewed before the provided day (RFC 3339, time ignored).'
+          in: query
+          name: contentReviewedBeforeDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items reviewed between the provided start and end days (RFC 3339, comma separated, time ignored).'
+          in: query
+          name: contentReviewedInRange
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items authored since the provided day (RFC 3339, time ignored).'
+          in: query
+          name: syndicationCapturedSinceDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items authored before the provided day (RFC 3339, time ignored).'
+          in: query
+          name: syndicationCapturedBeforeDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items authored between the provided start and end days (RFC 3339, comma separated, time ignored).'
+          in: query
+          name: syndicationCapturedInRange
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items updated since the provided day, (RFC 3339, time ignored).'
+          in: query
+          name: syndicationUpdatedSinceDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items updated before the provided day, (RFC 3339, time ignored).'
+          in: query
+          name: syndicationUpdatedBeforeDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items updated between the provided start and end days, (RFC 3339, comma separated, time ignored).'
+          in: query
+          name: syndicationUpdatedInRange
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items visible since the provided day, (RFC 3339, time ignored).'
+          in: query
+          name: syndicationVisibleSinceDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items visible before the provided day, (RFC 3339, time ignored).'
+          in: query
+          name: syndicationVisibleBeforeDate
+          required: false
+          schema:
+            type: string
+            format: date
+        - description: 'Find all media items visible between the provided start and end days, (RFC 3339, comma separated, time ignored).'
+          in: query
+          name: syndicationVisibleInRange
+          required: false
+          schema:
+            type: string
+        - description: Find all media items written in the language specified by Id.
+          in: query
+          name: languageId
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - description: 'Find all media items written in the language specified by name, case insensitive.'
+          in: query
+          name: languageName
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items written in the language specified by 639-2 isoCode , case insensitive.'
+          in: query
+          name: languageIsoCode
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items which match the provided hash, case insensitive.'
+          in: query
+          name: hash
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items which match the provided partial hash, case insensitive.'
+          in: query
+          name: hashContains
+          required: false
+          schema:
+            type: string
+        - description: Find all media items that belong to the source specified by Id.
+          in: query
+          name: sourceId
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - description: 'Find all media items that belong to the source specified by name, case insensitive.'
+          in: query
+          name: sourceName
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items that belong to the source specified by partial name, case insensitive.'
+          in: query
+          name: sourceNameContains
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items that belong to the source specified by acronym, case insensitive.'
+          in: query
+          name: sourceAcronym
+          required: false
+          schema:
+            type: string
+        - description: 'Find all media items that belong to the source specified by partial acronym, case insensitive.'
+          in: query
+          name: sourceAcronymContains
+          required: false
+          schema:
+            type: string
+        - description: Find only media items tagged with the specified tag Ids.
+          in: query
+          name: tagIds
+          required: false
+          schema:
+            type: string
+        - description: Find only media from within the supplied list of Ids.
+          in: query
+          name: restrictToSet
+          required: false
+          schema:
+            type: string
+        - description: Find all media items containing the createdBy value.
+          in: query
+          name: createdBy
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get MediaItems
+      tags:
+        - media
+  /resources/media/featured.json:
+    get:
+      description: Get the list of featured content in the syndication system
+      operationId: getFeaturedMedia
+      parameters:
+        - description: '* Set of fields to sort the records by.'
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of records to return.
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - description: How many records to offset the query by.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get the list of featured content in the syndication system
+      tags:
+        - media
+  /resources/media/mostPopularMedia.json:
+    get:
+      description: Returns the list of MediaItems with the highest ratings.
+      operationId: getMostPopularMedia
+      parameters:
+        - description: The maximum number of records to return
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The offset of the records set to return for pagination.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get MediaItems by popularity
+      tags:
+        - media
+  /resources/media/searchResults.json:
+    get:
+      description: 'Returns the list of MediaItems matching the search query ''q''.<p>The search query ''q'' is a Lucene query.<br>The syntax for a Lucene query can be found <a href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html">here</a>'
+      operationId: searchMedia
+      parameters:
+        - description: The search query supplied by the user
+          in: query
+          name: q
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of records to return
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The offset of the records set to return for pagination.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get MediaItems by search query
+      tags:
+        - media
+  '/resources/media/{id}.json':
+    get:
+      description: Returns the MediaItem identified by the 'id'.
+      operationId: getMediaById
+      parameters:
+        - description: The id of the record to look up
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Invalid ID
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get MediaItem by ID
+      tags:
+        - media
+  '/resources/media/{id}/content':
+    get:
+      description: 'Returns the raw content (html, image, etc...) for the MediaItem identified by the ''id''.'
+      operationId: getMediaContentById
+      parameters:
+        - description: The id of the media to show content for.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The method that called this method
+          in: query
+          name: calledByBuild
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                type: string
+            text/html:
+              schema:
+                type: string
+            image/jpeg:
+              schema:
+                type: string
+            image/png:
+              schema:
+                type: string
+        '400':
+          description: Invalid ID
+          content:
+            application/json:
+              schema:
+                type: string
+            text/html:
+              schema:
+                type: string
+            image/jpeg:
+              schema:
+                type: string
+            image/png:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+            text/html:
+              schema:
+                type: string
+            image/jpeg:
+              schema:
+                type: string
+            image/png:
+              schema:
+                type: string
+      summary: Get content for MediaItem
+      tags:
+        - media
+  '/resources/media/{id}/embed.json':
+    get:
+      description: Returns the javascript or iframe embed code for the MediaItem identified by 'id'.
+      operationId: getMediaEmbedById
+      parameters:
+        - description: The id of the media to get embed code for.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: 'Currently supports ''iframe'', defaults to ''javascript''.'
+          in: query
+          name: flavor
+          required: false
+          schema:
+            type: string
+        - description: The width of the generated iframe.
+          in: query
+          name: width
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The height of the generated iframe.
+          in: query
+          name: height
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The name of the iframe element
+          in: query
+          name: iframeName
+          required: false
+          schema:
+            type: string
+        - description: Should a reference to the JQuery Library be omitted?
+          in: query
+          name: excludeJquery
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: Should the div to insert content into be omitted?
+          in: query
+          name: excludeDiv
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: Should the div to insert content into have a specific name?
+          in: query
+          name: divId
+          required: false
+          schema:
+            type: string
+        - description: 'Method used to render an html request. Accepts one: [mv, list, feed]'
+          in: query
+          name: displayMethod
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/EmbedCode'
+        '400':
+          description: Bad Request
+          content:
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            text/html:
+              schema:
+                type: string
+      summary: Get embed code for MediaItem
+      tags:
+        - media
+  '/resources/media/{id}/preview.jpg':
+    get:
+      description: 'Returns the JPG preview, where applicable, for the MediaItem identified by the ''id''.'
+      operationId: getMediaPreviewById
+      parameters:
+        - description: The id of the media to get a preview for.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            image/jpeg:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Bad Request
+          content:
+            image/jpeg:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            image/jpeg:
+              schema:
+                type: string
+      summary: Get JPG preview for MediaItem
+      tags:
+        - media
+  '/resources/media/{id}/ratings.json':
+    get:
+      description: Get the Ratings (number of 'likes') for the MediaItem identified by the 'id'.
+      operationId: getMediaRatingsById
+      parameters:
+        - description: The ID of the media item to 'like'.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ratings'
+        '400':
+          description: Invalid ID
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get Ratings for MediaItem
+      tags:
+        - media
+  '/resources/media/{id}/relatedMedia.json':
+    get:
+      description: Returns the list of MediaItems related to the MediaItem identified by the 'id'.
+      operationId: getRelatedMediaById
+      parameters:
+        - description: The id of the media item to get related media for
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The maximum number of records to return
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The offset of the records set to return for pagination.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Which field to sort the records by.
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get related MediaItems by ID
+      tags:
+        - media
+  '/resources/media/{id}/syndicate.json':
+    get:
+      description: Returns the syndicated content for a given MediaItem in the specified 'format' (HTML or JSON).
+      operationId: getMediaSyndicateById
+      parameters:
+        - description: The id of the media to show embed code for.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The css class to target for extraction.
+          in: query
+          name: cssClass
+          required: false
+          schema:
+            type: string
+            default: syndicate
+        - description: Remove in-line styles from content.
+          in: query
+          name: stripStyles
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: Remove script tags from content.
+          in: query
+          name: stripScripts
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: Remove image tags from content.
+          in: query
+          name: stripImages
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: Remove break tags from content.
+          in: query
+          name: stripBreaks
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: Remove class attributes from content (except 'syndicate').
+          in: query
+          name: stripClasses
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: 'Set font size (in points) of p, div, and span tags.'
+          in: query
+          name: font-size
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Accepts valid CSS float options, such as ''left'' or ''right''. Will inject a style into the content before rendering.'
+          in: query
+          name: imageFloat
+          required: false
+          schema:
+            type: string
+        - description: 'Accepts 4 CSV values representing pixel sizes of margin similar to CSS. Default format is ''north,east,south,west'' - for example ''0,10,10,0'' would put a 10 pixel margin on the right and bottom sides of an image. Will inject a style into the content before rendering.'
+          in: query
+          name: imageMargin
+          required: false
+          schema:
+            type: string
+        - description: 'If content is a video, the embeded video will auto play when loaded.'
+          in: query
+          name: autoplay
+          required: false
+          schema:
+            type: boolean
+            default: true
+        - description: 'If content is a video, related items will be shown at the end of playback.'
+          in: query
+          name: rel
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyndicatedMediaItems'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/SyndicatedMediaItems'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+            text/html:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+            text/html:
+              schema:
+                type: string
+      summary: Get syndicated content for MediaItem
+      tags:
+        - media
+  '/resources/media/{id}/thumbnail.jpg':
+    get:
+      description: 'Returns the JPG thumbnail, where applicable, for the MediaItem identified by the ''id''.'
+      operationId: getMediaThumbnailById
+      parameters:
+        - description: The id of the media to get a thumbnail for.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            image/jpeg:
+              schema:
+                type: string
+        '400':
+          description: Invalid ID
+          content:
+            image/jpeg:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            image/jpeg:
+              schema:
+                type: string
+      summary: Get JPG thumbnail for MediaItem
+      tags:
+        - media
+  '/resources/media/{id}/youtubeMetaData.json':
+    get:
+      description: 'Returns the Youtube metadata, where applicable, for the MediaItem identified by the ''id''.'
+      operationId: getMediaYoutubeMetaDataById
+      parameters:
+        - description: The id of the video to show meta data for.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YoutubeMetadata'
+        '400':
+          description: Invalid ID or Invalid media type
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get Youtube metadata for MediaItem
+      tags:
+        - media
+  /resources/mediaTypes.json:
+    get:
+      description: Returns the list of available MediaTypes.
+      operationId: getMediaTypes
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaTypes'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get MediaTypes
+      tags:
+        - mediaTypes
+  /resources/sources.json:
+    get:
+      description: Returns the list of Sources.
+      operationId: getSources
+      parameters:
+        - description: The maximum number of records to return
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The offset of the records set to return for pagination
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: '* Set of fields to sort the records by.'
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sources'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get Sources
+      tags:
+        - sources
+  '/resources/sources/{id}.json':
+    get:
+      description: Returns the Source identified by the 'id'.
+      operationId: getSourceById
+      parameters:
+        - description: The id of the source to look up
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sources'
+        '400':
+          description: Invalid ID
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get Source by ID
+      tags:
+        - sources
+  '/resources/sources/{id}/syndicate.json':
+    get:
+      description: Renders the list of MediaItems associated with the Source identified by the 'id'.
+      parameters:
+        - description: The id of the record to look up
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: 'Method used to render an html request. Accepts one: [mv, list, feed]'
+          in: query
+          name: displayMethod
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get MediaItems for Source
+      tags:
+        - sources
+  /resources/tags.json:
+    get:
+      description: Returns the list of Tags matching the specified query parameters in the specified 'format'.
+      operationId: getTags
+      parameters:
+        - description: The name of the property to which sorting will be applied
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of records to return
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Return records starting at the offset index.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: 'Return tags[s] matching the supplied name'
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: Return tags which contain the supplied partial name.
+          in: query
+          name: nameContains
+          required: false
+          schema:
+            type: string
+        - description: Return tags associated with the supplied media id.
+          in: query
+          name: mediaId
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - description: Return tags belonging to the supplied tag type id.
+          in: query
+          name: typeId
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - description: Return tags belonging to the supplied tag type name.
+          in: query
+          name: typeName
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tags'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get Tags
+      tags:
+        - tags
+  /resources/tags/tagLanguages.json:
+    get:
+      description: Returns the list of TagLanguages
+      operationId: getTagLanguages
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagLanguages'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get TagLanguages
+      tags:
+        - tags
+  /resources/tags/tagTypes.json:
+    get:
+      description: Returns the list of TagTypes
+      operationId: getTagTypes
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagTypes'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get TagTypes
+      tags:
+        - tags
+  '/resources/tags/{id}.json':
+    get:
+      description: Returns the Tag identified by the 'id' in the specified 'format'.
+      operationId: getTagById
+      parameters:
+        - description: The id of the record to look up
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tags'
+        '400':
+          description: Invalid ID
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get Tag by ID
+      tags:
+        - tags
+  '/resources/tags/{id}/media.json':
+    get:
+      description: Returns the list of MediaItems associated with the Tag identified by the 'id'.
+      operationId: getMediaByTagId
+      parameters:
+        - description: The id of the record to look up
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The maximum number of records to return
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The offset of the records set to return for pagination
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The name of the property to which sorting will be applied
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get MediaItems for Tag
+      tags:
+        - tags
+  '/resources/tags/{id}/related.json':
+    get:
+      description: Returns the list of Tags related to the Tag identified by the 'id' in the specified format.
+      operationId: getRelatedTagsById
+      parameters:
+        - description: The id of the tag to look up
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: The maximum number of records to return
+          in: query
+          name: max
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The offset of the records set to return for pagination
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: The name of the property to which sorting will be applied
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tags'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get related Tags by ID
+      tags:
+        - tags
+  '/resources/tags/{id}/syndicate.json':
+    get:
+      description: Renders the list of MediaItems associated with the Tag identified by the 'id'.
+      parameters:
+        - description: The id of the record to look up
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: 'Method used to render an html request. Accepts one: [mv, list, feed]'
+          in: query
+          name: displayMethod
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get MediaItems for Tag
+      tags:
+        - tags
+  '/resources/userMediaLists/{id}.json':
+    get:
+      description: Get a specific user media list by 'id'.
+      operationId: getUserMediaList
+      parameters:
+        - description: The id of the record to look up
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: 'Method used to render an html request. Accepts one: [mv, list, feed]'
+          in: query
+          name: displayMethod
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaItems'
+        '400':
+          description: Invalid ID
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get UserMediaList by ID
+      tags:
+        - userMediaLists
+components:
+  schemas:
+    AlternateImage:
+      properties:
+        height:
+          format: int32
+          type: integer
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        url:
+          type: string
+        width:
+          format: int32
+          type: integer
+      required:
+        - id
+        - url
+    ApiResponse:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/MediaItem'
+          type: array
+      required:
+        - meta
+        - results
+        - callback
+    Campaign:
+      properties:
+        contactEmail:
+          type: string
+        description:
+          type: string
+        endDate:
+          format: date
+          type: string
+        id:
+          format: int64
+          type: integer
+        mediaItems:
+          items:
+            $ref: '#/components/schemas/MediaItem'
+          type: array
+        name:
+          type: string
+        source:
+          $ref: '#/components/schemas/Source'
+        startDate:
+          format: date
+          type: string
+      required:
+        - id
+        - name
+        - startDate
+    Campaigns:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/Campaign'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    Collection:
+      properties:
+        campaigns:
+          items:
+            $ref: '#/components/schemas/Campaign'
+          type: array
+        dateContentAuthored:
+          format: date
+          type: string
+        dateContentPublished:
+          format: date
+          type: string
+        dateContentReviewed:
+          format: date
+          type: string
+        dateContentUpdated:
+          format: date
+          type: string
+        dateSyndicationCaptured:
+          format: date
+          type: string
+        dateSyndicationUpdated:
+          format: date
+          type: string
+        dateSyndicationVisible:
+          format: date
+          type: string
+        description:
+          type: string
+        externalGuid:
+          type: string
+        hash:
+          type: string
+        id:
+          format: int64
+          type: integer
+        language:
+          $ref: '#/components/schemas/Language'
+        mediaItems:
+          items:
+            $ref: '#/components/schemas/MediaItem'
+          type: array
+        name:
+          type: string
+        source:
+          $ref: '#/components/schemas/Source'
+        sourceUrl:
+          type: string
+    EmbedCode:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/Snippet'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    Html:
+      properties:
+        createdBy:
+          type: string
+        customAttributionUrl:
+          type: string
+        customPreviewUrl:
+          type: string
+        customThumbnailUrl:
+          type: string
+        dateContentAuthored:
+          format: date
+          type: string
+        dateContentPublished:
+          format: date
+          type: string
+        dateContentReviewed:
+          format: date
+          type: string
+        dateContentUpdated:
+          format: date
+          type: string
+        dateSyndicationCaptured:
+          format: date
+          type: string
+        dateSyndicationUpdated:
+          format: date
+          type: string
+        dateSyndicationVisible:
+          format: date
+          type: string
+        description:
+          type: string
+        extendedAttributes:
+          type: object
+        externalGuid:
+          type: string
+        foreignSyndicationAPIUrl:
+          type: string
+        hash:
+          type: string
+        id:
+          format: int64
+          type: integer
+        language:
+          $ref: '#/components/schemas/Language'
+        mediaType:
+          type: string
+        name:
+          type: string
+        source:
+          $ref: '#/components/schemas/Source'
+        sourceUrl:
+          type: string
+        targetUrl:
+          type: string
+      required:
+        - id
+        - name
+        - mediaType
+        - sourceUrl
+        - dateSyndicationCaptured
+        - dateSyndicationUpdated
+        - dateSyndicationVisible
+        - language
+        - source
+        - createdBy
+        - foreignSyndicationAPIUrl
+    Image:
+      properties:
+        altText:
+          type: string
+        createdBy:
+          type: string
+        customAttributionUrl:
+          type: string
+        customPreviewUrl:
+          type: string
+        customThumbnailUrl:
+          type: string
+        dateContentAuthored:
+          format: date
+          type: string
+        dateContentPublished:
+          format: date
+          type: string
+        dateContentReviewed:
+          format: date
+          type: string
+        dateContentUpdated:
+          format: date
+          type: string
+        dateSyndicationCaptured:
+          format: date
+          type: string
+        dateSyndicationUpdated:
+          format: date
+          type: string
+        dateSyndicationVisible:
+          format: date
+          type: string
+        description:
+          type: string
+        extendedAttributes:
+          type: object
+        externalGuid:
+          type: string
+        foreignSyndicationAPIUrl:
+          type: string
+        hash:
+          type: string
+        height:
+          format: int32
+          type: integer
+        id:
+          format: int64
+          type: integer
+        imageFormat:
+          type: string
+        language:
+          $ref: '#/components/schemas/Language'
+        mediaType:
+          type: string
+        name:
+          type: string
+        source:
+          $ref: '#/components/schemas/Source'
+        sourceUrl:
+          type: string
+        targetUrl:
+          type: string
+        width:
+          format: int32
+          type: integer
+      required:
+        - id
+        - name
+        - mediaType
+        - sourceUrl
+        - dateSyndicationCaptured
+        - dateSyndicationUpdated
+        - dateSyndicationVisible
+        - language
+        - source
+        - createdBy
+        - foreignSyndicationAPIUrl
+        - width
+        - height
+        - imageFormat
+        - altText
+    Infographic:
+      properties:
+        altText:
+          type: string
+        createdBy:
+          type: string
+        customAttributionUrl:
+          type: string
+        customPreviewUrl:
+          type: string
+        customThumbnailUrl:
+          type: string
+        dateContentAuthored:
+          format: date
+          type: string
+        dateContentPublished:
+          format: date
+          type: string
+        dateContentReviewed:
+          format: date
+          type: string
+        dateContentUpdated:
+          format: date
+          type: string
+        dateSyndicationCaptured:
+          format: date
+          type: string
+        dateSyndicationUpdated:
+          format: date
+          type: string
+        dateSyndicationVisible:
+          format: date
+          type: string
+        description:
+          type: string
+        extendedAttributes:
+          type: object
+        externalGuid:
+          type: string
+        foreignSyndicationAPIUrl:
+          type: string
+        hash:
+          type: string
+        height:
+          format: int32
+          type: integer
+        id:
+          format: int64
+          type: integer
+        imageFormat:
+          type: string
+        language:
+          $ref: '#/components/schemas/Language'
+        mediaType:
+          type: string
+        name:
+          type: string
+        source:
+          $ref: '#/components/schemas/Source'
+        sourceUrl:
+          type: string
+        targetUrl:
+          type: string
+        width:
+          format: int32
+          type: integer
+      required:
+        - id
+        - name
+        - mediaType
+        - sourceUrl
+        - dateSyndicationCaptured
+        - dateSyndicationUpdated
+        - dateSyndicationVisible
+        - language
+        - source
+        - createdBy
+        - foreignSyndicationAPIUrl
+        - width
+        - height
+        - imageFormat
+        - altText
+    Language:
+      properties:
+        id:
+          format: int64
+          type: integer
+        isActive:
+          type: boolean
+        isoCode:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+        - isoCode
+        - isActive
+    Languages:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/Language'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    Likes:
+      properties:
+        likes:
+          format: int32
+          type: integer
+      required:
+        - likes
+    MediaItem:
+      properties:
+        createdBy:
+          type: string
+        customAttributionUrl:
+          type: string
+        customPreviewUrl:
+          type: string
+        customThumbnailUrl:
+          type: string
+        dateContentAuthored:
+          format: date
+          type: string
+        dateContentPublished:
+          format: date
+          type: string
+        dateContentReviewed:
+          format: date
+          type: string
+        dateContentUpdated:
+          format: date
+          type: string
+        dateSyndicationCaptured:
+          format: date
+          type: string
+        dateSyndicationUpdated:
+          format: date
+          type: string
+        dateSyndicationVisible:
+          format: date
+          type: string
+        description:
+          type: string
+        extendedAttributes:
+          type: object
+        externalGuid:
+          type: string
+        foreignSyndicationAPIUrl:
+          type: string
+        hash:
+          type: string
+        id:
+          format: int64
+          type: integer
+        language:
+          $ref: '#/components/schemas/Language'
+        mediaType:
+          type: string
+        name:
+          type: string
+        source:
+          $ref: '#/components/schemas/Source'
+        sourceUrl:
+          type: string
+        targetUrl:
+          type: string
+      required:
+        - id
+        - name
+        - mediaType
+        - sourceUrl
+        - dateSyndicationCaptured
+        - dateSyndicationUpdated
+        - dateSyndicationVisible
+        - language
+        - source
+        - createdBy
+        - foreignSyndicationAPIUrl
+    MediaItems:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/MediaItem'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    MediaType:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+        - name
+        - description
+    MediaTypes:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/MediaType'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    Message:
+      properties:
+        errorCode:
+          type: string
+        errorDetail:
+          type: string
+        errorMessage:
+          type: string
+        userMessage:
+          type: string
+      required:
+        - userMessage
+    Meta:
+      properties:
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        status:
+          format: int64
+          type: integer
+      required:
+        - status
+        - messages
+        - pagination
+    PDF:
+      properties:
+        createdBy:
+          type: string
+        customAttributionUrl:
+          type: string
+        customPreviewUrl:
+          type: string
+        customThumbnailUrl:
+          type: string
+        dateContentAuthored:
+          format: date
+          type: string
+        dateContentPublished:
+          format: date
+          type: string
+        dateContentReviewed:
+          format: date
+          type: string
+        dateContentUpdated:
+          format: date
+          type: string
+        dateSyndicationCaptured:
+          format: date
+          type: string
+        dateSyndicationUpdated:
+          format: date
+          type: string
+        dateSyndicationVisible:
+          format: date
+          type: string
+        description:
+          type: string
+        extendedAttributes:
+          type: object
+        externalGuid:
+          type: string
+        foreignSyndicationAPIUrl:
+          type: string
+        hash:
+          type: string
+        id:
+          format: int64
+          type: integer
+        language:
+          $ref: '#/components/schemas/Language'
+        mediaType:
+          type: string
+        name:
+          type: string
+        source:
+          $ref: '#/components/schemas/Source'
+        sourceUrl:
+          type: string
+        targetUrl:
+          type: string
+      required:
+        - id
+        - name
+        - mediaType
+        - sourceUrl
+        - dateSyndicationCaptured
+        - dateSyndicationUpdated
+        - dateSyndicationVisible
+        - language
+        - source
+        - createdBy
+        - foreignSyndicationAPIUrl
+    Pagination:
+      properties:
+        count:
+          format: int32
+          type: integer
+        currentUrl:
+          type: string
+        max:
+          format: int32
+          type: integer
+        nextUrl:
+          type: string
+        offset:
+          format: int32
+          type: integer
+        pageNum:
+          format: int32
+          type: integer
+        previousUrl:
+          type: string
+        sort:
+          type: string
+        total:
+          format: int32
+          type: integer
+        totalPages:
+          format: int32
+          type: integer
+      required:
+        - max
+        - offset
+        - count
+        - total
+        - pageNum
+        - totalPages
+        - sort
+        - currentUrl
+    Ratings:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/Likes'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    Resource:
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+      required:
+        - name
+    ResourceList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Resource'
+          type: array
+        mediaType:
+          type: string
+      required:
+        - items
+        - mediaType
+    ResourceLists:
+      properties:
+        alternateImages:
+          $ref: '#/components/schemas/ResourceList'
+        campaigns:
+          $ref: '#/components/schemas/ResourceList'
+        collections:
+          $ref: '#/components/schemas/ResourceList'
+        htmls:
+          $ref: '#/components/schemas/ResourceList'
+        images:
+          $ref: '#/components/schemas/ResourceList'
+        infographics:
+          $ref: '#/components/schemas/ResourceList'
+        languages:
+          $ref: '#/components/schemas/ResourceList'
+        socialMedias:
+          $ref: '#/components/schemas/ResourceList'
+        sources:
+          $ref: '#/components/schemas/ResourceList'
+        tagTypes:
+          $ref: '#/components/schemas/ResourceList'
+        tags:
+          $ref: '#/components/schemas/ResourceList'
+        videos:
+          $ref: '#/components/schemas/ResourceList'
+    Resources:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/ResourceLists'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    Snippet:
+      properties:
+        snippet:
+          type: string
+      required:
+        - snippet
+    Source:
+      properties:
+        acronym:
+          type: string
+        contactEmail:
+          type: string
+        id:
+          format: int64
+          type: integer
+        largeLogoUrl:
+          type: string
+        name:
+          type: string
+        smallLogoUrl:
+          type: string
+        websiteUrl:
+          type: string
+      required:
+        - id
+        - name
+        - acronym
+        - websiteUrl
+    Sources:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/Source'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    SyndicatedMediaItem:
+      properties:
+        content:
+          type: string
+        contentEncoding:
+          type: string
+        contentType:
+          type: string
+        description:
+          type: string
+        id:
+          format: int64
+          type: integer
+        mediaType:
+          type: string
+        name:
+          type: string
+        text:
+          type: string
+    SyndicatedMediaItems:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/SyndicatedMediaItem'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    Tag:
+      properties:
+        id:
+          format: int64
+          type: integer
+        language:
+          $ref: '#/components/schemas/Language'
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/TagType'
+      required:
+        - id
+        - name
+        - language
+        - type
+    TagLanguage:
+      properties:
+        id:
+          format: int64
+          type: integer
+        isoCode:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+        - isoCode
+    TagLanguages:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/TagLanguage'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    TagType:
+      properties:
+        description:
+          type: string
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+      required:
+        - id
+        - name
+    TagTypes:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/TagType'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    Tags:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+      required:
+        - meta
+        - callback
+        - results
+    Video:
+      properties:
+        createdBy:
+          type: string
+        customAttributionUrl:
+          type: string
+        customPreviewUrl:
+          type: string
+        customThumbnailUrl:
+          type: string
+        dateContentAuthored:
+          format: date
+          type: string
+        dateContentPublished:
+          format: date
+          type: string
+        dateContentReviewed:
+          format: date
+          type: string
+        dateContentUpdated:
+          format: date
+          type: string
+        dateSyndicationCaptured:
+          format: date
+          type: string
+        dateSyndicationUpdated:
+          format: date
+          type: string
+        dateSyndicationVisible:
+          format: date
+          type: string
+        description:
+          type: string
+        duration:
+          format: int32
+          type: integer
+        extendedAttributes:
+          type: object
+        externalGuid:
+          type: string
+        foreignSyndicationAPIUrl:
+          type: string
+        hash:
+          type: string
+        height:
+          format: int32
+          type: integer
+        id:
+          format: int64
+          type: integer
+        language:
+          $ref: '#/components/schemas/Language'
+        mediaType:
+          type: string
+        name:
+          type: string
+        source:
+          $ref: '#/components/schemas/Source'
+        sourceUrl:
+          type: string
+        targetUrl:
+          type: string
+        width:
+          format: int32
+          type: integer
+      required:
+        - id
+        - name
+        - mediaType
+        - sourceUrl
+        - dateSyndicationCaptured
+        - dateSyndicationUpdated
+        - dateSyndicationVisible
+        - language
+        - source
+        - createdBy
+        - foreignSyndicationAPIUrl
+        - duration
+    YoutubeMetadata:
+      properties:
+        callback:
+          type: string
+        meta:
+          $ref: '#/components/schemas/Meta'
+        results:
+          items:
+            type: object
+          type: array
+      required:
+        - meta
+        - callback
+        - results

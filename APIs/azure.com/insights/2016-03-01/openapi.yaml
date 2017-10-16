@@ -1,0 +1,185 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://management.azure.com/'
+info:
+  title: InsightsClient
+  version: '2016-03-01'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/insights/2016-03-01/swagger/insightsClient_MetricDefinitions.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: insights
+  x-tags:
+    - Azure
+    - Microsoft
+paths:
+  '/{resourceUri}/providers/microsoft.insights/metricDefinitions':
+    get:
+      description: 'Lists the metric definitions for the resource. The **$filter** parameter is optional, and can be used to only retrieve certain metric definitions. For example, get just the definition for the CPU percentage counter: $filter=name.value eq ''\Processor(_Total)\% Processor Time''. This $filter is very restricted and allows only these ''name eq <value>'' clauses separated by or operators. No other syntax is allowed.'
+      operationId: MetricDefinitions_List
+      parameters:
+        - $ref: '#/components/parameters/ResourceUriParameter'
+        - $ref: '#/components/parameters/ApiVersionParameter'
+        - $ref: '#/components/parameters/FilterParameter'
+      responses:
+        '200':
+          description: Successful request to get the list of metric definitions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricDefinitionCollection'
+              examples:
+                response:
+                  value:
+                    value:
+                      - id: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsStarted
+                        metricAvailabilities:
+                          - retention: P30D
+                            timeGrain: PT1M
+                          - retention: P30D
+                            timeGrain: PT1H
+                        name:
+                          localizedValue: Runs Started
+                          value: RunsStarted
+                        primaryAggregationType: Total
+                        resourceId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia
+                        unit: Count
+                      - id: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsCompleted
+                        metricAvailabilities:
+                          - retention: P30D
+                            timeGrain: PT1M
+                          - retention: P30D
+                            timeGrain: PT1H
+                        name:
+                          localizedValue: Runs Completed
+                          value: RunsCompleted
+                        primaryAggregationType: Total
+                        resourceId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia
+                        unit: Count
+                      - id: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsSucceeded
+                        metricAvailabilities:
+                          - retention: P30D
+                            timeGrain: PT1M
+                          - retention: P30D
+                            timeGrain: PT1H
+                        name:
+                          localizedValue: Runs Succeeded
+                          value: RunsSucceeded
+                        primaryAggregationType: Total
+                        resourceId: /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia
+                        unit: Count
+      tags:
+        - MetricDefinitions
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/MetricDefinition'
+      x-ms-pageable: {}
+components:
+  schemas:
+    LocalizableString:
+      description: The localizable string class.
+      properties:
+        localizedValue:
+          description: the locale specific value.
+          type: string
+        value:
+          description: the invariant value.
+          type: string
+      required:
+        - value
+    MetricAvailability:
+      description: Metric availability specifies the time grain (aggregation interval or frequency) and the retention period for that time grain.
+      properties:
+        retention:
+          description: 'the retention period for the metric at the specified timegrain.  Expressed as a duration ''PT1M'', ''P1D'', etc.'
+          format: duration
+          type: string
+        timeGrain:
+          description: 'the time grain specifies the aggregation interval for the metric. Expressed as a duration ''PT1M'', ''P1D'', etc.'
+          format: duration
+          type: string
+    MetricDefinition:
+      description: Metric definition class specifies the metadata for a metric.
+      properties:
+        id:
+          description: the resource identifier of the metric definition.
+          type: string
+        metricAvailabilities:
+          description: the collection of what aggregation intervals are available to be queried.
+          items:
+            $ref: '#/components/schemas/MetricAvailability'
+          type: array
+        name:
+          $ref: '#/components/schemas/LocalizableString'
+        primaryAggregationType:
+          description: the primary aggregation type value defining how to use the values for display.
+          enum:
+            - None
+            - Average
+            - Count
+            - Minimum
+            - Maximum
+            - Total
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: AggregationType
+        resourceId:
+          description: the resource identifier of the resource that emitted the metric.
+          type: string
+        unit:
+          $ref: '#/components/schemas/Unit'
+    MetricDefinitionCollection:
+      description: Represents collection of metric definitions.
+      properties:
+        value:
+          description: the values for the metric definitions.
+          items:
+            $ref: '#/components/schemas/MetricDefinition'
+          type: array
+      required:
+        - value
+    Unit:
+      description: the unit of the metric.
+      enum:
+        - Count
+        - Bytes
+        - Seconds
+        - CountPerSecond
+        - BytesPerSecond
+        - Percent
+        - MilliSeconds
+      type: string
+      x-ms-enum:
+        modelAsString: false
+        name: Unit
+  parameters:
+    ApiVersionParameter:
+      description: Client Api Version.
+      in: query
+      name: api-version
+      required: true
+      schema:
+        type: string
+    FilterParameter:
+      description: Reduces the set of data collected. The syntax allowed depends on the operation. See the operation's description for details.
+      in: query
+      name: $filter
+      required: false
+      x-ms-parameter-location: method
+      schema:
+        type: string
+    ResourceUriParameter:
+      description: The identifier of the resource.
+      in: path
+      name: resourceUri
+      required: true
+      x-ms-parameter-location: method
+      x-ms-skip-url-encoding: true
+      schema:
+        type: string
+      allowReserved: true

@@ -1,0 +1,821 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://wikimedia.org/api/rest_v1'
+info:
+  contact:
+    name: the Wikimedia Services team
+    url: 'http://mediawiki.org/wiki/RESTBase'
+  description: |
+    This API provides cacheable and straightforward access to Wikimedia content and data, in machine-readable formats. Each entry point has explicit stability markers to inform you about development status and change policy, according to [our API version policy](https://www.mediawiki.org/wiki/API_versioning).
+    See https://www.mediawiki.org/wiki/REST_API for background and details.
+    ### High-volume access
+      - Limit your clients to no more than 200 requests/s to this API.
+      - Set a unique `User-Agent` or `Api-User-Agent` header that
+        allows us to contact you quickly. Email addresses or URLs
+        of contact pages work well.
+
+    By using this API, you agree to Wikimedia's  [Terms of Use](https://wikimediafoundation.org/wiki/Terms_of_Use) and [Privacy Policy](https://wikimediafoundation.org/wiki/Privacy_policy), and you irrevocably agree to release modifications or additions made through this API under the  [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)  License and the [GFDL](https://www.gnu.org/copyleft/fdl.html).
+  license:
+    name: Apache2
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+  termsOfService: 'https://wikimediafoundation.org/wiki/Terms_of_Use'
+  title: Wikimedia
+  version: 1.0.0
+  x-apisguru-categories:
+    - media
+  x-logo:
+    url: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1122px-Wikipedia-logo-v2.svg.png'
+  x-origin:
+    - format: swagger
+      url: 'https://wikimedia.org/api/rest_v1/?spec'
+      version: '2.0'
+  x-providerName: wikimedia.org
+tags:
+  - description: formula rendering
+    name: Math
+paths:
+  '/media/math/check/{type}':
+    post:
+      description: |
+        Checks the supplied TeX formula for correctness and returns the
+        normalised formula representation as well as information about
+        identifiers. Available types are tex and inline-tex. The response
+        contains the `x-resource-location` header which can be used to retrieve
+        the render of the checked formula in one of the supported rendering
+        formats. Just append the value of the header to `/media/math/{format}/`
+        and perform a GET request against that URL.
+
+        Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).
+      parameters:
+        - description: The input type of the given formula; can be tex or inline-tex
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum:
+              - tex
+              - inline-tex
+              - chem
+      responses:
+        '200':
+          description: Information about the checked formula
+        '400':
+          description: Invalid type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      summary: Check and normalize a TeX formula.
+      tags:
+        - Math
+      x-amples:
+        - request:
+            body:
+              q: 'E=mc^{2}'
+            params:
+              domain: wikimedia.org
+              type: tex
+          response:
+            body:
+              checked: /.+/
+              success: true
+            headers:
+              cache-control: no-cache
+              content-type: /^application\/json/
+              x-resource-location: /.+/
+            status: 200
+          title: Mathoid - check test formula
+      x-monitor: true
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                q:
+                  description: The formula to check
+                  type: string
+              required:
+                - q
+  '/media/math/formula/{hash}':
+    get:
+      description: |
+        Returns the previously-stored formula via `/media/math/check/{type}` for
+        the given hash.
+
+        Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).
+      parameters:
+        - description: The hash string of the previous POST data
+          in: path
+          name: hash
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Information about the checked formula
+        '404':
+          description: Data for the given hash cannot be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      summary: Get a previously-stored formula
+      tags:
+        - Math
+      x-monitor: false
+  '/media/math/render/{format}/{hash}':
+    get:
+      description: |
+        Given a request hash, renders a TeX formula into its mathematic
+        representation in the given format. When a request is issued to the
+        `/media/math/check/{format}` POST endpoint, the response contains the
+        `x-resource-location` header denoting the hash ID of the POST data. Once
+        obtained, this endpoint has to be used to obtain the actual render.
+
+        Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable).
+      parameters:
+        - description: The output format; can be svg or mml
+          in: path
+          name: format
+          required: true
+          schema:
+            type: string
+            enum:
+              - svg
+              - mml
+              - png
+        - description: The hash string of the previous POST data
+          in: path
+          name: hash
+          required: true
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: The rendered formula
+        '404':
+          description: Unknown format or hash ID
+          content:
+            image/svg+xml:
+              schema:
+                $ref: '#/components/schemas/problem'
+            application/mathml+xml:
+              schema:
+                $ref: '#/components/schemas/problem'
+            image/png:
+              schema:
+                $ref: '#/components/schemas/problem'
+        default:
+          description: Error
+          content:
+            image/svg+xml:
+              schema:
+                $ref: '#/components/schemas/problem'
+            application/mathml+xml:
+              schema:
+                $ref: '#/components/schemas/problem'
+            image/png:
+              schema:
+                $ref: '#/components/schemas/problem'
+      summary: Get rendered formula in the given format.
+      tags:
+        - Math
+      x-monitor: false
+  /metrics/legacy/:
+    get:
+      description: |
+        This is the root of all legacy data endpoints. For the moment it only contains aggregated pagecounts.
+
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
+      responses:
+        '200':
+          description: The queriable sub-items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listing'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      summary: List legacy metrics API entry points.
+      tags:
+        - Legacy metrics
+      x-monitor: false
+  '/metrics/legacy/pagecounts/aggregate/{project}/{access-site}/{granularity}/{start}/{end}':
+    get:
+      description: |
+        Given a project and a date range, returns a timeseries of pagecounts. You can filter by access site (mobile or desktop) and you can choose between monthly, daily and hourly granularity as well.
+
+        - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+        - Rate limit: 100 req/s
+      parameters:
+        - description: 'The name of any Wikimedia project formatted like {language code}.{project name}, for example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped off. For projects like commons without language codes, use commons.wikimedia.'
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: 'If you want to filter by access site, use one of desktop-site or mobile-site. If you are interested in pagecounts regardless of access site use all-sites.'
+          in: path
+          name: access-site
+          required: true
+          schema:
+            type: string
+            enum:
+              - all-sites
+              - desktop-site
+              - mobile-site
+        - description: 'The time unit for the response data. As of today, the supported granularities for this endpoint are hourly, daily and monthly.'
+          in: path
+          name: granularity
+          required: true
+          schema:
+            type: string
+            enum:
+              - hourly
+              - daily
+              - monthly
+        - description: 'The timestamp of the first hour/day/month to include, in YYYYMMDDHH format.'
+          in: path
+          name: start
+          required: true
+          schema:
+            type: string
+        - description: 'The timestamp of the last hour/day/month to include, in YYYYMMDDHH format. In hourly and daily granularities this value is inclusive, in the monthly granularity this value is exclusive.'
+          in: path
+          name: end
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The list of values
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pagecounts-project'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      tags:
+        - Pagecounts data (legacy)
+      x-monitor: false
+  /metrics/pageviews/:
+    get:
+      description: |
+        This is the root of all pageview data endpoints.  The list of paths that this returns includes ways to query by article, project, top articles, etc.  If browsing the interactive documentation, see the specifics for each endpoint below.
+
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
+      responses:
+        '200':
+          description: The queriable sub-items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listing'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      summary: List pageview-related API entry points.
+      tags:
+        - Pageviews data
+      x-monitor: false
+  '/metrics/pageviews/aggregate/{project}/{access}/{agent}/{granularity}/{start}/{end}':
+    get:
+      description: |
+        Given a date range, returns a timeseries of pageview counts. You can filter by project, access method and/or agent type. You can choose between daily and hourly granularity as well.
+
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
+      parameters:
+        - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''. If you are interested in all pageviews regardless of project, use all-projects.'
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: 'If you want to filter by access method, use one of desktop, mobile-app or mobile-web. If you are interested in pageviews regardless of access method, use all-access'
+          in: path
+          name: access
+          required: true
+          schema:
+            type: string
+            enum:
+              - all-access
+              - desktop
+              - mobile-app
+              - mobile-web
+        - description: 'If you want to filter by agent type, use one of user or spider. If you are interested in pageviews regardless of agent type, use all-agents'
+          in: path
+          name: agent
+          required: true
+          schema:
+            type: string
+            enum:
+              - all-agents
+              - user
+              - spider
+        - description: 'The time unit for the response data. As of today, the supported granularities for this endpoint are hourly, daily, and monthly'
+          in: path
+          name: granularity
+          required: true
+          schema:
+            type: string
+            enum:
+              - hourly
+              - daily
+              - monthly
+        - description: 'The timestamp of the first hour/day/month to include, in YYYYMMDDHH format'
+          in: path
+          name: start
+          required: true
+          schema:
+            type: string
+        - description: 'The timestamp of the last hour/day/month to include, in YYYYMMDDHH format'
+          in: path
+          name: end
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The list of values
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pageview-project'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      summary: Get pageview counts for a project.
+      tags:
+        - Pageviews data
+      x-amples:
+        - request:
+            params:
+              access: all-access
+              agent: all-agents
+              domain: wikimedia.org
+              end: 1970010100
+              granularity: hourly
+              project: en.wikipedia
+              start: 1970010100
+          response:
+            body:
+              items:
+                - access: all-access
+                  agent: all-agents
+                  granularity: hourly
+                  project: en.wikipedia
+                  timestamp: 1970010100
+                  views: 0
+            headers:
+              content-type: application/json
+            status: 200
+          title: Get aggregate page views
+      x-monitor: true
+  '/metrics/pageviews/per-article/{project}/{access}/{agent}/{article}/{granularity}/{start}/{end}':
+    get:
+      description: |
+        Given a Mediawiki article and a date range, returns a daily timeseries of its pageview counts. You can also filter by access method and/or agent type.
+
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
+      parameters:
+        - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''.'
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: 'If you want to filter by access method, use one of desktop, mobile-app or mobile-web. If you are interested in pageviews regardless of access method, use all-access'
+          in: path
+          name: access
+          required: true
+          schema:
+            type: string
+            enum:
+              - all-access
+              - desktop
+              - mobile-app
+              - mobile-web
+        - description: 'If you want to filter by agent type, use one of user, bot or spider. If you are interested in pageviews regardless of agent type, use all-agents'
+          in: path
+          name: agent
+          required: true
+          schema:
+            type: string
+            enum:
+              - all-agents
+              - user
+              - spider
+              - bot
+        - description: 'The title of any article in the specified project. Any spaces should be replaced with underscores. It also should be URI-encoded, so that non-URI-safe characters like %, / or ? are accepted. Example: Are_You_the_One%3F'
+          in: path
+          name: article
+          required: true
+          schema:
+            type: string
+        - description: 'The time unit for the response data. As of today, the only supported granularity for this endpoint is daily and monthly.'
+          in: path
+          name: granularity
+          required: true
+          schema:
+            type: string
+            enum:
+              - daily
+              - monthly
+        - description: 'The date of the first day to include, in YYYYMMDD format'
+          in: path
+          name: start
+          required: true
+          schema:
+            type: string
+        - description: 'The date of the last day to include, in YYYYMMDD format'
+          in: path
+          name: end
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The list of values
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pageview-article'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      summary: Get pageview counts for a page.
+      tags:
+        - Pageviews data
+      x-monitor: false
+  '/metrics/pageviews/top/{project}/{access}/{year}/{month}/{day}':
+    get:
+      description: |
+        Lists the 1000 most viewed articles for a given project and timespan (month or day). You can filter by access method.
+
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
+      parameters:
+        - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''.'
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: 'If you want to filter by access method, use one of desktop, mobile-app or mobile-web. If you are interested in pageviews regardless of access method, use all-access'
+          in: path
+          name: access
+          required: true
+          schema:
+            type: string
+            enum:
+              - all-access
+              - desktop
+              - mobile-app
+              - mobile-web
+        - description: 'The year of the date for which to retrieve top articles, in YYYY format.'
+          in: path
+          name: year
+          required: true
+          schema:
+            type: string
+        - description: 'The month of the date for which to retrieve top articles, in MM format. If you want to get the top articles of a whole month, the day parameter should be all-days.'
+          in: path
+          name: month
+          required: true
+          schema:
+            type: string
+        - description: 'The day of the date for which to retrieve top articles, in DD format.'
+          in: path
+          name: day
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The list of top articles in the project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pageview-tops'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      summary: Get the most viewed articles for a project.
+      tags:
+        - Pageviews data
+      x-monitor: false
+  '/metrics/unique-devices/{project}/{access-site}/{granularity}/{start}/{end}':
+    get:
+      description: |
+        Given a project and a date range, returns a timeseries of unique devices counts. You need to specify a project, and can filter by accessed site (mobile or desktop). You can choose between daily and hourly granularity as well.
+
+        - Stability: [stable](https://www.mediawiki.org/wiki/API_versioning#Stable)
+        - Rate limit: 100 req/s
+      parameters:
+        - description: 'If you want to filter by project, use the domain of any Wikimedia project, for example ''en.wikipedia.org'', ''www.mediawiki.org'' or ''commons.wikimedia.org''.'
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: 'If you want to filter by accessed site, use one of desktop-site or mobile-site. If you are interested in unique devices regardless of accessed site, use or all-sites'
+          in: path
+          name: access-site
+          required: true
+          schema:
+            type: string
+            enum:
+              - all-sites
+              - desktop-site
+              - mobile-site
+        - description: 'The time unit for the response data. As of today, the supported granularities for this endpoint are daily and monthly'
+          in: path
+          name: granularity
+          required: true
+          schema:
+            type: string
+            enum:
+              - daily
+              - monthly
+        - description: 'The timestamp of the first day/month to include, in YYYYMMDD format'
+          in: path
+          name: start
+          required: true
+          schema:
+            type: string
+        - description: 'The timestamp of the last day/month to include, in YYYYMMDD format'
+          in: path
+          name: end
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The list of values
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unique-devices'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      summary: Get unique devices count per project
+      tags:
+        - Unique devices data
+      x-monitor: false
+x-default-params: {}
+x-host-basePath: /api/rest_v1
+components:
+  schemas:
+    listing:
+      description: The result format for listings
+      properties:
+        items:
+          items:
+            type: string
+          type: array
+      required:
+        - items
+    originalimage:
+      properties:
+        height:
+          description: Original image height
+          type: integer
+        source:
+          description: Original image URI
+          type: string
+        width:
+          description: Original image width
+          type: integer
+      required:
+        - source
+        - width
+        - height
+      type: object
+    pagecounts-project:
+      properties:
+        items:
+          items:
+            properties:
+              access-site:
+                type: string
+              count:
+                format: int64
+                type: integer
+              granularity:
+                type: string
+              project:
+                type: string
+              timestamp:
+                type: string
+          type: array
+    pageview-article:
+      properties:
+        items:
+          items:
+            properties:
+              access:
+                type: string
+              agent:
+                type: string
+              article:
+                type: string
+              granularity:
+                type: string
+              project:
+                type: string
+              timestamp:
+                type: string
+              views:
+                format: int64
+                type: integer
+          type: array
+    pageview-project:
+      properties:
+        items:
+          items:
+            properties:
+              access:
+                type: string
+              agent:
+                type: string
+              granularity:
+                type: string
+              project:
+                type: string
+              timestamp:
+                type: string
+              views:
+                format: int64
+                type: integer
+          type: array
+    pageview-tops:
+      properties:
+        items:
+          items:
+            properties:
+              access:
+                type: string
+              articles:
+                type: string
+              day:
+                type: string
+              month:
+                type: string
+              project:
+                type: string
+              year:
+                type: string
+          type: array
+    problem:
+      properties:
+        detail:
+          type: string
+        instance:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+      required:
+        - type
+    summary:
+      properties:
+        coordinates:
+          description: The coordinates of the item
+          properties:
+            lat:
+              description: The latitude
+              type: number
+            lon:
+              description: The longitude
+              type: number
+          required:
+            - lat
+            - lon
+          type: object
+        description:
+          description: Wikidata description for the page
+          example: American poet
+          type: string
+        dir:
+          description: The page language direction code
+          example: ltr
+          type: string
+        displaytitle:
+          description: The page title how it should be shown to the user
+          type: string
+        extract:
+          description: First several sentences of an article in plain text
+          type: string
+        extract_html:
+          description: First several sentences of an article in simple HTML format
+          type: string
+        lang:
+          description: The page language code
+          example: en
+          type: string
+        originalimage:
+          $ref: '#/components/schemas/originalimage'
+        pageid:
+          description: The page ID
+          type: integer
+        thumbnail:
+          $ref: '#/components/schemas/thumbnail'
+        timestamp:
+          description: 'The time when the page was last editted in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format'
+          example: '1970-01-01T00:00:00.000Z'
+          type: string
+        title:
+          description: The page title
+          type: string
+      required:
+        - title
+        - extract
+        - lang
+        - dir
+      type: object
+    thumbnail:
+      properties:
+        height:
+          description: Thumnail height
+          type: integer
+        source:
+          description: Thumbnail image URI
+          type: string
+        width:
+          description: Thumbnail width
+          type: integer
+      required:
+        - source
+        - width
+        - height
+      type: object
+    unique-devices:
+      properties:
+        items:
+          items:
+            properties:
+              access-site:
+                type: string
+              devices:
+                format: int64
+                type: integer
+              granularity:
+                type: string
+              project:
+                type: string
+              timestamp:
+                type: string
+          type: array
+  securitySchemes:
+    mediawiki_auth:
+      description: Checks permissions using MW api
+      in: header
+      name: cookie
+      type: apiKey
+      x-internal-request-whitelist:
+        - '/http:\/\/[a-zA-Z0-9\.]+\/w\/api\.php/'

@@ -1,0 +1,327 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://www.googleapis.com/appstate/v1'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: The Google App State API.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Google App State
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://www.googleapis.com/discovery/v1/apis/appstate/v1/rest'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: appstate
+externalDocs:
+  url: 'https://developers.google.com/games/services/web/api/states'
+tags:
+  - name: states
+paths:
+  /states:
+    get:
+      description: 'Lists all the states keys, and optionally the state data.'
+      operationId: appstate.states.list
+      parameters:
+        - description: Whether to include the full data in addition to the version number
+          in: query
+          name: includeData
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/appstate'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/appstate'
+      tags:
+        - states
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/states/{stateKey}':
+    delete:
+      description: 'Deletes a key and the data associated with it. The key is removed and no longer counts against the key quota. Note that since this method is not safe in the face of concurrent modifications, it should only be used for development and testing purposes. Invoking this method in shipping code can result in data loss and data corruption.'
+      operationId: appstate.states.delete
+      parameters:
+        - description: The key for the data to be retrieved.
+          in: path
+          name: stateKey
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 3
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/appstate'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/appstate'
+      tags:
+        - states
+    get:
+      description: 'Retrieves the data corresponding to the passed key. If the key does not exist on the server, an HTTP 404 will be returned.'
+      operationId: appstate.states.get
+      parameters:
+        - description: The key for the data to be retrieved.
+          in: path
+          name: stateKey
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 3
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/appstate'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/appstate'
+      tags:
+        - states
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    put:
+      description: Update the data associated with the input key if and only if the passed version matches the currently stored version. This method is safe in the face of concurrent writes. Maximum per-key size is 128KB.
+      operationId: appstate.states.update
+      parameters:
+        - description: The key for the data to be retrieved.
+          in: path
+          name: stateKey
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 3
+        - description: 'The version of the app state your application is attempting to update. If this does not match the current version, this method will return a conflict error. If there is no data stored on the server for this key, the update will succeed irrespective of the value of this parameter.'
+          in: query
+          name: currentStateVersion
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WriteResult'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/appstate'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/appstate'
+      tags:
+        - states
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRequest'
+  '/states/{stateKey}/clear':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Clears (sets to empty) the data for the passed key if and only if the passed version matches the currently stored version. This method results in a conflict error on version mismatch.
+      operationId: appstate.states.clear
+      parameters:
+        - description: The key for the data to be retrieved.
+          in: path
+          name: stateKey
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 3
+        - description: The version of the data to be cleared. Version strings are returned by the server.
+          in: query
+          name: currentDataVersion
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WriteResult'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/appstate'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/appstate'
+      tags:
+        - states
+components:
+  schemas:
+    GetResponse:
+      description: This is a JSON template for an app state resource.
+      properties:
+        currentStateVersion:
+          description: The current app state version.
+          type: string
+        data:
+          description: The requested data.
+          type: string
+        kind:
+          default: 'appstate#getResponse'
+          description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#getResponse.'
+          type: string
+        stateKey:
+          description: The key for the data.
+          format: int32
+          type: integer
+      type: object
+    ListResponse:
+      description: This is a JSON template to convert a list-response for app state.
+      properties:
+        items:
+          description: The app state data.
+          items:
+            $ref: '#/components/schemas/GetResponse'
+          type: array
+        kind:
+          default: 'appstate#listResponse'
+          description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#listResponse.'
+          type: string
+        maximumKeyCount:
+          description: The maximum number of keys allowed for this user.
+          format: int32
+          type: integer
+      type: object
+    UpdateRequest:
+      description: This is a JSON template for a requests which update app state
+      properties:
+        data:
+          description: The new app state data that your application is trying to update with.
+          type: string
+        kind:
+          default: 'appstate#updateRequest'
+          description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#updateRequest.'
+          type: string
+      type: object
+    WriteResult:
+      description: This is a JSON template for an app state write result.
+      properties:
+        currentStateVersion:
+          description: The version of the data for this key on the server.
+          type: string
+        kind:
+          default: 'appstate#writeResult'
+          description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#writeResult.'
+          type: string
+        stateKey:
+          description: The written key.
+          format: int32
+          type: integer
+      type: object
+  parameters:
+    alt:
+      description: Data format for the response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+        default: json
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    userIp:
+      description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      in: query
+      name: userIp
+      schema:
+        type: string
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/appstate': View and manage your data for this application
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/appstate': View and manage your data for this application

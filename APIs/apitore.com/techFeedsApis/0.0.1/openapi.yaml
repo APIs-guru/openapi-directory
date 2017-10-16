@@ -1,0 +1,129 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.apitore.com/api/35'
+info:
+  description: 'Various tech feeds.<BR />[Endpoint] https://api.apitore.com/api/35'
+  title: Tech feeds APIs
+  version: 0.0.1
+  x-description-language: jp
+  x-logo:
+    url: 'https://apitore.com/img/apis/35.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/35'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: techFeedsApis
+tags:
+  - description: Rss Tech Controller
+    name: rss-tech-controller
+paths:
+  /feeds/tech:
+    get:
+      description: 'Tech feeds.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/rome-response">rome-response</a><BR />&nbsp; Class: com.apitore.banana.response.org.rome.FeedResponseEntity<BR />'
+      operationId: feedUsingGET_7
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: 'Page number [page x 10 feeds]'
+          in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get tech feeds
+      tags:
+        - rss-tech-controller
+components:
+  schemas:
+    FeedEntryEntity:
+      properties:
+        author:
+          description: Author
+          type: string
+        description:
+          description: Description
+          type: string
+        link:
+          description: Link
+          type: string
+        pubDate:
+          description: Published Date
+          format: int64
+          type: integer
+        sourceLink:
+          description: Source Link
+          type: string
+        sourceTitle:
+          description: Source Title
+          type: string
+        title:
+          description: Title
+          type: string
+      required:
+        - link
+        - pubDate
+        - sourceLink
+        - sourceTitle
+        - title
+      type: object
+    FeedResponseEntity:
+      properties:
+        endTime:
+          description: End date
+          type: string
+        entries:
+          description: Entries
+          items:
+            $ref: '#/components/schemas/FeedEntryEntity'
+          type: array
+        lastUpdatedAt:
+          description: Last Updated At
+          format: int64
+          type: integer
+        log:
+          description: Log message
+          type: string
+        num:
+          description: Num
+          format: int32
+          type: integer
+        page:
+          description: Input page num
+          format: int32
+          type: integer
+        processTime:
+          description: 'Process time [millisecond]'
+          type: string
+        startTime:
+          description: Start date
+          type: string
+      required:
+        - endTime
+        - entries
+        - lastUpdatedAt
+        - log
+        - num
+        - page
+        - processTime
+        - startTime
+      type: object

@@ -1,0 +1,1069 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://www.googleapis.com/resourceviews/v1beta1/projects'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: The Resource View API allows users to create and manage logical sets of Google Compute Engine instances.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Resource Views
+  version: v1beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://www.googleapis.com/discovery/v1/apis/resourceviews/v1beta1/rest'
+      version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: resourceviews
+externalDocs:
+  url: 'https://developers.google.com/compute/'
+tags:
+  - name: regionViews
+  - name: zoneViews
+paths:
+  '/{projectName}/regions/{region}/resourceViews':
+    get:
+      description: List resource views.
+      operationId: resourceviews.regionViews.list
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The region name of the resource view.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: 'Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 5000
+            default: 5000
+        - description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RegionViewsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+      tags:
+        - regionViews
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Create a resource view.
+      operationId: resourceviews.regionViews.insert
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The region name of the resource view.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RegionViewsInsertResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - regionViews
+      requestBody:
+        $ref: '#/components/requestBodies/ResourceView'
+  '/{projectName}/regions/{region}/resourceViews/{resourceViewName}':
+    delete:
+      description: Delete a resource view.
+      operationId: resourceviews.regionViews.delete
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The region name of the resource view.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The name of the resource view.
+          in: path
+          name: resourceViewName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - regionViews
+    get:
+      description: Get the information of a resource view.
+      operationId: resourceviews.regionViews.get
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The region name of the resource view.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The name of the resource view.
+          in: path
+          name: resourceViewName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceView'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+      tags:
+        - regionViews
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/{projectName}/regions/{region}/resourceViews/{resourceViewName}/addResources':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Add resources to the view.
+      operationId: resourceviews.regionViews.addresources
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The region name of the resource view.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The name of the resource view.
+          in: path
+          name: resourceViewName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - regionViews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegionViewsAddResourcesRequest'
+  '/{projectName}/regions/{region}/resourceViews/{resourceViewName}/removeResources':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Remove resources from the view.
+      operationId: resourceviews.regionViews.removeresources
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The region name of the resource view.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The name of the resource view.
+          in: path
+          name: resourceViewName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - regionViews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegionViewsRemoveResourcesRequest'
+  '/{projectName}/regions/{region}/resourceViews/{resourceViewName}/resources':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: List the resources in the view.
+      operationId: resourceviews.regionViews.listresources
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The region name of the resource view.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The name of the resource view.
+          in: path
+          name: resourceViewName
+          required: true
+          schema:
+            type: string
+        - description: 'Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 5000
+            default: 5000
+        - description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RegionViewsListResourcesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+      tags:
+        - regionViews
+  '/{projectName}/zones/{zone}/resourceViews':
+    get:
+      description: List resource views.
+      operationId: resourceviews.zoneViews.list
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: 'Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 5000
+            default: 5000
+        - description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ZoneViewsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+      tags:
+        - zoneViews
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Create a resource view.
+      operationId: resourceviews.zoneViews.insert
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ZoneViewsInsertResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - zoneViews
+      requestBody:
+        $ref: '#/components/requestBodies/ResourceView'
+  '/{projectName}/zones/{zone}/resourceViews/{resourceViewName}':
+    delete:
+      description: Delete a resource view.
+      operationId: resourceviews.zoneViews.delete
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The name of the resource view.
+          in: path
+          name: resourceViewName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - zoneViews
+    get:
+      description: Get the information of a zonal resource view.
+      operationId: resourceviews.zoneViews.get
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The name of the resource view.
+          in: path
+          name: resourceViewName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceView'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+      tags:
+        - zoneViews
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+  '/{projectName}/zones/{zone}/resourceViews/{resourceViewName}/addResources':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Add resources to the view.
+      operationId: resourceviews.zoneViews.addresources
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The name of the resource view.
+          in: path
+          name: resourceViewName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - zoneViews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZoneViewsAddResourcesRequest'
+  '/{projectName}/zones/{zone}/resourceViews/{resourceViewName}/removeResources':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Remove resources from the view.
+      operationId: resourceviews.zoneViews.removeresources
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The name of the resource view.
+          in: path
+          name: resourceViewName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - zoneViews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZoneViewsRemoveResourcesRequest'
+  '/{projectName}/zones/{zone}/resourceViews/{resourceViewName}/resources':
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: List the resources of the resource view.
+      operationId: resourceviews.zoneViews.listresources
+      parameters:
+        - description: The project name of the resource view.
+          in: path
+          name: projectName
+          required: true
+          schema:
+            type: string
+        - description: The zone name of the resource view.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The name of the resource view.
+          in: path
+          name: resourceViewName
+          required: true
+          schema:
+            type: string
+        - description: 'Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)'
+          in: query
+          name: maxResults
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 5000
+            default: 5000
+        - description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ZoneViewsListResourcesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+      tags:
+        - zoneViews
+components:
+  schemas:
+    Label:
+      description: The Label to be applied to the resource views.
+      properties:
+        key:
+          description: Key of the label.
+          type: string
+        value:
+          description: Value of the label.
+          type: string
+      type: object
+    RegionViewsAddResourcesRequest:
+      description: The request to add resources to the resource view.
+      properties:
+        resources:
+          description: The list of resources to be added.
+          items:
+            type: string
+          type: array
+      type: object
+    RegionViewsInsertResponse:
+      description: The response to a resource view insert request.
+      properties:
+        resource:
+          $ref: '#/components/schemas/ResourceView'
+      type: object
+    RegionViewsListResourcesResponse:
+      description: The response to the list resource request.
+      properties:
+        members:
+          description: The resources in the view.
+          items:
+            type: string
+          type: array
+        nextPageToken:
+          description: A token used for pagination.
+          type: string
+      type: object
+    RegionViewsListResponse:
+      description: The response to the list resource view request.
+      properties:
+        nextPageToken:
+          description: A token used for pagination.
+          type: string
+        resourceViews:
+          description: The list of resource views that meet the criteria.
+          items:
+            $ref: '#/components/schemas/ResourceView'
+          type: array
+      type: object
+    RegionViewsRemoveResourcesRequest:
+      description: The request to remove resources from the resource view.
+      properties:
+        resources:
+          description: The list of resources to be removed.
+          items:
+            type: string
+          type: array
+      type: object
+    ResourceView:
+      description: The resource view object.
+      properties:
+        creationTime:
+          description: The creation time of the resource view.
+          type: string
+        description:
+          description: The detailed description of the resource view.
+          type: string
+        id:
+          description: '[Output Only] The ID of the resource view.'
+          type: string
+        kind:
+          default: 'resourceviews#resourceView'
+          description: Type of the resource.
+          type: string
+        labels:
+          description: The labels for events.
+          items:
+            $ref: '#/components/schemas/Label'
+          type: array
+        lastModified:
+          description: The last modified time of the view. Not supported yet.
+          type: string
+        members:
+          description: A list of all resources in the resource view.
+          items:
+            type: string
+          type: array
+        name:
+          description: The name of the resource view.
+          type: string
+        numMembers:
+          description: The total number of resources in the resource view.
+          format: uint32
+          type: integer
+        selfLink:
+          description: '[Output Only] A self-link to the resource view.'
+          type: string
+      type: object
+    ZoneViewsAddResourcesRequest:
+      description: The request to add resources to the resource view.
+      properties:
+        resources:
+          description: The list of resources to be added.
+          items:
+            type: string
+          type: array
+      type: object
+    ZoneViewsInsertResponse:
+      description: The response to an insert request.
+      properties:
+        resource:
+          $ref: '#/components/schemas/ResourceView'
+      type: object
+    ZoneViewsListResourcesResponse:
+      description: The response to a list resource request.
+      properties:
+        members:
+          description: The full URL of resources in the view.
+          items:
+            type: string
+          type: array
+        nextPageToken:
+          description: A token used for pagination.
+          type: string
+      type: object
+    ZoneViewsListResponse:
+      description: The response to a list request.
+      properties:
+        nextPageToken:
+          description: A token used for pagination.
+          type: string
+        resourceViews:
+          description: The result that contains all resource views that meet the criteria.
+          items:
+            $ref: '#/components/schemas/ResourceView'
+          type: array
+      type: object
+    ZoneViewsRemoveResourcesRequest:
+      description: The request to remove resources from the resource view.
+      properties:
+        resources:
+          description: The list of resources to be removed.
+          items:
+            type: string
+          type: array
+      type: object
+  parameters:
+    alt:
+      description: Data format for the response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+        default: json
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    userIp:
+      description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      in: query
+      name: userIp
+      schema:
+        type: string
+  requestBodies:
+    ResourceView:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceView'
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+            'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
+            'https://www.googleapis.com/auth/compute.readonly': View your Google Compute Engine resources
+            'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
+            'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+            'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
+            'https://www.googleapis.com/auth/compute.readonly': View your Google Compute Engine resources
+            'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
+            'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information

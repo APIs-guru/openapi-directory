@@ -1,0 +1,4220 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://elasticache.amazonaws.com/'
+info:
+  version: '2015-02-02'
+  x-release: v4
+  title: Amazon ElastiCache
+  description: '<fullname>Amazon ElastiCache</fullname> <p>Amazon ElastiCache is a web service that makes it easier to set up, operate, and scale a distributed cache in the cloud.</p> <p>With ElastiCache, customers get all of the benefits of a high-performance, in-memory cache with less of the administrative burden involved in launching and managing a distributed cache. The service makes setup, scaling, and cluster failure handling much simpler than in a self-managed cache deployment.</p> <p>In addition, through integration with Amazon CloudWatch, customers get enhanced visibility into the key performance statistics associated with their cache and can receive alarms if a part of their cache runs hot.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: elasticache
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/elasticache-2015-02-02.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/elasticache/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddTagsToResource
+      description: '<p>Adds up to 50 cost allocation tags to the named resource. A cost allocation tag is a key-value pair where the key and value are case-sensitive. You can use cost allocation tags to categorize and track your AWS costs.</p> <p> When you apply tags to your ElastiCache resources, AWS generates a cost allocation report as a comma-separated value (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories (such as cost centers, application names, or owners) to organize your costs across multiple services. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Tagging.html">Using Cost Allocation Tags in Amazon ElastiCache</a> in the <i>ElastiCache User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TagListMessage'
+        '480':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+        '481':
+          description: SnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '482':
+          description: TagQuotaPerResourceExceeded
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '483':
+          description: InvalidARNFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidARNFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTagsToResourceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#AuthorizeCacheSecurityGroupIngress':
+    post:
+      operationId: AuthorizeCacheSecurityGroupIngress
+      description: '<p>Allows network ingress to a cache security group. Applications using ElastiCache must be running on Amazon EC2, and Amazon EC2 security groups are used as the authorization mechanism.</p> <note> <p>You cannot authorize ingress from an Amazon EC2 security group in one region to an ElastiCache cluster in another region.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthorizeCacheSecurityGroupIngressResult'
+        '480':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '481':
+          description: InvalidCacheSecurityGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheSecurityGroupStateFault'
+        '482':
+          description: AuthorizationAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthorizationAlreadyExistsFault'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizeCacheSecurityGroupIngressMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CopySnapshot':
+    post:
+      operationId: CopySnapshot
+      description: '<p>Makes a copy of an existing snapshot.</p> <note> <p>This operation is valid for Redis only.</p> </note> <important> <p>Users or groups that have permissions to use the <code>CopySnapshot</code> operation can create their own Amazon S3 buckets and copy snapshots to it. To control access to your snapshots, use an IAM policy to control who has the ability to use the <code>CopySnapshot</code> operation. For more information about using IAM to control the use of ElastiCache operations, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html">Exporting Snapshots</a> and <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/IAM.html">Authentication &amp; Access Control</a>.</p> </important> <p>You could receive the following error messages.</p> <p class="title"> <b>Error Messages</b> </p> <ul> <li> <p> <b>Error Message:</b> The S3 bucket %s is outside of the region.</p> <p> <b>Solution:</b> Create an Amazon S3 bucket in the same region as your snapshot. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.CreateBucket">Step 1: Create an Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message:</b> The S3 bucket %s does not exist.</p> <p> <b>Solution:</b> Create an Amazon S3 bucket in the same region as your snapshot. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.CreateBucket">Step 1: Create an Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message:</b> The S3 bucket %s is not owned by the authenticated user.</p> <p> <b>Solution:</b> Create an Amazon S3 bucket in the same region as your snapshot. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.CreateBucket">Step 1: Create an Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message:</b> The authenticated user does not have sufficient permissions to perform the desired activity.</p> <p> <b>Solution:</b> Contact your system administrator to get the needed permissions.</p> </li> <li> <p> <b>Error Message:</b> The S3 bucket %s already contains an object with key %s.</p> <p> <b>Solution:</b> Give the <code>TargetSnapshotName</code> a new and unique value. If exporting a snapshot, you could alternatively create a new Amazon S3 bucket and use this same value for <code>TargetSnapshotName</code>.</p> </li> <li> <p> <b>Error Message: </b> ElastiCache has not been granted READ permissions %s on the S3 Bucket.</p> <p> <b>Solution:</b> Add List and Read permissions on the bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message: </b> ElastiCache has not been granted WRITE permissions %s on the S3 Bucket.</p> <p> <b>Solution:</b> Add Upload/Delete permissions on the bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> <li> <p> <b>Error Message: </b> ElastiCache has not been granted READ_ACP permissions %s on the S3 Bucket.</p> <p> <b>Solution:</b> Add View Permissions on the bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the ElastiCache User Guide.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CopySnapshotResult'
+        '480':
+          description: SnapshotAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotAlreadyExistsFault'
+        '481':
+          description: SnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '482':
+          description: SnapshotQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotQuotaExceededFault'
+        '483':
+          description: InvalidSnapshotStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSnapshotStateFault'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopySnapshotMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateCacheCluster':
+    post:
+      operationId: CreateCacheCluster
+      description: '<p>Creates a cache cluster. All nodes in the cache cluster run the same protocol-compliant cache engine software, either Memcached or Redis.</p> <important> <p>Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateCacheClusterResult'
+        '480':
+          description: ReplicationGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '481':
+          description: InvalidReplicationGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
+        '482':
+          description: CacheClusterAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterAlreadyExistsFault'
+        '483':
+          description: InsufficientCacheClusterCapacityFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientCacheClusterCapacityFault'
+        '484':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '485':
+          description: CacheSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
+        '486':
+          description: ClusterQuotaForCustomerExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ClusterQuotaForCustomerExceededFault'
+        '487':
+          description: NodeQuotaForClusterExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForClusterExceededFault'
+        '488':
+          description: NodeQuotaForCustomerExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForCustomerExceededFault'
+        '489':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '490':
+          description: InvalidVPCNetworkStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
+        '491':
+          description: TagQuotaPerResourceExceeded
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '492':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '493':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCacheClusterMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateCacheParameterGroup':
+    post:
+      operationId: CreateCacheParameterGroup
+      description: '<p>Creates a new Amazon ElastiCache cache parameter group. An ElastiCache cache parameter group is a collection of parameters and their values that are applied to all of the nodes in any cache cluster or replication group using the CacheParameterGroup.</p> <p>A newly created CacheParameterGroup is an exact duplicate of the default parameter group for the CacheParameterGroupFamily. To customize the newly created CacheParameterGroup you can change the values of specific parameters. For more information, see:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html">ModifyCacheParameterGroup</a> in the ElastiCache API Reference.</p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/ParameterGroups.html">Parameters and Parameter Groups</a> in the ElastiCache User Guide.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateCacheParameterGroupResult'
+        '480':
+          description: CacheParameterGroupQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupQuotaExceededFault'
+        '481':
+          description: CacheParameterGroupAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupAlreadyExistsFault'
+        '482':
+          description: InvalidCacheParameterGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheParameterGroupStateFault'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCacheParameterGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateCacheSecurityGroup':
+    post:
+      operationId: CreateCacheSecurityGroup
+      description: '<p>Creates a new cache security group. Use a cache security group to control access to one or more cache clusters.</p> <p>Cache security groups are only used when you are creating a cache cluster outside of an Amazon Virtual Private Cloud (Amazon VPC). If you are creating a cache cluster inside of a VPC, use a cache subnet group instead. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html">CreateCacheSubnetGroup</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateCacheSecurityGroupResult'
+        '480':
+          description: CacheSecurityGroupAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupAlreadyExistsFault'
+        '481':
+          description: CacheSecurityGroupQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupQuotaExceededFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCacheSecurityGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateCacheSubnetGroup':
+    post:
+      operationId: CreateCacheSubnetGroup
+      description: <p>Creates a new cache subnet group.</p> <p>Use this parameter only when you are creating a cluster in an Amazon Virtual Private Cloud (Amazon VPC).</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateCacheSubnetGroupResult'
+        '480':
+          description: CacheSubnetGroupAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupAlreadyExistsFault'
+        '481':
+          description: CacheSubnetGroupQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupQuotaExceededFault'
+        '482':
+          description: CacheSubnetQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSubnetQuotaExceededFault'
+        '483':
+          description: InvalidSubnet
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCacheSubnetGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateReplicationGroup':
+    post:
+      operationId: CreateReplicationGroup
+      description: '<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p> <p>A Redis (cluster mode disabled) replication group is a collection of cache clusters, where one of the cache clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas.</p> <p>A Redis (cluster mode enabled) replication group is a collection of 1 to 15 node groups (shards). Each node group (shard) has one read/write primary node and up to 5 read-only replica nodes. Writes to the primary are asynchronously propagated to the replicas. Redis (cluster mode enabled) replication groups partition the data across node groups (shards).</p> <p>When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. You cannot alter a Redis (cluster mode enabled) replication group after it has been created. However, if you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis'' enhanced backup and restore. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/backups-restoring.html">Restoring From a Backup with Cluster Resizing</a> in the <i>ElastiCache User Guide</i>.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateReplicationGroupResult'
+        '480':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+        '481':
+          description: InvalidCacheClusterStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheClusterStateFault'
+        '482':
+          description: ReplicationGroupAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupAlreadyExistsFault'
+        '483':
+          description: InsufficientCacheClusterCapacityFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientCacheClusterCapacityFault'
+        '484':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '485':
+          description: CacheSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
+        '486':
+          description: ClusterQuotaForCustomerExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ClusterQuotaForCustomerExceededFault'
+        '487':
+          description: NodeQuotaForClusterExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForClusterExceededFault'
+        '488':
+          description: NodeQuotaForCustomerExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForCustomerExceededFault'
+        '489':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '490':
+          description: InvalidVPCNetworkStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
+        '491':
+          description: TagQuotaPerResourceExceeded
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
+        '492':
+          description: NodeGroupsPerReplicationGroupQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NodeGroupsPerReplicationGroupQuotaExceededFault'
+        '493':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '494':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReplicationGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateSnapshot':
+    post:
+      operationId: CreateSnapshot
+      description: <p>Creates a copy of an entire cache cluster or replication group at a specific moment in time.</p> <note> <p>This operation is valid for Redis only.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateSnapshotResult'
+        '480':
+          description: SnapshotAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotAlreadyExistsFault'
+        '481':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+        '482':
+          description: ReplicationGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '483':
+          description: InvalidCacheClusterStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheClusterStateFault'
+        '484':
+          description: InvalidReplicationGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
+        '485':
+          description: SnapshotQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotQuotaExceededFault'
+        '486':
+          description: SnapshotFeatureNotSupportedFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotFeatureNotSupportedFault'
+        '487':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '488':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSnapshotMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteCacheCluster':
+    post:
+      operationId: DeleteCacheCluster
+      description: '<p>Deletes a previously provisioned cache cluster. <code>DeleteCacheCluster</code> deletes all associated cache nodes, node endpoints and the cache cluster itself. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the cache cluster; you cannot cancel or revert this operation.</p> <p>This operation cannot be used to delete a cache cluster that is the last read replica of a replication group or node group (shard) that has Multi-AZ mode enabled or a cache cluster from a Redis (cluster mode enabled) replication group.</p> <important> <p>Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteCacheClusterResult'
+        '480':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+        '481':
+          description: InvalidCacheClusterStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheClusterStateFault'
+        '482':
+          description: SnapshotAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotAlreadyExistsFault'
+        '483':
+          description: SnapshotFeatureNotSupportedFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotFeatureNotSupportedFault'
+        '484':
+          description: SnapshotQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotQuotaExceededFault'
+        '485':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '486':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCacheClusterMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteCacheParameterGroup':
+    post:
+      operationId: DeleteCacheParameterGroup
+      description: Deletes the specified cache parameter group. You cannot delete a cache parameter group if it is associated with any cache clusters.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidCacheParameterGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheParameterGroupStateFault'
+        '481':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCacheParameterGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteCacheSecurityGroup':
+    post:
+      operationId: DeleteCacheSecurityGroup
+      description: <p>Deletes a cache security group.</p> <note> <p>You cannot delete a cache security group if it is associated with any cache clusters.</p> </note>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidCacheSecurityGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheSecurityGroupStateFault'
+        '481':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCacheSecurityGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteCacheSubnetGroup':
+    post:
+      operationId: DeleteCacheSubnetGroup
+      description: <p>Deletes a cache subnet group.</p> <note> <p>You cannot delete a cache subnet group if it is associated with any cache clusters.</p> </note>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: CacheSubnetGroupInUse
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupInUse'
+        '481':
+          description: CacheSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCacheSubnetGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteReplicationGroup':
+    post:
+      operationId: DeleteReplicationGroup
+      description: '<p>Deletes an existing replication group. By default, this operation deletes the entire replication group, including the primary/primaries and all of the read replicas. If the replication group has only one primary, you can optionally delete only the read replicas, while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p> <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteReplicationGroupResult'
+        '480':
+          description: ReplicationGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '481':
+          description: InvalidReplicationGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
+        '482':
+          description: SnapshotAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotAlreadyExistsFault'
+        '483':
+          description: SnapshotFeatureNotSupportedFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotFeatureNotSupportedFault'
+        '484':
+          description: SnapshotQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotQuotaExceededFault'
+        '485':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '486':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteReplicationGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSnapshot':
+    post:
+      operationId: DeleteSnapshot
+      description: '<p>Deletes an existing snapshot. When you receive a successful response from this operation, ElastiCache immediately begins deleting the snapshot; you cannot cancel or revert this operation.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteSnapshotResult'
+        '480':
+          description: SnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '481':
+          description: InvalidSnapshotStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSnapshotStateFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSnapshotMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeCacheClusters':
+    post:
+      operationId: DescribeCacheClusters
+      description: '<p>Returns information about all provisioned cache clusters if no cache cluster identifier is specified, or about a specific cache cluster if a cache cluster identifier is supplied.</p> <p>By default, abbreviated information about the cache clusters is returned. You can use the optional <i>ShowCacheNodeInfo</i> flag to retrieve detailed information about the cache nodes associated with the cache clusters. These details include the DNS address and port for the cache node endpoint.</p> <p>If the cluster is in the <i>creating</i> state, only cluster-level information is displayed until all of the nodes are successfully provisioned.</p> <p>If the cluster is in the <i>deleting</i> state, only cluster-level information is displayed.</p> <p>If cache nodes are currently being added to the cache cluster, node endpoint information and creation time for the additional nodes are not displayed until they are completely provisioned. When the cache cluster state is <i>available</i>, the cluster is ready for use.</p> <p>If cache nodes are currently being removed from the cache cluster, no endpoint information for the removed nodes is displayed.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterMessage'
+        '480':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      x-waiters:
+        - acceptors:
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: available
+              matcher: pathAll
+              state: success
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: deleted
+              matcher: pathAny
+              state: failure
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: deleting
+              matcher: pathAny
+              state: failure
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: incompatible-network
+              matcher: pathAny
+              state: failure
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: restore-failed
+              matcher: pathAny
+              state: failure
+          delay: 15
+          description: Wait until ElastiCache cluster is available.
+          maxAttempts: 40
+          operation: DescribeCacheClusters
+        - acceptors:
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: deleted
+              matcher: pathAll
+              state: success
+            - expected: CacheClusterNotFound
+              matcher: error
+              state: success
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: available
+              matcher: pathAny
+              state: failure
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: creating
+              matcher: pathAny
+              state: failure
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: incompatible-network
+              matcher: pathAny
+              state: failure
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: modifying
+              matcher: pathAny
+              state: failure
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: restore-failed
+              matcher: pathAny
+              state: failure
+            - argument: 'CacheClusters[].CacheClusterStatus'
+              expected: snapshotting
+              matcher: pathAny
+              state: failure
+          delay: 15
+          description: Wait until ElastiCache cluster is deleted.
+          maxAttempts: 40
+          operation: DescribeCacheClusters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeCacheClustersMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeCacheEngineVersions':
+    post:
+      operationId: DescribeCacheEngineVersions
+      description: Returns a list of the available cache engines and their versions.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheEngineVersionMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeCacheEngineVersionsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeCacheParameterGroups':
+    post:
+      operationId: DescribeCacheParameterGroups
+      description: 'Returns a list of cache parameter group descriptions. If a cache parameter group name is specified, the list contains only the descriptions for that group.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupsMessage'
+        '480':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeCacheParameterGroupsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeCacheParameters':
+    post:
+      operationId: DescribeCacheParameters
+      description: Returns the detailed parameter list for a particular cache parameter group.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupDetails'
+        '480':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeCacheParametersMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeCacheSecurityGroups':
+    post:
+      operationId: DescribeCacheSecurityGroups
+      description: 'Returns a list of cache security group descriptions. If a cache security group name is specified, the list contains only the description of that group.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupMessage'
+        '480':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeCacheSecurityGroupsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeCacheSubnetGroups':
+    post:
+      operationId: DescribeCacheSubnetGroups
+      description: 'Returns a list of cache subnet group descriptions. If a subnet group name is specified, the list contains only the description of that group.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupMessage'
+        '480':
+          description: CacheSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeCacheSubnetGroupsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEngineDefaultParameters':
+    post:
+      operationId: DescribeEngineDefaultParameters
+      description: Returns the default engine and system parameter information for the specified cache engine.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeEngineDefaultParametersResult'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEngineDefaultParametersMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEvents':
+    post:
+      operationId: DescribeEvents
+      description: '<p>Returns events related to cache clusters, cache security groups, and cache parameter groups. You can obtain events specific to a particular cache cluster, cache security group, or cache parameter group by providing the name as a parameter.</p> <p>By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days'' worth of events if necessary.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EventsMessage'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReplicationGroups':
+    post:
+      operationId: DescribeReplicationGroups
+      description: '<p>Returns information about a particular replication group. If no identifier is specified, <code>DescribeReplicationGroups</code> returns information about all replication groups.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupMessage'
+        '480':
+          description: ReplicationGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      x-waiters:
+        - acceptors:
+            - argument: 'ReplicationGroups[].Status'
+              expected: available
+              matcher: pathAll
+              state: success
+            - argument: 'ReplicationGroups[].Status'
+              expected: deleted
+              matcher: pathAny
+              state: failure
+          delay: 15
+          description: Wait until ElastiCache replication group is available.
+          maxAttempts: 40
+          operation: DescribeReplicationGroups
+        - acceptors:
+            - argument: 'ReplicationGroups[].Status'
+              expected: deleted
+              matcher: pathAll
+              state: success
+            - argument: 'ReplicationGroups[].Status'
+              expected: available
+              matcher: pathAny
+              state: failure
+            - expected: ReplicationGroupNotFoundFault
+              matcher: error
+              state: success
+          delay: 15
+          description: Wait until ElastiCache replication group is deleted.
+          maxAttempts: 40
+          operation: DescribeReplicationGroups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReplicationGroupsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReservedCacheNodes':
+    post:
+      operationId: DescribeReservedCacheNodes
+      description: 'Returns information about reserved cache nodes for this account, or about a specified reserved cache node.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodeMessage'
+        '480':
+          description: ReservedCacheNodeNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodeNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReservedCacheNodesMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeReservedCacheNodesOfferings':
+    post:
+      operationId: DescribeReservedCacheNodesOfferings
+      description: Lists available reserved cache node offerings.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodesOfferingMessage'
+        '480':
+          description: ReservedCacheNodesOfferingNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodesOfferingNotFoundFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReservedCacheNodesOfferingsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSnapshots':
+    post:
+      operationId: DescribeSnapshots
+      description: '<p>Returns information about cache cluster or replication group snapshots. By default, <code>DescribeSnapshots</code> lists all of your snapshots; it can optionally describe a single snapshot, or just the snapshots associated with a particular cache cluster.</p> <note> <p>This operation is valid for Redis only.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeSnapshotsListMessage'
+        '480':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+        '481':
+          description: SnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: MaxRecords
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSnapshotsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListAllowedNodeTypeModifications':
+    post:
+      operationId: ListAllowedNodeTypeModifications
+      description: '<p>Lists all available node types that you can scale your Redis cluster''s or replication group''s current node type up to.</p> <p>When you use the <code>ModifyCacheCluster</code> or <code>ModifyReplicationGroup</code> operations to scale up your cluster or replication group, the value of the <code>CacheNodeType</code> parameter must be one of the node types returned by this operation.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AllowedNodeTypeModificationsMessage'
+        '480':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+        '481':
+          description: ReplicationGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAllowedNodeTypeModificationsMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: '<p>Lists all cost allocation tags currently on the named resource. A <code>cost allocation tag</code> is a key-value pair where the key is case-sensitive and the value is optional. You can use cost allocation tags to categorize and track your AWS costs.</p> <p>You can have a maximum of 50 cost allocation tags on an ElastiCache resource. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/BestPractices.html">Using Cost Allocation Tags in Amazon ElastiCache</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TagListMessage'
+        '480':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+        '481':
+          description: SnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '482':
+          description: InvalidARNFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidARNFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyCacheCluster':
+    post:
+      operationId: ModifyCacheCluster
+      description: Modifies the settings for a cache cluster. You can use this operation to change one or more cluster configuration parameters by specifying the parameters and the new values.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModifyCacheClusterResult'
+        '480':
+          description: InvalidCacheClusterStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheClusterStateFault'
+        '481':
+          description: InvalidCacheSecurityGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheSecurityGroupStateFault'
+        '482':
+          description: InsufficientCacheClusterCapacityFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientCacheClusterCapacityFault'
+        '483':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+        '484':
+          description: NodeQuotaForClusterExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForClusterExceededFault'
+        '485':
+          description: NodeQuotaForCustomerExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForCustomerExceededFault'
+        '486':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '487':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '488':
+          description: InvalidVPCNetworkStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
+        '489':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '490':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyCacheClusterMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyCacheParameterGroup':
+    post:
+      operationId: ModifyCacheParameterGroup
+      description: Modifies the parameters of a cache parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNameMessage'
+        '480':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '481':
+          description: InvalidCacheParameterGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheParameterGroupStateFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyCacheParameterGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyCacheSubnetGroup':
+    post:
+      operationId: ModifyCacheSubnetGroup
+      description: Modifies an existing cache subnet group.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModifyCacheSubnetGroupResult'
+        '480':
+          description: CacheSubnetGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
+        '481':
+          description: CacheSubnetQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSubnetQuotaExceededFault'
+        '482':
+          description: SubnetInUse
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SubnetInUse'
+        '483':
+          description: InvalidSubnet
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyCacheSubnetGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ModifyReplicationGroup':
+    post:
+      operationId: ModifyReplicationGroup
+      description: '<p>Modifies the settings for a replication group.</p> <important> <p>Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups.</p> </important> <note> <p>This operation is valid for Redis only.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModifyReplicationGroupResult'
+        '480':
+          description: ReplicationGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '481':
+          description: InvalidReplicationGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
+        '482':
+          description: InvalidCacheClusterStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheClusterStateFault'
+        '483':
+          description: InvalidCacheSecurityGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheSecurityGroupStateFault'
+        '484':
+          description: InsufficientCacheClusterCapacityFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientCacheClusterCapacityFault'
+        '485':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+        '486':
+          description: NodeQuotaForClusterExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForClusterExceededFault'
+        '487':
+          description: NodeQuotaForCustomerExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NodeQuotaForCustomerExceededFault'
+        '488':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '489':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '490':
+          description: InvalidVPCNetworkStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
+        '491':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '492':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyReplicationGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PurchaseReservedCacheNodesOffering':
+    post:
+      operationId: PurchaseReservedCacheNodesOffering
+      description: Allows you to purchase a reserved cache node offering.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PurchaseReservedCacheNodesOfferingResult'
+        '480':
+          description: ReservedCacheNodesOfferingNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodesOfferingNotFoundFault'
+        '481':
+          description: ReservedCacheNodeAlreadyExistsFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodeAlreadyExistsFault'
+        '482':
+          description: ReservedCacheNodeQuotaExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReservedCacheNodeQuotaExceededFault'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseReservedCacheNodesOfferingMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RebootCacheCluster':
+    post:
+      operationId: RebootCacheCluster
+      description: '<p>Reboots some, or all, of the cache nodes within a provisioned cache cluster. This operation applies any modified cache parameter groups to the cache cluster. The reboot operation takes place as soon as possible, and results in a momentary outage to the cache cluster. During the reboot, the cache cluster status is set to REBOOTING.</p> <p>The reboot causes the contents of the cache (for each cache node being rebooted) to be lost.</p> <p>When the reboot is complete, a cache cluster event is created.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RebootCacheClusterResult'
+        '480':
+          description: InvalidCacheClusterStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheClusterStateFault'
+        '481':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RebootCacheClusterMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RemoveTagsFromResource':
+    post:
+      operationId: RemoveTagsFromResource
+      description: Removes the tags identified by the <code>TagKeys</code> list from the named resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TagListMessage'
+        '480':
+          description: CacheClusterNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheClusterNotFoundFault'
+        '481':
+          description: SnapshotNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SnapshotNotFoundFault'
+        '482':
+          description: InvalidARNFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidARNFault'
+        '483':
+          description: TagNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TagNotFoundFault'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveTagsFromResourceMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ResetCacheParameterGroup':
+    post:
+      operationId: ResetCacheParameterGroup
+      description: 'Modifies the parameters of a cache parameter group to the engine or system default value. You can reset specific parameters by submitting a list of parameter names. To reset the entire cache parameter group, specify the <code>ResetAllParameters</code> and <code>CacheParameterGroupName</code> parameters.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNameMessage'
+        '480':
+          description: InvalidCacheParameterGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheParameterGroupStateFault'
+        '481':
+          description: CacheParameterGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetCacheParameterGroupMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#RevokeCacheSecurityGroupIngress':
+    post:
+      operationId: RevokeCacheSecurityGroupIngress
+      description: Revokes ingress from a cache security group. Use this operation to disallow access from an Amazon EC2 security group that had been previously authorized.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RevokeCacheSecurityGroupIngressResult'
+        '480':
+          description: CacheSecurityGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
+        '481':
+          description: AuthorizationNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthorizationNotFoundFault'
+        '482':
+          description: InvalidCacheSecurityGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheSecurityGroupStateFault'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeCacheSecurityGroupIngressMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#TestFailover':
+    post:
+      operationId: TestFailover
+      description: '<p>Represents the input of a <code>TestFailover</code> operation which test automatic failover on a specified node group (called shard in the console) in a replication group (called cluster in the console).</p> <p class="title"> <b>Note the following</b> </p> <ul> <li> <p>A customer can use this operation to test automatic failover on up to 5 shards (called node groups in the ElastiCache API and AWS CLI) in any rolling 24-hour period.</p> </li> <li> <p>If calling this operation on shards in different clusters (called replication groups in the API and CLI), the calls can be made concurrently.</p> <p> </p> </li> <li> <p>If calling this operation multiple times on different shards in the same Redis (cluster mode enabled) replication group, the first node replacement must complete before a subsequent call can be made.</p> </li> <li> <p>To determine whether the node replacement is complete you can check Events using the Amazon ElastiCache console, the AWS CLI, or the ElastiCache API. Look for the following automatic failover related events, listed here in order of occurrance:</p> <ol> <li> <p>Replication group message: <code>Test Failover API called for node group &lt;node-group-id&gt;</code> </p> </li> <li> <p>Cache cluster message: <code>Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed</code> </p> </li> <li> <p>Replication group message: <code>Failover from master node &lt;primary-node-id&gt; to replica node &lt;node-id&gt; completed</code> </p> </li> <li> <p>Cache cluster message: <code>Recovering cache nodes &lt;node-id&gt;</code> </p> </li> <li> <p>Cache cluster message: <code>Finished recovery for cache nodes &lt;node-id&gt;</code> </p> </li> </ol> <p>For more information see:</p> <ul> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/ECEvents.Viewing.html">Viewing ElastiCache Events</a> in the <i>ElastiCache User Guide</i> </p> </li> <li> <p> <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html">DescribeEvents</a> in the ElastiCache API Reference</p> </li> </ul> </li> </ul> <p>Also see, <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/AutoFailover.html#auto-failover-test">Testing Multi-AZ with Automatic Failover</a> in the <i>ElastiCache User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TestFailoverResult'
+        '480':
+          description: APICallRateForCustomerExceededFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/APICallRateForCustomerExceededFault'
+        '481':
+          description: InvalidCacheClusterStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidCacheClusterStateFault'
+        '482':
+          description: InvalidReplicationGroupStateFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
+        '483':
+          description: NodeGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NodeGroupNotFoundFault'
+        '484':
+          description: ReplicationGroupNotFoundFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ReplicationGroupNotFoundFault'
+        '485':
+          description: TestFailoverNotAvailableFault
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TestFailoverNotAvailableFault'
+        '486':
+          description: InvalidParameterValueException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '487':
+          description: InvalidParameterCombinationException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestFailoverMessage'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    APICallRateForCustomerExceededFault:
+      type: object
+      properties: {}
+      description: The customer has exceeded the allowed rate of API calls.
+    AZMode:
+      type: string
+      enum:
+        - single-az
+        - cross-az
+    AddTagsToResourceMessage:
+      type: object
+      required:
+        - ResourceName
+        - Tags
+      properties:
+        ResourceName:
+          $ref: '#/components/schemas/String'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+      description: Represents the input of an AddTagsToResource operation.
+    AllowedNodeTypeModificationsMessage:
+      type: object
+      properties:
+        ScaleUpModifications:
+          $ref: '#/components/schemas/NodeTypeList'
+      description: Represents the allowed node types you can use to modify your cache cluster or replication group.
+    AuthorizationAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: The specified Amazon EC2 security group is already authorized for the specified cache security group.
+    AuthorizationNotFoundFault:
+      type: object
+      properties: {}
+      description: The specified Amazon EC2 security group is not authorized for the specified cache security group.
+    AuthorizeCacheSecurityGroupIngressMessage:
+      type: object
+      required:
+        - CacheSecurityGroupName
+        - EC2SecurityGroupName
+        - EC2SecurityGroupOwnerId
+      properties:
+        CacheSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupName:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupOwnerId:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of an AuthorizeCacheSecurityGroupIngress operation.
+    AuthorizeCacheSecurityGroupIngressResult:
+      type: object
+      properties:
+        CacheSecurityGroup:
+          $ref: '#/components/schemas/CacheSecurityGroup'
+    AutomaticFailoverStatus:
+      type: string
+      enum:
+        - enabled
+        - disabled
+        - enabling
+        - disabling
+    AvailabilityZone:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+      description: Describes an Availability Zone in which the cache cluster is launched.
+    AvailabilityZonesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    AwsQueryErrorMessage:
+      type: string
+    Boolean:
+      type: boolean
+    BooleanOptional:
+      type: boolean
+    CacheCluster:
+      type: object
+      properties:
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        ConfigurationEndpoint:
+          $ref: '#/components/schemas/Endpoint'
+        ClientDownloadLandingPage:
+          $ref: '#/components/schemas/String'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        CacheClusterStatus:
+          $ref: '#/components/schemas/String'
+        NumCacheNodes:
+          $ref: '#/components/schemas/IntegerOptional'
+        PreferredAvailabilityZone:
+          $ref: '#/components/schemas/String'
+        CacheClusterCreateTime:
+          $ref: '#/components/schemas/TStamp'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        PendingModifiedValues:
+          $ref: '#/components/schemas/PendingModifiedValues'
+        NotificationConfiguration:
+          $ref: '#/components/schemas/NotificationConfiguration'
+        CacheSecurityGroups:
+          $ref: '#/components/schemas/CacheSecurityGroupMembershipList'
+        CacheParameterGroup:
+          $ref: '#/components/schemas/CacheParameterGroupStatus'
+        CacheSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        CacheNodes:
+          $ref: '#/components/schemas/CacheNodeList'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/Boolean'
+        SecurityGroups:
+          $ref: '#/components/schemas/SecurityGroupMembershipList'
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+        SnapshotRetentionLimit:
+          $ref: '#/components/schemas/IntegerOptional'
+        SnapshotWindow:
+          $ref: '#/components/schemas/String'
+      description: Contains all of the attributes of a specific cache cluster.
+    CacheClusterAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: You already have a cache cluster with the given identifier.
+    CacheClusterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CacheCluster'
+    CacheClusterMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        CacheClusters:
+          $ref: '#/components/schemas/CacheClusterList'
+      description: Represents the output of a <code>DescribeCacheClusters</code> operation.
+    CacheClusterNotFoundFault:
+      type: object
+      properties: {}
+      description: The requested cache cluster ID does not refer to an existing cache cluster.
+    CacheEngineVersion:
+      type: object
+      properties:
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        CacheParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        CacheEngineDescription:
+          $ref: '#/components/schemas/String'
+        CacheEngineVersionDescription:
+          $ref: '#/components/schemas/String'
+      description: Provides all of the details about a particular cache engine version.
+    CacheEngineVersionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CacheEngineVersion'
+    CacheEngineVersionMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        CacheEngineVersions:
+          $ref: '#/components/schemas/CacheEngineVersionList'
+      description: Represents the output of a <a>DescribeCacheEngineVersions</a> operation.
+    CacheNode:
+      type: object
+      properties:
+        CacheNodeId:
+          $ref: '#/components/schemas/String'
+        CacheNodeStatus:
+          $ref: '#/components/schemas/String'
+        CacheNodeCreateTime:
+          $ref: '#/components/schemas/TStamp'
+        Endpoint:
+          $ref: '#/components/schemas/Endpoint'
+        ParameterGroupStatus:
+          $ref: '#/components/schemas/String'
+        SourceCacheNodeId:
+          $ref: '#/components/schemas/String'
+        CustomerAvailabilityZone:
+          $ref: '#/components/schemas/String'
+      description: '<p>Represents an individual cache node within a cache cluster. Each cache node runs its own instance of the cluster''s protocol-compliant caching software - either Memcached or Redis.</p> <p>Valid node types are as follows:</p> <ul> <li> <p>General purpose:</p> <ul> <li> <p>Current generation: <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code>, <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code>, <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>, <code>cache.m4.2xlarge</code>, <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code> </p> </li> <li> <p>Previous generation: <code>cache.t1.micro</code>, <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code> </p> </li> </ul> </li> <li> <p>Compute optimized: <code>cache.c1.xlarge</code> </p> </li> <li> <p>Memory optimized:</p> <ul> <li> <p>Current generation: <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code> </p> </li> <li> <p>Previous generation: <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code> </p> </li> </ul> </li> </ul> <p> <b>Notes:</b> </p> <ul> <li> <p>All T2 instances are created in an Amazon Virtual Private Cloud (Amazon VPC).</p> </li> <li> <p>Redis backup/restore is not supported for Redis (cluster mode disabled) T1 and T2 instances. Backup/restore is supported on Redis (cluster mode enabled) T2 instances.</p> </li> <li> <p>Redis Append-only files (AOF) functionality is not supported for T1 or T2 instances.</p> </li> </ul> <p>For a complete listing of node types and specifications, see <a href="http://aws.amazon.com/elasticache/details">Amazon ElastiCache Product Features and Details</a> and either <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific">Cache Node Type-Specific Parameters for Memcached</a> or <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific">Cache Node Type-Specific Parameters for Redis</a>.</p>'
+    CacheNodeIdsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    CacheNodeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CacheNode'
+    CacheNodeTypeSpecificParameter:
+      type: object
+      properties:
+        ParameterName:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+        Source:
+          $ref: '#/components/schemas/String'
+        DataType:
+          $ref: '#/components/schemas/String'
+        AllowedValues:
+          $ref: '#/components/schemas/String'
+        IsModifiable:
+          $ref: '#/components/schemas/Boolean'
+        MinimumEngineVersion:
+          $ref: '#/components/schemas/String'
+        CacheNodeTypeSpecificValues:
+          $ref: '#/components/schemas/CacheNodeTypeSpecificValueList'
+        ChangeType:
+          $ref: '#/components/schemas/ChangeType'
+      description: 'A parameter that has a different value for each cache node type it is applied to. For example, in a Redis cache cluster, a <code>cache.m1.large</code> cache node type would have a larger <code>maxmemory</code> value than a <code>cache.m1.small</code> type.'
+    CacheNodeTypeSpecificParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CacheNodeTypeSpecificParameter'
+    CacheNodeTypeSpecificValue:
+      type: object
+      properties:
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+        Value:
+          $ref: '#/components/schemas/String'
+      description: A value that applies only to a certain cache node type.
+    CacheNodeTypeSpecificValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CacheNodeTypeSpecificValue'
+    CacheParameterGroup:
+      type: object
+      properties:
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        CacheParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+      description: Represents the output of a <code>CreateCacheParameterGroup</code> operation.
+    CacheParameterGroupAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: A cache parameter group with the requested name already exists.
+    CacheParameterGroupDetails:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        Parameters:
+          $ref: '#/components/schemas/ParametersList'
+        CacheNodeTypeSpecificParameters:
+          $ref: '#/components/schemas/CacheNodeTypeSpecificParametersList'
+      description: Represents the output of a <code>DescribeCacheParameters</code> operation.
+    CacheParameterGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CacheParameterGroup'
+    CacheParameterGroupNameMessage:
+      type: object
+      properties:
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+      description: '<p>Represents the output of one of the following operations:</p> <ul> <li> <p> <code>ModifyCacheParameterGroup</code> </p> </li> <li> <p> <code>ResetCacheParameterGroup</code> </p> </li> </ul>'
+    CacheParameterGroupNotFoundFault:
+      type: object
+      properties: {}
+      description: The requested cache parameter group name does not refer to an existing cache parameter group.
+    CacheParameterGroupQuotaExceededFault:
+      type: object
+      properties: {}
+      description: The request cannot be processed because it would exceed the maximum number of cache security groups.
+    CacheParameterGroupStatus:
+      type: object
+      properties:
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        ParameterApplyStatus:
+          $ref: '#/components/schemas/String'
+        CacheNodeIdsToReboot:
+          $ref: '#/components/schemas/CacheNodeIdsList'
+      description: Status of the cache parameter group.
+    CacheParameterGroupsMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        CacheParameterGroups:
+          $ref: '#/components/schemas/CacheParameterGroupList'
+      description: Represents the output of a <code>DescribeCacheParameterGroups</code> operation.
+    CacheSecurityGroup:
+      type: object
+      properties:
+        OwnerId:
+          $ref: '#/components/schemas/String'
+        CacheSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroups:
+          $ref: '#/components/schemas/EC2SecurityGroupList'
+      description: '<p>Represents the output of one of the following operations:</p> <ul> <li> <p> <code>AuthorizeCacheSecurityGroupIngress</code> </p> </li> <li> <p> <code>CreateCacheSecurityGroup</code> </p> </li> <li> <p> <code>RevokeCacheSecurityGroupIngress</code> </p> </li> </ul>'
+    CacheSecurityGroupAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: A cache security group with the specified name already exists.
+    CacheSecurityGroupMembership:
+      type: object
+      properties:
+        CacheSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+      description: Represents a cache cluster's status within a particular cache security group.
+    CacheSecurityGroupMembershipList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CacheSecurityGroupMembership'
+    CacheSecurityGroupMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        CacheSecurityGroups:
+          $ref: '#/components/schemas/CacheSecurityGroups'
+      description: Represents the output of a <code>DescribeCacheSecurityGroups</code> operation.
+    CacheSecurityGroupNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    CacheSecurityGroupNotFoundFault:
+      type: object
+      properties: {}
+      description: The requested cache security group name does not refer to an existing cache security group.
+    CacheSecurityGroupQuotaExceededFault:
+      type: object
+      properties: {}
+      description: The request cannot be processed because it would exceed the allowed number of cache security groups.
+    CacheSecurityGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/CacheSecurityGroup'
+    CacheSubnetGroup:
+      type: object
+      properties:
+        CacheSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        CacheSubnetGroupDescription:
+          $ref: '#/components/schemas/String'
+        VpcId:
+          $ref: '#/components/schemas/String'
+        Subnets:
+          $ref: '#/components/schemas/SubnetList'
+      description: '<p>Represents the output of one of the following operations:</p> <ul> <li> <p> <code>CreateCacheSubnetGroup</code> </p> </li> <li> <p> <code>ModifyCacheSubnetGroup</code> </p> </li> </ul>'
+    CacheSubnetGroupAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: The requested cache subnet group name is already in use by an existing cache subnet group.
+    CacheSubnetGroupInUse:
+      type: object
+      properties: {}
+      description: The requested cache subnet group is currently in use.
+    CacheSubnetGroupMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        CacheSubnetGroups:
+          $ref: '#/components/schemas/CacheSubnetGroups'
+      description: Represents the output of a <code>DescribeCacheSubnetGroups</code> operation.
+    CacheSubnetGroupNotFoundFault:
+      type: object
+      properties: {}
+      description: The requested cache subnet group name does not refer to an existing cache subnet group.
+    CacheSubnetGroupQuotaExceededFault:
+      type: object
+      properties: {}
+      description: The request cannot be processed because it would exceed the allowed number of cache subnet groups.
+    CacheSubnetGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/CacheSubnetGroup'
+    CacheSubnetQuotaExceededFault:
+      type: object
+      properties: {}
+      description: The request cannot be processed because it would exceed the allowed number of subnets in a cache subnet group.
+    ChangeType:
+      type: string
+      enum:
+        - immediate
+        - requires-reboot
+    ClusterIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ClusterQuotaForCustomerExceededFault:
+      type: object
+      properties: {}
+      description: The request cannot be processed because it would exceed the allowed number of cache clusters per customer.
+    CopySnapshotMessage:
+      type: object
+      required:
+        - SourceSnapshotName
+        - TargetSnapshotName
+      properties:
+        SourceSnapshotName:
+          $ref: '#/components/schemas/String'
+        TargetSnapshotName:
+          $ref: '#/components/schemas/String'
+        TargetBucket:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>CopySnapshotMessage</code> operation.
+    CopySnapshotResult:
+      type: object
+      properties:
+        Snapshot:
+          $ref: '#/components/schemas/Snapshot'
+    CreateCacheClusterMessage:
+      type: object
+      required:
+        - CacheClusterId
+      properties:
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+        AZMode:
+          $ref: '#/components/schemas/AZMode'
+        PreferredAvailabilityZone:
+          $ref: '#/components/schemas/String'
+        PreferredAvailabilityZones:
+          $ref: '#/components/schemas/PreferredAvailabilityZoneList'
+        NumCacheNodes:
+          $ref: '#/components/schemas/IntegerOptional'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        CacheSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        CacheSecurityGroupNames:
+          $ref: '#/components/schemas/CacheSecurityGroupNameList'
+        SecurityGroupIds:
+          $ref: '#/components/schemas/SecurityGroupIdsList'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        SnapshotArns:
+          $ref: '#/components/schemas/SnapshotArnsList'
+        SnapshotName:
+          $ref: '#/components/schemas/String'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        NotificationTopicArn:
+          $ref: '#/components/schemas/String'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/BooleanOptional'
+        SnapshotRetentionLimit:
+          $ref: '#/components/schemas/IntegerOptional'
+        SnapshotWindow:
+          $ref: '#/components/schemas/String'
+        AuthToken:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a CreateCacheCluster operation.
+    CreateCacheClusterResult:
+      type: object
+      properties:
+        CacheCluster:
+          $ref: '#/components/schemas/CacheCluster'
+    CreateCacheParameterGroupMessage:
+      type: object
+      required:
+        - CacheParameterGroupName
+        - CacheParameterGroupFamily
+        - Description
+      properties:
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        CacheParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>CreateCacheParameterGroup</code> operation.
+    CreateCacheParameterGroupResult:
+      type: object
+      properties:
+        CacheParameterGroup:
+          $ref: '#/components/schemas/CacheParameterGroup'
+    CreateCacheSecurityGroupMessage:
+      type: object
+      required:
+        - CacheSecurityGroupName
+        - Description
+      properties:
+        CacheSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>CreateCacheSecurityGroup</code> operation.
+    CreateCacheSecurityGroupResult:
+      type: object
+      properties:
+        CacheSecurityGroup:
+          $ref: '#/components/schemas/CacheSecurityGroup'
+    CreateCacheSubnetGroupMessage:
+      type: object
+      required:
+        - CacheSubnetGroupName
+        - CacheSubnetGroupDescription
+        - SubnetIds
+      properties:
+        CacheSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        CacheSubnetGroupDescription:
+          $ref: '#/components/schemas/String'
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdentifierList'
+      description: Represents the input of a <code>CreateCacheSubnetGroup</code> operation.
+    CreateCacheSubnetGroupResult:
+      type: object
+      properties:
+        CacheSubnetGroup:
+          $ref: '#/components/schemas/CacheSubnetGroup'
+    CreateReplicationGroupMessage:
+      type: object
+      required:
+        - ReplicationGroupId
+        - ReplicationGroupDescription
+      properties:
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+        ReplicationGroupDescription:
+          $ref: '#/components/schemas/String'
+        PrimaryClusterId:
+          $ref: '#/components/schemas/String'
+        AutomaticFailoverEnabled:
+          $ref: '#/components/schemas/BooleanOptional'
+        NumCacheClusters:
+          $ref: '#/components/schemas/IntegerOptional'
+        PreferredCacheClusterAZs:
+          $ref: '#/components/schemas/AvailabilityZonesList'
+        NumNodeGroups:
+          $ref: '#/components/schemas/IntegerOptional'
+        ReplicasPerNodeGroup:
+          $ref: '#/components/schemas/IntegerOptional'
+        NodeGroupConfiguration:
+          $ref: '#/components/schemas/NodeGroupConfigurationList'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        CacheSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        CacheSecurityGroupNames:
+          $ref: '#/components/schemas/CacheSecurityGroupNameList'
+        SecurityGroupIds:
+          $ref: '#/components/schemas/SecurityGroupIdsList'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        SnapshotArns:
+          $ref: '#/components/schemas/SnapshotArnsList'
+        SnapshotName:
+          $ref: '#/components/schemas/String'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        NotificationTopicArn:
+          $ref: '#/components/schemas/String'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/BooleanOptional'
+        SnapshotRetentionLimit:
+          $ref: '#/components/schemas/IntegerOptional'
+        SnapshotWindow:
+          $ref: '#/components/schemas/String'
+        AuthToken:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>CreateReplicationGroup</code> operation.
+    CreateReplicationGroupResult:
+      type: object
+      properties:
+        ReplicationGroup:
+          $ref: '#/components/schemas/ReplicationGroup'
+    CreateSnapshotMessage:
+      type: object
+      required:
+        - SnapshotName
+      properties:
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        SnapshotName:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>CreateSnapshot</code> operation.
+    CreateSnapshotResult:
+      type: object
+      properties:
+        Snapshot:
+          $ref: '#/components/schemas/Snapshot'
+    DeleteCacheClusterMessage:
+      type: object
+      required:
+        - CacheClusterId
+      properties:
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        FinalSnapshotIdentifier:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DeleteCacheCluster</code> operation.
+    DeleteCacheClusterResult:
+      type: object
+      properties:
+        CacheCluster:
+          $ref: '#/components/schemas/CacheCluster'
+    DeleteCacheParameterGroupMessage:
+      type: object
+      required:
+        - CacheParameterGroupName
+      properties:
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DeleteCacheParameterGroup</code> operation.
+    DeleteCacheSecurityGroupMessage:
+      type: object
+      required:
+        - CacheSecurityGroupName
+      properties:
+        CacheSecurityGroupName:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DeleteCacheSecurityGroup</code> operation.
+    DeleteCacheSubnetGroupMessage:
+      type: object
+      required:
+        - CacheSubnetGroupName
+      properties:
+        CacheSubnetGroupName:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DeleteCacheSubnetGroup</code> operation.
+    DeleteReplicationGroupMessage:
+      type: object
+      required:
+        - ReplicationGroupId
+      properties:
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+        RetainPrimaryCluster:
+          $ref: '#/components/schemas/BooleanOptional'
+        FinalSnapshotIdentifier:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DeleteReplicationGroup</code> operation.
+    DeleteReplicationGroupResult:
+      type: object
+      properties:
+        ReplicationGroup:
+          $ref: '#/components/schemas/ReplicationGroup'
+    DeleteSnapshotMessage:
+      type: object
+      required:
+        - SnapshotName
+      properties:
+        SnapshotName:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DeleteSnapshot</code> operation.
+    DeleteSnapshotResult:
+      type: object
+      properties:
+        Snapshot:
+          $ref: '#/components/schemas/Snapshot'
+    DescribeCacheClustersMessage:
+      type: object
+      properties:
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+        ShowCacheNodeInfo:
+          $ref: '#/components/schemas/BooleanOptional'
+        ShowCacheClustersNotInReplicationGroups:
+          $ref: '#/components/schemas/BooleanOptional'
+      description: Represents the input of a <code>DescribeCacheClusters</code> operation.
+    DescribeCacheEngineVersionsMessage:
+      type: object
+      properties:
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        CacheParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+        DefaultOnly:
+          $ref: '#/components/schemas/Boolean'
+      description: Represents the input of a <code>DescribeCacheEngineVersions</code> operation.
+    DescribeCacheParameterGroupsMessage:
+      type: object
+      properties:
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DescribeCacheParameterGroups</code> operation.
+    DescribeCacheParametersMessage:
+      type: object
+      required:
+        - CacheParameterGroupName
+      properties:
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        Source:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DescribeCacheParameters</code> operation.
+    DescribeCacheSecurityGroupsMessage:
+      type: object
+      properties:
+        CacheSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DescribeCacheSecurityGroups</code> operation.
+    DescribeCacheSubnetGroupsMessage:
+      type: object
+      properties:
+        CacheSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DescribeCacheSubnetGroups</code> operation.
+    DescribeEngineDefaultParametersMessage:
+      type: object
+      required:
+        - CacheParameterGroupFamily
+      properties:
+        CacheParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DescribeEngineDefaultParameters</code> operation.
+    DescribeEngineDefaultParametersResult:
+      type: object
+      properties:
+        EngineDefaults:
+          $ref: '#/components/schemas/EngineDefaults'
+    DescribeEventsMessage:
+      type: object
+      properties:
+        SourceIdentifier:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/SourceType'
+        StartTime:
+          $ref: '#/components/schemas/TStamp'
+        EndTime:
+          $ref: '#/components/schemas/TStamp'
+        Duration:
+          $ref: '#/components/schemas/IntegerOptional'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DescribeEvents</code> operation.
+    DescribeReplicationGroupsMessage:
+      type: object
+      properties:
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DescribeReplicationGroups</code> operation.
+    DescribeReservedCacheNodesMessage:
+      type: object
+      properties:
+        ReservedCacheNodeId:
+          $ref: '#/components/schemas/String'
+        ReservedCacheNodesOfferingId:
+          $ref: '#/components/schemas/String'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+        Duration:
+          $ref: '#/components/schemas/String'
+        ProductDescription:
+          $ref: '#/components/schemas/String'
+        OfferingType:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DescribeReservedCacheNodes</code> operation.
+    DescribeReservedCacheNodesOfferingsMessage:
+      type: object
+      properties:
+        ReservedCacheNodesOfferingId:
+          $ref: '#/components/schemas/String'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+        Duration:
+          $ref: '#/components/schemas/String'
+        ProductDescription:
+          $ref: '#/components/schemas/String'
+        OfferingType:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        Marker:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>DescribeReservedCacheNodesOfferings</code> operation.
+    DescribeSnapshotsListMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        Snapshots:
+          $ref: '#/components/schemas/SnapshotList'
+      description: Represents the output of a <code>DescribeSnapshots</code> operation.
+    DescribeSnapshotsMessage:
+      type: object
+      properties:
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        SnapshotName:
+          $ref: '#/components/schemas/String'
+        SnapshotSource:
+          $ref: '#/components/schemas/String'
+        Marker:
+          $ref: '#/components/schemas/String'
+        MaxRecords:
+          $ref: '#/components/schemas/IntegerOptional'
+        ShowNodeGroupConfig:
+          $ref: '#/components/schemas/BooleanOptional'
+      description: Represents the input of a <code>DescribeSnapshotsMessage</code> operation.
+    Double:
+      type: number
+      format: double
+    EC2SecurityGroup:
+      type: object
+      properties:
+        Status:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupName:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupOwnerId:
+          $ref: '#/components/schemas/String'
+      description: Provides ownership and status information for an Amazon EC2 security group.
+    EC2SecurityGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EC2SecurityGroup'
+    Endpoint:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/Integer'
+      description: Represents the information required for client programs to connect to a cache node.
+    EngineDefaults:
+      type: object
+      properties:
+        CacheParameterGroupFamily:
+          $ref: '#/components/schemas/String'
+        Marker:
+          $ref: '#/components/schemas/String'
+        Parameters:
+          $ref: '#/components/schemas/ParametersList'
+        CacheNodeTypeSpecificParameters:
+          $ref: '#/components/schemas/CacheNodeTypeSpecificParametersList'
+      description: Represents the output of a <code>DescribeEngineDefaultParameters</code> operation.
+    Event:
+      type: object
+      properties:
+        SourceIdentifier:
+          $ref: '#/components/schemas/String'
+        SourceType:
+          $ref: '#/components/schemas/SourceType'
+        Message:
+          $ref: '#/components/schemas/String'
+        Date:
+          $ref: '#/components/schemas/TStamp'
+      description: 'Represents a single occurrence of something interesting within the system. Some examples of events are creating a cache cluster, adding or removing a cache node, or rebooting a node.'
+    EventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    EventsMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        Events:
+          $ref: '#/components/schemas/EventList'
+      description: Represents the output of a <code>DescribeEvents</code> operation.
+    InsufficientCacheClusterCapacityFault:
+      type: object
+      properties: {}
+      description: The requested cache node type is not available in the specified Availability Zone.
+    Integer:
+      type: integer
+    IntegerOptional:
+      type: integer
+    InvalidARNFault:
+      type: object
+      properties: {}
+      description: The requested Amazon Resource Name (ARN) does not refer to an existing resource.
+    InvalidCacheClusterStateFault:
+      type: object
+      properties: {}
+      description: The requested cache cluster is not in the <code>available</code> state.
+    InvalidCacheParameterGroupStateFault:
+      type: object
+      properties: {}
+      description: The current state of the cache parameter group does not allow the requested operation to occur.
+    InvalidCacheSecurityGroupStateFault:
+      type: object
+      properties: {}
+      description: The current state of the cache security group does not allow deletion.
+    InvalidParameterCombinationException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/AwsQueryErrorMessage'
+      description: Two or more incompatible parameters were specified.
+    InvalidParameterValueException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/AwsQueryErrorMessage'
+      description: The value for a parameter is invalid.
+    InvalidReplicationGroupStateFault:
+      type: object
+      properties: {}
+      description: The requested replication group is not in the <code>available</code> state.
+    InvalidSnapshotStateFault:
+      type: object
+      properties: {}
+      description: The current state of the snapshot does not allow the requested operation to occur.
+    InvalidSubnet:
+      type: object
+      properties: {}
+      description: An invalid subnet identifier was specified.
+    InvalidVPCNetworkStateFault:
+      type: object
+      properties: {}
+      description: The VPC network is in an invalid state.
+    KeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ListAllowedNodeTypeModificationsMessage:
+      type: object
+      properties:
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+      description: The input parameters for the <code>ListAllowedNodeTypeModifications</code> operation.
+    ListTagsForResourceMessage:
+      type: object
+      required:
+        - ResourceName
+      properties:
+        ResourceName:
+          $ref: '#/components/schemas/String'
+      description: The input parameters for the <code>ListTagsForResource</code> operation.
+    ModifyCacheClusterMessage:
+      type: object
+      required:
+        - CacheClusterId
+      properties:
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        NumCacheNodes:
+          $ref: '#/components/schemas/IntegerOptional'
+        CacheNodeIdsToRemove:
+          $ref: '#/components/schemas/CacheNodeIdsList'
+        AZMode:
+          $ref: '#/components/schemas/AZMode'
+        NewAvailabilityZones:
+          $ref: '#/components/schemas/PreferredAvailabilityZoneList'
+        CacheSecurityGroupNames:
+          $ref: '#/components/schemas/CacheSecurityGroupNameList'
+        SecurityGroupIds:
+          $ref: '#/components/schemas/SecurityGroupIdsList'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        NotificationTopicArn:
+          $ref: '#/components/schemas/String'
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        NotificationTopicStatus:
+          $ref: '#/components/schemas/String'
+        ApplyImmediately:
+          $ref: '#/components/schemas/Boolean'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/BooleanOptional'
+        SnapshotRetentionLimit:
+          $ref: '#/components/schemas/IntegerOptional'
+        SnapshotWindow:
+          $ref: '#/components/schemas/String'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>ModifyCacheCluster</code> operation.
+    ModifyCacheClusterResult:
+      type: object
+      properties:
+        CacheCluster:
+          $ref: '#/components/schemas/CacheCluster'
+    ModifyCacheParameterGroupMessage:
+      type: object
+      required:
+        - CacheParameterGroupName
+        - ParameterNameValues
+      properties:
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        ParameterNameValues:
+          $ref: '#/components/schemas/ParameterNameValueList'
+      description: Represents the input of a <code>ModifyCacheParameterGroup</code> operation.
+    ModifyCacheSubnetGroupMessage:
+      type: object
+      required:
+        - CacheSubnetGroupName
+      properties:
+        CacheSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        CacheSubnetGroupDescription:
+          $ref: '#/components/schemas/String'
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdentifierList'
+      description: Represents the input of a <code>ModifyCacheSubnetGroup</code> operation.
+    ModifyCacheSubnetGroupResult:
+      type: object
+      properties:
+        CacheSubnetGroup:
+          $ref: '#/components/schemas/CacheSubnetGroup'
+    ModifyReplicationGroupMessage:
+      type: object
+      required:
+        - ReplicationGroupId
+      properties:
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+        ReplicationGroupDescription:
+          $ref: '#/components/schemas/String'
+        PrimaryClusterId:
+          $ref: '#/components/schemas/String'
+        SnapshottingClusterId:
+          $ref: '#/components/schemas/String'
+        AutomaticFailoverEnabled:
+          $ref: '#/components/schemas/BooleanOptional'
+        CacheSecurityGroupNames:
+          $ref: '#/components/schemas/CacheSecurityGroupNameList'
+        SecurityGroupIds:
+          $ref: '#/components/schemas/SecurityGroupIdsList'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        NotificationTopicArn:
+          $ref: '#/components/schemas/String'
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        NotificationTopicStatus:
+          $ref: '#/components/schemas/String'
+        ApplyImmediately:
+          $ref: '#/components/schemas/Boolean'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/BooleanOptional'
+        SnapshotRetentionLimit:
+          $ref: '#/components/schemas/IntegerOptional'
+        SnapshotWindow:
+          $ref: '#/components/schemas/String'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+        NodeGroupId:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>ModifyReplicationGroups</code> operation.
+    ModifyReplicationGroupResult:
+      type: object
+      properties:
+        ReplicationGroup:
+          $ref: '#/components/schemas/ReplicationGroup'
+    NodeGroup:
+      type: object
+      properties:
+        NodeGroupId:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+        PrimaryEndpoint:
+          $ref: '#/components/schemas/Endpoint'
+        Slots:
+          $ref: '#/components/schemas/String'
+        NodeGroupMembers:
+          $ref: '#/components/schemas/NodeGroupMemberList'
+      description: Represents a collection of cache nodes in a replication group. One node in the node group is the read/write primary node. All the other nodes are read-only Replica nodes.
+    NodeGroupConfiguration:
+      type: object
+      properties:
+        Slots:
+          $ref: '#/components/schemas/String'
+        ReplicaCount:
+          $ref: '#/components/schemas/IntegerOptional'
+        PrimaryAvailabilityZone:
+          $ref: '#/components/schemas/String'
+        ReplicaAvailabilityZones:
+          $ref: '#/components/schemas/AvailabilityZonesList'
+      description: 'node group (shard) configuration options. Each node group (shard) configuration has the following: <code>Slots</code>, <code>PrimaryAvailabilityZone</code>, <code>ReplicaAvailabilityZones</code>, <code>ReplicaCount</code>.'
+    NodeGroupConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NodeGroupConfiguration'
+    NodeGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NodeGroup'
+    NodeGroupMember:
+      type: object
+      properties:
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        CacheNodeId:
+          $ref: '#/components/schemas/String'
+        ReadEndpoint:
+          $ref: '#/components/schemas/Endpoint'
+        PreferredAvailabilityZone:
+          $ref: '#/components/schemas/String'
+        CurrentRole:
+          $ref: '#/components/schemas/String'
+      description: Represents a single node within a node group (shard).
+    NodeGroupMemberList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NodeGroupMember'
+    NodeGroupNotFoundFault:
+      type: object
+      properties: {}
+      description: The node group specified by the <code>NodeGroupId</code> parameter could not be found. Please verify that the node group exists and that you spelled the <code>NodeGroupId</code> value correctly.
+    NodeGroupsPerReplicationGroupQuotaExceededFault:
+      type: object
+      properties: {}
+      description: The request cannot be processed because it would exceed the maximum of 15 node groups (shards) in a single replication group.
+    NodeQuotaForClusterExceededFault:
+      type: object
+      properties: {}
+      description: The request cannot be processed because it would exceed the allowed number of cache nodes in a single cache cluster.
+    NodeQuotaForCustomerExceededFault:
+      type: object
+      properties: {}
+      description: The request cannot be processed because it would exceed the allowed number of cache nodes per customer.
+    NodeSnapshot:
+      type: object
+      properties:
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        NodeGroupId:
+          $ref: '#/components/schemas/String'
+        CacheNodeId:
+          $ref: '#/components/schemas/String'
+        NodeGroupConfiguration:
+          $ref: '#/components/schemas/NodeGroupConfiguration'
+        CacheSize:
+          $ref: '#/components/schemas/String'
+        CacheNodeCreateTime:
+          $ref: '#/components/schemas/TStamp'
+        SnapshotCreateTime:
+          $ref: '#/components/schemas/TStamp'
+      description: Represents an individual cache node in a snapshot of a cache cluster.
+    NodeSnapshotList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NodeSnapshot'
+    NodeTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    NotificationConfiguration:
+      type: object
+      properties:
+        TopicArn:
+          $ref: '#/components/schemas/String'
+        TopicStatus:
+          $ref: '#/components/schemas/String'
+      description: Describes a notification topic and its status. Notification topics are used for publishing ElastiCache events to subscribers using Amazon Simple Notification Service (SNS).
+    Parameter:
+      type: object
+      properties:
+        ParameterName:
+          $ref: '#/components/schemas/String'
+        ParameterValue:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+        Source:
+          $ref: '#/components/schemas/String'
+        DataType:
+          $ref: '#/components/schemas/String'
+        AllowedValues:
+          $ref: '#/components/schemas/String'
+        IsModifiable:
+          $ref: '#/components/schemas/Boolean'
+        MinimumEngineVersion:
+          $ref: '#/components/schemas/String'
+        ChangeType:
+          $ref: '#/components/schemas/ChangeType'
+      description: Describes an individual setting that controls some aspect of ElastiCache behavior.
+    ParameterNameValue:
+      type: object
+      properties:
+        ParameterName:
+          $ref: '#/components/schemas/String'
+        ParameterValue:
+          $ref: '#/components/schemas/String'
+      description: Describes a name-value pair that is used to update the value of a parameter.
+    ParameterNameValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParameterNameValue'
+    ParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Parameter'
+    PendingAutomaticFailoverStatus:
+      type: string
+      enum:
+        - enabled
+        - disabled
+    PendingModifiedValues:
+      type: object
+      properties:
+        NumCacheNodes:
+          $ref: '#/components/schemas/IntegerOptional'
+        CacheNodeIdsToRemove:
+          $ref: '#/components/schemas/CacheNodeIdsList'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+      description: 'A group of settings that are applied to the cache cluster in the future, or that are currently being applied.'
+    PreferredAvailabilityZoneList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    PurchaseReservedCacheNodesOfferingMessage:
+      type: object
+      required:
+        - ReservedCacheNodesOfferingId
+      properties:
+        ReservedCacheNodesOfferingId:
+          $ref: '#/components/schemas/String'
+        ReservedCacheNodeId:
+          $ref: '#/components/schemas/String'
+        CacheNodeCount:
+          $ref: '#/components/schemas/IntegerOptional'
+      description: Represents the input of a <code>PurchaseReservedCacheNodesOffering</code> operation.
+    PurchaseReservedCacheNodesOfferingResult:
+      type: object
+      properties:
+        ReservedCacheNode:
+          $ref: '#/components/schemas/ReservedCacheNode'
+    RebootCacheClusterMessage:
+      type: object
+      required:
+        - CacheClusterId
+        - CacheNodeIdsToReboot
+      properties:
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        CacheNodeIdsToReboot:
+          $ref: '#/components/schemas/CacheNodeIdsList'
+      description: Represents the input of a <code>RebootCacheCluster</code> operation.
+    RebootCacheClusterResult:
+      type: object
+      properties:
+        CacheCluster:
+          $ref: '#/components/schemas/CacheCluster'
+    RecurringCharge:
+      type: object
+      properties:
+        RecurringChargeAmount:
+          $ref: '#/components/schemas/Double'
+        RecurringChargeFrequency:
+          $ref: '#/components/schemas/String'
+      description: 'Contains the specific price and frequency of a recurring charges for a reserved cache node, or for a reserved cache node offering.'
+    RecurringChargeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecurringCharge'
+    RemoveTagsFromResourceMessage:
+      type: object
+      required:
+        - ResourceName
+        - TagKeys
+      properties:
+        ResourceName:
+          $ref: '#/components/schemas/String'
+        TagKeys:
+          $ref: '#/components/schemas/KeyList'
+      description: Represents the input of a <code>RemoveTagsFromResource</code> operation.
+    ReplicationGroup:
+      type: object
+      properties:
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+        PendingModifiedValues:
+          $ref: '#/components/schemas/ReplicationGroupPendingModifiedValues'
+        MemberClusters:
+          $ref: '#/components/schemas/ClusterIdList'
+        NodeGroups:
+          $ref: '#/components/schemas/NodeGroupList'
+        SnapshottingClusterId:
+          $ref: '#/components/schemas/String'
+        AutomaticFailover:
+          $ref: '#/components/schemas/AutomaticFailoverStatus'
+        ConfigurationEndpoint:
+          $ref: '#/components/schemas/Endpoint'
+        SnapshotRetentionLimit:
+          $ref: '#/components/schemas/IntegerOptional'
+        SnapshotWindow:
+          $ref: '#/components/schemas/String'
+        ClusterEnabled:
+          $ref: '#/components/schemas/BooleanOptional'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+      description: Contains all of the attributes of a specific Redis replication group.
+    ReplicationGroupAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: The specified replication group already exists.
+    ReplicationGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicationGroup'
+    ReplicationGroupMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        ReplicationGroups:
+          $ref: '#/components/schemas/ReplicationGroupList'
+      description: Represents the output of a <code>DescribeReplicationGroups</code> operation.
+    ReplicationGroupNotFoundFault:
+      type: object
+      properties: {}
+      description: The specified replication group does not exist.
+    ReplicationGroupPendingModifiedValues:
+      type: object
+      properties:
+        PrimaryClusterId:
+          $ref: '#/components/schemas/String'
+        AutomaticFailoverStatus:
+          $ref: '#/components/schemas/PendingAutomaticFailoverStatus'
+      description: 'The settings to be applied to the Redis replication group, either immediately or during the next maintenance window.'
+    ReservedCacheNode:
+      type: object
+      properties:
+        ReservedCacheNodeId:
+          $ref: '#/components/schemas/String'
+        ReservedCacheNodesOfferingId:
+          $ref: '#/components/schemas/String'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+        StartTime:
+          $ref: '#/components/schemas/TStamp'
+        Duration:
+          $ref: '#/components/schemas/Integer'
+        FixedPrice:
+          $ref: '#/components/schemas/Double'
+        UsagePrice:
+          $ref: '#/components/schemas/Double'
+        CacheNodeCount:
+          $ref: '#/components/schemas/Integer'
+        ProductDescription:
+          $ref: '#/components/schemas/String'
+        OfferingType:
+          $ref: '#/components/schemas/String'
+        State:
+          $ref: '#/components/schemas/String'
+        RecurringCharges:
+          $ref: '#/components/schemas/RecurringChargeList'
+      description: Represents the output of a <code>PurchaseReservedCacheNodesOffering</code> operation.
+    ReservedCacheNodeAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: You already have a reservation with the given identifier.
+    ReservedCacheNodeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReservedCacheNode'
+    ReservedCacheNodeMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        ReservedCacheNodes:
+          $ref: '#/components/schemas/ReservedCacheNodeList'
+      description: Represents the output of a <code>DescribeReservedCacheNodes</code> operation.
+    ReservedCacheNodeNotFoundFault:
+      type: object
+      properties: {}
+      description: The requested reserved cache node was not found.
+    ReservedCacheNodeQuotaExceededFault:
+      type: object
+      properties: {}
+      description: The request cannot be processed because it would exceed the user's cache node quota.
+    ReservedCacheNodesOffering:
+      type: object
+      properties:
+        ReservedCacheNodesOfferingId:
+          $ref: '#/components/schemas/String'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+        Duration:
+          $ref: '#/components/schemas/Integer'
+        FixedPrice:
+          $ref: '#/components/schemas/Double'
+        UsagePrice:
+          $ref: '#/components/schemas/Double'
+        ProductDescription:
+          $ref: '#/components/schemas/String'
+        OfferingType:
+          $ref: '#/components/schemas/String'
+        RecurringCharges:
+          $ref: '#/components/schemas/RecurringChargeList'
+      description: Describes all of the attributes of a reserved cache node offering.
+    ReservedCacheNodesOfferingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReservedCacheNodesOffering'
+    ReservedCacheNodesOfferingMessage:
+      type: object
+      properties:
+        Marker:
+          $ref: '#/components/schemas/String'
+        ReservedCacheNodesOfferings:
+          $ref: '#/components/schemas/ReservedCacheNodesOfferingList'
+      description: Represents the output of a <code>DescribeReservedCacheNodesOfferings</code> operation.
+    ReservedCacheNodesOfferingNotFoundFault:
+      type: object
+      properties: {}
+      description: The requested cache node offering does not exist.
+    ResetCacheParameterGroupMessage:
+      type: object
+      required:
+        - CacheParameterGroupName
+      properties:
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        ResetAllParameters:
+          $ref: '#/components/schemas/Boolean'
+        ParameterNameValues:
+          $ref: '#/components/schemas/ParameterNameValueList'
+      description: Represents the input of a <code>ResetCacheParameterGroup</code> operation.
+    RevokeCacheSecurityGroupIngressMessage:
+      type: object
+      required:
+        - CacheSecurityGroupName
+        - EC2SecurityGroupName
+        - EC2SecurityGroupOwnerId
+      properties:
+        CacheSecurityGroupName:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupName:
+          $ref: '#/components/schemas/String'
+        EC2SecurityGroupOwnerId:
+          $ref: '#/components/schemas/String'
+      description: Represents the input of a <code>RevokeCacheSecurityGroupIngress</code> operation.
+    RevokeCacheSecurityGroupIngressResult:
+      type: object
+      properties:
+        CacheSecurityGroup:
+          $ref: '#/components/schemas/CacheSecurityGroup'
+    SecurityGroupIdsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SecurityGroupMembership:
+      type: object
+      properties:
+        SecurityGroupId:
+          $ref: '#/components/schemas/String'
+        Status:
+          $ref: '#/components/schemas/String'
+      description: Represents a single cache security group and its status.
+    SecurityGroupMembershipList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupMembership'
+    Snapshot:
+      type: object
+      properties:
+        SnapshotName:
+          $ref: '#/components/schemas/String'
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+        ReplicationGroupDescription:
+          $ref: '#/components/schemas/String'
+        CacheClusterId:
+          $ref: '#/components/schemas/String'
+        SnapshotStatus:
+          $ref: '#/components/schemas/String'
+        SnapshotSource:
+          $ref: '#/components/schemas/String'
+        CacheNodeType:
+          $ref: '#/components/schemas/String'
+        Engine:
+          $ref: '#/components/schemas/String'
+        EngineVersion:
+          $ref: '#/components/schemas/String'
+        NumCacheNodes:
+          $ref: '#/components/schemas/IntegerOptional'
+        PreferredAvailabilityZone:
+          $ref: '#/components/schemas/String'
+        CacheClusterCreateTime:
+          $ref: '#/components/schemas/TStamp'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/String'
+        TopicArn:
+          $ref: '#/components/schemas/String'
+        Port:
+          $ref: '#/components/schemas/IntegerOptional'
+        CacheParameterGroupName:
+          $ref: '#/components/schemas/String'
+        CacheSubnetGroupName:
+          $ref: '#/components/schemas/String'
+        VpcId:
+          $ref: '#/components/schemas/String'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/Boolean'
+        SnapshotRetentionLimit:
+          $ref: '#/components/schemas/IntegerOptional'
+        SnapshotWindow:
+          $ref: '#/components/schemas/String'
+        NumNodeGroups:
+          $ref: '#/components/schemas/IntegerOptional'
+        AutomaticFailover:
+          $ref: '#/components/schemas/AutomaticFailoverStatus'
+        NodeSnapshots:
+          $ref: '#/components/schemas/NodeSnapshotList'
+      description: Represents a copy of an entire Redis cache cluster as of the time when the snapshot was taken.
+    SnapshotAlreadyExistsFault:
+      type: object
+      properties: {}
+      description: You already have a snapshot with the given name.
+    SnapshotArnsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SnapshotFeatureNotSupportedFault:
+      type: object
+      properties: {}
+      description: '<p>You attempted one of the following operations:</p> <ul> <li> <p>Creating a snapshot of a Redis cache cluster running on a <code>cache.t1.micro</code> cache node.</p> </li> <li> <p>Creating a snapshot of a cache cluster that is running Memcached rather than Redis.</p> </li> </ul> <p>Neither of these are supported by ElastiCache.</p>'
+    SnapshotList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Snapshot'
+    SnapshotNotFoundFault:
+      type: object
+      properties: {}
+      description: The requested snapshot name does not refer to an existing snapshot.
+    SnapshotQuotaExceededFault:
+      type: object
+      properties: {}
+      description: The request cannot be processed because it would exceed the maximum number of snapshots.
+    SourceType:
+      type: string
+      enum:
+        - cache-cluster
+        - cache-parameter-group
+        - cache-security-group
+        - cache-subnet-group
+        - replication-group
+    String:
+      type: string
+    Subnet:
+      type: object
+      properties:
+        SubnetIdentifier:
+          $ref: '#/components/schemas/String'
+        SubnetAvailabilityZone:
+          $ref: '#/components/schemas/AvailabilityZone'
+      description: Represents the subnet associated with a cache cluster. This parameter refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with ElastiCache.
+    SubnetIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SubnetInUse:
+      type: object
+      properties: {}
+      description: The requested subnet is being used by another cache subnet group.
+    SubnetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Subnet'
+    TStamp:
+      type: string
+      format: date-time
+    Tag:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/String'
+        Value:
+          $ref: '#/components/schemas/String'
+      description: A cost allocation Tag that can be added to an ElastiCache cluster or replication group. Tags are composed of a Key/Value pair. A tag with a null Value is permitted.
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TagListMessage:
+      type: object
+      properties:
+        TagList:
+          $ref: '#/components/schemas/TagList'
+      description: 'Represents the output from the <code>AddTagsToResource</code>, <code>ListTagsForResource</code>, and <code>RemoveTagsFromResource</code> operations.'
+    TagNotFoundFault:
+      type: object
+      properties: {}
+      description: The requested tag was not found on this resource.
+    TagQuotaPerResourceExceeded:
+      type: object
+      properties: {}
+      description: The request cannot be processed because it would cause the resource to have more than the allowed number of tags. The maximum number of tags permitted on a resource is 50.
+    TestFailoverMessage:
+      type: object
+      required:
+        - ReplicationGroupId
+        - NodeGroupId
+      properties:
+        ReplicationGroupId:
+          $ref: '#/components/schemas/String'
+        NodeGroupId:
+          $ref: '#/components/schemas/String'
+    TestFailoverNotAvailableFault:
+      type: object
+      properties: {}
+    TestFailoverResult:
+      type: object
+      properties:
+        ReplicationGroup:
+          $ref: '#/components/schemas/ReplicationGroup'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

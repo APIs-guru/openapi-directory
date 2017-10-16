@@ -1,0 +1,79 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.apitore.com/api/13'
+info:
+  description: 'Url to Text.<BR />[Endpoint] https://api.apitore.com/api/13'
+  title: Url2Text APIs
+  version: 0.0.1
+  x-description-language: jp
+  x-logo:
+    url: 'https://apitore.com/img/apis/13.jpg'
+  x-origin:
+    - format: swagger
+      url: 'https://api.apitore.com/json/13'
+      version: '2.0'
+  x-providerName: apitore.com
+  x-serviceName: url2textApis
+tags:
+  - description: Jsoup Controller
+    name: jsoup-controller
+paths:
+  /jsoup/url2text:
+    get:
+      description: 'Jsoup Web scraper.<BR />Response<BR />&nbsp; Github: <a href="https://github.com/keigohtr/apitore-response-parent/tree/master/jsoup-response">jsoup-response</a><BR />&nbsp; Class: com.apitore.banana.response.org.jsoup.TextResponseEntity<BR />'
+      operationId: url2textUsingGET
+      parameters:
+        - description: Access Token
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: URL
+          in: query
+          name: url
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextResponseEntity'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: URL to TEXT
+      tags:
+        - jsoup-controller
+components:
+  schemas:
+    TextResponseEntity:
+      properties:
+        endTime:
+          description: End date
+          type: string
+        log:
+          description: Log message
+          type: string
+        processTime:
+          description: 'Process time [millisecond]'
+          type: string
+        startTime:
+          description: Start date
+          type: string
+        text:
+          description: Text
+          type: string
+      required:
+        - endTime
+        - log
+        - processTime
+        - startTime
+        - text
+      type: object

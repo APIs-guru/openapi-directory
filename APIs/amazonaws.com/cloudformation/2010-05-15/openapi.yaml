@@ -1,0 +1,2322 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://cloudformation.amazonaws.com/'
+info:
+  version: '2010-05-15'
+  x-release: v4
+  title: AWS CloudFormation
+  description: '<fullname>AWS CloudFormation</fullname> <p>AWS CloudFormation allows you to create and manage AWS infrastructure deployments predictably and repeatedly. You can use AWS CloudFormation to leverage AWS products, such as Amazon Elastic Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification Service, Elastic Load Balancing, and Auto Scaling to build highly-reliable, highly scalable, cost-effective applications without creating or configuring the underlying AWS infrastructure.</p> <p>With AWS CloudFormation, you declare all of your resources and dependencies in a template file. The template defines a collection of resources as a single unit called a stack. AWS CloudFormation creates and deletes all member resources of the stack together and manages all dependencies between the resources for you.</p> <p>For more information about AWS CloudFormation, see the <a href="http://aws.amazon.com/cloudformation/">AWS CloudFormation Product Page</a>.</p> <p>Amazon CloudFormation makes use of other AWS products. If you need additional technical information about a specific AWS product, you can find the product''s technical documentation at <a href="http://docs.aws.amazon.com/">docs.aws.amazon.com</a>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: cloudformation
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/cloudformation-2010-05-15.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/cloudformation/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CancelUpdateStack
+      description: '<p>Cancels an update on the specified stack. If the call completes successfully, the stack rolls back the update and reverts to the previous stack configuration.</p> <note> <p>You can cancel only stacks that are in the UPDATE_IN_PROGRESS state.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: TokenAlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TokenAlreadyExistsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelUpdateStackInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ContinueUpdateRollback':
+    post:
+      operationId: ContinueUpdateRollback
+      description: '<p>For a specified stack that is in the <code>UPDATE_ROLLBACK_FAILED</code> state, continues rolling it back to the <code>UPDATE_ROLLBACK_COMPLETE</code> state. Depending on the cause of the failure, you can manually <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed"> fix the error</a> and continue the rollback. By continuing the rollback, you can return your stack to a working state (the <code>UPDATE_ROLLBACK_COMPLETE</code> state), and then try to update the stack again.</p> <p>A stack goes into the <code>UPDATE_ROLLBACK_FAILED</code> state when AWS CloudFormation cannot roll back all changes after a failed stack update. For example, you might have a stack that is rolling back to an old database instance that was deleted outside of AWS CloudFormation. Because AWS CloudFormation doesn''t know the database was deleted, it assumes that the database instance still exists and attempts to roll back to it, causing the update rollback to fail.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ContinueUpdateRollbackOutput'
+        '480':
+          description: TokenAlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TokenAlreadyExistsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContinueUpdateRollbackInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateChangeSet':
+    post:
+      operationId: CreateChangeSet
+      description: '<p>Creates a list of changes that will be applied to a stack so that you can review the changes before executing them. You can create a change set for a stack that doesn''t exist or an existing stack. If you create a change set for a stack that doesn''t exist, the change set shows all of the resources that AWS CloudFormation will create. If you create a change set for an existing stack, AWS CloudFormation compares the stack''s information with the information that you submit in the change set and lists the differences. Use change sets to understand which resources AWS CloudFormation will create or change, and how it will change resources in an existing stack, before you create or update a stack.</p> <p>To create a change set for a stack that doesn''t exist, for the <code>ChangeSetType</code> parameter, specify <code>CREATE</code>. To create a change set for an existing stack, specify <code>UPDATE</code> for the <code>ChangeSetType</code> parameter. After the <code>CreateChangeSet</code> call successfully completes, AWS CloudFormation starts creating the change set. To check the status of the change set or to review it, use the <a>DescribeChangeSet</a> action.</p> <p>When you are satisfied with the changes the change set will make, execute the change set by using the <a>ExecuteChangeSet</a> action. AWS CloudFormation doesn''t make changes until you execute the change set.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateChangeSetOutput'
+        '480':
+          description: AlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '481':
+          description: InsufficientCapabilitiesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientCapabilitiesException'
+        '482':
+          description: LimitExceededException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateChangeSetInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateStack':
+    post:
+      operationId: CreateStack
+      description: 'Creates a stack as specified in the template. After the call completes successfully, the stack creation starts. You can check the status of the stack via the <a>DescribeStacks</a> API.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreateStackOutput'
+        '480':
+          description: LimitExceededException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: AlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '482':
+          description: TokenAlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TokenAlreadyExistsException'
+        '483':
+          description: InsufficientCapabilitiesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientCapabilitiesException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStackInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteChangeSet':
+    post:
+      operationId: DeleteChangeSet
+      description: '<p>Deletes the specified change set. Deleting change sets ensures that no one executes the wrong change set.</p> <p>If the call successfully completes, AWS CloudFormation successfully deleted the change set.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeleteChangeSetOutput'
+        '480':
+          description: InvalidChangeSetStatusException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidChangeSetStatusException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteChangeSetInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteStack':
+    post:
+      operationId: DeleteStack
+      description: 'Deletes a specified stack. Once the call completes successfully, stack deletion starts. Deleted stacks do not show up in the <a>DescribeStacks</a> API if the deletion has been completed successfully.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: TokenAlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TokenAlreadyExistsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteStackInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAccountLimits':
+    post:
+      operationId: DescribeAccountLimits
+      description: 'Retrieves your account''s AWS CloudFormation limits, such as the maximum number of stacks that you can create in your account.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeAccountLimitsOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAccountLimitsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeChangeSet':
+    post:
+      operationId: DescribeChangeSet
+      description: 'Returns the inputs for the change set and a list of changes that AWS CloudFormation will make if you execute the change set. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html">Updating Stacks Using Change Sets</a> in the AWS CloudFormation User Guide.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeChangeSetOutput'
+        '480':
+          description: ChangeSetNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ChangeSetNotFoundException'
+      x-waiters:
+        - delay: 30
+          operation: DescribeChangeSet
+          maxAttempts: 120
+          description: Wait until change set status is CREATE_COMPLETE.
+          acceptors:
+            - argument: Status
+              expected: CREATE_COMPLETE
+              matcher: path
+              state: success
+            - argument: Status
+              expected: FAILED
+              matcher: path
+              state: failure
+            - expected: ValidationError
+              matcher: error
+              state: failure
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeChangeSetInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStackEvents':
+    post:
+      operationId: DescribeStackEvents
+      description: '<p>Returns all stack related events for a specified stack in reverse chronological order. For more information about a stack''s event history, go to <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html">Stacks</a> in the AWS CloudFormation User Guide.</p> <note> <p>You can list events for stacks that have failed to create or have been deleted by specifying the unique stack identifier (stack ID).</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeStackEventsOutput'
+      parameters:
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStackEventsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStackResource':
+    post:
+      operationId: DescribeStackResource
+      description: '<p>Returns a description of the specified resource in the specified stack.</p> <p>For deleted stacks, DescribeStackResource returns resource information for up to 90 days after the stack has been deleted.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeStackResourceOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStackResourceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStackResources':
+    post:
+      operationId: DescribeStackResources
+      description: '<p>Returns AWS resource descriptions for running and deleted stacks. If <code>StackName</code> is specified, all the associated resources that are part of the stack are returned. If <code>PhysicalResourceId</code> is specified, the associated resources of the stack that the resource belongs to are returned.</p> <note> <p>Only the first 100 resources will be returned. If your stack has more resources than this, you should use <code>ListStackResources</code> instead.</p> </note> <p>For deleted stacks, <code>DescribeStackResources</code> returns resource information for up to 90 days after the stack has been deleted.</p> <p>You must specify either <code>StackName</code> or <code>PhysicalResourceId</code>, but not both. In addition, you can specify <code>LogicalResourceId</code> to filter the returned result. For more information about resources, the <code>LogicalResourceId</code> and <code>PhysicalResourceId</code>, go to the <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/">AWS CloudFormation User Guide</a>.</p> <note> <p>A <code>ValidationError</code> is returned if you specify both <code>StackName</code> and <code>PhysicalResourceId</code> in the same request.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeStackResourcesOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStackResourcesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStacks':
+    post:
+      operationId: DescribeStacks
+      description: '<p>Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.</p> <note> <p>If the stack does not exist, an <code>AmazonCloudFormationException</code> is returned.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DescribeStacksOutput'
+      parameters:
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      x-waiters:
+        - delay: 5
+          operation: DescribeStacks
+          maxAttempts: 20
+          acceptors:
+            - matcher: status
+              expected: 200
+              state: success
+            - matcher: error
+              expected: ValidationError
+              state: retry
+        - delay: 30
+          operation: DescribeStacks
+          maxAttempts: 120
+          description: Wait until stack status is CREATE_COMPLETE.
+          acceptors:
+            - argument: 'Stacks[].StackStatus'
+              expected: CREATE_COMPLETE
+              matcher: pathAll
+              state: success
+            - argument: 'Stacks[].StackStatus'
+              expected: CREATE_FAILED
+              matcher: pathAny
+              state: failure
+            - argument: 'Stacks[].StackStatus'
+              expected: DELETE_COMPLETE
+              matcher: pathAny
+              state: failure
+            - argument: 'Stacks[].StackStatus'
+              expected: DELETE_FAILED
+              matcher: pathAny
+              state: failure
+            - argument: 'Stacks[].StackStatus'
+              expected: ROLLBACK_FAILED
+              matcher: pathAny
+              state: failure
+            - argument: 'Stacks[].StackStatus'
+              expected: ROLLBACK_COMPLETE
+              matcher: pathAny
+              state: failure
+            - expected: ValidationError
+              matcher: error
+              state: failure
+        - delay: 30
+          operation: DescribeStacks
+          maxAttempts: 120
+          description: Wait until stack status is DELETE_COMPLETE.
+          acceptors:
+            - argument: 'Stacks[].StackStatus'
+              expected: DELETE_COMPLETE
+              matcher: pathAll
+              state: success
+            - expected: ValidationError
+              matcher: error
+              state: success
+            - argument: 'Stacks[].StackStatus'
+              expected: DELETE_FAILED
+              matcher: pathAny
+              state: failure
+            - argument: 'Stacks[].StackStatus'
+              expected: CREATE_FAILED
+              matcher: pathAny
+              state: failure
+            - argument: 'Stacks[].StackStatus'
+              expected: ROLLBACK_FAILED
+              matcher: pathAny
+              state: failure
+            - argument: 'Stacks[].StackStatus'
+              expected: UPDATE_ROLLBACK_FAILED
+              matcher: pathAny
+              state: failure
+            - argument: 'Stacks[].StackStatus'
+              expected: UPDATE_ROLLBACK_IN_PROGRESS
+              matcher: pathAny
+              state: failure
+        - delay: 30
+          maxAttempts: 120
+          operation: DescribeStacks
+          description: Wait until stack status is UPDATE_COMPLETE.
+          acceptors:
+            - argument: 'Stacks[].StackStatus'
+              expected: UPDATE_COMPLETE
+              matcher: pathAll
+              state: success
+            - expected: UPDATE_FAILED
+              matcher: pathAny
+              state: failure
+              argument: 'Stacks[].StackStatus'
+            - argument: 'Stacks[].StackStatus'
+              expected: UPDATE_ROLLBACK_FAILED
+              matcher: pathAny
+              state: failure
+            - expected: UPDATE_ROLLBACK_COMPLETE
+              matcher: pathAny
+              state: failure
+              argument: 'Stacks[].StackStatus'
+            - expected: ValidationError
+              matcher: error
+              state: failure
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStacksInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#EstimateTemplateCost':
+    post:
+      operationId: EstimateTemplateCost
+      description: Returns the estimated monthly cost of a template. The return value is an AWS Simple Monthly Calculator URL with a query string that describes the resources required to run the template.
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EstimateTemplateCostOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateTemplateCostInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ExecuteChangeSet':
+    post:
+      operationId: ExecuteChangeSet
+      description: '<p>Updates a stack using the input information that was provided when the specified change set was created. After the call successfully completes, AWS CloudFormation starts updating the stack. Use the <a>DescribeStacks</a> action to view the status of the update.</p> <p>When you execute a change set, AWS CloudFormation deletes all other change sets associated with the stack because they aren''t valid for the updated stack.</p> <p>If a stack policy is associated with the stack, AWS CloudFormation enforces the policy during the update. You can''t specify a temporary stack policy that overrides the current policy.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExecuteChangeSetOutput'
+        '480':
+          description: InvalidChangeSetStatusException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InvalidChangeSetStatusException'
+        '481':
+          description: ChangeSetNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ChangeSetNotFoundException'
+        '482':
+          description: InsufficientCapabilitiesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientCapabilitiesException'
+        '483':
+          description: TokenAlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TokenAlreadyExistsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteChangeSetInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetStackPolicy':
+    post:
+      operationId: GetStackPolicy
+      description: 'Returns the stack policy for a specified stack. If a stack doesn''t have a policy, a null value is returned.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetStackPolicyOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetStackPolicyInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetTemplate':
+    post:
+      operationId: GetTemplate
+      description: '<p>Returns the template body for a specified stack. You can get the template for running or deleted stacks.</p> <p>For deleted stacks, GetTemplate returns the template for up to 90 days after the stack has been deleted.</p> <note> <p> If the template does not exist, a <code>ValidationError</code> is returned. </p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetTemplateOutput'
+        '480':
+          description: ChangeSetNotFoundException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ChangeSetNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTemplateInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetTemplateSummary':
+    post:
+      operationId: GetTemplateSummary
+      description: '<p>Returns information about a new or existing template. The <code>GetTemplateSummary</code> action is useful for viewing parameter information, such as default parameter values and parameter types, before you create or update a stack.</p> <p>You can use the <code>GetTemplateSummary</code> action when you submit a template, or you can get template information for a running or deleted stack.</p> <p>For deleted stacks, <code>GetTemplateSummary</code> returns the template information for up to 90 days after the stack has been deleted. If the template does not exist, a <code>ValidationError</code> is returned.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetTemplateSummaryOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTemplateSummaryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListChangeSets':
+    post:
+      operationId: ListChangeSets
+      description: 'Returns the ID and status of each active change set for a stack. For example, AWS CloudFormation lists change sets that are in the <code>CREATE_IN_PROGRESS</code> or <code>CREATE_PENDING</code> state.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListChangeSetsOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListChangeSetsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListExports':
+    post:
+      operationId: ListExports
+      description: '<p>Lists all exported output values in the account and region in which you call this action. Use this action to see the exported output values that you can import into other stacks. To import values, use the <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html"> <code>Fn::ImportValue</code> </a> function. </p> <p>For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html"> AWS CloudFormation Export Stack Output Values</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListExportsOutput'
+      parameters:
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListExportsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListImports':
+    post:
+      operationId: ListImports
+      description: '<p>Lists all stacks that are importing an exported output value. To modify or remove an exported output value, first use this action to see which stacks are using it. To see the exported output values in your account, see <a>ListExports</a>. </p> <p>For more information about importing an exported output value, see the <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html"> <code>Fn::ImportValue</code> </a> function. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListImportsOutput'
+      parameters:
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListImportsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListStackResources':
+    post:
+      operationId: ListStackResources
+      description: '<p>Returns descriptions of all resources of the specified stack.</p> <p>For deleted stacks, ListStackResources returns resource information for up to 90 days after the stack has been deleted.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListStackResourcesOutput'
+      parameters:
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStackResourcesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListStacks':
+    post:
+      operationId: ListStacks
+      description: 'Returns the summary information for stacks whose status matches the specified StackStatusFilter. Summary information for stacks that have been deleted is kept for 90 days after the stack is deleted. If no StackStatusFilter is specified, summary information for all stacks is returned (including existing stacks and stacks that have been deleted).'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListStacksOutput'
+      parameters:
+        - name: NextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStacksInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetStackPolicy':
+    post:
+      operationId: SetStackPolicy
+      description: Sets a stack policy for a specified stack.
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetStackPolicyInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SignalResource':
+    post:
+      operationId: SignalResource
+      description: Sends a signal to the specified resource with a success or failure status. You can use the SignalResource API in conjunction with a creation policy or update policy. AWS CloudFormation doesn't proceed with a stack creation or update until resources receive the required number of signals or the timeout period is exceeded. The SignalResource API is useful in cases where you want to send signals from anywhere other than an Amazon EC2 instance.
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignalResourceInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateStack':
+    post:
+      operationId: UpdateStack
+      description: '<p>Updates a stack as specified in the template. After the call completes successfully, the stack update starts. You can check the status of the stack via the <a>DescribeStacks</a> action.</p> <p>To get a copy of the template for an existing stack, you can use the <a>GetTemplate</a> action.</p> <p>For more information about creating an update template, updating a stack, and monitoring the progress of the update, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html">Updating a Stack</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UpdateStackOutput'
+        '480':
+          description: InsufficientCapabilitiesException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InsufficientCapabilitiesException'
+        '481':
+          description: TokenAlreadyExistsException
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TokenAlreadyExistsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStackInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ValidateTemplate':
+    post:
+      operationId: ValidateTemplate
+      description: 'Validates a specified template. AWS CloudFormation first checks if the template is valid JSON. If it isn''t, AWS CloudFormation checks if the template is valid YAML. If both these checks fail, AWS CloudFormation returns a template validation error.'
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ValidateTemplateOutput'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateTemplateInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AccountLimit:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/LimitName'
+        Value:
+          $ref: '#/components/schemas/LimitValue'
+      description: The AccountLimit data type.
+    AccountLimitList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccountLimit'
+    AllowedValue:
+      type: string
+    AllowedValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/AllowedValue'
+    AlreadyExistsException:
+      type: object
+      properties: {}
+      description: Resource with the name requested already exists.
+    CancelUpdateStackInput:
+      type: object
+      required:
+        - StackName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+      description: The input for the <a>CancelUpdateStack</a> action.
+    Capabilities:
+      type: array
+      items:
+        $ref: '#/components/schemas/Capability'
+    CapabilitiesReason:
+      type: string
+    Capability:
+      type: string
+      enum:
+        - CAPABILITY_IAM
+        - CAPABILITY_NAMED_IAM
+    CausingEntity:
+      type: string
+    Change:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/ChangeType'
+        ResourceChange:
+          $ref: '#/components/schemas/ResourceChange'
+      description: The <code>Change</code> structure describes the changes AWS CloudFormation will perform if you execute the change set.
+    ChangeAction:
+      type: string
+      enum:
+        - Add
+        - Modify
+        - Remove
+    ChangeSetId:
+      type: string
+      pattern: 'arn:[-a-zA-Z0-9:/]*'
+      minLength: 1
+    ChangeSetName:
+      type: string
+      pattern: '[a-zA-Z][-a-zA-Z0-9]*'
+      minLength: 1
+      maxLength: 128
+    ChangeSetNameOrId:
+      type: string
+      pattern: '[a-zA-Z][-a-zA-Z0-9]*|arn:[-a-zA-Z0-9:/]*'
+      minLength: 1
+      maxLength: 1600
+    ChangeSetNotFoundException:
+      type: object
+      properties: {}
+      description: 'The specified change set name or ID doesn''t exit. To view valid change sets for a stack, use the <code>ListChangeSets</code> action.'
+    ChangeSetStatus:
+      type: string
+      enum:
+        - CREATE_PENDING
+        - CREATE_IN_PROGRESS
+        - CREATE_COMPLETE
+        - DELETE_COMPLETE
+        - FAILED
+    ChangeSetStatusReason:
+      type: string
+    ChangeSetSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChangeSetSummary'
+    ChangeSetSummary:
+      type: object
+      properties:
+        StackId:
+          $ref: '#/components/schemas/StackId'
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        ChangeSetId:
+          $ref: '#/components/schemas/ChangeSetId'
+        ChangeSetName:
+          $ref: '#/components/schemas/ChangeSetName'
+        ExecutionStatus:
+          $ref: '#/components/schemas/ExecutionStatus'
+        Status:
+          $ref: '#/components/schemas/ChangeSetStatus'
+        StatusReason:
+          $ref: '#/components/schemas/ChangeSetStatusReason'
+        CreationTime:
+          $ref: '#/components/schemas/CreationTime'
+        Description:
+          $ref: '#/components/schemas/Description'
+      description: 'The <code>ChangeSetSummary</code> structure describes a change set, its status, and the stack with which it''s associated.'
+    ChangeSetType:
+      type: string
+      enum:
+        - CREATE
+        - UPDATE
+    ChangeSource:
+      type: string
+      enum:
+        - ResourceReference
+        - ParameterReference
+        - ResourceAttribute
+        - DirectModification
+        - Automatic
+    ChangeType:
+      type: string
+      enum:
+        - Resource
+    Changes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Change'
+    ClientRequestToken:
+      type: string
+      pattern: '[a-zA-Z][-a-zA-Z0-9]*'
+      minLength: 1
+      maxLength: 128
+    ClientToken:
+      type: string
+      minLength: 1
+      maxLength: 128
+    ContinueUpdateRollbackInput:
+      type: object
+      required:
+        - StackName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackNameOrId'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+        ResourcesToSkip:
+          $ref: '#/components/schemas/ResourcesToSkip'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+      description: The input for the <a>ContinueUpdateRollback</a> action.
+    ContinueUpdateRollbackOutput:
+      type: object
+      properties: {}
+      description: The output for a <a>ContinueUpdateRollback</a> action.
+    CreateChangeSetInput:
+      type: object
+      required:
+        - StackName
+        - ChangeSetName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackNameOrId'
+        TemplateBody:
+          $ref: '#/components/schemas/TemplateBody'
+        TemplateURL:
+          $ref: '#/components/schemas/TemplateURL'
+        UsePreviousTemplate:
+          $ref: '#/components/schemas/UsePreviousTemplate'
+        Parameters:
+          $ref: '#/components/schemas/Parameters'
+        Capabilities:
+          $ref: '#/components/schemas/Capabilities'
+        ResourceTypes:
+          $ref: '#/components/schemas/ResourceTypes'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+        NotificationARNs:
+          $ref: '#/components/schemas/NotificationARNs'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+        ChangeSetName:
+          $ref: '#/components/schemas/ChangeSetName'
+        ClientToken:
+          $ref: '#/components/schemas/ClientToken'
+        Description:
+          $ref: '#/components/schemas/Description'
+        ChangeSetType:
+          $ref: '#/components/schemas/ChangeSetType'
+      description: The input for the <a>CreateChangeSet</a> action.
+    CreateChangeSetOutput:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ChangeSetId'
+        StackId:
+          $ref: '#/components/schemas/StackId'
+      description: The output for the <a>CreateChangeSet</a> action.
+    CreateStackInput:
+      type: object
+      required:
+        - StackName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        TemplateBody:
+          $ref: '#/components/schemas/TemplateBody'
+        TemplateURL:
+          $ref: '#/components/schemas/TemplateURL'
+        Parameters:
+          $ref: '#/components/schemas/Parameters'
+        DisableRollback:
+          $ref: '#/components/schemas/DisableRollback'
+        TimeoutInMinutes:
+          $ref: '#/components/schemas/TimeoutMinutes'
+        NotificationARNs:
+          $ref: '#/components/schemas/NotificationARNs'
+        Capabilities:
+          $ref: '#/components/schemas/Capabilities'
+        ResourceTypes:
+          $ref: '#/components/schemas/ResourceTypes'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+        OnFailure:
+          $ref: '#/components/schemas/OnFailure'
+        StackPolicyBody:
+          $ref: '#/components/schemas/StackPolicyBody'
+        StackPolicyURL:
+          $ref: '#/components/schemas/StackPolicyURL'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+      description: The input for <a>CreateStack</a> action.
+    CreateStackOutput:
+      type: object
+      properties:
+        StackId:
+          $ref: '#/components/schemas/StackId'
+      description: The output for a <a>CreateStack</a> action.
+    CreationTime:
+      type: string
+      format: date-time
+    DeleteChangeSetInput:
+      type: object
+      required:
+        - ChangeSetName
+      properties:
+        ChangeSetName:
+          $ref: '#/components/schemas/ChangeSetNameOrId'
+        StackName:
+          $ref: '#/components/schemas/StackNameOrId'
+      description: The input for the <a>DeleteChangeSet</a> action.
+    DeleteChangeSetOutput:
+      type: object
+      properties: {}
+      description: The output for the <a>DeleteChangeSet</a> action.
+    DeleteStackInput:
+      type: object
+      required:
+        - StackName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        RetainResources:
+          $ref: '#/components/schemas/RetainResources'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+      description: The input for <a>DeleteStack</a> action.
+    DeletionTime:
+      type: string
+      format: date-time
+    DescribeAccountLimitsInput:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The input for the <a>DescribeAccountLimits</a> action.
+    DescribeAccountLimitsOutput:
+      type: object
+      properties:
+        AccountLimits:
+          $ref: '#/components/schemas/AccountLimitList'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output for the <a>DescribeAccountLimits</a> action.
+    DescribeChangeSetInput:
+      type: object
+      required:
+        - ChangeSetName
+      properties:
+        ChangeSetName:
+          $ref: '#/components/schemas/ChangeSetNameOrId'
+        StackName:
+          $ref: '#/components/schemas/StackNameOrId'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The input for the <a>DescribeChangeSet</a> action.
+    DescribeChangeSetOutput:
+      type: object
+      properties:
+        ChangeSetName:
+          $ref: '#/components/schemas/ChangeSetName'
+        ChangeSetId:
+          $ref: '#/components/schemas/ChangeSetId'
+        StackId:
+          $ref: '#/components/schemas/StackId'
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Parameters:
+          $ref: '#/components/schemas/Parameters'
+        CreationTime:
+          $ref: '#/components/schemas/CreationTime'
+        ExecutionStatus:
+          $ref: '#/components/schemas/ExecutionStatus'
+        Status:
+          $ref: '#/components/schemas/ChangeSetStatus'
+        StatusReason:
+          $ref: '#/components/schemas/ChangeSetStatusReason'
+        NotificationARNs:
+          $ref: '#/components/schemas/NotificationARNs'
+        Capabilities:
+          $ref: '#/components/schemas/Capabilities'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+        Changes:
+          $ref: '#/components/schemas/Changes'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output for the <a>DescribeChangeSet</a> action.
+    DescribeStackEventsInput:
+      type: object
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The input for <a>DescribeStackEvents</a> action.
+    DescribeStackEventsOutput:
+      type: object
+      properties:
+        StackEvents:
+          $ref: '#/components/schemas/StackEvents'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output for a <a>DescribeStackEvents</a> action.
+    DescribeStackResourceInput:
+      type: object
+      required:
+        - StackName
+        - LogicalResourceId
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        LogicalResourceId:
+          $ref: '#/components/schemas/LogicalResourceId'
+      description: The input for <a>DescribeStackResource</a> action.
+    DescribeStackResourceOutput:
+      type: object
+      properties:
+        StackResourceDetail:
+          $ref: '#/components/schemas/StackResourceDetail'
+      description: The output for a <a>DescribeStackResource</a> action.
+    DescribeStackResourcesInput:
+      type: object
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        LogicalResourceId:
+          $ref: '#/components/schemas/LogicalResourceId'
+        PhysicalResourceId:
+          $ref: '#/components/schemas/PhysicalResourceId'
+      description: The input for <a>DescribeStackResources</a> action.
+    DescribeStackResourcesOutput:
+      type: object
+      properties:
+        StackResources:
+          $ref: '#/components/schemas/StackResources'
+      description: The output for a <a>DescribeStackResources</a> action.
+    DescribeStacksInput:
+      type: object
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The input for <a>DescribeStacks</a> action.
+    DescribeStacksOutput:
+      type: object
+      properties:
+        Stacks:
+          $ref: '#/components/schemas/Stacks'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output for a <a>DescribeStacks</a> action.
+    Description:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    DisableRollback:
+      type: boolean
+    EstimateTemplateCostInput:
+      type: object
+      properties:
+        TemplateBody:
+          $ref: '#/components/schemas/TemplateBody'
+        TemplateURL:
+          $ref: '#/components/schemas/TemplateURL'
+        Parameters:
+          $ref: '#/components/schemas/Parameters'
+      description: The input for an <a>EstimateTemplateCost</a> action.
+    EstimateTemplateCostOutput:
+      type: object
+      properties:
+        Url:
+          $ref: '#/components/schemas/Url'
+      description: The output for a <a>EstimateTemplateCost</a> action.
+    EvaluationType:
+      type: string
+      enum:
+        - Static
+        - Dynamic
+    EventId:
+      type: string
+    ExecuteChangeSetInput:
+      type: object
+      required:
+        - ChangeSetName
+      properties:
+        ChangeSetName:
+          $ref: '#/components/schemas/ChangeSetNameOrId'
+        StackName:
+          $ref: '#/components/schemas/StackNameOrId'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+      description: The input for the <a>ExecuteChangeSet</a> action.
+    ExecuteChangeSetOutput:
+      type: object
+      properties: {}
+      description: The output for the <a>ExecuteChangeSet</a> action.
+    ExecutionStatus:
+      type: string
+      enum:
+        - UNAVAILABLE
+        - AVAILABLE
+        - EXECUTE_IN_PROGRESS
+        - EXECUTE_COMPLETE
+        - EXECUTE_FAILED
+        - OBSOLETE
+    Export:
+      type: object
+      properties:
+        ExportingStackId:
+          $ref: '#/components/schemas/StackId'
+        Name:
+          $ref: '#/components/schemas/ExportName'
+        Value:
+          $ref: '#/components/schemas/ExportValue'
+      description: The <code>Export</code> structure describes the exported output values for a stack.
+    ExportName:
+      type: string
+    ExportValue:
+      type: string
+    Exports:
+      type: array
+      items:
+        $ref: '#/components/schemas/Export'
+    GetStackPolicyInput:
+      type: object
+      required:
+        - StackName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+      description: The input for the <a>GetStackPolicy</a> action.
+    GetStackPolicyOutput:
+      type: object
+      properties:
+        StackPolicyBody:
+          $ref: '#/components/schemas/StackPolicyBody'
+      description: The output for the <a>GetStackPolicy</a> action.
+    GetTemplateInput:
+      type: object
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        ChangeSetName:
+          $ref: '#/components/schemas/ChangeSetNameOrId'
+        TemplateStage:
+          $ref: '#/components/schemas/TemplateStage'
+      description: The input for a <a>GetTemplate</a> action.
+    GetTemplateOutput:
+      type: object
+      properties:
+        TemplateBody:
+          $ref: '#/components/schemas/TemplateBody'
+        StagesAvailable:
+          $ref: '#/components/schemas/StageList'
+      description: The output for <a>GetTemplate</a> action.
+    GetTemplateSummaryInput:
+      type: object
+      properties:
+        TemplateBody:
+          $ref: '#/components/schemas/TemplateBody'
+        TemplateURL:
+          $ref: '#/components/schemas/TemplateURL'
+        StackName:
+          $ref: '#/components/schemas/StackNameOrId'
+      description: The input for the <a>GetTemplateSummary</a> action.
+    GetTemplateSummaryOutput:
+      type: object
+      properties:
+        Parameters:
+          $ref: '#/components/schemas/ParameterDeclarations'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Capabilities:
+          $ref: '#/components/schemas/Capabilities'
+        CapabilitiesReason:
+          $ref: '#/components/schemas/CapabilitiesReason'
+        ResourceTypes:
+          $ref: '#/components/schemas/ResourceTypes'
+        Version:
+          $ref: '#/components/schemas/Version'
+        Metadata:
+          $ref: '#/components/schemas/Metadata'
+        DeclaredTransforms:
+          $ref: '#/components/schemas/TransformsList'
+      description: The output for the <a>GetTemplateSummary</a> action.
+    Imports:
+      type: array
+      items:
+        $ref: '#/components/schemas/StackName'
+    InsufficientCapabilitiesException:
+      type: object
+      properties: {}
+      description: The template contains resources with capabilities that were not specified in the Capabilities parameter.
+    InvalidChangeSetStatusException:
+      type: object
+      properties: {}
+      description: 'The specified change set cannot be used to update the stack. For example, the change set status might be <code>CREATE_IN_PROGRESS</code> or the stack status might be <code>UPDATE_IN_PROGRESS</code>.'
+    LastUpdatedTime:
+      type: string
+      format: date-time
+    LimitExceededException:
+      type: object
+      properties: {}
+      description: Quota for the resource has already been reached.
+    LimitName:
+      type: string
+    LimitValue:
+      type: integer
+    ListChangeSetsInput:
+      type: object
+      required:
+        - StackName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackNameOrId'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The input for the <a>ListChangeSets</a> action.
+    ListChangeSetsOutput:
+      type: object
+      properties:
+        Summaries:
+          $ref: '#/components/schemas/ChangeSetSummaries'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output for the <a>ListChangeSets</a> action.
+    ListExportsInput:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListExportsOutput:
+      type: object
+      properties:
+        Exports:
+          $ref: '#/components/schemas/Exports'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListImportsInput:
+      type: object
+      required:
+        - ExportName
+      properties:
+        ExportName:
+          $ref: '#/components/schemas/ExportName'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListImportsOutput:
+      type: object
+      properties:
+        Imports:
+          $ref: '#/components/schemas/Imports'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListStackResourcesInput:
+      type: object
+      required:
+        - StackName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The input for the <a>ListStackResource</a> action.
+    ListStackResourcesOutput:
+      type: object
+      properties:
+        StackResourceSummaries:
+          $ref: '#/components/schemas/StackResourceSummaries'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output for a <a>ListStackResources</a> action.
+    ListStacksInput:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+        StackStatusFilter:
+          $ref: '#/components/schemas/StackStatusFilter'
+      description: The input for <a>ListStacks</a> action.
+    ListStacksOutput:
+      type: object
+      properties:
+        StackSummaries:
+          $ref: '#/components/schemas/StackSummaries'
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+      description: The output for <a>ListStacks</a> action.
+    LogicalResourceId:
+      type: string
+    Metadata:
+      type: string
+    NextToken:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    NoEcho:
+      type: boolean
+    NotificationARN:
+      type: string
+    NotificationARNs:
+      type: array
+      items:
+        $ref: '#/components/schemas/NotificationARN'
+      maxItems: 5
+    OnFailure:
+      type: string
+      enum:
+        - DO_NOTHING
+        - ROLLBACK
+        - DELETE
+    Output:
+      type: object
+      properties:
+        OutputKey:
+          $ref: '#/components/schemas/OutputKey'
+        OutputValue:
+          $ref: '#/components/schemas/OutputValue'
+        Description:
+          $ref: '#/components/schemas/Description'
+      description: The Output data type.
+    OutputKey:
+      type: string
+    OutputValue:
+      type: string
+    Outputs:
+      type: array
+      items:
+        $ref: '#/components/schemas/Output'
+    Parameter:
+      type: object
+      properties:
+        ParameterKey:
+          $ref: '#/components/schemas/ParameterKey'
+        ParameterValue:
+          $ref: '#/components/schemas/ParameterValue'
+        UsePreviousValue:
+          $ref: '#/components/schemas/UsePreviousValue'
+      description: The Parameter data type.
+    ParameterConstraints:
+      type: object
+      properties:
+        AllowedValues:
+          $ref: '#/components/schemas/AllowedValues'
+      description: 'A set of criteria that AWS CloudFormation uses to validate parameter values. Although other constraints might be defined in the stack template, AWS CloudFormation returns only the <code>AllowedValues</code> property.'
+    ParameterDeclaration:
+      type: object
+      properties:
+        ParameterKey:
+          $ref: '#/components/schemas/ParameterKey'
+        DefaultValue:
+          $ref: '#/components/schemas/ParameterValue'
+        ParameterType:
+          $ref: '#/components/schemas/ParameterType'
+        NoEcho:
+          $ref: '#/components/schemas/NoEcho'
+        Description:
+          $ref: '#/components/schemas/Description'
+        ParameterConstraints:
+          $ref: '#/components/schemas/ParameterConstraints'
+      description: The ParameterDeclaration data type.
+    ParameterDeclarations:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParameterDeclaration'
+    ParameterKey:
+      type: string
+    ParameterType:
+      type: string
+    ParameterValue:
+      type: string
+    Parameters:
+      type: array
+      items:
+        $ref: '#/components/schemas/Parameter'
+    PhysicalResourceId:
+      type: string
+    PropertyName:
+      type: string
+    Replacement:
+      type: string
+      enum:
+        - 'True'
+        - 'False'
+        - Conditional
+    RequiresRecreation:
+      type: string
+      enum:
+        - Never
+        - Conditionally
+        - Always
+    ResourceAttribute:
+      type: string
+      enum:
+        - Properties
+        - Metadata
+        - CreationPolicy
+        - UpdatePolicy
+        - DeletionPolicy
+        - Tags
+    ResourceChange:
+      type: object
+      properties:
+        Action:
+          $ref: '#/components/schemas/ChangeAction'
+        LogicalResourceId:
+          $ref: '#/components/schemas/LogicalResourceId'
+        PhysicalResourceId:
+          $ref: '#/components/schemas/PhysicalResourceId'
+        ResourceType:
+          $ref: '#/components/schemas/ResourceType'
+        Replacement:
+          $ref: '#/components/schemas/Replacement'
+        Scope:
+          $ref: '#/components/schemas/Scope'
+        Details:
+          $ref: '#/components/schemas/ResourceChangeDetails'
+      description: The <code>ResourceChange</code> structure describes the resource and the action that AWS CloudFormation will perform on it if you execute this change set.
+    ResourceChangeDetail:
+      type: object
+      properties:
+        Target:
+          $ref: '#/components/schemas/ResourceTargetDefinition'
+        Evaluation:
+          $ref: '#/components/schemas/EvaluationType'
+        ChangeSource:
+          $ref: '#/components/schemas/ChangeSource'
+        CausingEntity:
+          $ref: '#/components/schemas/CausingEntity'
+      description: 'For a resource with <code>Modify</code> as the action, the <code>ResourceChange</code> structure describes the changes AWS CloudFormation will make to that resource.'
+    ResourceChangeDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceChangeDetail'
+    ResourceProperties:
+      type: string
+    ResourceSignalStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - FAILURE
+    ResourceSignalUniqueId:
+      type: string
+      minLength: 1
+      maxLength: 64
+    ResourceStatus:
+      type: string
+      enum:
+        - CREATE_IN_PROGRESS
+        - CREATE_FAILED
+        - CREATE_COMPLETE
+        - DELETE_IN_PROGRESS
+        - DELETE_FAILED
+        - DELETE_COMPLETE
+        - DELETE_SKIPPED
+        - UPDATE_IN_PROGRESS
+        - UPDATE_FAILED
+        - UPDATE_COMPLETE
+    ResourceStatusReason:
+      type: string
+    ResourceTargetDefinition:
+      type: object
+      properties:
+        Attribute:
+          $ref: '#/components/schemas/ResourceAttribute'
+        Name:
+          $ref: '#/components/schemas/PropertyName'
+        RequiresRecreation:
+          $ref: '#/components/schemas/RequiresRecreation'
+      description: 'The field that AWS CloudFormation will change, such as the name of a resource''s property, and whether the resource will be recreated.'
+    ResourceToSkip:
+      type: string
+      pattern: '[a-zA-Z0-9]+|[a-zA-Z][-a-zA-Z0-9]*\.[a-zA-Z0-9]+'
+    ResourceType:
+      type: string
+      minLength: 1
+      maxLength: 256
+    ResourceTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceType'
+    ResourcesToSkip:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceToSkip'
+    RetainResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/LogicalResourceId'
+    RoleARN:
+      type: string
+      minLength: 20
+      maxLength: 2048
+    Scope:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceAttribute'
+    SetStackPolicyInput:
+      type: object
+      required:
+        - StackName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        StackPolicyBody:
+          $ref: '#/components/schemas/StackPolicyBody'
+        StackPolicyURL:
+          $ref: '#/components/schemas/StackPolicyURL'
+      description: The input for the <a>SetStackPolicy</a> action.
+    SignalResourceInput:
+      type: object
+      required:
+        - StackName
+        - LogicalResourceId
+        - UniqueId
+        - Status
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackNameOrId'
+        LogicalResourceId:
+          $ref: '#/components/schemas/LogicalResourceId'
+        UniqueId:
+          $ref: '#/components/schemas/ResourceSignalUniqueId'
+        Status:
+          $ref: '#/components/schemas/ResourceSignalStatus'
+      description: The input for the <a>SignalResource</a> action.
+    Stack:
+      type: object
+      required:
+        - StackName
+        - CreationTime
+        - StackStatus
+      properties:
+        StackId:
+          $ref: '#/components/schemas/StackId'
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        ChangeSetId:
+          $ref: '#/components/schemas/ChangeSetId'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Parameters:
+          $ref: '#/components/schemas/Parameters'
+        CreationTime:
+          $ref: '#/components/schemas/CreationTime'
+        LastUpdatedTime:
+          $ref: '#/components/schemas/LastUpdatedTime'
+        StackStatus:
+          $ref: '#/components/schemas/StackStatus'
+        StackStatusReason:
+          $ref: '#/components/schemas/StackStatusReason'
+        DisableRollback:
+          $ref: '#/components/schemas/DisableRollback'
+        NotificationARNs:
+          $ref: '#/components/schemas/NotificationARNs'
+        TimeoutInMinutes:
+          $ref: '#/components/schemas/TimeoutMinutes'
+        Capabilities:
+          $ref: '#/components/schemas/Capabilities'
+        Outputs:
+          $ref: '#/components/schemas/Outputs'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+      description: The Stack data type.
+    StackEvent:
+      type: object
+      required:
+        - StackId
+        - EventId
+        - StackName
+        - Timestamp
+      properties:
+        StackId:
+          $ref: '#/components/schemas/StackId'
+        EventId:
+          $ref: '#/components/schemas/EventId'
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        LogicalResourceId:
+          $ref: '#/components/schemas/LogicalResourceId'
+        PhysicalResourceId:
+          $ref: '#/components/schemas/PhysicalResourceId'
+        ResourceType:
+          $ref: '#/components/schemas/ResourceType'
+        Timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        ResourceStatus:
+          $ref: '#/components/schemas/ResourceStatus'
+        ResourceStatusReason:
+          $ref: '#/components/schemas/ResourceStatusReason'
+        ResourceProperties:
+          $ref: '#/components/schemas/ResourceProperties'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+      description: The StackEvent data type.
+    StackEvents:
+      type: array
+      items:
+        $ref: '#/components/schemas/StackEvent'
+    StackId:
+      type: string
+    StackName:
+      type: string
+    StackNameOrId:
+      type: string
+      pattern: '([a-zA-Z][-a-zA-Z0-9]*)|(arn:\b(aws|aws-us-gov|aws-cn)\b:[-a-zA-Z0-9:/._+]*)'
+      minLength: 1
+    StackPolicyBody:
+      type: string
+      minLength: 1
+      maxLength: 16384
+    StackPolicyDuringUpdateBody:
+      type: string
+      minLength: 1
+      maxLength: 16384
+    StackPolicyDuringUpdateURL:
+      type: string
+      minLength: 1
+      maxLength: 1350
+    StackPolicyURL:
+      type: string
+      minLength: 1
+      maxLength: 1350
+    StackResource:
+      type: object
+      required:
+        - LogicalResourceId
+        - ResourceType
+        - Timestamp
+        - ResourceStatus
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        StackId:
+          $ref: '#/components/schemas/StackId'
+        LogicalResourceId:
+          $ref: '#/components/schemas/LogicalResourceId'
+        PhysicalResourceId:
+          $ref: '#/components/schemas/PhysicalResourceId'
+        ResourceType:
+          $ref: '#/components/schemas/ResourceType'
+        Timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        ResourceStatus:
+          $ref: '#/components/schemas/ResourceStatus'
+        ResourceStatusReason:
+          $ref: '#/components/schemas/ResourceStatusReason'
+        Description:
+          $ref: '#/components/schemas/Description'
+      description: The StackResource data type.
+    StackResourceDetail:
+      type: object
+      required:
+        - LogicalResourceId
+        - ResourceType
+        - LastUpdatedTimestamp
+        - ResourceStatus
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        StackId:
+          $ref: '#/components/schemas/StackId'
+        LogicalResourceId:
+          $ref: '#/components/schemas/LogicalResourceId'
+        PhysicalResourceId:
+          $ref: '#/components/schemas/PhysicalResourceId'
+        ResourceType:
+          $ref: '#/components/schemas/ResourceType'
+        LastUpdatedTimestamp:
+          $ref: '#/components/schemas/Timestamp'
+        ResourceStatus:
+          $ref: '#/components/schemas/ResourceStatus'
+        ResourceStatusReason:
+          $ref: '#/components/schemas/ResourceStatusReason'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Metadata:
+          $ref: '#/components/schemas/Metadata'
+      description: Contains detailed information about the specified stack resource.
+    StackResourceSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/StackResourceSummary'
+    StackResourceSummary:
+      type: object
+      required:
+        - LogicalResourceId
+        - ResourceType
+        - LastUpdatedTimestamp
+        - ResourceStatus
+      properties:
+        LogicalResourceId:
+          $ref: '#/components/schemas/LogicalResourceId'
+        PhysicalResourceId:
+          $ref: '#/components/schemas/PhysicalResourceId'
+        ResourceType:
+          $ref: '#/components/schemas/ResourceType'
+        LastUpdatedTimestamp:
+          $ref: '#/components/schemas/Timestamp'
+        ResourceStatus:
+          $ref: '#/components/schemas/ResourceStatus'
+        ResourceStatusReason:
+          $ref: '#/components/schemas/ResourceStatusReason'
+      description: Contains high-level information about the specified stack resource.
+    StackResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/StackResource'
+    StackStatus:
+      type: string
+      enum:
+        - CREATE_IN_PROGRESS
+        - CREATE_FAILED
+        - CREATE_COMPLETE
+        - ROLLBACK_IN_PROGRESS
+        - ROLLBACK_FAILED
+        - ROLLBACK_COMPLETE
+        - DELETE_IN_PROGRESS
+        - DELETE_FAILED
+        - DELETE_COMPLETE
+        - UPDATE_IN_PROGRESS
+        - UPDATE_COMPLETE_CLEANUP_IN_PROGRESS
+        - UPDATE_COMPLETE
+        - UPDATE_ROLLBACK_IN_PROGRESS
+        - UPDATE_ROLLBACK_FAILED
+        - UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS
+        - UPDATE_ROLLBACK_COMPLETE
+        - REVIEW_IN_PROGRESS
+    StackStatusFilter:
+      type: array
+      items:
+        $ref: '#/components/schemas/StackStatus'
+    StackStatusReason:
+      type: string
+    StackSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/StackSummary'
+    StackSummary:
+      type: object
+      required:
+        - StackName
+        - CreationTime
+        - StackStatus
+      properties:
+        StackId:
+          $ref: '#/components/schemas/StackId'
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        TemplateDescription:
+          $ref: '#/components/schemas/TemplateDescription'
+        CreationTime:
+          $ref: '#/components/schemas/CreationTime'
+        LastUpdatedTime:
+          $ref: '#/components/schemas/LastUpdatedTime'
+        DeletionTime:
+          $ref: '#/components/schemas/DeletionTime'
+        StackStatus:
+          $ref: '#/components/schemas/StackStatus'
+        StackStatusReason:
+          $ref: '#/components/schemas/StackStatusReason'
+      description: The StackSummary Data Type
+    Stacks:
+      type: array
+      items:
+        $ref: '#/components/schemas/Stack'
+    StageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TemplateStage'
+    Tag:
+      type: object
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
+      description: The Tag type enables you to specify a key-value pair that can be used to store information about an AWS CloudFormation stack.
+    TagKey:
+      type: string
+    TagValue:
+      type: string
+    Tags:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    TemplateBody:
+      type: string
+      minLength: 1
+    TemplateDescription:
+      type: string
+    TemplateParameter:
+      type: object
+      properties:
+        ParameterKey:
+          $ref: '#/components/schemas/ParameterKey'
+        DefaultValue:
+          $ref: '#/components/schemas/ParameterValue'
+        NoEcho:
+          $ref: '#/components/schemas/NoEcho'
+        Description:
+          $ref: '#/components/schemas/Description'
+      description: The TemplateParameter data type.
+    TemplateParameters:
+      type: array
+      items:
+        $ref: '#/components/schemas/TemplateParameter'
+    TemplateStage:
+      type: string
+      enum:
+        - Original
+        - Processed
+    TemplateURL:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    TimeoutMinutes:
+      type: integer
+      minimum: 1
+    Timestamp:
+      type: string
+      format: date-time
+    TokenAlreadyExistsException:
+      type: object
+      properties: {}
+      description: A client request token already exists.
+    TransformName:
+      type: string
+    TransformsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TransformName'
+    UpdateStackInput:
+      type: object
+      required:
+        - StackName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/StackName'
+        TemplateBody:
+          $ref: '#/components/schemas/TemplateBody'
+        TemplateURL:
+          $ref: '#/components/schemas/TemplateURL'
+        UsePreviousTemplate:
+          $ref: '#/components/schemas/UsePreviousTemplate'
+        StackPolicyDuringUpdateBody:
+          $ref: '#/components/schemas/StackPolicyDuringUpdateBody'
+        StackPolicyDuringUpdateURL:
+          $ref: '#/components/schemas/StackPolicyDuringUpdateURL'
+        Parameters:
+          $ref: '#/components/schemas/Parameters'
+        Capabilities:
+          $ref: '#/components/schemas/Capabilities'
+        ResourceTypes:
+          $ref: '#/components/schemas/ResourceTypes'
+        RoleARN:
+          $ref: '#/components/schemas/RoleARN'
+        StackPolicyBody:
+          $ref: '#/components/schemas/StackPolicyBody'
+        StackPolicyURL:
+          $ref: '#/components/schemas/StackPolicyURL'
+        NotificationARNs:
+          $ref: '#/components/schemas/NotificationARNs'
+        Tags:
+          $ref: '#/components/schemas/Tags'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+      description: The input for an <a>UpdateStack</a> action.
+    UpdateStackOutput:
+      type: object
+      properties:
+        StackId:
+          $ref: '#/components/schemas/StackId'
+      description: The output for an <a>UpdateStack</a> action.
+    Url:
+      type: string
+    UsePreviousTemplate:
+      type: boolean
+    UsePreviousValue:
+      type: boolean
+    ValidateTemplateInput:
+      type: object
+      properties:
+        TemplateBody:
+          $ref: '#/components/schemas/TemplateBody'
+        TemplateURL:
+          $ref: '#/components/schemas/TemplateURL'
+      description: The input for <a>ValidateTemplate</a> action.
+    ValidateTemplateOutput:
+      type: object
+      properties:
+        Parameters:
+          $ref: '#/components/schemas/TemplateParameters'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Capabilities:
+          $ref: '#/components/schemas/Capabilities'
+        CapabilitiesReason:
+          $ref: '#/components/schemas/CapabilitiesReason'
+        DeclaredTransforms:
+          $ref: '#/components/schemas/TransformsList'
+      description: The output for <a>ValidateTemplate</a> action.
+    Version:
+      type: string
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

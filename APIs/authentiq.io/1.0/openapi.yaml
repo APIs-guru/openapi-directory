@@ -1,0 +1,774 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://connect.authentiq.io/'
+info:
+  contact:
+    email: hello@authentiq.com
+    name: Team Authentiq
+    url: 'https://www.authentiq.com/'
+  description: |
+    Authentiq Connect OAuth 2.0 and OpenID Connect API reference.
+    Learn about [Authentiq ID](https://www.authentiq.com/) or check out the [Authentiq Connect](https://developers.authentiq.com) developer documentation.
+  termsOfService: 'https://www.authentiq.com/tos/'
+  title: Authentiq Connect
+  version: '1.0'
+  x-logo:
+    backgroundColor: '#F26641'
+    url: 'https://www.authentiq.com/theme/images/authentiq-logo-a-inverse.svg'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/AuthentiqID/authentiq-docs/master/docs/swagger/provider.yaml'
+      version: '2.0'
+  x-providerName: authentiq.io
+externalDocs:
+  description: Authentiq Developer Docs
+  url: 'https://developers.authentiq.com/'
+paths:
+  /authorize:
+    get:
+      description: |
+        Start a session with Authentiq Connect and authenticate a user.
+
+        Example:
+
+        ```
+        GET https://connect.authentiq.io/authorize?client_id=<your-client-id>&response_type=code+id_token&scope=openid+email&redirect_uri=<your-redirect-uri>&state=0123456789
+        ```
+
+        This endpoint is compatible with OpenID Connect and also supports the POST method, in which case the parameters are passed as a form post.
+
+        See also:
+          - [OAuth 2.0 Authorization Endpoint](http://tools.ietf.org/html/rfc6749#section-3.1)
+          - [OIDC Authentication request](http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest)
+          - [OIDC Successful Authentication response](http://openid.net/specs/openid-connect-core-1_0.html#AuthResponse)
+          - [OIDC Error Authentication response](http://openid.net/specs/openid-connect-core-1_0.html#AuthError)
+      externalDocs:
+        description: OpenID Authorization Endpoint
+        url: 'http://openid.net/specs/openid-connect-core-1_0.html#AuthorizationEndpoint'
+      operationId: authorize
+      parameters:
+        - description: |
+            A client ID obtained from the [Dashboard](https://dashboard.authentiq.com/).
+          in: query
+          name: client_id
+          required: true
+          schema:
+            type: string
+        - description: |
+            The OIDC response type to use for this authentication flow. Valid choices are `code`, `id_token`, `token`, `token id_token`, `code id_token` `code token` and `code token id_token`, but a client can be configured with a more restricted set.
+          in: query
+          name: response_type
+          required: true
+          schema:
+            type: string
+        - description: |
+            The space-separated identity claims to request from the end-user. Always include `openid` as a scope for compatibility with OIDC.
+          in: query
+          name: scope
+          required: true
+          schema:
+            type: string
+        - description: |
+            The location to redirect to after (un)successful authentication. See OIDC for the parameters passed in the query string (`response_mode=query`) or as fragments (`response_mode=fragment`). Unless the client is in test-mode this must be one of the registered redirect URLs.
+          in: query
+          name: redirect_uri
+          required: true
+          schema:
+            type: string
+        - description: |
+            An opaque string that will be passed back to the redirect URL and therefore can be used to communicate client side state and prevent CSRF attacks.
+          in: query
+          name: state
+          required: true
+          schema:
+            type: string
+        - description: |
+            Whether to append parameters to the redirect URL in the query string (`query`) or as fragments (`fragment`). This option usually has a sensible default for each of the response types.
+          in: query
+          name: response_mode
+          required: false
+          schema:
+            type: string
+        - description: |
+            An nonce provided by the client (and opaque to Authentiq Connect) that will be included in any ID Token generated for this session. Clients should use the nonce to mitigate replay attacks.
+          in: query
+          name: nonce
+          required: false
+          schema:
+            type: string
+        - description: |
+            The authentication display mode, which can be one of `page`, `popup` or `modal`. Defaults to `page`.
+          in: query
+          name: display
+          required: false
+          schema:
+            type: string
+            default: page
+        - description: |
+            Space-delimited, case sensitive list of ASCII string values that specifies whether the Authorization Server prompts the End-User for reauthentication and consent. The supported values are: `none`, `login`, `consent`. If `consent` the end-user is asked to (re)confirm what claims they share. Use `none` to check for an active session.
+          in: query
+          name: prompt
+          required: false
+          schema:
+            type: string
+            default: login
+        - description: |
+            Specifies the allowable elapsed time in seconds since the last time the end-user was actively authenticated.
+          in: query
+          name: max_age
+          required: false
+          schema:
+            type: integer
+            default: 0
+        - description: |
+            Specifies the preferred language to use on the authorization page, as a space-separated list of BCP47 language tags. Ignored at the moment.
+          in: query
+          name: ui_locales
+          required: false
+          schema:
+            type: string
+      responses:
+        '302':
+          description: |
+            A successful or erroneous authentication response.
+        '303':
+          description: |
+            *Sign in with Authentiq* page, popup or modal.
+      summary: Authenticate a user
+      tags:
+        - Authentication
+  /client:
+    get:
+      description: |
+        Retrieve a list of clients.
+      operationId: client
+      responses:
+        '200':
+          description: A list of Client Objects.
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Client'
+                type: array
+            application/x-www-form-urlencoded:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Client'
+                type: array
+            application/problem+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Client'
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Client'
+                type: array
+        default:
+          $ref: '#/components/responses/OAuth2Error'
+      security:
+        - client_registration_token: []
+        - oauth_code: []
+        - oauth_implicit: []
+      summary: List clients
+      tags:
+        - Client Management
+    post:
+      description: |
+        Register a new client with this Authentiq Connect provider.
+
+        This endpoint is compatible with [OIDC's Client Registration](http://openid.net/specs/openid-connect-registration-1_0.html) extension.
+
+        See also:
+        - [OIDC Client Registration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientRegistration)
+      operationId: createClient
+      responses:
+        '201':
+          description: Client created
+          headers:
+            Location:
+              description: URL of new client resource
+              schema:
+                type: string
+        default:
+          $ref: '#/components/responses/ProblemDetail'
+      security:
+        - client_registration_token: []
+        - oauth_code: []
+        - oauth_implicit: []
+      summary: Register a client
+      tags:
+        - Client Management
+      requestBody:
+        $ref: '#/components/requestBodies/Client'
+  '/client/{client_id}':
+    delete:
+      description: |
+        Delete a previously registered client.
+      operationId: clientClient_id
+      parameters:
+        - $ref: '#/components/parameters/client_id'
+      responses:
+        '204':
+          description: Client deleted
+        default:
+          $ref: '#/components/responses/ProblemDetail'
+      security:
+        - client_registration_token: []
+        - oauth_code: []
+        - oauth_implicit: []
+      summary: Delete a client
+      tags:
+        - Client Management
+    get:
+      description: |
+        Retrieve the configuration of a previously registered client.
+
+        See also:
+        - [OIDC Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
+      operationId: getClient
+      parameters:
+        - $ref: '#/components/parameters/client_id'
+      responses:
+        '200':
+          description: Client found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/Client'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Client'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Client'
+        default:
+          $ref: '#/components/responses/OAuth2Error'
+      security:
+        - client_registration_token: []
+        - oauth_code: []
+        - oauth_implicit: []
+      summary: View a client
+      tags:
+        - Client Management
+    put:
+      description: |
+        Update the configuration of a previously registered client.
+
+        See also:
+        - [OIDC Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
+      operationId: updateClient
+      parameters:
+        - $ref: '#/components/parameters/client_id'
+      responses:
+        '200':
+          description: Client updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/Client'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Client'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Client'
+        default:
+          $ref: '#/components/responses/ProblemDetail'
+      security:
+        - client_registration_token: []
+        - oauth_code: []
+        - oauth_implicit: []
+      summary: Update a client
+      tags:
+        - Client Management
+      requestBody:
+        $ref: '#/components/requestBodies/Client'
+  /token:
+    post:
+      description: |
+        Exchange en authorization code for an ID Token or Access Token.
+
+        This endpoint supports both `client_secret_post` and `client_secret_basic` authenticatino methods, as specified by the client's `token_endpoint_auth_method`.
+
+        See also:
+          - [OIDC Token Endpoint](http://openid.net/specs/openid-connect-core-1_0.html#TokenRequest)
+          - [OIDC Successful Token response](http://openid.net/specs/openid-connect-core-1_0.html#TokenResponse)
+          - [OIDC Token Error response](http://openid.net/specs/openid-connect-core-1_0.html#TokenError)
+      externalDocs:
+        description: OpenID Token Endpoint
+        url: 'http://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint'
+      operationId: token
+      parameters:
+        - description: |
+            HTTP Basic authorization header.
+          in: header
+          name: Authorization
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Token'
+        '400':
+          $ref: '#/components/responses/OAuth2Error'
+        '401':
+          $ref: '#/components/responses/OAuth2Error'
+      summary: Obtain an ID Token
+      tags:
+        - Authentication
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                client_id:
+                  description: |
+                    The registered client ID.
+                  type: string
+                client_secret:
+                  description: |
+                    The registered client ID secret.
+                  type: string
+                  format: password
+                grant_type:
+                  description: |
+                    The authorization grant type, must be `authorization_code`.
+                  type: string
+                code:
+                  description: |
+                    The authorization code previously obtained from the Authentication endpoint.
+                  type: string
+                redirect_uri:
+                  description: |
+                    The redirect URL that was used previously with the Authentication endpoint.
+                  type: string
+              required:
+                - client_id
+  /userinfo:
+    get:
+      description: |
+        Use this endpoint to retrieve a user's profile in case you've not already obtained enough details from the ID Token via the Token Endpoint.
+         See also:
+         - [OIDC UserInfo endpoint](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo)
+      operationId: userInfo
+      responses:
+        '200':
+          $ref: '#/components/responses/UserInfo'
+        '401':
+          $ref: '#/components/responses/OAuth2Error'
+        default:
+          $ref: '#/components/responses/OAuth2Error'
+      security:
+        - oauth_code:
+            - oidc
+            - email
+            - phone
+            - address
+            - 'aq:location'
+            - 'aq:name'
+            - 'aq:push'
+        - oauth_implicit:
+            - oidc
+            - email
+            - phone
+            - address
+            - 'aq:location'
+            - 'aq:name'
+            - 'aq:push'
+      summary: Retrieve their user profile
+      tags:
+        - Authentication
+  '/{client_id}/iframe':
+    get:
+      description: |
+        An OpenID Connect Session Management iframe to facilitate e.g. single sign-on or remote logouts.
+
+        The iframe implements the OIDC postMessage-based [change notification protocol](http://openid.net/specs/openid-connect-session-1_0.html#ChangeNotification) via which a client can receive notifications about session state changes.
+
+        See also:
+        - [OIDC OP iframe](http://openid.net/specs/openid-connect-session-1_0.html#OPiframe)
+      operationId: authorizeIframe
+      parameters:
+        - $ref: '#/components/parameters/client_id'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              description: 'public, max-age=7200'
+              schema:
+                type: string
+      summary: Include a session iframe
+      tags:
+        - Session Management
+components:
+  schemas:
+    Address:
+      description: OIDC Address structure
+      properties:
+        country:
+          type: string
+        locality:
+          type: string
+        postal_code:
+          type: string
+        region:
+          type: string
+        street_address:
+          type: string
+    Client:
+      description: Client object
+      properties:
+        application_type:
+          type: string
+        client_id:
+          type: string
+        client_name:
+          type: string
+        client_uri:
+          type: string
+        contacts:
+          items:
+            type: string
+          type: array
+        default_max_age:
+          format: int64
+          type: integer
+        default_scopes:
+          items:
+            type: string
+          type: array
+        grant_types:
+          items:
+            type: string
+          type: array
+        logo_uri:
+          type: string
+        policy_uri:
+          type: string
+        redirect_uris:
+          items:
+            type: string
+          type: array
+        response_types:
+          items:
+            type: string
+          type: array
+        tos_uri:
+          type: string
+      required:
+        - client_name
+        - client_uri
+    OAuth2Error:
+      description: |
+        Error Response defined as in Section 5.2 of OAuth 2.0 [RFC6749].
+      properties:
+        error:
+          type: string
+        error_description:
+          type: string
+      required:
+        - error
+    ProblemDetail:
+      description: |
+        HTTP Problem Detail
+      properties:
+        detail:
+          description: |
+            Human-readable explanation specific to this occurrence of the problem.
+          type: string
+        status:
+          description: |
+            The HTTP status code for this occurrence of the problem.
+          type: integer
+        title:
+          description: |
+            Human-readable summary of the problem type.
+          type: string
+        type:
+          default: 'about:blank'
+          type: string
+      required:
+        - type
+        - status
+    Session:
+      description: Session object
+      properties:
+        authenticated_at:
+          format: date-time
+          type: string
+        client_id:
+          type: string
+        client_name:
+          type: string
+        client_uri:
+          type: string
+        concluded_at:
+          format: date-time
+          type: string
+        connected_at:
+          format: date-time
+          type: string
+        contacts:
+          items:
+            type: string
+          type: array
+        created_at:
+          type: string
+        deleted_at:
+          format: date-time
+          type: string
+        logo_uri:
+          type: string
+        nonce:
+          type: string
+        policy_uri:
+          type: string
+        redirect_uri:
+          type: string
+        response_mode:
+          type: string
+        response_type:
+          type: string
+        scopes:
+          items:
+            type: string
+          type: array
+        scopes_optional:
+          items:
+            type: string
+          type: array
+        scopes_required:
+          items:
+            type: string
+          type: array
+        scopes_seen:
+          items:
+            type: string
+          type: array
+        scopes_signed:
+          items:
+            type: string
+          type: array
+        session_id:
+          type: string
+        session_state:
+          type: string
+        session_uri:
+          type: string
+        sub:
+          type: string
+        tokens_seen:
+          items:
+            type: string
+          type: array
+        tos_uri:
+          type: string
+        version:
+          type: integer
+    Token:
+      description: |
+        Successful token response
+      properties:
+        access_token:
+          description: The access token issued by the authorization server.
+          type: string
+        expires_at:
+          description: The time the access token will expire in seconds since epoch.
+          format: int64
+          type: integer
+        expires_in:
+          description: The lifetime in seconds of the access token.
+          format: int32
+          type: integer
+        id_token:
+          description: ID Token value associated with the authenticated session.
+          type: string
+        refresh_token:
+          description: 'The refresh token issued to the client, if any.'
+          type: string
+        scope:
+          description: The scope of the granted tokens.
+          type: string
+        token_type:
+          type: string
+      required:
+        - token_type
+    UserInfo:
+      description: OIDC UserInfo structure
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        'aq:location':
+          description: Geolocation structure
+          properties:
+            address:
+              $ref: '#/components/schemas/Address'
+            latitude:
+              format: float
+              type: number
+            longitude:
+              format: float
+              type: number
+        email:
+          type: string
+        email_verified:
+          type: boolean
+        family_name:
+          type: string
+        given_name:
+          type: string
+        name:
+          type: string
+        phone_number:
+          type: string
+        phone_number_verified:
+          type: boolean
+        sub:
+          type: string
+      required:
+        - sub
+  responses:
+    OAuth2Error:
+      description: OAuth 2.0 error response
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            $ref: '#/components/schemas/OAuth2Error'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OAuth2Error'
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/OAuth2Error'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/OAuth2Error'
+    ProblemDetail:
+      description: Problem Detail error response
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+    Token:
+      description: Token response
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            $ref: '#/components/schemas/Token'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Token'
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Token'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/Token'
+    UserInfo:
+      description: UserInfo response
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            $ref: '#/components/schemas/UserInfo'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserInfo'
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/UserInfo'
+        text/html:
+          schema:
+            $ref: '#/components/schemas/UserInfo'
+  parameters:
+    client_id:
+      description: Client identifier
+      in: path
+      name: client_id
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    Client:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Client'
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Client'
+        application/x-www-form-urlencoded:
+          schema:
+            $ref: '#/components/schemas/Client'
+      description: Client Object
+      required: true
+  securitySchemes:
+    client_registration_token:
+      description: Client management via registration token.
+      in: header
+      name: Authorization
+      type: apiKey
+    client_secret:
+      description: Session management by confidential clients.
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: 'https://connect.authentiq.io/token'
+          scopes:
+            clients: Enable client management
+    oauth_code:
+      description: End-user authentication.
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://connect.authentiq.io/authorize'
+          tokenUrl: 'https://connect.authentiq.io/token'
+          scopes:
+            address: The user's postal address
+            'aq:location': The user's current location
+            'aq:name': The user's full name
+            'aq:push': Enable *One click sign-in*
+            email: The user's email address
+            oidc: Enable OIDC flow
+            phone: The user's phone number
+    oauth_implicit:
+      description: End-user authentication.
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://connect.authentiq.io/authorize'
+          scopes:
+            address: The user's postal address
+            'aq:location': The user's current location
+            'aq:name': The user's full name
+            'aq:push': Enable *One click sign-in*
+            email: The user's email address
+            oidc: Enable OIDC flow
+            phone: The user's phone number
+    user_jwt:
+      description: Session management by Authentiq ID.
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://connect.authentiq.io/token'
+          scopes:
+            session: Enable session management

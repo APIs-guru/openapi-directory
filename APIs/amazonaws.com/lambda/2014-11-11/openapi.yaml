@@ -1,0 +1,679 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://lambda.amazonaws.com/'
+info:
+  version: '2014-11-11'
+  x-release: v4
+  title: AWS Lambda
+  description: '<fullname>AWS Lambda</fullname> <p><b>Overview</b></p> <p>This is the AWS Lambda API Reference. The AWS Lambda Developer Guide provides additional information. For the service overview, go to <a href="http://docs.aws.amazon.com/lambda/latest/dg/welcome.html">What is AWS Lambda</a>, and for information about how the service works, go to <a href="http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html">AWS LambdaL How it Works</a> in the AWS Lambda Developer Guide.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: lambda
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/lambda-2014-11-11.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: false
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/lambda/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /2014-11-13/event-source-mappings/:
+    get:
+      operationId: ListEventSources
+      description: '<p>Returns a list of event source mappings you created using the <code>AddEventSource</code> (see <a>AddEventSource</a>), where you identify a stream as event source. This list does not include Amazon S3 event sources. </p> <p>For each mapping, the API returns configuration information. You can optionally specify filters to retrieve specific event source mappings.</p> <p>This operation requires permission for the <code>lambda:ListEventSources</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEventSourcesResponse'
+        '400':
+          description: InvalidParameterValueException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      parameters:
+        - name: MaxItems
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListEventSourcesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2014-11-13/functions/{FunctionName}':
+    put:
+      operationId: UploadFunction
+      description: '<p>Creates a new Lambda function or updates an existing function. The function metadata is created from the request parameters, and the code for the function is provided by a .zip file in the request body. If the function name already exists, the existing Lambda function is updated with the new code and metadata. </p> <p>This operation requires permission for the <code>lambda:UploadFunction</code> action.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FunctionConfiguration'
+        '400':
+          description: InvalidParameterValueException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: FunctionName
+          in: query
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadFunctionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2014-11-13/event-source-mappings/{UUID}':
+    delete:
+      operationId: RemoveEventSource
+      description: '<p>Removes an event source mapping. This means AWS Lambda will no longer invoke the function for events in the associated source.</p> <p>This operation requires permission for the <code>lambda:RemoveEventSource</code> action.</p>'
+      responses:
+        '204':
+          description: Success
+        '400':
+          description: InvalidParameterValueException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      parameters:
+        - name: UUID
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveEventSourceRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2014-11-13/functions/{FunctionName}/configuration':
+    put:
+      operationId: UpdateFunctionConfiguration
+      description: '<p>Updates the configuration parameters for the specified Lambda function by using the values provided in the request. You provide only the parameters you want to change. This operation must only be used on an existing Lambda function and cannot be used to update the function''s code. </p> <p>This operation requires permission for the <code>lambda:UpdateFunctionConfiguration</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FunctionConfiguration'
+        '400':
+          description: InvalidParameterValueException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: FunctionName
+          in: query
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFunctionConfigurationRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2014-11-13/functions/{FunctionName}/invoke-async/':
+    post:
+      operationId: InvokeAsync
+      description: '<p>Submits an invocation request to AWS Lambda. Upon receiving the request, Lambda executes the specified function asynchronously. To see the logs generated by the Lambda function execution, see the CloudWatch logs console.</p> <p>This operation requires permission for the <code>lambda:InvokeAsync</code> action.</p>'
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvokeAsyncResponse'
+        '400':
+          description: InvalidRequestContentException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestContentException'
+        '404':
+          description: ResourceNotFoundException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: FunctionName
+          in: query
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvokeAsyncRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2014-11-13/functions/:
+    get:
+      operationId: ListFunctions
+      description: '<p>Returns a list of your Lambda functions. For each function, the response includes the function configuration information. You must use <a>GetFunction</a> to retrieve the code for your function.</p> <p>This operation requires permission for the <code>lambda:ListFunctions</code> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFunctionsResponse'
+        '500':
+          description: ServiceException
+          x-aws-exception: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      parameters:
+        - name: MaxItems
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFunctionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AddEventSourceRequest:
+      type: object
+      required:
+        - EventSource
+        - FunctionName
+        - Role
+      properties:
+        EventSource:
+          $ref: '#/components/schemas/String'
+        FunctionName:
+          $ref: '#/components/schemas/FunctionName'
+        Role:
+          $ref: '#/components/schemas/RoleArn'
+        BatchSize:
+          $ref: '#/components/schemas/Integer'
+        Parameters:
+          $ref: '#/components/schemas/Map'
+    Blob:
+      type: string
+    DeleteFunctionRequest:
+      type: object
+      properties: {}
+    Description:
+      type: string
+      minLength: 0
+      maxLength: 256
+    EventSourceConfiguration:
+      type: object
+      properties:
+        UUID:
+          $ref: '#/components/schemas/String'
+        BatchSize:
+          $ref: '#/components/schemas/Integer'
+        EventSource:
+          $ref: '#/components/schemas/String'
+        FunctionName:
+          $ref: '#/components/schemas/FunctionName'
+        Parameters:
+          $ref: '#/components/schemas/Map'
+        Role:
+          $ref: '#/components/schemas/RoleArn'
+        LastModified:
+          $ref: '#/components/schemas/Timestamp'
+        IsActive:
+          $ref: '#/components/schemas/Boolean'
+        Status:
+          $ref: '#/components/schemas/String'
+      description: Describes mapping between an Amazon Kinesis stream and a Lambda function.
+    EventSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventSourceConfiguration'
+    FunctionArn:
+      type: string
+      pattern: 'arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?'
+    FunctionCodeLocation:
+      type: object
+      properties:
+        RepositoryType:
+          $ref: '#/components/schemas/String'
+        Location:
+          $ref: '#/components/schemas/String'
+      description: The object for the Lambda function location.
+    FunctionConfiguration:
+      type: object
+      properties:
+        FunctionName:
+          $ref: '#/components/schemas/FunctionName'
+        FunctionARN:
+          $ref: '#/components/schemas/FunctionArn'
+        ConfigurationId:
+          $ref: '#/components/schemas/String'
+        Runtime:
+          $ref: '#/components/schemas/Runtime'
+        Role:
+          $ref: '#/components/schemas/RoleArn'
+        Handler:
+          $ref: '#/components/schemas/Handler'
+        Mode:
+          $ref: '#/components/schemas/Mode'
+        CodeSize:
+          $ref: '#/components/schemas/Long'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Timeout:
+          $ref: '#/components/schemas/Timeout'
+        MemorySize:
+          $ref: '#/components/schemas/MemorySize'
+        LastModified:
+          $ref: '#/components/schemas/Timestamp'
+      description: A complex type that describes function metadata.
+    FunctionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FunctionConfiguration'
+    FunctionName:
+      type: string
+      pattern: '[a-zA-Z0-9-_]+'
+      minLength: 1
+      maxLength: 64
+    GetEventSourceRequest:
+      type: object
+      properties: {}
+    GetFunctionConfigurationRequest:
+      type: object
+      properties: {}
+    GetFunctionRequest:
+      type: object
+      properties: {}
+    GetFunctionResponse:
+      type: object
+      properties:
+        Configuration:
+          $ref: '#/components/schemas/FunctionConfiguration'
+        Code:
+          $ref: '#/components/schemas/FunctionCodeLocation'
+      description: This response contains the object for AWS Lambda function location (see <a>API_FunctionCodeLocation</a>
+    Handler:
+      type: string
+      pattern: '[a-zA-Z0-9./\-_]+'
+    HttpStatus:
+      type: integer
+    Integer:
+      type: integer
+    InvalidParameterValueException:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/String'
+        message:
+          $ref: '#/components/schemas/String'
+      description: 'One of the parameters in the request is invalid. For example, if you provided an IAM role for AWS Lambda to assume in the <code>UploadFunction</code> or the <code>UpdateFunctionConfiguration</code> API, that AWS Lambda is unable to assume you will get this exception. '
+    InvalidRequestContentException:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/String'
+        message:
+          $ref: '#/components/schemas/String'
+      description: The request body could not be parsed as JSON.
+    InvokeAsyncRequest:
+      type: object
+      required:
+        - InvokeArgs
+      properties:
+        InvokeArgs:
+          $ref: '#/components/schemas/Blob'
+    InvokeAsyncResponse:
+      type: object
+      properties: {}
+      description: 'Upon success, it returns empty response. Otherwise, throws an exception.'
+    ListEventSourcesRequest:
+      type: object
+      properties: {}
+    ListEventSourcesResponse:
+      type: object
+      properties:
+        NextMarker:
+          $ref: '#/components/schemas/String'
+        EventSources:
+          $ref: '#/components/schemas/EventSourceList'
+      description: Contains a list of event sources (see <a>API_EventSourceConfiguration</a>)
+    ListFunctionsRequest:
+      type: object
+      properties: {}
+    ListFunctionsResponse:
+      type: object
+      properties:
+        NextMarker:
+          $ref: '#/components/schemas/String'
+        Functions:
+          $ref: '#/components/schemas/FunctionList'
+      description: Contains a list of AWS Lambda function configurations (see <a>API_FunctionConfiguration</a>.
+    Long:
+      type: integer
+    Map:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    MaxListItems:
+      type: integer
+      minimum: 1
+      maximum: 10000
+    MemorySize:
+      type: integer
+      minimum: 128
+      maximum: 1024
+    Mode:
+      type: string
+      enum:
+        - event
+    RemoveEventSourceRequest:
+      type: object
+      properties: {}
+    ResourceNotFoundException:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/String'
+        Message:
+          $ref: '#/components/schemas/String'
+      description: The function or the event source specified in the request does not exist.
+    RoleArn:
+      type: string
+      pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+    Runtime:
+      type: string
+      enum:
+        - nodejs
+    ServiceException:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/String'
+        Message:
+          $ref: '#/components/schemas/String'
+      description: The AWS Lambda service encountered an internal error.
+    String:
+      type: string
+    Timeout:
+      type: integer
+      minimum: 1
+      maximum: 60
+    Timestamp:
+      type: string
+      format: date-time
+    UpdateFunctionConfigurationRequest:
+      type: object
+      properties: {}
+    UploadFunctionRequest:
+      type: object
+      required:
+        - FunctionZip
+      properties:
+        FunctionZip:
+          $ref: '#/components/schemas/Blob'
+    Boolean:
+      type: boolean
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

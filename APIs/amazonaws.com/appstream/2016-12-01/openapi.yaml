@@ -1,0 +1,1675 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://appstream2.amazonaws.com/'
+info:
+  version: '2016-12-01'
+  x-release: v4
+  title: Amazon AppStream
+  description: <fullname>Amazon AppStream 2.0</fullname> <p>API documentation for Amazon AppStream 2.0.</p>
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: appstream2
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/appstream-2016-12-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/appstream2/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AssociateFleet
+      description: Associate a fleet to a stack.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateFleetResult'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: IncompatibleImageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleImageException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateFleetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateFleet':
+    post:
+      operationId: CreateFleet
+      description: Creates a new fleet.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFleetResult'
+        '480':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '481':
+          description: ResourceNotAvailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotAvailableException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
+        '485':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFleetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateStack':
+    post:
+      operationId: CreateStack
+      description: Create a new stack.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStackResult'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStackRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateStreamingURL':
+    post:
+      operationId: CreateStreamingURL
+      description: 'Creates a URL to start an AppStream 2.0 streaming session for a user. By default, the URL is valid only for 1 minute from the time that it is generated.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStreamingURLResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceNotAvailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotAvailableException'
+        '482':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStreamingURLRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteFleet':
+    post:
+      operationId: DeleteFleet
+      description: Deletes a fleet.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFleetResult'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteFleetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteStack':
+    post:
+      operationId: DeleteStack
+      description: 'Deletes the stack. After this operation completes, the environment can no longer be activated, and any reservations made for the stack are released.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteStackResult'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteStackRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeFleets':
+    post:
+      operationId: DescribeFleets
+      description: 'If fleet names are provided, this operation describes the specified fleets; otherwise, all the fleets in the account are described.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFleetsResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      x-waiters:
+        - delay: 30
+          maxAttempts: 40
+          operation: DescribeFleets
+          acceptors:
+            - state: success
+              matcher: pathAll
+              argument: 'fleets[].state'
+              expected: ACTIVE
+            - state: failure
+              matcher: pathAny
+              argument: 'fleets[].state'
+              expected: PENDING_DEACTIVATE
+            - state: failure
+              matcher: pathAny
+              argument: 'fleets[].state'
+              expected: INACTIVE
+        - delay: 30
+          maxAttempts: 40
+          operation: DescribeFleets
+          acceptors:
+            - state: success
+              matcher: pathAll
+              argument: 'fleets[].state'
+              expected: INACTIVE
+            - state: failure
+              matcher: pathAny
+              argument: 'fleets[].state'
+              expected: PENDING_ACTIVATE
+            - state: failure
+              matcher: pathAny
+              argument: 'fleets[].state'
+              expected: ACTIVE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeFleetsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeImages':
+    post:
+      operationId: DescribeImages
+      description: 'Describes the images. If a list of names is not provided, all images in your account are returned. This operation does not return a paginated result.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeImagesResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeImagesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSessions':
+    post:
+      operationId: DescribeSessions
+      description: 'Describes the streaming sessions for a stack and a fleet. If a user ID is provided, this operation returns streaming sessions for only that user. Pass this value for the <code>nextToken</code> parameter in a subsequent call to this operation to retrieve the next set of items. If an authentication type is not provided, the operation defaults to users authenticated using a streaming URL.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSessionsResult'
+        '480':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSessionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStacks':
+    post:
+      operationId: DescribeStacks
+      description: 'If stack names are not provided, this operation describes the specified stacks; otherwise, all stacks in the account are described. Pass the <code>nextToken</code> value in a subsequent call to this operation to retrieve the next set of items.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStacksResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStacksRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateFleet':
+    post:
+      operationId: DisassociateFleet
+      description: Disassociates a fleet from a stack.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateFleetResult'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateFleetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ExpireSession':
+    post:
+      operationId: ExpireSession
+      description: This operation immediately stops a streaming session.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpireSessionResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpireSessionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListAssociatedFleets':
+    post:
+      operationId: ListAssociatedFleets
+      description: Lists all fleets associated with the stack.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAssociatedFleetsResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAssociatedFleetsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListAssociatedStacks':
+    post:
+      operationId: ListAssociatedStacks
+      description: Lists all stacks to which the specified fleet is associated.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAssociatedStacksResult'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAssociatedStacksRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartFleet':
+    post:
+      operationId: StartFleet
+      description: Starts a fleet.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartFleetResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartFleetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopFleet':
+    post:
+      operationId: StopFleet
+      description: Stops a fleet.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopFleetResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopFleetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateFleet':
+    post:
+      operationId: UpdateFleet
+      description: 'Updates an existing fleet. All the attributes except the fleet name can be updated in the <b>STOPPED</b> state. When a fleet is in the <b>RUNNING</b> state, only <code>DisplayName</code> and <code>ComputeCapacity</code> can be updated. A fleet cannot be updated in a status of <b>STARTING</b> or <b>STOPPING</b>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFleetResult'
+        '480':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ResourceNotAvailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotAvailableException'
+        '485':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '486':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '487':
+          description: IncompatibleImageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleImageException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFleetRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateStack':
+    post:
+      operationId: UpdateStack
+      description: Updates the specified fields in the stack with the specified name.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateStackResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: IncompatibleImageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncompatibleImageException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStackRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    Application:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        DisplayName:
+          $ref: '#/components/schemas/String'
+        IconURL:
+          $ref: '#/components/schemas/String'
+        LaunchPath:
+          $ref: '#/components/schemas/String'
+        LaunchParameters:
+          $ref: '#/components/schemas/String'
+        Enabled:
+          $ref: '#/components/schemas/Boolean'
+        Metadata:
+          $ref: '#/components/schemas/Metadata'
+      description: An entry for a single application in the application catalog.
+    Applications:
+      type: array
+      items:
+        $ref: '#/components/schemas/Application'
+    Arn:
+      type: string
+      pattern: '^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+    AssociateFleetRequest:
+      type: object
+      required:
+        - FleetName
+        - StackName
+      properties:
+        FleetName:
+          $ref: '#/components/schemas/String'
+        StackName:
+          $ref: '#/components/schemas/String'
+    AssociateFleetResult:
+      type: object
+      properties: {}
+    AuthenticationType:
+      type: string
+      enum:
+        - API
+        - SAML
+        - USERPOOL
+    Boolean:
+      type: boolean
+    BooleanObject:
+      type: boolean
+    ComputeCapacity:
+      type: object
+      required:
+        - DesiredInstances
+      properties:
+        DesiredInstances:
+          $ref: '#/components/schemas/Integer'
+      description: The capacity configuration for the fleet.
+    ComputeCapacityStatus:
+      type: object
+      required:
+        - Desired
+      properties:
+        Desired:
+          $ref: '#/components/schemas/Integer'
+        Running:
+          $ref: '#/components/schemas/Integer'
+        InUse:
+          $ref: '#/components/schemas/Integer'
+        Available:
+          $ref: '#/components/schemas/Integer'
+      description: The capacity information for the fleet.
+    ConcurrentModificationException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: An API error occurred. Wait a few minutes and try again.
+    CreateFleetRequest:
+      type: object
+      required:
+        - Name
+        - ImageName
+        - InstanceType
+        - ComputeCapacity
+      properties:
+        Name:
+          $ref: '#/components/schemas/Name'
+        ImageName:
+          $ref: '#/components/schemas/String'
+        InstanceType:
+          $ref: '#/components/schemas/String'
+        ComputeCapacity:
+          $ref: '#/components/schemas/ComputeCapacity'
+        VpcConfig:
+          $ref: '#/components/schemas/VpcConfig'
+        MaxUserDurationInSeconds:
+          $ref: '#/components/schemas/Integer'
+        DisconnectTimeoutInSeconds:
+          $ref: '#/components/schemas/Integer'
+        Description:
+          $ref: '#/components/schemas/Description'
+        DisplayName:
+          $ref: '#/components/schemas/DisplayName'
+        EnableDefaultInternetAccess:
+          $ref: '#/components/schemas/BooleanObject'
+      description: Contains the parameters for the new fleet to create.
+    CreateFleetResult:
+      type: object
+      properties:
+        Fleet:
+          $ref: '#/components/schemas/Fleet'
+    CreateStackRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/Description'
+        DisplayName:
+          $ref: '#/components/schemas/DisplayName'
+        StorageConnectors:
+          $ref: '#/components/schemas/StorageConnectorList'
+    CreateStackResult:
+      type: object
+      properties:
+        Stack:
+          $ref: '#/components/schemas/Stack'
+    CreateStreamingURLRequest:
+      type: object
+      required:
+        - StackName
+        - FleetName
+        - UserId
+      properties:
+        StackName:
+          $ref: '#/components/schemas/String'
+        FleetName:
+          $ref: '#/components/schemas/String'
+        UserId:
+          $ref: '#/components/schemas/UserId'
+        ApplicationId:
+          $ref: '#/components/schemas/String'
+        Validity:
+          $ref: '#/components/schemas/Long'
+        SessionContext:
+          $ref: '#/components/schemas/String'
+    CreateStreamingURLResult:
+      type: object
+      properties:
+        StreamingURL:
+          $ref: '#/components/schemas/String'
+        Expires:
+          $ref: '#/components/schemas/Timestamp'
+    DeleteFleetRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+    DeleteFleetResult:
+      type: object
+      properties: {}
+    DeleteStackRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+    DeleteStackResult:
+      type: object
+      properties: {}
+    DescribeFleetsRequest:
+      type: object
+      properties:
+        Names:
+          $ref: '#/components/schemas/StringList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    DescribeFleetsResult:
+      type: object
+      properties:
+        Fleets:
+          $ref: '#/components/schemas/FleetList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    DescribeImagesRequest:
+      type: object
+      properties:
+        Names:
+          $ref: '#/components/schemas/StringList'
+    DescribeImagesResult:
+      type: object
+      properties:
+        Images:
+          $ref: '#/components/schemas/ImageList'
+    DescribeSessionsRequest:
+      type: object
+      required:
+        - StackName
+        - FleetName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/String'
+        FleetName:
+          $ref: '#/components/schemas/String'
+        UserId:
+          $ref: '#/components/schemas/UserId'
+        NextToken:
+          $ref: '#/components/schemas/String'
+        Limit:
+          $ref: '#/components/schemas/Integer'
+        AuthenticationType:
+          $ref: '#/components/schemas/AuthenticationType'
+    DescribeSessionsResult:
+      type: object
+      properties:
+        Sessions:
+          $ref: '#/components/schemas/SessionList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    DescribeStacksRequest:
+      type: object
+      properties:
+        Names:
+          $ref: '#/components/schemas/StringList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    DescribeStacksResult:
+      type: object
+      properties:
+        Stacks:
+          $ref: '#/components/schemas/StackList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    Description:
+      type: string
+      maxLength: 256
+    DisassociateFleetRequest:
+      type: object
+      required:
+        - FleetName
+        - StackName
+      properties:
+        FleetName:
+          $ref: '#/components/schemas/String'
+        StackName:
+          $ref: '#/components/schemas/String'
+    DisassociateFleetResult:
+      type: object
+      properties: {}
+    DisplayName:
+      type: string
+      maxLength: 100
+    ErrorMessage:
+      type: string
+      description: The error message in the exception.
+    ExpireSessionRequest:
+      type: object
+      required:
+        - SessionId
+      properties:
+        SessionId:
+          $ref: '#/components/schemas/String'
+    ExpireSessionResult:
+      type: object
+      properties: {}
+    Fleet:
+      type: object
+      required:
+        - Arn
+        - Name
+        - ImageName
+        - InstanceType
+        - ComputeCapacityStatus
+        - State
+      properties:
+        Arn:
+          $ref: '#/components/schemas/Arn'
+        Name:
+          $ref: '#/components/schemas/String'
+        DisplayName:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+        ImageName:
+          $ref: '#/components/schemas/String'
+        InstanceType:
+          $ref: '#/components/schemas/String'
+        ComputeCapacityStatus:
+          $ref: '#/components/schemas/ComputeCapacityStatus'
+        MaxUserDurationInSeconds:
+          $ref: '#/components/schemas/Integer'
+        DisconnectTimeoutInSeconds:
+          $ref: '#/components/schemas/Integer'
+        State:
+          $ref: '#/components/schemas/FleetState'
+        VpcConfig:
+          $ref: '#/components/schemas/VpcConfig'
+        CreatedTime:
+          $ref: '#/components/schemas/Timestamp'
+        FleetErrors:
+          $ref: '#/components/schemas/FleetErrors'
+        EnableDefaultInternetAccess:
+          $ref: '#/components/schemas/BooleanObject'
+      description: Contains the parameters for a fleet.
+    FleetAttribute:
+      type: string
+      enum:
+        - VPC_CONFIGURATION
+        - VPC_CONFIGURATION_SECURITY_GROUP_IDS
+      description: Fleet attribute.
+    FleetAttributes:
+      type: array
+      description: A list of fleet attributes.
+      items:
+        $ref: '#/components/schemas/FleetAttribute'
+    FleetError:
+      type: object
+      properties:
+        ErrorCode:
+          $ref: '#/components/schemas/FleetErrorCode'
+        ErrorMessage:
+          $ref: '#/components/schemas/String'
+      description: The details of the fleet error.
+    FleetErrorCode:
+      type: string
+      enum:
+        - IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION
+        - IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION
+        - IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION
+        - NETWORK_INTERFACE_LIMIT_EXCEEDED
+        - INTERNAL_SERVICE_ERROR
+        - IAM_SERVICE_ROLE_IS_MISSING
+        - SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES
+        - IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION
+        - SUBNET_NOT_FOUND
+        - IMAGE_NOT_FOUND
+        - INVALID_SUBNET_CONFIGURATION
+    FleetErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/FleetError'
+    FleetList:
+      type: array
+      description: A list of fleets.
+      items:
+        $ref: '#/components/schemas/Fleet'
+    FleetState:
+      type: string
+      enum:
+        - STARTING
+        - RUNNING
+        - STOPPING
+        - STOPPED
+    Image:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Arn:
+          $ref: '#/components/schemas/Arn'
+        BaseImageArn:
+          $ref: '#/components/schemas/Arn'
+        DisplayName:
+          $ref: '#/components/schemas/String'
+        State:
+          $ref: '#/components/schemas/ImageState'
+        Visibility:
+          $ref: '#/components/schemas/VisibilityType'
+        ImageBuilderSupported:
+          $ref: '#/components/schemas/Boolean'
+        Platform:
+          $ref: '#/components/schemas/PlatformType'
+        Description:
+          $ref: '#/components/schemas/String'
+        StateChangeReason:
+          $ref: '#/components/schemas/ImageStateChangeReason'
+        Applications:
+          $ref: '#/components/schemas/Applications'
+        CreatedTime:
+          $ref: '#/components/schemas/Timestamp'
+        PublicBaseImageReleasedDate:
+          $ref: '#/components/schemas/Timestamp'
+      description: New streaming instances are booted from images. The image stores the application catalog and is connected to fleets.
+    ImageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Image'
+    ImageState:
+      type: string
+      enum:
+        - PENDING
+        - AVAILABLE
+        - FAILED
+        - DELETING
+    ImageStateChangeReason:
+      type: object
+      properties:
+        Code:
+          $ref: '#/components/schemas/ImageStateChangeReasonCode'
+        Message:
+          $ref: '#/components/schemas/String'
+      description: The reason why the last state change occurred.
+    ImageStateChangeReasonCode:
+      type: string
+      enum:
+        - INTERNAL_ERROR
+        - IMAGE_BUILDER_NOT_AVAILABLE
+    IncompatibleImageException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The image does not support storage connectors.
+    Integer:
+      type: integer
+    InvalidParameterCombinationException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Indicates an incorrect combination of parameters, or a missing parameter.'
+    InvalidRoleException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The specified role is invalid.
+    LimitExceededException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The requested limit exceeds the permitted limit for an account.
+    ListAssociatedFleetsRequest:
+      type: object
+      required:
+        - StackName
+      properties:
+        StackName:
+          $ref: '#/components/schemas/String'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    ListAssociatedFleetsResult:
+      type: object
+      properties:
+        Names:
+          $ref: '#/components/schemas/StringList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: The response from a successful operation.
+    ListAssociatedStacksRequest:
+      type: object
+      required:
+        - FleetName
+      properties:
+        FleetName:
+          $ref: '#/components/schemas/String'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    ListAssociatedStacksResult:
+      type: object
+      properties:
+        Names:
+          $ref: '#/components/schemas/StringList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: The response from a successful operation.
+    Long:
+      type: integer
+    Metadata:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    Name:
+      type: string
+      pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$'
+    OperationNotPermittedException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The attempted operation is not permitted.
+    PlatformType:
+      type: string
+      enum:
+        - WINDOWS
+    ResourceAlreadyExistsException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The specified resource already exists.
+    ResourceIdentifier:
+      type: string
+      description: The ARN of the resource.
+      minLength: 1
+    ResourceInUseException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The specified resource is in use.
+    ResourceNotAvailableException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'The specified resource exists and is not in use, but isn''t available.'
+    ResourceNotFoundException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The specified resource was not found.
+    SecurityGroupIdList:
+      type: array
+      description: A list of security groups.
+      items:
+        $ref: '#/components/schemas/String'
+      maxItems: 5
+    Session:
+      type: object
+      required:
+        - Id
+        - UserId
+        - StackName
+        - FleetName
+        - State
+      properties:
+        Id:
+          $ref: '#/components/schemas/String'
+        UserId:
+          $ref: '#/components/schemas/UserId'
+        StackName:
+          $ref: '#/components/schemas/String'
+        FleetName:
+          $ref: '#/components/schemas/String'
+        State:
+          $ref: '#/components/schemas/SessionState'
+        AuthenticationType:
+          $ref: '#/components/schemas/AuthenticationType'
+      description: Contains the parameters for a streaming session.
+    SessionList:
+      type: array
+      description: List of sessions.
+      items:
+        $ref: '#/components/schemas/Session'
+    SessionState:
+      type: string
+      enum:
+        - ACTIVE
+        - PENDING
+        - EXPIRED
+      description: Possible values for the state of a streaming session.
+    Stack:
+      type: object
+      required:
+        - Name
+      properties:
+        Arn:
+          $ref: '#/components/schemas/Arn'
+        Name:
+          $ref: '#/components/schemas/String'
+        Description:
+          $ref: '#/components/schemas/String'
+        DisplayName:
+          $ref: '#/components/schemas/String'
+        CreatedTime:
+          $ref: '#/components/schemas/Timestamp'
+        StorageConnectors:
+          $ref: '#/components/schemas/StorageConnectorList'
+        StackErrors:
+          $ref: '#/components/schemas/StackErrors'
+      description: Details about a stack.
+    StackError:
+      type: object
+      properties:
+        ErrorCode:
+          $ref: '#/components/schemas/StackErrorCode'
+        ErrorMessage:
+          $ref: '#/components/schemas/String'
+      description: Contains the parameters for a stack error.
+    StackErrorCode:
+      type: string
+      enum:
+        - STORAGE_CONNECTOR_ERROR
+        - INTERNAL_SERVICE_ERROR
+    StackErrors:
+      type: array
+      description: A list of stack errors.
+      items:
+        $ref: '#/components/schemas/StackError'
+    StackList:
+      type: array
+      description: A list of stacks.
+      items:
+        $ref: '#/components/schemas/Stack'
+    StartFleetRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+    StartFleetResult:
+      type: object
+      properties: {}
+    StopFleetRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+    StopFleetResult:
+      type: object
+      properties: {}
+    StorageConnector:
+      type: object
+      required:
+        - ConnectorType
+      properties:
+        ConnectorType:
+          $ref: '#/components/schemas/StorageConnectorType'
+        ResourceIdentifier:
+          $ref: '#/components/schemas/ResourceIdentifier'
+      description: Contains the parameters for a storage connector.
+    StorageConnectorList:
+      type: array
+      description: A list of storage connectors.
+      items:
+        $ref: '#/components/schemas/StorageConnector'
+    StorageConnectorType:
+      type: string
+      enum:
+        - HOMEFOLDERS
+      description: 'The type of storage connector. The possible values include: HOMEFOLDERS.'
+    String:
+      type: string
+      minLength: 1
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SubnetIdList:
+      type: array
+      description: A list of subnet IDs.
+      items:
+        $ref: '#/components/schemas/String'
+    Timestamp:
+      type: string
+      format: date-time
+    UpdateFleetRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        ImageName:
+          $ref: '#/components/schemas/String'
+        Name:
+          $ref: '#/components/schemas/String'
+        InstanceType:
+          $ref: '#/components/schemas/String'
+        ComputeCapacity:
+          $ref: '#/components/schemas/ComputeCapacity'
+        VpcConfig:
+          $ref: '#/components/schemas/VpcConfig'
+        MaxUserDurationInSeconds:
+          $ref: '#/components/schemas/Integer'
+        DisconnectTimeoutInSeconds:
+          $ref: '#/components/schemas/Integer'
+        DeleteVpcConfig:
+          $ref: '#/components/schemas/Boolean'
+        Description:
+          $ref: '#/components/schemas/Description'
+        DisplayName:
+          $ref: '#/components/schemas/DisplayName'
+        EnableDefaultInternetAccess:
+          $ref: '#/components/schemas/BooleanObject'
+        AttributesToDelete:
+          $ref: '#/components/schemas/FleetAttributes'
+    UpdateFleetResult:
+      type: object
+      properties:
+        Fleet:
+          $ref: '#/components/schemas/Fleet'
+    UpdateStackRequest:
+      type: object
+      required:
+        - Name
+      properties:
+        DisplayName:
+          $ref: '#/components/schemas/DisplayName'
+        Description:
+          $ref: '#/components/schemas/Description'
+        Name:
+          $ref: '#/components/schemas/String'
+        StorageConnectors:
+          $ref: '#/components/schemas/StorageConnectorList'
+        DeleteStorageConnectors:
+          $ref: '#/components/schemas/Boolean'
+    UpdateStackResult:
+      type: object
+      properties:
+        Stack:
+          $ref: '#/components/schemas/Stack'
+    UserId:
+      type: string
+      minLength: 2
+      maxLength: 32
+    VisibilityType:
+      type: string
+      enum:
+        - PUBLIC
+        - PRIVATE
+    VpcConfig:
+      type: object
+      properties:
+        SubnetIds:
+          $ref: '#/components/schemas/SubnetIdList'
+        SecurityGroupIds:
+          $ref: '#/components/schemas/SecurityGroupIdList'
+      description: VPC configuration information.
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

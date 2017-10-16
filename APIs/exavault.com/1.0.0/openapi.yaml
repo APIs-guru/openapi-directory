@@ -1,0 +1,2417 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.exavault.com/'
+info:
+  description: |
+    ExaVault's API allows you to incorporate ExaVault's suite of file transfer and user management tools into your own application.
+
+    ExaVault supports both POST (recommended when requesting large data sets) and GET operations, and requires an API key in order to use.
+  title: ExaVault
+  version: 1.0.0
+  x-apisguru-categories:
+    - storage
+  x-logo:
+    backgroundColor: '#222222'
+    url: 'https://www.exavault.com/common/images/110xNxlogo220x40.png.pagespeed.ic.N1chK3UTV9.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: swagger
+      url: 'https://www.exavault.com/api/docs'
+      version: '1.2'
+  x-providerName: exavault.com
+externalDocs:
+  url: 'https://www.exavault.com/developer/'
+tags:
+  - description: 'operations for files, notifications, sharing and users'
+    name: v1
+paths:
+  /v1/authenticateUser:
+    get:
+      description: Returns access token in the Response object
+      operationId: authenticateUser
+      parameters:
+        - description: Name of of user to authenticate
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+        - description: User's password
+          in: query
+          name: password
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+      summary: Authenticates a user into the API
+      tags:
+        - v1
+  /v1/checkFilesExist:
+    get:
+      description: Requires access token obtained via the authenticateUser operation
+      operationId: checkFilesExist
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Array containing paths of the files or folders to check
+          in: query
+          name: filePaths
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExistingResourcesResponse'
+      summary: Checks to see if each file or folder in the array exists
+      tags:
+        - v1
+  /v1/copyResources:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission.
+      operationId: copyResources
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Remote paths of the files or folders to copy
+          in: query
+          name: filePaths
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Remote destination path to copy files/folders to
+          in: query
+          name: destinationPath
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModifiedResourcesResponse'
+      summary: 'Copies files, folders to the destination path'
+      tags:
+        - v1
+  /v1/createFolder:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission.
+      operationId: createFolder
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Name of the folder to create
+          in: query
+          name: folderName
+          required: true
+          schema:
+            type: string
+        - description: Where to create the folder
+          in: query
+          name: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: Create a folder at a specified path
+      tags:
+        - v1
+  /v1/createNotification:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission
+      operationId: createNotification
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Full path of file/folder where notification is set.
+          in: query
+          name: path
+          required: true
+          schema:
+            type: string
+        - description: 'Type of action to filter on: ''upload'', ''download'', ''delete'', ''all'''
+          in: query
+          name: action
+          required: true
+          schema:
+            type: string
+        - description: 'User type to filter on: ''notice_user_all'', ''notice_user_all_recipients'', ''notice_user_all_users'''
+          in: query
+          name: usernames
+          required: true
+          schema:
+            type: string
+        - description: Set to true if the user should be notified by email when the notification is triggered.
+          in: query
+          name: sendEmail
+          required: true
+          schema:
+            type: boolean
+        - description: 'Email addresses to send notification to. If not specified, sends to owner by default.'
+          in: query
+          name: emails
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: Creates a new Notification object
+      tags:
+        - v1
+  /v1/createShare:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission
+      operationId: createShare
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: 'The type of share to create: shared_folder, send, receive.'
+          in: query
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: Name of the Share.
+          in: query
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Array of strings containing the file paths to share.
+          in: query
+          name: filePaths
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Share message subject (for email invitations).
+          in: query
+          name: subject
+          required: false
+          schema:
+            type: string
+        - description: Share message contents (for email invitations).
+          in: query
+          name: message
+          required: false
+          schema:
+            type: string
+        - description: Array of strings for email recipients (for email invitations).
+          in: query
+          name: emails
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Specifies a CC email recipient.
+          in: query
+          name: ccEmail
+          required: false
+          schema:
+            type: string
+        - description: Requires a user's email to access (defaults to false if not specified).
+          in: query
+          name: requireEmail
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: 'Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete. Defaults to download if no option specified.'
+          in: query
+          name: accessMode
+          required: false
+          schema:
+            type: string
+        - description: Allows user to embed a widget with the share. Defaults to false if not specified.
+          in: query
+          name: embed
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: 'True if share has a public URL, otherwise defaults to false'
+          in: query
+          name: isPublic
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - description: 'If not null, value of password is required to access this Share'
+          in: query
+          name: password
+          required: false
+          schema:
+            type: string
+        - description: 'The date the current Share should expire, formatted YYYY-mm-dd'
+          in: query
+          name: expiration
+          required: false
+          schema:
+            type: string
+        - description: True if the user should be notified about activity on this Share.
+          in: query
+          name: hasNotification
+          required: false
+          schema:
+            type: boolean
+        - description: An array of recipients who should receive notification emails.
+          in: query
+          name: notificationEmails
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'If true, all receive folder submissions will be uploaded separate folders (only applicable for Receive folder types)'
+          in: query
+          name: fileDropCreateFolders
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: Create a new Share object
+      tags:
+        - v1
+  /v1/createUser:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission
+      operationId: createUser
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Name of the subaccount user to create
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+        - description: The user's home folder
+          in: query
+          name: destinationFolder
+          required: true
+          schema:
+            type: string
+        - description: The user's email address
+          in: query
+          name: email
+          required: true
+          schema:
+            type: string
+        - description: The user's password
+          in: query
+          name: password
+          required: true
+          schema:
+            type: string
+        - description: 'The user''s role, i.e: ''user'' or ''admin'''
+          in: query
+          name: role
+          required: true
+          schema:
+            type: string
+        - description: 'A CSV string of user permissions. The following values are supported: upload, download, delete, modify, list, changePassword, share, notification.'
+          in: query
+          name: permissions
+          required: true
+          schema:
+            type: string
+        - description: 'The user''s timezone, used for accurate time display within SWFT. See <a href=''https://php.net/manual/en/timezones.php'' target=''blank''>this page</a> for allowed values'
+          in: query
+          name: timeZone
+          required: true
+          schema:
+            type: string
+            default: America/Los_Angeles
+        - description: The user's nickname
+          in: query
+          name: nickname
+          schema:
+            type: string
+        - description: 'The date when the user should expire, formatted YYYY-mm-dd'
+          in: query
+          name: expiration
+          schema:
+            type: string
+        - description: 'If true, the user''s account is locked by default'
+          in: query
+          name: locked
+          schema:
+            type: boolean
+            default: false
+        - description: 'If true, send a user email upon creation'
+          in: query
+          name: welcomeEmail
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: Adds a new subaccount user to the current account
+      tags:
+        - v1
+  /v1/deleteNotification:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission
+      operationId: deleteNotification
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: ID of the Notification to delete.
+          in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: Deletes a Notification by ID
+      tags:
+        - v1
+  /v1/deleteResources:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'delete' permission
+      operationId: deleteResources
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Array containing paths of the files or folder to delete
+          in: query
+          name: filePaths
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DeletedResourcesResponse'
+      summary: Delete the specified files/folders
+      tags:
+        - v1
+  /v1/deleteShare:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'share' permission
+      operationId: deleteShare
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: ID of the Share to delete.
+          in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: Deletes a Share by ID
+      tags:
+        - v1
+  /v1/deleteUser:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'manage users' permission
+      operationId: deleteUser
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Name of the subaccount user to delete
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: Deletes a subaccount user for the current account
+      tags:
+        - v1
+  /v1/getAccount:
+    get:
+      description: Requires access token obtained via the authenticateUser operation
+      operationId: getAccount
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+      summary: Gets the account object for the currently logged in user
+      tags:
+        - v1
+  /v1/getCurrentUser:
+    get:
+      description: Requires access token obtained via the authenticateUser operation
+      operationId: getCurrentUser
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Gets the user object for the currently logged in user
+      tags:
+        - v1
+  /v1/getDownloadFileUrl:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. URL points at the appropriate storage server for file download.
+      operationId: getDownloadFileUrl
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Path of file to be downloaded
+          in: query
+          name: filePaths
+          required: true
+          schema:
+            type: string
+        - description: The name of the file to be downloaded
+          in: query
+          name: downloadName
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UrlResponse'
+      summary: Returns a unique URL for handling file downloads
+      tags:
+        - v1
+  /v1/getFileActivityLogs:
+    get:
+      operationId: getFileActivityLogs
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Starting record in the result set. Can be used for pagination.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - description: 'Sort method [''sort_logs_date'' or ''sort_logs_ip_address'' or ''sort_logs_username'' or ''sort_logs_file'' or ''sort_logs_file_source'' or ''sort_logs_operation'', or ''sort_logs_duration'', or ''sort_logs_size'', or ''sort_logs_protocol'']'
+          in: query
+          name: sortBy
+          required: false
+          schema:
+            type: string
+            default: sort_logs_date
+        - description: 'Sort in either ascending or descending order: asc, desc'
+          in: query
+          name: sortOrder
+          required: false
+          schema:
+            type: string
+            default: desc
+        - description: 'Field to search on [''filter_logs_date'' or ''filter_logs_ip_address'' or ''filter_logs_username'' or ''filter_logs_operation'' or ''filter_logs_file'']'
+          in: query
+          name: filterBy
+          required: false
+          schema:
+            type: string
+        - description: 'Search criteria. For date ranges, use format ''start_date::end_date'''
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+        - description: Number of logs to return. Can be used for pagination.
+          in: query
+          name: itemLimit
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LogResponse'
+      summary: Returns a list of account activity. Allows for searching the activity log.
+      tags:
+        - v1
+  /v1/getFolders:
+    get:
+      description: Requires access token obtained via the authenticateUser operation
+      operationId: getFolders
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: The remote file path
+          in: query
+          name: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourcePropertiesResponse'
+      summary: Get folders for a specified path
+      tags:
+        - v1
+  /v1/getNotification:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission
+      operationId: getNotification
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: ID of the Notification
+          in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NotificationResponse'
+      summary: Returns a notification based on the given ID
+      tags:
+        - v1
+  /v1/getNotificationActivity:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission
+      operationId: getNotificationActivity
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NotificationActivityResponse'
+      summary: Returns all notification activity for the current user
+      tags:
+        - v1
+  /v1/getNotifications:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission
+      operationId: getNotifications
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: 'Type of notification to filter on: ''file'', ''folder'', ''shared_folder'', ''send_receipt'', ''share_receipt'', ''file_drop'''
+          in: query
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: 'Sort by one of the following: ''sort_notifications_folder_name'', ''sort_notifications_path'', ''sort_notifications_date'''
+          in: query
+          name: sortBy
+          required: false
+          schema:
+            type: string
+        - description: Sort by 'asc' or 'desc' order.
+          in: query
+          name: sortOrder
+          required: false
+          schema:
+            type: string
+        - description: Filter by the provided search terms.
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/NotificationsResponse'
+      summary: Returns all notifications for the current user
+      tags:
+        - v1
+  /v1/getResourceList:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'list files' permission.
+      operationId: getResourceList
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: The remote file path
+          in: query
+          name: path
+          required: true
+          schema:
+            type: string
+        - description: 'Sort according to attribute: sort_files_name, sort_files_size, sort_files_date, sort_files_type, sort_files_timeline'
+          in: query
+          name: sortBy
+          required: true
+          schema:
+            type: string
+        - description: 'Sort in either ascending or descending order: asc, desc'
+          in: query
+          name: sortOrder
+          required: true
+          schema:
+            type: string
+        - description: Determines which item to start on for pagination
+          in: query
+          name: offset
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: The number of files to limit the result
+          in: query
+          name: limit
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: 'If true, returns sharedFolder, notifications or other objects associated with specified path'
+          in: query
+          name: detailed
+          schema:
+            type: boolean
+            default: false
+        - description: 'Regex string. If not null, perform a search with specified pattern'
+          in: query
+          name: pattern
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+      summary: Get a listing of files/folders for the specified path
+      tags:
+        - v1
+  /v1/getResourceProperties:
+    get:
+      description: Requires access token obtained via the authenticateUser operation
+      operationId: getResourceProperties
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Array containing paths of the files or folder to get
+          in: query
+          name: filePaths
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResourcePropertiesResponse'
+      summary: Get the properties for each of the specified files/folders
+      tags:
+        - v1
+  /v1/getShare:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission
+      operationId: getShare
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: ID of the requested Share
+          in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ShareResponse'
+      summary: Returns a share by the specified ID
+      tags:
+        - v1
+  /v1/getShareActivity:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission
+      operationId: getShareActivity
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: ID of the Share
+          in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ShareActivityResponse'
+      summary: Return activity log entries for the specified Share ID
+      tags:
+        - v1
+  /v1/getShares:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission
+      operationId: getShares
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: 'The type of share to return: ''shared_folder'', ''send'', or ''receive''. If no argument specified, will return all Shares types.'
+          in: query
+          name: type
+          required: false
+          schema:
+            type: string
+        - description: 'Sort by one of the following: ''sort_shares_name'', ''sort_shares_date'', ''sort_shares_user'', ''sort_shares_access_mode''.'
+          in: query
+          name: sortBy
+          required: false
+          schema:
+            type: string
+        - description: Sort by 'asc' or 'desc' order.
+          in: query
+          name: sortOrder
+          required: false
+          schema:
+            type: string
+        - description: Filter by the provided search terms.
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+        - description: 'Filter by all, active-only, or current user''s only.'
+          in: query
+          name: include
+          required: false
+          schema:
+            type: string
+        - description: 'Start position of results to return, for pagination.'
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - description: Maximum number of elements to return or 0 if no limit.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SharesResponse'
+      summary: Returns all Shares for the current user
+      tags:
+        - v1
+  /v1/getUploadFileUrl:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Called before an upload is started to get URL to appropriate storage server. Available to users with the 'write' permission.
+      operationId: getUploadFileUrl
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: 'Size of the file to upload, in bytes'
+          in: query
+          name: fileSize
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - description: 'Path relative to account''s home directory, including file name'
+          in: query
+          name: destinationPath
+          required: true
+          schema:
+            type: string
+        - description: 'True if the file should be overwritten, false if different file names should be generated'
+          in: query
+          name: allowOverwrite
+          required: false
+          schema:
+            type: boolean
+            default: true
+        - description: 'True if upload resume is supported, false if it isn''t'
+          in: query
+          name: resume
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UrlResponse'
+      summary: Returns a unique URL for handling file uploads
+      tags:
+        - v1
+  /v1/getUser:
+    get:
+      description: Requires access token obtained via the authenticateUser operation
+      operationId: getUser
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Name of the subaccount user to get
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+      summary: Get the specified subaccount user for the current account
+      tags:
+        - v1
+  /v1/getUsers:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission set
+      operationId: getUsers
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: 'sort method [''sort_users_username'' or ''sort_users_nickname'' or ''sort_users_email'' or ''sort_users_home_folder'']'
+          in: query
+          name: sortBy
+          required: true
+          schema:
+            type: string
+        - description: 'sort order, i.e. ''asc'' or ''desc'''
+          in: query
+          name: sortOrder
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+      summary: Gets the user object for the currently logged in user
+      tags:
+        - v1
+  /v1/logoutUser:
+    get:
+      description: Requires access token obtained via the authenticateUser operation
+      operationId: logoutUser
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: 'Removes user''s access token from database, logging them out of API'
+      tags:
+        - v1
+  /v1/moveResources:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission
+      operationId: moveResources
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Remote paths of the files or folders to move
+          in: query
+          name: filePaths
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Remote destination path to move files/folders to
+          in: query
+          name: destinationPath
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ModifiedResourcesResponse'
+      summary: 'Moves files, folders to the destination path'
+      tags:
+        - v1
+  /v1/previewFile:
+    get:
+      description: Requires access token obtained via authenticateUser operation
+      operationId: previewFile
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Path of the image relative to the user's home directory
+          in: query
+          name: path
+          required: true
+          schema:
+            type: string
+        - description: 'The size of the image: small, medium, large'
+          in: query
+          name: size
+          required: true
+          schema:
+            type: string
+        - description: Overrides sizes. Sets to a specific width
+          in: query
+          name: width
+          schema:
+            type: integer
+            format: int32
+        - description: Overrides sizes. Sets to a specific height
+          in: query
+          name: height
+          schema:
+            type: integer
+            format: int32
+        - description: Page number for the document
+          in: query
+          name: page
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PreviewFileResponse'
+      summary: Returns a resized image of the specified document for support file types
+      tags:
+        - v1
+  /v1/renameResource:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'modify' permission
+      operationId: renameResource
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Remote path of the files or folder to rename
+          in: query
+          name: filePath
+          required: true
+          schema:
+            type: string
+        - description: The new name of the file or folder
+          in: query
+          name: newName
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: Rename a file or folder at the specified path
+      tags:
+        - v1
+  /v1/updateNotification:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission
+      operationId: updateNotification
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: The notification ID
+          in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: Full path of file/folder where notification is set.
+          in: query
+          name: path
+          schema:
+            type: string
+        - description: 'Type of action to filter on: ''upload'', ''download'', ''delete'', ''all'''
+          in: query
+          name: action
+          schema:
+            type: string
+        - description: 'User type to filter on: ''notice_user_all'', ''notice_user_all_recipients'', ''notice_user_all_users'''
+          in: query
+          name: usernames
+          schema:
+            type: string
+        - description: 'Email addresses to send notification to. If not specified, sends to owner by default.'
+          in: query
+          name: emails
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Set to true if the user should be notified by email when the notification is triggered.
+          in: query
+          name: sendEmail
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: Updates an existing notification by ID
+      tags:
+        - v1
+  /v1/updateShare:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission
+      operationId: updateShare
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: The ID of the Share to update.
+          in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: Name of the Share.
+          in: query
+          name: name
+          schema:
+            type: string
+        - description: Array of strings containing the file paths to share.
+          in: query
+          name: filePaths
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Share message subject (for email invitations).
+          in: query
+          name: subject
+          schema:
+            type: string
+        - description: Share message contents (for email invitations).
+          in: query
+          name: message
+          schema:
+            type: string
+        - description: Array of strings for email recipients (for email invitations).
+          in: query
+          name: emails
+          schema:
+            type: array
+            items:
+              type: string
+        - description: Specifies a CC email recipient.
+          in: query
+          name: ccEmail
+          schema:
+            type: string
+        - description: Requires a user's email to access.
+          in: query
+          name: requireEmail
+          schema:
+            type: boolean
+        - description: 'Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete.'
+          in: query
+          name: accessMode
+          schema:
+            type: string
+        - description: Allows user to embed a widget with the share.
+          in: query
+          name: embed
+          schema:
+            type: boolean
+        - description: 'True if share has a public URL, otherwise defaults to false'
+          in: query
+          name: isPublic
+          schema:
+            type: boolean
+        - description: 'If not null, value of password is required to access this Share'
+          in: query
+          name: password
+          schema:
+            type: string
+        - description: 'The date the current Share should expire, formatted YYYY-mm-dd'
+          in: query
+          name: expiration
+          schema:
+            type: string
+        - description: True if the user should be notified about activity on this Share.
+          in: query
+          name: hasNotification
+          schema:
+            type: boolean
+        - description: An array of recipients who should receive notification emails.
+          in: query
+          name: notificationEmails
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'If true, all receive folder submissions will be uploaded separate folders (only applicable for Receive folder types)'
+          in: query
+          name: fileDropCreateFolders
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: Update an existing Share by ID
+      tags:
+        - v1
+  /v1/updateUser:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'manage users' permission
+      operationId: updateUser
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: 'The user ID, must be obtained from getUser method first'
+          in: query
+          name: userId
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - description: Name of the subaccount user to modify
+          in: query
+          name: username
+          schema:
+            type: string
+        - description: The user's nickname
+          in: query
+          name: nickname
+          schema:
+            type: string
+        - description: 'The date when use should expire in format: YYYY-MM-DD'
+          in: query
+          name: expiration
+          schema:
+            type: string
+        - description: The user's email
+          in: query
+          name: email
+          schema:
+            type: string
+        - description: The user's home folder
+          in: query
+          name: destinationFolder
+          schema:
+            type: string
+        - description: The user's password
+          in: query
+          name: password
+          schema:
+            type: string
+        - description: 'If true, the user''s account is locked by default'
+          in: query
+          name: locked
+          schema:
+            type: boolean
+        - description: 'The user''s role, i.e: ''user'', ''admin'', ''master'''
+          in: query
+          name: role
+          schema:
+            type: string
+        - description: A CSV string of user permissions.
+          in: query
+          name: permissions
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Response'
+      summary: Updates a subaccount user for the current account
+      tags:
+        - v1
+  /v1/userAvailable:
+    get:
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission
+      operationId: userAvailable
+      parameters:
+        - description: Access token required to make the API call
+          in: query
+          name: access_token
+          required: true
+          schema:
+            type: string
+        - description: Username to check
+          in: query
+          name: username
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AvailableUserResponse'
+      summary: Returns true if requested username has not already been taken in the system
+      tags:
+        - v1
+components:
+  schemas:
+    Account:
+      properties:
+        appliedTrial:
+          type: string
+        bandwidthQuotaLimit:
+          format: int64
+          type: integer
+        bandwidthQuotaUsed:
+          format: int64
+          type: integer
+        branding:
+          type: boolean
+        clientId:
+          format: int32
+          type: integer
+        complexPasswords:
+          type: boolean
+        created:
+          type: string
+        customDomain:
+          type: boolean
+        diskQuotaLimit:
+          format: int64
+          type: integer
+        diskQuotaUsed:
+          format: int64
+          type: integer
+        externalDomains:
+          type: string
+        freeTrial:
+          type: boolean
+        id:
+          format: int32
+          type: integer
+        masterAccount:
+          $ref: '#/components/schemas/User'
+        maxUsers:
+          format: int32
+          type: integer
+        modified:
+          type: string
+        planCode:
+          type: string
+        quotaNoticeEnabled:
+          format: int32
+          type: integer
+        quotaNoticeThreshold:
+          format: int32
+          type: integer
+        redirect:
+          type: string
+        secureOnly:
+          type: boolean
+        showReferralLinks:
+          type: boolean
+        status:
+          format: int32
+          type: integer
+        userCount:
+          format: int32
+          type: integer
+        username:
+          type: string
+      required:
+        - id
+        - username
+        - maxUsers
+        - userCount
+        - masterAccount
+        - status
+        - branding
+        - customDomain
+        - planCode
+        - diskQuotaLimit
+        - bandwidthQuotaLimit
+        - diskQuotaUsed
+        - bandwidthQuotaUsed
+        - quotaNoticeEnabled
+        - quotaNoticeThreshold
+        - redirect
+        - secureOnly
+        - complexPasswords
+        - showReferralLinks
+        - externalDomains
+        - freeTrial
+        - appliedTrial
+        - clientId
+        - created
+        - modified
+    AccountResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          $ref: '#/components/schemas/Account'
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    Auth:
+      properties:
+        accessToken:
+          type: string
+        clientIp:
+          type: string
+        mode:
+          format: int32
+          type: integer
+        username:
+          type: string
+      required:
+        - username
+        - accessToken
+        - mode
+        - clientIp
+    AuthResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          $ref: '#/components/schemas/Auth'
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    AvailableUser:
+      properties:
+        available:
+          type: boolean
+      required:
+        - available
+    AvailableUserResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          $ref: '#/components/schemas/AvailableUser'
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    DeletedResource:
+      properties:
+        file:
+          type: string
+        size:
+          format: int64
+          type: integer
+        success:
+          format: int32
+          type: integer
+      required:
+        - file
+        - size
+        - success
+    DeletedResourcesResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          items:
+            $ref: '#/components/schemas/DeletedResource'
+          type: array
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    Error:
+      properties:
+        code:
+          format: int32
+          type: integer
+        message:
+          type: string
+      required:
+        - message
+        - code
+    ExistingResource:
+      properties:
+        exists:
+          type: boolean
+        resource:
+          $ref: '#/components/schemas/ResourceProperty'
+      required:
+        - exists
+        - resource
+    ExistingResourcesResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          items:
+            $ref: '#/components/schemas/ExistingResource'
+          type: array
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    LogEntry:
+      properties:
+        bytesTransferred:
+          format: int64
+          type: integer
+        created:
+          type: string
+        duration:
+          type: string
+        fileName:
+          type: string
+        fileSource:
+          type: string
+        id:
+          format: int32
+          type: integer
+        ipAddress:
+          type: string
+        operation:
+          type: string
+        protocol:
+          type: string
+        sessionId:
+          type: string
+        status:
+          type: string
+        username:
+          type: string
+      required:
+        - fileName
+        - fileSource
+        - operation
+        - duration
+        - bytesTransferred
+        - id
+        - created
+        - username
+        - sessionId
+        - ipAddress
+        - protocol
+        - status
+    LogResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          items:
+            $ref: '#/components/schemas/LogEntry'
+          type: array
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    Message:
+      properties:
+        body:
+          type: string
+        created:
+          type: string
+        id:
+          format: int32
+          type: integer
+        modified:
+          type: string
+        shareId:
+          type: string
+        subject:
+          type: string
+        userId:
+          format: int32
+          type: integer
+      required:
+        - id
+        - userId
+        - shareId
+        - subject
+        - body
+        - created
+        - modified
+    ModifiedResource:
+      properties:
+        destination:
+          type: string
+        file:
+          type: string
+        size:
+          format: int64
+          type: integer
+        success:
+          format: int32
+          type: integer
+      required:
+        - file
+        - destination
+        - size
+        - success
+    ModifiedResourcesResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          items:
+            $ref: '#/components/schemas/ModifiedResource'
+          type: array
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    Notification:
+      properties:
+        action:
+          type: string
+        created:
+          type: string
+        id:
+          format: int32
+          type: integer
+        modified:
+          type: string
+        name:
+          type: string
+        path:
+          type: string
+        readableDescription:
+          type: string
+        readableDescriptionWithoutPath:
+          type: string
+        recipientEmails:
+          items:
+            type: string
+          type: array
+        recipients:
+          items:
+            $ref: '#/components/schemas/Recipient'
+          type: array
+        sendEmail:
+          type: string
+        shareId:
+          type: string
+        type:
+          type: string
+        userId:
+          type: string
+        usernames:
+          items:
+            type: string
+          type: array
+      required:
+        - id
+        - userId
+        - type
+        - path
+        - name
+        - action
+        - usernames
+        - recipients
+        - recipientEmails
+        - sendEmail
+        - readableDescription
+        - readableDescriptionWithoutPath
+        - shareId
+        - created
+        - modified
+    NotificationActivityResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          items:
+            $ref: '#/components/schemas/NotificationMessage'
+          type: array
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    NotificationMessage:
+      properties:
+        action:
+          type: string
+        created:
+          type: string
+        id:
+          format: int32
+          type: integer
+        message:
+          type: string
+        notificationSetting:
+          $ref: '#/components/schemas/Notification'
+        path:
+          type: string
+        read:
+          type: boolean
+        sent:
+          type: boolean
+        username:
+          type: string
+      required:
+        - id
+        - notificationSetting
+        - message
+        - path
+        - action
+        - username
+        - sent
+        - read
+        - created
+    NotificationResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          $ref: '#/components/schemas/Notification'
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    NotificationsResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          items:
+            $ref: '#/components/schemas/Notification'
+          type: array
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    PreviewFile:
+      properties:
+        image:
+          type: string
+        imageId:
+          type: string
+        size:
+          format: int64
+          type: integer
+      required:
+        - image
+        - size
+        - imageId
+    PreviewFileResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          $ref: '#/components/schemas/PreviewFile'
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    Recipient:
+      properties:
+        created:
+          type: string
+        email:
+          type: string
+        hash:
+          type: string
+        id:
+          format: int32
+          type: integer
+        received:
+          type: boolean
+        sent:
+          type: boolean
+        shareId:
+          type: string
+        type:
+          type: string
+      required:
+        - id
+        - shareId
+        - type
+        - hash
+        - email
+        - sent
+        - received
+        - created
+    Resource:
+      properties:
+        inheritedNotifications:
+          type: string
+        inheritedShares:
+          type: string
+        resources:
+          items:
+            $ref: '#/components/schemas/ResourceProperty'
+          type: array
+        totalFiles:
+          format: int32
+          type: integer
+      required:
+        - totalFiles
+        - resources
+        - inheritedShares
+        - inheritedNotifications
+    ResourcePropertiesResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          items:
+            $ref: '#/components/schemas/ResourceProperty'
+          type: array
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    ResourceProperty:
+      properties:
+        createdBy:
+          type: string
+        file:
+          type: string
+        fileCount:
+          format: int32
+          type: integer
+        name:
+          type: string
+        notificationSettings:
+          type: string
+        parent:
+          type: string
+        path:
+          type: string
+        previewable:
+          type: boolean
+        shares:
+          items:
+            $ref: '#/components/schemas/Share'
+          type: array
+        size:
+          format: int64
+          type: integer
+        type:
+          type: string
+        uploadDate:
+          type: string
+      required:
+        - fileCount
+        - file
+        - name
+        - createdBy
+        - uploadDate
+        - parent
+        - path
+        - shares
+        - notificationSettings
+        - size
+        - previewable
+    ResourceResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          $ref: '#/components/schemas/Resource'
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    Response:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          items:
+            type: string
+          type: array
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    Share:
+      properties:
+        accessDescription:
+          type: string
+        accessMode:
+          type: string
+        created:
+          type: string
+        embed:
+          type: boolean
+        expiration:
+          type: string
+        expired:
+          type: string
+        fileDropCreateFolders:
+          type: boolean
+        hasNotification:
+          type: boolean
+        hasPassword:
+          type: boolean
+        hash:
+          type: string
+        id:
+          format: int32
+          type: integer
+        inherited:
+          type: boolean
+        isPublic:
+          type: boolean
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        modified:
+          type: string
+        name:
+          type: string
+        notification:
+          type: string
+        owner:
+          format: int32
+          type: integer
+        ownerHash:
+          type: string
+        ownerUsername:
+          type: string
+        paths:
+          items:
+            type: string
+          type: array
+        recipients:
+          items:
+            $ref: '#/components/schemas/Recipient'
+          type: array
+        recipientsWithOwner:
+          items:
+            $ref: '#/components/schemas/Recipient'
+          type: array
+        requireEmail:
+          type: boolean
+        resent:
+          type: boolean
+        status:
+          format: int32
+          type: integer
+        trackingStatus:
+          type: string
+        type:
+          type: string
+      required:
+        - id
+        - name
+        - hasPassword
+        - isPublic
+        - accessMode
+        - accessDescription
+        - embed
+        - hash
+        - ownerHash
+        - expiration
+        - trackingStatus
+        - expired
+        - resent
+        - owner
+        - ownerUsername
+        - type
+        - requireEmail
+        - fileDropCreateFolders
+        - paths
+        - recipients
+        - recipientsWithOwner
+        - messages
+        - inherited
+        - status
+        - hasNotification
+        - notification
+        - created
+        - modified
+    ShareActivityResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          items:
+            $ref: '#/components/schemas/ShareLogEntry'
+          type: array
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    ShareLogEntry:
+      properties:
+        action:
+          type: string
+        actionObjectId:
+          type: string
+        created:
+          type: string
+        detail:
+          type: string
+        id:
+          format: int32
+          type: integer
+        shareId:
+          type: string
+        username:
+          type: string
+      required:
+        - id
+        - shareId
+        - username
+        - action
+        - actionObjectId
+        - detail
+        - created
+    ShareResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          $ref: '#/components/schemas/Share'
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    SharesResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          items:
+            $ref: '#/components/schemas/Share'
+          type: array
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    Url:
+      properties:
+        offset:
+          format: int32
+          type: integer
+        url:
+          type: string
+      required:
+        - url
+    UrlResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          $ref: '#/components/schemas/Url'
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    User:
+      properties:
+        accessTimestamp:
+          type: string
+        changePassword:
+          type: boolean
+        created:
+          type: string
+        delete:
+          type: boolean
+        download:
+          type: boolean
+        email:
+          type: string
+        expiration:
+          type: string
+        gid:
+          format: int32
+          type: integer
+        homeDir:
+          type: string
+        id:
+          format: int32
+          type: integer
+        list:
+          type: boolean
+        modified:
+          type: string
+        modify:
+          type: boolean
+        nickname:
+          type: string
+        notification:
+          type: boolean
+        owningAccountId:
+          format: int32
+          type: integer
+        role:
+          type: string
+        share:
+          type: boolean
+        status:
+          format: int32
+          type: integer
+        timeZone:
+          type: string
+        upload:
+          type: boolean
+        username:
+          type: string
+      required:
+        - gid
+        - status
+        - created
+        - modified
+        - accessTimestamp
+        - id
+        - owningAccountId
+        - username
+        - nickname
+        - email
+        - expiration
+        - homeDir
+        - download
+        - upload
+        - modify
+        - delete
+        - list
+        - changePassword
+        - share
+        - notification
+        - role
+        - timeZone
+    UserResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          $ref: '#/components/schemas/User'
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results
+    UsersResponse:
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        results:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+        success:
+          format: int32
+          type: integer
+      required:
+        - success
+        - error
+        - results

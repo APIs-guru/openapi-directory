@@ -1,0 +1,6364 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://stats.nba.com/stats'
+info:
+  description: The destination for current and historic NBA statistics.
+  title: NBA Stats
+  version: 1.0.0
+  x-apisguru-categories:
+    - media
+    - open_data
+  x-logo:
+    url: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/03/National_Basketball_Association_logo.svg/100px-National_Basketball_Association_logo.svg.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/danielwelch/little-pynny/master/little-pynny/swagger.json'
+      version: '2.0'
+  x-providerName: nba.com
+  x-unofficialSpec: true
+paths:
+  /allstarballotpredictor:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PointCap
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: WestPlayer1
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: WestPlayer2
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: WestPlayer3
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: WestPlayer4
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: WestPlayer5
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EastPlayer1
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EastPlayer2
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EastPlayer3
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EastPlayer4
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EastPlayer5
+        required: true
+        schema:
+          type: string
+  /boxscore:
+    get:
+      deprecated: true
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: false
+        schema:
+          type: string
+  /boxscoreadvanced:
+    get:
+      deprecated: true
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: false
+        schema:
+          type: string
+  /boxscoreadvancedv2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: true
+        schema:
+          type: string
+  /boxscorefourfactors:
+    get:
+      deprecated: true
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: false
+        schema:
+          type: string
+  /boxscorefourfactorsv2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: true
+        schema:
+          type: string
+  /boxscoremisc:
+    get:
+      deprecated: true
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: false
+        schema:
+          type: string
+  /boxscoremiscv2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: true
+        schema:
+          type: string
+  /boxscoreplayertrackv2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+  /boxscorescoring:
+    get:
+      deprecated: true
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: false
+        schema:
+          type: string
+  /boxscorescoringv2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: true
+        schema:
+          type: string
+  /boxscoresummaryv2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+  /boxscoretraditionalv2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: true
+        schema:
+          type: string
+  /boxscoreusage:
+    get:
+      deprecated: true
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: false
+        schema:
+          type: string
+  /boxscoreusagev2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: RangeType
+        required: true
+        schema:
+          type: string
+  /commonTeamYears:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+  /commonallplayers:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: IsOnlyCurrentSeason
+        required: true
+        schema:
+          type: string
+  /commonplayerinfo:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+  /commonplayoffseries:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+  /commonteamroster:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+  /draftcombinedrillresults:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonYear
+        required: true
+        schema:
+          type: string
+  /draftcombinenonstationaryshooting:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonYear
+        required: true
+        schema:
+          type: string
+  /draftcombineplayeranthro:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonYear
+        required: true
+        schema:
+          type: string
+  /draftcombinespotshooting:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonYear
+        required: true
+        schema:
+          type: string
+  /draftcombinestats:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonYear
+        required: true
+        schema:
+          type: string
+  /drafthistory:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+  /franchisehistory:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+  /homepageleaders:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: StatCategory
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerOrTeam
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Game
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: Player
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: PlayerScope
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameScope
+        required: true
+        schema:
+          type: string
+  /homepagev2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: StatType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerOrTeam
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Game
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: Player
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: PlayerScope
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameScope
+        required: true
+        schema:
+          type: string
+  /leaderstiles:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: Stat
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerOrTeam
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Game
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: Player
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: PlayerScope
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameScope
+        required: true
+        schema:
+          type: string
+  /leaguedashlineups:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GroupQuantity
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /leaguedashplayerbiostats:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+  /leaguedashplayerclutch:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: ClutchTime
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: AheadBehind
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PointDiff
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameScope
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerExperience
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerPosition
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StarterBench
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /leaguedashplayerptshot:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+  /leaguedashplayershotlocations:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DistanceRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameScope
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerExperience
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerPosition
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StarterBench
+        required: true
+        schema:
+          type: string
+  /leaguedashplayerstats:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameScope
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerExperience
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerPosition
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StarterBench
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /leaguedashptdefend:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DefenseCategory
+        required: true
+        schema:
+          type: string
+  /leaguedashptteamdefend:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DefenseCategory
+        required: true
+        schema:
+          type: string
+  /leaguedashteamclutch:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: ClutchTime
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: AheadBehind
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PointDiff
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameScope
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerExperience
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerPosition
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StarterBench
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /leaguedashteamptshot:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+  /leaguedashteamshotlocations:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DistanceRange
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameScope
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerExperience
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerPosition
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StarterBench
+        required: true
+        schema:
+          type: string
+  /leaguedashteamstats:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /leagueleaders:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StatCategory
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Scope
+        required: true
+        schema:
+          type: string
+  /playbyplay:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: true
+        schema:
+          type: string
+  /playbyplayv2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: StartPeriod
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: EndPeriod
+        required: true
+        schema:
+          type: string
+  /playercareerstats:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+  /playercompare:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PlayerIDList
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsPlayerIDList
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashboardbyclutch:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashboardbygamesplits:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashboardbygeneralsplits:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashboardbylastngames:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashboardbyopponent:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashboardbyshootingsplits:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashboardbyteamperformance:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashboardbyyearoveryear:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashptpass:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashptreb:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashptreboundlogs:
+    get:
+      deprecated: true
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: Season
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: false
+        schema:
+          type: string
+  /playerdashptshotdefend:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playerdashptshotlog:
+    get:
+      deprecated: true
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: false
+        schema:
+          type: string
+  /playerdashptshots:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playergamelog:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+  /playerprofile:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GraphStartSeason
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GraphEndSeason
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GraphStat
+        required: true
+        schema:
+          type: string
+  /playerprofilev2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+  /playersvsplayers:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PlayerTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID1
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID2
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID3
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID4
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID5
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsPlayerID1
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsPlayerID2
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsPlayerID3
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsPlayerID4
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsPlayerID5
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playervsplayer:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsPlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /playoffpicture:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonID
+        required: true
+        schema:
+          type: string
+  /scoreboard:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameDate
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DayOffset
+        required: true
+        schema:
+          type: string
+  /scoreboardV2:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GameDate
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DayOffset
+        required: true
+        schema:
+          type: string
+  /shotchartdetail:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Position
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: RookieYear
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: ContextMeasure
+        required: true
+        schema:
+          type: string
+  /shotchartlineupdetail:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GROUP_ID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: ContextMeasure
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: ContextFilter
+        required: true
+        schema:
+          type: string
+  /teamdashboardbyclutch:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamdashboardbygamesplits:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamdashboardbygeneralsplits:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamdashboardbylastngames:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamdashboardbyopponent:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamdashboardbyshootingsplits:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamdashboardbyteamperformance:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamdashboardbyyearoveryear:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamdashlineups:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: GroupQuantity
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamdashptpass:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamdashptreb:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamdashptshots:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamgamelog:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+  /teaminfocommon:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+  /teamplayerdashboard:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamplayeronoffdetails:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamplayeronoffsummary:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamvsplayer:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsPlayerID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: MeasureType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PlusMinus
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PaceAdjust
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Rank
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Season
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Outcome
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Location
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Month
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateFrom
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: DateTo
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: OpponentTeamID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsConference
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: VsDivision
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameSegment
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: Period
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: LastNGames
+        required: true
+        schema:
+          type: string
+  /teamyearbyyearstats:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: SeasonType
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: PerMode
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: TeamID
+        required: true
+        schema:
+          type: string
+  /videoStatus:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: 200 OK
+        '400':
+          description: Bad request - bad parameters
+        '404':
+          description: '''No HTTP resource was found that matches the request URI'' - possible deprecated endpoint'
+      summary: ''
+    parameters:
+      - in: query
+        name: LeagueID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: GameDate
+        required: true
+        schema:
+          type: string
+components:
+  schemas: {}

@@ -1,0 +1,304 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://www.googleapis.com/urlshortener/v1'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'Lets you create, inspect, and manage goo.gl short URLs'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: URL Shortener
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-apisguru-categories:
+    - tools
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://www.googleapis.com/discovery/v1/apis/urlshortener/v1/rest'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: urlshortener
+externalDocs:
+  url: 'https://developers.google.com/url-shortener/v1/getting_started'
+tags:
+  - name: url
+paths:
+  /url:
+    get:
+      description: Expands a short URL or gets creation time and analytics.
+      operationId: urlshortener.url.get
+      parameters:
+        - description: 'The short URL, including the protocol.'
+          in: query
+          name: shortUrl
+          required: true
+          schema:
+            type: string
+        - description: Additional information to return.
+          in: query
+          name: projection
+          schema:
+            type: string
+            enum:
+              - ANALYTICS_CLICKS
+              - ANALYTICS_TOP_STRINGS
+              - FULL
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Url'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/urlshortener'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/urlshortener'
+      tags:
+        - url
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+    post:
+      description: Creates a new short URL.
+      operationId: urlshortener.url.insert
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Url'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/urlshortener'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/urlshortener'
+      tags:
+        - url
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Url'
+  /url/history:
+    get:
+      description: Retrieves a list of URLs shortened by a user.
+      operationId: urlshortener.url.list
+      parameters:
+        - description: Additional information to return.
+          in: query
+          name: projection
+          schema:
+            type: string
+            enum:
+              - ANALYTICS_CLICKS
+              - FULL
+        - description: Token for requesting successive pages of results.
+          in: query
+          name: start-token
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UrlHistory'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/urlshortener'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/urlshortener'
+      tags:
+        - url
+    parameters:
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/userIp'
+components:
+  schemas:
+    AnalyticsSnapshot:
+      properties:
+        browsers:
+          description: 'Top browsers, e.g. "Chrome"; sorted by (descending) click counts. Only present if this data is available.'
+          items:
+            $ref: '#/components/schemas/StringCount'
+          type: array
+        countries:
+          description: 'Top countries (expressed as country codes), e.g. "US" or "DE"; sorted by (descending) click counts. Only present if this data is available.'
+          items:
+            $ref: '#/components/schemas/StringCount'
+          type: array
+        longUrlClicks:
+          description: Number of clicks on all goo.gl short URLs pointing to this long URL.
+          format: int64
+          type: string
+        platforms:
+          description: 'Top platforms or OSes, e.g. "Windows"; sorted by (descending) click counts. Only present if this data is available.'
+          items:
+            $ref: '#/components/schemas/StringCount'
+          type: array
+        referrers:
+          description: 'Top referring hosts, e.g. "www.google.com"; sorted by (descending) click counts. Only present if this data is available.'
+          items:
+            $ref: '#/components/schemas/StringCount'
+          type: array
+        shortUrlClicks:
+          description: Number of clicks on this short URL.
+          format: int64
+          type: string
+      type: object
+    AnalyticsSummary:
+      properties:
+        allTime:
+          $ref: '#/components/schemas/AnalyticsSnapshot'
+        day:
+          $ref: '#/components/schemas/AnalyticsSnapshot'
+        month:
+          $ref: '#/components/schemas/AnalyticsSnapshot'
+        twoHours:
+          $ref: '#/components/schemas/AnalyticsSnapshot'
+        week:
+          $ref: '#/components/schemas/AnalyticsSnapshot'
+      type: object
+    StringCount:
+      properties:
+        count:
+          description: 'Number of clicks for this top entry, e.g. for this particular country or browser.'
+          format: int64
+          type: string
+        id:
+          description: 'Label assigned to this top entry, e.g. "US" or "Chrome".'
+          type: string
+      type: object
+    Url:
+      properties:
+        analytics:
+          $ref: '#/components/schemas/AnalyticsSummary'
+        created:
+          description: 'Time the short URL was created; ISO 8601 representation using the yyyy-MM-dd''T''HH:mm:ss.SSSZZ format, e.g. "2010-10-14T19:01:24.944+00:00".'
+          type: string
+        id:
+          description: 'Short URL, e.g. "http://goo.gl/l6MS".'
+          type: string
+        kind:
+          default: 'urlshortener#url'
+          description: 'The fixed string "urlshortener#url".'
+          type: string
+        longUrl:
+          description: 'Long URL, e.g. "http://www.google.com/". Might not be present if the status is "REMOVED".'
+          type: string
+        status:
+          description: 'Status of the target URL. Possible values: "OK", "MALWARE", "PHISHING", or "REMOVED". A URL might be marked "REMOVED" if it was flagged as spam, for example.'
+          type: string
+      type: object
+    UrlHistory:
+      properties:
+        items:
+          description: A list of URL resources.
+          items:
+            $ref: '#/components/schemas/Url'
+          type: array
+        itemsPerPage:
+          description: Number of items returned with each full "page" of results. Note that the last page could have fewer items than the "itemsPerPage" value.
+          format: int32
+          type: integer
+        kind:
+          default: 'urlshortener#urlHistory'
+          description: 'The fixed string "urlshortener#urlHistory".'
+          type: string
+        nextPageToken:
+          description: A token to provide to get the next page of results.
+          type: string
+        totalItems:
+          description: Total number of short URLs associated with this user (may be approximate).
+          format: int32
+          type: integer
+      type: object
+  parameters:
+    alt:
+      description: Data format for the response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+        default: json
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    userIp:
+      description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+      in: query
+      name: userIp
+      schema:
+        type: string
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/urlshortener': Manage your goo.gl short URLs
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/urlshortener': Manage your goo.gl short URLs

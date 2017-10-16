@@ -1,0 +1,858 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://shield.amazonaws.com/'
+info:
+  version: '2016-06-02'
+  x-release: v4
+  title: AWS Shield
+  description: '<fullname>AWS Shield Advanced</fullname> <p>This is the <i>AWS Shield Advanced API Reference</i>. This guide is for developers who need detailed information about the AWS Shield Advanced API actions, data types, and errors. For detailed information about AWS WAF and AWS Shield Advanced features and an overview of how to use the AWS WAF and AWS Shield Advanced APIs, see the <a href="http://docs.aws.amazon.com/waf/latest/developerguide/">AWS WAF and AWS Shield Developer Guide</a>.</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: shield
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/shield-2016-06-02.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/shield/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CreateProtection
+      description: 'Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, or an Amazon Route 53 hosted zone.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProtectionResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceException'
+        '482':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+        '483':
+          description: LimitsExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitsExceededException'
+        '484':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '485':
+          description: OptimisticLockException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimisticLockException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProtectionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateSubscription':
+    post:
+      operationId: CreateSubscription
+      description: Activates AWS Shield Advanced for an account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSubscriptionResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubscriptionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteProtection':
+    post:
+      operationId: DeleteProtection
+      description: Deletes an AWS Shield Advanced <a>Protection</a>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteProtectionResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: OptimisticLockException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptimisticLockException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteProtectionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteSubscription':
+    post:
+      operationId: DeleteSubscription
+      description: Removes AWS Shield Advanced from an account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSubscriptionResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: LockedSubscriptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LockedSubscriptionException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSubscriptionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeAttack':
+    post:
+      operationId: DescribeAttack
+      description: 'Describes the details of a DDoS attack. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAttackResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAttackRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeProtection':
+    post:
+      operationId: DescribeProtection
+      description: Lists the details of a <a>Protection</a> object.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeProtectionResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeProtectionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeSubscription':
+    post:
+      operationId: DescribeSubscription
+      description: Provides details about the AWS Shield Advanced subscription for an account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSubscriptionResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSubscriptionRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListAttacks':
+    post:
+      operationId: ListAttacks
+      description: Returns all ongoing DDoS attacks or all DDoS attacks during a specified time period.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAttacksResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOperationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAttacksRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListProtections':
+    post:
+      operationId: ListProtections
+      description: Lists all <a>Protection</a> objects for the account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProtectionsResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListProtectionsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AttackDetail:
+      type: object
+      properties:
+        AttackId:
+          $ref: '#/components/schemas/AttackId'
+        ResourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+        SubResources:
+          $ref: '#/components/schemas/SubResourceSummaryList'
+        StartTime:
+          $ref: '#/components/schemas/AttackTimestamp'
+        EndTime:
+          $ref: '#/components/schemas/AttackTimestamp'
+        AttackCounters:
+          $ref: '#/components/schemas/SummarizedCounterList'
+        Mitigations:
+          $ref: '#/components/schemas/MitigationList'
+      description: The details of a DDoS attack.
+    AttackId:
+      type: string
+      pattern: '[a-zA-Z0-9\\-]*'
+      minLength: 1
+      maxLength: 128
+    AttackSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttackSummary'
+    AttackSummary:
+      type: object
+      properties:
+        AttackId:
+          $ref: '#/components/schemas/String'
+        ResourceArn:
+          $ref: '#/components/schemas/String'
+        StartTime:
+          $ref: '#/components/schemas/AttackTimestamp'
+        EndTime:
+          $ref: '#/components/schemas/AttackTimestamp'
+        AttackVectors:
+          $ref: '#/components/schemas/AttackVectorDescriptionList'
+      description: Summarizes all DDoS attacks for a specified time period.
+    AttackTimestamp:
+      type: string
+      format: date-time
+    AttackVectorDescription:
+      type: object
+      required:
+        - VectorType
+      properties:
+        VectorType:
+          $ref: '#/components/schemas/String'
+      description: Describes the attack.
+    AttackVectorDescriptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttackVectorDescription'
+    CreateProtectionRequest:
+      type: object
+      required:
+        - Name
+        - ResourceArn
+      properties:
+        Name:
+          $ref: '#/components/schemas/ProtectionName'
+        ResourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+    CreateProtectionResponse:
+      type: object
+      properties:
+        ProtectionId:
+          $ref: '#/components/schemas/ProtectionId'
+    CreateSubscriptionRequest:
+      type: object
+      properties: {}
+    CreateSubscriptionResponse:
+      type: object
+      properties: {}
+    DeleteProtectionRequest:
+      type: object
+      required:
+        - ProtectionId
+      properties:
+        ProtectionId:
+          $ref: '#/components/schemas/ProtectionId'
+    DeleteProtectionResponse:
+      type: object
+      properties: {}
+    DeleteSubscriptionRequest:
+      type: object
+      properties: {}
+    DeleteSubscriptionResponse:
+      type: object
+      properties: {}
+    DescribeAttackRequest:
+      type: object
+      required:
+        - AttackId
+      properties:
+        AttackId:
+          $ref: '#/components/schemas/AttackId'
+    DescribeAttackResponse:
+      type: object
+      properties:
+        Attack:
+          $ref: '#/components/schemas/AttackDetail'
+    DescribeProtectionRequest:
+      type: object
+      required:
+        - ProtectionId
+      properties:
+        ProtectionId:
+          $ref: '#/components/schemas/ProtectionId'
+    DescribeProtectionResponse:
+      type: object
+      properties:
+        Protection:
+          $ref: '#/components/schemas/Protection'
+    DescribeSubscriptionRequest:
+      type: object
+      properties: {}
+    DescribeSubscriptionResponse:
+      type: object
+      properties:
+        Subscription:
+          $ref: '#/components/schemas/Subscription'
+    Double:
+      type: number
+      format: double
+    DurationInSeconds:
+      type: integer
+      minimum: 0
+    Integer:
+      type: integer
+    InternalErrorException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: Exception that indicates that a problem occurred with the service infrastructure. You can retry the request.
+    InvalidOperationException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: Exception that indicates that the operation would not cause any change to occur.
+    InvalidParameterException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: 'Exception that indicates that the parameters passed to the API are invalid. '
+    InvalidResourceException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: 'Exception that indicates that the resource is invalid. You might not have access to the resource, or the resource might not exist.'
+    LimitNumber:
+      type: integer
+    LimitType:
+      type: string
+    LimitsExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+        Type:
+          $ref: '#/components/schemas/LimitType'
+        Limit:
+          $ref: '#/components/schemas/LimitNumber'
+      description: Exception that indicates that the operation would exceed a limit.
+    ListAttacksRequest:
+      type: object
+      properties:
+        ResourceArns:
+          $ref: '#/components/schemas/ResourceArnFilterList'
+        StartTime:
+          $ref: '#/components/schemas/TimeRange'
+        EndTime:
+          $ref: '#/components/schemas/TimeRange'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+    ListAttacksResponse:
+      type: object
+      properties:
+        AttackSummaries:
+          $ref: '#/components/schemas/AttackSummaries'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+    ListProtectionsRequest:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/Token'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+    ListProtectionsResponse:
+      type: object
+      properties:
+        Protections:
+          $ref: '#/components/schemas/Protections'
+        NextToken:
+          $ref: '#/components/schemas/Token'
+    LockedSubscriptionException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: Exception that indicates that the subscription has been modified by another client. You can retry the request.
+    MaxResults:
+      type: integer
+      minimum: 0
+      maximum: 100
+    Mitigation:
+      type: object
+      properties:
+        MitigationName:
+          $ref: '#/components/schemas/String'
+      description: The mitigation applied to a DDoS attack.
+    MitigationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Mitigation'
+    OptimisticLockException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: Exception that indicates that the protection state has been modified by another client. You can retry the request.
+    Protection:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/ProtectionId'
+        Name:
+          $ref: '#/components/schemas/ProtectionName'
+        ResourceArn:
+          $ref: '#/components/schemas/ResourceArn'
+      description: An object that represents a resource that is under DDoS protection.
+    ProtectionId:
+      type: string
+      pattern: '[a-zA-Z0-9\\-]*'
+      minLength: 1
+      maxLength: 36
+    ProtectionName:
+      type: string
+      pattern: '[ a-zA-Z0-9_\\.\\-]*'
+      minLength: 1
+      maxLength: 128
+    Protections:
+      type: array
+      items:
+        $ref: '#/components/schemas/Protection'
+    ResourceAlreadyExistsException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: Exception indicating the specified resource already exists.
+    ResourceArn:
+      type: string
+      minLength: 1
+    ResourceArnFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceArn'
+    ResourceNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/errorMessage'
+      description: Exception indicating the specified resource does not exist.
+    String:
+      type: string
+    SubResourceSummary:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/SubResourceType'
+        Id:
+          $ref: '#/components/schemas/String'
+        AttackVectors:
+          $ref: '#/components/schemas/SummarizedAttackVectorList'
+        Counters:
+          $ref: '#/components/schemas/SummarizedCounterList'
+      description: The attack information for the specified SubResource.
+    SubResourceSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubResourceSummary'
+    SubResourceType:
+      type: string
+      enum:
+        - IP
+        - URL
+    Subscription:
+      type: object
+      properties:
+        StartTime:
+          $ref: '#/components/schemas/Timestamp'
+        TimeCommitmentInSeconds:
+          $ref: '#/components/schemas/DurationInSeconds'
+      description: Information about the AWS Shield Advanced subscription for an account.
+    SummarizedAttackVector:
+      type: object
+      required:
+        - VectorType
+      properties:
+        VectorType:
+          $ref: '#/components/schemas/String'
+        VectorCounters:
+          $ref: '#/components/schemas/SummarizedCounterList'
+      description: A summary of information about the attack.
+    SummarizedAttackVectorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SummarizedAttackVector'
+    SummarizedCounter:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/String'
+        Max:
+          $ref: '#/components/schemas/Double'
+        Average:
+          $ref: '#/components/schemas/Double'
+        Sum:
+          $ref: '#/components/schemas/Double'
+        'N':
+          $ref: '#/components/schemas/Integer'
+        Unit:
+          $ref: '#/components/schemas/String'
+      description: The counter that describes a DDoS attack.
+    SummarizedCounterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SummarizedCounter'
+    TimeRange:
+      type: object
+      properties:
+        FromInclusive:
+          $ref: '#/components/schemas/AttackTimestamp'
+        ToExclusive:
+          $ref: '#/components/schemas/AttackTimestamp'
+      description: The time range.
+    Timestamp:
+      type: string
+      format: date-time
+    Token:
+      type: string
+      minLength: 1
+    errorMessage:
+      type: string
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

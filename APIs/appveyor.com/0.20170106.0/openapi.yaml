@@ -1,0 +1,4032 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://ci.appveyor.com/api'
+info:
+  contact:
+    email: team@appveyor.com
+    name: AppVeyor Team
+    url: 'https://www.appveyor.com/about/'
+  description: |
+    AppVeyor is a hosted continuous integration service which runs on Microsoft
+    Windows.  The AppVeyor REST API provides a RESTful way to interact with the
+    AppVeyor service.  This includes managing projects, builds, deployments,
+    and the teams that build them.
+
+    Additional help and discussion of the AppVeyor REST API is available at
+    http://help.appveyor.com/discussions
+
+    This Swagger definition is an **unofficial** description of the AppVeyor
+    REST API maintained at https://github.com/kevinoid/appveyor-swagger
+    Please report any issues or suggestions for this Swagger definition at
+    https://github.com/kevinoid/appveyor-swagger/issues/new
+
+    #### API Conventions
+
+    Fields which are missing from update operations (`PUT` requests) are
+    typically reset to their default values.  So although most fields are not
+    technically required, they should usually be specified in practice.
+  license:
+    name: AppVeyor End User License Agreement (EULA)
+    url: 'https://www.appveyor.com/eula/'
+  termsOfService: 'https://www.appveyor.com/terms-of-service/'
+  title: AppVeyor
+  version: 0.20170106.0
+  x-logo:
+    url: 'https://www.appveyor.com/assets/img/appveyor-logo-256.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/kevinoid/appveyor-swagger/master/swagger.yaml'
+      version: '2.0'
+  x-providerName: appveyor.com
+  x-unofficialSpec: true
+externalDocs:
+  description: AppVeyor REST API Documentation
+  url: 'https://www.appveyor.com/docs/api/'
+security:
+  - apiToken: []
+tags:
+  - externalDocs:
+      url: 'https://www.appveyor.com/docs/api/team/'
+    name: Collaborator
+  - externalDocs:
+      url: 'https://www.appveyor.com/docs/api/team/'
+    name: Role
+  - externalDocs:
+      url: 'https://www.appveyor.com/docs/api/team/'
+    name: User
+  - externalDocs:
+      url: 'https://www.appveyor.com/docs/api/projects-builds/'
+    name: Build
+  - externalDocs:
+      url: 'https://www.appveyor.com/docs/api/projects-builds/'
+    name: Project
+  - externalDocs:
+      url: 'https://www.appveyor.com/docs/api/environments-deployments/'
+    name: Deployment
+  - externalDocs:
+      url: 'https://www.appveyor.com/docs/api/environments-deployments/'
+    name: Environment
+paths:
+  /account/encrypt:
+    post:
+      operationId: encryptValue
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                response:
+                  value: wsnoY4v1v1Uofj0xf8E6FA==
+            application/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Encrypt a value for use in StoredValue.
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EncryptRequest'
+        required: true
+  '/buildjobs/{jobId}/log':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#download-build-log'
+      operationId: getBuildLog
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream: {}
+            application/json: {}
+            application/xml: {}
+        default:
+          $ref: '#/components/responses/Error'
+      security: []
+      summary: Download build log
+      tags:
+        - Build
+    parameters:
+      - $ref: '#/components/parameters/jobId'
+  /builds:
+    post:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#start-build-of-branch-most-recent-commit'
+      operationId: startBuild
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Build'
+              examples:
+                response:
+                  value:
+                    authorName: Feodor Fitsner
+                    authorUsername: FeodorFitsner
+                    branch: master
+                    buildId: 136709
+                    buildNumber: 7
+                    commitId: c2892a70d60c96c1b65a7c665ab806b7731fea8a
+                    committed: '2014-08-15T22:05:54+00:00'
+                    committerName: Feodor Fitsner
+                    committerUsername: FeodorFitsner
+                    created: '2014-08-16T00:40:38.1703914+00:00'
+                    jobs: []
+                    message: 'replaced with command [skip ci]'
+                    messages: []
+                    status: queued
+                    version: 1.0.7
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Build'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Start build of branch most recent commit
+      tags:
+        - Build
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildStartRequest'
+        required: true
+  '/builds/{accountName}/{projectSlug}/{buildVersion}':
+    delete:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#cancel-build'
+      operationId: cancelBuild
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Cancel build
+      tags:
+        - Build
+    parameters:
+      - $ref: '#/components/parameters/accountName'
+      - $ref: '#/components/parameters/projectSlug'
+      - $ref: '#/components/parameters/buildVersion'
+  /collaborators:
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#get-collaborators'
+      operationId: getCollaborators
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserAccount'
+                type: array
+              examples:
+                response:
+                  value:
+                    - accountId: 2
+                      accountName: FeodorFitsner
+                      created: '2014-02-03T20:29:26.6807307+00:00'
+                      email: john@smith.com
+                      failedBuildNotification: all
+                      fullName: John Smith
+                      isCollaborator: true
+                      isOwner: false
+                      notifyWhenBuildStatusChangedOnly: true
+                      roleId: 3040
+                      roleName: My Role
+                      successfulBuildNotification: all
+                      updated: '2014-03-07T04:26:09.1051534+00:00'
+                      userId: 2018
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserAccount'
+                type: array
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get collaborators
+      tags:
+        - Collaborator
+    post:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#add-collaborator'
+      operationId: addCollaborator
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Add collaborator
+      tags:
+        - Collaborator
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollaboratorAddition'
+        required: true
+    put:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#update-collaborator'
+      operationId: updateCollaborator
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Update collaborator
+      tags:
+        - Collaborator
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollaboratorUpdate'
+        required: true
+  '/collaborators/{userId}':
+    delete:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#delete-collaborator'
+      operationId: deleteCollaborator
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Delete collaborator
+      tags:
+        - Collaborator
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#get-collaborator'
+      operationId: getCollaborator
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAccountRolesResults'
+              examples:
+                response:
+                  value:
+                    roles:
+                      - created: '2013-09-26T19:23:39.3615105+00:00'
+                        isSystem: true
+                        name: Administrator
+                        roleId: 4
+                      - created: '2013-09-26T19:23:39.3645117+00:00'
+                        isSystem: true
+                        name: User
+                        roleId: 5
+                      - created: '2014-03-18T20:12:08.4749886+00:00'
+                        isSystem: false
+                        name: My Role
+                        roleId: 3040
+                        updated: '2014-03-18T20:16:06.8803375+00:00'
+                    user:
+                      accountId: 2
+                      accountName: FeodorFitsner
+                      created: '2014-02-03T20:29:26.6807307+00:00'
+                      email: john@smith.com
+                      failedBuildNotification: all
+                      fullName: John Smith
+                      isCollaborator: true
+                      isOwner: false
+                      notifyWhenBuildStatusChangedOnly: true
+                      roleId: 3040
+                      roleName: My Role
+                      successfulBuildNotification: all
+                      updated: '2014-03-07T04:26:09.1051534+00:00'
+                      userId: 2018
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UserAccountRolesResults'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get collaborator
+      tags:
+        - Collaborator
+    parameters:
+      - $ref: '#/components/parameters/userId'
+  /deployments:
+    post:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/environments-deployments/#start-deployment'
+      operationId: startDeployment
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deployment'
+              examples:
+                response:
+                  value:
+                    build:
+                      authorName: Feodor Fitsner
+                      authorUsername: FeodorFitsner
+                      branch: master
+                      buildId: 132746
+                      buildNumber: 38
+                      commitId: c397ba5d17dd17b994375405f560e4922207da1e
+                      committed: '2014-08-12T22:56:00+00:00'
+                      committerName: Feodor Fitsner
+                      committerUsername: FeodorFitsner
+                      created: '2014-08-12T22:56:09.9208493+00:00'
+                      finished: '2014-08-12T22:58:05.7595508+00:00'
+                      jobs: []
+                      message: Removed Start-Website
+                      messages: []
+                      started: '2014-08-12T22:56:25.8575967+00:00'
+                      status: success
+                      updated: '2014-08-12T22:58:05.7595508+00:00'
+                      version: 1.0.38
+                    created: '2014-08-12T23:06:07.9009315+00:00'
+                    deploymentId: 19475
+                    environment:
+                      created: '2014-04-01T17:56:41.30982+00:00'
+                      deploymentEnvironmentId: 27
+                      name: agent test
+                      provider: Agent
+                      updated: '2014-08-12T22:35:51.9723883+00:00'
+                    finished: '2014-08-12T23:06:25.0502019+00:00'
+                    jobs:
+                      - created: '2014-08-12T23:06:07.9009315+00:00'
+                        finished: '2014-08-12T23:06:24.3361102+00:00'
+                        jobId: jnpbcc77s4w278e4
+                        messagesCount: 0
+                        name: Deployment
+                        started: '2014-08-12T23:06:10.8776088+00:00'
+                        status: success
+                        updated: '2014-08-12T23:06:24.9390847+00:00'
+                    started: '2014-08-12T23:06:10.8776088+00:00'
+                    status: success
+                    updated: '2014-08-12T23:06:25.0502019+00:00'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Deployment'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Start deployment
+      tags:
+        - Deployment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeploymentStartRequest'
+        required: true
+  /deployments/stop:
+    delete:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/environments-deployments/#cancel-deployment'
+      operationId: cancelDeployment
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Cancel deployment
+      tags:
+        - Deployment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeploymentCancellation'
+        required: true
+  '/deployments/{deploymentId}':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/environments-deployments/#get-deployment'
+      operationId: getDeployment
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDeployment'
+              examples:
+                response:
+                  value:
+                    deployment:
+                      build:
+                        authorName: Feodor Fitsner
+                        authorUsername: FeodorFitsner
+                        branch: master
+                        buildId: 132746
+                        buildNumber: 38
+                        commitId: c397ba5d17dd17b994375405f560e4922207da1e
+                        committed: '2014-08-12T22:56:00+00:00'
+                        committerName: Feodor Fitsner
+                        committerUsername: FeodorFitsner
+                        created: '2014-08-12T22:56:09.9208493+00:00'
+                        finished: '2014-08-12T22:58:05.7595508+00:00'
+                        jobs: []
+                        message: Removed Start-Website
+                        messages: []
+                        started: '2014-08-12T22:56:25.8575967+00:00'
+                        status: success
+                        updated: '2014-08-12T22:58:05.7595508+00:00'
+                        version: 1.0.38
+                      created: '2014-08-12T23:06:07.9009315+00:00'
+                      deploymentId: 19475
+                      environment:
+                        created: '2014-04-01T17:56:41.30982+00:00'
+                        deploymentEnvironmentId: 27
+                        name: agent test
+                        provider: Agent
+                        updated: '2014-08-12T22:35:51.9723883+00:00'
+                      finished: '2014-08-12T23:06:25.0502019+00:00'
+                      jobs:
+                        - created: '2014-08-12T23:06:07.9009315+00:00'
+                          finished: '2014-08-12T23:06:24.3361102+00:00'
+                          jobId: jnpbcc77s4w278e4
+                          messagesCount: 0
+                          name: Deployment
+                          started: '2014-08-12T23:06:10.8776088+00:00'
+                          status: success
+                          updated: '2014-08-12T23:06:24.9390847+00:00'
+                      started: '2014-08-12T23:06:10.8776088+00:00'
+                      status: success
+                      updated: '2014-08-12T23:06:25.0502019+00:00'
+                    project:
+                      accountId: 2
+                      accountName: appvyr
+                      builds: []
+                      created: '2014-05-08T18:38:57.9163293+00:00'
+                      isPrivate: false
+                      name: simple-web
+                      projectId: 22321
+                      repositoryName: AppVeyor/simple-web
+                      repositoryScm: git
+                      repositoryType: gitHub
+                      securityDescriptor: {}
+                      skipBranchesWithoutAppveyorYml: false
+                      slug: simple-web
+                      updated: '2014-07-14T10:16:26.9351867+00:00'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProjectDeployment'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get deployment
+      tags:
+        - Deployment
+    parameters:
+      - $ref: '#/components/parameters/deploymentId'
+  /environments:
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/environments-deployments/#get-environments'
+      operationId: getEnvironments
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DeploymentEnvironmentLookupModel'
+                type: array
+              examples:
+                response:
+                  value:
+                    - deploymentEnvironmentId: 14
+                      name: azure-blob-1
+                      provider: AzureBlob
+                    - deploymentEnvironmentId: 12
+                      name: azure-deploy-test
+                      provider: AzureCS
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DeploymentEnvironmentLookupModel'
+                type: array
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get environments
+      tags:
+        - Environment
+    post:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/environments-deployments/#add-environment'
+      operationId: addEnvironment
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentEnvironmentWithSettings'
+              examples:
+                response:
+                  value:
+                    created: '2014-08-15T23:57:16.1585268+00:00'
+                    deploymentEnvironmentId: 3018
+                    environmentAccessKey: gi3ttevuk7a123
+                    name: production
+                    provider: FTP
+                    settings:
+                      environmentVariables:
+                        - name: my-var
+                          value:
+                            isEncrypted: false
+                            value: '123'
+                      providerSettings:
+                        - name: server
+                          value:
+                            isEncrypted: false
+                            value: ftp.myserver.com
+                        - name: username
+                          value:
+                            isEncrypted: false
+                            value: ftp-user
+                        - name: password
+                          value:
+                            isEncrypted: true
+                            value: password
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DeploymentEnvironmentWithSettings'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Add environment
+      tags:
+        - Environment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeploymentEnvironmentAddition'
+        required: true
+    put:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/environments-deployments/#update-environment'
+      operationId: updateEnvironment
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentEnvironmentWithSettings'
+              examples:
+                response:
+                  value:
+                    created: '2014-08-15T23:57:16.1585268+00:00'
+                    deploymentEnvironmentId: 3018
+                    environmentAccessKey: gi3ttevuk7123
+                    name: production
+                    provider: FTP
+                    settings:
+                      environmentVariables:
+                        - name: my-var
+                          value:
+                            isEncrypted: false
+                            value: '123'
+                      providerSettings:
+                        - name: server
+                          value:
+                            isEncrypted: false
+                            value: ftp.myserver.com
+                        - name: username
+                          value:
+                            isEncrypted: false
+                            value: ftp-user
+                        - name: password
+                          value:
+                            isEncrypted: true
+                            value: password
+                    updated: '2014-08-16T00:00:37.6079863+00:00'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DeploymentEnvironmentWithSettings'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Update environment
+      tags:
+        - Environment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeploymentEnvironmentWithSettings'
+        required: true
+  '/environments/{deploymentEnvironmentId}':
+    delete:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/environments-deployments/#delete-environment'
+      operationId: deleteEnvironment
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Delete environment
+      tags:
+        - Environment
+    parameters:
+      - $ref: '#/components/parameters/deploymentEnvironmentId'
+  '/environments/{deploymentEnvironmentId}/deployments':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/environments-deployments/#get-environment-deployments'
+      operationId: getEnvironmentDeployments
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentEnvironmentDeploymentsResults'
+              examples:
+                response:
+                  value:
+                    deployments:
+                      - deployment:
+                          build:
+                            authorName: Feodor Fitsner
+                            authorUsername: FeodorFitsner
+                            branch: master
+                            buildId: 18665
+                            buildNumber: 25
+                            commitId: ed40bd27f732d162b2185d75921b1cd57191f83b
+                            committed: '2014-05-08T19:11:38+00:00'
+                            committerName: Feodor Fitsner
+                            committerUsername: FeodorFitsner
+                            created: '2014-05-22T20:09:53.759355+00:00'
+                            finished: '2014-05-22T20:12:33.7806881+00:00'
+                            jobs: []
+                            message: 'Merge pull request #3 from FeodorFitsner/master'
+                            messageExtended: Changes to AccountController
+                            messages: []
+                            started: '2014-05-22T20:12:11.4475134+00:00'
+                            status: success
+                            updated: '2014-05-22T20:12:33.7806881+00:00'
+                            version: 1.0.25
+                          created: '2014-06-02T18:20:07.2833871+00:00'
+                          deploymentId: 4120
+                          environment:
+                            created: '2014-01-23T18:13:52.2268502+00:00'
+                            deploymentEnvironmentId: 14
+                            name: azure-blob-1
+                            provider: AzureBlob
+                            updated: '2014-06-02T18:13:32.5106126+00:00'
+                          finished: '2014-06-02T18:20:25.11916+00:00'
+                          jobs:
+                            - created: '2014-07-27T09:59:57.0171035+00:00'
+                              finished: '2014-07-27T10:00:11.5995296+00:00'
+                              jobId: 1696fh3a2w5ng99y
+                              messagesCount: 0
+                              name: Deployment
+                              started: '2014-07-27T09:59:58.3955159+00:00'
+                              status: success
+                              updated: '2014-07-27T10:00:16.163082+00:00'
+                          started: '2014-06-02T18:20:07.9871288+00:00'
+                          status: success
+                          updated: '2014-06-02T18:20:25.11916+00:00'
+                        project:
+                          accountId: 2
+                          accountName: FeodorFitsner
+                          builds: []
+                          created: '2014-05-06T16:38:14.7788393+00:00'
+                          isPrivate: false
+                          name: simple-web
+                          projectId: 15072
+                          repositoryName: AppVeyor/simple-web
+                          repositoryScm: git
+                          repositoryType: gitHub
+                          securityDescriptor: {}
+                          skipBranchesWithoutAppveyorYml: false
+                          slug: simple-web
+                          updated: '2014-06-02T21:37:30.9378043+00:00'
+                    environment:
+                      created: '2014-01-23T18:13:52.2268502+00:00'
+                      deploymentEnvironmentId: 14
+                      name: azure-blob-1
+                      provider: AzureBlob
+                      updated: '2014-06-02T18:13:32.5106126+00:00'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DeploymentEnvironmentDeploymentsResults'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get environment deployments
+      tags:
+        - Environment
+    parameters:
+      - $ref: '#/components/parameters/deploymentEnvironmentId'
+  '/environments/{deploymentEnvironmentId}/settings':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/environments-deployments/#get-environment-settings'
+      operationId: getEnvironmentSettings
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentEnvironmentSettingsResults'
+              examples:
+                response:
+                  value:
+                    environment:
+                      created: '2014-01-23T18:13:52.2268502+00:00'
+                      deploymentEnvironmentId: 14
+                      environmentAccessKey: aaabbb12345
+                      name: azure-blob-1
+                      provider: AzureBlob
+                      settings:
+                        environmentVariables: []
+                        providerSettings:
+                          - name: storage_account_name
+                            value:
+                              isEncrypted: false
+                              value: myaccount
+                          - name: storage_access_key
+                            value:
+                              isEncrypted: true
+                              value: 4sc1c7/Qp5buQcZ8N486Ks46mLFbXJVqcJjyv98w==
+                          - name: container
+                            value:
+                              isEncrypted: false
+                              value: test
+                          - name: folder
+                            value:
+                              isEncrypted: false
+                              value: $(appveyor_build_version)
+                          - name: artifact
+                            value:
+                              isEncrypted: false
+                      updated: '2014-06-02T18:13:32.5106126+00:00'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DeploymentEnvironmentSettingsResults'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get environment settings
+      tags:
+        - Environment
+    parameters:
+      - $ref: '#/components/parameters/deploymentEnvironmentId'
+  /projects:
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#get-projects'
+      operationId: getProjects
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: array
+              examples:
+                response:
+                  value:
+                    - accountId: 2
+                      accountName: FeodorFitsner
+                      builds:
+                        - authorName: Feodor Fitsner
+                          authorUsername: FeodorFitsner
+                          branch: master
+                          buildId: 23864
+                          buildNumber: 3
+                          commitId: c2892a70d60c96c1b65a7c665ab806b7731fea8a
+                          committed: '2014-08-15T22:05:54+00:00'
+                          committerName: Feodor Fitsner
+                          committerUsername: FeodorFitsner
+                          created: '2014-08-15T22:33:15.9833328+00:00'
+                          finished: '2014-08-15T22:37:00.6171479+00:00'
+                          jobs: []
+                          message: 'replaced with command [skip ci]'
+                          messages: []
+                          started: '2014-08-15T22:36:38.1757886+00:00'
+                          status: success
+                          updated: '2014-08-15T22:37:00.6171479+00:00'
+                          version: 1.0.3
+                      created: '2014-08-15T22:04:19.2868375+00:00'
+                      isPrivate: false
+                      name: appveyor-artifact-test
+                      nuGetFeed:
+                        created: '2014-08-15T22:04:21.3111546+00:00'
+                        id: appveyor-artifact-test-j8kk0o
+                        name: Project appveyor-artifact-test
+                        publishingEnabled: false
+                      projectId: 19096
+                      repositoryBranch: master
+                      repositoryName: FeodorFitsner/appveyor-artifact-test
+                      repositoryScm: git
+                      repositoryType: gitHub
+                      skipBranchesWithoutAppveyorYml: false
+                      slug: appveyor-artifact-test
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: array
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get projects
+      tags:
+        - Project
+    post:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#add-project'
+      operationId: addProject
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+              examples:
+                response:
+                  value:
+                    accountId: 2
+                    accountName: appvyr
+                    builds: []
+                    created: '2014-08-16T00:52:15.6604826+00:00'
+                    isPrivate: false
+                    name: demo-app
+                    projectId: 43682
+                    repositoryName: FeodorFitsner/demo-app
+                    repositoryScm: git
+                    repositoryType: gitHub
+                    skipBranchesWithoutAppveyorYml: false
+                    slug: demo-app-335
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Project'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Add project
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectAddition'
+        required: true
+    put:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#update-project'
+      operationId: updateProject
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Update project
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectWithConfiguration'
+        required: true
+  '/projects/status/{badgeRepoProvider}/{repoAccountName}/{repoSlug}':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/status-badges/'
+      operationId: getPublicProjectStatusBadge
+      parameters:
+        - $ref: '#/components/parameters/branch'
+        - $ref: '#/components/parameters/svg'
+        - $ref: '#/components/parameters/retina'
+        - $ref: '#/components/parameters/passingText'
+        - $ref: '#/components/parameters/failingText'
+        - $ref: '#/components/parameters/pendingText'
+      responses:
+        '200':
+          description: Success
+          content:
+            image/svg+xml: {}
+            image/png: {}
+            application/json: {}
+            application/xml: {}
+        default:
+          $ref: '#/components/responses/Error'
+      security: []
+      summary: Get status badge image for a project with a public repository
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/components/parameters/badgeRepoProvider'
+      - $ref: '#/components/parameters/repoAccountName'
+      - $ref: '#/components/parameters/repoSlug'
+  '/projects/status/{statusBadgeId}':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/status-badges/'
+      operationId: getProjectStatusBadge
+      parameters:
+        - $ref: '#/components/parameters/svg'
+        - $ref: '#/components/parameters/retina'
+        - $ref: '#/components/parameters/passingText'
+        - $ref: '#/components/parameters/failingText'
+        - $ref: '#/components/parameters/pendingText'
+      responses:
+        '200':
+          description: Success
+          content:
+            image/svg+xml: {}
+            image/png: {}
+            application/json: {}
+            application/xml: {}
+        default:
+          $ref: '#/components/responses/Error'
+      security: []
+      summary: Get project status badge image
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/components/parameters/statusBadgeId'
+  '/projects/status/{statusBadgeId}/branch/{buildBranch}':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/status-badges/'
+      operationId: getProjectBranchStatusBadge
+      parameters:
+        - $ref: '#/components/parameters/svg'
+        - $ref: '#/components/parameters/retina'
+        - $ref: '#/components/parameters/passingText'
+        - $ref: '#/components/parameters/failingText'
+        - $ref: '#/components/parameters/pendingText'
+      responses:
+        '200':
+          description: Success
+          content:
+            image/svg+xml: {}
+            image/png: {}
+            application/json: {}
+            application/xml: {}
+        default:
+          $ref: '#/components/responses/Error'
+      security: []
+      summary: Get project branch status badge image
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/components/parameters/statusBadgeId'
+      - $ref: '#/components/parameters/buildBranch'
+  '/projects/{accountName}/{projectSlug}':
+    delete:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#delete-project'
+      operationId: deleteProject
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Delete project
+      tags:
+        - Project
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#get-project-last-build'
+      operationId: getProjectLastBuild
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectBuildResults'
+              examples:
+                response:
+                  value:
+                    build:
+                      authorName: Feodor Fitsner
+                      authorUsername: FeodorFitsner
+                      branch: master
+                      buildId: 134173
+                      buildNumber: 45
+                      commitId: 85da1fb810ae89744abad83e75c13483dd740258
+                      committed: '2014-07-03T07:56:15+00:00'
+                      committerName: Feodor Fitsner
+                      committerUsername: FeodorFitsner
+                      created: '2014-08-14T05:39:26.2946368+00:00'
+                      finished: '2014-08-14T05:42:45.5709599+00:00'
+                      jobs:
+                        - allowFailure: false
+                          artifactsCount: 0
+                          compilationErrorsCount: 0
+                          compilationMessagesCount: 0
+                          compilationWarningsCount: 0
+                          created: '2014-08-14T05:39:27.3902557+00:00'
+                          failedTestsCount: 0
+                          finished: '2014-08-14T05:42:45.1102797+00:00'
+                          jobId: 9r2qufuu8
+                          messagesCount: 0
+                          name: ''
+                          passedTestsCount: 0
+                          started: '2014-08-14T05:41:49.1061831+00:00'
+                          status: success
+                          testsCount: 0
+                          updated: '2014-08-14T05:42:45.477213+00:00'
+                      message: AssemblyInfo patching
+                      messages: []
+                      started: '2014-08-14T05:41:49.1686804+00:00'
+                      status: success
+                      updated: '2014-08-14T05:42:45.5709599+00:00'
+                      version: 1.0.45
+                    project:
+                      accountId: 2
+                      accountName: appvyr
+                      builds: []
+                      created: '2014-07-19T10:23:03.8005134+00:00'
+                      isPrivate: false
+                      name: nuget-test
+                      nuGetFeed:
+                        created: '2014-07-19T10:23:05.5160273+00:00'
+                        id: nuget-test-23spw2w
+                        name: Project nuget-test
+                        publishingEnabled: false
+                      projectId: 38907
+                      repositoryBranch: master
+                      repositoryName: FeodorFitsner/nuget-test
+                      repositoryScm: git
+                      repositoryType: gitHub
+                      securityDescriptor: {}
+                      skipBranchesWithoutAppveyorYml: false
+                      slug: nuget-test
+                      updated: '2014-08-01T05:25:15.4119745+00:00'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProjectBuildResults'
+        default:
+          $ref: '#/components/responses/Error'
+      security: []
+      summary: Get project last build
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/components/parameters/accountName'
+      - $ref: '#/components/parameters/projectSlug'
+  '/projects/{accountName}/{projectSlug}/branch/{buildBranch}':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#get-project-last-branch-build'
+      operationId: getProjectLastBuildBranch
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectBuildResults'
+              examples:
+                response:
+                  value:
+                    build:
+                      authorName: Feodor Fitsner
+                      authorUsername: FeodorFitsner
+                      branch: master
+                      buildId: 134173
+                      buildNumber: 45
+                      commitId: 85da1fb810ae89744abad83e75c13483dd740258
+                      committed: '2014-07-03T07:56:15+00:00'
+                      committerName: Feodor Fitsner
+                      committerUsername: FeodorFitsner
+                      created: '2014-08-14T05:39:26.2946368+00:00'
+                      finished: '2014-08-14T05:42:45.5709599+00:00'
+                      jobs:
+                        - allowFailure: false
+                          artifactsCount: 0
+                          compilationErrorsCount: 0
+                          compilationMessagesCount: 0
+                          compilationWarningsCount: 0
+                          created: '2014-08-14T05:39:27.3902557+00:00'
+                          failedTestsCount: 0
+                          finished: '2014-08-14T05:42:45.1102797+00:00'
+                          jobId: 9r2qufuu8
+                          messagesCount: 0
+                          name: ''
+                          passedTestsCount: 0
+                          started: '2014-08-14T05:41:49.1061831+00:00'
+                          status: success
+                          testsCount: 0
+                          updated: '2014-08-14T05:42:45.477213+00:00'
+                      message: AssemblyInfo patching
+                      messages: []
+                      started: '2014-08-14T05:41:49.1686804+00:00'
+                      status: success
+                      updated: '2014-08-14T05:42:45.5709599+00:00'
+                      version: 1.0.45
+                    project:
+                      accountId: 2
+                      accountName: appvyr
+                      builds: []
+                      created: '2014-07-19T10:23:03.8005134+00:00'
+                      isPrivate: false
+                      name: nuget-test
+                      nuGetFeed:
+                        created: '2014-07-19T10:23:05.5160273+00:00'
+                        id: nuget-test-23spw2w
+                        name: Project nuget-test
+                        publishingEnabled: false
+                      projectId: 38907
+                      repositoryBranch: master
+                      repositoryName: FeodorFitsner/nuget-test
+                      repositoryScm: git
+                      repositoryType: gitHub
+                      securityDescriptor: {}
+                      skipBranchesWithoutAppveyorYml: false
+                      slug: nuget-test
+                      updated: '2014-08-01T05:25:15.4119745+00:00'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProjectBuildResults'
+        default:
+          $ref: '#/components/responses/Error'
+      security: []
+      summary: Get project last branch build
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/components/parameters/accountName'
+      - $ref: '#/components/parameters/projectSlug'
+      - $ref: '#/components/parameters/buildBranch'
+  '/projects/{accountName}/{projectSlug}/build/{buildVersion}':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#get-project-build-by-version'
+      operationId: getProjectBuildByVersion
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectBuildResults'
+              examples:
+                response:
+                  value:
+                    build:
+                      authorName: Feodor Fitsner
+                      authorUsername: FeodorFitsner
+                      branch: master
+                      buildId: 134173
+                      buildNumber: 45
+                      commitId: 85da1fb810ae89744abad83e75c13483dd740258
+                      committed: '2014-07-03T07:56:15+00:00'
+                      committerName: Feodor Fitsner
+                      committerUsername: FeodorFitsner
+                      created: '2014-08-14T05:39:26.2946368+00:00'
+                      finished: '2014-08-14T05:42:45.5709599+00:00'
+                      jobs:
+                        - allowFailure: false
+                          artifactsCount: 0
+                          compilationErrorsCount: 0
+                          compilationMessagesCount: 0
+                          compilationWarningsCount: 0
+                          created: '2014-08-14T05:39:27.3902557+00:00'
+                          failedTestsCount: 0
+                          finished: '2014-08-14T05:42:45.1102797+00:00'
+                          jobId: 9r2qufuu8
+                          messagesCount: 0
+                          name: ''
+                          passedTestsCount: 0
+                          started: '2014-08-14T05:41:49.1061831+00:00'
+                          status: success
+                          testsCount: 0
+                          updated: '2014-08-14T05:42:45.477213+00:00'
+                      message: AssemblyInfo patching
+                      messages: []
+                      started: '2014-08-14T05:41:49.1686804+00:00'
+                      status: success
+                      updated: '2014-08-14T05:42:45.5709599+00:00'
+                      version: 1.0.45
+                    project:
+                      accountId: 2
+                      accountName: appvyr
+                      builds: []
+                      created: '2014-07-19T10:23:03.8005134+00:00'
+                      isPrivate: false
+                      name: nuget-test
+                      nuGetFeed:
+                        created: '2014-07-19T10:23:05.5160273+00:00'
+                        id: nuget-test-23spw2w
+                        name: Project nuget-test
+                        publishingEnabled: false
+                      projectId: 38907
+                      repositoryBranch: master
+                      repositoryName: FeodorFitsner/nuget-test
+                      repositoryScm: git
+                      repositoryType: gitHub
+                      securityDescriptor: {}
+                      skipBranchesWithoutAppveyorYml: false
+                      slug: nuget-test
+                      updated: '2014-08-01T05:25:15.4119745+00:00'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProjectBuildResults'
+        default:
+          $ref: '#/components/responses/Error'
+      security: []
+      summary: Get project build by version
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/components/parameters/accountName'
+      - $ref: '#/components/parameters/projectSlug'
+      - $ref: '#/components/parameters/buildVersion'
+  '/projects/{accountName}/{projectSlug}/buildcache':
+    delete:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#delete-project-build-cache'
+      operationId: deleteProjectBuildCache
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Delete project build cache
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/components/parameters/accountName'
+      - $ref: '#/components/parameters/projectSlug'
+  '/projects/{accountName}/{projectSlug}/deployments':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#get-project-deployments'
+      operationId: getProjectDeployments
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDeploymentsResults'
+              examples:
+                response:
+                  value:
+                    deployments:
+                      - deployment:
+                          build:
+                            authorName: Feodor Fitsner
+                            authorUsername: FeodorFitsner
+                            branch: master
+                            buildId: 132746
+                            buildNumber: 38
+                            commitId: c397ba5d17dd17b994375405f560e4922207da1e
+                            committed: '2014-08-12T22:56:00+00:00'
+                            committerName: Feodor Fitsner
+                            committerUsername: FeodorFitsner
+                            created: '2014-08-12T22:56:09.9208493+00:00'
+                            finished: '2014-08-12T22:58:05.7595508+00:00'
+                            jobs: []
+                            message: Removed Start-Website
+                            messages: []
+                            started: '2014-08-12T22:56:25.8575967+00:00'
+                            status: success
+                            updated: '2014-08-12T22:58:05.7595508+00:00'
+                            version: 1.0.38
+                          created: '2014-08-12T23:06:07.9009315+00:00'
+                          deploymentId: 19475
+                          environment:
+                            created: '2014-04-01T17:56:41.30982+00:00'
+                            deploymentEnvironmentId: 27
+                            name: agent test
+                            provider: Agent
+                            updated: '2014-08-12T22:35:51.9723883+00:00'
+                          finished: '2014-08-12T23:06:25.0502019+00:00'
+                          jobs:
+                            - created: '2014-08-12T23:06:07.9009315+00:00'
+                              finished: '2014-08-12T23:06:24.3361102+00:00'
+                              jobId: jnpbcc77s4w278e4
+                              messagesCount: 0
+                              name: Deployment
+                              started: '2014-08-12T23:06:10.8776088+00:00'
+                              status: success
+                              updated: '2014-08-12T23:06:24.9390847+00:00'
+                            - created: '2014-08-12T23:06:14.8148958+00:00'
+                              finished: '2014-08-12T23:06:21.9647266+00:00'
+                              jobId: nbgyf7pn65d4agyr
+                              messagesCount: 0
+                              name: TEST-AGENT-DEPL
+                              started: '2014-08-12T23:06:14.8148958+00:00'
+                              status: success
+                              updated: '2014-08-12T23:06:22.3768791+00:00'
+                          started: '2014-08-12T23:06:10.8776088+00:00'
+                          status: success
+                          updated: '2014-08-12T23:06:25.0502019+00:00'
+                        environment:
+                          created: '2014-04-01T17:56:41.30982+00:00'
+                          deploymentEnvironmentId: 27
+                          name: agent test
+                          provider: Agent
+                          updated: '2014-08-12T22:35:51.9723883+00:00'
+                    project:
+                      accountId: 2
+                      accountName: appvyr
+                      builds: []
+                      created: '2014-05-08T18:38:57.9163293+00:00'
+                      isPrivate: false
+                      name: simple-web
+                      projectId: 22321
+                      repositoryName: AppVeyor/simple-web
+                      repositoryScm: git
+                      repositoryType: gitHub
+                      securityDescriptor: {}
+                      skipBranchesWithoutAppveyorYml: false
+                      slug: simple-web
+                      updated: '2014-07-14T10:16:26.9351867+00:00'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProjectDeploymentsResults'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get project deployments
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/components/parameters/accountName'
+      - $ref: '#/components/parameters/projectSlug'
+  '/projects/{accountName}/{projectSlug}/history':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#get-project-history'
+      operationId: getProjectHistory
+      parameters:
+        - $ref: '#/components/parameters/recordsNumber'
+        - $ref: '#/components/parameters/startBuildId'
+        - $ref: '#/components/parameters/branch'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectHistory'
+              examples:
+                response:
+                  value:
+                    builds:
+                      - authorName: Feodor Fitsner
+                        authorUsername: FeodorFitsner
+                        branch: master
+                        buildId: 134174
+                        buildNumber: 5
+                        commitId: d19740243e3ec5497345de0f7d828e66a7cd1a6b
+                        committed: '2014-08-10T14:08:16+00:00'
+                        committerName: Feodor Fitsner
+                        committerUsername: FeodorFitsner
+                        created: '2014-08-14T05:39:30.8845902+00:00'
+                        finished: '2014-08-14T05:43:47.4732355+00:00'
+                        jobs: []
+                        message: Enabled diag mode
+                        messages: []
+                        started: '2014-08-14T05:42:17.2696755+00:00'
+                        status: success
+                        updated: '2014-08-14T05:43:47.4732355+00:00'
+                        version: 1.0.5
+                      - authorName: Feodor Fitsner
+                        authorUsername: FeodorFitsner
+                        branch: master
+                        buildId: 129289
+                        buildNumber: 3
+                        commitId: 28c6eec932c0e21eca5bb5571a722f850aa8bf6f
+                        committed: '2014-08-09T00:33:34+00:00'
+                        committerName: Feodor Fitsner
+                        committerUsername: FeodorFitsner
+                        created: '2014-08-09T15:42:38.8315273+00:00'
+                        finished: '2014-08-09T15:44:15.5828009+00:00'
+                        jobs: []
+                        message: Added appveyor.yml
+                        messages: []
+                        started: '2014-08-09T15:42:45.7878479+00:00'
+                        status: success
+                        updated: '2014-08-09T15:44:15.5828009+00:00'
+                        version: 1.0.3
+                    project:
+                      accountId: 2
+                      accountName: appvyr
+                      builds: []
+                      created: '2014-08-09T00:30:43.3327131+00:00'
+                      isPrivate: false
+                      name: wix-test
+                      projectId: 42438
+                      repositoryName: FeodorFitsner/wix-test
+                      repositoryScm: git
+                      repositoryType: gitHub
+                      skipBranchesWithoutAppveyorYml: false
+                      slug: wix-test
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProjectHistory'
+        default:
+          $ref: '#/components/responses/Error'
+      security: []
+      summary: Get project history
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/components/parameters/accountName'
+      - $ref: '#/components/parameters/projectSlug'
+  '/projects/{accountName}/{projectSlug}/settings':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#get-project-settings'
+      operationId: getProjectSettings
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSettingsResults'
+              examples:
+                response:
+                  value:
+                    images:
+                      - name: test-win2012-r2
+                      - name: Windows Server 2012
+                      - name: Windows Server 2012 R2
+                    project:
+                      accountId: 2
+                      accountName: appvyr
+                      builds: []
+                      created: '2014-05-08T18:38:57.9163293+00:00'
+                      isPrivate: false
+                      name: simple-web
+                      projectId: 22321
+                      repositoryName: AppVeyor/simple-web
+                      repositoryScm: git
+                      repositoryType: gitHub
+                      securityDescriptor:
+                        accessRightDefinitions:
+                          - description: View
+                            name: View
+                          - description: Run build
+                            name: RunBuild
+                          - description: Update settings
+                            name: Update
+                          - description: Delete project
+                            name: Delete
+                        roleAces:
+                          - accessRights:
+                              - allowed: true
+                                name: View
+                              - allowed: true
+                                name: RunBuild
+                              - allowed: true
+                                name: Update
+                              - allowed: true
+                                name: Delete
+                            isAdmin: true
+                            name: Administrator
+                            roleId: 4
+                          - accessRights:
+                              - name: View
+                              - name: RunBuild
+                              - name: Update
+                              - name: Delete
+                            isAdmin: false
+                            name: User
+                            roleId: 5
+                      skipBranchesWithoutAppveyorYml: false
+                      slug: simple-web
+                      updated: '2014-07-14T10:16:26.9351867+00:00'
+                    settings:
+                      accountId: 2
+                      accountName: appvyr
+                      builds: []
+                      configuration:
+                        afterBuildScripts: []
+                        afterDeployScripts: []
+                        afterTestScripts: []
+                        artifacts: []
+                        assemblyFileVersionFormat: '{version}'
+                        assemblyInfoFile: '**\AssemblyInfo.*'
+                        assemblyInformationalVersionFormat: '{version}'
+                        assemblyVersionFormat: '{version}'
+                        beforeBuildScripts: []
+                        beforeDeployScripts: []
+                        beforeTestScripts: []
+                        buildMode: msbuild
+                        buildScripts: []
+                        configuration: []
+                        deployMode: providers
+                        deployScripts: []
+                        deployments: []
+                        environmentVariables: []
+                        environmentVariablesMatrix: []
+                        excludeBranches: []
+                        hostsEntries: []
+                        includeBranches: []
+                        initScripts: []
+                        installScripts: []
+                        matrixAllowFailures: []
+                        matrixFastFinish: false
+                        msBuildVerbosity: minimal
+                        notifications: []
+                        onBuildErrorScripts: []
+                        onBuildSuccessScripts: []
+                        operatingSystem: []
+                        packageAzureCloudServiceProjects: false
+                        packageNuGetProjects: false
+                        packageWebApplicationProjects: false
+                        packageWebApplicationProjectsXCopy: false
+                        patchAssemblyInfo: false
+                        platform: []
+                        services: []
+                        shallowClone: false
+                        testAssemblies: []
+                        testCategories: []
+                        testCategoriesMatrix: []
+                        testMode: auto
+                        testScripts: []
+                      created: '2014-05-08T18:38:57.9163293+00:00'
+                      ignoreAppveyorYml: false
+                      isPrivate: false
+                      name: simple-web
+                      nextBuildNumber: 41
+                      nuGetFeed:
+                        created: '2014-05-08T18:38:59.2455842+00:00'
+                        id: simple-web-0r50wgb1st6q
+                        name: Project simple-web
+                        publishingEnabled: false
+                      projectId: 22321
+                      repositoryBranch: master
+                      repositoryName: AppVeyor/simple-web
+                      repositoryScm: git
+                      repositoryType: gitHub
+                      securityDescriptor:
+                        accessRightDefinitions:
+                          - description: View
+                            name: View
+                          - description: Run build
+                            name: RunBuild
+                          - description: Update settings
+                            name: Update
+                          - description: Delete project
+                            name: Delete
+                        roleAces:
+                          - accessRights:
+                              - allowed: true
+                                name: View
+                              - allowed: true
+                                name: RunBuild
+                              - allowed: true
+                                name: Update
+                              - allowed: true
+                                name: Delete
+                            isAdmin: true
+                            name: Administrator
+                            roleId: 4
+                          - accessRights:
+                              - name: View
+                              - name: RunBuild
+                              - name: Update
+                              - name: Delete
+                            isAdmin: false
+                            name: User
+                            roleId: 5
+                      skipBranchesWithoutAppveyorYml: false
+                      slug: simple-web
+                      updated: '2014-07-14T10:16:26.9351867+00:00'
+                      versionFormat: '1.0.{build}'
+                      webhookId: k783di7br
+                      webhookUrl: 'https://ci.appveyor.com/api/github/webhook?id=k783di7br'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProjectSettingsResults'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get project settings
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/components/parameters/accountName'
+      - $ref: '#/components/parameters/projectSlug'
+  '/projects/{accountName}/{projectSlug}/settings/build-number':
+    parameters:
+      - $ref: '#/components/parameters/accountName'
+      - $ref: '#/components/parameters/projectSlug'
+    put:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#update-project-build-number'
+      operationId: updateProjectBuildNumber
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Update project build number
+      tags:
+        - Project
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectBuildNumberUpdate'
+        required: true
+  '/projects/{accountName}/{projectSlug}/settings/yaml':
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#get-project-settings-in-yaml'
+      operationId: getProjectSettingsYaml
+      responses:
+        '200':
+          description: |
+            Success
+
+            The schema type of this response could be specified as `file` to
+            denote opaque binary data.  The generated Java code for `file`
+            saves the response as a temporary file, making it a little more
+            difficult to use and less efficient for common cases.  If `string`
+            causes problems for other generators, can switch to `file` type.
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                response:
+                  value: |
+                    version: 1.0.{build}
+                    build:
+                      project: MySolution.sln
+                      verbosity: minimal
+                      publish_wap: true
+                      ...
+            application/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get project settings in YAML
+      tags:
+        - Project
+    parameters:
+      - $ref: '#/components/parameters/accountName'
+      - $ref: '#/components/parameters/projectSlug'
+    put:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/projects-builds/#update-project-settings-in-yaml'
+      operationId: updateProjectSettingsYaml
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Update project settings in YAML
+      tags:
+        - Project
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              format: binary
+              type: string
+          application/json:
+            schema:
+              format: binary
+              type: string
+        description: |
+          The body of requests should contain YAML data.  It is unclear how
+          to specify this since the OpenAPI spec requires `schema` without
+          `type` for `in: body` parameters and does not allow `type: file` in
+          `schema`.  See https://github.com/OAI/OpenAPI-Specification/issues/326
+          swagger-codegen (for Java, probably others) allows a binary
+          string body parameter with non-application/json `consumes` to be
+          passed through in the request body without conversion to JSON.
+        required: true
+  /roles:
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#get-roles'
+      operationId: getRoles
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Role'
+                type: array
+              examples:
+                response:
+                  value:
+                    - created: '2013-09-26T19:23:39.3615105+00:00'
+                      isSystem: true
+                      name: Administrator
+                      roleId: 4
+                    - created: '2013-09-26T19:23:39.3645117+00:00'
+                      isSystem: true
+                      name: User
+                      roleId: 5
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Role'
+                type: array
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get roles
+      tags:
+        - Role
+    post:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#add-role'
+      operationId: addRole
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleWithGroups'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RoleWithGroups'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Add role
+      tags:
+        - Role
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleAddition'
+        required: true
+    put:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#update-role'
+      operationId: updateRole
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleWithGroups'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RoleWithGroups'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Update role
+      tags:
+        - Role
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleWithGroups'
+        required: true
+  '/roles/{roleId}':
+    delete:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#delete-role'
+      operationId: deleteRole
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Delete role
+      tags:
+        - Role
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#get-role'
+      operationId: getRole
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleWithGroups'
+              examples:
+                response:
+                  value:
+                    created: '2014-03-18T20:12:08.4749886+00:00'
+                    groups:
+                      - name: Projects
+                        permissions:
+                          - allowed: false
+                            description: 'Create, delete projects, update project settings'
+                            name: ManageProjects
+                          - allowed: false
+                            description: Update project settings
+                            name: UpdateProjectSettings
+                          - allowed: false
+                            description: Run project builds
+                            name: RunProjectBuild
+                          - allowed: false
+                            description: Delete project builds
+                            name: DeleteProjectBuilds
+                      - name: Environments
+                        permissions:
+                          - allowed: false
+                            description: 'Create, delete projects, update environment settings'
+                            name: ManageEnvironments
+                          - allowed: false
+                            description: Update environment settings
+                            name: UpdateEnvironmentSettings
+                          - allowed: false
+                            description: Deploy to environment
+                            name: DeployToEnvironment
+                      - name: Account
+                        permissions:
+                          - allowed: false
+                            description: Update account details
+                            name: UpdateAccountDetails
+                      - name: Users
+                        permissions:
+                          - allowed: false
+                            description: Add new user
+                            name: AddUser
+                          - allowed: false
+                            description: Update user details
+                            name: UpdateUserDetails
+                          - allowed: false
+                            description: Delete user
+                            name: DeleteUser
+                      - name: Roles
+                        permissions:
+                          - allowed: false
+                            description: Add new role
+                            name: AddRole
+                          - allowed: false
+                            description: Update role details
+                            name: UpdateRoleDetails
+                          - allowed: false
+                            description: Delete role
+                            name: DeleteRole
+                      - name: User
+                        permissions:
+                          - allowed: false
+                            description: Generate API keys
+                            name: ConfigureApiKeys
+                    isSystem: false
+                    name: My Role
+                    roleId: 3040
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RoleWithGroups'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get role
+      tags:
+        - Role
+    parameters:
+      - $ref: '#/components/parameters/roleId'
+  /users:
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#get-users'
+      operationId: getUsers
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserAccount'
+                type: array
+              examples:
+                response:
+                  value:
+                    - accountId: 2
+                      accountName: FeodorFitsner
+                      created: '2014-02-12T19:21:15.0618564+00:00'
+                      email: nuget@appveyor.com
+                      failedBuildNotification: all
+                      fullName: NuGet
+                      isCollaborator: false
+                      isOwner: false
+                      notifyWhenBuildStatusChangedOnly: true
+                      roleId: 5
+                      roleName: User
+                      successfulBuildNotification: all
+                      updated: '2014-03-06T22:47:44.9706252+00:00'
+                      userId: 2019
+            application/xml:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserAccount'
+                type: array
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get users
+      tags:
+        - User
+    post:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#add-user'
+      operationId: addUser
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Add user
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAddition'
+        required: true
+    put:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#update-user'
+      operationId: updateUser
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Update user
+      tags:
+        - User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAccount'
+        required: true
+  '/users/{userId}':
+    delete:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#delete-user'
+      operationId: deleteUser
+      responses:
+        '204':
+          description: Success
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Delete user
+      tags:
+        - User
+    get:
+      externalDocs:
+        url: 'https://www.appveyor.com/docs/api/team/#get-user'
+      operationId: getUser
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAccountRolesResults'
+              examples:
+                response:
+                  value:
+                    roles:
+                      - created: '2013-09-26T19:23:39.3615105+00:00'
+                        isSystem: true
+                        name: Administrator
+                        roleId: 4
+                      - created: '2013-09-26T19:23:39.3645117+00:00'
+                        isSystem: true
+                        name: User
+                        roleId: 5
+                    user:
+                      accountId: 2
+                      accountName: FeodorFitsner
+                      created: '2014-02-12T19:21:15.0618564+00:00'
+                      email: nuget@appveyor.com
+                      failedBuildNotification: all
+                      fullName: NuGet
+                      isCollaborator: false
+                      isOwner: false
+                      notifyWhenBuildStatusChangedOnly: true
+                      roleId: 5
+                      roleName: User
+                      successfulBuildNotification: all
+                      updated: '2014-03-06T22:47:44.9706252+00:00'
+                      userId: 2019
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/UserAccountRolesResults'
+        default:
+          $ref: '#/components/responses/Error'
+      summary: Get user
+      tags:
+        - User
+    parameters:
+      - $ref: '#/components/parameters/userId'
+components:
+  schemas:
+    AccessRightName:
+      enum:
+        - Delete
+        - Deploy
+        - RunBuild
+        - Update
+        - View
+      type: string
+    AceAccessRight:
+      properties:
+        allowed:
+          type: boolean
+        name:
+          $ref: '#/components/schemas/AccessRightName'
+      required:
+        - name
+      type: object
+    AceAccessRightDefinition:
+      properties:
+        description:
+          type: string
+        name:
+          $ref: '#/components/schemas/AccessRightName'
+      required:
+        - name
+      type: object
+    Artifact:
+      properties:
+        name:
+          minLength: 0
+          title: Deployment name
+          type: string
+        path:
+          type: string
+        type:
+          $ref: '#/components/schemas/ArtifactType'
+      required:
+        - path
+        - name
+      type: object
+    ArtifactType:
+      enum:
+        - WebDeployPackage
+      type: string
+    Build:
+      allOf:
+        - $ref: '#/components/schemas/BuildLookupModel'
+        - $ref: '#/components/schemas/Timestamped'
+        - properties:
+            authorName:
+              type: string
+            authorUsername:
+              type: string
+            buildNumber:
+              minimum: 0
+              type: integer
+            commitId:
+              type: string
+            committed:
+              format: date-time
+              type: string
+            committerName:
+              type: string
+            committerUsername:
+              type: string
+            finished:
+              format: date-time
+              type: string
+            isTag:
+              type: boolean
+            jobs:
+              description: Always empty in getProjectHistory and startDeployment responses.
+              items:
+                $ref: '#/components/schemas/BuildJob'
+              type: array
+            messageExtended:
+              type: string
+            messages:
+              items:
+                $ref: '#/components/schemas/BuildMessage'
+              type: array
+            pullRequestId:
+              minimum: 1
+              type: integer
+            pullRequestName:
+              type: string
+            started:
+              format: date-time
+              type: string
+            status:
+              $ref: '#/components/schemas/Status'
+          type: object
+    BuildCloudName:
+      enum:
+        - gce
+        - pro-win2016
+        - ubuntu
+      type: string
+    BuildJob:
+      allOf:
+        - $ref: '#/components/schemas/Job'
+        - properties:
+            allowFailure:
+              type: boolean
+            artifactsCount:
+              minimum: 0
+              type: integer
+            compilationErrorsCount:
+              minimum: 0
+              type: integer
+            compilationMessagesCount:
+              minimum: 0
+              type: integer
+            compilationWarningsCount:
+              minimum: 0
+              type: integer
+            failedTestsCount:
+              minimum: 0
+              type: integer
+            messagesCount:
+              minimum: 0
+              type: integer
+            osType:
+              $ref: '#/components/schemas/OSType'
+            passedTestsCount:
+              minimum: 0
+              type: integer
+            testsCount:
+              minimum: 0
+              type: integer
+          type: object
+    BuildLookupModel:
+      properties:
+        branch:
+          type: string
+        buildId:
+          minimum: 0
+          type: integer
+        message:
+          type: string
+        version:
+          type: string
+      type: object
+    BuildMessage:
+      properties:
+        category:
+          $ref: '#/components/schemas/BuildMessageCategory'
+        created:
+          format: date-time
+          type: string
+        message:
+          type: string
+      type: object
+    BuildMessageCategory:
+      enum:
+        - information
+        - warning
+      type: string
+    BuildMode:
+      enum:
+        - msbuild
+        - none
+        - script
+      type: string
+    BuildNotificationFrequency:
+      enum:
+        - all
+        - myCommits
+        - none
+      type: string
+    BuildStartRequest:
+      example:
+        accountName: your-account-name
+        branch: master
+        environmentVariables:
+          another_var: another value
+          my_var: value
+        projectSlug: project-slug-from-url
+      properties:
+        accountName:
+          minLength: 1
+          type: string
+        branch:
+          type: string
+        commitId:
+          type: string
+        environmentVariables:
+          additionalProperties:
+            type: string
+          type: object
+        projectSlug:
+          minLength: 1
+          type: string
+        pullRequestId:
+          description: Can not be used with `branch` or `commitId`
+          minimum: 1
+          type: integer
+      required:
+        - accountName
+        - projectSlug
+      type: object
+    BuildWorkerImage:
+      properties:
+        buildCloudName:
+          $ref: '#/components/schemas/BuildCloudName'
+        buildWorkerImageId:
+          minimum: 0
+          type: integer
+        name:
+          $ref: '#/components/schemas/BuildWorkerImageName'
+        osType:
+          $ref: '#/components/schemas/OSType'
+      required:
+        - buildWorkerImageId
+        - name
+      type: object
+    BuildWorkerImageName:
+      enum:
+        - Previous Visual Studio 2013
+        - Previous Visual Studio 2015
+        - Previous Visual Studio 2017
+        - Ubuntu
+        - Visual Studio 2013
+        - Visual Studio 2015
+        - Visual Studio 2017
+        - Visual Studio 2017 Preview
+        - WMF 5
+      type: string
+    CollaboratorAddition:
+      description: |
+        Technically `roleId` has default value 0 and is not required, but
+        since role 0 never exists it would always cause a 404 response.
+      example:
+        email: john@smith.com
+        roleId: 3040
+      properties:
+        email:
+          format: email
+          type: string
+        roleId:
+          minimum: 0
+          type: integer
+      required:
+        - email
+        - roleId
+      type: object
+    CollaboratorUpdate:
+      description: |
+        Technically `userId` and `roleId` have default value 0 and are not
+        required, but since user 0 and role 0 never exist it would always cause
+        a 404 response.
+      example:
+        roleId: 3040
+        userId: 2018
+      properties:
+        roleId:
+          minimum: 0
+          type: integer
+        userId:
+          minimum: 0
+          type: integer
+      required:
+        - userId
+        - roleId
+      type: object
+    DeployMode:
+      enum:
+        - providers
+        - none
+        - script
+      type: string
+    Deployment:
+      allOf:
+        - $ref: '#/components/schemas/DeploymentLookupModel'
+        - $ref: '#/components/schemas/Timestamped'
+        - properties:
+            build:
+              $ref: '#/components/schemas/Build'
+            environment:
+              $ref: '#/components/schemas/DeploymentEnvironment'
+            jobs:
+              items:
+                $ref: '#/components/schemas/DeploymentJob'
+              type: array
+          type: object
+    DeploymentCancellation:
+      example:
+        deploymentId: 123
+      properties:
+        deploymentId:
+          minimum: 0
+          type: integer
+      required:
+        - deploymentId
+      type: object
+    DeploymentEnvironment:
+      allOf:
+        - $ref: '#/components/schemas/DeploymentEnvironmentLookupModel'
+        - $ref: '#/components/schemas/Timestamped'
+        - properties:
+            accountId:
+              type: integer
+            projectsMode:
+              description: |-
+                0 is "Any project can be deployed to the environment"
+                1 is "Only selected projects can be deployed to the environment"
+                2 is "All except selected projects can be deployed to the environment"
+              enum:
+                - 0
+                - 1
+                - 2
+              type: integer
+            securityDescriptor:
+              $ref: '#/components/schemas/SecurityDescriptor'
+          type: object
+    DeploymentEnvironmentAddition:
+      example:
+        name: production
+        provider: FTP
+        settings:
+          environmentVariables:
+            - name: my-var
+              value:
+                isEncrypted: false
+                value: '123'
+          providerSettings:
+            - name: server
+              value:
+                isEncrypted: false
+                value: ftp.myserver.com
+            - name: username
+              value:
+                isEncrypted: false
+                value: ftp-user
+            - name: password
+              value:
+                isEncrypted: true
+                value: password
+      properties:
+        name:
+          type: string
+        provider:
+          $ref: '#/components/schemas/DeploymentProviderType'
+        settings:
+          $ref: '#/components/schemas/DeploymentEnvironmentSettings'
+      required:
+        - name
+        - provider
+        - settings
+      type: object
+    DeploymentEnvironmentDeploymentsResults:
+      properties:
+        deployments:
+          items:
+            $ref: '#/components/schemas/EnvironmentDeploymentModel'
+          type: array
+        environment:
+          $ref: '#/components/schemas/DeploymentEnvironment'
+      required:
+        - environment
+        - deployments
+      type: object
+    DeploymentEnvironmentLookupModel:
+      properties:
+        deploymentEnvironmentId:
+          minimum: 0
+          type: integer
+        name:
+          type: string
+        provider:
+          $ref: '#/components/schemas/DeploymentProviderType'
+      type: object
+    DeploymentEnvironmentProject:
+      properties:
+        isSelected:
+          type: boolean
+        name:
+          type: string
+        projectId:
+          minimum: 0
+          type: integer
+      required:
+        - projectId
+        - name
+        - isSelected
+      type: object
+    DeploymentEnvironmentSettings:
+      properties:
+        environmentVariables:
+          items:
+            $ref: '#/components/schemas/StoredNameValue'
+          type: array
+        notifications:
+          items:
+            $ref: '#/components/schemas/NotificationProviderSettings'
+          type: array
+        providerSettings:
+          items:
+            $ref: '#/components/schemas/StoredNameValue'
+          type: array
+      type: object
+    DeploymentEnvironmentSettingsResults:
+      properties:
+        environment:
+          $ref: '#/components/schemas/DeploymentEnvironmentWithSettings'
+      type: object
+    DeploymentEnvironmentWithSettings:
+      allOf:
+        - $ref: '#/components/schemas/DeploymentEnvironment'
+        - properties:
+            environmentAccessKey:
+              type: string
+            projects:
+              description: |
+                Projects available for selection in UI.
+                Only present in response from getEnvironmentSettings.
+              items:
+                $ref: '#/components/schemas/DeploymentEnvironmentProject'
+              type: array
+            selectedProjects:
+              description: Project IDs of selected projects
+              items:
+                minimum: 1
+                type: integer
+              type: array
+            settings:
+              $ref: '#/components/schemas/DeploymentEnvironmentSettings'
+          type: object
+      example:
+        deploymentEnvironmentId: 3018
+        environmentAccessKey: gi3ttevuk7123
+        name: production
+        settings:
+          environmentVariables:
+            - name: my-var
+              value:
+                isEncrypted: false
+                value: '123'
+          provider: FTP
+          providerSettings:
+            - name: server
+              value:
+                isEncrypted: false
+                value: ftp.myserver.com
+            - name: username
+              value:
+                isEncrypted: false
+                value: ftp-user
+            - name: password
+              value:
+                isEncrypted: true
+                value: password
+    DeploymentJob:
+      allOf:
+        - $ref: '#/components/schemas/Job'
+        - properties:
+            messagesCount:
+              minimum: 0
+              type: integer
+          type: object
+    DeploymentLookupModel:
+      properties:
+        build:
+          $ref: '#/components/schemas/BuildLookupModel'
+        deploymentId:
+          minimum: 0
+          type: integer
+        finished:
+          format: date-time
+          type: string
+        started:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+      type: object
+    DeploymentNotificationFrequency:
+      enum:
+        - all
+        - none
+      type: string
+    DeploymentProvider:
+      properties:
+        onBranch:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        onEnvironmentVariables:
+          items:
+            $ref: '#/components/schemas/StoredNameValue'
+          type: array
+        provider:
+          $ref: '#/components/schemas/DeploymentProviderType'
+        providerSettings:
+          items:
+            $ref: '#/components/schemas/StoredNameValue'
+          type: array
+      required:
+        - provider
+      type: object
+    DeploymentProviderType:
+      enum:
+        - Agent
+        - AzureBlob
+        - AzureCS
+        - AzureWebJob
+        - BinTray
+        - FTP
+        - GitHub
+        - NuGet
+        - S3
+        - SqlDatabase
+        - WebDeploy
+        - Webhook
+      type: string
+    DeploymentStartRequest:
+      example:
+        accountName: your-account-name
+        buildJobId: sfke9239ydzf
+        buildVersion: 1.2.0
+        environmentName: environment-to-deploy
+        environmentVariables:
+          another_var: another value
+          server: myserver.com
+        projectSlug: project-slug-from-url
+      properties:
+        accountName:
+          minLength: 1
+          type: string
+        buildJobId:
+          description: Optional job id with artifacts if build contains multiple jobs.
+          type: string
+        buildVersion:
+          description: Build to deploy
+          minLength: 1
+          type: string
+        environmentName:
+          minLength: 1
+          type: string
+        environmentVariables:
+          additionalProperties:
+            type: string
+          type: object
+        projectSlug:
+          minLength: 1
+          type: string
+      required:
+        - environmentName
+        - accountName
+        - projectSlug
+        - buildVersion
+      type: object
+    EncryptRequest:
+      example:
+        plainValue: encryptme
+      properties:
+        plainValue:
+          default: ''
+          type: string
+      type: object
+    EnvironmentDeploymentModel:
+      allOf:
+        - $ref: '#/components/schemas/DeploymentLookupModel'
+        - properties:
+            project:
+              $ref: '#/components/schemas/ProjectLookupModel'
+          type: object
+    Error:
+      properties:
+        message:
+          type: string
+        modelState:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: |
+            When present, this property is a map of property names in the format
+            `request.<capitalized name>` to an `Array` of validation error
+            message strings for the property.
+          type: object
+      required:
+        - message
+      type: object
+    GroupName:
+      enum:
+        - Account
+        - BuildEnvironment
+        - Environments
+        - Projects
+        - Roles
+        - User
+        - Users
+      type: string
+    GroupPermissions:
+      properties:
+        name:
+          $ref: '#/components/schemas/GroupName'
+        permissions:
+          items:
+            $ref: '#/components/schemas/PermissionState'
+          type: array
+      required:
+        - name
+        - permissions
+      type: object
+    HostEntry:
+      properties:
+        host:
+          minLength: 1
+          type: string
+        ip:
+          minLength: 1
+          type: string
+      required:
+        - host
+        - ip
+      type: object
+    HttpMethodRestricted:
+      enum:
+        - GET
+        - POST
+      type: string
+    Job:
+      allOf:
+        - $ref: '#/components/schemas/Timestamped'
+        - properties:
+            finished:
+              format: date-time
+              type: string
+            jobId:
+              type: string
+            name:
+              type: string
+            started:
+              format: date-time
+              type: string
+            status:
+              $ref: '#/components/schemas/Status'
+          type: object
+    MSBuildVerbosity:
+      enum:
+        - quiet
+        - minimal
+        - normal
+        - detailed
+      type: string
+    NotificationProviderSettings:
+      properties:
+        provider:
+          $ref: '#/components/schemas/NotificationProviderType'
+        settings:
+          $ref: '#/components/schemas/NotificationSettings'
+      required:
+        - provider
+        - settings
+      type: object
+    NotificationProviderType:
+      enum:
+        - Campfire
+        - Email
+        - GitHubPullRequest
+        - HipChat
+        - Slack
+        - Webhook
+        - VSOTeamRoom
+      type: string
+    NotificationSettings:
+      description: |
+        This type is the union of the settings types for each of the various
+        notification types supported by the API.  The properties correspond to
+        the following notification types:
+
+        #### All Types
+        - onBuildSuccess
+        - onBuildFailure
+        - onBuildStatusChanged
+
+        #### Campfire
+        - account
+        - authToken
+        - room
+        - template
+
+        #### Email
+        - subjectTemplate
+        - bodyTemplate
+        - recipients
+        - recipientsValue
+
+        #### GitHubPullRequest
+        - authToken
+        - template
+
+        #### HipChat
+        - authToken
+        - from
+        - room
+        - template
+        - serverUrl
+
+        #### Slack
+        - incomingWebhookUrl
+        - authToken
+        - channel
+        - template
+
+        #### Webhook
+        - method
+        - url
+        - headers
+        - headersValue
+        - addCustomRequestBody
+        - customRequestBodyContentType
+        - customRequestBody
+
+        #### VSOTeamRoom
+        - vsoAccount
+        - username
+        - password
+        - room
+        - template
+      properties:
+        $type:
+          $ref: '#/components/schemas/NotificationSettingsType'
+        account:
+          type: string
+        addCustomRequestBody:
+          type: boolean
+        authToken:
+          $ref: '#/components/schemas/StoredValue'
+        bodyTemplate:
+          type: string
+        channel:
+          type: string
+        customRequestBody:
+          type: string
+        customRequestBodyContentType:
+          type: string
+        from:
+          type: string
+        headers:
+          items:
+            $ref: '#/components/schemas/StoredNameValue'
+          type: array
+        headersValue:
+          type: string
+        incomingWebhookUrl:
+          format: uri
+          type: string
+        method:
+          $ref: '#/components/schemas/HttpMethodRestricted'
+        onBuildFailure:
+          type: boolean
+        onBuildStatusChanged:
+          type: boolean
+        onBuildSuccess:
+          type: boolean
+        password:
+          $ref: '#/components/schemas/StoredValue'
+        recipients:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        recipientsValue:
+          type: string
+        room:
+          type: string
+        serverUrl:
+          format: uri
+          type: string
+        subjectTemplate:
+          type: string
+        template:
+          type: string
+        url:
+          format: uri
+          type: string
+        username:
+          type: string
+        vsoAccount:
+          type: string
+      type: object
+    NotificationSettingsType:
+      enum:
+        - 'Appveyor.Models.CampfireNotificationSettings, Appveyor.Models'
+        - 'Appveyor.Models.EmailNotificationSettings, Appveyor.Models'
+        - 'Appveyor.Models.GitHubPullRequestNotificationSettings, Appveyor.Models'
+        - 'Appveyor.Models.HipChatNotificationSettings, Appveyor.Models'
+        - 'Appveyor.Models.SlackNotificationSettings, Appveyor.Models'
+        - 'Appveyor.Models.WebhookNotificationSettings, Appveyor.Models'
+        - 'Appveyor.Models.VSOTeamRoomNotificationSettings, Appveyor.Models'
+      type: string
+    NuGetFeed:
+      allOf:
+        - $ref: '#/components/schemas/Timestamped'
+        - properties:
+            accountId:
+              minimum: 0
+              type: integer
+            id:
+              type: string
+            name:
+              type: string
+            projectId:
+              minimum: 0
+              type: integer
+            publishingEnabled:
+              type: boolean
+          type: object
+    OSServiceName:
+      enum:
+        - iis
+        - mongodb
+        - msmq
+        - mssql2008r2sp2
+        - mssql2008r2sp2rs
+        - mssql2012sp1
+        - mssql2012sp1rs
+        - mssql2014
+        - mssql2014rs
+        - mssql2016
+        - mysql
+        - postgresql
+      type: string
+    OSType:
+      enum:
+        - Ubuntu
+        - Windows
+      type: string
+    PermissionName:
+      description: |
+        Available permission names.  The names correspond to the following groups:
+        #### AccountPermission
+        - ManageApplicationAuthorizations
+        - UpdateAccountDetails
+        - UpdateBillingDetails
+        #### BuildEnvironmentPermission
+        - ConfigureBuildEnvironment
+        #### EnvironmentsPermission
+        - DeployToEnvironment
+        - ManageEnvironments
+        - UpdateEnvironmentSettings
+        #### ProjectsPermission
+        - ManageProjects
+        - RunProjectBuild
+        - UpdateProjectSettings
+        #### RolesPermission
+        - AddRole
+        - DeleteRole
+        - UpdateRoleDetails
+        #### UserPermission
+        - ConfigureApiKeys
+        #### UsersPermission
+        - AddUser
+        - DeleteUser
+        - UpdateUserDetails
+      enum:
+        - ManageApplicationAuthorizations
+        - UpdateAccountDetails
+        - UpdateBillingDetails
+        - ConfigureBuildEnvironment
+        - DeployToEnvironment
+        - ManageEnvironments
+        - UpdateEnvironmentSettings
+        - ManageProjects
+        - RunProjectBuild
+        - UpdateProjectSettings
+        - AddRole
+        - DeleteRole
+        - UpdateRoleDetails
+        - ConfigureApiKeys
+        - AddUser
+        - DeleteUser
+        - UpdateUserDetails
+      type: string
+    PermissionState:
+      properties:
+        allowed:
+          description: |
+            State of the named permission.  `true` to allow, `false` to deny,
+            missing to inherit.
+          type: boolean
+        description:
+          type: string
+        name:
+          $ref: '#/components/schemas/PermissionName'
+      required:
+        - name
+      type: object
+    PlatformName:
+      enum:
+        - ARM
+        - Any CPU
+        - x64
+        - x86
+      type: string
+    Project:
+      allOf:
+        - $ref: '#/components/schemas/ProjectLookupModel'
+        - $ref: '#/components/schemas/Timestamped'
+        - properties:
+            accountId:
+              minimum: 0
+              readOnly: true
+              type: integer
+            alwaysBuildClosedPullRequests:
+              type: boolean
+            builds:
+              description: Only non-empty for response from getProjects.
+              items:
+                $ref: '#/components/schemas/Build'
+              readOnly: true
+              type: array
+            enableDeploymentInPullRequests:
+              type: boolean
+            enableSecureVariablesInPullRequests:
+              type: boolean
+            enableSecureVariablesInPullRequestsFromSameRepo:
+              type: boolean
+            isPrivate:
+              type: boolean
+            nuGetFeed:
+              $ref: '#/components/schemas/NuGetFeed'
+            repositoryBranch:
+              description: Not present in response from addProject.
+              type: string
+            repositoryName:
+              type: string
+            repositoryScm:
+              $ref: '#/components/schemas/RepositoryScm'
+            repositoryType:
+              $ref: '#/components/schemas/RepositoryProvider'
+            rollingBuilds:
+              type: boolean
+            rollingBuildsDoNotCancelRunningBuilds:
+              type: boolean
+            securityDescriptor:
+              $ref: '#/components/schemas/SecurityDescriptor'
+            skipBranchesWithoutAppveyorYml:
+              type: boolean
+            tags:
+              type: string
+          required:
+            - repositoryName
+          type: object
+    ProjectAddition:
+      description: '`repositoryAuthentication` is only used for git, mercurial, subversion `repositoryProvider`.'
+      example:
+        repositoryName: FeodorFitsner/demo-app
+        repositoryProvider: gitHub
+      properties:
+        repositoryAuthentication:
+          $ref: '#/components/schemas/RepositoryAuthenticationType'
+        repositoryName:
+          description: 'URL when repositoryProvider is git, mercurial, subversion username/project when repositoryProvider is gitHub'
+          minLength: 1
+          type: string
+        repositoryPassword:
+          description: Required if repositoryAuthentication is credentials
+          format: password
+          type: string
+        repositoryProvider:
+          $ref: '#/components/schemas/RepositoryProvider'
+        repositoryUsername:
+          description: Required if repositoryAuthentication is credentials
+          type: string
+      required:
+        - repositoryProvider
+        - repositoryName
+      type: object
+    ProjectBranchesMode:
+      enum:
+        - exclude
+        - include
+      type: string
+    ProjectBuildNumberUpdate:
+      example:
+        nextBuildNumber: 35
+      properties:
+        nextBuildNumber:
+          minimum: 0
+          type: integer
+      required:
+        - nextBuildNumber
+      type: object
+    ProjectBuildResults:
+      properties:
+        build:
+          $ref: '#/components/schemas/Build'
+        project:
+          $ref: '#/components/schemas/Project'
+      type: object
+    ProjectConfiguration:
+      properties:
+        afterBuildScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        afterDeployScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        afterTestScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        artifacts:
+          items:
+            $ref: '#/components/schemas/Artifact'
+          type: array
+        assemblyFileVersionFormat:
+          type: string
+        assemblyInfoFile:
+          type: string
+        assemblyInformationalVersionFormat:
+          type: string
+        assemblyVersionFormat:
+          type: string
+        beforeBuildScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        beforeDeployScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        beforePackageScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        beforeTestScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        branchesMode:
+          $ref: '#/components/schemas/ProjectBranchesMode'
+        buildCloud:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        buildMode:
+          $ref: '#/components/schemas/BuildMode'
+        buildScripts:
+          description: Only set/used when `buildMode` is `script`.
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        cacheEntries:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        cloneDepth:
+          minimum: 1
+          type: integer
+        cloneFolder:
+          type: string
+        cloneScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        configuration:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        configureNuGetAccountSource:
+          type: boolean
+        configureNuGetProjectSource:
+          type: boolean
+        deployMode:
+          $ref: '#/components/schemas/DeployMode'
+        deployScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        deployments:
+          items:
+            $ref: '#/components/schemas/DeploymentProvider'
+          type: array
+        disableNuGetPublishOnPullRequests:
+          type: boolean
+        doNotIncrementBuildNumberOnPullRequests:
+          type: boolean
+        environmentVariables:
+          items:
+            $ref: '#/components/schemas/StoredNameValue'
+          type: array
+        environmentVariablesMatrix:
+          items:
+            $ref: '#/components/schemas/StoredNameValueMatrix'
+          type: array
+        excludeBranches:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        forceHttpsClone:
+          type: boolean
+        hostsEntries:
+          items:
+            $ref: '#/components/schemas/HostEntry'
+          type: array
+        includeBranches:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        includeNuGetReferences:
+          type: boolean
+        initScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        installScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        matrixAllowFailures:
+          description: 'Although the names and values are not enforced, the combinations which are meaningful are documented at https://www.appveyor.com/docs/build-configuration/#allow-failing-jobs'
+          items:
+            $ref: '#/components/schemas/StoredNameValueMatrix'
+          type: array
+        matrixExclude:
+          items:
+            $ref: '#/components/schemas/StoredNameValueMatrix'
+          type: array
+        matrixFastFinish:
+          type: boolean
+        maxJobs:
+          minimum: 1
+          type: integer
+        msBuildInParallel:
+          type: boolean
+        msBuildProjectFileName:
+          type: string
+        msBuildVerbosity:
+          $ref: '#/components/schemas/MSBuildVerbosity'
+        notifications:
+          items:
+            $ref: '#/components/schemas/NotificationProviderSettings'
+          type: array
+        onBuildErrorScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        onBuildFinishScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        onBuildSuccessScripts:
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        onlyCommitsFiles:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        operatingSystem:
+          items:
+            properties:
+              value:
+                $ref: '#/components/schemas/BuildWorkerImageName'
+            required:
+              - value
+            type: object
+          title: Build worker image
+          type: array
+        packageAzureCloudServiceProjects:
+          type: boolean
+        packageNuGetProjects:
+          type: boolean
+        packageNuGetSymbols:
+          type: boolean
+        packageWebApplicationProjects:
+          type: boolean
+        packageWebApplicationProjectsXCopy:
+          type: boolean
+        patchAssemblyInfo:
+          type: boolean
+        platform:
+          items:
+            properties:
+              value:
+                $ref: '#/components/schemas/PlatformName'
+            required:
+              - value
+            type: object
+          type: array
+        services:
+          items:
+            properties:
+              value:
+                $ref: '#/components/schemas/OSServiceName'
+            required:
+              - value
+            type: object
+          title: OS services to start during the build process
+          type: array
+        shallowClone:
+          type: boolean
+        skipBranchWithPullRequests:
+          type: boolean
+        skipCommitsFiles:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        skipNonTags:
+          type: boolean
+        skipTags:
+          type: boolean
+        testAssemblies:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        testCategories:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        testCategoriesMatrix:
+          items:
+            properties:
+              categories:
+                items:
+                  $ref: '#/components/schemas/StringValueObject'
+                type: array
+            type: object
+          type: array
+        testCategoriesMode:
+          enum:
+            - exclude
+            - include
+          type: string
+        testMode:
+          $ref: '#/components/schemas/TestMode'
+        testScripts:
+          description: Only set/used when `testMode` is `script`.
+          items:
+            $ref: '#/components/schemas/Script'
+          type: array
+        xamarinRegisterAndroidProduct:
+          type: boolean
+        xamarinRegisterIosProduct:
+          type: boolean
+      type: object
+    ProjectDeployment:
+      properties:
+        deployment:
+          $ref: '#/components/schemas/Deployment'
+        project:
+          $ref: '#/components/schemas/Project'
+      required:
+        - project
+        - deployment
+      type: object
+    ProjectDeploymentModel:
+      allOf:
+        - $ref: '#/components/schemas/DeploymentLookupModel'
+        - properties:
+            environment:
+              $ref: '#/components/schemas/DeploymentEnvironmentLookupModel'
+          type: object
+    ProjectDeploymentsResults:
+      properties:
+        deployments:
+          items:
+            $ref: '#/components/schemas/ProjectDeploymentModel'
+          type: array
+        project:
+          $ref: '#/components/schemas/Project'
+      type: object
+    ProjectHistory:
+      properties:
+        builds:
+          items:
+            $ref: '#/components/schemas/Build'
+          type: array
+        project:
+          $ref: '#/components/schemas/Project'
+      type: object
+    ProjectLookupModel:
+      properties:
+        accountName:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        projectId:
+          minimum: 0
+          type: integer
+        slug:
+          readOnly: true
+          type: string
+      required:
+        - projectId
+      type: object
+    ProjectSettingsResults:
+      example:
+        build:
+          project: MySolution.sln
+          publish_wap: true
+          verbosity: minimal
+        version: '1.0.{build}'
+      properties:
+        buildClouds:
+          items:
+            $ref: '#/components/schemas/StringValueObject'
+          type: array
+        defaultImageName:
+          type: string
+        images:
+          items:
+            $ref: '#/components/schemas/BuildWorkerImage'
+          type: array
+        project:
+          $ref: '#/components/schemas/Project'
+        settings:
+          $ref: '#/components/schemas/ProjectWithConfiguration'
+      type: object
+    ProjectWithConfiguration:
+      allOf:
+        - $ref: '#/components/schemas/Project'
+        - example:
+            accountId: 2
+            accountName: appvyr
+            builds: []
+            configuration:
+              afterBuildScripts: []
+              afterDeployScripts: []
+              afterTestScripts: []
+              artifacts: []
+              assemblyFileVersionFormat: '{version}'
+              assemblyInfoFile: '**\AssemblyInfo.*'
+              assemblyInformationalVersionFormat: '{version}'
+              assemblyVersionFormat: '{version}'
+              beforeBuildScripts: []
+              beforeDeployScripts: []
+              beforeTestScripts: []
+              buildMode: msbuild
+              buildScripts: []
+              configuration: []
+              deployMode: providers
+              deployScripts: []
+              deployments: []
+              environmentVariables: []
+              environmentVariablesMatrix: []
+              excludeBranches: []
+              hostsEntries: []
+              includeBranches: []
+              initScripts: []
+              installScripts: []
+              matrixAllowFailures: []
+              matrixFastFinish: false
+              msBuildVerbosity: minimal
+              notifications: []
+              onBuildErrorScripts: []
+              onBuildSuccessScripts: []
+              operatingSystem: []
+              packageAzureCloudServiceProjects: false
+              packageNuGetProjects: false
+              packageWebApplicationProjects: false
+              packageWebApplicationProjectsXCopy: false
+              patchAssemblyInfo: false
+              platform: []
+              services: []
+              shallowClone: false
+              testAssemblies: []
+              testCategories: []
+              testCategoriesMatrix: []
+              testMode: auto
+              testScripts: []
+            created: '2014-08-16T00:52:15.6604826+00:00'
+            ignoreAppveyorYml: false
+            isPrivate: false
+            name: demo-app
+            nextBuildNumber: 1
+            nuGetFeed:
+              created: '2014-08-16T00:52:16.9886427+00:00'
+              id: demo-app-tw5iw2wk3bl1
+              name: Project demo-app
+              publishingEnabled: false
+            projectId: 43682
+            repositoryBranch: master
+            repositoryName: FeodorFitsner/demo-app
+            repositoryScm: git
+            repositoryType: gitHub
+            securityDescriptor:
+              accessRightDefinitions:
+                - description: View
+                  name: View
+                - description: Run build
+                  name: RunBuild
+                - description: Update settings
+                  name: Update
+                - description: Delete project
+                  name: Delete
+              roleAces:
+                - accessRights:
+                    - allowed: true
+                      name: View
+                    - allowed: true
+                      name: RunBuild
+                    - allowed: true
+                      name: Update
+                    - allowed: true
+                      name: Delete
+                  isAdmin: true
+                  name: Administrator
+                  roleId: 4
+                - accessRights:
+                    - name: View
+                    - name: RunBuild
+                    - name: Update
+                    - name: Delete
+                  isAdmin: false
+                  name: User
+                  roleId: 5
+            skipBranchesWithoutAppveyorYml: false
+            slug: demo-app-335
+            versionFormat: '1.0.{build}'
+            webhookId: rca5vb5qqu
+            webhookUrl: 'https://ci.appveyor.com/api/github/webhook?id=rca5vb5qqu'
+          properties:
+            buildPriority:
+              minimum: 1
+              type: integer
+            configuration:
+              $ref: '#/components/schemas/ProjectConfiguration'
+            customYmlName:
+              type: string
+            ignoreAppveyorYml:
+              type: boolean
+            nextBuildNumber:
+              type: integer
+            repositoryAuthentication:
+              $ref: '#/components/schemas/RepositoryAuthenticationType'
+            repositoryUsername:
+              type: string
+            scheduleCrontabExpression:
+              description: 'Build schedule as an NCrontab Expression.  See https://github.com/atifaziz/NCrontab/wiki/Crontab-Expression'
+              externalDocs:
+                url: 'https://appveyor-staging.azurewebsites.net/docs/build-configuration/#scheduled-builds'
+              type: string
+            sshPublicKey:
+              type: string
+            statusBadgeId:
+              type: string
+            versionFormat:
+              minLength: 7
+              pattern: '[{]build[}]'
+              type: string
+            webhookId:
+              type: string
+            webhookUrl:
+              format: uri
+              type: string
+          required:
+            - versionFormat
+            - configuration
+          type: object
+      type: object
+    RepositoryAuthenticationType:
+      enum:
+        - credentials
+        - ssh
+      type: string
+    RepositoryProvider:
+      enum:
+        - bitBucket
+        - git
+        - gitHub
+        - gitLab
+        - kiln
+        - mercurial
+        - stash
+        - subversion
+        - vso
+      type: string
+    RepositoryScm:
+      enum:
+        - git
+        - mercurial
+        - subversion
+      type: string
+    Role:
+      allOf:
+        - $ref: '#/components/schemas/Timestamped'
+        - properties:
+            isSystem:
+              readOnly: true
+              type: boolean
+            name:
+              minLength: 1
+              type: string
+            roleId:
+              minimum: 0
+              type: integer
+          required:
+            - roleId
+            - name
+          type: object
+      description: |
+        Technically `roleId` has default value 0 and is not required, but
+        since role 0 never exists it would always cause a 404 response.
+    RoleAce:
+      properties:
+        accessRights:
+          items:
+            $ref: '#/components/schemas/AceAccessRight'
+          type: array
+        isAdmin:
+          type: boolean
+        name:
+          type: string
+        roleId:
+          minimum: 0
+          type: integer
+      type: object
+    RoleAddition:
+      example:
+        name: My Role
+      properties:
+        name:
+          minLength: 1
+          type: string
+      required:
+        - name
+      type: object
+    RoleWithGroups:
+      allOf:
+        - $ref: '#/components/schemas/Role'
+        - properties:
+            groups:
+              items:
+                $ref: '#/components/schemas/GroupPermissions'
+              type: array
+          type: object
+      example:
+        created: '2014-03-18T20:12:08.4749886+00:00'
+        groups:
+          - name: Projects
+            permissions:
+              - allowed: true
+                description: 'Create, delete projects, update project settings'
+                name: ManageProjects
+              - allowed: true
+                description: Update project settings
+                name: UpdateProjectSettings
+              - allowed: false
+                description: Run project builds
+                name: RunProjectBuild
+              - allowed: false
+                description: Delete project builds
+                name: DeleteProjectBuilds
+          - name: Environments
+            permissions:
+              - allowed: false
+                description: 'Create, delete projects, update environment settings'
+                name: ManageEnvironments
+              - allowed: false
+                description: Update environment settings
+                name: UpdateEnvironmentSettings
+              - allowed: false
+                description: Deploy to environment
+                name: DeployToEnvironment
+          - name: Account
+            permissions:
+              - allowed: false
+                description: Update account details
+                name: UpdateAccountDetails
+          - name: Users
+            permissions:
+              - allowed: false
+                description: Add new user
+                name: AddUser
+              - allowed: false
+                description: Update user details
+                name: UpdateUserDetails
+              - allowed: false
+                description: Delete user
+                name: DeleteUser
+          - name: Roles
+            permissions:
+              - allowed: false
+                description: Add new role
+                name: AddRole
+              - allowed: false
+                description: Update role details
+                name: UpdateRoleDetails
+              - allowed: false
+                description: Delete role
+                name: DeleteRole
+          - name: User
+            permissions:
+              - allowed: false
+                description: Generate API keys
+                name: ConfigureApiKeys
+        isSystem: false
+        name: My Role
+        roleId: 3040
+    Script:
+      properties:
+        language:
+          $ref: '#/components/schemas/ScriptLanguage'
+        script:
+          type: string
+      required:
+        - script
+      type: object
+    ScriptLanguage:
+      enum:
+        - cmd
+        - ps
+      type: string
+    SecurityDescriptor:
+      properties:
+        accessRightDefinitions:
+          items:
+            $ref: '#/components/schemas/AceAccessRightDefinition'
+          type: array
+        roleAces:
+          items:
+            $ref: '#/components/schemas/RoleAce'
+          type: array
+      type: object
+    Status:
+      enum:
+        - cancelled
+        - cancelling
+        - failed
+        - queued
+        - running
+        - success
+      type: string
+    StoredNameValue:
+      properties:
+        name:
+          minLength: 1
+          type: string
+        value:
+          $ref: '#/components/schemas/StoredValue'
+      required:
+        - name
+        - value
+      type: object
+    StoredNameValueMatrix:
+      properties:
+        variables:
+          $ref: '#/components/schemas/StoredNameValue'
+      type: object
+    StoredValue:
+      properties:
+        isEncrypted:
+          type: boolean
+        value:
+          description: |-
+            Encrypted values can be created using the encryptValue operation.
+
+            Empty environment variables are represented by missing (null) value
+            rather than an empty string.
+          type: string
+      type: object
+    StringValueObject:
+      properties:
+        value:
+          type: string
+      type: object
+    TestMode:
+      enum:
+        - auto
+        - none
+        - script
+      type: string
+    Timestamped:
+      properties:
+        created:
+          format: date-time
+          readOnly: true
+          type: string
+        updated:
+          format: date-time
+          readOnly: true
+          type: string
+      type: object
+    UserAccount:
+      allOf:
+        - $ref: '#/components/schemas/Timestamped'
+        - $ref: '#/components/schemas/UserAccountSettings'
+        - properties:
+            accountId:
+              minimum: 0
+              readOnly: true
+              type: integer
+            accountName:
+              readOnly: true
+              type: string
+            email:
+              format: email
+              type: string
+            fullName:
+              type: string
+            isCollaborator:
+              readOnly: true
+              type: boolean
+            isOwner:
+              readOnly: true
+              type: boolean
+            pageSize:
+              minimum: 0
+              readOnly: true
+              type: integer
+            password:
+              format: password
+              minLength: 1
+              type: string
+            roleId:
+              minimum: 0
+              type: integer
+            roleName:
+              readOnly: true
+              type: string
+            userId:
+              minimum: 0
+              type: integer
+          required:
+            - fullName
+            - email
+          type: object
+      example:
+        email: john@smith.com
+        failedBuildNotification: all
+        fullName: John Smith
+        notifyWhenBuildStatusChangedOnly: true
+        roleId: 4
+        successfulBuildNotification: all
+        userId: 3019
+    UserAccountRolesResults:
+      description: 'The roles property contains all roles, not only the role for which the user is a member.'
+      properties:
+        roles:
+          items:
+            $ref: '#/components/schemas/Role'
+          type: array
+        user:
+          $ref: '#/components/schemas/UserAccount'
+      type: object
+    UserAccountSettings:
+      properties:
+        failedBuildNotification:
+          $ref: '#/components/schemas/BuildNotificationFrequency'
+        failedDeploymentNotification:
+          $ref: '#/components/schemas/DeploymentNotificationFrequency'
+        notifyWhenBuildStatusChangedOnly:
+          default: false
+          description: |
+            Note that this value is `true` on user creation, but behaves as
+            `false` when not specified on update.
+          type: boolean
+        notifyWhenDeploymentStatusChangedOnly:
+          default: false
+          description: |
+            Note that this value is `true` on user creation, but behaves as
+            `false` when not specified on update.
+          type: boolean
+        successfulBuildNotification:
+          $ref: '#/components/schemas/BuildNotificationFrequency'
+        successfulDeploymentNotification:
+          $ref: '#/components/schemas/DeploymentNotificationFrequency'
+      required:
+        - successfulBuildNotification
+        - failedBuildNotification
+        - successfulDeploymentNotification
+        - failedDeploymentNotification
+      type: object
+    UserAddition:
+      example:
+        confirmPassword: password
+        email: john@smith.com
+        fullName: John Smith
+        generatePassword: false
+        password: password
+        roleId: 4
+      properties:
+        confirmPassword:
+          format: password
+          minLength: 1
+          type: string
+        email:
+          format: email
+          type: string
+        fullName:
+          type: string
+        generatePassword:
+          type: boolean
+        password:
+          format: password
+          minLength: 1
+          type: string
+        roleId:
+          description: |
+            Technically `roleId` has default value 0 and is not required, but
+            since role 0 never exists it would always cause a 404 response.
+          minimum: 0
+          type: integer
+      required:
+        - fullName
+        - email
+        - roleId
+      type: object
+  responses:
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    accountName:
+      description: AppVeyor account name (`accountName` property of `UserAccount`)
+      in: path
+      name: accountName
+      required: true
+      schema:
+        type: string
+        minLength: 1
+    badgeRepoProvider:
+      description: Repository provider supported for badges
+      in: path
+      name: badgeRepoProvider
+      required: true
+      schema:
+        type: string
+        enum:
+          - bitBucket
+          - gitHub
+    branch:
+      description: Repository Branch
+      in: query
+      name: branch
+      schema:
+        type: string
+        minLength: 1
+    buildBranch:
+      description: Build Branch
+      in: path
+      name: buildBranch
+      required: true
+      schema:
+        type: string
+    buildVersion:
+      description: Build Version (`version` property of `Build`)
+      in: path
+      name: buildVersion
+      required: true
+      schema:
+        type: string
+    deploymentEnvironmentId:
+      description: |
+        Deployment Environment ID (`deploymentEnvironmentId` property of `DeploymentEnvironment`)
+      in: path
+      name: deploymentEnvironmentId
+      required: true
+      schema:
+        type: integer
+        minimum: 0
+    deploymentId:
+      description: Deployment ID (`deploymentId` property of `Deployment`)
+      in: path
+      name: deploymentId
+      required: true
+      schema:
+        type: integer
+        minimum: 0
+    failingText:
+      description: Text to show in badge when build is failing.
+      in: query
+      name: failingText
+      schema:
+        type: string
+        minLength: 1
+    jobId:
+      description: Build ID (`jobId` property of `BuildJob`)
+      in: path
+      name: jobId
+      required: true
+      schema:
+        type: string
+    passingText:
+      description: Text to show in badge when build is passing.
+      in: query
+      name: passingText
+      schema:
+        type: string
+        minLength: 1
+    pendingText:
+      description: Text to show in badge when build is pending.
+      in: query
+      name: pendingText
+      schema:
+        type: string
+        minLength: 1
+    projectSlug:
+      description: Project Slug
+      in: path
+      name: projectSlug
+      required: true
+      schema:
+        type: string
+    recordsNumber:
+      description: Number of results to include in the response.
+      in: query
+      name: recordsNumber
+      required: true
+      schema:
+        type: integer
+        minimum: 0
+    repoAccountName:
+      description: Account name with repository provider
+      in: path
+      name: repoAccountName
+      required: true
+      schema:
+        type: string
+        minLength: 1
+    repoSlug:
+      description: Slug (URL component) of repository.
+      in: path
+      name: repoSlug
+      required: true
+      schema:
+        type: string
+        minLength: 1
+    retina:
+      description: Return a larger image suitable for retina displays?  Exclusive with `svg`.
+      in: query
+      name: retina
+      schema:
+        type: boolean
+        default: false
+    roleId:
+      description: Role ID
+      in: path
+      name: roleId
+      required: true
+      schema:
+        type: integer
+        minimum: 0
+    startBuildId:
+      description: Maximum `buildId` to include in the results (exclusive).
+      in: query
+      name: startBuildId
+      schema:
+        type: integer
+        minimum: 0
+    statusBadgeId:
+      description: ID of the status badge (`statusBadgeId` from `ProjectWithConfiguration`).
+      in: path
+      name: statusBadgeId
+      required: true
+      schema:
+        type: string
+        minLength: 1
+    svg:
+      description: Return an SVG image instead of PNG?  Exclusive with `retina`.
+      in: query
+      name: svg
+      schema:
+        type: boolean
+        default: false
+    userId:
+      description: User ID
+      in: path
+      name: userId
+      required: true
+      schema:
+        type: integer
+        minimum: 0
+  securitySchemes:
+    apiToken:
+      description: |-
+        API token can be acquired from https://ci.appveyor.com/api-token
+        This value must be passed to the server in the `Authorization` header as `"Bearer <token>"`.  Since [bearer token authentication support is not explicitly supported in OpenAPI 2.0](https://github.com/OAI/OpenAPI-Specification/issues/583), client code will vary.  Clients created with [swagger-codegen](https://github.com/swagger-api/swagger-codegen) should set `apiKeyPrefix` to `"Bearer"` and set `apiKey` to the token.  Other clients may need to set `apiKey` to the string `"Bearer <token>"`.
+        Note that this should be [fixed in OpenAPI 3.0](https://github.com/OAI/OpenAPI-Specification/pull/807)), whenever that becomes available and supported.
+      in: header
+      name: Authorization
+      type: apiKey

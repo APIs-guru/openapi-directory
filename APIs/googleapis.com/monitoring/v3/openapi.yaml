@@ -1,0 +1,1464 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://monitoring.googleapis.com/'
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
+  title: Stackdriver Monitoring
+  version: v3
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.0.1
+      format: google
+      url: 'https://monitoring.googleapis.com/$discovery/rest?version=v3'
+      version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: monitoring
+externalDocs:
+  url: 'https://cloud.google.com/monitoring/api/'
+tags:
+  - name: projects
+paths:
+  '/v3/{name}':
+    delete:
+      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
+      operationId: monitoring.projects.metricDescriptors.delete
+      parameters:
+        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+      tags:
+        - projects
+    get:
+      description: Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
+      operationId: monitoring.projects.monitoredResourceDescriptors.get
+      parameters:
+        - description: 'The monitored resource descriptor to get. The format is "projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}". The {resource_type} is a predefined type, such as cloudsql_database.'
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MonitoredResourceDescriptor'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+    put:
+      description: Updates an existing group. You can change any group attributes except name.
+      operationId: monitoring.projects.groups.update
+      parameters:
+        - description: 'Output only. The name of this group. The format is "projects/{project_id_or_number}/groups/{group_id}". When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique {group_id} that is generated automatically.'
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+        - description: 'If true, validate this request but do not update the existing group.'
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Group'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+      tags:
+        - projects
+      requestBody:
+        $ref: '#/components/requestBodies/Group'
+  '/v3/{name}/collectdTimeSeries':
+    parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+    post:
+      description: 'Stackdriver Monitoring Agent only: Creates a new time series.<aside class="caution">This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.</aside>'
+      operationId: monitoring.projects.collectdTimeSeries.create
+      parameters:
+        - description: The project in which to create the time series. The format is "projects/PROJECT_ID_OR_NUMBER".
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+      tags:
+        - projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCollectdTimeSeriesRequest'
+  '/v3/{name}/groups':
+    get:
+      description: Lists the existing groups.
+      operationId: monitoring.projects.groups.list
+      parameters:
+        - description: 'The project whose groups are to be listed. The format is "projects/{project_id_or_number}".'
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups whose parentName field contains the group name. If no groups have this parent, the results are empty.'
+          in: query
+          name: childrenOfGroup
+          schema:
+            type: string
+        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns the descendants of the specified group. This is a superset of the results returned by the childrenOfGroup filter, and includes children-of-children, and so forth.'
+          in: query
+          name: descendantsOfGroup
+          schema:
+            type: string
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: A positive number that is the maximum number of results to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: 'A group name: "projects/{project_id_or_number}/groups/{group_id}". Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.'
+          in: query
+          name: ancestorsOfGroup
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListGroupsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+    post:
+      description: Creates a new group.
+      operationId: monitoring.projects.groups.create
+      parameters:
+        - description: 'The project in which to create the group. The format is "projects/{project_id_or_number}".'
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+        - description: 'If true, validate this request but do not create the group.'
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Group'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+      tags:
+        - projects
+      requestBody:
+        $ref: '#/components/requestBodies/Group'
+  '/v3/{name}/members':
+    get:
+      description: Lists the monitored resources that are members of a group.
+      operationId: monitoring.projects.groups.members.list
+      parameters:
+        - description: 'The group whose members are listed. The format is "projects/{project_id_or_number}/groups/{group_id}".'
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
+          in: query
+          name: interval.startTime
+          schema:
+            type: string
+        - description: A positive number that is the maximum number of results to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Required. The end of the time interval.
+          in: query
+          name: interval.endTime
+          schema:
+            type: string
+        - description: |
+            An optional list filter describing the members to be returned. The filter may reference the type, labels, and metadata of monitored resources that comprise the group. For example, to return only resources representing Compute Engine VM instances, use this filter:
+            resource.type = "gce_instance"
+          in: query
+          name: filter
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListGroupMembersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+  '/v3/{name}/metricDescriptors':
+    get:
+      description: Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
+      operationId: monitoring.projects.metricDescriptors.list
+      parameters:
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: A positive number that is the maximum number of results to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |
+            If this field is empty, all custom and system-defined metric descriptors are returned. Otherwise, the filter specifies which metric descriptors are to be returned. For example, the following filter matches all custom metrics:
+            metric.type = starts_with("custom.googleapis.com/")
+          in: query
+          name: filter
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListMetricDescriptorsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+    post:
+      description: Creates a new metric descriptor. User-created metric descriptors define custom metrics.
+      operationId: monitoring.projects.metricDescriptors.create
+      parameters:
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MetricDescriptor'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+      tags:
+        - projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetricDescriptor'
+  '/v3/{name}/monitoredResourceDescriptors':
+    get:
+      description: Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
+      operationId: monitoring.projects.monitoredResourceDescriptors.list
+      parameters:
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: A positive number that is the maximum number of results to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: |
+            An optional filter describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an id label:
+            resource.type = starts_with("gce_") AND resource.label:id
+          in: query
+          name: filter
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListMonitoredResourceDescriptorsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+  '/v3/{name}/timeSeries':
+    get:
+      description: Lists time series that match a filter. This method does not require a Stackdriver account.
+      operationId: monitoring.projects.timeSeries.list
+      parameters:
+        - description: 'The alignment period for per-time series alignment. If present, alignmentPeriod must be at least 60 seconds. After per-time series alignment, each time series will contain data points only on the period boundaries. If perSeriesAligner is not specified or equals ALIGN_NONE, then this field is ignored. If perSeriesAligner is specified and does not equal ALIGN_NONE, then this field must be defined; otherwise an error is returned.'
+          in: query
+          name: aggregation.alignmentPeriod
+          schema:
+            type: string
+        - description: 'The approach to be used to combine time series. Not all reducer functions may be applied to all time series, depending on the metric type and the value type of the original time series. Reduction may change the metric type of value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
+          in: query
+          name: aggregation.crossSeriesReducer
+          schema:
+            type: string
+            enum:
+              - REDUCE_NONE
+              - REDUCE_MEAN
+              - REDUCE_MIN
+              - REDUCE_MAX
+              - REDUCE_SUM
+              - REDUCE_STDDEV
+              - REDUCE_COUNT
+              - REDUCE_COUNT_TRUE
+              - REDUCE_FRACTION_TRUE
+              - REDUCE_PERCENTILE_99
+              - REDUCE_PERCENTILE_95
+              - REDUCE_PERCENTILE_50
+              - REDUCE_PERCENTILE_05
+        - description: 'The set of fields to preserve when crossSeriesReducer is specified. The groupByFields determine how the time series are partitioned into subsets prior to applying the aggregation function. Each subset contains time series that have the same value for each of the grouping fields. Each individual time series is a member of exactly one subset. The crossSeriesReducer is applied to each subset of time series. It is not possible to reduce across different resource types, so this field implicitly contains resource.type. Fields not specified in groupByFields are aggregated away. If groupByFields is not specified and all the time series have the same resource type, then the time series are aggregated into a single output time series. If crossSeriesReducer is not defined, this field is ignored.'
+          in: query
+          name: aggregation.groupByFields
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - description: 'The approach to be used to align individual time series. Not all alignment functions may be applied to all time series, depending on the metric type and value type of the original time series. Alignment may change the metric type or the value type of the time series.Time series data must be aligned in order to perform cross-time series reduction. If crossSeriesReducer is specified, then perSeriesAligner must be specified and not equal ALIGN_NONE and alignmentPeriod must be specified; otherwise, an error is returned.'
+          in: query
+          name: aggregation.perSeriesAligner
+          schema:
+            type: string
+            enum:
+              - ALIGN_NONE
+              - ALIGN_DELTA
+              - ALIGN_RATE
+              - ALIGN_INTERPOLATE
+              - ALIGN_NEXT_OLDER
+              - ALIGN_MIN
+              - ALIGN_MAX
+              - ALIGN_MEAN
+              - ALIGN_COUNT
+              - ALIGN_SUM
+              - ALIGN_STDDEV
+              - ALIGN_COUNT_TRUE
+              - ALIGN_FRACTION_TRUE
+              - ALIGN_PERCENTILE_99
+              - ALIGN_PERCENTILE_95
+              - ALIGN_PERCENTILE_50
+              - ALIGN_PERCENTILE_05
+        - description: |
+            A monitoring filter that specifies which time series should be returned. The filter must specify a single metric type, and can additionally specify metric labels and other information. For example:
+            metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
+                metric.label.instance_name = "my-instance-name"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Required. The end of the time interval.
+          in: query
+          name: interval.endTime
+          schema:
+            type: string
+        - description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
+          in: query
+          name: interval.startTime
+          schema:
+            type: string
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+        - description: 'Specifies the order in which the points of the time series should be returned. By default, results are not ordered. Currently, this field must be left blank.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: 'A positive number that is the maximum number of results to return. When view field sets to FULL, it limits the number of Points server will return; if view field is HEADERS, it limits the number of TimeSeries server will return.'
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return additional results from the previous method call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Specifies which information is returned about the time series.
+          in: query
+          name: view
+          schema:
+            type: string
+            enum:
+              - FULL
+              - HEADERS
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListTimeSeriesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.read'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/pp'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/bearer_token'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/key'
+    post:
+      description: 'Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.'
+      operationId: monitoring.projects.timeSeries.create
+      parameters:
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
+          in: path
+          name: name
+          required: true
+          x-reservedExpansion: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/monitoring.write'
+      tags:
+        - projects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTimeSeriesRequest'
+components:
+  schemas:
+    BucketOptions:
+      description: 'BucketOptions describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. BucketOptions does not include the number of values in each bucket.A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.'
+      properties:
+        explicitBuckets:
+          $ref: '#/components/schemas/Explicit'
+        exponentialBuckets:
+          $ref: '#/components/schemas/Exponential'
+        linearBuckets:
+          $ref: '#/components/schemas/Linear'
+      type: object
+    CollectdPayload:
+      description: A collection of data points sent from a collectd-based plugin. See the collectd documentation for more information.
+      properties:
+        endTime:
+          description: The end time of the interval.
+          format: google-datetime
+          type: string
+        metadata:
+          additionalProperties:
+            $ref: '#/components/schemas/TypedValue'
+          description: 'The measurement metadata. Example: "process_id" -> 12345'
+          type: object
+        plugin:
+          description: 'The name of the plugin. Example: "disk".'
+          type: string
+        pluginInstance:
+          description: 'The instance name of the plugin Example: "hdcl".'
+          type: string
+        startTime:
+          description: The start time of the interval.
+          format: google-datetime
+          type: string
+        type:
+          description: 'The measurement type. Example: "memory".'
+          type: string
+        typeInstance:
+          description: 'The measurement type instance. Example: "used".'
+          type: string
+        values:
+          description: The measured values during this time interval. Each value must have a different dataSourceName.
+          items:
+            $ref: '#/components/schemas/CollectdValue'
+          type: array
+      type: object
+    CollectdValue:
+      description: A single data point from a collectd-based plugin.
+      properties:
+        dataSourceName:
+          description: 'The data source for the collectd value. For example there are two data sources for network measurements: "rx" and "tx".'
+          type: string
+        dataSourceType:
+          description: The type of measurement.
+          enum:
+            - UNSPECIFIED_DATA_SOURCE_TYPE
+            - GAUGE
+            - COUNTER
+            - DERIVE
+            - ABSOLUTE
+          type: string
+        value:
+          $ref: '#/components/schemas/TypedValue'
+      type: object
+    CreateCollectdTimeSeriesRequest:
+      description: The CreateCollectdTimeSeries request.
+      properties:
+        collectdPayloads:
+          description: 'The collectd payloads representing the time series data. You must not include more than a single point for each time series, so no two payloads can have the same values for all of the fields plugin, plugin_instance, type, and type_instance.'
+          items:
+            $ref: '#/components/schemas/CollectdPayload'
+          type: array
+        collectdVersion:
+          description: 'The version of collectd that collected the data. Example: "5.3.0-192.el6".'
+          type: string
+        resource:
+          $ref: '#/components/schemas/MonitoredResource'
+      type: object
+    CreateTimeSeriesRequest:
+      description: The CreateTimeSeries request.
+      properties:
+        timeSeries:
+          description: The new data to be added to a list of time series. Adds at most one data point to each of several time series. The new data point must be more recent than any other point in its time series. Each TimeSeries value must fully specify a unique time series by supplying all label values for the metric and the monitored resource.
+          items:
+            $ref: '#/components/schemas/TimeSeries'
+          type: array
+      type: object
+    Distribution:
+      description: 'Distribution contains summary statistics for a population of values. It optionally contains a histogram representing the distribution of those values across a set of buckets.The summary statistics are the count, mean, sum of the squared deviation from the mean, the minimum, and the maximum of the set of population of values. The histogram is based on a sequence of buckets and gives a count of values that fall into each bucket. The boundaries of the buckets are given either explicitly or by formulas for buckets of fixed or exponentially increasing widths.Although it is not forbidden, it is generally a bad idea to include non-finite values (infinities or NaNs) in the population of values, as this will render the mean and sum_of_squared_deviation fields meaningless.'
+      properties:
+        bucketCounts:
+          description: 'Required in the Stackdriver Monitoring API v3. The values for each bucket specified in bucket_options. The sum of the values in bucketCounts must equal the value in the count field of the Distribution object. The order of the bucket counts follows the numbering schemes described for the three bucket types. The underflow bucket has number 0; the finite buckets, if any, have numbers 1 through N-2; and the overflow bucket has number N-1. The size of bucket_counts must not be greater than N. If the size is less than N, then the remaining buckets are assigned values of zero.'
+          items:
+            format: int64
+            type: string
+          type: array
+        bucketOptions:
+          $ref: '#/components/schemas/BucketOptions'
+        count:
+          description: The number of values in the population. Must be non-negative. This value must equal the sum of the values in bucket_counts if a histogram is provided.
+          format: int64
+          type: string
+        mean:
+          description: The arithmetic mean of the values in the population. If count is zero then this field must be zero.
+          format: double
+          type: number
+        range:
+          $ref: '#/components/schemas/Range'
+        sumOfSquaredDeviation:
+          description: |-
+            The sum of squared deviations from the mean of the values in the population. For values x_i this is:
+            Sum[i=1..n]((x_i - mean)^2)
+            Knuth, "The Art of Computer Programming", Vol. 2, page 323, 3rd edition describes Welford's method for accumulating this sum in one pass.If count is zero then this field must be zero.
+          format: double
+          type: number
+      type: object
+    Empty:
+      description: |-
+        A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:
+        service Foo {
+          rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+        }
+        The JSON representation for Empty is empty JSON object {}.
+      properties: {}
+      type: object
+    Explicit:
+      description: 'Specifies a set of buckets with arbitrary widths.There are size(bounds) + 1 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 <= i < N-1): boundsi  Lower bound (1 <= i < N); boundsi - 1The bounds field must contain at least one element. If bounds has only one element, then there are no finite buckets, and that single element is the common boundary of the overflow and underflow buckets.'
+      properties:
+        bounds:
+          description: The values must be monotonically increasing.
+          items:
+            format: double
+            type: number
+          type: array
+      type: object
+    Exponential:
+      description: 'Specifies an exponential sequence of buckets that have a width that is proportional to the value of the lower bound. Each bucket represents a constant relative uncertainty on a specific value in the bucket.There are num_finite_buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 <= i < N-1): scale * (growth_factor ^ i).  Lower bound (1 <= i < N): scale * (growth_factor ^ (i - 1)).'
+      properties:
+        growthFactor:
+          description: Must be greater than 1.
+          format: double
+          type: number
+        numFiniteBuckets:
+          description: Must be greater than 0.
+          format: int32
+          type: integer
+        scale:
+          description: Must be greater than 0.
+          format: double
+          type: number
+      type: object
+    Field:
+      description: A single field of a message type.
+      properties:
+        cardinality:
+          description: The field cardinality.
+          enum:
+            - CARDINALITY_UNKNOWN
+            - CARDINALITY_OPTIONAL
+            - CARDINALITY_REQUIRED
+            - CARDINALITY_REPEATED
+          type: string
+        defaultValue:
+          description: The string value of the default value of this field. Proto2 syntax only.
+          type: string
+        jsonName:
+          description: The field JSON name.
+          type: string
+        kind:
+          description: The field type.
+          enum:
+            - TYPE_UNKNOWN
+            - TYPE_DOUBLE
+            - TYPE_FLOAT
+            - TYPE_INT64
+            - TYPE_UINT64
+            - TYPE_INT32
+            - TYPE_FIXED64
+            - TYPE_FIXED32
+            - TYPE_BOOL
+            - TYPE_STRING
+            - TYPE_GROUP
+            - TYPE_MESSAGE
+            - TYPE_BYTES
+            - TYPE_UINT32
+            - TYPE_ENUM
+            - TYPE_SFIXED32
+            - TYPE_SFIXED64
+            - TYPE_SINT32
+            - TYPE_SINT64
+          type: string
+        name:
+          description: The field name.
+          type: string
+        number:
+          description: The field number.
+          format: int32
+          type: integer
+        oneofIndex:
+          description: 'The index of the field type in Type.oneofs, for message or enumeration types. The first type has index 1; zero means the type is not in the list.'
+          format: int32
+          type: integer
+        options:
+          description: The protocol buffer options.
+          items:
+            $ref: '#/components/schemas/Option'
+          type: array
+        packed:
+          description: Whether to use alternative packed wire representation.
+          type: boolean
+        typeUrl:
+          description: 'The field type URL, without the scheme, for message or enumeration types. Example: "type.googleapis.com/google.protobuf.Timestamp".'
+          type: string
+      type: object
+    Group:
+      description: 'The description of a dynamic collection of monitored resources. Each group has a filter that is matched against monitored resources and their associated metadata. If a group''s filter matches an available monitored resource, then that resource is a member of that group. Groups can contain any number of monitored resources, and each monitored resource can be a member of any number of groups.Groups can be nested in parent-child hierarchies. The parentName field identifies an optional parent for each group. If a group has a parent, then the only monitored resources available to be matched by the group''s filter are the resources contained in the parent group. In other words, a group contains the monitored resources that match its filter and the filters of all the group''s ancestors. A group without a parent can contain any monitored resource.For example, consider an infrastructure running a set of instances with two user-defined tags: "environment" and "role". A parent group has a filter, environment="production". A child of that parent group has a filter, role="transcoder". The parent group contains all instances in the production environment, regardless of their roles. The child group contains instances that have the transcoder role and are in the production environment.The monitored resources contained in a group can change at any moment, depending on what resources exist and what filters are associated with the group and its ancestors.'
+      properties:
+        displayName:
+          description: 'A user-assigned name for this group, used only for display purposes.'
+          type: string
+        filter:
+          description: The filter used to determine which monitored resources belong to this group.
+          type: string
+        isCluster:
+          description: 'If true, the members of this group are considered to be a cluster. The system can perform additional analysis on groups that are clusters.'
+          type: boolean
+        name:
+          description: 'Output only. The name of this group. The format is "projects/{project_id_or_number}/groups/{group_id}". When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to CreateGroup and a unique {group_id} that is generated automatically.'
+          type: string
+        parentName:
+          description: 'The name of the group''s parent, if it has one. The format is "projects/{project_id_or_number}/groups/{group_id}". For groups with no parent, parentName is the empty string, "".'
+          type: string
+      type: object
+    LabelDescriptor:
+      description: A description of a label.
+      properties:
+        description:
+          description: A human-readable description for the label.
+          type: string
+        key:
+          description: The label key.
+          type: string
+        valueType:
+          description: The type of data that can be assigned to the label.
+          enum:
+            - STRING
+            - BOOL
+            - INT64
+          type: string
+      type: object
+    Linear:
+      description: 'Specifies a linear sequence of buckets that all have the same width (except overflow and underflow). Each bucket represents a constant absolute uncertainty on the specific value in the bucket.There are num_finite_buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 <= i < N-1): offset + (width * i).  Lower bound (1 <= i < N): offset + (width * (i - 1)).'
+      properties:
+        numFiniteBuckets:
+          description: Must be greater than 0.
+          format: int32
+          type: integer
+        offset:
+          description: Lower bound of the first bucket.
+          format: double
+          type: number
+        width:
+          description: Must be greater than 0.
+          format: double
+          type: number
+      type: object
+    ListGroupMembersResponse:
+      description: The ListGroupMembers response.
+      properties:
+        members:
+          description: A set of monitored resources in the group.
+          items:
+            $ref: '#/components/schemas/MonitoredResource'
+          type: array
+        nextPageToken:
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          type: string
+        totalSize:
+          description: The total number of elements matching this request.
+          format: int32
+          type: integer
+      type: object
+    ListGroupsResponse:
+      description: The ListGroups response.
+      properties:
+        group:
+          description: The groups that match the specified filters.
+          items:
+            $ref: '#/components/schemas/Group'
+          type: array
+        nextPageToken:
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          type: string
+      type: object
+    ListMetricDescriptorsResponse:
+      description: The ListMetricDescriptors response.
+      properties:
+        metricDescriptors:
+          description: 'The metric descriptors that are available to the project and that match the value of filter, if present.'
+          items:
+            $ref: '#/components/schemas/MetricDescriptor'
+          type: array
+        nextPageToken:
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          type: string
+      type: object
+    ListMonitoredResourceDescriptorsResponse:
+      description: The ListMonitoredResourceDescriptors response.
+      properties:
+        nextPageToken:
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          type: string
+        resourceDescriptors:
+          description: 'The monitored resource descriptors that are available to this project and that match filter, if present.'
+          items:
+            $ref: '#/components/schemas/MonitoredResourceDescriptor'
+          type: array
+      type: object
+    ListTimeSeriesResponse:
+      description: The ListTimeSeries response.
+      properties:
+        nextPageToken:
+          description: 'If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as pageToken in the next call to this method.'
+          type: string
+        timeSeries:
+          description: One or more time series that match the filter included in the request.
+          items:
+            $ref: '#/components/schemas/TimeSeries'
+          type: array
+      type: object
+    Metric:
+      description: 'A specific metric, identified by specifying values for all of the labels of a MetricDescriptor.'
+      properties:
+        labels:
+          additionalProperties:
+            type: string
+          description: The set of label values that uniquely identify this metric. All labels listed in the MetricDescriptor must be assigned values.
+          type: object
+        type:
+          description: 'An existing metric type, see google.api.MetricDescriptor. For example, custom.googleapis.com/invoice/paid/amount.'
+          type: string
+      type: object
+    MetricDescriptor:
+      description: 'Defines a metric type and its schema. Once a metric descriptor is created, deleting or altering it stops data collection and makes the metric type''s existing data unusable.'
+      properties:
+        description:
+          description: 'A detailed description of the metric, which can be used in documentation.'
+          type: string
+        displayName:
+          description: 'A concise name for the metric, which can be displayed in user interfaces. Use sentence case without an ending period, for example "Request count".'
+          type: string
+        labels:
+          description: 'The set of labels that can be used to describe a specific instance of this metric type. For example, the appengine.googleapis.com/http/server/response_latencies metric type has a label for the HTTP response code, response_code, so you can look at latencies for successful responses or just for responses that failed.'
+          items:
+            $ref: '#/components/schemas/LabelDescriptor'
+          type: array
+        metricKind:
+          description: 'Whether the metric records instantaneous values, changes to a value, etc. Some combinations of metric_kind and value_type might not be supported.'
+          enum:
+            - METRIC_KIND_UNSPECIFIED
+            - GAUGE
+            - DELTA
+            - CUMULATIVE
+          type: string
+        name:
+          description: |
+            The resource name of the metric descriptor. Depending on the implementation, the name typically includes: (1) the parent resource name that defines the scope of the metric type or of its data; and (2) the metric's URL-encoded type, which also appears in the type field of this descriptor. For example, following is the resource name of a custom metric within the GCP project my-project-id:
+            "projects/my-project-id/metricDescriptors/custom.googleapis.com%2Finvoice%2Fpaid%2Famount"
+          type: string
+        type:
+          description: |
+            The metric type, including its DNS name prefix. The type is not URL-encoded. All user-defined custom metric types have the DNS name custom.googleapis.com. Metric types should use a natural hierarchical grouping. For example:
+            "custom.googleapis.com/invoice/paid/amount"
+            "appengine.googleapis.com/http/server/response_latencies"
+          type: string
+        unit:
+          description: |-
+            The unit in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The supported units are a subset of The Unified Code for Units of Measure (http://unitsofmeasure.org/ucum.html) standard:Basic units (UNIT)
+            bit bit
+            By byte
+            s second
+            min minute
+            h hour
+            d dayPrefixes (PREFIX)
+            k kilo (10**3)
+            M mega (10**6)
+            G giga (10**9)
+            T tera (10**12)
+            P peta (10**15)
+            E exa (10**18)
+            Z zetta (10**21)
+            Y yotta (10**24)
+            m milli (10**-3)
+            u micro (10**-6)
+            n nano (10**-9)
+            p pico (10**-12)
+            f femto (10**-15)
+            a atto (10**-18)
+            z zepto (10**-21)
+            y yocto (10**-24)
+            Ki kibi (2**10)
+            Mi mebi (2**20)
+            Gi gibi (2**30)
+            Ti tebi (2**40)GrammarThe grammar includes the dimensionless unit 1, such as 1/s.The grammar also includes these connectors:
+            / division (as an infix operator, e.g. 1/s).
+            . multiplication (as an infix operator, e.g. GBy.d)The grammar for a unit is as follows:
+            Expression = Component { "." Component } { "/" Component } ;
+
+            Component = [ PREFIX ] UNIT [ Annotation ]
+                      | Annotation
+                      | "1"
+                      ;
+
+            Annotation = "{" NAME "}" ;
+            Notes:
+            Annotation is just a comment if it follows a UNIT and is  equivalent to 1 if it is used alone. For examples,  {requests}/s == 1/s, By{transmitted}/s == By/s.
+            NAME is a sequence of non-blank printable ASCII characters not  containing '{' or '}'.
+          type: string
+        valueType:
+          description: 'Whether the measurement is an integer, a floating-point number, etc. Some combinations of metric_kind and value_type might not be supported.'
+          enum:
+            - VALUE_TYPE_UNSPECIFIED
+            - BOOL
+            - INT64
+            - DOUBLE
+            - STRING
+            - DISTRIBUTION
+            - MONEY
+          type: string
+      type: object
+    MonitoredResource:
+      description: |
+        An object representing a resource that can be used for monitoring, logging, billing, or other purposes. Examples include virtual machine instances, databases, and storage devices such as disks. The type field identifies a MonitoredResourceDescriptor object that describes the resource's schema. Information in the labels field identifies the actual resource and its attributes according to the schema. For example, a particular Compute Engine VM instance could be represented by the following object, because the MonitoredResourceDescriptor for "gce_instance" has labels "instance_id" and "zone":
+        { "type": "gce_instance",
+          "labels": { "instance_id": "12345678901234",
+                      "zone": "us-central1-a" }}
+      properties:
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Required. Values for all of the labels listed in the associated monitored resource descriptor. For example, Compute Engine VM instances use the labels "project_id", "instance_id", and "zone".'
+          type: object
+        type:
+          description: 'Required. The monitored resource type. This field must match the type field of a MonitoredResourceDescriptor object. For example, the type of a Compute Engine VM instance is gce_instance.'
+          type: string
+      type: object
+    MonitoredResourceDescriptor:
+      description: 'An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of "gce_instance" and specifies the use of the labels "instance_id" and "zone" to identify particular VM instances.Different APIs can support different monitored resource types. APIs generally provide a list method that returns the monitored resource descriptors used by the API.'
+      properties:
+        description:
+          description: Optional. A detailed description of the monitored resource type that might be used in documentation.
+          type: string
+        displayName:
+          description: 'Optional. A concise name for the monitored resource type that might be displayed in user interfaces. It should be a Title Cased Noun Phrase, without any article or other determiners. For example, "Google Cloud SQL Database".'
+          type: string
+        labels:
+          description: 'Required. A set of labels used to describe instances of this monitored resource type. For example, an individual Google Cloud SQL database is identified by values for the labels "database_id" and "zone".'
+          items:
+            $ref: '#/components/schemas/LabelDescriptor'
+          type: array
+        name:
+          description: 'Optional. The resource name of the monitored resource descriptor: "projects/{project_id}/monitoredResourceDescriptors/{type}" where {type} is the value of the type field in this object and {project_id} is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format "monitoredResourceDescriptors/{type}".'
+          type: string
+        type:
+          description: 'Required. The monitored resource type. For example, the type "cloudsql_database" represents databases in Google Cloud SQL. The maximum length of this value is 256 characters.'
+          type: string
+      type: object
+    Option:
+      description: 'A protocol buffer option, which can be attached to a message, field, enumeration, etc.'
+      properties:
+        name:
+          description: 'The option''s name. For protobuf built-in options (options defined in descriptor.proto), this is the short name. For example, "map_entry". For custom options, it should be the fully-qualified name. For example, "google.api.http".'
+          type: string
+        value:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: 'The option''s value packed in an Any message. If the value is a primitive, the corresponding wrapper type defined in google/protobuf/wrappers.proto should be used. If the value is an enum, it should be stored as an int32 value using the google.protobuf.Int32Value type.'
+          type: object
+      type: object
+    Point:
+      description: A single data point in a time series.
+      properties:
+        interval:
+          $ref: '#/components/schemas/TimeInterval'
+        value:
+          $ref: '#/components/schemas/TypedValue'
+      type: object
+    Range:
+      description: The range of the population values.
+      properties:
+        max:
+          description: The maximum of the population values.
+          format: double
+          type: number
+        min:
+          description: The minimum of the population values.
+          format: double
+          type: number
+      type: object
+    SourceContext:
+      description: 'SourceContext represents information about the source of a protobuf element, like the file in which it is defined.'
+      properties:
+        fileName:
+          description: 'The path-qualified name of the .proto file that contained the associated protobuf element. For example: "google/protobuf/source_context.proto".'
+          type: string
+      type: object
+    TimeInterval:
+      description: 'A time interval extending just after a start time through an end time. If the start time is the same as the end time, then the interval represents a single point in time.'
+      properties:
+        endTime:
+          description: Required. The end of the time interval.
+          format: google-datetime
+          type: string
+        startTime:
+          description: Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.
+          format: google-datetime
+          type: string
+      type: object
+    TimeSeries:
+      description: A collection of data points that describes the time-varying values of a metric. A time series is identified by a combination of a fully-specified monitored resource and a fully-specified metric. This type is used for both listing and creating time series.
+      properties:
+        metric:
+          $ref: '#/components/schemas/Metric'
+        metricKind:
+          description: 'The metric kind of the time series. When listing time series, this metric kind might be different from the metric kind of the associated metric if this time series is an alignment or reduction of other time series.When creating a time series, this field is optional. If present, it must be the same as the metric kind of the associated metric. If the associated metric''s descriptor must be auto-created, then this field specifies the metric kind of the new descriptor and must be either GAUGE (the default) or CUMULATIVE.'
+          enum:
+            - METRIC_KIND_UNSPECIFIED
+            - GAUGE
+            - DELTA
+            - CUMULATIVE
+          type: string
+        points:
+          description: 'The data points of this time series. When listing time series, the order of the points is specified by the list method.When creating a time series, this field must contain exactly one point and the point''s type must be the same as the value type of the associated metric. If the associated metric''s descriptor must be auto-created, then the value type of the descriptor is determined by the point''s type, which must be BOOL, INT64, DOUBLE, or DISTRIBUTION.'
+          items:
+            $ref: '#/components/schemas/Point'
+          type: array
+        resource:
+          $ref: '#/components/schemas/MonitoredResource'
+        valueType:
+          description: 'The value type of the time series. When listing time series, this value type might be different from the value type of the associated metric if this time series is an alignment or reduction of other time series.When creating a time series, this field is optional. If present, it must be the same as the type of the data in the points field.'
+          enum:
+            - VALUE_TYPE_UNSPECIFIED
+            - BOOL
+            - INT64
+            - DOUBLE
+            - STRING
+            - DISTRIBUTION
+            - MONEY
+          type: string
+      type: object
+    Type:
+      description: A protocol buffer message type.
+      properties:
+        fields:
+          description: The list of fields.
+          items:
+            $ref: '#/components/schemas/Field'
+          type: array
+        name:
+          description: The fully qualified message name.
+          type: string
+        oneofs:
+          description: The list of types appearing in oneof definitions in this type.
+          items:
+            type: string
+          type: array
+        options:
+          description: The protocol buffer options.
+          items:
+            $ref: '#/components/schemas/Option'
+          type: array
+        sourceContext:
+          $ref: '#/components/schemas/SourceContext'
+        syntax:
+          description: The source syntax.
+          enum:
+            - SYNTAX_PROTO2
+            - SYNTAX_PROTO3
+          type: string
+      type: object
+    TypedValue:
+      description: A single strongly-typed value.
+      properties:
+        boolValue:
+          description: 'A Boolean value: true or false.'
+          type: boolean
+        distributionValue:
+          $ref: '#/components/schemas/Distribution'
+        doubleValue:
+          description: A 64-bit double-precision floating-point number. Its magnitude is approximately &plusmn;10<sup>&plusmn;300</sup> and it has 16 significant digits of precision.
+          format: double
+          type: number
+        int64Value:
+          description: A 64-bit integer. Its range is approximately &plusmn;9.2x10<sup>18</sup>.
+          format: int64
+          type: string
+        stringValue:
+          description: A variable-length string value.
+          type: string
+      type: object
+  parameters:
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        type: string
+        enum:
+          - json
+          - media
+          - proto
+        default: json
+    bearer_token:
+      description: OAuth bearer token.
+      in: query
+      name: bearer_token
+      schema:
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    pp:
+      description: Pretty-print response.
+      in: query
+      name: pp
+      schema:
+        type: boolean
+        default: true
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+        default: true
+    quotaUser:
+      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        type: string
+        enum:
+          - '1'
+          - '2'
+  requestBodies:
+    Group:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Group'
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
+            'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
+            'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects
+    Oauth2c:
+      description: Oauth 2.0 accessCode authentication
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+          scopes:
+            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
+            'https://www.googleapis.com/auth/monitoring.read': View monitoring data for all of your Google Cloud and third-party projects
+            'https://www.googleapis.com/auth/monitoring.write': Publish metric data to your Google Cloud projects

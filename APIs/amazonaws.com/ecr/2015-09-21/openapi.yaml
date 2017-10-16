@@ -1,0 +1,1806 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://ecr.amazonaws.com/'
+info:
+  version: '2015-09-21'
+  x-release: v4
+  title: Amazon EC2 Container Registry
+  description: 'Amazon EC2 Container Registry (Amazon ECR) is a managed AWS Docker registry service. Customers can use the familiar Docker CLI to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry. Amazon ECR supports private Docker repositories with resource-based permissions using AWS IAM so that specific users or Amazon EC2 instances can access repositories and images. Developers can use the Docker CLI to author and manage images.'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: ecr
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/ecr-2015-09-21.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/ecr/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: BatchCheckLayerAvailability
+      description: '<p>Check the availability of multiple image layers in a specified registry and repository.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchCheckLayerAvailabilityResponse'
+        '480':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchCheckLayerAvailabilityRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#BatchDeleteImage':
+    post:
+      operationId: BatchDeleteImage
+      description: '<p>Deletes a list of specified images within a specified repository. Images are specified with either <code>imageTag</code> or <code>imageDigest</code>.</p> <p>You can remove a tag from an image by specifying the image''s tag in your request. When you remove the last tag from an image, the image is deleted from your repository.</p> <p>You can completely delete an image (and all of its tags) by specifying the image''s digest in your request.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteImageResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchDeleteImageRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#BatchGetImage':
+    post:
+      operationId: BatchGetImage
+      description: Gets detailed information for specified images within a specified repository. Images are specified with either <code>imageTag</code> or <code>imageDigest</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetImageResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchGetImageRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CompleteLayerUpload':
+    post:
+      operationId: CompleteLayerUpload
+      description: '<p>Inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed. You can optionally provide a <code>sha256</code> digest of the image layer for data validation purposes.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompleteLayerUploadResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '483':
+          description: UploadNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadNotFoundException'
+        '484':
+          description: InvalidLayerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLayerException'
+        '485':
+          description: LayerPartTooSmallException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LayerPartTooSmallException'
+        '486':
+          description: LayerAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LayerAlreadyExistsException'
+        '487':
+          description: EmptyUploadException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyUploadException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompleteLayerUploadRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateRepository':
+    post:
+      operationId: CreateRepository
+      description: Creates an image repository.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRepositoryResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryAlreadyExistsException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRepositoryRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRepository':
+    post:
+      operationId: DeleteRepository
+      description: 'Deletes an existing image repository. If a repository contains images, you must use the <code>force</code> option to delete it.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRepositoryResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '483':
+          description: RepositoryNotEmptyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotEmptyException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRepositoryRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRepositoryPolicy':
+    post:
+      operationId: DeleteRepositoryPolicy
+      description: Deletes the repository policy from a specified repository.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRepositoryPolicyResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '483':
+          description: RepositoryPolicyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryPolicyNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRepositoryPolicyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeImages':
+    post:
+      operationId: DescribeImages
+      description: '<p>Returns metadata about the images in a repository, including image size, image tags, and creation date.</p> <note> <p>Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the <code>docker images</code> command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by <a>DescribeImages</a>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeImagesResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '483':
+          description: ImageNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeImagesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeRepositories':
+    post:
+      operationId: DescribeRepositories
+      description: Describes image repositories in a registry.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRepositoriesResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeRepositoriesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetAuthorizationToken':
+    post:
+      operationId: GetAuthorizationToken
+      description: '<p>Retrieves a token that is valid for a specified registry for 12 hours. This command allows you to use the <code>docker</code> CLI to push and pull images with Amazon ECR. If you do not specify a registry, the default registry is assumed.</p> <p>The <code>authorizationToken</code> returned for each registry specified is a base64 encoded string that can be decoded and used in a <code>docker login</code> command to authenticate to a registry. The AWS CLI offers an <code>aws ecr get-login</code> command that simplifies the login process.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAuthorizationTokenResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAuthorizationTokenRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetDownloadUrlForLayer':
+    post:
+      operationId: GetDownloadUrlForLayer
+      description: '<p>Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDownloadUrlForLayerResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: LayersNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LayersNotFoundException'
+        '483':
+          description: LayerInaccessibleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LayerInaccessibleException'
+        '484':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDownloadUrlForLayerRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetRepositoryPolicy':
+    post:
+      operationId: GetRepositoryPolicy
+      description: Retrieves the repository policy for a specified repository.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRepositoryPolicyResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '483':
+          description: RepositoryPolicyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryPolicyNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRepositoryPolicyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#InitiateLayerUpload':
+    post:
+      operationId: InitiateLayerUpload
+      description: '<p>Notify Amazon ECR that you intend to upload an image layer.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiateLayerUploadResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitiateLayerUploadRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListImages':
+    post:
+      operationId: ListImages
+      description: '<p>Lists all the image IDs for a given repository.</p> <p>You can filter images based on whether or not they are tagged by setting the <code>tagStatus</code> parameter to <code>TAGGED</code> or <code>UNTAGGED</code>. For example, you can filter your results to return only <code>UNTAGGED</code> images and then pipe that result to a <a>BatchDeleteImage</a> operation to delete them. Or, you can filter your results to return only <code>TAGGED</code> images to list all of the tags in your repository.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImagesResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListImagesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#PutImage':
+    post:
+      operationId: PutImage
+      description: '<p>Creates or updates the image manifest and tags associated with an image.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutImageResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '483':
+          description: ImageAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageAlreadyExistsException'
+        '484':
+          description: LayersNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LayersNotFoundException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutImageRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SetRepositoryPolicy':
+    post:
+      operationId: SetRepositoryPolicy
+      description: Applies a repository policy on a specified repository to control access permissions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetRepositoryPolicyResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetRepositoryPolicyRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UploadLayerPart':
+    post:
+      operationId: UploadLayerPart
+      description: '<p>Uploads an image layer part to Amazon ECR.</p> <note> <p>This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadLayerPartResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InvalidLayerPartException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLayerPartException'
+        '483':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '484':
+          description: UploadNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadNotFoundException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadLayerPartRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    Arn:
+      type: string
+    AuthorizationData:
+      type: object
+      properties:
+        authorizationToken:
+          $ref: '#/components/schemas/Base64'
+        expiresAt:
+          $ref: '#/components/schemas/ExpirationTimestamp'
+        proxyEndpoint:
+          $ref: '#/components/schemas/ProxyEndpoint'
+      description: An object representing authorization data for an Amazon ECR registry.
+    AuthorizationDataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AuthorizationData'
+    Base64:
+      type: string
+      pattern: ^\S+$
+    BatchCheckLayerAvailabilityRequest:
+      type: object
+      required:
+        - repositoryName
+        - layerDigests
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        layerDigests:
+          $ref: '#/components/schemas/BatchedOperationLayerDigestList'
+    BatchCheckLayerAvailabilityResponse:
+      type: object
+      properties:
+        layers:
+          $ref: '#/components/schemas/LayerList'
+        failures:
+          $ref: '#/components/schemas/LayerFailureList'
+    BatchDeleteImageRequest:
+      type: object
+      required:
+        - repositoryName
+        - imageIds
+      example:
+        imageIds:
+          - imageTag: precise
+        repositoryName: ubuntu
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        imageIds:
+          $ref: '#/components/schemas/ImageIdentifierList'
+      description: Deletes specified images within a specified repository. Images are specified with either the <code>imageTag</code> or <code>imageDigest</code>.
+    BatchDeleteImageResponse:
+      type: object
+      example:
+        failures: []
+        imageIds:
+          - imageDigest: 'sha256:examplee6d1e504117a17000003d3753086354a38375961f2e665416ef4b1b2f'
+            imageTag: precise
+      properties:
+        imageIds:
+          $ref: '#/components/schemas/ImageIdentifierList'
+        failures:
+          $ref: '#/components/schemas/ImageFailureList'
+    BatchGetImageRequest:
+      type: object
+      required:
+        - repositoryName
+        - imageIds
+      example:
+        imageIds:
+          - imageTag: precise
+        repositoryName: ubuntu
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        imageIds:
+          $ref: '#/components/schemas/ImageIdentifierList'
+        acceptedMediaTypes:
+          $ref: '#/components/schemas/MediaTypeList'
+    BatchGetImageResponse:
+      type: object
+      example:
+        failures: []
+        images:
+          - imageId:
+              imageDigest: 'sha256:example76bdff6d83a09ba2a818f0d00000063724a9ac3ba5019c56f74ebf42a'
+              imageTag: precise
+            imageManifest: |-
+              {
+               "schemaVersion": 1,
+               "name": "ubuntu",
+               "tag": "precise",
+              ...
+            registryId: '244698725403'
+            repositoryName: ubuntu
+      properties:
+        images:
+          $ref: '#/components/schemas/ImageList'
+        failures:
+          $ref: '#/components/schemas/ImageFailureList'
+    BatchedOperationLayerDigest:
+      type: string
+      minLength: 0
+      maxLength: 1000
+    BatchedOperationLayerDigestList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchedOperationLayerDigest'
+      minItems: 1
+      maxItems: 100
+    CompleteLayerUploadRequest:
+      type: object
+      required:
+        - repositoryName
+        - uploadId
+        - layerDigests
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        uploadId:
+          $ref: '#/components/schemas/UploadId'
+        layerDigests:
+          $ref: '#/components/schemas/LayerDigestList'
+    CompleteLayerUploadResponse:
+      type: object
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        uploadId:
+          $ref: '#/components/schemas/UploadId'
+        layerDigest:
+          $ref: '#/components/schemas/LayerDigest'
+    CreateRepositoryRequest:
+      type: object
+      required:
+        - repositoryName
+      example:
+        repositoryName: project-a/nginx-web-app
+      properties:
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+    CreateRepositoryResponse:
+      type: object
+      example:
+        repository:
+          registryId: 012345678901
+          repositoryArn: 'arn:aws:ecr:us-west-2:012345678901:repository/project-a/nginx-web-app'
+          repositoryName: project-a/nginx-web-app
+      properties:
+        repository:
+          $ref: '#/components/schemas/Repository'
+    CreationTimestamp:
+      type: string
+      format: date-time
+    DeleteRepositoryPolicyRequest:
+      type: object
+      required:
+        - repositoryName
+      example:
+        repositoryName: ubuntu
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+    DeleteRepositoryPolicyResponse:
+      type: object
+      example:
+        policyText: '{ ... }'
+        registryId: 012345678901
+        repositoryName: ubuntu
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        policyText:
+          $ref: '#/components/schemas/RepositoryPolicyText'
+    DeleteRepositoryRequest:
+      type: object
+      required:
+        - repositoryName
+      example:
+        force: true
+        repositoryName: ubuntu
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        force:
+          $ref: '#/components/schemas/ForceFlag'
+    DeleteRepositoryResponse:
+      type: object
+      example:
+        repository:
+          registryId: 012345678901
+          repositoryArn: 'arn:aws:ecr:us-west-2:012345678901:repository/ubuntu'
+          repositoryName: ubuntu
+      properties:
+        repository:
+          $ref: '#/components/schemas/Repository'
+    DescribeImagesFilter:
+      type: object
+      properties:
+        tagStatus:
+          $ref: '#/components/schemas/TagStatus'
+      description: An object representing a filter on a <a>DescribeImages</a> operation.
+    DescribeImagesRequest:
+      type: object
+      required:
+        - repositoryName
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        imageIds:
+          $ref: '#/components/schemas/ImageIdentifierList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+        filter:
+          $ref: '#/components/schemas/DescribeImagesFilter'
+    DescribeImagesResponse:
+      type: object
+      properties:
+        imageDetails:
+          $ref: '#/components/schemas/ImageDetailList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    DescribeRepositoriesRequest:
+      type: object
+      example: {}
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryNames:
+          $ref: '#/components/schemas/RepositoryNameList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+    DescribeRepositoriesResponse:
+      type: object
+      example:
+        repositories:
+          - registryId: 012345678910
+            repositoryArn: 'arn:aws:ecr:us-west-2:012345678910:repository/ubuntu'
+            repositoryName: ubuntu
+          - registryId: 012345678910
+            repositoryArn: 'arn:aws:ecr:us-west-2:012345678910:repository/test'
+            repositoryName: test
+      properties:
+        repositories:
+          $ref: '#/components/schemas/RepositoryList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    EmptyUploadException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The specified layer upload does not contain any layer parts.
+    ExceptionMessage:
+      type: string
+    ExpirationTimestamp:
+      type: string
+      format: date-time
+    ForceFlag:
+      type: boolean
+    GetAuthorizationTokenRegistryIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RegistryId'
+      minItems: 1
+      maxItems: 10
+    GetAuthorizationTokenRequest:
+      type: object
+      example: {}
+      properties:
+        registryIds:
+          $ref: '#/components/schemas/GetAuthorizationTokenRegistryIdList'
+    GetAuthorizationTokenResponse:
+      type: object
+      example:
+        authorizationData:
+          - authorizationToken: QVdTOkN...
+            expiresAt: '1470951892432'
+            proxyEndpoint: 'https://012345678901.dkr.ecr.us-west-2.amazonaws.com'
+      properties:
+        authorizationData:
+          $ref: '#/components/schemas/AuthorizationDataList'
+    GetDownloadUrlForLayerRequest:
+      type: object
+      required:
+        - repositoryName
+        - layerDigest
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        layerDigest:
+          $ref: '#/components/schemas/LayerDigest'
+    GetDownloadUrlForLayerResponse:
+      type: object
+      properties:
+        downloadUrl:
+          $ref: '#/components/schemas/Url'
+        layerDigest:
+          $ref: '#/components/schemas/LayerDigest'
+    GetRepositoryPolicyRequest:
+      type: object
+      required:
+        - repositoryName
+      example:
+        repositoryName: ubuntu
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+    GetRepositoryPolicyResponse:
+      type: object
+      example:
+        policyText: |-
+          {
+            "Version" : "2008-10-17",
+            "Statement" : [ {
+              "Sid" : "new statement",
+              "Effect" : "Allow",
+              "Principal" : {
+               "AWS" : "arn:aws:iam::012345678901:role/CodeDeployDemo"
+              },
+          "Action" : [ "ecr:GetDownloadUrlForLayer", "ecr:BatchGetImage", "ecr:BatchCheckLayerAvailability" ]
+           } ]
+          }
+        registryId: 012345678901
+        repositoryName: ubuntu
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        policyText:
+          $ref: '#/components/schemas/RepositoryPolicyText'
+    Image:
+      type: object
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        imageId:
+          $ref: '#/components/schemas/ImageIdentifier'
+        imageManifest:
+          $ref: '#/components/schemas/ImageManifest'
+      description: An object representing an Amazon ECR image.
+    ImageAlreadyExistsException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: 'The specified image has already been pushed, and there are no changes to the manifest or image tag since the last push.'
+    ImageDetail:
+      type: object
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        imageDigest:
+          $ref: '#/components/schemas/ImageDigest'
+        imageTags:
+          $ref: '#/components/schemas/ImageTagList'
+        imageSizeInBytes:
+          $ref: '#/components/schemas/ImageSizeInBytes'
+        imagePushedAt:
+          $ref: '#/components/schemas/PushTimestamp'
+      description: An object that describes an image returned by a <a>DescribeImages</a> operation.
+    ImageDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageDetail'
+    ImageDigest:
+      type: string
+    ImageFailure:
+      type: object
+      properties:
+        imageId:
+          $ref: '#/components/schemas/ImageIdentifier'
+        failureCode:
+          $ref: '#/components/schemas/ImageFailureCode'
+        failureReason:
+          $ref: '#/components/schemas/ImageFailureReason'
+      description: An object representing an Amazon ECR image failure.
+    ImageFailureCode:
+      type: string
+      enum:
+        - InvalidImageDigest
+        - InvalidImageTag
+        - ImageTagDoesNotMatchDigest
+        - ImageNotFound
+        - MissingDigestAndTag
+    ImageFailureList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageFailure'
+    ImageFailureReason:
+      type: string
+    ImageIdentifier:
+      type: object
+      properties:
+        imageDigest:
+          $ref: '#/components/schemas/ImageDigest'
+        imageTag:
+          $ref: '#/components/schemas/ImageTag'
+      description: An object with identifying information for an Amazon ECR image.
+    ImageIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageIdentifier'
+      minItems: 1
+      maxItems: 100
+    ImageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Image'
+    ImageManifest:
+      type: string
+    ImageNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The image requested does not exist in the specified repository.
+    ImageSizeInBytes:
+      type: integer
+    ImageTag:
+      type: string
+    ImageTagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageTag'
+    InitiateLayerUploadRequest:
+      type: object
+      required:
+        - repositoryName
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+    InitiateLayerUploadResponse:
+      type: object
+      properties:
+        uploadId:
+          $ref: '#/components/schemas/UploadId'
+        partSize:
+          $ref: '#/components/schemas/PartSize'
+    InvalidLayerException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The layer digest calculation performed by Amazon ECR upon receipt of the image layer does not match the digest specified.
+    InvalidLayerPartException:
+      type: object
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        uploadId:
+          $ref: '#/components/schemas/UploadId'
+        lastValidByteReceived:
+          $ref: '#/components/schemas/PartSize'
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: 'The layer part size is not valid, or the first byte specified is not consecutive to the last byte of a previous layer part upload.'
+    InvalidParameterException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The specified parameter is invalid. Review the available parameters for the API request.
+    Layer:
+      type: object
+      properties:
+        layerDigest:
+          $ref: '#/components/schemas/LayerDigest'
+        layerAvailability:
+          $ref: '#/components/schemas/LayerAvailability'
+        layerSize:
+          $ref: '#/components/schemas/LayerSizeInBytes'
+        mediaType:
+          $ref: '#/components/schemas/MediaType'
+      description: An object representing an Amazon ECR image layer.
+    LayerAlreadyExistsException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The image layer already exists in the associated repository.
+    LayerAvailability:
+      type: string
+      enum:
+        - AVAILABLE
+        - UNAVAILABLE
+    LayerDigest:
+      type: string
+      pattern: '[a-zA-Z0-9-_+.]+:[a-fA-F0-9]+'
+    LayerDigestList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LayerDigest'
+      minItems: 1
+      maxItems: 100
+    LayerFailure:
+      type: object
+      properties:
+        layerDigest:
+          $ref: '#/components/schemas/BatchedOperationLayerDigest'
+        failureCode:
+          $ref: '#/components/schemas/LayerFailureCode'
+        failureReason:
+          $ref: '#/components/schemas/LayerFailureReason'
+      description: An object representing an Amazon ECR image layer failure.
+    LayerFailureCode:
+      type: string
+      enum:
+        - InvalidLayerDigest
+        - MissingLayerDigest
+    LayerFailureList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LayerFailure'
+    LayerFailureReason:
+      type: string
+    LayerInaccessibleException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The specified layer is not available because it is not associated with an image. Unassociated image layers may be cleaned up at any time.
+    LayerList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Layer'
+    LayerPartBlob:
+      type: string
+    LayerPartTooSmallException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: Layer parts must be at least 5 MiB in size.
+    LayerSizeInBytes:
+      type: integer
+    LayersNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: 'The specified layers could not be found, or the specified layer is not valid for this repository.'
+    LimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: 'The operation did not succeed because it would have exceeded a service limit for your account. For more information, see <a href="http://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html">Amazon ECR Default Service Limits</a> in the Amazon EC2 Container Registry User Guide.'
+    ListImagesFilter:
+      type: object
+      properties:
+        tagStatus:
+          $ref: '#/components/schemas/TagStatus'
+      description: An object representing a filter on a <a>ListImages</a> operation.
+    ListImagesRequest:
+      type: object
+      required:
+        - repositoryName
+      example:
+        repositoryName: ubuntu
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+        filter:
+          $ref: '#/components/schemas/ListImagesFilter'
+    ListImagesResponse:
+      type: object
+      example:
+        imageIds:
+          - imageDigest: 'sha256:764f63476bdff6d83a09ba2a818f0d35757063724a9ac3ba5019c56f74ebf42a'
+            imageTag: precise
+      properties:
+        imageIds:
+          $ref: '#/components/schemas/ImageIdentifierList'
+        nextToken:
+          $ref: '#/components/schemas/NextToken'
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    MediaType:
+      type: string
+      pattern: '\w{1,127}\/[-+.\w]{1,127}'
+    MediaTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaType'
+      minItems: 1
+      maxItems: 100
+    NextToken:
+      type: string
+    PartSize:
+      type: integer
+      minimum: 0
+    ProxyEndpoint:
+      type: string
+    PushTimestamp:
+      type: string
+      format: date-time
+    PutImageRequest:
+      type: object
+      required:
+        - repositoryName
+        - imageManifest
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        imageManifest:
+          $ref: '#/components/schemas/ImageManifest'
+        imageTag:
+          $ref: '#/components/schemas/ImageTag'
+    PutImageResponse:
+      type: object
+      properties:
+        image:
+          $ref: '#/components/schemas/Image'
+    RegistryId:
+      type: string
+      pattern: '[0-9]{12}'
+    Repository:
+      type: object
+      properties:
+        repositoryArn:
+          $ref: '#/components/schemas/Arn'
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        repositoryUri:
+          $ref: '#/components/schemas/Url'
+        createdAt:
+          $ref: '#/components/schemas/CreationTimestamp'
+      description: An object representing a repository.
+    RepositoryAlreadyExistsException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The specified repository already exists in the specified registry.
+    RepositoryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Repository'
+    RepositoryName:
+      type: string
+      pattern: '(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*'
+      minLength: 2
+      maxLength: 256
+    RepositoryNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RepositoryName'
+      minItems: 1
+      maxItems: 100
+    RepositoryNotEmptyException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: 'The specified repository contains images. To delete a repository that contains images, you must force the deletion with the <code>force</code> parameter.'
+    RepositoryNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The specified repository could not be found. Check the spelling of the specified repository and ensure that you are performing operations on the correct registry.
+    RepositoryPolicyNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: The specified repository and registry combination does not have an associated repository policy.
+    RepositoryPolicyText:
+      type: string
+      minLength: 0
+      maxLength: 10240
+    ServerException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: These errors are usually caused by a server-side issue.
+    SetRepositoryPolicyRequest:
+      type: object
+      required:
+        - repositoryName
+        - policyText
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        policyText:
+          $ref: '#/components/schemas/RepositoryPolicyText'
+        force:
+          $ref: '#/components/schemas/ForceFlag'
+    SetRepositoryPolicyResponse:
+      type: object
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        policyText:
+          $ref: '#/components/schemas/RepositoryPolicyText'
+    TagStatus:
+      type: string
+      enum:
+        - TAGGED
+        - UNTAGGED
+    UploadId:
+      type: string
+      pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+    UploadLayerPartRequest:
+      type: object
+      required:
+        - repositoryName
+        - uploadId
+        - partFirstByte
+        - partLastByte
+        - layerPartBlob
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        uploadId:
+          $ref: '#/components/schemas/UploadId'
+        partFirstByte:
+          $ref: '#/components/schemas/PartSize'
+        partLastByte:
+          $ref: '#/components/schemas/PartSize'
+        layerPartBlob:
+          $ref: '#/components/schemas/LayerPartBlob'
+    UploadLayerPartResponse:
+      type: object
+      properties:
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        repositoryName:
+          $ref: '#/components/schemas/RepositoryName'
+        uploadId:
+          $ref: '#/components/schemas/UploadId'
+        lastByteReceived:
+          $ref: '#/components/schemas/PartSize'
+    UploadNotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ExceptionMessage'
+      description: 'The upload could not be found, or the specified upload id is not valid for this repository.'
+    Url:
+      type: string
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

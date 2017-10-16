@@ -1,0 +1,1322 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://codestar.amazonaws.com/'
+info:
+  version: '2017-04-19'
+  x-release: v4
+  title: AWS CodeStar
+  description: '<fullname>AWS CodeStar</fullname> <p>This is the API reference for AWS CodeStar. This reference provides descriptions of the operations and data types for the AWS CodeStar API along with usage examples.</p> <p>You can use the AWS CodeStar API to work with:</p> <p>Projects and their resources, by calling the following:</p> <ul> <li> <p> <a>DeleteProject</a>, which deletes a project in AWS CodeStar.</p> </li> <li> <p> <a>DescribeProject</a>, which lists the attributes of a project.</p> </li> <li> <p> <a>ListProjects</a>, which lists all AWS CodeStar projects associated with your AWS account.</p> </li> <li> <p> <a>ListResources</a>, which lists the resources associated with an AWS CodeStar project.</p> </li> <li> <p> <a>UpdateProject</a>, which updates the attributes of an AWS CodeStar project.</p> </li> </ul> <p>Teams and team members, by calling the following:</p> <ul> <li> <p> <a>AssociateTeamMember</a>, which adds an IAM user to the team for an AWS CodeStar project.</p> </li> <li> <p> <a>DisassociateTeamMember</a>, which removes an IAM user from the team for an AWS CodeStar project.</p> </li> <li> <p> <a>ListTeamMembers</a>, which lists all the IAM users in the team for an AWS CodeStar project, including their roles and attributes.</p> </li> </ul> <p>Users, by calling the following:</p> <ul> <li> <p> <a>CreateUserProfile</a>, which creates a user profile that contains data associated with the user across all AWS CodeStar projects.</p> </li> <li> <p> <a>DeleteUserProfile</a>, which deletes all user profile information across all AWS CodeStar projects.</p> </li> <li> <p> <a>DescribeUserProfile</a>, which describes the profile of a user.</p> </li> <li> <p> <a>ListUserProfiles</a>, which lists all AWS CodeStar user profiles.</p> </li> <li> <p> <a>UpdateUserProfile</a>, which updates the profile for an AWS CodeStar user. </p> </li> </ul>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: codestar
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/codestar-2017-04-19.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/codestar/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AssociateTeamMember
+      description: Adds an IAM user to the team for an AWS CodeStar project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateTeamMemberResult'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: ProjectNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectNotFoundException'
+        '482':
+          description: TeamMemberAlreadyAssociatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamMemberAlreadyAssociatedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InvalidServiceRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidServiceRoleException'
+        '485':
+          description: ProjectConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectConfigurationException'
+        '486':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateTeamMemberRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateProject':
+    post:
+      operationId: CreateProject
+      description: 'Reserved for future use. To create a project, use the AWS CodeStar console.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProjectResult'
+        '480':
+          description: ProjectAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectAlreadyExistsException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ProjectCreationFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectCreationFailedException'
+        '484':
+          description: InvalidServiceRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidServiceRoleException'
+        '485':
+          description: ProjectConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectConfigurationException'
+        '486':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateUserProfile':
+    post:
+      operationId: CreateUserProfile
+      description: 'Creates a profile for a user that includes user preferences, such as the display name and email address assocciated with the user, in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user''s information appears to other users in AWS CodeStar.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserProfileResult'
+        '480':
+          description: UserProfileAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileAlreadyExistsException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserProfileRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteProject':
+    post:
+      operationId: DeleteProject
+      description: 'Deletes a project, including project resources. Does not delete users associated with the project, but does delete the IAM roles that allowed access to the project.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteProjectResult'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InvalidServiceRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidServiceRoleException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteProjectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteUserProfile':
+    post:
+      operationId: DeleteUserProfile
+      description: 'Deletes a user profile in AWS CodeStar, including all personal preference data associated with that profile, such as display name and email address. It does not delete the history of that user, for example the history of commits made by that user.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUserProfileResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteUserProfileRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeProject':
+    post:
+      operationId: DescribeProject
+      description: Describes a project and its resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeProjectResult'
+        '480':
+          description: ProjectNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InvalidServiceRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidServiceRoleException'
+        '483':
+          description: ProjectConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectConfigurationException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeProjectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeUserProfile':
+    post:
+      operationId: DescribeUserProfile
+      description: Describes a user in AWS CodeStar and the user attributes across all projects.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeUserProfileResult'
+        '480':
+          description: UserProfileNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeUserProfileRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DisassociateTeamMember':
+    post:
+      operationId: DisassociateTeamMember
+      description: Removes a user from a project. Removing a user from a project also removes the IAM policies from that user that allowed access to the project and its resources. Disassociating a team member does not remove that user's profile from AWS CodeStar. It does not remove the user from IAM.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateTeamMemberResult'
+        '480':
+          description: ProjectNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InvalidServiceRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidServiceRoleException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateTeamMemberRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListProjects':
+    post:
+      operationId: ListProjects
+      description: Lists all projects in AWS CodeStar associated with your AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProjectsResult'
+        '480':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListProjectsRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListResources':
+    post:
+      operationId: ListResources
+      description: Lists resources associated with a project in AWS CodeStar.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResourcesResult'
+        '480':
+          description: ProjectNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectNotFoundException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListResourcesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListTeamMembers':
+    post:
+      operationId: ListTeamMembers
+      description: Lists all team members associated with a project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTeamMembersResult'
+        '480':
+          description: ProjectNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectNotFoundException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTeamMembersRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListUserProfiles':
+    post:
+      operationId: ListUserProfiles
+      description: Lists all the user profiles configured for your AWS account in AWS CodeStar.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUserProfilesResult'
+        '480':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListUserProfilesRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateProject':
+    post:
+      operationId: UpdateProject
+      description: Updates a project in AWS CodeStar.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProjectResult'
+        '480':
+          description: ProjectNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateTeamMember':
+    post:
+      operationId: UpdateTeamMember
+      description: 'Updates a team member''s attributes in an AWS CodeStar project. For example, you can change a team member''s role in the project, or change whether they have remote access to project resources.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTeamMemberResult'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: ProjectNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InvalidServiceRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidServiceRoleException'
+        '484':
+          description: ProjectConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectConfigurationException'
+        '485':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '486':
+          description: TeamMemberNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamMemberNotFoundException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTeamMemberRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#UpdateUserProfile':
+    post:
+      operationId: UpdateUserProfile
+      description: 'Updates a user''s profile in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user''s information appears to other users in AWS CodeStar. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateUserProfileResult'
+        '480':
+          description: UserProfileNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserProfileRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    AssociateTeamMemberRequest:
+      type: object
+      required:
+        - projectId
+        - userArn
+        - projectRole
+      properties:
+        projectId:
+          $ref: '#/components/schemas/ProjectId'
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+        projectRole:
+          $ref: '#/components/schemas/Role'
+        remoteAccessAllowed:
+          $ref: '#/components/schemas/RemoteAccessAllowed'
+    AssociateTeamMemberResult:
+      type: object
+      properties:
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+    ClientRequestToken:
+      type: string
+      pattern: '^[\w:/-]+$'
+      minLength: 1
+      maxLength: 256
+    ConcurrentModificationException:
+      type: object
+      properties: {}
+      description: Another modification is being made. That modification must complete before you can make your change.
+    CreateProjectRequest:
+      type: object
+      required:
+        - name
+        - id
+      properties:
+        name:
+          $ref: '#/components/schemas/ProjectName'
+        id:
+          $ref: '#/components/schemas/ProjectId'
+        description:
+          $ref: '#/components/schemas/ProjectDescription'
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+    CreateProjectResult:
+      type: object
+      required:
+        - id
+        - arn
+      properties:
+        id:
+          $ref: '#/components/schemas/ProjectId'
+        arn:
+          $ref: '#/components/schemas/ProjectArn'
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+        projectTemplateId:
+          $ref: '#/components/schemas/ProjectTemplateId'
+    CreateUserProfileRequest:
+      type: object
+      required:
+        - userArn
+        - displayName
+        - emailAddress
+      properties:
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+        displayName:
+          $ref: '#/components/schemas/UserProfileDisplayName'
+        emailAddress:
+          $ref: '#/components/schemas/Email'
+        sshPublicKey:
+          $ref: '#/components/schemas/SshPublicKey'
+    CreateUserProfileResult:
+      type: object
+      required:
+        - userArn
+      properties:
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+        displayName:
+          $ref: '#/components/schemas/UserProfileDisplayName'
+        emailAddress:
+          $ref: '#/components/schemas/Email'
+        sshPublicKey:
+          $ref: '#/components/schemas/SshPublicKey'
+        createdTimestamp:
+          $ref: '#/components/schemas/CreatedTimestamp'
+        lastModifiedTimestamp:
+          $ref: '#/components/schemas/LastModifiedTimestamp'
+    CreatedTimestamp:
+      type: string
+      format: date-time
+    DeleteProjectRequest:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/ProjectId'
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+        deleteStack:
+          $ref: '#/components/schemas/DeleteStack'
+    DeleteProjectResult:
+      type: object
+      properties:
+        stackId:
+          $ref: '#/components/schemas/StackId'
+        projectArn:
+          $ref: '#/components/schemas/ProjectArn'
+    DeleteStack:
+      type: boolean
+    DeleteUserProfileRequest:
+      type: object
+      required:
+        - userArn
+      properties:
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+    DeleteUserProfileResult:
+      type: object
+      required:
+        - userArn
+      properties:
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+    DescribeProjectRequest:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/ProjectId'
+    DescribeProjectResult:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/ProjectName'
+        id:
+          $ref: '#/components/schemas/ProjectId'
+        arn:
+          $ref: '#/components/schemas/ProjectArn'
+        description:
+          $ref: '#/components/schemas/ProjectDescription'
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+        createdTimeStamp:
+          $ref: '#/components/schemas/CreatedTimestamp'
+        stackId:
+          $ref: '#/components/schemas/StackId'
+        projectTemplateId:
+          $ref: '#/components/schemas/ProjectTemplateId'
+    DescribeUserProfileRequest:
+      type: object
+      required:
+        - userArn
+      properties:
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+    DescribeUserProfileResult:
+      type: object
+      required:
+        - userArn
+        - createdTimestamp
+        - lastModifiedTimestamp
+      properties:
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+        displayName:
+          $ref: '#/components/schemas/UserProfileDisplayName'
+        emailAddress:
+          $ref: '#/components/schemas/Email'
+        sshPublicKey:
+          $ref: '#/components/schemas/SshPublicKey'
+        createdTimestamp:
+          $ref: '#/components/schemas/CreatedTimestamp'
+        lastModifiedTimestamp:
+          $ref: '#/components/schemas/LastModifiedTimestamp'
+    DisassociateTeamMemberRequest:
+      type: object
+      required:
+        - projectId
+        - userArn
+      properties:
+        projectId:
+          $ref: '#/components/schemas/ProjectId'
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+    DisassociateTeamMemberResult:
+      type: object
+      properties: {}
+    Email:
+      type: string
+      pattern: '^[\w-.+]+@[\w-.+]+$'
+      minLength: 3
+      maxLength: 128
+    InvalidNextTokenException:
+      type: object
+      properties: {}
+      description: The next token is not valid.
+    InvalidServiceRoleException:
+      type: object
+      properties: {}
+      description: The service role is not valid.
+    LastModifiedTimestamp:
+      type: string
+      format: date-time
+    LimitExceededException:
+      type: object
+      properties: {}
+      description: A resource limit has been exceeded.
+    ListProjectsRequest:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+    ListProjectsResult:
+      type: object
+      required:
+        - projects
+      properties:
+        projects:
+          $ref: '#/components/schemas/ProjectsList'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+    ListResourcesRequest:
+      type: object
+      required:
+        - projectId
+      properties:
+        projectId:
+          $ref: '#/components/schemas/ProjectId'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+    ListResourcesResult:
+      type: object
+      properties:
+        resources:
+          $ref: '#/components/schemas/ResourcesResult'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+    ListTeamMembersRequest:
+      type: object
+      required:
+        - projectId
+      properties:
+        projectId:
+          $ref: '#/components/schemas/ProjectId'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+    ListTeamMembersResult:
+      type: object
+      required:
+        - teamMembers
+      properties:
+        teamMembers:
+          $ref: '#/components/schemas/TeamMemberResult'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+    ListUserProfilesRequest:
+      type: object
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+    ListUserProfilesResult:
+      type: object
+      required:
+        - userProfiles
+      properties:
+        userProfiles:
+          $ref: '#/components/schemas/UserProfilesList'
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    PaginationToken:
+      type: string
+      pattern: '^[\w/+=]+$'
+      minLength: 1
+      maxLength: 256
+    ProjectAlreadyExistsException:
+      type: object
+      properties: {}
+      description: An AWS CodeStar project with the same ID already exists in this region for the AWS account. AWS CodeStar project IDs must be unique within a region for the AWS account.
+    ProjectArn:
+      type: string
+      pattern: '^arn:aws[^:\s]*:codestar:[^:\s]+:[0-9]{12}:project\/[a-z]([a-z0-9|-])+$'
+    ProjectConfigurationException:
+      type: object
+      properties: {}
+      description: Project configuration information is required but not specified.
+    ProjectCreationFailedException:
+      type: object
+      properties: {}
+      description: 'The project creation request was valid, but a nonspecific exception or error occurred during project creation. The project could not be created in AWS CodeStar.'
+    ProjectDescription:
+      type: string
+      pattern: ^$|^\S(.*\S)?$
+      maxLength: 1024
+      format: password
+    ProjectId:
+      type: string
+      pattern: '^[a-z][a-z0-9-]+$'
+      minLength: 2
+      maxLength: 15
+    ProjectName:
+      type: string
+      pattern: ^\S(.*\S)?$
+      minLength: 1
+      maxLength: 100
+      format: password
+    ProjectNotFoundException:
+      type: object
+      properties: {}
+      description: The specified AWS CodeStar project was not found.
+    ProjectSummary:
+      type: object
+      properties:
+        projectId:
+          $ref: '#/components/schemas/ProjectId'
+        projectArn:
+          $ref: '#/components/schemas/ProjectArn'
+      description: Information about the metadata for a project.
+    ProjectTemplateId:
+      type: string
+      pattern: '^arn:aws[^:\s]{0,5}:codestar:[^:\s]+::project-template\/[a-z0-9-]+$'
+      minLength: 1
+    ProjectsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProjectSummary'
+    RemoteAccessAllowed:
+      type: boolean
+    Resource:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/ResourceId'
+      description: Information about a resource for a project.
+    ResourceId:
+      type: string
+      pattern: '^arn\:aws\:\S.*\:.*'
+      minLength: 11
+    ResourcesResult:
+      type: array
+      items:
+        $ref: '#/components/schemas/Resource'
+    Role:
+      type: string
+      pattern: ^(Owner|Viewer|Contributor)$
+    SshPublicKey:
+      type: string
+      pattern: '^[\t\r\n\u0020-\u00FF]*$'
+      maxLength: 16384
+    StackId:
+      type: string
+      pattern: '^arn:aws[^:\s]*:cloudformation:[^:\s]+:[0-9]{12}:stack\/[^:\s]+\/[^:\s]+$'
+    TeamMember:
+      type: object
+      required:
+        - userArn
+        - projectRole
+      properties:
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+        projectRole:
+          $ref: '#/components/schemas/Role'
+        remoteAccessAllowed:
+          $ref: '#/components/schemas/RemoteAccessAllowed'
+      description: Information about a team member in a project.
+    TeamMemberAlreadyAssociatedException:
+      type: object
+      properties: {}
+      description: The team member is already associated with a role in this project.
+    TeamMemberNotFoundException:
+      type: object
+      properties: {}
+      description: The specified team member was not found.
+    TeamMemberResult:
+      type: array
+      items:
+        $ref: '#/components/schemas/TeamMember'
+    UpdateProjectRequest:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/ProjectId'
+        name:
+          $ref: '#/components/schemas/ProjectName'
+        description:
+          $ref: '#/components/schemas/ProjectDescription'
+    UpdateProjectResult:
+      type: object
+      properties: {}
+    UpdateTeamMemberRequest:
+      type: object
+      required:
+        - projectId
+        - userArn
+      properties:
+        projectId:
+          $ref: '#/components/schemas/ProjectId'
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+        projectRole:
+          $ref: '#/components/schemas/Role'
+        remoteAccessAllowed:
+          $ref: '#/components/schemas/RemoteAccessAllowed'
+    UpdateTeamMemberResult:
+      type: object
+      properties:
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+        projectRole:
+          $ref: '#/components/schemas/Role'
+        remoteAccessAllowed:
+          $ref: '#/components/schemas/RemoteAccessAllowed'
+    UpdateUserProfileRequest:
+      type: object
+      required:
+        - userArn
+      properties:
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+        displayName:
+          $ref: '#/components/schemas/UserProfileDisplayName'
+        emailAddress:
+          $ref: '#/components/schemas/Email'
+        sshPublicKey:
+          $ref: '#/components/schemas/SshPublicKey'
+    UpdateUserProfileResult:
+      type: object
+      required:
+        - userArn
+      properties:
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+        displayName:
+          $ref: '#/components/schemas/UserProfileDisplayName'
+        emailAddress:
+          $ref: '#/components/schemas/Email'
+        sshPublicKey:
+          $ref: '#/components/schemas/SshPublicKey'
+        createdTimestamp:
+          $ref: '#/components/schemas/CreatedTimestamp'
+        lastModifiedTimestamp:
+          $ref: '#/components/schemas/LastModifiedTimestamp'
+    UserArn:
+      type: string
+      pattern: 'arn:aws:iam::\d{12}:user\/[\w-]+'
+      minLength: 32
+      maxLength: 95
+    UserProfileAlreadyExistsException:
+      type: object
+      properties: {}
+      description: 'A user profile with that name already exists in this region for the AWS account. AWS CodeStar user profile names must be unique within a region for the AWS account. '
+    UserProfileDisplayName:
+      type: string
+      pattern: ^\S(.*\S)?$
+      minLength: 1
+      maxLength: 64
+    UserProfileNotFoundException:
+      type: object
+      properties: {}
+      description: The user profile was not found.
+    UserProfileSummary:
+      type: object
+      properties:
+        userArn:
+          $ref: '#/components/schemas/UserArn'
+        displayName:
+          $ref: '#/components/schemas/UserProfileDisplayName'
+        emailAddress:
+          $ref: '#/components/schemas/Email'
+        sshPublicKey:
+          $ref: '#/components/schemas/SshPublicKey'
+      description: Information about a user's profile in AWS CodeStar.
+    UserProfilesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserProfileSummary'
+    ValidationException:
+      type: object
+      properties: {}
+      description: 'The specified input is either not valid, or it could not be validated.'
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

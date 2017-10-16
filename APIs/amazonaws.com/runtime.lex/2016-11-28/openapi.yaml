@@ -1,0 +1,517 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://runtime.lex.amazonaws.com/'
+info:
+  version: '2016-11-28'
+  x-release: v4
+  title: Amazon Lex Runtime Service
+  description: 'Amazon Lex provides both build and runtime endpoints. Each endpoint provides a set of operations (API). Your conversational bot uses the runtime API to understand user utterances (user input text or voice). For example, suppose a user says "I want pizza", your bot sends this input to Amazon Lex using the runtime API. Amazon Lex recognizes that the user request is for the OrderPizza intent (one of the intents defined in the bot). Then Amazon Lex engages in user conversation on behalf of the bot to elicit required information (slot values, such as pizza size and crust type), and then performs fulfillment activity (that you configured when you created the bot). You use the build-time API to create and manage your Amazon Lex bot. For a list of build-time operations, see the build-time API, . '
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: runtime.lex
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/runtime.lex-2016-11-28.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/lex/'
+security:
+  - hmac: []
+paths:
+  '/bot/{botName}/alias/{botAlias}/user/{userId}/content':
+    post:
+      operationId: PostContent
+      description: '<p> Sends user input (text or speech) to Amazon Lex. Clients use this API to send requests to Amazon Lex at runtime. Amazon Lex interprets the user input using the machine learning model that it built for the bot. </p> <p> In response, Amazon Lex returns the next message to convey to the user. Consider the following example messages: </p> <ul> <li> <p> For a user input "I would like a pizza," Amazon Lex might return a response with a message eliciting slot data (for example, <code>PizzaSize</code>): "What size pizza would you like?". </p> </li> <li> <p> After the user provides all of the pizza order information, Amazon Lex might return a response with a message to get user confirmation: "Order the pizza?". </p> </li> <li> <p> After the user replies "Yes" to the confirmation prompt, Amazon Lex might return a conclusion statement: "Thank you, your cheese pizza has been ordered.". </p> </li> </ul> <p> Not all Amazon Lex messages require a response from the user. For example, conclusion statements do not require a response. Some messages require only a yes or no response. In addition to the <code>message</code>, Amazon Lex provides additional context about the message in the response that you can use to enhance client behavior, such as displaying the appropriate client user interface. Consider the following examples: </p> <ul> <li> <p> If the message is to elicit slot data, Amazon Lex returns the following context information: </p> <ul> <li> <p> <code>x-amz-lex-dialog-state</code> header set to <code>ElicitSlot</code> </p> </li> <li> <p> <code>x-amz-lex-intent-name</code> header set to the intent name in the current context </p> </li> <li> <p> <code>x-amz-lex-slot-to-elicit</code> header set to the slot name for which the <code>message</code> is eliciting information </p> </li> <li> <p> <code>x-amz-lex-slots</code> header set to a map of slots configured for the intent with their current values </p> </li> </ul> </li> <li> <p> If the message is a confirmation prompt, the <code>x-amz-lex-dialog-state</code> header is set to <code>Confirmation</code> and the <code>x-amz-lex-slot-to-elicit</code> header is omitted. </p> </li> <li> <p> If the message is a clarification prompt configured for the intent, indicating that the user intent is not understood, the <code>x-amz-dialog-state</code> header is set to <code>ElicitIntent</code> and the <code>x-amz-slot-to-elicit</code> header is omitted. </p> </li> </ul> <p> In addition, Amazon Lex also returns your application-specific <code>sessionAttributes</code>. For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html">Managing Conversation Context</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostContentResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: UnsupportedMediaTypeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedMediaTypeException'
+        '486':
+          description: NotAcceptableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptableException'
+        '487':
+          description: RequestTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestTimeoutException'
+        '488':
+          description: DependencyFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyFailedException'
+        '489':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '490':
+          description: LoopDetectedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoopDetectedException'
+      parameters:
+        - name: botName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: botAlias
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostContentRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bot/{botName}/alias/{botAlias}/user/{userId}/text':
+    post:
+      operationId: PostText
+      description: '<p>Sends user input (text-only) to Amazon Lex. Client applications can use this API to send requests to Amazon Lex at runtime. Amazon Lex then interprets the user input using the machine learning model it built for the bot. </p> <p> In response, Amazon Lex returns the next <code>message</code> to convey to the user an optional <code>responseCard</code> to display. Consider the following example messages: </p> <ul> <li> <p> For a user input "I would like a pizza", Amazon Lex might return a response with a message eliciting slot data (for example, PizzaSize): "What size pizza would you like?" </p> </li> <li> <p> After the user provides all of the pizza order information, Amazon Lex might return a response with a message to obtain user confirmation "Proceed with the pizza order?". </p> </li> <li> <p> After the user replies to a confirmation prompt with a "yes", Amazon Lex might return a conclusion statement: "Thank you, your cheese pizza has been ordered.". </p> </li> </ul> <p> Not all Amazon Lex messages require a user response. For example, a conclusion statement does not require a response. Some messages require only a "yes" or "no" user response. In addition to the <code>message</code>, Amazon Lex provides additional context about the message in the response that you might use to enhance client behavior, for example, to display the appropriate client user interface. These are the <code>slotToElicit</code>, <code>dialogState</code>, <code>intentName</code>, and <code>slots</code> fields in the response. Consider the following examples: </p> <ul> <li> <p>If the message is to elicit slot data, Amazon Lex returns the following context information:</p> <ul> <li> <p> <code>dialogState</code> set to ElicitSlot </p> </li> <li> <p> <code>intentName</code> set to the intent name in the current context </p> </li> <li> <p> <code>slotToElicit</code> set to the slot name for which the <code>message</code> is eliciting information </p> </li> <li> <p> <code>slots</code> set to a map of slots, configured for the intent, with currently known values </p> </li> </ul> </li> <li> <p> If the message is a confirmation prompt, the <code>dialogState</code> is set to ConfirmIntent and <code>SlotToElicit</code> is set to null. </p> </li> <li> <p>If the message is a clarification prompt (configured for the intent) that indicates that user intent is not understood, the <code>dialogState</code> is set to ElicitIntent and <code>slotToElicit</code> is set to null. </p> </li> </ul> <p> In addition, Amazon Lex also returns your application-specific <code>sessionAttributes</code>. For more information, see <a href="http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html">Managing Conversation Context</a>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostTextResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: DependencyFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyFailedException'
+        '486':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '487':
+          description: LoopDetectedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoopDetectedException'
+      parameters:
+        - name: botName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: botAlias
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTextRequest'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    Accept:
+      type: string
+    BadGatewayException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Either the Amazon Lex bot is still building, or one of the dependent services (Amazon Polly, AWS Lambda) failed with an internal service error.'
+    BadRequestException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: ' Request validation failed, there is no usable message in the context, or the bot build failed. '
+    BlobStream:
+      type: string
+    BotAlias:
+      type: string
+    BotName:
+      type: string
+    Button:
+      type: object
+      required:
+        - text
+        - value
+      properties:
+        text:
+          $ref: '#/components/schemas/ButtonTextStringWithLength'
+        value:
+          $ref: '#/components/schemas/ButtonValueStringWithLength'
+      description: 'Represents an option to be shown on the client platform (Facebook, Slack, etc.)'
+    ButtonTextStringWithLength:
+      type: string
+      minLength: 1
+      maxLength: 15
+    ButtonValueStringWithLength:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    ConflictException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: ' Two clients are using the same AWS account, Amazon Lex bot, and user ID. '
+    ContentType:
+      type: string
+      enum:
+        - application/vnd.amazonaws.card.generic
+    DependencyFailedException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: ' One of the downstream dependencies, such as AWS Lambda or Amazon Polly, threw an exception. For example, if Amazon Lex does not have sufficient permissions to call a Lambda function, it results in Lambda throwing an exception. '
+    DialogState:
+      type: string
+      enum:
+        - ElicitIntent
+        - ConfirmIntent
+        - ElicitSlot
+        - Fulfilled
+        - ReadyForFulfillment
+        - Failed
+    ErrorMessage:
+      type: string
+    GenericAttachment:
+      type: object
+      properties:
+        title:
+          $ref: '#/components/schemas/StringWithLength'
+        subTitle:
+          $ref: '#/components/schemas/StringWithLength'
+        attachmentLinkUrl:
+          $ref: '#/components/schemas/StringUrlWithLength'
+        imageUrl:
+          $ref: '#/components/schemas/StringUrlWithLength'
+        buttons:
+          $ref: '#/components/schemas/listOfButtons'
+      description: 'Represents an option rendered to the user when a prompt is shown. It could be an image, a button, a link, or text. '
+    HttpContentType:
+      type: string
+    IntentName:
+      type: string
+    InternalFailureException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: Internal service error. Retry the call.
+    LimitExceededException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: Exceeded a limit.
+    LoopDetectedException:
+      type: object
+      properties:
+        Message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: 'Lambda fulfilment function returned <code>DelegateDialogAction</code> to Amazon Lex without changing any slot values. '
+    NotAcceptableException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: The accept header in the request does not have a valid value.
+    NotFoundException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: The resource (such as the Amazon Lex bot or an alias) that is referred to is not found.
+    PostContentRequest:
+      type: object
+      required:
+        - inputStream
+      properties:
+        inputStream:
+          $ref: '#/components/schemas/BlobStream'
+    PostContentResponse:
+      type: object
+      properties:
+        audioStream:
+          $ref: '#/components/schemas/BlobStream'
+    PostTextRequest:
+      type: object
+      required:
+        - inputText
+      properties:
+        sessionAttributes:
+          $ref: '#/components/schemas/StringMap'
+        inputText:
+          $ref: '#/components/schemas/Text'
+    PostTextResponse:
+      type: object
+      properties:
+        intentName:
+          $ref: '#/components/schemas/IntentName'
+        slots:
+          $ref: '#/components/schemas/StringMap'
+        sessionAttributes:
+          $ref: '#/components/schemas/StringMap'
+        message:
+          $ref: '#/components/schemas/Text'
+        dialogState:
+          $ref: '#/components/schemas/DialogState'
+        slotToElicit:
+          $ref: '#/components/schemas/String'
+        responseCard:
+          $ref: '#/components/schemas/ResponseCard'
+    RequestTimeoutException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: The input speech is too long.
+    ResponseCard:
+      type: object
+      properties:
+        version:
+          $ref: '#/components/schemas/String'
+        contentType:
+          $ref: '#/components/schemas/ContentType'
+        genericAttachments:
+          $ref: '#/components/schemas/genericAttachmentList'
+      description: 'If you configure a response card when creating your bots, Amazon Lex substitutes the session attributes and slot values that are available, and then returns it. The response card can also come from a Lambda function ( <code>dialogCodeHook</code> and <code>fulfillmentActivity</code> on an intent).'
+    String:
+      type: string
+    StringMap:
+      type: array
+      items:
+        type: object
+        properties:
+          key:
+            $ref: '#/components/schemas/String'
+          value:
+            $ref: '#/components/schemas/String'
+    StringUrlWithLength:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    StringWithLength:
+      type: string
+      minLength: 1
+      maxLength: 80
+    Text:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    UnsupportedMediaTypeException:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/String'
+      description: 'The Content-Type header (<code>PostContent</code> API) has an invalid value. '
+    UserId:
+      type: string
+      pattern: '[0-9a-zA-Z._:-]+'
+      minLength: 2
+      maxLength: 100
+    genericAttachmentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GenericAttachment'
+      minItems: 0
+      maxItems: 10
+    listOfButtons:
+      type: array
+      items:
+        $ref: '#/components/schemas/Button'
+      minItems: 0
+      maxItems: 5
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4

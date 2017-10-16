@@ -1,0 +1,4338 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://management.azure.com/'
+info:
+  description: Azure DevTest Labs REST API version 2015-05-21-preview.
+  title: DevTestLabsClient
+  version: 2015-05-21-preview
+  x-apisguru-categories:
+    - developer_tools
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-devtestlabs/2015-05-21-preview/swagger/DTL.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: arm-devtestlabs
+  x-tags:
+    - Azure
+    - Microsoft
+    - virtual machines
+    - testing
+    - environments
+security:
+  - oauth2:
+      - user_impersonation
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/labs':
+    get:
+      description: List labs.
+      operationId: Lab_ListBySubscription
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Lab_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Lab_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Lab
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/Lab'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs':
+    get:
+      description: List labs.
+      operationId: Lab_ListByResourceGroup
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Lab_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Lab_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Lab
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/Lab'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources':
+    get:
+      description: List artifact sources.
+      operationId: ArtifactSource_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_ArtifactSource_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_ArtifactSource_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - ArtifactSource
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/ArtifactSource'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts':
+    get:
+      description: List artifacts.
+      operationId: Artifact_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the artifact source.
+          in: path
+          name: artifactSourceName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Artifact_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Artifact_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Artifact
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/Artifact'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}':
+    get:
+      description: Get artifact.
+      operationId: Artifact_GetResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the artifact source.
+          in: path
+          name: artifactSourceName
+          required: true
+          schema:
+            type: string
+        - description: The name of the artifact.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Artifact'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Artifact'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Artifact
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts/{name}/generateArmTemplate':
+    post:
+      description: 'Generates an ARM template for the given artifact, uploads the required files to a storage account, and validates the generated artifact.'
+      operationId: Artifact_GenerateArmTemplate
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the artifact source.
+          in: path
+          name: artifactSourceName
+          required: true
+          schema:
+            type: string
+        - description: The name of the artifact.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArmTemplateInfo'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ArmTemplateInfo'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Artifact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateArmTemplateRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GenerateArmTemplateRequest'
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{name}':
+    delete:
+      description: Delete artifact source.
+      operationId: ArtifactSource_DeleteResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the artifact source.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - ArtifactSource
+    get:
+      description: Get artifact source.
+      operationId: ArtifactSource_GetResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the artifact source.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactSource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactSource'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - ArtifactSource
+    patch:
+      description: Modify properties of artifact sources.
+      operationId: ArtifactSource_PatchResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the artifact source.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactSource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactSource'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - ArtifactSource
+      requestBody:
+        $ref: '#/components/requestBodies/ArtifactSource'
+    put:
+      description: Create or replace an existing artifact source.
+      operationId: ArtifactSource_CreateOrUpdateResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the artifact source.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactSource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactSource'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactSource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactSource'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - ArtifactSource
+      requestBody:
+        $ref: '#/components/requestBodies/ArtifactSource'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costinsights':
+    get:
+      description: List cost insights.
+      operationId: CostInsight_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_CostInsight_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_CostInsight_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - CostInsight
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/CostInsight'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costinsights/{name}':
+    get:
+      description: Get cost insight.
+      operationId: CostInsight_GetResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the cost insight.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostInsight'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CostInsight'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - CostInsight
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costinsights/{name}/refreshData':
+    post:
+      description: Refresh Lab's Cost Insight Data. This operation can take a while to complete.
+      operationId: CostInsight_RefreshData
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the cost insight.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - CostInsight
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs':
+    get:
+      description: List costs.
+      operationId: Cost_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Cost_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Cost_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Cost
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/Cost'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{name}':
+    get:
+      description: Get cost.
+      operationId: Cost_GetResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the cost.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cost'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cost'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Cost
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{name}/refreshData':
+    post:
+      description: Refresh Lab's Cost Data. This operation can take a while to complete.
+      operationId: Cost_RefreshData
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the cost.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Cost
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages':
+    get:
+      description: List custom images.
+      operationId: CustomImage_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_CustomImage_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_CustomImage_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - CustomImage
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/CustomImage'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages/{name}':
+    delete:
+      description: Delete custom image. This operation can take a while to complete.
+      operationId: CustomImage_DeleteResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the custom image.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '202':
+          description: Accepted
+        '204':
+          description: No Content
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - CustomImage
+      x-ms-long-running-operation: true
+    get:
+      description: Get custom image.
+      operationId: CustomImage_GetResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the custom image.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomImage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CustomImage'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - CustomImage
+    put:
+      description: Create or replace an existing custom image. This operation can take a while to complete.
+      operationId: CustomImage_CreateOrUpdateResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the custom image.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomImage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CustomImage'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomImage'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CustomImage'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - CustomImage
+      x-ms-long-running-operation: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomImage'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CustomImage'
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas':
+    get:
+      description: List formulas.
+      operationId: Formula_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Formula_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Formula_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Formula
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/Formula'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas/{name}':
+    delete:
+      description: Delete formula.
+      operationId: Formula_DeleteResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the formula.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Formula
+    get:
+      description: Get formula.
+      operationId: Formula_GetResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the formula.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Formula'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Formula'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Formula
+    put:
+      description: Create or replace an existing Formula. This operation can take a while to complete.
+      operationId: Formula_CreateOrUpdateResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the formula.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Formula'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Formula'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Formula'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Formula'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Formula
+      x-ms-long-running-operation: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Formula'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Formula'
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/galleryimages':
+    get:
+      description: List gallery images.
+      operationId: GalleryImage_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_GalleryImage_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_GalleryImage_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - GalleryImage
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/GalleryImage'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{name}/evaluatePolicies':
+    post:
+      description: Evaluates Lab Policy.
+      operationId: PolicySet_EvaluatePolicies
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the policy set.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatePoliciesResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EvaluatePoliciesResponse'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - PolicySet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluatePoliciesRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/EvaluatePoliciesRequest'
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies':
+    get:
+      description: List policies.
+      operationId: Policy_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the policy set.
+          in: path
+          name: policySetName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Policy_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Policy_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Policy
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/Policy'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies/{name}':
+    delete:
+      description: Delete policy.
+      operationId: Policy_DeleteResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the policy set.
+          in: path
+          name: policySetName
+          required: true
+          schema:
+            type: string
+        - description: The name of the policy.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Policy
+    get:
+      description: Get policy.
+      operationId: Policy_GetResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the policy set.
+          in: path
+          name: policySetName
+          required: true
+          schema:
+            type: string
+        - description: The name of the policy.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Policy
+    patch:
+      description: Modify properties of policies.
+      operationId: Policy_PatchResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the policy set.
+          in: path
+          name: policySetName
+          required: true
+          schema:
+            type: string
+        - description: The name of the policy.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Policy
+      requestBody:
+        $ref: '#/components/requestBodies/Policy'
+    put:
+      description: Create or replace an existing policy.
+      operationId: Policy_CreateOrUpdateResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the policy set.
+          in: path
+          name: policySetName
+          required: true
+          schema:
+            type: string
+        - description: The name of the policy.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Policy'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Policy
+      requestBody:
+        $ref: '#/components/requestBodies/Policy'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules':
+    get:
+      description: List schedules.
+      operationId: Schedule_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Schedule_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_Schedule_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Schedule
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/Schedule'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}':
+    delete:
+      description: Delete schedule. This operation can take a while to complete.
+      operationId: Schedule_DeleteResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the schedule.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '202':
+          description: Accepted
+        '204':
+          description: No Content
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Schedule
+      x-ms-long-running-operation: true
+    get:
+      description: Get schedule.
+      operationId: Schedule_GetResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the schedule.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Schedule
+    patch:
+      description: Modify properties of schedules.
+      operationId: Schedule_PatchResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the schedule.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Schedule
+      requestBody:
+        $ref: '#/components/requestBodies/Schedule'
+    put:
+      description: Create or replace an existing schedule. This operation can take a while to complete.
+      operationId: Schedule_CreateOrUpdateResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the schedule.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Schedule
+      x-ms-long-running-operation: true
+      requestBody:
+        $ref: '#/components/requestBodies/Schedule'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}/execute':
+    post:
+      description: Execute a schedule. This operation can take a while to complete.
+      operationId: Schedule_Execute
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the schedule.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Schedule
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines':
+    get:
+      description: List virtual machines.
+      operationId: VirtualMachine_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_LabVirtualMachine_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_LabVirtualMachine_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualMachine
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/LabVirtualMachine'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}':
+    delete:
+      description: Delete virtual machine. This operation can take a while to complete.
+      operationId: VirtualMachine_DeleteResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the virtual Machine.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '202':
+          description: Accepted
+        '204':
+          description: No Content
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualMachine
+      x-ms-long-running-operation: true
+    get:
+      description: Get virtual machine.
+      operationId: VirtualMachine_GetResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the virtual Machine.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabVirtualMachine'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LabVirtualMachine'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualMachine
+    patch:
+      description: Modify properties of virtual machines.
+      operationId: VirtualMachine_PatchResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the virtual Machine.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabVirtualMachine'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LabVirtualMachine'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualMachine
+      requestBody:
+        $ref: '#/components/requestBodies/LabVirtualMachine'
+    put:
+      description: Create or replace an existing Virtual Machine. This operation can take a while to complete.
+      operationId: VirtualMachine_CreateOrUpdateResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the virtual Machine.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabVirtualMachine'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LabVirtualMachine'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabVirtualMachine'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LabVirtualMachine'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualMachine
+      x-ms-long-running-operation: true
+      requestBody:
+        $ref: '#/components/requestBodies/LabVirtualMachine'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/applyArtifacts':
+    post:
+      description: Apply artifacts to Lab VM. This operation can take a while to complete.
+      operationId: VirtualMachine_ApplyArtifacts
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the virtual Machine.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualMachine
+      x-ms-long-running-operation: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplyArtifactsRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ApplyArtifactsRequest'
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/start':
+    post:
+      description: Start a Lab VM. This operation can take a while to complete.
+      operationId: VirtualMachine_Start
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the virtual Machine.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualMachine
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{name}/stop':
+    post:
+      description: Stop a Lab VM. This operation can take a while to complete.
+      operationId: VirtualMachine_Stop
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the virtual Machine.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualMachine
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks':
+    get:
+      description: List virtual networks.
+      operationId: VirtualNetwork_List
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: $top
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: $orderBy
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_VirtualNetwork_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_VirtualNetwork_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualNetwork
+      x-ms-odata: '#/components/schemas//components/schemas//components/schemas/VirtualNetwork'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks/{name}':
+    delete:
+      description: Delete virtual network. This operation can take a while to complete.
+      operationId: VirtualNetwork_DeleteResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the virtual network.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '202':
+          description: Accepted
+        '204':
+          description: No Content
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualNetwork
+      x-ms-long-running-operation: true
+    get:
+      description: Get virtual network.
+      operationId: VirtualNetwork_GetResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the virtual network.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualNetwork'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VirtualNetwork'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualNetwork
+    patch:
+      description: Modify properties of virtual networks.
+      operationId: VirtualNetwork_PatchResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the virtual network.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualNetwork'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VirtualNetwork'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualNetwork
+      requestBody:
+        $ref: '#/components/requestBodies/VirtualNetwork'
+    put:
+      description: Create or replace an existing virtual network. This operation can take a while to complete.
+      operationId: VirtualNetwork_CreateOrUpdateResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: labName
+          required: true
+          schema:
+            type: string
+        - description: The name of the virtual network.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualNetwork'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VirtualNetwork'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualNetwork'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VirtualNetwork'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - VirtualNetwork
+      x-ms-long-running-operation: true
+      requestBody:
+        $ref: '#/components/requestBodies/VirtualNetwork'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}':
+    delete:
+      description: Delete lab. This operation can take a while to complete.
+      operationId: Lab_DeleteResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '202':
+          description: Accepted
+        '204':
+          description: No Content
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Lab
+      x-ms-long-running-operation: true
+    get:
+      description: Get lab.
+      operationId: Lab_GetResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Lab
+    patch:
+      description: Modify properties of labs.
+      operationId: Lab_PatchResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Lab
+      requestBody:
+        $ref: '#/components/requestBodies/Lab'
+    put:
+      description: Create or replace an existing Lab. This operation can take a while to complete.
+      operationId: Lab_CreateOrUpdateResource
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Lab'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Lab
+      x-ms-long-running-operation: true
+      requestBody:
+        $ref: '#/components/requestBodies/Lab'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/createEnvironment':
+    post:
+      description: Create virtual machines in a Lab. This operation can take a while to complete.
+      operationId: Lab_CreateEnvironment
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Lab
+      x-ms-long-running-operation: true
+      requestBody:
+        $ref: '#/components/requestBodies/LabVirtualMachine'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/generateUploadUri':
+    post:
+      description: Generate a URI for uploading custom disk images to a Lab.
+      operationId: Lab_GenerateUploadUri
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateUploadUriResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GenerateUploadUriResponse'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Lab
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateUploadUriParameter'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GenerateUploadUriParameter'
+        required: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/listVhds':
+    post:
+      description: List disk images available for custom image creation.
+      operationId: Lab_ListVhds
+      parameters:
+        - $ref: '#/components/parameters/subscriptionId'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            type: string
+        - description: The name of the lab.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/api-version'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_LabVhd_'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWithContinuation_LabVhd_'
+        default:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CloudError'
+      security:
+        - oauth2:
+            - user_impersonation
+      tags:
+        - Lab
+      x-ms-pageable:
+        nextLinkName: nextLink
+components:
+  schemas:
+    ApplyArtifactsRequest:
+      description: Request body for applying artifacts to a virtual machine.
+      properties:
+        artifacts:
+          description: The list of artifacts to apply.
+          items:
+            $ref: '#/components/schemas/ArtifactInstallProperties'
+          type: array
+      type: object
+    ArmTemplateInfo:
+      description: Information about a generated ARM template.
+      properties:
+        parameters:
+          $ref: '#/components/schemas/Object'
+        template:
+          $ref: '#/components/schemas/Object'
+      type: object
+    Artifact:
+      description: An artifact.
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/ArtifactProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    ArtifactDeploymentStatusProperties:
+      description: Properties of an artifact deployment.
+      properties:
+        artifactsApplied:
+          description: The total count of the artifacts that were successfully applied.
+          format: int32
+          type: integer
+        deploymentStatus:
+          description: The deployment status of the artifact.
+          type: string
+        totalArtifacts:
+          description: The total count of the artifacts that were tentatively applied.
+          format: int32
+          type: integer
+      type: object
+    ArtifactInstallProperties:
+      description: Properties of an artifact.
+      properties:
+        artifactId:
+          description: The artifact's identifier.
+          type: string
+        parameters:
+          description: The parameters of the artifact.
+          items:
+            $ref: '#/components/schemas/ArtifactParameterProperties'
+          type: array
+      type: object
+    ArtifactParameterProperties:
+      description: Properties of an artifact parameter.
+      properties:
+        name:
+          description: The name of the artifact parameter.
+          type: string
+        value:
+          description: The value of the artifact parameter.
+          type: string
+      type: object
+    ArtifactProperties:
+      description: Properties of an artifact.
+      properties:
+        description:
+          description: The description of the artifact.
+          type: string
+        filePath:
+          description: The file path of the artifact.
+          type: string
+        icon:
+          description: The icon of the artifact.
+          type: string
+        parameters:
+          $ref: '#/components/schemas/Object'
+        targetOsType:
+          description: Gets or sets the type of the target os.
+          type: string
+        title:
+          description: The title of the artifact.
+          type: string
+      type: object
+    ArtifactSource:
+      description: Properties of an artifact source.
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/ArtifactSourceProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    ArtifactSourceProperties:
+      description: Properties of an artifact source.
+      properties:
+        branchRef:
+          description: The branch reference of the artifact source.
+          type: string
+        displayName:
+          description: The display name of the artifact source.
+          type: string
+        folderPath:
+          description: The folder path of the artifact source.
+          type: string
+        provisioningState:
+          description: The provisioning status of the resource.
+          type: string
+        securityToken:
+          description: The security token of the artifact source.
+          type: string
+        sourceType:
+          description: The type of the artifact source.
+          enum:
+            - VsoGit
+            - GitHub
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: SourceControlType
+        status:
+          description: The status of the artifact source.
+          enum:
+            - Enabled
+            - Disabled
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: EnableStatus
+        uri:
+          description: The URI of the artifact source.
+          type: string
+      type: object
+    CloudError:
+      properties:
+        error:
+          $ref: '#/components/schemas/CloudErrorBody'
+      type: object
+      x-ms-external: true
+    CloudErrorBody:
+      properties:
+        code:
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/CloudErrorBody'
+          type: array
+        message:
+          type: string
+        target:
+          type: string
+      type: object
+      x-ms-external: true
+    Cost:
+      description: A cost item.
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/CostProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    CostInsight:
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/CostInsightProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    CostInsightProperties:
+      properties:
+        currencyCode:
+          type: string
+        provisioningState:
+          description: The provisioning status of the resource.
+          type: string
+        vmCosts:
+          items:
+            $ref: '#/components/schemas/VMCostProperties'
+          type: array
+      type: object
+    CostPerDayProperties:
+      description: The per-day properties of a cost item.
+      properties:
+        cost:
+          description: The cost of the cost item.
+          format: double
+          type: number
+        costType:
+          description: The type of the cost.
+          enum:
+            - Unavailable
+            - Reported
+            - Projected
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: CostPropertyType
+        date:
+          description: The date of the cost item.
+          format: date-time
+          type: string
+      type: object
+    CostProperties:
+      description: Properties of a cost item.
+      properties:
+        costs:
+          description: The per-day costs items of the cost.
+          items:
+            $ref: '#/components/schemas/CostPerDayProperties'
+          type: array
+        currencyCode:
+          description: The currency code of the cost.
+          type: string
+      type: object
+    CustomImage:
+      description: A custom image.
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/CustomImageProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    CustomImageProperties:
+      description: Properties of a custom image.
+      properties:
+        author:
+          description: The author of the custom image.
+          type: string
+        creationDate:
+          description: The creation date of the custom image.
+          format: date-time
+          type: string
+        description:
+          description: The description of the custom image.
+          type: string
+        osType:
+          description: The OS type of the custom image.
+          enum:
+            - Windows
+            - Linux
+            - None
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: CustomImageOsType
+        provisioningState:
+          description: The provisioning status of the resource.
+          type: string
+        vhd:
+          $ref: '#/components/schemas/CustomImagePropertiesCustom'
+        vm:
+          $ref: '#/components/schemas/CustomImagePropertiesFromVm'
+      type: object
+    CustomImagePropertiesCustom:
+      description: Properties for creating a custom image from a VHD.
+      properties:
+        imageName:
+          description: The image name.
+          type: string
+        sysPrep:
+          description: Indicates whether sysprep has been run on the VHD.
+          type: boolean
+      type: object
+    CustomImagePropertiesFromVm:
+      description: Properties for creating a custom image from a virtual machine.
+      properties:
+        linuxOsInfo:
+          $ref: '#/components/schemas/LinuxOsInfo'
+        sourceVmId:
+          description: The source vm identifier.
+          type: string
+        sysPrep:
+          description: Indicates whether sysprep has been run on the VHD.
+          type: boolean
+        windowsOsInfo:
+          $ref: '#/components/schemas/WindowsOsInfo'
+      type: object
+    DayDetails:
+      description: Properties of a daily schedule.
+      properties:
+        time:
+          type: string
+      type: object
+    EvaluatePoliciesProperties:
+      description: Properties for evaluating a policy set.
+      properties:
+        factData:
+          description: The fact data.
+          type: string
+        factName:
+          description: The fact name.
+          type: string
+        valueOffset:
+          description: The value offset.
+          type: string
+      type: object
+    EvaluatePoliciesRequest:
+      description: Request body for evaluating a policy set.
+      properties:
+        policies:
+          description: Policies to evaluate.
+          items:
+            $ref: '#/components/schemas/EvaluatePoliciesProperties'
+          type: array
+      type: object
+    EvaluatePoliciesResponse:
+      description: Response body for evaluating a policy set.
+      properties:
+        results:
+          description: Results of evaluating a policy set.
+          items:
+            $ref: '#/components/schemas/PolicySetResult'
+          type: array
+      type: object
+    Formula:
+      description: A formula.
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/FormulaProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    FormulaProperties:
+      description: Properties of a formula.
+      properties:
+        author:
+          description: The author of the formula.
+          type: string
+        creationDate:
+          description: The creation date of the formula.
+          format: date-time
+          type: string
+        description:
+          description: The description of the formula.
+          type: string
+        formulaContent:
+          $ref: '#/components/schemas/LabVirtualMachine'
+        osType:
+          description: The OS type of the formula.
+          type: string
+        provisioningState:
+          description: The provisioning status of the resource.
+          type: string
+        vm:
+          $ref: '#/components/schemas/FormulaPropertiesFromVm'
+      type: object
+    FormulaPropertiesFromVm:
+      description: Information about a VM from which a formula is to be created.
+      properties:
+        labVmId:
+          description: The identifier of the VM from which a formula is to be created.
+          type: string
+      type: object
+    GalleryImage:
+      description: A gallery image.
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/GalleryImageProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    GalleryImageProperties:
+      description: Properties of a gallery image.
+      properties:
+        author:
+          description: The author of the gallery image.
+          type: string
+        createdDate:
+          description: The creation date of the gallery image.
+          format: date-time
+          type: string
+        description:
+          description: The description of the gallery image.
+          type: string
+        enabled:
+          description: Indicates whether this gallery image is enabled.
+          type: boolean
+        icon:
+          description: The icon of the gallery image.
+          type: string
+        imageReference:
+          $ref: '#/components/schemas/GalleryImageReference'
+      type: object
+    GalleryImageReference:
+      description: The reference information for an Azure Marketplace image.
+      properties:
+        offer:
+          description: The offer of the gallery image.
+          type: string
+        osType:
+          description: The OS type of the gallery image.
+          type: string
+        publisher:
+          description: The publisher of the gallery image.
+          type: string
+        sku:
+          description: The SKU of the gallery image.
+          type: string
+        version:
+          description: The version of the gallery image.
+          type: string
+      type: object
+    GenerateArmTemplateRequest:
+      description: Parameters for generating an ARM template for deploying artifacts.
+      properties:
+        location:
+          description: The location of the virtual machine.
+          type: string
+        parameters:
+          description: The parameters of the ARM template.
+          items:
+            $ref: '#/components/schemas/ParameterInfo'
+          type: array
+        virtualMachineName:
+          description: The resource name of the virtual machine.
+          type: string
+      type: object
+    GenerateUploadUriParameter:
+      description: Properties for generating an upload URI.
+      properties:
+        blobName:
+          description: The blob name of the upload URI.
+          type: string
+      type: object
+    GenerateUploadUriResponse:
+      description: Reponse body for generating an upload URI.
+      properties:
+        uploadUri:
+          description: The upload URI for the VHD.
+          type: string
+      type: object
+    HourDetails:
+      description: Properties of an hourly schedule.
+      properties:
+        minute:
+          description: Minutes of the hour the schedule will run.
+          format: int32
+          type: integer
+      type: object
+    Lab:
+      description: A lab.
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/LabProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    LabProperties:
+      description: Properties of a lab.
+      properties:
+        artifactsStorageAccount:
+          description: The artifact storage account of the lab.
+          type: string
+        createdDate:
+          description: The creation date of the lab.
+          format: date-time
+          type: string
+        defaultStorageAccount:
+          description: The lab's default storage account.
+          type: string
+        defaultVirtualNetworkId:
+          description: The default virtual network identifier of the lab.
+          type: string
+        labStorageType:
+          description: The type of the lab storage.
+          enum:
+            - Standard
+            - Premium
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: LabStorageType
+        provisioningState:
+          description: The provisioning status of the resource.
+          type: string
+        storageAccounts:
+          description: The storage accounts of the lab.
+          items:
+            type: string
+          type: array
+        vaultName:
+          description: The name of the key vault of the lab.
+          type: string
+      type: object
+    LabVhd:
+      description: Properties of a VHD in the lab.
+      properties:
+        id:
+          description: The absolute URI of the VHD.
+          type: string
+      type: object
+    LabVirtualMachine:
+      description: A virtual machine.
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/LabVirtualMachineProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    LabVirtualMachineProperties:
+      description: Properties of a virtual machine.
+      properties:
+        artifactDeploymentStatus:
+          $ref: '#/components/schemas/ArtifactDeploymentStatusProperties'
+        artifacts:
+          description: The artifacts to be installed on the virtual machine.
+          items:
+            $ref: '#/components/schemas/ArtifactInstallProperties'
+          type: array
+        computeId:
+          description: The resource identifier (Microsoft.Compute) of the virtual machine.
+          type: string
+        createdByUser:
+          description: The email address of creator of the virtual machine.
+          type: string
+        createdByUserId:
+          description: The object identifier of the creator of the virtual machine.
+          type: string
+        customImageId:
+          description: The custom image identifier of the virtual machine.
+          type: string
+        disallowPublicIpAddress:
+          description: Indicates whether the virtual machine is to be created without a public IP address.
+          type: boolean
+        fqdn:
+          description: The fully-qualified domain name of the virtual machine.
+          type: string
+        galleryImageReference:
+          $ref: '#/components/schemas/GalleryImageReference'
+        isAuthenticationWithSshKey:
+          description: A value indicating whether this virtual machine uses an SSH key for authentication.
+          type: boolean
+        labSubnetName:
+          description: The lab subnet name of the virtual machine.
+          type: string
+        labVirtualNetworkId:
+          description: The lab virtual network identifier of the virtual machine.
+          type: string
+        notes:
+          description: The notes of the virtual machine.
+          type: string
+        osType:
+          description: The OS type of the virtual machine.
+          type: string
+        ownerObjectId:
+          description: The object identifier of the owner of the virtual machine.
+          type: string
+        password:
+          description: The password of the virtual machine administrator.
+          type: string
+        provisioningState:
+          description: The provisioning status of the resource.
+          type: string
+        size:
+          description: The size of the virtual machine.
+          type: string
+        sshKey:
+          description: The SSH key of the virtual machine administrator.
+          type: string
+        userName:
+          description: The user name of the virtual machine.
+          type: string
+      type: object
+    LinuxOsInfo:
+      description: Information about a Linux OS.
+      properties:
+        linuxOsState:
+          description: The state of the Linux OS.
+          enum:
+            - NonDeprovisioned
+            - DeprovisionRequested
+            - DeprovisionApplied
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: LinuxOsState
+      type: object
+    Object:
+      properties: {}
+      type: object
+    ParameterInfo:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    Policy:
+      description: A Policy.
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/PolicyProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    PolicyProperties:
+      description: Properties of a Policy.
+      properties:
+        description:
+          description: The description of the policy.
+          type: string
+        evaluatorType:
+          description: The evaluator type of the policy.
+          enum:
+            - AllowedValuesPolicy
+            - MaxValuePolicy
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: PolicyEvaluatorType
+        factData:
+          description: The fact data of the policy.
+          type: string
+        factName:
+          description: The fact name of the policy.
+          enum:
+            - UserOwnedLabVmCount
+            - LabVmCount
+            - LabVmSize
+            - GalleryImage
+            - UserOwnedLabVmCountInSubnet
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: PolicyFactName
+        provisioningState:
+          description: The provisioning status of the resource.
+          type: string
+        status:
+          description: The status of the policy.
+          enum:
+            - Enabled
+            - Disabled
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: PolicyStatus
+        threshold:
+          description: The threshold of the policy.
+          type: string
+      type: object
+    PolicySetResult:
+      description: Result of a policy set evaluation.
+      properties:
+        hasError:
+          description: A value indicating whether this policy set evaluation has discovered violations.
+          type: boolean
+        policyViolations:
+          description: The list of policy violations.
+          items:
+            $ref: '#/components/schemas/PolicyViolation'
+          type: array
+      type: object
+    PolicyViolation:
+      description: Policy violation.
+      properties:
+        code:
+          description: The code of the policy violation.
+          type: string
+        message:
+          description: The message of the policy violation.
+          type: string
+      type: object
+    Schedule:
+      description: A schedule.
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/ScheduleProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    ScheduleProperties:
+      description: Properties of a schedule.
+      properties:
+        dailyRecurrence:
+          $ref: '#/components/schemas/DayDetails'
+        hourlyRecurrence:
+          $ref: '#/components/schemas/HourDetails'
+        provisioningState:
+          description: The provisioning status of the resource.
+          type: string
+        status:
+          description: The status of the schedule.
+          enum:
+            - Enabled
+            - Disabled
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: EnableStatus
+        taskType:
+          description: The task type of the schedule.
+          enum:
+            - LabVmsShutdownTask
+            - LabVmsStartupTask
+            - LabBillingTask
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: TaskType
+        timeZoneId:
+          description: The time zone id.
+          type: string
+        weeklyRecurrence:
+          $ref: '#/components/schemas/WeekDetails'
+      type: object
+    Subnet:
+      properties:
+        allowPublicIp:
+          enum:
+            - Default
+            - Deny
+            - Allow
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: UsagePermissionType
+        labSubnetName:
+          type: string
+        resourceId:
+          type: string
+      type: object
+    SubnetOverride:
+      description: Property overrides on a subnet of a virtual network.
+      properties:
+        labSubnetName:
+          description: The name given to the subnet within the lab.
+          type: string
+        resourceId:
+          description: The resource identifier of the subnet.
+          type: string
+        useInVmCreationPermission:
+          description: Indicates whether this subnet can be used during virtual machine creation.
+          enum:
+            - Default
+            - Deny
+            - Allow
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: UsagePermissionType
+        usePublicIpAddressPermission:
+          description: Indicates whether public IP addresses can be assigned to virtual machines on this subnet.
+          enum:
+            - Default
+            - Deny
+            - Allow
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: UsagePermissionType
+      type: object
+    SubscriptionNotification:
+      properties:
+        properties:
+          $ref: '#/components/schemas/SubscriptionNotificationProperties'
+        registrationDate:
+          type: string
+        state:
+          enum:
+            - NotDefined
+            - Registered
+            - Unregistered
+            - Warned
+            - Suspended
+            - Deleted
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: SubscriptionNotificationState
+      type: object
+    SubscriptionNotificationProperties:
+      properties:
+        tenantId:
+          type: string
+      type: object
+    VMCostProperties:
+      properties:
+        cost:
+          format: double
+          type: number
+        name:
+          type: string
+        resourceGroupName:
+          type: string
+      type: object
+    VirtualNetwork:
+      description: A virtual network.
+      properties:
+        id:
+          description: The identifier of the resource.
+          type: string
+        location:
+          description: The location of the resource.
+          type: string
+        name:
+          description: The name of the resource.
+          type: string
+        properties:
+          $ref: '#/components/schemas/VirtualNetworkProperties'
+        tags:
+          additionalProperties:
+            type: string
+          description: The tags of the resource.
+          type: object
+        type:
+          description: The type of the resource.
+          type: string
+      type: object
+      x-ms-azure-resource: true
+    VirtualNetworkProperties:
+      description: Properties of a virtual network.
+      properties:
+        allowedSubnets:
+          description: The allowed subnets of the virtual network.
+          items:
+            $ref: '#/components/schemas/Subnet'
+          type: array
+        description:
+          description: The description of the virtual network.
+          type: string
+        externalProviderResourceId:
+          description: The Microsoft.Network resource identifier of the virtual network.
+          type: string
+        provisioningState:
+          description: The provisioning status of the resource.
+          type: string
+        subnetOverrides:
+          description: The subnet overrides of the virtual network.
+          items:
+            $ref: '#/components/schemas/SubnetOverride'
+          type: array
+      type: object
+    WeekDetails:
+      description: Properties of a weekly schedule.
+      properties:
+        time:
+          description: The time of the day.
+          type: string
+        weekdays:
+          description: The days of the week.
+          items:
+            type: string
+          type: array
+      type: object
+    WindowsOsInfo:
+      description: Information about a Windows OS.
+      properties:
+        windowsOsState:
+          description: The state of the Windows OS.
+          enum:
+            - NonSysprepped
+            - SysprepRequested
+            - SysprepApplied
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: WindowsOsState
+      type: object
+    ResponseWithContinuation_ArtifactSource_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/ArtifactSource'
+          type: array
+      type: object
+    ResponseWithContinuation_Artifact_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/Artifact'
+          type: array
+      type: object
+    ResponseWithContinuation_CostInsight_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/CostInsight'
+          type: array
+      type: object
+    ResponseWithContinuation_Cost_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/Cost'
+          type: array
+      type: object
+    ResponseWithContinuation_CustomImage_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/CustomImage'
+          type: array
+      type: object
+    ResponseWithContinuation_Formula_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/Formula'
+          type: array
+      type: object
+    ResponseWithContinuation_GalleryImage_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/GalleryImage'
+          type: array
+      type: object
+    ResponseWithContinuation_LabVhd_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/LabVhd'
+          type: array
+      type: object
+    ResponseWithContinuation_LabVirtualMachine_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/LabVirtualMachine'
+          type: array
+      type: object
+    ResponseWithContinuation_Lab_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/Lab'
+          type: array
+      type: object
+    ResponseWithContinuation_Policy_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/Policy'
+          type: array
+      type: object
+    ResponseWithContinuation_Schedule_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/Schedule'
+          type: array
+      type: object
+    ResponseWithContinuation_VirtualNetwork_:
+      description: The response of a list operation.
+      properties:
+        nextLink:
+          description: Link for next set of results.
+          type: string
+        value:
+          description: Results of the list operation.
+          items:
+            $ref: '#/components/schemas/VirtualNetwork'
+          type: array
+      type: object
+  parameters:
+    api-version:
+      description: Client API version.
+      in: query
+      name: api-version
+      required: true
+      schema:
+        type: string
+        default: 2015-05-21-preview
+    subscriptionId:
+      description: The subscription ID.
+      in: path
+      name: subscriptionId
+      required: true
+      schema:
+        type: string
+  requestBodies:
+    ArtifactSource:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ArtifactSource'
+        text/json:
+          schema:
+            $ref: '#/components/schemas/ArtifactSource'
+      required: true
+    Policy:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Policy'
+        text/json:
+          schema:
+            $ref: '#/components/schemas/Policy'
+      required: true
+    Schedule:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Schedule'
+        text/json:
+          schema:
+            $ref: '#/components/schemas/Schedule'
+      required: true
+    LabVirtualMachine:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LabVirtualMachine'
+        text/json:
+          schema:
+            $ref: '#/components/schemas/LabVirtualMachine'
+      required: true
+    VirtualNetwork:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VirtualNetwork'
+        text/json:
+          schema:
+            $ref: '#/components/schemas/VirtualNetwork'
+      required: true
+    Lab:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Lab'
+        text/json:
+          schema:
+            $ref: '#/components/schemas/Lab'
+      required: true
+  securitySchemes:
+    oauth2:
+      description: OAuth2 Implicit Grant
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+          scopes:
+            user_impersonation: Access Microsoft Azure

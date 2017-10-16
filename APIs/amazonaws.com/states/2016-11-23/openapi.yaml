@@ -1,0 +1,1656 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://states.amazonaws.com/'
+info:
+  version: '2016-11-23'
+  x-release: v4
+  title: AWS Step Functions
+  description: '<fullname>AWS Step Functions</fullname> <p>AWS Step Functions is a web service that enables you to coordinate the components of distributed applications and microservices using visual workflows. You build applications from individual components that each perform a discrete function, or <i>task</i>, allowing you to scale and change applications quickly. Step Functions provides a graphical console to visualize the components of your application as a series of steps. It automatically triggers and tracks each step, and retries when there are errors, so your application executes in order and as expected, every time. Step Functions logs the state of each step, so when things do go wrong, you can diagnose and debug problems quickly.</p> <p>Step Functions manages the operations and underlying infrastructure for you to ensure your application is available at any scale. You can run tasks on the AWS cloud, on your own servers, or an any system that has access to AWS. Step Functions can be accessed and used with the Step Functions console, the AWS SDKs (included with your Beta release invitation email), or an HTTP API (the subject of this document).</p>'
+  x-logo:
+    url: 'https://media.amazonwebservices.com/blog/2007/big_pbaws_logo_300px.jpg'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: states
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/states-2016-11-23.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/states/'
+x-hasEquivalentPaths: true
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: CreateActivity
+      description: Creates an activity.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateActivityOutput'
+        '480':
+          description: ActivityLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityLimitExceeded'
+        '481':
+          description: InvalidName
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateActivityInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#CreateStateMachine':
+    post:
+      operationId: CreateStateMachine
+      description: Creates a state machine.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStateMachineOutput'
+        '480':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+        '481':
+          description: InvalidDefinition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDefinition'
+        '482':
+          description: InvalidName
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidName'
+        '483':
+          description: StateMachineAlreadyExists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineAlreadyExists'
+        '484':
+          description: StateMachineDeleting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDeleting'
+        '485':
+          description: StateMachineLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineLimitExceeded'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStateMachineInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteActivity':
+    post:
+      operationId: DeleteActivity
+      description: Deletes an activity.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteActivityOutput'
+        '480':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteActivityInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DeleteStateMachine':
+    post:
+      operationId: DeleteStateMachine
+      description: Deletes a state machine. This is an asynchronous operation-- it sets the state machine's status to "DELETING" and begins the delete process.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteStateMachineOutput'
+        '480':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteStateMachineInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeActivity':
+    post:
+      operationId: DescribeActivity
+      description: Describes an activity.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeActivityOutput'
+        '480':
+          description: ActivityDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityDoesNotExist'
+        '481':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeActivityInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeExecution':
+    post:
+      operationId: DescribeExecution
+      description: Describes an execution.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeExecutionOutput'
+        '480':
+          description: ExecutionDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionDoesNotExist'
+        '481':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeExecutionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#DescribeStateMachine':
+    post:
+      operationId: DescribeStateMachine
+      description: Describes a state machine.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStateMachineOutput'
+        '480':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+        '481':
+          description: StateMachineDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDoesNotExist'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStateMachineInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetActivityTask':
+    post:
+      operationId: GetActivityTask
+      description: '<p>Used by workers to retrieve a task (with the specified activity ARN) scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll will return an empty result, that is, the <code>taskToken</code> returned is an empty string.</p> <important> <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds higher than the maximum time the service may hold the poll request).</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetActivityTaskOutput'
+        '480':
+          description: ActivityDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityDoesNotExist'
+        '481':
+          description: ActivityWorkerLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityWorkerLimitExceeded'
+        '482':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetActivityTaskInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#GetExecutionHistory':
+    post:
+      operationId: GetExecutionHistory
+      description: 'Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the <code>timeStamp</code> of the events. Use the <code>reverseOrder</code> parameter to get the latest events first. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the <code>nextToken</code> returned by the previous call.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetExecutionHistoryOutput'
+        '480':
+          description: ExecutionDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionDoesNotExist'
+        '481':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+        '482':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetExecutionHistoryInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListActivities':
+    post:
+      operationId: ListActivities
+      description: 'Lists the existing activities. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the <code>nextToken</code> returned by the previous call.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListActivitiesOutput'
+        '480':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListActivitiesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListExecutions':
+    post:
+      operationId: ListExecutions
+      description: 'Lists the executions of a state machine that meet the filtering criteria. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the <code>nextToken</code> returned by the previous call.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExecutionsOutput'
+        '480':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+        '481':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+        '482':
+          description: StateMachineDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDoesNotExist'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListExecutionsInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#ListStateMachines':
+    post:
+      operationId: ListStateMachines
+      description: 'Lists the existing state machines. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the <code>nextToken</code> returned by the previous call.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStateMachinesOutput'
+        '480':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+      parameters:
+        - name: maxResults
+          in: query
+          description: Pagination limit
+          required: false
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          description: Pagination token
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStateMachinesInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SendTaskFailure':
+    post:
+      operationId: SendTaskFailure
+      description: Used by workers to report that the task identified by the <code>taskToken</code> failed.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendTaskFailureOutput'
+        '480':
+          description: TaskDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDoesNotExist'
+        '481':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+        '482':
+          description: TaskTimedOut
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskTimedOut'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendTaskFailureInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SendTaskHeartbeat':
+    post:
+      operationId: SendTaskHeartbeat
+      description: '<p>Used by workers to report to the service that the task represented by the specified <code>taskToken</code> is still making progress. This action resets the <code>Heartbeat</code> clock. The <code>Heartbeat</code> threshold is specified in the state machine''s Amazon States Language definition. This action does not in itself create an event in the execution history. However, if the task times out, the execution history will contain an <code>ActivityTimedOut</code> event.</p> <note> <p>The <code>Timeout</code> of a task, defined in the state machine''s Amazon States Language definition, is its maximum allowed duration, regardless of the number of <a>SendTaskHeartbeat</a> requests received.</p> </note> <note> <p>This operation is only useful for long-lived tasks to report the liveliness of the task.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendTaskHeartbeatOutput'
+        '480':
+          description: TaskDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDoesNotExist'
+        '481':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+        '482':
+          description: TaskTimedOut
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskTimedOut'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendTaskHeartbeatInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#SendTaskSuccess':
+    post:
+      operationId: SendTaskSuccess
+      description: Used by workers to report that the task identified by the <code>taskToken</code> completed successfully.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendTaskSuccessOutput'
+        '480':
+          description: TaskDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDoesNotExist'
+        '481':
+          description: InvalidOutput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidOutput'
+        '482':
+          description: InvalidToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidToken'
+        '483':
+          description: TaskTimedOut
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskTimedOut'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendTaskSuccessInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StartExecution':
+    post:
+      operationId: StartExecution
+      description: Starts a state machine execution.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartExecutionOutput'
+        '480':
+          description: ExecutionLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionLimitExceeded'
+        '481':
+          description: ExecutionAlreadyExists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionAlreadyExists'
+        '482':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+        '483':
+          description: InvalidExecutionInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidExecutionInput'
+        '484':
+          description: InvalidName
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidName'
+        '485':
+          description: StateMachineDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDoesNotExist'
+        '486':
+          description: StateMachineDeleting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDeleting'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartExecutionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/#StopExecution':
+    post:
+      operationId: StopExecution
+      description: Stops an execution.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopExecutionOutput'
+        '480':
+          description: ExecutionDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecutionDoesNotExist'
+        '481':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopExecutionInput'
+        required: true
+    parameters:
+      - $ref: '#/components/parameters/Action'
+      - $ref: '#/components/parameters/Version'
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  schemas:
+    ActivityDoesNotExist:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The specified activity does not exist.
+    ActivityFailedEventDetails:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    ActivityLimitExceeded:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The maximum number of activities has been reached. Existing activities must be deleted before a new activity can be created.
+    ActivityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActivityListItem'
+    ActivityListItem:
+      type: object
+      required:
+        - activityArn
+        - name
+        - creationDate
+      properties:
+        activityArn:
+          $ref: '#/components/schemas/Arn'
+        name:
+          $ref: '#/components/schemas/Name'
+        creationDate:
+          $ref: '#/components/schemas/Timestamp'
+    ActivityScheduleFailedEventDetails:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    ActivityScheduledEventDetails:
+      type: object
+      required:
+        - resource
+      properties:
+        resource:
+          $ref: '#/components/schemas/Arn'
+        input:
+          $ref: '#/components/schemas/Data'
+        timeoutInSeconds:
+          $ref: '#/components/schemas/TimeoutInSeconds'
+        heartbeatInSeconds:
+          $ref: '#/components/schemas/TimeoutInSeconds'
+    ActivityStartedEventDetails:
+      type: object
+      properties:
+        workerName:
+          $ref: '#/components/schemas/Identity'
+    ActivitySucceededEventDetails:
+      type: object
+      properties:
+        output:
+          $ref: '#/components/schemas/Data'
+    ActivityTimedOutEventDetails:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    ActivityWorkerLimitExceeded:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The maximum number of workers concurrently polling for activity tasks has been reached.
+    Arn:
+      type: string
+      minLength: 1
+      maxLength: 256
+    Cause:
+      type: string
+      minLength: 0
+      maxLength: 32768
+    CreateActivityInput:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+    CreateActivityOutput:
+      type: object
+      required:
+        - activityArn
+        - creationDate
+      properties:
+        activityArn:
+          $ref: '#/components/schemas/Arn'
+        creationDate:
+          $ref: '#/components/schemas/Timestamp'
+    CreateStateMachineInput:
+      type: object
+      required:
+        - name
+        - definition
+        - roleArn
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        definition:
+          $ref: '#/components/schemas/Definition'
+        roleArn:
+          $ref: '#/components/schemas/Arn'
+    CreateStateMachineOutput:
+      type: object
+      required:
+        - stateMachineArn
+        - creationDate
+      properties:
+        stateMachineArn:
+          $ref: '#/components/schemas/Arn'
+        creationDate:
+          $ref: '#/components/schemas/Timestamp'
+    Data:
+      type: string
+      maxLength: 32768
+    Definition:
+      type: string
+      minLength: 1
+      maxLength: 1048576
+    DeleteActivityInput:
+      type: object
+      required:
+        - activityArn
+      properties:
+        activityArn:
+          $ref: '#/components/schemas/Arn'
+    DeleteActivityOutput:
+      type: object
+      properties: {}
+    DeleteStateMachineInput:
+      type: object
+      required:
+        - stateMachineArn
+      properties:
+        stateMachineArn:
+          $ref: '#/components/schemas/Arn'
+    DeleteStateMachineOutput:
+      type: object
+      properties: {}
+    DescribeActivityInput:
+      type: object
+      required:
+        - activityArn
+      properties:
+        activityArn:
+          $ref: '#/components/schemas/Arn'
+    DescribeActivityOutput:
+      type: object
+      required:
+        - activityArn
+        - name
+        - creationDate
+      properties:
+        activityArn:
+          $ref: '#/components/schemas/Arn'
+        name:
+          $ref: '#/components/schemas/Name'
+        creationDate:
+          $ref: '#/components/schemas/Timestamp'
+    DescribeExecutionInput:
+      type: object
+      required:
+        - executionArn
+      properties:
+        executionArn:
+          $ref: '#/components/schemas/Arn'
+    DescribeExecutionOutput:
+      type: object
+      required:
+        - executionArn
+        - stateMachineArn
+        - status
+        - startDate
+        - input
+      properties:
+        executionArn:
+          $ref: '#/components/schemas/Arn'
+        stateMachineArn:
+          $ref: '#/components/schemas/Arn'
+        name:
+          $ref: '#/components/schemas/Name'
+        status:
+          $ref: '#/components/schemas/ExecutionStatus'
+        startDate:
+          $ref: '#/components/schemas/Timestamp'
+        stopDate:
+          $ref: '#/components/schemas/Timestamp'
+        input:
+          $ref: '#/components/schemas/Data'
+        output:
+          $ref: '#/components/schemas/Data'
+    DescribeStateMachineInput:
+      type: object
+      required:
+        - stateMachineArn
+      properties:
+        stateMachineArn:
+          $ref: '#/components/schemas/Arn'
+    DescribeStateMachineOutput:
+      type: object
+      required:
+        - stateMachineArn
+        - name
+        - definition
+        - roleArn
+        - creationDate
+      properties:
+        stateMachineArn:
+          $ref: '#/components/schemas/Arn'
+        name:
+          $ref: '#/components/schemas/Name'
+        status:
+          $ref: '#/components/schemas/StateMachineStatus'
+        definition:
+          $ref: '#/components/schemas/Definition'
+        roleArn:
+          $ref: '#/components/schemas/Arn'
+        creationDate:
+          $ref: '#/components/schemas/Timestamp'
+    Error:
+      type: string
+      minLength: 0
+      maxLength: 256
+    ErrorMessage:
+      type: string
+    EventId:
+      type: integer
+    ExecutionAbortedEventDetails:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    ExecutionAlreadyExists:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: An execution with the same name already exists.
+    ExecutionDoesNotExist:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The specified execution does not exist.
+    ExecutionFailedEventDetails:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    ExecutionLimitExceeded:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The maximum number of running executions has been reached. Running executions must end or be stopped before a new execution can be started.
+    ExecutionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExecutionListItem'
+    ExecutionListItem:
+      type: object
+      required:
+        - executionArn
+        - stateMachineArn
+        - name
+        - status
+        - startDate
+      properties:
+        executionArn:
+          $ref: '#/components/schemas/Arn'
+        stateMachineArn:
+          $ref: '#/components/schemas/Arn'
+        name:
+          $ref: '#/components/schemas/Name'
+        status:
+          $ref: '#/components/schemas/ExecutionStatus'
+        startDate:
+          $ref: '#/components/schemas/Timestamp'
+        stopDate:
+          $ref: '#/components/schemas/Timestamp'
+    ExecutionStartedEventDetails:
+      type: object
+      properties:
+        input:
+          $ref: '#/components/schemas/Data'
+        roleArn:
+          $ref: '#/components/schemas/Arn'
+    ExecutionStatus:
+      type: string
+      enum:
+        - RUNNING
+        - SUCCEEDED
+        - FAILED
+        - TIMED_OUT
+        - ABORTED
+    ExecutionSucceededEventDetails:
+      type: object
+      properties:
+        output:
+          $ref: '#/components/schemas/Data'
+    ExecutionTimedOutEventDetails:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    GetActivityTaskInput:
+      type: object
+      required:
+        - activityArn
+      properties:
+        activityArn:
+          $ref: '#/components/schemas/Arn'
+        workerName:
+          $ref: '#/components/schemas/Name'
+    GetActivityTaskOutput:
+      type: object
+      properties:
+        taskToken:
+          $ref: '#/components/schemas/TaskToken'
+        input:
+          $ref: '#/components/schemas/Data'
+    GetExecutionHistoryInput:
+      type: object
+      required:
+        - executionArn
+      properties:
+        executionArn:
+          $ref: '#/components/schemas/Arn'
+        maxResults:
+          $ref: '#/components/schemas/PageSize'
+        reverseOrder:
+          $ref: '#/components/schemas/ReverseOrder'
+        nextToken:
+          $ref: '#/components/schemas/PageToken'
+    GetExecutionHistoryOutput:
+      type: object
+      required:
+        - events
+      properties:
+        events:
+          $ref: '#/components/schemas/HistoryEventList'
+        nextToken:
+          $ref: '#/components/schemas/PageToken'
+    HistoryEvent:
+      type: object
+      required:
+        - timestamp
+        - type
+        - id
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/Timestamp'
+        type:
+          $ref: '#/components/schemas/HistoryEventType'
+        id:
+          $ref: '#/components/schemas/EventId'
+        previousEventId:
+          $ref: '#/components/schemas/EventId'
+        activityFailedEventDetails:
+          $ref: '#/components/schemas/ActivityFailedEventDetails'
+        activityScheduleFailedEventDetails:
+          $ref: '#/components/schemas/ActivityScheduleFailedEventDetails'
+        activityScheduledEventDetails:
+          $ref: '#/components/schemas/ActivityScheduledEventDetails'
+        activityStartedEventDetails:
+          $ref: '#/components/schemas/ActivityStartedEventDetails'
+        activitySucceededEventDetails:
+          $ref: '#/components/schemas/ActivitySucceededEventDetails'
+        activityTimedOutEventDetails:
+          $ref: '#/components/schemas/ActivityTimedOutEventDetails'
+        executionFailedEventDetails:
+          $ref: '#/components/schemas/ExecutionFailedEventDetails'
+        executionStartedEventDetails:
+          $ref: '#/components/schemas/ExecutionStartedEventDetails'
+        executionSucceededEventDetails:
+          $ref: '#/components/schemas/ExecutionSucceededEventDetails'
+        executionAbortedEventDetails:
+          $ref: '#/components/schemas/ExecutionAbortedEventDetails'
+        executionTimedOutEventDetails:
+          $ref: '#/components/schemas/ExecutionTimedOutEventDetails'
+        lambdaFunctionFailedEventDetails:
+          $ref: '#/components/schemas/LambdaFunctionFailedEventDetails'
+        lambdaFunctionScheduleFailedEventDetails:
+          $ref: '#/components/schemas/LambdaFunctionScheduleFailedEventDetails'
+        lambdaFunctionScheduledEventDetails:
+          $ref: '#/components/schemas/LambdaFunctionScheduledEventDetails'
+        lambdaFunctionStartFailedEventDetails:
+          $ref: '#/components/schemas/LambdaFunctionStartFailedEventDetails'
+        lambdaFunctionSucceededEventDetails:
+          $ref: '#/components/schemas/LambdaFunctionSucceededEventDetails'
+        lambdaFunctionTimedOutEventDetails:
+          $ref: '#/components/schemas/LambdaFunctionTimedOutEventDetails'
+        stateEnteredEventDetails:
+          $ref: '#/components/schemas/StateEnteredEventDetails'
+        stateExitedEventDetails:
+          $ref: '#/components/schemas/StateExitedEventDetails'
+    HistoryEventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/HistoryEvent'
+    HistoryEventType:
+      type: string
+      enum:
+        - ActivityFailed
+        - ActivityScheduleFailed
+        - ActivityScheduled
+        - ActivityStarted
+        - ActivitySucceeded
+        - ActivityTimedOut
+        - ChoiceStateEntered
+        - ChoiceStateExited
+        - ExecutionFailed
+        - ExecutionStarted
+        - ExecutionSucceeded
+        - ExecutionAborted
+        - ExecutionTimedOut
+        - FailStateEntered
+        - LambdaFunctionFailed
+        - LambdaFunctionScheduleFailed
+        - LambdaFunctionScheduled
+        - LambdaFunctionStartFailed
+        - LambdaFunctionStarted
+        - LambdaFunctionSucceeded
+        - LambdaFunctionTimedOut
+        - SucceedStateEntered
+        - SucceedStateExited
+        - TaskStateEntered
+        - TaskStateExited
+        - PassStateEntered
+        - PassStateExited
+        - ParallelStateEntered
+        - ParallelStateExited
+        - WaitStateEntered
+        - WaitStateExited
+    Identity:
+      type: string
+      maxLength: 256
+    InvalidArn:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The provided Amazon Resource Name (ARN) is invalid.
+    InvalidDefinition:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The provided Amazon States Language definition is invalid.
+    InvalidExecutionInput:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The provided JSON input data is invalid.
+    InvalidName:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The provided name is invalid.
+    InvalidOutput:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The provided JSON output data is invalid.
+    InvalidToken:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The provided token is invalid.
+    LambdaFunctionFailedEventDetails:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    LambdaFunctionScheduleFailedEventDetails:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    LambdaFunctionScheduledEventDetails:
+      type: object
+      required:
+        - resource
+      properties:
+        resource:
+          $ref: '#/components/schemas/Arn'
+        input:
+          $ref: '#/components/schemas/Data'
+        timeoutInSeconds:
+          $ref: '#/components/schemas/TimeoutInSeconds'
+    LambdaFunctionStartFailedEventDetails:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    LambdaFunctionSucceededEventDetails:
+      type: object
+      properties:
+        output:
+          $ref: '#/components/schemas/Data'
+    LambdaFunctionTimedOutEventDetails:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    ListActivitiesInput:
+      type: object
+      properties:
+        maxResults:
+          $ref: '#/components/schemas/PageSize'
+        nextToken:
+          $ref: '#/components/schemas/PageToken'
+    ListActivitiesOutput:
+      type: object
+      required:
+        - activities
+      properties:
+        activities:
+          $ref: '#/components/schemas/ActivityList'
+        nextToken:
+          $ref: '#/components/schemas/PageToken'
+    ListExecutionsInput:
+      type: object
+      required:
+        - stateMachineArn
+      properties:
+        stateMachineArn:
+          $ref: '#/components/schemas/Arn'
+        statusFilter:
+          $ref: '#/components/schemas/ExecutionStatus'
+        maxResults:
+          $ref: '#/components/schemas/PageSize'
+        nextToken:
+          $ref: '#/components/schemas/PageToken'
+    ListExecutionsOutput:
+      type: object
+      required:
+        - executions
+      properties:
+        executions:
+          $ref: '#/components/schemas/ExecutionList'
+        nextToken:
+          $ref: '#/components/schemas/PageToken'
+    ListStateMachinesInput:
+      type: object
+      properties:
+        maxResults:
+          $ref: '#/components/schemas/PageSize'
+        nextToken:
+          $ref: '#/components/schemas/PageToken'
+    ListStateMachinesOutput:
+      type: object
+      required:
+        - stateMachines
+      properties:
+        stateMachines:
+          $ref: '#/components/schemas/StateMachineList'
+        nextToken:
+          $ref: '#/components/schemas/PageToken'
+    Name:
+      type: string
+      minLength: 1
+      maxLength: 80
+    PageSize:
+      type: integer
+      minimum: 0
+      maximum: 1000
+    PageToken:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ReverseOrder:
+      type: boolean
+    SendTaskFailureInput:
+      type: object
+      required:
+        - taskToken
+      properties:
+        taskToken:
+          $ref: '#/components/schemas/TaskToken'
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    SendTaskFailureOutput:
+      type: object
+      properties: {}
+    SendTaskHeartbeatInput:
+      type: object
+      required:
+        - taskToken
+      properties:
+        taskToken:
+          $ref: '#/components/schemas/TaskToken'
+    SendTaskHeartbeatOutput:
+      type: object
+      properties: {}
+    SendTaskSuccessInput:
+      type: object
+      required:
+        - taskToken
+        - output
+      properties:
+        taskToken:
+          $ref: '#/components/schemas/TaskToken'
+        output:
+          $ref: '#/components/schemas/Data'
+    SendTaskSuccessOutput:
+      type: object
+      properties: {}
+    StartExecutionInput:
+      type: object
+      required:
+        - stateMachineArn
+      properties:
+        stateMachineArn:
+          $ref: '#/components/schemas/Arn'
+        name:
+          $ref: '#/components/schemas/Name'
+        input:
+          $ref: '#/components/schemas/Data'
+    StartExecutionOutput:
+      type: object
+      required:
+        - executionArn
+        - startDate
+      properties:
+        executionArn:
+          $ref: '#/components/schemas/Arn'
+        startDate:
+          $ref: '#/components/schemas/Timestamp'
+    StateEnteredEventDetails:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        input:
+          $ref: '#/components/schemas/Data'
+    StateExitedEventDetails:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        output:
+          $ref: '#/components/schemas/Data'
+    StateMachineAlreadyExists:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: A state machine with the same name but a different definition or role ARN already exists.
+    StateMachineDeleting:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The specified state machine is being deleted.
+    StateMachineDoesNotExist:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The specified state machine does not exist.
+    StateMachineLimitExceeded:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+      description: The maximum number of state machines has been reached. Existing state machines must be deleted before a new state machine can be created.
+    StateMachineList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StateMachineListItem'
+    StateMachineListItem:
+      type: object
+      required:
+        - stateMachineArn
+        - name
+        - creationDate
+      properties:
+        stateMachineArn:
+          $ref: '#/components/schemas/Arn'
+        name:
+          $ref: '#/components/schemas/Name'
+        creationDate:
+          $ref: '#/components/schemas/Timestamp'
+    StateMachineStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - DELETING
+    StopExecutionInput:
+      type: object
+      required:
+        - executionArn
+      properties:
+        executionArn:
+          $ref: '#/components/schemas/Arn'
+        error:
+          $ref: '#/components/schemas/Error'
+        cause:
+          $ref: '#/components/schemas/Cause'
+    StopExecutionOutput:
+      type: object
+      required:
+        - stopDate
+      properties:
+        stopDate:
+          $ref: '#/components/schemas/Timestamp'
+    TaskDoesNotExist:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+    TaskTimedOut:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ErrorMessage'
+    TaskToken:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    TimeoutInSeconds:
+      type: integer
+    Timestamp:
+      type: string
+      format: date-time
+  parameters:
+    Action:
+      name: Action
+      in: header
+      required: true
+      schema:
+        type: string
+    Version:
+      name: Version
+      in: header
+      required: true
+      schema:
+        type: string
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      required: false
+      schema:
+        type: string
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
