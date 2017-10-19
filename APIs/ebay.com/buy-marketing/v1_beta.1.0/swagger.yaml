@@ -5,18 +5,18 @@ host: api.ebay.com
 basePath: /buy/marketing/v1_beta
 info:
   contact:
-    name: eBay Inc.
-  description: The Buy Marketing API lets shoppers discover the best selling products and assists shoppers with deciding which product to purchase.
+    name: 'eBay Inc,'
+  description: 'The Marketing API retrieves eBay products based on a metric, such as Best Selling, as well as products that were also bought and also viewed.'
   license:
     name: eBay API License Agreement
     url: 'https://go.developer.ebay.com/api-license-agreement'
   title: Buy Marketing
-  version: v1_beta.0.0
+  version: v1_beta.1.0
   x-apisguru-categories:
     - ecommerce
   x-logo:
     backgroundColor: '#FFFFFF'
-    url: 'https://pbs.twimg.com/profile_images/667048357307662338/PzXHlU9N_400x400.png'
+    url: 'https://pbs.twimg.com/profile_images/854751952239853568/BdT5xkFG_400x400.jpg'
   x-origin:
     - format: swagger
       url: 'https://developer.ebay.com/api-docs/master/buy/marketing/openapi/2/buy_marketing_v1_beta.json'
@@ -34,15 +34,15 @@ securityDefinitions:
 paths:
   /merchandised_product:
     get:
-      description: 'This call returns an array of products based on the category and metric specified. This includes details of the product, such as the eBay product ID (EPID), title, and user reviews and ratings for the product. You can use the epid returned by this call in the Browse API search call to retrieve items for this product. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
+      description: 'This call returns an array of products based on the category and metric specified. This includes details of the product, such as the eBay product Id (EPID), title, and user reviews and ratings for the product. You can use the epid returned by this call in the Browse API search call to retrieve items for this product. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
       operationId: getMerchandisedProducts
       parameters:
-        - description: 'The aspect name/value pairs used to further refine product results. For example: &nbsp;&nbsp;&nbsp;/buy/marketing/v1_beta/merchandised_product?category_id=31388&amp;metric_name=BEST_SELLING&amp;aspect_filter=Brand:Canon You can use the Browse API search call with the fieldgroups=ASPECT_REFINEMENTS field to return the aspects of a product. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/buy-marketing/types/MarketingAspectFilter.html'
+        - description: 'The aspect name/value pairs used to further refine product results. For example: &nbsp;&nbsp;&nbsp;/buy/marketing/v1_beta/merchandised_product?category_id=31388&amp;metric_name=BEST_SELLING&amp;aspect_filter=Brand:Canon You can use the Browse API search call with the fieldgroups=ASPECT_REFINEMENTS field to return the aspects of a product. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/marketing/types/MarketingAspectFilter.html'
           in: query
           name: aspect_filter
           required: false
           type: string
-        - description: 'This query parameter limits the products returned to a specific eBay category. The list of eBay category Ids is not published and category Ids are not all the same across all the eBay maketplace. You can use the following techniques to find a category by site. Use the Category Changes page. Use the Taxonomy API. Use the Browse API and submit the following call to get the dominantCategoryId for an item. /buy/browse/v1/item_summary/search?q=keyword&amp;fieldgroups=ASPECT_REFINEMENTS Maximum: 1 Required: 1'
+        - description: 'This query parameter limits the products returned to a specific eBay category. The list of eBay category Ids is not published and category Ids are not all the same across all the eBay maketplace. You can use the following techniques to find a category by site. Use the Category Changes page. Use the Taxonomy API. For details see Categories for Buy API Calls. Use the Browse API and submit the following call to get the dominantCategoryId for an item. /buy/browse/v1/item_summary/search?q=keyword&amp;fieldgroups=ASPECT_REFINEMENTS Maximum: 1 Required: 1'
           in: query
           name: category_id
           required: true
@@ -69,7 +69,96 @@ paths:
       security:
         - Client Credentials:
             - 'https://api.ebay.com/oauth/api_scope/buy.marketing'
-      summary: Returns an array of products based on the category and metric specified.
+      tags:
+        - merchandised_product
+  /merchandised_product/get_also_bought_products:
+    get:
+      description: 'This call returns products that were also bought when shoppers bought the product specified in the request. Showing ''also bought'' products inspires up-selling and cross-selling. You specify the product by one of the following. epid (eBay Product Id) gtin (Global Trade Item Number) brand (brand name such as Nike) plus mpn (Manufacturer''s Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Maximum: A maximum of 12 products are returned.'
+      operationId: getAlsoBoughtByProduct
+      parameters:
+        - description: 'The brand of the product. Restriction: This must be used along with mpn. Required: You must specify one epid, or one gtin, or one brand plus mpn pair.'
+          in: query
+          name: brand
+          required: false
+          type: string
+        - description: 'The eBay product identifier of a product. Required: You must specify one epid, or one gtin, or one brand plus mpn pair.'
+          in: query
+          name: epid
+          required: false
+          type: string
+        - description: 'The unique Global Trade Item Number of the item as defined by http://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number value. Required: You must specify one epid, or one gtin, or one brand plus mpn pair.'
+          in: query
+          name: gtin
+          required: false
+          type: string
+        - description: 'The manufacturer part number of the product. Restriction: This must be used along with brand. Required: You must specify one epid, or one gtin, or one brand plus mpn pair.'
+          in: query
+          name: mpn
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BestSellingProductResponse'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope/buy.marketing'
+      tags:
+        - merchandised_product
+  /merchandised_product/get_also_viewed_products:
+    get:
+      description: 'This call returns products that were also viewed when shoppers viewed the product specified in the request. Showing ''also viewed'' products encourages up-selling and cross-selling. You specify the product by one one of the following. epid (eBay Product Id) gtin (Global Trade Item Number) brand (brand name such as Nike) plus mpn (Manufacturer''s Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Maximum: A maximum of 12 products are returned.'
+      operationId: getAlsoViewedByProduct
+      parameters:
+        - description: 'The brand of the product. Restriction: This must be used along with mpn. Required: You must specify one epid, or one gtin, or one brand plus mpn pair.'
+          in: query
+          name: brand
+          required: false
+          type: string
+        - description: 'The eBay product identifier of a product. Required: You must specify one epid, or one gtin, or one brand plus mpn pair.'
+          in: query
+          name: epid
+          required: false
+          type: string
+        - description: 'The unique Global Trade Item Number of the item as defined by http://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number value. Required: You must specify one epid, or one gtin, or one brand plus mpn pair.'
+          in: query
+          name: gtin
+          required: false
+          type: string
+        - description: 'The manufacturer part number of the product. Restriction: This must be used along with brand.'
+          in: query
+          name: mpn
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BestSellingProductResponse'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope/buy.marketing'
       tags:
         - merchandised_product
 definitions:
@@ -77,7 +166,7 @@ definitions:
     description: This type defines the monetary value of an amount and the currency used.
     properties:
       currency:
-        description: 'A three-letter ISO 4217 code that indicates the currency of the amount in the value field. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/buy-marketing/types/CurrencyCodeEnum.html''>eBay API documentation</a>'
+        description: 'A three-letter ISO 4217 code that indicates the currency of the amount in the value field. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/marketing/types/CurrencyCodeEnum.html''>eBay API documentation</a>'
         type: string
       value:
         description: 'The monetary amount, in the currency specified by the currency field.'
@@ -151,7 +240,7 @@ definitions:
         description: Reserved for future use.
         type: integer
       imageUrl:
-        description: A string that is the URL of the image.
+        description: The URL of the image.
         type: string
       width:
         description: Reserved for future use.
