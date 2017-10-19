@@ -56,7 +56,7 @@ buildApiList(specs)
 
 function cacheLogo(url) {
   assert(url.indexOf('#') === -1);
-  return makeRequest('get', url, {encoding: null})
+  return makeRequest('get', url, {encoding: null, retries: 10})
     .spread(function(response, data) {
       var logoFile = 'cache/logo/' + util.urlToFilename(url, true);
 
