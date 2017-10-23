@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Schedules reporting jobs containing your YouTube Analytics data and downloads the resulting bulk data reports in the form of CSV files.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: YouTube Reporting
   version: v1
   x-apiClientRegistration:
@@ -32,11 +36,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/yt-analytics-monetary.readonly': View monetary and non-monetary YouTube Analytics reports for your YouTube content
       'https://www.googleapis.com/auth/yt-analytics.readonly': View YouTube Analytics reports for your YouTube content
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/yt-analytics-monetary.readonly': View monetary and non-monetary YouTube Analytics reports for your YouTube content
+      'https://www.googleapis.com/auth/yt-analytics.readonly': View YouTube Analytics reports for your YouTube content
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -159,7 +172,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - jobs
@@ -199,7 +216,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - jobs
@@ -227,7 +248,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - jobs
@@ -254,7 +279,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - jobs
@@ -328,7 +357,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - jobs
@@ -375,7 +408,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - jobs
@@ -416,7 +453,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - media
@@ -474,7 +515,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
         - reportTypes

@@ -9,6 +9,10 @@ info:
     url: 'https://google.com'
   description: |
     Creates and manages rules that determine when a Firebase Rules-enabled service should permit a request.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Firebase Rules
   version: v1
   x-apiClientRegistration:
@@ -32,12 +36,22 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
       'https://www.googleapis.com/auth/firebase.readonly': View all your Firebase data and settings
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
+      'https://www.googleapis.com/auth/firebase.readonly': View all your Firebase data and settings
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -120,16 +134,13 @@ tags:
 paths:
   '/v1/{name}':
     delete:
-      description: |-
-        Delete a `Ruleset` by resource name.
-
-        If the `Ruleset` is referenced by a `Release` the operation will fail.
-      operationId: firebaserules.projects.rulesets.delete
+      description: Delete a `Release` by resource name.
+      operationId: firebaserules.projects.releases.delete
       parameters:
         - description: |-
-            Resource name for the ruleset to delete.
+            Resource name for the `Release` to delete.
 
-            Format: `projects/{project_id}/rulesets/{ruleset_id}`
+            Format: `projects/{project_id}/releases/{release_id}`
           in: path
           name: name
           required: true
@@ -143,18 +154,22 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - projects
     get:
-      description: Get a `Ruleset` by name including the full `Source` contents.
-      operationId: firebaserules.projects.rulesets.get
+      description: Get a `Release` by name.
+      operationId: firebaserules.projects.releases.get
       parameters:
         - description: |-
-            Resource name for the ruleset to get.
+            Resource name of the `Release`.
 
-            Format: `projects/{project_id}/rulesets/{ruleset_id}`
+            Format: `projects/{project_id}/releases/{release_id}`
           in: path
           name: name
           required: true
@@ -164,13 +179,19 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Ruleset'
+            $ref: '#/definitions/Release'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/firebase'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase.readonly'
       tags:
         - projects
@@ -188,6 +209,44 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/uploadType'
+    patch:
+      description: |-
+        Update a `Release` via PATCH.
+
+        Only updates to the `ruleset_name` and `test_suite_name` fields will be
+        honored. `Release` rename is not supported. To create a `Release` use the
+        CreateRelease method.
+      operationId: firebaserules.projects.releases.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateReleaseRequest'
+        - description: |-
+            Resource name for the project which owns this `Release`.
+
+            Format: `projects/{project_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Release'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/firebase'
+      tags:
+        - projects
     put:
       description: |-
         Update a `Release`.
@@ -239,7 +298,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - projects
@@ -309,9 +372,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/firebase'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase.readonly'
       tags:
         - projects
@@ -376,7 +445,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - projects
@@ -430,9 +503,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/firebase'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase.readonly'
       tags:
         - projects
@@ -481,7 +560,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase'
       tags:
         - projects
@@ -517,9 +600,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/firebase'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase.readonly'
       tags:
         - projects
@@ -603,9 +692,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/firebase'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/firebase'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/firebase.readonly'
       tags:
         - projects
@@ -1018,4 +1113,15 @@ definitions:
         items:
           $ref: '#/definitions/TestCase'
         type: array
+    type: object
+  UpdateReleaseRequest:
+    description: The request for FirebaseRulesService.UpdateReleasePatch.
+    properties:
+      release:
+        $ref: '#/definitions/Release'
+        description: '`Release` to update.'
+      updateMask:
+        description: Specifies which fields to update.
+        format: google-fieldmask
+        type: string
     type: object

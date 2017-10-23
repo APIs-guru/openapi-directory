@@ -7,6 +7,10 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Firestore
   version: v1beta1
   x-apiClientRegistration:
@@ -30,11 +34,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/datastore': View and manage your Google Cloud Datastore data
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/datastore': View and manage your Google Cloud Datastore data
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -158,7 +171,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -201,7 +218,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -244,7 +265,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -287,7 +312,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -330,7 +359,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -374,14 +407,18 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
   '/v1beta1/{name}':
     delete:
-      description: Deletes an index.
-      operationId: firestore.projects.databases.indexes.delete
+      description: Deletes a document.
+      operationId: firestore.projects.databases.documents.delete
       parameters:
         - description: |-
             When set to `true`, the target document must exist.
@@ -396,8 +433,8 @@ paths:
           name: currentDocument.updateTime
           type: string
         - description: |-
-            The index name. For example:
-            `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
+            The resource name of the Document to delete. In the format:
+            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           in: path
           name: name
           required: true
@@ -411,13 +448,17 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
     get:
-      description: Gets an index.
-      operationId: firestore.projects.databases.indexes.get
+      description: Gets a single document.
+      operationId: firestore.projects.databases.documents.get
       parameters:
         - collectionFormat: multi
           description: |-
@@ -429,8 +470,8 @@ paths:
           name: mask.fieldPaths
           type: array
         - description: |-
-            The name of the index. For example:
-            `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
+            The resource name of the Document to get. In the format:
+            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           in: path
           name: name
           required: true
@@ -450,11 +491,15 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Index'
+            $ref: '#/definitions/Document'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -526,7 +571,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -562,7 +611,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -617,7 +670,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -695,7 +752,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -759,7 +820,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -782,16 +847,10 @@ paths:
       description: Lists all the collection IDs underneath a document.
       operationId: firestore.projects.databases.documents.listCollectionIds
       parameters:
-        - description: The maximum number of results to return.
-          in: query
-          name: pageSize
-          type: integer
-        - description: |-
-            A page token. Must be a value from
-            ListCollectionIdsResponse.
-          in: query
-          name: pageToken
-          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ListCollectionIdsRequest'
         - description: |-
             The parent document. In the format:
             `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
@@ -810,7 +869,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -857,7 +920,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/datastore'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/datastore'
       tags:
         - projects
@@ -971,9 +1038,7 @@ definitions:
     description: The request for Firestore.Commit.
     properties:
       transaction:
-        description: |-
-          If non-empty, applies all writes in this transaction, and commits it.
-          Otherwise, applies the writes as if they were in their own transaction.
+        description: 'If set, applies all writes in this transaction, and commits it.'
         format: byte
         type: string
       writes:
@@ -1318,13 +1383,14 @@ definitions:
           $ref: '#/definitions/IndexField'
         type: array
       name:
-        description: The resource name of the index.
+        description: |-
+          The resource name of the index.
+          Output only.
         type: string
       state:
         description: |-
           The state of the index.
-          The state is read-only.
-          @OutputOnly
+          Output only.
         enum:
           - STATE_UNSPECIFIED
           - CREATING
@@ -1348,42 +1414,6 @@ definitions:
           - MODE_UNSPECIFIED
           - ASCENDING
           - DESCENDING
-        type: string
-    type: object
-  IndexOperationMetadata:
-    description: |-
-      Metadata for index operations. This metadata populates
-      the metadata field of google.longrunning.Operation.
-    properties:
-      cancelled:
-        description: |-
-          True if the [google.longrunning.Operation] was cancelled. If the
-          cancellation is in progress, cancelled will be true but
-          google.longrunning.Operation.done will be false.
-        type: boolean
-      documentProgress:
-        $ref: '#/definitions/Progress'
-        description: 'Progress of the existing operation, measured in number of documents.'
-      endTime:
-        description: |-
-          The time the operation ended, either successfully or otherwise. Unset if
-          the operation is still active.
-        format: google-datetime
-        type: string
-      index:
-        description: |-
-          The index resource that this operation is acting on. For example:
-          `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
-        type: string
-      operationType:
-        description: The type of index operation.
-        enum:
-          - OPERATION_TYPE_UNSPECIFIED
-          - CREATING_INDEX
-        type: string
-      startTime:
-        description: The time that work began on the operation.
-        format: google-datetime
         type: string
     type: object
   LatLng:
@@ -1436,6 +1466,19 @@ definitions:
         description: 'The longitude in degrees. It must be in the range [-180.0, +180.0].'
         format: double
         type: number
+    type: object
+  ListCollectionIdsRequest:
+    description: The request for Firestore.ListCollectionIds.
+    properties:
+      pageSize:
+        description: The maximum number of results to return.
+        format: int32
+        type: integer
+      pageToken:
+        description: |-
+          A page token. Must be a value from
+          ListCollectionIdsResponse.
+        type: string
     type: object
   ListCollectionIdsResponse:
     description: The response from Firestore.ListCollectionIds.
@@ -1600,22 +1643,6 @@ definitions:
           When set, the target document must exist and have been last updated at
           that time.
         format: google-datetime
-        type: string
-    type: object
-  Progress:
-    description: Measures the progress of a particular metric.
-    properties:
-      workCompleted:
-        description: |-
-          An estimate of how much work has been completed. Note that this may be
-          greater than `work_estimated`.
-        format: int64
-        type: string
-      workEstimated:
-        description: |-
-          An estimate of how much work needs to be performed. Zero if the
-          work estimate is unavailable. May change as work progresses.
-        format: int64
         type: string
     type: object
   Projection:

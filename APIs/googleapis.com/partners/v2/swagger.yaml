@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'Searches certified companies and creates contact leads with them, and also audits the usage of clients.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Partners
   version: v2
   x-apiClientRegistration:
@@ -2746,6 +2750,8 @@ definitions:
           - AGENCY_PROGRESS_INSIGHTS_VIEW_CONTENT
           - AGENCY_CLICKED_CANCEL_ACCEPT_TOS_BUTTON
           - SMB_ENTERED_WEBSITE_IN_CONTACT_PARTNER_FORM
+          - AGENCY_SELECTED_OPT_IN_AFA_MIGRATION
+          - AGENCY_SELECTED_OPT_OUT_AFA_MIGRATION
         type: string
       eventCategory:
         description: The category the action belongs to.
@@ -3125,6 +3131,9 @@ definitions:
         items:
           type: string
         type: array
+      migrateToAfa:
+        description: Whether or not to migrate the user's exam data to Academy for Ads.
+        type: boolean
       phoneNumber:
         description: The user's phone number.
         type: string

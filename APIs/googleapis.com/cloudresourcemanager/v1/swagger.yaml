@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'The Google Cloud Resource Manager API provides methods for creating, reading, and updating project metadata.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Resource Manager
   version: v1
   x-apiClientRegistration:
@@ -29,11 +33,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -150,7 +163,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - liens
@@ -191,7 +208,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - liens
@@ -233,7 +254,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - organizations
@@ -303,7 +328,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
@@ -348,6 +377,8 @@ paths:
             $ref: '#/definitions/Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -396,6 +427,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -422,7 +455,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
@@ -467,6 +504,8 @@ paths:
             $ref: '#/definitions/Project'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -513,7 +552,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
@@ -563,6 +606,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{resource}:getIamPolicy':
@@ -608,7 +653,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
@@ -692,6 +741,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/projects/{resource}:testIamPermissions':
@@ -735,7 +786,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
@@ -763,7 +818,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - liens
@@ -788,7 +847,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - operations
@@ -823,7 +886,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Clears a `Policy` from a resource.
-      operationId: cloudresourcemanager.projects.clearOrgPolicy
+      operationId: cloudresourcemanager.folders.clearOrgPolicy
       parameters:
         - in: body
           name: body
@@ -843,8 +906,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - folders
   '/v1/{resource}:getEffectiveOrgPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -865,7 +930,7 @@ paths:
         Gets the effective `Policy` on a resource. This is the result of merging
         `Policies` in the resource hierarchy. The returned `Policy` will not have
         an `etag`set because it is a computed `Policy` across multiple resources.
-      operationId: cloudresourcemanager.projects.getEffectiveOrgPolicy
+      operationId: cloudresourcemanager.folders.getEffectiveOrgPolicy
       parameters:
         - in: body
           name: body
@@ -885,10 +950,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - folders
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/key'
@@ -934,7 +1003,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - organizations
@@ -961,7 +1034,7 @@ paths:
         values including `POLICY_TYPE_NOT_SET` for the `policy_type oneof`. The
         `etag` value can be used with `SetOrgPolicy()` to create or update a
         `Policy` during read-modify-write.
-      operationId: cloudresourcemanager.projects.getOrgPolicy
+      operationId: cloudresourcemanager.folders.getOrgPolicy
       parameters:
         - in: body
           name: body
@@ -981,10 +1054,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - folders
   '/v1/{resource}:listAvailableOrgPolicyConstraints':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1002,7 +1079,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists `Constraints` that could be applied on the specified resource.
-      operationId: cloudresourcemanager.projects.listAvailableOrgPolicyConstraints
+      operationId: cloudresourcemanager.folders.listAvailableOrgPolicyConstraints
       parameters:
         - in: body
           name: body
@@ -1022,10 +1099,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - folders
   '/v1/{resource}:listOrgPolicies':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -1043,7 +1124,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Lists all the `Policies` set for a particular resource.
-      operationId: cloudresourcemanager.projects.listOrgPolicies
+      operationId: cloudresourcemanager.folders.listOrgPolicies
       parameters:
         - in: body
           name: body
@@ -1063,10 +1144,14 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - projects
+        - folders
   '/v1/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/key'
@@ -1112,6 +1197,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - organizations
   '/v1/{resource}:setOrgPolicy':
@@ -1136,7 +1223,7 @@ paths:
 
         Not supplying an `etag` on the request `Policy` results in an unconditional
         write of the `Policy`.
-      operationId: cloudresourcemanager.projects.setOrgPolicy
+      operationId: cloudresourcemanager.folders.setOrgPolicy
       parameters:
         - in: body
           name: body
@@ -1156,8 +1243,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - folders
   '/v1/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/key'
@@ -1202,7 +1291,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - organizations

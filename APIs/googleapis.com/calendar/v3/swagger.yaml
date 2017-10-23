@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Manipulates events and other calendar data.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Calendar
   version: v3
   x-apiClientRegistration:
@@ -31,11 +35,20 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/calendar': Manage your calendars
       'https://www.googleapis.com/auth/calendar.readonly': View your calendars
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/calendar': Manage your calendars
+      'https://www.googleapis.com/auth/calendar.readonly': View your calendars
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -112,6 +125,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
   '/calendars/{calendarId}':
@@ -129,6 +144,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
@@ -149,7 +166,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendars
@@ -182,6 +203,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
     put:
@@ -204,6 +227,8 @@ paths:
             $ref: '#/definitions/Calendar'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
@@ -246,6 +271,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
     parameters:
@@ -280,6 +307,8 @@ paths:
             $ref: '#/definitions/AclRule'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
@@ -334,6 +363,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
   '/calendars/{calendarId}/acl/{ruleId}':
@@ -356,6 +387,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
@@ -381,7 +414,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - acl
@@ -423,6 +460,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
     put:
@@ -455,6 +494,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - acl
   '/calendars/{calendarId}/clear':
@@ -480,6 +521,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendars
@@ -595,7 +638,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -641,6 +688,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
   '/calendars/{calendarId}/events/import':
@@ -676,6 +725,8 @@ paths:
             $ref: '#/definitions/Event'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
@@ -713,6 +764,8 @@ paths:
             $ref: '#/definitions/Event'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
@@ -840,7 +893,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -868,6 +925,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
@@ -906,7 +965,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -961,6 +1024,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
     put:
@@ -1005,6 +1070,8 @@ paths:
             $ref: '#/definitions/Event'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
@@ -1069,7 +1136,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - events
@@ -1121,6 +1192,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - events
   /channels/stop:
@@ -1146,7 +1219,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - channels
@@ -1162,7 +1239,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - colors
@@ -1199,7 +1280,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - freebusy
@@ -1251,7 +1336,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendarList
@@ -1282,6 +1371,8 @@ paths:
             $ref: '#/definitions/CalendarListEntry'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
@@ -1345,7 +1436,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendarList
@@ -1364,6 +1459,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
@@ -1384,7 +1481,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - calendarList
@@ -1421,6 +1522,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
     put:
@@ -1447,6 +1550,8 @@ paths:
             $ref: '#/definitions/CalendarListEntry'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar'
       tags:
         - calendarList
@@ -1480,7 +1585,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - settings
@@ -1534,7 +1643,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - settings
@@ -1556,7 +1669,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/calendar'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/calendar'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/calendar.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/calendar.readonly'
       tags:
         - settings

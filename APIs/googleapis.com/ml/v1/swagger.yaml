@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: An API to enable creating and using machine learning models.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Machine Learning Engine
   version: v1
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -138,13 +150,18 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
-      description: Describes a job.
-      operationId: ml.projects.jobs.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: ml.projects.operations.get
       parameters:
-        - description: Required. The name of the job to get the description of.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -154,9 +171,11 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleCloudMlV1__Job'
+            $ref: '#/definitions/GoogleLongrunning__Operation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -219,6 +238,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}/operations':
@@ -262,6 +283,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -294,14 +317,24 @@ paths:
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/oauth_token'
     post:
-      description: Cancels a running job.
-      operationId: ml.projects.jobs.cancel
+      description: |-
+        Starts asynchronous cancellation on a long-running operation.  The server
+        makes a best effort to cancel the operation, but success is not
+        guaranteed.  If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+        Operations.GetOperation or
+        other methods to check whether the cancellation succeeded or whether the
+        operation completed despite cancellation. On successful cancellation,
+        the operation is not deleted; instead, it becomes an operation with
+        an Operation.error value with a google.rpc.Status.code of 1,
+        corresponding to `Code.CANCELLED`.
+      operationId: ml.projects.operations.cancel
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/GoogleCloudMlV1__CancelJobRequest'
-        - description: Required. The name of the job to cancel.
+        - description: The name of the operation resource to be cancelled.
           in: path
           name: name
           required: true
@@ -314,6 +347,8 @@ paths:
             $ref: '#/definitions/GoogleProtobuf__Empty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -339,6 +374,8 @@ paths:
             $ref: '#/definitions/GoogleCloudMlV1__GetConfigResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -399,6 +436,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{name}:setDefault':
@@ -449,6 +488,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/jobs':
@@ -491,6 +532,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -528,6 +571,8 @@ paths:
             $ref: '#/definitions/GoogleCloudMlV1__Job'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -570,6 +615,8 @@ paths:
             $ref: '#/definitions/GoogleCloudMlV1__ListModelsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -614,6 +661,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{parent}/versions':
@@ -656,6 +705,8 @@ paths:
             $ref: '#/definitions/GoogleCloudMlV1__ListVersionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -703,6 +754,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1/{resource}:getIamPolicy':
@@ -711,7 +764,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: ml.projects.jobs.getIamPolicy
+      operationId: ml.projects.models.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -728,6 +781,8 @@ paths:
             $ref: '#/definitions/GoogleIamV1__Policy'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -764,7 +819,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: ml.projects.jobs.setIamPolicy
+      operationId: ml.projects.models.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -785,6 +840,8 @@ paths:
             $ref: '#/definitions/GoogleIamV1__Policy'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -812,7 +869,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: ml.projects.jobs.testIamPermissions
+      operationId: ml.projects.models.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -833,6 +890,8 @@ paths:
             $ref: '#/definitions/GoogleIamV1__TestIamPermissionsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects

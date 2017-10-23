@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: API for managing lightweight user-provided functions executed in response to events.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Cloud Functions
   version: v1beta2
   x-apiClientRegistration:
@@ -29,10 +33,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -153,6 +165,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - operations
     parameters:
@@ -204,6 +218,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     parameters:
@@ -247,6 +263,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/{name}':
@@ -271,6 +289,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
     get:
@@ -290,6 +310,8 @@ paths:
             $ref: '#/definitions/CloudFunction'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -329,6 +351,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/{name}/locations':
@@ -361,6 +385,8 @@ paths:
             $ref: '#/definitions/ListLocationsResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -417,6 +443,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
   '/v1beta2/{name}:generateDownloadUrl':
@@ -462,6 +490,8 @@ paths:
             $ref: '#/definitions/GenerateDownloadUrlResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -509,6 +539,8 @@ paths:
             $ref: '#/definitions/GenerateUploadUrlResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
@@ -833,6 +865,34 @@ definitions:
           is `TakeSnapshot()`, the inferred response type is
           `TakeSnapshotResponse`.
         type: object
+    type: object
+  OperationMetadataV1:
+    description: Metadata describing an Operation
+    properties:
+      request:
+        additionalProperties:
+          description: Properties of the object. Contains field @type with type URL.
+        description: The original request that started the operation.
+        type: object
+      target:
+        description: |-
+          Target of the operation - for example
+          projects/project-1/locations/region-1/functions/function-1
+        type: string
+      type:
+        description: Type of operation.
+        enum:
+          - OPERATION_UNSPECIFIED
+          - CREATE_FUNCTION
+          - UPDATE_FUNCTION
+          - DELETE_FUNCTION
+        type: string
+      versionId:
+        description: |-
+          Version id of the function created or updated by an API call.
+          This field is only pupulated for Create and Update operations.
+        format: int64
+        type: string
     type: object
   OperationMetadataV1Beta2:
     description: Metadata describing an Operation

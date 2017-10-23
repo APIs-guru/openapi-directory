@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'The Google Data Loss Prevention API provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: DLP
   version: v2beta1
   x-apiClientRegistration:
@@ -31,10 +35,18 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -152,6 +164,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - content
   '/v2beta1/content:inspect':
@@ -186,6 +200,8 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2beta1InspectContentResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - content
@@ -222,6 +238,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - content
   '/v2beta1/dataSource:analyze':
@@ -256,6 +274,8 @@ paths:
             $ref: '#/definitions/GoogleLongrunningOperation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - dataSource
@@ -292,6 +312,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - inspect
   /v2beta1/rootCategories:
@@ -313,6 +335,8 @@ paths:
             $ref: '#/definitions/GooglePrivacyDlpV2beta1ListRootCategoriesResponse'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - rootCategories
@@ -356,6 +380,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - rootCategories
     parameters:
@@ -391,6 +417,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - inspect
     get:
@@ -413,6 +441,8 @@ paths:
             $ref: '#/definitions/GoogleLongrunningOperation'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - inspect
@@ -478,6 +508,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - inspect
     parameters:
@@ -530,6 +562,8 @@ paths:
             $ref: '#/definitions/GoogleProtobufEmpty'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - inspect
@@ -1090,6 +1124,22 @@ definitions:
       Custom information type based on a dictionary of words or phrases. This can
       be used to match sensitive information specific to the data, such as a list
       of employee IDs or job titles.
+
+      Dictionary words are case-insensitive and all characters other than letters
+      and digits in the unicode [Basic Multilingual
+      Plane](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane)
+      will be replaced with whitespace when scanning for matches, so the
+      dictionary phrase "Sam Johnson" will match all three phrases "sam johnson",
+      "Sam, Johnson", and "Sam (Johnson)". Additionally, the characters
+      surrounding any match must be of a different type than the adjacent
+      characters within the word, so letters must be next to non-letters and
+      digits next to non-digits. For example, the dictionary word "jen" will
+      match the first three letters of the text "jen123" but will return no
+      matches for "jennifer".
+
+      Dictionary words containing a large number of characters that are not
+      letters or digits may result in unexpected findings because such characters
+      are treated as whitespace.
     properties:
       wordList:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1WordList'
@@ -1249,7 +1299,7 @@ definitions:
         type: integer
     type: object
   GooglePrivacyDlpV2beta1ImageRedactionConfig:
-    description: Configuration for determing how redaction of images should occur.
+    description: Configuration for determining how redaction of images should occur.
     properties:
       infoType:
         $ref: '#/definitions/GooglePrivacyDlpV2beta1InfoType'
@@ -1923,7 +1973,7 @@ definitions:
     type: object
   GooglePrivacyDlpV2beta1RecordCondition:
     description: |-
-      A condition for determing whether a transformation should be applied to
+      A condition for determining whether a transformation should be applied to
       a field.
     properties:
       expressions:
@@ -2226,9 +2276,9 @@ definitions:
     properties:
       words:
         description: |-
-          Words or phrases defining the dictionary. No word can be shorter than 3
-          characters in length. To match, there must be whitespace or punctuation
-          around the targeted string. [required]
+          Words or phrases defining the dictionary. The dictionary must contain
+          at least one phrase and every phrase must contain at least 2 characters
+          that are letters or digits. [required]
         items:
           type: string
         type: array

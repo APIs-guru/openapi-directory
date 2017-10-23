@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'A data platform for customers to create, manage, share and query data.'
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: BigQuery
   version: v2
   x-apiClientRegistration:
@@ -31,7 +35,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
@@ -41,6 +45,20 @@ securityDefinitions:
       'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
+      'https://www.googleapis.com/auth/bigquery.insertdata': Insert data into Google BigQuery
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   alt:
@@ -110,9 +128,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
@@ -158,9 +182,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - datasets
@@ -193,7 +223,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - datasets
@@ -222,7 +256,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - datasets
@@ -248,9 +286,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - datasets
@@ -288,7 +332,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - datasets
@@ -318,7 +366,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - datasets
@@ -353,9 +405,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - tables
@@ -393,7 +451,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - tables
@@ -423,7 +485,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - tables
@@ -458,9 +524,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - tables
@@ -503,7 +575,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - tables
@@ -538,7 +614,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - tables
@@ -586,9 +666,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - tabledata
@@ -640,9 +726,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery.insertdata'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery.insertdata'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - tabledata
@@ -694,9 +786,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - jobs
@@ -731,13 +829,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - jobs
@@ -764,9 +872,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - jobs
@@ -809,7 +923,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - jobs
@@ -843,9 +961,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - jobs
@@ -888,9 +1012,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - jobs
@@ -920,9 +1050,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/bigquery'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/bigquery'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
@@ -1506,7 +1642,7 @@ definitions:
         description: '[Deprecated] The format of the schemaInline property.'
         type: string
       schemaUpdateOptions:
-        description: '[Experimental] Allows the schema of the desitination table to be updated as a side effect of the load job if a schema is autodetected or supplied in the job configuration. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
+        description: 'Allows the schema of the desitination table to be updated as a side effect of the load job if a schema is autodetected or supplied in the job configuration. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
         items:
           type: string
         type: array
@@ -1524,7 +1660,7 @@ definitions:
         type: array
       timePartitioning:
         $ref: '#/definitions/TimePartitioning'
-        description: '[Experimental] If specified, configures time-based partitioning for the destination table.'
+        description: 'If specified, configures time-based partitioning for the destination table.'
       writeDisposition:
         description: '[Optional] Specifies the action that occurs if the destination table already exists. The following values are supported: WRITE_TRUNCATE: If the table already exists, BigQuery overwrites the table data. WRITE_APPEND: If the table already exists, BigQuery appends the data to the table. WRITE_EMPTY: If the table already exists and contains data, a ''duplicate'' error is returned in the job result. The default value is WRITE_APPEND. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion.'
         type: string
@@ -1578,7 +1714,7 @@ definitions:
           $ref: '#/definitions/QueryParameter'
         type: array
       schemaUpdateOptions:
-        description: '[Experimental] Allows the schema of the destination table to be updated as a side effect of the query job. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
+        description: 'Allows the schema of the destination table to be updated as a side effect of the query job. Schema update options are supported in two cases: when writeDisposition is WRITE_APPEND; when writeDisposition is WRITE_TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE_TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW_FIELD_ADDITION: allow adding a nullable field to the schema. ALLOW_FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.'
         items:
           type: string
         type: array
@@ -1589,7 +1725,7 @@ definitions:
         type: object
       timePartitioning:
         $ref: '#/definitions/TimePartitioning'
-        description: '[Experimental] If specified, configures time-based partitioning for the destination table.'
+        description: 'If specified, configures time-based partitioning for the destination table.'
       useLegacySql:
         description: 'Specifies whether to use BigQuery''s legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery''s standard SQL: https://cloud.google.com/bigquery/sql-reference/ When useLegacySql is set to false, the value of flattenResults is ignored; query will be run as if flattenResults is false.'
         type: boolean
@@ -2082,7 +2218,7 @@ definitions:
         description: '[Required] Reference describing the ID of this table.'
       timePartitioning:
         $ref: '#/definitions/TimePartitioning'
-        description: '[Experimental] If specified, configures time-based partitioning for this table.'
+        description: 'If specified, configures time-based partitioning for this table.'
       type:
         description: '[Output-only] Describes the table type. The following values are supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined by a SQL query. EXTERNAL: A table that references data stored in an external storage system, such as Google Cloud Storage. The default value is TABLE.'
         type: string
@@ -2202,6 +2338,14 @@ definitions:
         description: Tables in the requested dataset.
         items:
           properties:
+            creationTime:
+              description: 'The time when this table was created, in milliseconds since the epoch.'
+              format: int64
+              type: string
+            expirationTime:
+              description: '[Optional] The time when this table expires, in milliseconds since the epoch. If not present, the table will persist indefinitely. Expired tables will be deleted and their storage reclaimed.'
+              format: int64
+              type: string
             friendlyName:
               description: The user-friendly name for this table.
               type: string
@@ -2222,7 +2366,7 @@ definitions:
               description: A reference uniquely identifying the table.
             timePartitioning:
               $ref: '#/definitions/TimePartitioning'
-              description: '[Experimental] The time-based partitioning for this table.'
+              description: The time-based partitioning for this table.
             type:
               description: 'The type of table. Possible values are: TABLE, VIEW.'
               type: string

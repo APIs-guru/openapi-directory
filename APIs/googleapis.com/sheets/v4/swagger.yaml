@@ -8,6 +8,10 @@ info:
     name: Google
     url: 'https://google.com'
   description: Reads and writes Google Sheets.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: 'http://creativecommons.org/licenses/by/3.0/'
+  termsOfService: 'https://developers.google.com/terms/'
   title: Google Sheets
   version: v4
   x-apiClientRegistration:
@@ -31,7 +35,7 @@ externalDocs:
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
+    description: Oauth 2.0 implicit authentication
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
@@ -39,6 +43,18 @@ securityDefinitions:
       'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
       'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
       'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
+    type: oauth2
+  Oauth2c:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 accessCode authentication
+    flow: accessCode
+    scopes:
+      'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
+      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
+      'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
+      'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
+      'https://www.googleapis.com/auth/spreadsheets.readonly': View your Google Spreadsheets
+    tokenUrl: 'https://accounts.google.com/o/oauth2/token'
     type: oauth2
 parameters:
   $.xgafv:
@@ -150,9 +166,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -208,13 +230,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets.readonly'
       tags:
         - spreadsheets
@@ -258,9 +290,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -319,9 +357,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -368,9 +412,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -435,13 +485,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets.readonly'
       tags:
         - spreadsheets
@@ -527,9 +587,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -633,9 +699,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -684,9 +756,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -730,9 +808,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -777,9 +861,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -846,13 +936,23 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.readonly'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets.readonly'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets.readonly'
       tags:
         - spreadsheets
@@ -910,9 +1010,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -956,9 +1062,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -1002,9 +1114,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -1063,9 +1181,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -1127,9 +1251,15 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive.file'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/drive.file'
         - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+          Oauth2c:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
@@ -4067,9 +4197,7 @@ definitions:
           with an `=` character.
         type: string
       name:
-        description: |-
-          A name to use for the value. This is only used if formula was set.
-          Otherwise, the column name is used.
+        description: A name to use for the value.
         type: string
       sourceColumnOffset:
         description: |-
